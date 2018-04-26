@@ -1,0 +1,285 @@
+﻿2005p,2005 prices
+99p,1999 prices
+abs,asset-backed security, asset backed security
+adp,aeroport de paris
+arpu,average revenue per unit
+ASEAN, ASEAN4, AEC, A6, A5, A4, CLMV
+atm,automated teller machine
+Auto,automobile,car,vehicle
+avg,average
+Average Annual Wage, Average Wage
+BCI,Business Climate Index
+bdi,baltic dry index,baltic dry
+bdo,banco de oro
+bis,bank for international settlements
+bldg, building
+BLS,Best Lending Rate
+BOP,Balance of Payment
+BPM6,Balance of payment
+BPM5,Balance of payment
+BRIC, BRICS
+bsi,business survey index
+Call Market Rate, Call Money Rate
+cap,china agri-products, china agri products
+cbi,citic bank international
+ccb,china construction bank
+ccfi,consulting center for finance and investment
+#CCI,Construction Confidence Indicator
+cci, consumer confidence index, consumer confidence indicator, construction cost index, construction confidence index, construction confidence indicator, coincident composite index
+CD,Certificates of Deposits
+CDS,credit default swap
+cfetc,china foreign exchange trading center
+cgpi,corporate goods price index
+cif,cost insurance and freight
+Cil,coal india limited
+Cis,Certificates of Indebtedness
+cis,commonwealth of independent states
+cli,china life insurance
+cn,china
+cnh,china offshore spot
+cny,chinese yuan,renminbi,rmb
+Condo,condominium
+convenience store,convenient store
+corp,corporation
+cpi,consumer price index
+cpo,crude palm oil
+crb,commodity research bureau
+Cr,Credit
+crr,cash reserve ratio
+csi,consumer survey index
+CSRC, China Securities Regulatory Commission
+current account deficit,current account balance,net export
+dbu,domestic banking units
+dc,discontinued
+dcs,depository corporations survey
+domestic debt,internal debt
+Dr,Debit
+e-commerce sales,online sales
+ecb,european central bank
+EFTA, European Free-Trade Association, European Free Trade Association
+EEI,Entrepreneur Expectation Indicator
+embi,emerging markets bond index
+enrollment,enrolment
+eps,earnings per share
+eu27,european union 27
+eu,european union
+eur,euro
+EURIBOR,Euro Interbank Offered Rate
+excl,excluding
+ExPI,Export Price Index
+FAI,Fixed Assets Investment
+FDA, Food and Agriculture Organisation
+FDI, foreign direct investment
+fao,Food and Agriculture Organization
+fas,food and agriculture
+fce,foreign currency exchange
+fed,federal, federal reserve system
+Fed rate,Federal Funds Rate
+fii,foreign institutional investor
+fiscal deficit,government deficit
+fob,freight on board
+frb,federal reserve board
+FTSE, 100 Financial Times Stock Exchange 100 Share Index
+FTZ, free trade zone, duty free zone, free zone
+FX,foreign exchange
+G7, G8, G10, G20, G24
+GCE,Government Consumption Expenditure
+GCF,Gross Capital Formation
+gdp,gross domestic product
+GDP constant,real GDP
+GFCF,Gross Fixed Capital Formation
+GIO, Gross Industrial Output
+gni,gross national income
+gnp,gross national product
+government spending, government expenditure
+gov,govt,government
+gsdp,gross state domestic product
+gva,gross value added
+health care,healthcare
+hh, household
+HHI,Herfindahl-Hirschman Index
+HIBOR,Hong Kong Interbank Offered Rate
+hicp,harmonized index of consumer price
+hk,hong kong
+HS, household savings
+icbc,industrial and commericla bank of china
+IDA, International Development Association
+ICI,Industrial Confidence Indicator
+IDI,Inward Direct Investment
+idr, inr,indian rupee
+ifs,international financial statistics
+iip,international investment position
+imf,international monetary fund
+ImPI,Import Price Index
+incl,including
+ind,industrial
+industry,sector
+info,information
+Inst,institute
+Internet shopping,internet commerce
+Inv,investment
+ip,industrial production
+ipi,industrial production index
+ipo,initial public offering
+ism,institute of supply management
+iti,industrial turnover index
+jibor,Japan Interbank Offered Rate
+jpy,japanese yen
+jsx,jakarta stock exchange
+Labor,labour
+Lao,laos
+lcd,liquid crystal display
+l&d,l d, loans discounts, loans and discounts
+lgfv,Local Government Financing Vehicle china
+LIBOR,London Interbank Offered Rate
+lme,london metal exchange
+LME,Loss Making Enterprises
+LMRA, Labour Market Regulatory Authority
+lng,liquified natural gas
+Loan,credit,borrowing
+lpg,Liquefied petroleum gas
+IP, Industrial Products
+Money Supply, M, M0, M1, M2, M3, M4, M5
+M&A,M A, Merges Acquisitions, Merges and Acquisitions, Merges & Acquisitions, mergers and acquisitions, mergers acquisitions
+mfg,manufacturing
+mfi,money flow index
+mfsm,monetary and financial statistics manual
+mobile phone,cell phone,cellphone,smartphone
+MOHRSS, Ministry of Human Resources and Social Security
+mkt,market
+Market cap, Market capitalization
+Migrant,migration
+MLF,Medium-term Lending Facility
+mom,month-on-month, month on month
+movie,cinema,film
+mpi,malaysian pacific
+nbs,national bureau of statistics
+ncd,negotiable certificate of deposit
+NCD,Negotiable Certificates of Deposit
+ndf,non deliverable forward
+ndi,national disposable income
+NEER,Nominal Effective Exchange Rate
+nibfc,national interbank funding center
+nim,net interest margin
+no,no.,number
+npa,non-performing assets, non performing assets
+NPL,Non-Performing Loans, Non Performing Loans
+NYSE, New York Stock Exchange
+ODI,Outward Direct Investment
+oecd,organization for economic cooperation and development
+ois,overnight index swap
+OMO, open market operation
+opec,organization of petroleum exporting countries
+OTC,over-the-counter, over the counter
+pa,per annum
+pbc,people's bank of china
+PCE,Personal Consumption Expenditure
+PDI, Personal Disposable Income
+p/e, pe, p e, price earnings
+pkr,pakistan rupee
+PMI,Purchasing Managers Index, Purchasing Managers' Index
+ppi,producer price index
+ppp,purchasing power parity
+proportion,share
+province,region
+PSI,Producers Shipment Index, Producers' Shipment Index
+pvc,Polyvinyl chloride
+PVI,Producers Inventory Index, Producers' Inventory Index
+QDII,Qualified Domestic Institutional Investor
+QFII,Qualified Foreign Institutional Investor
+qoq,quarter-on-quarter, quarter on quarter
+qtr,quarter
+r&d,r d, research development, research and development
+Reit,Real Estate Investment Trusts
+REER,Real Effective Exchange Rate
+repo,repurchase agreement
+RD, Reserve Deposits
+rev,revenue
+roa,return on assets
+Roe,return on equity
+ron,return on net worth
+ROW, rest of the world
+rpi,retail price index
+rpk,revenue per passenger per kilometer
+RQFII,renminbi qualified foreign institutional investor
+rrr,Reserve Requirement Ratio
+Russia, Russian, Russian Fed, Russian Federation
+sa,seasonally adjusted
+sales,sold
+sbr,styrene butadiene rubber
+sdr,special drawing rights
+sea,south east asia
+sgx,singapore exchange
+SHIBOR,Shanghai Interbank Offered Rate
+sia,semiconductor industry association
+sitc,standard international trade classification
+slf,standing lending facility
+sme,small and medium enterprises
+sna,system of national accounts
+spf,Survey of Professional Forecasters
+SSF, Social Security Fund
+SOE, state-owned enterprise, state control enterprise, state owned enterprise
+Soft furniture,seating furniture
+s&p,s p, standard poors,standard and poors
+spending,expenditure
+steel pmi,metal pmi
+T-bill, T bill, Treasury Bills
+TOT, Terms of Trade
+TFR, total fertility rate
+teu,twenty foot equivalent units
+Tfp,total factor productivity
+Thai,thailand
+tse,tokyo stock exchange
+tsf,total social financing
+uae,united arab emirates
+UN, United Nations
+UVI, Unit Value Index
+Urbanization,urbanisation
+usd,united states dollar
+us,usa,united states
+vai,value added of industry
+VAT, Value-Added Tax, Value Added Tax
+VaR, Value at Risk
+vol,volume
+wmp,wmps,Wealth Management Product
+WPI,Wholesale Price Index
+WR, Wholesale and Retail trade
+wsa,working day and seasonally adjusted
+wti,west texas intermediate, wholesale trade value index
+X, Exports
+yoy,year on year,growth
+ytd,year to date
+gds,Gross Domestic Saving
+real estate,property,housing,house
+
+
+# Chinese
+
+
+上 交 所, 上 海 证 券 交 易 所
+上 海, 上 海 市
+个 人 消 费 支 出, 人 均 消 费 支 出
+冰 箱, 電 冰 箱
+印 尼, 印 度 尼 西 亚
+国 债 利 率, 国 债 收 益 率
+张 家 界, 张 家 界 市
+活 猪 存 栏 量, 生 猪 存 栏 头 数
+深 交 所, 深 圳 证 券 交 易 所
+生 产 率, 劳 动 生 产 率
+生 产 率, 劳 动 生 产 率
+草 鱼, 活 草 魚
+货 币 供 应 量, 货 币 供 应
+金 融 资 产 总 量, 金 融 资 产
+程 限, 进 度
+文 化, 教 育
+一 月, 元 月
+职 工,  员 工
+年 尾 年 末, 年 底, 年 终, 年 关
+交 易, 买 卖
+建 造, 建 筑
+假 期, 假 日
+季 节, 时 节
+加 强, 增 强
+计 算, 算 计
+出 产, 生 产
+出 入 收 支, 进 出, 相 差
