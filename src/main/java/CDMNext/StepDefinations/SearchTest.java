@@ -245,6 +245,13 @@ public class SearchTest {
 	}
 
 	public boolean search_validation(String searchText, String Keyword) throws Throwable {
+		
+		
+		/*if (searchText.toUpperCase().contains(Keyword.toUpperCase()) == true) {
+			return true;
+		} else {
+		    return false;
+		}*/
 		String[] keywords = null;
 		keywords = Keyword.split(" ");
 
