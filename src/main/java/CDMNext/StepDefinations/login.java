@@ -74,6 +74,7 @@ public class login {
 	// Properties files
 	public static Properties CONFIG;
 	public static Properties LOCATORS;
+	//public static Properties LOCATORS1;
 
 	public static String data;
 	public static String object;
@@ -97,7 +98,6 @@ public class login {
 	@After
 	public void tearDownClass() throws Exception {
 		System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
-		// System.out.println("\nInside tearDown");
 		// driver.quit();
 
 	}
@@ -149,8 +149,6 @@ public class login {
 		Log4j.info("Is 'Download' button displayed? - True/False:: " + downloadButton.isDisplayed());
 		Assert.assertEquals(true, downloadButton.isDisplayed());
 		if (downloadButton.isDisplayed()) {
-			// Log4j.info("Performing User logout");
-
 			driver.findElement(By.xpath(LOCATORS.getProperty("logout_dropdown"))).click();
 			Thread.sleep(2000);
 			driver.findElement(By.xpath(LOCATORS.getProperty("logout"))).click();
@@ -162,27 +160,19 @@ public class login {
 	@Then("^Application login should be unsuccessful-UI$")
 	public void application_login_should_be_unsuccessful_UI() throws Throwable {
 		Thread.sleep(2000);
-		// String var1,var2;
 		if (username == null) {
 
 			WebElement emailrequired = driver.findElement(By.xpath(LOCATORS.getProperty("uname_required")));
 			Log4j.info("Is 'emailrequired' button displayed? - True/False:: " + emailrequired.isDisplayed());
-			Assert.assertEquals(true, emailrequired.isDisplayed());
-			// var1=emailrequired.getText();
-			// System.out.println("var1"+var1);
+
 		}
 		if (password == null) {
 			WebElement pwdrequired = driver.findElement(By.xpath(LOCATORS.getProperty("pwd_required")));
 			Log4j.info("Is 'pwdrequired' button displayed? - True/False:: " + pwdrequired.isDisplayed());
-
 			Assert.assertEquals(true, pwdrequired.isDisplayed());
-			// var2=pwdrequired.getText();
-
-			// System.out.println("var2"+var2);
-
 		} else {
-			// Log4j.info("error message");
-			// System.out.println("error");
+			Log4j.info("error message");
+
 		}
 	}
 
@@ -219,29 +209,23 @@ public class login {
 	}
 
 	public static void Invoke_browser() throws Throwable {
-
+		
 		LOCATORS = new Properties();
 
 		System.out.println(System.getProperty("user.dir"));
 		FileInputStream fs = new FileInputStream(
 				System.getProperty("user.dir") + "\\src\\test\\java\\Config\\locators.properties");
 		LOCATORS.load(fs);
-		// LOCATORS.load(ClassLoader.class.getResourceAsStream("locators.properties"));
 
 		CONFIG = new Properties();
 		FileInputStream fs1 = new FileInputStream(
 				System.getProperty("user.dir") + "\\src\\test\\java\\Config\\config.properties");
 		CONFIG.load(fs1);
-		// CONFIG.load(ClassLoader.class.getResourceAsStream("config.properties"));
-
 		Log4j.info("Logger initialized and writing using logger");
-		// System.out.println("Logger initialized but system println statement");
-		// Log4j = Logger.getLogger("org.example.foo.bar");
-		System.out.println("\nInside setup");
+		Log4j.info("\nInside setup");
 		if (driver != null) {
 			// We have a valid driver, re-use the same...
 			Log4j.info("Reusing same driver..");
-			// System.out.println("\nReusing same driver..");
 			return;
 		}
 
