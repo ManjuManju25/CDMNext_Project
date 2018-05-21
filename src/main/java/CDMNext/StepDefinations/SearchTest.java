@@ -1,25 +1,21 @@
 
 package CDMNext.StepDefinations;
 
-import java.io.File;
 
 import java.io.FileReader;
 import java.util.List;
 import java.util.Scanner;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-
-
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+
 
 
 public class SearchTest {
@@ -56,7 +52,7 @@ public class SearchTest {
 
 	@Then("^User verify keyword search results$")
 	public void user_verify_keyword_search_results() throws Throwable {
-
+		
 		WebElement element;
 		WebElement checkbox;
 
@@ -272,22 +268,20 @@ public class SearchTest {
 						Assert.fail(currentKeyword + " has more than 8 synonyms which is not handled.  Please handle!");
 
 					}
+					
 				}
 
 			} else {
 				Assert.fail("Sorry,No results were found ");
 			}
-			/*
-			 * } catch (NoSuchElementException e) {
-			 * 
-			 * login.Log4j.error("Sorry,No results were found");
-			 * Assert.fail("Sorry,No results were found " + e.getMessage());
-			 */
+
+		} catch (NoSuchElementException e) {
+
+			Assert.fail(e.getMessage());
 
 		} catch (StaleElementReferenceException | ElementNotVisibleException e) {
-			File screenshotFile = ((TakesScreenshot)login.driver).getScreenshotAs(OutputType.FILE);
-		    FileUtils.copyFile(screenshotFile, new File("C:/Users/mnadiya/Screenshots/error.png"));
-		 	Assert.fail("The WebElement is not visisble! " + e.getMessage());
+			
+			Assert.fail("The WebElement is not visisble! " + e.getMessage());
 		}
 	}
 
@@ -364,5 +358,5 @@ public class SearchTest {
 		// }
 		//
 	}
-	 
+	
 }

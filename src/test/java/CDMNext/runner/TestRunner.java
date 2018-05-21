@@ -4,9 +4,11 @@ import cucumber.api.CucumberOptions;
 
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import CDMNext.StepDefinations.login;
+import CDMNext.screenShot.CaptureScreenShot;
 import CDMNext.util.SendmailWithAttachment;
 
 @CucumberOptions(features = "src/test/java/CDMNext/Features/search.Feature", glue = { "CDMNext.StepDefinations" },
@@ -39,11 +41,20 @@ public class TestRunner {
 		return testNGCucumberRunner.provideFeatures();
 	}
 
-	// TestNG @AfterSuite
+	// TestNG @AfterMethod
+	@AfterMethod
+	public void tearDown(ITestResult result) throws Exception {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			CaptureScreenShot.captureScreenMethod(login.driver, result.getName());
+		}
+	}
+
+	// TestNG @Aftersuite
 	@AfterSuite
 	public void tearDownClass() throws Exception {
 		login.Log4j.info("\nInside TestNG > @AfterSuite");
 		testNGCucumberRunner.finish();
+
 		if (login.driver != null) {
 			login.Log4j.info("\n CLOSING THE BROWSER WE YOU GO");
 			login.driver.manage().deleteAllCookies();
@@ -53,4 +64,5 @@ public class TestRunner {
 		login.Log4j.info("\n ****Inside Email*****");
 		SendmailWithAttachment.report();
 	}
+
 }
