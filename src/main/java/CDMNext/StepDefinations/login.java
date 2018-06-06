@@ -74,7 +74,7 @@ public class login {
 	// Properties files
 	public static Properties CONFIG;
 	public static Properties LOCATORS;
-	//public static Properties LOCATORS1;
+	// public static Properties LOCATORS1;
 
 	public static String data;
 	public static String object;
@@ -209,7 +209,7 @@ public class login {
 	}
 
 	public static void Invoke_browser() throws Throwable {
-		
+
 		LOCATORS = new Properties();
 
 		System.out.println(System.getProperty("user.dir"));

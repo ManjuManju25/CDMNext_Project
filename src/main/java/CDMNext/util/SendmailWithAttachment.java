@@ -69,17 +69,19 @@ public class SendmailWithAttachment {
 			MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
 			// Mention the file which you want to send
-			String filename = "C:\\Users\\mnadiya\\Documents\\cucumber_project\\target\\report.html";
-			//String filename = "C:\\Users\\mnadiya\\Documents\\cucumber_project\\test-output\\emailable-report.html";
+			String filename=System.getProperty("user.dir")+ "\\target\\report.html";
+			
+			//String screenShot=System.getProperty("user.dir")+ "\\ErrorScreenshot\\TC_KeywordSearch_09 _FDI.png";
 
 			// Create data source and pass the filename
 			DataSource source = new FileDataSource(filename);
-
+			//DataSource source1 = new FileDataSource(screenShot);
 			// set the handler
 			messageBodyPart2.setDataHandler(new DataHandler(source));
-
+			//messageBodyPart2.setDataHandler(new DataHandler(source1));
 			// set the file
 			messageBodyPart2.setFileName(filename);
+			//messageBodyPart2.setFileName(screenShot);
 
 			// Create object of MimeMultipart class
 			Multipart multipart = new MimeMultipart();
