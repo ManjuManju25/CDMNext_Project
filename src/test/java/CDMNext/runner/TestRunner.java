@@ -4,11 +4,8 @@ import cucumber.api.CucumberOptions;
 
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
-
 import CDMNext.StepDefinations.login;
-import CDMNext.screenShot.CaptureScreenShot;
 import CDMNext.util.SendmailWithAttachment;
 
 @CucumberOptions(features = "src/test/java/CDMNext/Features/search.Feature", glue = { "CDMNext.StepDefinations" },
@@ -39,14 +36,6 @@ public class TestRunner {
 	public Object[][] features() {
 		login.Log4j.info("\nInside TestNG > @DataProvider");
 		return testNGCucumberRunner.provideFeatures();
-	}
-
-	// TestNG @AfterMethod
-	@AfterMethod
-	public void tearDown(ITestResult result) throws Exception {
-		if (result.getStatus() == ITestResult.FAILURE) {
-			CaptureScreenShot.captureScreenMethod(login.driver, result.getName());
-		}
 	}
 
 	// TestNG @Aftersuite

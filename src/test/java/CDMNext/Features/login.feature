@@ -9,19 +9,19 @@ Scenario Outline: Login Success and Failure
  Then  Application login should be <status>     
   
  Examples: 
-
-  | username | password | status |
-  | "nadiya.maduru@shravas.com" | "Thulasi@1988" | successful |  
-  | "nadiyap@shravas.com" | "thulasi1988" | unsuccessful-WS |  
-  | "nadiya.maduru@shravas.com" | "thulasi1988" | unsuccessful-WS | 
-  | "nadiyap@shravas.com" | "Thulasi@1988" | unsuccessful-WS |
-  | " nadiya.maduru@shravas.com" | "Thulasi@1988" | successful |
-  | "nadiya.maduru@shravas.com " | "Thulasi@1988" | successful |
-  | "nadiya.maduru@shravas.com" | " Thulasi@1988" | unsuccessful-WS |
-  | "nadiya.maduru@shravas.com" | "Thulasi@1988 " | unsuccessful-WS | 
-  | "" | "" | unsuccessful-UI |
-  | "" | "Thulasi@1988" | unsuccessful-UI |
-  |  "nadiya.maduru@shravas.com" | "" | unsuccessful-UI |
-
+	
+		| username | password | status |
+		| "nadiya.maduru@shravas.com" | "Thulasi@1988" | successful |  
+		| "nadiyap@shravas.com" | "thulasi1988" | unsuccessful-WS |  
+		| "nadiya.maduru@shravas.com" | "thulasi1988" | unsuccessful-WS | 
+		| "nadiyap@shravas.com" | "Thulasi@1988" | unsuccessful-WS |
+		| " nadiya.maduru@shravas.com" | "Thulasi@1988" | successful |
+		| "nadiya.maduru@shravas.com " | "Thulasi@1988" | successful |
+		| "nadiya.maduru@shravas.com" | " Thulasi@1988" | unsuccessful-WS |
+		| "nadiya.maduru@shravas.com" | "Thulasi@1988 " | unsuccessful-WS | 
+		| "" | "" | unsuccessful-UI |
+		| "" | "Thulasi@1988" | unsuccessful-UI |
+		|  "nadiya.maduru@shravas.com" | "" | unsuccessful-UI |
+		
  
  
