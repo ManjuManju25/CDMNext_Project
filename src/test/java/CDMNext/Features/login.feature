@@ -1,7 +1,7 @@
-Feature: Login into account 
+Feature: Login to the application under test
 
 @Login 
-Scenario Outline: Login Success and Failure 
+Scenario Outline: Login functionality for Success and Failure TC'S
  Given User navigates to the CDMNext appliction 
  And   Enters username <username>       
  And   Enters password <password>                
