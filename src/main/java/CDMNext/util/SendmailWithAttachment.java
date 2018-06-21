@@ -63,26 +63,23 @@ public class SendmailWithAttachment {
 			BodyPart messageBodyPart1 = new MimeBodyPart();
 
 			// Set the body of email
-			messageBodyPart1.setText("LastExecution summary report is attached with mail.Please find the attached Extent Report.\n\nThanks,\nNadiya");
+			messageBodyPart1.setText("LastExecution summary report is attached with mail.Please find the attached Extent Report.\nThanks\n\nRegards,\nNadiya");
 
 			// Create another object to add another content
 			MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
 			// Mention the file which you want to send
 			String filename=System.getProperty("user.dir")+ "\\target\\report.html";
-			
-			//String screenShot=System.getProperty("user.dir")+ "\\ErrorScreenshot\\TC_KeywordSearch_09 _FDI.png";
-
+						
 			// Create data source and pass the filename
 			DataSource source = new FileDataSource(filename);
-			//DataSource source1 = new FileDataSource(screenShot);
+			
 			// set the handler
 			messageBodyPart2.setDataHandler(new DataHandler(source));
-			//messageBodyPart2.setDataHandler(new DataHandler(source1));
+			
 			// set the file
 			messageBodyPart2.setFileName(filename);
-			//messageBodyPart2.setFileName(screenShot);
-
+			
 			// Create object of MimeMultipart class
 			Multipart multipart = new MimeMultipart();
 
