@@ -54,7 +54,7 @@ public class SendmailWithAttachment {
 			message.setFrom(new InternetAddress("info@shravas.com"));
 
 			// Set the recipient address
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("nadiya.maduru@shravas.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("nmaduru@shravas.com"));
 
 			// Add the subject link
 			message.setSubject("CDMNext_Automation TestReport");
