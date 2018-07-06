@@ -50,8 +50,8 @@ public class TestRunner {
 			login.driver.quit();
 			login.driver = null;
 		}
-		//login.Log4j.info("\n ****Inside Email*****");
-		//SendmailWithAttachment.report();
+		login.Log4j.info("\n ****Inside Email*****");
+		SendmailWithAttachment.report();
 	}
 
 }
