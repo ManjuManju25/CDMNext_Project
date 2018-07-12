@@ -2,7 +2,6 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 
-
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +25,7 @@ public class Filters {
 	String[] sid = null;
 	public static String searchData;
 	public static String advancedfltr;
+	public static String topic;
 
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
@@ -34,6 +34,33 @@ public class Filters {
 		login.Log4j.info("searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
+		Thread.sleep(3000);
+		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
+		List<WebElement> clearIcon = login.driver
+				.findElements(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"));
+		
+		if (login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).isDisplayed()) {
+			login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).click();
+			login.Log4j.info("Clicking on Top button");
+		}
+		if (clearIcon.size() > 0) {
+			if (login.driver.findElement(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"))
+					.isDisplayed()) {
+
+				login.driver.findElement(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"))
+						.click();
+			}
+		}
+		if (reset.size() > 0) {
+			if (login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).isDisplayed()) {
+				login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
+				login.Log4j.info("Clicking on Reset button");
+			}
+		} else {
+			login.driver.findElement(By.xpath("//div//span[@class='search-input--toggle-filters-wrapper']")).click();
+			login.Log4j.info("Clicking on filter...");
+		}
+
 	}
 
 	@And("^User clicks on Filters$")
@@ -50,10 +77,11 @@ public class Filters {
 				login.Log4j.info("Clicking on Reset button");
 			}
 		} else {
-			Thread.sleep(1000);
+			// Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//div//span[@class='search-input--toggle-filters-wrapper']")).click();
 			login.Log4j.info("Clicking on filter...");
 		}
+
 	}
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
@@ -91,12 +119,18 @@ public class Filters {
 			}
 		}
 		if (filter.equals("Status")) {
+			login.Log4j.info("clicking on " + filter);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by status']")).click();
-			for (String list : fltrOptions) {
-				Thread.sleep(1000);
-				login.Log4j.info("clicking on " + list);
-				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
-			}
+			login.Log4j.info("clicking on " + var);
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).click();
+		}
+		if (filter.equals("Unit")) {
+			login.Log4j.info("clicking on " + filter);
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + filter + "')]")).click();
+			login.Log4j.info("clicking on " + var);
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).click();
 
 		}
 	}
@@ -117,20 +151,24 @@ public class Filters {
 
 	}
 
-	@When("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
+	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selected_as(String arg1, String arg2) throws Throwable {
 		Thread.sleep(5000);
-		List<WebElement> alldb = login.driver.findElements(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
-		System.out.println(alldb.size());
-		if (alldb.size() > 0) {
-			login.Log4j.info("Clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
-		} else {
-			login.driver.findElement(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"))
-					.click();
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
-		}
+		// List<WebElement> alldb =
+		// login.driver.findElements(By.xpath("//span[contains(text(),'" + arg1 +
+		// "')]"));
+		// System.out.println(alldb.size());
+		/*
+		 * if (alldb.size() > 0) { login.Log4j.info("Clicking on " + arg1);
+		 * login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 +
+		 * "')]")).click(); } else { login.driver.findElement(By.
+		 * xpath("//span[@class='icon--red-cross database-selector--clear-icon']"))
+		 * .click(); Thread.sleep(2000);
+		 * login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 +
+		 * "')]")).click(); }
+		 */
+		login.Log4j.info("Clicking on " + arg1);
+		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 		String[] database = arg2.split(",");
 		for (String dblist : database) {
 			Thread.sleep(1000);
@@ -138,6 +176,7 @@ public class Filters {
 			List<WebElement> checkbox = login.driver.findElements(By.xpath("//div//span[contains(text(),'" + dblist
 					+ "')]/preceding-sibling::label/span[@class='input-control--indicator']"));
 			if (checkbox.size() > 0) {
+
 				login.driver.findElement(By.xpath("//div//span[contains(text(),'" + dblist
 						+ "')]/preceding-sibling::label/span[@class='input-control--indicator']")).click();
 			} else {
@@ -199,33 +238,33 @@ public class Filters {
 						login.Log4j.info("sid length is " + sid.length);
 						switch (sid.length) {
 						case 1:
-							
-							 if(advancedfltr !=null){
-								   if (advancedfltr.equals("Subscribed only") && seriesId.contains(sid[0]) == true) {
-									   if (!checkbox.isSelected()) {
-										  checkbox.click();
-										  login.Log4j.info("Element is clickable");
-									    } else {
-										   login.Log4j.error("Element is not clickable");
-									    }
-								    } else {
-								    	 if(advancedfltr.equals("Name only")
-											&& seriesName.toUpperCase().contains(sid[0].toUpperCase()) == true) {
-									      login.Log4j.info(sid[0] + " is exists in  : " + seriesName);
-										} else {
-											Assert.fail(sid[0] + " doesn't exists in  : " + seriesName);
-										}
-								    }
-							} else if(seriesId.contains(sid[0]) == true){
-								login.Log4j.info(sid[0] + " is exists in " + "\n" + seriesId);
-							} else {
-									if (text.toUpperCase().contains(sid[0].toUpperCase()) == true) {
-										login.Log4j.info(sid[0] + " is exists in the" + "\n" + text);
+
+							if (advancedfltr != null) {
+								if (advancedfltr.equals("Subscribed only") && seriesId.contains(sid[0]) == true) {
+									if (!checkbox.isSelected()) {
+										checkbox.click();
+										login.Log4j.info("Element is clickable");
 									} else {
-										Assert.fail(sid[0] + " doesn't exists " + text);
+										login.Log4j.error("Element is not clickable");
+									}
+								} else {
+									if (advancedfltr.equals("Name only")
+											&& seriesName.toUpperCase().contains(sid[0].toUpperCase()) == true) {
+										login.Log4j.info(sid[0] + " is exists in  : " + seriesName);
+									} else {
+										Assert.fail(sid[0] + " doesn't exists in  : " + seriesName);
 									}
 								}
-						
+							} else if (seriesId.contains(sid[0]) == true) {
+								login.Log4j.info(sid[0] + " is exists in " + "\n" + seriesId);
+							} else {
+								if (text.toUpperCase().contains(sid[0].toUpperCase()) == true) {
+									login.Log4j.info(sid[0] + " is exists in the" + "\n" + text);
+								} else {
+									Assert.fail(sid[0] + " doesn't exists " + text);
+								}
+							}
+
 							break;
 						case 2:
 							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true) {
@@ -330,7 +369,7 @@ public class Filters {
 							if (frequency.contains(fltrOptions[0]) == true) {
 								login.Log4j.info(fltrOptions[0] + " is exists in the" + "\n" + frequency);
 							} else {
-								login.Log4j.error("vxvchj");
+
 								Assert.fail(fltrOptions[0] + " doesn't exist in " + frequency);
 
 							}
@@ -387,6 +426,16 @@ public class Filters {
 
 							}
 							break;
+						case "Unit":
+							String unit = lines[2];
+							if (unit.contains(fltrOptions[0]) == true) {
+								login.Log4j.info(fltrOptions[0] + " is exists in the" + "\n" + unit);
+							} else {
+
+								Assert.fail(fltrOptions[0] + " doesn't exist in " + unit);
+
+							}
+							break;
 
 						default:
 
@@ -398,12 +447,33 @@ public class Filters {
 				Assert.fail("Sorry,No results were found ");
 			}
 
-		} catch (
+		} catch (NoSuchElementException e) {
 
-		NoSuchElementException e) {
-			login.Log4j.error("m in catch");
-			Assert.fail(e.getMessage());
+			Assert.fail("NoSuchElementException " + e.getMessage());
 		}
+
 	}
 
+	@When("^User get the topics as \"([^\"]*)\"$")
+	public void user_get_the_topics_as(String arg1) throws Throwable {
+		topic = arg1;
+		Thread.sleep(1000);
+		login.driver
+				.findElement(By.xpath(
+						"//span[@class='series-tab ui-sortable-handle active']//span[contains(text(),'Databases')]"))
+				.click();
+		login.Log4j.info("topic is " + topic);
+	}
+
+	@Then("^User verify the results$")
+	public void user_verify_the_results() throws Throwable {
+		// create instance of JavaScriptExecutor
+		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+		Thread.sleep(2000);
+		WebElement Topic = login.driver.findElement(By.xpath("//span[contains(text(),'" + topic + "')]"));
+		// Until the element is not visible keep scrolling
+		jse.executeScript("arguments[0].scrollIntoView(true);", Topic);
+		login.Log4j.info("Is 'Topic' displayed? - True/False:: " + Topic.isDisplayed());
+
+	}
 }
