@@ -122,7 +122,7 @@ public class Filters {
 			login.Log4j.info("clicking on " + filter);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by status']")).click();
 			login.Log4j.info("clicking on " + var);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).click();
 		}
 		if (filter.equals("Unit")) {
@@ -154,19 +154,6 @@ public class Filters {
 	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selected_as(String arg1, String arg2) throws Throwable {
 		Thread.sleep(5000);
-		// List<WebElement> alldb =
-		// login.driver.findElements(By.xpath("//span[contains(text(),'" + arg1 +
-		// "')]"));
-		// System.out.println(alldb.size());
-		/*
-		 * if (alldb.size() > 0) { login.Log4j.info("Clicking on " + arg1);
-		 * login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 +
-		 * "')]")).click(); } else { login.driver.findElement(By.
-		 * xpath("//span[@class='icon--red-cross database-selector--clear-icon']"))
-		 * .click(); Thread.sleep(2000);
-		 * login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 +
-		 * "')]")).click(); }
-		 */
 		login.Log4j.info("Clicking on " + arg1);
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 		String[] database = arg2.split(",");
@@ -457,12 +444,12 @@ public class Filters {
 	@When("^User get the topics as \"([^\"]*)\"$")
 	public void user_get_the_topics_as(String arg1) throws Throwable {
 		topic = arg1;
-		Thread.sleep(1000);
-		login.driver
-				.findElement(By.xpath(
-						"//span[@class='series-tab ui-sortable-handle active']//span[contains(text(),'Databases')]"))
-				.click();
 		login.Log4j.info("topic is " + topic);
+		Thread.sleep(1000);
+		login.Log4j.info("Clicking on Databases");
+		WebElement db=login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"));
+		db.click();
+	
 	}
 
 	@Then("^User verify the results$")
