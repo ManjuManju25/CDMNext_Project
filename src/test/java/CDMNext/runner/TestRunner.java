@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 import CDMNext.StepDefinations.login;
 import CDMNext.util.SendmailWithAttachment;
 
-@CucumberOptions(features = "src/test/java/CDMNext/Features/filters.feature", glue = { "CDMNext.StepDefinations" },
+@CucumberOptions(features = "src/test/java/CDMNext/Features/search.Feature", glue = { "CDMNext.StepDefinations" },
 		// tags = {"@Keywordsearch"},
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
