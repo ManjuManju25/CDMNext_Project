@@ -2,18 +2,20 @@ package CDMNext.runner;
 
 import cucumber.api.CucumberOptions;
 
+
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import org.testng.annotations.*;
 import CDMNext.StepDefinations.login;
 import CDMNext.util.SendmailWithAttachment;
 
-@CucumberOptions(features = "src/test/java/CDMNext/Features/search.Feature", glue = { "CDMNext.StepDefinations" },
-		// tags = {"@Keywordsearch"},
-		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
-				"json:target/cucumber-reports/CucumberTestReport.json",
-				"com.cucumber.listener.ExtentCucumberFormatter:target/report.html",
-				"rerun:target/cucumber-reports/rerun.txt" })
+@CucumberOptions(features = "src/test/java/CDMNext/Features/filters.feature", glue = {
+		"CDMNext.StepDefinations" }, tags = {
+				"@Source-Filter,@KeywordSearch,@Unit-Filter,@Date-Filter,@Frequency-Filter,@SeriesID-Search,@SeriesTagSearch" }, dryRun = false, plugin = {
+						"pretty", "html:target/cucumber-reports/cucumber-pretty",
+						"json:target/cucumber-reports/CucumberTestReport.json",
+						"com.cucumber.listener.ExtentCucumberFormatter:target/report.html",
+						"rerun:target/cucumber-reports/rerun.txt" })
 public class TestRunner {
 
 	private TestNGCucumberRunner testNGCucumberRunner;
@@ -38,6 +40,22 @@ public class TestRunner {
 		return testNGCucumberRunner.provideFeatures();
 	}
 
+	/*@AfterClass
+	public static void reportSetup() {
+		Reporter.loadXMLConfig(new File(System.getProperty("user.dir") + "\\test-output\\extent-config.xml"));
+		
+		 * Properties p=System.getProperties(); p.list(System.out);
+		 
+		Reporter.setSystemInfo("User Name", System.getProperty("user.name"));
+		Reporter.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
+		Reporter.setSystemInfo("64 bit", "windows 7");
+		Reporter.setSystemInfo("User Name", System.getProperty("user.name"));
+		Reporter.setSystemInfo("3.4.0", "Selenium");
+		Reporter.setSystemInfo("3.5.2", "Maven");
+		Reporter.setSystemInfo("1.8.0", "Java version");
+		Reporter.setTestRunnerOutput("Cucumber Junit Test Runner");
+	}*/
+
 	// TestNG @Aftersuite
 	@AfterSuite
 	public void tearDownClass() throws Exception {
@@ -54,4 +72,5 @@ public class TestRunner {
 		SendmailWithAttachment.report();
 	}
 
+	
 }
