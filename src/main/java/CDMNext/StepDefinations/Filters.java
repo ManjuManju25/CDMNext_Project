@@ -30,15 +30,15 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		login.Log4j.info("searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
-		Thread.sleep(3000);
+		//Thread.sleep(2000);
 		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
 		List<WebElement> clearIcon = login.driver
 				.findElements(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"));
-		
+
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).isDisplayed()) {
 			login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).click();
 			login.Log4j.info("Clicking on Top button");
@@ -63,32 +63,11 @@ public class Filters {
 
 	}
 
-	@And("^User clicks on Filters$")
-	public void user_clicks_on_Filters() throws Throwable {
-		Thread.sleep(3000);
-		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).isDisplayed()) {
-			login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).click();
-			login.Log4j.info("Clicking on Top button");
-		}
-		if (reset.size() > 0) {
-			if (login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).isDisplayed()) {
-				login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
-				login.Log4j.info("Clicking on Reset button");
-			}
-		} else {
-			// Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div//span[@class='search-input--toggle-filters-wrapper']")).click();
-			login.Log4j.info("Clicking on filter...");
-		}
-
-	}
-
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selects_as(String arg1, String arg2) throws Throwable {
 		var = arg2;
 		filter = arg1;
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		fltrOptions = var.split(";");
 
 		if (filter.equals("Source")) {
@@ -129,7 +108,7 @@ public class Filters {
 			login.Log4j.info("clicking on " + filter);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + filter + "')]")).click();
 			login.Log4j.info("clicking on " + var);
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).click();
 
 		}
@@ -153,7 +132,7 @@ public class Filters {
 
 	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selected_as(String arg1, String arg2) throws Throwable {
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		login.Log4j.info("Clicking on " + arg1);
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 		String[] database = arg2.split(",");
@@ -179,6 +158,7 @@ public class Filters {
 		WebElement element;
 		WebElement checkbox;
 		String text;
+
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(5000);
@@ -339,16 +319,32 @@ public class Filters {
 						case "Date":
 							SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 							Date date = new Date();
+
 							if (fltrOptions[0].equalsIgnoreCase("First observation before")) {
 								fltrOptions[0] = "First date";
 							}
-							String[] frstDate = lines[4].split(": ");
-							String first_obs_before = sdf.format(date);
-							if (sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)) == true) {
-								login.Log4j.info(frstDate[1] + " is less than " + first_obs_before + "? "
-										+ sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)));
-							} else {
-								Assert.fail(frstDate[1] + " is not less than " + first_obs_before);
+							if (fltrOptions[0].equals("First date")) {
+								String[] frstDate = lines[4].split(": ");
+								String first_obs_before = sdf.format(date);
+								if (sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)) == true) {
+									login.Log4j.info(frstDate[1] + " is less than " + first_obs_before + "? "
+											+ sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)));
+								} else {
+									Assert.fail(frstDate[1] + " is not less than " + first_obs_before);
+								}
+							}
+							if (fltrOptions[1].equalsIgnoreCase("Last observation after")) {
+								fltrOptions[1] = "Last date";
+							}
+							if (fltrOptions[1].equals("Last date")) {
+								String[] lastDate = lines[5].split(": ");
+								String last_obs_after = sdf.format(date);
+								if (sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)) == true) {
+									login.Log4j.info(lastDate[1] + " is less than " + last_obs_after + "? "
+											+ sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)));
+								} else {
+									Assert.fail(lastDate[1] + " is not greater than " + last_obs_after);
+								}
 							}
 							break;
 						case "Frequency":
@@ -398,7 +394,7 @@ public class Filters {
 								mouseOver.moveToElement(list).click().build().perform();
 								if (login.driver.findElement(By.xpath("//div[contains(text(),'Active')]"))
 										.isDisplayed()) {
-									Thread.sleep(1000);
+									Thread.sleep(2000);
 									login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 									login.Log4j.info(fltrOptions[0] + " series exists");
 								} else {
@@ -447,9 +443,10 @@ public class Filters {
 		login.Log4j.info("topic is " + topic);
 		Thread.sleep(1000);
 		login.Log4j.info("Clicking on Databases");
-		WebElement db=login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"));
+		WebElement db = login.driver.findElement(
+				By.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"));
 		db.click();
-	
+
 	}
 
 	@Then("^User verify the results$")
