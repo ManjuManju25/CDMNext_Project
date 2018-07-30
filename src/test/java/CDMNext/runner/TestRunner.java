@@ -8,7 +8,7 @@ import CDMNext.StepDefinations.login;
 import CDMNext.util.SendmailWithAttachment;
 
 @CucumberOptions(features = "src/test/java/CDMNext/Features/search.Feature", glue = {
-		"CDMNext.StepDefinations" }, tags = { "@KeywordSearch,@ChineseKeywordSearch" },
+		"CDMNext.StepDefinations" }, tags = { "@KeywordSearch" },
 		// tags =
 
 		// {"@KeywordSearch,@UnitFilter,@SourceFilter,@DateFilter,@FrequencyFilter,@SeriesIDSearch,@SeriesTagSearch"
