@@ -834,90 +834,100 @@ And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Russia Premium Database"
 Then  User verify Filter search results  
 
-#@RegionFilter
-#Scenario: TC_Filters_Search_118
-#Given User enters "1055401 (BAEAE)"
-#And   User selects "Region" as "Asia Pacific"
-#Then  User should get the search results 
-# 
-#@RegionFilter
-#Scenario: TC_Filters_Search_119
-#Given User enters "1382601 (BRJAEN)"
-#And   User selects "Region" as "Americas"
-#Then  User should get the search results  
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_120
-#Given User enters "121587008"
-#And   User selects "Region" as "Europe"
-#Then  User should get the search results  
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_121
-#Given User enters "99459607"
-#And   User selects "Region" as "Middle East"
-#Then  User should get the search results  
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_122
-#Given User enters "132330608"
-#And   User selects "Region" as "Africa"
-#Then  User should get the search results  
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_123
-#Given User enters "225939502 (EJGAADH)"
-#And   User selects "Region" as "G7"
-#Then  User should get the search results  
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_124
-#Given User enters "68951101 (BRFGG)"
-#And   User selects "Region" as "G20"
-#Then  User should get the search results  
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_125
-#Given User enters "61540402 (BNAAAAA)"
-#And   User selects "Region" as "ASEAN"
-#Then  User should get the search results 
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_126
-#Given User enters "230792902 (IAPAFABH)"
-#And   User selects "Region" as "BRIC"
-#Then  User should get the search results  
-#
-#@RegionFilter
-#Scenario: TC_Filters_Search_127
-#Given User enters "230792902 (IAPAFABH)"
-#And   User selects "Region" as "BRIC"
-#Then  User should get the search results 
-#
-#@FrequencyFilter
-#Scenario: TC_Filters_Search_128
-#Given User enters "1380601"
-#And   User selects "Frequency" as "Monthly"
-#And   User has clicked on "Apply filter"
-#And   User selected "All databases" as "Brazil Premium Database"
-#Then  User verify Filter search results  
-#
-#Scenario: TC_Filters_Search_129
-#Given User enters "money"
-#And   User selects "Subscribed only" 
-#And   User selects "Frequency" as "Quarterly"
-#And   User selects "Source" as "International Monetary Fund"
-##And   User selects "Unit" as "MUR"
-#And   User has clicked on "Apply filter"
-#And   User selected "All databases" as "Global Database"
-#Then  User verify Filter search results  
-#
-#Scenario: TC_Filters_Search_130
-#Given User enters "money"
-#And   User selects "Name only" 
-#And   User selects "Frequency" as "Quarterly"
-#And   User selects "Unit" as "MUR"
-#And   User selects "Source" as "International Monetary Fund"
-#And   User has clicked on "Apply filter"
-#And   User selected "All databases" as "Global Database"
-#Then  User verify Filter search results  
+@UnitFilter
+Scenario: TC_Filters_Search_118
+Given User enters "3782201"
+And   User selects "Unit" as "19Dec1990=100"
+And   User has clicked on "Apply filter"
+And   User selected "All databases" as "China Premium Database"
+Then  User verify Filter search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_119
+Given User enters "1055401 (BAEAE)"
+And   User selects "Region" as "Asia Pacific"
+Then  User should get the search results 
+ 
+@RegionFilter
+Scenario: TC_Filters_Search_120
+Given User enters "1382601 (BRJAEN)"
+And   User selects "Region" as "Americas"
+Then  User should get the search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_121
+Given User enters "121587008"
+And   User selects "Region" as "Europe"
+Then  User should get the search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_122
+Given User enters "99459607"
+And   User selects "Region" as "Middle East"
+Then  User should get the search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_123
+Given User enters "132330608"
+And   User selects "Region" as "Africa"
+Then  User should get the search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_124
+Given User enters "225939502 (EJGAADH)"
+And   User selects "Region" as "G7"
+Then  User should get the search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_125
+Given User enters "68951101 (BRFGG)"
+And   User selects "Region" as "G20"
+Then  User should get the search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_126
+Given User enters "61540402 (BNAAAAA)"
+And   User selects "Region" as "ASEAN"
+Then  User should get the search results 
+
+@RegionFilter
+Scenario: TC_Filters_Search_127
+Given User enters "230792902 (IAPAFABH)"
+And   User selects "Region" as "BRIC"
+Then  User should get the search results  
+
+@RegionFilter
+Scenario: TC_Filters_Search_128
+Given User enters "230792902 (IAPAFABH)"
+And   User selects "Region" as "BRIC"
+Then  User should get the search results 
+
+@FrequencyFilter
+Scenario: TC_Filters_Search_129
+Given User enters "1380601"
+And   User selects "Frequency" as "Monthly"
+And   User has clicked on "Apply filter"
+And   User selected "All databases" as "Brazil Premium Database"
+Then  User verify Filter search results  
+
+@KeywordSearch
+Scenario: TC_Filters_Search_130
+Given User enters "money"
+And   User selects "Subscribed only" 
+And   User selects "Frequency" as "Quarterly"
+And   User selects "Source" as "International Monetary Fund"
+And   User selects "Unit" as "MUR"
+And   User has clicked on "Apply filter"
+And   User selected "All databases" as "Global Database"
+Then  User verify Filter search results 
+ 
+@KeywordSearch
+Scenario: TC_Filters_Search_131
+Given User enters "money"
+And   User selects "Name only" 
+And   User selects "Frequency" as "Quarterly"
+And   User selects "Unit" as "MUR"
+And   User selects "Source" as "International Monetary Fund"
+And   User has clicked on "Apply filter"
+And   User selected "All databases" as "Global Database"
+Then  User verify Filter search results  
