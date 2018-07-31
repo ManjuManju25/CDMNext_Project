@@ -141,7 +141,7 @@ public class SearchTest {
 							login.Log4j.info(listwords[0] + " is exists in the"+"\n" + text);
 							login.Log4j.info("\n");
 						} else {
-							AssertJUnit.fail(listwords[0] + "  doesnot exists in the  " + text);
+							AssertJUnit.fail(listwords[0] + " keyword doesnot exists in the  " + text);
 						}
 						break;
 					case 2:
@@ -153,7 +153,7 @@ public class SearchTest {
 							 login.Log4j.info("\n");
 						} else {
 							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " doesnot exists in the " + text);
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " doesnot exists in the " + text);
+							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " keyword doesnot exists in the " + text);
 						}
 
 						break;
@@ -169,7 +169,7 @@ public class SearchTest {
 							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
 									+ " doesnot exists in the \n" + text);
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-									+ " doesnot exists in the " + text);
+									+ " keyword doesnot exists in the " + text);
 						}
 						break;
 					case 4:
@@ -184,7 +184,7 @@ public class SearchTest {
 							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " doesnot exists in the \n" + text);
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " doesnot exists in the " + text);
+									+ listwords[3] + " keyword doesnot exists in the " + text);
 						}
 						break;
 					case 5:
@@ -194,13 +194,13 @@ public class SearchTest {
 								|| search_validation(text, listwords[3]) == true
 								|| search_validation(text, listwords[4]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " exists in the \n" + text);
+									+ listwords[3] + " OR " + listwords[4] + " keyword exists in the \n" + text);
 							login.Log4j.info("\n");
 						} else {
 							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " doesnot exists in the \n" + text);
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " doesnot exists in the " + text);
+									+ listwords[3] + " OR " + listwords[4] + " keyword doesnot exists in the " + text);
 						}
 						break;
 					case 6:
@@ -220,7 +220,7 @@ public class SearchTest {
 									+ " doesnot exists in the \n" + text);
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
-									+ "  doesnot exists in the " + text);
+									+ "  keyword doesnot exists in the " + text);
 						}
 						break;
 					case 7:
@@ -241,7 +241,7 @@ public class SearchTest {
 									+ listwords[6] + " doesnot exists in the \n" + text);
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " doesnot exists in the " + text);
+									+ listwords[6] + " keyword doesnot exists in the " + text);
 						}
 						break;
 					case 8:
@@ -263,7 +263,7 @@ public class SearchTest {
 									+ listwords[6] + " doesnot exists in the \n" + text);
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + listwords[7] + " doesnot exists in the " + text);
+									+ listwords[6] + listwords[7] + " keyword doesnot exists in the " + text);
 						}
 						break;
 
