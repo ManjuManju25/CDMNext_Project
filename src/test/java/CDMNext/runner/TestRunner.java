@@ -7,12 +7,12 @@ import org.testng.annotations.*;
 import CDMNext.StepDefinations.login;
 import CDMNext.util.SendmailWithAttachment;
 
-@CucumberOptions(features = "src/test/java/CDMNext/Features/search.Feature", glue = {
-		"CDMNext.StepDefinations" }, tags = { "@KeywordSearch" },
-		// tags =
-
-		// {"@KeywordSearch,@UnitFilter,@SourceFilter,@DateFilter,@FrequencyFilter,@SeriesIDSearch,@SeriesTagSearch"
-		// },
+@CucumberOptions(features = "src/test/java/CDMNext/Features/filters.feature", glue = {
+		"CDMNext.StepDefinations" }, 
+//tags = { "@KeywordSearch" },
+		 tags =
+		 {"@KeywordSearch,@UnitFilter,@SourceFilter,@DateFilter,@FrequencyFilter,@SeriesIDSearch,@SeriesTagSearch,@RegionFilter"
+		 },
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
 				"com.cucumber.listener.ExtentCucumberFormatter:target/report.html",

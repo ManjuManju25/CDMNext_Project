@@ -4,6 +4,7 @@ import org.testng.Assert;
 
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,18 +20,20 @@ import cucumber.api.java.en.When;
 
 public class Filters {
 
-	public static String var;
-	public String filter = null;
-	// String[] filter=null;
-	// String[] filter = new String[6];
-	String[] fltrOptions = null;
-	// String[] fltrOptions = new String[6];
-	String[] sid = null;
-	public static String searchData;
-	public static String advancedfltr;
-	public static String topic;
-	// public int i=0;
-	// public int j=0;
+	public String var;
+	public String fltrStatus;
+	String[] unitarr = null;
+	List<String> filters = new ArrayList<>();
+	String[] sourcearr = null;
+	String[] datearr = null;
+	String[] frequencyarr = null;
+	static String[] sid = null;
+	public String searchData;
+	public String advancedfltr;
+	public String topic;
+	public int k;
+	public static int j;
+	public static String showdata;
 
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
@@ -70,70 +73,66 @@ public class Filters {
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selects_as(String arg1, String arg2) throws Throwable {
-		var = arg2;
-		filter = arg1;
-		// String[] filter = new String[6];
-		// String value = String.valueOf(arg1);
-		// filter[i] = value;
-		// System.out.println("filter values are: "+ filter[i]);
+		k = 0;
+		filters.add(arg1);
+		login.Log4j.info(filters);
 		Thread.sleep(2000);
-		fltrOptions = var.split(";");
-
-		// String var = String.valueOf(arg2);
-		// fltrOptions= var.split(";");
-		if (filter.equals("Source")) {
-			login.Log4j.info("clicking on " + filter);
-			login.driver.findElement(By.xpath("//span[contains(text(),'" + filter + "')]")).click();
-			for (String list : fltrOptions) {
+		var = arg2;
+		if (arg1.equals("Source")) {
+			login.Log4j.info("clicking on " + arg1);
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			sourcearr = var.split(";");
+			for (String list : sourcearr) {
 				Thread.sleep(2000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
 		}
-		if (filter.equals("Date")) {
-			login.Log4j.info("clicking on " + filter);
+		if (arg1.equals("Date")) {
+			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by observation date']")).click();
-			for (String list : fltrOptions) {
+			datearr = var.split(";");
+			for (String list : datearr) {
 				Thread.sleep(2000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//label[@title='" + list + "']")).click();
 			}
 		}
-		if (filter.equals("Frequency")) {
-			// System.out.println("i value is "+ i);
-			login.Log4j.info("clicking on " + filter);
+		if (arg1.equals("Frequency")) {
+			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by frequency']")).click();
-			for (String list : fltrOptions) {
+			frequencyarr = var.split(";");
+			for (String list : frequencyarr) {
 				Thread.sleep(2000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
 		}
-		if (filter.equals("Status")) {
-			login.Log4j.info("clicking on " + filter);
+		if (arg1.equals("Status")) {
+			fltrStatus = arg2;
+			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by status']")).click();
-			login.Log4j.info("clicking on " + var);
+			login.Log4j.info("clicking on " + fltrStatus);
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).click();
+			login.driver.findElement(By.xpath("//tr[@title='" + fltrStatus + "']")).click();
 		}
-		if (filter.equals("Unit")) {
-			login.Log4j.info("clicking on " + filter);
-			login.driver.findElement(By.xpath("//span[contains(text(),'" + filter + "')]")).click();
-			login.Log4j.info("clicking on " + var);
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).click();
-
+		if (arg1.equals("Unit")) {
+			login.Log4j.info("clicking on " + arg1);
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			unitarr = var.split(";");
+			for (String list : unitarr) {
+				Thread.sleep(2000);
+				login.Log4j.info("clicking on " + list);
+				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
+			}
 		}
-		if (filter.equals("Region")) {
-			login.Log4j.info("clicking on " + filter);
+		if (arg1.equals("Region")) {
+			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'By group')]")).click();
 
 		}
-
-		// i=i+1;
-
 	}
 
 	@And("^User has clicked on \"([^\"]*)\"$")
@@ -188,21 +187,19 @@ public class Filters {
 		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		// create object of Actions class
 		Actions mouseOver = new Actions(login.driver);
-
 		WebElement ul_element = null;
 		try {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 			login.Log4j.info("List size is :" + li_All.size());
-
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
 
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
 					Thread.sleep(1500);
-					int j = i + 1;
+					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//span[@class='series-list-item--checkbox']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
@@ -210,16 +207,15 @@ public class Filters {
 					element = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
 					mouseOver.moveToElement(element).build().perform();
-
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
 					// login.Log4j.info("Title information is \n" + text);
 					String[] lines = text.split("\n");
-					System.out.println("filter is " + filter);
+					login.Log4j.info("filter is " + filters);
 					String seriesId = lines[11];
 					String seriesName = lines[1];
-					if (filter == null) {
+					if (filters.isEmpty()) {
 						Thread.sleep(2000);
 						sid = searchData.split(";");
 						login.Log4j.info("search data is " + searchData);
@@ -227,7 +223,7 @@ public class Filters {
 						login.Log4j.info("sid length is " + sid.length);
 						switch (sid.length) {
 						case 1:
-
+							login.Log4j.info(advancedfltr);
 							if (advancedfltr != null) {
 								if (advancedfltr.equals("Subscribed only") && seriesId.contains(sid[0]) == true) {
 									if (!checkbox.isSelected()) {
@@ -250,7 +246,7 @@ public class Filters {
 								if (text.toUpperCase().contains(sid[0].toUpperCase()) == true) {
 									login.Log4j.info(sid[0] + " is exists in the" + "\n" + text);
 								} else {
-									Assert.fail(sid[0] + " doesn't exists " + text);
+									showRelatedData(sid[0], j);
 								}
 							}
 
@@ -311,136 +307,146 @@ public class Filters {
 
 						}
 
-					}
-					if (filter != null) {
-						if (filter.equals("Source")) {
-							System.out.println(fltrOptions.length);
-							String source = lines[10];
-							System.out.println(source);
-							if ((fltrOptions.length == 1)
-									&& (source.toUpperCase().contains(fltrOptions[0].toUpperCase()) == true)) {
-								login.Log4j.info(fltrOptions[0] + " is exists in the" + "\n" + source);
+					} else {
+						for (k = 0; k < filters.size(); k++) {
+							if (filters.get(k).equals("Source")) {
+								System.out.println(sourcearr.length);
+								String source = lines[10];
+								System.out.println(source);
+								for (int l = 0; l < sourcearr.length; l++) {
+									if ((sourcearr.length == 1)
+											&& (source.toUpperCase().contains(sourcearr[l].toUpperCase()) == true)) {
+										login.Log4j.info(sourcearr[l] + " is exists in the" + "\n" + source);
 
-							} else if ((fltrOptions.length == 2) && (source.contains(fltrOptions[0]) == true
-									|| source.contains(fltrOptions[1]) == true)) {
-								login.Log4j.info(
-										fltrOptions[0] + " OR " + fltrOptions[1] + " is exists in the" + "\n" + source);
-							} else {
-								if (fltrOptions.length == 1) {
-									login.Log4j.error(fltrOptions[0] + " doesn't exist in " + source);
-									Assert.fail(fltrOptions[0] + " doesn't exist in " + source);
-								} else {
-									login.Log4j.error(
-											fltrOptions[0] + " OR " + fltrOptions[1] + " doesn't exist in " + source);
-									Assert.fail(
-											fltrOptions[0] + " OR " + fltrOptions[1] + " doesn't exist in " + source);
-								}
-							}
-						}
-						if (filter.equals("Date")) {
-							SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-							Date date = new Date();
-
-							if (fltrOptions[0].equalsIgnoreCase("First observation before")) {
-								fltrOptions[0] = "First date";
-							}
-							if (fltrOptions[0].equals("First date")) {
-								String[] frstDate = lines[4].split(": ");
-								String first_obs_before = sdf.format(date);
-								if (sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)) == true) {
-									login.Log4j.info(frstDate[1] + " is less than " + first_obs_before + "? "
-											+ sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)));
-								} else {
-									Assert.fail(frstDate[1] + " is not less than " + first_obs_before);
-								}
-							}
-							// if (fltrOptions[1].equalsIgnoreCase("Last observation after")) {
-							// fltrOptions[1] = "Last date";
-							// }
-							// if (fltrOptions[1].equals("Last date")) {
-							// String[] lastDate = lines[5].split(": ");
-							// String last_obs_after = sdf.format(date);
-							// if (sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)) == true) {
-							// login.Log4j.info(lastDate[1] + " is less than " + last_obs_after + "? "
-							// + sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)));
-							// } else {
-							// Assert.fail(lastDate[1] + " is not greater than " + last_obs_after);
-							// }
-							// }
-						}
-						if (filter.equals("Frequency")) {
-							login.Log4j.info("filter  is : " + filter);
-							login.Log4j.info("filter option is : " + fltrOptions[0]);
-							String frequency = lines[3];
-							if (frequency.contains(fltrOptions[0]) == true) {
-								// login.Log4j.info("filter option is : "+ fltrOptions[0]);
-								login.Log4j.info(fltrOptions[0] + " is exists in the" + "\n" + frequency);
-							} else {
-
-								Assert.fail(fltrOptions[0] + " doesn't exist in " + frequency);
-
-							}
-						}
-
-						if (filter.equals("Status")) {
-							System.out.println(advancedfltr);
-							sid = searchData.split(";");
-							try {
-								if (advancedfltr != null) {
-
-									if (advancedfltr.equals("Subscribed only")) {
-										Thread.sleep(1000);
-										if (!checkbox.isSelected()) {
-											checkbox.click();
-											login.Log4j.info("Element is clickable");
-										} else {
-											login.Log4j.error("Element is not clickable");
-										}
+									} else if ((sourcearr.length == 2) && (source.contains(sourcearr[l]) == true
+											|| source.contains(sourcearr[l]) == true)) {
+										login.Log4j.info(sourcearr[l] + " OR " + sourcearr[l] + " is exists in the"
+												+ "\n" + source);
 									} else {
-										if (advancedfltr.equals("Name only")
-												&& seriesName.toUpperCase().contains(sid[0].toUpperCase()) == true) {
-											login.Log4j.info(sid[0] + " is exists in the  : " + seriesName);
-
+										if (sourcearr.length == 1) {
+											login.Log4j.error(sourcearr[l] + " doesn't exist in " + source);
+											Assert.fail(sourcearr[l] + " doesn't exist in " + source);
 										} else {
-											Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
-											login.Log4j.error(sid[0] + " doesn't exists in the  : " + seriesName);
+											login.Log4j.error(sourcearr[l] + " OR " + sourcearr[l]
+													+ " doesn't exist in " + source);
+											Assert.fail(sourcearr[l] + " OR " + sourcearr[l] + " doesn't exist in "
+													+ source);
 										}
 									}
 								}
-							} catch (NullPointerException e) {
-								Assert.fail("Nullpointer Exception " + e.getMessage());
+							}
+							if (filters.get(k).equals("Date")) {
+								for (int l = 0; l < datearr.length; l++) {
+									SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+									Date date = new Date();
+
+									if (datearr[l].equalsIgnoreCase("First observation before")) {
+										datearr[l] = "First date";
+									}
+									if (datearr[l].equals("First date")) {
+										String[] frstDate = lines[4].split(": ");
+										String first_obs_before = sdf.format(date);
+										if (sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)) == true) {
+											login.Log4j.info(frstDate[1] + " is less than " + first_obs_before + "? "
+													+ sdf.parse(frstDate[1]).before(sdf.parse(first_obs_before)));
+										} else {
+											Assert.fail(frstDate[1] + " is not less than " + first_obs_before);
+										}
+									}
+
+									if (datearr[l].equalsIgnoreCase("Last observation after")) {
+										datearr[l] = "Last date";
+									}
+									if (datearr[l].equals("Last date")) {
+										String[] lastDate = lines[5].split(": ");
+										String last_obs_after = sdf.format(date);
+										if (sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)) == true) {
+											login.Log4j.info(lastDate[1] + " is less than " + last_obs_after + "? "
+													+ sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)));
+										} else {
+											Assert.fail(lastDate[1] + " is not greater than " + last_obs_after);
+										}
+									}
+								}
+							}
+							if (filters.get(k).equals("Frequency")) {
+								login.Log4j.info("filter  is : " + filters.get(k));
+								for (int l = 0; l < frequencyarr.length; l++) {
+									login.Log4j.info("filter option is : " + frequencyarr[l]);
+									String frequency = lines[3];
+									if (frequency.contains(frequencyarr[l]) == true) {
+										login.Log4j.info(frequencyarr[l] + " is exists in the" + "\n" + frequency);
+									} else {
+
+										Assert.fail(frequencyarr[l] + " doesn't exist in " + frequency);
+
+									}
+								}
 							}
 
-							if (fltrOptions[0].equals("Active")) {
-								Thread.sleep(2000);
-								WebElement list = login.driver.findElement(
-										By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
-								mouseOver.moveToElement(list).click().build().perform();
-								if (login.driver.findElement(By.xpath("//div[contains(text(),'Active')]"))
-										.isDisplayed()) {
-									Thread.sleep(2000);
-									login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-									login.Log4j.info(fltrOptions[0] + " series exists");
-								} else {
-									login.Log4j.error(fltrOptions[0] + " doesn't exists");
-									Assert.fail(fltrOptions[0] + " doesn't exists");
+							if (filters.get(k).equals("Status")) {
+								System.out.println(advancedfltr);
+								sid = searchData.split(";");
+								try {
+									if (advancedfltr != null) {
+
+										if (advancedfltr.equals("Subscribed only")) {
+											Thread.sleep(1000);
+											if (!checkbox.isSelected()) {
+												checkbox.click();
+												login.Log4j.info("Element is clickable");
+											} else {
+												login.Log4j.error("Element is not clickable");
+											}
+										} else {
+											if (advancedfltr.equals("Name only") && seriesName.toUpperCase()
+													.contains(sid[0].toUpperCase()) == true) {
+												login.Log4j.info(sid[0] + " is exists in the  : " + seriesName);
+
+											} else {
+												Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
+												login.Log4j.error(sid[0] + " doesn't exists in the  : " + seriesName);
+											}
+										}
+									}
+								} catch (NullPointerException e) {
+									Assert.fail("Nullpointer Exception " + e.getMessage());
 								}
 
-							} else if (seriesId.contains(sid[0]) == true) {
-								login.Log4j.info(sid[0] + " is exists in the" + "\n" + seriesId);
-							} else {
-								Assert.fail(sid[0] + " doesn't exist in " + seriesId);
+								if (fltrStatus.equals("Active")) {
+									Thread.sleep(2000);
+									WebElement list = login.driver.findElement(
+											By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+									mouseOver.moveToElement(list).click().build().perform();
+									if (login.driver.findElement(By.xpath("//div[contains(text(),'Active')]"))
+											.isDisplayed()) {
+										Thread.sleep(2000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										login.Log4j.info(fltrStatus + " series exists");
+									} else {
+										login.Log4j.error(fltrStatus + " doesn't exists");
+										Assert.fail(fltrStatus + " doesn't exists");
+									}
 
+								} else if (seriesId.contains(sid[0]) == true) {
+									login.Log4j.info(sid[0] + " is exists in the" + "\n" + seriesId);
+								} else {
+									Assert.fail(sid[0] + " doesn't exist in " + seriesId);
+
+								}
 							}
-						}
-						if (filter.equals("Unit")) {
-							String unit = lines[2];
-							if (unit.contains(fltrOptions[0]) == true) {
-								login.Log4j.info(fltrOptions[0] + " is exists in the" + "\n" + unit);
-							} else {
+							if (filters.get(k).equals("Unit")) {
+								login.Log4j.info("filter  is : " + filters.get(k));
+								for (int l = 0; l < unitarr.length; l++) {
+									login.Log4j.info("filter option is : " + unitarr[l]);
+									String unit = lines[2];
+									if (unit.contains(unitarr[l]) == true) {
+										login.Log4j.info(unitarr[l] + " is exists in the" + "\n" + unit);
+									} else {
+										Assert.fail(unitarr[l] + " doesn't exist in " + unit);
 
-								Assert.fail(fltrOptions[0] + " doesn't exist in " + unit);
-
+									}
+								}
 							}
 						}
 					}
@@ -452,9 +458,8 @@ public class Filters {
 
 		} catch (NoSuchElementException e) {
 
-			Assert.fail("WebElement is null" + e.getMessage());
+			Assert.fail("WebElement is null " + e.getMessage());
 		}
-
 	}
 
 	@When("^User get the topics as \"([^\"]*)\"$")
@@ -494,4 +499,143 @@ public class Filters {
 		login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
 	}
 
+	@Then("^User verifies Filter search results$")
+	public void user_verifies_Filter_search_results() throws Throwable {
+		WebElement element;
+		WebElement checkbox;
+		String text;
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		Thread.sleep(5000);
+		// create instance of JavaScriptExecutor
+		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+		// create object of Actions class
+		Actions mouseOver = new Actions(login.driver);
+
+		WebElement ul_element = null;
+		try {
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			login.Log4j.info("List size is :" + li_All.size());
+
+			if (li_All.size() > 0) {
+				for (int i = 0; i < li_All.size(); i++) {
+
+					login.Log4j.info(i);
+					login.Log4j.info(li_All.size());
+					Thread.sleep(1500);
+					int j = i + 1;
+					checkbox = login.driver
+							.findElement(By.xpath("//li[" + j + "]//span[@class='series-list-item--checkbox']"));
+					mouseOver.moveToElement(checkbox).click().build().perform();
+
+					element = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
+					mouseOver.moveToElement(element).build().perform();
+					// Until the element is not visible keep scrolling
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					text = element.getAttribute("title");
+					if (searchData.contains("AND")) {
+						String[] keyword = searchData.split("AND");
+						for (String result : keyword) {
+							System.out.println(result);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+							} else {
+								showRelatedData(result, j);
+							}
+
+						}
+					} else if (searchData.contains("OR")) {
+						String[] keyword = searchData.split("OR");
+						login.Log4j.info(keyword[0]);
+						login.Log4j.info(keyword[1]);
+						if (text.toUpperCase().contains(keyword[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(keyword[1].toUpperCase()) == true) {
+							login.Log4j.info(keyword[0] + " OR " + keyword[1] + " exists in " + text);
+						} else {
+							login.Log4j.error(keyword[0] + " OR " + keyword[1] + "not exists");
+							Assert.fail(keyword[0] + " OR " + keyword[1] + " not exists in " + text);
+						}
+					} else {
+						if (searchData.contains("*")) {
+							String[] str = searchData.split("\\*");
+							login.Log4j.info(str.length);
+							switch (str.length) {
+							case 1:
+								if (text.toUpperCase().contains(str[0].toUpperCase()) == true) {
+									login.Log4j.info(str[0] + " exists in " + text);
+
+								} else {
+									Assert.fail(str[0] + " not exists in " + text);
+								}
+								break;
+
+							case 2:
+								if (text.toUpperCase().contains(str[0].toUpperCase()) == true
+										&& text.toUpperCase().contains(str[1].toUpperCase()) == true) {
+
+									login.Log4j.info(str[0] + "AND" + str[1] + " exists in " + text);
+								} else {
+									Assert.fail(str[0] + "AND" + str[1] + " not exists in " + text);
+								}
+
+							default:
+							}
+						}
+					}
+				}
+			} else {
+				login.Log4j.error("List size is null");
+			}
+		} catch (NoSuchElementException e) {
+
+			Assert.fail("WebElement is null " + e.getMessage());
+		}
+	}
+
+	public static void showRelatedData(String keyword, int j) throws InterruptedException {
+		/*
+		 * WebElement element1; element1 = login.driver.findElement(By.xpath("//li[" + j
+		 * + "]//div[@title='Show related data']")); Thread.sleep(1000);
+		 * element1.click(); List<WebElement> datasets = login.driver
+		 * .findElements(By.xpath("//div[@class='related-series-data-sets--container']")
+		 * ); for (WebElement list : datasets) { Thread.sleep(1000); showdata =
+		 * list.getText(); login.Log4j.info(showdata); login.Log4j.info(keyword); if
+		 * (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
+		 * login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
+		 * Thread.sleep(1000);
+		 * login.driver.findElement(By.xpath("//div[@title='Hide related data']")).click
+		 * ();
+		 * 
+		 * } else { login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
+		 * Assert.fail(keyword + " keyword doesn't exists " + showdata); } }
+		 */
+		WebElement ele = login.driver
+				.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+		Thread.sleep(1000);
+		ele.click();
+
+		if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+			List<WebElement> datasets = login.driver
+					.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+			for (WebElement list : datasets) {
+				showdata = list.getText();
+				login.Log4j.info(showdata);
+				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
+					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
+					Thread.sleep(1000);
+//					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+				} else {
+					login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
+					Assert.fail(keyword + " keyword doesn't exists " + showdata);
+				}
+				login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+			}
+		}
+	}
 }
