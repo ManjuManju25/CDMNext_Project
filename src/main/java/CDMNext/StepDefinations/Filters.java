@@ -27,13 +27,13 @@ public class Filters {
 	String[] sourcearr = null;
 	String[] datearr = null;
 	String[] frequencyarr = null;
-	static String[] sid = null;
+	String[] sid = null;
 	public String searchData;
 	public String advancedfltr;
 	public String topic;
 	public int k;
-	public static int j;
-	public static String showdata;
+	public int j;
+	public String showdata;
 
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
@@ -548,42 +548,83 @@ public class Filters {
 
 						}
 					} else if (searchData.contains("OR")) {
-						String[] keyword = searchData.split("OR");
+						String[] keyword = searchData.split(" OR ");
 						login.Log4j.info(keyword[0]);
 						login.Log4j.info(keyword[1]);
+
 						if (text.toUpperCase().contains(keyword[0].toUpperCase()) == true
 								|| text.toUpperCase().contains(keyword[1].toUpperCase()) == true) {
 							login.Log4j.info(keyword[0] + " OR " + keyword[1] + " exists in " + text);
+							// } else if (text.toUpperCase().equalsIgnoreCase(keyword[1].toUpperCase()) ==
+							// true) {
+							// login.Log4j.error(keyword[1] + " exists" + text);
 						} else {
-							login.Log4j.error(keyword[0] + " OR " + keyword[1] + "not exists");
-							Assert.fail(keyword[0] + " OR " + keyword[1] + " not exists in " + text);
+
+							for (String result : keyword) {
+								showRelatedData(result, j);
+							}
+
+						}
+
+					} else if (searchData.contains("*")) {
+						String[] str = searchData.split("\\*");
+						login.Log4j.info(str.length);
+						switch (str.length) {
+						case 1:
+							if (text.toUpperCase().contains(str[0].toUpperCase()) == true) {
+								login.Log4j.info(str[0] + " exists in " + text);
+
+							} else {
+								showRelatedData(str[0], j);
+							}
+							break;
+
+						case 2:
+							login.Log4j.info(str[0]);
+							login.Log4j.info(str[1]);
+							if (text.toUpperCase().contains(str[0].toUpperCase()) == true
+									&& text.toUpperCase().contains(str[1].toUpperCase()) == true) {
+								login.Log4j.info(str[0] + " AND " + str[1] + " exists in " + text);
+							} else {
+								for (String list : str) {
+									showRelatedData(list, j);
+								}
+							}
+							break;
+						default:
+							login.Log4j.error(searchData + " size is more than " + str.length);
 						}
 					} else {
-						if (searchData.contains("*")) {
-							String[] str = searchData.split("\\*");
-							login.Log4j.info(str.length);
-							switch (str.length) {
+						if (searchData.contains("?")) {
+							String[] str1 = searchData.split("\\?");
+							login.Log4j.info(str1.length);
+							switch (str1.length) {
 							case 1:
-								if (text.toUpperCase().contains(str[0].toUpperCase()) == true) {
-									login.Log4j.info(str[0] + " exists in " + text);
+								if (text.toUpperCase().contains(str1[0].toUpperCase()) == true) {
+									login.Log4j.info(str1[0] + " exists in " + text);
 
 								} else {
-									Assert.fail(str[0] + " not exists in " + text);
+									showRelatedData(str1[0], j);
 								}
 								break;
 
 							case 2:
-								if (text.toUpperCase().contains(str[0].toUpperCase()) == true
-										&& text.toUpperCase().contains(str[1].toUpperCase()) == true) {
-
-									login.Log4j.info(str[0] + "AND" + str[1] + " exists in " + text);
+								login.Log4j.info(str1[0]);
+								login.Log4j.info(str1[1]);
+								if (text.toUpperCase().contains(str1[0].toUpperCase()) == true
+										&& text.toUpperCase().contains(str1[1].toUpperCase()) == true) {
+									login.Log4j.info(str1[0] + " AND " + str1[1] + " exists in " + text);
 								} else {
-									Assert.fail(str[0] + "AND" + str[1] + " not exists in " + text);
+									for (String list : str1) {
+										showRelatedData(list, j);
+									}
 								}
-
+								break;
 							default:
+								login.Log4j.error(searchData + " size is more than " + str1.length);
 							}
 						}
+
 					}
 				}
 			} else {
@@ -595,7 +636,7 @@ public class Filters {
 		}
 	}
 
-	public static void showRelatedData(String keyword, int j) throws InterruptedException {
+	public void showRelatedData(String keyword, int j) throws InterruptedException {
 		/*
 		 * WebElement element1; element1 = login.driver.findElement(By.xpath("//li[" + j
 		 * + "]//div[@title='Show related data']")); Thread.sleep(1000);
@@ -628,13 +669,16 @@ public class Filters {
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
-//					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 
 				} else {
 					login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
+					Thread.sleep(1000);
+					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 					Assert.fail(keyword + " keyword doesn't exists " + showdata);
+
 				}
-				login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
 			}
 		}
 	}
