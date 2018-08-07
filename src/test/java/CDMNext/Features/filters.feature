@@ -940,7 +940,6 @@ Then  User verifies Filter search results
 @KeywordSearch
 Scenario: TC_Filters_Search_133
 Given User enters "Forecast OR Low"
-And   User selects "Name only" 
 Then  User verifies Filter search results  
 
 @KeywordSearch
@@ -948,71 +947,66 @@ Scenario: TC_Filters_Search_134
 Given User enters "Exchange Rate"
 Then  User verify Filter search results  
 
-#@KeywordSearch
-#Scenario: TC_Filters_Search_135
-#Given User enters "Res*"
-#Then  User verifies Filter search results  
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_136
-#Given User enters "Seleni*"
-#And   User selected "All databases" as "India Premium Database"
-#Then  User verifies Filter search results  
+@KeywordSearch
+Scenario: TC_Filters_Search_135
+Given User enters "Res*"
+Then  User verifies Filter search results  
 
-#@KeywordSearch
-#Scenario: TC_Filters_Search_137
-#Given User enters "Se*enium"
-#Then  User verifies Filter search results  
+@KeywordSearch
+Scenario: TC_Filters_Search_136
+Given User enters "Seleni*"
+And   User selected "All databases" as "India Premium Database"
+Then  User verifies Filter search results  
 
-#@KeywordSearch
-#Scenario: TC_Filters_Search_138
-#Given User enters "aga?"
-#Then  User verify Filter search results 
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_139
-#Given User enters "ag?r"
-#Then  User verify Filter search results 
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_140
-#Given User enters "2137320*"
-#Then  User verify Filter search results 
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_141
-#Given User enters "1380*1"
-#And   User selected "All databases" as "Brazil Premium Database"
-#Then  User verify Filter search results
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_142
-#Given User enters "BRDLA*"
-#Then  User verify Filter search results
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_143
-#Given User enters "IZI*O"
-#Then  User verify Filter search results
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_144
-#Given User enters "*ZINO"
-#Then  User verify Filter search results
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_145
-#Given User enters "2137320?"
-#Then  User verify Filter search results
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_146
-#Given User enters "?1373201"
-#And   User selected "All databases" as "India Premium Database"
-#Then  User verify Filter search results
-#
-#@KeywordSearch
-#Scenario: TC_Filters_Search_147
-#Given User enters "BRDLA?"
-#And   User selected "All databases" as "India Premium Database"
-#Then  User verify Filter search results
+@KeywordSearch
+Scenario: TC_Filters_Search_137
+Given User enters "Se*enium"
+Then  User verifies Filter search results  
+
+@KeywordSearch
+Scenario: TC_Filters_Search_138
+Given User enters "aga?"
+Then  User verifies Filter search results 
+
+@KeywordSearch
+Scenario: TC_Filters_Search_139
+Given User enters "ag?r"
+Then  User verifies Filter search results 
+
+@KeywordSearch
+Scenario: TC_Filters_Search_140
+Given User enters "2137320*"
+Then  User verifies Filter search results 
+
+@KeywordSearch
+Scenario: TC_Filters_Search_141
+Given User enters "1380*1"
+And   User selected "All databases" as "Brazil Premium Database"
+Then  User verifies Filter search results
+
+@KeywordSearch
+Scenario: TC_Filters_Search_142
+Given User enters "BRDLA*"
+Then  User verifies Filter search results
+
+@KeywordSearch
+Scenario: TC_Filters_Search_143
+Given User enters "IZI*O"
+Then  User verifies Filter search results
+
+@KeywordSearch
+Scenario: TC_Filters_Search_144
+Given User enters "*ZINO"
+Then  User verifies Filter search results
+
+@KeywordSearch
+Scenario: TC_Filters_Search_145
+Given User enters "2137320?"
+Then  User verifies Filter search results
+
+@KeywordSearch
+Scenario: TC_Filters_Search_146
+Given User enters "?1373201"
+And   User selected "All databases" as "India Premium Database"
+Then  User verifies Filter search results
+
