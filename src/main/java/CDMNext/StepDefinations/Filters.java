@@ -119,6 +119,14 @@ public class Filters {
 		if (arg1.equals("Unit")) {
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			if (arg2.equals("MUR")) {
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath("//div[contains(text(),'All options')]")).click();
+				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).clear();
+				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).sendKeys(arg2);
+
+			}
+
 			unitarr = var.split(";");
 			for (String list : unitarr) {
 				Thread.sleep(2000);
