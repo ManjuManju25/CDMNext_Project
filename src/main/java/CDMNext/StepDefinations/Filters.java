@@ -83,7 +83,7 @@ public class Filters {
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			sourcearr = var.split(";");
 			for (String list : sourcearr) {
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
@@ -103,7 +103,7 @@ public class Filters {
 			login.driver.findElement(By.xpath("//span[@title='Filter series by frequency']")).click();
 			frequencyarr = var.split(";");
 			for (String list : frequencyarr) {
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
@@ -120,7 +120,7 @@ public class Filters {
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			if (arg2.equals("MUR")) {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				login.driver.findElement(By.xpath("//div[contains(text(),'All options')]")).click();
 				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).clear();
 				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).sendKeys(arg2);
@@ -129,7 +129,7 @@ public class Filters {
 
 			unitarr = var.split(";");
 			for (String list : unitarr) {
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
@@ -137,7 +137,7 @@ public class Filters {
 		if (arg1.equals("Region")) {
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'By group')]")).click();
 
 		}
@@ -321,25 +321,23 @@ public class Filters {
 								System.out.println(sourcearr.length);
 								String source = lines[10];
 								System.out.println(source);
-								for (int l = 0; l < sourcearr.length; l++) {
-									if ((sourcearr.length == 1)
-											&& (source.toUpperCase().contains(sourcearr[l].toUpperCase()) == true)) {
-										login.Log4j.info(sourcearr[l] + " is exists in the" + "\n" + source);
+								if ((sourcearr.length == 1)
+										&& (source.toUpperCase().contains(sourcearr[0].toUpperCase()) == true)) {
+									login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + source);
 
-									} else if ((sourcearr.length == 2) && (source.contains(sourcearr[l]) == true
-											|| source.contains(sourcearr[l]) == true)) {
-										login.Log4j.info(sourcearr[l] + " OR " + sourcearr[l] + " is exists in the"
-												+ "\n" + source);
+								} else if ((sourcearr.length == 2) && (source.contains(sourcearr[0]) == true
+										|| source.contains(sourcearr[1]) == true)) {
+									login.Log4j.info(
+											sourcearr[0] + " OR " + sourcearr[1] + " is exists in the" + "\n" + source);
+								} else {
+									if (sourcearr.length == 1) {
+										login.Log4j.error(sourcearr[0] + " doesn't exist in " + source);
+										Assert.fail(sourcearr[0] + " doesn't exist in " + source);
 									} else {
-										if (sourcearr.length == 1) {
-											login.Log4j.error(sourcearr[l] + " doesn't exist in " + source);
-											Assert.fail(sourcearr[l] + " doesn't exist in " + source);
-										} else {
-											login.Log4j.error(sourcearr[l] + " OR " + sourcearr[l]
-													+ " doesn't exist in " + source);
-											Assert.fail(sourcearr[l] + " OR " + sourcearr[l] + " doesn't exist in "
-													+ source);
-										}
+										login.Log4j.error(
+												sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in " + source);
+										Assert.fail(
+												sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in " + source);
 									}
 								}
 							}
