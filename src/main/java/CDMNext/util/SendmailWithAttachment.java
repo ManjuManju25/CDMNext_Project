@@ -54,7 +54,7 @@ public class SendmailWithAttachment {
 			message.setFrom(new InternetAddress("info@shravas.com"));
 
 			// Set the recipient address
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("nmaduru@shravas.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("nmaduru@shravas.com,nyojana@shravas.com"));
 
 			// Add the subject link
 			message.setSubject("CDMNext_Automation TestReport");
@@ -63,7 +63,7 @@ public class SendmailWithAttachment {
 			BodyPart messageBodyPart1 = new MimeBodyPart();
 
 			// Set the body of email
-			messageBodyPart1.setText("LastExecution summary report is attached with mail.Please find the attached Extent Report.\nThanks\n\nRegards,\nNadiya");
+			messageBodyPart1.setText("Hi Guru&Sudhee,\n\nLastExecution summary report is attached. Please find the attached Extent Report.\nThanks\n\nRegards,\nNadiya");
 
 			// Create another object to add another content
 			MimeBodyPart messageBodyPart2 = new MimeBodyPart();
