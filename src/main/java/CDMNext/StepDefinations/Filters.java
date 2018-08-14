@@ -33,12 +33,13 @@ public class Filters {
 	public String topic;
 	public int k;
 	public int j;
-	public String showdata;
+	public static String showdata;
+	static Boolean status = true;
 
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		login.Log4j.info("searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
@@ -255,6 +256,9 @@ public class Filters {
 									login.Log4j.info(sid[0] + " is exists in the" + "\n" + text);
 								} else {
 									showRelatedData(sid[0], j);
+									if (status == false) {
+										Assert.fail(sid[0] + " keyword doesn't exists " + showdata);
+									}
 								}
 							}
 
@@ -318,9 +322,9 @@ public class Filters {
 					} else {
 						for (k = 0; k < filters.size(); k++) {
 							if (filters.get(k).equals("Source")) {
-								System.out.println(sourcearr.length);
+								login.Log4j.info(sourcearr.length);
 								String source = lines[10];
-								System.out.println(source);
+								login.Log4j.info(source);
 								if ((sourcearr.length == 1)
 										&& (source.toUpperCase().contains(sourcearr[0].toUpperCase()) == true)) {
 									login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + source);
@@ -377,21 +381,32 @@ public class Filters {
 							}
 							if (filters.get(k).equals("Frequency")) {
 								login.Log4j.info("filter  is : " + filters.get(k));
-								for (int l = 0; l < frequencyarr.length; l++) {
-									login.Log4j.info("filter option is : " + frequencyarr[l]);
-									String frequency = lines[3];
-									if (frequency.contains(frequencyarr[l]) == true) {
-										login.Log4j.info(frequencyarr[l] + " is exists in the" + "\n" + frequency);
+								login.Log4j.info(frequencyarr.length);
+								String frequency = lines[3];
+								login.Log4j.info(frequency);
+								if ((frequencyarr.length == 1)
+										&& (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true)) {
+									login.Log4j.info(frequencyarr[0] + " is exists in the" + "\n" + frequency);
+
+								} else if ((frequencyarr.length == 2) && (frequency.contains(frequencyarr[0]) == true
+										|| frequency.contains(frequencyarr[1]) == true)) {
+									login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1] + " is exists in the"
+											+ "\n" + frequency);
+								} else {
+									if (frequencyarr.length == 1) {
+										login.Log4j.error(frequencyarr[0] + " doesn't exist in " + frequency);
+										Assert.fail(frequencyarr[0] + " doesn't exist in " + frequency);
 									} else {
-
-										Assert.fail(frequencyarr[l] + " doesn't exist in " + frequency);
-
+										login.Log4j.error(frequencyarr[0] + " OR " + frequencyarr[1]
+												+ " doesn't exist in " + frequency);
+										Assert.fail(frequencyarr[0] + " OR " + frequencyarr[1] + " doesn't exist in "
+												+ frequency);
 									}
 								}
 							}
 
 							if (filters.get(k).equals("Status")) {
-								System.out.println(advancedfltr);
+								login.Log4j.info(advancedfltr);
 								sid = searchData.split(";");
 								try {
 									if (advancedfltr != null) {
@@ -545,11 +560,17 @@ public class Filters {
 					if (searchData.contains("AND")) {
 						String[] keyword = searchData.split("AND");
 						for (String result : keyword) {
-							System.out.println(result);
+							login.Log4j.info(result);
+							login.Log4j.info(text);
+							Thread.sleep(1000);
 							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
 								login.Log4j.info(result + " exists in " + text);
 							} else {
 								showRelatedData(result, j);
+								if (status == false) {
+									Assert.fail(result + " keyword doesn't exists " + showdata);
+								}
+
 							}
 
 						}
@@ -568,6 +589,9 @@ public class Filters {
 
 							for (String result : keyword) {
 								showRelatedData(result, j);
+								if (status == false) {
+									Assert.fail(result + " keyword doesn't exists " + showdata);
+								}
 							}
 
 						}
@@ -582,6 +606,9 @@ public class Filters {
 
 							} else {
 								showRelatedData(str[0], j);
+								if (status == false) {
+									Assert.fail(str[0] + " keyword doesn't exists " + showdata);
+								}
 							}
 							break;
 
@@ -594,6 +621,9 @@ public class Filters {
 							} else {
 								for (String list : str) {
 									showRelatedData(list, j);
+									if (status == false) {
+										Assert.fail(list + " keyword doesn't exists " + showdata);
+									}
 								}
 							}
 							break;
@@ -611,6 +641,10 @@ public class Filters {
 
 								} else {
 									showRelatedData(str1[0], j);
+									if (status == false) {
+										Assert.fail(str1[0] + " keyword doesn't exists " + showdata);
+									}
+
 								}
 								break;
 
@@ -623,6 +657,9 @@ public class Filters {
 								} else {
 									for (String list : str1) {
 										showRelatedData(list, j);
+										if (status == false) {
+											Assert.fail(list + " keyword doesn't exists " + showdata);
+										}
 									}
 								}
 								break;
@@ -642,23 +679,8 @@ public class Filters {
 		}
 	}
 
-	public void showRelatedData(String keyword, int j) throws InterruptedException {
-		/*
-		 * WebElement element1; element1 = login.driver.findElement(By.xpath("//li[" + j
-		 * + "]//div[@title='Show related data']")); Thread.sleep(1000);
-		 * element1.click(); List<WebElement> datasets = login.driver
-		 * .findElements(By.xpath("//div[@class='related-series-data-sets--container']")
-		 * ); for (WebElement list : datasets) { Thread.sleep(1000); showdata =
-		 * list.getText(); login.Log4j.info(showdata); login.Log4j.info(keyword); if
-		 * (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
-		 * login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
-		 * Thread.sleep(1000);
-		 * login.driver.findElement(By.xpath("//div[@title='Hide related data']")).click
-		 * ();
-		 * 
-		 * } else { login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
-		 * Assert.fail(keyword + " keyword doesn't exists " + showdata); } }
-		 */
+	public static boolean showRelatedData(String keyword, int j) throws Throwable {
+
 		WebElement ele = login.driver
 				.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 		Thread.sleep(1000);
@@ -671,21 +693,24 @@ public class Filters {
 					.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
 			for (WebElement list : datasets) {
 				showdata = list.getText();
-				login.Log4j.info(showdata);
+				//login.Log4j.info(showdata);
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					status = true;
 
 				} else {
 					login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-					Assert.fail(keyword + " keyword doesn't exists " + showdata);
+					status = false;
+					// Assert.fail(keyword + " keyword doesn't exists " + showdata);
 
 				}
 
 			}
 		}
+		return status;
 	}
 }
