@@ -15,7 +15,7 @@ import CDMNext.util.SendmailWithAttachment;
 		 },
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
-				"com.cucumber.listener.ExtentCucumberFormatter:test-output/html/report.html",
+				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
 				"rerun:target/cucumber-reports/rerun.txt" })
 public class TestRunner {
 
