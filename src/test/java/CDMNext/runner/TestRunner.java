@@ -15,7 +15,7 @@ import CDMNext.util.SendmailWithAttachment;
 		 },
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
-				"com.cucumber.listener.ExtentCucumberFormatter:target/report.html",
+				"com.cucumber.listener.ExtentCucumberFormatter:test-output/html/report.html",
 				"rerun:target/cucumber-reports/rerun.txt" })
 public class TestRunner {
 
@@ -53,8 +53,8 @@ public class TestRunner {
 			login.driver.quit();
 			login.driver = null;
 		}
-		login.Log4j.info("\n ****Inside Email*****");
-		SendmailWithAttachment.report();
+		//login.Log4j.info("\n ****Inside Email*****");
+		//SendmailWithAttachment.report();
 	}
 
 }
