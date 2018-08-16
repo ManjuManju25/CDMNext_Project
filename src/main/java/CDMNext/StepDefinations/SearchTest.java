@@ -112,8 +112,8 @@ public class SearchTest {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			 login.Log4j.info("List size is :" + li_All.size());
-			
+			login.Log4j.info("List size is :" + li_All.size());
+
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
 
@@ -132,139 +132,287 @@ public class SearchTest {
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
-					login.Log4j.info("Title information is \n" + text);
-					
+					// login.Log4j.info("Title information is \n" + text);
+					Boolean KeywordMatch = false;
 
 					switch (listwords.length) {
 					case 1:
 						if (search_validation(text, listwords[0]) == true) {
-							login.Log4j.info(listwords[0] + " is exists in the"+"\n" + text);
-							login.Log4j.info("\n");
+							login.Log4j.info(listwords[0] + " is exists in the" + "\n" + text);
+
 						} else {
-							AssertJUnit.fail(listwords[0] + " keyword doesnot exists in the  " + text);
+							Filters.showRelatedData(listwords[0], j);
+							if (Filters.status == false) {
+								AssertJUnit.fail(listwords[0] + " keyword doesnot exists in the " + Filters.showdata);
+							}
 						}
 						break;
 					case 2:
 
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true) {
-							 login.Log4j.info(listwords[0] + " OR " + listwords[1] + " exists in the \n" +text);
-							
-							 login.Log4j.info("\n");
-						} else {
-							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " doesnot exists in the " + text);
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " keyword doesnot exists in the " + text);
-						}
+						for (String result : listwords) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+								KeywordMatch = true;
+								break;
+							} else if (KeywordMatch == false) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									KeywordMatch = true;
+									break;
+								} else if (Filters.status == false) {
+									KeywordMatch = false;
+								}
 
+							}
+
+						}
+						if (KeywordMatch == false) {
+							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " keyword doesnot exists in the "
+									+ Filters.showdata);
+						}
+						/*
+						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
+						 * listwords[1]) == true) { login.Log4j.info(listwords[0] + " OR " +
+						 * listwords[1] + " exists in the" + " \n" + text);
+						 * 
+						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] +
+						 * " doesnot exists in the " + text); AssertJUnit.fail( listwords[0] + " OR " +
+						 * listwords[1] + " keyword doesnot exists in the " + text); }
+						 */
 						break;
 					case 3:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true) {
-							 login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-							 + " exists in the \n" + text);
-							
-							 login.Log4j.info("\n");
-						} else {
-							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-									+ " doesnot exists in the \n" + text);
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-									+ " keyword doesnot exists in the " + text);
+						for (String result : listwords) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+								KeywordMatch = true;
+								break;
+							} else if (KeywordMatch == false) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									KeywordMatch = true;
+									break;
+								} else if (Filters.status == false) {
+									KeywordMatch = false;
+								}
+							}
 						}
+						if (KeywordMatch == false) {
+							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+									+ " keyword doesnot exists in the " + Filters.showdata);
+						}
+
+						/*
+						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
+						 * listwords[1]) == true || search_validation(text, listwords[2]) == true) {
+						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " exists in the" + "\n" + text); } else { login.Log4j.error(listwords[0] +
+						 * " OR " + listwords[1] + " OR " + listwords[2] + " doesnot exists in the \n" +
+						 * text); AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " +
+						 * listwords[2] + " keyword doesnot exists in the " + text); }
+						 */
 						break;
 					case 4:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true) {
-							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " exists in the \n" + text);
-							login.Log4j.info("\n");
-						} else {
-							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " doesnot exists in the \n" + text);
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " keyword doesnot exists in the " + text);
+						for (String result : listwords) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+								KeywordMatch = true;
+								break;
+							} else if (KeywordMatch == false) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									KeywordMatch = true;
+									break;
+								} else if (Filters.status == false) {
+									KeywordMatch = false;
+								}
+							}
 						}
+						if (KeywordMatch == false) {
+							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
+									+ listwords[3] + " keyword doesnot exists in the " + Filters.showdata);
+						}
+
+						/*
+						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
+						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
+						 * search_validation(text, listwords[3]) == true) {
+						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " OR " + listwords[3] + " exists in the" + "\n" + text);
+						 * 
+						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
+						 * listwords[2] + " OR " + listwords[3] + " doesnot exists in the \n" + text);
+						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " OR " + listwords[3] + " keyword doesnot exists in the " + text); }
+						 */
 						break;
 					case 5:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true) {
-							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " keyword exists in the \n" + text);
-							login.Log4j.info("\n");
-						} else {
-							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " doesnot exists in the \n" + text);
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " keyword doesnot exists in the " + text);
+						for (String result : listwords) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+								KeywordMatch = true;
+								break;
+							} else if (KeywordMatch == false) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									KeywordMatch = true;
+									break;
+								} else if (Filters.status == false) {
+									KeywordMatch = false;
+								}
+							}
 						}
+						if (KeywordMatch == false) {
+							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
+									+ listwords[3] + " OR " + listwords[4] + " keyword doesnot exists in the "
+									+ Filters.showdata);
+						}
+						/*
+						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
+						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
+						 * search_validation(text, listwords[3]) == true || search_validation(text,
+						 * listwords[4]) == true) { login.Log4j.info(listwords[0] + " OR " +
+						 * listwords[1] + " OR " + listwords[2] + " OR " + listwords[3] + " OR " +
+						 * listwords[4] + " keyword exists in the" + "\n" + text);
+						 * 
+						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
+						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] +
+						 * " doesnot exists in the \n" + text); AssertJUnit.fail(listwords[0] + " OR " +
+						 * listwords[1] + " OR " + listwords[2] + " OR " + listwords[3] + " OR " +
+						 * listwords[4] + " keyword doesnot exists in the " + text); }
+						 */
 						break;
 					case 6:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true
-								|| search_validation(text, listwords[5]) == true) {
-							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " exists in the \n"
-									+ text);
-							login.Log4j.info("\n");
-						} else {
-							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
-									+ " doesnot exists in the \n" + text);
+						for (String result : listwords) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+								KeywordMatch = true;
+								break;
+							} else if (KeywordMatch == false) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									KeywordMatch = true;
+									break;
+								} else if (Filters.status == false) {
+									KeywordMatch = false;
+								}
+							}
+						}
+						if (KeywordMatch == false) {
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
-									+ "  keyword doesnot exists in the " + text);
+									+ " keyword doesnot exists in the " + Filters.showdata);
 						}
+						/*
+						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
+						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
+						 * search_validation(text, listwords[3]) == true || search_validation(text,
+						 * listwords[4]) == true || search_validation(text, listwords[5]) == true) {
+						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
+						 * " exists in the" + "\n" + text);
+						 * 
+						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
+						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] + " OR " +
+						 * listwords[5] + " doesnot exists in the \n" + text);
+						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
+						 * "  keyword doesnot exists in the " + text); }
+						 */
 						break;
 					case 7:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true
-								|| search_validation(text, listwords[5]) == true
-								|| search_validation(text, listwords[6]) == true) {
-							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " exists in the \n" + text);
-							login.Log4j.info("\n");
-						} else {
-							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " doesnot exists in the \n" + text);
+						for (String result : listwords) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+								KeywordMatch = true;
+								break;
+							} else if (KeywordMatch == false) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									KeywordMatch = true;
+									break;
+								} else if (Filters.status == false) {
+									KeywordMatch = false;
+								}
+							}
+						}
+						if (KeywordMatch == false) {
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " keyword doesnot exists in the " + text);
+									+ listwords[6] + " keyword doesnot exists in the " + Filters.showdata);
 						}
+						/*
+						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
+						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
+						 * search_validation(text, listwords[3]) == true || search_validation(text,
+						 * listwords[4]) == true || search_validation(text, listwords[5]) == true ||
+						 * search_validation(text, listwords[6]) == true) {
+						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
+						 * " OR " + listwords[6] + " exists in the" + "\n" + text);
+						 * 
+						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
+						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] + " OR " +
+						 * listwords[5] + " OR " + listwords[6] + " doesnot exists in the \n" + text);
+						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
+						 * " OR " + listwords[6] + " keyword doesnot exists in the " + text); }
+						 */
 						break;
 					case 8:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true
-								|| search_validation(text, listwords[5]) == true
-								|| search_validation(text, listwords[6]) == true
-								|| search_validation(text, listwords[7]) == true) {
-							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + listwords[7] + " exists in the \n" + text);
-							login.Log4j.info("\n");
-						} else {
-							login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " doesnot exists in the \n" + text);
+						for (String result : listwords) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+								KeywordMatch = true;
+								break;
+							} else if (KeywordMatch == false) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									KeywordMatch = true;
+									break;
+								} else if (Filters.status == false) {
+									KeywordMatch = false;
+								}
+							}
+						}
+						if (KeywordMatch == false) {
 							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + listwords[7] + " keyword doesnot exists in the " + text);
+									+ listwords[6] + " OR " + listwords[7] + " keyword doesnot exists in the "
+									+ Filters.showdata);
 						}
+						/*
+						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
+						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
+						 * search_validation(text, listwords[3]) == true || search_validation(text,
+						 * listwords[4]) == true || search_validation(text, listwords[5]) == true ||
+						 * search_validation(text, listwords[6]) == true || search_validation(text,
+						 * listwords[7]) == true) { login.Log4j.info(listwords[0] + " OR " +
+						 * listwords[1] + " OR " + listwords[2] + " OR " + listwords[3] + " OR " +
+						 * listwords[4] + " OR " + listwords[5] + " OR " + listwords[6] + listwords[7] +
+						 * " exists in the" + "\n" + text);
+						 * 
+						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
+						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] + " OR " +
+						 * listwords[5] + " OR " + listwords[6] + " doesnot exists in the \n" + text);
+						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
+						 * " OR " + listwords[6] + listwords[7] + " keyword doesnot exists in the " +
+						 * text); }
+						 */
 						break;
 
 					default:
@@ -282,7 +430,9 @@ public class SearchTest {
 				AssertJUnit.fail("Sorry,No results were found ");
 			}
 
-		} catch (NoSuchElementException e) {
+		} catch (
+
+		NoSuchElementException e) {
 
 			AssertJUnit.fail(e.getMessage());
 
@@ -300,47 +450,6 @@ public class SearchTest {
 		} else {
 			return false;
 		}
-
-		/*
-		 * String[] keywords = null; keywords = Keyword.split(" ");
-		 * 
-		 * switch (keywords.length) { case 1: if
-		 * (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true) {
-		 * return true; } else { return false; }
-		 * 
-		 * case 2: if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) ==
-		 * true && searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true)
-		 * { return true; } else { return false; }
-		 * 
-		 * case 3: if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) ==
-		 * true && searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
-		 * && searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
-		 * return true; } else { return false; }
-		 * 
-		 * case 4: if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) ==
-		 * true && searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
-		 * && searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true) {
-		 * return true; } else { return false; } case 5: if
-		 * (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true) {
-		 * return true; } else { return false; } case 6: if
-		 * (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true &&
-		 * searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true) {
-		 * return true; } else { return false; }
-		 * 
-		 * default: return false;
-		 * 
-		 * }
-		 */
-
 	}
 
 	// It will execute after every test execution
@@ -360,10 +469,10 @@ public class SearchTest {
 				// Copy files to specific location
 				FileUtils.copyFile(srcFile, destFile);
 				login.Log4j.info("Screenshot is taken successfully.");
-				
+
 			} catch (IOException e) {
 				login.Log4j.error("Exception while taking screenshot\n " + e.getMessage());
-				
+
 			}
 
 		}

@@ -558,10 +558,9 @@ public class Filters {
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
 					if (searchData.contains("AND")) {
-						String[] keyword = searchData.split("AND");
+						String[] keyword = searchData.split(" AND ");
 						for (String result : keyword) {
 							login.Log4j.info(result);
-							login.Log4j.info(text);
 							Thread.sleep(1000);
 							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
 								login.Log4j.info(result + " exists in " + text);
@@ -576,26 +575,59 @@ public class Filters {
 						}
 					} else if (searchData.contains("OR")) {
 						String[] keyword = searchData.split(" OR ");
-						login.Log4j.info(keyword[0]);
-						login.Log4j.info(keyword[1]);
-
-						if (text.toUpperCase().contains(keyword[0].toUpperCase()) == true
+						// login.Log4j.info(keyword[0]);
+						// login.Log4j.info(keyword[1]);
+						login.Log4j.info("length is " + keyword.length);
+						if ((keyword.length == 2) && text.toUpperCase().contains(keyword[0].toUpperCase()) == true
 								|| text.toUpperCase().contains(keyword[1].toUpperCase()) == true) {
 							login.Log4j.info(keyword[0] + " OR " + keyword[1] + " exists in " + text);
 							// } else if (text.toUpperCase().equalsIgnoreCase(keyword[1].toUpperCase()) ==
 							// true) {
 							// login.Log4j.error(keyword[1] + " exists" + text);
+						} else if ((keyword.length == 3)
+								&& text.toUpperCase().contains(keyword[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(keyword[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(keyword[2].toUpperCase()) == true) {
+							login.Log4j.info(
+									keyword[0] + " OR " + keyword[1] + " OR " + keyword[2] + " exists in " + text);
+
 						} else {
 
 							for (String result : keyword) {
 								showRelatedData(result, j);
-								if (status == false) {
+								if (status == true) {
+									break;
+								} else if (status == false) {
 									Assert.fail(result + " keyword doesn't exists " + showdata);
 								}
 							}
 
 						}
+					} else if (searchData.contains("NOT")) {
+						String[] keyword = searchData.split(" NOT ");
+						login.Log4j.info("length is " + keyword.length);
+						if ((keyword.length == 2) && text.toUpperCase().contains(keyword[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(keyword[1].toUpperCase()) == false) {
+							login.Log4j.info(keyword[0] + " exists in " + text);
 
+						} else if ((keyword.length == 3)
+								&& text.toUpperCase().contains(keyword[0].toUpperCase()) == true
+								&& text.toUpperCase().contains(keyword[1].toUpperCase()) == false
+								&& text.toUpperCase().contains(keyword[2].toUpperCase()) == false) {
+							login.Log4j.info(keyword[0] + " exists in " + text);
+
+						} else {
+
+							for (String result : keyword) {
+								showRelatedData(result, j);
+								if (status == true) {
+									break;
+								} else if (status == false) {
+									Assert.fail(result + " keyword doesn't exists " + showdata);
+								}
+							}
+
+						}
 					} else if (searchData.contains("*")) {
 						String[] str = searchData.split("\\*");
 						login.Log4j.info(str.length);
@@ -693,7 +725,7 @@ public class Filters {
 					.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
 			for (WebElement list : datasets) {
 				showdata = list.getText();
-				//login.Log4j.info(showdata);
+				// login.Log4j.info(showdata);
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
