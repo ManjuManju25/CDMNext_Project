@@ -2,10 +2,14 @@
 package CDMNext.StepDefinations;
 
 import org.testng.AssertJUnit;
+
+import com.sun.mail.imap.protocol.Status;
+
 import java.io.File;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 //import java.text.SimpleDateFormat;
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
@@ -16,6 +20,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -31,6 +36,7 @@ import cucumber.api.java.en.Then;
 public class SearchTest {
 	public static String currentKeyword = "";
 	private static Boolean logged = false;
+	List<String> status = new ArrayList<>();
 
 	@Given("^User has successful logged in$")
 	public void user_has_successful_logged_in() throws Throwable {
@@ -78,7 +84,8 @@ public class SearchTest {
 		String[] listwords = null;
 		while (txtscan.hasNextLine()) {
 			Content = txtscan.nextLine();
-			listwords = Content.split(",");
+			listwords = Content.trim().split("\\s*,\\s*");
+			
 			if (listwords[0].equalsIgnoreCase((currentKeyword))) {
 				login.Log4j.info("Synonym text file contains " + currentKeyword);
 				SynomymSearch = true;
@@ -133,286 +140,442 @@ public class SearchTest {
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
 					// login.Log4j.info("Title information is \n" + text);
+					
+					 /*Boolean KeywordMatch = false;
+					 for (String keyword : listwords) {
+					   login.Log4j.info(keyword);
+					 
+					    if (text.toUpperCase().contains(keyword.toUpperCase()) == true) {
+					      login.Log4j.info(keyword + " is exists in the" + "\n" + text); 
+					      KeywordMatch = true; 
+					      break;
+					 
+					     } else if (KeywordMatch == false) { 
+					    	 WebElement ele =login.driver.findElement( By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']")); Thread.sleep(1000);
+					      ele.click();
+					 
+					       if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+					    	   Thread.sleep(1000);
+					           login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click(); 
+					           List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']")); 
+					           for(WebElement list : datasets) { 
+					        	   Filters.showdata = list.getText();
+					               login.Log4j.info(keyword);
+					               if(Filters.showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
+					               login.Log4j.info(keyword + " is exists in the" + "\n" + Filters.showdata);
+					               Thread.sleep(1000);
+					               login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					               KeywordMatch = true;
+					               break;
+					               } else {
+					            	 Thread.sleep(1000);
+					                 login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					                 status.add(keyword); } } } } }
+					                 //login.Log4j.info(KeywordMatch); 
+					                 if (KeywordMatch == false) {
+					                	 for (String failure : status) { 
+					                		 Assert.fail(failure + " keyword doesn't exists in " + text + " AND " + "\n" + Filters.showdata); } }
+					*/
 					Boolean KeywordMatch = false;
 
 					switch (listwords.length) {
 					case 1:
-						if (search_validation(text, listwords[0]) == true) {
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true) {
 							login.Log4j.info(listwords[0] + " is exists in the" + "\n" + text);
+							KeywordMatch = true;
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+							Thread.sleep(1000);
+							ele.click();
 
-						} else {
-							Filters.showRelatedData(listwords[0], j);
-							if (Filters.status == false) {
-								AssertJUnit.fail(listwords[0] + " keyword doesnot exists in the " + Filters.showdata);
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " is exists in the" + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(listwords[0] + " keyword doesn't exists in the " + text + " AND "
+												+ "\n" + Filters.showdata);
+									}
+								}
 							}
 						}
 						break;
 					case 2:
 
-						for (String result : listwords) {
-							login.Log4j.info(result);
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " exists in " + text);
+							KeywordMatch = true;
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-								KeywordMatch = true;
-								break;
-							} else if (KeywordMatch == false) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									KeywordMatch = true;
-									break;
-								} else if (Filters.status == false) {
-									KeywordMatch = false;
+							ele.click();
+
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[1].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " OR " + listwords[1] + " is exists in the "
+												+ "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(
+												listwords[0] + " OR " + listwords[1] + " keyword doesn't exists in the "
+														+ text + " AND " + "\n" + Filters.showdata);
+									}
 								}
-
 							}
-
 						}
-						if (KeywordMatch == false) {
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " keyword doesnot exists in the "
-									+ Filters.showdata);
-						}
-						/*
-						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
-						 * listwords[1]) == true) { login.Log4j.info(listwords[0] + " OR " +
-						 * listwords[1] + " exists in the" + " \n" + text);
-						 * 
-						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] +
-						 * " doesnot exists in the " + text); AssertJUnit.fail( listwords[0] + " OR " +
-						 * listwords[1] + " keyword doesnot exists in the " + text); }
-						 */
 						break;
 					case 3:
-						for (String result : listwords) {
-							login.Log4j.info(result);
+
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+									+ " exists in " + text);
+							KeywordMatch = true;
+
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-								KeywordMatch = true;
-								break;
-							} else if (KeywordMatch == false) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									KeywordMatch = true;
-									break;
-								} else if (Filters.status == false) {
-									KeywordMatch = false;
+							ele.click();
+
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[1].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[2].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " exists in the " + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " keyword doesn't exists in the " + text + " AND " + "\n"
+												+ Filters.showdata);
+									}
 								}
 							}
-						}
-						if (KeywordMatch == false) {
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-									+ " keyword doesnot exists in the " + Filters.showdata);
+
 						}
 
-						/*
-						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
-						 * listwords[1]) == true || search_validation(text, listwords[2]) == true) {
-						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " exists in the" + "\n" + text); } else { login.Log4j.error(listwords[0] +
-						 * " OR " + listwords[1] + " OR " + listwords[2] + " doesnot exists in the \n" +
-						 * text); AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " +
-						 * listwords[2] + " keyword doesnot exists in the " + text); }
-						 */
 						break;
 					case 4:
-						for (String result : listwords) {
-							login.Log4j.info(result);
+
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
+									+ listwords[3] + " exists in " + text);
+							KeywordMatch = true;
+
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-								KeywordMatch = true;
-								break;
-							} else if (KeywordMatch == false) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									KeywordMatch = true;
-									break;
-								} else if (Filters.status == false) {
-									KeywordMatch = false;
+							ele.click();
+
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[1].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[2].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[3].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " exists in the " + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " keyword doesn't exists in the " + text
+												+ " AND " + "\n" + Filters.showdata);
+									}
 								}
 							}
-						}
-						if (KeywordMatch == false) {
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " keyword doesnot exists in the " + Filters.showdata);
-						}
 
-						/*
-						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
-						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
-						 * search_validation(text, listwords[3]) == true) {
-						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " OR " + listwords[3] + " exists in the" + "\n" + text);
-						 * 
-						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
-						 * listwords[2] + " OR " + listwords[3] + " doesnot exists in the \n" + text);
-						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " OR " + listwords[3] + " keyword doesnot exists in the " + text); }
-						 */
+						}
 						break;
 					case 5:
-						for (String result : listwords) {
-							login.Log4j.info(result);
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
+									+ listwords[3] + " OR " + listwords[4] + " exists in " + text);
+							KeywordMatch = true;
+
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-								KeywordMatch = true;
-								break;
-							} else if (KeywordMatch == false) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									KeywordMatch = true;
-									break;
-								} else if (Filters.status == false) {
-									KeywordMatch = false;
+							ele.click();
+
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[1].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[2].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[3].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[4].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4] + "exists in the " + "\n"
+												+ Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4]
+												+ " keyword doesn't exists in the " + text + " AND " + "\n"
+												+ Filters.showdata);
+									}
 								}
 							}
+
 						}
-						if (KeywordMatch == false) {
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " keyword doesnot exists in the "
-									+ Filters.showdata);
-						}
-						/*
-						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
-						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
-						 * search_validation(text, listwords[3]) == true || search_validation(text,
-						 * listwords[4]) == true) { login.Log4j.info(listwords[0] + " OR " +
-						 * listwords[1] + " OR " + listwords[2] + " OR " + listwords[3] + " OR " +
-						 * listwords[4] + " keyword exists in the" + "\n" + text);
-						 * 
-						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
-						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] +
-						 * " doesnot exists in the \n" + text); AssertJUnit.fail(listwords[0] + " OR " +
-						 * listwords[1] + " OR " + listwords[2] + " OR " + listwords[3] + " OR " +
-						 * listwords[4] + " keyword doesnot exists in the " + text); }
-						 */
 						break;
 					case 6:
-						for (String result : listwords) {
-							login.Log4j.info(result);
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[5].toUpperCase()) == true) {
+							login.Log4j.info(
+									listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR " + listwords[3]
+											+ " OR " + listwords[4] + " OR " + listwords[5] + " exists in " + text);
+							KeywordMatch = true;
+
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-								KeywordMatch = true;
-								break;
-							} else if (KeywordMatch == false) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									KeywordMatch = true;
-									break;
-								} else if (Filters.status == false) {
-									KeywordMatch = false;
+							ele.click();
+
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[1].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[2].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[3].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[4].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[5].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
+												+ " exists in the " + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
+												+ " keyword doesn't exists in the " + text + " AND " + "\n"
+												+ Filters.showdata);
+									}
 								}
 							}
+
 						}
-						if (KeywordMatch == false) {
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
-									+ " keyword doesnot exists in the " + Filters.showdata);
-						}
-						/*
-						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
-						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
-						 * search_validation(text, listwords[3]) == true || search_validation(text,
-						 * listwords[4]) == true || search_validation(text, listwords[5]) == true) {
-						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
-						 * " exists in the" + "\n" + text);
-						 * 
-						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
-						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] + " OR " +
-						 * listwords[5] + " doesnot exists in the \n" + text);
-						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
-						 * "  keyword doesnot exists in the " + text); }
-						 */
 						break;
 					case 7:
-						for (String result : listwords) {
-							login.Log4j.info(result);
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[5].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[6].toUpperCase()) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
+									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
+									+ listwords[6] + " exists in " + text);
+							KeywordMatch = true;
+
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-								KeywordMatch = true;
-								break;
-							} else if (KeywordMatch == false) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									KeywordMatch = true;
-									break;
-								} else if (Filters.status == false) {
-									KeywordMatch = false;
+							ele.click();
+
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									login.Log4j.info(listwords[5]);
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[1].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[2].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[3].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[4].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[5].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[6].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
+												+ " OR " + listwords[6] + " exists in the " + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
+												+ " OR " + listwords[6] + " keyword doesn't exists in the " + text
+												+ " AND " + "\n" + Filters.showdata);
+									}
 								}
 							}
+
 						}
-						if (KeywordMatch == false) {
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " keyword doesnot exists in the " + Filters.showdata);
-						}
-						/*
-						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
-						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
-						 * search_validation(text, listwords[3]) == true || search_validation(text,
-						 * listwords[4]) == true || search_validation(text, listwords[5]) == true ||
-						 * search_validation(text, listwords[6]) == true) {
-						 * login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
-						 * " OR " + listwords[6] + " exists in the" + "\n" + text);
-						 * 
-						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
-						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] + " OR " +
-						 * listwords[5] + " OR " + listwords[6] + " doesnot exists in the \n" + text);
-						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
-						 * " OR " + listwords[6] + " keyword doesnot exists in the " + text); }
-						 */
 						break;
 					case 8:
-						for (String result : listwords) {
-							login.Log4j.info(result);
+						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[5].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[6].toUpperCase()) == true
+								|| text.toUpperCase().contains(listwords[7].toUpperCase()) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
+									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
+									+ listwords[6] + " OR " + listwords[7] + " exists in " + text);
+							KeywordMatch = true;
+
+						} else if (KeywordMatch == false) {
+							WebElement ele = login.driver.findElement(
+									By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
 							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-								KeywordMatch = true;
-								break;
-							} else if (KeywordMatch == false) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									KeywordMatch = true;
-									break;
-								} else if (Filters.status == false) {
-									KeywordMatch = false;
+							ele.click();
+
+							if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"))
+									.isDisplayed()) {
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								List<WebElement> datasets = login.driver
+										.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								for (WebElement list : datasets) {
+									Filters.showdata = list.getText();
+									if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[1].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[2].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[3].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[4].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[5].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[6].toUpperCase()) == true
+											|| Filters.showdata.toUpperCase()
+													.contains(listwords[7].toUpperCase()) == true) {
+										login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
+												+ " OR " + listwords[6] + " OR " + listwords[7] + " exists in the "
+												+ "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
+												+ " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
+												+ " OR " + listwords[6] + " OR " + listwords[7]
+												+ " keyword doesn't exists in the " + text + " AND " + "\n"
+												+ Filters.showdata);
+									}
 								}
 							}
+
 						}
-						if (KeywordMatch == false) {
-							AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " OR " + listwords[7] + " keyword doesnot exists in the "
-									+ Filters.showdata);
-						}
-						/*
-						 * if (search_validation(text, listwords[0]) == true || search_validation(text,
-						 * listwords[1]) == true || search_validation(text, listwords[2]) == true ||
-						 * search_validation(text, listwords[3]) == true || search_validation(text,
-						 * listwords[4]) == true || search_validation(text, listwords[5]) == true ||
-						 * search_validation(text, listwords[6]) == true || search_validation(text,
-						 * listwords[7]) == true) { login.Log4j.info(listwords[0] + " OR " +
-						 * listwords[1] + " OR " + listwords[2] + " OR " + listwords[3] + " OR " +
-						 * listwords[4] + " OR " + listwords[5] + " OR " + listwords[6] + listwords[7] +
-						 * " exists in the" + "\n" + text);
-						 * 
-						 * } else { login.Log4j.error(listwords[0] + " OR " + listwords[1] + " OR " +
-						 * listwords[2] + " OR " + listwords[3] + " OR " + listwords[4] + " OR " +
-						 * listwords[5] + " OR " + listwords[6] + " doesnot exists in the \n" + text);
-						 * AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-						 * + " OR " + listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] +
-						 * " OR " + listwords[6] + listwords[7] + " keyword doesnot exists in the " +
-						 * text); }
-						 */
 						break;
 
 					default:
