@@ -2,11 +2,7 @@
 package CDMNext.StepDefinations;
 
 import org.testng.AssertJUnit;
-
-import com.sun.mail.imap.protocol.Status;
-
 import java.io.File;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
