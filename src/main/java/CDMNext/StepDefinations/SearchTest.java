@@ -137,11 +137,11 @@ public class SearchTest {
 					text = element.getAttribute("title");
 					// login.Log4j.info("Title information is \n" + text);
 					
-					 /*Boolean KeywordMatch = false;
+					 Boolean KeywordMatch = false;
 					 for (String keyword : listwords) {
 					   login.Log4j.info(keyword);
-					 
-					    if (text.toUpperCase().contains(keyword.toUpperCase()) == true) {
+					
+					    if (search_validation(text,keyword) == true) {
 					      login.Log4j.info(keyword + " is exists in the" + "\n" + text); 
 					      KeywordMatch = true; 
 					      break;
@@ -157,7 +157,7 @@ public class SearchTest {
 					           for(WebElement list : datasets) { 
 					        	   Filters.showdata = list.getText();
 					               login.Log4j.info(keyword);
-					               if(Filters.showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
+					               if(search_validation(Filters.showdata,keyword) == true) {
 					               login.Log4j.info(keyword + " is exists in the" + "\n" + Filters.showdata);
 					               Thread.sleep(1000);
 					               login.driver.findElement(By.xpath("//div[@title='Close']")).click();
@@ -171,8 +171,8 @@ public class SearchTest {
 					                 if (KeywordMatch == false) {
 					                	 for (String failure : status) { 
 					                		 Assert.fail(failure + " keyword doesn't exists in " + text + " AND " + "\n" + Filters.showdata); } }
-					*/
-					Boolean KeywordMatch = false;
+					
+					/*Boolean KeywordMatch = false;
 
 					switch (listwords.length) {
 					case 1:
@@ -581,7 +581,7 @@ public class SearchTest {
 						AssertJUnit.fail(
 								currentKeyword + " has more than 8 synonyms which is not handled.  Please handle!");
 
-					}
+					}*/
 
 				}
 
@@ -604,11 +604,62 @@ public class SearchTest {
 
 	public boolean search_validation(String searchText, String Keyword) throws Throwable {
 
-		if (searchText.toUpperCase().contains(Keyword.toUpperCase()) == true) {
+		/*if (searchText.toUpperCase().contains(Keyword.toUpperCase()) == true) {
 			return true;
 		} else {
 			return false;
+		}*/
+		String[] keywords = null;
+		keywords = Keyword.split(" ");
+		switch (keywords.length) {
+		case 1:
+			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
+         
+		case 2:
+			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		case 3:
+			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
+
+		case 4:
+			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
+		case 5:
+			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
+		default:
+			return false;
+
 		}
+
 	}
 
 	// It will execute after every test execution
