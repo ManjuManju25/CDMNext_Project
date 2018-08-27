@@ -114,7 +114,7 @@ public class Filters {
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by status']")).click();
 			login.Log4j.info("clicking on " + fltrStatus);
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//tr[@title='" + fltrStatus + "']")).click();
 		}
 		if (arg1.equals("Unit")) {
@@ -138,7 +138,7 @@ public class Filters {
 		if (arg1.equals("Region")) {
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'By group')]")).click();
 
 		}
