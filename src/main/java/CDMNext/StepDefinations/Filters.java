@@ -241,6 +241,14 @@ public class Filters {
 									} else {
 										login.Log4j.error("Element is not clickable");
 									}
+								} else if (advancedfltr.equals("Subscribed only")) {
+									if (!checkbox.isSelected()) {
+										checkbox.click();
+										login.Log4j.info("Element is clickable");
+									} else {
+										login.Log4j.error("Element is not clickable");
+									}
+
 								} else {
 									if (advancedfltr.equals("Name only")
 											&& seriesName.toUpperCase().contains(sid[0].toUpperCase()) == true) {
@@ -371,7 +379,7 @@ public class Filters {
 										String[] lastDate = lines[5].split(": ");
 										String last_obs_after = sdf.format(date);
 										if (sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)) == true) {
-											login.Log4j.info(lastDate[1] + " is less than " + last_obs_after + "? "
+											login.Log4j.info(lastDate[1] + " is greater than " + last_obs_after + "? "
 													+ sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)));
 										} else {
 											Assert.fail(lastDate[1] + " is not greater than " + last_obs_after);
@@ -557,56 +565,8 @@ public class Filters {
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
-					if (searchData.contains("AND") && searchData.contains("OR")) {
-						String[] keyword = searchData.split(" AND|OR ");
-						//Boolean array=new Boolean(keyword.length);
-						
-						login.Log4j.info("length is " + keyword.length);
-						login.Log4j.info("keyword[0] is " + keyword[0]);
-						login.Log4j.info("keyword[1] is " + keyword[1]);
-						login.Log4j.info("keyword[2] is " + keyword[2]);
-						//Boolean keyword[0] = false;
-						//Boolean keyword[1] = false;
-						//Boolean keyword[2] = false;
-//						if (searchData.equals("capital AND price OR algeria")) {
-//							if(text.toUpperCase().contains(keyword[0]).toUppercase()==true || )
-//
-//							
-//							
-//						} else if (searchData.equals("fuel OR price AND albania")) {
-//							if (text.toUpperCase().contains(keyword[0].toUpperCase()) == true
-//									|| (text.toUpperCase().contains(keyword[1].toUpperCase()) == true
-//											&& text.toUpperCase().contains(keyword[2].toUpperCase()) == true)) {
-//								login.Log4j.info(keyword[0] + " OR " + keyword[1] + " AND " + keyword[2] + " exists in " + text);
-//
-//							} else{
-//								WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
-//							        Thread.sleep(1000);
-//							        ele.click();
-//
-//							    if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
-//								     Thread.sleep(1000);
-//								     login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
-//								     List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
-//								       for (WebElement list : datasets) {
-//									      showdata = list.getText();
-//									      login.Log4j.info(showdata);
-//									      if (showdata.toUpperCase().contains(keyword[0].toUpperCase()) == true
-//											|| (showdata.toUpperCase().contains(keyword[1].toUpperCase()) == true
-//											&& showdata.toUpperCase().contains(keyword[2].toUpperCase()) == true)) {
-//										       login.Log4j.info(keyword[0]+ " OR " + keyword[1] + " AND " + keyword[2]+" is exists in the" + "\n" + showdata);
-//										       Thread.sleep(1000);
-//										       login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-//									       } else {
-//										       login.Log4j.error(keyword[0]+" OR " + keyword[1] + " AND " + keyword[2]+" keyword doesn't exists " + showdata);
-//										       Thread.sleep(1000);
-//										       login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-//									        }
-//								        }
-//							      }
-//							}
-//						}	
-					} else if (searchData.contains("AND")) {
+
+					if (searchData.contains("AND")) {
 						String[] keyword1 = searchData.split(" AND ");
 						for (String result : keyword1) {
 							login.Log4j.info(result);
@@ -624,15 +584,11 @@ public class Filters {
 						}
 					} else if (searchData.contains("OR")) {
 						String[] keywords = searchData.split(" OR ");
-						// login.Log4j.info(keyword[0]);
-						// login.Log4j.info(keyword[1]);
 						login.Log4j.info("length is " + keywords.length);
 						if ((keywords.length == 2) && text.toUpperCase().contains(keywords[0].toUpperCase()) == true
 								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
 							login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + text);
-							// } else if (text.toUpperCase().equalsIgnoreCase(keyword[1].toUpperCase()) ==
-							// true) {
-							// login.Log4j.error(keyword[1] + " exists" + text);
+
 						} else if ((keywords.length == 3)
 								&& text.toUpperCase().contains(keywords[0].toUpperCase()) == true
 								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true
@@ -652,26 +608,7 @@ public class Filters {
 							}
 
 						}
-					} else if (searchData.contains("NOT")) {
-						String[] keywrd = searchData.split(" NOT ");
-						// login.Log4j.info("length is " + keyword.length);
-						if (text.toUpperCase().contains(keywrd[0].toUpperCase()) == true
-								&& text.toUpperCase().contains(keywrd[1].toUpperCase()) == false
-								&& text.toUpperCase().contains(keywrd[2].toUpperCase()) == false) {
-							login.Log4j.info(keywrd[0] + " exists in " + text);
 
-						} else {
-
-							for (String result : keywrd) {
-								showRelatedData(result, j);
-								if (status == true) {
-									break;
-								} else if (status == false) {
-									Assert.fail(result + " keyword doesn't exists " + showdata);
-								}
-							}
-
-						}
 					} else if (searchData.contains("*")) {
 						String[] str = searchData.split("\\*");
 						login.Log4j.info(str.length);
@@ -746,7 +683,7 @@ public class Filters {
 
 					}
 				}
-										
+
 			} else {
 				login.Log4j.error("List size is null");
 			}

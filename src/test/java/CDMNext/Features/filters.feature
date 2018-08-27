@@ -1103,7 +1103,14 @@ Then  User verify Filter search results
 @DateFilter
 Scenario: TC_Filters_Search_159
 Given User enters "money"
-And   User selects "Date" as "First observation before,Last observation after"
+And   User selects "Date" as "First observation before;Last observation after"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Global Database"
 Then  User verify Filter search results 
+
+@KeywordSearch
+Scenario: TC_Filters_Search_160
+Given User enters "money"
+And   User selects "Subscribed only" 
+Then  User verify Filter search results 
+
