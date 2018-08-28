@@ -555,562 +555,562 @@ Given User enters "3782201"
 And   User selected "All databases" as "China Premium Database" 
 When  User get the topics as "Financial Market"
 Then  User verify the results 
-
-@SeriesIDSearch
-Scenario: TC_Filters_Search_81
-Given User enters "279238002"
-And   User selected "All databases" as "OECD - Main Economic Indicators" 
-When  User get the topics as "Aggregate: 7 Major OECD Countries"
-Then  User verify the results 
-
-@SeriesIDSearch
-Scenario: TC_Filters_Search_82
-Given User enters "277061402"
-And   User selected "All databases" as "OECD - Economic Outlook" 
-When  User get the topics as "Aggregate: Non-OECD Countries"
-Then  User verify the results 
-
-@SeriesIDSearch
-Scenario: TC_Filters_Search_83
-Given User enters "295423302"
-And   User selected "All databases" as "OECD - National Accounts" 
-When  User get the topics as "Aggregate: North American Free Trade Agreement (NAFTA)"
-Then  User verify the results 
-
-@SeriesIDSearch
-Scenario: TC_Filters_Search_84
-Given User enters "293607802"
-And   User selected "All databases" as "OECD - Productivity" 
-When  User get the topics as "OECD Members: Austria"
-Then  User verify the results 
-
-@SeriesTagSearch
-Scenario: TC_Filters_Search_85
-Given User enters "brdlac"
-And   User selected "All databases" as "Daily Database" 
-When  User get the topics as "Lending Rates"
-Then  User verify the results 
-
-@SeriesTagSearch
-Scenario: TC_Filters_Search_86
-Given User enters "brjac"
-And   User selected "All databases" as "Brazil Premium Database" 
-When  User get the topics as "Foreign Trade"
-Then  User verify the results 
-
-@SeriesTagSearch
-Scenario: TC_Filters_Search_87
-Given User enters "idiab"
-And   User selected "All databases" as "India Premium Database" 
-When  User get the topics as "Financial Market"
-Then  User verify the results 
-
-@SeriesTagSearch
-Scenario: TC_Filters_Search_88
-Given User enters "DKCBGA"
-And   User selected "All databases" as "Indonesia Premium Database" 
-When  User get the topics as "Monetary"
-Then  User verify the results 
-
-@SeriesTagSearch
-Scenario: TC_Filters_Search_89
-Given User enters "CZACKC"
-And   User selected "All databases" as "China Premium Database" 
-When  User get the topics as "Insurance Sector"
-Then  User verify the results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_90
-Given User enters "194081702"
-And   User selects "Unit" as "kg"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Russia Premium Database"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_91
-Given User enters "228912101"
-And   User selects "Unit" as "ALL"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_92
-Given User enters "1086701"
-And   User selects "Unit" as "BDT/USD"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Daily Database"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_93
-Given User enters "1440701"
-And   User selects "Unit" as "BRL"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Brazil Premium Database"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_94
-Given User enters "261967901"
-And   User selects "Unit" as "%"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "World Trend Plus"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_95
-Given User enters "189144402"
-And   User selects "Unit" as "USD"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "World Trend Plus"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_96
-Given User enters "279238002"
-And   User selects "Unit" as "2005=100"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "OECD - Main Economic Indicators"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_97
-Given User enters "277061402"
-And   User selects "Unit" as "USD"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "OECD - Economic Outlook"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_98
-Given User enters "295423302"
-And   User selects "Unit" as "USD"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "OECD - National Accounts"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_99
-Given User enters "293607802"
-And   User selects "Unit" as "ATS"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "OECD - Productivity"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_100
-Given User enters "VDPACA"
-And   User selects "Unit" as "MN VND/Tael"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "World Trend Plus"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_101
-Given User enters "BRAFAC"
-And   User selects "Unit" as "BRL"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_102
-Given User enters "WHO001"
-And   User selects "Unit" as "Person"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Daily Database"
-Then  User verify Filter search results
-
-@UnitFilter
-Scenario: TC_Filters_Search_103
-Given User enters "BRDLAC"
-And   User selects "Unit" as "% pa"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Brazil Premium Database"
-Then  User verify Filter search results  
-
-@UnitFilter
-Scenario: TC_Filters_Search_104
-Given User enters "IZINO"
-And   User selects "Unit" as "2005=1000"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "India Premium Database"
-Then  User verify Filter search results  
-
-@UnitFilter
-Scenario: TC_Filters_Search_105
-Given User enters "NLIRCAAAEX"
-And   User selects "Unit" as "USD"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "World Trend Plus"
-Then  User verify Filter search results  
-
-@UnitFilter
-Scenario: TC_Filters_Search_106
-Given User enters "Agar"
-And   User selects "Unit" as "MAD"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_107
-Given User enters "228912101"
-And   User selects "Unit" as "ALL"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results
-
-@UnitFilter
-Scenario: TC_Filters_Search_108
-Given User enters "126074608"
-And   User selects "Unit" as "Ton"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_109
-Given User enters "commodity"
-And   User selects "Frequency" as "Daily"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_110
-Given User enters "estate"
-And   User selects "Frequency" as "Weekly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results    
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_111
-Given User enters "Selenium"
-And   User selects "Frequency" as "Monthly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_112
-Given User enters "Selenium"
-And   User selects "Frequency" as "Quarterly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results 
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_113
-Given User enters "capital"
-And   User selects "Frequency" as "Semiannually"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_114
-Given User enters "Selenium"
-And   User selects "Frequency" as "Yearly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_115
-Given User enters "Rate"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_116
-Given User enters "126074608"
-And   User selects "Unit" as "Ton"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
-
-@UnitFilter
-Scenario: TC_Filters_Search_117
-Given User enters "242994803"
-And   User selects "Unit" as "RUB"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Russia Premium Database"
-Then  User verify Filter search results  
-
-@UnitFilter
-Scenario: TC_Filters_Search_118
-Given User enters "3782201"
-And   User selects "Unit" as "19Dec1990=100"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "China Premium Database"
-Then  User verify Filter search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_119
-Given User enters "1055401 (BAEAE)"
-And   User selects "Region" as "Asia Pacific"
-Then  User should get the search results 
- 
-@RegionFilter
-Scenario: TC_Filters_Search_120
-Given User enters "1382601 (BRJAEN)"
-And   User selects "Region" as "Americas"
-Then  User should get the search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_121
-Given User enters "121587008"
-And   User selects "Region" as "Europe"
-Then  User should get the search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_122
-Given User enters "99459607"
-And   User selects "Region" as "Middle East"
-Then  User should get the search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_123
-Given User enters "132330608"
-And   User selects "Region" as "Africa"
-Then  User should get the search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_124
-Given User enters "225939502 (EJGAADH)"
-And   User selects "Region" as "G7"
-Then  User should get the search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_125
-Given User enters "68951101 (BRFGG)"
-And   User selects "Region" as "G20"
-Then  User should get the search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_126
-Given User enters "61540402 (BNAAAAA)"
-And   User selects "Region" as "ASEAN"
-Then  User should get the search results 
-
-@RegionFilter
-Scenario: TC_Filters_Search_127
-Given User enters "230792902 (IAPAFABH)"
-And   User selects "Region" as "BRIC"
-Then  User should get the search results  
-
-@RegionFilter
-Scenario: TC_Filters_Search_128
-Given User enters "230792902 (IAPAFABH)"
-And   User selects "Region" as "BRIC"
-Then  User should get the search results 
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_129
-Given User enters "1380601"
-And   User selects "Frequency" as "Monthly"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Brazil Premium Database"
-Then  User verify Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_130
-Given User enters "money"
-And   User selects "Subscribed only" 
-And   User selects "Frequency" as "Quarterly"
-And   User selects "Source" as "International Monetary Fund"
-And   User selects "Unit" as "MUR"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
- 
-@KeywordSearch
-Scenario: TC_Filters_Search_131
-Given User enters "money"
-And   User selects "Name only" 
-And   User selects "Frequency" as "Quarterly"
-And   User selects "Unit" as "MUR"
-And   User selects "Source" as "International Monetary Fund"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
- 
-@KeywordSearch
-Scenario: TC_Filters_Search_132
-Given User enters "Exchange AND Rate"
-Then  User verifies Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_133
-Given User enters "Forecast OR Low"
-Then  User verifies Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_134
-Given User enters "Exchange Rate"
-Then  User verify Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_135
-Given User enters "Res*"
-Then  User verifies Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_136
-Given User enters "Seleni*"
-And   User selected "All databases" as "India Premium Database"
-Then  User verifies Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_137
-Given User enters "Se*enium"
-Then  User verifies Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_138
-Given User enters "aga?"
-And   User selects "Name only" 
-Then  User verifies Filter search results 
-
-@KeywordSearch
-Scenario: TC_Filters_Search_139
-Given User enters "ag?r"
-And   User selects "Name only" 
-Then  User verifies Filter search results 
-
-@KeywordSearch
-Scenario: TC_Filters_Search_140
-Given User enters "2137320*"
-Then  User verifies Filter search results 
-
-@KeywordSearch
-Scenario: TC_Filters_Search_141
-Given User enters "1380*1"
-And   User selected "All databases" as "Brazil Premium Database"
-Then  User verifies Filter search results
-
-@KeywordSearch
-Scenario: TC_Filters_Search_142
-Given User enters "BRDLA*"
-Then  User verifies Filter search results
-
-@KeywordSearch
-Scenario: TC_Filters_Search_143
-Given User enters "IZI*O"
-Then  User verifies Filter search results
-
-@KeywordSearch
-Scenario: TC_Filters_Search_144
-Given User enters "*ZINO"
-Then  User verifies Filter search results
-
-@KeywordSearch
-Scenario: TC_Filters_Search_145
-Given User enters "2137320?"
-Then  User verifies Filter search results
-
-@KeywordSearch
-Scenario: TC_Filters_Search_146
-Given User enters "?1373201"
-And   User selected "All databases" as "India Premium Database"
-Then  User verifies Filter search results
-
-@UnitFilter
-Scenario: TC_Filters_Search_147
-Given User enters "mfg"
-And   User selects "Unit" as "2005=100"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results  
-
-@SourceFilter
-Scenario: TC_Filters_Search_148
-Given User enters "mfg"
-And   User selects "Source" as "Federal Statistics Office Germany"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results 
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_149
-Given User enters "mfg"
-And   User selects "Frequency" as "Quarterly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@KeywordSearch
-Scenario: TC_Filters_Search_150
-Given User enters "mfg"
-And   User selects "Frequency" as "Monthly"
-And   User selects "Source" as "Federal Statistics Office Germany"
-And   User selects "Unit" as "2005=100"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_151
-Given User enters "account"
-And   User selects "Frequency" as "Daily"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_152
-Given User enters "GDP"
-And   User selects "Frequency" as "Monthly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_153
-Given User enters "GDP"
-And   User selects "Frequency" as "Quarterly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_154
-Given User enters "Capital"
-And   User selects "Frequency" as "Semiannually"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_155
-Given User enters "GDP"
-And   User selects "Frequency" as "Yearly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_156
-Given User enters "account"
-And   User selects "Frequency" as "Daily;Weekly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_157
-Given User enters "account"
-And   User selects "Frequency" as "Monthly;Quarterly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results 
-
-@FrequencyFilter
-Scenario: TC_Filters_Search_158
-Given User enters "account"
-And   User selects "Frequency" as "Daily;Yearly"
-And   User has clicked on "Apply filter"
-Then  User verify Filter search results  
-
-@DateFilter
-Scenario: TC_Filters_Search_159
-Given User enters "money"
-And   User selects "Date" as "First observation before;Last observation after"
-And   User has clicked on "Apply filter"
-And   User selected "All databases" as "Global Database"
-Then  User verify Filter search results 
-
-@KeywordSearch
-Scenario: TC_Filters_Search_160
-Given User enters "money"
-And   User selects "Subscribed only" 
-Then  User verify Filter search results 
+#
+#@SeriesIDSearch
+#Scenario: TC_Filters_Search_81
+#Given User enters "279238002"
+#And   User selected "All databases" as "OECD - Main Economic Indicators" 
+#When  User get the topics as "Aggregate: 7 Major OECD Countries"
+#Then  User verify the results 
+#
+#@SeriesIDSearch
+#Scenario: TC_Filters_Search_82
+#Given User enters "277061402"
+#And   User selected "All databases" as "OECD - Economic Outlook" 
+#When  User get the topics as "Aggregate: Non-OECD Countries"
+#Then  User verify the results 
+#
+#@SeriesIDSearch
+#Scenario: TC_Filters_Search_83
+#Given User enters "295423302"
+#And   User selected "All databases" as "OECD - National Accounts" 
+#When  User get the topics as "Aggregate: North American Free Trade Agreement (NAFTA)"
+#Then  User verify the results 
+#
+#@SeriesIDSearch
+#Scenario: TC_Filters_Search_84
+#Given User enters "293607802"
+#And   User selected "All databases" as "OECD - Productivity" 
+#When  User get the topics as "OECD Members: Austria"
+#Then  User verify the results 
+#
+#@SeriesTagSearch
+#Scenario: TC_Filters_Search_85
+#Given User enters "brdlac"
+#And   User selected "All databases" as "Daily Database" 
+#When  User get the topics as "Lending Rates"
+#Then  User verify the results 
+#
+#@SeriesTagSearch
+#Scenario: TC_Filters_Search_86
+#Given User enters "brjac"
+#And   User selected "All databases" as "Brazil Premium Database" 
+#When  User get the topics as "Foreign Trade"
+#Then  User verify the results 
+#
+#@SeriesTagSearch
+#Scenario: TC_Filters_Search_87
+#Given User enters "idiab"
+#And   User selected "All databases" as "India Premium Database" 
+#When  User get the topics as "Financial Market"
+#Then  User verify the results 
+#
+#@SeriesTagSearch
+#Scenario: TC_Filters_Search_88
+#Given User enters "DKCBGA"
+#And   User selected "All databases" as "Indonesia Premium Database" 
+#When  User get the topics as "Monetary"
+#Then  User verify the results 
+#
+#@SeriesTagSearch
+#Scenario: TC_Filters_Search_89
+#Given User enters "CZACKC"
+#And   User selected "All databases" as "China Premium Database" 
+#When  User get the topics as "Insurance Sector"
+#Then  User verify the results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_90
+#Given User enters "194081702"
+#And   User selects "Unit" as "kg"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Russia Premium Database"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_91
+#Given User enters "228912101"
+#And   User selects "Unit" as "ALL"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_92
+#Given User enters "1086701"
+#And   User selects "Unit" as "BDT/USD"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Daily Database"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_93
+#Given User enters "1440701"
+#And   User selects "Unit" as "BRL"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Brazil Premium Database"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_94
+#Given User enters "261967901"
+#And   User selects "Unit" as "%"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "World Trend Plus"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_95
+#Given User enters "189144402"
+#And   User selects "Unit" as "USD"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "World Trend Plus"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_96
+#Given User enters "279238002"
+#And   User selects "Unit" as "2005=100"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "OECD - Main Economic Indicators"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_97
+#Given User enters "277061402"
+#And   User selects "Unit" as "USD"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "OECD - Economic Outlook"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_98
+#Given User enters "295423302"
+#And   User selects "Unit" as "USD"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "OECD - National Accounts"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_99
+#Given User enters "293607802"
+#And   User selects "Unit" as "ATS"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "OECD - Productivity"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_100
+#Given User enters "VDPACA"
+#And   User selects "Unit" as "MN VND/Tael"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "World Trend Plus"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_101
+#Given User enters "BRAFAC"
+#And   User selects "Unit" as "BRL"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_102
+#Given User enters "WHO001"
+#And   User selects "Unit" as "Person"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Daily Database"
+#Then  User verify Filter search results
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_103
+#Given User enters "BRDLAC"
+#And   User selects "Unit" as "% pa"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Brazil Premium Database"
+#Then  User verify Filter search results  
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_104
+#Given User enters "IZINO"
+#And   User selects "Unit" as "2005=1000"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "India Premium Database"
+#Then  User verify Filter search results  
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_105
+#Given User enters "NLIRCAAAEX"
+#And   User selects "Unit" as "USD"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "World Trend Plus"
+#Then  User verify Filter search results  
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_106
+#Given User enters "Agar"
+#And   User selects "Unit" as "MAD"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_107
+#Given User enters "228912101"
+#And   User selects "Unit" as "ALL"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_108
+#Given User enters "126074608"
+#And   User selects "Unit" as "Ton"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_109
+#Given User enters "commodity"
+#And   User selects "Frequency" as "Daily"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_110
+#Given User enters "estate"
+#And   User selects "Frequency" as "Weekly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results    
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_111
+#Given User enters "Selenium"
+#And   User selects "Frequency" as "Monthly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_112
+#Given User enters "Selenium"
+#And   User selects "Frequency" as "Quarterly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results 
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_113
+#Given User enters "capital"
+#And   User selects "Frequency" as "Semiannually"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_114
+#Given User enters "Selenium"
+#And   User selects "Frequency" as "Yearly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_115
+#Given User enters "Rate"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_116
+#Given User enters "126074608"
+#And   User selects "Unit" as "Ton"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_117
+#Given User enters "242994803"
+#And   User selects "Unit" as "RUB"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Russia Premium Database"
+#Then  User verify Filter search results  
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_118
+#Given User enters "3782201"
+#And   User selects "Unit" as "19Dec1990=100"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "China Premium Database"
+#Then  User verify Filter search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_119
+#Given User enters "1055401 (BAEAE)"
+#And   User selects "Region" as "Asia Pacific"
+#Then  User should get the search results 
+# 
+#@RegionFilter
+#Scenario: TC_Filters_Search_120
+#Given User enters "1382601 (BRJAEN)"
+#And   User selects "Region" as "Americas"
+#Then  User should get the search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_121
+#Given User enters "121587008"
+#And   User selects "Region" as "Europe"
+#Then  User should get the search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_122
+#Given User enters "99459607"
+#And   User selects "Region" as "Middle East"
+#Then  User should get the search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_123
+#Given User enters "132330608"
+#And   User selects "Region" as "Africa"
+#Then  User should get the search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_124
+#Given User enters "225939502 (EJGAADH)"
+#And   User selects "Region" as "G7"
+#Then  User should get the search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_125
+#Given User enters "68951101 (BRFGG)"
+#And   User selects "Region" as "G20"
+#Then  User should get the search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_126
+#Given User enters "61540402 (BNAAAAA)"
+#And   User selects "Region" as "ASEAN"
+#Then  User should get the search results 
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_127
+#Given User enters "230792902 (IAPAFABH)"
+#And   User selects "Region" as "BRIC"
+#Then  User should get the search results  
+#
+#@RegionFilter
+#Scenario: TC_Filters_Search_128
+#Given User enters "230792902 (IAPAFABH)"
+#And   User selects "Region" as "BRIC"
+#Then  User should get the search results 
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_129
+#Given User enters "1380601"
+#And   User selects "Frequency" as "Monthly"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Brazil Premium Database"
+#Then  User verify Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_130
+#Given User enters "money"
+#And   User selects "Subscribed only" 
+#And   User selects "Frequency" as "Quarterly"
+#And   User selects "Source" as "International Monetary Fund"
+#And   User selects "Unit" as "MUR"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+# 
+#@KeywordSearch
+#Scenario: TC_Filters_Search_131
+#Given User enters "money"
+#And   User selects "Name only" 
+#And   User selects "Frequency" as "Quarterly"
+#And   User selects "Unit" as "MUR"
+#And   User selects "Source" as "International Monetary Fund"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+# 
+#@KeywordSearch
+#Scenario: TC_Filters_Search_132
+#Given User enters "Exchange AND Rate"
+#Then  User verifies Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_133
+#Given User enters "Forecast OR Low"
+#Then  User verifies Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_134
+#Given User enters "Exchange Rate"
+#Then  User verify Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_135
+#Given User enters "Res*"
+#Then  User verifies Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_136
+#Given User enters "Seleni*"
+#And   User selected "All databases" as "India Premium Database"
+#Then  User verifies Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_137
+#Given User enters "Se*enium"
+#Then  User verifies Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_138
+#Given User enters "aga?"
+#And   User selects "Name only" 
+#Then  User verifies Filter search results 
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_139
+#Given User enters "ag?r"
+#And   User selects "Name only" 
+#Then  User verifies Filter search results 
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_140
+#Given User enters "2137320*"
+#Then  User verifies Filter search results 
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_141
+#Given User enters "1380*1"
+#And   User selected "All databases" as "Brazil Premium Database"
+#Then  User verifies Filter search results
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_142
+#Given User enters "BRDLA*"
+#Then  User verifies Filter search results
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_143
+#Given User enters "IZI*O"
+#Then  User verifies Filter search results
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_144
+#Given User enters "*ZINO"
+#Then  User verifies Filter search results
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_145
+#Given User enters "2137320?"
+#Then  User verifies Filter search results
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_146
+#Given User enters "?1373201"
+#And   User selected "All databases" as "India Premium Database"
+#Then  User verifies Filter search results
+#
+#@UnitFilter
+#Scenario: TC_Filters_Search_147
+#Given User enters "mfg"
+#And   User selects "Unit" as "2005=100"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results  
+#
+#@SourceFilter
+#Scenario: TC_Filters_Search_148
+#Given User enters "mfg"
+#And   User selects "Source" as "Federal Statistics Office Germany"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results 
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_149
+#Given User enters "mfg"
+#And   User selects "Frequency" as "Quarterly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_150
+#Given User enters "mfg"
+#And   User selects "Frequency" as "Monthly"
+#And   User selects "Source" as "Federal Statistics Office Germany"
+#And   User selects "Unit" as "2005=100"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_151
+#Given User enters "account"
+#And   User selects "Frequency" as "Daily"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_152
+#Given User enters "GDP"
+#And   User selects "Frequency" as "Monthly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_153
+#Given User enters "GDP"
+#And   User selects "Frequency" as "Quarterly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_154
+#Given User enters "Capital"
+#And   User selects "Frequency" as "Semiannually"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_155
+#Given User enters "GDP"
+#And   User selects "Frequency" as "Yearly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_156
+#Given User enters "account"
+#And   User selects "Frequency" as "Daily;Weekly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_157
+#Given User enters "account"
+#And   User selects "Frequency" as "Monthly;Quarterly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results 
+#
+#@FrequencyFilter
+#Scenario: TC_Filters_Search_158
+#Given User enters "account"
+#And   User selects "Frequency" as "Daily;Yearly"
+#And   User has clicked on "Apply filter"
+#Then  User verify Filter search results  
+#
+#@DateFilter
+#Scenario: TC_Filters_Search_159
+#Given User enters "money"
+#And   User selects "Date" as "First observation before;Last observation after"
+#And   User has clicked on "Apply filter"
+#And   User selected "All databases" as "Global Database"
+#Then  User verify Filter search results 
+#
+#@KeywordSearch
+#Scenario: TC_Filters_Search_160
+#Given User enters "money"
+#And   User selects "Subscribed only" 
+#Then  User verify Filter search results 
 
