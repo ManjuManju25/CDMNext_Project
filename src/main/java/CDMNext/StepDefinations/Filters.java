@@ -2,12 +2,12 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 
+
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -167,7 +167,7 @@ public class Filters {
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 		String[] database = arg2.split(",");
 		for (String dblist : database) {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			login.Log4j.info("Selecting " + dblist);
 			List<WebElement> checkbox = login.driver.findElements(By.xpath("//div//span[contains(text(),'" + dblist
 					+ "')]/preceding-sibling::label/span[@class='input-control--indicator']"));
@@ -183,8 +183,8 @@ public class Filters {
 
 	}
 
-	@Then("^User verify Filter search results$")
-	public void user_verify_Filter_search_results() throws Throwable {
+	@Then("^User verify the search results$")
+	public void user_verify_the_search_results() throws Throwable {
 		WebElement element;
 		WebElement checkbox;
 		String text;
@@ -210,7 +210,7 @@ public class Filters {
 					Thread.sleep(1500);
 					j = i + 1;
 					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='series-list-item--checkbox']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
 
 					element = login.driver
@@ -556,7 +556,7 @@ public class Filters {
 					Thread.sleep(1500);
 					int j = i + 1;
 					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='series-list-item--checkbox']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
 
 					element = login.driver
@@ -700,15 +700,21 @@ public class Filters {
 		Thread.sleep(1000);
 		ele.click();
 
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+		/*if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
 			List<WebElement> datasets = login.driver
-					.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+					.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));*/
+	
+		if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+			List<WebElement> datasets = login.driver
+					.findElements(By.xpath("//div[@class='series-related-data']"));
 			for (WebElement list : datasets) {
 				showdata = list.getText();
 				// login.Log4j.info(showdata);
-				login.Log4j.info(keyword);
+//				login.Log4j.info(keyword);
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
@@ -725,6 +731,8 @@ public class Filters {
 
 			}
 		}
+		
 		return status;
-	}
+	
+ }
 }

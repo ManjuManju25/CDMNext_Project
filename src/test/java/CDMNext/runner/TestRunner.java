@@ -1,19 +1,18 @@
 package CDMNext.runner;
 
 import cucumber.api.CucumberOptions;
-
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import org.testng.annotations.*;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
-@CucumberOptions(features = "src/test/java/CDMNext/Features/search.Feature", glue = {
+@CucumberOptions(features = "src/test/java/CDMNext/Features/filters.feature", glue = {
 		"CDMNext.StepDefinations" }, 
-		tags = { "@KeywordSearch" },
-		/* tags =
+		//tags = { "@KeywordSearch" },
+		 tags =
 		 {"@KeywordSearch,@UnitFilter,@SourceFilter,@DateFilter,@FrequencyFilter,@SeriesIDSearch,@SeriesTagSearch,@RegionFilter"
-		 },*/
+		 },
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
 				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
