@@ -32,11 +32,11 @@ import cucumber.api.java.en.Then;
 public class SearchTest {
 	public static String currentKeyword = "";
 	private static Boolean logged = false;
+	 Boolean KeywordMatch = false;
 	List<String> status = new ArrayList<>();
-
+	
 	@Given("^User has successful logged in$")
 	public void user_has_successful_logged_in() throws Throwable {
-
 		if (login.logged_in = false) {
 			login.Invoke_browser();
 			login.application_login();
@@ -137,7 +137,7 @@ public class SearchTest {
 					text = element.getAttribute("title");
 					// login.Log4j.info("Title information is \n" + text);
 					
-					 Boolean KeywordMatch = false;
+					 //Boolean KeywordMatch = false;
 					 for (String keyword : listwords) {
 					   login.Log4j.info(keyword);
 					
@@ -601,6 +601,251 @@ public class SearchTest {
 		}
 
 	}
+	@Then("^User verifies keyword search results$")
+	public void user_verifies_keyword_search_results() throws Throwable {
+		WebElement element;
+		WebElement checkbox;
+		String text;
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		Thread.sleep(5000);
+		// create instance of JavaScriptExecutor
+		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+		// create object of Actions class
+		Actions mouseOver = new Actions(login.driver);
+
+		WebElement ul_element = null;
+		try {
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			login.Log4j.info("List size is :" + li_All.size());
+
+			if (li_All.size() > 0) {
+				for (int i = 0; i < li_All.size(); i++) {
+
+					login.Log4j.info(i);
+					login.Log4j.info(li_All.size());
+					Thread.sleep(1500);
+					 int j = i + 1;
+					checkbox = login.driver
+							.findElement(By.xpath("//li[" + j + "]//span[@class='series-list-item--checkbox']"));
+					mouseOver.moveToElement(checkbox).click().build().perform();
+
+					element = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
+					mouseOver.moveToElement(element).build().perform();
+					// Until the element is not visible keep scrolling
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					text = element.getAttribute("title");
+					if (currentKeyword.contains("AND") && currentKeyword.contains("OR")) {
+						String[] keywords = currentKeyword.split(" AND|OR ");
+						login.Log4j.info("length is " + keywords.length);
+						if (currentKeyword.equals("capital AND price OR algeria")) {
+							if(text.toUpperCase().contains(keywords[0].toUpperCase()) == true && text.toUpperCase().contains(keywords[1].toUpperCase()) == true || text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
+                            login.Log4j.info(keywords[0]+" AND "+keywords[1]+" OR "+keywords[2]+" exists in "+text);	
+							}else {	
+								WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+						        Thread.sleep(1000);
+						        ele.click();
+
+						        if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+							       Thread.sleep(1000);
+							       login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+							       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+							         for (WebElement list : datasets) {
+								         Filters.showdata = list.getText();
+								         login.Log4j.info(Filters.showdata);
+								          if (Filters.showdata.toUpperCase().contains(keywords[0].toUpperCase()) == true
+										    || (Filters.showdata.toUpperCase().contains(keywords[1].toUpperCase()) == true
+										    && Filters.showdata.toUpperCase().contains(keywords[2].toUpperCase()) == true)) {
+									          login.Log4j.info(keywords[0]+ " AND " + keywords[1] + " OR " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
+									          Thread.sleep(1000);
+									          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								           }else if(text.toUpperCase().contains(keywords[0].toUpperCase()) == true && Filters.showdata.toUpperCase().contains(keywords[1].toUpperCase()) == true || text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
+								        	   login.Log4j.info(keywords[0]+ " AND " + keywords[1] + " OR " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
+								        	   Thread.sleep(1000);
+									           login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								           } else {
+									          Thread.sleep(1000);
+									          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									          Assert.fail(keywords[0]+" AND " + keywords[1] + " OR " + keywords[2]+" keyword doesn't exists " + Filters.showdata);
+								        }
+							        }
+						       }
+							
+							}
+							
+						} else if (currentKeyword.equals("fuel OR price AND albania")) {
+							if (text.toUpperCase().contains(keywords[0].toUpperCase()) == true
+									|| (text.toUpperCase().contains(keywords[1].toUpperCase()) == true
+											&& text.toUpperCase().contains(keywords[2].toUpperCase()) == true)) {
+								login.Log4j.info(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2] + " exists in " + text);
+
+							} else{
+								WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+							        Thread.sleep(1000);
+							        ele.click();
+
+							    if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+								     Thread.sleep(1000);
+								     login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+								     List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								       for (WebElement list : datasets) {
+									      Filters.showdata = list.getText();
+									      login.Log4j.info(Filters.showdata);
+									      if (Filters.showdata.toUpperCase().contains(keywords[0].toUpperCase()) == true
+											|| (Filters.showdata.toUpperCase().contains(keywords[1].toUpperCase()) == true
+											&& Filters.showdata.toUpperCase().contains(keywords[2].toUpperCase()) == true)) {
+										       login.Log4j.info(keywords[0]+ " OR " + keywords[1] + " AND " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
+										       Thread.sleep(1000);
+										       login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									       } else {
+										       login.Log4j.error(keywords[0]+" OR " + keywords[1] + " AND " + keywords[2]+" keyword doesn't exists " + Filters.showdata);
+										       Thread.sleep(1000);
+										       login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									        }
+								        }
+							      }
+							}
+						}	
+					} else if(currentKeyword.contains("OR") && currentKeyword.contains("NOT")) {
+						String[] keyword = currentKeyword.split(" OR|NOT ");
+						if(text.toUpperCase().contains(keyword[0].toUpperCase()) == true || text.toUpperCase().contains(keyword[1].toUpperCase()) == true && text.toUpperCase().contains(keyword[2].toUpperCase()) != true) {
+                            login.Log4j.info(keyword[0]+" OR "+keyword[1]+" exists in "+text);
+						}else {
+							WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+					        Thread.sleep(1000);
+					        ele.click();
+
+					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+						       Thread.sleep(1000);
+						       login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+						         for (WebElement list : datasets) {
+							         Filters.showdata = list.getText();
+							         login.Log4j.info(Filters.showdata);
+							          if (Filters.showdata.toUpperCase().contains(keyword[0].toUpperCase()) == true
+									    || Filters.showdata.toUpperCase().contains(keyword[1].toUpperCase()) == true
+									    && Filters.showdata.toUpperCase().contains(keyword[2].toUpperCase()) != true) {
+								          login.Log4j.info(keyword[0]+ " OR " + keyword[1] + " is exists in the" + "\n" + Filters.showdata);
+								          Thread.sleep(1000);
+								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							           
+							           } else {
+								          Thread.sleep(1000);
+								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								          Assert.fail(keyword[0]+" OR " + keyword[1] + " keyword doesn't exists " + Filters.showdata);
+							           }
+						           }
+					          }
+						}
+					}else if(currentKeyword.contains("NOT") && currentKeyword.contains("AND")) {
+						String[] keyword = currentKeyword.split(" NOT|AND ");
+						if(text.toUpperCase().contains(keyword[0].toUpperCase()) == true && text.toUpperCase().contains(keyword[1].toUpperCase()) != true && text.toUpperCase().contains(keyword[2].toUpperCase()) == true) {
+                            login.Log4j.info(keyword[0]+" AND "+keyword[2]+" exists in "+text);
+						}else {
+							WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+					        Thread.sleep(1000);
+					        ele.click();
+
+					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+						       Thread.sleep(1000);
+						       login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
+						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+						         for (WebElement list : datasets) {
+							         Filters.showdata = list.getText();
+							         login.Log4j.info(Filters.showdata);
+							          if (Filters.showdata.toUpperCase().contains(keyword[0].toUpperCase()) == true
+									    && Filters.showdata.toUpperCase().contains(keyword[1].toUpperCase()) != true
+									    && Filters.showdata.toUpperCase().contains(keyword[2].toUpperCase()) == true) {
+								          login.Log4j.info(keyword[0]+ " AND " + keyword[2] + " is exists in the" + "\n" + Filters.showdata);
+								          Thread.sleep(1000);
+								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							           
+							           } else {
+								          Thread.sleep(1000);
+								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								          Assert.fail(keyword[0]+" AND " + keyword[1] + " keywords doesn't exists " + Filters.showdata);
+							           }
+						           }
+					          }
+						}
+					}else if (currentKeyword.contains("AND")) {
+						String[] keyword1 = currentKeyword.split(" AND ");
+						for (String result : keyword1) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+							} else {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == false) {
+									Assert.fail(result + " keyword doesn't exists " + Filters.showdata);
+								}
+
+							}
+
+						}
+					} else if (currentKeyword.contains("OR")) {
+						String[] keywords = currentKeyword.split(" OR ");
+						// login.Log4j.info(keyword[0]);
+						// login.Log4j.info(keyword[1]);
+						login.Log4j.info("length is " + keywords.length);
+						if ((keywords.length == 2) && text.toUpperCase().contains(keywords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
+							login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + text);
+							// } else if (text.toUpperCase().equalsIgnoreCase(keyword[1].toUpperCase()) ==
+							// true) {
+							// login.Log4j.error(keyword[1] + " exists" + text);
+						} else if ((keywords.length == 3)
+								&& text.toUpperCase().contains(keywords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
+							login.Log4j.info(
+									keywords[0] + " OR " + keywords[1] + " OR " + keywords[2] + " exists in " + text);
+
+						} else {
+
+							for (String result : keywords) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									break;
+								} else if (Filters.status == false) {
+									Assert.fail(result + " keyword doesn't exists " + Filters.showdata);
+								}
+							}
+
+						}
+					} else if (currentKeyword.contains("NOT")) {
+						String[] keywrd = currentKeyword.split(" NOT ");
+						// login.Log4j.info("length is " + keyword.length);
+						if (text.toUpperCase().contains(keywrd[0].toUpperCase()) == true
+								 && text.toUpperCase().contains(keywrd[1].toUpperCase()) != true
+								&& text.toUpperCase().contains(keywrd[2].toUpperCase()) != true) {
+							login.Log4j.info(keywrd[0] + " exists in " + text);
+
+						} else {
+
+							for (String result : keywrd) {
+								Filters.showRelatedData(result, j);
+								if (Filters.status == true) {
+									break;
+								} else if (Filters.status == false) {
+									Assert.fail(result + " keyword doesn't exists " + Filters.showdata);
+								}
+							}
+						}
+					}
+				}
+			}else {
+						login.Log4j.error("List size is null");
+					}
+			} catch (NoSuchElementException e) {
+									Assert.fail("WebElement is null " + e.getMessage());
+								}
+	}
+
 
 	public boolean search_validation(String searchText, String Keyword) throws Throwable {
 

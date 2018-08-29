@@ -1188,6 +1188,46 @@ Scenario: TC_KeywordSearch_237 : Search for an Acronym as "VAT"
 Given User enters keyword "VAT"
 Then User verify keyword search results
 
+@KeywordSearch
+Scenario: TC_KeywordSearch_238
+Given User enters keyword "Electricity AND gas AND india"
+Then  User verifies keyword search results 
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_239
+Given User enters keyword "oil OR water OR industry"
+Then  User verifies keyword search results 
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_240
+Given User enters keyword "capital NOT price NOT algeria"
+Then  User verifies keyword search results 
+ 
+@KeywordSearch
+Scenario: TC_KeywordSearch_241
+Given User enters keyword "capital AND price OR algeria"
+Then  User verifies keyword search results 
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_242
+Given User enters keyword "fuel OR price AND albania"
+Then  User verifies keyword search results 
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_243
+Given User enters keyword "population OR india NOT average"
+Then  User verifies keyword search results 
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_244
+Given User enters keyword "gas NOT oil AND state"
+Then  User verifies keyword search results
+
+#@KeywordSearch
+#Scenario: TC_KeywordSearch_245
+#Given User enters keyword "gas NOT india OR state"
+#Then  User verifies keyword search results
+
 #@ChineseKeywordSearch
 #Scenario: TC_KeywordSearch_238 : Search for an Acronym as "上交所"
 #Given User enters keyword "上交所"
