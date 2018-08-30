@@ -1223,10 +1223,35 @@ Scenario: TC_KeywordSearch_244
 Given User enters keyword "gas NOT oil AND state"
 Then  User verifies keyword search results
 
-#@KeywordSearch
-#Scenario: TC_KeywordSearch_245
-#Given User enters keyword "gas NOT india OR state"
-#Then  User verifies keyword search results
+@KeywordSearch
+Scenario: TC_KeywordSearch_245
+Given User enters keyword "gas NOT india OR state"
+Then  User verifies keyword search results
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_246
+Given User enters keyword "Bank AND Deposits"
+Then  User verifies keyword search results
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_247
+Given User enters keyword "Bank OR Deposits"
+Then  User verifies keyword search results
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_248
+Given User enters keyword "Bank NOT Deposits"
+Then  User verifies keyword search results
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_249
+Given User enters "IAPAFABH"
+Then  User verify the search results 
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_250
+Given User enters "134347308"
+Then  User verify the search results
 
 #@ChineseKeywordSearch
 #Scenario: TC_KeywordSearch_238 : Search for an Acronym as "上交所"

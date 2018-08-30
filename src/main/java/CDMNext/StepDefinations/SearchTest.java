@@ -125,7 +125,7 @@ public class SearchTest {
 					Thread.sleep(3000);
 					int j = i + 1;
 					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='series-list-item--checkbox']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
 
 					element = login.driver
@@ -138,7 +138,7 @@ public class SearchTest {
 					// login.Log4j.info("Title information is \n" + text);
 					
 					 //Boolean KeywordMatch = false;
-					 for (String keyword : listwords) {
+					 /*for (String keyword : listwords) {
 					   login.Log4j.info(keyword);
 					
 					    if (search_validation(text,keyword) == true) {
@@ -150,10 +150,10 @@ public class SearchTest {
 					    	 WebElement ele =login.driver.findElement( By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']")); Thread.sleep(1000);
 					      ele.click();
 					 
-					       if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+					       if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 					    	   Thread.sleep(1000);
-					           login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click(); 
-					           List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']")); 
+					           login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click(); 
+					           List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']")); 
 					           for(WebElement list : datasets) { 
 					        	   Filters.showdata = list.getText();
 					               login.Log4j.info(keyword);
@@ -170,9 +170,9 @@ public class SearchTest {
 					                 //login.Log4j.info(KeywordMatch); 
 					                 if (KeywordMatch == false) {
 					                	 for (String failure : status) { 
-					                		 Assert.fail(failure + " keyword doesn't exists in " + text + " AND " + "\n" + Filters.showdata); } }
+					                		 Assert.fail(failure + " keyword doesn't exists in " + text + " AND " + "\n" + Filters.showdata); } }*/
 					
-					/*Boolean KeywordMatch = false;
+					//Boolean KeywordMatch = false;
 
 					switch (listwords.length) {
 					case 1:
@@ -581,7 +581,7 @@ public class SearchTest {
 						AssertJUnit.fail(
 								currentKeyword + " has more than 8 synonyms which is not handled.  Please handle!");
 
-					}*/
+					}
 
 				}
 
@@ -629,7 +629,7 @@ public class SearchTest {
 					Thread.sleep(1500);
 					 int j = i + 1;
 					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='series-list-item--checkbox']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
 
 					element = login.driver
@@ -649,10 +649,10 @@ public class SearchTest {
 						        Thread.sleep(1000);
 						        ele.click();
 
-						        if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+						        if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 							       Thread.sleep(1000);
-							       login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
-							       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+							       login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+							       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
 							         for (WebElement list : datasets) {
 								         Filters.showdata = list.getText();
 								         login.Log4j.info(Filters.showdata);
@@ -687,10 +687,10 @@ public class SearchTest {
 							        Thread.sleep(1000);
 							        ele.click();
 
-							    if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+							    if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 								     Thread.sleep(1000);
-								     login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
-								     List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+								     login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								     List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
 								       for (WebElement list : datasets) {
 									      Filters.showdata = list.getText();
 									      login.Log4j.info(Filters.showdata);
@@ -718,10 +718,10 @@ public class SearchTest {
 					        Thread.sleep(1000);
 					        ele.click();
 
-					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 						       Thread.sleep(1000);
-						       login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
-						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+						       login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
 						         for (WebElement list : datasets) {
 							         Filters.showdata = list.getText();
 							         login.Log4j.info(Filters.showdata);
@@ -749,10 +749,10 @@ public class SearchTest {
 					        Thread.sleep(1000);
 					        ele.click();
 
-					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
+					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 						       Thread.sleep(1000);
-						       login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
-						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+						       login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
 						         for (WebElement list : datasets) {
 							         Filters.showdata = list.getText();
 							         login.Log4j.info(Filters.showdata);
@@ -771,7 +771,41 @@ public class SearchTest {
 						           }
 					          }
 						}
-					}else if (currentKeyword.contains("AND")) {
+					}else if(currentKeyword.contains("NOT") && currentKeyword.contains("OR")) {
+						String[] keyword = currentKeyword.split(" NOT|OR ");
+						login.Log4j.info(keyword[0]);
+						login.Log4j.info(keyword[1]);
+						login.Log4j.info(keyword[2]);
+						if(text.toUpperCase().contains(keyword[0].toUpperCase()) == true && text.toUpperCase().contains(keyword[1].toUpperCase()) != true || text.toUpperCase().contains(keyword[2].toUpperCase()) == true) {
+                            login.Log4j.info(keyword[0]+" OR "+keyword[2]+" exists in "+text);
+						}else {
+							WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+					        Thread.sleep(1000);
+					        ele.click();
+
+					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+						       Thread.sleep(1000);
+						       login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+						         for (WebElement list : datasets) {
+							         Filters.showdata = list.getText();
+							         login.Log4j.info(Filters.showdata);
+							          if (Filters.showdata.toUpperCase().contains(keyword[0].toUpperCase()) == true
+									    && Filters.showdata.toUpperCase().contains(keyword[1].toUpperCase()) != true
+									    || Filters.showdata.toUpperCase().contains(keyword[2].toUpperCase()) == true) {
+								          login.Log4j.info(keyword[0]+ " OR " + keyword[2] + " is exists in the" + "\n" + Filters.showdata);
+								          Thread.sleep(1000);
+								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							           
+							           } else {
+								          Thread.sleep(1000);
+								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								          Assert.fail(keyword[0]+" OR " + keyword[2] + " keywords doesn't exists " + Filters.showdata);
+							           }
+						           }
+					          }
+						  }
+						}else if (currentKeyword.contains("AND")) {
 						String[] keyword1 = currentKeyword.split(" AND ");
 						for (String result : keyword1) {
 							login.Log4j.info(result);
@@ -820,7 +854,11 @@ public class SearchTest {
 					} else if (currentKeyword.contains("NOT")) {
 						String[] keywrd = currentKeyword.split(" NOT ");
 						// login.Log4j.info("length is " + keyword.length);
-						if (text.toUpperCase().contains(keywrd[0].toUpperCase()) == true
+						if((keywrd.length == 2) && text.toUpperCase().contains(keywrd[0].toUpperCase()) == true
+								 && text.toUpperCase().contains(keywrd[1].toUpperCase()) != true) {
+							login.Log4j.info(keywrd[0]+" exists in " + text);
+
+						} else if((keywrd.length == 3) && text.toUpperCase().contains(keywrd[0].toUpperCase()) == true
 								 && text.toUpperCase().contains(keywrd[1].toUpperCase()) != true
 								&& text.toUpperCase().contains(keywrd[2].toUpperCase()) != true) {
 							login.Log4j.info(keywrd[0] + " exists in " + text);
