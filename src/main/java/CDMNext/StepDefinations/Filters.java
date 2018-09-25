@@ -2,7 +2,6 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 
-
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class Filters {
 	String[] datearr = null;
 	String[] frequencyarr = null;
 	String[] sid = null;
-	public String searchData;
+	public static String searchData;
 	public String advancedfltr;
 	public String topic;
 	public int k;
@@ -46,17 +45,17 @@ public class Filters {
 		// Thread.sleep(2000);
 		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
 		List<WebElement> clearIcon = login.driver
-				.findElements(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"));
+				.findElements(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"));
 
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).isDisplayed()) {
 			login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).click();
 			login.Log4j.info("Clicking on Top button");
 		}
 		if (clearIcon.size() > 0) {
-			if (login.driver.findElement(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"))
+			if (login.driver.findElement(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"))
 					.isDisplayed()) {
 
-				login.driver.findElement(By.xpath("//span[@class='icon--red-cross database-selector--clear-icon']"))
+				login.driver.findElement(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"))
 						.click();
 			}
 		}
@@ -154,9 +153,9 @@ public class Filters {
 	@And("^User selects \"([^\"]*)\"$")
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
-		login.driver.findElement(By.xpath("//div[@class='search-filters-panel--settings-toggler-icon']")).click();
+		login.driver.findElement(By.xpath("//span[@title='More']")).click();
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+		login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
 
 	}
 
@@ -212,7 +211,6 @@ public class Filters {
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
-
 					element = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
 					mouseOver.moveToElement(element).build().perform();
@@ -234,27 +232,37 @@ public class Filters {
 						case 1:
 							login.Log4j.info(advancedfltr);
 							if (advancedfltr != null) {
-								if (advancedfltr.equals("Subscribed only") && seriesId.contains(sid[0]) == true) {
+								if (advancedfltr.equals("Subscribed series only")
+										&& seriesId.contains(sid[0]) == true) {
 									if (!checkbox.isSelected()) {
 										checkbox.click();
 										login.Log4j.info("Element is clickable");
 									} else {
-										login.Log4j.error("Element is not clickable");
+										Assert.fail("Element is not clickable");
 									}
-								} else if (advancedfltr.equals("Subscribed only")) {
+								} else if (advancedfltr.equals("Subscribed series only")) {
 									if (!checkbox.isSelected()) {
 										checkbox.click();
 										login.Log4j.info("Element is clickable");
 									} else {
-										login.Log4j.error("Element is not clickable");
+										Assert.fail("Element is not clickable");
 									}
+								} else if (advancedfltr.equals("New only")) {
 
+									if (login.driver.findElement(By.xpath(
+											"//span[@class='status-icon status-icon__new']//span[contains(text(),'n')]"))
+											.isDisplayed()) {
+										login.Log4j.info(advancedfltr + " series are exists");
+									} else {
+										Assert.fail(advancedfltr + " series doesnot exists");
+									}
 								} else {
 									if (advancedfltr.equals("Name only")
 											&& seriesName.toUpperCase().contains(sid[0].toUpperCase()) == true) {
 										login.Log4j.info(sid[0] + " is exists in  : " + seriesName);
 									} else {
 										Assert.fail(sid[0] + " doesn't exists in  : " + seriesName);
+
 									}
 								}
 							} else if (seriesId.contains(sid[0]) == true) {
@@ -288,6 +296,11 @@ public class Filters {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " is exists in the" + "\n"
 										+ seriesId);
 
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true) {
+								login.Log4j.info(
+										sid[0] + " OR " + sid[1] + " OR " + sid[2] + " is exists in the" + "\n" + text);
 							} else {
 								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " doesn't exists in the" + "\n"
 										+ seriesId);
@@ -298,9 +311,13 @@ public class Filters {
 									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
 										+ " exists in the" + "\n" + seriesId);
-
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
+										+ " is exists in the" + "\n" + text);
 							} else {
-
 								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
 										+ " doesnot exists in the" + "\n" + seriesId);
 							}
@@ -311,19 +328,43 @@ public class Filters {
 									|| seriesId.contains(sid[4]) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
 										+ sid[4] + " exists in the" + "\n" + seriesId);
-
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[4].toUpperCase()) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " is exists in the" + "\n" + text);
 							} else {
-
 								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
 										+ sid[4] + " doesnot exists in the" + "\n" + seriesId);
 							}
 							break;
+						case 6:
+							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true
+									|| seriesId.contains(sid[4]) == true || seriesId.contains(sid[5]) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " exists in the" + "\n" + seriesId);
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[4].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[5].toUpperCase()) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " OR " + sid[5] + " is exists in the" + "\n" + text);
+							} else {
+								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + "OR " + sid[5] + " doesnot exists in the" + "\n" + seriesId);
+							}
+							break;
 						default:
 
-							login.Log4j.error(
-									searchData + " has more than 5 series Id's which is not handled.  Please handle!");
-							Assert.fail(
-									searchData + " has more than 5 series Id's which is not handled.  Please handle!");
+							login.Log4j.error(searchData + " has more than size " + sid.length
+									+ " which is not handled.  Please handle!");
+							Assert.fail(searchData + " has more than size " + sid.length
+									+ " which is not handled.  Please handle!");
 
 						}
 
@@ -419,7 +460,7 @@ public class Filters {
 								try {
 									if (advancedfltr != null) {
 
-										if (advancedfltr.equals("Subscribed only")) {
+										if (advancedfltr.equals("Subscribed series only")) {
 											Thread.sleep(1000);
 											if (!checkbox.isSelected()) {
 												checkbox.click();
@@ -558,14 +599,12 @@ public class Filters {
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
-
 					element = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
 					mouseOver.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
-
 					if (searchData.contains("AND")) {
 						String[] keyword1 = searchData.split(" AND ");
 						for (String result : keyword1) {
@@ -700,27 +739,27 @@ public class Filters {
 		Thread.sleep(1000);
 		ele.click();
 
-		/*if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).isDisplayed()) {
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).click();
-			List<WebElement> datasets = login.driver
-					.findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));*/
-	
+		/*
+		 * if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).
+		 * isDisplayed()) { Thread.sleep(1000);
+		 * login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).
+		 * click(); List<WebElement> datasets = login.driver
+		 * .findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
+		 */
+
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
-			List<WebElement> datasets = login.driver
-					.findElements(By.xpath("//div[@class='series-related-data']"));
+			List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
 			for (WebElement list : datasets) {
 				showdata = list.getText();
 				// login.Log4j.info(showdata);
-//				login.Log4j.info(keyword);
+				// login.Log4j.info(keyword);
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 					status = true;
-
 				} else {
 					// login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
 					Thread.sleep(1000);
@@ -731,8 +770,8 @@ public class Filters {
 
 			}
 		}
-		
+
 		return status;
-	
- }
+
+	}
 }
