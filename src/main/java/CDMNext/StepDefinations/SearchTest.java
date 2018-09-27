@@ -151,8 +151,8 @@ public class SearchTest {
 					       if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 					    	   Thread.sleep(1000);
 					           login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click(); 
-					          // List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
-					           List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']")); 
+					           List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
+					           //List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']")); 
 					           for(WebElement list : datasets) { 
 					        	   Filters.showdata = list.getText();
 					               login.Log4j.info(keyword);
