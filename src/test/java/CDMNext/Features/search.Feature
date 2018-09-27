@@ -4,8 +4,8 @@ Background:
  	Given User has successful logged in
  	
 @KeywordSearch
-Scenario: TC_KeywordSearch_01 : Search for an Acronym as "GDP"
-Given User enters keyword "GDP"
+Scenario: TC_KeywordSearch_01 : Search for an Acronym as "gdp"
+Given User enters keyword "gdp"
 Then User verify keyword search results 
  	
 @KeywordSearch
@@ -19,8 +19,8 @@ Given User enters keyword "FLA"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_04 : Search for an Acronym as "CPI"
-Given User enters keyword "CPI"
+Scenario: TC_KeywordSearch_04 : Search for an Acronym as "cpi"
+Given User enters keyword "cpi"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -44,8 +44,8 @@ Given User enters keyword "FAI"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_09 : Search for an Acronym as "FDI"
-Given User enters keyword "FDI"
+Scenario: TC_KeywordSearch_09 : Search for an Acronym as "fdi"
+Given User enters keyword "fdi"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -54,8 +54,8 @@ Given User enters keyword "GCF"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_11 : Search for an Acronym as "IMF"
-Given User enters keyword "IMF"
+Scenario: TC_KeywordSearch_11 : Search for an Acronym as "imf"
+Given User enters keyword "imf"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -64,23 +64,23 @@ Given User enters keyword "SOE"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_13 : Search for an Acronym as "FOB"
-Given User enters keyword "FOB"
+Scenario: TC_KeywordSearch_13 : Search for an Acronym as "fob"
+Given User enters keyword "fob"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_14 : Search for an Acronym as "GNP"
-Given User enters keyword "GNP"
+Scenario: TC_KeywordSearch_14 : Search for an Acronym as "gnp"
+Given User enters keyword "gnp"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_15 : Search for an Acronym as "PPP"
-Given User enters keyword "PPP"
+Scenario: TC_KeywordSearch_15 : Search for an Acronym as "ppp"
+Given User enters keyword "ppp"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_16 : Search for an Acronym as "LCD"
-Given User enters keyword "LCD"
+Scenario: TC_KeywordSearch_16 : Search for an Acronym as "lcd"
+Given User enters keyword "lcd"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -89,8 +89,8 @@ Given User enters keyword "PCE"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_18 : Search for an Acronym as "BIS"
-Given User enters keyword "BIS"
+Scenario: TC_KeywordSearch_18 : Search for an Acronym as "bis"
+Given User enters keyword "bis"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -99,13 +99,13 @@ Given User enters keyword "QFII"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_20 : Search for an Acronym as "ICBC"
-Given User enters keyword "ICBC"
+Scenario: TC_KeywordSearch_20 : Search for an Acronym as "icbc"
+Given User enters keyword "icbc"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_21 : Search for an Acronym as "IPI"
-Given User enters keyword "IPI"
+Scenario: TC_KeywordSearch_21 : Search for an Acronym as "ipi"
+Given User enters keyword "ipi"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -119,78 +119,78 @@ Given User enters keyword "NPL"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_24 : Search for an Acronym as "USD"
-Given User enters keyword "USD"
+Scenario: TC_KeywordSearch_24 : Search for an Acronym as "usd"
+Given User enters keyword "usd"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_25 : Search for an Acronym as "YOY"
-Given User enters keyword "YOY"
+Scenario: TC_KeywordSearch_25 : Search for an Acronym as "yoy"
+Given User enters keyword "yoy"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_26 : Search for an Acronym as "MFG"
-Given User enters keyword "MFG"
+Scenario: TC_KeywordSearch_26 : Search for an Acronym as "mfg"
+Given User enters keyword "mfg"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_27 : Search for an Acronym as "CRB"
-Given User enters keyword "CRB"
+Scenario: TC_KeywordSearch_27 : Search for an Acronym as "crb"
+Given User enters keyword "crb"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_28 : Search for an Acronym as "ISM"
-Given User enters keyword "ISM"
+Scenario: TC_KeywordSearch_28 : Search for an Acronym as "ism"
+Given User enters keyword "ism"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_29 : Search for an Acronym as "AVG"
-Given User enters keyword "AVG"
+Scenario: TC_KeywordSearch_29 : Search for an Acronym as "avg"
+Given User enters keyword "avg"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_30 : Search for an Acronym as "WTI"
-Given User enters keyword "WTI"
+Scenario: TC_KeywordSearch_30 : Search for an Acronym as "wti"
+Given User enters keyword "wti"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_31 : Search for an Acronym as "FED"
-Given User enters keyword "FED"
+Scenario: TC_KeywordSearch_31 : Search for an Acronym as "fed"
+Given User enters keyword "fed"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_32 : Search for an Acronym as "ATM"
-Given User enters keyword "ATM"
+Scenario: TC_KeywordSearch_32 : Search for an Acronym as "atm"
+Given User enters keyword "atm"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_33 : Search for an Acronym as "EU"
-Given User enters keyword "EU"
+Scenario: TC_KeywordSearch_33 : Search for an Acronym as "eu"
+Given User enters keyword "eu"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_34 : Search for an Acronym as "BDI"
-Given User enters keyword "BDI"
+Scenario: TC_KeywordSearch_34 : Search for an Acronym as "bdi"
+Given User enters keyword "bdi"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_35 : Search for an Acronym as "R&D"
-Given User enters keyword "R&D"
+Scenario: TC_KeywordSearch_35 : Search for an Acronym as "r&d"
+Given User enters keyword "r&d"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_36 : Search for an Acronym as "EXCL"
-Given User enters keyword "EXCL"
+Scenario: TC_KeywordSearch_36 : Search for an Acronym as "excl"
+Given User enters keyword "excl"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_37 : Search for an Acronym as "SME"
-Given User enters keyword "SME"
+Scenario: TC_KeywordSearch_37 : Search for an Acronym as "sme"
+Given User enters keyword "sme"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_38 : Search for an Acronym as "IPO"
-Given User enters keyword "IPO"
+Scenario: TC_KeywordSearch_38 : Search for an Acronym as "ipo"
+Given User enters keyword "ipo"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -259,8 +259,8 @@ Given User enters keyword "dc"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_52 : Search for an Acronym as "wpi"
-Given User enters keyword "wpi"
+Scenario: TC_KeywordSearch_52 : Search for an Acronym as "WPI"
+Given User enters keyword "WPI"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -504,13 +504,13 @@ Given User enters keyword "Auto"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_101 : Search for an Acronym as "Average annual wage"
-Given User enters keyword "Average annual wage"
+Scenario: TC_KeywordSearch_101 : Search for an Acronym as "Average Annual Wage"
+Given User enters keyword "Average Annual Wage"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_102 : Search for an Acronym as "bci"
-Given User enters keyword "bci"
+Scenario: TC_KeywordSearch_102 : Search for an Acronym as "BCI"
+Given User enters keyword "BCI"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -559,8 +559,8 @@ Given User enters keyword "cbi"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_112: Search for an Acronym as "CCI"
-Given User enters keyword "CCI"
+Scenario: TC_KeywordSearch_112: Search for an Acronym as "cci"
+Given User enters keyword "cci"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -819,8 +819,8 @@ Given User enters keyword "Internet shopping"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_164 : Search for an Acronym as "ip"
-Given User enters keyword "ip"
+Scenario: TC_KeywordSearch_164 : Search for an Acronym as "IP"
+Given User enters keyword "IP"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -969,13 +969,13 @@ Given User enters keyword "oecd"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_194 : Search for an Acronym as "omo"
-Given User enters keyword "omo"
+Scenario: TC_KeywordSearch_194 : Search for an Acronym as "OMO"
+Given User enters keyword "OMO"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_195 : Search for an Acronym as "otc"
-Given User enters keyword "otc"
+Scenario: TC_KeywordSearch_195 : Search for an Acronym as "OTC"
+Given User enters keyword "OTC"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -1179,8 +1179,8 @@ Given User enters keyword "X"
 Then User verify keyword search results
 
 @KeywordSearch
-Scenario: TC_KeywordSearch_236 : Search for an Acronym as "Var"
-Given User enters keyword "Var"
+Scenario: TC_KeywordSearch_236 : Search for an Acronym as "VaR"
+Given User enters keyword "VaR"
 Then User verify keyword search results
 
 @KeywordSearch
@@ -1482,175 +1482,183 @@ Then  User verify keyword search results
 Scenario: TC_KeywordSearch_296 : Search for an Acronym as "real state"
 Given User enters keyword "real state"
 Then  User verify keyword search results
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_297 : Search for an Acronym as "lme"
+Given User enters keyword "lme"
+Then User verify keyword search results
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_298 : Search for an Acronym as "NCD"
+Given User enters keyword "NCD"
+Then User verify keyword search results
+
+@KeywordSearch
+Scenario: TC_KeywordSearch_299 : Search for an Acronym as "cis"
+Given User enters keyword "cis"
+Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_297 : Search for an Acronym as "上交所"
+#Scenario: TC_KeywordSearch_300 : Search for an Acronym as "上交所"
 #Given User enters keyword "上交所"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_298 : Search for an Acronym as "上海"
+#Scenario: TC_KeywordSearch_301 : Search for an Acronym as "上海"
 #Given User enters keyword "上海"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_299 : Search for an Acronym as "个人消费支出"
+#Scenario: TC_KeywordSearch_302 : Search for an Acronym as "个人消费支出"
 #Given User enters keyword "个人消费支出"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_300 : Search for an Acronym as "冰箱"
+#Scenario: TC_KeywordSearch_303 : Search for an Acronym as "冰箱"
 #Given User enters keyword "冰箱"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_301 : Search for an Acronym as "印尼"
+#Scenario: TC_KeywordSearch_304 : Search for an Acronym as "印尼"
 #Given User enters keyword "印尼"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_302 : Search for an Acronym as "国债利率"
+#Scenario: TC_KeywordSearch_305 : Search for an Acronym as "国债利率"
 #Given User enters keyword "国债利率"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_303 : Search for an Acronym as "张家界"
+#Scenario: TC_KeywordSearch_306 : Search for an Acronym as "张家界"
 #Given User enters keyword "张家界"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_304 : Search for an Acronym as "活猪存栏量"
+#Scenario: TC_KeywordSearch_307 : Search for an Acronym as "活猪存栏量"
 #Given User enters keyword "活猪存栏量"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_305 : Search for an Acronym as "深交所"
+#Scenario: TC_KeywordSearch_308 : Search for an Acronym as "深交所"
 #Given User enters keyword "深交所"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_306 : Search for an Acronym as "生产率"
+#Scenario: TC_KeywordSearch_309 : Search for an Acronym as "生产率"
 #Given User enters keyword "生产率"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_307 : Search for an Acronym as "草鱼"
+#Scenario: TC_KeywordSearch_310 : Search for an Acronym as "草鱼"
 #Given User enters keyword "草鱼"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_308 : Search for an Acronym as "货币供应量"
+#Scenario: TC_KeywordSearch_311 : Search for an Acronym as "货币供应量"
 #Given User enters keyword "货币供应量"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_309 : Search for an Acronym as "金融资产总量"
+#Scenario: TC_KeywordSearch_312 : Search for an Acronym as "金融资产总量"
 #Given User enters keyword "金融资产总量"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_310 : Search for an Acronym as "程限"
+#Scenario: TC_KeywordSearch_313 : Search for an Acronym as "程限"
 #Given User enters keyword "程2"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_311 : Search for an Acronym as "文化"
+#Scenario: TC_KeywordSearch_314 : Search for an Acronym as "文化"
 #Given User enters keyword "文化"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_312 : Search for an Acronym as "一月"
+#Scenario: TC_KeywordSearch_315 : Search for an Acronym as "一月"
 #Given User enters keyword "一月"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_313 : Search for an Acronym as "职工"
+#Scenario: TC_KeywordSearch_316 : Search for an Acronym as "职工"
 #Given User enters keyword "职工"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_314 : Search for an Acronym as "年尾年末"
+#Scenario: TC_KeywordSearch_317 : Search for an Acronym as "年尾年末"
 #Given User enters keyword "年尾年末"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_315 : Search for an Acronym as "交易"
+#Scenario: TC_KeywordSearch_318 : Search for an Acronym as "交易"
 #Given User enters keyword "交易"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_316 : Search for an Acronym as "建造"
+#Scenario: TC_KeywordSearch_319 : Search for an Acronym as "建造"
 #Given User enters keyword "建造"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_317 : Search for an Acronym as "假期"
+#Scenario: TC_KeywordSearch_320 : Search for an Acronym as "假期"
 #Given User enters keyword "假期"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_318 : Search for an Acronym as "季节"
+#Scenario: TC_KeywordSearch_321 : Search for an Acronym as "季节"
 #Given User enters keyword "季节"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_319 : Search for an Acronym as "加强"
+#Scenario: TC_KeywordSearch_322 : Search for an Acronym as "加强"
 #Given User enters keyword "加强"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_320 : Search for an Acronym as "计算"
+#Scenario: TC_KeywordSearch_323 : Search for an Acronym as "计算"
 #Given User enters keyword "计算"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_321 : Search for an Acronym as "出产"
+#Scenario: TC_KeywordSearch_324 : Search for an Acronym as "出产"
 #Given User enters keyword "出产"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_322 : Search for an Acronym as "出入收支"
+#Scenario: TC_KeywordSearch_325 : Search for an Acronym as "出入收支"
 #Given User enters keyword "出入收支"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_323 : Search for an Acronym as "摩托车"
+#Scenario: TC_KeywordSearch_326 : Search for an Acronym as "摩托车"
 #Given User enters keyword "摩托车"
 #Then User verify keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_324
+#Scenario: TC_KeywordSearch_327
 #Given User enters "从业人数 AND ВВП"
 #Then  User verifies keyword search results
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_325
+#Scenario: TC_KeywordSearch_328
 #Given User enters keyword "国内総生産 OR ВВП OR gas"
 #Then  User verifies keyword search results 
 #
 #@RussianKeywordSearch
-#Scenario: TC_KeywordSearch_326
+#Scenario: TC_KeywordSearch_329
 #Given User enters keyword "среднегодовым"
 #Then  User verify keyword search results 
 #
 #@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_327
+#Scenario: TC_KeywordSearch_330
 #Given User enters "摩托车"
 #And   User selects "Source" as "China Association of Automobile Manufacturers"
 #And   User has clicked on "Apply filter"
 #Then  User verify the search results 
 #
 #@RussianKeywordSearch
-#Scenario: TC_KeywordSearch_328
+#Scenario: TC_KeywordSearch_331
 #Given User enters "среднегодовым"
 #And   User selects "Source" as "Federal State Statistics Service"
 #And   User has clicked on "Apply filter"
 #Then  User verify the search results 
-
-#@RussianKeywordSearch
-#Scenario: TC_KeywordSearch_328
-#Given User enters "Расходы на конечное потребление: Все группы домохозяйств"
-#And   User selects "Ед. измерения" as "руб"
-#And   User selects "Источник" as "Федеральная служба государственной статистики"
-#And   User has clicked on "Apply filter"
-#Then  User verify the search results 
+#
