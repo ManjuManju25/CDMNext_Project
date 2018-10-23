@@ -2,6 +2,7 @@
 package CDMNext.StepDefinations;
 
 import org.testng.AssertJUnit;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -127,12 +128,13 @@ public class SearchTest {
 					mouseOver.moveToElement(checkbox).click().build().perform();
 
 					element = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--content']"));
 					mouseOver.moveToElement(element).build().perform();
 
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
+					//text=element.getText();
 					// login.Log4j.info("Title information is \n" + text);
 					
 					 Boolean KeywordMatch = false;
@@ -145,8 +147,9 @@ public class SearchTest {
 					      break;
 					 
 					     } else if (KeywordMatch == false) { 
-					    	 WebElement ele =login.driver.findElement( By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']")); Thread.sleep(1000);
-					      ele.click();
+					    	 WebElement ele =login.driver.findElement( By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					    	 Thread.sleep(1000);
+					         ele.click();
 					 
 					       if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
 					    	   Thread.sleep(1000);
@@ -187,6 +190,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								 List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -222,6 +226,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								 List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -264,6 +269,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								 List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -311,6 +317,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								 List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -359,6 +366,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								 List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -413,6 +421,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -470,6 +479,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								 List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -531,6 +541,7 @@ public class SearchTest {
 									.isDisplayed()) {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+								 List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 								List<WebElement> datasets = login.driver
 										.findElements(By.xpath("//div[@class='series-related-data']"));
 								for (WebElement list : datasets) {
@@ -627,7 +638,7 @@ public class SearchTest {
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
 					element = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--content']"));
 					mouseOver.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -646,7 +657,7 @@ public class SearchTest {
 								&& text.toUpperCase().contains(keywords[2]) == true))) {
 							   login.Log4j.info(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2] + " exists in " + text);
 						} else {	
-								WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+								WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 						        Thread.sleep(1000);
 						        ele.click();
 
@@ -703,7 +714,7 @@ public class SearchTest {
                                 login.Log4j.info(keyword[0]+" OR "+keyword[2]+" exists in "+text);
 						    
 						} else {	
-							WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+							WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					        Thread.sleep(1000);
 					        ele.click();
 
@@ -751,7 +762,7 @@ public class SearchTest {
 						if(text.toUpperCase().contains(keyword[0]) == true && text.toUpperCase().contains(keyword[1]) != true && text.toUpperCase().contains(keyword[2]) == true) {
                             login.Log4j.info(keyword[0]+" AND "+keyword[2]+" exists in "+text);
 						}else {
-							WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+							WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					        Thread.sleep(1000);
 					        ele.click();
 
