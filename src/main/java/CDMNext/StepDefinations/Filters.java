@@ -2,6 +2,7 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 
+
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import cucumber.api.java.en.When;
 
 public class Filters {
 
-	public String var;
+	public static String var;
 	public String fltrStatus;
 	String[] unitarr = null;
 	List<String> filters = new ArrayList<>();
@@ -212,7 +213,7 @@ public class Filters {
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
 					element = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--content']"));
 					mouseOver.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -250,7 +251,7 @@ public class Filters {
 								} else if (advancedfltr.equals("New only")) {
 
 									if (login.driver.findElement(By.xpath(
-											"//span[@class='status-icon status-icon__new']//span[contains(text(),'n')]"))
+											"//span[@class='status-icon status-icon__new']//span[contains(text(),'new')]"))
 											.isDisplayed()) {
 										login.Log4j.info(advancedfltr + " series are exists");
 									} else {
@@ -735,7 +736,7 @@ public class Filters {
 	public static boolean showRelatedData(String keyword, int j) throws Throwable {
 
 		WebElement ele = login.driver
-				.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+				.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 		Thread.sleep(1000);
 		ele.click();
 

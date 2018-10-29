@@ -152,7 +152,7 @@ public class SearchTest {
 					         ele.click();
 					 
 					       if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
-					    	   Thread.sleep(1000);
+					    	   Thread.sleep(2000);
 					           login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click(); 
 					           List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
 					           //List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']")); 
