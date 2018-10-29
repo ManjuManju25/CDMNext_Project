@@ -133,12 +133,12 @@ Background:
 #When  Click on "Apply filter"
 #Then  User verify corresponding results for selected filter
 #
-#@SeriesTab
-#Scenario: TC_SeriesTab_22:Verifying "Forecast" filter for series tab
-#Given User enters "FDI"
-#And   User has selects "More" as "Forecast"
-#When  Click on "Apply filter"
-#Then  User verify corresponding results for selected filter
+@SeriesTab
+Scenario: TC_SeriesTab_22:Verifying "Forecast" filter for series tab
+Given User enters "FDI"
+And   User has selects "More" as "Forecast"
+When  Click on "Apply filter"
+Then  User verify corresponding results for selected filter
 
 @SeriesTab
 Scenario: TC_SeriesTab_23:Verify 'Mouse over' icons for series level
