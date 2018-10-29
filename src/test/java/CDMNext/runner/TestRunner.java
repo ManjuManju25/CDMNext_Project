@@ -8,9 +8,9 @@ import org.testng.annotations.*;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
-@CucumberOptions(features = "src/test/java/CDMNext/Features/SeriesTab.feature", glue = {
+@CucumberOptions(features = "src/test/java/CDMNext/Features/", glue = {
 		"CDMNext.StepDefinations" }, 
-        tags = { "@SeriesTab" },
+        tags = { "@SeriesTab,@MnemonicSearch" },
 		// tags = {"@KeywordSearch,@ChineseKeywordSearch,@RussianKeywordSearch" },
 
 		
