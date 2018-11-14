@@ -20,6 +20,13 @@ public class Mnemonics {
 	public void user_enters_Mnemonic(String arg1) throws Throwable {
 		mnemonic = arg1;
 		Thread.sleep(3000);
+		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
+		if (reset.size() > 0) {
+			if (login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).isDisplayed()) {
+				login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
+				login.Log4j.info("Clicking on Reset button");
+			}
+		}
 		login.Log4j.info("Searching with " + mnemonic);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(mnemonic);

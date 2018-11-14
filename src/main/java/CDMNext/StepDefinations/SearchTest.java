@@ -3,6 +3,7 @@ package CDMNext.StepDefinations;
 
 import org.testng.AssertJUnit;
 
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -615,9 +616,9 @@ public class SearchTest {
 		WebElement element;
 		WebElement checkbox;
 		String text;
-	   	login.Log4j.info("Clicking on  Series tab ");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(5000);
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		// create instance of JavaScriptExecutor
 		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		// create object of Actions class
@@ -890,7 +891,7 @@ public class SearchTest {
 			}else {
 						login.Log4j.error("No results were found");
 					}
-			} catch (NoSuchElementException e) {
+			} catch(NoSuchElementException e) {
 									Assert.fail("WebElement is null " + e.getMessage());
 								}
 	}
