@@ -1,91 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" total="1" passed="0">
+<testng-results skipped="1" failed="0" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="409696" started-at="2018-11-14T09:41:14Z" finished-at="2018-11-14T09:48:03Z">
+  <suite name="Default suite" duration-ms="20" started-at="2018-11-14T12:05:25Z" finished-at="2018-11-14T12:05:25Z">
     <groups>
       <group name="cucumber">
         <method signature="TestRunner.feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" class="CDMNext.runner.TestRunner"/>
       </group> <!-- cucumber -->
     </groups>
-    <test name="Default test" duration-ms="409696" started-at="2018-11-14T09:41:14Z" finished-at="2018-11-14T09:48:03Z">
+    <test name="Default test" duration-ms="20" started-at="2018-11-14T12:05:25Z" finished-at="2018-11-14T12:05:25Z">
       <class name="CDMNext.runner.TestRunner">
-        <test-method status="PASS" signature="setUpClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="setUpClass" is-config="true" duration-ms="441" started-at="2018-11-14T15:11:13Z" finished-at="2018-11-14T15:11:14Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUpClass -->
-        <test-method status="FAIL" signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" duration-ms="409426" started-at="2018-11-14T15:11:14Z" description="Runs Cucumber Feature" data-provider="features" finished-at="2018-11-14T15:18:03Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[Filters]]>
-              </value>
-            </param>
-          </params>
-          <exception class="cucumber.runtime.CucumberException">
+        <test-method status="FAIL" signature="setUpClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="setUpClass" is-config="true" duration-ms="0" started-at="2018-11-14T17:35:24Z" finished-at="2018-11-14T17:35:24Z">
+          <exception class="cucumber.runtime.DuplicateStepDefinitionException">
             <message>
-              <![CDATA[java.lang.AssertionError: consumer keyword doesn't exists DATASETS
-China Securities Index 300
-Global Database
->
-China
->
-China: Financial Market
-Equity Market Index, Asia
-World Trend Plus
->
-Global Economic Monitor
->
-Financial Market
-China Securities Index
-China Premium Database
->
-Financial Market
->
-Securities Market
-Banking and Financial Sector
-Asia Forecasting Service
->
-China
->
-Financial Indicators]]>
+              <![CDATA[Duplicate step definitions in CDMNext.StepDefinations.SearchTest.user_has_successful_logged_in() in file:/C:/Users/mnadiya/Documents/cucumber_project/target/classes/ and CDMNext.StepDefinations.Exceldatacomparision.user_has_successful_logged_in() in file:/C:/Users/mnadiya/Documents/cucumber_project/target/classes/]]>
             </message>
             <full-stacktrace>
-              <![CDATA[cucumber.runtime.CucumberException: java.lang.AssertionError: consumer keyword doesn't exists DATASETS
-China Securities Index 300
-Global Database
->
-China
->
-China: Financial Market
-Equity Market Index, Asia
-World Trend Plus
->
-Global Economic Monitor
->
-Financial Market
-China Securities Index
-China Premium Database
->
-Financial Market
->
-Securities Market
-Banking and Financial Sector
-Asia Forecasting Service
->
-China
->
-Financial Indicators
-	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:69)
-	at CDMNext.runner.TestRunner.feature(TestRunner.java:33)
+              <![CDATA[cucumber.runtime.DuplicateStepDefinitionException: Duplicate step definitions in CDMNext.StepDefinations.SearchTest.user_has_successful_logged_in() in file:/C:/Users/mnadiya/Documents/cucumber_project/target/classes/ and CDMNext.StepDefinations.Exceldatacomparision.user_has_successful_logged_in() in file:/C:/Users/mnadiya/Documents/cucumber_project/target/classes/
+	at cucumber.runtime.RuntimeGlue.addStepDefinition(RuntimeGlue.java:33)
+	at cucumber.runtime.java.JavaBackend.addStepDefinition(JavaBackend.java:151)
+	at cucumber.runtime.java.MethodScanner.scan(MethodScanner.java:68)
+	at cucumber.runtime.java.MethodScanner.scan(MethodScanner.java:41)
+	at cucumber.runtime.java.JavaBackend.loadGlue(JavaBackend.java:86)
+	at cucumber.runtime.Runtime.<init>(Runtime.java:92)
+	at cucumber.runtime.Runtime.<init>(Runtime.java:70)
+	at cucumber.runtime.Runtime.<init>(Runtime.java:66)
+	at cucumber.api.testng.TestNGCucumberRunner.<init>(TestNGCucumberRunner.java:42)
+	at CDMNext.runner.TestRunner.setUpClass(TestRunner.java:26)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:510)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:211)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:298)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1191)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.run(TestNG.java:1024)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- cucumber.runtime.DuplicateStepDefinitionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method status="SKIP" signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" duration-ms="0" started-at="2018-11-14T17:35:25Z" description="Runs Cucumber Feature" data-provider="features" finished-at="2018-11-14T17:35:25Z">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[java.lang.NullPointerException]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: java.lang.NullPointerException
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:162)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:430)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1270)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:985)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1075)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
 	at org.testng.TestRunner.privateRun(TestRunner.java:774)
@@ -102,41 +79,22 @@ Financial Indicators
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: java.lang.AssertionError: consumer keyword doesn't exists DATASETS
-China Securities Index 300
-Global Database
->
-China
->
-China: Financial Market
-Equity Market Index, Asia
-World Trend Plus
->
-Global Economic Monitor
->
-Financial Market
-China Securities Index
-China Premium Database
->
-Financial Market
->
-Securities Market
-Banking and Financial Sector
-Asia Forecasting Service
->
-China
->
-Financial Indicators
-	at org.testng.Assert.fail(Assert.java:94)
-	at CDMNext.StepDefinations.Filters.user_verify_the_search_results(Filters.java:291)
-	at ✽.Then User verify the search results(CDMNext/Features/Filters.feature:374)
+Caused by: java.lang.NullPointerException
+	at CDMNext.runner.TestRunner.features(TestRunner.java:40)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:136)
+	... 20 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- cucumber.runtime.CucumberException -->
+          </exception> <!-- java.lang.RuntimeException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- feature -->
-        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="tearDownClass" is-config="true" duration-ms="3114" started-at="2018-11-14T15:18:03Z" finished-at="2018-11-14T15:18:06Z">
+        <test-method status="SKIP" signature="tearDownClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="tearDownClass" is-config="true" duration-ms="0" started-at="2018-11-14T17:35:25Z" finished-at="2018-11-14T17:35:25Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
