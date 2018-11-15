@@ -7,7 +7,7 @@
         <methods>
           <include name="setUpClass"/>
           <include name="tearDownClass"/>
-          <include name="feature" invocation-numbers="0"/>
+          <include name="feature" invocation-numbers="0 1 2"/>
         </methods>
       </class> <!-- CDMNext.runner.TestRunner -->
     </classes>
