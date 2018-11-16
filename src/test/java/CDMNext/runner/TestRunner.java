@@ -11,7 +11,7 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(features="classpath:",
 		//features = "src/test/java/CDMNext/Features/",
 		glue = {"CDMNext.StepDefinations" }, 
-        tags = {"@MnemonicSearch,@@SeriesTab"},
+        tags = {"@MnemonicSearch,@SeriesTab,@ExelDatacomparision,@MySeries "},
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
 				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
