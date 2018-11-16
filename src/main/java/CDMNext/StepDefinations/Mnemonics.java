@@ -29,6 +29,7 @@ public class Mnemonics {
 		}
 		login.Log4j.info("Searching with " + mnemonic);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(mnemonic);
 
 	}
@@ -76,17 +77,17 @@ public class Mnemonics {
 						// login.Log4j.info(ssi);
 						if (ssi.contains(mnemonic) == true) {
 							login.Log4j.info(mnemonic + " exists in " + "\n" + ssi);
-							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 						} else {
 							Assert.fail(mnemonic + " does not exists in " + ssi);
-							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 						}
 					}
 				}
 			} else {
-				login.Log4j.error("List size is null");
+				Assert.fail("List size is null");
 			}
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());

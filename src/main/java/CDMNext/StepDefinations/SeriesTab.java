@@ -41,7 +41,7 @@ public class SeriesTab {
 	public String filter;
 	public String seriesName;
 	public String db="null";
-	public String showdb;
+	public String MousehoverIcon;
 	public WebElement dbase;
     public String stext;
 	@Given("^User enters seriesID \"([^\"]*)\"$")
@@ -52,9 +52,9 @@ public class SeriesTab {
 			login.driver.findElement(By.xpath("//div[contains(text(),'Unselect')]")).click();
 		}
 		searchData = arg1;
-		Thread.sleep(5000);
 		login.Log4j.info("Searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
 
 	}
@@ -66,7 +66,7 @@ public class SeriesTab {
 		int j = 0;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		Actions action = new Actions(login.driver);
 		WebElement ul_element = null;
 		try {
@@ -366,6 +366,12 @@ public class SeriesTab {
 	@When("^Click on \"([^\"]*)\"$")
 	public void click_on(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("All insights")) {
+			Thread.sleep(1000);
+			/*login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+			login.Log4j.info("clearing the searchdata");
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//span[@class='series-tab ui-sortable-handle']//span[contains(text(),'Databases')]")).click();
+			login.Log4j.info("clicking on databases");*/
 			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 				Thread.sleep(5000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
@@ -397,7 +403,6 @@ public class SeriesTab {
 
 	@And("^Select indicator \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void select_indicator_as(String arg1, String arg2) throws Throwable {
-
 		indicator.add(arg2);
 		login.Log4j.info("indicator size is " + indicator.size());
 		login.Log4j.info(indicator);
@@ -672,7 +677,7 @@ public class SeriesTab {
 
 	@When("^User Mouse hover on \"([^\"]*)\" icon$")
 	public void user_Mouse_hover_on_icon(String arg1) throws Throwable {
-		showdb=arg1;
+		MousehoverIcon=arg1;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(3000);
@@ -681,7 +686,12 @@ public class SeriesTab {
 		action.moveToElement(ele1).build().perform();
 		 stext=ele1.getText();
 		login.Log4j.info("Clicking on "+ arg1+ " icon");
-		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']//span[@title='"+arg1+"']")).click();
+		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']//span[@title='"+ arg1 +"']")).click();
+		if(MousehoverIcon.equals("View as Chart. Type `c`")) {
+			Thread.sleep(1500);
+			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+		}
+		
 	}
 
 	@Then("^User can selects \"([^\"]*)\"$")
@@ -689,7 +699,7 @@ public class SeriesTab {
 		db=arg1;
 		Thread.sleep(2000);
 		login.Log4j.info(" Clicking on "+arg1);
-		login.driver.findElement(By.xpath("//span//b[contains(text(),'" +arg1+ "')]")).click();
+		login.driver.findElement(By.xpath("//span//b[contains(text(),'" + arg1 + "')]")).click();
 		
    	}
 
@@ -748,19 +758,19 @@ public class SeriesTab {
 		   String txt=dbase.getText();
 		   login.Log4j.info(txt);
  	        if (txt.equals(db)) {
-				login.Log4j.info(db+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(db+" is displayed for "+MousehoverIcon+" icon when mouse hovered");
 				
 			} else if(txt.equals("Markit Purchasing Managers' Index")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+MousehoverIcon+" icon when mouse hovered");
 				
 			} else if(txt.equals("OECD - Main Economic Indicators")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+MousehoverIcon+" icon when mouse hovered");
 			} else if(txt.equals("OECD - Economic Outlook")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+MousehoverIcon+" icon when mouse hovered");
 			} else if(txt.equals("OECD - Productivity")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+MousehoverIcon+" icon when mouse hovered");
 	        } else {
-				Assert.fail(db+" is not displayed for " +showdb+ " icon");
+				Assert.fail(db+" is not displayed for " +MousehoverIcon+ " icon");
 			}
 
 	   
@@ -784,7 +794,7 @@ public class SeriesTab {
 		if (ftext.contains(stext)==true) {
 			login.Log4j.info("Footnotes window is appeared for series level when mouse hovered");
 			Thread.sleep(1500);
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+			login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 		} else {
 			Assert.fail("Footnotes window is not appeared");
 		} 

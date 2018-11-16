@@ -790,12 +790,12 @@ public class Filters {
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 					status = true;
 				} else {
 					// login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 					status = false;
 
 				}

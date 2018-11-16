@@ -1,224 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="3" total="3" passed="0">
+<testng-results skipped="0" failed="1" total="1" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="12158116" started-at="2018-11-14T13:05:45Z" finished-at="2018-11-14T16:28:23Z">
+  <suite name="Default suite" duration-ms="2619983" started-at="2018-11-16T06:46:02Z" finished-at="2018-11-16T07:29:42Z">
     <groups>
       <group name="cucumber">
         <method signature="TestRunner.feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" class="CDMNext.runner.TestRunner"/>
       </group> <!-- cucumber -->
     </groups>
-    <test name="Default test" duration-ms="12158116" started-at="2018-11-14T13:05:45Z" finished-at="2018-11-14T16:28:23Z">
+    <test name="Default test" duration-ms="2619983" started-at="2018-11-16T06:46:02Z" finished-at="2018-11-16T07:29:42Z">
       <class name="CDMNext.runner.TestRunner">
-        <test-method status="PASS" signature="setUpClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="setUpClass" is-config="true" duration-ms="370" started-at="2018-11-14T18:35:45Z" finished-at="2018-11-14T18:35:45Z">
+        <test-method status="PASS" signature="setUpClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="setUpClass" is-config="true" duration-ms="361" started-at="2018-11-16T12:16:02Z" finished-at="2018-11-16T12:16:02Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method status="FAIL" signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" duration-ms="9500602" started-at="2018-11-14T18:35:45Z" description="Runs Cucumber Feature" data-provider="features" finished-at="2018-11-14T21:14:06Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[Filters]]>
-              </value>
-            </param>
-          </params>
-          <exception class="cucumber.runtime.CucumberException">
-            <message>
-              <![CDATA[java.lang.AssertionError: consumer keyword doesn't exists DATASETS
-China Securities Index 300
-Global Database
->
-China
->
-China: Financial Market
-Equity Market Index, Asia
-World Trend Plus
->
-Global Economic Monitor
->
-Financial Market
-China Securities Index
-China Premium Database
->
-Financial Market
->
-Securities Market
-Banking and Financial Sector
-Asia Forecasting Service
->
-China
->
-Financial Indicators]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[cucumber.runtime.CucumberException: java.lang.AssertionError: consumer keyword doesn't exists DATASETS
-China Securities Index 300
-Global Database
->
-China
->
-China: Financial Market
-Equity Market Index, Asia
-World Trend Plus
->
-Global Economic Monitor
->
-Financial Market
-China Securities Index
-China Premium Database
->
-Financial Market
->
-Securities Market
-Banking and Financial Sector
-Asia Forecasting Service
->
-China
->
-Financial Indicators
-	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:69)
-	at CDMNext.runner.TestRunner.feature(TestRunner.java:33)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
-	at org.testng.TestRunner.privateRun(TestRunner.java:774)
-	at org.testng.TestRunner.run(TestRunner.java:624)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1191)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
-	at org.testng.TestNG.run(TestNG.java:1024)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: java.lang.AssertionError: consumer keyword doesn't exists DATASETS
-China Securities Index 300
-Global Database
->
-China
->
-China: Financial Market
-Equity Market Index, Asia
-World Trend Plus
->
-Global Economic Monitor
->
-Financial Market
-China Securities Index
-China Premium Database
->
-Financial Market
->
-Securities Market
-Banking and Financial Sector
-Asia Forecasting Service
->
-China
->
-Financial Indicators
-	at org.testng.Assert.fail(Assert.java:94)
-	at CDMNext.StepDefinations.Filters.user_verify_the_search_results(Filters.java:291)
-	at ✽.Then User verify the search results(CDMNext/Features/Filters.feature:374)
-]]>
-            </full-stacktrace>
-          </exception> <!-- cucumber.runtime.CucumberException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- feature -->
-        <test-method status="FAIL" signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" duration-ms="259367" started-at="2018-11-14T21:14:06Z" description="Runs Cucumber Feature" data-provider="features" finished-at="2018-11-14T21:18:25Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[Mnemonic Search]]>
-              </value>
-            </param>
-          </params>
-          <exception class="cucumber.runtime.CucumberException">
-            <message>
-              <![CDATA[org.openqa.selenium.WebDriverException: unknown error: Element <span class="series-tab ui-sortable-handle active" title="View results as List" data-id="list" js-series-mode="">...</span> is not clickable at point (98, 190). Other element would receive the click: <div class="search-presentation pointer-events-none" data-view-item-id="view1242">...</div>
-  (Session info: chrome=70.0.3538.102)
-  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 198 milliseconds
-Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
-System info: host: 'IN-BLR-SHRVSL1', ip: '10.33.16.3', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir5908_16050}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: 4824c3bf05074ff5f3945581bcf71ce1]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[cucumber.runtime.CucumberException: org.openqa.selenium.WebDriverException: unknown error: Element <span class="series-tab ui-sortable-handle active" title="View results as List" data-id="list" js-series-mode="">...</span> is not clickable at point (98, 190). Other element would receive the click: <div class="search-presentation pointer-events-none" data-view-item-id="view1242">...</div>
-  (Session info: chrome=70.0.3538.102)
-  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 198 milliseconds
-Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
-System info: host: 'IN-BLR-SHRVSL1', ip: '10.33.16.3', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir5908_16050}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: 4824c3bf05074ff5f3945581bcf71ce1
-	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:69)
-	at CDMNext.runner.TestRunner.feature(TestRunner.java:33)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
-	at org.testng.TestRunner.privateRun(TestRunner.java:774)
-	at org.testng.TestRunner.run(TestRunner.java:624)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1191)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
-	at org.testng.TestNG.run(TestNG.java:1024)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.openqa.selenium.WebDriverException: unknown error: Element <span class="series-tab ui-sortable-handle active" title="View results as List" data-id="list" js-series-mode="">...</span> is not clickable at point (98, 190). Other element would receive the click: <div class="search-presentation pointer-events-none" data-view-item-id="view1242">...</div>
-  (Session info: chrome=70.0.3538.102)
-  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 198 milliseconds
-Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
-System info: host: 'IN-BLR-SHRVSL1', ip: '10.33.16.3', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir5908_16050}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: 4824c3bf05074ff5f3945581bcf71ce1
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
-	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:215)
-	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:167)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:671)
-	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:272)
-	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:82)
-	at CDMNext.StepDefinations.Mnemonics.user_should_get_Mnemonic_search_results_in_SSI_window(Mnemonics.java:41)
-	at ✽.Then User should get Mnemonic search results in SSI window(CDMNext/Features/Mnemonics.feature:9)
-]]>
-            </full-stacktrace>
-          </exception> <!-- cucumber.runtime.CucumberException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- feature -->
-        <test-method status="FAIL" signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" duration-ms="2397908" started-at="2018-11-14T21:18:25Z" description="Runs Cucumber Feature" data-provider="features" finished-at="2018-11-14T21:58:23Z">
+        <test-method status="FAIL" signature="feature(cucumber.api.testng.CucumberFeatureWrapper)[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="feature" duration-ms="2619779" started-at="2018-11-16T12:16:03Z" description="Runs Cucumber Feature" data-provider="features" finished-at="2018-11-16T12:59:42Z">
           <params>
             <param index="0">
               <value>
@@ -228,30 +24,26 @@ Session ID: 4824c3bf05074ff5f3945581bcf71ce1
           </params>
           <exception class="cucumber.runtime.CucumberException">
             <message>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(),'Insight Explorer')]"}
+              <![CDATA[org.openqa.selenium.WebDriverException: unknown error: Element <div class="movable-modal--close" js-close="" title="Close">...</div> is not clickable at point (1346, 133). Other element would receive the click: <div class="growl-message growl-warning" data-view-item-id="view57200">...</div>
   (Session info: chrome=70.0.3538.102)
   (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 60.14 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Command duration or timeout: 40 milliseconds
 Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
 System info: host: 'IN-BLR-SHRVSL1', ip: '10.33.16.3', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir5908_16050}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: 4824c3bf05074ff5f3945581bcf71ce1
-*** Element info: {Using=xpath, value=//span[contains(text(),'Insight Explorer')]}]]>
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir6608_21112}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 9c331fed1c5ee7b8680de2fe5d0ae7a4]]>
             </message>
             <full-stacktrace>
-              <![CDATA[cucumber.runtime.CucumberException: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(),'Insight Explorer')]"}
+              <![CDATA[cucumber.runtime.CucumberException: org.openqa.selenium.WebDriverException: unknown error: Element <div class="movable-modal--close" js-close="" title="Close">...</div> is not clickable at point (1346, 133). Other element would receive the click: <div class="growl-message growl-warning" data-view-item-id="view57200">...</div>
   (Session info: chrome=70.0.3538.102)
   (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 60.14 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Command duration or timeout: 40 milliseconds
 Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
 System info: host: 'IN-BLR-SHRVSL1', ip: '10.33.16.3', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir5908_16050}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: 4824c3bf05074ff5f3945581bcf71ce1
-*** Element info: {Using=xpath, value=//span[contains(text(),'Insight Explorer')]}
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir6608_21112}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 9c331fed1c5ee7b8680de2fe5d0ae7a4
 	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:69)
 	at CDMNext.runner.TestRunner.feature(TestRunner.java:33)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -278,17 +70,15 @@ Session ID: 4824c3bf05074ff5f3945581bcf71ce1
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//span[contains(text(),'Insight Explorer')]"}
+Caused by: org.openqa.selenium.WebDriverException: unknown error: Element <div class="movable-modal--close" js-close="" title="Close">...</div> is not clickable at point (1346, 133). Other element would receive the click: <div class="growl-message growl-warning" data-view-item-id="view57200">...</div>
   (Session info: chrome=70.0.3538.102)
   (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 6.1.7601 SP1 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 60.14 seconds
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Command duration or timeout: 40 milliseconds
 Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
 System info: host: 'IN-BLR-SHRVSL1', ip: '10.33.16.3', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_161'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir5908_16050}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
-Session ID: 4824c3bf05074ff5f3945581bcf71ce1
-*** Element info: {Using=xpath, value=//span[contains(text(),'Insight Explorer')]}
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73), userDataDir=C:\Users\mnadiya\AppData\Local\Temp\scoped_dir6608_21112}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=70.0.3538.102, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=false, acceptInsecureCerts=false, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, setWindowRect=true, unexpectedAlertBehaviour=}]
+Session ID: 9c331fed1c5ee7b8680de2fe5d0ae7a4
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -296,19 +86,17 @@ Session ID: 4824c3bf05074ff5f3945581bcf71ce1
 	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:215)
 	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:167)
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:671)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:410)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:509)
-	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:402)
-	at CDMNext.StepDefinations.SeriesTab.the_popup_should_be_appeared(SeriesTab.java:389)
-	at ✽.Then The "Insight Explorer" popup should be appeared(CDMNext/Features/SeriesTab.feature:9)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:272)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:82)
+	at CDMNext.StepDefinations.SeriesTab.footnotes_window_should_be_open(SeriesTab.java:792)
+	at ✽.Then Footnotes window should be open(CDMNext/Features/SeriesTab.feature:246)
 ]]>
             </full-stacktrace>
           </exception> <!-- cucumber.runtime.CucumberException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- feature -->
-        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="tearDownClass" is-config="true" duration-ms="3313" started-at="2018-11-14T21:58:23Z" finished-at="2018-11-14T21:58:26Z">
+        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:CDMNext.runner.TestRunner@78c03f1f]" name="tearDownClass" is-config="true" duration-ms="3109" started-at="2018-11-16T12:59:42Z" finished-at="2018-11-16T12:59:46Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

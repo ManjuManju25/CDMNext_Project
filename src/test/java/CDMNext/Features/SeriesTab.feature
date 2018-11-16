@@ -2,7 +2,7 @@ Feature: SeriesTab
 
 Background:
  	Given User has successful logged in
- 
+ 	
 @SeriesTab 
 Scenario: TC_SeriesTab_01:Verify "All Insights" option
 When Click on "All insights" 
@@ -23,23 +23,29 @@ And   User has clicked on "Apply filter"
 When Click on "Reset"
 Then Selected options should be reset to default
 
-@SeriesTab
-Scenario: TC_SeriesTab_04:Verify series count for search
-Given User enters keyword "gdp" 
-Then Series count should be matched with displayed result
-
 @SeriesTab	
-Scenario: TC_SeriesTab_05:Verifying "Unselect all" option for series level
+Scenario: TC_SeriesTab_04:Verifying "Unselect all" option for series level
 Given User enters seriesID "146381801;1380601;245178303" 
 When User right click on any series
 Then User can able to see "Unselect all" option from dropdown menu
+
+@SeriesTab
+Scenario: TC_SeriesTab_05:Verify series count for search
+Given User enters keyword "gdp" 
+Then Series count should be matched with displayed result
 
 @SeriesTab 
 Scenario: TC_SeriesTab_06:Verifying "Copy" option for series level
 Given User enters seriesID "1380601;245178303" 
 When User right click on any series
 Then User can able to see "Copy" option from dropdown menu
-
+#
+#@SeriesTab	
+#Scenario: TC_SeriesTab_06:Verifying "Unselect all" option for series level
+#Given User enters seriesID "146381801;1380601;245178303" 
+#When User right click on any series
+#Then User can able to see "Unselect all" option from dropdown menu
+#
 @SeriesTab
 Scenario: TC_SeriesTab_07:Verifying "Copy data" option for series level
 Given User enters seriesID "146381801;228912101" 
@@ -234,7 +240,7 @@ When User Mouse hover on "View as Chart. Type `c`" icon
 Then User can see the Chart Visual in the right pannel  
 
 @SeriesTab
-Scenario: TC_SeriesTab_36:Verify 'Mouse over' icons for series level
+Scenario: TC_SeriesTab_37:Verify 'Mouse over' icons for series level
 Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
