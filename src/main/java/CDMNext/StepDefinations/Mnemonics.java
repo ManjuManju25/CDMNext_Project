@@ -86,7 +86,7 @@ public class Mnemonics {
 					}
 				}
 			} else {
-				login.Log4j.error("List size is null");
+				Assert.fail("List size is null");
 			}
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());
