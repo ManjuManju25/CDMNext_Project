@@ -1352,7 +1352,7 @@ Then  User verifies Filter search results
 @KeywordSearch
 Scenario: TC_KeywordSearch_270
 Given User enters "index"
-Then  User verify the search results
+Then  User verify keyword search results
 #
 #@ChineseKeywordSearch
 #Scenario: TC_KeywordSearch_270 : Search for an Acronym as "上交所"

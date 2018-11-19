@@ -769,11 +769,14 @@ public class SeriesTab {
 	public void user_can_see_the_Chart_Visual_in_the_right_pannel() throws Throwable {
 		//login.driver.findElement(By.xpath("//div[@class='insight-activity-close']")).click();
 	    Thread.sleep(2000);
+	    login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
 	    WebElement ctitle=login.driver.findElement(By.xpath("//span[@class='highcharts-title']"));
 	    String ctext=ctitle.getText();
 	    login.Log4j.info(ctext);
 	    if(stext.equals(ctext)) {
 	    	login.Log4j.info("Chart visual is created for Mouse hover icon");
+	    } else {
+	    	Assert.fail("Chart visual is not created for Mouse hover icon");
 	    }
 	}
 	@Then("^Footnotes window should be open$")
@@ -784,7 +787,7 @@ public class SeriesTab {
 		if (ftext.contains(stext)==true) {
 			login.Log4j.info("Footnotes window is appeared for series level when mouse hovered");
 			Thread.sleep(1500);
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+			login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 		} else {
 			Assert.fail("Footnotes window is not appeared");
 		} 
