@@ -39,13 +39,7 @@ Scenario: TC_SeriesTab_06:Verifying "Copy" option for series level
 Given User enters seriesID "1380601;245178303" 
 When User right click on any series
 Then User can able to see "Copy" option from dropdown menu
-#
-#@SeriesTab	
-#Scenario: TC_SeriesTab_06:Verifying "Unselect all" option for series level
-#Given User enters seriesID "146381801;1380601;245178303" 
-#When User right click on any series
-#Then User can able to see "Unselect all" option from dropdown menu
-#
+
 @SeriesTab
 Scenario: TC_SeriesTab_07:Verifying "Copy data" option for series level
 Given User enters seriesID "146381801;228912101" 
@@ -244,4 +238,11 @@ Scenario: TC_SeriesTab_37:Verify 'Mouse over' icons for series level
 Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
-
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_38:Verify added sereis to Data tab
+#Given User enters "322681802;6283501"
+#When User Mouse hover on Add series" icon 
+#And  Apply "Add"
+#Then Series should be highlighted under My series tab.
+# 

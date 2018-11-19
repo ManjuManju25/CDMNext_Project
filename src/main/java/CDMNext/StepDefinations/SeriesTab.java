@@ -41,12 +41,12 @@ public class SeriesTab {
 	public String filter;
 	public String seriesName;
 	public String db="null";
-	public String showdb;
+	public String mouseHover;
 	public WebElement dbase;
     public String stext;
 	@Given("^User enters seriesID \"([^\"]*)\"$")
 	public void user_enters_seriesID(String arg1) throws Throwable {
-
+		
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Unselect')]")).isDisplayed()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'Unselect')]")).click();
@@ -366,6 +366,8 @@ public class SeriesTab {
 	@When("^Click on \"([^\"]*)\"$")
 	public void click_on(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("All insights")) {
+			Thread.sleep(2000);
+			 login.driver.findElement(By.xpath("//div[@class='insights-create-new']/div")).click();
 			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 				Thread.sleep(5000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
@@ -672,7 +674,7 @@ public class SeriesTab {
 
 	@When("^User Mouse hover on \"([^\"]*)\" icon$")
 	public void user_Mouse_hover_on_icon(String arg1) throws Throwable {
-		showdb=arg1;
+		mouseHover=arg1;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(3000);
@@ -682,6 +684,7 @@ public class SeriesTab {
 		 stext=ele1.getText();
 		login.Log4j.info("Clicking on "+ arg1+ " icon");
 		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']//span[@title='"+arg1+"']")).click();
+		
 	}
 
 	@Then("^User can selects \"([^\"]*)\"$")
@@ -748,19 +751,19 @@ public class SeriesTab {
 		   String txt=dbase.getText();
 		   login.Log4j.info(txt);
  	        if (txt.equals(db)) {
-				login.Log4j.info(db+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(db+" is displayed for "+mouseHover+" icon when mouse hovered");
 				
 			} else if(txt.equals("Markit Purchasing Managers' Index")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+mouseHover+" icon when mouse hovered");
 				
 			} else if(txt.equals("OECD - Main Economic Indicators")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+mouseHover+" icon when mouse hovered");
 			} else if(txt.equals("OECD - Economic Outlook")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+mouseHover+" icon when mouse hovered");
 			} else if(txt.equals("OECD - Productivity")) {
-				login.Log4j.info(txt+" is displayed for "+showdb+" icon when mouse hovered");
+				login.Log4j.info(txt+" is displayed for "+mouseHover+" icon when mouse hovered");
 	        } else {
-				Assert.fail(db+" is not displayed for " +showdb+ " icon");
+				Assert.fail(db+" is not displayed for " +mouseHover+ " icon");
 			}
 
 	   
@@ -792,6 +795,60 @@ public class SeriesTab {
 			Assert.fail("Footnotes window is not appeared");
 		} 
 	   
+	}
+	@When("^User Mouse hover on Add series icon$")
+	public void user_Mouse_hover_on_Add_series_icon() throws Throwable {
+		WebElement mouseHoverElement;
+		WebElement checkbox;
+		int j = 0;
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		Thread.sleep(1000);
+		Actions action = new Actions(login.driver);
+		WebElement ul_element = null;
+		try {
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			login.Log4j.info("List size is :" + li_All.size());
+			if (li_All.size() > 0) {
+				for (int i = 0; i < li_All.size(); i++) {
+
+					login.Log4j.info(i);
+					login.Log4j.info(li_All.size());
+					Thread.sleep(1500);
+					j = i + 1;
+					checkbox = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					action.moveToElement(checkbox).click().build().perform();
+					copiedSeries = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					SeriesNames = copiedSeries.getText();
+					login.Log4j.info(SeriesNames);
+					Copy.add(SeriesNames);
+					// login.Log4j.info(Copy);
+
+				}
+			} else {
+				Assert.fail("Sorry,No results were found ");
+			}
+			mouseHoverElement = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='add-to-data-selection--toggle']"));
+			action.moveToElement(mouseHoverElement).click().build().perform();
+		} catch (NoSuchElementException e) {
+			Assert.fail("WebElement is null " + e.getMessage());
+		}
+	    
+	}
+
+	@And("^Apply \"([^\"]*)\"$")
+	public void apply(String arg1) throws Throwable {
+		Thread.sleep(2000);
+	    login.driver.findElement(By.xpath("//span[@class='context-menu-item link   ']//span[contains(text(),'Add')]")).click();
+	}
+
+	@Then("^Series should be highlighted under My series tab\\.$")
+	public void series_should_be_highlighted_under_My_series_tab() throws Throwable {
+	    
 	}
 
 	public void PasteIntoExcel(List<String> string) throws Throwable {
