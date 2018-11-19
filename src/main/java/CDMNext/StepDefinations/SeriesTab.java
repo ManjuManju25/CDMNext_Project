@@ -368,10 +368,12 @@ public class SeriesTab {
 		if (arg1.equalsIgnoreCase("All insights")) {
 			Thread.sleep(2000);
 			 login.driver.findElement(By.xpath("//div[@class='insights-create-new']/div")).click();
-			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
+			 if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 				Thread.sleep(5000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 				login.Log4j.info("Clicking on " + arg1);
+			
+				
 			}
 
 		} else if (arg1.equals("Apply filter")) {
@@ -388,6 +390,7 @@ public class SeriesTab {
 
 	@Then("^The \"([^\"]*)\" popup should be appeared$")
 	public void the_popup_should_be_appeared(String arg1) throws Throwable {
+		
 		if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 			login.Log4j.info(arg1 + " popup is appeared");
 			Thread.sleep(3000);
@@ -395,6 +398,8 @@ public class SeriesTab {
 		} else {
 			Assert.fail(arg1 + " popup is not appeared");
 		}
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[1]/div/div[2]/div[1]/div[1]/div[2]")).click();
 	}
 
 	@And("^Select indicator \"([^\"]*)\" as \"([^\"]*)\"$")
