@@ -77,11 +77,11 @@ public class Mnemonics {
 						if (ssi.contains(mnemonic) == true) {
 							login.Log4j.info(mnemonic + " exists in " + "\n" + ssi);
 							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 						} else {
 							Assert.fail(mnemonic + " does not exists in " + ssi);
 							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 						}
 					}
 				}

@@ -376,8 +376,6 @@ public class Filters {
 							break;
 						default:
 
-							login.Log4j.error(searchData + " has more than size " + sid.length
-									+ " which is not handled.  Please handle!");
 							Assert.fail(searchData + " has more than size " + sid.length
 									+ " which is not handled.  Please handle!");
 
@@ -401,11 +399,8 @@ public class Filters {
 											sourcearr[0] + " OR " + sourcearr[1] + " is exists in the" + "\n" + text);
 							  } else {
 									if (sourcearr.length == 1) {
-										login.Log4j.error(sourcearr[0] + " doesn't exist in " + text);
 										Assert.fail(sourcearr[0] + " doesn't exist in " + text);
 									} else {
-										login.Log4j.error(
-												sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in " + text);
 										Assert.fail(sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in " + text);
 									}
 								}
@@ -504,7 +499,6 @@ public class Filters {
 												login.Log4j.info(sid[0] + " is exists in the  : " + seriesName);
 
 											} else {
-												Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
 												login.Log4j.error(sid[0] + " doesn't exists in the  : " + seriesName);
 											}
 										}
@@ -521,7 +515,7 @@ public class Filters {
 									if (login.driver.findElement(By.xpath("//div[contains(text(),'Active')]"))
 											.isDisplayed()) {
 										Thread.sleep(2000);
-										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 										login.Log4j.info(fltrStatus + " series exists");
 									} else {
 										Assert.fail(fltrStatus + " doesn't exists");
@@ -757,7 +751,7 @@ public class Filters {
 				}
 
 			} else {
-				login.Log4j.error("List size is null");
+				Assert.fail("List size is null");
 			}
 		} catch (NoSuchElementException e) {
 
@@ -790,12 +784,12 @@ public class Filters {
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 					status = true;
 				} else {
 					// login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 					status = false;
 
 				}

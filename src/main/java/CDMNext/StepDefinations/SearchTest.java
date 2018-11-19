@@ -163,12 +163,12 @@ public class SearchTest {
 					               if(search_validation(Filters.showdata,keyword) == true) {
 					               login.Log4j.info(keyword + " is exists in the" + "\n" + Filters.showdata);
 					               Thread.sleep(1000);
-					               login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					               login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 					               KeywordMatch = true;
 					               break;
 					               } else {
 					            	 Thread.sleep(1000);
-					                 login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					                 login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 					                 status.add(keyword); } } } } }
 					                 //login.Log4j.info(KeywordMatch); 
 					                 if (KeywordMatch == false) {
@@ -679,10 +679,10 @@ public class SearchTest {
 								             } else if(text.toUpperCase().contains(keywords[0].toUpperCase()) == true && Filters.showdata.toUpperCase().contains(keywords[1].toUpperCase()) == true || text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
 								        	     login.Log4j.info(keywords[0]+ " AND " + keywords[1] + " OR " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
 								        	     Thread.sleep(1000);
-									             login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									             login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 								             } else {
 									            Thread.sleep(1000);
-									            login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									            login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 									            Assert.fail(keywords[0]+" AND " + keywords[1] + " OR " + keywords[2]+" keyword doesn't exists " + Filters.showdata);
 								             }
 							            } else if(currentKeyword.equalsIgnoreCase("fuel OR price AND albania")) {
@@ -691,10 +691,10 @@ public class SearchTest {
 													&& Filters.showdata.toUpperCase().contains(keywords[2]) == true)) {
 												       login.Log4j.info(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2] +" is exists in the" + "\n" + Filters.showdata);
 												       Thread.sleep(1000);
-												       login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+												       login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 										    } else {
 												       Thread.sleep(1000);
-												       login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+												       login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 												       Assert.fail(keywords[0] +" OR " + keywords[1] + " AND " + keywords[2] +" keyword doesn't exists " + Filters.showdata);
 									       }
 							            }
@@ -732,10 +732,10 @@ public class SearchTest {
 									       && Filters.showdata.toUpperCase().contains(keyword[2]) != true) {
 								           login.Log4j.info(keyword[0]+ " OR " + keyword[1] + " is exists in the" + "\n" + Filters.showdata);
 								           Thread.sleep(1000);
-								           login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								           login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 							        	  } else {
 							        		 Thread.sleep(1000);
-									          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 									          Assert.fail(keyword[0]+" OR " + keyword[1] + " keyword doesn't exists " + Filters.showdata);
 							        	  }
 							           
@@ -745,10 +745,10 @@ public class SearchTest {
 											    || Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
 										          login.Log4j.info(keyword[0]+ " OR " + keyword[2] + " is exists in the" + "\n" + Filters.showdata);
 										          Thread.sleep(1000);
-										          login.driver.findElement(By.xpath("//div[@title='Close']")).click(); 
+										          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click(); 
 							               } else {
 								                 Thread.sleep(1000);
-								                 login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								                 login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 								                 Assert.fail(keyword[0]+" OR " + keyword[2] + " keyword doesn't exists " + Filters.showdata);
 							               }
 						             }
@@ -779,11 +779,11 @@ public class SearchTest {
 									    && Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
 								          login.Log4j.info(keyword[0]+ " AND " + keyword[2] + " is exists in the" + "\n" + Filters.showdata);
 								          Thread.sleep(1000);
-								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 							           
 							           } else {
 								          Thread.sleep(1000);
-								          login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+								          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 								          Assert.fail(keyword[0]+" AND " + keyword[2] + " keywords doesn't exists " + Filters.showdata);
 							           }
 						           }
@@ -889,7 +889,7 @@ public class SearchTest {
 						}
 				}
 			}else {
-						login.Log4j.error("No results were found");
+						Assert.fail("No results were found");
 					}
 			} catch(NoSuchElementException e) {
 									Assert.fail("WebElement is null " + e.getMessage());
