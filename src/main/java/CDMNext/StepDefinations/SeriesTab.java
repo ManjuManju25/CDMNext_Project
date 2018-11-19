@@ -687,10 +687,10 @@ public class SeriesTab {
 		 stext=ele1.getText();
 		login.Log4j.info("Clicking on "+ arg1+ " icon");
 		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']//span[@title='"+ arg1 +"']")).click();
-		if(MousehoverIcon.equals("View as Chart. Type `c`")) {
+		/*if(MousehoverIcon.equals("View as Chart. Type `c`")) {
 			Thread.sleep(1500);
 			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-		}
+		}*/
 		
 	}
 
@@ -779,11 +779,14 @@ public class SeriesTab {
 	public void user_can_see_the_Chart_Visual_in_the_right_pannel() throws Throwable {
 		//login.driver.findElement(By.xpath("//div[@class='insight-activity-close']")).click();
 	    Thread.sleep(2000);
-	    WebElement ctitle=login.driver.findElement(By.xpath("//span[@class='highcharts-title']"));
+	    login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+		 WebElement ctitle=login.driver.findElement(By.xpath("//span[@class='highcharts-title']"));
 	    String ctext=ctitle.getText();
 	    login.Log4j.info(ctext);
 	    if(stext.equals(ctext)) {
 	    	login.Log4j.info("Chart visual is created for Mouse hover icon");
+	    } else {
+	    	Assert.fail("Chart visual is not created for Mouse hover icon");
 	    }
 	}
 	@Then("^Footnotes window should be open$")

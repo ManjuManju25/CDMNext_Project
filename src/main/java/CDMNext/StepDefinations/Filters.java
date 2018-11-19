@@ -757,7 +757,7 @@ public class Filters {
 				}
 
 			} else {
-				login.Log4j.error("List size is null");
+				Assert.fail("List size is null");
 			}
 		} catch (NoSuchElementException e) {
 
