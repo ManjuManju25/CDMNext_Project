@@ -20,8 +20,16 @@ public class Mnemonics {
 	public void user_enters_Mnemonic(String arg1) throws Throwable {
 		mnemonic = arg1;
 		Thread.sleep(3000);
+		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
+		if (reset.size() > 0) {
+			if (login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).isDisplayed()) {
+				login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
+				login.Log4j.info("Clicking on Reset button");
+			}
+		}
 		login.Log4j.info("Searching with " + mnemonic);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(mnemonic);
 
 	}
@@ -69,17 +77,17 @@ public class Mnemonics {
 						// login.Log4j.info(ssi);
 						if (ssi.contains(mnemonic) == true) {
 							login.Log4j.info(mnemonic + " exists in " + "\n" + ssi);
-							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 						} else {
 							Assert.fail(mnemonic + " does not exists in " + ssi);
-							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 						}
 					}
 				}
 			} else {
-				login.Log4j.error("List size is null");
+				Assert.fail("List size is null");
 			}
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());
