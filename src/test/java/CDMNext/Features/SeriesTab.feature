@@ -238,11 +238,3 @@ Scenario: TC_SeriesTab_37:Verify 'Mouse over' icons for series level
 Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
-#
-#@SeriesTab
-#Scenario: TC_SeriesTab_38:Verify added sereis to Data tab
-#Given User enters "322681802;6283501"
-#When User Mouse hover on Add series" icon 
-#And  Apply "Add"
-#Then Series should be highlighted under My series tab.
-# 
