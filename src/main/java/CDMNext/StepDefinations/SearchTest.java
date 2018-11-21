@@ -675,7 +675,7 @@ public class SearchTest {
 										      || Filters.showdata.toUpperCase().contains(keywords[2]) == true) {
 									             login.Log4j.info(keywords[0]+ " AND " + keywords[1] + " OR " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
 									             Thread.sleep(1000);
-									             login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									             login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
 								             } else if(text.toUpperCase().contains(keywords[0].toUpperCase()) == true && Filters.showdata.toUpperCase().contains(keywords[1].toUpperCase()) == true || text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
 								        	     login.Log4j.info(keywords[0]+ " AND " + keywords[1] + " OR " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
 								        	     Thread.sleep(1000);
