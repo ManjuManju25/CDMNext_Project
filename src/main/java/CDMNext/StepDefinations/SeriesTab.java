@@ -47,9 +47,9 @@ public class SeriesTab {
 	@Given("^User enters seriesID \"([^\"]*)\"$")
 	public void user_enters_seriesID(String arg1) throws Throwable {
 
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Unselect')]")).isDisplayed()) {
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
 			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[contains(text(),'Unselect')]")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
 		}
 		searchData = arg1;
 		login.Log4j.info("Searching with " + searchData);
@@ -108,7 +108,7 @@ public class SeriesTab {
 	public void user_can_able_to_see_option_from_dropdown_menu(String arg1) throws Throwable {
 		Thread.sleep(3000);
 		WebElement checkbox;
-		checkbox = login.driver.findElement(By.xpath("//div[@class='series-list-item--checkbox-wrapper']"));
+		checkbox = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Checkbox")));
 		login.Log4j.info("Clicking on " + arg1);
 		try {
 			if (arg1.equals("Unselect all")) {
@@ -120,16 +120,15 @@ public class SeriesTab {
 				}
 			} else if (arg1.equalsIgnoreCase("Copy")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath("//div[contains(text(),'Selected series copied.')]"))
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("copy_popup_text")))
 						.isDisplayed()) {
 					PasteIntoExcel(Copy);
 				}
 			} else if (arg1.equals("Copy data")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath("//button[contains(text(),'Copy to Clipboard')]"))
-						.isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("clipboard"))).isDisplayed()) {
 					Thread.sleep(2000);
-					login.driver.findElement(By.xpath("//button[contains(text(),'Copy to Clipboard')]")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("clipboard"))).click();
 					Thread.sleep(2000);
 					String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
 							.getData(DataFlavor.stringFlavor);
@@ -144,7 +143,7 @@ public class SeriesTab {
 				Thread.sleep(3000);
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
 				List<WebElement> element = login.driver
-						.findElements(By.xpath("//div[@class='main-series-information--series-id']"));
+						.findElements(By.xpath(login.LOCATORS.getProperty("series_info")));
 				for (WebElement Seriesinfo : element) {
 					String ssi = Seriesinfo.getText();
 					login.Log4j.info(ssi);
@@ -152,24 +151,24 @@ public class SeriesTab {
 					if (ssi.contains(sid[0]) == true || ssi.contains(sid[1]) == true) {
 						login.Log4j.info(arg1 + " window is appeared ");
 						Thread.sleep(2000);
-						login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 					} else {
 						Assert.fail(arg1 + " window is not appeared ");
 						Thread.sleep(1000);
-						login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 					}
 				}
 
 			} else if (arg1.equals("View as Chart")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath("//span[@class='highcharts-title']")).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title"))).isDisplayed()) {
 					login.Log4j.info("Chart visual is created for " + arg1 + " right click option");
 				} else {
 					Assert.fail("Chart visual is not created");
 				}
 			} else if (arg1.equals("View as Map")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath("//span[@class='highcharts-title']")).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title"))).isDisplayed()) {
 					login.Log4j.info("Map visual is created " + arg1 + " right click option");
 										
 				} else {
@@ -178,35 +177,33 @@ public class SeriesTab {
 
 			} else if (arg1.equals("View as Table")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath("//span[@data-name='title']")).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_title"))).isDisplayed()) {
 					login.Log4j.info("Table visual is created for right click option on series level");
 				} else {
 					Assert.fail("Table visual is not created");
 				}
 			} else if (arg1.equals("Download")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath(
-						"//button[@class='sphere-modal-control sphere-modal-control--filled-green insight-download__modal-button']"))
-						.isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download"))).isDisplayed()) {
 					Thread.sleep(2000);
 					login.Log4j.info("Download window is appeared for right click option on series level " + arg1);
-					login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download_popup"))).click();
 				} else {
 					Assert.fail("Download window is not appeared");
 				}
 			} else if (arg1.equals("Footnotes")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath("//div[@class='footnotes-modal--title']")).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes"))).isDisplayed()) {
 					login.Log4j.info("Footnotes window is appeared");
 					Thread.sleep(1500);
-					login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("close_footnotes"))).click();
 				} else {
 					Assert.fail("Footnotes window is not appeared");
 				}
 			} else if (arg1.equals("Copy link(s)")) {
 				WebElement copylink = login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']"));
 				copylink.click();
-				if (login.driver.findElement(By.xpath("//div[@class='growl-message-text']")).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("copylink_popup"))).isDisplayed()) {
 					login.Log4j.info("URL link(s) is copied");
 					Thread.sleep(2000);
 					Robot robot = new Robot();
@@ -239,9 +236,9 @@ public class SeriesTab {
 						if (ssp.isDisplayed()) {
 							login.Log4j.info("SSP window is displayed for Copy link(s) option");
 							Thread.sleep(2000);
-							login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 						} else {
-							Assert.fail("SSP window is displayed for Copy link(s) option");
+							Assert.fail("SSP window is not displayed for Copy link(s) option");
 						}
 					} catch (Exception e) {
 						String[] seriesId = searchData.split(";");
@@ -262,10 +259,10 @@ public class SeriesTab {
 				}
 			} else if (arg1.equals("Show Dataset")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath("//span[@class='series-table-name']")).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("show_dataset_validateTxt"))).isDisplayed()) {
 					login.Log4j.info("Dataset is displayed for given SeriesID");
 					Thread.sleep(2000);
-					login.driver.findElement(By.xpath("//span[@class='back-to-series-list']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Back_button"))).click();
 
 				} else {
 					Assert.fail("Dataset is not displayed for given SeriesID");
@@ -276,16 +273,15 @@ public class SeriesTab {
 				if (login.driver.findElement(By.xpath("//div[contains(text(),'" + SeriesNames + "')]")).isDisplayed()) {
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath("//div[contains(text(),'" + SeriesNames + "')]")).click();
-					if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+					if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 						Thread.sleep(1000);
-						login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
 						List<WebElement> datasets = login.driver
-								.findElements(By.xpath("//div[@class='series-related-data']"));
+								.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
 						for (WebElement list : datasets) {
 							Filters.showdata = list.getText();
 							login.Log4j.info("Database is displayed for selected series");
-							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
-
+							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 						}
 					} else {
 						login.Log4j.info("Database is not displayed  for selected series");
@@ -354,9 +350,9 @@ public class SeriesTab {
 					.isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
 				Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 			} else {
-				login.Log4j.info("SSP window is not displayed");
+				Assert.fail("SSP window is not displayed");
 			}
 		} catch (NoSuchElementException e) {
 
@@ -367,11 +363,7 @@ public class SeriesTab {
 	public void click_on(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("All insights")) {
 			Thread.sleep(1000);
-			/*login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-			login.Log4j.info("clearing the searchdata");
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//span[@class='series-tab ui-sortable-handle']//span[contains(text(),'Databases')]")).click();
-			login.Log4j.info("clicking on databases");*/
+			
 			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 				Thread.sleep(5000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
@@ -395,7 +387,7 @@ public class SeriesTab {
 		if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 			login.Log4j.info(arg1 + " popup is appeared");
 			Thread.sleep(3000);
-			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download_popup"))).click();
 		} else {
 			Assert.fail(arg1 + " popup is not appeared");
 		}
@@ -408,7 +400,7 @@ public class SeriesTab {
 		login.Log4j.info(indicator);
 
 		List<WebElement> crossIcon = login.driver
-				.findElements(By.xpath("//span[@title='Freight Traffic']//span[@class='select-field--cross-icon']"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("frieghtTraffic_crossIcon")));
 		login.Log4j.info("obj size is " + crossIcon.size());
 		if (crossIcon.size() > 0) {
 			login.Log4j.info("Selecting indicator " + arg1 + " as " + arg2);
@@ -417,7 +409,7 @@ public class SeriesTab {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//td[contains(text(),'" + arg2 + "')]")).click();
 		} else {
-			login.driver.findElement(By.xpath("//span[@title='Filter series by indicator']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("indicator_filter"))).click();
 			login.Log4j.info("Selecting indicator " + arg1 + " as " + arg2);
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
@@ -495,8 +487,7 @@ public class SeriesTab {
 	public void series_count_should_be_matched_with_displayed_result() throws Throwable {
 		Thread.sleep(5000);
 		int i = 0;
-		WebElement element = login.driver.findElement(By.xpath(
-				"//span[@style='outline: 0px; box-shadow: rgba(223, 186, 73, 0) 0px 0px 6px; outline-offset: 10px;']"));
+		WebElement element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_count")));
 		String Count = element.getText();
 		login.Log4j.info("Count is " + Count);
 		String newStr = Count.replaceAll(",", "");
@@ -514,7 +505,7 @@ public class SeriesTab {
 	public void selected_options_should_be_reset_to_default() throws Throwable {
 		Thread.sleep(2000);
 		// login.Log4j.info(Filters.var);
-		if (!login.driver.findElement(By.xpath("//span[@class='select-field--selected']")).isDisplayed()) {
+		if (!login.driver.findElement(By.xpath(login.LOCATORS.getProperty("selected_field"))).isDisplayed()) {
 			login.Log4j.info("Selected option is get Reset");
 		} else {
 			Assert.fail("Selected option isn't get Reset");
@@ -539,23 +530,23 @@ public class SeriesTab {
 			if (login.driver.findElement(By.xpath("//div[contains(text(),'" + SeriesNames + "')]")).isDisplayed()) {
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath("//div[contains(text(),'" + SeriesNames + "')]")).click();
-				if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
 					List<WebElement> datasets = login.driver
-							.findElements(By.xpath("//div[@class='series-related-data']"));
+							.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
 					for (WebElement list : datasets) {
 						Filters.showdata = list.getText();
 
 						if (Filters.showdata.toUpperCase().contains(arg2.toUpperCase()) == true) {
 							login.Log4j.info("The selected " + arg1 + " as " + arg2 + " does exists in DATASETS");
 							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 
 						} else {
 							Assert.fail("The selected " + arg1 + " as " + arg2 + " does not exists in DATASETS");
 							Thread.sleep(1000);
-							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 
 						}
 
@@ -614,7 +605,7 @@ public class SeriesTab {
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 
 					if (filter.equalsIgnoreCase("Key only")) {
-						if (login.driver.findElement(By.xpath("//span[@class='status-icon status-icon__key']"))
+						if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("key_icon")))
 								.isDisplayed()) {
 							login.Log4j.info(filter + " series are exists");
 						} else {
@@ -624,20 +615,17 @@ public class SeriesTab {
 						Thread.sleep(3000);
 						ele.click();
 						if (login.driver
-								.findElement(By.xpath("//div[@class='series-changes-time-line--open-releases']"))
-								.isDisplayed()) {
+								.findElement(By.xpath(login.LOCATORS.getProperty("with_Release"))).isDisplayed()) {
 							login.Log4j.info(filter + " series are exists");
 							Thread.sleep(2000);
-							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 						} else {
 							Assert.fail(filter + " series doesnot exists");
 						}
 					} else if (filter.equalsIgnoreCase("Forecast")) {
 						Thread.sleep(3000);
 						ele.click();
-						// WebElement chart=login.driver.findElement(By.xpath("//*[contains(@class,
-						// 'highcharts-grid highcharts-xaxis-grid')]"));
-						WebElement timepoints = login.driver.findElement(By.xpath("//*[@fill='#FFA500']"));
+						WebElement timepoints = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("forecast_timepoints")));
 						String Orange = "rgb(255, 165, 0)";
 						String appOrange = timepoints.getCssValue("fill");
 						// String appOrange =timepoints.getAttribute("fill");
@@ -646,7 +634,7 @@ public class SeriesTab {
 						if (Orange.equals(appOrange)) {
 							login.Log4j.info(filter + " series are exists");
 							Thread.sleep(2000);
-							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 						} else {
 							Assert.fail(filter + " series doesnot exists");
 						}
@@ -654,11 +642,10 @@ public class SeriesTab {
 						Thread.sleep(3000);
 						ele.click();
 						if (login.driver.findElement(By
-								.xpath("//div[@class='related-series-section related-series-section__multiple-items']"))
-								.isDisplayed()) {
+								.xpath(login.LOCATORS.getProperty("with_suggestion"))).isDisplayed()) {
 							login.Log4j.info(filter + " are exists");
 							Thread.sleep(2000);
-							login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 						} else {
 							Assert.fail(filter + " doesnot exists");
 						}
@@ -682,15 +669,12 @@ public class SeriesTab {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(3000);
 		Actions action=new Actions(login.driver);
-		WebElement ele1 = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
+		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_name")));
 		action.moveToElement(ele1).build().perform();
 		 stext=ele1.getText();
 		login.Log4j.info("Clicking on "+ arg1+ " icon");
 		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']//span[@title='"+ arg1 +"']")).click();
-		/*if(MousehoverIcon.equals("View as Chart. Type `c`")) {
-			Thread.sleep(1500);
-			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-		}*/
+		
 		
 	}
 
@@ -712,47 +696,22 @@ public class SeriesTab {
 		if(db.equals("null")) {
 		
 			if(Filters.searchData.equals("400841827")) {
-				dbase=login.driver.findElement(By.xpath("//span[@class='name']//span[contains(text(),'Markit Purchasing Managers')]"));
-//				   // Until the element is not visible keep scrolling
-//				   jse.executeScript("arguments[0].scrollIntoView(true);", dbase);
-//				   String txt=dbase.getText();
-//				   login.Log4j.info(txt);
-//			   
+				dbase=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("markit_purchasing_db")));
 			} else if(Filters.searchData.equals("122834404")) {
-				dbase=login.driver.findElement(By.xpath("//span[@class='name']//span[contains(text(),'OECD - Main Economic Indicators')]"));
-				
+				dbase=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("OECD-MainEconomic_db")));
 			} else if(Filters.searchData.equals("377030917")) {
-				dbase=login.driver.findElement(By.xpath("//span[@class='name']/span[contains(text(),'OECD - Economic Outlook')]"));
+				dbase=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("OECD_EconomicOutlook")));
 			} else if(Filters.searchData.equals("295755902")) {
-				dbase=login.driver.findElement(By.xpath("//span[@class='name']/span[contains(text(),'OECD - Productivity')]"));
+				dbase=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("OECD_productivity")));
 			}
 		  
 		} else if(db.equals("Global Database")) {
 			  dbase=login.driver.findElement(By.xpath("//span[contains(text(),'"+db+"')]"));
-//			   // Until the element is not visible keep scrolling
-//			   jse.executeScript("arguments[0].scrollIntoView(true);", dbase);
-//			   String txt=dbase.getText();
-//			   //login.Log4j.info(txt);
-//				if(txt.equals(db)) {
-//					login.Log4j.info(db+" is displayed for "+showdb+" icon when mouse hovered");
-//					
-//				} else {
-//					Assert.fail(db+" is not displayed for " +showdb+ " icon");
-//				}
+
 		}else {
 			dbase=login.driver.findElement(By.xpath("//span[@class='name']//span[contains(text(),'"+db+"')]"));
-//			// Until the element is not visible keep scrolling
-//			   jse.executeScript("arguments[0].scrollIntoView(true);", dbase);
-//			   String txt=dbase.getText();
-//			  	if(txt.equals(db)) {
-//					login.Log4j.info(db+" is displayed for "+showdb+" icon when mouse hovered");
-//					
-//				} else {
-//					Assert.fail(db+" is not displayed for " +showdb+ " icon");
-//				}
+
 		}
-		
-			
 		  // Until the element is not visible keep scrolling
 		   jse.executeScript("arguments[0].scrollIntoView(true);", dbase);
 		   String txt=dbase.getText();
@@ -779,8 +738,8 @@ public class SeriesTab {
 	public void user_can_see_the_Chart_Visual_in_the_right_pannel() throws Throwable {
 		//login.driver.findElement(By.xpath("//div[@class='insight-activity-close']")).click();
 	    Thread.sleep(2000);
-	    login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-		 WebElement ctitle=login.driver.findElement(By.xpath("//span[@class='highcharts-title']"));
+	    login.driver.findElement(By.xpath(login.LOCATORS.getProperty("OK_button"))).click();
+		 WebElement ctitle=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title")));
 	    String ctext=ctitle.getText();
 	    login.Log4j.info(ctext);
 	    if(stext.equals(ctext)) {
@@ -791,13 +750,13 @@ public class SeriesTab {
 	}
 	@Then("^Footnotes window should be open$")
 	public void footnotes_window_should_be_open() throws Throwable {
-		WebElement ele=login.driver.findElement(By.xpath("//div[@class='footnotes-modal--title']"));
+		WebElement ele=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes")));
 		String ftext=ele.getText();
 		login.Log4j.info(ftext);
 		if (ftext.contains(stext)==true) {
 			login.Log4j.info("Footnotes window is appeared for series level when mouse hovered");
 			Thread.sleep(1500);
-			login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("close_footnotes"))).click();
 		} else {
 			Assert.fail("Footnotes window is not appeared");
 		} 

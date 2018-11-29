@@ -1348,11 +1348,6 @@ Then  User verify keyword search results
 Scenario: TC_KeywordSearch_269
 Given User enters "Tes*"
 Then  User verifies Filter search results  
-
-@SynonymSearch
-Scenario: TC_KeywordSearch_270 : Search for an Keyword as "index"
-Given User enters keyword "index"
-Then User verify keyword search results
 #
 #@ChineseKeywordSearch
 #Scenario: TC_KeywordSearch_270 : Search for an Acronym as "上交所"

@@ -4,22 +4,30 @@ import cucumber.api.CucumberOptions;
 
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
+
+import java.io.File;
+
 import org.testng.annotations.*;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
 @CucumberOptions(//features="classpath:",
 		features = "src/test/java/CDMNext/Features/",
 		glue = {"CDMNext.StepDefinations" }, 
-        tags = {"@SeriesTab"},
+        tags = {"@FilterSearch,@SeriesTab,@Search"},
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
-				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
+				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/Report.html",
 				"rerun:target/cucumber-reports/rerun.txt" })
 public class TestRunner {
-
+	ExtentReports extent;
+    ExtentTest test;
 	private TestNGCucumberRunner testNGCucumberRunner;
-
+	
 	@BeforeSuite
 	public void setUpClass() throws Exception {
 		login.Log4j.info("\nInside TestNG > @BeforeSuite");
@@ -45,7 +53,6 @@ public class TestRunner {
 	public void tearDownClass() throws Exception {
 		login.Log4j.info("\nInside TestNG > @AfterSuite");
 		testNGCucumberRunner.finish();
-
 		if (login.driver != null) {
 			login.Log4j.info("\n CLOSING THE BROWSER WE YOU GO");
 			login.driver.manage().deleteAllCookies();

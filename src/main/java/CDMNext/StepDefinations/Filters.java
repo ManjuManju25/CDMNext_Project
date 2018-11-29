@@ -43,36 +43,42 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		Thread.sleep(5000);
-		login.Log4j.info("searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(3000);
+		login.Log4j.info("searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
-		// Thread.sleep(2000);
-		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
+		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		List<WebElement> clearIcon = login.driver
-				.findElements(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"));
-
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).isDisplayed()) {
-			login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).click();
+				.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
+       
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 			login.Log4j.info("Clicking on Top button");
 		}
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
+	        	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();	
+	     }
 		if (clearIcon.size() > 0) {
-			if (login.driver.findElement(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"))
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")))
 					.isDisplayed()) {
               Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"))
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")))
 						.click();
 			}
 		}
 		if (reset.size() > 0) {
-			if (login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).isDisplayed()) {
-				login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 				login.Log4j.info("Clicking on Reset button");
 			}
 		} else {
-			login.driver.findElement(By.xpath("//div//span[@class='search-input--toggle-filters-wrapper']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Filters"))).click();
 			login.Log4j.info("Clicking on filter...");
 		}
+//		login.Log4j.info("searching with " + searchData);
+//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+//		Thread.sleep(3000);
+//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
 
 	}
 
@@ -95,7 +101,7 @@ public class Filters {
 		}
 		if (arg1.equals("Date")) {
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by observation date']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DateFilter"))).click();
 			datearr = var.split(";");
 			for (String list : datearr) {
 				Thread.sleep(2000);
@@ -105,7 +111,7 @@ public class Filters {
 		}
 		if (arg1.equals("Frequency")) {
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by frequency']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FrequencyFilter"))).click();
 			frequencyarr = var.split(";");
 			for (String list : frequencyarr) {
 				Thread.sleep(3000);
@@ -116,7 +122,7 @@ public class Filters {
 		if (arg1.equals("Status")) {
 			fltrStatus = arg2;
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by status']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status_filter"))).click();
 			login.Log4j.info("clicking on " + fltrStatus);
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//tr[@title='" + fltrStatus + "']")).click();
@@ -126,9 +132,9 @@ public class Filters {
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			if (arg2.equals("MUR")) {
 				Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//div[contains(text(),'All options')]")).click();
-				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).clear();
-				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).sendKeys(arg2);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_option"))).click();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).clear();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).sendKeys(arg2);
 
 			}
 
@@ -141,7 +147,7 @@ public class Filters {
 		}
 		if (arg1.equals("Region")) {
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
 			Thread.sleep(4000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'By group')]")).click();
 
@@ -158,7 +164,7 @@ public class Filters {
 	@And("^User selects \"([^\"]*)\"$")
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
-		login.driver.findElement(By.xpath("//span[@title='More']")).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_filter"))).click();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
 
@@ -263,8 +269,7 @@ public class Filters {
 									}
 								} else if (advancedfltr.equals("New only")) {
 
-									if (login.driver.findElement(By.xpath(
-											"//span[@class='status-icon status-icon__new']//span[contains(text(),'new')]"))
+									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Newonly")))
 											.isDisplayed()) {
 										login.Log4j.info(advancedfltr + " series are exists");
 									} else {
@@ -376,8 +381,6 @@ public class Filters {
 							break;
 						default:
 
-							login.Log4j.error(searchData + " has more than size " + sid.length
-									+ " which is not handled.  Please handle!");
 							Assert.fail(searchData + " has more than size " + sid.length
 									+ " which is not handled.  Please handle!");
 
@@ -401,11 +404,9 @@ public class Filters {
 											sourcearr[0] + " OR " + sourcearr[1] + " is exists in the" + "\n" + text);
 							  } else {
 									if (sourcearr.length == 1) {
-										login.Log4j.error(sourcearr[0] + " doesn't exist in " + text);
+										
 										Assert.fail(sourcearr[0] + " doesn't exist in " + text);
 									} else {
-										login.Log4j.error(
-												sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in " + text);
 										Assert.fail(sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in " + text);
 									}
 								}
@@ -505,7 +506,6 @@ public class Filters {
 
 											} else {
 												Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
-												login.Log4j.error(sid[0] + " doesn't exists in the  : " + seriesName);
 											}
 										}
 									}
@@ -516,12 +516,12 @@ public class Filters {
 								if (fltrStatus.equals("Active")) {
 									Thread.sleep(2000);
 									WebElement list = login.driver.findElement(
-											By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+											By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 									mouseOver.moveToElement(list).click().build().perform();
-									if (login.driver.findElement(By.xpath("//div[contains(text(),'Active')]"))
+									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
 											.isDisplayed()) {
 										Thread.sleep(2000);
-										login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 										login.Log4j.info(fltrStatus + " series exists");
 									} else {
 										Assert.fail(fltrStatus + " doesn't exists");
@@ -571,8 +571,7 @@ public class Filters {
 		login.Log4j.info("topic is " + topic);
 		Thread.sleep(1000);
 		login.Log4j.info("Clicking on Databases");
-		WebElement db = login.driver.findElement(
-				By.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"));
+		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases")));
 		db.click();
 
 	}
@@ -599,7 +598,7 @@ public class Filters {
 		} else {
 			Assert.fail(var + " doesn't exists");
 		}
-		login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
 	}
 
 	@Then("^User verifies Filter search results$")
@@ -633,11 +632,12 @@ public class Filters {
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
 					element = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--content']"));
 					mouseOver.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
+					login.Log4j.info(text);
 					if (searchData.contains("AND")) {
 						String[] keyword1 = searchData.split(" AND ");
 						for (String result : keyword1) {
@@ -656,7 +656,7 @@ public class Filters {
 						}
 					} else if (searchData.contains("OR")) {
 						String[] keywords = searchData.split(" OR ");
-						login.Log4j.info("length is " + keywords.length);
+						login.Log4j.info("Length is "+ keywords.length);
 						if ((keywords.length == 2) && text.toUpperCase().contains(keywords[0].toUpperCase()) == true
 								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
 							login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + text);
@@ -771,18 +771,10 @@ public class Filters {
 		Thread.sleep(1000);
 		ele.click();
 
-		/*
-		 * if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).
-		 * isDisplayed()) { Thread.sleep(1000);
-		 * login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).
-		 * click(); List<WebElement> datasets = login.driver
-		 * .findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
-		 */
-
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
-			List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
+			List<WebElement> datasets = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
 			for (WebElement list : datasets) {
 				showdata = list.getText();
 				// login.Log4j.info(showdata);
@@ -790,12 +782,11 @@ public class Filters {
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 					status = true;
 				} else {
-					// login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 					status = false;
 
 				}
@@ -810,10 +801,7 @@ public class Filters {
 		String[] keywords = null;
 	if(sourcearr2.contains(",")) {
 			keywords = sourcearr2.split(",");
-//			login.Log4j.info(keywords[0]);
-//			login.Log4j.info(keywords[1]);
 		    String keyword=keywords[0]+keywords[1];
-//		    login.Log4j.info(keyword);
 		    keywords = keyword.split(" ");
 		   
 	} else {
