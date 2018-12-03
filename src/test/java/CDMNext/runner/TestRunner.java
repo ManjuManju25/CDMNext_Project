@@ -18,10 +18,10 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(//features="classpath:",
 		features = "src/test/java/CDMNext/Features/",
 		glue = {"CDMNext.StepDefinations" }, 
-        tags = {"@FilterSearch,@SeriesTab,@Search"},
+        tags = {"@MnemonicSearch"},
 		dryRun = false, plugin = { "pretty", "html:target/cucumber-reports/cucumber-pretty",
 				"json:target/cucumber-reports/CucumberTestReport.json",
-				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/Report.html",
+				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
 				"rerun:target/cucumber-reports/rerun.txt" })
 public class TestRunner {
 	ExtentReports extent;

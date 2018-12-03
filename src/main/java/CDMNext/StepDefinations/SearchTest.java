@@ -59,16 +59,8 @@ public class SearchTest {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
 		Thread.sleep(3000);
-		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-		if (reset.size() > 0) {
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
-				login.Log4j.info("Clicking on Reset button");
-			}
-		}else {
-	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();	
-	     
-		}
+		ClearSelection();
+		
 	}
 
 	@Then("^User verify keyword search results$")
@@ -904,6 +896,24 @@ public class SearchTest {
 			} catch(NoSuchElementException e) {
 									Assert.fail("WebElement is null " + e.getMessage());
 								}
+	}
+	public static void ClearSelection() throws InterruptedException {
+		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
+			login.Log4j.info("Clicking on Top button");
+		}
+		if (reset.size() > 0) {
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+				login.Log4j.info("Clicking on Reset button");
+			}
+		} else {
+			Thread.sleep(1000);
+	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();	
+	     
+		}
+		
 	}
 
 

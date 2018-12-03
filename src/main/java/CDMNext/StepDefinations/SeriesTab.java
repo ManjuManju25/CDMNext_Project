@@ -183,11 +183,12 @@ public class SeriesTab {
 					Assert.fail("Table visual is not created");
 				}
 			} else if (arg1.equals("Download")) {
+				login.Log4j.info("m in download");
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download"))).isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Downloadicon"))).isDisplayed()) {
 					Thread.sleep(2000);
 					login.Log4j.info("Download window is appeared for right click option on series level " + arg1);
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download_popup"))).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Downloadclose"))).click();
 				} else {
 					Assert.fail("Download window is not appeared");
 				}
@@ -362,12 +363,14 @@ public class SeriesTab {
 	@When("^Click on \"([^\"]*)\"$")
 	public void click_on(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("All insights")) {
-			Thread.sleep(1000);
-			
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 				Thread.sleep(5000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 				login.Log4j.info("Clicking on " + arg1);
+			}else {
+				Assert.fail(arg1+" is not displayed");
 			}
 
 		} else if (arg1.equals("Apply filter")) {
@@ -387,7 +390,7 @@ public class SeriesTab {
 		if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 			login.Log4j.info(arg1 + " popup is appeared");
 			Thread.sleep(3000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download_popup"))).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Downloadclose"))).click();
 		} else {
 			Assert.fail(arg1 + " popup is not appeared");
 		}
@@ -398,7 +401,8 @@ public class SeriesTab {
 		indicator.add(arg2);
 		login.Log4j.info("indicator size is " + indicator.size());
 		login.Log4j.info(indicator);
-
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		SearchTest.ClearSelection();
 		List<WebElement> crossIcon = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("frieghtTraffic_crossIcon")));
 		login.Log4j.info("obj size is " + crossIcon.size());
@@ -761,6 +765,59 @@ public class SeriesTab {
 			Assert.fail("Footnotes window is not appeared");
 		} 
 	   
+	}
+	@And("^Click on drop down icon next to \\+$")
+	public void click_on_drop_down_icon_next_to() throws Throwable {
+	WebElement checkbox;
+	WebElement addSeries_dropdown;	
+	int j = 0;
+	login.Log4j.info("Clicking on  Series tab ");
+	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+	Thread.sleep(3000);
+	Actions action = new Actions(login.driver);
+	WebElement ul_element = null;
+	try {
+		ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		AssertJUnit.assertNotNull(ul_element);
+		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		login.Log4j.info("List size is :" + li_All.size());
+		if (li_All.size() > 0) {
+			for (int i = 0; i < li_All.size(); i++) {
+				j = i + 1;
+				checkbox = login.driver
+						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+				action.moveToElement(checkbox).click().build().perform();
+				copiedSeries = login.driver
+						.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+				// action.moveToElement(copiedSeries).build().perform();
+				SeriesNames = copiedSeries.getText();
+				login.Log4j.info(SeriesNames);
+				Copy.add(SeriesNames);
+				// login.Log4j.info(Copy);
+
+			}
+		} else {
+			Assert.fail("Sorry,No results were found ");
+		}
+		addSeries_dropdown = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='add-to-data-selection--toggle']"));
+		action.moveToElement(addSeries_dropdown).click().build().perform();
+	} catch (NoSuchElementException e) {
+		Assert.fail("WebElement is null " + e.getMessage());
+	}
+		
+	    
+	}
+
+	@And("^Click on Add$")
+	public void click_on_Add() throws Throwable {
+		Thread.sleep(2000);
+		login.Log4j.info("Clicking on Add icon ");
+	    login.driver.findElement(By.xpath("//span[@title='Add series (A)']")).click();
+	}
+
+	@Then("^The series should be added to series tab$")
+	public void the_series_should_be_added_to_series_tab() throws Throwable {
+	    
 	}
 
 	public void PasteIntoExcel(List<String> string) throws Throwable {

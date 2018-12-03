@@ -4,19 +4,14 @@ Background:
  	Given User has successful logged in
  	
 @SeriesTab 
-Scenario: TC_SeriesTab_01:Verify "All Insights" option
-When Click on "All insights" 
-Then The "Insight Explorer" popup should be appeared
-
-@SeriesTab 
-Scenario: TC_SeriesTab_02:Verify indicator filter  for series tab
+Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
 And Select indicator "Transport" as "Freight Traffic"
-And Select indicator "Tourism" as "Tourism Statistics"
+And Select indicator "Investment" as "Domestic Investment"
 When Click on "Apply filter"
 Then Result should be displayed as per selection
 
 @SeriesTab 
-Scenario: TC_SeriesTab_03:Verify Reset option  for series tab
+Scenario: TC_SeriesTab_02:Verify Reset option  for series tab
 Given User enters "GDP" 
 And   User selects "Source" as "World Bank"
 And   User has clicked on "Apply filter"
@@ -24,10 +19,15 @@ When Click on "Reset"
 Then Selected options should be reset to default
 
 @SeriesTab	
-Scenario: TC_SeriesTab_04:Verifying "Unselect all" option for series level
+Scenario: TC_SeriesTab_03:Verifying "Unselect all" option for series level
 Given User enters seriesID "146381801;1380601;245178303" 
 When User right click on any series
 Then User can able to see "Unselect all" option from dropdown menu
+
+@SeriesTab 
+Scenario: TC_SeriesTab_04:Verify "All Insights" option
+When Click on "All insights" 
+Then The "Insight Explorer" popup should be appeared
 
 @SeriesTab
 Scenario: TC_SeriesTab_05:Verify series count for search
@@ -39,13 +39,7 @@ Scenario: TC_SeriesTab_06:Verifying "Copy" option for series level
 Given User enters seriesID "1380601;245178303" 
 When User right click on any series
 Then User can able to see "Copy" option from dropdown menu
-#
-#@SeriesTab	
-#Scenario: TC_SeriesTab_06:Verifying "Unselect all" option for series level
-#Given User enters seriesID "146381801;1380601;245178303" 
-#When User right click on any series
-#Then User can able to see "Unselect all" option from dropdown menu
-#
+
 @SeriesTab
 Scenario: TC_SeriesTab_07:Verifying "Copy data" option for series level
 Given User enters seriesID "146381801;228912101" 
@@ -72,7 +66,7 @@ Then User can able to see "View as Map" option from dropdown menu
 
 @SeriesTab
 Scenario: TC_SeriesTab_11:Verifying "View as Table" option for series level
-Given User enters seriesID "359084467;241769403" 
+Given User enters seriesID "7872901;7874601" 
 When User right click on any series
 Then User can able to see "View as Table" option from dropdown menu
 
@@ -244,3 +238,10 @@ Scenario: TC_SeriesTab_37:Verify 'Mouse over' icons for series level
 Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_38:Verify 'add' series from dropdown
+#Given User enters "368921927;371376337"
+#And Click on drop down icon next to +
+#And Click on Add
+#Then The series should be added to series tab

@@ -163,7 +163,7 @@ public class Mnemonics {
 	    mnemonic=arg1;
 	    login.Log4j.info("Searching with " + mnemonic);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(mnemonic);
 	}
 
@@ -187,7 +187,6 @@ public class Mnemonics {
 
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
-
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
 					Thread.sleep(1000);
@@ -212,6 +211,7 @@ public class Mnemonics {
 							Thread.sleep(2000);
 							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 							login.Log4j.info("Closing... SSI window");
+						
 						} else {
 							if(ssi.contains(mnemonic) != true) {
 							  Thread.sleep(3000);
@@ -232,7 +232,7 @@ public class Mnemonics {
 				Assert.fail("List size is null");
 			}
 		} catch (NoSuchElementException e) {
-			Assert.fail("Sorry, no results were found here. " + e.getMessage());
+			Assert.fail("Sorry, no results were found here. " );
 			
 		}
 		

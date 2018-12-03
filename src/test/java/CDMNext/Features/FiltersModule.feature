@@ -93,7 +93,7 @@ Then  User verify the search results
 @FilterSearch
 Scenario: TC_Filters_Search_12
 Given User enters "322968702"
-And   User selects "Source" as "Hong Kong AIA Group Limited"
+And   User selects "Source" as "Hong Kong SAR AIA Group Limited"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "World Trend Plus"
 Then  User verify the search results 
@@ -181,7 +181,7 @@ Then  User verify the search results
 @FilterSearch
 Scenario: TC_Filters_Search_23
 Given User enters "HKIRGAAAUA"
-And   User selects "Source" as "Hong Kong AIA Group Limited"
+And   User selects "Source" as "Hong Kong SAR AIA Group Limited"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "World Trend Plus"
 Then  User verify the search results 
