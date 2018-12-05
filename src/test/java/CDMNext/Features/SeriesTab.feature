@@ -238,10 +238,17 @@ Scenario: TC_SeriesTab_37:Verify 'Mouse over' icons for series level
 Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
-#
-#@SeriesTab
-#Scenario: TC_SeriesTab_38:Verify 'add' series from dropdown
-#Given User enters "368921927;371376337"
-#And Click on drop down icon next to +
-#And Click on Add
-#Then The series should be added to series tab
+
+@SeriesTab
+Scenario: TC_SeriesTab_38:Verify 'add' series from dropdown
+Given User enters "368921927;371376337"
+And Click on drop down icon next to +
+And Click on Add
+Then The series should be added to series tab
+
+@SeriesTab
+Scenario: TC_SeriesTab_39:Verify 'add' series from dropdown
+Given User enters "5724301;5958801"
+And  Click on drop down icon next to +
+And  Select "Add and replace"
+Then The series should be added to series tab

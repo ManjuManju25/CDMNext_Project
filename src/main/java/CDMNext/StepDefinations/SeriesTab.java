@@ -814,10 +814,26 @@ public class SeriesTab {
 		login.Log4j.info("Clicking on Add icon ");
 	    login.driver.findElement(By.xpath("//span[@title='Add series (A)']")).click();
 	}
+	@And("^Select \"([^\"]*)\"$")
+	public void select(String arg1) throws Throwable {
+	    
+	}
 
 	@Then("^The series should be added to series tab$")
 	public void the_series_should_be_added_to_series_tab() throws Throwable {
-	    
+	    Thread.sleep(2000);
+	    WebElement  ele=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sname")))	;
+	    WebElement ele1=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sname1")));
+	    String  gdp=ele.getText();
+	    String  nominal_gdp=ele1.getText();
+	    login.Log4j.info(gdp);
+	    login.Log4j.info(nominal_gdp);   
+	    if(Copy.contains(gdp) == true && Copy.contains(nominal_gdp) == true) {
+	    	login.Log4j.info("The selected series is added to series tab");
+	    	
+	    } else {
+	    	Assert.fail("The selected series is not added to series tab");
+	    }
 	}
 
 	public void PasteIntoExcel(List<String> string) throws Throwable {
