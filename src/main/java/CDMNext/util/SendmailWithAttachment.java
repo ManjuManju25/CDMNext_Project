@@ -69,7 +69,7 @@ public class SendmailWithAttachment {
 			MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
 			// Mention the file which you want to send
-			String filename=System.getProperty("user.dir")+ "\\target\\report.html";
+			String filename=System.getProperty("user.dir")+ "\\target\\surefire-reports\\html\\report.html";
 						
 			// Create data source and pass the filename
 			DataSource source = new FileDataSource(filename);

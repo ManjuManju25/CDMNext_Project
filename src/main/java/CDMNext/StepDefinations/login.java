@@ -90,7 +90,6 @@ public class login {
 		second = date.get(Calendar.SECOND);
 		minute = date.get(Calendar.MINUTE);
 		hour = date.get(Calendar.HOUR);
-
 		Invoke_browser();
 
 	}
@@ -272,7 +271,6 @@ public class login {
 			driver = new ChromeDriver();
 		}
 		long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));
-
 		driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);
 		// driver.manage().timeouts().pageLoadTimeout(implicitWaitTime,
 		// TimeUnit.SECONDS);
