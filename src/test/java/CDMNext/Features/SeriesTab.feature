@@ -6,7 +6,7 @@ Background:
 @SeriesTab 
 Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
 And Select indicator "Transport" as "Freight Traffic"
-And Select indicator "Investment" as "Domestic Investment"
+And Select indicator "Tourism" as "Tourism Statistics"
 When Click on "Apply filter"
 Then Result should be displayed as per selection
 
@@ -240,15 +240,46 @@ When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
 
 @SeriesTab
-Scenario: TC_SeriesTab_38:Verify 'add' series from dropdown
+Scenario: TC_SeriesTab_38:Verify selected 'series count' under series tab.
+Given User enters "146381801;1380601;245178303"
+Then Verify the selected series count
+
+@SeriesTab
+Scenario: TC_SeriesTab_39:Verify "Add series" by click on '+'
+Given User enters "7872901;7874601"
+When Click on + icon on series
+Then The series should be added to Data tab
+
+@SeriesTab
+Scenario: TC_SeriesTab_40:Verify Pin/unpin filters
+When Hover the mouse on any filter and click on Pin
+Then filter should be pined/unpined the filter to left panel
+
+@SeriesTab
+Scenario: TC_SeriesTab_41:Verify 'add' series from dropdown
 Given User enters "368921927;371376337"
 And Click on drop down icon next to +
 And Click on Add
-Then The series should be added to series tab
+Then The series should be added to Data tab
 
 @SeriesTab
-Scenario: TC_SeriesTab_39:Verify 'add' series from dropdown
+Scenario: TC_SeriesTab_42:Verify 'Add and replace' from dropdown
 Given User enters "5724301;5958801"
 And  Click on drop down icon next to +
 And  Select "Add and replace"
-Then The series should be added to series tab
+Then Highlighted visual series should be replaced new series
+
+@SeriesTab
+Scenario: TC_SeriesTab_43:Verify 'add to exist insight' in dropdown
+Given User enters "368921927;371376337"
+And  Click on drop down icon next to +
+And  Select "Add to existing insight"
+Then Choose any existing insights to add this series
+Then The series should be added to selected insight
+
+@SeriesTab
+Scenario: TC_SeriesTab_44:Verify 'Add to new insight' in dropdown
+Given User enters "122834404;295755902"
+And  Click on drop down icon next to +
+And  Select "Add to new insight"
+Then New insight should be created and the series should be added to the insight

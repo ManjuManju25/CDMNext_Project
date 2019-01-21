@@ -1,25 +1,31 @@
 package CDMNext.runner;
+
 import cucumber.api.CucumberOptions;
+
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
-import java.io.File;
 import org.testng.annotations.*;
+
+import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
-@CucumberOptions(//features="classpath:",
+@CucumberOptions(// features="classpath:",
 		features = "src/test/java/CDMNext/Features/",
-		glue = {"CDMNext.StepDefinations" }, 
-        tags = {"@Mnemonics"},
-		dryRun = false, plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
-				 })
+		glue = { "CDMNext.StepDefinations" }, 
+		tags = {"@DB" }, 
+		dryRun = false, 
+		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
 public class TestRunner {
 	private TestNGCucumberRunner testNGCucumberRunner;
-	
+
 	@BeforeSuite
-	public void setUpClass() throws Exception {
+	public void setUpClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @BeforeSuite");
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+		HTML_Report.openHTMLReport();
+		HTML_Report.html_Header();
+
 	}
 
 	// TestNG @Test
@@ -38,7 +44,7 @@ public class TestRunner {
 
 	// TestNG @Aftersuite
 	@AfterSuite
-	public void tearDownClass() throws Exception {
+	public void tearDownClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @AfterSuite");
 		testNGCucumberRunner.finish();
 		if (login.driver != null) {
@@ -46,6 +52,8 @@ public class TestRunner {
 			login.driver.manage().deleteAllCookies();
 			login.driver.quit();
 			login.driver = null;
+			HTML_Report.html_Footer();
+			HTML_Report.bw.close();
 		}
 		// login.Log4j.info("\n ****Inside Email*****");
 		// SendmailWithAttachment.report();

@@ -52,11 +52,14 @@ public class Filters {
 		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
 
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 			login.Log4j.info("Clicking on Top button");
 		}
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
+			login.Log4j.info("Clicking on Unselect");
 		}
 		if (clearIcon.size() > 0) {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).isDisplayed()) {
@@ -66,6 +69,7 @@ public class Filters {
 		}
 		if (reset.size() > 0) {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 				login.Log4j.info("Clicking on Reset button");
 			}
@@ -73,11 +77,7 @@ public class Filters {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Filters"))).click();
 			login.Log4j.info("Clicking on filter...");
 		}
-		// login.Log4j.info("searching with " + searchData);
-		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		// Thread.sleep(3000);
-		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
-
+		
 	}
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
@@ -88,6 +88,8 @@ public class Filters {
 		Thread.sleep(2000);
 		var = arg2;
 		if (arg1.equals("Source")) {
+//			login.driver.navigate().refresh();
+//			System.out.println("Refresh :"+login.driver.getCurrentUrl());
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			sourcearr = var.split(";");
@@ -154,7 +156,7 @@ public class Filters {
 
 	@And("^User has clicked on \"([^\"]*)\"$")
 	public void user_has_clicked_on(String arg1) throws Throwable {
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		login.Log4j.info("Clicking on " + arg1);
 		login.driver.findElement(By.xpath("//div[contains(text(),'" + arg1 + "')]")).click();
 	}
@@ -163,7 +165,7 @@ public class Filters {
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_filter"))).click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
 
 	}
@@ -395,6 +397,11 @@ public class Filters {
 									login.Log4j.info(sourcearr[0]
 											+ " does exists as Organisation for Economic Co-operation and Development in \n"
 											+ text);
+//								} else if ((sourcearr.length == 1) && var.equalsIgnoreCase(
+//										"International Monetary Fund - World Economic Outlook") == true) {
+//									login.Log4j.info(sourcearr[0]
+//											+ " does exists as International Monetary Fund in \n"
+//											+ text);
 								} else if ((sourcearr.length == 1) && validation(text, sourcearr[0]) == true) {
 									login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);
 
@@ -889,6 +896,19 @@ public class Filters {
 					&& searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true
 					&& searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true
 					&& searchText.toUpperCase().contains(keywords[6].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
+		case 8:
+			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[6].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[7].toUpperCase()) == true) {
 				return true;
 			} else {
 				return false;

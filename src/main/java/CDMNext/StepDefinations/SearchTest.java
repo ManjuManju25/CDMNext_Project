@@ -911,7 +911,7 @@ public class SearchTest {
 		} else {
 			Thread.sleep(1000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();	
-	     
+	    	login.Log4j.info("Clicking on Unselect button");
 		}
 		
 	}
