@@ -54,11 +54,13 @@ public class SearchTest {
 	@Given("^User enters keyword \"([^\"]*)\"$")
 	public void user_enters_keyword(String keyword) throws Throwable {
 		currentKeyword = keyword;
-		Thread.sleep(3000);
 		login.Log4j.info("Searching with " + currentKeyword);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
-
+		Thread.sleep(3000);
+		ClearSelection();
+		
 	}
 
 	@Then("^User verify keyword search results$")
@@ -152,10 +154,10 @@ public class SearchTest {
 					    	 Thread.sleep(1000);
 					         ele.click();
 					 
-					       if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+					       if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 					    	   Thread.sleep(2000);
-					           login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click(); 
-					           List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='single-series-preview--content']")); 
+					           login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click(); 
+					           List<WebElement> datasets = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info"))); 
 					           //List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']")); 
 					           for(WebElement list : datasets) { 
 					        	   Filters.showdata = list.getText();
@@ -163,17 +165,18 @@ public class SearchTest {
 					               if(search_validation(Filters.showdata,keyword) == true) {
 					               login.Log4j.info(keyword + " is exists in the" + "\n" + Filters.showdata);
 					               Thread.sleep(1000);
-					               login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+					               login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 					               KeywordMatch = true;
 					               break;
 					               } else {
 					            	 Thread.sleep(1000);
-					                 login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+					                 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+
 					                 status.add(keyword); } } } } }
 					                 //login.Log4j.info(KeywordMatch); 
 					                 if (KeywordMatch == false) {
 					                	 for (String failure : status) { 
-					                		 Assert.fail(failure + " keyword doesn't exists in " + text + " AND " + "\n" + Filters.showdata); } }
+					                		 Assert.fail(failure + " keyword doesn't exists in " + text + " AND in Related data " + "\n" + Filters.showdata); } }
 					
 					/*Boolean KeywordMatch = false;
 
@@ -662,10 +665,10 @@ public class SearchTest {
 						        Thread.sleep(1000);
 						        ele.click();
 
-						        if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+						        if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 							       Thread.sleep(1000);
-							       login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
-							       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+							       login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
+							       List<WebElement> datasets = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
 							         for (WebElement list : datasets) {
 								         Filters.showdata = list.getText();
 								         login.Log4j.info(Filters.showdata);
@@ -675,14 +678,14 @@ public class SearchTest {
 										      || Filters.showdata.toUpperCase().contains(keywords[2]) == true) {
 									             login.Log4j.info(keywords[0]+ " AND " + keywords[1] + " OR " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
 									             Thread.sleep(1000);
-									             login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+									             login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								             } else if(text.toUpperCase().contains(keywords[0].toUpperCase()) == true && Filters.showdata.toUpperCase().contains(keywords[1].toUpperCase()) == true || text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
 								        	     login.Log4j.info(keywords[0]+ " AND " + keywords[1] + " OR " + keywords[2]+" is exists in the" + "\n" + Filters.showdata);
 								        	     Thread.sleep(1000);
-									             login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+									             login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								             } else {
 									            Thread.sleep(1000);
-									            login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+									            login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 									            Assert.fail(keywords[0]+" AND " + keywords[1] + " OR " + keywords[2]+" keyword doesn't exists " + Filters.showdata);
 								             }
 							            } else if(currentKeyword.equalsIgnoreCase("fuel OR price AND albania")) {
@@ -691,10 +694,10 @@ public class SearchTest {
 													&& Filters.showdata.toUpperCase().contains(keywords[2]) == true)) {
 												       login.Log4j.info(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2] +" is exists in the" + "\n" + Filters.showdata);
 												       Thread.sleep(1000);
-												       login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+									              login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 										    } else {
 												       Thread.sleep(1000);
-												       login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+												       login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 												       Assert.fail(keywords[0] +" OR " + keywords[1] + " AND " + keywords[2] +" keyword doesn't exists " + Filters.showdata);
 									       }
 							            }
@@ -719,10 +722,10 @@ public class SearchTest {
 					        Thread.sleep(1000);
 					        ele.click();
 
-					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+					        if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 						       Thread.sleep(1000);
-						       login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
-						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+						       login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
+						       List<WebElement> datasets = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
 						         for (WebElement list : datasets) {
 							         Filters.showdata = list.getText();
 							         login.Log4j.info(Filters.showdata);
@@ -732,10 +735,10 @@ public class SearchTest {
 									       && Filters.showdata.toUpperCase().contains(keyword[2]) != true) {
 								           login.Log4j.info(keyword[0]+ " OR " + keyword[1] + " is exists in the" + "\n" + Filters.showdata);
 								           Thread.sleep(1000);
-								           login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+								           login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 							        	  } else {
 							        		 Thread.sleep(1000);
-									          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+									          login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 									          Assert.fail(keyword[0]+" OR " + keyword[1] + " keyword doesn't exists " + Filters.showdata);
 							        	  }
 							           
@@ -745,10 +748,10 @@ public class SearchTest {
 											    || Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
 										          login.Log4j.info(keyword[0]+ " OR " + keyword[2] + " is exists in the" + "\n" + Filters.showdata);
 										          Thread.sleep(1000);
-										          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click(); 
+										          login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click(); 
 							               } else {
 								                 Thread.sleep(1000);
-								                 login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+								                 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								                 Assert.fail(keyword[0]+" OR " + keyword[2] + " keyword doesn't exists " + Filters.showdata);
 							               }
 						             }
@@ -767,10 +770,10 @@ public class SearchTest {
 					        Thread.sleep(1000);
 					        ele.click();
 
-					        if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+					        if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 						       Thread.sleep(1000);
-						       login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
-						       List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+						       login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
+						       List<WebElement> datasets = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
 						         for (WebElement list : datasets) {
 							         Filters.showdata = list.getText();
 							         login.Log4j.info(Filters.showdata);
@@ -779,11 +782,11 @@ public class SearchTest {
 									    && Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
 								          login.Log4j.info(keyword[0]+ " AND " + keyword[2] + " is exists in the" + "\n" + Filters.showdata);
 								          Thread.sleep(1000);
-								          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+								          login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 							           
 							           } else {
 								          Thread.sleep(1000);
-								          login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+								          login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								          Assert.fail(keyword[0]+" AND " + keyword[2] + " keywords doesn't exists " + Filters.showdata);
 							           }
 						           }
@@ -894,6 +897,24 @@ public class SearchTest {
 			} catch(NoSuchElementException e) {
 									Assert.fail("WebElement is null " + e.getMessage());
 								}
+	}
+	public static void ClearSelection() throws InterruptedException {
+		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
+			login.Log4j.info("Clicking on Top button");
+		}
+		if (reset.size() > 0) {
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+				login.Log4j.info("Clicking on Reset button");
+			}
+		} else {
+			Thread.sleep(1000);
+	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();	
+	    	login.Log4j.info("Clicking on Unselect button");
+		}
+		
 	}
 
 

@@ -1,7 +1,6 @@
 package CDMNext.StepDefinations;
 
 import org.testng.Assert;
-
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,37 +42,41 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		Thread.sleep(5000);
-		login.Log4j.info("searching with " + searchData);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(2000);
+		login.Log4j.info("searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
-		// Thread.sleep(2000);
-		List<WebElement> reset = login.driver.findElements(By.xpath("//span[contains(text(),'Reset')]"));
-		List<WebElement> clearIcon = login.driver
-				.findElements(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"));
+		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
+		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
 
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).isDisplayed()) {
-			login.driver.findElement(By.xpath("//div[contains(text(),'Top')]")).click();
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 			login.Log4j.info("Clicking on Top button");
 		}
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
+			login.Log4j.info("Clicking on Unselect");
+		}
 		if (clearIcon.size() > 0) {
-			if (login.driver.findElement(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"))
-					.isDisplayed()) {
-              Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"))
-						.click();
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).isDisplayed()) {
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).click();
 			}
 		}
 		if (reset.size() > 0) {
-			if (login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).isDisplayed()) {
-				login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 				login.Log4j.info("Clicking on Reset button");
 			}
 		} else {
-			login.driver.findElement(By.xpath("//div//span[@class='search-input--toggle-filters-wrapper']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Filters"))).click();
 			login.Log4j.info("Clicking on filter...");
 		}
-
+		
 	}
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
@@ -84,6 +87,8 @@ public class Filters {
 		Thread.sleep(2000);
 		var = arg2;
 		if (arg1.equals("Source")) {
+//			login.driver.navigate().refresh();
+//			System.out.println("Refresh :"+login.driver.getCurrentUrl());
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			sourcearr = var.split(";");
@@ -95,7 +100,7 @@ public class Filters {
 		}
 		if (arg1.equals("Date")) {
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by observation date']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DateFilter"))).click();
 			datearr = var.split(";");
 			for (String list : datearr) {
 				Thread.sleep(2000);
@@ -105,7 +110,7 @@ public class Filters {
 		}
 		if (arg1.equals("Frequency")) {
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by frequency']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FrequencyFilter"))).click();
 			frequencyarr = var.split(";");
 			for (String list : frequencyarr) {
 				Thread.sleep(3000);
@@ -116,7 +121,7 @@ public class Filters {
 		if (arg1.equals("Status")) {
 			fltrStatus = arg2;
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by status']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status_filter"))).click();
 			login.Log4j.info("clicking on " + fltrStatus);
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//tr[@title='" + fltrStatus + "']")).click();
@@ -126,9 +131,9 @@ public class Filters {
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			if (arg2.equals("MUR")) {
 				Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//div[contains(text(),'All options')]")).click();
-				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).clear();
-				login.driver.findElement(By.xpath("//div//input[@placeholder='Search']")).sendKeys(arg2);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_option"))).click();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).clear();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).sendKeys(arg2);
 
 			}
 
@@ -141,7 +146,7 @@ public class Filters {
 		}
 		if (arg1.equals("Region")) {
 			login.Log4j.info("clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
 			Thread.sleep(4000);
 			login.driver.findElement(By.xpath("//div[contains(text(),'By group')]")).click();
 
@@ -150,7 +155,7 @@ public class Filters {
 
 	@And("^User has clicked on \"([^\"]*)\"$")
 	public void user_has_clicked_on(String arg1) throws Throwable {
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		login.Log4j.info("Clicking on " + arg1);
 		login.driver.findElement(By.xpath("//div[contains(text(),'" + arg1 + "')]")).click();
 	}
@@ -158,8 +163,8 @@ public class Filters {
 	@And("^User selects \"([^\"]*)\"$")
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
-		login.driver.findElement(By.xpath("//span[@title='More']")).click();
-		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_filter"))).click();
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
 
 	}
@@ -192,7 +197,7 @@ public class Filters {
 		WebElement element;
 		WebElement checkbox;
 		String text;
-		//String str=null;
+		// String str=null;
 
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
@@ -226,7 +231,7 @@ public class Filters {
 					String[] lines = text.split("\n");
 					// login.Log4j.info("filter is " + filters);
 					for (String Tooltip : lines) {
-						//String str=null;
+						// String str=null;
 						if (Tooltip.contains("Series id")) {
 							seriesId = Tooltip;
 						} else if (Tooltip.contains("Name")) {
@@ -235,7 +240,7 @@ public class Filters {
 							unit = Tooltip;
 						} else if (Tooltip.contains("Frequency")) {
 							frequency = Tooltip;
-						} 
+						}
 					}
 
 					if (filters.isEmpty()) {
@@ -263,8 +268,7 @@ public class Filters {
 									}
 								} else if (advancedfltr.equals("New only")) {
 
-									if (login.driver.findElement(By.xpath(
-											"//span[@class='status-icon status-icon__new']//span[contains(text(),'new')]"))
+									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Newonly")))
 											.isDisplayed()) {
 										login.Log4j.info(advancedfltr + " series are exists");
 									} else {
@@ -383,21 +387,28 @@ public class Filters {
 
 					} else {
 						for (k = 0; k < filters.size(); k++) {
-						  if (filters.get(k).equals("Source")) {
+							if (filters.get(k).equals("Source")) {
 								login.Log4j.info(sourcearr.length);
 								// String source = lines[10];
 								// login.Log4j.info(source);
-							  if((sourcearr.length == 1) && var.equalsIgnoreCase("International Organisation for Economic Co-operation and Development") == true) {
-								login.Log4j.info(sourcearr[0] + " does exists as Organisation for Economic Co-operation and Development in \n"+text);
-							  } else if ((sourcearr.length == 1)
-										&& validation(text,sourcearr[0]) == true) {
+								if ((sourcearr.length == 1) && var.equalsIgnoreCase(
+										"International Organisation for Economic Co-operation and Development") == true) {
+									login.Log4j.info(sourcearr[0]
+											+ " does exists as Organisation for Economic Co-operation and Development in \n"
+											+ text);
+//								} else if ((sourcearr.length == 1) && var.equalsIgnoreCase(
+//										"International Monetary Fund - World Economic Outlook") == true) {
+//									login.Log4j.info(sourcearr[0]
+//											+ " does exists as International Monetary Fund in \n"
+//											+ text);
+								} else if ((sourcearr.length == 1) && validation(text, sourcearr[0]) == true) {
 									login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);
 
-							  } else if ((sourcearr.length == 2) && validation(text,sourcearr[0]) == true
-										|| validation(text,sourcearr[1]) == true) {
+								} else if ((sourcearr.length == 2) && validation(text, sourcearr[0]) == true
+										|| validation(text, sourcearr[1]) == true) {
 									login.Log4j.info(
 											sourcearr[0] + " OR " + sourcearr[1] + " is exists in the" + "\n" + text);
-							  } else {
+								} else {
 									if (sourcearr.length == 1) {
 										Assert.fail(sourcearr[0] + " doesn't exist in " + text);
 									} else {
@@ -460,12 +471,28 @@ public class Filters {
 								// if(Tooltip.contains("Frequency")) {
 								// String frequency = Tooltip;
 								login.Log4j.info(frequency);
-								if ((frequencyarr.length == 1)
-										&& (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true)) {
-									login.Log4j.info(frequencyarr[0] + " is exists in the" + "\n" + frequency);
+								String str = "Half-yearly";
+								String str1 = "Annual";
+								if ((frequencyarr.length == 1)) {
+									if (frequencyarr[0].equals("Semiannually")) {
+										if (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| frequency.toUpperCase().contains(str.toUpperCase()) == true) {
+											login.Log4j.info(frequencyarr[0] + " OR " + str + " is exists in the" + "\n"
+													+ frequency);
+										}
+									} else {
+										if (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true) {
+											login.Log4j.info(frequencyarr[0] + " OR " + str1 + " is exists in the"
+													+ "\n" + frequency);
+										}
+									}
 
-								} else if ((frequencyarr.length == 2) && (frequency.contains(frequencyarr[0]) == true
-										|| frequency.contains(frequencyarr[1]) == true)) {
+								} else if ((frequencyarr.length == 2)
+										&& (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| frequency.toUpperCase()
+														.contains(frequencyarr[1].toUpperCase()) == true
+												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true)) {
 									login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1] + " is exists in the"
 											+ "\n" + frequency);
 								} else {
@@ -499,7 +526,8 @@ public class Filters {
 												login.Log4j.info(sid[0] + " is exists in the  : " + seriesName);
 
 											} else {
-												login.Log4j.error(sid[0] + " doesn't exists in the  : " + seriesName);
+										       login.Log4j.error(sid[0] + " doesn't exists in the  : " + seriesName);
+												Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
 											}
 										}
 									}
@@ -509,13 +537,14 @@ public class Filters {
 
 								if (fltrStatus.equals("Active")) {
 									Thread.sleep(2000);
-									WebElement list = login.driver.findElement(
-											By.xpath("//li[" + j + "]//div[@class='series-list-item-data--name']"));
+									WebElement list = login.driver
+											.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 									mouseOver.moveToElement(list).click().build().perform();
-									if (login.driver.findElement(By.xpath("//div[contains(text(),'Active')]"))
+									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
 											.isDisplayed()) {
 										Thread.sleep(2000);
-										login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
 										login.Log4j.info(fltrStatus + " series exists");
 									} else {
 										Assert.fail(fltrStatus + " doesn't exists");
@@ -565,8 +594,7 @@ public class Filters {
 		login.Log4j.info("topic is " + topic);
 		Thread.sleep(1000);
 		login.Log4j.info("Clicking on Databases");
-		WebElement db = login.driver.findElement(
-				By.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"));
+		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases")));
 		db.click();
 
 	}
@@ -593,7 +621,7 @@ public class Filters {
 		} else {
 			Assert.fail(var + " doesn't exists");
 		}
-		login.driver.findElement(By.xpath("//span[@title='Filter series by region']")).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
 	}
 
 	@Then("^User verifies Filter search results$")
@@ -626,12 +654,12 @@ public class Filters {
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
-					element = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item-data']"));
+					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--content']"));
 					mouseOver.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = element.getAttribute("title");
+					login.Log4j.info(text);
 					if (searchData.contains("AND")) {
 						String[] keyword1 = searchData.split(" AND ");
 						for (String result : keyword1) {
@@ -650,7 +678,7 @@ public class Filters {
 						}
 					} else if (searchData.contains("OR")) {
 						String[] keywords = searchData.split(" OR ");
-						login.Log4j.info("length is " + keywords.length);
+						login.Log4j.info("Length is " + keywords.length);
 						if ((keywords.length == 2) && text.toUpperCase().contains(keywords[0].toUpperCase()) == true
 								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
 							login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + text);
@@ -765,18 +793,11 @@ public class Filters {
 		Thread.sleep(1000);
 		ele.click();
 
-		/*
-		 * if (login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).
-		 * isDisplayed()) { Thread.sleep(1000);
-		 * login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]")).
-		 * click(); List<WebElement> datasets = login.driver
-		 * .findElements(By.xpath("//div[@class='ps-container ps-theme-default']"));
-		 */
-
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).isDisplayed()) {
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[contains(text(),'Related Data')]")).click();
-			List<WebElement> datasets = login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
+			List<WebElement> datasets = login.driver
+					.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
 			for (WebElement list : datasets) {
 				showdata = list.getText();
 				// login.Log4j.info(showdata);
@@ -784,12 +805,11 @@ public class Filters {
 				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 					status = true;
 				} else {
-					// login.Log4j.error(keyword + " keyword doesn't exists " + showdata);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--actions']//div[@title='Close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 					status = false;
 
 				}
@@ -800,19 +820,17 @@ public class Filters {
 		return status;
 
 	}
+
 	public boolean validation(String searchText, String sourcearr2) throws Throwable {
 		String[] keywords = null;
-	if(sourcearr2.contains(",")) {
+		if (sourcearr2.contains(",")) {
 			keywords = sourcearr2.split(",");
-//			login.Log4j.info(keywords[0]);
-//			login.Log4j.info(keywords[1]);
-		    String keyword=keywords[0]+keywords[1];
-//		    login.Log4j.info(keyword);
-		    keywords = keyword.split(" ");
-		   
-	} else {
-		    	keywords = sourcearr2.split(" ");
-	}
+			String keyword = keywords[0] + keywords[1];
+			keywords = keyword.split(" ");
+
+		} else {
+			keywords = sourcearr2.split(" ");
+		}
 		login.Log4j.info(keywords.length);
 		switch (keywords.length) {
 		case 1:
@@ -821,7 +839,7 @@ public class Filters {
 			} else {
 				return false;
 			}
-         
+
 		case 2:
 			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
 					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
@@ -858,33 +876,46 @@ public class Filters {
 			} else {
 				return false;
 			}
-		case 6: 
+		case 6:
 			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true) {
-		        return true;
-	        } else {
-		       return false;
-	        }
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
 		case 7:
 			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true
-			   && searchText.toUpperCase().contains(keywords[6].toUpperCase()) == true) {
-		        return true;
-	        } else {
-		       return false;
-	        }
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[6].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
+		case 8:
+			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[1].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[2].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[3].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[4].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[5].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[6].toUpperCase()) == true
+					&& searchText.toUpperCase().contains(keywords[7].toUpperCase()) == true) {
+				return true;
+			} else {
+				return false;
+			}
 		default:
 			return false;
 
 		}
- 
+
 	}
 }
