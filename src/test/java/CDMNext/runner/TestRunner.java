@@ -15,7 +15,7 @@ import CDMNext.StepDefinations.login;
 		glue = { "CDMNext.StepDefinations" }, 
 		tags = {"@DB" }, 
 		dryRun = false, 
-		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
+		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/Report.html", })
 public class TestRunner {
 	private TestNGCucumberRunner testNGCucumberRunner;
 
