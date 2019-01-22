@@ -18,12 +18,12 @@ public class CompareExcel {
         try {
             // get input excel files
         	//Exceldatacompare obj= new Exceldatacompare();
-        	 String x=Exceldatacomparision.testcase_num;
+        	 String x=Exceldatacompare.testcase_num;
         	System.out.println(x);
             FileInputStream excellFile1 = new FileInputStream(
             //FileInputStream excellFile1 = new FileInputStream(
                     //"C:\\Users\\Admin\\Documents\\Cucumber_Project\\Cucumber_Project\\securities-cucumber-3c396d71c6ca\\Testdata\\" +x+ ".xlsx");
-            		System.getProperty("user.home")  + "\\Testdata\\" +x+ ".xlsx");
+            		System.getProperty("user.dir")  + "\\Testdata\\" +x+ ".xlsx");
             FileInputStream excellFile2 = new FileInputStream(
            // FileInputStream excellFile2 = new FileInputStream(
                    // "C:\\Users\\Admin\\Downloads\\Untitled insight.xlsx");

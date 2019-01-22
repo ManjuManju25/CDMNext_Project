@@ -19,19 +19,10 @@ When Click on "Reset"
 Then Selected options should be reset to default
 
 @SeriesTab	
-<<<<<<< HEAD
-Scenario: TC_SeriesTab_04:Verifying "Unselect all" option for series level
-=======
 Scenario: TC_SeriesTab_03:Verifying "Unselect all" option for series level
->>>>>>> search
 Given User enters seriesID "146381801;1380601;245178303" 
 When User right click on any series
 Then User can able to see "Unselect all" option from dropdown menu
-
-@SeriesTab
-Scenario: TC_SeriesTab_05:Verify series count for search
-Given User enters keyword "gdp" 
-Then Series count should be matched with displayed result
 
 @SeriesTab 
 Scenario: TC_SeriesTab_04:Verify "All Insights" option
@@ -247,16 +238,6 @@ Scenario: TC_SeriesTab_37:Verify 'Mouse over' icons for series level
 Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
-<<<<<<< HEAD
-#
-#@SeriesTab
-#Scenario: TC_SeriesTab_38:Verify added sereis to Data tab
-#Given User enters "322681802;6283501"
-#When User Mouse hover on Add series" icon 
-#And  Apply "Add"
-#Then Series should be highlighted under My series tab.
- 
-=======
 
 @SeriesTab
 Scenario: TC_SeriesTab_38:Verify selected 'series count' under series tab.
@@ -302,4 +283,3 @@ Given User enters "122834404;295755902"
 And  Click on drop down icon next to +
 And  Select "Add to new insight"
 Then New insight should be created and the series should be added to the insight
->>>>>>> search

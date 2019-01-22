@@ -17,10 +17,33 @@ public class Myseries {
 	public String rest;
 	WebElement element;
 	WebElement ulelement;
+	public String Searchinserieslistfilter;
 
 
 	@And("^Select the Expand Icon$")
 	public void select_the_Expand_Icon() throws Throwable {
+		Thread.sleep(10000);
+		login.driver.findElement(By.xpath("//div[@class='user-avatar -default -small']")).click();
+	
+		Thread.sleep(6000);
+	
+		 login.driver.findElement(By.xpath("//div[@class='account-menu--dropdown dropdown--body']/div/div[3]")).click();
+		 Thread.sleep(2500);
+		//login.driver.findElement(By.xpath("//span[contains(text(),'Insight explorer')]")).click();
+               login.driver.findElement(By.xpath(" //span[contains(text(),'New insight')]")).click();
+                     
+		Thread.sleep(6000);
+		
+		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+		
+		
+		element = login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[14]/div[1]"));
+		jse.executeScript("arguments[0].scrollIntoView(true);", element);
+		
+		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[14]/div[1]")).click();
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+
 		Thread.sleep(6000);
 		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div[1]/div[1]/div")).click(); 
 	}
@@ -38,46 +61,17 @@ public class Myseries {
 		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[3]/div[1]/div[1]/div")).click();
 	}
 	
-	@And("^deselect the series if the Series is present$")
-	public void deselect_the_series_if_the_Series_is_present() throws Throwable {
-		Thread.sleep(6000);
-		login.driver.findElement(By.xpath("//a[contains(text(),'My Series')]")).click();
-		Thread.sleep(6000);
-		if  (!login.driver.findElements(By.xpath("//span[@class='input-control--indicator']")).isEmpty())
-		{
-			Thread.sleep(6000);
-			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-			Thread.sleep(6000);
-			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
-		}else
-		{
-			System.out.println("No series found at the my series panel");
-		}
-			
-	}
 	
 	@And("^Verify for \"([^\"]*)\" series functionality under \"([^\"]*)\" tab$")
 	public void verify_for_series_functionality_under_tab(String arg1, String arg2) throws Throwable {
        Thread.sleep(6000);
-		if  (login.driver.findElements(By.xpath("//div[@class='insight-data disabled']/div[1]/div[1]/div/div/div")).size() != 0)
+		if  (login.driver.findElements(By.xpath("//div[@class='insight-data disabled']/div[1]/div[1]/div/div[1]/div[2]")).size() != 0)
 		{
-			System.out.println("Related Series option is Enabled");
+			System.out.println("Related Series option is disabled");
 		}
-		if  (login.driver.findElements(By.xpath("//div[@class='insight-action-panel--btn insight-action-panel--btn__disabled'] ")).size() != 0)
-		{
-			System.out.println("Rename option is disabled");
-		}
-		if  (login.driver.findElements(By.xpath("//div[@class='insight-data disabled']/div/div[7]/div")).size() != 0)
+		if  (login.driver.findElements(By.xpath("//div[@class='insight-data disabled']/div/div[7]/div[1]")).size() != 0)
 		{
 			System.out.println("Group the series option is disabled");
-		}
-		if  (login.driver.findElements(By.xpath("//div[@class='insight-data disabled']/div/div[8]")).size() != 0)
-		{
-			System.out.println("Rename option is disabled");
-		}
-		if  (login.driver.findElements(By.xpath("//div[@class='insight-data disabled']/div/div[14]")).size() != 0)
-		{
-			System.out.println("Cut option is disabled");
 		}
 		else{
 			 Assert.fail("My series Option are Enadled even though Series are not present ");
@@ -244,21 +238,18 @@ public class Myseries {
 		@And("^Select (\\d+) series to my series tab$")
 		public void select_series_to_my_series_tab(int arg1) throws Throwable {
 			Thread.sleep(5000);
+			login.driver.navigate().refresh();
+			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 			
 			JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 			ulelement = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']"));
 			
-			//System.out.println("Total Size are- " + element.getSize());
-	       
 			List<WebElement> objLinks = ulelement.findElements(By.tagName("li"));
 			
 			System.out.println("Total Size are- " + objLinks.size());
 			 Thread.sleep(2000);
-			 
-			 
-				
-			for(int i=1;i<=20;i++){
+			for(int i=0;i<=19;i++){
 				Thread.sleep(2000);
 				int j=i+1;
 				 login.driver.findElement(By.xpath("//li["+j+"]//div[@class='series-list-item--checkbox-wrapper']")).click();
@@ -268,8 +259,12 @@ public class Myseries {
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 			}
 			 Robot r = new Robot();
+			 Thread.sleep(2000);
 			 r.keyPress(KeyEvent.VK_A);
 			 r.keyRelease(KeyEvent.VK_A);
+			 Thread.sleep(2000);
+			 login.driver.findElement(By.xpath("//div[@class='search-input--move-top-title']")).click();
+			
 		}
 		
 	
@@ -308,10 +303,8 @@ public class Myseries {
 			
 			System.out.println("Total Size are- " + objLinks.size());
 			 Thread.sleep(2000);
-			 
-			 
-				
-			for(int i=1;i<=21;i++){
+			 	
+			for(int i=0;i<=20;i++){
 				Thread.sleep(2000);
 				int j=i+1;
 				 login.driver.findElement(By.xpath("//li["+j+"]//div[@class='series-list-item--checkbox-wrapper']")).click();
@@ -379,7 +372,7 @@ public class Myseries {
 			 Thread.sleep(8000);
 			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]/div[2]")).click();
 			 Thread.sleep(8000);
-			 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[1]")).click();
+			 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[1]")).click();
 			
 		}
 
@@ -408,7 +401,7 @@ public class Myseries {
 			 Thread.sleep(8000);
 			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]/div[2]")).click();
 			 Thread.sleep(8000);
-			 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[2]")).click();
+			 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[2]")).click();
 		}
 
 		@And("^Verify UnSelect all option functionality\\.$")
@@ -435,16 +428,16 @@ public class Myseries {
 			 if(arg2.equalsIgnoreCase(arg2))
 			 {
 				 Thread.sleep(8000);
-				 String Countbeoreclear = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[1]/span[1]")).getText();
+				 String Countbeforeclear = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[1]/span[1]")).getText();
 				 Thread.sleep(5000);
 				 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]/div[2]")).click();
 				 Thread.sleep(8000);
-				 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[3]")).click();
+				 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[3]")).click();
 				 Thread.sleep(8000);
 				 login.driver.findElement(By.xpath("//button[contains(text(),'Cancel')]")).click();
 				 String Countafterclear = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[1]/span[1]")).getText();
-				 System.out.println( Countbeoreclear + ":" + Countafterclear );
-				  if(Countbeoreclear.equalsIgnoreCase(Countafterclear)){
+				 System.out.println( Countbeforeclear + ":" + Countafterclear );
+				  if(Countbeforeclear.equalsIgnoreCase(Countafterclear)){
 					   
 				    	System.out.println("Clear all Functionality  for Cancel is working Successfully");
 				    }else{
@@ -460,7 +453,7 @@ public class Myseries {
 				 Thread.sleep(5000);
 				 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]/div[2]")).click();
 				 Thread.sleep(8000);
-				 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[3]")).click();
+				 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[3]")).click();
 				 Thread.sleep(8000);
 				 login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 				 String Countafterclear = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[1]/span[1]")).getText();
@@ -479,7 +472,7 @@ public class Myseries {
 				 Thread.sleep(5000);
 				 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]/div[2]")).click();
 				 Thread.sleep(8000);
-				 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[3]")).click();
+				 login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[3]")).click();
 				 Thread.sleep(8000);
 				 login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
 				 Thread.sleep(5000);
@@ -622,7 +615,7 @@ public class Myseries {
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[10]/div[2]")).click();
 			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[1]/span")).click();
+			login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[1]/span")).click();
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@class='insight-series-rename--button insight-series-rename--button__cancel']")).click();
 			
@@ -708,7 +701,7 @@ public class Myseries {
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[10]/div[2]")).click();
 			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[2]/span")).click();
+			login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[2]/span")).click();
 		}
 
 		@Given("^Verify UnGroup functionality for Series$")
@@ -749,9 +742,11 @@ public class Myseries {
 		public void select_the_Seperator_option() throws Throwable {
 			select_some_series_to_my_series_tab();
 			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[10]/div[2]")).click();
 			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu arrow-up']/div[3]/li[3]/span")).click();
+			login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']/div[3]/li[3]/span")).click();
 			
 		}
 
@@ -760,16 +755,12 @@ public class Myseries {
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-			//Thread.sleep(5000);
-			//login.driver.findElement(By.xpath("//div[@class='webix_column list-series-name webix_last']/div[1]/div/span[1]")).click();
-			Thread.sleep(5000);
-			Actions action = new Actions(login.driver);
-			WebElement RightclickonInsight = login.driver.findElement(By.xpath("//div[@class='webix_column list-series-name webix_last']/div[2]/div/span[1]"));
-			action.contextClick(RightclickonInsight).build().perform();
+			login.driver.findElement(By.xpath("//div[@class='series-name-wrapper separator-row ']/span[1] ")).click();
+			
+			
 			Thread.sleep(5000);
 			
-			 if(login.driver.findElements(By.xpath("//span[contains(@class, 'context-menu-item link disabled') and contains(@title, 'Unselect all')]")).size() != 0)
+			 if(login.driver.findElements(By.xpath("//div[@class='download-button download-button__header download-button__algae download-button__disabled download-button__unavailable']")).size() != 0)
 				{
 					System.out.println("Seperate functionality is working Successfully");
 				}
@@ -777,5 +768,451 @@ public class Myseries {
 			 {
 				 Assert.fail("Seperate  functionality is NOT working Successfully :-(");
 			 }
+			 Thread.sleep(5000);
+				login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+				 Thread.sleep(5000);
+				 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		}
+		
+		
+		@Given("^Select Cut option$")
+		public void select_Cut_option() throws Throwable {
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[14]")).click();
+		}
+
+		@Given("^verify the Cut option$")
+		public void verify_the_Cut_option() throws Throwable {
+			Thread.sleep(1000);
+			 if(login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).size() != 0){
+				  System.out.println("Validation message Verified Successfully for Cut Option!!! ");
+				  }else{
+					  Assert.fail("Validation message is NOT Verified Successfully for Cut Option!!!"); 
+				  }
+			 Thread.sleep(2000);
+				login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+				Thread.sleep(4000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		}
+		
+		@Given("^Select Copy option$")
+		public void select_Copy_option() throws Throwable {
+			Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[15]")).click();
+		}
+
+		@Given("^verify the Copy option$")
+		public void verify_the_Copy_option() throws Throwable {
+			Thread.sleep(1000);
+			 if(login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).size() != 0){
+				  System.out.println("Validation message Verified Successfully for Copy Option!!! ");
+				  }else{
+					  Assert.fail("Validation message is NOT Verified Successfully for Copy Option!!!"); 
+				  }
+		}
+
+		@Given("^Select Paste option$")
+		public void select_Paste_option() throws Throwable {
+			Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[16]")).click();
+		}
+		
+		@Given("^verify the Paste option$")
+		public void verify_the_Paste_option() throws Throwable {
+			Thread.sleep(1000);
+			 if(login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).size() != 0){
+				  System.out.println("Validation message Verified Successfully for Paste Option!!! ");
+				  }else{
+					  Assert.fail("Validation message is NOT Verified Successfully for Paste Option!!!"); 
+				  }
+			 Thread.sleep(5000);
+				login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+				 Thread.sleep(5000);
+				 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		}
+		@Given("^Select Currency Conversion$")
+		public void select_Currency_Conversion() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[19]/div[1]/div[1]/div[3]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[1]")).click();
+		}
+
+		@Given("^verify the Currency Conversion is applied for a series$")
+		public void verify_the_Currency_Conversion_is_applied_for_a_series() throws Throwable {
+			Thread.sleep(3000);
+			String Functionappliedintoolbar = login.driver.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+			
+			Thread.sleep(3000);
+			String Functiondescriptioninseries = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();	
+			  String s1 = Functiondescriptioninseries.substring(1,11); 
+			     System.out.println( Functionappliedintoolbar + ":" + s1 );
+			     
+			if(Functionappliedintoolbar.equalsIgnoreCase(s1)){
+				   
+		    	System.out.println("Currency Conversion is applied Successfully");
+		    }else{
+		    	 Assert.fail("Currency Conversion functionality is Not working Successfully:-(");
+		    }
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		}
+		@Given("^Select Calculate Change$")
+		public void select_Calculate_Change() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[19]/div[2]/div[1]/div[3]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[1]")).click();
+		}
+
+		@Given("^verify the Calculate Change is applied for a series$")
+		public void verify_the_Calculate_Change_is_applied_for_a_series() throws Throwable {
+			Thread.sleep(3000);
+			String Functionappliedintoolbar = login.driver.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+			
+			Thread.sleep(3000);
+			String Functiondescriptioninseries = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();	
+			  String s1 = Functiondescriptioninseries.substring(1,5); 
+			     System.out.println( Functionappliedintoolbar + ":" + s1 );
+			     
+			if(Functionappliedintoolbar.equalsIgnoreCase(s1)){
+				   
+		    	System.out.println("Calculate Change is applied Successfully");
+		    }else{
+		    	 Assert.fail("Calculate Change functionality is Not working Successfully:-(");
+		    }
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click(); 
+		}
+		@Given("^Select Aggregate$")
+		public void select_Aggregate() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[19]/div[3]/div[1]/div[3]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[1]")).click();
+		}
+
+		@Given("^verify the Aggregate is applied for a series$")
+		public void verify_the_Aggregate_is_applied_for_a_series() throws Throwable {
+			Thread.sleep(3000);
+			String Functionappliedintoolbar = login.driver.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+			
+			Thread.sleep(3000);
+			String Functiondescriptioninseries = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();	
+			  String s1 = Functiondescriptioninseries.substring(1,10); 
+			     System.out.println( Functionappliedintoolbar + ":" + s1 );
+			     
+			if(Functionappliedintoolbar.equalsIgnoreCase(s1)){
+				   
+		    	System.out.println("Aggregate is applied Successfully");
+		    }else{
+		    	 Assert.fail("Aggregate functionality is Not working Successfully:-(");
+		    }
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click(); 
+		}
+		@Given("^Select Accumulate$")
+		public void select_Accumulate() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[19]/div[4]/div[1]/div[3]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[1]")).click();
+		}
+
+		@Given("^verify the Accumulate is applied for a series$")
+		public void verify_the_Accumulate_is_applied_for_a_series() throws Throwable {
+			Thread.sleep(3000);
+			String Functionappliedintoolbar = login.driver.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+			
+			Thread.sleep(3000);
+			String Functiondescriptioninseries = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();	
+			  String s1 = Functiondescriptioninseries.substring(1,4); 
+			     System.out.println( Functionappliedintoolbar + ":" + s1 );
+			     
+			if(Functionappliedintoolbar.equalsIgnoreCase(s1)){
+				   
+		    	System.out.println("Accumulate is applied Successfully");
+		    }else{
+		    	 Assert.fail("Accumulate functionality is Not working Successfully:-(");
+		    }
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click(); 
+		}
+		
+		@Given("^Select FX drop down$")
+		public void select_FX_drop_down() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[19]/div[5]/div[1]/div[3]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[3]")).click();
+	
+		}
+
+		@Given("^verify the Function applied in FX drop down$")
+		public void verify_the_Function_applied_in_FX_drop_down() throws Throwable {
+			Thread.sleep(3000);
+			String Functionappliedintoolbar = login.driver.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+			
+			Thread.sleep(3000);
+			String Functiondescriptioninseries = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();	
+			  String s1 = Functiondescriptioninseries.substring(1,4); 
+			     System.out.println( Functionappliedintoolbar + ":" + s1 );
+			     
+			if(Functionappliedintoolbar.equalsIgnoreCase(s1)){
+				   
+		    	System.out.println("Function applied in FX drop down is Successfully");
+		    }else{
+		    	 Assert.fail("Function applied in FX drop down is Not working Successfully:-(");
+		    }
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click(); 
+		}
+		@Given("^Select FX Icon$")
+		public void select_FX_Icon() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[19]/div[5]/div[1]/div[1]")).click();
+			
+	
+		}
+
+		@Given("^verify the FX Icon$")
+		public void verify_the_FX_Icon() throws Throwable {
+			
+			if(login.driver.findElements(By.xpath("//div[@class='movable-modal--title ui-draggable-handle']")).size() != 0){
+				  System.out.println("FX Icon is Verified Successfully!!! ");
+				  }else{
+					  Assert.fail("FX Icon is NOT Verified Successfully!!!"); 
+				  }
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+			Thread.sleep(3000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		}
+		
+		@Given("^Select Type a function field$")
+		public void select_Type_a_function_field() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='current-function-input--body']/input")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//ul[@class='suggestions_list select-list']/li[1]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//ul[@class='suggestions_list select-list']/li[1]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//ul[@class='suggestions_list select-list']/li[1]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+			
+		}
+
+		@Given("^verify Type a function field$")
+		public void verify_Type_a_function_field() throws Throwable {
+			Thread.sleep(3000);
+			String Functionappliedintoolbar = login.driver.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+			
+			Thread.sleep(3000);
+			String Functiondescriptioninseries = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();	
+			  String s1 = Functiondescriptioninseries.substring(1,11); 
+			     System.out.println( Functionappliedintoolbar + ":" + s1 );
+			     
+			if(Functionappliedintoolbar.equalsIgnoreCase(s1)){
+				   
+		    	System.out.println("Type a function field is working Successfully");
+		    }else{
+		    	 Assert.fail("Type a function field is Not working Successfully:-(");
+		    }
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click(); 
+		}
+		@Given("^Select Checkbox field$")
+		public void select_Checkbox_field() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		}
+
+		@Given("^verify Checkbox for select all Series$")
+		public void verify_Checkbox_for_select_all_Series() throws Throwable {
+			Thread.sleep(8000);
+			 String Countbeforechecked = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[1]/span[1]")).getText();
+			 Thread.sleep(8000);
+			 String Countafterchecked = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[3]/span[2]")).getText();
+			 System.out.println( Countbeforechecked + ":" + Countafterchecked );
+		     
+				if(Countbeforechecked.equalsIgnoreCase(Countafterchecked)){
+					   
+			    	System.out.println("Checkbox for select all Series is working Successfully");
+			    	 HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Checkbox for select all Series is working Successfully ";
+			    }else{
+			    	 Assert.fail("Checkbox for select all Series is Not working Successfully:-(");
+			    	 HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Checkbox for select all Series is Not working Successfully:-(";
+			    	 
+			    }
+				Thread.sleep(5000);
+				 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		}
+		@Given("^UnSelect Checkbox field$")
+		public void unselect_Checkbox_field() throws Throwable {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		}
+
+		@Given("^verify Checkbox for Unselect all Series$")
+		public void verify_Checkbox_for_Unselect_all_Series() throws Throwable {
+			
+			if(login.driver.findElements(By.xpath("//div[@class='insight-action-panel--btn insight-action-panel--btn__disabled']/div[2]")).size() != 0){
+				  System.out.println("Checkbox for Unselect all Series is Verified Successfully !!! ");
+				  }else{
+					  Assert.fail("Checkbox for Unselect all Series is NOT Verified Successfully!!!"); 
+				  }
+			Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		}
+		@Given("^Select any five series to my series tab$")
+		public void select_any_five_series_to_my_series_tab() throws Throwable {
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
+			//List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container internal-series series-list-item--container__with_actions']"));
+			//System.out.println("Total Size are- " + objLinks.size());
+			
+			for(int i=1;i<=5;i++){
+				Thread.sleep(2000);
+				 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+			}
+			Thread.sleep(6000);
+			 Robot r = new Robot();
+			 r.keyPress(KeyEvent.VK_A);
+			 r.keyRelease(KeyEvent.VK_A);
+		}
+
+		@Given("^Search with series name or with series attribute$")
+		public void search_with_series_name_or_with_series_attribute() throws Throwable {
+			
+			Thread.sleep(3000);
+			  Actions action = new Actions(login.driver);
+				WebElement we = login.driver.findElement(By.xpath("//div[@class='webix_ss_center']/div/div[1]/div[1]/div"));
+				action.moveToElement(we).build().perform();
+			login.driver.findElement(By.xpath("//div[@class='webix_ss_center']/div/div[1]/div[1]/div")).click();
+			Thread.sleep(3000);
+			Searchinserieslistfilter = login.driver.findElement(By.xpath("//span[@class='table-cell '] ")).getText();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='insight-series-list-filter']/input")).sendKeys(Searchinserieslistfilter);
+			
+		}
+
+		@Given("^Verify the Searched field functionality$")
+		public void verify_the_Searched_field_functionality() throws Throwable {
+				try
+				{
+				List<WebElement> Totalseries = login.driver.findElements(By.xpath("//div[@class='series-name-field']"));
+				System.out.println("Total Series are : "+Totalseries.size());
+				
+				 for(int i=0;i<Totalseries.size();i++)
+					{
+			 Actions action = new Actions(login.driver);
+				WebElement we = login.driver.findElement(By.xpath("//div[@class='name-block two-rows-item ']"));
+				action.moveToElement(we).build().perform();
+				
+				String Text;
+				Text = we.getAttribute("title");
+				System.out.println(Text);
+				String[]  array = Text.split("\n");
+				int size=array.length;
+				System.out.println(size);
+				System.out.println("Name of the Series = :- "+ array[1]);
+				 String NameofSeries = array[1];
+				  String[] result = NameofSeries.split(" ", 2);
+				    //String first = result[0];
+				    String instatistics = result[1];
+				   // System.out.println("First Expected String : " + first);
+				    System.out.println("Expected String : " + instatistics);
+				    Thread.sleep(3000);
+				    if(Searchinserieslistfilter.equalsIgnoreCase(instatistics)){
+						   
+				    	System.out.println("Searched field functionality is working Successfully");
+				    
+				    }else{
+				    	 Assert.fail("Searched field functionality is Not working Successfully:-(");
+				    }
+					}
+				 login.driver.findElement(By.xpath("//div[@class='insight-series-list-filter']/input")).clear();
+				 Thread.sleep(3000);
+					login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+					 Thread.sleep(5000);
+					 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+				}
+				catch(Exception e){
+					
+				}
+		}
+		@Given("^Verify the series count under My series$")
+		public void verify_the_series_count_under_My_series() throws Throwable {
+			Thread.sleep(3000);
+			List<WebElement> Totalseries = login.driver.findElements(By.xpath("//div[@class='series-name-field']"));
+			System.out.println("Total Series are : "+Totalseries.size());
+			int X = Totalseries.size();
+			Thread.sleep(3000);
+			String seriescount = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[1]/span[1]")).getText();
+			int Y = Integer.parseInt(seriescount);
+			   System.out.println(X + ":"  + Y);
+			   if(X == Y)
+			   {
+				   
+			    	System.out.println("Searched field functionality is working Successfully");
+			    	 HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Searched field functionality is working Successfully ";
+			    
+			    }else{
+			    	 Assert.fail("Searched field functionality is Not working Successfully:-(");
+			    	 HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Searched field functionality is Not working Successfully:-(";
+			    }
+			
+		}
+		@Given("^Verify the Selected series count under My series$")
+		public void verify_the_Selected_series_count_under_My_series() throws Throwable {
+			verify_Checkbox_for_select_all_Series();
+		}
+		@Given("^Verify the Selected series in List Mode$")
+		public void verify_the_Selected_series_in_List_Mode() throws Throwable {
+			Thread.sleep(8000);
+			Actions action = new Actions(login.driver);
+			WebElement we = login.driver.findElement(By.xpath("//div[@class='webix_ss_body']/div[2]/div/div[2]/div[1]/div/div[2]/div[2]"));
+			action.moveToElement(we).build().perform();
+			
+			if(login.driver.findElements(By.xpath("//div[@class='webix_ss_body']/div[2]/div/div[2]/div[1]/div/div[2]/div[2]")).size() != 0)
+			{
+				  System.out.println("series in List Mode is Verified Successfully!!! ");
+				  HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="series in List Mode is Verified Successfully!!! ";
+				  }
+			else
+				  {
+				HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="series in List Mode is NOT Verified Successfully!!!";
+					  Assert.fail("series in List Mode is NOT Verified Successfully!!!"); 
+				  }
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
 		}
 }

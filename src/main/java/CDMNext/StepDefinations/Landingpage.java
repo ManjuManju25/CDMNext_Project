@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
@@ -34,10 +35,58 @@ public class Landingpage {
 	public int Addition_of_three_insight;
 	public String CopylinkRightclick;
 	public String Text1insearch;
+	public String TooltipName;
+	public String SeriesIDforSeriesAttribute;
 	
- 	@And("^Successfully Verify the Tabs present in Landing page$")
+	public String Insightmouseovername;
+	public String Seriesadded;
+	
+	public String NewInsightnameForInvalidKeyword;
+	//public int Insightcountforfiltersearch;
+	
+	@Given("^User has successful logged in$")
+	public void user_has_successful_logged_in() throws Throwable {
+		
+		if (login.logged_in = false) {
+			login.Invoke_browser();
+			login.application_login();
+		} 
+		else if (login.logged_in = true && !Landingpage.logged) {
+			login.application_login();
+			Landingpage.logged = true;
+		} else {
+			System.out.println("Already Loggedin...Continue....!!!!");
+		}
+        
+		// login.Invoke_browser();
+		// login.application_login();
+	}
+	
+	@And("^Successfully Verify the Tabs present in Landing page$")
 	public void successfully_Verify_the_Tabs_present_in_Landing_page() throws Throwable {
+		Thread.sleep(10000);
+		login.driver.findElement(By.xpath("	//div[@class='user-avatar -default -small']")).click();
+	
+		Thread.sleep(6000);
+	
+		 login.driver.findElement(By.xpath("//div[@class='account-menu--dropdown dropdown--body']/div/div[3]")).click();
+		 Thread.sleep(2500);
+		login.driver.findElement(By.xpath("//span[contains(text(),'Insight explorer')]")).click();
+		Thread.sleep(6000);
+		
+		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+		
+		
+		element = login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[14]/div[1]"));
+		jse.executeScript("arguments[0].scrollIntoView(true);", element);
+		
+		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[14]/div[1]")).click();
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
 		Thread.sleep(1000);
+		
+		if(login.driver.findElements(By.xpath("//div[@title='Insights that you have created']")).size() != 0)
+		{
 		WebElement Favorite_Tab_inLandingPage = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Favorite_Tab_inLandingPage")));
 		  Assert.assertEquals(true,Favorite_Tab_inLandingPage.isDisplayed());
 		  Thread.sleep(500);
@@ -55,7 +104,68 @@ public class Landingpage {
 		  Thread.sleep(500);
 		  WebElement All_Tab_inLandingPage = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_Tab_inLandingPage")));
 		  Assert.assertEquals(true,All_Tab_inLandingPage.isDisplayed());
+		  HTML_Report.strTCResult="PASS";
+		  HTML_Report.execRemarks="All Tabs present in Landing page is Verified Successfully!!! ";
+		}
+		else
+		{
+			HTML_Report.strTCResult="FAIL";
+			  HTML_Report.execRemarks="All Tabs present in Landing page is NOT Verified Successfully!!!";
+				  Assert.fail("All Tabs present in Landing page is NOT Verified Successfully!!!"); 
+		}
 	}
+	
+	@And("^Select the New insight option in Landing page$")
+	public void select_the_New_insight_option_in_Landing_page() throws Throwable {
+		
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@class='insights-create-new']/div")).click();
+	}
+
+	@Then("^verify the New insight has been created$")
+	public void verify_the_New_insight_has_been_created() throws Throwable {
+		Thread.sleep(4500);
+		if(login.driver.findElements(By.xpath("//div[@class='page-main-header--buttons']/div[1]")).size() != 0){
+			System.out.println("Successfully Verified the New insight Page");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="New insight has been created Successfully!!! ";
+			}else
+			{
+				 Assert.fail( "New insight has NOT been created Successfully!!!.");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="New insight has NOT been created Successfully!!!.";
+			     System.out.println("Unable to open New insight Page");
+			}
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+	}
+
+	@Then("^verify the New insight under My insights tab$")
+	public void verify_the_New_insight_under_My_insights_tab() throws Throwable {
+		String Text1 =login.driver.findElement(By.xpath("//div[@class='page-main-header--title-field-text text-dots']")).getText();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		Thread.sleep(2000);
+		String Text2 =login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
+		Thread.sleep(2000);
+		System.out.println( Text1      + ":" + Text2);
+		if(Text1.equalsIgnoreCase(Text2))
+		{
+			System.out.println("New insight under My insights tab is verified Successfully");
+			HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="New insight under My insights tab is verified Successfully ";
+		}
+		else{
+			 Assert.fail( "New insight under My insights tab is NOT verified Successfully.");
+			 HTML_Report.strTCResult="FAIL";
+			  HTML_Report.execRemarks="New insight under My insights tab is NOT verified Successfully.";
+		}
+		
+		
+	}
+	
 	
 	
 	@And("^Select the New insight option$")
@@ -79,9 +189,128 @@ public class Landingpage {
 		
 	}
 	
+	@And("^Select the Shared option in Landing page$")
+	public void select_the_Shared_option_in_Landing_page() throws Throwable {
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'Shared Insights')] ")).click();
+	
+	}
+	@Then("^verify the insights under Shared with me tab$")
+	public void verify_the_insights_under_Shared_with_me_tab() throws Throwable {
+			Thread.sleep(2500);
+			login.driver.findElement(By.xpath("//div[@class='user-avatar -default -small']")).click();
+			Thread.sleep(2000);
+			 String Text1 = login.driver.findElement(By.xpath("//span[@class='account-popup--header-name']")).getText();
+			 Thread.sleep(2500);
+			 login.driver.findElement(By.xpath("//div[@class='user-avatar -default -small']")).click();
+			 Thread.sleep(2500);
+			 String Text2 = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[4]/div[1]")).getText();
+			 System.out.println( Text1 + ":" + Text2);
+			 if (!Text2.equals(Text1))
+			 {
+				 System.out.println("Insight were verified under Shared with me tab Successfully !!!");
+					HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Insight were verified under Shared with me tab Successfully !!! ";
+			 }
+			 else
+			 {
+				 Assert.fail( "Insight were NOT verified Successfully under Shared with me tab!!!");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Insight were NOT verified Successfully under Shared with me tab!!!";
+			 }
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("MyInsight_Tab_inLandingPage"))).click();
+	}
+	
+	
+	
+	@Then("^verify the New insight under All tab as \"([^\"]*)\"$")
+	public void verify_the_New_insight_under_All_tab_as(String arg1) throws Throwable {
+		Thread.sleep(1500);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		Thread.sleep(2500);
+		login.driver.findElement(By.xpath("//div[@title='All insights you have access to']")).click();
+		Thread.sleep(5500);
+		String AllInsight = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
+		
+		System.out.println(  AllInsight +":"+ arg1);
+		if(AllInsight.equalsIgnoreCase(arg1))
+		{
+			System.out.println("Recent Insight under All tab has been Verified Successfully");
+			HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Recent Insight under All tab has been Verified Successfully";
+		  }else
+		  {
+			  Assert.fail("Recent Insight under All tab has not been Verified Successfully");  
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Recent Insight under All tab has not been Verified Successfully!!!";
+		}
+	}
+	
+	@And("^get insight name and add  any five series to my series tab$")
+	public void get_insight_name_and_add_any_five_series_to_my_series_tab() throws Throwable {
+		Thread.sleep(4500);
+		login.driver.findElement(By.xpath("//div[@title='Click to edit the Insight']")).click();
+		Thread.sleep(8500);
+		login.driver.findElement(By.xpath("//div[@class='page-main-header--title-field']/input")).sendKeys("Insightmouseover");
+		
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
+		
+		for(int i=1;i<=5;i++){
+			Thread.sleep(2000);
+			 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+		}
+		Thread.sleep(6000);
+		 Robot r = new Robot();
+		 r.keyPress(KeyEvent.VK_A);
+		 r.keyRelease(KeyEvent.VK_A);
+		 Thread.sleep(2000);
+		 Insightmouseovername = login.driver.findElement(By.xpath("//div[@class='page-main-header--title-field-text text-dots']")).getText();
+	     Seriesadded = login.driver.findElement(By.xpath("//span[@class='series-panel--count']/span[1]/span[1]")).getText();
+	     Thread.sleep(500);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+	}
+
+	
+	@And("^Mouse over on inisight title in Table mode\\.$")
+	public void mouse_over_on_inisight_title_in_Table_mode() throws Throwable {
+		
+		Thread.sleep(1500);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		Actions action = new Actions(login.driver);
+		WebElement InsightmouseoverinIEpage = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a"));
+		action.moveToElement(InsightmouseoverinIEpage).build().perform();
+		TooltipName = InsightmouseoverinIEpage.getText();
+	}
+
+	@Then("^verify the insight name and number of series$")
+	public void verify_the_insight_name_and_number_of_series() throws Throwable {
+		Thread.sleep(1500);
+		System.out.println( Insightmouseovername  + ":" + TooltipName);
+		if(Insightmouseovername.equalsIgnoreCase(TooltipName) )
+		{
+			System.out.println("Mouse over on inisight title in Table mode is Verified Successfully");
+			HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Mouse over on inisight title in Table mode is Verified Successfully";
+		  }else
+		  {
+			  Assert.fail("Mouse over on inisight title in Table mode is NOT Verified Successfully");  
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Mouse over on inisight title in Table mode is NOT Verified Successfully";
+		}
+	}
+
+	
+	
+	
+	
+	
+	
 	@And("^Select the option search by name$")
 	public void select_the_option_search_by_name() throws Throwable {
-		Thread.sleep(500);
+		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[@class='insights-search-attributes dropdown dropdown__right']/div[1]/span/div")).click();
@@ -119,11 +348,17 @@ public class Landingpage {
 		String Text2 =login.driver.findElement(By.xpath("//span[@class='tagit-label']")).getText();
 		System.out.println("Text2- " + Text2);	
 		System.out.println( Text1insearch      + ":" + Text2);
-		if(Text1insearch.equalsIgnoreCase(Text2)){
-			System.out.println("Search Verified with respect to TAG Successfully");
+		if(Text1insearch.equalsIgnoreCase(Text2))
+		{
+			System.out.println("Search Functionality is Verified with respect to TAG is done Successfully");
+			HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Search Functionality is Verified with respect to TAG is done Successfully";
 		}
-		else{
+		else
+		{
 			 Assert.fail( "Search Verification Failed with respect to TAG.");
+			 HTML_Report.strTCResult="FAIL";
+			  HTML_Report.execRemarks="Search Verification Failed with respect to TAG.";
 		}
 		Thread.sleep(1500);
 		login.driver.findElement(By.xpath("//span[@class='text-icon']")).click();
@@ -150,53 +385,192 @@ public class Landingpage {
 		login.driver.findElement(By.xpath("//div[@class='form-group']")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//input[@class='ui-widget-content ui-autocomplete-input']")).sendKeys("AddedTag");
-		Thread.sleep(500);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='modal-header sphere-modal__header']")).click();
-		Thread.sleep(500);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/button[2]")).click();
 		
 	}
 
 	@And("^Select the All tag dropdown$")
 	public void select_the_All_tag_dropdown() throws Throwable {
-		Thread.sleep(500);
+		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div")).click();
 	}
 	
 	@And("^Added tags should be available in dropdown and should display related insights$")
 	public void added_tags_should_be_available_in_dropdown_and_should_display_related_insights() throws Throwable {
-		Thread.sleep(1500);
+		Thread.sleep(4500);
 		login.driver.findElement(By.xpath("//span[contains(text(),'AddedTag')]")).click();
 		String Text1 =login.driver.findElement(By.xpath("//span[contains(text(),'AddedTag')]")).getText();
 		System.out.println("Text1- " + Text1);
-		Thread.sleep(2500);
+		Thread.sleep(4500);
 		Actions action = new Actions(login.driver);
 		WebElement AddTag = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a"));
 		action.contextClick(AddTag).build().perform();
-		Thread.sleep(1500);
+		Thread.sleep(4500);
 		//selecting Add tag option
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu '] /div[3]/li[9]")).click();
-		Thread.sleep(1500);
+		Thread.sleep(4500);
 		WebElement AddedTag = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("AddedTag")));
 		Assert.assertEquals(true,AddedTag.isDisplayed());
 		String Text2 =login.driver.findElement(By.xpath("//span[@class='tagit-label']")).getText();
 		System.out.println("Text2- " + Text2);	
 		
-		if(Text1.equalsIgnoreCase(Text2)){
-			System.out.println("Adding of Tag is Verified Successfully");
+		if(Text1.equalsIgnoreCase(Text2))
+		{
+			System.out.println("All tags drop down is Verified Successfully");
+			HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="All tags drop down is Verified Successfully";
 		}
-		else{
-			 Assert.fail( "Adding of Tag is  UnSuccessfully and It's BUG.");
+		else
+		{
+			 Assert.fail( "All tags drop down is NOT Verified Successfully");
+			 HTML_Report.strTCResult="FAIL";
+			  HTML_Report.execRemarks="All tags drop down is NOT Verified Successfully";
 		}
 		
-		Thread.sleep(1500);
+		Thread.sleep(4500);
 		login.driver.findElement(By.xpath("//span[@class='text-icon']")).click();
-		Thread.sleep(1500);
+		Thread.sleep(4500);
 		login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/button[2]")).click();
-		Thread.sleep(1500);
+		Thread.sleep(4500);
 		login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/div/span")).click();
 	}
 	
+	
+	
+	
+	@And("^Verify the Meassgae for the All tags drop down for no tags in insights$")
+	public void verify_the_Meassgae_for_the_All_tags_drop_down_for_no_tags_in_insights() throws Throwable {
+		Thread.sleep(4500);
+		if(login.driver.findElements(By.xpath("//div[contains(text(),'There are no items to select')]")).size() != 0)
+		{
+			System.out.println("Meassgae for the All tags drop down for no tags in insights Appeared Successfully");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Meassgae for the All tags drop down for no tags in insights Appeared Successfully";
+			}else
+			{
+				 Assert.fail("Meassgae for the All tags drop down for no tags in insights Did'nt Appeared Successfully");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Meassgae for the All tags drop down for no tags in insights Did'nt Appeared Successfully";  
+			}
+		
+		select_the_All_tag_dropdown();
+		
+	}
+	
+
+	@Given("^Verify that tag should be applied for all other tab$")
+	public void verify_that_tag_should_be_applied_for_all_other_tab() throws Throwable {
+		Thread.sleep(4500);
+		login.driver.findElement(By.xpath("//span[contains(text(),'AddedTag')]")).click();
+		Thread.sleep(4500);
+		String AddedTagText = login.driver.findElement(By.xpath("//span[contains(text(),'AddedTag')]")).getText();
+		
+				Thread.sleep(4500);
+	        	login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[2]")).click();
+	        	Thread.sleep(2500);
+	        	
+	        	String AddedTagTextinMyInsight =login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/span/span[1]")).getText();
+	        	
+	        	
+	        	if(AddedTagText.equalsIgnoreCase(AddedTagTextinMyInsight))
+	        	{
+	    			System.out.println("Successfully Verified Tag filter in My Insight Tab");
+	    			}
+	        	else{
+	    				 Assert.fail( "Successfully NOT Verified Tag filter in My Insight Tab");
+	    			     System.out.println("Successfully NOT Verified Tag filter in My Insight Tab");
+	    			}
+	           
+	        	Thread.sleep(4500);
+	     login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[3]")).click();
+        	Thread.sleep(2500);
+        	Thread.sleep(2500);
+        	
+        	String AddedTagTextinAnalytics =login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/span/span[1]")).getText();
+        	
+        	
+        	if(AddedTagText.equalsIgnoreCase(AddedTagTextinAnalytics))
+        	{
+    			System.out.println("Successfully Verified Tag filter in Analytics Tab");
+    			}
+        	else{
+    				 Assert.fail( "Successfully NOT Verified Tag filter in Analytics  Tab");
+    			     System.out.println("Successfully NOT Verified Tag filter in Analytics  Tab");
+    			}
+	        
+        	Thread.sleep(4500);
+	         login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[4]")).click();
+        	Thread.sleep(2500);
+        	Thread.sleep(2500);
+        	
+        	String AddedTagTextinShared =login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/span/span[1]")).getText();
+        	
+        	
+        	if(AddedTagText.equalsIgnoreCase(AddedTagTextinShared))
+        	{
+    			System.out.println("Successfully Verified Tag filter in Shared Tab");
+    			}
+        	else{
+    				 Assert.fail( "Successfully NOT Verified Tag filter in Shared Tab");
+    			     System.out.println("Successfully NOT Verified Tag filter in Shared Tab");
+    			}
+	          
+        	Thread.sleep(4500);
+	         login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[5]")).click();
+	         Thread.sleep(2500);
+	        	
+	        	String AddedTagTextinRecent =login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/span/span[1]")).getText();
+	        	
+	        	
+	        	if(AddedTagText.equalsIgnoreCase(AddedTagTextinRecent))
+	        	{
+	    			System.out.println("Successfully Verified Tag filter in Recent Tab");
+	    			}
+	        	else{
+	    				 Assert.fail( "Successfully NOT Verified Tag filter in Recent Tab");
+	    			     System.out.println("Successfully NOT Verified Tag filter in Recent Tab");
+	    			}
+	       
+        	Thread.sleep(4500);
+	        login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[6]")).click();
+	        Thread.sleep(2500);
+        	
+        	String AddedTagTextinAll =login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/span/span[1]")).getText();
+        	
+        	
+        	if(AddedTagText.equalsIgnoreCase(AddedTagTextinAll))
+        	{
+    			System.out.println("Successfully Verified Tag filter in All Tab");
+    			HTML_Report.strTCResult="PASS";
+  			   HTML_Report.execRemarks="Successfully Verified Tag filter in All FIVE Tab";
+  			   
+  			 Thread.sleep(4500);
+	        	login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[2]")).click();
+	        	 Thread.sleep(4500);
+  				Actions action = new Actions(login.driver);
+  				WebElement AddTag = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a"));
+  				action.contextClick(AddTag).build().perform();
+  				 Thread.sleep(4500);
+  				login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu '] /div[3]/li[9]")).click();
+  				Thread.sleep(4500);
+  				login.driver.findElement(By.xpath("//span[@class='text-icon']")).click();
+  				Thread.sleep(4500);
+  				login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/button[2]")).click();
+  				Thread.sleep(4500);
+  				login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/div/span")).click();
+        	}
+        	else{
+    				 Assert.fail( "Successfully NOT Verified Tag filter in All Tab");
+    			     System.out.println("Successfully NOT Verified Tag filter in All Tab");
+    			     HTML_Report.strTCResult="FAIL";
+    				  HTML_Report.execRemarks="Successfully NOT Verified Tag filter in All FIVE Tab";
+    			}
+	     
+	
+	}
 	
 	@And("^Verify the landing page in left hand side$")
 	public void verify_the_landing_page_in_left_hand_side() throws Throwable {
@@ -641,7 +1015,7 @@ public class Landingpage {
 			
 	@And("^verify the  Markets category is available in the insight$")
 			public void verify_the_Markets_category_is_available_in_the_insight() throws Throwable {
-				 Thread.sleep(4500);
+			Thread.sleep(4500);
 				 Actions action = new Actions(login.driver);
 					WebElement AddTag = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a"));
 					action.contextClick(AddTag).build().perform();
@@ -1731,10 +2105,16 @@ public class Landingpage {
 			Thread.sleep(1500);
 			String ChangeInsight = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
 			System.out.println(  ChangeInsight +":"+ arg1);
-			if (ChangeInsight.equalsIgnoreCase(arg1)){
-				System.out.println("Change Insight done  Successfully");
-			  }else{
-				  Assert.fail("Change Insight Did'nt Done Successfully");  
+			if (ChangeInsight.equalsIgnoreCase(arg1))
+			{
+				System.out.println("Changing of Insight title is done Successfully");
+				HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="Changing of Insight title is done Successfully";
+			  }else
+			  {
+				  Assert.fail("Changing of Insight title is NOT done Successfully");
+				  HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Changing of Insight title is NOT done Successfully";
 			}
 		
 		}
@@ -1756,10 +2136,17 @@ public class Landingpage {
 			Thread.sleep(1500);
 			String FavouriteInsight = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
 			System.out.println(  FavouriteInsight +":"+ arg1);
-			if(FavouriteInsight.equalsIgnoreCase(arg1)){
-				System.out.println("Favorite icon behavior work Successfully");
-			  }else{
+			if(FavouriteInsight.equalsIgnoreCase(arg1))
+			{
+				System.out.println("Favorite icon behavior is working Successfully");
+				HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="Favorite icon behavior is working Successfully ";
+			  }
+			else
+			  {
 				  Assert.fail("Favorite icon behavior Did'nt work Successfully");  
+					 HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Favorite icon behavior Did'nt work Successfully";
 			}
 			Thread.sleep(2500);
 			login.driver.findElement(By.xpath("//div[@title='Insights that you have created']")).click();
@@ -1771,11 +2158,17 @@ public class Landingpage {
 		@And("^Successfully Verify favorite icon behavior$")
 		public void successfully_Verify_favorite_icon_behavior() throws Throwable {
 			Thread.sleep(1500);
-			 if(login.driver.findElements(By.xpath("//div[@class='insight-favorite insight-favorite__gray insight-favorite__active']")).size() != 0){
+			 if(login.driver.findElements(By.xpath("//div[@class='insight-favorite insight-favorite__gray insight-favorite__active']")).size() != 0)
+			 {
 				  Thread.sleep(2500);
 				  System.out.println("Favorite icon Enable Successfully");
-				  }else{
+					HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Favorite icon Enable Successfully";
+				  }else
+				  {
 					  Assert.fail("Favorite icon is NOT Enable Successfully"); 
+						 HTML_Report.strTCResult="FAIL";
+						  HTML_Report.execRemarks="Favorite icon is NOT Enable Successfully";
 				  }
 			 Thread.sleep(5500);
 			 select_the_Star_icon();
@@ -1784,8 +2177,14 @@ public class Landingpage {
 			 if(login.driver.findElements(By.xpath("//div[@class='insights-grid-body']/div[1]/div[1]/div[1]/div")).size() != 0){
 				  Thread.sleep(2500);
 				  System.out.println("Favorite icon Disable Successfully");
-				  }else{
-					  Assert.fail("Favorite icon is Enable.Please Log A BUG"); 
+					HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Favorite icon Disable Successfully";
+				  }
+			 else
+			 { 
+					  Assert.fail("Favorite icon is NOT Disable Successfully"); 
+						 HTML_Report.strTCResult="FAIL";
+						  HTML_Report.execRemarks="Favorite icon is NOT Disable Successfully";
 				  }
 		}
 		
@@ -1837,11 +2236,17 @@ public class Landingpage {
 			login.driver.findElement(By.xpath("//div[@title='Insights that you have worked with last time']")).click();
 			Thread.sleep(5500);
 			String RecentInsight = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
-			System.out.println(  RecentInsight +":"+ arg1);
-			if(RecentInsight.equalsIgnoreCase(arg1)){
-				System.out.println("Recent Insight is Verified Successfully");
-			  }else{
-				  Assert.fail("Recent Insight is not working Successfully");  
+			System.out.println(RecentInsight +":"+ arg1);
+			if(RecentInsight.equalsIgnoreCase(arg1))
+			{
+				System.out.println("Recent Insight under Recent tab has been Verified Successfully");
+				HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="Recent Insight under Recent tab has been Verified Successfully";
+			  }else
+			  {
+				  Assert.fail("Recent Insight under Recent tab has not been Verified Successfully");  
+					 HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Recent Insight under Recent tab has not been Verified Successfully!!!";
 			}
 		}
 		
@@ -1910,7 +2315,7 @@ public class Landingpage {
 			Thread.sleep(2500);
 			 if(arg1.equalsIgnoreCase(arg1)){
 				 Thread.sleep(2500);
-				 String Uname = login.driver.findElement(By.xpath("//span[@class='account-popup--header-name']")).getText();
+			String Uname = login.driver.findElement(By.xpath("//span[@class='account-popup--header-name']")).getText();
 				 String Emailnameindrop = login.driver.findElement(By.xpath("//span[@class='account-popup--header-email']")).getText();
 				  String Unameindrop = Uname;
 				    String[] result = Unameindrop.split(" ", 2);
@@ -3026,66 +3431,7 @@ public class Landingpage {
 				login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 		}
 		
-		@Given("^Select Shared insight Tab$")
-		public void select_Shared_insight_Tab() throws Throwable {
-			Thread.sleep(5500);
-			login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
-			 Thread.sleep(5500);
-			 login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[4]")).click();
-				
-		}
-
-		@Given("^Successfully Verify Share insights under Shared tab$")
-		public void successfully_Verify_Share_insights_under_Shared_tab() throws Throwable {
-			 Thread.sleep(5500);
-			JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'Indonesia Construction')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'CIS Macro Overview')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'MITI-V')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'Sentix Report: July 2017')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'Indonesia Foreign Trade')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'China Keqiang Index')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'India: Inflation')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'China CPI')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'China Bond Yield Monitor')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'India: Monetary Sector')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'Temp')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			element = login.driver.findElement(By.xpath("//div/a[contains(text(),'China Wage')]"));
-			jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			//element = login.driver.findElement(By.xpath("//div/a[contains(text(),'shareing1')]"));
-			//jse.executeScript("arguments[0].scrollIntoView(true);", element);
-			 Thread.sleep(10500);
-			 
-			 WebElement element  = login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[4]/span[3]/span"));
-			 String X = element.getText();
-			
-			 String numbers;
-				numbers = X.replaceAll("[^0-9]", "");
-				int result = Integer.parseInt(numbers);
-				System.out.println(result);
-			 Thread.sleep(8500);
-			 List<WebElement> objLinks = login.driver.findElements(By.xpath("//div[@class='insights-grid-row--title']"));
-			 System.out.println("Total Insights are : " + objLinks.size());
-			 System.out.println(objLinks.size() + ":" + result);
-			 if(objLinks.size() == result ){
-				 
-				 System.out.println("Insight Can be Found in the Shared insight");
-			  }else{
-				  Assert.fail("Insight Cannot be Found in the Shared insight,and count is also Wrong");
-				 
-			  }
-		}
+		
 		
 		@Given("^Select share option in right click$")
 		public void select_share_option_in_right_click() throws Throwable {
@@ -4189,10 +4535,9 @@ public class Landingpage {
 		
 		@Given("^Change the insight name as \"([^\"]*)\"$")
 		public void change_the_insight_name_as(String arg1) throws Throwable {
-			Thread.sleep(8500);
+			Thread.sleep(5500);
 			login.driver.findElement(By.xpath("//div[@title='Click to edit the Insight']")).click();
-			
-			Thread.sleep(10500);
+			Thread.sleep(5500);
 			login.driver.findElement(By.xpath("//div[@class='page-main-header--title-field']/input")).sendKeys(arg1);
 			
 			
@@ -4201,8 +4546,6 @@ public class Landingpage {
 		@Given("^Search for the ID \"([^\"]*)\"$")
 		public void search_for_the_ID(String arg1) throws Throwable {
 			
-			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
 			Thread.sleep(6000);
 			login.driver.findElement(By.xpath("//input[@class='search-input-text']")).click();
 			Thread.sleep(2000);
@@ -4219,17 +4562,26 @@ public class Landingpage {
 
 		@Given("^Verify the insight name as \"([^\"]*)\" for Successful landing page search with Series ID as \"([^\"]*)\"$")
 		public void verify_the_insight_name_as_for_Successful_landing_page_search_with_Series_ID_as(String arg1, String arg2) throws Throwable {
-			Thread.sleep(10000);
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+			Thread.sleep(5000);
 			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).click();
-			 Thread.sleep(10000);
+			 Thread.sleep(5000);
 			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).sendKeys(arg2);
-			 Thread.sleep(10000);
+			 Thread.sleep(5000);
 			 String Myinsightsearch = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
 				System.out.println(arg1 + ":" + Myinsightsearch);
-				if(arg1.equalsIgnoreCase(Myinsightsearch)){
+				if(arg1.equalsIgnoreCase(Myinsightsearch))
+				{
 					  System.out.println("Landing page Search with Series ID is working Successfully");
-					  }else{
+					  HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Landing page Search with Series ID is working Successfully";
+					  login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
+					  }else
+					  {
 						  Assert.fail("Landing page Search with Series ID NOT working Successfully");
+						  HTML_Report.strTCResult="FAIL";
+						  HTML_Report.execRemarks="Landing page Search with Series ID NOT working Successfully";
 					  }
 				 login.driver.findElement(By.xpath("//button[@class='insights-search-filter--reset-icon icon--red-cross']")).click();
 				
@@ -4263,9 +4615,11 @@ public class Landingpage {
 
 		@Given("^Search for the insight name as  \"([^\"]*)\"$")
 		public void search_for_the_insight_name_as(String arg1) throws Throwable {
-			Thread.sleep(10000);
+			Thread.sleep(8000);
 			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).click();
-			 Thread.sleep(10000);
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
+			 Thread.sleep(8000);
 			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).sendKeys(arg1);
 		}
 
@@ -4277,8 +4631,13 @@ public class Landingpage {
 			Thread.sleep(5000);
 			if(arg1.equalsIgnoreCase(searchInsight)){
 				  System.out.println("Landing page Search with Name is working Successfully");
+				  HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="Landing page Search with Name is working Successfully ";
+				  login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
 				  }else{
 					  Assert.fail("Landing page Search with Name is NOT working Successfully");
+					  HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Landing page Search with Name is NOT working Successfully";
 				  }
 			 login.driver.findElement(By.xpath("//button[@class='insights-search-filter--reset-icon icon--red-cross']")).click();
 		}
@@ -4292,4 +4651,581 @@ public class Landingpage {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/label[2]/span[1]")).click();
 		}
+		@Given("^Verify that insight should not display for Series ID when search by Name is selected$")
+		public void verify_that_insight_should_not_display_for_Series_ID_when_search_by_Name_is_selected() throws Throwable {
+			
+			if(login.driver.findElements(By.xpath("//div[@class='search-create-item search-create-item__create-blank insight-list-empty--wrapper']")).size() != 0)
+			{
+				System.out.println("Landing page Search when  Name drop down is selected is working Successfully");
+				 HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="Landing page Search when  Name drop down is selected is working Successfully ";
+				  Thread.sleep(6000);
+				  login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
+				  Thread.sleep(6000);
+					login.driver.findElement(By.xpath("//div[@class='insights-search-attributes dropdown dropdown__right']/div[1]/span/div")).click();
+					Thread.sleep(6000);
+					login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/label[1]")).click();
+				  
+				}else
+				{
+					 Assert.fail( "Landing page Search when  Name drop down is selected is NOT working Successfully");
+					 HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Landing page Search when  Name drop down is selected is NOT working Successfully";
+				   
+				}
+			
+		}
+		
+		@Given("^Gives a Description as \"([^\"]*)\"$")
+		public void gives_a_Description_as(String arg1) throws Throwable {
+			 Thread.sleep(2500);
+				login.driver.findElement(By.xpath("//div[@class='header-menu-file header-menu-item']")).click();
+		    Thread.sleep(2500);
+		    login.driver.findElement(By.xpath("//div[@class='header-menu-item--dropdown']/div[10]")).click();
+		    Thread.sleep(2500);
+		    login.driver.findElement(By.xpath("//div[@class='insight-settings-general']/div[5]/div/textarea")).sendKeys(arg1);
+		    Thread.sleep(4500);
+		    login.driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
+		  Thread.sleep(2500);
+		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+		}
+
+		@Given("^Select Insight attributes drop down$")
+		public void select_Insight_attributes_drop_down() throws Throwable {
+			Thread.sleep(6000);
+			login.driver.findElement(By.xpath("//div[@class='insights-search-attributes dropdown dropdown__right']/div[1]/span/div")).click();
+			Thread.sleep(6000);
+			login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/label[1]")).click();
+			
+			Thread.sleep(1000);
+			
+			if(login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/div/div[2]/label/span[1]")).isEnabled());
+			{
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/div/div[2]/label/span[1]")).click();
+			
+			}
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='dropdown--button insights-search-attributes--button']")).click();
+		}
+
+		@Given("^Search with Description as \"([^\"]*)\" for search by all content - Insight attributes$")
+		public void search_with_Description_as_for_search_by_all_content_Insight_attributes(String arg1) throws Throwable {
+			Thread.sleep(500);
+			login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+			Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).click();
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).sendKeys(arg1);
+		}
+
+		@Given("^Verify the insight as \"([^\"]*)\" with Description \"([^\"]*)\" for search by all content - Insight attributes$")
+		public void verify_the_insight_as_with_Description_for_search_by_all_content_Insight_attributes(String arg1, String arg2) throws Throwable {
+			Thread.sleep(5000);
+			String searchInsightwithInsightattributes = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
+			System.out.println(arg1 + ":" + searchInsightwithInsightattributes);
+			
+			if(arg1.equalsIgnoreCase(searchInsightwithInsightattributes))
+			{
+				  System.out.println("Landing page Search for search by all content - Insight attributes is Verified Successfully");
+				
+				  }else
+				  {
+					  Assert.fail("Landing page Search for search by all content - Insight attributes is NOT Verified Successfully");
+			
+				  }
+			 Actions action = new Actions(login.driver);
+				WebElement RightclickonInsight = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a"));
+				action.contextClick(RightclickonInsight).build().perform();
+				Thread.sleep(5000);
+				 login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[2]")).click();
+				 Thread.sleep(2500);
+					login.driver.findElement(By.xpath("//div[@class='header-menu-file header-menu-item']")).click();
+			    Thread.sleep(2500);
+			    login.driver.findElement(By.xpath("//div[@class='header-menu-item--dropdown']/div[10]")).click();
+			    Thread.sleep(2500);
+			    String searchInsightwithInsightattributesDescription =login.driver.findElement(By.xpath("//div[@class='insight-settings-general']/div[5]/div/textarea")).getText();
+			    System.out.println(arg2 + ":" + searchInsightwithInsightattributesDescription);
+			    Thread.sleep(2500);
+				if(arg2.equalsIgnoreCase(searchInsightwithInsightattributesDescription))
+				{
+					  System.out.println("Landing page Search for search by all content - Insight attributes is Verified Successfully");
+					  HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Landing page Search for search by all content - Insight attributes is Verified Successfully ";
+					 
+					  }else
+					  {
+						  Assert.fail("Landing page Search for search by all content - Insight attributes is NOT Verified Successfully");
+						  HTML_Report.strTCResult="FAIL";
+						  HTML_Report.execRemarks="Landing page Search for search by all content - Insight attributes is NOT Verified Successfully";
+					  }
+				  Thread.sleep(2500);
+				login.driver.findElement(By.xpath("//div[@class='insight-settings-general']/div[5]/div/textarea")).clear();
+				 Thread.sleep(2500);
+					login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+					Thread.sleep(2500);
+					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+				
+		}
+		
+
+	@Given("^Take a copy of the series ID$")
+	public void take_a_copy_of_the_series_ID() throws Throwable {
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();	
+		for(int i=1;i<=1;i++){
+			Thread.sleep(2000);
+			 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+		}
+		Thread.sleep(6000);
+		 Robot r = new Robot();
+		 r.keyPress(KeyEvent.VK_A);
+		 r.keyRelease(KeyEvent.VK_A);
+		 Thread.sleep(2000);
+			Actions action = new Actions(login.driver);
+			WebElement SeriesSSPWindow = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a[1]/div[1]"));
+			action.moveToElement(SeriesSSPWindow).build().perform();
+			 Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a[1]/div[1]")).click();
+			 Thread.sleep(2000);
+			 String SeriesIDforSeriesAttributes = login.driver.findElement(By.xpath("//div[@class='main-series-information--data']/div[2]/div[1]/div[1]")).getText();
+			  String SeriesIDforSeriesAttribute = SeriesIDforSeriesAttributes.substring(4,13); 
+				System.out.println(SeriesIDforSeriesAttribute);
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();	
+				Thread.sleep(2500);
+				  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+	}
+	
+	@Given("^Select Insight attributes drop down as Series attributes$")
+	public void select_Insight_attributes_drop_down_as_Series_attributes() throws Throwable {
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@class='insights-search-attributes dropdown dropdown__right']/div[1]/span/div")).click();
+		Thread.sleep(6000);
+		login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/label[1]")).click();
+		
+		Thread.sleep(1000);
+		
+		if(login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/div/div[1]/label/span[1]")).isEnabled());
+		{
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/div/div[1]/label/span[1]")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/div/div[2]/label/span[1]")).click();
+		
+		}
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@class='dropdown--button insights-search-attributes--button']")).click();
+	}
+	
+	@Given("^Search for the Series ID in IE Page as \"([^\"]*)\"$")
+	public void search_for_the_Series_ID_in_IE_Page_as(String arg1) throws Throwable {
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		 Thread.sleep(5000);
+		 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
+		Thread.sleep(5000);
+		 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).click();
+		 Thread.sleep(5000);
+		 //System.out.println("******"+SeriesIDforSeriesAttribute);
+		 login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).sendKeys(arg1);
+		 //(SeriesIDforSeriesAttribute)369703417,String.valueOf(SeriesIDforSeriesAttribute);
+	}
+	
+	
+	@Given("^Verify the insight as \"([^\"]*)\" with Series ID as \"([^\"]*)\" for search as by all content - Series attributes$")
+	public void verify_the_insight_as_with_Series_ID_as_for_search_as_by_all_content_Series_attributes(String arg1, String arg2) throws Throwable {
+		Thread.sleep(8000);
+		String InsightnameforSeriesattributessearch =login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
+		Thread.sleep(1000);
+		System.out.println( arg1 + ":" + InsightnameforSeriesattributessearch);
+		if(arg1.equalsIgnoreCase(InsightnameforSeriesattributessearch))
+		{
+			System.out.println("Series ID search as by all content - Series attributes is verified Successfully");
+			
+		}
+		else{
+			 Assert.fail( "Series ID search as by all content - Series attributes is NOT verified Successfully.");
+			
+		}
+		Thread.sleep(5000);
+		 Actions action = new Actions(login.driver);
+			WebElement RightclickonInsight = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a"));
+			action.contextClick(RightclickonInsight).build().perform();
+			 Thread.sleep(8000);
+			 login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[2]")).click();
+			 Thread.sleep(6000);
+			 login.driver.findElement(By.xpath("//div[@class='view-selection--btn-icon view-selection--btn-icon__my-series']")).click();
+			 Thread.sleep(8000);
+			 Actions action1 = new Actions(login.driver);
+				WebElement we = login.driver.findElement(By.xpath("	//div[@title='Show Series Info']"));
+				action1.moveToElement(we).build().perform();
+			 login.driver.findElement(By.xpath("	//div[@title='Show Series Info']")).click();
+
+			 String VerifyingSeriesIDforSeriesAttributes = login.driver.findElement(By.xpath("//div[@class='main-series-information--data']/div[2]/div[1]/div[1]")).getText();
+			  String SeriesIDforSeriesAttribute = VerifyingSeriesIDforSeriesAttributes.substring(4,13); 
+				System.out.println(SeriesIDforSeriesAttribute);
+				Thread.sleep(3000);
+				System.out.println( arg2 + ":" + SeriesIDforSeriesAttribute);
+				if(arg2.equalsIgnoreCase(SeriesIDforSeriesAttribute))
+				{
+					System.out.println("Series ID search as by all content - Series attributes is verified Successfully");
+					HTML_Report.strTCResult="PASS";
+					  HTML_Report.execRemarks="Series ID search as by all content - Series attributes is verified Successfully ";
+					
+				}
+				else{
+					 Assert.fail( "Series ID search as by all content - Series attributes is NOT verified Successfully.");
+					 HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Series ID search as by all content - Series attributes is NOT verified Successfully.";
+				}
+				login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();	
+				Thread.sleep(2500);
+				  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+	}
+	@Given("^unSelect Insight attributes drop down$")
+	public void unselect_Insight_attributes_drop_down() throws Throwable {
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@class='insights-search-attributes dropdown dropdown__right']/div[1]/span/div")).click();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/label[1]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/div/div[1]/label/span[1]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/div/div[2]/label/span[1]")).click();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@class='dropdown--button insights-search-attributes--button']")).click();
+	}
+	
+	@Given("^Verify that insight should not display for Series ID when all checkboxes unselected$")
+	public void verify_that_insight_should_not_display_for_Series_ID_when_all_checkboxes_unselected() throws Throwable {
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		Thread.sleep(5000);
+		if(login.driver.findElements(By.xpath("//div[@class='search-create-item search-create-item__create-blank insight-list-empty--wrapper']")).size() != 0)
+		{
+			System.out.println("Search by all content with all checkboxes Unselected is working Successfully");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Search by all content with all checkboxes Unselected is working Successfully";
+			  login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
+			}else
+			{
+				 Assert.fail( "Search by all content with all checkboxes Unselected is NOT working Successfully");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Search by all content with all checkboxes Unselected is NOT working Successfully";
+			   
+			}
+		
+	}
+	@Given("^Verify that insight should not display for Invalid keyword$")
+	public void verify_that_insight_should_not_display_for_Invalid_keyword() throws Throwable {
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		Thread.sleep(5000);
+		if(login.driver.findElements(By.xpath("//div[@class='search-create-item search-create-item__create-blank insight-list-empty--wrapper']")).size() != 0)
+		{
+			System.out.println("Search for Invalid keyword is Verified Successfully");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Search for Invalid keyword is Verified Successfully";
+			  login.driver.findElement(By.xpath("//input[@class='insights-search-filter--input']")).clear();
+			}else
+			{
+				 Assert.fail( "Search for Invalid keyword is Not Verified Successfully");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Search for Invalid keyword is Not Verified Successfully";
+			}
+		
+
+	}
+	@And("^Select the Create insight button$")
+	public void select_the_Create_insight_button() throws Throwable {
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath("//div[@class='button button__primary btn-block link__upper']")).click();
+		
+	}
+
+	@And("^Verify that Create insight pop up Appear$")
+	public void verify_that_Create_insight_pop_up_Appear() throws Throwable {
+		Thread.sleep(5000);
+		if(login.driver.findElements(By.xpath("//h4[@class='modal-title sphere-modal__title text-dots']")).size() != 0)
+		{
+			System.out.println("Create insight pop up Appeared Successfully");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Create insight pop up Appeared Successfully";
+			}else
+			{
+				 Assert.fail( "Create insight pop up Did'nt Appeared Successfully");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Search for Invalid keyword is Not Verified Successfully";  
+			}
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+		
+	}
+	
+	@Given("^Create a insight name as \"([^\"]*)\"$")
+	public void create_a_insight_name_as(String arg1) throws Throwable {
+		Thread.sleep(3500);
+		login.driver.findElement(By.xpath("//div[@class='modal-body sphere-modal__body']/div/input")).click();
+		Thread.sleep(3500);
+		login.driver.findElement(By.xpath("//div[@class='modal-body sphere-modal__body']/div[1]/input")).clear();
+		Thread.sleep(3500);
+		login.driver.findElement(By.xpath("//div[@class='modal-body sphere-modal__body']/div[1]/input")).sendKeys(arg1);
+		Thread.sleep(8500);
+		login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/button[2]")).click();
+		Thread.sleep(3500);
+		 NewInsightnameForInvalidKeyword = login.driver.findElement(By.xpath("//div[@title='Click to edit the Insight']")).getText();
+		  System.out.println( arg1 + ":" + NewInsightnameForInvalidKeyword);
+			if(arg1.equalsIgnoreCase(NewInsightnameForInvalidKeyword))
+			{
+				System.out.println("Insight Had been created Successfully !!");
+			}
+			else{
+				 Assert.fail( "Insight Had been NOT been created Successfully !! ");
+			}
+			Thread.sleep(2500);
+			  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+	}
+
+	@Given("^Verify that Create insight Functionality is working by creating Insight$")
+	public void verify_that_Create_insight_Functionality_is_working_by_creating_Insight() throws Throwable {
+		 Thread.sleep(5000);
+		 login.driver.findElement(By.xpath("//button[@class='insights-search-filter--reset-icon icon--red-cross']")).click();
+		 Thread.sleep(5000);
+		 String Insightnamecreatedatinvalidkeyword =login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[1]/div[2]/div/a")).getText();
+			Thread.sleep(5000);
+			System.out.println( NewInsightnameForInvalidKeyword + ":" + Insightnamecreatedatinvalidkeyword);
+			if(NewInsightnameForInvalidKeyword.equalsIgnoreCase(Insightnamecreatedatinvalidkeyword))
+			{
+				System.out.println("Insight Had been created Successfully !!");
+				HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="Insight Had been created Successfully !! ";
+				
+			}
+			else{
+				 Assert.fail( "Insight Had been NOT been created Successfully !! ");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Insight Had been NOT been created Successfully !! " ;
+	}
+	}
+	@And("^Select the Search Dropdown$")
+	public void select_the_Search_Dropdown() throws Throwable {
+		Thread.sleep(10000);
+		login.driver.findElement(By.xpath("//div[@class='insights-search-attributes dropdown dropdown__right']/div[1]/span/div")).click();
+		
+	}
+
+	@And("^Select Search by name$")
+	public void select_Search_by_name() throws Throwable {
+		Thread.sleep(10000);
+		login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/label[2]")).click();
+	}
+
+	@And("^Verify that Insight attributes and Series attributes in search drop down is disabled$")
+	public void verify_that_Insight_attributes_and_Series_attributes_in_search_drop_down_is_disabled() throws Throwable {
+		select_the_Search_Dropdown();
+		Thread.sleep(9000);
+		boolean CheckboxDefaultStatus = login.driver.findElement(By.xpath("//div[@class='dropdown--body insights-search-attributes--content']/label[1]")).isSelected();
+		
+			if (CheckboxDefaultStatus == true)
+			{
+				
+				  Assert.fail( "Insight attributes and Series attributes in search drop down is NOT disabled Successfully !! ");
+					 HTML_Report.strTCResult="FAIL";
+					  HTML_Report.execRemarks="Insight attributes and Series attributes in search drop down is NOT disabled Successfully !! " ;
+			}
+			else{
+				System.out.println("Insight attributes and Series attributes in search drop down is disabled Successfully !!");
+				HTML_Report.strTCResult="PASS";
+				  HTML_Report.execRemarks="Insight attributes and Series attributes in search drop down is disabled Successfully !! ";
+	
+			}
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@class='dropdown--button insights-search-attributes--button']")).click();
+		
+		}
+	@And("^Applay Tag for the insight \"([^\"]*)\"$")
+	public void applay_Tag_for_the_insight(String arg1) throws Throwable {
+		Thread.sleep(500);
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		 Actions action = new Actions(login.driver);
+			WebElement RightclickonInsight = login.driver.findElement(By.xpath("//div[@class='insights-grid-body']/div[2]/div[2]/div/a"));
+			action.contextClick(RightclickonInsight).build().perform();
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[9]")).click();
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='form-group']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//input[@class='ui-widget-content ui-autocomplete-input']")).sendKeys("ApplayFilterSearch");
+			Thread.sleep(500);
+			login.driver.findElement(By.xpath("//div[@class='modal-header sphere-modal__header']")).click();
+			Thread.sleep(500);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/button[2]")).click();
+			
+	}
+	
+	@And("^Applay tag filter on the Landing page$")
+	public void applay_tag_filter_on_the_Landing_page() throws Throwable {
+		select_the_All_tag_dropdown();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'ApplayFilterSearch')] ")).click();
+		
+	}
+	@And("^Take the count of the insight$")
+	public void take_the_count_of_the_insight() throws Throwable {
+		
+	}
+	@Given("^Verify the search with in available insights and work with respect to the applied filters\\.$")
+	public void verify_the_search_with_in_available_insights_and_work_with_respect_to_the_applied_filters() throws Throwable {
+		
+		Thread.sleep(10000);
+		List<WebElement> objLinks = login.driver.findElements(By.xpath("//div[@class='insights-grid-body']/div"));
+		System.out.println("Total Insights are- " + objLinks.size());
+		int Insightcountforfiltersearch = objLinks.size();
+		
+		select_the_All_tag_dropdown();
+		Thread.sleep(10000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'ApplayFilterSearch')] ")).click();
+		
+		Thread.sleep(10000);
+		List<WebElement> objLinks1 = login.driver.findElements(By.xpath("//div[@class='insights-grid-body']/div"));
+		System.out.println("Total Insights are- " + objLinks1.size());
+		int Insightcountafterforfiltersearch = objLinks1.size();
+		System.out.println( Insightcountafterforfiltersearch + ":" + Insightcountforfiltersearch);
+		if(Insightcountafterforfiltersearch < Insightcountforfiltersearch)
+		{
+			System.out.println("Landing page Search when any filter is applied is Verified Successfully !!");
+			HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Landing page Search when any filter is applied is Verified Successfully !!";
+			  Thread.sleep(6000);
+				login.driver.findElement(By.xpath("//button[@class='insights-search-filter--reset-icon icon--red-cross']")).click();
+				 Thread.sleep(6000);
+				login.driver.findElement(By.xpath("//div[@class='landing-content--filters-panel']/div[2]/div/div/div/div/span")).click();
+		}
+		else{
+			 Assert.fail( "Landing page Search when any filter is applied is NOT Verified Successfully !! ");
+			 HTML_Report.strTCResult="FAIL";
+			  HTML_Report.execRemarks="Landing page Search when any filter is applied is NOT Verified Successfully !!" ;
 }
+	}
+	@Given("^navigate to Analytics tab$")
+	public void navigate_to_Analytics_tab() throws Throwable {
+		Thread.sleep(10000);
+		login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[3]")).click();
+		
+	}
+
+	@Given("^Verify message for no insights search in current tab$")
+	public void verify_message_for_no_insights_search_in_current_tab() throws Throwable {
+		
+		if(login.driver.findElements(By.xpath("//span[contains(text(),'No insights were found in this group. But there are some in the other one - ')] ")).size() != 0)
+		{
+			System.out.println("Message for No insights search in Other tab is Verified Successfully");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="Message for No insights search in Other tab is Verified Successfully";
+			  Thread.sleep(6000);
+				login.driver.findElement(By.xpath("//button[@class='insights-search-filter--reset-icon icon--red-cross']")).click();
+				Thread.sleep(8000);
+				login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[2]")).click();
+			}else
+			{
+				 Assert.fail( "Message for No insights search in Other tab is Not Verified Successfully");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="Message for No insights search in Other tab is Not Verified Successfully";
+			}
+		
+		
+	}
+
+	@And("^Change the Insight name as \"([^\"]*)\"$")
+	public void change_the_Insight_name_as(String arg1) throws Throwable {
+		Thread.sleep(5500);
+		login.driver.findElement(By.xpath("//div[@title='Click to edit the Insight']")).click();
+		Thread.sleep(5500);
+		login.driver.findElement(By.xpath("//div[@class='page-main-header--title-field']/input")).sendKeys(arg1);
+		Thread.sleep(2500);
+		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
+	}
+	
+	@Given("^Verify All available hyperlink functionality is working$")
+	public void verify_All_available_hyperlink_functionality_is_working() throws Throwable {
+		Thread.sleep(5500);
+		login.driver.findElement(By.xpath("//span[contains(text(),'All available')]")).click();
+		Thread.sleep(5500);
+		if(login.driver.findElements(By.xpath("//div[@class='insights-groups']/div[6]/span[3]/span")).size() != 0)
+		{
+			System.out.println("Create insight pop up Appeared Successfully");
+			 
+			}else
+			{
+				 Assert.fail( "Create insight pop up Did'nt Appeared Successfully");
+				
+			}
+		Thread.sleep(5500);
+		String Insightcountforallhyperlinkinalltabs = login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[6]/span[3]/span")).getText();
+		int Insightcountforallhyperlinkinalltab = Integer.parseInt(Insightcountforallhyperlinkinalltabs);
+		System.out.println(Insightcountforallhyperlinkinalltab);
+		Thread.sleep(5500);
+		List<WebElement> objLinks = login.driver.findElements(By.xpath("//div[@class='insights-grid-body']/div"));
+		System.out.println("Total Insights are- " + objLinks.size());
+		Thread.sleep(5500);
+		int Insightcountforallhyperlink = objLinks.size();
+		Thread.sleep(5500);
+		System.out.println( Insightcountforallhyperlinkinalltab + ":" + Insightcountforallhyperlink);
+		if(Insightcountforallhyperlinkinalltab == (Insightcountforallhyperlink))
+		{
+			System.out.println("All available hyperlink for no insights search in Other tab than Myinsight is verified Successfully");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="All available hyperlink for no insights search in Other tab than Myinsight is verified Successfully";
+				Thread.sleep(6000);
+				login.driver.findElement(By.xpath("//button[@class='insights-search-filter--reset-icon icon--red-cross']")).click();
+				Thread.sleep(8000);
+				login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[2]")).click();
+		}else
+			{
+				 Assert.fail( "All available hyperlink for no insights search in Other tab than Myinsight is verified Successfully");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="All available hyperlink for no insights search in Other tab than Myinsight is NOT verified Successfully";  
+			}
+		
+	}
+	@And("^Verify the number of insight count with search$")
+	public void verify_the_number_of_insight_count_with_search() throws Throwable {
+		Thread.sleep(5500);
+		String InsightcountforallhyperlinkinMyinsighttabs = login.driver.findElement(By.xpath("//div[@class='insights-groups']/div[6]/span[3]/span")).getText();
+		int InsightcountforallhyperlinkinMyinsighttab = Integer.parseInt(InsightcountforallhyperlinkinMyinsighttabs);
+		System.out.println(InsightcountforallhyperlinkinMyinsighttab);
+		
+		
+		Thread.sleep(5500);
+		List<WebElement> objLinks = login.driver.findElements(By.xpath("//div[@class='insights-grid-body']/div"));
+		System.out.println("Total Insights are- " + objLinks.size());
+		int Insightcountforinmysight = objLinks.size();
+		System.out.println( InsightcountforallhyperlinkinMyinsighttab + ":" + Insightcountforinmysight);
+		Thread.sleep(5500);
+		if(InsightcountforallhyperlinkinMyinsighttab == (Insightcountforinmysight))
+		{
+			System.out.println("The number of insight count with search is verified Successfully");
+			 HTML_Report.strTCResult="PASS";
+			  HTML_Report.execRemarks="The number of insight count with search is verified Successfully";
+				Thread.sleep(6000);
+				login.driver.findElement(By.xpath("//button[@class='insights-search-filter--reset-icon icon--red-cross']")).click();
+		}else
+			{
+				 Assert.fail( "The number of insight count with search is NOT verified Successfully");
+				 HTML_Report.strTCResult="FAIL";
+				  HTML_Report.execRemarks="The number of insight count with search is NOT verified Successfully";  
+			}
+		
+		
+		
+	
+	}
+
+}
+
+

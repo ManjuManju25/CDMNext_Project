@@ -7,7 +7,7 @@ import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.testng.Assert;
 
 
-import CDMNext.StepDefinations.Exceldatacomparision;
+import CDMNext.StepDefinations.Exceldatacompare;
 
 import java.io.*;
 import java.util.*;
@@ -21,9 +21,9 @@ public class Last_file_download {
 public static void getTheNewestFile() throws IOException {
     File theNewestFile = null;
     File dir = new File(System.getProperty("user.home") + "\\Downloads");
-    String y=Exceldatacomparision.format;
+    String y=Exceldatacompare.format;
     //System.out.println("^^^^^^^^^^^^"+y);
-    String ext = Exceldatacomparision.format;
+    String ext = Exceldatacompare.format;
 	FileFilter fileFilter = new WildcardFileFilter("*." + ext);
     
 	File[] files = dir.listFiles(fileFilter);
