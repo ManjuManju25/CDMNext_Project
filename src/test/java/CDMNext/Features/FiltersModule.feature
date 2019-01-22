@@ -3,14 +3,14 @@ Feature: Filters
 Background:
  	Given User has successful logged in
  	
-@Filter
+@FilterSearch
 Scenario: TC_Filters_Search_01
 Given User enters "GDP"
 And   User selects "Source" as "World Bank"
 And   User has clicked on "Apply filter"
 Then  User verify the search results 
 
-@Filter
+@FilterSearch
 Scenario: TC_Filters_Search_02  
 Given User enters "228912101"
 And   User selects "Source" as "International Monetary Fund"
