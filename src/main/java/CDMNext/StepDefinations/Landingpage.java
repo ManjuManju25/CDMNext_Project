@@ -44,7 +44,7 @@ public class Landingpage {
 	public String NewInsightnameForInvalidKeyword;
 	//public int Insightcountforfiltersearch;
 	
-	@Given("^User has successful logged in$")
+	/*@Given("^User has successful logged in$")
 	public void user_has_successful_logged_in() throws Throwable {
 		
 		if (login.logged_in = false) {
@@ -60,7 +60,7 @@ public class Landingpage {
         
 		// login.Invoke_browser();
 		// login.application_login();
-	}
+	}*/
 	
 	@And("^Successfully Verify the Tabs present in Landing page$")
 	public void successfully_Verify_the_Tabs_present_in_Landing_page() throws Throwable {
