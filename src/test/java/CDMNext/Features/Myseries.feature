@@ -23,16 +23,16 @@ Scenario: TC_MS_04: Verify "20" Maximum series for 'Preview'
     And Select 20 series to my series tab
     And Verify for "20" Maximum series for 'Preview option'   
     
-     @MySeries
-Scenario: TC_MS_05: Verify Preview option is disable for "21" series
-    And Select "21" series to my series tab
-    And Verify 'Preview option' is disable for "21" series  
+#     @MySeries
+#Scenario: TC_MS_05: Verify Preview option is disable for "21" series
+#    And Select "21" series to my series tab
+#    And Verify 'Preview option' is disable for "21" series  
     
- @MySeries
-Scenario: TC_MS_06: Verify Validation message for more than "20" series added to preview window.
-   And Select "21" series to my series tab
-    And Select preview option
-    And Verify Validation message for more than 20 series added to preview window.
+# @MySeries
+#Scenario: TC_MS_06: Verify Validation message for more than "20" series added to preview window.
+#   And Select "21" series to my series tab
+#    And Select preview option
+#    And Verify Validation message for more than 20 series added to preview window.
     
   @MySeries
 Scenario: TC_MS_07: Verify "Select all" option.
