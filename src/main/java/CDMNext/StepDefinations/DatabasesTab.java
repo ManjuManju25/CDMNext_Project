@@ -439,7 +439,7 @@ public class DatabasesTab {
 				.findElement(By
 						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
 				.click();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		List<WebElement> multidb = login.driver
 				.findElements(By.xpath("//div[@class='child-container']//div[@class='database-node tree-node']"));
 		login.Log4j.info("Size of database selection is " + multidb.size());

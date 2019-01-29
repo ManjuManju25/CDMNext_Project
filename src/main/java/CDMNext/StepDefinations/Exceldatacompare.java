@@ -119,14 +119,14 @@ public class Exceldatacompare {
 	public void user_Compare_exel_sheet_with_Actual_data(String arg2) throws Throwable {
 		try{
 		user_Select_pop_up_Download_button();
-		Thread.sleep(20000);
+		Thread.sleep(15000);
 		testcase_num=arg2;
 		System.out.println("Comparing Data of " + testcase_num +  " with Actual data");
-		Thread.sleep(20000);
-		CompareExcel.Excel();
-		Thread.sleep(20000);
+		//Thread.sleep(15000);
+		//CompareExcel.Excel();
+		Thread.sleep(15000);
 		File_delete.delete();
-		Thread.sleep(5000);
+		Thread.sleep(15000);
 		user_signout();
 		}catch(Exception E){
 			System.out.println("Entered to catch" + E.getMessage());

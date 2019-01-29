@@ -23,8 +23,6 @@ Scenario: TC_IE_89: Verify Mouse over on inisight title in Table mode.
    And get insight name and add  any five series to my series tab
    And  Mouse over on inisight title in Table mode.
    Then verify the insight name and number of series 
-
-
    
     @LandingPage
 Scenario: TC_IE_66: Verify insights under Shared with me tab.
@@ -392,9 +390,7 @@ Scenario: TC_IE_65:  Verify share for multiple insights
    And  Select two or more Insights
   And  Selects Share options
   And Successfully Verify Share insight count is working 
- 
-
- 
+  
    @LandingPage
 Scenario: TC_IE_68:Verify Insights Counts for each tabs
     And  Select Insights Counts for each tabs
@@ -405,16 +401,13 @@ Scenario: TC_IE_69:Verify insights in All Available tab
    And  Select the New insight option in Landing page
    And create a Insight as "All insight"
    Then verify the New insight under All tab as "All insight"
-    
-    
+  
 @LandingPage
 Scenario: TC_IE_70: Verify All tags drop down for Analytics Tab.
    And Select the Analytics Tab
    And Add tags for insight
    And Select the All tag dropdown
    And Added tags should be available in dropdown and should display related insights
-
-
 
      @LandingPage
 Scenario: TC_IE_71: Verify All tags drop down for Analytics-China Premium Tab.
@@ -451,7 +444,6 @@ Scenario: TC_IE_75: Verify All tags drop down for Shared Tab.
    And Select the All tag dropdown
    And Added tags should be available in dropdown and should display related insights 
   
-  
    @LandingPage
 Scenario: TC_IE_76: Verify All tags drop down for Recent Tab.
    And Select the Recent Tab
@@ -466,7 +458,6 @@ Scenario: TC_IE_77: Verify All tags drop down for All Tab.
    And Select the All tag dropdown
    And Added tags should be available in dropdown and should display related insights 
    
-  
    @LandingPage
 Scenario: TC_IE_78:  Verify categories selection for Hot Topics with All available Tabs.
     And Select the categories as Hot Topics for the insight 
@@ -503,7 +494,6 @@ Scenario: TC_IE_83: Verify categories selection for New Datasets with All availa
   And Select the categories option as New Datasets
    And verify the New Datasets category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
   
-
     @LandingPage
 Scenario: TC_IE_84: Verify CopyLink option in right click.
     And  Select Right click options on Insight 
@@ -530,8 +520,7 @@ Scenario: TC_IE_87: Verify Search in landing page by Name.
    And Select search by name drop down
    And Search for the insight name as  "TC_IE_87"
    And Verify the insight name as "TC_IE_87" for Successful landing page search by Name
-   
-   
+    
          @LandingPage
 Scenario: TC_IE_90: Verify Search as Series ID in landing page by Selecting Name category dropdown.
    And  Select the New insight option
@@ -540,9 +529,8 @@ Scenario: TC_IE_90: Verify Search as Series ID in landing page by Selecting Name
    And Select search by name drop down
    And Search for the insight name as  "284748804"
    And Verify that insight should not display for Series ID when search by Name is selected 
-   
-   
-            @LandingPage
+
+     @LandingPage
 Scenario: TC_IE_91: Verify Search by all content - Insight attributes.
    And  Select the New insight option
    And Change the insight name as "TC_IE_91"
@@ -550,7 +538,6 @@ Scenario: TC_IE_91: Verify Search by all content - Insight attributes.
    And Select Insight attributes drop down
    And Search with Description as "Testing Insight attributes" for search by all content - Insight attributes
    And Verify the insight as "TC_IE_91" with Description "Testing Insight attributes" for search by all content - Insight attributes
-    
   
      @LandingPage
 Scenario: TC_IE_92: Verify Search by all content - Series attributes.
@@ -560,8 +547,7 @@ Scenario: TC_IE_92: Verify Search by all content - Series attributes.
    And Select Insight attributes drop down as Series attributes
    And Search for the Series ID in IE Page as "369703417"
    And Verify the insight as "TC_IE_92" with Series ID as "369703417" for search as by all content - Series attributes
-   
-   
+      
         @LandingPage
 Scenario: TC_IE_93: Verify search by all content with all checkboxes unselected.
    And  Select the New insight option
@@ -571,8 +557,7 @@ Scenario: TC_IE_93: Verify search by all content with all checkboxes unselected.
    And Search for the Series ID in IE Page as "284748804"
     And Verify that insight should not display for Series ID when all checkboxes unselected
     
-    
-            @LandingPage
+              @LandingPage
 Scenario: TC_IE_94: Verify search with Invalid keyword.
      And Search for the insight name as  "InvalidKeyword"
      And Verify that insight should not display for Invalid keyword

@@ -45,12 +45,12 @@ Scenario: TC_07:Verifying Date order option is available
     And User Select Series ID  as "310902301"
     And Select Download button
     Then  Columns and Rows radio buttons should be present
-#
-#@UI        
-# Scenario: TC_10:Verifying ADD function option is available
-#    And User Select Series ID  as "310902301"
-#    And Select Download button 
-#    Then ADD function  button should be present
+
+@UI        
+ Scenario: TC_10:Verifying ADD function option is available
+    And User Select Series ID  as "310902301"
+    And Select Download button 
+    Then ADD function  button should be present
 
 @UI 
  Scenario: TC_11:Verifying Blank Observations options is available
@@ -89,7 +89,6 @@ Scenario: TC_15:Verifying Timeframe options
     And Select Download button
    Then Sample=10 should be the default timeframe option
  
-
 @ExelDatacomparision   
 Scenario: TC_19:Verifying Date format as Automic date format
       And User Select Series ID  as "310902301"
@@ -618,21 +617,21 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
       And uncheck the Date column
       And Compare "TC_78" exel sheet with Actual data
       
-#@FormatVerification     
-#Scenario: TC_79:Downloading data in CSV Format from Selection
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#      And Add to Right panel
-#      And Select Download button
-#      And select the "csv" format
-#      Then download should be Sucess
+@FormatVerification     
+Scenario: TC_79:Downloading data in CSV Format from Selection
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+      And Add to Right panel
+      And Select Download button
+      And select the "csv" format
+      Then download should be Sucess
    
-#@FormatVerification   
-# Scenario: TC_80:Downloading Table created from view tab into Excel format
-#       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#       And Create a Table 
-#       And Select Download Button
-#       And select the "xlsx" format 
-#       Then Tabel download should be Sucess
+@FormatVerification   
+ Scenario: TC_80:Downloading Table created from view tab into Excel format
+       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+       And Create a Table 
+       And Select Download Button
+       And select the "xlsx" format 
+       Then Tabel download should be Sucess
 
 #@FormatVerification   
 # Scenario: TC_81:Downloading Map created from view tab into Excel format
@@ -642,13 +641,13 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #       And select the "xlsx" format 
 #       Then Map download should be Sucess
    
-#@FormatVerification    
-#   Scenario: TC_82:Downloading Chart created from view tab into Excel format.
-#        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#        And Create a Chart
-#        And Select Download Button
-#        And select the "xlsx" format   
-#        Then Chart download should be Sucess
+@FormatVerification    
+   Scenario: TC_82:Downloading Chart created from view tab into Excel format.
+        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+        And Create a Chart
+        And Select Download Button
+        And select the "xlsx" format   
+        Then Chart download should be Sucess
    
 #   @FormatVerification   
 # Scenario: TC_83:Downloading HeatMap created from view tab into Excel format
@@ -658,37 +657,37 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #       And select the "xlsx" format 
 #       Then HeatMap download should be Sucess
    
-#@FormatVerification     
-#    Scenario: TC_84:Downloading Table created from view tab in format = "JPEG".
-#        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#        And Create a Table
-#        And Select Download Button
-#        And select the "jpeg" format   
-#        Then Tabel download should be Sucess
+@FormatVerification     
+    Scenario: TC_84:Downloading Table created from view tab in format = "JPEG".
+        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+        And Create a Table
+        And Select Download Button
+        And select the "jpeg" format   
+        Then Tabel download should be Sucess
    
-#@FormatVerification    
-#   Scenario: TC_85:Downloading Table created from view tab in format = "PNG".
-#       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#       And Create a Table
-#       And Select Download Button
-#       And select the "png" format   
-#       Then Tabel download should be Sucess 
+@FormatVerification    
+   Scenario: TC_85:Downloading Table created from view tab in format = "PNG".
+       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+       And Create a Table
+       And Select Download Button
+       And select the "png" format   
+       Then Tabel download should be Sucess 
    
-#@FormatVerification    
-#    Scenario: TC_86:Downloading Chart created from view tab in format = "JPEG".
-#       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#       And Create a Chart
-#       And Select Download Button
-#       And select the "jpeg" format   
-#      Then Chart download should be Sucess
+@FormatVerification    
+    Scenario: TC_86:Downloading Chart created from view tab in format = "JPEG".
+       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+       And Create a Chart
+       And Select Download Button
+       And select the "jpeg" format   
+      Then Chart download should be Sucess
 
-#@FormatVerification      
-#      Scenario: TC_87:Downloading Chart created from view tab in format = "PNG".
-#        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#        And Create a Chart
-#        And Select Download Button
-#        And select the "png" format   
-#       Then Chart download should be Sucess
+@FormatVerification      
+      Scenario: TC_87:Downloading Chart created from view tab in format = "PNG".
+        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+        And Create a Chart
+        And Select Download Button
+        And select the "png" format   
+       Then Chart download should be Sucess
    
    
  @ExelDatacomparision      
@@ -752,7 +751,7 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
         And Select Download button
         And Compare "TC_94" exel sheet with Actual data   
       
-#      
+      
 ##  @ExelDatacomparision       
 ##      Scenario: TC_96:Verifying Download with maximum no of series.
 ##        And User Add 3000 Series into Right panel
@@ -761,17 +760,17 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #        # And Compares "TC_96" exel sheet with Actual data   
 #        
 
-#    @UI      
-#      Scenario: TC_97:Verifying Reset button of download settings window.
-#        And User Select Series ID  as "310902301"
-#        And Select Download button
-#        And Select Orientation as  Rows
-#        And Select the  Adjust columns as wrap text   
-#        And Select on Range
-#        And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
-#        And uncheck the Date column
-#        And deSelect Series Attributes
-#        And Reset button should Successfully work 
+    @UI      
+      Scenario: TC_97:Verifying Reset button of download settings window.
+        And User Select Series ID  as "310902301"
+        And Select Download button
+        And Select Orientation as  Rows
+        And Select the  Adjust columns as wrap text   
+        And Select on Range
+        And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+        And uncheck the Date column
+        And deSelect Series Attributes
+        And Reset button should Successfully work 
   
      
       @ExelDatacomparision      
@@ -783,45 +782,45 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
      And Compare "TC_98" exel sheet with Actual data 
 
 
-#   @UI      
-#      Scenario: TC_99:Verifying Cancel button in the Download Window.
-#        And User Select Series ID  as "310902301"
-#       And Select Download button  
-#       And Sucessfully verify the Cancel button
+   @UI      
+      Scenario: TC_99:Verifying Cancel button in the Download Window.
+        And User Select Series ID  as "310902301"
+       And Select Download button  
+       And Sucessfully verify the Cancel button
    
-#  @UI      
-#      Scenario: TC_100:Verify Attributes Srcode exist or not.
-#        And User Select Series ID  as "310902301"
-#       And Select Download button  
-#       And Sucessfully verify the Srcode exist or not
+  @UI      
+      Scenario: TC_100:Verify Attributes Srcode exist or not.
+        And User Select Series ID  as "310902301"
+       And Select Download button  
+       And Sucessfully verify the Srcode exist or not
          
             
-#@ExelDatacomparision      
-#       Scenario: TC_101:Apply function through the function tab Present on the My series panel.
-#          And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#         And Add to Right panel
-#        And Select Function button on my series panel
-#          And Apply Function as "Accumulate"
-#         And Select Download button 
-#      And Compare "TC_101" exel sheet with Actual data  
+@ExelDatacomparision      
+       Scenario: TC_101:Apply function through the function tab Present on the My series panel.
+          And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+         And Add to Right panel
+        And Select Function button on my series panel
+          And Apply Function as "Accumulate"
+         And Select Download button 
+      And Compare "TC_101" exel sheet with Actual data  
     
            
-#@ExelDatacomparision      
-#     Scenario: TC_102: Applay function through the function tab Present on the  download settings window.
-#          And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#         And Add to Right panel
-#         And Select Download button    
-#         And Select the Function as "Accumulate"     
-#         And select the Replace selected series option 
-#         And Select the Applay button  
-#       And Compare "TC_102" exel sheet with Actual data  
+@ExelDatacomparision      
+     Scenario: TC_102: Applay function through the function tab Present on the  download settings window.
+          And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+         And Add to Right panel
+         And Select Download button    
+         And Select the Function as "Accumulate"     
+         And select the Replace selected series option 
+         And Select the Applay button  
+       And Compare "TC_102" exel sheet with Actual data  
           
-# @UI      
-#     Scenario: TC_103: Verifying order of series selection to download when series selected from both search and myseries.
-#        And User Select Series ID  as "310902301"
-#        And Select series from Series and myseries
-#         And Select Download button    
-#         And series selection W.R.T both search and myseries must be Successfull
+ @UI      
+     Scenario: TC_103: Verifying order of series selection to download when series selected from both search and myseries.
+        And User Select Series ID  as "310902301"
+        And Select series from Series and myseries
+         And Select Download button    
+         And series selection W.R.T both search and myseries must be Successfull
    
 ###@ExelDatacomparision      
 ###     Scenario: TC_104: Verify label for different frequency series from SSP, Tooltips, Tables, Preview and My Series.
@@ -833,7 +832,7 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #     @UI      
 #     Scenario: TC_105: verify state of download button when there are no series in myseries/no views.
 #        And User verify state of download button when there are no series in myseries/no views
-#
+
 #
 #@FormatVerification       
 #     Scenario: TC_110: Verify the formats available for visual download.
@@ -841,7 +840,7 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #        And Create a Table 
 #        And Select Download Button    
 #       And  verify the available formats 
-         
+#         
 # @FormatVerification       
 #     Scenario: TC_111: Verify the Download table visual to Excel Format.
 #      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
@@ -849,8 +848,8 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #        And Select Download Button
 #        And select the "xlsx" format 
 #        Then Tabel download should be Sucess   
-
-        
+#
+#        
 # @FormatVerification       
 #     Scenario: TC_112: Verify the Download table visual to PNG Format.
 #      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
@@ -875,21 +874,21 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #      And Select Download Button
 #     And verify the formats available for views download 
 #     
-#  @FormatVerification       
-#     Scenario: TC_115: Verify the Download table visual to Excel Format.
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#      And Create a Table 
-#      And Select Download Button
-#     Then Tabel download should be Sucess     
-#    
-#     @FormatVerification   
-#   Scenario: TC_116: Verify the Download table visual to PDF Format.
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#      And Create a Table 
-#      And Select Download Button
-#      And select the "pdf" format 
-#     Then Tabel download should be Sucess  
-
+  @FormatVerification       
+     Scenario: TC_115: Verify the Download table visual to Excel Format.
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+      And Create a Table 
+      And Select Download Button
+     Then Tabel download should be Sucess     
+    
+     @FormatVerification   
+   Scenario: TC_116: Verify the Download table visual to PDF Format.
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+      And Create a Table 
+      And Select Download Button
+      And select the "pdf" format 
+     Then Tabel download should be Sucess  
+#
 #     @UI   
 #   Scenario: TC_124: Verify whether Data referesh option is checked by deault.
 #      And User Select Series ID  as "310911001"
@@ -897,12 +896,12 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
 #      And Verify Data referesh option is checked by deault
 
 
-#    @ExelDatacomparision  
-#   Scenario: TC_125: verify download option in right click context menu from search database tree.
-#      And User Search for Series ID  as "310919001"
-#      And Expand the database tree 
-#      And select the download by right click option from database tree
-#      And Compare "TC_125" exel sheet with Actual data
+    @ExelDatacomparision  
+   Scenario: TC_125: verify download option in right click context menu from search database tree.
+      And User Search for Series ID  as "310919001"
+      And Expand the database tree 
+      And select the download by right click option from database tree
+      And Compare "TC_125" exel sheet with Actual data
 
    @ExelDatacomparision  
    Scenario: TC_126: verify download option in right click context menu from series tab .

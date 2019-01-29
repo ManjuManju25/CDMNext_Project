@@ -13,7 +13,8 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(// features="classpath:",
 		features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@DB, @ExelDatacomparision,@FilterSearch,@SynonymSearch,@KeywordSearch,@KeywordSearch,@MySeries,@SeriesTab" }, 
+		//tags= {"@SeriesTab"},
+		tags = {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab" }, 
 		dryRun = false, 
 		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
 public class TestRunner {
