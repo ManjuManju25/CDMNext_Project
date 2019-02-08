@@ -2,6 +2,9 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 import org.testng.AssertJUnit;
+
+import static org.testng.Assert.assertTrue;
+
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -33,25 +36,31 @@ public class DatabasesTab {
 	String[] DataBase;
 	Boolean closeVar = false;
 	public String countryVar;
-	int afterFilter;
-
+	static int afterFilter;
+    static int beforeFilter;
+    public WebElement rightClickElement;
+    public String Before_set_lang;
+    public String After_set_lang;
+    public String dbase;
+    Robot robot;
+    // create object of Actions class
+ 	public static final Actions action=new Actions(login.driver);
+ 	// create instance of JavaScriptExecutor
+     public static final JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+    
 	@Given("^Click on All Databases dropdown$")
 	public void click_on_All_Databases_dropdown() throws Throwable {
-		Thread.sleep(3000);
 		// SearchTest.ClearSelection();
 		AlldbClear();
-		login.driver.findElement(By.xpath("//span[contains(text(),'All databases')]")).click();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_Databases"))).click();
 		login.Log4j.info("Clicking on All databases tab ");
 	}
 
 	@And("^Select database as \"([^\"]*)\"$")
 	public void select_database_as(String arg1) throws Throwable {
-		// Db = arg1;
-		// Thread.sleep(2000);
-		// dbarr = Db.split(" ");
-		// login.driver.findElement(By.xpath("//div//span[contains(text(),'" + arg1 +
-		// "')]/preceding-sibling::label/span[@class='input-control--indicator']")).click();
-		// login.Log4j.info("Selecting " + Db);
 
 		DataBase = arg1.split(",");
 		for (String dblist : DataBase) {
@@ -74,30 +83,20 @@ public class DatabasesTab {
 	@Then("^Result should be loaded only for selected database$")
 	public void result_should_be_loaded_only_for_selected_database() throws Throwable {
 		Thread.sleep(2000);
-		login.driver
-				.findElement(By
-						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
-				.click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases"))).click();
 		dbarr = DataBase[0].split(" ");
 		if (DataBase[0].equals("India Premium Database")) {
-			login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[1]")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DB_level_1"))).click();
 			Thread.sleep(2000);
-			login.driver
-					.findElement(By.xpath(
-							"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[1]"))
-					.click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("GDP"))).click();
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(
-					"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
-					.click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table-level"))).click();
 			Thread.sleep(2000);
 			DatabaseValidation();
 			if (database == true) {
-				HTML_Report.execRemarks = "Results is shown correctly for selected " + DataBase[0];
 				login.Log4j.info("Results is shown correctly for selected " + DataBase[0]);
 
 			} else if (database == false) {
-				HTML_Report.execRemarks = "Results is not shown correctly for selected " + DataBase[0];
 				Assert.fail("Results is not shown correctly for selected " + DataBase[0]);
 			}
 
@@ -106,9 +105,9 @@ public class DatabasesTab {
 
 	@And("^Select database as Daily Database$")
 	public void select_database_as_Daily_Database() throws Throwable {
-		Thread.sleep(3000);
 		AlldbClear();
-		login.driver.findElement(By.xpath("//div[@class='child-container']//div[5]//div[@class='toggle']")).click();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Daily_db"))).click();
 		login.Log4j.info("Clicking on Database level");
 		database = true;
 	}
@@ -164,14 +163,10 @@ public class DatabasesTab {
 		WebElement checkbox = login.driver.findElement(By.xpath(
 				"//div[@class='child-container']//div[1]//ul//a//div[@class='series-list-item--checkbox-wrapper']//span"));
 		if (checkbox.isDisplayed()) {
-			HTML_Report.strTCResult = "PASS";
 			checkbox.click();
 			login.Log4j.info("DB/Topic/section/table level under Databases tab is expanded");
-			HTML_Report.execRemarks = "DB/Topic/section/table level under Databases tab is expanded";
 		} else {
-			HTML_Report.strTCResult = "FAIL";
 			login.Log4j.info("DB/Topic/section/table level under Databases tab is not expanded");
-			HTML_Report.execRemarks = "DB/Topic/section/table level under Databases tab is not expanded";
 		}
 	}
 
@@ -193,16 +188,11 @@ public class DatabasesTab {
 		WebElement collapse;
 		collapse = login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]"));
 		if (collapse.isEnabled()) {
-			HTML_Report.strTCResult = "PASS";
 			collapse.click();
 			login.Log4j.info("Open data tree is collapsed");
-			HTML_Report.execRemarks = "Open data tree is collapsed";
 		} else {
-			HTML_Report.strTCResult = "FAIL";
 			AssertJUnit.fail("Open data tree is not collapse");
-			HTML_Report.execRemarks = "Open data tree is not collapse";
 		}
-
 	}
 
 	@And("^Select any number of series$")
@@ -211,8 +201,6 @@ public class DatabasesTab {
 		WebElement checkbox;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		// create instance of JavaScriptExecutor
-		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		WebElement ul_element = null;
 		try {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -235,35 +223,14 @@ public class DatabasesTab {
 		}
 
 	}
-
-	@And("^Click on Unselect$")
-	public void click_on_Unselect() throws Throwable {
-		Thread.sleep(2000);
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
-			login.Log4j.info("Clicking on Top button");
-		}
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-			login.Log4j.info("Clicking on Unselect");
-		}
-
-	}
-
+	
 	@Then("^Selected series should be unselected$")
 	public void selected_series_should_be_unselected() throws Throwable {
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isEnabled()) {
-			HTML_Report.strTCResult = "PASS";
 			login.Log4j.info("The selected series are got unselected");
-			HTML_Report.execRemarks = "The selected series are got unselected";
 		} else {
-			HTML_Report.strTCResult = "FAIL";
-			HTML_Report.execRemarks = "The selected series are not unselected";
 			AssertJUnit.fail("The selected series are not unselected");
 		}
-
 	}
 
 	@Given("^Hover the mouse on any Database$")
@@ -281,6 +248,7 @@ public class DatabasesTab {
 				By.xpath("//div[@class='child-container']//div[1]//div[@class='title']//span[@class='name']//span[1]"));
 		dbstr = ele.getText();
 		login.Log4j.info("Database is " + dbstr);
+		Thread.sleep(1000);
 		action.moveToElement(db).build().perform();
 	}
 
@@ -290,13 +258,9 @@ public class DatabasesTab {
 		footnote = login.driver
 				.findElement(By.xpath("//div[@class='child-container']//div[1]//span//i[@title='Open footnote']"));
 		if (footnote.isDisplayed()) {
-			HTML_Report.strTCResult = "PASS";
 			login.Log4j.info("footnote icon is enabled when mouse hover on the databse");
-			HTML_Report.execRemarks = "footnote icon is enabled when mouse hover on the databse";
 		} else {
-			HTML_Report.strTCResult = "FAIL";
 			AssertJUnit.fail("footnote icon is not enabled when mouse hover on the databse");
-			HTML_Report.execRemarks = "footnote icon is not enabled when mouse hover on the databse";
 		}
 	}
 
@@ -308,22 +272,21 @@ public class DatabasesTab {
 
 	@Then("^Footnotes should be opened for related DB$")
 	public void footnotes_should_be_opened_for_related_DB() throws Throwable {
-		Thread.sleep(2000);
+		// Thread.sleep(2000);
 		footnoteDb = login.driver.findElement(
 				By.xpath("//div[@class='footnotes--main-actions']//div[@class='footnotes-bread-crumb--title']"));
+		Thread.sleep(2000);
 		str = footnoteDb.getText();
 		login.Log4j.info(str);
 		if (str.contains(dbstr) == true) {
-			HTML_Report.strTCResult = "PASS";
 			login.Log4j.info("Footnotes is displayed for mouse hover action on DB level");
-			HTML_Report.execRemarks = "Footnotes is displayed for mouse hover action on DB level";
+			Thread.sleep(1500);
+			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 		} else {
-			HTML_Report.strTCResult = "FAIL";
-			HTML_Report.execRemarks = "Footnotes is not displayed for mouse hover action on DB level";
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 			AssertJUnit.fail("Footnotes is not displayed for mouse hover action on DB level");
 		}
-		login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-
 	}
 
 	@Given("^Right click on any Database$")
@@ -346,7 +309,7 @@ public class DatabasesTab {
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("copylink_popup"))).isDisplayed()) {
 			login.Log4j.info("URL link(s) is copied");
 			Thread.sleep(2000);
-			Robot robot = new Robot();
+			robot = new Robot();
 			robot.keyPress(KeyEvent.VK_CONTROL);
 			robot.keyPress(KeyEvent.VK_T);
 			robot.keyRelease(KeyEvent.VK_CONTROL);
@@ -378,12 +341,8 @@ public class DatabasesTab {
 		WebElement highlightddb = login.driver
 				.findElement(By.xpath("//div[@class='database-node tree-node open highlight']"));
 		if (highlightddb.isDisplayed()) {
-			HTML_Report.strTCResult = "PASS";
-			HTML_Report.execRemarks = "The selected DB is highlighted";
 			login.Log4j.info("The selected DB is highlighted for right click action Copy link(s)");
 		} else {
-			HTML_Report.strTCResult = "FAIL";
-			HTML_Report.execRemarks = "The selected DB is not highlighted";
 			AssertJUnit.fail("The selected DB is not highlighted for right click action Copy link(s)");
 		}
 		login.driver.close();
@@ -392,44 +351,37 @@ public class DatabasesTab {
 
 	@Then("^Footnotes should be opened for selected DB$")
 	public void footnotes_should_be_opened_for_selected_DB() throws Throwable {
-		Thread.sleep(2000);
 		footnoteDb = login.driver.findElement(
 				By.xpath("//div[@class='footnotes--main-actions']//div[@class='footnotes-bread-crumb--title']"));
 		str = footnoteDb.getText();
 		login.Log4j.info(str);
 		if (str.contains(dbstr) == true) {
-			HTML_Report.strTCResult = "PASS";
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 			login.Log4j.info("Footnotes is displayed for right click action on DB level");
-			HTML_Report.execRemarks = "Footnotes is displayed for right click action on DB level";
+
 		} else {
-			HTML_Report.strTCResult = "FAIL";
-			HTML_Report.execRemarks = "Footnotes is not displayed for right click action on DB level";
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 			AssertJUnit.fail("Footnotes is not displayed for right click action on DB level");
 		}
-		login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-
 	}
 
 	@And("^Click on x icon to remove DB$")
 	public void click_on_x_icon_to_remove_DB() throws Throwable {
-		Thread.sleep(2000);
 		cross_icon = login.driver
 				.findElement(By.xpath("//div[@class='icon--red-cross database-selector--clear-icon']"));
+		Thread.sleep(1000);
 		cross_icon.click();
 	}
 
 	@Then("^Selected database shold be removed$")
 	public void selected_database_shold_be_removed() throws Throwable {
 		if (!cross_icon.isDisplayed()) {
-			HTML_Report.strTCResult = "PASS";
-			HTML_Report.execRemarks = "Selected database has been removed";
 			login.Log4j.info("Selected database has been removed");
 		} else {
-			HTML_Report.strTCResult = "FAIL";
-			HTML_Report.execRemarks = "Selected database has not been removed";
 			login.Log4j.info("Selected database has not been removed");
 		}
-
 	}
 
 	@Then("^User can see the results for multiple database selection$")
@@ -464,11 +416,9 @@ public class DatabasesTab {
 						.click();
 				DatabaseValidation();
 				if (database == true) {
-					HTML_Report.execRemarks = "Results is shown correctly for selected " + DataBase[i];
 					login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
 
 				} else if (database == false) {
-					HTML_Report.execRemarks = "Results is not shown correctly for selected " + DataBase[i];
 					Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
 				}
 
@@ -487,11 +437,9 @@ public class DatabasesTab {
 						.click();
 				DatabaseValidation();
 				if (database == true) {
-					HTML_Report.execRemarks = "Results is shown correctly for selected " + DataBase[i];
 					login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
 
 				} else if (database == false) {
-					HTML_Report.execRemarks = "Results is not shown correctly for selected " + DataBase[i];
 					Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
 				}
 
@@ -512,10 +460,8 @@ public class DatabasesTab {
 						.click();
 				DatabaseValidation();
 				if (database == true) {
-					HTML_Report.execRemarks = "Results is shown correctly for selected " + DataBase[i];
 					login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
 				} else if (database == false) {
-					HTML_Report.execRemarks = "Results is not shown correctly for selected " + DataBase[i];
 					Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
 				}
 
@@ -533,8 +479,6 @@ public class DatabasesTab {
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
 		} else {
-			HTML_Report.strTCResult = "FAIL";
-			HTML_Report.execRemarks = arg1 + " is not displayed";
 			Assert.fail(arg1 + " is not displayed");
 		}
 
@@ -545,6 +489,7 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		WebElement close_icon = login.driver.findElement(By.xpath("//div[@ui='$close']"));
 		if (close_icon.isDisplayed()) {
+			Thread.sleep(1000);
 			close_icon.click();
 			login.Log4j.info("Clicking on Closing icon");
 			closeVar = true;
@@ -557,12 +502,8 @@ public class DatabasesTab {
 	public void the_Insight_Explorer_popup_should_be_closed() throws Throwable {
 
 		if (closeVar == true) {
-			HTML_Report.strTCResult = "PASS";
-			HTML_Report.execRemarks = "Insight Explorer popup is closed";
 			login.Log4j.info("Insight Explorer popup is closed");
 		} else {
-			HTML_Report.strTCResult = "FAIL";
-			HTML_Report.execRemarks = "Insight Explorer popup is not closed";
 			Assert.fail("Insight Explorer popup is not closed");
 		}
 	}
@@ -583,6 +524,10 @@ public class DatabasesTab {
 
 	@Then("^Result should be displayed as per the filters applied$")
 	public void result_should_be_displayed_as_per_the_filters_applied() throws Throwable {
+		WebElement element;
+		WebElement topButton;
+		WebElement collapseTree;
+		
 		login.driver
 				.findElement(By
 						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
@@ -602,11 +547,8 @@ public class DatabasesTab {
 				.click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(
-				"//div[@class='database-node tree-node open']//div[3]//div[1]//div[3]//div[1]//div[3]//div[@class='tree-node'][2]//div[@class='toggle']"))
+				"//div[@class='database-node tree-node open']//div[3]//div[1]//div[3]//div[1]//div[3]//div[@class='tree-node'][6]//div[@class='toggle']"))
 				.click();
-		WebElement element;
-		// create instance of JavaScriptExecutor
-		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		WebElement ul_element = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']"));
 		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		login.Log4j.info("List size is :" + li_All.size());
@@ -634,36 +576,31 @@ public class DatabasesTab {
 				login.Log4j.info(countryVar);
 				login.Log4j.info(rgnstr);
 				if (countryVar.equalsIgnoreCase(rgnstr) == true) {
-					HTML_Report.strTCResult = "PASS";
-					HTML_Report.execRemarks = "Results has shown correctly for applied region filter is " + countryVar;
 					login.Log4j.info("Results has shown correctly for applied region filter is " + countryVar);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 				} else {
-					HTML_Report.strTCResult = "FAIL";
-					HTML_Report.execRemarks = "Results has not shown correctly for applied region filter is "
-							+ countryVar;
 					login.Log4j.info("Results has not shown correctly for applied region filter is " + countryVar);
 					Thread.sleep(1000);
-					login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 				}
 			}
 		}
+		topButton=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
+		collapseTree=login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
+		if(topButton.isDisplayed()) {
+		 Thread.sleep(2000);
+		 topButton.click();
+		}
+		if(collapseTree.isDisplayed()) {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
+		collapseTree.click();
+		}
 	}
 
 	@When("^Click on x icon$")
 	public void click_on_x_icon() throws Throwable {
-		Thread.sleep(2000);
-		WebElement SeriesCount = login.driver.findElement(By.xpath(
-				"//div[@class='series-series-count search-input--series-indicator series-series-count__with-copy']"));
-		String after_apply_filter = SeriesCount.getText();
-		String[] count = after_apply_filter.split(" ");
-		String newStr = count[0].replaceAll(",", "");
-		afterFilter = Integer.parseInt(newStr);
+		AfterMethod();
 		login.Log4j.info("After applied filter series count is " + afterFilter);
 		login.driver.findElement(By.xpath(
 				"//div[@class='dropdown-filters-list']//div[3]//span[2]//span[@class='select-field--cross-icon']"))
@@ -674,13 +611,7 @@ public class DatabasesTab {
 
 	@Then("^The applied filters should be removed$")
 	public void the_applied_filters_should_be_removed() throws Throwable {
-		Thread.sleep(2000);
-		WebElement SeriesCount = login.driver.findElement(By.xpath(
-				"//div[@class='series-series-count search-input--series-indicator series-series-count__with-copy']"));
-		String before_apply_filter = SeriesCount.getText();
-		String[] count1 = before_apply_filter.split(" ");
-		String newStr = count1[0].replaceAll(",", "");
-		int beforeFilter = Integer.parseInt(newStr);
+		BeforeMethod();
 		login.Log4j.info("Before apply filter the series count is " + beforeFilter);
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		if (reset.size() > 0 && beforeFilter > afterFilter) {
@@ -691,10 +622,47 @@ public class DatabasesTab {
 
 	}
 
+	@Then("^The \"([^\"]*)\" popup should be opened$")
+	public void the_popup_should_be_opened(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		WebElement keywrd_search_tips_popup = login.driver
+				.findElement(By.xpath("//h4[contains(text(), '" + arg1 + "')]"));
+		if (keywrd_search_tips_popup.isDisplayed()) {
+			login.Log4j.info(arg1 + " popup is displayed");
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+		} else {
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+			Assert.fail(arg1 + " popup is not displayed");
+		}
+
+	}
+
+	@Then("^User should redirect to \"([^\"]*)\"$")
+	public void user_should_redirect_to(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		robot = new Robot();
+		// Store all currently open tabs in tabs
+		tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
+		// Navigate to New Tab
+		login.driver.switchTo().window(tabs2.get(1));
+		robot.keyPress(KeyEvent.VK_ENTER);
+		String Currenturl = login.driver.getCurrentUrl();
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		login.Log4j.info("Current url is " + Currenturl);
+		if (Currenturl.equals(arg1)) {
+			login.Log4j.info("User is able to redirect to " + arg1);
+		} else {
+			Assert.fail("User is unable to redirect to " + arg1);
+		}
+
+		login.driver.close();
+		login.driver.switchTo().window(tabs2.get(0));
+	}
+
 	public void DatabaseValidation() throws InterruptedException {
 		WebElement element;
-		// create instance of JavaScriptExecutor
-		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		WebElement ul_element = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']"));
 		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		login.Log4j.info("List size is :" + li_All.size());
@@ -740,6 +708,167 @@ public class DatabasesTab {
 		login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
 	}
 
+	@Then("^The data tree should be expanded$")
+	public void the_data_tree_should_be_expanded() throws Throwable {
+		Thread.sleep(2000);
+		WebElement data_tree_ele = login.driver.findElement(
+				By.xpath("//div[@class='database-node tree-node open']//div[1]//div[1]//div[3]//div[1]//div[2]"));
+		if (data_tree_ele.isDisplayed()) {
+			Actions act = new Actions(login.driver);
+			Thread.sleep(1000);
+			act.moveToElement(data_tree_ele).build().perform();
+			login.Log4j.info("The data tree is expanded");
+		} else {
+			Assert.fail("The data tree is not expanded");
+		}
+	}
+
+	@Then("^The data tree should be collapsed$")
+	public void the_data_tree_should_be_collapsed() throws Throwable {
+		login.Log4j.info("The data tree is collapsed");
+	}
+
+	@Then("^\"([^\"]*)\" message should be displayed$")
+	public void message_should_be_displayed(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		WebElement ele = login.driver.findElement(By.xpath("//p[contains(text(),'" + arg1 + "')]"));
+		String noResults = ele.getText();
+		// login.Log4j.info(noResults);
+		// Assert.assertEquals(true, ele.isDisplayed());
+		// Assert.assertEquals(noResults, arg1," is displayed for invalid Keyword");
+		if (ele.isDisplayed()) {
+			login.Log4j.info(noResults + "is displayed for invalid Keyword ");
+		} else {
+			Assert.fail(noResults + "is not displayed for invalid Keyword ");
+		}
+
+	}
+
+	@Given("^Right click on any database$")
+	public void right_click_on_any_database() throws Throwable {
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		WebElement rightClickElement = login.driver
+				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
+		String str=rightClickElement.getText();
+		login.Log4j.info(str);
+		Thread.sleep(4000);
+		// contextClick() method to do right click on the element
+		action.contextClick(rightClickElement).build().perform();
+	}
+
+	@Then("^\"([^\"]*)\" options should be available$")
+	public void options_should_be_available(String arg1) throws Throwable {
+		Actions act=new Actions(login.driver);
+		String[] array = arg1.split(",");
+		Thread.sleep(2000);
+		WebElement ul_element = login.driver.findElement(By.cssSelector(".context-menu"));
+		String rightClick_str = ul_element.getText();
+		login.Log4j.info(rightClick_str);
+		if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true
+				&& rightClick_str.contains(array[2]) == true) {
+			login.Log4j.info(array[0] + " AND " + array[1] + " AND " + array[2]
+					+ " options available for right click option for DB level");
+		    Thread.sleep(2000);
+			WebElement ele=login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
+	          Thread.sleep(2000);
+	          act.moveToElement(ele).click().build().perform();
+	          Thread.sleep(2000);
+	          login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]")).click();
+	          Thread.sleep(3000);
+	          WebElement rightClickElement = login.driver
+	  				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
+	  		String str=rightClickElement.getText();
+	  		login.Log4j.info(str);
+		} else {
+			Assert.fail(array[0] + " AND" + array[1] + " AND" + array[2]
+					+ " options not available for right click option for DB level");
+		}
+		          
+	}
+	@And("^After loaded the results ,click on Remove for search keyword$")
+	public void after_loaded_the_results_click_on_Remove_for_search_keyword() throws Throwable {
+		AfterMethod();
+		login.Log4j.info("After search with keyword,the series count is: "+afterFilter);
+	    
+	}
+
+	@Then("^The result should be loaded without search$")
+	public void the_result_should_be_loaded_without_search() throws Throwable {
+		Thread.sleep(2000);
+		login.driver.findElement(By.className("search-input-field-wrap-inner")).click();
+		BeforeMethod();
+		login.Log4j.info("Before searching with keyword,the series count is : " + beforeFilter);
+		if (beforeFilter > afterFilter) {
+			login.Log4j.info("The result is loaded without search");
+		} else {
+			Assert.fail("The result is not loaded without search");
+		}
+	    
+	}
+	@And("^Right click on \"([^\"]*)\"$")
+	public void right_click_on(String arg1) throws Throwable {
+		dbase=arg1;
+		switch(arg1) {
+		case "World Trend Plus":
+			Thread.sleep(2000);
+			rightClickElement = login.driver
+					.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
+			break;
+		case "Russia Premium Database":
+			Thread.sleep(2000);
+			rightClickElement = login.driver
+					.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
+			break;
+		case "Indonesia Premium Database":
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='child-container']//div[@class='database-node tree-node'][7]/div[1]")).click();
+			Thread.sleep(2000);
+			rightClickElement = login.driver
+					.findElement(By.xpath("//div[@class='database-node tree-node open']//div[3]//div[1]//span[1]//span[1]"));
+			
+		    break;
+		default:
+			Assert.fail("Doesn't exist in given databse list");
+		}
+		Before_set_lang=rightClickElement.getText();
+		login.Log4j.info("Before_set_lang is "+Before_set_lang);
+		Thread.sleep(4000);
+		// contextClick() method to do right click on the element
+		action.contextClick(rightClickElement).build().perform();
+	    
+	}
+	@And("^Set language as \"([^\"]*)\"$")
+	public void set_language_as(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		WebElement ele=login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
+	    Thread.sleep(2000);
+	    action.moveToElement(ele).click().build().perform();
+	    Thread.sleep(2000);
+	    login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]")).click();
+	   /* Thread.sleep(3000);
+	    WebElement rightClickElement = login.driver
+	  				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
+	    After_set_lang=rightClickElement.getText();
+	    login.Log4j.info("After_set_lang is "+After_set_lang);*/
+		
+	    
+	}
+
+	@Then("^The Databases language should be changed to selected language$")
+	public void the_Databases_language_should_be_changed_to_selected_language() throws Throwable {
+		 Thread.sleep(3000);
+		    WebElement rightClickElement = login.driver
+		  				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
+		    After_set_lang=rightClickElement.getText();
+		    login.Log4j.info("After_set_lang is "+After_set_lang);
+		    if(!Before_set_lang.equals(After_set_lang)==true) {
+		    	  login.Log4j.info(Before_set_lang+" is changed as "+ After_set_lang );
+		    } else {
+		    	
+		    }
+	}
+
 	public static void AlldbClear() throws InterruptedException {
 		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
 		if (clearIcon.size() > 0) {
@@ -749,5 +878,20 @@ public class DatabasesTab {
 			}
 		}
 	}
-
+	public static void AfterMethod() throws InterruptedException {
+		Thread.sleep(2000);
+		WebElement SeriesCount = login.driver.findElement(By.cssSelector(".series-series-count"));
+		String after_apply_filter = SeriesCount.getText();
+		String[] count = after_apply_filter.split(" ");
+		String newStr = count[0].replaceAll(",", "");
+		afterFilter = Integer.parseInt(newStr);
+	}
+   public static void BeforeMethod() throws InterruptedException {
+	   Thread.sleep(2000);
+		WebElement SeriesCount = login.driver.findElement(By.cssSelector(".series-series-count"));
+		String before_apply_filter = SeriesCount.getText();
+		String[] count1 = before_apply_filter.split(" ");
+		String newStr = count1[0].replaceAll(",", "");
+	    beforeFilter = Integer.parseInt(newStr);
+   }
 }

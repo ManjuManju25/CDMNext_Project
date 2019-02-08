@@ -1,6 +1,7 @@
 package CDMNext.StepDefinations;
 
 import org.testng.Assert;
+
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,10 +44,9 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		Thread.sleep(3000);
 		login.Log4j.info("searching with " + searchData);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
@@ -85,7 +85,6 @@ public class Filters {
 		k = 0;
 		filters.add(arg1);
 		login.Log4j.info(filters);
-		Thread.sleep(2000);
 		var = arg2;
 		if (arg1.equals("Source")) {
 			// login.driver.navigate().refresh();
@@ -94,7 +93,7 @@ public class Filters {
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			sourcearr = var.split(";");
 			for (String list : sourcearr) {
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
@@ -114,7 +113,7 @@ public class Filters {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FrequencyFilter"))).click();
 			frequencyarr = var.split(";");
 			for (String list : frequencyarr) {
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
@@ -133,7 +132,9 @@ public class Filters {
 			if (arg2.equals("MUR")) {
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_option"))).click();
+				Thread.sleep(1000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).clear();
+				Thread.sleep(1000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).sendKeys(arg2);
 
 			}
@@ -148,16 +149,16 @@ public class Filters {
 		if (arg1.equals("Region")) {
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
-			Thread.sleep(4000);
-			login.driver.findElement(By.xpath("//div[contains(text(),'By group')]")).click();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_By_group"))).click();
 
 		}
 	}
 
 	@And("^User has clicked on \"([^\"]*)\"$")
 	public void user_has_clicked_on(String arg1) throws Throwable {
-		Thread.sleep(2000);
 		login.Log4j.info("Clicking on " + arg1);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'" + arg1 + "')]")).click();
 	}
 
@@ -172,8 +173,8 @@ public class Filters {
 
 	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selected_as(String arg1, String arg2) throws Throwable {
-		Thread.sleep(3000);
 		login.Log4j.info("Clicking on " + arg1);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 		String[] database = arg2.split(",");
 		for (String dblist : database) {
@@ -201,7 +202,6 @@ public class Filters {
 		// String str=null;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		Thread.sleep(5000);
 		// create instance of JavaScriptExecutor
 		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		// create object of Actions class
@@ -216,19 +216,17 @@ public class Filters {
 				for (int i = 0; i < li_All.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(2500);
+					Thread.sleep(4000);
 					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					mouseOver.moveToElement(checkbox).click().build().perform();
-					// element = login.driver.findElement(By.xpath("//li[" + j +
-					// "]//div[@class='series-item--content']"));
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					mouseOver.moveToElement(element).build().perform();
 					Thread.sleep(1000);
-					tooltip = login.driver.findElement(
-							By.xpath("//div[@class='tooltip tooltip__visible']//table[@class='series-tooltip-table']"));
+					tooltip = login.driver.findElement(		
+							By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = tooltip.getText();
@@ -249,7 +247,6 @@ public class Filters {
 					}
 
 					if (filters.isEmpty()) {
-						Thread.sleep(2000);
 						sid = searchData.split(";");
 
 						switch (sid.length) {
@@ -404,11 +401,7 @@ public class Filters {
 									login.Log4j.info(sourcearr[0]
 											+ " does exists as Organisation for Economic Co-operation and Development in \n"
 											+ text);
-									// } else if ((sourcearr.length == 1) && var.equalsIgnoreCase(
-									// "International Monetary Fund - World Economic Outlook") == true) {
-									// login.Log4j.info(sourcearr[0]
-									// + " does exists as International Monetary Fund in \n"
-									// + text);
+									
 								} else if ((sourcearr.length == 1) && validation(text, sourcearr[0]) == true) {
 									login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);
 
@@ -474,10 +467,6 @@ public class Filters {
 							if (filters.get(k).equals("Frequency")) {
 								login.Log4j.info("filter  is : " + filters.get(k));
 								login.Log4j.info(frequencyarr.length);
-
-								// for (String Tooltip:lines) {
-								// if(Tooltip.contains("Frequency")) {
-								// String frequency = Tooltip;
 								login.Log4j.info(frequency);
 								String str = "Half-yearly";
 								String str1 = "Annual";
@@ -569,10 +558,6 @@ public class Filters {
 								login.Log4j.info("filter  is : " + filters.get(k));
 								for (int l = 0; l < unitarr.length; l++) {
 									login.Log4j.info("filter option is : " + unitarr[l]);
-									// String unit = lines[2];
-									// for(String Tooltip:lines) {
-									// if(Tooltip.contains("Unit")) {
-									// String unit = Tooltip;
 									if (unit.contains(unitarr[l]) == true) {
 										login.Log4j.info(unitarr[l] + " is exists in the" + "\n" + unit);
 									} else {
@@ -639,7 +624,6 @@ public class Filters {
 		String text;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		Thread.sleep(5000);
 		// create instance of JavaScriptExecutor
 		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		// create object of Actions class
@@ -657,7 +641,7 @@ public class Filters {
 
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(2500);
+					Thread.sleep(4000);
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -667,7 +651,7 @@ public class Filters {
 					mouseOver.moveToElement(element).build().perform();
 					Thread.sleep(1000);
 					tooltip = login.driver.findElement(
-							By.xpath("//div[@class='tooltip tooltip__visible']//table[@class='series-tooltip-table']"));
+							By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = tooltip.getText();
@@ -802,7 +786,7 @@ public class Filters {
 	public static boolean showRelatedData(String keyword, int j) throws Throwable {
 
 		WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		ele.click();
 
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {

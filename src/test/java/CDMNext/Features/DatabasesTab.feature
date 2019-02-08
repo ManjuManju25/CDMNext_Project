@@ -31,7 +31,7 @@ Then Opened data tree should be collapsed
 @DB
 Scenario: TC_DB_05: Verifying unselect option
 And Select any number of series
-And Click on Unselect
+And Click on "Unselect"
 Then Selected series should be unselected
 
 @DB
@@ -67,17 +67,82 @@ Given Click on "All insights" option
 When Click on Close
 Then The Insight Explorer popup should be closed
 
-#@DB
-#Scenario: TC_DB_11: Verifying Filters for DB tab
-#And Select filter "Region" as "Japan"
-#And User has clicked on "Apply filter"
-#And User selected "All databases" as "Global Database"
-#Then Result should be displayed as per the filters applied
+@DB
+Scenario: TC_DB_11: Verifying Filters for DB tab
+And Select filter "Region" as "Japan"
+And User has clicked on "Apply filter"
+And User selected "All databases" as "Global Database"
+Then Result should be displayed as per the filters applied
 
-#@DB
-#Scenario: TC_DB_12: Verifying remove icon for filters.
-#And  User selects "Frequency" as "Monthly"
-#And User has clicked on "Apply filter"
-#When Click on x icon 
-#Then The applied filters should be removed 
+@DB
+Scenario: TC_DB_12: Verifying remove icon for filters.
+And  User selects "Frequency" as "Monthly"
+And User has clicked on "Apply filter"
+When Click on x icon 
+Then The applied filters should be removed 
 
+@DB
+Scenario: TC_DB_13: Verifying Collapse option when search/filter applied
+Given User enters "Banglore"
+And Click on "Collapse"
+Then The data tree should be collapsed
+
+@DB
+Scenario: TC_DB_14: Verifying Expand option when search/filter applied
+Given User enters "Banglore"
+And Click on "Expand"
+Then The data tree should be expanded
+
+@DB
+Scenario: TC_DB_15: Verifying message if no results found for the search
+Given User enters "UN"
+Then "Sorry, no results were found here." message should be displayed
+
+@DB
+Scenario: TC_DB_16: Verifying 'See our search help'
+Given User enters "X"
+And  Click on "See our Search help"
+Then The "Keyword search tips" popup should be opened
+
+@DB
+Scenario: TC_DB_17: Verifying 'our help desk team'
+Given User enters "UN"
+And  Click on "our help desk team"
+Then User should redirect to "https://support.ceicdata.com/support/tickets/new"
+
+@DB
+Scenario: TC_DB_18: Verifying behavior after search removed
+Given User enters "money"
+And After loaded the results ,click on Remove for search keyword
+Then The result should be loaded without search
+
+@DB
+Scenario: TC_DB_19: Verifying right click options for Databases level
+Given Right click on any database 
+Then "Set language,Copy link(s),Footnotes" options should be available
+
+##@DB
+##Scenario Outline:TC_DB_19: Verifying right click options for Databases level
+##Given Right click on <database>
+##Then "Set language,Copy link(s),Footnotes" options should be available
+#
+##Examples:
+##	| database |
+##	| World Trend Plus |
+##	| Global Database |
+##	| Global Key Series Database |
+##	| Russia Premium Database |
+##	| Indonesia Premium Database |
+##	| China Premium Database |
+#
+#@DB
+#Scenario Outline: TC_DB_20: Verifying DB language change in right click
+#And Right click on "<database>"
+#And Set language as "<language>"
+#Then The Databases language should be changed to selected language
+#
+#Examples:
+#	|     database               | language |
+#	| World Trend Plus           | Chinese  |
+#	| Russia Premium Database    | Russian  |
+#	| Indonesia Premium Database | Basha    |
