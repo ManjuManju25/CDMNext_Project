@@ -14,7 +14,7 @@ import CDMNext.StepDefinations.login;
 		features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
 		//tags= {"@DB"},
-		tags = {"@DB,@FilterSearch,@Search,@MySeries,@SeriesTab" }, 
+		tags = {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab" }, 
 		dryRun =false, 
 		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
 public class TestRunner {

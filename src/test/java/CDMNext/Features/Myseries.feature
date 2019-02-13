@@ -23,41 +23,41 @@ Scenario: TC_MS_04: Verify "20" Maximum series for 'Preview'
     And Select 20 series to my series tab
     And Verify for "20" Maximum series for 'Preview option'   
     
-#     @MySeries
-#Scenario: TC_MS_05: Verify Preview option is disable for "21" series
-#    And Select "21" series to my series tab
-#    And Verify 'Preview option' is disable for "21" series  
+     @MySeries
+Scenario: TC_MS_05: Verify Preview option is disable for "21" series
+    And Select "21" series to my series tab
+    And Verify 'Preview option' is disable for "21" series  
     
-# @MySeries
-#Scenario: TC_MS_06: Verify Validation message for more than "20" series added to preview window.
-#   And Select "21" series to my series tab
-#    And Select preview option
-#    And Verify Validation message for more than 20 series added to preview window.
-#    
-#  @MySeries
-#Scenario: TC_MS_07: Verify "Select all" option.
-#   And Select some series to my series tab
-#    And Select the select all option
-#    And Verify "Select all" option functionality.
-#    
-#     @MySeries
-#Scenario: TC_MS_08: Verify "UnSelect all" option.
-#   And Select some series to my series tab
-#    And Select the Unselect all option
-#    And Verify UnSelect all option functionality.
-#    
-#  
+ @MySeries
+Scenario: TC_MS_06: Verify Validation message for more than "20" series added to preview window.
+   And Select "21" series to my series tab
+    And Select preview option
+    And Verify Validation message for more than 20 series added to preview window.
+    
+  @MySeries
+Scenario: TC_MS_07: Verify "Select all" option.
+   And Select some series to my series tab
+    And Select the select all option
+    And Verify "Select all" option functionality.
+    
+     @MySeries
+Scenario: TC_MS_08: Verify "UnSelect all" option.
+   And Select some series to my series tab
+    And Select the Unselect all option
+    And Verify UnSelect all option functionality.
+    
+  
  @MySeries
 Scenario: TC_MS_09: Verify "Clear All" option.
    And Select some series to my series tab
     And Verify Clear All option for "Ok" "Cancel" "Dismiss" functionality.
-#    
-#    @MySeries
-#Scenario: TC_MS_10: Verify "Delete confirmation" message having Series.
-#   And Select some series to my series tab
-#    And Select the Delete option
-#    And Verify Delete option functionality for Series
-#    
+    
+    @MySeries
+Scenario: TC_MS_10: Verify "Delete confirmation" message having Series.
+   And Select some series to my series tab
+    And Select the Delete option
+    And Verify Delete option functionality for Series
+    
  @MySeries
 Scenario: TC_MS_11: Verify "Delete confirmation" message having Visuals.
    And Create visuals as Chart
@@ -107,30 +107,30 @@ Scenario: TC_MS_19: Verify Paste Option.
           And Select Paste option
           And verify the Paste option
 
-#          @MySeries
-#Scenario: TC_MS_20: Verify Currency Conversion. 
-#         And User Select Series ID  as "402529207"
-#          And Select Currency Conversion
-#          And verify the Currency Conversion is applied for a series
-#                
-#          @MySeries
-#Scenario: TC_MS_21: Verify Calculate Change. 
-#         And User Select Series ID  as "402529207"
-#          And Select Calculate Change
-#          And verify the Calculate Change is applied for a series
-#          
-#          @MySeries
-#Scenario: TC_MS_22: Verify Aggregate. 
-#         And User Select Series ID  as "402529207"
-#          And Select Aggregate
-#          And verify the Aggregate is applied for a series
-#      
-#           @MySeries
-#Scenario: TC_MS_23: Verify Accumulate. 
-#         And User Select Series ID  as "402529207"
-#          And Select Accumulate
-#          And verify the Accumulate is applied for a series
-#          
+          @MySeries
+Scenario: TC_MS_20: Verify Currency Conversion. 
+         And User Select Series ID  as "402529207"
+          And Select Currency Conversion
+          And verify the Currency Conversion is applied for a series
+                
+          @MySeries
+Scenario: TC_MS_21: Verify Calculate Change. 
+         And User Select Series ID  as "402529207"
+          And Select Calculate Change
+          And verify the Calculate Change is applied for a series
+          
+          @MySeries
+Scenario: TC_MS_22: Verify Aggregate. 
+         And User Select Series ID  as "402529207"
+          And Select Aggregate
+          And verify the Aggregate is applied for a series
+      
+           @MySeries
+Scenario: TC_MS_23: Verify Accumulate. 
+         And User Select Series ID  as "402529207"
+          And Select Accumulate
+          And verify the Accumulate is applied for a series
+          
           @MySeries
 Scenario: TC_MS_24: Verify FX drop down. 
          And User Select Series ID  as "402529207"
@@ -142,13 +142,13 @@ Scenario: TC_MS_25: Verify FX Icon.
           And Select some series to my series tab
           And Select FX Icon
           And verify the FX Icon
-#
-#          @MySeries
-#Scenario: TC_MS_26: Verify Type a function field. 
-#         And Select some series to my series tab
-#          And Select Type a function field
-#          And verify Type a function field
-#
+
+          @MySeries
+Scenario: TC_MS_26: Verify Type a function field. 
+         And Select some series to my series tab
+          And Select Type a function field
+          And verify Type a function field
+
          @MySeries
 Scenario: TC_MS_27: Verify Checkbox for select all Series. 
           And Select 20 series to my series tab
