@@ -405,6 +405,16 @@ public class SeriesTab {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
+			Thread.sleep(2000);
+			String clipboard_data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
+					.getData(DataFlavor.stringFlavor);
+			login.Log4j.info(clipboard_data);
+			if (clipboard_data!= null) {
+				login.Log4j.info("The entire database link is copied to clipboard");
+			} else {
+				login.Log4j.info("The entire database link is not copied to clipboard");
+			}
+			
 			break;
 		case "Footnotes":
 			Thread.sleep(2000);

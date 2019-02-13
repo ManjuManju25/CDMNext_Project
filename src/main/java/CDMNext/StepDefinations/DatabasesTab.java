@@ -2,6 +2,7 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 import org.testng.AssertJUnit;
+import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertTrue;
 
@@ -37,17 +38,21 @@ public class DatabasesTab {
 	Boolean closeVar = false;
 	public String countryVar;
 	static int afterFilter;
-    static int beforeFilter;
-    public WebElement rightClickElement;
-    public String Before_set_lang;
-    public String After_set_lang;
-    public String dbase;
-    Robot robot;
-    // create object of Actions class
- 	public static final Actions action=new Actions(login.driver);
- 	// create instance of JavaScriptExecutor
-     public static final JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-    
+	static int beforeFilter;
+	public WebElement rightClickElement;
+	public String Before_set_lang;
+	public String After_set_lang;
+	public String dbase;
+	public WebElement copy_link;
+	public WebElement ele;
+	public WebElement checkbox;
+	Robot robot;
+	// create object of Actions class
+	public static final Actions action = new Actions(login.driver);
+	// create instance of JavaScriptExecutor
+	public static final JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+	SoftAssert s_assert = new SoftAssert();
+
 	@Given("^Click on All Databases dropdown$")
 	public void click_on_All_Databases_dropdown() throws Throwable {
 		// SearchTest.ClearSelection();
@@ -160,7 +165,7 @@ public class DatabasesTab {
 	@Then("^Should able to expand all the DB/Topic/section/table under Databases tab$")
 	public void should_able_to_expand_all_the_DB_Topic_section_table_under_Databases_tab() throws Throwable {
 		Thread.sleep(2000);
-		WebElement checkbox = login.driver.findElement(By.xpath(
+		checkbox = login.driver.findElement(By.xpath(
 				"//div[@class='child-container']//div[1]//ul//a//div[@class='series-list-item--checkbox-wrapper']//span"));
 		if (checkbox.isDisplayed()) {
 			checkbox.click();
@@ -198,7 +203,6 @@ public class DatabasesTab {
 	@And("^Select any number of series$")
 	public void select_any_number_of_series() throws Throwable {
 		Thread.sleep(3000);
-		WebElement checkbox;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		WebElement ul_element = null;
@@ -223,7 +227,7 @@ public class DatabasesTab {
 		}
 
 	}
-	
+
 	@Then("^Selected series should be unselected$")
 	public void selected_series_should_be_unselected() throws Throwable {
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isEnabled()) {
@@ -237,7 +241,6 @@ public class DatabasesTab {
 	public void hover_the_mouse_on_any_Database() throws Throwable {
 		Thread.sleep(3000);
 		WebElement db;
-		WebElement ele;
 		login.driver
 				.findElement(By
 						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
@@ -292,7 +295,6 @@ public class DatabasesTab {
 	@Given("^Right click on any Database$")
 	public void right_click_on_any_Database() throws Throwable {
 		Thread.sleep(3000);
-		WebElement rightClickElement;
 		WebElement dbele;
 		dbele = login.driver
 				.findElement(By.xpath("//div[@class='child-container']//div[2]//div[2]//span[@class='name-text']"));
@@ -304,8 +306,8 @@ public class DatabasesTab {
 		act.contextClick(rightClickElement).build().perform();
 	}
 
-	@When("^Paste in new tab$")
-	public void paste_in_new_tab() throws Throwable {
+	@When("^Paste it in new tab$")
+	public void paste_it_in_new_tab() throws Throwable {
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("copylink_popup"))).isDisplayed()) {
 			login.Log4j.info("URL link(s) is copied");
 			Thread.sleep(2000);
@@ -527,7 +529,7 @@ public class DatabasesTab {
 		WebElement element;
 		WebElement topButton;
 		WebElement collapseTree;
-		
+
 		login.driver
 				.findElement(By
 						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
@@ -586,15 +588,15 @@ public class DatabasesTab {
 				}
 			}
 		}
-		topButton=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
-		collapseTree=login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
-		if(topButton.isDisplayed()) {
-		 Thread.sleep(2000);
-		 topButton.click();
+		topButton = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
+		collapseTree = login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
+		if (topButton.isDisplayed()) {
+			Thread.sleep(2000);
+			topButton.click();
 		}
-		if(collapseTree.isDisplayed()) {
-		Thread.sleep(2000);
-		collapseTree.click();
+		if (collapseTree.isDisplayed()) {
+			Thread.sleep(2000);
+			collapseTree.click();
 		}
 	}
 
@@ -731,7 +733,7 @@ public class DatabasesTab {
 	@Then("^\"([^\"]*)\" message should be displayed$")
 	public void message_should_be_displayed(String arg1) throws Throwable {
 		Thread.sleep(2000);
-		WebElement ele = login.driver.findElement(By.xpath("//p[contains(text(),'" + arg1 + "')]"));
+		ele = login.driver.findElement(By.xpath("//p[contains(text(),'" + arg1 + "')]"));
 		String noResults = ele.getText();
 		// login.Log4j.info(noResults);
 		// Assert.assertEquals(true, ele.isDisplayed());
@@ -746,11 +748,11 @@ public class DatabasesTab {
 
 	@Given("^Right click on any database$")
 	public void right_click_on_any_database() throws Throwable {
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		WebElement rightClickElement = login.driver
+		rightClickElement = login.driver
 				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
-		String str=rightClickElement.getText();
+		String str = rightClickElement.getText();
 		login.Log4j.info(str);
 		Thread.sleep(4000);
 		// contextClick() method to do right click on the element
@@ -759,38 +761,39 @@ public class DatabasesTab {
 
 	@Then("^\"([^\"]*)\" options should be available$")
 	public void options_should_be_available(String arg1) throws Throwable {
-		Actions act=new Actions(login.driver);
 		String[] array = arg1.split(",");
 		Thread.sleep(2000);
 		WebElement ul_element = login.driver.findElement(By.cssSelector(".context-menu"));
 		String rightClick_str = ul_element.getText();
 		login.Log4j.info(rightClick_str);
-		if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true
-				&& rightClick_str.contains(array[2]) == true) {
-			login.Log4j.info(array[0] + " AND " + array[1] + " AND " + array[2]
-					+ " options available for right click option for DB level");
-		    Thread.sleep(2000);
-			WebElement ele=login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
-	          Thread.sleep(2000);
-	          act.moveToElement(ele).click().build().perform();
-	          Thread.sleep(2000);
-	          login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]")).click();
-	          Thread.sleep(3000);
-	          WebElement rightClickElement = login.driver
-	  				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
-	  		String str=rightClickElement.getText();
-	  		login.Log4j.info(str);
-		} else {
-			Assert.fail(array[0] + " AND" + array[1] + " AND" + array[2]
-					+ " options not available for right click option for DB level");
+		if (array.length == 3) {
+			if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true
+					&& rightClick_str.contains(array[2]) == true) {
+				login.Log4j.info(array[0] + " AND " + array[1] + " AND " + array[2]
+						+ " options available for right click option for DB level");
+
+			} else {
+				Assert.fail(array[0] + " AND" + array[1] + " AND" + array[2]
+						+ " options not available for right click option for DB level");
+			}
+		} else if (array.length == 2) {
+			if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true) {
+				login.Log4j.info(
+						array[0] + " AND " + array[1] + " options available for right click option for topic level");
+
+			} else {
+				Assert.fail(
+						array[0] + " AND" + array[1] + " options not available for right click option for topic level");
+			}
 		}
-		          
+
 	}
+
 	@And("^After loaded the results ,click on Remove for search keyword$")
 	public void after_loaded_the_results_click_on_Remove_for_search_keyword() throws Throwable {
 		AfterMethod();
-		login.Log4j.info("After search with keyword,the series count is: "+afterFilter);
-	    
+		login.Log4j.info("After search with keyword,the series count is: " + afterFilter);
+
 	}
 
 	@Then("^The result should be loaded without search$")
@@ -804,69 +807,186 @@ public class DatabasesTab {
 		} else {
 			Assert.fail("The result is not loaded without search");
 		}
-	    
+
 	}
+
 	@And("^Right click on \"([^\"]*)\"$")
 	public void right_click_on(String arg1) throws Throwable {
-		dbase=arg1;
-		switch(arg1) {
+		dbase = arg1;
+		switch (arg1) {
 		case "World Trend Plus":
 			Thread.sleep(2000);
-			rightClickElement = login.driver
-					.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
+			rightClickElement = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
+			Before_set_lang = rightClickElement.getText();
 			break;
 		case "Russia Premium Database":
 			Thread.sleep(2000);
-			rightClickElement = login.driver
-					.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
+			rightClickElement = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
+			Before_set_lang = rightClickElement.getText();
 			break;
 		case "Indonesia Premium Database":
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@class='child-container']//div[@class='database-node tree-node'][7]/div[1]")).click();
+			login.driver.findElement(By.xpath("//div[@data-node-model-id='INDONESIA']//div[@class='toggle']")).click();
 			Thread.sleep(2000);
-			rightClickElement = login.driver
-					.findElement(By.xpath("//div[@class='database-node tree-node open']//div[3]//div[1]//span[1]//span[1]"));
-			
-		    break;
+			ele = login.driver.findElement(By.xpath(
+					"//div[@data-node-model-id='INDONESIA']//div[@class='child-container']//div[1]//span[@class='name-text']"));
+			Before_set_lang = ele.getText();
+			rightClickElement = login.driver.findElement(
+					By.xpath("//div[@data-node-model-id='INDONESIA']//span[contains(text(),'" + arg1 + "')]"));
+			break;
+		case "Global Database":
+			Thread.sleep(2000);
+			WebElement obj = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--name']"));
+			Before_set_lang = obj.getText();
+			rightClickElement = login.driver.findElement(
+					By.xpath("//div[@data-node-model-id='GLOBAL']//span[contains(text(),'" + arg1 + "')]"));
+			break;
 		default:
 			Assert.fail("Doesn't exist in given databse list");
 		}
-		Before_set_lang=rightClickElement.getText();
-		login.Log4j.info("Before_set_lang is "+Before_set_lang);
+		login.Log4j.info("Before_set_lang is " + Before_set_lang);
 		Thread.sleep(4000);
 		// contextClick() method to do right click on the element
 		action.contextClick(rightClickElement).build().perform();
-	    
+
 	}
+
 	@And("^Set language as \"([^\"]*)\"$")
 	public void set_language_as(String arg1) throws Throwable {
 		Thread.sleep(2000);
-		WebElement ele=login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
-	    Thread.sleep(2000);
-	    action.moveToElement(ele).click().build().perform();
-	    Thread.sleep(2000);
-	    login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]")).click();
-	   /* Thread.sleep(3000);
-	    WebElement rightClickElement = login.driver
-	  				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
-	    After_set_lang=rightClickElement.getText();
-	    login.Log4j.info("After_set_lang is "+After_set_lang);*/
-		
-	    
+		ele = login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
+		Thread.sleep(2000);
+		action.moveToElement(ele).click().build().perform();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]")).click();
+
 	}
 
 	@Then("^The Databases language should be changed to selected language$")
 	public void the_Databases_language_should_be_changed_to_selected_language() throws Throwable {
-		 Thread.sleep(3000);
-		    WebElement rightClickElement = login.driver
-		  				.findElement(By.xpath("//div[@class='child-container']//div[1]//span[@class='name-text']"));
-		    After_set_lang=rightClickElement.getText();
-		    login.Log4j.info("After_set_lang is "+After_set_lang);
-		    if(!Before_set_lang.equals(After_set_lang)==true) {
-		    	  login.Log4j.info(Before_set_lang+" is changed as "+ After_set_lang );
-		    } else {
-		    	
-		    }
+		Thread.sleep(3000);
+		WebElement dbele;
+
+		if (dbase.equalsIgnoreCase("World Trend Plus")) {
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='WORLD']//span[@class='name-text']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			Thread.sleep(2000);
+			action.contextClick(dbele).build().perform();
+
+		} else if (dbase.equalsIgnoreCase("Russia Premium Database")) {
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='RUSSIA']//span[@class='name-text']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			action.contextClick(dbele).build().perform();
+
+		} else if (dbase.equalsIgnoreCase("Global Database")) {
+			dbele = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--name']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			action.contextClick(rightClickElement).build().perform();
+
+		} else {
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@data-node-model-id='INDONESIA']//div[@class='child-container']//div[1]//span[@class='name-text']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			Thread.sleep(2000);
+			action.contextClick(rightClickElement).build().perform();
+
+		}
+		SetLangugeEnglish();
+		if (database == true && !Before_set_lang.equals(After_set_lang) == true) {
+			login.Log4j.info(Before_set_lang + " is changed as " + After_set_lang);
+		} else {
+			Assert.fail("The Databases language is not changed to selected language");
+		}
+		if (login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).isDisplayed()) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
+		}
+
+	}
+
+	@And("^Mouse hover on any topic level of data$")
+	public void mouse_hover_on_any_topic_level_of_data() throws Throwable {
+		// mouse hover on Global key series Database topic level
+		Thread.sleep(3000);
+		login.driver
+				.findElement(
+						By.xpath("//div[@class='child-container']//div[@class='database-node tree-node'][3]/div[1]"))
+				.click();
+		Thread.sleep(2000);
+		ele = login.driver.findElement(
+				By.xpath("//div[@class='child-container']//div[@class='title']//span[contains(text(),'Albania')]"));
+
+	}
+
+	@Then("^\"([^\"]*)\" should be available$")
+	public void should_be_available(String arg1) throws Throwable {
+		str = ele.getText();
+		login.Log4j.info(str);
+		action.moveToElement(ele).click().build().perform();
+		if (arg1.equalsIgnoreCase("Copy link(s)")) {
+			copy_link = login.driver.findElement(By.xpath(
+					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[1]//i"));
+			copy_link.click();
+			login.Log4j.info("Clicking on " + arg1);
+
+		} else if (arg1.equalsIgnoreCase("Footnotes")) {
+			footnote = login.driver.findElement(By.xpath(
+					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[2]"));
+			login.Log4j.info("Clicking on " + arg1);
+		}
+	}
+
+	@Then("^The selected topic should be highleted$")
+	public void the_selected_topic_should_be_highleted() throws Throwable {
+		Thread.sleep(10000);
+		WebElement highlightd_topic = login.driver.findElement(By.xpath("//div[@class='tree-node open highlight']"));
+		if (highlightd_topic.isDisplayed()) {
+			login.Log4j.info("The selected topic is highlighted for mouse hover action Copy link(s)");
+		} else {
+			AssertJUnit.fail("The selected topic is not highlighted for mouse hover action Copy link(s)");
+		}
+		login.driver.close();
+		login.driver.switchTo().window(tabs2.get(0));
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
+	}
+
+	@When("^click on it$")
+	public void click_on_it() throws Throwable {
+		if (footnote.isDisplayed()) {
+			Thread.sleep(1000);
+			footnote.click();
+		}
+	}
+
+	@Then("^Footnotes should be open for related topic$")
+	public void footnotes_should_be_open_for_related_topic() throws Throwable {
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.className("footnotes-modal--name"));
+		String footenote_text = ele.getText();
+		login.Log4j.info(footenote_text);
+		if (footenote_text.contains(str)) {
+			login.Log4j.info("Footnotes opened for related topic");
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@title='Close']"));
+		} else {
+			login.driver.findElement(By.xpath("//div[@title='Close']"));
+			Assert.fail("Footnotes not opened for related topic");
+		}
 	}
 
 	public static void AlldbClear() throws InterruptedException {
@@ -878,6 +998,30 @@ public class DatabasesTab {
 			}
 		}
 	}
+
+	@And("^Right click on any topic level of data$")
+	public void right_click_on_any_topic_level_of_data() throws Throwable {
+		mouse_hover_on_any_topic_level_of_data();
+		Thread.sleep(5000);
+		action.contextClick(ele).build().perform();
+	}
+
+	@And("^\"([^\"]*)\" option should be available$")
+	public void option_should_be_available(String arg1) throws Throwable {
+		if (arg1.equalsIgnoreCase("Copy link(s)")) {
+			copy_link = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[1]"));
+			Thread.sleep(1000);
+			copy_link.click();
+			login.Log4j.info("Clicking on " + arg1);
+		} else if (arg1.equalsIgnoreCase("Footnotes")) {
+			footnote = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[2]"));
+			Thread.sleep(1000);
+			footnote.click();
+			login.Log4j.info("Clicking on " + arg1);
+		}
+
+	}
+
 	public static void AfterMethod() throws InterruptedException {
 		Thread.sleep(2000);
 		WebElement SeriesCount = login.driver.findElement(By.cssSelector(".series-series-count"));
@@ -886,12 +1030,22 @@ public class DatabasesTab {
 		String newStr = count[0].replaceAll(",", "");
 		afterFilter = Integer.parseInt(newStr);
 	}
-   public static void BeforeMethod() throws InterruptedException {
-	   Thread.sleep(2000);
+
+	public static void BeforeMethod() throws InterruptedException {
+		Thread.sleep(2000);
 		WebElement SeriesCount = login.driver.findElement(By.cssSelector(".series-series-count"));
 		String before_apply_filter = SeriesCount.getText();
 		String[] count1 = before_apply_filter.split(" ");
 		String newStr = count1[0].replaceAll(",", "");
-	    beforeFilter = Integer.parseInt(newStr);
-   }
+		beforeFilter = Integer.parseInt(newStr);
+	}
+
+	public void SetLangugeEnglish() throws InterruptedException {
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
+		Thread.sleep(2000);
+		action.moveToElement(ele).click().build().perform();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[2]")).click();
+	}
 }
