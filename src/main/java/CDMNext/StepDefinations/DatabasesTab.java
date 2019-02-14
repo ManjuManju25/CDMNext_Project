@@ -57,7 +57,7 @@ public class DatabasesTab {
 	public void click_on_All_Databases_dropdown() throws Throwable {
 		// SearchTest.ClearSelection();
 		AlldbClear();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_Databases"))).click();
@@ -339,7 +339,7 @@ public class DatabasesTab {
 
 	@Then("^The selected DB should be highlighted$")
 	public void the_selected_DB_should_be_highlighted() throws Throwable {
-		Thread.sleep(10000);
+		Thread.sleep(20000);
 		WebElement highlightddb = login.driver
 				.findElement(By.xpath("//div[@class='database-node tree-node open highlight']"));
 		if (highlightddb.isDisplayed()) {
@@ -590,6 +590,8 @@ public class DatabasesTab {
 		}
 		topButton = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
 		collapseTree = login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
+		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
+
 		if (topButton.isDisplayed()) {
 			Thread.sleep(2000);
 			topButton.click();
@@ -597,6 +599,13 @@ public class DatabasesTab {
 		if (collapseTree.isDisplayed()) {
 			Thread.sleep(2000);
 			collapseTree.click();
+		}
+		if (reset.size() > 0) {
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+				login.Log4j.info("Clicking on Reset button");
+			}
 		}
 	}
 
@@ -950,11 +959,10 @@ public class DatabasesTab {
 		}
 	}
 
-	@Then("^The selected topic should be highleted$")
-	public void the_selected_topic_should_be_highleted() throws Throwable {
+	@Then("^The selected topic should be highlighted$")
+	public void the_selected_topic_should_be_highlighted() throws Throwable {
 		Thread.sleep(10000);
-		WebElement highlightd_topic = login.driver.findElement(By.xpath("//div[@class='tree-node open highlight']"));
-		if (highlightd_topic.isDisplayed()) {
+		if (login.driver.findElement(By.xpath("//div[@class='tree-node open highlight']")).isDisplayed()) {
 			login.Log4j.info("The selected topic is highlighted for mouse hover action Copy link(s)");
 		} else {
 			AssertJUnit.fail("The selected topic is not highlighted for mouse hover action Copy link(s)");
@@ -982,11 +990,13 @@ public class DatabasesTab {
 		if (footenote_text.contains(str)) {
 			login.Log4j.info("Footnotes opened for related topic");
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@title='Close']"));
+			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 		} else {
-			login.driver.findElement(By.xpath("//div[@title='Close']"));
+			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
 			Assert.fail("Footnotes not opened for related topic");
 		}
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
 	}
 
 	public static void AlldbClear() throws InterruptedException {
@@ -1008,6 +1018,8 @@ public class DatabasesTab {
 
 	@And("^\"([^\"]*)\" option should be available$")
 	public void option_should_be_available(String arg1) throws Throwable {
+		str = ele.getText();
+		login.Log4j.info(str);
 		if (arg1.equalsIgnoreCase("Copy link(s)")) {
 			copy_link = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[1]"));
 			Thread.sleep(1000);
@@ -1015,11 +1027,26 @@ public class DatabasesTab {
 			login.Log4j.info("Clicking on " + arg1);
 		} else if (arg1.equalsIgnoreCase("Footnotes")) {
 			footnote = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[2]"));
-			Thread.sleep(1000);
-			footnote.click();
+			// Thread.sleep(1000);
+			// footnote.click();
 			login.Log4j.info("Clicking on " + arg1);
 		}
 
+	}
+
+	@And("^Mouse hover on any Section level of data$")
+	public void mouse_hover_on_any_Section_level_of_data() throws Throwable {
+		// mouse hover on Markit Purchasing Managers' Index for section level
+		Thread.sleep(3000);
+		login.driver
+				.findElement(
+						By.xpath("//div[@class='child-container']//div[@class='database-node tree-node'][4]/div[1]"))
+				.click();
+		Thread.sleep(2000);
+		login.driver.findElement(
+				By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[1]//div[@class='toggle']")).click();
+		Thread.sleep(2000);
+		ele=login.driver.findElement(By.xpath("//div[@class='tree-node open']//div[@class='child-container']//div[1]//span[@class='name']"));
 	}
 
 	public static void AfterMethod() throws InterruptedException {

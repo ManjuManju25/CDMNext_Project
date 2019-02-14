@@ -11,12 +11,12 @@ import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
 @CucumberOptions(// features="classpath:",
-		features = "src/test/java/CDMNext/Features/",
-		glue = { "CDMNext.StepDefinations" }, 
-		//tags= {"@DB"},
-		tags = {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab" }, 
-		dryRun =false, 
-		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
+		features = "src/test/java/CDMNext/Features/", glue = { "CDMNext.StepDefinations" }, 
+		tags = { "@DB" },
+		// tags =
+		// {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab" },
+		dryRun = false, plugin = {
+				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
 public class TestRunner {
 	private TestNGCucumberRunner testNGCucumberRunner;
 
@@ -42,7 +42,7 @@ public class TestRunner {
 		login.Log4j.info("\nInside TestNG > @DataProvider");
 		return testNGCucumberRunner.provideFeatures();
 	}
-
+	
 	// TestNG @Aftersuite
 	@AfterSuite
 	public void tearDownClass() throws Throwable {
