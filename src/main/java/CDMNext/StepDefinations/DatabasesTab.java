@@ -7,6 +7,8 @@ import org.testng.asserts.SoftAssert;
 import static org.testng.Assert.assertTrue;
 
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,7 @@ public class DatabasesTab {
 	ArrayList<String> tabs2;
 	public WebElement footnoteDb;
 	public String str;
+	public String Validationstr;
 	public WebElement cross_icon;
 	String[] dbarr;
 	String[] DataBase;
@@ -48,9 +51,9 @@ public class DatabasesTab {
 	public WebElement checkbox;
 	Robot robot;
 	// create object of Actions class
-	public static final Actions action = new Actions(login.driver);
+	Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
-	public static final JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+     JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	SoftAssert s_assert = new SoftAssert();
 
 	@Given("^Click on All Databases dropdown$")
@@ -80,9 +83,7 @@ public class DatabasesTab {
 			} else {
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + dblist + "')]")).click();
 			}
-
 		}
-
 	}
 
 	@Then("^Result should be loaded only for selected database$")
@@ -104,7 +105,6 @@ public class DatabasesTab {
 			} else if (database == false) {
 				Assert.fail("Results is not shown correctly for selected " + DataBase[0]);
 			}
-
 		}
 	}
 
@@ -225,7 +225,6 @@ public class DatabasesTab {
 		} catch (NoSuchElementException e) {
 			AssertJUnit.fail(e.getMessage());
 		}
-
 	}
 
 	@Then("^Selected series should be unselected$")
@@ -245,14 +244,10 @@ public class DatabasesTab {
 				.findElement(By
 						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
 				.click();
-		Actions action = new Actions(login.driver);
 		db = login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[2]"));
 		ele = login.driver.findElement(
 				By.xpath("//div[@class='child-container']//div[1]//div[@class='title']//span[@class='name']//span[1]"));
-		dbstr = ele.getText();
-		login.Log4j.info("Database is " + dbstr);
-		Thread.sleep(1000);
-		action.moveToElement(db).build().perform();
+		action.moveToElement(ele).build().perform();
 	}
 
 	@Then("^Footnotes icon should be displayed$")
@@ -273,37 +268,35 @@ public class DatabasesTab {
 		login.Log4j.info("Clicking on footnote icon");
 	}
 
-	@Then("^Footnotes should be opened for related DB$")
-	public void footnotes_should_be_opened_for_related_DB() throws Throwable {
-		// Thread.sleep(2000);
-		footnoteDb = login.driver.findElement(
-				By.xpath("//div[@class='footnotes--main-actions']//div[@class='footnotes-bread-crumb--title']"));
+	@Then("^Footnotes should be opened for related \"([^\"]*)\"$")
+	public void footnotes_should_be_opened_for_related(String arg1) throws Throwable {
+		footnoteDb = login.driver.findElement(By.className("footnotes-modal--name"));
 		Thread.sleep(2000);
 		str = footnoteDb.getText();
 		login.Log4j.info(str);
-		if (str.contains(dbstr) == true) {
-			login.Log4j.info("Footnotes is displayed for mouse hover action on DB level");
+		Validationstr=ele.getText();
+		login.Log4j.info(Validationstr);
+		if (str.contains(Validationstr) == true) {
+			login.Log4j.info("Footnotes is displayed on "+ arg1 + " level");
 			Thread.sleep(1500);
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+			login.driver.findElement(By.className("movable-modal--close")).click();
 		} else {
 			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-			AssertJUnit.fail("Footnotes is not displayed for mouse hover action on DB level");
+			login.driver.findElement(By.className("movable-modal--close")).click();
+			AssertJUnit.fail("Footnotes is not displayed on "+ arg1+ " level");
 		}
+		CollapseTreeMethod();
 	}
 
 	@Given("^Right click on any Database$")
 	public void right_click_on_any_Database() throws Throwable {
+		//Right clicking on Global Database
 		Thread.sleep(3000);
-		WebElement dbele;
-		dbele = login.driver
+		ele = login.driver
 				.findElement(By.xpath("//div[@class='child-container']//div[2]//div[2]//span[@class='name-text']"));
-		dbstr = dbele.getText();
-		login.Log4j.info("dbele is " + dbstr);
-		Actions act = new Actions(login.driver);
-		rightClickElement = login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[2]"));
+    	rightClickElement = login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[2]"));
 		// contextClick() method to do right click on the element
-		act.contextClick(rightClickElement).build().perform();
+		action.contextClick(rightClickElement).build().perform();
 	}
 
 	@When("^Paste it in new tab$")
@@ -337,38 +330,32 @@ public class DatabasesTab {
 		}
 	}
 
-	@Then("^The selected DB should be highlighted$")
-	public void the_selected_DB_should_be_highlighted() throws Throwable {
+	@Then("^The selected \"([^\"]*)\" should be highlighted$")
+	public void the_selected_should_be_highlighted(String arg1) throws Throwable {
 		Thread.sleep(20000);
-		WebElement highlightddb = login.driver
-				.findElement(By.xpath("//div[@class='database-node tree-node open highlight']"));
-		if (highlightddb.isDisplayed()) {
-			login.Log4j.info("The selected DB is highlighted for right click action Copy link(s)");
-		} else {
-			AssertJUnit.fail("The selected DB is not highlighted for right click action Copy link(s)");
+		if(arg1.equalsIgnoreCase("DB")) {
+			WebElement highlightddb=login.driver
+			.findElement(By.xpath("//div[@class='database-node tree-node open highlight']"));
+			if (highlightddb.isDisplayed()) {
+				login.Log4j.info("The selected "+ arg1 +" is highlighted for right click action/mouse hover Copy link(s)");
+			} else {
+				AssertJUnit.fail("The selected "+ arg1 +" is not highlighted for right click action/mouse hover Copy link(s)");
+			}
+		} else if(arg1.equals("topic")==true || arg1.equals("section")==true || arg1.equals("table")==true){
+			WebElement highlightdtext=login.driver
+					.findElement(By.xpath("//div[@class='tree-node open highlight']"));
+			if (highlightdtext.isDisplayed()) {
+				login.Log4j.info("The selected "+ arg1 +" is highlighted for right click action/mouse hover Copy link(s)");
+			} else {
+				AssertJUnit.fail("The selected "+ arg1 +" is not highlighted for right click action/mouse hover Copy link(s)");
+			}
 		}
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
+		Thread.sleep(2000);
+		CollapseTreeMethod();
 	}
-
-	@Then("^Footnotes should be opened for selected DB$")
-	public void footnotes_should_be_opened_for_selected_DB() throws Throwable {
-		footnoteDb = login.driver.findElement(
-				By.xpath("//div[@class='footnotes--main-actions']//div[@class='footnotes-bread-crumb--title']"));
-		str = footnoteDb.getText();
-		login.Log4j.info(str);
-		if (str.contains(dbstr) == true) {
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-			login.Log4j.info("Footnotes is displayed for right click action on DB level");
-
-		} else {
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-			AssertJUnit.fail("Footnotes is not displayed for right click action on DB level");
-		}
-	}
-
+	
 	@And("^Click on x icon to remove DB$")
 	public void click_on_x_icon_to_remove_DB() throws Throwable {
 		cross_icon = login.driver
@@ -527,9 +514,6 @@ public class DatabasesTab {
 	@Then("^Result should be displayed as per the filters applied$")
 	public void result_should_be_displayed_as_per_the_filters_applied() throws Throwable {
 		WebElement element;
-		WebElement topButton;
-		WebElement collapseTree;
-
 		login.driver
 				.findElement(By
 						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
@@ -588,25 +572,9 @@ public class DatabasesTab {
 				}
 			}
 		}
-		topButton = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
-		collapseTree = login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
-		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-
-		if (topButton.isDisplayed()) {
-			Thread.sleep(2000);
-			topButton.click();
-		}
-		if (collapseTree.isDisplayed()) {
-			Thread.sleep(2000);
-			collapseTree.click();
-		}
-		if (reset.size() > 0) {
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
-				login.Log4j.info("Clicking on Reset button");
-			}
-		}
+		TopMethod();
+		CollapseTreeMethod();
+		ResetMethod();
 	}
 
 	@When("^Click on x icon$")
@@ -617,7 +585,6 @@ public class DatabasesTab {
 				"//div[@class='dropdown-filters-list']//div[3]//span[2]//span[@class='select-field--cross-icon']"))
 				.click();
 		login.Log4j.info("Removing filter.... ");
-
 	}
 
 	@Then("^The applied filters should be removed$")
@@ -630,7 +597,6 @@ public class DatabasesTab {
 		} else {
 			Assert.fail("The applied filter has not been removed");
 		}
-
 	}
 
 	@Then("^The \"([^\"]*)\" popup should be opened$")
@@ -647,7 +613,6 @@ public class DatabasesTab {
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			Assert.fail(arg1 + " popup is not displayed");
 		}
-
 	}
 
 	@Then("^User should redirect to \"([^\"]*)\"$")
@@ -713,10 +678,8 @@ public class DatabasesTab {
 				}
 			}
 		}
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
+		TopMethod();
+		CollapseTreeMethod();
 	}
 
 	@Then("^The data tree should be expanded$")
@@ -742,17 +705,24 @@ public class DatabasesTab {
 	@Then("^\"([^\"]*)\" message should be displayed$")
 	public void message_should_be_displayed(String arg1) throws Throwable {
 		Thread.sleep(2000);
-		ele = login.driver.findElement(By.xpath("//p[contains(text(),'" + arg1 + "')]"));
-		String noResults = ele.getText();
-		// login.Log4j.info(noResults);
-		// Assert.assertEquals(true, ele.isDisplayed());
-		// Assert.assertEquals(noResults, arg1," is displayed for invalid Keyword");
-		if (ele.isDisplayed()) {
-			login.Log4j.info(noResults + "is displayed for invalid Keyword ");
-		} else {
-			Assert.fail(noResults + "is not displayed for invalid Keyword ");
+		if (arg1.equalsIgnoreCase("Sorry, no results were found here.")) {
+			ele = login.driver.findElement(By.xpath("//p[contains(text(),'" + arg1 + "')]"));
+			String noResults = ele.getText();
+			if (ele.isDisplayed()) {
+				login.Log4j.info(noResults + "is displayed for invalid Keyword ");
+			} else {
+				Assert.fail(noResults + "is not displayed for invalid Keyword ");
+			}
+		} else if (arg1.equalsIgnoreCase("1 URL link(s) copied.")) {
+			ele = login.driver.findElement(By.xpath("//div[@class='growl-message-text']"));
+			String linkCopied = ele.getText();
+			login.Log4j.info(linkCopied);
+			if (ele.isDisplayed()) {
+				login.Log4j.info(linkCopied + " message is displayed");
+			} else {
+				Assert.fail(linkCopied + "is not displayed  ");
+			}
 		}
-
 	}
 
 	@Given("^Right click on any database$")
@@ -787,15 +757,13 @@ public class DatabasesTab {
 			}
 		} else if (array.length == 2) {
 			if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true) {
-				login.Log4j.info(
-						array[0] + " AND " + array[1] + " options available for right click option for topic level");
+				login.Log4j.info(array[0] + " AND " + array[1] + " options available for right click option ");
 
 			} else {
-				Assert.fail(
-						array[0] + " AND" + array[1] + " options not available for right click option for topic level");
+				Assert.fail(array[0] + " AND" + array[1] + " options not available for right click option ");
 			}
 		}
-
+		CollapseTreeMethod();
 	}
 
 	@And("^After loaded the results ,click on Remove for search keyword$")
@@ -860,14 +828,14 @@ public class DatabasesTab {
 
 	}
 
-	@And("^Set language as \"([^\"]*)\"$")
-	public void set_language_as(String arg1) throws Throwable {
+	@And("^\"([^\"]*)\" as \"([^\"]*)\"$")
+	public void as(String arg1, String arg2) throws Throwable {
 		Thread.sleep(2000);
-		ele = login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
+		ele = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
 		Thread.sleep(2000);
 		action.moveToElement(ele).click().build().perform();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg2 + "')]")).click();
 
 	}
 
@@ -912,7 +880,6 @@ public class DatabasesTab {
 			// After validation changing set language as English
 			Thread.sleep(2000);
 			action.contextClick(rightClickElement).build().perform();
-
 		}
 		SetLangugeEnglish();
 		if (database == true && !Before_set_lang.equals(After_set_lang) == true) {
@@ -920,17 +887,13 @@ public class DatabasesTab {
 		} else {
 			Assert.fail("The Databases language is not changed to selected language");
 		}
-		if (login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
-		}
-
+		CollapseTreeMethod();
 	}
 
 	@And("^Mouse hover on any topic level of data$")
 	public void mouse_hover_on_any_topic_level_of_data() throws Throwable {
 		// mouse hover on Global key series Database topic level
-		Thread.sleep(3000);
+		Thread.sleep(10000);
 		login.driver
 				.findElement(
 						By.xpath("//div[@class='child-container']//div[@class='database-node tree-node'][3]/div[1]"))
@@ -943,8 +906,6 @@ public class DatabasesTab {
 
 	@Then("^\"([^\"]*)\" should be available$")
 	public void should_be_available(String arg1) throws Throwable {
-		str = ele.getText();
-		login.Log4j.info(str);
 		action.moveToElement(ele).click().build().perform();
 		if (arg1.equalsIgnoreCase("Copy link(s)")) {
 			copy_link = login.driver.findElement(By.xpath(
@@ -953,24 +914,11 @@ public class DatabasesTab {
 			login.Log4j.info("Clicking on " + arg1);
 
 		} else if (arg1.equalsIgnoreCase("Footnotes")) {
-			footnote = login.driver.findElement(By.xpath(
-					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[2]"));
+			
+				footnote = login.driver.findElement(By.xpath(
+						"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[2]"));
 			login.Log4j.info("Clicking on " + arg1);
 		}
-	}
-
-	@Then("^The selected topic should be highlighted$")
-	public void the_selected_topic_should_be_highlighted() throws Throwable {
-		Thread.sleep(10000);
-		if (login.driver.findElement(By.xpath("//div[@class='tree-node open highlight']")).isDisplayed()) {
-			login.Log4j.info("The selected topic is highlighted for mouse hover action Copy link(s)");
-		} else {
-			AssertJUnit.fail("The selected topic is not highlighted for mouse hover action Copy link(s)");
-		}
-		login.driver.close();
-		login.driver.switchTo().window(tabs2.get(0));
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
 	}
 
 	@When("^click on it$")
@@ -980,25 +928,7 @@ public class DatabasesTab {
 			footnote.click();
 		}
 	}
-
-	@Then("^Footnotes should be open for related topic$")
-	public void footnotes_should_be_open_for_related_topic() throws Throwable {
-		Thread.sleep(2000);
-		ele = login.driver.findElement(By.className("footnotes-modal--name"));
-		String footenote_text = ele.getText();
-		login.Log4j.info(footenote_text);
-		if (footenote_text.contains(str)) {
-			login.Log4j.info("Footnotes opened for related topic");
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-		} else {
-			login.driver.findElement(By.xpath("//div[@title='Close']")).click();
-			Assert.fail("Footnotes not opened for related topic");
-		}
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
-	}
-
+	
 	public static void AlldbClear() throws InterruptedException {
 		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
 		if (clearIcon.size() > 0) {
@@ -1018,35 +948,74 @@ public class DatabasesTab {
 
 	@And("^\"([^\"]*)\" option should be available$")
 	public void option_should_be_available(String arg1) throws Throwable {
-		str = ele.getText();
-		login.Log4j.info(str);
 		if (arg1.equalsIgnoreCase("Copy link(s)")) {
-			copy_link = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[1]"));
+			copy_link = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='"+ arg1 +"']"));
 			Thread.sleep(1000);
 			copy_link.click();
 			login.Log4j.info("Clicking on " + arg1);
 		} else if (arg1.equalsIgnoreCase("Footnotes")) {
-			footnote = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[2]"));
-			// Thread.sleep(1000);
-			// footnote.click();
+			footnote = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='"+ arg1 +"']"));
 			login.Log4j.info("Clicking on " + arg1);
 		}
-
 	}
 
 	@And("^Mouse hover on any Section level of data$")
 	public void mouse_hover_on_any_Section_level_of_data() throws Throwable {
 		// mouse hover on Markit Purchasing Managers' Index for section level
-		Thread.sleep(3000);
+		Thread.sleep(10000);
 		login.driver
 				.findElement(
 						By.xpath("//div[@class='child-container']//div[@class='database-node tree-node'][4]/div[1]"))
 				.click();
 		Thread.sleep(2000);
-		login.driver.findElement(
-				By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[1]//div[@class='toggle']")).click();
+		login.driver.findElement(By.xpath(
+				"//div[@class='database-node tree-node open']//div[@class='child-container']//div[1]//div[@class='toggle']"))
+				.click();
 		Thread.sleep(2000);
-		ele=login.driver.findElement(By.xpath("//div[@class='tree-node open']//div[@class='child-container']//div[1]//span[@class='name']"));
+		ele = login.driver.findElement(
+				By.xpath("//div[@class='tree-node open']//div[@class='child-container']//div[1]//span[@class='name-text']"));
+	}
+
+	@And("^Right click on any section level of data$")
+	public void right_click_on_any_section_level_of_data() throws Throwable {
+		mouse_hover_on_any_Section_level_of_data();
+		Thread.sleep(5000);
+		action.contextClick(ele).build().perform();
+	}
+
+	@And("^Mouse hover on any table level of data$")
+	public void mouse_hover_on_any_table_level_of_data() throws Throwable {
+		// mouse hover on China Premium Database for table level
+		Thread.sleep(10000);
+		login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		login.driver
+				.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		login.driver
+				.findElement(By.xpath(
+						"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath(
+				"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']"));
+		Thread.sleep(2000);
+
+	}
+
+	@Then("^The link should be copied$")
+	public void the_link_should_be_copied() throws Throwable {
+		Thread.sleep(2000);
+		String clipboard_data = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
+				.getData(DataFlavor.stringFlavor);
+		if (clipboard_data != null) {
+			login.Log4j.info(clipboard_data);
+			login.Log4j.info("The entire database link is copied to clipboard");
+		} else {
+			login.Log4j.info("The entire database link is not copied to clipboard");
+		}
 	}
 
 	public static void AfterMethod() throws InterruptedException {
@@ -1074,5 +1043,32 @@ public class DatabasesTab {
 		action.moveToElement(ele).click().build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[2]")).click();
+	}
+
+	public void CollapseTreeMethod() throws InterruptedException {
+		Thread.sleep(2000);
+		WebElement collapseTree = login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
+		if (collapseTree.isDisplayed()) {
+			collapseTree.click();
+			login.Log4j.info("Clicking on collapseTree");
+		}
+	}
+	public void TopMethod() throws InterruptedException {
+		Thread.sleep(2000);
+		WebElement topButton = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
+		if (topButton.isDisplayed()) {
+			topButton.click();
+			login.Log4j.info("Clicking on Top button");
+		}
+	}
+	public void ResetMethod() throws InterruptedException {
+		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
+		if(reset.size() > 0) {
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+				login.Log4j.info("Clicking on Reset button");
+			}
+		}
 	}
 }

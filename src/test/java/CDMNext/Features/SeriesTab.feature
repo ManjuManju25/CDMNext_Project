@@ -28,11 +28,11 @@ Then User can able to see "Unselect all" option from dropdown menu
 Scenario: TC_SeriesTab_04:Verify "All Insights" option
 When Click on "All insights" 
 Then The "Insight Explorer" popup should be appeared
-
-@SeriesTab
-Scenario: TC_SeriesTab_05:Verify series count for search
-Given User enters keyword "gdp" 
-Then Series count should be matched with displayed result
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_05:Verify series count for search
+#Given User enters keyword "gdp" 
+#Then Series count should be matched with displayed result
 
 @SeriesTab 
 Scenario: TC_SeriesTab_06:Verifying "Copy" option for series level
@@ -111,41 +111,41 @@ Scenario: TC_SeriesTab_18:Verifying SSP for series
 Given User enters "GDP" 
 When Click on (i) icon
 Then SSP window should be displayed
-
-@SeriesTab
-Scenario: TC_SeriesTab_19:Verifying "key only" filter for series tab
-Given User enters keyword "GCF"
-And   User has selects "More" as "Key only"
-When  Click on "Apply filter"
-Then  User verify corresponding results for selected filter
-
-@SeriesTab
-Scenario: TC_SeriesTab_20:Verifying "with release schedule" filter for series tab
-Given User enters "FDI"
-And   User has selects "More" as "With release schedule"
-When  Click on "Apply filter"
-Then  User verify corresponding results for selected filter
-
-@SeriesTab
-Scenario: TC_SeriesTab_21:Verifying "with suggestions for rebased/discontinued series " filter for series tab
-Given User enters "PSI"
-And   User has selects "More" as "With suggestions for rebased/discontinued series"
-When  Click on "Apply filter"
-Then  User verify corresponding results for selected filter
-
-@SeriesTab
-Scenario: TC_SeriesTab_22:Verifying "Forecast" filter for series tab
-Given User enters "FDI"
-And   User has selects "More" as "Forecast"
-When  Click on "Apply filter"
-Then  User verify corresponding results for selected filter
-
-@SeriesTab
-Scenario: TC_SeriesTab_23:Verify 'Mouse over' icons for series level
-Given User enters "5724301"
-When User Mouse hover on "Show Database" icon
-Then User can selects "Global Database"
-Then User can see the selected database in Databases tab 
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_19:Verifying "key only" filter for series tab
+#Given User enters keyword "GCF"
+#And   User has selects "More" as "Key only"
+#When  Click on "Apply filter"
+#Then  User verify corresponding results for selected filter
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_20:Verifying "with release schedule" filter for series tab
+#Given User enters "FDI"
+#And   User has selects "More" as "With release schedule"
+#When  Click on "Apply filter"
+#Then  User verify corresponding results for selected filter
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_21:Verifying "with suggestions for rebased/discontinued series " filter for series tab
+#Given User enters "PSI"
+#And   User has selects "More" as "With suggestions for rebased/discontinued series"
+#When  Click on "Apply filter"
+#Then  User verify corresponding results for selected filter
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_22:Verifying "Forecast" filter for series tab
+#Given User enters "FDI"
+#And   User has selects "More" as "Forecast"
+#When  Click on "Apply filter"
+#Then  User verify corresponding results for selected filter
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_23:Verify 'Mouse over' icons for series level
+#Given User enters "5724301"
+#When User Mouse hover on "Show Database" icon
+#Then User can selects "Global Database"
+#Then User can see the selected database in Databases tab 
 
 @SeriesTab
 Scenario: TC_SeriesTab_24:Verify 'Mouse over' icons for series level
@@ -239,21 +239,21 @@ Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
 
-@SeriesTab
-Scenario: TC_SeriesTab_38:Verify selected 'series count' under series tab.
-Given User enters "146381801;1380601;245178303"
-Then Verify the selected series count
-
-@SeriesTab
-Scenario: TC_SeriesTab_39:Verify "Add series" by click on '+'
-Given User enters "7872901;7874601"
-When Click on + icon on series
-Then The series should be added to Data tab
-
-@SeriesTab
-Scenario: TC_SeriesTab_40:Verify Pin/unpin filters
-When Hover the mouse on any filter and click on Pin
-Then filter should be pined/unpined the filter to left panel
+#@SeriesTab
+#Scenario: TC_SeriesTab_38:Verify selected 'series count' under series tab.
+#Given User enters "146381801;1380601;245178303"
+#Then Verify the selected series count
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_39:Verify "Add series" by click on '+'
+#Given User enters "7872901;7874601"
+#When Click on + icon on series
+#Then The series should be added to Data tab
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_40:Verify Pin/unpin filters
+#When Hover the mouse on any filter and click on Pin
+#Then filter should be pined/unpined the filter to left panel
 
 @SeriesTab
 Scenario: TC_SeriesTab_41:Verify 'add' series from dropdown
