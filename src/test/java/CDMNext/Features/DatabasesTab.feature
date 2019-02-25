@@ -268,8 +268,7 @@ Then The selected "table" should be highlighted
 #
 #@DB
 #Scenario: TC_DB_43:Verifying Add and Replace for table level
-#And Create a visual for table level
-#And Mouse hover on any table level of data
+#And Create a visual and Mouse hover on any table 
 #And  Click on dropdown icon 
 #And  Click on "Add and replace"
 #Then The selected table data should be replaced with existing data on the visual

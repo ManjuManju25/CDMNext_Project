@@ -33,6 +33,7 @@ public class SearchTest {
 	public WebElement checkbox;
 	public WebElement ul_element;
 	public String text;
+	String keyword;
 	// create instance of JavaScriptExecutor
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	// create object of Actions class
@@ -50,7 +51,6 @@ public class SearchTest {
 
 		} else {
 			login.Log4j.info("If User has already logged in pelase continue....");
-
 		}
 	}
 
@@ -63,7 +63,6 @@ public class SearchTest {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
 		Thread.sleep(2000);
 		ClearSelection();
-
 	}
 
 	@Then("^User verify keyword search results$")
@@ -101,7 +100,6 @@ public class SearchTest {
 			listwords = new String[1];
 			listwords[0] = currentKeyword;
 			login.Log4j.info(listwords[0]);
-
 		}
 
 		login.Log4j.info("Array size is " + listwords.length);
@@ -132,15 +130,48 @@ public class SearchTest {
 					text = tooltip.getText();
 					// login.Log4j.info("Title information is \n" + text);
 
+					/*
+					  Boolean KeywordMatch = false; for (String keyword : listwords) {
+					  login.Log4j.info(keyword);
+					  
+					  if (search_validation(text,keyword) == true) { login.Log4j.info(keyword +
+					  " is exists in the" + "\n" + text); KeywordMatch = true; break;
+					  
+					  } else if (KeywordMatch == false) { WebElement ele =login.driver.findElement(
+					  By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					  Thread.sleep(1000); ele.click();
+					  
+					  if
+					  (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data")
+					  )).isDisplayed()) { Thread.sleep(2000);
+					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))
+					  ).click(); List<WebElement> datasets =
+					  login.driver.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info")));
+					  //List<WebElement> datasets =
+					  login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+					  for(WebElement list : datasets) { Filters.showdata = list.getText();
+					  login.Log4j.info(keyword); if(search_validation(Filters.showdata,keyword) ==
+					  true) { login.Log4j.info(keyword + " is exists in the" + "\n" +
+					  Filters.showdata); Thread.sleep(1000);
+					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+					  .click(); KeywordMatch = true; break; } else { Thread.sleep(1000);
+					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+					  .click(); status.add(keyword); } } } } } //login.Log4j.info(KeywordMatch); if
+					  (KeywordMatch == false) { for (String failure : status) { Assert.fail(failure
+					  + " keyword doesn't exists in " + text + " AND in Related data " + "\n" +
+					  Filters.showdata); } }
+					 */
+
 					Boolean KeywordMatch = false;
 					switch (listwords.length) {
 					case 1:
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true) {
 							login.Log4j.info(listwords[0] + " is exists in the" + "\n" + text);
 							KeywordMatch = true;
+
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true) {
 								login.Log4j.info(listwords[0] + " is exists in the" + "\n" + Filters.showdata);
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
@@ -155,14 +186,14 @@ public class SearchTest {
 						break;
 					case 2:
 
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true
+								|| search_validation(text, listwords[1]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " exists in " + text);
 							KeywordMatch = true;
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[1].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true
+									|| search_validation(Filters.showdata, listwords[1]) == true) {
 								login.Log4j.info(listwords[0] + " OR " + listwords[1] + " is exists in the " + "\n"
 										+ Filters.showdata);
 								Thread.sleep(1000);
@@ -177,9 +208,9 @@ public class SearchTest {
 
 						break;
 					case 3:
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true
+								|| search_validation(text, listwords[1]) == true
+								|| search_validation(text, listwords[2]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
 									+ " exists in " + text);
 							KeywordMatch = true;
@@ -187,9 +218,9 @@ public class SearchTest {
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
 
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[1].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[2].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true
+									|| search_validation(Filters.showdata, listwords[1]) == true
+									|| search_validation(Filters.showdata, listwords[2]) == true) {
 								login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
 										+ " exists in the " + "\n" + Filters.showdata);
 								Thread.sleep(1000);
@@ -205,20 +236,20 @@ public class SearchTest {
 						break;
 					case 4:
 
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true
+								|| search_validation(text, listwords[1]) == true
+								|| search_validation(text, listwords[2]) == true
+								|| search_validation(text, listwords[3]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " exists in " + text);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[1].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[2].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[3].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true
+									|| search_validation(Filters.showdata, listwords[1]) == true
+									|| search_validation(Filters.showdata, listwords[2]) == true
+									|| search_validation(Filters.showdata, listwords[3]) == true) {
 								login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " exists in the " + "\n" + Filters.showdata);
 								Thread.sleep(1000);
@@ -234,22 +265,22 @@ public class SearchTest {
 
 						break;
 					case 5:
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true
+								|| search_validation(text, listwords[1]) == true
+								|| search_validation(text, listwords[2]) == true
+								|| search_validation(text, listwords[3]) == true
+								|| search_validation(text, listwords[4]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " exists in " + text);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[1].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[2].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[3].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[4].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true
+									|| search_validation(Filters.showdata, listwords[1]) == true
+									|| search_validation(Filters.showdata, listwords[2]) == true
+									|| search_validation(Filters.showdata, listwords[3]) == true
+									|| search_validation(Filters.showdata, listwords[4]) == true) {
 								login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + "exists in the " + "\n"
 										+ Filters.showdata);
@@ -266,12 +297,12 @@ public class SearchTest {
 
 						break;
 					case 6:
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[5].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true
+								|| search_validation(text, listwords[1]) == true
+								|| search_validation(text, listwords[2]) == true
+								|| search_validation(text, listwords[3]) == true
+								|| search_validation(text, listwords[4]) == true
+								|| search_validation(text, listwords[5]) == true) {
 							login.Log4j.info(
 									listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR " + listwords[3]
 											+ " OR " + listwords[4] + " OR " + listwords[5] + " exists in " + text);
@@ -279,12 +310,12 @@ public class SearchTest {
 
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[1].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[2].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[3].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[4].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[5].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true
+									|| search_validation(Filters.showdata, listwords[1]) == true
+									|| search_validation(Filters.showdata, listwords[2]) == true
+									|| search_validation(Filters.showdata, listwords[3]) == true
+									|| search_validation(Filters.showdata, listwords[4]) == true
+									|| search_validation(Filters.showdata, listwords[5]) == true) {
 								login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
 										+ " exists in the " + "\n" + Filters.showdata);
@@ -302,13 +333,13 @@ public class SearchTest {
 
 						break;
 					case 7:
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[5].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[6].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true
+								|| search_validation(text, listwords[1]) == true
+								|| search_validation(text, listwords[2]) == true
+								|| search_validation(text, listwords[3]) == true
+								|| search_validation(text, listwords[4]) == true
+								|| search_validation(text, listwords[5]) == true
+								|| search_validation(text, listwords[6]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
 									+ listwords[6] + " exists in " + text);
@@ -316,13 +347,13 @@ public class SearchTest {
 
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[1].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[2].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[3].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[4].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[5].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[6].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true
+									|| search_validation(Filters.showdata, listwords[1]) == true
+									|| search_validation(Filters.showdata, listwords[2]) == true
+									|| search_validation(Filters.showdata, listwords[3]) == true
+									|| search_validation(Filters.showdata, listwords[4]) == true
+									|| search_validation(Filters.showdata, listwords[5]) == true
+									|| search_validation(Filters.showdata, listwords[6]) == true) {
 								login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
 										+ listwords[6] + " exists in the " + "\n" + Filters.showdata);
@@ -341,14 +372,14 @@ public class SearchTest {
 
 						break;
 					case 8:
-						if (text.toUpperCase().contains(listwords[0].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[1].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[2].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[3].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[4].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[5].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[6].toUpperCase()) == true
-								|| text.toUpperCase().contains(listwords[7].toUpperCase()) == true) {
+						if (search_validation(text, listwords[0]) == true
+								|| search_validation(text, listwords[1]) == true
+								|| search_validation(text, listwords[2]) == true
+								|| search_validation(text, listwords[3]) == true
+								|| search_validation(text, listwords[4]) == true
+								|| search_validation(text, listwords[5]) == true
+								|| search_validation(text, listwords[6]) == true
+								|| search_validation(text, listwords[7]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
 									+ listwords[6] + " OR " + listwords[7] + " exists in " + text);
@@ -356,14 +387,14 @@ public class SearchTest {
 
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
-							if (Filters.showdata.toUpperCase().contains(listwords[0].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[1].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[2].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[3].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[4].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[5].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[6].toUpperCase()) == true
-									|| Filters.showdata.toUpperCase().contains(listwords[7].toUpperCase()) == true) {
+							if (search_validation(Filters.showdata, listwords[0]) == true
+									|| search_validation(Filters.showdata, listwords[1]) == true
+									|| search_validation(Filters.showdata, listwords[2]) == true
+									|| search_validation(Filters.showdata, listwords[3]) == true
+									|| search_validation(Filters.showdata, listwords[4]) == true
+									|| search_validation(Filters.showdata, listwords[5]) == true
+									|| search_validation(Filters.showdata, listwords[6]) == true
+									|| search_validation(Filters.showdata, listwords[7]) == true) {
 								login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
 										+ listwords[6] + " OR " + listwords[7] + " exists in the " + "\n"
@@ -704,7 +735,6 @@ public class SearchTest {
 				Filters.showdata = list.getText();
 			}
 		}
-
 	}
 
 	public static void ClearSelection() throws InterruptedException {
@@ -718,7 +748,8 @@ public class SearchTest {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 				login.Log4j.info("Clicking on Reset button");
 			}
-		} else {
+		}
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
 			login.Log4j.info("Clicking on Unselect button");
@@ -726,14 +757,14 @@ public class SearchTest {
 
 	}
 
-	public boolean search_validation(String searchText, String Keyword) throws Throwable {
+	public boolean search_validation(String searchText, String listwords) throws Throwable {
 
 		/*
 		 * if (searchText.toUpperCase().contains(Keyword.toUpperCase()) == true) {
 		 * return true; } else { return false; }
 		 */
 		String[] keywords = null;
-		keywords = Keyword.split(" ");
+		keywords = listwords.split(" ");
 		switch (keywords.length) {
 		case 1:
 			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true) {

@@ -58,6 +58,10 @@ public class DatabasesTab {
 	String Clipboard_data;
 	WebDriverWait wait;
 	String MouseHoverAction;
+	String beforeReplace_sname1;
+	String beforeReplace_sname2;
+	String afterReplace_sname1;
+	String afterReplace_sname2;
 	Robot robot;
 	// create object of Actions class
 	Actions action = new Actions(login.driver);
@@ -354,38 +358,18 @@ public class DatabasesTab {
 				Assert.fail(
 						"The selected " + arg1 + " is not highlighted for right click action/mouse hover Copy link(s)");
 			}
+			login.driver.close();
+			login.driver.switchTo().window(tabs2.get(0));
+			Thread.sleep(2000);
+			CollapseTreeMethod();
 			
 		} catch(Exception e) {
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
 			Thread.sleep(2000);
 			CollapseTreeMethod();
-			
+			Assert.fail(e.getMessage());
 		}
-		/*if (arg1.equalsIgnoreCase("DB")) {
-			WebElement highlightddb = login.driver
-					.findElement(By.xpath("//div[@class='database-node tree-node open highlight']"));
-			if (highlightddb.isDisplayed()) {
-				login.Log4j.info(
-						"The selected " + arg1 + " is highlighted for right click action/mouse hover Copy link(s)");
-			} else {
-				AssertJUnit.fail(
-						"The selected " + arg1 + " is not highlighted for right click action/mouse hover Copy link(s)");
-			}
-		} else if (arg1.equals("topic") == true || arg1.equals("section") == true || arg1.equals("table") == true) {
-			WebElement highlightdtext = login.driver.findElement(By.xpath("//div[@class='tree-node open highlight']"));
-			if (highlightdtext.isDisplayed()) {
-				login.Log4j.info(
-						"The selected " + arg1 + " is highlighted for right click action/mouse hover Copy link(s)");
-			} else {
-				AssertJUnit.fail(
-						"The selected " + arg1 + " is not highlighted for right click action/mouse hover Copy link(s)");
-			}
-		}
-		login.driver.close();
-		login.driver.switchTo().window(tabs2.get(0));
-		Thread.sleep(2000);
-		CollapseTreeMethod();*/
 	}
 
 	@And("^Click on x icon to remove DB$")
@@ -416,36 +400,39 @@ public class DatabasesTab {
 		List<WebElement> multidb = login.driver
 				.findElements(By.xpath("//div[@class='child-container']//div[@class='database-node tree-node']"));
 		login.Log4j.info("Size of database selection is " + multidb.size());
-		for (int i = 0; i < multidb.size(); i++) {
-			login.Log4j.info(DataBase[0]);
-			login.Log4j.info(DataBase[1]);
-			login.Log4j.info(DataBase[2]);
-			login.Log4j.info(i);
-			Thread.sleep(3000);
-			if (DataBase[i].equalsIgnoreCase("China Premium Database")) {
-				dbarr = DataBase[i].split(" ");
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[3]//div[1]")).click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[3]/div[1]//div[1]")).click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(
+		try {
+			if(multidb.size()==3) {
+		
+		      for (int i = 0; i < multidb.size(); i++) {
+			    login.Log4j.info(DataBase[0]);
+			    login.Log4j.info(DataBase[1]);
+			    login.Log4j.info(DataBase[2]);
+			    login.Log4j.info(i);
+			    Thread.sleep(3000);
+			    if (DataBase[i].equalsIgnoreCase("China Premium Database")) {
+				   dbarr = DataBase[i].split(" ");
+				   login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]")).click();
+				   Thread.sleep(2000);
+				   login.driver.findElement(By.xpath("//div[@class='child-container']//div[3]/div[1]//div[1]")).click();
+				   Thread.sleep(2000);
+				   login.driver.findElement(By.xpath(
 						"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
 						.click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(
+				   Thread.sleep(2000);
+				   login.driver.findElement(By.xpath(
 						"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
 						.click();
-				DatabaseValidation();
-				if (database == true) {
+				//DatabaseValidation();
+			/*	if (database == true) {
 					login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
 
 				} else if (database == false) {
 					Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
-				}
+				}*/
 
 			} else if (DataBase[i].equalsIgnoreCase("Brazil Premium Database")) {
 				dbarr = DataBase[i].split(" ");
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[1]")).click();
+				login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]")).click();
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[1]//div[1]")).click();
 				Thread.sleep(2000);
@@ -456,17 +443,17 @@ public class DatabasesTab {
 				login.driver.findElement(By.xpath(
 						"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[3]//div[1]//div[@class='toggle']"))
 						.click();
-				DatabaseValidation();
-				if (database == true) {
+				//DatabaseValidation();
+				/*if (database == true) {
 					login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
 
 				} else if (database == false) {
 					Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
-				}
+				}*/
 
-			} else {
+			} else if(DataBase[i].equalsIgnoreCase("Russia Premium Database")){
 				dbarr = DataBase[i].split(" ");
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[1]")).click();
+				login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='RUSSIA']//div[1]")).click();
 				Thread.sleep(2000);
 				login.driver.findElement(By
 						.xpath("//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[1]"))
@@ -479,15 +466,28 @@ public class DatabasesTab {
 				login.driver.findElement(By.xpath(
 						"//div[@class='child-container']//div[2]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
 						.click();
-				DatabaseValidation();
-				if (database == true) {
+				//DatabaseValidation();
+				/*if (database == true) {
 					login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
 				} else if (database == false) {
 					Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
-				}
+				}*/
 
 			}
+			DatabaseValidation();
+			if (database == true) {
+				login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
+			} else if (database == false) {
+				Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
+			}
 		}
+	
+			} else {
+				login.Log4j.info("dbsize is more than 3");
+			}
+		}catch(Exception e)	{
+		Assert.fail( e.getMessage());
+	}
 
 	}
 
@@ -1008,6 +1008,7 @@ public class DatabasesTab {
 
 	@And("^\"([^\"]*)\" option should be available$")
 	public void option_should_be_available(String arg1) throws Throwable {
+		MouseHoverAction=arg1;
 		if (arg1.equalsIgnoreCase("Copy link(s)")) {
 			copy_link = login.driver
 					.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='" + arg1 + "']"));
@@ -1056,7 +1057,8 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='view-selection--header']//div[@class='panel-expander panel-expander__left']")).click();
 		// mouse hover on China Premium Database for table level
-		wait=new WebDriverWait(login.driver, 60);
+		login.Log4j.info("mouse hovering");
+		wait=new WebDriverWait(login.driver, 100);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))).click();
 		Thread.sleep(2000);
 		login.driver
@@ -1196,20 +1198,42 @@ public class DatabasesTab {
 		action.moveToElement(dropdown).click().build().perform();		 
 	    login.Log4j.info("Clicking on dropdown icon");
 	}
-	@And("^Create a visual for table level$")
-	public void create_a_visual_for_table_level() throws Throwable {
+	@Given("^Create a visual and Mouse hover on any table$")
+	public void create_a_visual_and_Mouse_hover_on_any_table() throws Throwable {
 		mouse_hover_on_any_table_level_of_data();
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']//span[@class='svg-checkbox']")).click();
+		login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[3]//div[@class='title']//span[@class='svg-checkbox']")).click();
 		robot=new Robot();
 		//creating table
 		robot.keyPress(KeyEvent.VK_T);
 		robot.keyRelease(KeyEvent.VK_T);
+		Thread.sleep(3000);
+	   WebElement element=login.driver.findElement(By.xpath("//tr[@class=' heading']//th[2]//span[@class='series-edit--title']"));
+	   beforeReplace_sname1=element.getText();
+	   login.Log4j.info( beforeReplace_sname1);
+	   WebElement element1=login.driver.findElement(By.xpath("//tr[@class=' heading']//th[3]//span[@class='series-edit--title']"));
+	   beforeReplace_sname2=element1.getText();
+	   login.Log4j.info( beforeReplace_sname2);
+	   ele = login.driver.findElement(By.xpath(
+				"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']"));
+		action.moveToElement(ele).build().perform();
+		
 	}
 
 	@Then("^The selected table data should be replaced with existing data on the visual$")
 	public void the_selected_table_data_should_be_replaced_with_existing_data_on_the_visual() throws Throwable {
-	    
+	Thread.sleep(3000);
+	 WebElement element=login.driver.findElement(By.xpath("//tr[@class=' heading']//th[2]//span[@class='series-edit--title']"));
+	   afterReplace_sname1=element.getText();
+	   login.Log4j.info( afterReplace_sname1);
+	   WebElement element1=login.driver.findElement(By.xpath("//tr[@class=' heading']//th[3]//span[@class='series-edit--title']"));
+	   afterReplace_sname2=element1.getText();
+	   login.Log4j.info( afterReplace_sname2);
+	   if(!beforeReplace_sname1.equals(afterReplace_sname1) == true && !beforeReplace_sname2.equals(afterReplace_sname2) == true) {
+		   login.Log4j.info("The selected table data replaced with existing data for Add and replace");
+	   } else {
+		   Assert.fail("The selected table data replaced with existing data for Add and replace");
+	   }
 	}
 
 	public static void AfterMethod() throws InterruptedException {

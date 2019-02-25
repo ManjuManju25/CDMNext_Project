@@ -11,6 +11,11 @@ When Click on "Apply filter"
 Then Result should be displayed as per selection
 
 @SeriesTab 
+Scenario: TC_SeriesTab_04:Verify "All Insights" option
+When Click on "All insights" 
+Then The "Insight Explorer" popup should be appeared
+
+@SeriesTab 
 Scenario: TC_SeriesTab_02:Verify Reset option  for series tab
 Given User enters "GDP" 
 And   User selects "Source" as "World Bank"
@@ -23,11 +28,11 @@ Scenario: TC_SeriesTab_03:Verifying "Unselect all" option for series level
 Given User enters seriesID "146381801;1380601;245178303" 
 When User right click on any series
 Then User can able to see "Unselect all" option from dropdown menu
-
-@SeriesTab 
-Scenario: TC_SeriesTab_04:Verify "All Insights" option
-When Click on "All insights" 
-Then The "Insight Explorer" popup should be appeared
+#
+#@SeriesTab 
+#Scenario: TC_SeriesTab_04:Verify "All Insights" option
+#When Click on "All insights" 
+#Then The "Insight Explorer" popup should be appeared
 
 @SeriesTab
 Scenario: TC_SeriesTab_05:Verify series count for search
@@ -256,20 +261,26 @@ When Hover the mouse on any filter and click on Pin
 Then filter should be pined/unpined the filter to left panel
 
 @SeriesTab
-Scenario: TC_SeriesTab_41:Verify 'add' series from dropdown
-Given User enters "368921927;371376337"
-And Click on drop down icon next to +
-#And Click on Add
-And Click on "Add"
-Then The series should be added to Data tab
-
-@SeriesTab
 Scenario: TC_SeriesTab_42:Verify 'Add and replace' from dropdown
 Given User enters "5724301;5958801"
 And  Click on drop down icon next to +
 And  Select "Add and replace"
 Then Highlighted visual series should be replaced new series
 
+@SeriesTab
+Scenario: TC_SeriesTab_41:Verify 'add' series from dropdown
+Given User enters "368921927;371376337"
+And Click on drop down icon next to +
+And Click on "Add"
+Then The series should be added to Data tab
+
+#@SeriesTab
+#Scenario: TC_SeriesTab_42:Verify 'Add and replace' from dropdown
+#Given User enters "5724301;5958801"
+#And  Click on drop down icon next to +
+#And  Select "Add and replace"
+#Then Highlighted visual series should be replaced new series
+#
 @SeriesTab
 Scenario: TC_SeriesTab_43:Verify 'add to exist insight' in dropdown
 Given User enters "368921927;371376337"

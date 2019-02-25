@@ -14,7 +14,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 
 public class Myseries {
-	public String rest;
+	public String Seriesnameforpreview;
 	WebElement element;
 	WebElement ulelement;
 	public String Searchinserieslistfilter;
@@ -22,28 +22,6 @@ public class Myseries {
 
 	@And("^Select the Expand Icon$")
 	public void select_the_Expand_Icon() throws Throwable {
-		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//div[@class='user-avatar -default -small']")).click();
-	
-		Thread.sleep(6000);
-	
-		 login.driver.findElement(By.xpath("//div[@class='account-menu--dropdown dropdown--body']/div/div[3]")).click();
-		 Thread.sleep(2500);
-		//login.driver.findElement(By.xpath("//span[contains(text(),'Insight explorer')]")).click();
-               login.driver.findElement(By.xpath(" //span[contains(text(),'New insight')]")).click();
-                     
-		Thread.sleep(6000);
-		
-		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-		
-		
-		element = login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[14]/div[1]"));
-		jse.executeScript("arguments[0].scrollIntoView(true);", element);
-		
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[2]/div/div/div[2]/div[2]/div[14]/div[1]")).click();
-		Thread.sleep(500);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Logo"))).click();
-
 		Thread.sleep(6000);
 		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[3]/div[2]/div[1]/div[1]/div")).click(); 
 	}
@@ -102,22 +80,10 @@ public class Myseries {
 		Actions action = new Actions(login.driver);
 		WebElement we = login.driver.findElement(By.xpath("//div[@class='name-block two-rows-item ']"));
 		action.moveToElement(we).build().perform();
+		Thread.sleep(6000);
 		
-		String Text;
-		Text = we.getAttribute("title");
-		System.out.println(Text);
-		String[]  array = Text.split("\n");
-		int size=array.length;
-		System.out.println(size);
-		for(int i=0;i<array.length;i++){
-		}
-		System.out.println("Name of the Series = :- "+ array[1]);
-		 String NameofSeries = array[1];
-		    String[] result = NameofSeries.split(" ", 2);
-		    String first = result[0];
-		   rest = result[1];
-		   // System.out.println("First Expected String : " + first);
-		    System.out.println("Expected String : " + rest);
+	     Seriesnameforpreview= login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']")).getText();
+		 System.out.println(Seriesnameforpreview);
 		  Thread.sleep(6000);
 			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 			 Thread.sleep(6000);
@@ -136,63 +102,42 @@ public class Myseries {
 			 login.driver.findElement(By.xpath("//div[@class='series-preview--mode__chart']")).click();
 			 
 			 
-			   Actions action = new Actions(login.driver);
+			   /*Actions action = new Actions(login.driver);
 				WebElement we = login.driver.findElement(By.xpath("//span[@class='series-edit--title']"));
-				action.moveToElement(we).build().perform();
+				action.moveToElement(we).build().perform();*/
 				
-				String Text;
-				Text = we.getAttribute("title");
-				System.out.println(Text);
-				String[]  array = Text.split("\n");
-				int size=array.length;
-				System.out.println(size);
-				for(int i=0;i<array.length;i++){
-				}
-				System.out.println("Name of the Series = :- "+ array[1]);
-				 String NameofSeries = array[1];
-				    String[] result = NameofSeries.split(" ", 2);
-				    //String first = result[0];
-				    String inchart = result[1];
-				   // System.out.println("First Expected String : " + first);
-				    System.out.println("Expected String : " + inchart);
-				    if(rest.equalsIgnoreCase(inchart)){
-						System.out.println("Preview Series functionality in Chart is Working Successfully");
-					}
-					else{
-						 Assert.fail("Preview Series functionality in Chart is NOT Working Successfully");
-					}
+				Thread.sleep(6000);
+				String Text1 = login.driver.findElement(By.xpath("//span[@class='series-edit--title']")).getText();
+				
+				 System.out.println(Text1);
+				
+				 System.out.println( Text1 + ":" + Seriesnameforpreview );
+				  if(Text1.equalsIgnoreCase(Seriesnameforpreview)){
+					   
+				    	System.out.println("Preview Series functionality in Chart is Working Successfully");
+				    }else{
+				    	 Assert.fail("Preview Series functionality in Chart is NOT Working Successfully");
+				    }
 		 }
 		 if(arg3.equalsIgnoreCase(arg3))
 		 {
 			 Thread.sleep(6000);
 			 login.driver.findElement(By.xpath("//div[@class='series-preview--mode__table']")).click();
-			 
-			 
-			   Actions action = new Actions(login.driver);
+			   /*Actions action = new Actions(login.driver);
 				WebElement we = login.driver.findElement(By.xpath("//span[@class='series-edit--title']"));
-				action.moveToElement(we).build().perform();
+				action.moveToElement(we).build().perform();*/
+				Thread.sleep(6000);
+				String Text2 = login.driver.findElement(By.xpath("//span[@class='series-edit--title']")).getText();
 				
-				String Text;
-				Text = we.getAttribute("title");
-				System.out.println(Text);
-				String[]  array = Text.split("\n");
-				int size=array.length;
-				System.out.println(size);
-				for(int i=0;i<array.length;i++){
-				}
-				System.out.println("Name of the Series = :- "+ array[1]);
-				 String NameofSeries = array[1];
-				    String[] result = NameofSeries.split(" ", 2);
-				    //String first = result[0];
-				    String intable = result[1];
-				   // System.out.println("First Expected String : " + first);
-				    System.out.println("Expected String : " + intable);
-				    if(rest.equalsIgnoreCase(intable)){
-						System.out.println("Preview Series functionality in Table is Working Successfully");
-					}
-					else{
-						 Assert.fail("Preview Series functionality in Table is NOT Working Successfully");
-					}
+				 System.out.println(Text2);
+				
+				 System.out.println( Text2 + ":" + Seriesnameforpreview );
+				  if(Text2.equalsIgnoreCase(Seriesnameforpreview)){
+					   
+				    	System.out.println("Preview Series functionality in Table is Working Successfully");
+				    }else{
+				    	 Assert.fail("Preview Series functionality in Table is NOT Working Successfully");
+				    }
 		 }
 		 if(arg4.equalsIgnoreCase(arg4))
 		 {
@@ -200,31 +145,22 @@ public class Myseries {
 			 login.driver.findElement(By.xpath("//div[@class='series-preview--mode__statistics']")).click();
 			 
 			 
-			   Actions action = new Actions(login.driver);
+			  /* Actions action = new Actions(login.driver);
 				WebElement we = login.driver.findElement(By.xpath("//span[@class='series-edit--title']"));
-				action.moveToElement(we).build().perform();
+				action.moveToElement(we).build().perform();*/
 				
-				String Text;
-				Text = we.getAttribute("title");
-				System.out.println(Text);
-				String[]  array = Text.split("\n");
-				int size=array.length;
-				System.out.println(size);
-				for(int i=0;i<array.length;i++){
-				}
-				System.out.println("Name of the Series = :- "+ array[1]);
-				 String NameofSeries = array[1];
-				    String[] result = NameofSeries.split(" ", 2);
-				    //String first = result[0];
-				    String instatistics = result[1];
-				   // System.out.println("First Expected String : " + first);
-				    System.out.println("Expected String : " + instatistics);
-				    if(rest.equalsIgnoreCase(instatistics)){
-						System.out.println("Preview Series functionality in Statistics is Working Successfully");
-					}
-					else{
-						 Assert.fail("Preview Series functionality in Statistics is NOT Working Successfully");
-					}
+				Thread.sleep(6000);
+				String Text3 = login.driver.findElement(By.xpath("//span[@class='series-edit--title']")).getText();
+				
+				 System.out.println(Text3);
+				
+				 System.out.println( Text3 + ":" + Seriesnameforpreview );
+				  if(Text3.equalsIgnoreCase(Seriesnameforpreview)){
+					   
+				    	System.out.println("Preview Series functionality in Statistics is Working Successfully");
+				    }else{
+				    	 Assert.fail("Preview Series functionality in Statistics is NOT Working Successfully");
+				    }
 		 }
 		 Thread.sleep(6000);
 		 login.driver.findElement(By.xpath("//div[@class='series-preview-close']")).click();
@@ -284,8 +220,7 @@ public class Myseries {
 			 login.driver.findElement(By.xpath("//div[@class='series-preview-close']")).click();
 			 Thread.sleep(8000);
 			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
-			 Thread.sleep(8000);
-			 login.driver.findElement(By.xpath("//div[@class='search-input--move-top-title']")).click();
+			
 			
 		}
 		
@@ -954,7 +889,7 @@ public class Myseries {
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[19]/div[5]/div[1]/div[3]")).click();
 			Thread.sleep(3000);
-			login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[3]")).click();
+			login.driver.findElement(By.xpath("//div[contains(text(),'YTD')]")).click();
 	
 		}
 
