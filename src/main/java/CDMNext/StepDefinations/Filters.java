@@ -10,6 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import cucumber.api.java.en.And;
@@ -40,13 +41,25 @@ public class Filters {
 	public String frequency;
 	String[] source = null;
 	public WebElement tooltip;
+	public WebElement element;
+	public WebElement checkbox;
+	public WebElement ul_element;
+	public String text;
+	int finalCount;
+	String Morefilter;
+	
+	// create instance of JavaScriptExecutor
+	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+	// create object of Actions class
+	Actions mouseOver = new Actions(login.driver);
 
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
+		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		login.Log4j.info("searching with " + searchData);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
@@ -77,7 +90,6 @@ public class Filters {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Filters"))).click();
 			login.Log4j.info("Clicking on filter...");
 		}
-
 	}
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
@@ -87,13 +99,11 @@ public class Filters {
 		login.Log4j.info(filters);
 		var = arg2;
 		if (arg1.equals("Source")) {
-			// login.driver.navigate().refresh();
-			// System.out.println("Refresh :"+login.driver.getCurrentUrl());
 			login.Log4j.info("clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			sourcearr = var.split(";");
 			for (String list : sourcearr) {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				login.Log4j.info("clicking on " + list);
 				login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 			}
@@ -151,14 +161,13 @@ public class Filters {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_By_group"))).click();
-
 		}
 	}
 
 	@And("^User has clicked on \"([^\"]*)\"$")
 	public void user_has_clicked_on(String arg1) throws Throwable {
 		login.Log4j.info("Clicking on " + arg1);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'" + arg1 + "')]")).click();
 	}
 
@@ -168,7 +177,6 @@ public class Filters {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_filter"))).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
-
 	}
 
 	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
@@ -189,24 +197,15 @@ public class Filters {
 			} else {
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + dblist + "')]")).click();
 			}
-
 		}
-
 	}
 
 	@Then("^User verify the search results$")
 	public void user_verify_the_search_results() throws Throwable {
-		WebElement element;
-		WebElement checkbox;
-		String text;
-		// String str=null;
+
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		// create instance of JavaScriptExecutor
-		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-		// create object of Actions class
-		Actions mouseOver = new Actions(login.driver);
-		WebElement ul_element = null;
+		ul_element = null;
 		try {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
@@ -225,8 +224,7 @@ public class Filters {
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					mouseOver.moveToElement(element).build().perform();
 					Thread.sleep(1000);
-					tooltip = login.driver.findElement(		
-							By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = tooltip.getText();
@@ -386,7 +384,6 @@ public class Filters {
 
 							Assert.fail(searchData + " has more than size " + sid.length
 									+ " which is not handled.  Please handle!");
-
 						}
 
 					} else {
@@ -401,7 +398,7 @@ public class Filters {
 									login.Log4j.info(sourcearr[0]
 											+ " does exists as Organisation for Economic Co-operation and Development in \n"
 											+ text);
-									
+
 								} else if ((sourcearr.length == 1) && validation(text, sourcearr[0]) == true) {
 									login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);
 
@@ -594,8 +591,6 @@ public class Filters {
 
 	@Then("^User verify the results$")
 	public void user_verify_the_results() throws Throwable {
-		// create instance of JavaScriptExecutor
-		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 		Thread.sleep(2000);
 		WebElement Topic = login.driver.findElement(By.xpath("//span[contains(text(),'" + topic + "')]"));
 		// Until the element is not visible keep scrolling
@@ -619,17 +614,9 @@ public class Filters {
 
 	@Then("^User verifies Filter search results$")
 	public void user_verifies_Filter_search_results() throws Throwable {
-		WebElement element;
-		WebElement checkbox;
-		String text;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		// create instance of JavaScriptExecutor
-		JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-		// create object of Actions class
-		Actions mouseOver = new Actions(login.driver);
-
-		WebElement ul_element = null;
+		ul_element = null;
 		try {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
@@ -650,8 +637,7 @@ public class Filters {
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					mouseOver.moveToElement(element).build().perform();
 					Thread.sleep(1000);
-					tooltip = login.driver.findElement(
-							By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = tooltip.getText();
@@ -668,9 +654,7 @@ public class Filters {
 								if (status == false) {
 									Assert.fail(result + " keyword doesn't exists " + showdata);
 								}
-
 							}
-
 						}
 					} else if (searchData.contains("OR")) {
 						String[] keywords = searchData.split(" OR ");
@@ -696,7 +680,6 @@ public class Filters {
 									Assert.fail(result + " keyword doesn't exists " + showdata);
 								}
 							}
-
 						}
 
 					} else if (searchData.contains("*")) {
@@ -770,7 +753,6 @@ public class Filters {
 								login.Log4j.error(searchData + " size is more than " + str1.length);
 							}
 						}
-
 					}
 				}
 
@@ -784,37 +766,67 @@ public class Filters {
 	}
 
 	public static boolean showRelatedData(String keyword, int j) throws Throwable {
-
-		WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-		Thread.sleep(2000);
-		ele.click();
-
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
+		SearchTest.sspValidation(j);
+		if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
+			login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 			Thread.sleep(1000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
-			List<WebElement> datasets = login.driver
-					.findElements(By.xpath(login.LOCATORS.getProperty("Related_Data_text")));
-			for (WebElement list : datasets) {
-				showdata = list.getText();
-				// login.Log4j.info(showdata);
-				// login.Log4j.info(keyword);
-				if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
-					login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
-					Thread.sleep(1000);
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-					status = true;
-				} else {
-					Thread.sleep(1000);
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-					status = false;
-
-				}
-
-			}
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+			status = true;
+		} else {
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+			status = false;
 		}
-
 		return status;
+	}
 
+	@And("^Select \"([^\"]*)\" from \"([^\"]*)\" filter$")
+	public void select_from_filter(String arg1, String arg2) throws Throwable {
+		Morefilter = arg1;
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		DatabasesTab.TopMethod();
+		DatabasesTab.ResetMethod();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[@title='" + arg2 + "']")).click();
+		login.Log4j.info("Clicking on " + arg2);
+		Thread.sleep(5000);
+		WebElement SeriesCount = null;
+		try {
+			SeriesCount = login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']//td[2]"));
+			String filter_count = SeriesCount.getText();
+			login.Log4j.info(arg1 + " filter count is: " + filter_count);
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
+			String replace = null;
+			if (filter_count.contains(",")) {
+				String FilterCount = filter_count.replaceAll(",", "");
+				replace = FilterCount.replaceAll("\\(", "").replaceAll("\\)", "");
+				login.Log4j.info(arg1 + " filter count is: " + replace);
+				finalCount = Integer.parseInt(replace);
+
+			} else {
+				finalCount = Integer.parseInt(filter_count);
+				replace = filter_count.replaceAll("\\(", "").replaceAll("\\)", "");
+				login.Log4j.info(arg1 + " filter count is: " + replace);
+				finalCount = Integer.parseInt(replace);
+			}
+
+		} catch (NullPointerException | NumberFormatException e) {
+			Assert.fail("Series count is null for More filter" + e.getMessage());
+		}
+	}
+
+	@Then("^User verify the series count$")
+	public void user_verify_the_series_count() throws Throwable {
+		Thread.sleep(5000);
+		DatabasesTab.AfterMethod();
+		login.Log4j.info("After apply the filter count is: " + DatabasesTab.afterFilter);
+		if (finalCount == DatabasesTab.afterFilter) {
+			login.Log4j.info("The series count is shown correctly for " + Morefilter);
+		} else {
+			Assert.fail("The series count is shown incorrectly for " + Morefilter);
+		}
 	}
 
 	public boolean validation(String searchText, String sourcearr2) throws Throwable {

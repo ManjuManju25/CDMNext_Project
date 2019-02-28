@@ -92,8 +92,6 @@ public class SeriesTab {
 			login.Log4j.info("List size is :" + li_All.size());
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
-					login.Log4j.info(i);
-					login.Log4j.info(li_All.size());
 					Thread.sleep(1500);
 					j = i + 1;
 					checkbox = login.driver
@@ -105,13 +103,12 @@ public class SeriesTab {
 					login.Log4j.info(SeriesNames);
 					Copy.add(SeriesNames);
 					// login.Log4j.info(Copy);
-
 				}
 			} else {
 				Assert.fail("Sorry,No results were found ");
 			}
 			rightClickElement = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-			// contextClick() method to do right click on the element
+		   // contextClick() method to do right click on the element
 			action.contextClick(rightClickElement).build().perform();
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());
@@ -209,7 +206,7 @@ public class SeriesTab {
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).click();
 				}
-				
+
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_title"))).isDisplayed()) {
 					login.Log4j.info("Table visual is created for right click option on series level");
 				} else {
@@ -387,11 +384,11 @@ public class SeriesTab {
 
 	@When("^Click on \"([^\"]*)\"$")
 	public void click_on(String arg1) throws Throwable {
-		//filter=arg1;
 		switch (arg1) {
 		case "All insights":
 			Thread.sleep(2000);
-			//login.driver.navigate().refresh();
+//			 login.driver.navigate().refresh();
+//		     login.driver.getCurrentUrl();
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 				Thread.sleep(10000);
@@ -409,7 +406,11 @@ public class SeriesTab {
 			break;
 		case "Copy link(s)":
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[1]//i")).click();
+			/*login.driver.findElement(By.xpath(
+					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[1]//i"))
+					.click();*/
+			login.driver.findElement(By.xpath("//div[@class='tree-node active']//span[@class='actions']//i[1]//i"))
+					.click();
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Footnotes":
@@ -455,14 +456,42 @@ public class SeriesTab {
 			break;
 		case "Add":
 			Thread.sleep(2000);
-			login.Log4j.info("Clicking on " + arg1+ " icon ");
-			login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[1]//span[contains(text(),'"+arg1+"')]")).click();
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver
+					.findElement(
+							By.xpath("//div[@class='items-wrapper']//li[1]//span[contains(text(),'" + arg1 + "')]"))
+					.click();
 			break;
 		case "Add and replace":
 			Thread.sleep(2000);
-			login.Log4j.info("Clicking on " + arg1+ " icon ");
-			login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[2]//span[contains(text(),'"+arg1+"')]")).click();
-		    break;
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			break;
+		case "Add and group":
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			break;
+		case "Add to new insight":
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			break;
+		case "Add to existing insight":
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			break;
+		case "Open":
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver.findElement(By.xpath("//div[@class='modal-icon-button']//span[contains(text(),'"+ arg1 + "')]")).click();
+			break;
+		case "×":
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver.findElement(By.xpath("//div[contains(text(),'"+arg1+"')]")).click();
+			break;
 		default:
 			login.Log4j.info("Clicking on " + arg1);
 			Thread.sleep(1000);
@@ -472,15 +501,33 @@ public class SeriesTab {
 
 	@Then("^The \"([^\"]*)\" popup should be appeared$")
 	public void the_popup_should_be_appeared(String arg1) throws Throwable {
-
-		if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
-			login.Log4j.info(arg1 + " popup is appeared");
-			Thread.sleep(3000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Downloadclose"))).click();
-		} else {
+		switch (arg1) {
+		case "Insight Explorer":
+			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
+				login.Log4j.info(arg1 + " popup is appeared");
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Downloadclose"))).click();
+			} else {
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Downloadclose"))).click();
+				Assert.fail(arg1 + " popup is not appeared");
+			}
+			break;
+		case "Selected series added to insights:":
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Downloadclose"))).click();
-			Assert.fail(arg1 + " popup is not appeared");
+			 WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("first_insight")));
+				ele.click();
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath("//button[contains(text(),'Add to insights')]")).click();
+			    Thread.sleep(2000);
+			   element=login.driver.findElement(By.xpath("//div[@class='growl-message growl-success']//div[@class='growl-message-text']"));
+			   String confirm_msg=element.getText();
+			   String[] confirmarr=confirm_msg.split("\n");
+			   login.Log4j.info(confirmarr[0]);
+			   Assert.assertEquals(confirmarr[0], arg1);
+			   login.Log4j.info(confirmarr[0]+ " is displayed"); 
+			break;
+		default:
 		}
 	}
 
@@ -489,11 +536,12 @@ public class SeriesTab {
 		indicator.add(arg2);
 		login.Log4j.info("indicator size is " + indicator.size());
 		login.Log4j.info(indicator);
-        if(refresh == false) {
-        	login.driver.navigate().refresh();
-        	refresh=true;
-          }
-		Thread.sleep(10000);
+		if (refresh == false) {
+			login.driver.navigate().refresh();
+			//System.out.println("Refresh :"+login.driver.getCurrentUrl());
+			refresh = true;
+		}
+		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		SearchTest.ClearSelection();
 		Thread.sleep(2000);
@@ -507,6 +555,7 @@ public class SeriesTab {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//td[contains(text(),'" + arg2 + "')]")).click();
 		} else {
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("indicator_filter"))).click();
 			login.Log4j.info("Selecting indicator " + arg1 + " as " + arg2);
 			Thread.sleep(3000);
@@ -744,6 +793,13 @@ public class SeriesTab {
 	@When("^User Mouse hover on \"([^\"]*)\" icon$")
 	public void user_Mouse_hover_on_icon(String arg1) throws Throwable {
 		MousehoverIcon = arg1;
+		/*if(arg1.equalsIgnoreCase("Show Database")) {
+		  if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
+				.isDisplayed()) {
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).click();
+		  }
+		}*/
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(2000);
@@ -848,16 +904,16 @@ public class SeriesTab {
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(2000);
-		try {
-		  if(login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).isEnabled()) {
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
-		   }
-		} catch(NoSuchElementException e) {
-			
-		}
+		/*try {
+			if (login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).isEnabled()) {
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+			}
+		} catch (NoSuchElementException e) {
+
+		}*/
 		WebElement ul_element = null;
 		try {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -866,18 +922,18 @@ public class SeriesTab {
 			login.Log4j.info("List size is :" + li_All.size());
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
+					Thread.sleep(1500);
 					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					action.moveToElement(checkbox).click().build().perform();
 					copiedSeries = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					// action.moveToElement(copiedSeries).build().perform();
 					SeriesNames = copiedSeries.getText();
 					login.Log4j.info(SeriesNames);
 					Copy.add(SeriesNames);
+					Thread.sleep(2000);
 					// login.Log4j.info(Copy);
-
 				}
 			} else {
 				Assert.fail("Sorry,No results were found ");
@@ -901,13 +957,6 @@ public class SeriesTab {
 		}
 	}
 
-	@And("^Select \"([^\"]*)\"$")
-	public void select(String arg1) throws Throwable {
-		Thread.sleep(2000);
-		login.Log4j.info("Clicking on " + arg1 + " from drop down");
-		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
-	}
-
 	@When("^User Mouse hover on Add series icon$")
 	public void user_Mouse_hover_on_Add_series_icon() throws Throwable {
 		WebElement mouseHoverElement;
@@ -923,9 +972,6 @@ public class SeriesTab {
 			login.Log4j.info("List size is :" + li_All.size());
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
-
-					login.Log4j.info(i);
-					login.Log4j.info(li_All.size());
 					Thread.sleep(1500);
 					j = i + 1;
 					checkbox = login.driver
@@ -937,7 +983,6 @@ public class SeriesTab {
 					login.Log4j.info(SeriesNames);
 					Copy.add(SeriesNames);
 					// login.Log4j.info(Copy);
-
 				}
 			} else {
 				Assert.fail("Sorry,No results were found ");
@@ -961,12 +1006,20 @@ public class SeriesTab {
 	public void click_on_icon_on_series() throws Throwable {
 		WebElement addIcon;
 		int j = 0;
+		/*if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
+				.isDisplayed()) {
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).click();
+		}*/
 		Thread.sleep(2000);
-		if(login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).isEnabled()) {
+		login.driver.findElement(By.xpath("//a[contains(text(),'My Series')]")).click();
+		if (login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).isEnabled()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
 		}
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
@@ -978,11 +1031,11 @@ public class SeriesTab {
 			login.Log4j.info("List size is :" + li_All.size());
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
-					Thread.sleep(2000);
+					Thread.sleep(1500);
 					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					checkbox.click();
+					action.moveToElement(checkbox).click().build().perform();
 					copiedSeries = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					SeriesNames = copiedSeries.getText();
@@ -1001,27 +1054,31 @@ public class SeriesTab {
 
 	@Then("^The series should be added to Data tab$")
 	public void the_series_should_be_added_to_Data_tab() throws Throwable {
-		
-		List<WebElement> ele=login.driver.findElements(By.xpath("//span[@class='series-name-field--series-name']"));
-		for(int i=0;i<ele.size();i++) {
-			WebElement element=login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']"));
-			String sname=element.getText();
-			if (Copy.contains(sname)==true) {
+
+		List<WebElement> ele = login.driver.findElements(By.xpath("//span[@class='series-name-field--series-name']"));
+		for (int i = 0; i < ele.size(); i++) {
+			WebElement element = login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']"));
+			String sname = element.getText();
+			if (Copy.contains(sname) == true) {
 				login.Log4j.info("The selected series are added to the series tab");
 			} else {
 				Assert.fail("The selected series are not added to the series tab");
 			}
 		}
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 	}
 
 	@Then("^Highlighted visual series should be replaced new series$")
 	public void highlighted_visual_series_should_be_replaced_new_series() throws Throwable {
 		WebElement ele;
 		Thread.sleep(2000);
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).isDisplayed()) {
+		/*if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).isDisplayed()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).click();
-		}
+		}*/
 		List<WebElement> elements = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("highcharts_legend")));
 		for (int i = 0; i < elements.size(); i++) {
@@ -1040,7 +1097,7 @@ public class SeriesTab {
 
 	@Then("^Choose any existing insights to add this series$")
 	public void choose_any_existing_insights_to_add_this_series() throws Throwable {
-		login.Log4j.info("Clicking on existing insight");
+		login.Log4j.info("Selecting existing insight");
 		WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("first_insight")));
 		insightName = ele.getText();
 		// login.Log4j.info("insight name is" + insightName);
@@ -1077,6 +1134,10 @@ public class SeriesTab {
 					Assert.fail("The selected series are not added to the existing insight");
 				}
 			}
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
 
@@ -1114,6 +1175,10 @@ public class SeriesTab {
 					Assert.fail("The selected series are not added to the new insight");
 				}
 			}
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
 		} else {
@@ -1206,7 +1271,7 @@ public class SeriesTab {
 		}
 		wb.write(fileOut);
 		fileOut.close();
-
 	}
+	
 	
 }

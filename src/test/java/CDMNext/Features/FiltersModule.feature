@@ -1090,34 +1090,34 @@ Given User enters "money"
 And   User selects "New only" 
 Then  User verify the search results
 
-#@FilterSearch
-#Scenario: TC_Filters_Search_158
-#And   Select "New only" from "More" filter
-#And   User has clicked on "Apply filter"
-#Then  User verify the series count
-#
-#@FilterSearch
-#Scenario: TC_Filters_Search_159
-#And   Select "Key only" from "More" filter
-#And   User has clicked on "Apply filter"
-#Then  User verify the series count
-#
-#@FilterSearch
-#Scenario: TC_Filters_Search_160
-#And   Select "Forecast" from "More" filter
-#And   User has clicked on "Apply filter"
-#Then  User verify the series count
-#
-#@FilterSearch
-#Scenario: TC_Filters_Search_161
-#And   Select "With release schedule" from "More" filter
-#And   User has clicked on "Apply filter"
-#Then  User verify the series count
-#
-#@FilterSearch
-#Scenario: TC_Filters_Search_162
-#And   Select "With suggestions for rebased/discontinued series" from "More" filter
-#And   User has clicked on "Apply filter"
-#Then  User verify the series count
+@FilterSearch
+Scenario: TC_Filters_Search_158
+And   Select "New only" from "More" filter
+And   User has clicked on "Apply filter"
+Then  User verify the series count
+
+@FilterSearch
+Scenario: TC_Filters_Search_159
+And   Select "Key only" from "More" filter
+And   User has clicked on "Apply filter"
+Then  User verify the series count
+
+@FilterSearch
+Scenario: TC_Filters_Search_160
+And   Select "Forecast" from "More" filter
+And   User has clicked on "Apply filter"
+Then  User verify the series count
+
+@FilterSearch
+Scenario: TC_Filters_Search_161
+And   Select "With release schedule" from "More" filter
+And   User has clicked on "Apply filter"
+Then  User verify the series count
+
+@FilterSearch
+Scenario: TC_Filters_Search_162
+And   Select "With suggestions for rebased/discontinued series" from "More" filter
+And   User has clicked on "Apply filter"
+Then  User verify the series count
 
 

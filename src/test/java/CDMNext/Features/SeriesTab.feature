@@ -2,18 +2,13 @@ Feature: SeriesTab
 
 Background:
  	Given User has successful logged in
- 	
+	
 @SeriesTab 
 Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
 And Select indicator "Transport" as "Freight Traffic"
 And Select indicator "Tourism" as "Tourism Statistics"
 When Click on "Apply filter"
 Then Result should be displayed as per selection
-
-@SeriesTab 
-Scenario: TC_SeriesTab_04:Verify "All Insights" option
-When Click on "All insights" 
-Then The "Insight Explorer" popup should be appeared
 
 @SeriesTab 
 Scenario: TC_SeriesTab_02:Verify Reset option  for series tab
@@ -28,11 +23,11 @@ Scenario: TC_SeriesTab_03:Verifying "Unselect all" option for series level
 Given User enters seriesID "146381801;1380601;245178303" 
 When User right click on any series
 Then User can able to see "Unselect all" option from dropdown menu
-#
-#@SeriesTab 
-#Scenario: TC_SeriesTab_04:Verify "All Insights" option
-#When Click on "All insights" 
-#Then The "Insight Explorer" popup should be appeared
+
+@SeriesTab 
+Scenario: TC_SeriesTab_04:Verify "All Insights" option
+When Click on "All insights" 
+Then The "Insight Explorer" popup should be appeared
 
 @SeriesTab
 Scenario: TC_SeriesTab_05:Verify series count for search
@@ -239,6 +234,13 @@ When User Mouse hover on "View as Chart. Type `c`" icon
 Then User can see the Chart Visual in the right pannel  
 
 @SeriesTab
+Scenario: TC_SeriesTab_42:Verify 'Add and replace' from dropdown
+Given User enters "5724301;5958801"
+And  Click on drop down icon next to +
+And  Click on "Add and replace"
+Then Highlighted visual series should be replaced new series
+
+@SeriesTab
 Scenario: TC_SeriesTab_37:Verify 'Mouse over' icons for series level
 Given User enters "368921927"
 When User Mouse hover on "Open footnote" icon
@@ -261,13 +263,6 @@ When Hover the mouse on any filter and click on Pin
 Then filter should be pined/unpined the filter to left panel
 
 @SeriesTab
-Scenario: TC_SeriesTab_42:Verify 'Add and replace' from dropdown
-Given User enters "5724301;5958801"
-And  Click on drop down icon next to +
-And  Select "Add and replace"
-Then Highlighted visual series should be replaced new series
-
-@SeriesTab
 Scenario: TC_SeriesTab_41:Verify 'add' series from dropdown
 Given User enters "368921927;371376337"
 And Click on drop down icon next to +
@@ -280,12 +275,12 @@ Then The series should be added to Data tab
 #And  Click on drop down icon next to +
 #And  Select "Add and replace"
 #Then Highlighted visual series should be replaced new series
-#
+
 @SeriesTab
 Scenario: TC_SeriesTab_43:Verify 'add to exist insight' in dropdown
 Given User enters "368921927;371376337"
 And  Click on drop down icon next to +
-And  Select "Add to existing insight"
+And  Click on "Add to existing insight"
 Then Choose any existing insights to add this series
 Then The series should be added to selected insight
 
@@ -293,5 +288,5 @@ Then The series should be added to selected insight
 Scenario: TC_SeriesTab_44:Verify 'Add to new insight' in dropdown
 Given User enters "122834404;295755902"
 And  Click on drop down icon next to +
-And  Select "Add to new insight"
+And  Click on "Add to new insight"
 Then New insight should be created and the series should be added to the insight

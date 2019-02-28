@@ -59,9 +59,9 @@ public class SearchTest {
 		currentKeyword = keyword;
 		login.Log4j.info("Searching with " + currentKeyword);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		ClearSelection();
 	}
 
@@ -722,7 +722,7 @@ public class SearchTest {
 		}
 	}
 
-	public void sspValidation(int j) throws InterruptedException {
+	public static void sspValidation(int j) throws InterruptedException {
 		WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 		Thread.sleep(2000);
 		ele.click();

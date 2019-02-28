@@ -210,67 +210,146 @@ Then Footnotes should be opened for related "section"
 
 @DB
 Scenario: TC_DB_34: Verifying copy link(s) for table level
-And  Mouse hover on any table level of data
+And  Mouse hover on any table level 
 And "Copy link(s)" should be available
 Then The link should be copied
 
 @DB
 Scenario: TC_DB_35: Verifying confirmation message for Copy link
-And  Mouse hover on any table level of data
+And  Mouse hover on any table level 
 And "Copy link(s)" should be available
 Then "1 URL link(s) copied." message should be displayed
 
 @DB
 Scenario: TC_DB_36:Validating copied link
-And  Mouse hover on any table level of data
+And  Mouse hover on any table level 
 And "Copy link(s)" should be available
 When Paste it in new tab
 Then The selected "table" should be highlighted
 
-#@DB
-#Scenario: TC_DB_37:Verifying Copy link for multiple tables selected
-#And  Select multiple tables
-#And Click on "Copy link(s)"
-#Then The links should be generated for selected tables
-#
-#@DB
-#Scenario: TC_DB_38: Validating copied link for multiple tables selection.
-#And  Select multiple tables
-#And Click on "Copy link(s)"
-#Then Multiple table's link should be copied to clipboard and open respective "table" should be highlighted when run links one by one in browser
-#
-#@DB
-#Scenario: TC_DB_39: Verifying Footnotes for table level
-#And Mouse hover on any table level of data
-#And "Footnotes" should be available
-#When click on it
-#Then Footnotes should be opened for related "table"
-#
-#@DB
-#Scenario: TC_DB_40:Verifying + icon for table level
-#And Mouse hover on any table level of data
-#And "+" should be available
-#When click on it
-#Then The entire table should be added to my series
-#
-#@DB
-#Scenario: TC_DB_41:Verifying Add dropdown for table level
-#And Mouse hover on any table level of data
-#And Click on dropdown next to + icon
-#Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to existing insight"
-#
-#@DB
-#Scenario: TC_DB_42:Verifying Add option under add dropdown for table level
-#And Mouse hover on any table level of data
-#And  Click on dropdown icon 
-#And  Click on "Add"
-#Then The entire table should be added to my series
-#
-#@DB
-#Scenario: TC_DB_43:Verifying Add and Replace for table level
-#And Create a visual and Mouse hover on any table 
-#And  Click on dropdown icon 
-#And  Click on "Add and replace"
-#Then The selected table data should be replaced with existing data on the visual
+@DB
+Scenario: TC_DB_37:Verifying Copy link for multiple tables selected
+And  Select multiple tables
+And Click on "Copy link(s)"
+Then The links should be generated for selected tables
 
+@DB
+Scenario: TC_DB_38: Validating copied link for multiple tables selection.
+And  Select multiple tables
+And Click on "Copy link(s)"
+Then Multiple table's link should be copied to clipboard and open respective "table" should be highlighted when run links one by one in browser
+
+@DB
+Scenario: TC_DB_39: Verifying Footnotes for table level
+And Mouse hover on any table level 
+And "Footnotes" should be available
+When click on it
+Then Footnotes should be opened for related "table"
+
+@DB
+Scenario: TC_DB_40:Verifying + icon for table level
+And Mouse hover on any table level 
+And "+" should be available
+When click on it
+Then The entire table should be added to my series
+
+@DB
+Scenario: TC_DB_41:Verifying Add dropdown for table level
+And Mouse hover on any table level
+And Click on dropdown next to + icon
+Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to existing insight"
+
+@DB
+Scenario: TC_DB_42:Verifying Add option under add dropdown for table level
+And Mouse hover on any table level 
+And  Click on dropdown icon 
+And  Click on "Add"
+Then The entire table should be added to my series
+
+@DB
+Scenario: TC_DB_43:Verifying Add and Replace for table level
+And Create a visual and Mouse hover on any table 
+And  Click on dropdown icon 
+And  Click on "Add and replace"
+Then The selected table data should be replaced with existing data on the visual
+
+@DB
+Scenario: TC_DB_44:Verifying Add and Group for table level
+And Mouse hover on any table level of data
+And  Click on dropdown icon 
+And  Click on "Add and group"
+Then Selected table should be added as group in My series
+
+@DB
+Scenario: TC_DB_45:Verifying Add to new insight for table level
+And Mouse hover on any table level
+And  Click on dropdown icon 
+And  Click on "Add to new insight"
+Then The new insight should be created with selected data
+
+@DB
+Scenario: TC_DB_46:Verifying confirmation message for adding table to new insight
+And Mouse hover on any table level 
+And  Click on dropdown icon 
+And  Click on "Add to new insight"
+Then Confirmation message should be displayed as below "New insight with the selected series created."
+
+@DB
+Scenario: TC_DB_47:Validating the added series by opening new insight
+And Mouse hover on any table level 
+And  Click on dropdown icon 
+And  Click on "Add to new insight"
+Then The insight should be opened and added series should be available in My series
+
+@DB
+Scenario: TC_DB_48:Verifying 'add to existing' insight for table level
+And Mouse hover on any table level 
+And  Click on dropdown icon 
+And  Click on "Add to existing insight"
+Then The "Insight Explorer" popup should be appeared
+
+@DB
+Scenario: TC_DB_49:Verifying 'Add to insights' button
+And Mouse hover on any table level 
+And  Click on dropdown icon 
+And  Click on "Add to existing insight"
+Then The "Add to insights" button should be disabled by default and enable after any insight selection
+
+@DB
+Scenario: TC_DB_50:Verifying adding data to existing insight
+And Mouse hover on any table level 
+And  Click on dropdown icon 
+And  Click on "Add to existing insight"
+Then The "Selected series added to insights:" popup should be appeared
+#
+#@DB
+#Scenario: TC_DB_51:Validating the added table data by opening existing insight
+#And Mouse hover on any table level of data
+#And  Click on dropdown icon 
+#And  Click on "Add to existing insight"
+#Then The data should be added to My series for selected insight
+#
+#@DB
+#Scenario: TC_DB_52:Verifying number of selected insights count
+#And Mouse hover on any table level
+#And  Click on dropdown icon 
+#And  Click on "Add to existing insight"
+#And Select multiple insights
+#Then The number of selected insights count should be shown on popup header
+#
+#@DB
+#Scenario: TC_DB_53:Verifying Open option
+#And Mouse hover on any table level
+#And  Click on dropdown icon 
+#And  Click on "Add to existing insight"
+#And Click on "Open"
+#Then "Insight Explorer" page should be opened in new tab
+#
+#@DB
+#Scenario: TC_DB_54:Verifying Close/x for insight explorer modal window
+#And Mouse hover on any table level
+#And  Click on dropdown icon 
+#And  Click on "Add to existing insight"
+#And Click on "×"
+#Then The insight explorer popup should be closed
 
