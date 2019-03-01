@@ -1,7 +1,7 @@
 Feature:  verifying Insight Explorer Functionality
 
 Background:
-   Given User has successful logged in
+   Given User2 has successful logged in
 
 @LandingPage
 Scenario: TC_IE_01: Verify All Tabs in Landing page
@@ -20,7 +20,7 @@ Scenario: TC_IE_88: Verify insights under My insights tab.
    @LandingPage
 Scenario: TC_IE_89: Verify Mouse over on inisight title in Table mode.
    And  Select the New insight option in Landing page
-   And get insight name and add  any five series to my series tab
+   And get insight name and add any five series to my series tab
    And  Mouse over on inisight title in Table mode.
    Then verify the insight name and number of series 
    
@@ -48,9 +48,77 @@ Scenario: TC_IE_103: Verify Tag filter for all other tabs when tags applied in c
   
 
   @LandingPage
+Scenario: TC_IE_104: Verify number of insights for a tag Applied
+	And  Select two or more Insights 
+    And  Select Add tag options to get number of insights for a tag Applied
+    And Verify number of insights for a tag Applied
+    
+   @LandingPage
+Scenario: TC_IE_105: Verify  Click on remove icon when tag filter applied.
+	  And Select the All tag dropdown
+	  And  Select any insight having tag 
+     And Successfully Verify Remove icon for filters
+
+      @LandingPage1
+Scenario: TC_IE_106: Verify tag behavior when any other filters applied
+	  And Select any category dropdown
+     And Successfully Verify tag behavior when any other filters applied   
+    
+    
+        @LandingPage
+Scenario: TC_IE_60: Verify Sort by drop down 
+   And  Select Sort down option
+   And Successfully Verify  Sort down option 
+   
+          @LandingPage
+Scenario: TC_IE_107:Verify sort by behavior for all tabs
+   And  Select Sort down option
+   And Select the last editor option
+   And Successfully Verify  sort by behavior for "Favorite tab" "Analytics Tab" "Shared tab" "All Tab"
+   
+         @LandingPage
+Scenario: TC_IE_108:Verify Last opened for all tabs.
+   And  Select Sort down option
+   And Select the Last opened option
+   And Successfully Verify  Last opened option for "Favorite tab" "Analytics Tab" "Shared tab" "All Tab"   
+    
+    
+      @LandingPage
+Scenario: TC_IE_109: Verify Sort by -Last Editor.
+   And Share the insight 
+   And Select copylink option
+   And Login to the shared account
+   And change Add some series that had been shared
+   And Login to the Normal account
+   And Successfully Verify  Sort by -Last Editor.
+
+
+      @LandingPage
+Scenario: TC_IE_110: Verify Title.
+   And Edit the first insight as "AMTC110"
+   And Edit the Second insight as "ZZTC110"
+   And Select Title option
+   And Successfully Verify Title functionality as "AMTC110" and "ZZTC110".
+
+           @LandingPage
+Scenario: TC_IE_61: Sort by - Verify Last Opened
+   And  Select Some insigt to Verify Last Opened option
+   And Successfully Verify  Last Opened Insights
+    
+    
+          @LandingPage
+Scenario: TC_IE_111: Sort by -  Popularity in Analytics tab.
+   And  Select Analytics tab
+   And  Select Sort down option
+   And Successfully Verify  Sort by -Popularity in Analytics tab
+
+
+  @LandingPage
 Scenario: TC_IE_04: Verify Categories dropdown.
    And Successfully Verify Categories dropdown  
-  
+
+
+
    @LandingPage
 Scenario: TC_IE_05: Verify categories selection for Hot Topics.
    And Select the Hot topics option
@@ -82,6 +150,42 @@ Scenario: TC_IE_10: Verify categories selection for  New Datasets
    And Select the  New Datasets option
    And verify the  New Datasets category is available in the insight   
   
+  @LandingPage
+Scenario: TC_IE_78:  Verify categories selection for Hot Topics with All available Tabs.
+    And Select the categories as Hot Topics for the insight 
+    And Select the categories option as Hot topics option
+   And verify the Hot topics category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab"    
+  
+   @LandingPage
+Scenario: TC_IE_79:  Verify categories selection for World Economy with All available Tabs.
+    And Select the categories as World Economy for the insight 
+    And Select the categories option as World Economy option
+   And verify the World Economy category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab"    
+   
+      @LandingPage
+Scenario: TC_IE_80: Verify categories selection for Emerging Markets with All available Tabs.
+   And Select the categories as Emerging Markets for the insight 
+  And Select the categories option as Emerging Markets option
+   And verify the Emerging Markets category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
+   
+    @LandingPage
+Scenario: TC_IE_81: Verify categories selection for Thematic Analysis with All available Tabs.
+      And Select the categories as Thematic Analysis for the insight 
+     And Select the categories option as Thematic Analysis option
+   And verify the Thematic Analysis category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
+   
+     @LandingPage
+Scenario: TC_IE_82: Verify categories selection for Markets with All available Tabs.
+  And Select the categories as Markets for the insight 
+  And Select the categories option as Markets option
+   And verify the  Markets category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
+    
+    @LandingPage
+Scenario: TC_IE_83: Verify categories selection for New Datasets with All available Tabs.
+     And Select the categories as New Datasets for the insight 
+  And Select the categories option as New Datasets
+   And verify the New Datasets category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
+  
  @LandingPage
 Scenario: TC_IE_11: Verfify Remove icon for filters.
    And Select all category option
@@ -94,6 +198,13 @@ Scenario: TC_IE_12: Verify View as a grid option.
  @LandingPage
 Scenario: TC_IE_13: Verify View as a table option.
    And Successfully Verify View as a table option    
+      
+@LandingPage
+Scenario: TC_IE_112: Verify insight display mode when navigated from other pages.
+   And Select mode as tabel 
+   And select any pages 
+   And Successfully Verify insight display mode as tabel when navigated from other pages
+          
       
  @LandingPage
 Scenario: TC_IE_14: Verify View insight.
@@ -120,45 +231,181 @@ Scenario: TC_IE_18: Verify Product on landing page.
    And Select Product option  
    And Successfully Verify Product Dropdown 
    
-   @LandingPage
-Scenario: TC_IE_19: Verify Glboal databases under Product.
-   And Select Product option  
-   And Successfully Verify All databases like "ExploreData" "SeeFootnotes" "Watchvideo" under Product 
-   
-    @LandingPage
-Scenario: TC_IE_20: Verify World Trend Plus databases under Product.
-   And Select Product option  
-   And Successfully Verify World Trend Plus databases like "ExploreData" "SeeFootnotes" under Product   
 
-    @LandingPage
-Scenario: TC_IE_26: Verify China Premium databases under Product.
-   And Select Product option  
-   And Successfully Verify China Premium databases like "ExploreData" "SeeFootnotes" "Watchvideo" under Product   
-   
-     @LandingPage
-Scenario: TC_IE_27 Verify Brazil Premium databases under Product.
-   And Select Product option  
-   And Successfully Verify Brazil Premium databases like "ExploreData" "SeeFootnotes" "Watchvideo" under Product    
-   
- @LandingPage
-Scenario: TC_IE_28 Verify India Premium databases under Product.
-   And Select Product option  
-   And Successfully Verify India Premium databases like "ExploreData" "SeeFootnotes" "Watchvideo" under Product    
-     
-   @LandingPage
-Scenario: TC_IE_29 Verify Russia Premium databases under Product.
-   And Select Product option  
-   And Successfully Verify Russia Premium databases like "ExploreData" "SeeFootnotes" "Watchvideo" under Product  
-   
-    @LandingPage
-Scenario: TC_IE_30 Verify Indonesia Premium databases under Product.
-   And Select Product option  
-   And Successfully Verify Indonesia Premium databases like "ExploreData" "SeeFootnotes" "Watchvideo" under Product 
    
   @LandingPage
 Scenario: TC_IE_21: Verify What's New option under Product.
    And Select Product option  
    And Successfully verify the What's New option under Product   
+
+ @LandingPage
+Scenario: TC_IE_113: Verify Verify 'What's new by product' dropdown.
+   And Select Product option  
+   And select wat's new explore data 
+    And select wat's new by product dropdown 
+   And Successfully verify the What's New by product' dropdown   
+
+
+ @LandingPage
+Scenario: TC_IE_114: Verify default option for dropdown.
+   And Select Product option  
+   And select wat's new explore data 
+   And Successfully verify default option for dropdown 
+
+ @LandingPage
+Scenario: TC_IE_115: Verify CEIC Insider insight of world trend plus in What's new.
+   And Select Product option  
+   And select wat's new explore data 
+   And Successfully CEIC Insider insight of world trend plus in What's new 
+
+ @LandingPage
+Scenario: TC_IE_116: Verify CEIC Insider insight of global data base in What's new.
+   And Select Product option  
+   And select wat's new explore data 
+   And select global data base dropdown
+   And Successfully verify CEIC Insider insight of global data base in What's new 
+
+ @LandingPage
+Scenario: TC_IE_117: Verify CEIC Insider insight of Brazil Premium Database in What's new.
+   And Select Product option  
+   And select wat's new explore data 
+   And select Brazil Premium Database dropdown
+   And Successfully verify CEIC Insider insight of Brazil Premium Database in What's new 
+    
+   @LandingPage
+Scenario: TC_IE_118: Verify CEIC Insider insight of China Premium Database in What's new.
+   And Select Product option  
+   And select wat's new explore data 
+   And select China Premium Database dropdown
+   And Successfully verify CEIC Insider insight of China Premium Database in What's new 
+
+   @LandingPage
+Scenario: TC_IE_119: Verify CEIC Insider insight of Indonesia Premium Database in What's new.
+   And Select Product option  
+   And select wat's new explore data 
+   And select Indonesia Premium Database dropdown
+   And Successfully verify CEIC Insider insight of Indonesia Premium Database in What's new 
+   
+   @LandingPage
+Scenario: TC_IE_120: Verify the insight permission for other users after add to CEIC Insider.
+   And Select Product option  
+   And select wat's new explore data 
+   And select insight in what's new pop up
+   And Successfully verify the insight permission for other users after add to CEIC Insider   
+      
+   
+      @LandingPage
+Scenario: TC_IE_121: Verify the copy insight for CEIC Insider
+   And Select Product option  
+   And select wat's new explore data 
+   And select insight in what's new pop up
+   And Successfully verify the copy insight for CEIC Insider
+   
+       @LandingPage
+Scenario: TC_IE_122: Verify Open option for What's new popup.
+   And Select Product option  
+   And select wat's new explore data 
+   And select open options in What's new popup.
+   And Successfully verify open options in What's new popup.
+   
+       @LandingPage
+Scenario: TC_IE_123: Verify Close option for What's new popup.
+   And Select Product option  
+   And select wat's new explore data 
+   And Successfully Close option for What's new popup
+   
+      @LandingPage
+Scenario: TC_IE_19: Verify Glboal databases under Product.
+   And Select Product option  
+    And verify Glboal databases under Product 
+ 
+ 
+       @LandingPage
+Scenario: TC_IE_124: Verify Explore data for Global DB.
+   And Select Product option  
+    And verify Explore data for Global DB
+ 
+       @LandingPage
+Scenario: TC_IE_125: Verify Footnotes for Global DB.
+   And Select Product option  
+    And verify Footnotes for Global DB
+ 
+  
+    @LandingPage
+Scenario: TC_IE_20: Verify World Trend Plus databases under Product.
+   And Select Product option  
+   And verify World Trend Plus databases under Product 
+  
+
+       @LandingPage
+Scenario: TC_IE_126: Verify Explore data for World Trend Plus databases.
+   And Select Product option  
+    And verify Explore data for World Trend Plus databases
+
+       @LandingPage
+Scenario: TC_IE_127: Verify Footnotes for World Trend Plus databases.
+   And Select Product option  
+    And verify Footnotes for World Trend Plus databases.
+ 
+
+    @LandingPage
+Scenario: TC_IE_26: Verify China Premium databases Explore data under Product.
+   And Select Product option 
+   And verify Explore data for China Premium databases databases
+   
+      @LandingPage
+Scenario: TC_IE_128: Verify China Premium databases Footnotes under Product.
+   And Select Product option 
+    And verify Footnotes for China Premium databases.
+    
+     @LandingPage
+Scenario: TC_IE_27 Verify Brazil Premium databases Explore data under Product.
+   And Select Product option  
+   And verify Explore data for Brazil Premium databases
+
+      @LandingPage
+Scenario: TC_IE_129: Verify Brazil Premium databases Footnotes under Product.
+   And Select Product option 
+    And verify Footnotes for Brazil Premium databases.
+   
+ @LandingPage
+Scenario: TC_IE_28 Verify India Premium Explore data under Product.
+   And Select Product option  
+   And verify Explore data for India Premium databases
+  
+  
+      @LandingPage
+Scenario: TC_IE_130: Verify India Premium databases Footnotes under Product.
+   And Select Product option 
+    And verify Footnotes for India Premium databases. 
+   
+    
+   @LandingPage
+Scenario: TC_IE_29 Verify Russia Premium Explore data under Product.
+   And Select Product option  
+  And verify Explore data for Russia Premium databases
+
+
+      @LandingPage
+Scenario: TC_IE_131: Verify Russia Premium databases Footnotes under Product.
+   And Select Product option 
+    And verify Footnotes for Russia Premium databases. 
+
+    @LandingPage
+Scenario: TC_IE_30 Verify Indonesia Premium databases under Product.
+   And Select Product option  
+   And verify Explore data for Indonesia Premium databases
+
+
+      @LandingPage
+Scenario: TC_IE_132: Verify Indonesia Premium databases Footnotes under Product.
+   And Select Product option 
+    And verify Footnotes for Indonesia Premium databases. 
+
+
+
+
+
 
 ####  @LandingPage
 ####Scenario: TC_IE_22: Verify Take the servey under what's new.
@@ -216,7 +463,7 @@ Scenario: TC_IE_35: Verify insights under My insights tab.
 Scenario: TC_IE_36: Verify insights in Recent tab. 
    And  Select the New insight option
    And create a Insight as "Recent insight"
-   And Successfully Verify Insights under   tab as "Recent insight"
+   And Successfully Verify Insights under tab as "Recent insight"
    
      @LandingPage
 Scenario: TC_IE_37: Verify View Comments. 
@@ -253,12 +500,12 @@ Scenario: TC_IE_42:Verify New folder.
   @LandingPage
 Scenario: TC_IE_43:Verify Empty folder. 
    And Successfully Verify Empty folder 
-  
+ 
      @LandingPage
 Scenario: TC_IE_44:Verify Right click options for folder. 
    And  Select Right click options on folder 
    And Successfully Verify  Right click options as "Rename" "Newfolder" "Newinsight" "Share" "Addtag" "Deletefolder" on folder  
-   
+  
    @LandingPage
 Scenario: TC_IE_45: Verfify folder rename.  
    And  Select Rename option
@@ -282,7 +529,6 @@ Scenario: TC_IE_47:Verify new insights under folder right click.
 Scenario: TC_IE_67:Verify share option in folder right click
     And  Select share option in right click
    And Successfully Verify share option is working
-
 
  @LandingPage
 Scenario: TC_IE_48: Verify Add tags. 
@@ -336,6 +582,11 @@ Scenario: TC_IE_56: Verify Add Tag Option in Right click menu on Insight.
   And  Select Add Tag options
   And Successfully Verify Add Tag option is working for insight
 
+    @LandingPage
+Scenario: TC_IE_84: Verify CopyLink option in right click.
+    And  Select Right click options on Insight 
+   And  Select CopyLink options
+   And Successfully Verify CopyLink insight option is working 
 
  @LandingPage
 Scenario: TC_IE_57: Verify Delete Option in Right click menu on Insight. 
@@ -355,18 +606,13 @@ Scenario: TC_IE_58: Verify add tags for multiple insights at once.
 Scenario: TC_IE_59: Verify selected insights count in add tags window. 
    And  Select two or more Insights 
   And Successfully Verify Add Tag count in the pop up window
+ 
+        @LandingPage
+Scenario: TC_IE_146: Verify auto title for create a folder.
+    And  Select Right click options on Insight 
+     And  Select the create a folder
+    And Successfully Verify  auto title for create a folder 
 
-    @LandingPage
-Scenario: TC_IE_60: Verify Sort by drop down 
-   And  Select Sort down option
-   And Successfully Verify  Sort down option 
-   
-  
-       @LandingPage
-Scenario: TC_IE_61: Sort by - Verify Last Opened
-   And  Select Some insigt to Verify Last Opened option
-   And Successfully Verify  Last Opened Insights
-  
       @LandingPage
 Scenario: TC_IE_62:  Verify Move to option to existing Folder in right click 
     And  Select Folder panel option and  create a New Folder 
@@ -378,8 +624,32 @@ Scenario: TC_IE_63:  Verify Move to option by creating Folder in right click
     And  Select the Insigt and create Folder 
      And  Insights should be moved to created folder
     And Successfully Verify  Insights moved to created folder
+   
+         @LandingPage
+Scenario: TC_IE_147: Verify Move to - Create new folder pop up appear
+    And  Select Right click options on Insight 
+     And  Select the Move to - Create new folder
+    And Successfully Verify  Move to - Create new folder pop up appear
   
           @LandingPage
+Scenario: TC_IE_148: Verify Cancel button for create folder popup
+    And  Select Right click options on Insight 
+     And  Select the Move to - Create new folder
+    And Successfully Verify  Cancel button for create folder popup
+  
+         @LandingPage
+Scenario: TC_IE_149: Verify Cancel/dismiss(x) button for add tags popup.
+    And  Select Right click options on Insight 
+     And  Select the add tags option
+    And Successfully Verify  Cancel/dismiss(x) button for add tags popup  
+  
+          @LandingPage
+Scenario: TC_IE_150: Verify disabled Save button in  add tags popup.
+    And  Select Right click options on Insight 
+     And  Select the add tags option
+    And Successfully Verify  Save button is disabled
+  
+        @LandingPage
 Scenario: TC_IE_64:  Verify Share option in right click 
    And  Select Right click options on Insight 
   And  Select Share options
@@ -390,115 +660,84 @@ Scenario: TC_IE_65:  Verify share for multiple insights
    And  Select two or more Insights
   And  Selects Share options
   And Successfully Verify Share insight count is working 
-  
-   @LandingPage
-Scenario: TC_IE_68:Verify Insights Counts for each tabs
-    And  Select Insights Counts for each tabs
-   And Successfully Verify Insights Counts equal to ALl tab
+ 
+        @LandingPage
+Scenario: TC_IE_151:Verify More options icon click. 
+   And  Select More options icon 
+   And Successfully Verify More options icon 
+
+
+# 
+##   @LandingPage
+##Scenario: TC_IE_68:Verify Insights Counts for each tabs
+##    And  Select Insights Counts for each tabs
+##   And Successfully Verify Insights Counts equal to ALl tab
   
    @LandingPage
 Scenario: TC_IE_69:Verify insights in All Available tab
    And  Select the New insight option in Landing page
    And create a Insight as "All insight"
    Then verify the New insight under All tab as "All insight"
-  
+    
+    
 @LandingPage
 Scenario: TC_IE_70: Verify All tags drop down for Analytics Tab.
    And Select the Analytics Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights
+   And Added tags should be available in Dropdown and should display related insights
 
      @LandingPage
 Scenario: TC_IE_71: Verify All tags drop down for Analytics-China Premium Tab.
    And Select the China Premium  Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights    
+   And Added tags should be available in Dropdown and should display related insights    
    
        @LandingPage
 Scenario: TC_IE_72: Verify All tags drop down for Analytics-Focus Tab.
    And Select the Analytics-Focus Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights    
+   And Added tags should be available in Dropdown and should display related insights    
    
        @LandingPage
 Scenario: TC_IE_73: Verify All tags drop down for Analytics-Sentix Tab.
    And Select the Analytics-Sentix Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights   
+   And Added tags should be available in Dropdown and should display related insights   
    
          @LandingPage
 Scenario: TC_IE_74: Verify All tags drop down for Analytics-EMIS Tab.
    And Select the Analytics-EMIS Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights 
+   And Added tags should be available in Dropdown and should display related insights 
   
    @LandingPage
 Scenario: TC_IE_75: Verify All tags drop down for Shared Tab.
    And Select the Shared Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights 
+   And Added tags should be available in Dropdown and should display related insights 
+  
   
    @LandingPage
 Scenario: TC_IE_76: Verify All tags drop down for Recent Tab.
    And Select the Recent Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights 
+   And Added tags should be available in Dropdown and should display related insights 
    
      @LandingPage
 Scenario: TC_IE_77: Verify All tags drop down for All Tab.
    And Select the All Tab
-   And Add tags for insight
+   And Add tags for Insight
    And Select the All tag dropdown
-   And Added tags should be available in dropdown and should display related insights 
+   And Added tags should be available in Dropdown and should display related insights 
    
-   @LandingPage
-Scenario: TC_IE_78:  Verify categories selection for Hot Topics with All available Tabs.
-    And Select the categories as Hot Topics for the insight 
-    And Select the categories option as Hot topics option
-   And verify the Hot topics category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab"    
-   
-   @LandingPage
-Scenario: TC_IE_79:  Verify categories selection for World Economy with All available Tabs.
-    And Select the categories as World Economy for the insight 
-    And Select the categories option as World Economy option
-   And verify the World Economy category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab"    
-   
-      @LandingPage
-Scenario: TC_IE_80: Verify categories selection for Emerging Markets with All available Tabs.
-   And Select the categories as Emerging Markets for the insight 
-  And Select the categories option as Emerging Markets option
-   And verify the Emerging Markets category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
-   
-    @LandingPage
-Scenario: TC_IE_81: Verify categories selection for Thematic Analysis with All available Tabs.
-      And Select the categories as Thematic Analysis for the insight 
-     And Select the categories option as Thematic Analysis option
-   And verify the Thematic Analysis category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
-   
-     @LandingPage
-Scenario: TC_IE_82: Verify categories selection for Markets with All available Tabs.
-  And Select the categories as Markets for the insight 
-  And Select the categories option as Markets option
-   And verify the  Markets category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
-    
-    @LandingPage
-Scenario: TC_IE_83: Verify categories selection for New Datasets with All available Tabs.
-     And Select the categories as New Datasets for the insight 
-  And Select the categories option as New Datasets
-   And verify the New Datasets category in "Analytics Tab" "Shared Tab" "Recent Tab" "All Tab" 
-  
-    @LandingPage
-Scenario: TC_IE_84: Verify CopyLink option in right click.
-    And  Select Right click options on Insight 
-   And  Select CopyLink options
-   And Successfully Verify CopyLink insight option is working 
+
 
  @LandingPage
 Scenario: TC_IE_85: Verify search in landing page.
@@ -520,7 +759,8 @@ Scenario: TC_IE_87: Verify Search in landing page by Name.
    And Select search by name drop down
    And Search for the insight name as  "TC_IE_87"
    And Verify the insight name as "TC_IE_87" for Successful landing page search by Name
-    
+   
+   
          @LandingPage
 Scenario: TC_IE_90: Verify Search as Series ID in landing page by Selecting Name category dropdown.
    And  Select the New insight option
@@ -529,8 +769,9 @@ Scenario: TC_IE_90: Verify Search as Series ID in landing page by Selecting Name
    And Select search by name drop down
    And Search for the insight name as  "284748804"
    And Verify that insight should not display for Series ID when search by Name is selected 
-
-     @LandingPage
+   
+   
+            @LandingPage
 Scenario: TC_IE_91: Verify Search by all content - Insight attributes.
    And  Select the New insight option
    And Change the insight name as "TC_IE_91"
@@ -538,6 +779,7 @@ Scenario: TC_IE_91: Verify Search by all content - Insight attributes.
    And Select Insight attributes drop down
    And Search with Description as "Testing Insight attributes" for search by all content - Insight attributes
    And Verify the insight as "TC_IE_91" with Description "Testing Insight attributes" for search by all content - Insight attributes
+   
   
      @LandingPage
 Scenario: TC_IE_92: Verify Search by all content - Series attributes.
@@ -547,7 +789,8 @@ Scenario: TC_IE_92: Verify Search by all content - Series attributes.
    And Select Insight attributes drop down as Series attributes
    And Search for the Series ID in IE Page as "369703417"
    And Verify the insight as "TC_IE_92" with Series ID as "369703417" for search as by all content - Series attributes
-      
+   
+   
         @LandingPage
 Scenario: TC_IE_93: Verify search by all content with all checkboxes unselected.
    And  Select the New insight option
@@ -557,7 +800,8 @@ Scenario: TC_IE_93: Verify search by all content with all checkboxes unselected.
    And Search for the Series ID in IE Page as "284748804"
     And Verify that insight should not display for Series ID when all checkboxes unselected
     
-              @LandingPage
+    
+            @LandingPage
 Scenario: TC_IE_94: Verify search with Invalid keyword.
      And Search for the insight name as  "InvalidKeyword"
      And Verify that insight should not display for Invalid keyword
@@ -577,7 +821,7 @@ Scenario: TC_IE_96: Verify Create insight Functionality for the insight pop up a
      And Verify that Create insight Functionality is working by creating Insight 
      
              @LandingPage
-Scenario: TC_IE_97: Verify Search by all content options when Search by name is selected..
+Scenario: TC_IE_97: Verify Search by all content options when Search by name is selected.
      And Select the Search Dropdown
      And Select Search by name
      And Verify that Insight attributes and Series attributes in search drop down is disabled     
@@ -618,4 +862,185 @@ Scenario: TC_IE_101:  Verify the number of insight count with search.
       And  Select the New insight option
      And Change the Insight name as "TC_IE_101_B"
      And Search for the Series ID in IE Page as "TC_IE_101"
-     And Verify the number of insight count with search   
+     And Verify the number of insight count with search  
+  
+     @LandingPage
+Scenario: TC_IE_133:Verify Guest Mode access button for internal login.
+     And  Select the Guest Mode  option
+     And  Select the login button 
+     And Verify that user login into guest mode
+     And user logout guest maode and login into the normal account  
+  
+       @LandingPage
+Scenario: TC_IE_134:Verify View insight in grid mode.
+     And  Select the New insight option in Landing page
+      And Create a visual for the insight "TC_IE_134"
+       And Select the View option in grid mode
+     And Verify the insight in preview mode - Grid mode 
+
+       @LandingPage
+Scenario: TC_IE_135:Verify insight in preview mode -Grid mode
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_135"
+        And Select the View option in grid mode
+     And Verify the insight in preview mode
+ 
+        @LandingPage
+Scenario: TC_IE_136:Verify Favorite icon in preview mode.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_136"
+      And Select the View option in grid mode
+     And Verify the Favorite icon in for the insight "TC_IE_136" preview mode
+            
+            @LandingPage
+Scenario: TC_IE_137:Verify Open option in insight preview.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_137"
+      And Select the View option in grid mode
+     And Verify the Open option in insight preview.
+     
+             @LandingPage
+Scenario: TC_IE_138:Verify Copy option in insight preview.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_138"
+      And Select the View option in grid mode
+     And Verify the Copy option in insight preview    
+     
+       @LandingPage
+Scenario: TC_IE_139:Verify default insight title while coping insight.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_139"
+     And Select the View option in grid mode
+     And Verify default insight title while coping insight 
+          
+      @LandingPage
+Scenario: TC_IE_140:Verify Insight title update in Copy the insight popup.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_140"
+     And Select the View option in grid mode
+     And Verify Insight title update in Copy the insight popup
+     
+        @LandingPage
+Scenario: TC_IE_141:Verify Cancel button for Copy the insight popup.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_141"
+     And Select the View option in grid mode
+     And Verify Cancel button for Copy the insight popup
+     
+            @LandingPage
+Scenario: TC_IE_142:Verify Download option in insight preview.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_142"
+     And Select the View option in grid mode
+     And Verify Download option in insight preview
+     
+        @LandingPage
+Scenario: TC_IE_143:Verify Maximize option in insight preview.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_143"
+     And Select the View option in grid mode
+     And Verify Maximize option in insight preview
+     
+      @LandingPage
+Scenario: TC_IE_144:Verify Close option for insight preview popup.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_144"
+     And Select the View option in grid mode
+     And Verify Close option for insight preview popup
+
+      @LandingPage
+Scenario: TC_IE_145:Verify Related Insights in insight preview.
+     And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_145"
+      And  Select the New insight option in Landing page
+     And Create a visual for the insight "TC_IE_145A"
+     And add a tag for the insight "TC_IE_145"
+     And add a tag for the Insight "TC_IE_145A"
+     And select the insight "TC_IE_145A"
+     And Select the Related insight option
+     And Verify Related Insights in insight preview
+
+      @LandingPage
+Scenario: TC_IE_152:Verify insights options/icons in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Verify the options in gridmode
+    
+      @LandingPage
+Scenario: TC_IE_153:Verify Copy insight in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the Copy option in gridmode   
+     And Verify Copy insight functionality
+   
+         @LandingPage
+Scenario: TC_IE_154:Verify Share insight in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the Share option in gridmode   
+     And Verify Share insight functionality  
+     
+       @LandingPage
+Scenario: TC_IE_155:Verify Add tags in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the Add tags option in gridmode   
+     And Verify Add tags functionality in gridmode 
+     
+        @LandingPage
+Scenario: TC_IE_156:Verify Delete insight in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the Delete option in gridmode   
+     And Verify Delete functionality in gridmode    
+     
+         @LandingPage
+Scenario: TC_IE_157:Verify View in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the View option in gridmode   
+     And Verify View functionality in gridmode      
+     
+          @LandingPage
+Scenario: TC_IE_158:Verify open in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the open option in gridmode   
+     And Verify open functionality in gridmode   
+
+          @LandingPage
+Scenario: TC_IE_159:Verify Favorite icon in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the Favorite icon option in gridmode   
+     And Verify open functionality in gridmode   
+       
+      @LandingPage
+Scenario: TC_IE_160:Verify insight title click in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the insight title option in gridmode   
+     And Verify insight title functionality in gridmode
+     
+           @LandingPage
+Scenario: TC_IE_161:Verify insight description on mouse over in Grid mode.
+     And Select the New insight option in Landing page
+     And Select the Settings option
+     And Give some description for insight
+     And Select the grid mode option
+     And Mouseover on insight
+     And Verify insight description functionality in gridmode        
+
+
+           @LandingPage
+Scenario: TC_IE_162:Verify Last Editor functionality in Grid mode.
+     And  Select the grid mode option
+     And Mouseover on insight
+     And Select the Share option
+      And Select copylink option
+      And Login to the shared account
+      And change Add some series that had been shared
+      And Login to the Normal account
+      And Successfully Verify  Sort by -Last Editor in gridmode 
+    
+       

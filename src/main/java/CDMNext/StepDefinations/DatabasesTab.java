@@ -63,6 +63,7 @@ public class DatabasesTab {
 	String afterReplace_sname1;
 	String afterReplace_sname2;
 	int insightVar;
+	int beforeUnselct;
 	Robot robot;
 	// create object of Actions class
 	Actions action = new Actions(login.driver);
@@ -1024,25 +1025,6 @@ public class DatabasesTab {
 				.findElement(By.xpath(
 						"//div[@class='view-selection--header']//div[@class='panel-expander panel-expander__left']"))
 				.click();
-		/*// mouse hover on China Premium Database for table level
-		login.Log4j.info("mouse hovering");
-		wait = new WebDriverWait(login.driver, 100);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))).click();
-		Thread.sleep(2000);
-		login.driver
-				.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]"))
-				.click();
-		Thread.sleep(2000);
-		login.driver
-				.findElement(By.xpath(
-						"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[1]"))
-				.click();
-		Thread.sleep(2000);
-		ele = login.driver.findElement(By.xpath(
-				"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']"));
-		Thread.sleep(2000);
-		Validationstr = ele.getText();*/
 		mouse_hover_on_any_table_level();
 
 	}
@@ -1323,7 +1305,7 @@ public class DatabasesTab {
 	public void mouse_hover_on_any_table_level() throws Throwable {
 		// mouse hover on China Premium Database for table level
 				login.Log4j.info("mouse hovering on table level");
-			Thread.sleep(20000);
+			   Thread.sleep(20000);
 				login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]")).click();
 				Thread.sleep(2000);
 				login.driver
@@ -1377,6 +1359,8 @@ public class DatabasesTab {
 	}
 	@Then("^\"([^\"]*)\" page should be opened in new tab$")
 	public void page_should_be_opened_in_new_tab(String arg1) throws Throwable {
+		ArrayList<String> tabs2 = new ArrayList<String> (login.driver.getWindowHandles()); 
+		login.driver.switchTo().window(tabs2.get(1));
 		 Thread.sleep(5000);
 		 if(login.driver.findElement(By.xpath("//div[contains(text(),'"+arg1+"')]")).isDisplayed()) {
 	    	login.Log4j.info("Insight Explorer page is opened ");
@@ -1384,13 +1368,83 @@ public class DatabasesTab {
 	    	Assert.fail("Insight Explorer page is not opened");
 	    }
 	    login.driver.close();
-	    //login.driver.switchTo().window(tabs2.get(0));
+	    login.driver.switchTo().window(tabs2.get(0));
 	    CollapseTreeMethod();
 	}
 	@Then("^The insight explorer popup should be closed$")
 	public void the_insight_explorer_popup_should_be_closed() throws Throwable {
-		login.Log4j.info("Insight explorer popup is closed ");
+		
+		try {
+		   if(!login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).isEnabled()) {
+		             login.Log4j.info("Insight explorer popup is closed ");
+		     }
+		}catch(NoSuchElementException e) {
+			login.Log4j.info("Insight explorer popup is closed ");
+		}
+		CollapseTreeMethod();
 	}
+	@And("^Right click on any table level$")
+	public void right_click_on_any_table_level() throws Throwable {
+		// Right clicking on Brazil Premium Database for table level
+		 Thread.sleep(20000);
+			login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]")).click();
+			Thread.sleep(2000);
+			login.driver
+					.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]"))
+					.click();
+			Thread.sleep(2000);
+			login.driver
+					.findElement(By.xpath(
+							"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[1]"))
+					.click();
+			Thread.sleep(2000);
+			ele = login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[3]//div[1]//div[@class='title']"));
+			Thread.sleep(2000);
+			action.contextClick(ele).build().perform();
+		    WebElement count=login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
+		    beforeUnselct=Integer.parseInt(count.getText());
+			login.Log4j.info(beforeUnselct);
+		
+	}
+
+	@And("^Select \"([^\"]*)\"$")
+	public void select(String arg1) throws Throwable {
+		Thread.sleep(3000);
+		login.Log4j.info(arg1);
+	    login.driver.findElement(By.xpath("//span[contains(text(),'"+arg1+"')]")).click();
+			
+	}
+
+	@Then("^The selected data should be unselected$")
+	public void the_selected_data_should_be_unselected() throws Throwable {
+		Thread.sleep(2000);
+		WebElement count=null;
+		count=login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
+		if(!count.isDisplayed()) {
+			login.Log4j.info("The selected data is unselected");
+		} else {
+			Assert.fail("The selected data is not unselected");
+		}
+	}
+	@Then("^\"([^\"]*)\" should be created with series in views panel$")
+	public void should_be_created_with_series_in_views_panel(String arg1) throws Throwable {
+	   Thread.sleep(5000);
+	  ele= login.driver.findElement(By.xpath("//div[contains(text(),'"+arg1+"')]"));
+	  String VisualTitle=ele.getText();
+	  login.Log4j.info(VisualTitle);
+	  Thread.sleep(2000);
+	   if(arg1.equalsIgnoreCase(VisualTitle)) {
+		   login.Log4j.info(arg1+ " visual is created");
+		   Thread.sleep(2000);
+		   login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-container ui-sortable']")).click();
+	   } else {
+		   Assert.fail(arg1+ " visual is not created");
+	   }
+	   UnselectMethod();
+	   CollapseTreeMethod();
+	}
+
 
 	public static void AfterMethod() throws InterruptedException {
 		Thread.sleep(2000);
@@ -1417,6 +1471,13 @@ public class DatabasesTab {
 		action.moveToElement(ele).click().build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[2]")).click();
+	}
+	public void UnselectMethod() throws InterruptedException {
+		Thread.sleep(2000);
+		WebElement unselect = login.driver.findElement(By.xpath("//div[contains(text(),'Unselect')]"));
+		if(unselect.isDisplayed() ) {
+			unselect.click();
+		}
 	}
 
 	public void CollapseTreeMethod() throws InterruptedException {

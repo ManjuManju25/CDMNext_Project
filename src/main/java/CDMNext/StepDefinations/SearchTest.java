@@ -43,11 +43,12 @@ public class SearchTest {
 	public void user_has_successful_logged_in() throws Throwable {
 		if (login.logged_in = false) {
 			login.Invoke_browser();
-			login.application_login();
-
+	        login.application_login();
+	        login.Log4j.info("It is in If block");
 		} else if (login.logged_in = true && !SearchTest.logged) {
 			login.application_login();
 			SearchTest.logged = true;
+			 login.Log4j.info("It is in else If block");
 
 		} else {
 			login.Log4j.info("If User has already logged in pelase continue....");

@@ -202,6 +202,7 @@ public class login {
 		// enter password
 		// click login
 		// asset login and set 'logged_in' = True
+		logged_in = true;
 
 	}
 

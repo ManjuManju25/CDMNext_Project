@@ -352,4 +352,18 @@ Then The "Selected series added to insights:" popup should be appeared
 #And  Click on "Add to existing insight"
 #And Click on "×"
 #Then The insight explorer popup should be closed
+#
+#@DB
+#Scenario: TC_DB_55:Verifying 'Unselect all' for table level
+#And Right click on any table level
+#And  Select "Unselect all"
+#Then The selected data should be unselected
+#
+#@DB
+#Scenario: TC_DB_56:Verifying "View as Chart" for table level
+#And Right click on any table level
+#And  Select "View as Chart"
+#Then "Chart" should be created with series in views panel
+
+
 

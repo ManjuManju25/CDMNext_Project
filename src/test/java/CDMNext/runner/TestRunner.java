@@ -5,18 +5,22 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import org.testng.annotations.*;
-
 import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
+
+
 @CucumberOptions(// features="classpath:",
-		features = "src/test/java/CDMNext/Features/",
+		strict = true,
+	  	features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		//tags = { "@DB" },
-		 tags = {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab" },
-		dryRun = false,
-		plugin = {"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
+	   // tags = {"@DB" },
+		 tags = {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab,@Footnote" },
+		monochrome = true,
+		// = true,
+		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
+				 })
 public class TestRunner {
 	private TestNGCucumberRunner testNGCucumberRunner;
 
@@ -42,7 +46,7 @@ public class TestRunner {
 		login.Log4j.info("\nInside TestNG > @DataProvider");
 		return testNGCucumberRunner.provideFeatures();
 	}
-	
+
 	// TestNG @Aftersuite
 	@AfterSuite
 	public void tearDownClass() throws Throwable {
@@ -55,9 +59,8 @@ public class TestRunner {
 			login.driver = null;
 			HTML_Report.html_Footer();
 			HTML_Report.bw.close();
-		}
 		// login.Log4j.info("\n ****Inside Email*****");
 		// SendmailWithAttachment.report();
+		}
 	}
-
 }
