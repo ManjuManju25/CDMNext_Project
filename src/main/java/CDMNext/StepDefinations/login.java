@@ -1,5 +1,6 @@
 package CDMNext.StepDefinations;
 
+import java.awt.Robot;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -10,11 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
@@ -29,9 +32,8 @@ import cucumber.api.java.en.When;
 public class login {
 	public static WebDriver driver;
 	public static final Logger Log4j = Logger.getLogger("Log4j");
-
 	public static Boolean logged_in = false;
-
+	public static Robot robot;
 	public String username = "";
 	public String password = "";
 	GregorianCalendar date = new GregorianCalendar();
@@ -108,26 +110,24 @@ public class login {
 
 	@And("^Enters username \"([^\"]*)\"$")
 	public void enters_username(String username) throws Throwable {
-		// Thread.sleep(5000);
-		driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).clear();
+		Thread.sleep(5000);
+		driver.findElement(By.name("user-id")).clear();
 		Log4j.info("Trying to login with Username:" + username);
-		driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).sendKeys(username);
+		driver.findElement(By.name("user_id")).sendKeys(username);
 
 	}
 
 	@And("^Enters password \"([^\"]*)\"$")
 	public void enters_password(String password) throws Throwable {
-		// Thread.sleep(2000);
-		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).clear();
+		driver.findElement(By.name("password")).clear();
 		Log4j.info("Trying to login with Password:" + password);
-		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).sendKeys(password);
+		driver.findElement(By.name("password")).sendKeys(password);
 
 	}
 
 	@When("^User clicks on \"([^\"]*)\"$")
 	public void user_clicks_on(String arg1) throws Throwable {
-		// Thread.sleep(2000);
-
+		
 		switch (arg1) {
 		case "login":
 			Log4j.info("Clicking on login button ");
@@ -202,6 +202,7 @@ public class login {
 		// enter password
 		// click login
 		// asset login and set 'logged_in' = True
+		logged_in = true;
 
 	}
 
