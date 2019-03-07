@@ -9,16 +9,14 @@ import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
-
-
 @CucumberOptions(// features="classpath:",
 		strict = true,
 	  	features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-	   // tags = {"@DB" },
+	    //tags = {"@DB" },
 		 tags = {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab,@Footnote" },
 		monochrome = true,
-		// = true,
+		//dryRun = true,
 		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
 				 })
 public class TestRunner {

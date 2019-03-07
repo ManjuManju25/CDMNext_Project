@@ -62,8 +62,10 @@ public class DatabasesTab {
 	String beforeReplace_sname2;
 	String afterReplace_sname1;
 	String afterReplace_sname2;
+	int SeriesCount;
 	int insightVar;
 	int beforeUnselct;
+	String tableName;
 	Robot robot;
 	// create object of Actions class
 	Actions action = new Actions(login.driver);
@@ -369,6 +371,8 @@ public class DatabasesTab {
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
 			Thread.sleep(2000);
+			TopMethod();
+			Thread.sleep(2000);
 			CollapseTreeMethod();
 			Assert.fail(e.getMessage());
 		}
@@ -403,71 +407,83 @@ public class DatabasesTab {
 				.findElements(By.xpath("//div[@class='child-container']//div[@class='database-node tree-node']"));
 		login.Log4j.info("Size of database selection is " + multidb.size());
 		try {
-			if(multidb.size()==3) {
-		
-		      for (int i = 0; i < multidb.size(); i++) {
-			    login.Log4j.info(DataBase[0]);
-			    login.Log4j.info(DataBase[1]);
-			    login.Log4j.info(DataBase[2]);
-			    login.Log4j.info(i);
-			    Thread.sleep(3000);
-			    if (DataBase[i].equalsIgnoreCase("China Premium Database")) {
-				   dbarr = DataBase[i].split(" ");
-				   login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]")).click();
-				   Thread.sleep(2000);
-				   login.driver.findElement(By.xpath("//div[@class='child-container']//div[3]/div[1]//div[1]")).click();
-				   Thread.sleep(2000);
-				   login.driver.findElement(By.xpath(
-						"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
-						.click();
-				   Thread.sleep(2000);
-				   login.driver.findElement(By.xpath(
-						"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
-						.click();
-			
-			} else if (DataBase[i].equalsIgnoreCase("Brazil Premium Database")) {
-				dbarr = DataBase[i].split(" ");
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]")).click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[1]//div[1]")).click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(
-						"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[@class='toggle']"))
-						.click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(
-						"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[3]//div[1]//div[@class='toggle']")).click();
-				
-			} else if(DataBase[i].equalsIgnoreCase("Russia Premium Database")){
-				dbarr = DataBase[i].split(" ");
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='RUSSIA']//div[1]")).click();
-				Thread.sleep(2000);
-				login.driver.findElement(By
-						.xpath("//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[1]"))
-						.click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(
-						"//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
-						.click();
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(
-						"//div[@class='child-container']//div[2]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
-						.click();
-			}
-			DatabaseValidation();
-			if (database == true) {
-				login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
-			} else if (database == false) {
-				Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
-			}
-		}
-	
+			if (multidb.size() == 3) {
+
+				for (int i = 0; i < multidb.size(); i++) {
+					login.Log4j.info(DataBase[0]);
+					login.Log4j.info(DataBase[1]);
+					login.Log4j.info(DataBase[2]);
+					login.Log4j.info(i);
+					Thread.sleep(3000);
+					if (DataBase[i].equalsIgnoreCase("China Premium Database")) {
+						dbarr = DataBase[i].split(" ");
+						login.driver
+								.findElement(By.xpath(
+										"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath("//div[@class='child-container']//div[3]/div[1]//div[1]"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
+								.click();
+
+					} else if (DataBase[i].equalsIgnoreCase("Brazil Premium Database")) {
+						dbarr = DataBase[i].split(" ");
+						login.driver
+								.findElement(By.xpath(
+										"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[1]//div[1]"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[@class='toggle']"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[3]//div[1]//div[@class='toggle']"))
+								.click();
+
+					} else if (DataBase[i].equalsIgnoreCase("Russia Premium Database")) {
+						dbarr = DataBase[i].split(" ");
+						login.driver
+								.findElement(By.xpath(
+										"//div[@class='child-container']//div[@data-node-model-id='RUSSIA']//div[1]"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[1]"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
+								.click();
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='child-container']//div[2]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
+								.click();
+					}
+					DatabaseValidation();
+					if (database == true) {
+						login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
+					} else if (database == false) {
+						Assert.fail("Results is not shown correctly for selected " + DataBase[i]);
+					}
+				}
+
 			} else {
 				login.Log4j.info("dbsize is more than 3");
 			}
-		}catch(Exception e)	{
-		Assert.fail( e.getMessage());
-	}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 
 	}
 
@@ -801,17 +817,20 @@ public class DatabasesTab {
 		dbase = arg1;
 		switch (arg1) {
 		case "World Trend Plus":
-			Thread.sleep(2000);
+			login.driver.navigate().refresh();
+			Thread.sleep(5000);
 			rightClickElement = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
 			Before_set_lang = rightClickElement.getText();
 			break;
 		case "Russia Premium Database":
-			Thread.sleep(2000);
+			login.driver.navigate().refresh();
+			Thread.sleep(5000);
 			rightClickElement = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
 			Before_set_lang = rightClickElement.getText();
 			break;
 		case "Indonesia Premium Database":
-			Thread.sleep(2000);
+			login.driver.navigate().refresh();
+			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@data-node-model-id='INDONESIA']//div[@class='toggle']")).click();
 			Thread.sleep(2000);
 			ele = login.driver.findElement(By.xpath(
@@ -1044,7 +1063,8 @@ public class DatabasesTab {
 	@And("^Select multiple tables$")
 	public void select_multiple_tables() throws Throwable {
 		// mouse hover on China Premium Database for table level
-		wait = new WebDriverWait(login.driver, 60);
+		UnselectMethod();
+		wait = new WebDriverWait(login.driver, 5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))).click();
 		Thread.sleep(2000);
@@ -1067,7 +1087,7 @@ public class DatabasesTab {
 			checkbox = login.driver.findElement(By.xpath(
 					"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[" + j
 							+ "]//div[@class='title']//span[@class='svg-checkbox']"));
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 			checkbox.click();
 			if (i == 2) {
 				ele = login.driver.findElement(By.xpath(
@@ -1111,30 +1131,32 @@ public class DatabasesTab {
 	public void the_entire_table_should_be_added_to_my_series() throws Throwable {
 		login.Log4j.info(Validationstr);
 		Thread.sleep(5000);
-//		WebElement tableName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("group-name")));
-		WebElement tableName =login.driver.findElement(By.className("group-name"));
+		// WebElement tableName =
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("group-name")));
+		WebElement tableName = login.driver.findElement(By.className("group-name"));
 		Thread.sleep(5000);
 		String actualStr = tableName.getText();
 		login.Log4j.info(actualStr);
 		Assert.assertEquals(actualStr, Validationstr);
 		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-     	Thread.sleep(2000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 		Thread.sleep(2000);
-		CollapseTreeMethod();
-		
+		 CollapseTreeMethod();
+
 	}
-	
+
 	@And("^Click on dropdown next to \\+ icon$")
 	public void click_on_dropdown_next_to_icon() throws Throwable {
 		login.driver.findElement(By.xpath(
 				"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']//span[@class='svg-checkbox']"))
 				.click();
-		/*Thread.sleep(2000);
-		robot = new Robot();
-		// creating table
+
+		Thread.sleep(2000);
+		robot = new Robot(); // creating table
 		robot.keyPress(KeyEvent.VK_T);
-		robot.keyRelease(KeyEvent.VK_T);*/
+		robot.keyRelease(KeyEvent.VK_T);
+
 		Thread.sleep(10000);
 		login.driver.findElement(By.xpath(
 				"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']//div[@class='add-to-data-selection--title']//div[2]"))
@@ -1211,7 +1233,7 @@ public class DatabasesTab {
 		} else {
 			Assert.fail("The selected table data replaced with existing data for Add and replace");
 		}
-		CollapseTreeMethod();
+		 CollapseTreeMethod();
 	}
 
 	@Then("^Selected table should be added as group in My series$")
@@ -1286,8 +1308,9 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//button[contains(text(),'Add to insights')]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//li//a[@class='growl-message--link growl-message--link__highlighted']")).click();
-		//login.Log4j.info(ele.getText());
+		login.driver.findElement(By.xpath("//li//a[@class='growl-message--link growl-message--link__highlighted']"))
+				.click();
+		// login.Log4j.info(ele.getText());
 		login.robot = new Robot();
 		// Store all currently open tabs in tabs
 		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
@@ -1295,156 +1318,457 @@ public class DatabasesTab {
 		login.driver.switchTo().window(tabs2.get(1));
 		Thread.sleep(10000);
 		the_entire_table_should_be_added_to_my_series();
-		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-     	Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
+
 	}
+
 	@And("^Mouse hover on any table level$")
 	public void mouse_hover_on_any_table_level() throws Throwable {
 		// mouse hover on China Premium Database for table level
-				login.Log4j.info("mouse hovering on table level");
-			   Thread.sleep(20000);
-				login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]")).click();
-				Thread.sleep(2000);
-				login.driver
-						.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]"))
-						.click();
-				Thread.sleep(2000);
-				login.driver
-						.findElement(By.xpath(
-								"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[1]"))
-						.click();
-				Thread.sleep(2000);
-				ele = login.driver.findElement(By.xpath(
-						"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']"));
-				Thread.sleep(2000);
-				Validationstr = ele.getText();
+		CollapseTreeMethod();
+		login.Log4j.info("mouse hovering on table level");
+		Thread.sleep(20000);
+		try {
+			login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))
+					.click();
+			Thread.sleep(2000);
+			login.driver
+					.findElement(
+							By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]"))
+					.click();
+			Thread.sleep(2000);
+			login.driver
+					.findElement(By.xpath(
+							"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[1]"))
+					.click();
+			Thread.sleep(2000);
+			ele = login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']//span[@class='name-text']"));
+			Thread.sleep(2000);
+			Validationstr = ele.getText();
+		} catch (NoSuchElementException e) {
+			login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))
+					.click();
+		}
 	}
 
 	@And("^Select multiple insights$")
 	public void select_multiple_insights() throws Throwable {
 		Thread.sleep(2000);
 		insightVar = 0;
-		List<WebElement> insights_list=login.driver.findElements(By.className("insight-icon-item"));
-	    login.Log4j.info(insights_list.size());
-	    for(int i=0; i<insights_list.size();i++) {
-	    	Thread.sleep(1000);
-	    	int j=i+1;
-	    	login.driver.findElement(By.xpath("//div[@class='insight-icon-item']["+j+"]")).click();
-	    	insightVar++;
-	    	//login.Log4j.info(insightVar);
-	    	if(i==2) {
-	    		break;
-	    	}
-	    }
+		List<WebElement> insights_list = login.driver.findElements(By.className("insight-icon-item"));
+		login.Log4j.info(insights_list.size());
+		for (int i = 0; i < insights_list.size(); i++) {
+			Thread.sleep(1000);
+			int j = i + 1;
+			login.driver.findElement(By.xpath("//div[@class='insight-icon-item'][" + j + "]")).click();
+			insightVar++;
+			// login.Log4j.info(insightVar);
+			if (i == 2) {
+				break;
+			}
+		}
 	}
 
 	@Then("^The number of selected insights count should be shown on popup header$")
 	public void the_number_of_selected_insights_count_should_be_shown_on_popup_header() throws Throwable {
-	    ele=login.driver.findElement(By.xpath("//span[@class='insights-search-modal-header--txt-counter']"));
-	    String str=ele.getText();
-	    login.Log4j.info(str);
-	    String str1=str.replaceAll("\\(", "").replaceAll("\\)", "");
-	    String[] arr=str1.split("");
-	    int insightCount=Integer.parseInt(arr[0]);
-	    login.Log4j.info(insightCount);
-	    if(insightCount==insightVar) {
-	    	  login.Log4j.info("The number of selected insights count shown on popup header");
-	    }else {
-	    	Assert.fail("The number of selected insights count is not shown on popup header");
-	    
-	    }
+		ele = login.driver.findElement(By.xpath("//span[@class='insights-search-modal-header--txt-counter']"));
+		String str = ele.getText();
+		login.Log4j.info(str);
+		String str1 = str.replaceAll("\\(", "").replaceAll("\\)", "");
+		String[] arr = str1.split("");
+		int insightCount = Integer.parseInt(arr[0]);
+		login.Log4j.info(insightCount);
+		if (insightCount == insightVar) {
+			login.Log4j.info("The number of selected insights count shown on popup header");
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+
+		} else {
+			Assert.fail("The number of selected insights count is not shown on popup header");
+
+		}
 	}
+
 	@Then("^\"([^\"]*)\" page should be opened in new tab$")
 	public void page_should_be_opened_in_new_tab(String arg1) throws Throwable {
-		ArrayList<String> tabs2 = new ArrayList<String> (login.driver.getWindowHandles()); 
+		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(tabs2.get(1));
-		 Thread.sleep(5000);
-		 if(login.driver.findElement(By.xpath("//div[contains(text(),'"+arg1+"')]")).isDisplayed()) {
-	    	login.Log4j.info("Insight Explorer page is opened ");
-	    } else {
-	    	Assert.fail("Insight Explorer page is not opened");
-	    }
-	    login.driver.close();
-	    login.driver.switchTo().window(tabs2.get(0));
-	    CollapseTreeMethod();
+		Thread.sleep(5000);
+		if (login.driver.findElement(By.xpath("//div[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
+			login.Log4j.info("Insight Explorer page is opened ");
+		} else {
+			Assert.fail("Insight Explorer page is not opened");
+		}
+		login.driver.close();
+		login.driver.switchTo().window(tabs2.get(0));
+		// CollapseTreeMethod();
 	}
+
 	@Then("^The insight explorer popup should be closed$")
 	public void the_insight_explorer_popup_should_be_closed() throws Throwable {
-		
+
 		try {
-		   if(!login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).isEnabled()) {
-		             login.Log4j.info("Insight explorer popup is closed ");
-		     }
-		}catch(NoSuchElementException e) {
+			if (!login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).isEnabled()) {
+				login.Log4j.info("Insight explorer popup is closed ");
+			}
+		} catch (NoSuchElementException e) {
 			login.Log4j.info("Insight explorer popup is closed ");
 		}
-		CollapseTreeMethod();
+		// CollapseTreeMethod();
 	}
+
 	@And("^Right click on any table level$")
 	public void right_click_on_any_table_level() throws Throwable {
+		CollapseTreeMethod();
 		// Right clicking on Brazil Premium Database for table level
-		 Thread.sleep(20000);
-			login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]")).click();
-			Thread.sleep(2000);
-			login.driver
-					.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]"))
-					.click();
-			Thread.sleep(2000);
-			login.driver
-					.findElement(By.xpath(
-							"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[1]"))
-					.click();
-			Thread.sleep(2000);
-			ele = login.driver.findElement(By.xpath(
-					"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[3]//div[1]//div[@class='title']"));
-			Thread.sleep(2000);
-			action.contextClick(ele).build().perform();
-		    WebElement count=login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
-		    beforeUnselct=Integer.parseInt(count.getText());
-			login.Log4j.info(beforeUnselct);
-		
+		Thread.sleep(20000);
+		login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		login.driver
+				.findElement(
+						By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		login.driver
+				.findElement(By.xpath(
+						"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath(
+				"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[3]//div[1]//div[@class='title']//span[@class='name-text']"));
+		tableName = ele.getText();
 	}
 
 	@And("^Select \"([^\"]*)\"$")
 	public void select(String arg1) throws Throwable {
-		Thread.sleep(3000);
-		login.Log4j.info(arg1);
-	    login.driver.findElement(By.xpath("//span[contains(text(),'"+arg1+"')]")).click();
-			
+		if (arg1.equals("Unselect all")) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[3]//div[1]//div[@class='title']//span[@class='svg-checkbox']"))
+					.click();
+			Thread.sleep(2000);
+			try {
+				WebElement count = login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
+				beforeUnselct = Integer.parseInt(count.getText());
+				login.Log4j.info(beforeUnselct);
+				action.contextClick(ele).build().perform();
+				Thread.sleep(3000);
+				login.Log4j.info(arg1);
+				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			} catch (NumberFormatException e) {
+				login.Log4j.info(e.getMessage());
+			}
+
+		} else if (arg1.equalsIgnoreCase("Pie") || arg1.equalsIgnoreCase("Heat map")
+				|| arg1.equalsIgnoreCase("Histogram")) {
+			Thread.sleep(2000);
+			action.contextClick(ele).build().perform();
+			Thread.sleep(2000);
+			// Mouse Hovering on View As
+			WebElement viewAs = login.driver.findElement(By.xpath("//span[contains(text(),'View as ...')]"));
+			action.moveToElement(viewAs).build().perform();
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1);
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			if (arg1.equalsIgnoreCase("Histogram")) {
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+			}
+
+		} else if (arg1.equalsIgnoreCase("View as Chart") || arg1.equalsIgnoreCase("View as Map")
+				|| arg1.equalsIgnoreCase("View as Table")) {
+			Thread.sleep(2000);
+			action.contextClick(ele).build().perform();
+			Thread.sleep(3000);
+			login.Log4j.info("Clicking on " + arg1);
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+		} else if (arg1.equals("Download")) {
+			Thread.sleep(2000);
+			action.contextClick(ele).build().perform();
+			Thread.sleep(3000);
+			try {
+				WebElement count = login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
+				SeriesCount = Integer.parseInt(count.getText());
+				login.Log4j.info(SeriesCount);
+			} catch (NumberFormatException e) {
+				login.Log4j.info(e.getMessage());
+			}
+			login.Log4j.info("Clicking on " + arg1);
+			login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
+		} else if (arg1.equals("Copy link(s)") || arg1.equals("Footnotes") || arg1.equals("Show Dataset")) {
+			Thread.sleep(2000);
+			action.contextClick(ele).build().perform();
+			Thread.sleep(3000);
+			login.Log4j.info("Clicking on " + arg1);
+			login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
+		}
 	}
 
 	@Then("^The selected data should be unselected$")
 	public void the_selected_data_should_be_unselected() throws Throwable {
 		Thread.sleep(2000);
-		WebElement count=null;
-		count=login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
-		if(!count.isDisplayed()) {
+		WebElement count = null;
+		count = login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
+		if (!count.isDisplayed()) {
 			login.Log4j.info("The selected data is unselected");
 		} else {
 			Assert.fail("The selected data is not unselected");
 		}
 	}
+
 	@Then("^\"([^\"]*)\" should be created with series in views panel$")
 	public void should_be_created_with_series_in_views_panel(String arg1) throws Throwable {
-	   Thread.sleep(5000);
-	  ele= login.driver.findElement(By.xpath("//div[contains(text(),'"+arg1+"')]"));
-	  String VisualTitle=ele.getText();
-	  login.Log4j.info(VisualTitle);
-	  Thread.sleep(2000);
-	   if(arg1.equalsIgnoreCase(VisualTitle)) {
-		   login.Log4j.info(arg1+ " visual is created");
-		   Thread.sleep(2000);
-		   login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-container ui-sortable']")).click();
-	   } else {
-		   Assert.fail(arg1+ " visual is not created");
-	   }
-	   UnselectMethod();
-	   CollapseTreeMethod();
+		Thread.sleep(5000);
+		if (arg1.equalsIgnoreCase("Table")) {
+			ele = login.driver.findElement(By.xpath(
+					"//div[@class='visual-title visual-select-area visual-title--wrapper']//span[contains(text(),'"
+							+ arg1 + "')]"));
+		} else if (arg1.equalsIgnoreCase("Histogram")) {
+			ele = login.driver.findElement(By.xpath("//div[@class='text-dots']"));
+
+		} else {
+			ele = login.driver.findElement(
+					By.xpath("//div[@class='visual-title--wrapper']//div[contains(text(),'" + arg1 + "')]"));
+		}
+
+		String VisualTitle = ele.getText();
+		login.Log4j.info(VisualTitle);
+		Thread.sleep(2000);
+		if (arg1.equalsIgnoreCase(VisualTitle)) {
+			login.Log4j.info(arg1 + " visual is created");
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@title='Delete']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+		} else if (!arg1.equalsIgnoreCase(VisualTitle)) {
+			login.Log4j.info(tableName);
+			if (tableName.contains(VisualTitle)) {
+				login.Log4j.info(arg1 + " visual is created");
+			}
+
+		} else {
+			Assert.fail(arg1 + " visual is not created");
+		}
+		// UnselectMethod();
 	}
 
+	@And("^Right click on any table level and select more than max series$")
+	public void right_click_on_any_table_level_and_select_more_than_max_series() throws Throwable {
+		CollapseTreeMethod();
+		// Right clicking on Brazil Premium Database for table level
+		Thread.sleep(20000);
+		login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		login.driver
+				.findElement(
+						By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		login.driver
+				.findElement(By.xpath(
+						"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[1]"))
+				.click();
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath(
+				"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[3]//div[2]//div[@class='title']"));
+	}
+
+	@Then("^\"([^\"]*)\" window should be displayed$")
+	public void window_should_be_displayed(String arg1) throws Throwable {
+		ele = login.driver.findElement(By.xpath("//h4[contains(text(),'Confirmation')]"));
+		String Confirm_popup = ele.getText();
+		if (arg1.equalsIgnoreCase(Confirm_popup)) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close'] ")).click();
+			login.Log4j.info("Confirmation window is displayed");
+		} else {
+			Assert.fail("Confirmation window is not displayed");
+		}
+
+	}
+
+	@Then("^Confirmation window should display with \"([^\"]*)\"$")
+	public void confirmation_window_should_display_with(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath("//div[contains(text(),'" + arg1 + "')]"));
+		String Confirm_msg = ele.getText();
+
+		if (Confirm_msg.contains(arg1)) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close'] ")).click();
+			login.Log4j.info(Confirm_msg + " is displayed");
+		} else {
+			Assert.fail(Confirm_msg + " is not displayed");
+		}
+	}
+
+	@Then("^\"([^\"]*)\" visual should be created with max series$")
+	public void visual_should_be_created_with_max_series(String arg1) throws Throwable {
+		Thread.sleep(5000);
+		ele = login.driver
+				.findElement(By.xpath("//div[@class='visual-title--wrapper']//div[contains(text(),'" + arg1 + "')]"));
+		String VisualTitle = ele.getText();
+		login.Log4j.info(VisualTitle);
+		Thread.sleep(2000);
+		if (arg1.equalsIgnoreCase(VisualTitle)) {
+			login.Log4j.info(arg1 + " visual is created");
+		} else {
+			Assert.fail(arg1 + " visual is not created");
+		}
+	}
+
+	@Then("^Download window should be appeared with selected series count$")
+	public void download_window_should_be_appeared_with_selected_series_count() throws Throwable {
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath("//div[@class='download-modal-title']"));
+		String downloadTitle = ele.getText();
+		login.Log4j.info(downloadTitle);
+		if (downloadTitle.substring(SeriesCount) != null) {
+			login.Log4j.info("Download window is displayed with selected series count");
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+		} else {
+			Assert.fail("Download window is not displayed with selected series count");
+		}
+	}
+
+	@Then("^All the series under the table should be shown$")
+	public void all_the_series_under_the_table_should_be_shown() throws Throwable {
+		Thread.sleep(2000);
+		if (login.driver.findElement(By.xpath("//span[@class='back-to-series-list']")).isDisplayed()) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//span[@class='back-to-series-list']")).click();
+			login.Log4j.info("Show Dataset is working for table level");
+		} else {
+			Assert.fail("Show Dataset is not working for table level");
+		}
+	}
+
+	@And("^Expand till table level$")
+	public void expand_till_table_level() throws Throwable {
+		login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[@class='toggle']"))
+				.click();
+		login.Log4j.info("Clicking on Topic level");
+		Thread.sleep(2000);
+		login.driver
+				.findElement(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[@class='toggle']"))
+				.click();
+		login.Log4j.info("Clicking on Section level");
+		Thread.sleep(2000);
+		login.driver
+				.findElement(By
+						.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='toggle']"))
+				.click();
+		login.Log4j.info("Clicking on Table level");
+		
+
+	}
+
+	@Then("^\"([^\"]*)\" icon should be displayed in table level$")
+	public void icon_should_be_displayed_in_table_level(String arg1) throws Throwable {
+		Thread.sleep(5000);
+		List<WebElement> table_list=login.driver.findElements(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']"));
+        login.Log4j.info("List of tables : "+table_list.size());
+        for(int i=0;i<table_list.size();i++) {
+        	int j=i+1;
+        	ele=login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']["+j+"]"));
+        String newStr=ele.getText();
+        login.Log4j.info(newStr);
+        if(newStr.contains(arg1)) {
+        	Thread.sleep(3000);
+        	login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']//div[@class='toggle']")).click();
+        	break;
+        } else {
+        	Assert.fail(arg1+" icon is not displaying for table level");
+        }
+        }
+        WebElement ul_element = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']"));
+		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		login.Log4j.info("List size is :" + li_All.size());
+		for (int i = 0; i < li_All.size(); i++) {
+			Thread.sleep(3000);
+			login.Log4j.info(i);
+			login.Log4j.info(li_All.size());
+			int j = i + 1;
+			try {
+				ele = login.driver.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__new']"));
+				// Until the element is not visible keep scrolling
+				jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+			} catch (NoSuchElementException e) {
+				login.Log4j.error("Series name is null");
+				int k = j + 1;
+				ele = login.driver.findElement(By.xpath("//li[" + k + "]//span[@class='status-icon status-icon__new']"));
+			 // Until the element is not visible keep scrolling
+				jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+			} finally {
+				String New_icon=ele.getText();
+				if (New_icon.equalsIgnoreCase(arg1)== true) {
+					login.Log4j.info(arg1+" icon for series level is working ");		
+				} else {
+					Assert.fail(arg1+" icon for series level is not displayed ");
+					
+				}
+			}
+		}
+		TopMethod();
+		CollapseTreeMethod();
+		
+	}
+
+	@And("^Press A on keyboard$")
+	public void press_A_on_keyboard() throws Throwable {
+		Validationstr = ele.getText();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath("//div[@class='insight-page-view-tab']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+		login.driver
+				.findElement(By.xpath(
+						"//div[@class='child-container']//div[@class='tree-node'][1]//span[@class='svg-checkbox']"))
+				.click();
+		// action.dragAndDrop(Validationstr, target)
+		robot = new Robot();
+		// Adding table to Myseries
+		robot.keyPress(KeyEvent.VK_A);
+		robot.keyRelease(KeyEvent.VK_A);
+
+	}
+
+	@And("^Drag and drop to my series/visual$")
+	public void drag_and_drop_to_my_series_visual() throws Throwable {
+		Validationstr = ele.getText();
+		WebElement Myseries = login.driver.findElement(By.xpath("//div[@class='insight-page--right']"));
+		login.Log4j.info(ele);
+		action.dragAndDrop(ele, Myseries).build().perform();
+
+	}
+
+	@And("^Click on series name$")
+	public void click_on_series_name() throws Throwable {
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
+		ele.click();
+	}
+
+	@Then("^Series information popup should be opened$")
+	public void series_information_popup_should_be_opened() throws Throwable {
+		Validationstr = ele.getText();
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath("//div[@class='table-row']"));
+		String ssp_text = ele.getText();
+		Assert.assertEquals(ssp_text, Validationstr);
+		login.Log4j.info("Series information popup is opened");
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")));
+	}
 
 	public static void AfterMethod() throws InterruptedException {
 		Thread.sleep(2000);
@@ -1472,10 +1796,11 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[2]")).click();
 	}
+
 	public void UnselectMethod() throws InterruptedException {
 		Thread.sleep(2000);
 		WebElement unselect = login.driver.findElement(By.xpath("//div[contains(text(),'Unselect')]"));
-		if(unselect.isDisplayed() ) {
+		if (unselect.isDisplayed()) {
 			unselect.click();
 		}
 	}

@@ -276,8 +276,7 @@ Scenario: Tc_Footnotes_54:Verify opening footnotes from dropdown in series tab
 		    And Click on the  'readmore' option, verify Footnotes
 @Footnote
 Scenario: Tc_Footnotes_55:Verify footnotes open in suggested indicators
- 			  And Goto Db Search tab 
-		      And Expand the database
+			  And Goto Db Search tab 
 		      And Add series to my series
 		      And Select series then click on Related series
 		      And Click on i icon to verify footnotes
@@ -286,11 +285,11 @@ Scenario: Tc_Footnotes_55:Verify footnotes open in suggested indicators
 Scenario: Tc_Footnotes_56:Verify chinese translated footnotes for any of the global db table
 			 And Goto Db Search tab 
 			 And Expand the global database
-            And Open footnotes for table level
-            And Download chinese language footnote file
+             And Open footnotes for table level
+             And Download chinese language footnote file
 @Footnote
 Scenario: Tc_Footnotes_57:Verify Korean translated footnotes for any of the global series
-			 And Goto Db Search tab 
+			And Goto Db Search tab 
             And Expand the global database
             And Open footnotes for series level
             And Download japanese language footnote file
@@ -392,5 +391,4 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 			And Translate to Japanese
 			And Click on Open icon to open footnotes in new tab
 			And Verify footnotes opened in new tab retain the japanese language
-	
 	  

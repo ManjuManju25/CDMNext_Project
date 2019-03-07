@@ -1148,6 +1148,6 @@ public class Myseries {
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 			Thread.sleep(5000);
-			 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+			 login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 		}
 }

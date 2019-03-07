@@ -34,6 +34,7 @@ public class SearchTest {
 	public WebElement ul_element;
 	public String text;
 	String keyword;
+	Boolean CreateInsight=false;
 	// create instance of JavaScriptExecutor
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	// create object of Actions class
@@ -58,12 +59,17 @@ public class SearchTest {
 	@Given("^User enters keyword \"([^\"]*)\"$")
 	public void user_enters_keyword(String keyword) throws Throwable {
 		currentKeyword = keyword;
+		login.driver.navigate().refresh();
 		login.Log4j.info("Searching with " + currentKeyword);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		Thread.sleep(7000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
-		Thread.sleep(3000);
-		ClearSelection();
+		try {
+			ClearSelection();
+		} catch(Exception e) {
+			//
+		}finally {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+			Thread.sleep(7000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
+		}
 	}
 
 	@Then("^User verify keyword search results$")
@@ -116,7 +122,7 @@ public class SearchTest {
 
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(3000);
+					Thread.sleep(5000);
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -124,7 +130,7 @@ public class SearchTest {
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					mouseOver.moveToElement(element).build().perform();
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -455,7 +461,7 @@ public class SearchTest {
 				for (int i = 0; i < li_All.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(3000);
+					Thread.sleep(5000);
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -463,7 +469,7 @@ public class SearchTest {
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					mouseOver.moveToElement(element).build().perform();
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -741,17 +747,19 @@ public class SearchTest {
 	public static void ClearSelection() throws InterruptedException {
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 			login.Log4j.info("Clicking on Top button");
 		}
 		if (reset.size() > 0) {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 				login.Log4j.info("Clicking on Reset button");
 			}
 		}
 		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
 			login.Log4j.info("Clicking on Unselect button");
 		}

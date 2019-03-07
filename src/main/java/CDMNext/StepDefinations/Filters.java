@@ -47,7 +47,7 @@ public class Filters {
 	public String text;
 	int finalCount;
 	String Morefilter;
-	
+
 	// create instance of JavaScriptExecutor
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	// create object of Actions class
@@ -56,39 +56,50 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		Thread.sleep(5000);
+		/*Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		login.Log4j.info("searching with " + searchData);
-		Thread.sleep(5000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
-		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
+		Thread.sleep(7000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);*/
+		try {
+			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
+			List<WebElement> clearIcon = login.driver
+					.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
 
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
-			login.Log4j.info("Clicking on Top button");
-		}
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-			login.Log4j.info("Clicking on Unselect");
-		}
-		if (clearIcon.size() > 0) {
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).isDisplayed()) {
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
 				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).click();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
+				login.Log4j.info("Clicking on Top button");
 			}
-		}
-		if (reset.size() > 0) {
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
 				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
-				login.Log4j.info("Clicking on Reset button");
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
+				login.Log4j.info("Clicking on Unselect");
 			}
-		} else {
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Filters"))).click();
-			login.Log4j.info("Clicking on filter...");
+			if (clearIcon.size() > 0) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).isDisplayed()) {
+					Thread.sleep(2000);
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).click();
+				}
+			}
+			if (reset.size() > 0) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
+					Thread.sleep(2000);
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+					login.Log4j.info("Clicking on Reset button");
+				}
+			} else {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Filters"))).click();
+				login.Log4j.info("Clicking on filter...");
+			}
+		} catch (Exception e) {
+			
+		} finally {
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+			login.Log4j.info("searching with " + searchData);
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
 		}
 	}
 
@@ -207,6 +218,7 @@ public class Filters {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		ul_element = null;
 		try {
+			Thread.sleep(2000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));

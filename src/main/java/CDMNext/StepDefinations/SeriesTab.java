@@ -492,6 +492,22 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			login.driver.findElement(By.xpath("//div[contains(text(),'"+arg1+"')]")).click();
 			break;
+		case "Cancel":
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			if(login.driver.findElement(By.xpath("//button[contains(text(),'"+arg1+"')]")).isDisplayed()) {
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath("//button[contains(text(),'"+arg1+"')]")).click();
+				login.Log4j.info("Confirmation popup is closed");
+			}else {
+				Assert.fail("Confirmation popup is not closed");
+			}
+			break;
+		case "Ok":
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			login.driver.findElement(By.xpath("//button[contains(text(),'"+arg1+"')]")).click();
+			break;
 		default:
 			login.Log4j.info("Clicking on " + arg1);
 			Thread.sleep(1000);
@@ -541,6 +557,21 @@ public class SeriesTab {
 			//System.out.println("Refresh :"+login.driver.getCurrentUrl());
 			refresh = true;
 		}
+		/*if(CreateInsight==false) {
+			// creating new insight
+					Thread.sleep(5000);
+					login.driver.findElement(By.xpath("//span[contains(text(),'File')]")).click();
+					Thread.sleep(2000);
+					login.driver.findElement(By.xpath("//span[contains(text(),'New')]")).click();
+					Thread.sleep(2000);
+					login.driver.findElement(By.xpath("//button[contains(text(),'Create insight')]")).click();
+					Thread.sleep(2000);
+					login.driver
+							.findElement(By.xpath(
+									"//div[@class='view-selection--header']//div[@class='panel-expander panel-expander__left']"))
+							.click();
+					CreateInsight=true;
+			}*/
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		SearchTest.ClearSelection();

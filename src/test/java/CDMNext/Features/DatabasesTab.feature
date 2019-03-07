@@ -252,75 +252,75 @@ And Mouse hover on any table level
 And "+" should be available
 When click on it
 Then The entire table should be added to my series
-
-@DB
-Scenario: TC_DB_41:Verifying Add dropdown for table level
-And Mouse hover on any table level
-And Click on dropdown next to + icon
-Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to existing insight"
-
-@DB
-Scenario: TC_DB_42:Verifying Add option under add dropdown for table level
-And Mouse hover on any table level 
-And  Click on dropdown icon 
-And  Click on "Add"
-Then The entire table should be added to my series
-
-@DB
-Scenario: TC_DB_43:Verifying Add and Replace for table level
-And Create a visual and Mouse hover on any table 
-And  Click on dropdown icon 
-And  Click on "Add and replace"
-Then The selected table data should be replaced with existing data on the visual
-
-@DB
-Scenario: TC_DB_44:Verifying Add and Group for table level
-And Mouse hover on any table level of data
-And  Click on dropdown icon 
-And  Click on "Add and group"
-Then Selected table should be added as group in My series
-
-@DB
-Scenario: TC_DB_45:Verifying Add to new insight for table level
-And Mouse hover on any table level
-And  Click on dropdown icon 
-And  Click on "Add to new insight"
-Then The new insight should be created with selected data
-
-@DB
-Scenario: TC_DB_46:Verifying confirmation message for adding table to new insight
-And Mouse hover on any table level 
-And  Click on dropdown icon 
-And  Click on "Add to new insight"
-Then Confirmation message should be displayed as below "New insight with the selected series created."
-
-@DB
-Scenario: TC_DB_47:Validating the added series by opening new insight
-And Mouse hover on any table level 
-And  Click on dropdown icon 
-And  Click on "Add to new insight"
-Then The insight should be opened and added series should be available in My series
-
-@DB
-Scenario: TC_DB_48:Verifying 'add to existing' insight for table level
-And Mouse hover on any table level 
-And  Click on dropdown icon 
-And  Click on "Add to existing insight"
-Then The "Insight Explorer" popup should be appeared
-
-@DB
-Scenario: TC_DB_49:Verifying 'Add to insights' button
-And Mouse hover on any table level 
-And  Click on dropdown icon 
-And  Click on "Add to existing insight"
-Then The "Add to insights" button should be disabled by default and enable after any insight selection
-
-@DB
-Scenario: TC_DB_50:Verifying adding data to existing insight
-And Mouse hover on any table level 
-And  Click on dropdown icon 
-And  Click on "Add to existing insight"
-Then The "Selected series added to insights:" popup should be appeared
+#
+#@DB
+#Scenario: TC_DB_41:Verifying Add dropdown for table level
+#And Mouse hover on any table level
+#And Click on dropdown next to + icon
+#Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to existing insight"
+#
+#@DB
+#Scenario: TC_DB_42:Verifying Add option under add dropdown for table level
+#And Mouse hover on any table level 
+#And  Click on dropdown icon 
+#And  Click on "Add"
+#Then The entire table should be added to my series
+#
+#@DB
+#Scenario: TC_DB_43:Verifying Add and Replace for table level
+#And Create a visual and Mouse hover on any table 
+#And  Click on dropdown icon 
+#And  Click on "Add and replace"
+#Then The selected table data should be replaced with existing data on the visual
+#
+#@DB
+#Scenario: TC_DB_44:Verifying Add and Group for table level
+#And Mouse hover on any table level of data
+#And  Click on dropdown icon 
+#And  Click on "Add and group"
+#Then Selected table should be added as group in My series
+#
+#@DB
+#Scenario: TC_DB_45:Verifying Add to new insight for table level
+#And Mouse hover on any table level
+#And  Click on dropdown icon 
+#And  Click on "Add to new insight"
+#Then The new insight should be created with selected data
+#
+#@DB
+#Scenario: TC_DB_46:Verifying confirmation message for adding table to new insight
+#And Mouse hover on any table level 
+#And  Click on dropdown icon 
+#And  Click on "Add to new insight"
+#Then Confirmation message should be displayed as below "New insight with the selected series created."
+#
+#@DB
+#Scenario: TC_DB_47:Validating the added series by opening new insight
+#And Mouse hover on any table level 
+#And  Click on dropdown icon 
+#And  Click on "Add to new insight"
+#Then The insight should be opened and added series should be available in My series
+#
+#@DB
+#Scenario: TC_DB_48:Verifying 'add to existing' insight for table level
+#And Mouse hover on any table level 
+#And  Click on dropdown icon 
+#And  Click on "Add to existing insight"
+#Then The "Insight Explorer" popup should be appeared
+#
+#@DB
+#Scenario: TC_DB_49:Verifying 'Add to insights' button
+#And Mouse hover on any table level 
+#And  Click on dropdown icon 
+#And  Click on "Add to existing insight"
+#Then The "Add to insights" button should be disabled by default and enable after any insight selection
+#
+#@DB
+#Scenario: TC_DB_50:Verifying adding data to existing insight
+#And Mouse hover on any table level 
+#And  Click on dropdown icon 
+#And  Click on "Add to existing insight"
+#Then The "Selected series added to insights:" popup should be appeared
 #
 #@DB
 #Scenario: TC_DB_51:Validating the added table data by opening existing insight
@@ -364,6 +364,108 @@ Then The "Selected series added to insights:" popup should be appeared
 #And Right click on any table level
 #And  Select "View as Chart"
 #Then "Chart" should be created with series in views panel
-
-
-
+#
+#@DB
+#Scenario: TC_DB_57:Verifying "View as Map" for table level
+#And Right click on any table level
+#And  Select "View as Map"
+#Then "Map" should be created with series in views panel
+#
+#@DB
+#Scenario: TC_DB_58:Verifying "View as Table" for table level
+#And Right click on any table level
+#And  Select "View as Table"
+#Then "Table" should be created with series in views panel
+#
+#@DB
+#Scenario: TC_DB_59:Verifying "View as Pie" for table level
+#And Right click on any table level
+#And  Select "Pie"
+#Then "Pie" should be created with series in views panel
+#
+#@DB
+#Scenario: TC_DB_60:Verifying "View as Heat map" for table level
+#And Right click on any table level
+#And  Select "Heat map"
+#Then "Heat map" should be created with series in views panel
+#
+#@DB
+#Scenario: TC_DB_61:Verifying "Histogram" for table level
+#And Right click on any table level
+#And  Select "Histogram"
+#Then "Histogram" should be created with series in views panel
+#
+#@DB
+#Scenario: TC_DB_62:Verify creating visual with more than max seires selection
+#And Right click on any table level and select more than max series
+#And  Select "View as Chart"
+#Then "Confirmation" window should be displayed
+#
+#@DB
+#Scenario: TC_DB_63:Verify confirmation window for more than max series selection for visual creation
+#And Right click on any table level and select more than max series
+#And  Select "View as Chart"
+#Then Confirmation window should display with "You cannot create a chart with more than 20 series. Proceed with 20 series?"
+#
+#@DB
+#Scenario: TC_DB_64:Verifying cancel/x button for confrimation popup
+#And Right click on any table level and select more than max series
+#And  Select "View as Chart"
+#And Click on "Cancel"
+#
+#@DB
+#Scenario: TC_DB_65:Verifying Ok button for confrimation popup
+#And Right click on any table level and select more than max series
+#And  Select "View as Chart"
+#And Click on "Ok"
+#Then "Chart" visual should be created with max series
+#
+#@DB
+#Scenario: TC_DB_66:Verifying Download option for table level
+#And Right click on any table level
+#And  Select "Download"
+#Then Download window should be appeared with selected series count
+#
+#@DB
+#Scenario: TC_DB_67:Verifying Copy link(s) for table level
+#And Right click on any table level
+#And Select "Copy link(s)"
+#When Paste it in new tab
+#Then The selected "table" should be highlighted
+#
+#@DB
+#Scenario: TC_DB_68:Verifying Footnotes option for table level
+#And Right click on any table level
+#And Select "Footnotes"
+#Then Footnotes should be opened for related "table"
+#
+#@DB
+#Scenario: TC_DB_69:Verifying Show dataset for table level
+#And Right click on any table level
+#And Select "Show Dataset"
+#Then All the series under the table should be shown
+#
+#@DB
+#Scenario: TC_DB_70:Verifying 'NEW' icon for table level
+#And Select Global database  
+#And Expand till table level
+#Then "NEW" icon should be displayed in table level
+#
+#@DB
+#Scenario: TC_DB_71:Verifying adding table by keyboard shortcut
+#And  Right click on any table level
+#And  Press A on keyboard
+#Then The entire table should be added to my series
+#
+##@DB
+##Scenario: TC_DB_72:Verifying adding table by drag and drop
+##And  Right click on any table level
+##And  Drag and drop to my series/visual
+##Then The entire table should be added to my series
+#
+#@DB
+#Scenario: TC_DB_73:Verifying clicking on series name
+#And  Select database as Daily Database
+#And  Expand till series level
+#And Click on series name
+#Then Series information popup should be opened
