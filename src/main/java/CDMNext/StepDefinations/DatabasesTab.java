@@ -4,8 +4,6 @@ import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.asserts.SoftAssert;
 
-import static org.testng.Assert.assertTrue;
-
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -17,14 +15,11 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.AssertJUnit;
-
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -1539,7 +1534,7 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		if (arg1.equalsIgnoreCase(VisualTitle)) {
 			login.Log4j.info(arg1 + " visual is created");
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@title='Delete']")).click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
@@ -1769,6 +1764,17 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")));
 	}
+	@Then("^Related data should be displayed under the dropdown$")
+	public void related_data_should_be_displayed_under_the_dropdown() throws Throwable {
+	    Thread.sleep(2000);
+	    ele=login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"));
+	    String Actual=ele.getText();
+	    String Expected="Datasets";
+	    Assert.assertEquals(Actual, Expected);
+	    login.driver.findElement(By.xpath("//div[@class='expand-series-control--icon']")).click();
+	    CollapseTreeMethod();
+	}
+
 
 	public static void AfterMethod() throws InterruptedException {
 		Thread.sleep(2000);

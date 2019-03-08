@@ -456,6 +456,18 @@ public class SeriesTab {
 			break;
 		case "Add":
 			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//a[@class='insight-page-view-tab--link']//div[@class='insight-page-view-tab--link-ghost']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+			Thread.sleep(5000);
+			WebElement dropdown = login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]//div[1]//div[3]//div[1]//div[@class='title']//div[@class='add-to-data-selection--title']//div[2]"));
+			action.moveToElement(dropdown).click().build().perform();
+			login.Log4j.info("Clicking on dropdown icon");
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			login.driver
 					.findElement(
@@ -508,6 +520,16 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			login.driver.findElement(By.xpath("//button[contains(text(),'"+arg1+"')]")).click();
 			break;
+		case "Show related data":
+		//	Thread.sleep(2000);
+//			element=login.driver.findElement(By.xpath("//div[@class='series-item-information--additional-text series-item-information--frequency']"));
+//			action.moveToElement(element).build().perform();
+			Thread.sleep(2000);
+			login.Log4j.info("Clicking on " + arg1 + " icon ");
+			element=login.driver.findElement(By.xpath("//div[@class='series-item--status-icons']"));
+			Thread.sleep(2000);
+			action.moveToElement(element).click().build().perform();
+			break;	
 		default:
 			login.Log4j.info("Clicking on " + arg1);
 			Thread.sleep(1000);
