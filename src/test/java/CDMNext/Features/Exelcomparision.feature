@@ -2,20 +2,20 @@ Feature: Comparing Data in Two Exel sheet
 Background:
    Given User has successful logged in
    
-@UI1
+@UI
 Scenario: TC_01:Verifying Date drop down for available options
     And User Select Series ID  as "310902301"
     And Select Download button
     And Select Date drop down
     Then Automatic and Custom Date drop down should be available
 
-@UI1    
+@UI   
 Scenario: TC_02:Verifying default decimal place
     And User Select Series ID  as "310902301"
     And Select Download button
     Then default decimal place to be as 3
 
-@UI1     
+@UI     
 Scenario: TC_03:Verifying available range of decimal places
     And User Select Series ID  as "310902301"
     And Select Download button
