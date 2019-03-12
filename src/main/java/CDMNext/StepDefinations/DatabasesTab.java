@@ -1832,6 +1832,31 @@ public class DatabasesTab {
 		}
 		CollapseTreeMethod();
 	}
+	@And("^Expand World Trend Plus till series level$")
+	public void expand_World_Trend_Plus_till_series_level() throws Throwable {
+		CollapseTreeMethod();
+		Thread.sleep(20000);
+		login.driver.findElement(By.xpath("//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[3]//div[1]//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node'][1]//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[@class='child-container']//div[@class='tree-node'][1]//div[@class='toggle']")).click();
+	}
+
+	@Then("^\"([^\"]*)\" should be displayed if available for the series$")
+	public void should_be_displayed_if_available_for_the_series(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		ele=login.driver.findElement(By.xpath("//span[contains(text(),'"+arg1+"')]"));
+		if(ele.isDisplayed()) {
+			login.Log4j.info(arg1+ " is displayed");
+		}else {
+			Assert.fail(arg1+ " is not displayed");
+		}
+	}
 
 	public static void AfterMethod() throws InterruptedException {
 		Thread.sleep(2000);

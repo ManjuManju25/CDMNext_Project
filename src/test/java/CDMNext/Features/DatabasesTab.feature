@@ -478,11 +478,17 @@ Given User has successful logged in
 #Then Related data should be displayed under the dropdown
 
 @DB
-Scenario: TC_DB_75:Verify clicking Datasets
-And   Select database as Daily Database 
-And  Expand till series level
+Scenario: TC_DB_75:Verify Related data > Remarks
+And  Expand World Trend Plus till series level
 And Click on Show related data icon
-And Click on datalinks under datasets
-Then Should redirect to respective datasets
+Then "Remarks:" should be displayed if available for the series
+
+#@DB
+#Scenario: TC_DB_75:Verify clicking Datasets
+#And   Select database as Daily Database 
+#And  Expand till series level
+#And Click on Show related data icon
+#And Click on datalinks under datasets
+#Then Should redirect to respective datasets
 
 
