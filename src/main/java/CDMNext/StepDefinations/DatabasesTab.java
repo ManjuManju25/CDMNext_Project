@@ -1,9 +1,9 @@
 package CDMNext.StepDefinations;
 
 import org.testng.Assert;
+
 import org.testng.AssertJUnit;
 import org.testng.asserts.SoftAssert;
-
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -61,6 +61,8 @@ public class DatabasesTab {
 	int insightVar;
 	int beforeUnselct;
 	String tableName;
+	String link_txt;
+	String result = "fail";
 	Robot robot;
 	// create object of Actions class
 	Actions action = new Actions(login.driver);
@@ -340,7 +342,7 @@ public class DatabasesTab {
 
 	@Then("^The selected \"([^\"]*)\" should be highlighted$")
 	public void the_selected_should_be_highlighted(String arg1) throws Throwable {
-		Thread.sleep(20000);
+		Thread.sleep(25000);
 		WebElement highlightdtext = null;
 		try {
 			if (arg1.equalsIgnoreCase("DB")) {
@@ -1137,7 +1139,7 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 		Thread.sleep(2000);
-		 CollapseTreeMethod();
+		CollapseTreeMethod();
 
 	}
 
@@ -1228,7 +1230,7 @@ public class DatabasesTab {
 		} else {
 			Assert.fail("The selected table data replaced with existing data for Add and replace");
 		}
-		 CollapseTreeMethod();
+		CollapseTreeMethod();
 	}
 
 	@Then("^Selected table should be added as group in My series$")
@@ -1659,29 +1661,32 @@ public class DatabasesTab {
 						.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='toggle']"))
 				.click();
 		login.Log4j.info("Clicking on Table level");
-		
-
 	}
 
 	@Then("^\"([^\"]*)\" icon should be displayed in table level$")
 	public void icon_should_be_displayed_in_table_level(String arg1) throws Throwable {
 		Thread.sleep(5000);
-		List<WebElement> table_list=login.driver.findElements(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']"));
-        login.Log4j.info("List of tables : "+table_list.size());
-        for(int i=0;i<table_list.size();i++) {
-        	int j=i+1;
-        	ele=login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']["+j+"]"));
-        String newStr=ele.getText();
-        login.Log4j.info(newStr);
-        if(newStr.contains(arg1)) {
-        	Thread.sleep(3000);
-        	login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']//div[@class='toggle']")).click();
-        	break;
-        } else {
-        	Assert.fail(arg1+" icon is not displaying for table level");
-        }
-        }
-        WebElement ul_element = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']"));
+		List<WebElement> table_list = login.driver.findElements(
+				By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']"));
+		login.Log4j.info("List of tables : " + table_list.size());
+		for (int i = 0; i < table_list.size(); i++) {
+			int j = i + 1;
+			ele = login.driver.findElement(
+					By.xpath("//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']["
+							+ j + "]"));
+			String newStr = ele.getText();
+			login.Log4j.info(newStr);
+			if (newStr.contains(arg1)) {
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath(
+						"//div[@class='child-container']//div[2]//div[1]//div[1]//div[1]//div[@class='tree-node']//div[@class='toggle']"))
+						.click();
+				break;
+			} else {
+				Assert.fail(arg1 + " icon is not displaying for table level");
+			}
+		}
+		WebElement ul_element = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']"));
 		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
@@ -1690,28 +1695,29 @@ public class DatabasesTab {
 			login.Log4j.info(li_All.size());
 			int j = i + 1;
 			try {
-				ele = login.driver.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__new']"));
+				ele = login.driver
+						.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__new']"));
 				// Until the element is not visible keep scrolling
 				jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 			} catch (NoSuchElementException e) {
 				login.Log4j.error("Series name is null");
 				int k = j + 1;
-				ele = login.driver.findElement(By.xpath("//li[" + k + "]//span[@class='status-icon status-icon__new']"));
-			 // Until the element is not visible keep scrolling
+				ele = login.driver
+						.findElement(By.xpath("//li[" + k + "]//span[@class='status-icon status-icon__new']"));
+				// Until the element is not visible keep scrolling
 				jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 			} finally {
-				String New_icon=ele.getText();
-				if (New_icon.equalsIgnoreCase(arg1)== true) {
-					login.Log4j.info(arg1+" icon for series level is working ");		
+				String New_icon = ele.getText();
+				if (New_icon.equalsIgnoreCase(arg1) == true) {
+					login.Log4j.info(arg1 + " icon for series level is working ");
 				} else {
-					Assert.fail(arg1+" icon for series level is not displayed ");
-					
+					Assert.fail(arg1 + " icon for series level is not displayed ");
+
 				}
 			}
 		}
 		TopMethod();
 		CollapseTreeMethod();
-		
 	}
 
 	@And("^Press A on keyboard$")
@@ -1734,7 +1740,6 @@ public class DatabasesTab {
 		// Adding table to Myseries
 		robot.keyPress(KeyEvent.VK_A);
 		robot.keyRelease(KeyEvent.VK_A);
-
 	}
 
 	@And("^Drag and drop to my series/visual$")
@@ -1743,7 +1748,6 @@ public class DatabasesTab {
 		WebElement Myseries = login.driver.findElement(By.xpath("//div[@class='insight-page--right']"));
 		login.Log4j.info(ele);
 		action.dragAndDrop(ele, Myseries).build().perform();
-
 	}
 
 	@And("^Click on series name$")
@@ -1762,20 +1766,98 @@ public class DatabasesTab {
 		Assert.assertEquals(ssp_text, Validationstr);
 		login.Log4j.info("Series information popup is opened");
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")));
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+		CollapseTreeMethod();
 	}
+
+	@And("^Click on \"([^\"]*)\" icon$")
+	public void click_on_icon(String arg1) throws Throwable {
+		        Thread.sleep(2000);
+				ele = login.driver.findElement(
+						By.xpath("//div[@class='series-item--country country-information']"));
+				action.moveToElement(ele).click().build().perform();
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath("//div[@title='Show related data']")).click();
+				String expected = "DATASETS";
+				ele = login.driver.findElement(By.xpath("//div[@class='related-series-information-portlet--title']"));
+				String actual = ele.getText();
+				login.Log4j.info(actual);
+				if (actual.equals(expected)) {
+					login.Log4j.info("Related data is displayed ");
+					Thread.sleep(4000);
+					login.driver.findElement(By.xpath("//div[@title='Hide related data']")).click();
+					result = "pass";
+				} else {
+					Assert.fail("Related data is not displayed ");
+					result = "fail";
+				}
+				CollapseTreeMethod();
+		}
+
 	@Then("^Related data should be displayed under the dropdown$")
 	public void related_data_should_be_displayed_under_the_dropdown() throws Throwable {
+		login.Log4j.info(result);
+	}
+	@And("^Click on Show related data icon$")
+	public void click_on_Show_related_data_icon() throws Throwable {
 	    Thread.sleep(2000);
-	    ele=login.driver.findElement(By.xpath("//div[contains(text(),'Datasets')]"));
-	    String Actual=ele.getText();
-	    String Expected="Datasets";
-	    Assert.assertEquals(Actual, Expected);
-	    login.driver.findElement(By.xpath("//div[@class='expand-series-control--icon']")).click();
-	    CollapseTreeMethod();
+	    ele = login.driver.findElement(
+				By.xpath("//div[@class='series-item--country country-information']"));
+		action.moveToElement(ele).click().build().perform();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@title='Show related data']")).click();
 	}
 
+	@And("^Click on datalinks under datasets$")
+	public void click_on_datalinks_under_datasets() throws Throwable {
+		Thread.sleep(2000);
+		ele=login.driver.findElement(By.xpath("//div[@class='series-data-set--table-name']"));
+		link_txt=ele.getText();
+		ele.click();
+	}
 
+	@Then("^Should redirect to respective datasets$")
+	public void should_redirect_to_respective_datasets() throws Throwable {
+		Thread.sleep(2000);
+		ele=login.driver.findElement(By.xpath("//span[@class='series-table-name']"));
+		String tname=ele.getText();
+		String[] str=link_txt.split(",");
+		
+		if(tname.contains(str[0]) == true && tname.contains(str[1]) == true ) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//span[@class='back-to-series-list']")).click();
+			login.Log4j.info("It is redirected to respective DB");
+		} else {
+			Assert.fail("It is not redirected");
+		}
+		CollapseTreeMethod();
+	}
+	@And("^Expand World Trend Plus till series level$")
+	public void expand_World_Trend_Plus_till_series_level() throws Throwable {
+		CollapseTreeMethod();
+		Thread.sleep(20000);
+		login.driver.findElement(By.xpath("//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[3]//div[1]//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node'][1]//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[@class='child-container']//div[@class='tree-node'][1]//div[@class='toggle']")).click();
+	}
+
+	@Then("^\"([^\"]*)\" should be displayed if available for the series$")
+	public void should_be_displayed_if_available_for_the_series(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		ele=login.driver.findElement(By.xpath("//span[contains(text(),'"+arg1+"')]"));
+		if(ele.isDisplayed()) {
+			login.Log4j.info(arg1+ " is displayed");
+		}else {
+			Assert.fail(arg1+ " is not displayed");
+		}
+	}
+	
 	public static void AfterMethod() throws InterruptedException {
 		Thread.sleep(2000);
 		WebElement SeriesCount = login.driver.findElement(By.cssSelector(".series-series-count"));

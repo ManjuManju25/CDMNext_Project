@@ -470,11 +470,26 @@ Given User has successful logged in
 #And Click on series name
 #Then Series information popup should be opened
 #
+#@DB
+#Scenario: TC_DB_74:Verifying related data
+#And   Select database as Daily Database 
+#And  Expand till series level
+#And Click on "Show related data" icon
+#Then Related data should be displayed under the dropdown
+
 @DB
-Scenario: TC_DB_74:Verifying Show related data dropdown icon
-And  Select database as Daily Database
-And  Expand till series level
-And  Click on "Show related data"
-Then Related data should be displayed under the dropdown
+Scenario: TC_DB_75:Verify Related data > Remarks
+And  Expand World Trend Plus till series level
+And Click on Show related data icon
+Then "Remarks:" should be displayed if available for the series
+
+#@DB
+#Scenario: TC_DB_75:Verify clicking Datasets
+#And   Select database as Daily Database 
+#And  Expand till series level
+#And Click on Show related data icon
+#And Click on datalinks under datasets
+#Then Should redirect to respective datasets
+
 
 
