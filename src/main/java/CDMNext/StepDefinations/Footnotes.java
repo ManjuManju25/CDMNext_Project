@@ -80,7 +80,10 @@ public class Footnotes {
 		Thread.sleep(5000);
 		 String text = tableName.replaceAll("\\W", "");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_download"))).click();
+
+		
 		Thread.sleep(50000);
+
 		 String downloadPath =System.getProperty("user.home")+"\\Downloads";
 		 File getLatestFile = getLatestFilefromDir(downloadPath);
 		 System.out.println(text);
@@ -1148,15 +1151,18 @@ try{
 	   List<WebElement> country_specific_info_table = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("country_specific_info_table")));
 	   if(country_specific_info_table.size()!=0){
 		   System.out.println("Page navigates to country specific information");
+		   login.driver.switchTo().defaultContent();
+		   footnotes_close();
 		  
 	   }
 	   else
 	   {
 		   Assert.fail("Page will not navigate to country specific information");
+		   login.driver.switchTo().defaultContent();
+		   footnotes_close();
 	   }
 	   
-	   login.driver.switchTo().defaultContent();
-	   footnotes_close();
+	  
 	}
 	////Tc_Footnotes_26
 	@Given("^Add series to My series$")
@@ -1273,7 +1279,7 @@ try{
 	}
 	//Tc_Footnotes_29
 	@Given("^Goto Footnotes menu bar , click Open new tab$")
-	public void goto_Footnotes_menu_bar_click_Open_new_tab() throws Throwable {
+	public void Goto_Footnotes_menu_bar_click_Open_new_tab() throws Throwable {
 		WebDriverWait wait = new WebDriverWait(login.driver,500); 
 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnotes_tab"))));
 		 Thread.sleep(10000);
@@ -2867,9 +2873,12 @@ login.driver.switchTo().window(browserTabs.get(0));
 		   login.driver.switchTo().defaultContent();
 		   File file=new File(System.getProperty("user.home")+"\\Downloads\\Table Real GDP Y-o-Y Growth Asia.pdf");
 		   file.delete();
+
+
 		   Thread.sleep(7000);
 		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_download"))).click();
 		   Thread.sleep(50000);
+
 		  
 		   String downloadPath =System.getProperty("user.home")+"\\Downloads";
 		   File getLatestFile = getLatestFilefromDir(downloadPath);
@@ -2877,7 +2886,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 		   System.out.println(fileName);
 		   boolean text = fileName.equalsIgnoreCase("Table Real GDP Y-o-Y Growth Asia.pdf");
 		   Assert.assertTrue("Downloaded file name is not matching with expected file name", text);
-		   footnotes_close();
+		  
 			}
 			catch(Exception e){
 				
@@ -3376,13 +3385,16 @@ login.driver.switchTo().window(browserTabs.get(0));
 			 if(askQuestionWindow.size()!=0)
 			 {
 				 Assert.fail("Ask Question window is shown");
+				 login.driver.close();
+				 login.driver.switchTo().window(browserTabs .get(0));
 			 }
 			 else
 			 {
 				 System.out.println("Ask Question window is not shown");
+				 login.driver.close();
+				 login.driver.switchTo().window(browserTabs .get(0));
 			 }
-			 login.driver.close();
-			 login.driver.switchTo().window(browserTabs .get(0));
+			
 		}
 		//Tc_Footnotes_52
 		@Given("^Click on guestmode option, verify the page$")
@@ -3674,26 +3686,34 @@ Thread.sleep(3000);
 		public void Verify_footnote_download_message() throws Throwable {
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download_enabled"))).click();
-			Thread.sleep(200000);
-			WebElement footnoteDownloadMessage = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_download_message")));
-			System.out.println(footnoteDownloadMessage.getText());
-			try{
-			if(footnoteDownloadMessage.isDisplayed())
-			{
-				System.out.println("Footnote download message is displayed");
-				footnotes_close();
-			}
-			else{
+			Thread.sleep(50000);
+			 List<WebElement> footnoteDownloadMessage = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("footnote_download_message")));
+				if(footnoteDownloadMessage.size()!=0){
+					System.out.println("Footnote download message is displayed");
+					footnotes_close();
+				}
+				else{
 				Assert.fail("Footnote download message is not displayed");
 				footnotes_close();
-			}
-			
-			}
-			catch(Exception e)
-			{
-				Assert.fail("Footnote download message is not displayed");
-				footnotes_close();
-			}
+				}
+			//			System.out.println(footnoteDownloadMessage.getText());
+//			try{
+//			if(footnoteDownloadMessage.isDisplayed())
+//			{
+//				System.out.println("Footnote download message is displayed");
+//				footnotes_close();
+//			}
+//			else{
+//				Assert.fail("Footnote download message is not displayed");
+//				footnotes_close();
+//			}
+//			
+//			}
+//			catch(Exception e)
+//			{
+//				Assert.fail("Footnote download message is not displayed");
+//				footnotes_close();
+//			}
 		}
 		// Tc_Footnotes_65
 		@Given("^Click on Download button$")

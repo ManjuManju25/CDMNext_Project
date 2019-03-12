@@ -1,7 +1,7 @@
 Feature:  verifying Footnote Functionality
 
 Background:
-   Given User has successful logged in
+   Given User2 has successful logged in
 @Footnote
 Scenario: Tc_Footnotes_01: Verify opening of footnotes from insight explorer window 
     And Set the Preference to insight explorer 
@@ -391,4 +391,9 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 			And Translate to Japanese
 			And Click on Open icon to open footnotes in new tab
 			And Verify footnotes opened in new tab retain the japanese language
-	  
+
+	
+                                               
+     
+#
+#		  
