@@ -2,7 +2,7 @@ Feature: Comparing Data in Two Exel sheet
 Background:
    Given User has successful logged in
    
-@UI
+@UI1
 Scenario: TC_01:Verifying Date drop down for available options
     And User Select Series ID  as "310902301"
     And Select Download button
