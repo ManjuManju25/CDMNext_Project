@@ -1,7 +1,7 @@
 Feature:  verifying Footnote Functionality
 
 Background:
-   Given User2 has successful logged in
+   Given User has successful logged in
 @Footnote
 Scenario: Tc_Footnotes_01: Verify opening of footnotes from insight explorer window 
     And Set the Preference to insight explorer 
@@ -311,12 +311,7 @@ Scenario: Tc_Footnotes_60:Verify Indonesian translated footnotes for any of the 
             And Expand the indonesian database
             And Open footnotes for indonesian series level
             And Download Indonesian language footnote file
-#@Footnote
-#Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
-#			 And Goto Db Search tab 
-#            And Expand the Markit database
-#            And Open footnotes for section level, change to Japanese
-#            And Click on PMI glossary link,Verify the glossary
+
 @Footnote
 Scenario: Tc_Footnotes_62:Footnotes: 'Ask question' should include the selected table name
 			 And Goto Db Search tab 
@@ -393,7 +388,12 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 			And Verify footnotes opened in new tab retain the japanese language
 
 	
-                                               
+#@Footnote
+#Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
+#			 And Goto Db Search tab 
+#            And Expand the Markit database
+#            And Open footnotes for section level, change to Japanese
+#            And Click on PMI glossary link,Verify the glossary                                               
      
 #
 #		  

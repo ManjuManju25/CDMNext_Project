@@ -493,7 +493,7 @@ try{
 	@Given("^Click on Footnotes tab$")
 	public void click_on_Footnotes_tab() throws Throwable {
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_tab"))).click();
-		 Thread.sleep(3000);
+		 Thread.sleep(9000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_open"))).click();
 		 Thread.sleep(3000);
 	}
