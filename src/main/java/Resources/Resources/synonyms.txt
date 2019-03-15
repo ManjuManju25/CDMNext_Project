@@ -156,7 +156,7 @@ PSI,Producers Shipment Index, Producers' Shipment Index
 PVI,Producers Inventory Index, Producers' Inventory Index
 qoq,quarter-on-quarter, quarter on quarter
 qtr,quarter
-r&d,r d, research development, research and development
+r&d,r d, research development, research and development, research & development
 REER,Real Effective Exchange Rate
 repo,repurchase agreement
 RD, Reserve Deposits
@@ -179,7 +179,7 @@ sme,small and medium enterprises
 sna,system of national accounts
 SSF, Social Security Fund
 SOE, state-owned enterprise, state control enterprise, state owned enterprise
-s&p,s p, standard poors,standard and poors
+s&p,s p, standard poors,standard and poors, standard & poors
 hahaa
 T-bill, T bill, Treasury Bills
 TOT, Terms of Trade
