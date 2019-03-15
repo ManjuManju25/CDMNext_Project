@@ -830,10 +830,10 @@ public class Filters {
 				finalCount = Integer.parseInt(replace);
 
 			} else {
-				finalCount = Integer.parseInt(filter_count);
-				replace = filter_count.replaceAll("\\(", "").replaceAll("\\)", "");
+				replace =filter_count.replaceAll("\\(", "").replaceAll("\\)", "");
 				login.Log4j.info(arg1 + " filter count is: " + replace);
 				finalCount = Integer.parseInt(replace);
+				
 			}
 
 		} catch (NullPointerException | NumberFormatException e) {
@@ -870,6 +870,7 @@ public class Filters {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					jse.executeScript("arguments[0].scrollIntoView(true);", checkbox );
 					if(checkbox.isDisplayed()) {
 						Thread.sleep(1000);
 						 mouseOver.moveToElement(checkbox).click().build().perform();
