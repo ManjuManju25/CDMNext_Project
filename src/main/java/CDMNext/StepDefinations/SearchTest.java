@@ -694,8 +694,8 @@ public class SearchTest {
 
 					} else if (Filters.searchData.contains("*")) {
 						String[] currentLine = Filters.searchData.split(";");
-						login.Log4j.info(currentLine[0]);
-						login.Log4j.info(currentLine[1]);
+//						login.Log4j.info(currentLine[0]);
+//						login.Log4j.info(currentLine[1]);
 						for (String pair : currentLine) {
 							String[] str = pair.split("\\*");
 							for (String keyword : str) {
@@ -836,7 +836,7 @@ public class SearchTest {
 			String[] TC = var.split(":");
 			// TC[0] will return test case number so that screenshot name will be same as
 			// test case number
-			String dest = System.getProperty("user.dir") + "/ErrorScreenshot/" + TC[0] + ".jpg";
+			String dest = System.getProperty("user.dir") + "/ErrorScreenshot/" + TC[0] + ".png";
 			File destFile = new File(dest);
 			try {
 				// Copy files to specific location

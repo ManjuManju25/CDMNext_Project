@@ -443,12 +443,14 @@ Then  User verify the search results
 Scenario: TC_Filters_Search_65
 Given User enters "Agar"
 And   User selects "Name only" 
+And   User has clicked on "Apply filter"
 Then  User verify the search results
 
 @FilterSearch
 Scenario: TC_Filters_Search_66
 Given User enters "297756101"
 And   User selects "Subscribed series only" 
+And   User has clicked on "Apply filter"
 Then  User verify the search results 
 
 @FilterSearch
@@ -457,6 +459,7 @@ Given User enters "293847801"
 And   User selects "Status" as "Active"
 And   User has clicked on "Apply filter"
 And   User selects "Subscribed series only"
+And   User has clicked on "Apply filter"
 Then  User verify the search results 
 
 @FilterSearch
@@ -465,6 +468,7 @@ Given User enters "BRJAC"
 And   User selects "Status" as "Active"
 And   User has clicked on "Apply filter"
 And   User selects "Subscribed series only"
+And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Brazil Premium Database"
 Then  User verify the search results 
 
@@ -483,6 +487,7 @@ Given User enters "demand"
 And   User selects "Status" as "Active"
 And   User has clicked on "Apply filter"
 And   User selects "Subscribed series only" 
+And   User has clicked on "Apply filter"
 Then  User verify the search results 
 
 @FilterSearch
@@ -899,7 +904,7 @@ And   User selects "Unit" as "MUR"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Global Database"
 Then  User verify the search results 
- 
+
 @FilterSearch
 Scenario: TC_Filters_Search_128
 Given User enters "money"
@@ -1082,12 +1087,14 @@ Then  User verify the search results
 Scenario: TC_Filters_Search_156
 Given User enters "money"
 And   User selects "Subscribed series only" 
-Then  User verify the search results 
+And   User has clicked on "Apply filter"
+Then  User check for the scubscribed series
 
 @FilterSearch
 Scenario: TC_Filters_Search_157
 Given User enters "money"
 And   User selects "New only" 
+And   User has clicked on "Apply filter"
 Then  User verify the search results
 
 @FilterSearch

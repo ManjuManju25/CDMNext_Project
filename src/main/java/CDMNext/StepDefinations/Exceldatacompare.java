@@ -712,8 +712,8 @@ public class Exceldatacompare {
 			Thread.sleep(2000);
 			 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
 		}
-		 Thread.sleep(2000);
-	     login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a/div[5]/div/div[1]")).click();
+		Thread.sleep(2000);
+	     login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a/div[4]/div/div[1]")).click();
 	}
 
 	

@@ -129,7 +129,7 @@ public class Filters {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DateFilter"))).click();
 				datearr = var.split(";");
 				for (String list : datearr) {
-					Thread.sleep(2000);
+					Thread.sleep(5000);
 					login.Log4j.info("clicking on " + list);
 					login.driver.findElement(By.xpath("//label[@title='" + list + "']")).click();
 				}
@@ -139,7 +139,7 @@ public class Filters {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FrequencyFilter"))).click();
 				frequencyarr = var.split(";");
 				for (String list : frequencyarr) {
-					Thread.sleep(2000);
+					Thread.sleep(5000);
 					login.Log4j.info("clicking on " + list);
 					login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 				}
@@ -149,7 +149,7 @@ public class Filters {
 				login.Log4j.info("clicking on " + arg1);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status_filter"))).click();
 				login.Log4j.info("clicking on " + fltrStatus);
-				Thread.sleep(3000);
+				Thread.sleep(5000);
 				login.driver.findElement(By.xpath("//tr[@title='" + fltrStatus + "']")).click();
 			}
 			if (arg1.equals("Unit")) {
@@ -160,7 +160,7 @@ public class Filters {
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_option"))).click();
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).clear();
-					Thread.sleep(1000);
+					Thread.sleep(2000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).sendKeys(arg2);
 
 				}
@@ -197,7 +197,7 @@ public class Filters {
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_filter"))).click();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
 	}
 

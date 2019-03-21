@@ -59,6 +59,7 @@ public class Footnotes {
 	 	Thread.sleep(5000);
 	 	
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
+		Thread.sleep(20000);
 	}
 	public void japanese_lang() throws Exception{
 		
@@ -1151,8 +1152,7 @@ try{
 	   List<WebElement> country_specific_info_table = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("country_specific_info_table")));
 	   if(country_specific_info_table.size()!=0){
 		   System.out.println("Page navigates to country specific information");
-		   login.driver.switchTo().defaultContent();
-		   footnotes_close();
+		  
 		  
 	   }
 	   else
@@ -1161,12 +1161,14 @@ try{
 		   login.driver.switchTo().defaultContent();
 		   footnotes_close();
 	   }
-	   
+	   login.driver.switchTo().defaultContent();
+	   footnotes_close();
 	  
 	}
 	////Tc_Footnotes_26
 	@Given("^Add series to My series$")
 	public void Add_series_to_My_series() throws Throwable {
+	//	login.driver.navigate().refresh();
 		WebDriverWait wait=new WebDriverWait(login.driver, 150);
 		Thread.sleep(9000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_presentation"))).click();
@@ -1251,12 +1253,14 @@ try{
 	public void refresh_the_page_Verify_the_footnotes_window_disappear() throws Throwable {
 		try{
 		login.driver.navigate().refresh();
+		Thread.sleep(15000);
 		 List<WebElement> verify_footnote = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("search")));
 		 if(verify_footnote.size()!=0){
-			   System.out.println("Footnote window disappear on page refresh");
+			 Assert.fail("Footnote window retained on page refresh");
+			  
 		   }
 		   else{
-			   Assert.fail("Footnote window retained on page refresh");
+			   System.out.println("Footnote window disappear on page refresh");
 		   }
 		}
 		catch(WebDriverException e){
@@ -1286,7 +1290,7 @@ try{
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_tab"))).click();
 				 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("open_in_new_tab"))));
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_in_new_tab"))).click();
-				 Thread.sleep(4000);
+				 Thread.sleep(20000);
 				 String windowHandle = login.driver.getWindowHandle();
 				 for(String winHandle : login.driver.getWindowHandles()){
 					    login.driver.switchTo().window(winHandle);
@@ -1357,7 +1361,7 @@ try{
 		@Given("^Click on Open button and verify refreshing footnotes in new tab$")
 	public void Click_on_Open_button_and_verify_refreshing_footnotes_in_new_tab() throws Throwable {
 		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
-		  Thread.sleep(5000);
+		  Thread.sleep(20000);
 			login.driver.navigate().refresh();
 		  try{
 				//get window handlers as list
@@ -2954,11 +2958,13 @@ login.driver.switchTo().window(browserTabs.get(0));
 		//TC_Footnotes_38
 		@Given("^Click on Footnotes tab Open new tab$")
 		public void click_on_Footnotes_tab_Open_new_tab() throws Throwable {
+			
 			WebDriverWait wait = new WebDriverWait(login.driver,200); 
 			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnotes_tab"))));
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_tab"))).click();
 					 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("open_in_new_tab"))));
 					 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_in_new_tab"))).click();
+					 Thread.sleep(20000);
 		}
 
 		@Given("^Expand the tree change the language ,verify the Back button$")
@@ -3086,7 +3092,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 				   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_euro_asia_icon"))).click();
 				   Thread.sleep(3000);
 				   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
-				 
+				   Thread.sleep(20000);
 
 			}
 	
@@ -3094,6 +3100,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 
 		@Given("^check the country specific information$")
 		public void check_the_country_specific_information() throws Throwable {
+			Thread.sleep(10000);
 			  String windowHandle = login.driver.getWindowHandle();
 				 for(String winHandle : login.driver.getWindowHandles()){
 					    login.driver.switchTo().window(winHandle);
@@ -3468,7 +3475,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("parentseries"))).click();
 			Thread.sleep(3000);			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("related_series"))).click();
-			 Thread.sleep(3000);
+			 Thread.sleep(25000);
 		}
 
 		@Given("^Click on i icon to verify footnotes$")
@@ -3500,7 +3507,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
 //footnotes_close();
 login.driver.navigate().refresh();
-Thread.sleep(3000);
+Thread.sleep(15000);
 		}
 //TC_Footnotes_56
 		@Given("^Expand the global database$")
@@ -3552,12 +3559,14 @@ Thread.sleep(3000);
 		@Given("^Download japanese language footnote file$")
 		public void Download_japanese_language_footnote_file() throws Throwable {
 		  Japanese();
+		  Thread.sleep(10000);
 		  global_footnote_download();
 		}
 		//Tc_Footnotes_58
 		@Given("^Download Korean language footnote file$")
 		public void Download_Korean_language_footnote_file() throws Throwable {
 		   Korean();
+		   Thread.sleep(10000);
 		   global_footnote_download();
 		}
 		//Tc_Footnotes_59
@@ -3590,6 +3599,7 @@ Thread.sleep(3000);
 		@Given("^Download Russian language footnote file$")
 		public void Download_Russian_language_footnote_file() throws Throwable {
 		    Russian();
+		    Thread.sleep(8000);
 		   global_footnote_download();
 		}
 // Tc_Footnotes_60
@@ -3619,6 +3629,7 @@ Thread.sleep(3000);
 		@Given("^Download Indonesian language footnote file$")
 		public void Download_Indonesian_language_footnote_file() throws Throwable {
 		    Indonesian();
+		    Thread.sleep(10000);
 		    global_footnote_download();
 		}
 		// Tc_Footnotes_61

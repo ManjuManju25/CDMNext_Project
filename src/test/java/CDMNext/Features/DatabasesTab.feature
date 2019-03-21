@@ -531,5 +531,16 @@ Then "Heat map" should be created with series in views panel
 #And Click on "Show related data" 
 #And Click on "Hide related data" 
 #Then The related data dropdown should be collapsed
+#
+#@DB1
+#Scenario: TC_DB_82: Verifying 'View as chart'
+#And Mouse hover on any series level 
+#And Click on "View as Chart. Type `c`"
+#Then Chart should be created with the series
 
+#@DB1
+#Scenario: TC_DB_83:Verifying Footnote icon
+#And Mouse hover on any series level 
+#And Click on Footnote icon
+#Then Footnotes should be opened for related "series"
 

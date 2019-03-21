@@ -1289,7 +1289,7 @@ Scenario: TC_KeywordSearch_257
 Given User enters "State Bank of Mysore;shanghai stock exchange"
 Then  User verify the search results
 
-@KeywordSearch
+@Keyword
 Scenario: TC_Filters_Search_258
 Given User enters "miner*;Seleni*"
 Then  User verifies keyword search results  
@@ -1333,26 +1333,26 @@ Then  User verify keyword search results
 Scenario: TC_KeywordSearch_266
 Given User enters "Tes*"
 Then  User verifies Filter search results  
-#
-#@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_267 : Search for an Acronym as "上交所"
-#Given User enters keyword "上交所"
-#Then User verify keyword search results
-#
-#@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_268 : Search for an Acronym as "上海"
-#Given User enters keyword "上海"
-#Then User verify keyword search results
-#
-#@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_269 : Search for an Acronym as "个人消费支出"
-#Given User enters keyword "个人消费支出"
-#Then User verify keyword search results
-#
-#@ChineseKeywordSearch
-#Scenario: TC_KeywordSearch_270 : Search for an Acronym as "冰箱"
-#Given User enters keyword "冰箱"
-#Then User verify keyword search results
+
+@ChineseKeywordSearch
+Scenario: TC_KeywordSearch_267 : Search for an Acronym as "上交所"
+Given User enters keyword "上交所"
+Then User verify keyword search results
+
+@ChineseKeywordSearch
+Scenario: TC_KeywordSearch_268 : Search for an Acronym as "上海"
+Given User enters keyword "上海"
+Then User verify keyword search results
+
+@ChineseKeywordSearch
+Scenario: TC_KeywordSearch_269 : Search for an Acronym as "个人消费支出"
+Given User enters keyword "个人消费支出"
+Then User verify keyword search results
+
+@ChineseKeywordSearch
+Scenario: TC_KeywordSearch_270 : Search for an Acronym as "冰箱"
+Given User enters keyword "冰箱"
+Then User verify keyword search results
 #
 #@ChineseKeywordSearch
 #Scenario: TC_KeywordSearch_271 : Search for an Acronym as "印尼"
@@ -1479,10 +1479,10 @@ Then  User verifies Filter search results
 #Given User enters keyword "国内総生産 OR ВВП OR gas"
 #Then  User verifies keyword search results 
 #
-#@RussianKeywordSearch
-#Scenario: TC_KeywordSearch_296
-#Given User enters keyword "среднегодовым"
-#Then  User verify keyword search results 
+@RussianKeywordSearch
+Scenario: TC_KeywordSearch_296
+Given User enters keyword "среднегодовым"
+Then  User verify keyword search results 
 #
 #@ChineseKeywordSearch
 #Scenario: TC_KeywordSearch_297
@@ -1491,10 +1491,10 @@ Then  User verifies Filter search results
 #And   User has clicked on "Apply filter"
 #Then  User verify the search results 
 #
-#@RussianKeywordSearch
-#Scenario: TC_KeywordSearch_298
-#Given User enters "среднегодовым"
-#And   User selects "Source" as "Federal State Statistics Service"
-#And   User has clicked on "Apply filter"
-#Then  User verify the search results 
+@RussianKeywordSearch
+Scenario: TC_KeywordSearch_298
+Given User enters "среднегодовым"
+And   User selects "Source" as "Federal State Statistics Service"
+And   User has clicked on "Apply filter"
+Then  User verify the search results 
 
