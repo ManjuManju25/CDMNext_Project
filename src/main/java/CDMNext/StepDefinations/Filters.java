@@ -116,30 +116,33 @@ public class Filters {
 		try {
 			if (arg1.equals("Source")) {
 				login.Log4j.info("clicking on " + arg1);
+				Thread.sleep(3000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 				sourcearr = var.split(";");
 				for (String list : sourcearr) {
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					login.Log4j.info("clicking on " + list);
 					login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 				}
 			}
 			if (arg1.equals("Date")) {
 				login.Log4j.info("clicking on " + arg1);
+				Thread.sleep(3000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DateFilter"))).click();
 				datearr = var.split(";");
 				for (String list : datearr) {
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					login.Log4j.info("clicking on " + list);
 					login.driver.findElement(By.xpath("//label[@title='" + list + "']")).click();
 				}
 			}
 			if (arg1.equals("Frequency")) {
 				login.Log4j.info("clicking on " + arg1);
+				Thread.sleep(3000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FrequencyFilter"))).click();
 				frequencyarr = var.split(";");
 				for (String list : frequencyarr) {
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					login.Log4j.info("clicking on " + list);
 					login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
 				}
@@ -147,13 +150,15 @@ public class Filters {
 			if (arg1.equals("Status")) {
 				fltrStatus = arg2;
 				login.Log4j.info("clicking on " + arg1);
+				Thread.sleep(3000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status_filter"))).click();
 				login.Log4j.info("clicking on " + fltrStatus);
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 				login.driver.findElement(By.xpath("//tr[@title='" + fltrStatus + "']")).click();
 			}
 			if (arg1.equals("Unit")) {
 				login.Log4j.info("clicking on " + arg1);
+				Thread.sleep(3000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 				if (arg2.equals("MUR")) {
 					Thread.sleep(2000);
@@ -177,6 +182,7 @@ public class Filters {
 			}
 			if (arg1.equals("Region")) {
 				login.Log4j.info("clicking on " + arg1);
+				Thread.sleep(3000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
 				Thread.sleep(3000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_By_group"))).click();
@@ -196,6 +202,7 @@ public class Filters {
 	@And("^User selects \"([^\"]*)\"$")
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_filter"))).click();
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
@@ -229,7 +236,7 @@ public class Filters {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		ul_element = null;
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
