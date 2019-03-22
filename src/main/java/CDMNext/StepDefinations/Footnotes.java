@@ -59,7 +59,7 @@ public class Footnotes {
 	 	Thread.sleep(5000);
 	 	
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
-		Thread.sleep(20000);
+		Thread.sleep(15000);
 	}
 	public void japanese_lang() throws Exception{
 		
@@ -143,6 +143,7 @@ public class Footnotes {
 			   System.out.println("Footnotes is Open");
 		   }
 		   else{
+			   footnotes_close();
 			   Assert.fail("Footnotes is not  Open");
 		   }
 	}
@@ -195,6 +196,7 @@ public class Footnotes {
 		 			login.driver.switchTo().window(browserTabs.get(0));
 		 		}
 		 		catch(Exception e){
+		 			
 		 			Assert.fail("Fail to open Footnotes in new tab");
 		 		}
 		 		 
@@ -219,15 +221,19 @@ public class Footnotes {
 try{
 			
 			if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("contents"))).isDisplayed()){
-				Assert.fail("Footnote window is not minimized");
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
+					footnotes_close();
+				 Assert.fail("Footnote window is not minimized");
 			}
 			else{
+				//footnotes_close();
 				System.out.println("Footnote window is  minimized");
 				
 			}
 	}
 			catch(Exception e)
 			{
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 				Assert.fail("Footnote window is  minimized");
 			}
 	}
@@ -236,6 +242,8 @@ try{
 	
 	@Given("^select '-' icon to maximize$")
 	public void select_icon_to_maximize() throws Throwable {
+		 WebDriverWait wait = new WebDriverWait(login.driver,70);
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_maximize"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_maximize"))).click();
 		Thread.sleep(3000);
 	}
@@ -248,8 +256,10 @@ try{
 			 Thread.sleep(3000);
 			  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
+			 Thread.sleep(5000);
 		  }
 		 else{
+footnotes_close();
 			  Assert.fail("Footnote window is not maximized");
 		  }
 	}
@@ -283,6 +293,7 @@ try{
 				login.driver.switchTo().window(browserTabs.get(0));
 			}
 			catch(Exception e){
+				 		
 				Assert.fail("Fail to open Footnotes in new tab");
 			}
 	}
@@ -310,6 +321,7 @@ try{
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 		}
 		 else{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			 Assert.fail("Footnote window is not in full-screen");
 		 }
 	}
@@ -332,6 +344,7 @@ try{
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 		}
 		 else{
+			 footnotes_close();
 			 Assert.fail("Footnote window is  in full-screen");
 		 }
 	}
@@ -343,6 +356,7 @@ try{
 		}
 		else
 		{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			Assert.fail("Download option is enabled");
 		}
 		footnotes_close();
@@ -360,6 +374,7 @@ try{
 		}
 		else
 		{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			Assert.fail("Download option is disabled");
 		}
 	}
@@ -393,6 +408,7 @@ try{
 			System.out.println(tooltiptext);
 		}
 		else{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			Assert.fail("Open new tab tooltip is not shown");
 		}
 		
@@ -414,6 +430,7 @@ try{
 			System.out.println(tooltiptext);
 		}
 		else{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			Assert.fail("Download  tooltip is not shown");
 		}
 	}
@@ -432,6 +449,7 @@ try{
 			System.out.println(tooltiptext);
 		}
 		else{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			Assert.fail("Minimize  tooltip is not shown");
 		}
 	}
@@ -450,6 +468,7 @@ try{
 			System.out.println(tooltiptext);
 		}
 		else{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			Assert.fail("Full-screen  tooltip is not shown");
 		}
 	}
@@ -468,6 +487,7 @@ try{
 			System.out.println(tooltiptext);
 		}
 		else{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			Assert.fail("Close  tooltip is not shown");
 		}
 	}
@@ -478,6 +498,7 @@ try{
 		Thread.sleep(4000);
 		try{
 			if  (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_window"))).isDisplayed()){
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 				Assert.fail("Footnote window is Open");
 			}
 			else{
@@ -518,6 +539,7 @@ try{
 				login.driver.switchTo().window(browserTabs.get(0));
 			}
 			catch(Exception e){
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 				Assert.fail("Fail to open Footnotes in new tab");
 			}
 	}
@@ -551,7 +573,7 @@ try{
 
 	@Given("^Click on hat option to Verify footnotes open from series search tab$")
 	public void Click_on_hat_option_to_Verify_footnotes_open_from_series_search_tab() throws Throwable {
-		 WebElement series_row = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_row")));
+		 WebElement series_row = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_row_1")));
 		  WebDriverWait wait=new WebDriverWait(login.driver, 10);
 		  action.moveToElement(series_row).perform();
 		  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_hat_icon"))));
@@ -570,6 +592,7 @@ try{
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 		 }
 		 else{
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			 Assert.fail("Series name not matched with footnotes name");
 		 }
 		 
@@ -608,6 +631,7 @@ try{
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 	      }
 	      else{
+	    	  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 	    	  Assert.fail("Series name not matched with footnotes name");
 	      }
 	  }
@@ -643,7 +667,8 @@ try{
 
 	@Given("^Verify the footnotes at each level from database search$")
 	public void Verify_the_footnotes_at_each_level_from_database_search() throws Throwable {
-	   WebElement all_row = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("all_footnote")));
+		Thread.sleep(3000);
+		WebElement all_row = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("all_footnote")));
 	   action.moveToElement(all_row).perform();
 	   WebDriverWait wait=new WebDriverWait(login.driver,160);
 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("all_footnote_hat_icon"))));
@@ -665,6 +690,7 @@ try{
 	    	  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
 	 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      }
 	      else{
+	    	  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 	    	  Assert.fail("Series name not matched with footnotes name");
 	      }
   //topic
@@ -673,6 +699,7 @@ try{
      action.moveToElement(topic_row).perform();
 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("topic_footnote_hat_icon"))));
 	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("topic_footnote_hat_icon"))).click();
+	   Thread.sleep(5000);
 	   String topicText =   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("topic_footnote"))).getText();
 		  //Remove spl characters in text
 		  String topicTextFootnote = topicText.replaceAll("\\W", "");
@@ -691,6 +718,7 @@ try{
 	    	  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
 	 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      }
 	      else{
+	    	  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 	    	  Assert.fail("topic name not matched with footnotes name");
 	      }
 	      
@@ -700,7 +728,7 @@ try{
 	      action.moveToElement(section_row).perform();
 	 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("section_footnote_hat_icon"))));
 	 	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("section_footnote_hat_icon"))).click();
-	 	   Thread.sleep(3000);
+	 	  Thread.sleep(5000);
 	 	   String sectionText =   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("section_footnote"))).getText();
 	 		  //Remove spl characters in text
 	 		  String sectionTextFootnote = sectionText.replaceAll("\\W", "");
@@ -720,6 +748,7 @@ try{
 	 	    	  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 	 	      }
 	 	      else{
+	 	    	 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 	 	    	 Assert.fail("section name not matched with footnotes name");
 	 	      }
 	 	    //table
@@ -730,6 +759,7 @@ try{
 		      action.moveToElement(table_row).perform();
 		 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("table_footnote_hat_icon"))));
 		 	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_footnote_hat_icon"))).click();
+		 	  Thread.sleep(5000);
 		 	   String tableText =   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_footnote"))).getText();
 		 		  //Remove spl characters in text
 		 		  String tableTextFootnote = tableText.replaceAll("\\W", "");
@@ -749,6 +779,7 @@ try{
 		 	    	  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 		 	      }
 		 	      else{
+		 	    	 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 		 	    	 Assert.fail("table name not matched with footnotes name");
 		 	      }
 		 	      
@@ -757,7 +788,8 @@ try{
 			      action.moveToElement(series_row).perform();
 			 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("series_footnote_hat_icon"))));
 			 	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_footnote_hat_icon"))).click();
-			 	   String seriesText =   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_footnote"))).getText();
+			 	  Thread.sleep(5000);
+			 	   String seriesText =   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_footnotes"))).getText();
 			 		  //Remove spl characters in text
 			 		  String seriesTextFootnote = seriesText.replaceAll("\\W", "");
 			 		  System.out.println(seriesTextFootnote);
@@ -771,11 +803,12 @@ try{
 			 	     System.out.println(seriesFootnote);
 			 	      if(seriesTextFootnote.equalsIgnoreCase(seriesFootnote)){
 			 	    	  System.out.println("series name matched with footnotes name");
-			 	    	footnotes_close();
+			 	    	 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			 	      }
 			 	      else{
+			 	    	 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 			 	    	 Assert.fail("series name not matched with footnotes name");
-			 	    	footnotes_close();
+			 	    	
 			 	      }
 			 	      Thread.sleep(4000);
 			 	    
@@ -875,6 +908,7 @@ try{
 		    	  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
 		 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      }
 		      else{
+		    	  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();	      
 		    	  Assert.fail("Series name not matched with footnotes name");
 		      }
 	}
@@ -895,9 +929,10 @@ try{
 	public void verify_Translate_option_in_footnotes() throws Throwable {
 		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("translate_option"))).size()!=0){
 			System.out.println("Translate option is shown");
-			
+			footnotes_close();
 		}
 		else{
+			footnotes_close();
 			Assert.fail("Translate option not shown");
 		}
 	
@@ -905,9 +940,9 @@ try{
 	//Tc_Footnotes_21
 	@Given("^click on Translate dropdown, verify the options$")
 	public void click_on_Translate_dropdown_verify_the_options() throws Throwable {
-		WebDriverWait wait=new WebDriverWait(login.driver, 500);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("translate_option"))));
-        Thread.sleep(3000);
+//		WebDriverWait wait=new WebDriverWait(login.driver, 500);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("translate_option"))));
+//        Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("translate_option"))).click();
         
 	   String[] expected={"中文 (Chinese)","日本語 (Japanese)","한국어 (Korean)","Русский (Russian)","Bahasa (Indonesian)"};
@@ -1149,20 +1184,22 @@ try{
 	 	   js.executeScript("window.scrollBy(0,1000)");
 	  
 	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("country_specific_info"))).click();
+	   Thread.sleep(10000);
 	   List<WebElement> country_specific_info_table = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("country_specific_info_table")));
 	   if(country_specific_info_table.size()!=0){
-		   System.out.println("Page navigates to country specific information");
-		  
+		   System.out.println("Page navigates to country specific information table");
+		   login.driver.switchTo().defaultContent();
+		   footnotes_close();
 		  
 	   }
 	   else
 	   {
-		   Assert.fail("Page will not navigate to country specific information");
 		   login.driver.switchTo().defaultContent();
 		   footnotes_close();
+		   Assert.fail("Page will not navigate to country specific information");
+		   
 	   }
-	   login.driver.switchTo().defaultContent();
-	   footnotes_close();
+	  
 	  
 	}
 	////Tc_Footnotes_26
@@ -1174,23 +1211,29 @@ try{
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_presentation"))).click();
 		
 		Thread.sleep(9000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
-		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
 		Thread.sleep(3000);
+		action.sendKeys("a").perform();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
+		Thread.sleep(10000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("delete_myeries"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("delete_myeries"))).click();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 	    login.driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-	    Actions act=new Actions(login.driver);
-	    act.sendKeys("a").perform();
-	    
+	    Thread.sleep(5000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
+
+	    action.sendKeys("a").perform();
+	    Thread.sleep(10000);
 	    
 	    
 	}
 
 	@Given("^Click on i con in SSP window$")
 	public void Click_on_i_con_in_SSP_window() throws Throwable {
+		WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("i_con")));
+		action.moveToElement(ele).perform();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("i_con"))).click();
 	}
 
@@ -1198,6 +1241,7 @@ try{
 	public void Click_on_Read_more_to_Verify_open_footnotes() throws Throwable {
 		WebDriverWait wait=new WebDriverWait(login.driver, 70);
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(login.LOCATORS.getProperty("read_more"))));
+		  Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("read_more"))).click();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("i_con_close"))).click();
 		Thread.sleep(5000);
@@ -1208,6 +1252,7 @@ try{
 		}
 		else{
 			System.out.println("Footnotes window is not shown");
+			footnotes_close();
 		}
 		//Thread.sleep(1000);
 	
@@ -1239,14 +1284,17 @@ try{
 	    List<WebElement> verify_footnote = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("footnote_window")));
 	    if(verify_footnote.size()!=0){
 	    	System.out.println("Footnote window is retained on refresh");
-	    	
+	    	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
+			  // Thread.sleep(4000);
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 	    }
 	    else{
+	    	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
+			  // Thread.sleep(4000);
+			  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
 	    	Assert.fail("Footnote window is not  retained on refresh");
 	    }
-	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
-		  // Thread.sleep(4000);
-		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
+	   
 	}
 	//Tc_Footnotes_28
 	@Given("^Refresh the page,Verify the footnotes window disappear$")
@@ -1324,20 +1372,26 @@ try{
 				 List<WebElement> tree = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("database")));
 				 if(tree.size()!=0){
 					 System.out.println("Database tree is collapsed");
-					 
+					 login.driver.close();
+						login.driver.switchTo().window(browserTabs.get(0));
+						Thread.sleep(3000);
 					
 				 }
 				 else{
-					 System.out.println("Database tree is not collapsed");
+					 login.driver.close();
+						login.driver.switchTo().window(browserTabs.get(0));
+						Thread.sleep(3000);
+					Assert.fail("Database tree is not collapsed");
 				 }
 				 
 				//then close tab and get back
-				 login.driver.close();
-					login.driver.switchTo().window(browserTabs.get(0));
-					Thread.sleep(3000);
+				
 			}
 			catch(Exception e){
-				Assert.fail("Database tree is not collapsed");
+//				login.driver.close();
+//				login.driver.switchTo().window(browserTabs.get(0));
+//				Thread.sleep(3000);
+//				Assert.fail("Database tree is not collapsed");
 				
 			}
 		  Thread.sleep(12000);
@@ -1361,7 +1415,7 @@ try{
 		@Given("^Click on Open button and verify refreshing footnotes in new tab$")
 	public void Click_on_Open_button_and_verify_refreshing_footnotes_in_new_tab() throws Throwable {
 		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
-		  Thread.sleep(20000);
+		  Thread.sleep(25000);
 			login.driver.navigate().refresh();
 		  try{
 				//get window handlers as list
@@ -1373,15 +1427,18 @@ try{
 				 List<WebElement> tree = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("db")));
 				 if(tree.size()!=0){
 					 System.out.println("Database tree is collapsed");
+					 login.driver.close();
+						login.driver.switchTo().window(browserTabs.get(0));
 					
 				 }
 				 else{
-					 System.out.println("Database tree is not collapsed");
+					 login.driver.close();
+						login.driver.switchTo().window(browserTabs.get(0));
+					 Assert.fail("Database tree is not collapsed");
 				 }
 				 
 				//then close tab and get back
-				 login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
+				 
 			}
 			catch(Exception e){
 				Assert.fail("Database tree is not collapsed");
@@ -2084,7 +2141,7 @@ try{
 			login.driver.switchTo().defaultContent();
 
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
-			Thread.sleep(5000);
+			Thread.sleep(25000);
 			//Compare chinese
 			try{
 				
@@ -2201,7 +2258,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 			login.driver.switchTo().defaultContent();
 			Thread.sleep(7000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
-			Thread.sleep(7000);
+			Thread.sleep(25000);
 			//Compare chinese
 			try{
 				
@@ -2318,6 +2375,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 			login.driver.switchTo().defaultContent();
 			Thread.sleep(7000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
+			Thread.sleep(25000);
 			//Compare chinese
 			try{
 				
@@ -2435,6 +2493,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 			login.driver.switchTo().defaultContent();
 			Thread.sleep(7000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
+			Thread.sleep(25000);
 			//Compare chinese
 			try{
 				
@@ -2551,6 +2610,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 			login.driver.switchTo().defaultContent();
 			Thread.sleep(7000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
+			Thread.sleep(25000);
 			//Compare chinese
 			try{
 				
@@ -2675,6 +2735,7 @@ login.driver.switchTo().defaultContent();
 			login.driver.switchTo().defaultContent();
 			Thread.sleep(7000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
+			Thread.sleep(25000);
 			//Compare chinese
 			try{
 				
@@ -2830,9 +2891,10 @@ login.driver.switchTo().window(browserTabs.get(0));
 			   footnotes_close();
 		   }
 		   else{
-			   System.out.println("Text fail to change to  English");
+		
 			   login.driver.switchTo().defaultContent();
 			   footnotes_close();
+				  Assert.fail("Text fail to change to  English");
 		   }
 		  
 		}
@@ -2911,16 +2973,20 @@ login.driver.switchTo().window(browserTabs.get(0));
 			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ceic_logo"))).click();
 			   
 		   if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("back_button"))).size()!=0){
+			   login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
 			   Assert.fail("Back button is displayed");
 		   }
 		   else{
+			   
 			   System.out.println("Back button is not displayed");
+			   login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
 		   }
-		   login.driver.close();
-			login.driver.switchTo().window(browserTabs.get(0));
+		  
 		}
 		catch(Exception e){
-			  System.out.println("Back button is not displayed");
+			 System.out.println("Back button is not displayed");
 		}
 		   
 		}
@@ -2942,12 +3008,15 @@ login.driver.switchTo().window(browserTabs.get(0));
 			  
 			   if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("back_button"))).isDisplayed()){
 				   System.out.println("Back button is displayed");
+				   login.driver.close();
+					login.driver.switchTo().window(browserTabs.get(0));
 			   }
 			   else{
+				   login.driver.close();
+					login.driver.switchTo().window(browserTabs.get(0));
 				   Assert.fail("Back button is not displayed");
 			   }
-			   login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
+			  
 			}
 				catch(Exception e){
 					Assert.fail("Back button is not displayed");
@@ -3038,12 +3107,15 @@ login.driver.switchTo().window(browserTabs.get(0));
 			
 			   if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_page"))).isDisplayed()){
 				   System.out.println("Navigates back to footnotes page");
+				   login.driver.switchTo().defaultContent();
+				   footnotes_close();
 			   }
 			   else{
+				   login.driver.switchTo().defaultContent();
+				   footnotes_close();
 				   Assert.fail("Failed to navigate to footnotes page");
 			   }
-			   login.driver.switchTo().defaultContent();
-			   footnotes_close();
+			 
 		}
 //Tc_Footnotes_40
 	
@@ -3070,16 +3142,19 @@ login.driver.switchTo().window(browserTabs.get(0));
 					if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_page"))).isDisplayed()){
 						   String text = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_page"))).getText();
 						   System.out.println("Navigates back to footnotes page"+text);
-					   }
+						   login.driver.switchTo().defaultContent();
+						   footnotes_close();   
+					}
 					   else{
+						   login.driver.switchTo().defaultContent();
+						   footnotes_close();
 						   Assert.fail("Failed to navigate to footnotes page");
 					   }
 					  
 					   
 				}
 				
-			   login.driver.switchTo().defaultContent();
-			   footnotes_close();
+			  
 		}
 		//Tc_Footnotes_41
 	
@@ -3116,16 +3191,19 @@ login.driver.switchTo().window(browserTabs.get(0));
 	    	  List<WebElement> country_specific_info_table = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("country_specific_info_table")));
 			   if(country_specific_info_table.size()!=0){
 				   System.out.println("Page navigates to country specific information table");
-				  
+				   login.driver.switchTo().defaultContent();
+					 login.driver.close();
+				login.driver.switchTo().window(windowHandle);	
 			   }
 			   else
 			   {
+				   login.driver.switchTo().defaultContent();
+					 login.driver.close();
+				login.driver.switchTo().window(windowHandle);	
 				   Assert.fail("Page will not navigate to country specific information");
 			   }
 			   		   
-			   login.driver.switchTo().defaultContent();
-				 login.driver.close();
-			login.driver.switchTo().window(windowHandle);	
+			 
 		    	
 								
 						    }
@@ -3148,13 +3226,17 @@ login.driver.switchTo().window(browserTabs.get(0));
     	 js.executeScript("window.scrollBy(0,-1000)");
     	  if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_page"))).isDisplayed()){
 			   System.out.println("Navigates back to footnotes page");
+			   login.driver.switchTo().defaultContent();
+				 login.driver.close();
+			login.driver.switchTo().window(windowHandle);
 		   }
 		   else{
+			   login.driver.switchTo().defaultContent();
+				 login.driver.close();
+			login.driver.switchTo().window(windowHandle);
 			   Assert.fail("Failed to navigate to footnotes page");
 		   }
-    	  login.driver.switchTo().defaultContent();
-			 login.driver.close();
-		login.driver.switchTo().window(windowHandle);
+    	 
 		}
 //Tc_Footnotes_43
 		@Given("^check the Back button navigates to translated Footnotes page$")
@@ -3192,13 +3274,17 @@ login.driver.switchTo().window(browserTabs.get(0));
 		  	 js.executeScript("window.scrollBy(0,-1000)");
 		  	if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_page"))).isDisplayed()){
 				   System.out.println("Navigates back to footnotes page");
+				   login.driver.switchTo().defaultContent();
+					 login.driver.close();
+				   login.driver.switchTo().window(browserTabs.get(0));
 			   }
 			   else{
+				   login.driver.switchTo().defaultContent();
+					 login.driver.close();
+				   login.driver.switchTo().window(browserTabs.get(0));
 				   Assert.fail("Failed to navigate to footnotes page");
 			   }
-	  	 login.driver.switchTo().defaultContent();
-		 login.driver.close();
-	   login.driver.switchTo().window(browserTabs.get(0));
+	  	
 		   // }
 	//}
 }
@@ -3235,6 +3321,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 				 }
 			
 			 else{
+				 footnotes_close();
 				 Assert.fail("Fail to open window");
 			 }
 			}
@@ -3264,14 +3351,17 @@ login.driver.switchTo().window(browserTabs.get(0));
 					 if(askQuestionCloseBtn.size()!=0){
 						 System.out.println("Ask Question window is Open with all options");
 						 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("close_ask_a_question"))).click();
-						 					 }
+						 login.driver.close();
+						 login.driver.switchTo().window(browserTabs.get(0));	 					
+					 }
 				 }
 			 }
 			 else{
+				 login.driver.close();
+				 login.driver.switchTo().window(browserTabs.get(0));
 				 Assert.fail("Fail to open window");
 			 }
-			 login.driver.close();
-			 login.driver.switchTo().window(browserTabs.get(0));
+			
 		}
 		//Tc_Footnotes_46
 		@Given("^verify submitting message in Ask Question window$")
@@ -3305,9 +3395,17 @@ login.driver.switchTo().window(browserTabs.get(0));
 		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("askQuestion_submit"))).click();
 		   Thread.sleep(3000);
 	      String element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("confirmMessage"))).getText();
-	     Assert.assertEquals("Thank you for submitting a question to us.",element);
-	     login.driver.close();
-	     login.driver.switchTo().window(browserTabs.get(0));
+	      if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("confirmMessage"))).size()!=0){
+	    	  Assert.assertEquals("Thank you for submitting a question to us.",element);
+	    	  login.driver.close();
+	 	     login.driver.switchTo().window(browserTabs.get(0));
+	      }
+	      else{
+	    	  login.driver.close();
+	 	     login.driver.switchTo().window(browserTabs.get(0));
+	 	     Assert.fail("Message not shown");
+	      }
+	    
 		}
 //Tc_Footnotes_48
 		@Given("^Verify cancel button in ask question window$")
@@ -3323,14 +3421,16 @@ login.driver.switchTo().window(browserTabs.get(0));
 			 if(askQuestionWindow.size()!=0)
 			 {
 				 System.out.println("Ask Question window is not shown");
+				 footnotes_close();
 			 }
 			 else
 			 {
+				 footnotes_close();
 				 Assert.fail("Ask Question window is shown");
 				
 				
 			 }
-			 footnotes_close();
+			
 		}
 //TC_Footnotes_49
 		@Given("^verify cancel button ask question window in new tab$")
@@ -3349,15 +3449,18 @@ login.driver.switchTo().window(browserTabs.get(0));
 			 if(askQuestionWindow.size()!=0)
 			 {
 				 System.out.println("Ask Question window is not shown");
+				 login.driver.close();
+				 login.driver.switchTo().window(browserTabs .get(0));
 			 }
 			 else
 			 {
+				 login.driver.close();
+				 login.driver.switchTo().window(browserTabs .get(0));
 				 Assert.fail("Ask Question window is shown");
 				
 				
 			 }
-			 login.driver.close();
-			 login.driver.switchTo().window(browserTabs .get(0));
+			
 		}
 		//Tc_Footnotes_50
 		@Given("^Verify crossmark option in ask question window$")
@@ -3370,30 +3473,34 @@ login.driver.switchTo().window(browserTabs.get(0));
 			 if(askQuestionWindow.size()!=0)
 			 {
 				 Assert.fail("Ask Question window is shown");
+				 footnotes_close();
 			 }
 			 else
 			 {
+				 footnotes_close();
 				 System.out.println("Ask Question window is not shown");
 			 }
-			 footnotes_close();
+			
 		}
 		//Tc_Footnotes_51
 		@Given("^Verify crossmark option in Ask Question window in new tab$")
 		public void Verify_crossmark_option_in_Ask_Question_window_in_new_tab() throws Throwable {
 		    footnote_open_new_window();
+		   // Thread.sleep(15000);
 		    List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
 //			 //switch to new tab
 		   login.driver.switchTo().window(browserTabs .get(1));
-		   Thread.sleep(8000);
+		   Thread.sleep(20000);
 		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ask_qstn_button"))).click();
 		   Thread.sleep(3000);
 		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("askQuestionWindowClose"))).click();
 			 List<WebElement> askQuestionWindow = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("askQuestionwindow")));
 			 if(askQuestionWindow.size()!=0)
 			 {
-				 Assert.fail("Ask Question window is shown");
 				 login.driver.close();
 				 login.driver.switchTo().window(browserTabs .get(0));
+				 Assert.fail("Ask Question window is shown");
+				 
 			 }
 			 else
 			 {
@@ -3409,20 +3516,33 @@ login.driver.switchTo().window(browserTabs.get(0));
 		   footnote_open_new_window();
 		   List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
 		   login.driver.switchTo().window(browserTabs .get(1));
-		   Thread.sleep(8000);
-		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("guestMode"))).click();
-		   Thread.sleep(8000);
-		 
-		   if(login.driver.findElements(By.name("user_id")).size()!=0){
-			   System.out.println("Guest login page is shown");
+		   Thread.sleep(10000);
+		   if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("guestMode"))).size()!=0){
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("guestMode"))).click();
+			   Thread.sleep(4000);
+			   if(login.driver.findElements(By.name("user_id")).size()!=0){
+				   System.out.println("Guest login page is shown");
+				    login.driver.close();
+				   login.driver.switchTo().window(browserTabs .get(0));
+			   }
+			   else{
+				   login.driver.close();
+				   login.driver.switchTo().window(browserTabs .get(0));
+				   Assert.fail("Guest login page is not shown");
+//				   login.driver.close();
+//					  
+//				   login.driver.switchTo().window(browserTabs .get(0));
+			   }
 		   }
-		   else{
-			   Assert.fail("Guest login page is not shown");
+			   else{
+				   login.driver.close();
+ login.driver.switchTo().window(browserTabs .get(0));
+			   }
 		   }
-		   login.driver.close();
 		  
-		   login.driver.switchTo().window(browserTabs .get(0));
-		}
+		 
+		  
+
 		//Tc_Footnotes_53
 		@Given("^Click on link - our support team,verify$")
 		public void Click_on_link_our_support_team_verify() throws Throwable {
@@ -3446,10 +3566,11 @@ login.driver.switchTo().window(browserTabs.get(0));
 		//Tc_Footnotes_54
 		@Given("^Click on the down arrow present$")
 		public void Click_on_the_down_arrow_present() throws Throwable {
-			 WebElement series_row = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_row")));
+			 WebElement series_row = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_row_1")));
 			  WebDriverWait wait=new WebDriverWait(login.driver, 70);
 			  action.moveToElement(series_row).perform();
-			  Thread.sleep(5000);
+			  Thread.sleep(10000);
+			  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("seriesDropdown"))));
 		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesDropdown"))).click();
 		   Thread.sleep(5000);
 		}
@@ -3461,17 +3582,38 @@ login.driver.switchTo().window(browserTabs.get(0));
 			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("footnote_window"))).size()!=0)
 			{
 				System.out.println("Footnotes is open");
+				footnotes_close();
+				Thread.sleep(2000);
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesDropdown"))).click();
 			}
 			else{
+				footnotes_close();
+				Thread.sleep(2000);
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesDropdown"))).click();
 				Assert.fail("Footnotes is not open");
 			}
-			footnotes_close();
-			Thread.sleep(2000);
-			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesDropdown"))).click();
+			
+			
 }
 		//TC_Footnotes_55
 		@Given("^Select series then click on Related series$")
 		public void select_series_then_click_on_Related_series() throws Throwable {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
+			Thread.sleep(3000);
+			action.sendKeys("a").perform();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
+			Thread.sleep(3000);
+			WebDriverWait wait=new WebDriverWait(login.driver, 120);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("delete_myeries"))));
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("delete_myeries"))).click();
+			Thread.sleep(5000);
+		    login.driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		    Thread.sleep(5000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
+
+		    action.sendKeys("a").perform();
+		    Thread.sleep(3000);
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("parentseries"))).click();
 			Thread.sleep(3000);			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("related_series"))).click();
@@ -3498,8 +3640,9 @@ login.driver.switchTo().window(browserTabs.get(0));
 			 }
 			 else
 			 {
-				 Assert.fail("Failed to open footnotes window");
 				 footnotes_close();
+				 Assert.fail("Failed to open footnotes window");
+				
 			 }
 			// login.driver.navigate().refresh();
 //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))));
@@ -3553,7 +3696,7 @@ Thread.sleep(15000);
 			action.moveToElement(series_row).perform();
 		 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("gbseries_footnote_icon"))));
 		 	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("gbseries_footnote_icon"))).click();
-		 	Thread.sleep(3000);
+		 	Thread.sleep(7000);
 		}
 
 		@Given("^Download japanese language footnote file$")
@@ -3593,7 +3736,7 @@ Thread.sleep(15000);
 			action.moveToElement(series_row).perform();
 		 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("russ_series_footnote_icon"))));
 		 	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("russ_series_footnote_icon"))).click();
-		 	Thread.sleep(3000);
+		 	Thread.sleep(10000);
 		}
 
 		@Given("^Download Russian language footnote file$")
@@ -3623,7 +3766,7 @@ Thread.sleep(15000);
 		 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("indo_series_footnote_icon"))));
 		 	Thread.sleep(9000);
 		 	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("indo_series_footnote_icon"))).click();
-		 	Thread.sleep(3000);
+			Thread.sleep(10000);
 		}
 
 		@Given("^Download Indonesian language footnote file$")
@@ -3678,13 +3821,17 @@ Thread.sleep(15000);
 			String fooaskText=askText.replaceFirst("Ask a question about ", "").replaceAll("`", "").replaceAll("`", "");
 			if(fooaskText.equalsIgnoreCase(footnoteText)){
 				System.out.println("Ask question will display table name");
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("askQuestionWindowClose"))).click();
+				 Thread.sleep(2000);
+	             footnotes_close();
 			}
 			else{
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("askQuestionWindowClose"))).click();
+				 Thread.sleep(2000);
+	             footnotes_close();
 				Assert.fail("Ask question will not display table name");
 			}
-			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("askQuestionWindowClose"))).click();
-			 Thread.sleep(2000);
-             footnotes_close();
+			
 		}
 		// Tc_Footnotes_63
 		@Given("^Press 'd' to verify footnote download$")
@@ -3699,13 +3846,16 @@ Thread.sleep(15000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("download_enabled"))).click();
 			Thread.sleep(50000);
 			 List<WebElement> footnoteDownloadMessage = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("footnote_download_message")));
-				if(footnoteDownloadMessage.size()!=0){
+			 //
+			 if(footnoteDownloadMessage.size()!=0){
 					System.out.println("Footnote download message is displayed");
+					System.out.println(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_download_message"))).getText());
 					footnotes_close();
 				}
 				else{
+					footnotes_close();
 				Assert.fail("Footnote download message is not displayed");
-				footnotes_close();
+				
 				}
 			//			System.out.println(footnoteDownloadMessage.getText());
 //			try{
@@ -3747,7 +3897,13 @@ Thread.sleep(15000);
 		@Given("^Access links verify hyperlinks are redirectable$")
 		public void access_links_verify_hyperlinks_are_redirectable() throws Throwable {
 			try{
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("hyperlink"))).click();
+				login.driver.switchTo().frame(0);
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("hyperlink"))).click();
+			 login.driver.switchTo().defaultContent();
+			 String test = login.driver.getCurrentUrl();
+			 String test1="https://ihsmarkit.com/index.html";
+			 Assert.assertEquals(test1,test);
+			// Assert.fail("Link is not navigating");
 			}
 			catch(Exception e){
 				
@@ -3767,12 +3923,14 @@ Thread.sleep(15000);
 			 if(askQuestionButton.size()!=0)
 			 {
 				 System.out.println("Ask Question button is shown");
+				 footnotes_close();
 			 }
 			 else
 			 {
+				 footnotes_close();
 				 Assert.fail("Ask Question button is not shown");
 			 }
-			 footnotes_close();
+			
 		}
 		//TC_Footnotes_68
 		@Given("^Expand Daily Database$")
@@ -3847,11 +4005,13 @@ Thread.sleep(15000);
 			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("footnote_window"))).size()!=0)
 			{
 				System.out.println("Footnotes opened for transformed series");
+				footnotes_close();
 			}
 			else{
+				footnotes_close();
 				Assert.fail("Footnotes failed to open for transformed series");
 			}
-			footnotes_close();
+			
 		}
 
 		//TC_Footnotes_70
@@ -3901,12 +4061,15 @@ Thread.sleep(15000);
 		public void expand_the_database_upto_section() throws Throwable {
 			WebDriverWait wait=new WebDriverWait(login.driver, 120);
 			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("expand_database"))));
-			 Thread.sleep(4000);
+			 Thread.sleep(7000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("expand_database"))).click();
+			Thread.sleep(3000);
 			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("expand_all"))));
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("expand_all"))).click();
+				Thread.sleep(3000);
 			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("expand_topic"))));
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("expand_topic"))).click();
+			Thread.sleep(3000);
 			 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("expand_section"))));
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("expand_section"))).click();
 		}
@@ -3942,12 +4105,15 @@ Thread.sleep(15000);
 		   if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("nominalGDP_Footnotepage"))).size()!=0)
 		   {
 			   System.out.println("Translated page  appears once after onclick 'Back' button");
+			   login.driver.switchTo().defaultContent();
+			   footnotes_close();
 		   }
 		   else{
+			   login.driver.switchTo().defaultContent();
+			   footnotes_close();
 			   Assert.fail("Translated page  failed to appear  after onclick  'Back' button");
 		   }
-		   login.driver.switchTo().defaultContent();
-		   footnotes_close();
+		  
 		}
 		//TC_Footnotes_72
 		@Given("^Click on Open icon to open footnotes in new tab$")
@@ -3966,22 +4132,26 @@ Thread.sleep(15000);
 		public void verify_footnotes_opened_in_new_tab_retain_the_japanese_language() throws Throwable {
 			 List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
 			   login.driver.switchTo().window(browserTabs .get(1));
-			   Thread.sleep(5000);
+			   Thread.sleep(10000);
 			   login.driver.switchTo().frame(0);
 			   String fooNewTabText = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_jpn_text"))).getText();
-			   Thread.sleep(4000);
+			   Thread.sleep(8000);
 				System.out.println(japaneseFootnoteText);
 				System.out.println(fooNewTabText);
 			 if(japaneseFootnoteText.equalsIgnoreCase(fooNewTabText))
 			 {
 				 System.out.println("Opened footnote in new tab will retain the same language");
+				 login.driver.switchTo().defaultContent();
+				 login.driver.close();
+				 login.driver.switchTo().window(browserTabs.get(0));
 			 }
 			 else{
+				 login.driver.switchTo().defaultContent();
+				 login.driver.close();
+				 login.driver.switchTo().window(browserTabs.get(0));
 				 Assert.fail("Opened footnote in new tab will not  retain the same language");
 			 }
-			 login.driver.switchTo().defaultContent();
-			 login.driver.close();
-			 login.driver.switchTo().window(browserTabs.get(0));
+			 
 		}
 
 

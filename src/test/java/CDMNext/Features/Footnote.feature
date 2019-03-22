@@ -265,7 +265,7 @@ Scenario: Tc_Footnotes_52:Verify guest mode from footnotes
 		    And Expand the database
 		    And Click on guestmode option, verify the page
 @Footnote
-Scenario: Tc_Footnotes_53:Verify guest mode from footnotes
+Scenario: Tc_Footnotes_53:Verify our support team link  from footnotes
 			And Goto Db Search tab 
 		    And Expand the database
 		    And Click on link - our support team,verify
@@ -277,7 +277,7 @@ Scenario: Tc_Footnotes_54:Verify opening footnotes from dropdown in series tab
 @Footnote
 Scenario: Tc_Footnotes_55:Verify footnotes open in suggested indicators
 			  And Goto Db Search tab 
-		      And Add series to my series
+#			  And Expand the database
 		      And Select series then click on Related series
 		      And Click on i icon to verify footnotes
 		      
@@ -311,7 +311,6 @@ Scenario: Tc_Footnotes_60:Verify Indonesian translated footnotes for any of the 
             And Expand the indonesian database
             And Open footnotes for indonesian series level
             And Download Indonesian language footnote file
-
 @Footnote
 Scenario: Tc_Footnotes_62:Footnotes: 'Ask question' should include the selected table name
 			 And Goto Db Search tab 
@@ -387,7 +386,7 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 			And Click on Open icon to open footnotes in new tab
 			And Verify footnotes opened in new tab retain the japanese language
 
-	
+#	
 #@Footnote
 #Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
 #			 And Goto Db Search tab 
