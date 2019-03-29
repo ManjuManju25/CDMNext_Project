@@ -262,8 +262,7 @@ Then The dropdown should be opened with these items "Add,Add and replace,Add and
 @DB
 Scenario: TC_DB_42:Verifying Add option under add dropdown for table level
 And Mouse hover on any table level 
-#And  Click on dropdown icon 
-And  Click on "Add"
+And  Select "Add" option
 Then The entire table should be added to my series
 
 @DB
@@ -388,159 +387,332 @@ Scenario: TC_DB_60:Verifying "View as Heat map" for table level
 And Right click on any table level
 And  Select "Heat map"
 Then "Heat map" should be created with series in views panel
+
+@DB
+Scenario: TC_DB_61:Verifying "Histogram" for table level
+And Right click on any table level
+And  Select "Histogram"
+Then "Histogram" should be created with series in views panel
+
+@DB
+Scenario: TC_DB_62:Verify creating visual with more than max seires selection
+And Right click on any table level and select more than max series
+And  Select "View as Chart"
+Then "Confirmation" window should be displayed
+
+@DB
+Scenario: TC_DB_63:Verify confirmation window for more than max series selection for visual creation
+And Right click on any table level and select more than max series
+And  Select "View as Chart"
+Then Confirmation window should display with "You cannot create a chart with more than 20 series. Proceed with 20 series?"
+
+@DB
+Scenario: TC_DB_64:Verifying cancel/x button for confrimation popup
+And Right click on any table level and select more than max series
+And  Select "View as Chart"
+And Click on "Cancel"
+
+@DB
+Scenario: TC_DB_65:Verifying Ok button for confrimation popup
+And Right click on any table level and select more than max series
+And  Select "View as Chart"
+And Click on "Ok"
+Then "Chart" visual should be created with max series
+
+@DB
+Scenario: TC_DB_66:Verifying Download option for table level
+And Right click on any table level
+And  Select "Download"
+Then Download window should be appeared with selected series count
+
+@DB
+Scenario: TC_DB_67:Verifying Copy link(s) for table level
+And Right click on any table level
+And Select "Copy link(s)"
+When Paste it in new tab
+Then The selected "table" should be highlighted
+
+@DB
+Scenario: TC_DB_68:Verifying Footnotes option for table level
+And Right click on any table level
+And Select "Footnotes"
+Then Footnotes should be opened for related "table"
+
+@DB
+Scenario: TC_DB_69:Verifying Show dataset for table level
+And Right click on any table level
+And Select "Show Dataset"
+Then All the series under the table should be shown
+
+@DB
+Scenario: TC_DB_70:Verifying 'NEW' icon for table level
+And User selects "New only"
+And User has clicked on "Apply filter"
+And Select Global database  
+And Expand till table level
+Then "NEW" icon should be displayed in table level
+
+@DB
+Scenario: TC_DB_71:Verifying adding table by keyboard shortcut
+And  Right click on any table level
+And  Press A on keyboard
+Then The entire table should be added to my series
+
+@DB
+Scenario: TC_DB_72:Verifying adding table by drag and drop
+And Mouse hover on any table level
+And  Drag and drop to my series/visual
+Then The entire table should be added to my series
+
+@DB
+Scenario: TC_DB_73:Verifying clicking on series name
+And  Select database as Daily Database
+And  Expand till series level
+And Click on series name
+Then Series information popup should be opened
+
+@DB
+Scenario: TC_DB_74:Verifying related data
+And   Select database as Daily Database 
+And  Expand till series level
+And Click on "Show related data" icon
+Then Related data should be displayed under the dropdown
+
+@DB
+Scenario: TC_DB_75:Verify Related data > Remarks
+And  Expand World Trend Plus till series level
+And Click on Show related data icon
+Then "Remarks:" should be displayed if available for the series
+
+@DB
+Scenario: TC_DB_76:Verify 'Read more' for Remarks under Related data
+And  Expand World Trend Plus till series level
+And Click on Show related data icon
+And Click on "Read More"
+Then Should open related footnotes
+
+@DB
+Scenario: TC_DB_77:Verify clicking Datasets
+And   Select database as Daily Database 
+And  Expand till series level
+And Click on Show related data icon
+And Click on datalinks under datasets
+Then Should redirect to respective datasets
+
+@DB
+Scenario: TC_DB_78:Verify related insights
+And   Select database as Daily Database 
+And  Expand till series level
+And Click on Show related data icon
+And Click on any insights under insights section
+Then Insights should be opened in preview mode
+
+@DB
+Scenario: TC_DB_79:Verify share icon for insight
+And   Select database as Daily Database 
+And  Expand till series level
+And Click on Show related data icon
+And Click on share under insights section
+Then Share popup should be opened if have permission to share
+
+@DB
+Scenario: TC_DB_80:Verify add to favorite icon
+And   Select database as Daily Database 
+And  Expand till series level
+And Click on Show related data icon
+And Click on add to favourite under insights section
+Then The insights should be added to favorite list
+
+@DB
+Scenario: TC_DB_81:Verify hide related data
+And   Select database as Daily Database 
+And  Expand till series level
+And Click on "Show related data" 
+And Click on "Hide related data" 
+Then The related data dropdown should be collapsed
+
+@DB
+Scenario: TC_DB_82: Verifying 'View as chart'
+And Mouse hover on any series level 
+And Click on "View as Chart. Type `c`"
+Then Chart should be created with the series
+
+@DB
+Scenario: TC_DB_83: Verify the series selection in Database after created visual
+And Mouse hover on any series level 
+And Click on "View as Chart. Type `c`"
+Then The series should be selected in search panel although visual created
+
+@DB
+Scenario: TC_DB_84:Verifying Footnote icon
+And Mouse hover on any series level 
+And Click on Footnote icon
+Then Footnotes should be opened for related "series"
+
+@DB
+Scenario: TC_DB_85:More actions - Verify Unselect all
+And Mouse hover on any series level of data
+And Click on "More actions"
+And Click on "Unselect all"
+Then The selected series should be unselected
+
+@DB
+Scenario: TC_DB_86:More actions - Verify "View as Chart" for series level
+And Mouse hover on any series level of data
+And Click on "More actions"
+And Select "View as Chart"
+Then Visual should be created with "Edit Chart"
+
+@DB
+Scenario: TC_DB_87:More actions - Verify "View as Map" for series level
+And Mouse hover on any series level of data
+And Click on "More actions"
+And Select "View as Map"
+Then Visual should be created with "Edit Map"
+
+@DB
+Scenario: TC_DB_88:More actions - Verify "View as Table" for series level
+And Mouse hover on any series level of data
+And Click on "More actions"
+And Select "View as Table"
+Then Visual should be created with "Edit Table"
+
+@DB
+Scenario: TC_DB_89:More actions - Verify View as Pie for series level
+And Mouse hover on any series level of data
+And Click on "More actions"
+And Select "Pie"
+Then Visual should be created with "Edit Pie"
+
+@DB
+Scenario: TC_DB_90:More actions - Verify View as Heat map for series level
+And Mouse hover on any series level of data
+And Click on "More actions"
+And Select "Heat map"
+Then Visual should be created with "Edit Heat map"
 #
 #@DB
-#Scenario: TC_DB_61:Verifying "Histogram" for table level
-#And Right click on any table level
-#And  Select "Histogram"
-#Then "Histogram" should be created with series in views panel
+#Scenario: TC_DB_91:More actions - Verify View as Histogram for series level
+#And Mouse hover on any series level
+#And Click on More actions
+##And Mouse hover on any series level of data
+##And Click on "More actions"
+#And Select "Histogram"
+#Then Visual should be created with "Edit Histogram"
 #
 #@DB
-#Scenario: TC_DB_62:Verify creating visual with more than max seires selection
-#And Right click on any table level and select more than max series
-#And  Select "View as Chart"
-#Then "Confirmation" window should be displayed
-#
-#@DB
-#Scenario: TC_DB_63:Verify confirmation window for more than max series selection for visual creation
-#And Right click on any table level and select more than max series
-#And  Select "View as Chart"
-#Then Confirmation window should display with "You cannot create a chart with more than 20 series. Proceed with 20 series?"
-#
-#@DB
-#Scenario: TC_DB_64:Verifying cancel/x button for confrimation popup
-#And Right click on any table level and select more than max series
-#And  Select "View as Chart"
-#And Click on "Cancel"
-#
-#@DB
-#Scenario: TC_DB_65:Verifying Ok button for confrimation popup
-#And Right click on any table level and select more than max series
-#And  Select "View as Chart"
-#And Click on "Ok"
-#Then "Chart" visual should be created with max series
-#
-#@DB
-#Scenario: TC_DB_66:Verifying Download option for table level
-#And Right click on any table level
+#Scenario: TC_DB_92:More actions - Verify download option for series
+#And Mouse hover on any series level of data
+#And Click on "More actions"
 #And  Select "Download"
 #Then Download window should be appeared with selected series count
 #
 #@DB
-#Scenario: TC_DB_67:Verifying Copy link(s) for table level
-#And Right click on any table level
+#Scenario: TC_DB_93:More actions - Verify creating visual with more than max seires selection
+#And Mouse hover on any series level and select more than max series
+#And Select "View as Chart"
+#Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
+#Then "Chart" visual should be created with max series
+#
+#@DB
+#Scenario: TC_DB_94:More actions - Verify 'Copy' for series level
+#And Mouse hover on any series level of data
+#And Click on "More actions"
+#And Select "Copy"
+#Then Selected series should be copied
+#
+@DB1
+Scenario: TC_DB_95:More actions - Verify pasting the copied series
+And Mouse hover on any series level
+And Click on More actions
+And Select "Copy"
+And Paste in application
+Then Copied series should be pasted
+#
+#@DB
+#Scenario: TC_DB_96:More actions - Verify the confirmation message
+#And Mouse hover on any series level
+#And Click on More actions
+#And Select "Copy"
+#Then The message should be in growl popup as "Selected series copied."
+#
+#@DB
+#Scenario: TC_DB_97:More actions - Verify copy data for series
+#And Mouse hover on any series level
+#And Click on More actions
+#And Select "Copy data"
+#Then The download popup should be opened
+#
+#@DB
+#Scenario: TC_DB_98:More actions - Verify Copy links for a series
+#And Mouse hover on any series level
+#And Click on More actions
+#And Select "Copy link(s)"
+#Then URL should be generated for selected series
+#
+#@DB
+#Scenario: TC_DB_99:More actions - Validate copied URL
+#And Mouse hover on any series level
+#And Click on More actions
 #And Select "Copy link(s)"
 #When Paste it in new tab
-#Then The selected "table" should be highlighted
+#Then The Series information popup should be opened in untitled insight for selected series
 #
 #@DB
-#Scenario: TC_DB_68:Verifying Footnotes option for table level
-#And Right click on any table level
+#Scenario: TC_DB_100:More actions - Verify Copy links for multiple series
+#And Mouse hover on any series level of data
+#And Click on "More actions"
+#And Select "Copy link(s)"
+#Then URL should be generated for selected series
+#
+#@DB
+#Scenario: TC_DB_101:More actions - Validate copied URL for multiple series
+#And Mouse hover on any series level of data
+#And Click on "More actions"
+#And Select "Copy link(s)"
+#And Paste in clipboard and take url one by one 
+#Then The Series information popup should be opened 
+#
+#@DB
+#Scenario: TC_DB_102:More actions - Verify 'Series info' option for series
+#And Mouse hover on any series level 
+#And Click on More actions
+#And Select "Series Info"
+#Then The SSP window should be opened
+#
+#@DB
+#Scenario: TC_DB_103:More actions - Verify 'Footnotes' options for a series
+#And Mouse hover on any series level 
+#And Click on More actions
 #And Select "Footnotes"
-#Then Footnotes should be opened for related "table"
-#
-#@DB
-#Scenario: TC_DB_69:Verifying Show dataset for table level
-#And Right click on any table level
-#And Select "Show Dataset"
-#Then All the series under the table should be shown
-#
-#@DB
-#Scenario: TC_DB_70:Verifying 'NEW' icon for table level
-#And User selects "New only"
-#And   User has clicked on "Apply filter"
-#And Select Global database  
-#And Expand till table level
-#Then "NEW" icon should be displayed in table level
-#
-#@DB
-#Scenario: TC_DB_71:Verifying adding table by keyboard shortcut
-#And  Right click on any table level
-#And  Press A on keyboard
-#Then The entire table should be added to my series
-#
-#@DB
-#Scenario: TC_DB_72:Verifying adding table by drag and drop
-#And  Right click on any table level
-#And  Drag and drop to my series/visual
-#Then The entire table should be added to my series
-#
-#@DB
-#Scenario: TC_DB_73:Verifying clicking on series name
-#And  Select database as Daily Database
-#And  Expand till series level
-#And Click on series name
-#Then Series information popup should be opened
-#
-#@DB
-#Scenario: TC_DB_74:Verifying related data
-#And   Select database as Daily Database 
-#And  Expand till series level
-#And Click on "Show related data" icon
-#Then Related data should be displayed under the dropdown
-#
-#@DB
-#Scenario: TC_DB_75:Verify Related data > Remarks
-#And  Expand World Trend Plus till series level
-#And Click on Show related data icon
-#Then "Remarks:" should be displayed if available for the series
-#
-#@DB
-#Scenario: TC_DB_76:Verify 'Read more' for Remarks under Related data
-#And  Expand World Trend Plus till series level
-#And Click on Show related data icon
-#And Click on "Read More"
-#Then Should open related footnotes
-#
-#@DB
-#Scenario: TC_DB_77:Verify clicking Datasets
-#And   Select database as Daily Database 
-#And  Expand till series level
-#And Click on Show related data icon
-#And Click on datalinks under datasets
-#Then Should redirect to respective datasets
-#
-#@DB
-#Scenario: TC_DB_78:Verify related insights
-#And   Select database as Daily Database 
-#And  Expand till series level
-#And Click on Show related data icon
-#And Click on any insights under insights section
-#Then Insights should be opened in preview mode
-#
-#@DB
-#Scenario: TC_DB_79:Verify share icon for insight
-#And   Select database as Daily Database 
-#And  Expand till series level
-#And Click on Show related data icon
-#And Click on share under insights section
-#Then Share popup should be opened if have permission to share
-#
-#@DB
-#Scenario: TC_DB_80:Verify add to favorite icon
-#And   Select database as Daily Database 
-#And  Expand till series level
-#And Click on Show related data icon
-#And Click on add to favourite under insights section
-#Then The insights should be added to favorite list
-#
-#@DB
-#Scenario: TC_DB_81:Verify hide related data
-#And   Select database as Daily Database 
-#And  Expand till series level
-#And Click on "Show related data" 
-#And Click on "Hide related data" 
-#Then The related data dropdown should be collapsed
-#
-#@DB1
-#Scenario: TC_DB_82: Verifying 'View as chart'
-#And Mouse hover on any series level 
-#And Click on "View as Chart. Type `c`"
-#Then Chart should be created with the series
-
-#@DB1
-#Scenario: TC_DB_83:Verifying Footnote icon
-#And Mouse hover on any series level 
-#And Click on Footnote icon
 #Then Footnotes should be opened for related "series"
+#
+#@DB
+#Scenario: TC_DB_104:More actions - Verify back button
+#And Mouse hover on any series level of data
+#And Click on "More actions"
+#And Select "Show Dataset"
+#And Click on Back button
+#Then Should redirect to database tab
+#
+#@DB
+#Scenario: TC_DB_105:More actions - Verify closing of more dropdown
+#And Mouse hover on any series level 
+#And Click on More actions
+#And Click on More actions
+#Then The dropdown should be closed
+#
+#@DB1
+#Scenario: TC_DB_106:Verify + icon for series
+#And Mouse hover on any series level 
+#And  Click on + icon for a series 
+#Then The series should be added to my series
+#
+#@DB1
+#Scenario: TC_DB_107:Verify + icon when user in view tab
+#And Click on View tab on right side
+#And Mouse hover on any series level 
+#And  Click on + icon for a series 
+#Then Chart should be created with selected seires
+
 
