@@ -1525,12 +1525,12 @@ public class DatabasesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			try {
-			  if (arg1.equalsIgnoreCase("Histogram")) {
-				Thread.sleep(1000);
-				login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-			  }
-			}catch(NoSuchElementException e) {
-				
+				if (arg1.equalsIgnoreCase("Histogram")) {
+					Thread.sleep(1000);
+					login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+				}
+			} catch (NoSuchElementException e) {
+
 			}
 
 		} else if (arg1.equalsIgnoreCase("View as Chart") || arg1.equalsIgnoreCase("View as Map")
@@ -2260,8 +2260,24 @@ public class DatabasesTab {
 
 	@And("^Paste in application$")
 	public void paste_in_application() throws Throwable {
-		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@data-action='paste']")).click();
+		try {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath(
+					"//a[@class='insight-page-view-tab--link']//div[@class='insight-page-view-tab--link-ghost']"))
+					.click();
+			Thread.sleep(3000);
+			ele = login.driver.findElement(By.xpath("//span[@class='input-control--indicator']"));
+			action.moveToElement(ele).click().build().perform();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//div[@data-action='paste']")).click();
+		} catch (Exception e) {
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//div[@data-action='paste']")).click();
+		}
 	}
 
 	@Then("^Copied series should be pasted$")
@@ -2320,7 +2336,7 @@ public class DatabasesTab {
 	public void the_Series_information_popup_should_be_opened_in_untitled_insight_for_selected_series()
 			throws Throwable {
 		Thread.sleep(10000);
-		ele = login.driver.findElement(By.xpath("//div[@class='single-series-preview--title ']"));
+		ele = login.driver.findElement(By.xpath("//span[@class='table-cell ']"));
 		String actual = ele.getText();
 		login.Log4j.info(actual);
 		Assert.assertEquals(actual, sname);
@@ -2351,7 +2367,7 @@ public class DatabasesTab {
 	@Then("^The Series information popup should be opened$")
 	public void the_Series_information_popup_should_be_opened() throws Throwable {
 		Thread.sleep(10000);
-		ele = login.driver.findElement(By.xpath("//div[@class='single-series-preview--title ']"));
+		ele = login.driver.findElement(By.xpath("//span[@class='table-cell ']"));
 		String stitle = ele.getText();
 		login.Log4j.info(stitle);
 		if (ele.isDisplayed()) {
@@ -2364,7 +2380,7 @@ public class DatabasesTab {
 	@Then("^The SSP window should be opened$")
 	public void the_SSP_window_should_be_opened() throws Throwable {
 		Thread.sleep(3000);
-		ele = login.driver.findElement(By.xpath("//div[@class='single-series-preview--title ']"));
+		ele = login.driver.findElement(By.xpath("//span[@class='table-cell ']"));
 		String stitle = ele.getText();
 		login.Log4j.info(stitle);
 		if (ele.isDisplayed()) {
@@ -2406,8 +2422,24 @@ public class DatabasesTab {
 
 	@And("^Click on \\+ icon for a series$")
 	public void click_on_icon_for_a_series() throws Throwable {
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//li[1]//div[@class='add-to-data-selection--icon']")).click();
+		try {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath(
+					"//a[@class='insight-page-view-tab--link']//div[@class='insight-page-view-tab--link-ghost']"))
+					.click();
+			Thread.sleep(3000);
+			ele = login.driver.findElement(By.xpath("//span[@class='input-control--indicator']"));
+			action.moveToElement(ele).click().build().perform();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//li[1]//div[@class='add-to-data-selection--icon']")).click();
+		} catch (Exception e) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//li[1]//div[@class='add-to-data-selection--icon']")).click();
+		}
 	}
 
 	@Then("^The series should be added to my series$")

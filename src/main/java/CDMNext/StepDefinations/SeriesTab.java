@@ -427,8 +427,9 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Expand":
-//			Thread.sleep(2000);
-//			login.driver.findElement(By.xpath("//div[contains(text(),'Matches only')]")).click();
+			// Thread.sleep(2000);
+			// login.driver.findElement(By.xpath("//div[contains(text(),'Matches
+			// only')]")).click();
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
@@ -501,11 +502,26 @@ public class SeriesTab {
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			break;
 		case "Open":
-			login.Log4j.info("Clicking on " + arg1 + " icon ");
-			Thread.sleep(4000);
-			login.driver
-					.findElement(By.xpath("//div[@class='modal-icon-button']//span[contains(text(),'" + arg1 + "')]"))
-					.click();
+			Thread.sleep(2000);
+			try {
+//				login.Log4j.info("Clicking on Refresh ");
+//				login.driver.findElement(By.xpath("//button[contains(text(),'Refresh')]")).click();
+				login.Log4j.info("Clicking on " + arg1 + " icon ");
+				Thread.sleep(4000);
+				login.driver
+						.findElement(
+								By.xpath("//div[@class='insights-search-modal-header-btns']//span[contains(text(),'" + arg1 + "')]"))
+						.click();
+
+			} catch (Exception e) {
+				login.Log4j.info("Clicking on " + arg1 + " icon ");
+				Thread.sleep(4000);
+				login.driver
+						.findElement(
+								By.xpath("//div[@class='modal-icon-button']//span[contains(text(),'" + arg1 + "')]"))
+						.click();
+			}
+
 			break;
 		case "×":
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
@@ -567,7 +583,7 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			break;
-			
+
 		default:
 			login.Log4j.info("Clicking on " + arg1);
 			Thread.sleep(1000);
