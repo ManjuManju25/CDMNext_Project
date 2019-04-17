@@ -149,7 +149,7 @@ public class Exceldatacompare {
 		if(login.driver.findElements(By.xpath("//span[@class='series-name-field-title']")).size() != 0){
 			login.driver.findElement(By.xpath("//div[@class='insight-series-container']/div/div/div/div/label/span")).click();
 		 Thread.sleep(1000);
-		 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[8]")).click();
+		 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]")).click();
 		}
 	}
 	
