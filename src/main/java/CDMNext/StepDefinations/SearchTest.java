@@ -32,9 +32,9 @@ public class SearchTest {
 	public WebElement element;
 	public WebElement checkbox;
 	public WebElement ul_element;
-	public String text;
+	public String TooltipInfo;
 	String keyword;
-	Boolean CreateInsight=false;
+	Boolean CreateInsight = false;
 	// create instance of JavaScriptExecutor
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	// create object of Actions class
@@ -44,16 +44,17 @@ public class SearchTest {
 	public void user_has_successful_logged_in() throws Throwable {
 		if (login.logged_in = false) {
 			login.Invoke_browser();
-	        login.application_login();
-	        login.Log4j.info("It is in If block");
+			login.application_login();
+			login.Log4j.info("It is in If block");
 		} else if (login.logged_in = true && !SearchTest.logged) {
 			login.application_login();
 			SearchTest.logged = true;
-			 login.Log4j.info("It is in else If block");
+			login.Log4j.info("It is in else If block");
 
 		} else {
 			login.Log4j.info("If User has already logged in pelase continue....");
 		}
+		
 	}
 
 	@Given("^User enters keyword \"([^\"]*)\"$")
@@ -63,9 +64,9 @@ public class SearchTest {
 		login.Log4j.info("Searching with " + currentKeyword);
 		try {
 			ClearSelection();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			//
-		}finally {
+		} finally {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 			Thread.sleep(7000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
@@ -110,6 +111,19 @@ public class SearchTest {
 		}
 
 		login.Log4j.info("Array size is " + listwords.length);
+		/*
+		 * List<WebElement> No_of_pages = login.driver .findElements(By.xpath(
+		 * "//span[@class='search-series-pagination-pages-wrapper']//span"));
+		 * login.Log4j.info("Total no.of pages is :" + No_of_pages.size()); for (int l =
+		 * 0; l < No_of_pages.size(); l++) {
+		 * 
+		 * if (l == 1) { int m = l + 1; Thread.sleep(2000); element =
+		 * login.driver.findElement(By.xpath("//span[contains(text(),'Next')]"));
+		 * mouseOver.moveToElement(element).build().perform(); // selecting 2nd page
+		 * Thread.sleep(3000); login.driver .findElement(
+		 * By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span[" + m
+		 * + "]")) .click(); } else if (l == 2) { break; }
+		 */
 		ul_element = null;
 		try {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -119,7 +133,6 @@ public class SearchTest {
 
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
-
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
 					Thread.sleep(5000);
@@ -133,47 +146,76 @@ public class SearchTest {
 					Thread.sleep(2000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					text = tooltip.getText();
-					// login.Log4j.info("Title information is \n" + text);
+					// jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					TooltipInfo = tooltip.getText();
+					//login.Log4j.info("Title information is \n" + TooltipInfo);
+                    //keep scrolling till the elemnent is visible
+					if (j == 11) {
+						element = login.driver.findElement(By.xpath("//li[11]//div[@class='series-item--name']"));
+						jse.executeScript("arguments[0].scrollIntoView(true);", element);
+						mouseOver.moveToElement(element).build().perform();
+						Thread.sleep(2000);
+						ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+						AssertJUnit.assertNotNull(ul_element);
+						List<WebElement> list = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+						login.Log4j.info("List size is :" + list.size());
+						for (int l = 3; l < list.size(); l++) {
+							int m = l + 1;
+							login.Log4j.info(l);
+							login.Log4j.info(list.size());
+							Thread.sleep(5000);
+							checkbox = login.driver.findElement(
+									By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+							mouseOver.moveToElement(checkbox).click().build().perform();
+							Thread.sleep(1000);
+							element = login.driver
+									.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
+							mouseOver.moveToElement(element).build().perform();
+							Thread.sleep(2000);
+							tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+							TooltipInfo = tooltip.getText();
+							//login.Log4j.info("Title information is \n" + TooltipInfo);
+						}
+
+					}
 
 					/*
-					  Boolean KeywordMatch = false; for (String keyword : listwords) {
-					  login.Log4j.info(keyword);
-					  
-					  if (search_validation(text,keyword) == true) { login.Log4j.info(keyword +
-					  " is exists in the" + "\n" + text); KeywordMatch = true; break;
-					  
-					  } else if (KeywordMatch == false) { WebElement ele =login.driver.findElement(
-					  By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					  Thread.sleep(1000); ele.click();
-					  
-					  if
-					  (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data")
-					  )).isDisplayed()) { Thread.sleep(2000);
-					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))
-					  ).click(); List<WebElement> datasets =
-					  login.driver.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info")));
-					  //List<WebElement> datasets =
-					  login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
-					  for(WebElement list : datasets) { Filters.showdata = list.getText();
-					  login.Log4j.info(keyword); if(search_validation(Filters.showdata,keyword) ==
-					  true) { login.Log4j.info(keyword + " is exists in the" + "\n" +
-					  Filters.showdata); Thread.sleep(1000);
-					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-					  .click(); KeywordMatch = true; break; } else { Thread.sleep(1000);
-					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-					  .click(); status.add(keyword); } } } } } //login.Log4j.info(KeywordMatch); if
-					  (KeywordMatch == false) { for (String failure : status) { Assert.fail(failure
-					  + " keyword doesn't exists in " + text + " AND in Related data " + "\n" +
-					  Filters.showdata); } }
+					 * Boolean KeywordMatch = false; for (String keyword : listwords) {
+					 * login.Log4j.info(keyword);
+					 * 
+					 * if (search_validation(text,keyword) == true) { login.Log4j.info(keyword +
+					 * " is exists in the" + "\n" + text); KeywordMatch = true; break;
+					 * 
+					 * } else if (KeywordMatch == false) { WebElement ele =login.driver.findElement(
+					 * By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					 * Thread.sleep(1000); ele.click();
+					 * 
+					 * if
+					 * (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data")
+					 * )).isDisplayed()) { Thread.sleep(2000);
+					 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))
+					 * ).click(); List<WebElement> datasets =
+					 * login.driver.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info")));
+					 * //List<WebElement> datasets =
+					 * login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
+					 * for(WebElement list : datasets) { Filters.showdata = list.getText();
+					 * login.Log4j.info(keyword); if(search_validation(Filters.showdata,keyword) ==
+					 * true) { login.Log4j.info(keyword + " is exists in the" + "\n" +
+					 * Filters.showdata); Thread.sleep(1000);
+					 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+					 * .click(); KeywordMatch = true; break; } else { Thread.sleep(1000);
+					 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+					 * .click(); status.add(keyword); } } } } } //login.Log4j.info(KeywordMatch); if
+					 * (KeywordMatch == false) { for (String failure : status) { Assert.fail(failure
+					 * + " keyword doesn't exists in " + text + " AND in Related data " + "\n" +
+					 * Filters.showdata); } }
 					 */
 
 					Boolean KeywordMatch = false;
 					switch (listwords.length) {
 					case 1:
-						if (search_validation(text, listwords[0]) == true) {
-							login.Log4j.info(listwords[0] + " is exists in the" + "\n" + text);
+						if (search_validation(TooltipInfo, listwords[0]) == true) {
+							login.Log4j.info(listwords[0] + " is exists in the" + "\n" + TooltipInfo);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
@@ -185,17 +227,17 @@ public class SearchTest {
 							} else {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-								Assert.fail(listwords[0] + " keyword doesn't exists in the " + text + " AND " + "\n"
-										+ Filters.showdata);
+								Assert.fail(listwords[0] + " keyword doesn't exists in the " + TooltipInfo + " AND "
+										+ "\n" + Filters.showdata);
 							}
 						}
 
 						break;
 					case 2:
 
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true) {
-							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " exists in " + text);
+						if (search_validation(TooltipInfo, listwords[0]) == true
+								|| search_validation(TooltipInfo, listwords[1]) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " exists in " + TooltipInfo);
 							KeywordMatch = true;
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
@@ -209,17 +251,17 @@ public class SearchTest {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								Assert.fail(listwords[0] + " OR " + listwords[1] + " keyword doesn't exists in the "
-										+ text + " AND " + "\n" + Filters.showdata);
+										+ TooltipInfo + " AND " + "\n" + Filters.showdata);
 							}
 						}
 
 						break;
 					case 3:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true) {
+						if (search_validation(TooltipInfo, listwords[0]) == true
+								|| search_validation(TooltipInfo, listwords[1]) == true
+								|| search_validation(TooltipInfo, listwords[2]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-									+ " exists in " + text);
+									+ " exists in " + TooltipInfo);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
@@ -236,19 +278,20 @@ public class SearchTest {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2]
-										+ " keyword doesn't exists in the " + text + " AND " + "\n" + Filters.showdata);
+										+ " keyword doesn't exists in the " + TooltipInfo + " AND " + "\n"
+										+ Filters.showdata);
 							}
 						}
 
 						break;
 					case 4:
 
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true) {
+						if (search_validation(TooltipInfo, listwords[0]) == true
+								|| search_validation(TooltipInfo, listwords[1]) == true
+								|| search_validation(TooltipInfo, listwords[2]) == true
+								|| search_validation(TooltipInfo, listwords[3]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " exists in " + text);
+									+ listwords[3] + " exists in " + TooltipInfo);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
@@ -265,20 +308,20 @@ public class SearchTest {
 								Thread.sleep(1000);
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-										+ listwords[3] + " keyword doesn't exists in the " + text + " AND " + "\n"
-										+ Filters.showdata);
+										+ listwords[3] + " keyword doesn't exists in the " + TooltipInfo + " AND "
+										+ "\n" + Filters.showdata);
 							}
 						}
 
 						break;
 					case 5:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true) {
+						if (search_validation(TooltipInfo, listwords[0]) == true
+								|| search_validation(TooltipInfo, listwords[1]) == true
+								|| search_validation(TooltipInfo, listwords[2]) == true
+								|| search_validation(TooltipInfo, listwords[3]) == true
+								|| search_validation(TooltipInfo, listwords[4]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
-									+ listwords[3] + " OR " + listwords[4] + " exists in " + text);
+									+ listwords[3] + " OR " + listwords[4] + " exists in " + TooltipInfo);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
@@ -298,21 +341,21 @@ public class SearchTest {
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + " keyword doesn't exists in the "
-										+ text + " AND " + "\n" + Filters.showdata);
+										+ TooltipInfo + " AND " + "\n" + Filters.showdata);
 							}
 						}
 
 						break;
 					case 6:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true
-								|| search_validation(text, listwords[5]) == true) {
-							login.Log4j.info(
-									listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR " + listwords[3]
-											+ " OR " + listwords[4] + " OR " + listwords[5] + " exists in " + text);
+						if (search_validation(TooltipInfo, listwords[0]) == true
+								|| search_validation(TooltipInfo, listwords[1]) == true
+								|| search_validation(TooltipInfo, listwords[2]) == true
+								|| search_validation(TooltipInfo, listwords[3]) == true
+								|| search_validation(TooltipInfo, listwords[4]) == true
+								|| search_validation(TooltipInfo, listwords[5]) == true) {
+							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
+									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " exists in "
+									+ TooltipInfo);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
@@ -334,22 +377,23 @@ public class SearchTest {
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5]
-										+ " keyword doesn't exists in the " + text + " AND " + "\n" + Filters.showdata);
+										+ " keyword doesn't exists in the " + TooltipInfo + " AND " + "\n"
+										+ Filters.showdata);
 							}
 						}
 
 						break;
 					case 7:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true
-								|| search_validation(text, listwords[5]) == true
-								|| search_validation(text, listwords[6]) == true) {
+						if (search_validation(TooltipInfo, listwords[0]) == true
+								|| search_validation(TooltipInfo, listwords[1]) == true
+								|| search_validation(TooltipInfo, listwords[2]) == true
+								|| search_validation(TooltipInfo, listwords[3]) == true
+								|| search_validation(TooltipInfo, listwords[4]) == true
+								|| search_validation(TooltipInfo, listwords[5]) == true
+								|| search_validation(TooltipInfo, listwords[6]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " exists in " + text);
+									+ listwords[6] + " exists in " + TooltipInfo);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
@@ -372,24 +416,24 @@ public class SearchTest {
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 								Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-										+ listwords[6] + " keyword doesn't exists in the " + text + " AND " + "\n"
-										+ Filters.showdata);
+										+ listwords[6] + " keyword doesn't exists in the " + TooltipInfo + " AND "
+										+ "\n" + Filters.showdata);
 							}
 						}
 
 						break;
 					case 8:
-						if (search_validation(text, listwords[0]) == true
-								|| search_validation(text, listwords[1]) == true
-								|| search_validation(text, listwords[2]) == true
-								|| search_validation(text, listwords[3]) == true
-								|| search_validation(text, listwords[4]) == true
-								|| search_validation(text, listwords[5]) == true
-								|| search_validation(text, listwords[6]) == true
-								|| search_validation(text, listwords[7]) == true) {
+						if (search_validation(TooltipInfo, listwords[0]) == true
+								|| search_validation(TooltipInfo, listwords[1]) == true
+								|| search_validation(TooltipInfo, listwords[2]) == true
+								|| search_validation(TooltipInfo, listwords[3]) == true
+								|| search_validation(TooltipInfo, listwords[4]) == true
+								|| search_validation(TooltipInfo, listwords[5]) == true
+								|| search_validation(TooltipInfo, listwords[6]) == true
+								|| search_validation(TooltipInfo, listwords[7]) == true) {
 							login.Log4j.info(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 									+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
-									+ listwords[6] + " OR " + listwords[7] + " exists in " + text);
+									+ listwords[6] + " OR " + listwords[7] + " exists in " + TooltipInfo);
 							KeywordMatch = true;
 
 						} else if (KeywordMatch == false) {
@@ -415,7 +459,7 @@ public class SearchTest {
 								Assert.fail(listwords[0] + " OR " + listwords[1] + " OR " + listwords[2] + " OR "
 										+ listwords[3] + " OR " + listwords[4] + " OR " + listwords[5] + " OR "
 										+ listwords[6] + " OR " + listwords[7] + " keyword doesn't exists in the "
-										+ text + " AND " + "\n" + Filters.showdata);
+										+ TooltipInfo + " AND " + "\n" + Filters.showdata);
 							}
 						}
 
@@ -444,6 +488,7 @@ public class SearchTest {
 
 			AssertJUnit.fail("The WebElement is not visisble! " + e.getMessage());
 		}
+		// }
 	}
 
 	@Then("^User verifies keyword search results$")
@@ -451,281 +496,335 @@ public class SearchTest {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		ul_element = null;
-		try {
-			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			login.Log4j.info("List size is :" + li_All.size());
-			if (li_All.size() > 0) {
-				for (int i = 0; i < li_All.size(); i++) {
-					login.Log4j.info(i);
-					login.Log4j.info(li_All.size());
-					Thread.sleep(5000);
-					int j = i + 1;
-					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					mouseOver.moveToElement(checkbox).click().build().perform();
-					Thread.sleep(1000);
-					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					mouseOver.moveToElement(element).build().perform();
-					Thread.sleep(2000);
-					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
-					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					text = tooltip.getText();
-					Boolean KeywordMatch = false;
-					if (currentKeyword.toUpperCase().contains("AND") && currentKeyword.toUpperCase().contains("OR")) {
-						String[] keywords = currentKeyword.toUpperCase().trim().split("\\s*AND\\s*|\\s*OR\\s* ");
-						login.Log4j.info("length is " + keywords.length);
-						login.Log4j.info(keywords[0]);
-						login.Log4j.info(keywords[1]);
-						login.Log4j.info(keywords[2]);
-						if (currentKeyword.equalsIgnoreCase("capital AND price OR algeria")
-								&& ((text.toUpperCase().contains(keywords[0]) == true
-										&& text.toUpperCase().contains(keywords[1]) == true)
-										|| text.toUpperCase().contains(keywords[2]) == true)) {
-							login.Log4j.info(
-									keywords[0] + " AND " + keywords[1] + " OR " + keywords[2] + " exists in " + text);
-						} else if (currentKeyword.equalsIgnoreCase("fuel OR price AND albania")
-								&& (text.toUpperCase().contains(keywords[0]) == true
-										|| (text.toUpperCase().contains(keywords[1]) == true
-												&& text.toUpperCase().contains(keywords[2]) == true))) {
-							login.Log4j.info(
-									keywords[0] + " OR " + keywords[1] + " AND " + keywords[2] + " exists in " + text);
-						} else {
-							sspValidation(j);
-							login.Log4j.info(Filters.showdata);
-							if (currentKeyword.equalsIgnoreCase("capital AND price OR algeria")) {
-								if (Filters.showdata.toUpperCase().contains(keywords[0]) == true
-										&& Filters.showdata.toUpperCase().contains(keywords[1]) == true
-										|| Filters.showdata.toUpperCase().contains(keywords[2]) == true) {
-									login.Log4j.info(keywords[0] + " AND " + keywords[1] + " OR " + keywords[2]
-											+ " is exists in the" + "\n" + Filters.showdata);
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-								} else if (text.toUpperCase().contains(keywords[0].toUpperCase()) == true
-										&& Filters.showdata.toUpperCase().contains(keywords[1].toUpperCase()) == true
-										|| text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
-									login.Log4j.info(keywords[0] + " AND " + keywords[1] + " OR " + keywords[2]
-											+ " is exists in the" + "\n" + Filters.showdata);
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-								} else {
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-									Assert.fail(keywords[0] + " AND " + keywords[1] + " OR " + keywords[2]
-											+ " keyword doesn't exists " + Filters.showdata);
-								}
-							} else if (currentKeyword.equalsIgnoreCase("fuel OR price AND albania")) {
-								if (Filters.showdata.toUpperCase().contains(keywords[0]) == true
-										|| (Filters.showdata.toUpperCase().contains(keywords[1]) == true
-												&& Filters.showdata.toUpperCase().contains(keywords[2]) == true)) {
-									login.Log4j.info(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2]
-											+ " is exists in the" + "\n" + Filters.showdata);
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-								} else {
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-									Assert.fail(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2]
-											+ " keyword doesn't exists " + Filters.showdata);
-								}
-							}
-						}
+		Thread.sleep(2000);
+		List<WebElement> No_of_pages = login.driver
+				.findElements(By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span"));
+		login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
+		for (int l = 0; l < No_of_pages.size(); l++) {
 
-					} else if (currentKeyword.toUpperCase().contains("OR")
-							&& currentKeyword.toUpperCase().contains("NOT")) {
-						String[] keyword = currentKeyword.toUpperCase().trim().split("\\s*OR\\s*|\\s*NOT\\s*");
-						login.Log4j.info(keyword[0]);
-						login.Log4j.info(keyword[1]);
-						login.Log4j.info(keyword[2]);
-
-						if (currentKeyword.equalsIgnoreCase("population OR India NOT average")
-								&& (text.toUpperCase().contains(keyword[0]) == true
-										|| text.toUpperCase().contains(keyword[1]) == true
-												&& text.toUpperCase().contains(keyword[2]) != true)) {
-							login.Log4j.info(keyword[0] + " OR " + keyword[1] + " exists in " + text);
-
-						} else if (currentKeyword.equalsIgnoreCase("gas NOT India OR state")
-								&& (text.toUpperCase().contains(keyword[0]) == true
-										&& text.toUpperCase().contains(keyword[1]) != true
-										|| text.toUpperCase().contains(keyword[2]) == true)) {
-							login.Log4j.info(keyword[0] + " OR " + keyword[2] + " exists in " + text);
-
-						} else {
-							sspValidation(j);
-							login.Log4j.info(Filters.showdata);
-							if (currentKeyword.equalsIgnoreCase("population OR India NOT average")) {
-								if (Filters.showdata.toUpperCase().contains(keyword[0]) == true
-										|| Filters.showdata.toUpperCase().contains(keyword[1]) == true
-												&& Filters.showdata.toUpperCase().contains(keyword[2]) != true) {
-									login.Log4j.info(keyword[0] + " OR " + keyword[1] + " is exists in the" + "\n"
-											+ Filters.showdata);
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-								} else {
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-									Assert.fail(keyword[0] + " OR " + keyword[1] + " keyword doesn't exists "
-											+ Filters.showdata);
-								}
-
-							} else if (currentKeyword.equalsIgnoreCase("gas NOT India OR state")) {
-								if (Filters.showdata.toUpperCase().contains(keyword[0]) == true
-										&& Filters.showdata.toUpperCase().contains(keyword[1]) != true
-										|| Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
-									login.Log4j.info(keyword[0] + " OR " + keyword[2] + " is exists in the" + "\n"
-											+ Filters.showdata);
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-								} else {
-									Thread.sleep(1000);
-									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-											.click();
-									Assert.fail(keyword[0] + " OR " + keyword[2] + " keyword doesn't exists "
-											+ Filters.showdata);
-								}
-							}
-						}
-
-					} else if (currentKeyword.toUpperCase().contains("NOT")
-							&& currentKeyword.toUpperCase().contains("AND")) {
-						String[] keyword = currentKeyword.toUpperCase().trim().split("\\s*NOT\\s*|\\s*AND\\s*");
-						login.Log4j.info(keyword[0]);
-						login.Log4j.info(keyword[1]);
-						login.Log4j.info(keyword[2]);
-						if (text.toUpperCase().contains(keyword[0]) == true
-								&& text.toUpperCase().contains(keyword[1]) != true
-								&& text.toUpperCase().contains(keyword[2]) == true) {
-							login.Log4j.info(keyword[0] + " AND " + keyword[2] + " exists in " + text);
-						} else {
-							sspValidation(j);
-							login.Log4j.info(Filters.showdata);
-							if (Filters.showdata.toUpperCase().contains(keyword[0]) == true
-									&& Filters.showdata.toUpperCase().contains(keyword[1]) != true
-									&& Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
-								login.Log4j.info(keyword[0] + " AND " + keyword[2] + " is exists in the" + "\n"
-										+ Filters.showdata);
+			if (l == 1) {
+				int m = l + 1;
+				Thread.sleep(2000);
+				element = login.driver.findElement(By.xpath("//span[contains(text(),'Next')]"));
+				mouseOver.moveToElement(element).build().perform();
+				// selecting 2nd page
+				Thread.sleep(3000);
+				login.driver
+						.findElement(
+								By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
+						.click();
+			} else if (l == 2) {
+				break;
+			}
+			ul_element = null;
+			try {
+				ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+				AssertJUnit.assertNotNull(ul_element);
+				List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+				login.Log4j.info("List size is :" + li_All.size());
+				if (li_All.size() > 0) {
+					for (int i = 0; i < li_All.size(); i++) {
+						login.Log4j.info(i);
+						login.Log4j.info(li_All.size());
+						Thread.sleep(5000);
+						int j = i + 1;
+						checkbox = login.driver.findElement(
+								By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+						mouseOver.moveToElement(checkbox).click().build().perform();
+						Thread.sleep(1000);
+						element = login.driver
+								.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+						mouseOver.moveToElement(element).build().perform();
+						Thread.sleep(2000);
+						tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+						// Until the element is not visible keep scrolling
+						//jse.executeScript("arguments[0].scrollIntoView(true);", element);
+						TooltipInfo = tooltip.getText();
+						if (j == 11) {
+							element = login.driver.findElement(By.xpath("//li[11]//div[@class='series-item--name']"));
+							jse.executeScript("arguments[0].scrollIntoView(true);", element);
+							mouseOver.moveToElement(element).build().perform();
+							Thread.sleep(2000);
+							ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+							AssertJUnit.assertNotNull(ul_element);
+							List<WebElement> list = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+							login.Log4j.info("List size is :" + list.size());
+							for (int l1 = 3; l < list.size(); l1++) {
+								int m = l1 + 1;
+								login.Log4j.info(l1);
+								login.Log4j.info(list.size());
+								Thread.sleep(5000);
+								checkbox = login.driver.findElement(
+										By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+								mouseOver.moveToElement(checkbox).click().build().perform();
 								Thread.sleep(1000);
-								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+								element = login.driver
+										.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
+								mouseOver.moveToElement(element).build().perform();
+								Thread.sleep(2000);
+								tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+								TooltipInfo = tooltip.getText();
+								//login.Log4j.info("Title information is \n" + TooltipInfo);
+							}
+
+						}
+						Boolean KeywordMatch = false;
+						if (currentKeyword.toUpperCase().contains("AND")
+								&& currentKeyword.toUpperCase().contains("OR")) {
+							String[] keywords = currentKeyword.toUpperCase().trim().split("\\s*AND\\s*|\\s*OR\\s* ");
+							login.Log4j.info("length is " + keywords.length);
+							login.Log4j.info(keywords[0]);
+							login.Log4j.info(keywords[1]);
+							login.Log4j.info(keywords[2]);
+							if (currentKeyword.equalsIgnoreCase("capital AND price OR algeria")
+									&& ((TooltipInfo.toUpperCase().contains(keywords[0]) == true
+											&& TooltipInfo.toUpperCase().contains(keywords[1]) == true)
+											|| TooltipInfo.toUpperCase().contains(keywords[2]) == true)) {
+								login.Log4j.info(keywords[0] + " AND " + keywords[1] + " OR " + keywords[2]
+										+ " exists in " + TooltipInfo);
+							} else if (currentKeyword.equalsIgnoreCase("fuel OR price AND albania")
+									&& (TooltipInfo.toUpperCase().contains(keywords[0]) == true
+											|| (TooltipInfo.toUpperCase().contains(keywords[1]) == true
+													&& TooltipInfo.toUpperCase().contains(keywords[2]) == true))) {
+								login.Log4j.info(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2]
+										+ " exists in " + TooltipInfo);
+							} else {
+								sspValidation(j);
+								login.Log4j.info(Filters.showdata);
+								if (currentKeyword.equalsIgnoreCase("capital AND price OR algeria")) {
+									if (Filters.showdata.toUpperCase().contains(keywords[0]) == true
+											&& Filters.showdata.toUpperCase().contains(keywords[1]) == true
+											|| Filters.showdata.toUpperCase().contains(keywords[2]) == true) {
+										login.Log4j.info(keywords[0] + " AND " + keywords[1] + " OR " + keywords[2]
+												+ " is exists in the" + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+									} else if (TooltipInfo.toUpperCase().contains(keywords[0].toUpperCase()) == true
+											&& Filters.showdata.toUpperCase()
+													.contains(keywords[1].toUpperCase()) == true
+											|| TooltipInfo.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
+										login.Log4j.info(keywords[0] + " AND " + keywords[1] + " OR " + keywords[2]
+												+ " is exists in the" + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+										Assert.fail(keywords[0] + " AND " + keywords[1] + " OR " + keywords[2]
+												+ " keyword doesn't exists " + Filters.showdata);
+									}
+								} else if (currentKeyword.equalsIgnoreCase("fuel OR price AND albania")) {
+									if (Filters.showdata.toUpperCase().contains(keywords[0]) == true
+											|| (Filters.showdata.toUpperCase().contains(keywords[1]) == true
+													&& Filters.showdata.toUpperCase().contains(keywords[2]) == true)) {
+										login.Log4j.info(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2]
+												+ " is exists in the" + "\n" + Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+										Assert.fail(keywords[0] + " OR " + keywords[1] + " AND " + keywords[2]
+												+ " keyword doesn't exists " + Filters.showdata);
+									}
+								}
+							}
+
+						} else if (currentKeyword.toUpperCase().contains("OR")
+								&& currentKeyword.toUpperCase().contains("NOT")) {
+							String[] keyword = currentKeyword.toUpperCase().trim().split("\\s*OR\\s*|\\s*NOT\\s*");
+							login.Log4j.info(keyword[0]);
+							login.Log4j.info(keyword[1]);
+							login.Log4j.info(keyword[2]);
+
+							if (currentKeyword.equalsIgnoreCase("population OR India NOT average")
+									&& (TooltipInfo.toUpperCase().contains(keyword[0]) == true
+											|| TooltipInfo.toUpperCase().contains(keyword[1]) == true
+													&& TooltipInfo.toUpperCase().contains(keyword[2]) != true)) {
+								login.Log4j.info(keyword[0] + " OR " + keyword[1] + " exists in " + TooltipInfo);
+
+							} else if (currentKeyword.equalsIgnoreCase("gas NOT India OR state")
+									&& (TooltipInfo.toUpperCase().contains(keyword[0]) == true
+											&& TooltipInfo.toUpperCase().contains(keyword[1]) != true
+											|| TooltipInfo.toUpperCase().contains(keyword[2]) == true)) {
+								login.Log4j.info(keyword[0] + " OR " + keyword[2] + " exists in " + TooltipInfo);
 
 							} else {
-								Thread.sleep(1000);
-								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-								Assert.fail(keyword[0] + " AND " + keyword[2] + " keywords doesn't exists "
-										+ Filters.showdata);
-							}
-						}
-
-					} else if (currentKeyword.toUpperCase().contains("AND")) {
-						String[] keyword1 = currentKeyword.toUpperCase().split(" AND ");
-						for (String result : keyword1) {
-							login.Log4j.info(result);
-							Thread.sleep(1000);
-							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-								login.Log4j.info(result + " exists in " + text);
-							} else {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == false) {
-									Assert.fail(result + " keyword doesn't exists " + Filters.showdata);
-								}
-							}
-						}
-
-					} else if (currentKeyword.toUpperCase().contains("OR")) {
-						String[] keywords = currentKeyword.toUpperCase().split(" OR ");
-						login.Log4j.info("length is " + keywords.length);
-						if ((keywords.length == 2) && text.toUpperCase().contains(keywords[0]) == true
-								|| text.toUpperCase().contains(keywords[1]) == true) {
-							login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + text);
-
-						} else if ((keywords.length == 3) && text.toUpperCase().contains(keywords[0]) == true
-								|| text.toUpperCase().contains(keywords[1]) == true
-								|| text.toUpperCase().contains(keywords[2]) == true) {
-							login.Log4j.info(
-									keywords[0] + " OR " + keywords[1] + " OR " + keywords[2] + " exists in " + text);
-
-						} else {
-
-							for (String result : keywords) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									break;
-								} else if (Filters.status == false) {
-									login.Log4j.error(result + " keyword doesn't exists " + Filters.showdata);
-								}
-							}
-							if (Filters.status == false) {
-								Assert.fail(currentKeyword + " keyword doesn't exists " + Filters.showdata);
-							}
-						}
-
-					} else if (currentKeyword.toUpperCase().contains("NOT")) {
-						String[] keywrd = currentKeyword.toUpperCase().split(" NOT ");
-						// login.Log4j.info("length is " + keyword.length);
-						if ((keywrd.length == 2) && text.toUpperCase().contains(keywrd[0]) == true
-								&& text.toUpperCase().contains(keywrd[1]) != true) {
-							login.Log4j.info(keywrd[0] + " exists in " + text);
-
-						} else if ((keywrd.length == 3) && text.toUpperCase().contains(keywrd[0]) == true
-								&& text.toUpperCase().contains(keywrd[1]) != true
-								&& text.toUpperCase().contains(keywrd[2]) != true) {
-							login.Log4j.info(keywrd[0] + " exists in " + text);
-
-						} else {
-							for (String result : keywrd) {
-								Filters.showRelatedData(result, j);
-								if (Filters.status == true) {
-									break;
-								} else {
-									Assert.fail(result + " Keyword does not exists" + Filters.showdata);
-								}
-							}
-						}
-
-					} else if (Filters.searchData.contains("*")) {
-						String[] currentLine = Filters.searchData.split(";");
-//						login.Log4j.info(currentLine[0]);
-//						login.Log4j.info(currentLine[1]);
-						for (String pair : currentLine) {
-							String[] str = pair.split("\\*");
-							for (String keyword : str) {
-								login.Log4j.info(KeywordMatch);
-								if (text.toUpperCase().contains(keyword.toUpperCase()) == true) {
-									login.Log4j.info(keyword + " keyword exists in " + text);
-									KeywordMatch = true;
-									break;
-								} else if (KeywordMatch == false) {
-									Filters.showRelatedData(keyword, j);
-									if (Filters.status == true) {
-										KeywordMatch = true;
-										break;
-									} else if (Filters.status == false) {
-										login.Log4j.error(keyword + " keyword doesn't exists " + Filters.showdata);
+								sspValidation(j);
+								login.Log4j.info(Filters.showdata);
+								if (currentKeyword.equalsIgnoreCase("population OR India NOT average")) {
+									if (Filters.showdata.toUpperCase().contains(keyword[0]) == true
+											|| Filters.showdata.toUpperCase().contains(keyword[1]) == true
+													&& Filters.showdata.toUpperCase().contains(keyword[2]) != true) {
+										login.Log4j.info(keyword[0] + " OR " + keyword[1] + " is exists in the" + "\n"
+												+ Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+										Assert.fail(keyword[0] + " OR " + keyword[1] + " keyword doesn't exists "
+												+ Filters.showdata);
 									}
 
+								} else if (currentKeyword.equalsIgnoreCase("gas NOT India OR state")) {
+									if (Filters.showdata.toUpperCase().contains(keyword[0]) == true
+											&& Filters.showdata.toUpperCase().contains(keyword[1]) != true
+											|| Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
+										login.Log4j.info(keyword[0] + " OR " + keyword[2] + " is exists in the" + "\n"
+												+ Filters.showdata);
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+									} else {
+										Thread.sleep(1000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+										Assert.fail(keyword[0] + " OR " + keyword[2] + " keyword doesn't exists "
+												+ Filters.showdata);
+									}
 								}
 							}
-							if (Filters.status == false) {
-								Assert.fail(str + " keyword doesn't exists " + Filters.showdata);
+
+						} else if (currentKeyword.toUpperCase().contains("NOT")
+								&& currentKeyword.toUpperCase().contains("AND")) {
+							String[] keyword = currentKeyword.toUpperCase().trim().split("\\s*NOT\\s*|\\s*AND\\s*");
+							login.Log4j.info(keyword[0]);
+							login.Log4j.info(keyword[1]);
+							login.Log4j.info(keyword[2]);
+							if (TooltipInfo.toUpperCase().contains(keyword[0]) == true
+									&& TooltipInfo.toUpperCase().contains(keyword[1]) != true
+									&& TooltipInfo.toUpperCase().contains(keyword[2]) == true) {
+								login.Log4j.info(keyword[0] + " AND " + keyword[2] + " exists in " + TooltipInfo);
+							} else {
+								sspValidation(j);
+								login.Log4j.info(Filters.showdata);
+								if (Filters.showdata.toUpperCase().contains(keyword[0]) == true
+										&& Filters.showdata.toUpperCase().contains(keyword[1]) != true
+										&& Filters.showdata.toUpperCase().contains(keyword[2]) == true) {
+									login.Log4j.info(keyword[0] + " AND " + keyword[2] + " is exists in the" + "\n"
+											+ Filters.showdata);
+									Thread.sleep(1000);
+									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+											.click();
+
+								} else {
+									Thread.sleep(1000);
+									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+											.click();
+									Assert.fail(keyword[0] + " AND " + keyword[2] + " keywords doesn't exists "
+											+ Filters.showdata);
+								}
+							}
+
+						} else if (currentKeyword.toUpperCase().contains("AND")) {
+							String[] keyword1 = currentKeyword.toUpperCase().split(" AND ");
+							for (String result : keyword1) {
+								login.Log4j.info(result);
+								Thread.sleep(1000);
+								if (TooltipInfo.toUpperCase().contains(result.toUpperCase()) == true) {
+									login.Log4j.info(result + " exists in " + TooltipInfo);
+								} else {
+									Filters.showRelatedData(result, j);
+									if (Filters.status == false) {
+										Assert.fail(result + " keyword doesn't exists " + Filters.showdata);
+									}
+								}
+							}
+
+						} else if (currentKeyword.toUpperCase().contains("OR")) {
+							String[] keywords = currentKeyword.toUpperCase().split(" OR ");
+							login.Log4j.info("length is " + keywords.length);
+							if ((keywords.length == 2) && TooltipInfo.toUpperCase().contains(keywords[0]) == true
+									|| TooltipInfo.toUpperCase().contains(keywords[1]) == true) {
+								login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + TooltipInfo);
+
+							} else if ((keywords.length == 3) && TooltipInfo.toUpperCase().contains(keywords[0]) == true
+									|| TooltipInfo.toUpperCase().contains(keywords[1]) == true
+									|| TooltipInfo.toUpperCase().contains(keywords[2]) == true) {
+								login.Log4j.info(keywords[0] + " OR " + keywords[1] + " OR " + keywords[2]
+										+ " exists in " + TooltipInfo);
+
+							} else {
+
+								for (String result : keywords) {
+									Filters.showRelatedData(result, j);
+									if (Filters.status == true) {
+										break;
+									} else if (Filters.status == false) {
+										login.Log4j.error(result + " keyword doesn't exists " + Filters.showdata);
+									}
+								}
+								if (Filters.status == false) {
+									Assert.fail(currentKeyword + " keyword doesn't exists " + Filters.showdata);
+								}
+							}
+
+						} else if (currentKeyword.toUpperCase().contains("NOT")) {
+							String[] keywrd = currentKeyword.toUpperCase().split(" NOT ");
+							// login.Log4j.info("length is " + keyword.length);
+							if ((keywrd.length == 2) && TooltipInfo.toUpperCase().contains(keywrd[0]) == true
+									&& TooltipInfo.toUpperCase().contains(keywrd[1]) != true) {
+								login.Log4j.info(keywrd[0] + " exists in " + TooltipInfo);
+
+							} else if ((keywrd.length == 3) && TooltipInfo.toUpperCase().contains(keywrd[0]) == true
+									&& TooltipInfo.toUpperCase().contains(keywrd[1]) != true
+									&& TooltipInfo.toUpperCase().contains(keywrd[2]) != true) {
+								login.Log4j.info(keywrd[0] + " exists in " + TooltipInfo);
+
+							} else {
+								for (String result : keywrd) {
+									Filters.showRelatedData(result, j);
+									if (Filters.status == true) {
+										break;
+									} else {
+										Assert.fail(result + " Keyword does not exists" + Filters.showdata);
+									}
+								}
+							}
+
+						} else if (Filters.searchData.contains("*")) {
+							String[] currentLine = Filters.searchData.split(";");
+							// login.Log4j.info(currentLine[0]);
+							// login.Log4j.info(currentLine[1]);
+							for (String pair : currentLine) {
+								String[] str = pair.split("\\*");
+								for (String keyword : str) {
+									login.Log4j.info(KeywordMatch);
+									if (TooltipInfo.toUpperCase().contains(keyword.toUpperCase()) == true) {
+										login.Log4j.info(keyword + " keyword exists in " + TooltipInfo);
+										KeywordMatch = true;
+										break;
+									} else if (KeywordMatch == false) {
+										Filters.showRelatedData(keyword, j);
+										if (Filters.status == true) {
+											KeywordMatch = true;
+											break;
+										} else if (Filters.status == false) {
+											login.Log4j.error(keyword + " keyword doesn't exists " + Filters.showdata);
+										}
+
+									}
+								}
+								if (Filters.status == false) {
+									Assert.fail(str + " keyword doesn't exists " + Filters.showdata);
+								}
 							}
 						}
 					}
+				} else {
+					Assert.fail("No results were found");
 				}
-			} else {
-				Assert.fail("No results were found");
+			} catch (NoSuchElementException e) {
+				Assert.fail("WebElement is null " + e.getMessage());
 			}
-		} catch (NoSuchElementException e) {
-			Assert.fail("WebElement is null " + e.getMessage());
 		}
 	}
 
@@ -758,7 +857,7 @@ public class SearchTest {
 				login.Log4j.info("Clicking on Reset button");
 			}
 		}
-		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
 			login.Log4j.info("Clicking on Unselect button");
