@@ -32,7 +32,7 @@ public class Exceldatacompare {
 	private String isChecked; 
 	private WebElement e; 
 	
-	/*@And("^User has successful logged in$")
+	@And("^User has successful logged in$")
 	public void user_has_successful_logged_in() throws Throwable {
 		if (login.logged_in = false) {
 			login.Invoke_browser();
@@ -47,7 +47,7 @@ public class Exceldatacompare {
         
 		// login.Invoke_browser();
 		// login.application_login();
-	}*/
+	}
 	
 
 	@And("^User Select Series ID  as \"([^\"]*)\"$")
@@ -180,7 +180,7 @@ public class Exceldatacompare {
 	@And("^User Select Reset button$")
 	public void user_Select_Reset_button() throws Throwable {
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//button[@class='sphere-modal-control insight-download__modal-button'][1]")).click();
+		login.driver.findElement(By.xpath("//button[contains(text(),'Reset')]")).click();
 	}
 
 	
@@ -275,7 +275,8 @@ public class Exceldatacompare {
 	@And("^Select All button$")
 	public void Select_All_button() throws Throwable {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[1]/div[2]/div/div[2]/div[1]/label/span[2]")).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_Timeframe"))).click();
+		
 	}
 	
 	@And("^User(\\d+) Select Custom date format$")
@@ -704,16 +705,18 @@ public class Exceldatacompare {
 	public void add_to_Right_panel() throws Throwable {
 		
 		
-		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container series-list-item--container__with_actions']"));
+		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container']"));
 		
 		System.out.println("Total Size are- " + objLinks.size());
 		
 		for(int i=1;i<=objLinks.size();i++){
 			Thread.sleep(2000);
-			 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+			
+			login.driver.findElement(By.xpath("//ul[@class='search-series-list']/li[ "+i+"]/div/a/div[2]/span")).click();
+			//login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
 		}
-		Thread.sleep(2000);
-	     login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a/div[4]/div/div[1]")).click();
+		 Thread.sleep(2000);
+	     login.driver.findElement(By.xpath("//ul[@class='search-series-list']/li[1]/div/a/div[4]/div/div[1]")).click();
 	}
 
 	
@@ -1390,6 +1393,16 @@ public class Exceldatacompare {
 	public void user_Refresh_the_page() throws Throwable {
 		Thread.sleep(5000);
 		login.driver.navigate().refresh();
+	}
+	
+	
+}
+
+
+
+
+
+te().refresh();
 	}
 	
 	
