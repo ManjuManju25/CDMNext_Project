@@ -455,17 +455,6 @@ public class SeriesTab {
 			}
 			break;
 		case "Add":
-			/*Thread.sleep(2000);
-			login.driver.findElement(By.xpath(
-					"//a[@class='insight-page-view-tab--link']//div[@class='insight-page-view-tab--link-ghost']"))
-					.click();
-			Thread.sleep(3000);
-			element = login.driver.findElement(By.xpath("//span[@class='input-control--indicator']"));
-			action.moveToElement(element).click().build().perform();
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();*/
 			DatabasesTab.DeleteSeries();
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			Thread.sleep(3000);
