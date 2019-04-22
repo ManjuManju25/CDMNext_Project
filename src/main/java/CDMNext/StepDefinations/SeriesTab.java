@@ -465,8 +465,8 @@ public class SeriesTab {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-*/			DatabasesTab.DeleteSeries();
+			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();*/
+			DatabasesTab.DeleteSeries();
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			Thread.sleep(3000);
 			login.driver
