@@ -1402,11 +1402,7 @@ public class Exceldatacompare {
 
 
 
-te().refresh();
-	}
-	
-	
-}
+
 
 
 
