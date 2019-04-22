@@ -32,7 +32,7 @@ public class Exceldatacompare {
 	private String isChecked; 
 	private WebElement e; 
 	
-	@And("^User has successful logged in$")
+	/*@And("^User has successful logged in$")
 	public void user_has_successful_logged_in() throws Throwable {
 		if (login.logged_in = false) {
 			login.Invoke_browser();
@@ -47,7 +47,7 @@ public class Exceldatacompare {
         
 		// login.Invoke_browser();
 		// login.application_login();
-	}
+	}*/
 	
 
 	@And("^User Select Series ID  as \"([^\"]*)\"$")
