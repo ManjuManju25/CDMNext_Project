@@ -13,7 +13,7 @@ import CDMNext.StepDefinations.login;
 		strict = true,
 	  	features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-	     tags = {"@Search,@UI,@ExelDatacomparision,@MySeries,@SeriesTab" },
+	     tags = {"@UI,@ExelDatacomparision,@FilterSearch,@Search" },
 		//tags = {"@DB,@UI,@ExelDatacomparision,@FilterSearch,@Search,@MySeries,@SeriesTab,@Footnote" },
 		monochrome = true,
 		//dryRun = true,

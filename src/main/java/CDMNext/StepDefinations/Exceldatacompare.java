@@ -70,6 +70,8 @@ public class Exceldatacompare {
 	public void user_Download_button() throws Throwable {
 		Thread.sleep(6000);
 		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[1]/div[3]/div[2]/button")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'Range')]")).click();
 		Thread.sleep(5000);
 		user_Select_Reset_button();
 		Thread.sleep(2000);
@@ -80,6 +82,8 @@ public class Exceldatacompare {
 	public void select_Download_button() throws Throwable {
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//span[@class='download-button--text']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'Range')]")).click();
 		Thread.sleep(4000);
 		user_Select_Reset_button();
 		Thread.sleep(2000);
@@ -95,9 +99,10 @@ public class Exceldatacompare {
 	@And("^Select Automic button$")
 	public void Select_Automic_button() throws Throwable {
 		Thread.sleep(2500);
-		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div/div[5]/div[2]/a/span[2]/b")).click();
+		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div[1]/div[5]/div[2]/div/div[1]/div[2]")).click();
 		Thread.sleep(2500);
-		login.driver.findElement(By.xpath("//ul[@class='select2-results']/li[1]/div/div")).click();
+		login.driver.findElement(By.xpath("/html/body/ul/div[3]/li[1]/div/label/span[2]")).click();
+
 	}
 	
 	@And("^User1 Select pop up Download button$")
@@ -135,10 +140,10 @@ public class Exceldatacompare {
   
 	@And("^Select Custom button$")
 	public void Select_Custom_button() throws Throwable {
-		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div/div[5]/div[2]/a/span[2]/b")).click();
+		Thread.sleep(2500);
+		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div[1]/div[5]/div[2]/div/div[1]/div[2]")).click();
 		Thread.sleep(6000);
-		login.driver.findElement(By.xpath("//ul[@class='select2-results']/li[2]/div/div")).click();
+		login.driver.findElement(By.xpath("/html/body/ul/div[3]/li[2]/div/label/span[2]")).click();
 	}
 	
 	@And("^User signout$")
@@ -163,13 +168,13 @@ public class Exceldatacompare {
 	@And("^Select format input	\"([^\"]*)\"$")
 	public void Select_format_input(String formatinput) throws Throwable {
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div/input[@class='format-input']")).click();
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).click();
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div/input[@class='format-input']")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div/input[@class='format-input']")).sendKeys(formatinput);
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).sendKeys(formatinput);
 		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[2]/div/div[2]/div[2]/button[2]")).click();
+		
 	}
 	@And("^User Select Decimal drop down$")
 	public void user_Select_Decimal_drop_down() throws Throwable {
@@ -447,20 +452,16 @@ public class Exceldatacompare {
 	
 	@And("^Select Date drop down$")
 	public void select_Date_drop_down() throws Throwable {
-		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div/div[5]/div[2]/a/span[2]/b")).click();
+		Thread.sleep(2500);
+		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div[1]/div[5]/div[2]/div/div[1]/div[2]")).click();
 		
 	}
 
 	@Then("^Automatic and Custom Date drop down should be available$")
 	public void automatic_and_Custom_Date_drop_down_should_be_available() throws Throwable {
-		WebElement Automaticdate = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Automaticdate")));
-		  Assert.assertEquals(true,Automaticdate.isDisplayed());
-		 WebElement Customdate = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customdate")));
-		  Assert.assertEquals(true,Customdate.isDisplayed());
-	
-		  Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//ul[@class='select2-results']/li[1]/div/div")).click();
+		WebElement Dateformatdropdown = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dateformatdropdown")));
+		  Assert.assertEquals(true,Dateformatdropdown.isDisplayed());
+		
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			  user_signout();
@@ -1397,12 +1398,6 @@ public class Exceldatacompare {
 	
 	
 }
-
-
-
-
-
-
 
 
 

@@ -80,7 +80,7 @@ public class SearchTest {
 		Boolean SynomymSearch = false;
 		Thread.sleep(10000);
 		login.Log4j.info("Clicking on  Series tab ");
-		SeriesTab=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
+		SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
 		SeriesTab.click();
 		// text file location where it contains synonyms
 		FileReader file = new FileReader(
@@ -129,6 +129,7 @@ public class SearchTest {
 						.findElement(
 								By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
 						.click();
+
 			} else if (l == 2) {
 				break;
 			}
@@ -492,7 +493,7 @@ public class SearchTest {
 	public void user_verifies_keyword_search_results() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(2000);
-		SeriesTab=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
+		SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
 		SeriesTab.click();
 		Thread.sleep(2000);
 		List<WebElement> No_of_pages = login.driver
@@ -510,7 +511,7 @@ public class SearchTest {
 						.findElement(
 								By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
 						.click();
-			} else if (l == 2) {
+			} else if (l == 10) {
 				break;
 			}
 			ul_element = null;
@@ -542,9 +543,9 @@ public class SearchTest {
 								&& currentKeyword.toUpperCase().contains("OR")) {
 							String[] keywords = currentKeyword.toUpperCase().trim().split("\\s*AND\\s*|\\s*OR\\s* ");
 							login.Log4j.info("length is " + keywords.length);
-							//login.Log4j.info(keywords[0]);
-							//login.Log4j.info(keywords[1]);
-							//login.Log4j.info(keywords[2]);
+							// login.Log4j.info(keywords[0]);
+							// login.Log4j.info(keywords[1]);
+							// login.Log4j.info(keywords[2]);
 							if (currentKeyword.equalsIgnoreCase("capital AND price OR algeria")
 									&& ((TooltipInfo.toUpperCase().contains(keywords[0]) == true
 											&& TooltipInfo.toUpperCase().contains(keywords[1]) == true)
@@ -760,8 +761,8 @@ public class SearchTest {
 							}
 						} else if (Filters.searchData.contains("*")) {
 							String[] currentLine = Filters.searchData.split(";");
-							 login.Log4j.info(currentLine[0]);
-							 login.Log4j.info(currentLine[1]);
+							login.Log4j.info(currentLine[0]);
+							login.Log4j.info(currentLine[1]);
 							for (String pair : currentLine) {
 								String[] str = pair.split("\\*");
 								for (String keyword : str) {
