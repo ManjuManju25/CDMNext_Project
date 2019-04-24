@@ -392,15 +392,15 @@ Scenario: TC_Filters_Search_57
 Given User enters "Construction"
 And   User selected "All databases" as "World Trend Plus"
 Then  User verify the search results 
-#
-##@FilterSearch
-##Scenario: TC_Filters_Search_58
-##Given User enters "Agar"
-##And   User selects "Date" as "First observation before"
-##And   User has clicked on "Apply filter"
-##And   User selected "All databases" as "Global Database"
-##Then  User verify the search results  
-#
+
+@FilterSearch
+Scenario: TC_Filters_Search_58
+Given User enters "Agar"
+And   User selects "Date" as "First observation before"
+And   User has clicked on "Apply filter"
+And   User selected "All databases" as "Global Database"
+Then  User verify the search results  
+
 @FilterSearch
 Scenario: TC_Filters_Search_59
 Given User enters "Changes"
@@ -412,13 +412,13 @@ Scenario: TC_Filters_Search_60
 Given User enters "formation"
 And   User selected "All databases" as "OECD - Economic Outlook"
 Then  User verify the search results 
-#
-##@FilterSearch
-##Scenario: TC_Filters_Search_61
-##Given User enters "Reference;employment"
-##And   User selected "All databases" as "OECD - National Accounts"
-##Then  User verify the search results 
-#
+
+@FilterSearch
+Scenario: TC_Filters_Search_61
+Given User enters "Reference;employment"
+And   User selected "All databases" as "OECD - National Accounts"
+Then  User verify the search results 
+
 @FilterSearch
 Scenario: TC_Filters_Search_62
 Given User enters "Reserve"

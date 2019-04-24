@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -56,15 +57,12 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		/*
-		 * Thread.sleep(5000);
-		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).
-		 * clear(); login.Log4j.info("searching with " + searchData);
-		 * Thread.sleep(7000);
-		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).
-		 * sendKeys(searchData);
-		 */
+		Thread.sleep(10000);
+		try {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
+		} catch (ElementNotVisibleException e) {
 
+		}
 		try {
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 			List<WebElement> clearIcon = login.driver
@@ -239,417 +237,28 @@ public class Filters {
 		try {
 			// validating for two pages[per page=10 series]
 			No_of_pages = login.driver
-					.findElements(By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span"));
+					.findElements(By.xpath(login.LOCATORS.getProperty("Total_No_of_pages")));
 			login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
-			
-			for (int l = 0; l < No_of_pages.size(); l++) {
-				if (l == 1) {
-					int m = l + 1;
-					Thread.sleep(2000);
-					mouseOver.moveToElement(SeriesTab).build().perform();
-					// selecting 2nd page
-					Thread.sleep(3000);
-					login.driver
-							.findElement(By
-									.xpath("//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
-							.click();
+			if (No_of_pages.size() > 0)
+				for (int l = 0; l < No_of_pages.size(); l++) {
+					if (l == 1) {
+						int m = l + 1;
+						Thread.sleep(2000);
+						mouseOver.moveToElement(SeriesTab).build().perform();
+						// selecting 2nd page
+						Thread.sleep(3000);
+						login.driver
+								.findElement(By.xpath(
+										"//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
+								.click();
 
-				} else if (l == 2) {
-					break;
-				}
-				ul_element = null;
-				try {
-					Thread.sleep(5000);
-					ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-					AssertJUnit.assertNotNull(ul_element);
-					List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-					login.Log4j.info("List size is :" + li_All.size());
-					if (li_All.size() > 0) {
-						for (int i = 0; i < li_All.size(); i++) {
-							login.Log4j.info(i);
-							login.Log4j.info(li_All.size());
-							Thread.sleep(5000);
-							j = i + 1;
-							checkbox = login.driver.findElement(
-									By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-							mouseOver.moveToElement(checkbox).click().build().perform();
-							Thread.sleep(1000);
-							element = login.driver
-									.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-							mouseOver.moveToElement(element).build().perform();
-							Thread.sleep(2000);
-							tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
-							// Until the element is not visible keep scrolling
-							// jse.executeScript("arguments[0].scrollIntoView(true);", element);
-							text = tooltip.getText();
-							// login.Log4j.info("Title information is \n" + text);
-							String[] lines = text.split("\n");
-							login.Log4j.info("filter is " + filters);
-							for (String Tooltip : lines) {
-								// String str=null;
-								if (Tooltip.contains("Series id")) {
-									seriesId = Tooltip;
-								} else if (Tooltip.contains("Name")) {
-									seriesName = Tooltip;
-								} else if (Tooltip.contains("Unit")) {
-									unit = Tooltip;
-								} else if (Tooltip.contains("Frequency")) {
-									frequency = Tooltip;
-								}
-							}
-
-							if (filters.isEmpty()) {
-								sid = searchData.split(";");
-
-								switch (sid.length) {
-								case 1:
-									login.Log4j.info(advancedfltr);
-									if (advancedfltr != null) {
-										if (advancedfltr.equals("Subscribed series only")
-												&& seriesId.contains(sid[0]) == true) {
-											if (!checkbox.isSelected()) {
-												Thread.sleep(1000);
-												checkbox.click();
-												login.Log4j.info("Element is clickable");
-											} else {
-												Assert.fail("Element is not clickable");
-											}
-											/*
-											 * } else if (advancedfltr.equals("Subscribed series only")) { if
-											 * (checkbox.getAttribute("class").
-											 * contains("series-list-item--checkbox svg-checkbox")) { //
-											 * Thread.sleep(1500); //
-											 * mouseOver.moveToElement(checkbox).click().build().perform();
-											 * login.Log4j.info("Subscribed series are clickable"); } else {
-											 * Assert.fail("Subscribed series are not clickable"); }
-											 */
-										} else if (advancedfltr.equals("New only")) {
-
-											if (login.driver
-													.findElement(By.xpath(login.LOCATORS.getProperty("Newonly")))
-													.isDisplayed()) {
-												login.Log4j.info(advancedfltr + " series are exists");
-											} else {
-												Assert.fail(advancedfltr + " series doesnot exists");
-											}
-										} else {
-
-											if (advancedfltr.equals("Name only") && seriesName.toUpperCase()
-													.contains(sid[0].toUpperCase()) == true) {
-												login.Log4j.info(sid[0] + " is exists in  : " + seriesName);
-											} else {
-												Assert.fail(sid[0] + " doesn't exists in  : " + seriesName);
-
-											}
-										}
-									} else if (seriesId.contains(sid[0]) == true) {
-										login.Log4j.info(sid[0] + " is exists in " + "\n" + seriesId);
-									} else {
-										if (validation(text, sid[0]) == true) {
-											// if (text.toUpperCase().contains(sid[0].toUpperCase()) == true) {
-											login.Log4j.info(sid[0] + " is exists in the" + "\n" + text);
-										} else {
-											showRelatedData(sid[0], j);
-											if (status == false) {
-												Assert.fail(sid[0] + " keyword doesn't exists " + showdata);
-											}
-										}
-									}
-
-									break;
-								case 2:
-									if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true) {
-										login.Log4j
-												.info(sid[0] + " OR " + sid[1] + " is exists in the" + "\n" + seriesId);
-									} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[1].toUpperCase()) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " is exists in the" + "\n" + text);
-									} else {
-										Assert.fail(sid[0] + " OR " + sid[1] + " doesn't exists");
-									}
-									break;
-
-								case 3:
-									if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
-											|| seriesId.contains(sid[2]) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2]
-												+ " is exists in the" + "\n" + seriesId);
-
-									} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[2].toUpperCase()) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2]
-												+ " is exists in the" + "\n" + text);
-									} else {
-										Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2]
-												+ " doesn't exists in the" + "\n" + seriesId);
-									}
-									break;
-								case 4:
-									if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
-											|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " exists in the" + "\n" + seriesId);
-									} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[3].toUpperCase()) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " is exists in the" + "\n" + text);
-									} else {
-										Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " doesnot exists in the" + "\n" + seriesId);
-									}
-									break;
-								case 5:
-									if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
-											|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true
-											|| seriesId.contains(sid[4]) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " OR " + sid[4] + " exists in the" + "\n" + seriesId);
-									} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[4].toUpperCase()) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " OR " + sid[4] + " is exists in the" + "\n" + text);
-									} else {
-										Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " OR " + sid[4] + " doesnot exists in the" + "\n" + seriesId);
-									}
-									break;
-								case 6:
-									if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
-											|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true
-											|| seriesId.contains(sid[4]) == true || seriesId.contains(sid[5]) == true) {
-										login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " OR " + sid[4] + " exists in the" + "\n" + seriesId);
-									} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[4].toUpperCase()) == true
-											|| text.toUpperCase().contains(sid[5].toUpperCase()) == true) {
-										login.Log4j.info(
-												sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
-														+ sid[4] + " OR " + sid[5] + " is exists in the" + "\n" + text);
-									} else {
-										Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
-												+ " OR " + sid[4] + "OR " + sid[5] + " doesnot exists in the" + "\n"
-												+ seriesId);
-									}
-									break;
-								default:
-
-									Assert.fail(searchData + " has more than size " + sid.length
-											+ " which is not handled.  Please handle!");
-								}
-
-							} else {
-								for (k = 0; k < filters.size(); k++) {
-									if (filters.get(k).equals("Source")) {
-										login.Log4j.info(sourcearr.length);
-										login.Log4j.info(sourcearr[0]);
-										// String source = lines[10];
-										// login.Log4j.info(source);
-										if ((sourcearr.length == 1) && var.equalsIgnoreCase(
-												"International Organisation for Economic Co-operation and Development") == true) {
-											login.Log4j.info(sourcearr[0]
-													+ " does exists as Organisation for Economic Co-operation and Development in \n"
-													+ text);
-
-										} else if((sourcearr.length == 1) && text.contains("International Monetary Fund") ) {
-											login.Log4j.info(var+" exists as International Monetary Fund in \n"+ text);
-
-										} else if ((sourcearr.length == 1) && validation(text, sourcearr[0]) == true) {
-											login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);
-
-										} else if ((sourcearr.length == 2) && validation(text, sourcearr[0]) == true
-												|| validation(text, sourcearr[1]) == true) {
-											login.Log4j.info(sourcearr[0] + " OR " + sourcearr[1] + " is exists in the"
-													+ "\n" + text);
-										} else {
-											if (sourcearr.length == 1) {
-												Assert.fail(sourcearr[0] + " doesn't exist in " + text);
-											} else {
-												Assert.fail(sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in "
-														+ text);
-											}
-										}
-									}
-									if (filters.get(k).equals("Date")) {
-										for (int m = 0; m < datearr.length; m++) {
-											SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-											Date date = new Date();
-
-											if (datearr[m].equalsIgnoreCase("First observation before")) {
-												datearr[m] = "First date";
-											}
-											if (datearr[m].equals("First date")) {
-												for (String Tooltip : lines) {
-													if (Tooltip.contains("First date")) {
-														login.Log4j.info(Tooltip);
-														String[] frstDate = Tooltip.split(": ");
-														String first_obs_before = sdf.format(date);
-														if (sdf.parse(frstDate[1])
-																.before(sdf.parse(first_obs_before)) == true) {
-															login.Log4j.info(frstDate[1] + " is less than "
-																	+ first_obs_before + "? " + sdf.parse(frstDate[1])
-																			.before(sdf.parse(first_obs_before)));
-														} else {
-															Assert.fail(frstDate[1] + " is not less than "
-																	+ first_obs_before);
-														}
-													}
-												}
-											}
-
-											if (datearr[m].equalsIgnoreCase("Last observation after")) {
-												datearr[m] = "Last date";
-											}
-											if (datearr[m].equals("Last date")) {
-												for (String Tooltip : lines) {
-													if (Tooltip.contains("Last date")) {
-														login.Log4j.info(Tooltip);
-														String[] lastDate = Tooltip.split(": ");
-														String last_obs_after = sdf.format(date);
-														if (sdf.parse(lastDate[1])
-																.after(sdf.parse(last_obs_after)) == true) {
-															login.Log4j.info(lastDate[1] + " is greater than "
-																	+ last_obs_after + "? " + sdf.parse(lastDate[1])
-																			.after(sdf.parse(last_obs_after)));
-														} else {
-															Assert.fail(lastDate[1] + " is not greater than "
-																	+ last_obs_after);
-														}
-													}
-												}
-											}
-										}
-									}
-									if (filters.get(k).equals("Frequency")) {
-										login.Log4j.info("filter  is : " + filters.get(k));
-										login.Log4j.info(frequencyarr.length);
-										login.Log4j.info(frequency);
-										String str = "Half-yearly";
-										String str1 = "Annual";
-										if ((frequencyarr.length == 1)) {
-											if (frequencyarr[0].equals("Semiannually")) {
-												if (frequency.toUpperCase()
-														.contains(frequencyarr[0].toUpperCase()) == true
-														|| frequency.toUpperCase()
-																.contains(str.toUpperCase()) == true) {
-													login.Log4j.info(frequencyarr[0] + " OR " + str
-															+ " is exists in the" + "\n" + frequency);
-												}
-											} else {
-												if (frequency.toUpperCase()
-														.contains(frequencyarr[0].toUpperCase()) == true
-														|| frequency.toUpperCase()
-																.contains(str1.toUpperCase()) == true) {
-													login.Log4j.info(frequencyarr[0] + " OR " + str1
-															+ " is exists in the" + "\n" + frequency);
-												}
-											}
-
-										} else if ((frequencyarr.length == 2) && (frequency.toUpperCase()
-												.contains(frequencyarr[0].toUpperCase()) == true
-												|| frequency.toUpperCase()
-														.contains(frequencyarr[1].toUpperCase()) == true
-												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true)) {
-											login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1]
-													+ " is exists in the" + "\n" + frequency);
-										} else {
-											if (frequencyarr.length == 1) {
-												Assert.fail(frequencyarr[0] + " doesn't exist in " + frequency);
-											} else {
-												Assert.fail(frequencyarr[0] + " OR " + frequencyarr[1]
-														+ " doesn't exist in " + frequency);
-											}
-
-										}
-									}
-
-									if (filters.get(k).equals("Status")) {
-										login.Log4j.info(advancedfltr);
-										sid = searchData.split(";");
-										try {
-											if (advancedfltr != null) {
-
-												if (advancedfltr.equals("Subscribed series only")) {
-													Thread.sleep(1000);
-													if (!checkbox.isSelected()) {
-														checkbox.click();
-														login.Log4j.info("Element is clickable");
-													} else {
-														Assert.fail("Element is not clickable");
-													}
-												} else {
-													if (advancedfltr.equals("Name only") && seriesName.toUpperCase()
-															.contains(sid[0].toUpperCase()) == true) {
-														login.Log4j.info(sid[0] + " is exists in the  : " + seriesName);
-
-													} else {
-														login.Log4j.error(
-																sid[0] + " doesn't exists in the  : " + seriesName);
-														Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
-													}
-												}
-											}
-										} catch (NullPointerException e) {
-											Assert.fail("Nullpointer Exception " + e.getMessage());
-										}
-
-										if (fltrStatus.equals("Active")) {
-											Thread.sleep(2000);
-											WebElement list = login.driver.findElement(
-													By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-											mouseOver.moveToElement(list).click().build().perform();
-											if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
-													.isDisplayed()) {
-												Thread.sleep(2000);
-												login.driver
-														.findElement(
-																By.xpath(login.LOCATORS.getProperty("closeAction")))
-														.click();
-												login.Log4j.info(fltrStatus + " series exists");
-											} else {
-												Assert.fail(fltrStatus + " doesn't exists");
-											}
-
-										} else if (seriesId.contains(sid[0]) == true) {
-											login.Log4j.info(sid[0] + " is exists in the" + "\n" + seriesId);
-										} else {
-											Assert.fail(sid[0] + " doesn't exist in " + seriesId);
-
-										}
-									}
-									if (filters.get(k).equals("Unit")) {
-										login.Log4j.info("filter  is : " + filters.get(k));
-										for (int m = 0; m < unitarr.length; m++) {
-											login.Log4j.info("filter option is : " + unitarr[m]);
-											if (unit.contains(unitarr[m]) == true) {
-												login.Log4j.info(unitarr[m] + " is exists in the" + "\n" + unit);
-											} else {
-												Assert.fail(unitarr[m] + " doesn't exist in " + unit);
-
-											}
-
-										}
-									}
-								}
-							}
-						}
-
-					} else {
-						Assert.fail("Sorry,No results were found ");
+					} else if (l == 2) {
+						break;
 					}
-
-				} catch (NoSuchElementException e) {
-
-					Assert.fail("WebElement is null " + e.getMessage());
+					FiltersValidation();
 				}
+			else {
+				FiltersValidation();
 			}
 		} catch (Exception e) {
 
@@ -697,7 +306,7 @@ public class Filters {
 		SeriesTab.click();
 		// validating for two pages[per page=10 series]
 		List<WebElement> No_of_pages = login.driver
-				.findElements(By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("Total_No_of_pages")));
 		login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
 		for (int l = 0; l < No_of_pages.size(); l++) {
 			if (l == 1) {
@@ -928,6 +537,10 @@ public class Filters {
 		} else {
 			Assert.fail("The series count is shown incorrectly for " + Morefilter);
 		}
+		if (Morefilter.equalsIgnoreCase("With suggestions for rebased/discontinued series")) {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_left"))).click();
+		}
 	}
 
 	@Then("^User check for the scubscribed series$")
@@ -963,6 +576,385 @@ public class Filters {
 		}
 	}
 
+	public void FiltersValidation() throws Throwable {
+		ul_element = null;
+		try {
+			Thread.sleep(5000);
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			login.Log4j.info("List size is :" + li_All.size());
+			if (li_All.size() > 0) {
+				for (int i = 0; i < li_All.size(); i++) {
+					login.Log4j.info(i);
+					login.Log4j.info(li_All.size());
+					Thread.sleep(5000);
+					j = i + 1;
+					checkbox = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					mouseOver.moveToElement(checkbox).click().build().perform();
+					Thread.sleep(1000);
+					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					mouseOver.moveToElement(element).build().perform();
+					Thread.sleep(2000);
+					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					// Until the element is not visible keep scrolling
+					// jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					text = tooltip.getText();
+					// login.Log4j.info("Title information is \n" + text);
+					String[] lines = text.split("\n");
+					login.Log4j.info("filter is " + filters);
+					for (String Tooltip : lines) {
+						// String str=null;
+						if (Tooltip.contains("Series id")) {
+							seriesId = Tooltip;
+						} else if (Tooltip.contains("Name")) {
+							seriesName = Tooltip;
+						} else if (Tooltip.contains("Unit")) {
+							unit = Tooltip;
+						} else if (Tooltip.contains("Frequency")) {
+							frequency = Tooltip;
+						}
+					}
+
+					if (filters.isEmpty()) {
+						sid = searchData.split(";");
+
+						switch (sid.length) {
+						case 1:
+							login.Log4j.info(advancedfltr);
+							if (advancedfltr != null) {
+								if (advancedfltr.equals("Subscribed series only")
+										&& seriesId.contains(sid[0]) == true) {
+									if (!checkbox.isSelected()) {
+										Thread.sleep(1000);
+										checkbox.click();
+										login.Log4j.info("Element is clickable");
+									} else {
+										Assert.fail("Element is not clickable");
+									}
+									/*
+									 * } else if (advancedfltr.equals("Subscribed series only")) { if
+									 * (checkbox.getAttribute("class").
+									 * contains("series-list-item--checkbox svg-checkbox")) { // Thread.sleep(1500);
+									 * // mouseOver.moveToElement(checkbox).click().build().perform();
+									 * login.Log4j.info("Subscribed series are clickable"); } else {
+									 * Assert.fail("Subscribed series are not clickable"); }
+									 */
+								} else if (advancedfltr.equals("New only")) {
+
+									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Newonly")))
+											.isDisplayed()) {
+										login.Log4j.info(advancedfltr + " series are exists");
+									} else {
+										Assert.fail(advancedfltr + " series doesnot exists");
+									}
+								} else {
+
+									if (advancedfltr.equals("Name only")
+											&& seriesName.toUpperCase().contains(sid[0].toUpperCase()) == true) {
+										login.Log4j.info(sid[0] + " is exists in  : " + seriesName);
+									} else {
+										Assert.fail(sid[0] + " doesn't exists in  : " + seriesName);
+
+									}
+								}
+							} else if (seriesId.contains(sid[0]) == true) {
+								login.Log4j.info(sid[0] + " is exists in " + "\n" + seriesId);
+							} else {
+								if (validation(text, sid[0]) == true) {
+									// if (text.toUpperCase().contains(sid[0].toUpperCase()) == true) {
+									login.Log4j.info(sid[0] + " is exists in the" + "\n" + text);
+								} else {
+									showRelatedData(sid[0], j);
+									if (status == false) {
+										Assert.fail(sid[0] + " keyword doesn't exists " + showdata);
+									}
+								}
+							}
+
+							break;
+						case 2:
+							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " is exists in the" + "\n" + seriesId);
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " is exists in the" + "\n" + text);
+							} else {
+								Assert.fail(sid[0] + " OR " + sid[1] + " doesn't exists");
+							}
+							break;
+
+						case 3:
+							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+									|| seriesId.contains(sid[2]) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " is exists in the" + "\n"
+										+ seriesId);
+
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true) {
+								login.Log4j.info(
+										sid[0] + " OR " + sid[1] + " OR " + sid[2] + " is exists in the" + "\n" + text);
+							} else {
+								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " doesn't exists in the" + "\n"
+										+ seriesId);
+							}
+							break;
+						case 4:
+							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
+										+ " exists in the" + "\n" + seriesId);
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
+										+ " is exists in the" + "\n" + text);
+							} else {
+								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
+										+ " doesnot exists in the" + "\n" + seriesId);
+							}
+							break;
+						case 5:
+							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true
+									|| seriesId.contains(sid[4]) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " exists in the" + "\n" + seriesId);
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[4].toUpperCase()) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " is exists in the" + "\n" + text);
+							} else {
+								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " doesnot exists in the" + "\n" + seriesId);
+							}
+							break;
+						case 6:
+							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true
+									|| seriesId.contains(sid[4]) == true || seriesId.contains(sid[5]) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " exists in the" + "\n" + seriesId);
+							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[4].toUpperCase()) == true
+									|| text.toUpperCase().contains(sid[5].toUpperCase()) == true) {
+								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + " OR " + sid[5] + " is exists in the" + "\n" + text);
+							} else {
+								Assert.fail(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
+										+ sid[4] + "OR " + sid[5] + " doesnot exists in the" + "\n" + seriesId);
+							}
+							break;
+						default:
+
+							Assert.fail(searchData + " has more than size " + sid.length
+									+ " which is not handled.  Please handle!");
+						}
+
+					} else {
+						for (k = 0; k < filters.size(); k++) {
+							if (filters.get(k).equals("Source")) {
+								login.Log4j.info(sourcearr.length);
+								login.Log4j.info(sourcearr[0]);
+								// String source = lines[10];
+								// login.Log4j.info(source);
+								if ((sourcearr.length == 1) && text
+										.contains("Organisation for Economic Co-operation and Development") == true) {
+									login.Log4j.info(sourcearr[0]
+											+ " does exists as Organisation for Economic Co-operation and Development in \n"
+											+ text);
+
+								} else if ((sourcearr.length == 1) && text.contains("International Monetary Fund")) {
+									login.Log4j.info(var + " exists as International Monetary Fund in \n" + text);
+
+								} else if ((sourcearr.length == 1) && validation(text, sourcearr[0]) == true) {
+									login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);
+
+								} else if ((sourcearr.length == 2) && validation(text, sourcearr[0]) == true
+										|| validation(text, sourcearr[1]) == true) {
+									login.Log4j.info(
+											sourcearr[0] + " OR " + sourcearr[1] + " is exists in the" + "\n" + text);
+								} else {
+									if (sourcearr.length == 1) {
+										Assert.fail(sourcearr[0] + " doesn't exist in " + text);
+									} else {
+										Assert.fail(sourcearr[0] + " OR " + sourcearr[1] + " doesn't exist in " + text);
+									}
+								}
+							}
+							if (filters.get(k).equals("Date")) {
+								for (int m = 0; m < datearr.length; m++) {
+									SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+									Date date = new Date();
+
+									if (datearr[m].equalsIgnoreCase("First observation before")) {
+										datearr[m] = "First date";
+									}
+									if (datearr[m].equals("First date")) {
+										for (String Tooltip : lines) {
+											if (Tooltip.contains("First date")) {
+												login.Log4j.info(Tooltip);
+												String[] frstDate = Tooltip.split(": ");
+												String first_obs_before = sdf.format(date);
+												if (sdf.parse(frstDate[1])
+														.before(sdf.parse(first_obs_before)) == true) {
+													login.Log4j.info(frstDate[1] + " is less than " + first_obs_before
+															+ "? " + sdf.parse(frstDate[1])
+																	.before(sdf.parse(first_obs_before)));
+												} else {
+													Assert.fail(frstDate[1] + " is not less than " + first_obs_before);
+												}
+											}
+										}
+									}
+
+									if (datearr[m].equalsIgnoreCase("Last observation after")) {
+										datearr[m] = "Last date";
+									}
+									if (datearr[m].equals("Last date")) {
+										for (String Tooltip : lines) {
+											if (Tooltip.contains("Last date")) {
+												login.Log4j.info(Tooltip);
+												String[] lastDate = Tooltip.split(": ");
+												String last_obs_after = sdf.format(date);
+												if (sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)) == true) {
+													login.Log4j.info(lastDate[1] + " is greater than " + last_obs_after
+															+ "? "
+															+ sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)));
+												} else {
+													Assert.fail(lastDate[1] + " is not greater than " + last_obs_after);
+												}
+											}
+										}
+									}
+								}
+							}
+							if (filters.get(k).equals("Frequency")) {
+								login.Log4j.info("filter  is : " + filters.get(k));
+								login.Log4j.info(frequencyarr.length);
+								login.Log4j.info(frequency);
+								String str = "Half-yearly";
+								String str1 = "Annual";
+								if ((frequencyarr.length == 1)) {
+									if (frequencyarr[0].equals("Semiannually")) {
+										if (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| frequency.toUpperCase().contains(str.toUpperCase()) == true) {
+											login.Log4j.info(frequencyarr[0] + " OR " + str + " is exists in the" + "\n"
+													+ frequency);
+										}
+									} else {
+										if (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true) {
+											login.Log4j.info(frequencyarr[0] + " OR " + str1 + " is exists in the"
+													+ "\n" + frequency);
+										}
+									}
+
+								} else if ((frequencyarr.length == 2)
+										&& (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| frequency.toUpperCase()
+														.contains(frequencyarr[1].toUpperCase()) == true
+												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true)) {
+									login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1] + " is exists in the"
+											+ "\n" + frequency);
+								} else {
+									if (frequencyarr.length == 1) {
+										Assert.fail(frequencyarr[0] + " doesn't exist in " + frequency);
+									} else {
+										Assert.fail(frequencyarr[0] + " OR " + frequencyarr[1] + " doesn't exist in "
+												+ frequency);
+									}
+
+								}
+							}
+
+							if (filters.get(k).equals("Status")) {
+								login.Log4j.info(advancedfltr);
+								sid = searchData.split(";");
+								try {
+									if (advancedfltr != null) {
+
+										if (advancedfltr.equals("Subscribed series only")) {
+											Thread.sleep(1000);
+											if (!checkbox.isSelected()) {
+												checkbox.click();
+												login.Log4j.info("Element is clickable");
+											} else {
+												Assert.fail("Element is not clickable");
+											}
+										} else {
+											if (advancedfltr.equals("Name only") && seriesName.toUpperCase()
+													.contains(sid[0].toUpperCase()) == true) {
+												login.Log4j.info(sid[0] + " is exists in the  : " + seriesName);
+
+											} else {
+												login.Log4j.error(sid[0] + " doesn't exists in the  : " + seriesName);
+												Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
+											}
+										}
+									}
+								} catch (NullPointerException e) {
+									Assert.fail("Nullpointer Exception " + e.getMessage());
+								}
+
+								if (fltrStatus.equals("Active")) {
+									Thread.sleep(2000);
+									WebElement list = login.driver
+											.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+									mouseOver.moveToElement(list).click().build().perform();
+									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
+											.isDisplayed()) {
+										Thread.sleep(2000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+										login.Log4j.info(fltrStatus + " series exists");
+									} else {
+										Assert.fail(fltrStatus + " doesn't exists");
+									}
+
+								} else if (seriesId.contains(sid[0]) == true) {
+									login.Log4j.info(sid[0] + " is exists in the" + "\n" + seriesId);
+								} else {
+									Assert.fail(sid[0] + " doesn't exist in " + seriesId);
+
+								}
+							}
+							if (filters.get(k).equals("Unit")) {
+								login.Log4j.info("filter  is : " + filters.get(k));
+								for (int m = 0; m < unitarr.length; m++) {
+									login.Log4j.info("filter option is : " + unitarr[m]);
+									if (unit.contains(unitarr[m]) == true) {
+										login.Log4j.info(unitarr[m] + " is exists in the" + "\n" + unit);
+									} else {
+										Assert.fail(unitarr[m] + " doesn't exist in " + unit);
+
+									}
+
+								}
+							}
+						}
+					}
+				}
+
+			} else {
+				Assert.fail("Sorry,No results were found ");
+			}
+
+		} catch (NoSuchElementException e) {
+
+			Assert.fail("WebElement is null " + e.getMessage());
+		}
+	}
+
 	public boolean validation(String searchText, String sourcearr2) throws Throwable {
 		String[] keywords = null;
 		if (sourcearr2.contains(",")) {
@@ -973,7 +965,7 @@ public class Filters {
 		} else {
 			keywords = sourcearr2.split(" ");
 		}
-		login.Log4j.info(keywords.length);
+		//login.Log4j.info(keywords.length);
 		switch (keywords.length) {
 		case 1:
 			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true) {

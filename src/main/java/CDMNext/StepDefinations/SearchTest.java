@@ -134,6 +134,18 @@ public class SearchTest {
 				break;
 			}
 
+			/*int m = l + 1;
+			Thread.sleep(2000);
+			mouseOver.moveToElement(SeriesTab).build().perform();
+			Thread.sleep(3000);
+			login.driver
+					.findElement(By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
+					.click();
+
+			if (l == 10) {
+				break;
+			}*/
+
 			ul_element = null;
 			try {
 				ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -162,37 +174,36 @@ public class SearchTest {
 						// login.Log4j.info("Title information is \n" + TooltipInfo);
 						// keep scrolling till the 20th elemnent is visible
 
-						/*
-						 * Boolean KeywordMatch = false; for (String keyword : listwords) {
-						 * login.Log4j.info(keyword);
-						 * 
-						 * if (search_validation(text,keyword) == true) { login.Log4j.info(keyword +
-						 * " is exists in the" + "\n" + text); KeywordMatch = true; break;
-						 * 
-						 * } else if (KeywordMatch == false) { WebElement ele =login.driver.findElement(
-						 * By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-						 * Thread.sleep(1000); ele.click();
-						 * 
-						 * if
-						 * (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data")
-						 * )).isDisplayed()) { Thread.sleep(2000);
-						 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))
-						 * ).click(); List<WebElement> datasets =
-						 * login.driver.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info")));
-						 * //List<WebElement> datasets =
-						 * login.driver.findElements(By.xpath("//div[@class='series-related-data']"));
-						 * for(WebElement list : datasets) { Filters.showdata = list.getText();
-						 * login.Log4j.info(keyword); if(search_validation(Filters.showdata,keyword) ==
-						 * true) { login.Log4j.info(keyword + " is exists in the" + "\n" +
-						 * Filters.showdata); Thread.sleep(1000);
-						 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-						 * .click(); KeywordMatch = true; break; } else { Thread.sleep(1000);
-						 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-						 * .click(); status.add(keyword); } } } } } //login.Log4j.info(KeywordMatch); if
-						 * (KeywordMatch == false) { for (String failure : status) { Assert.fail(failure
-						 * + " keyword doesn't exists in " + text + " AND in Related data " + "\n" +
-						 * Filters.showdata); } }
-						 */
+						/*if (j == 11) {
+							element = login.driver
+									.findElement(By.xpath("//li[11]//div[@class='series-item--name']"));
+							jse.executeScript("arguments[0].scrollIntoView(true);", element);
+							mouseOver.moveToElement(element).build().perform();
+							Thread.sleep(2000);
+							ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+							AssertJUnit.assertNotNull(ul_element);
+							List<WebElement> list = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+							login.Log4j.info("List size is :" + list.size());
+							for (int k = 3; k < list.size(); k++) {
+								int m = k + 1;
+								login.Log4j.info(k);
+								login.Log4j.info(list.size());
+								Thread.sleep(5000);
+								checkbox = login.driver
+										.findElement(By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+								mouseOver.moveToElement(checkbox).click().build().perform();
+								Thread.sleep(1000);
+								element = login.driver
+										.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
+								mouseOver.moveToElement(element).build().perform();
+								Thread.sleep(2000);
+								tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+								TooltipInfo = tooltip.getText();
+								login.Log4j.info("Title information is \n" + TooltipInfo);
+							}
+
+						}
+						*/
 
 						Boolean KeywordMatch = false;
 						switch (listwords.length) {
@@ -497,7 +508,7 @@ public class SearchTest {
 		SeriesTab.click();
 		Thread.sleep(2000);
 		List<WebElement> No_of_pages = login.driver
-				.findElements(By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("Total_No_of_pages")));
 		login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
 		for (int l = 0; l < No_of_pages.size(); l++) {
 

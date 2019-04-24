@@ -173,7 +173,7 @@ public class Exceldatacompare {
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).sendKeys(formatinput);
-		Thread.sleep(10000);
+		
 		
 	}
 	@And("^User Select Decimal drop down$")
@@ -286,22 +286,20 @@ public class Exceldatacompare {
 	
 	@And("^User(\\d+) Select Custom date format$")
 	public void user_Select_Custom_date_format(int arg1) throws Throwable {
-		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div/div[5]/div[2]/a/span[2]/b")).click();
-		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//ul[@class='select2-results']/li[2]/div/div")).click();
+		Thread.sleep(2500);
+		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div[1]/div[5]/div[2]/div/div[1]/div[2]")).click();
+		Thread.sleep(6000);
+		login.driver.findElement(By.xpath("/html/body/ul/div[3]/li[2]/div/label/span[2]")).click();
 	}
 
 	@And("^Select Custom date input as \"([^\"]*)\"$")
 	public void Select_Custom_date_input_as(String arg2) throws Throwable {
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div/input[@class='format-input']")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div/input[@class='format-input']")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div/input[@class='format-input']")).sendKeys(arg2);
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[2]/div/div[2]/div[2]/button[2]")).click();
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).click();
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu date-format--context-menu']/div[3]/li[2]/div/div/div[1]/input")).sendKeys(arg2);
 	}
 	@And("^User(\\d+) Select All Attributes$")
 	public void user_Select_All_Attributes(int arg1) throws Throwable {
@@ -1022,7 +1020,7 @@ public class Exceldatacompare {
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[10]/div[2]")).click();
+		login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Add separator')]")).click();
 		Thread.sleep(1500);
@@ -1095,8 +1093,6 @@ public class Exceldatacompare {
 		  login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 		  Thread.sleep(1000);
 		  login.driver.findElement(By.xpath("//div[@class='insight-series-container']/div/div/div/div/label/span")).click();
-		  Thread.sleep(1000);
-		  login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a/div[2]")).click();
 		  user_signout();
 	}
 	
@@ -1398,6 +1394,10 @@ public class Exceldatacompare {
 	
 	
 }
+
+
+
+
 
 
 
