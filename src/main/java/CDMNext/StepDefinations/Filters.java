@@ -57,10 +57,11 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
+		login.driver.navigate().refresh();
 		Thread.sleep(10000);
 		try {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
-		} catch (ElementNotVisibleException e) {
+		} catch (Exception e) {
 
 		}
 		try {
@@ -130,8 +131,8 @@ public class Filters {
 				datearr = var.split(";");
 				for (String list : datearr) {
 					Thread.sleep(3000);
+					login.driver.findElement(By.xpath("//SPAN[contains(text(),'" + list + "')]")).click();
 					login.Log4j.info("clicking on " + list);
-					login.driver.findElement(By.xpath("//SPAN[contains(text(),'" + arg2 + "')]")).click();
 				}
 			}
 			if (arg1.equals("Frequency")) {
@@ -235,10 +236,11 @@ public class Filters {
 		SeriesTab.click();
 		List<WebElement> No_of_pages = null;
 		try {
+			Thread.sleep(5000);
 			// validating for two pages[per page=10 series]
-			No_of_pages = login.driver
-					.findElements(By.xpath(login.LOCATORS.getProperty("Total_No_of_pages")));
+			No_of_pages = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Total_No_of_pages")));
 			login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
+			Thread.sleep(2000);
 			if (No_of_pages.size() > 0)
 				for (int l = 0; l < No_of_pages.size(); l++) {
 					if (l == 1) {
@@ -271,7 +273,7 @@ public class Filters {
 		login.Log4j.info("topic is " + topic);
 		Thread.sleep(1000);
 		login.Log4j.info("Clicking on Databases");
-		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases")));
+		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab")));
 		db.click();
 
 	}
@@ -304,117 +306,167 @@ public class Filters {
 		login.Log4j.info("Clicking on  Series tab ");
 		SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
 		SeriesTab.click();
-		// validating for two pages[per page=10 series]
-		List<WebElement> No_of_pages = login.driver
-				.findElements(By.xpath(login.LOCATORS.getProperty("Total_No_of_pages")));
-		login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
-		for (int l = 0; l < No_of_pages.size(); l++) {
-			if (l == 1) {
-				int m = l + 1;
-				Thread.sleep(2000);
-				mouseOver.moveToElement(SeriesTab).build().perform();
-				// selecting 2nd page
-				Thread.sleep(3000);
-				login.driver
-						.findElement(
-								By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
-						.click();
+		Thread.sleep(5000);
+		try {
+			// validating for two pages[per page=10 series]
+			List<WebElement> No_of_pages = login.driver
+					.findElements(By.xpath(login.LOCATORS.getProperty("Total_No_of_pages")));
+			login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
+			if (No_of_pages.size() > 0) {
+				for (int l = 0; l < No_of_pages.size(); l++) {
+					if (l == 1) {
+						int m = l + 1;
+						Thread.sleep(2000);
+						mouseOver.moveToElement(SeriesTab).build().perform();
+						// selecting 2nd page
+						Thread.sleep(3000);
+						login.driver
+								.findElement(By.xpath(
+										"//span[@class='search-series-pagination-pages-wrapper']//span[" + m + "]"))
+								.click();
 
-			} else if (l == 2) {
-				break;
+					} else if (l == 2) {
+						break;
+					}
+					LogicalOperators_WildcardValidation();
+				}
+			} else {
+				LogicalOperators_WildcardValidation();
 			}
-			ul_element = null;
-			try {
-				Thread.sleep(3000);
-				ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-				AssertJUnit.assertNotNull(ul_element);
-				List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-				login.Log4j.info("List size is :" + li_All.size());
+		} catch (NoSuchElementException e) {
 
-				if (li_All.size() > 0) {
-					for (int i = 0; i < li_All.size(); i++) {
+		}
 
-						login.Log4j.info(i);
-						login.Log4j.info(li_All.size());
-						Thread.sleep(4000);
-						int j = i + 1;
-						checkbox = login.driver.findElement(
-								By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-						mouseOver.moveToElement(checkbox).click().build().perform();
-						Thread.sleep(1000);
-						element = login.driver
-								.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-						mouseOver.moveToElement(element).build().perform();
-						Thread.sleep(1000);
-						tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
-						// Until the element is not visible keep scrolling
-						// jse.executeScript("arguments[0].scrollIntoView(true);", element);
-						text = tooltip.getText();
-						// login.Log4j.info(text);
-						if (searchData.contains("AND")) {
-							String[] keyword1 = searchData.split(" AND ");
-							for (String result : keyword1) {
-								login.Log4j.info(result);
-								Thread.sleep(1000);
-								if (text.toUpperCase().contains(result.toUpperCase()) == true) {
-									login.Log4j.info(result + " exists in " + text);
-								} else {
-									showRelatedData(result, j);
-									if (status == false) {
-										Assert.fail(result + " keyword doesn't exists " + showdata);
-									}
+	}
+
+	public void LogicalOperators_WildcardValidation() throws Throwable {
+		ul_element = null;
+		try {
+			Thread.sleep(3000);
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			login.Log4j.info("List size is :" + li_All.size());
+
+			if (li_All.size() > 0) {
+				for (int i = 0; i < li_All.size(); i++) {
+
+					login.Log4j.info(i);
+					login.Log4j.info(li_All.size());
+					Thread.sleep(4000);
+					int j = i + 1;
+					checkbox = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					mouseOver.moveToElement(checkbox).click().build().perform();
+					Thread.sleep(1000);
+					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					mouseOver.moveToElement(element).build().perform();
+					Thread.sleep(1000);
+					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					// Until the element is not visible keep scrolling
+					// jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					text = tooltip.getText();
+					// login.Log4j.info(text);
+					if (searchData.contains("AND")) {
+						String[] keyword1 = searchData.split(" AND ");
+						for (String result : keyword1) {
+							login.Log4j.info(result);
+							Thread.sleep(1000);
+							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
+								login.Log4j.info(result + " exists in " + text);
+							} else {
+								showRelatedData(result, j);
+								if (status == false) {
+									Assert.fail(result + " keyword doesn't exists " + showdata);
 								}
 							}
-						} else if (searchData.contains("OR")) {
-							String[] keywords = searchData.split(" OR ");
-							login.Log4j.info("Length is " + keywords.length);
-							if ((keywords.length == 2) && text.toUpperCase().contains(keywords[0].toUpperCase()) == true
-									|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
-								login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + text);
+						}
+					} else if (searchData.contains("OR")) {
+						String[] keywords = searchData.split(" OR ");
+						login.Log4j.info("Length is " + keywords.length);
+						if ((keywords.length == 2) && text.toUpperCase().contains(keywords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true) {
+							login.Log4j.info(keywords[0] + " OR " + keywords[1] + " exists in " + text);
 
-							} else if ((keywords.length == 3)
-									&& text.toUpperCase().contains(keywords[0].toUpperCase()) == true
-									|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true
-									|| text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
-								login.Log4j.info(keywords[0] + " OR " + keywords[1] + " OR " + keywords[2]
-										+ " exists in " + text);
+						} else if ((keywords.length == 3)
+								&& text.toUpperCase().contains(keywords[0].toUpperCase()) == true
+								|| text.toUpperCase().contains(keywords[1].toUpperCase()) == true
+								|| text.toUpperCase().contains(keywords[2].toUpperCase()) == true) {
+							login.Log4j.info(
+									keywords[0] + " OR " + keywords[1] + " OR " + keywords[2] + " exists in " + text);
+
+						} else {
+
+							for (String result : keywords) {
+								showRelatedData(result, j);
+								if (status == true) {
+									break;
+								} else if (status == false) {
+									Assert.fail(result + " keyword doesn't exists " + showdata);
+								}
+							}
+						}
+
+					} else if (searchData.contains("*")) {
+						String[] str = searchData.split("\\*");
+						// login.Log4j.info(str.length);
+						switch (str.length) {
+						case 1:
+							if (text.toUpperCase().contains(str[0].toUpperCase()) == true) {
+								login.Log4j.info(str[0] + " exists in " + text);
 
 							} else {
+								showRelatedData(str[0], j);
+								if (status == false) {
+									Assert.fail(str[0] + " keyword doesn't exists " + showdata);
+								}
+							}
+							break;
 
-								for (String result : keywords) {
-									showRelatedData(result, j);
-									if (status == true) {
-										break;
-									} else if (status == false) {
-										Assert.fail(result + " keyword doesn't exists " + showdata);
+						case 2:
+							login.Log4j.info(str[0]);
+							login.Log4j.info(str[1]);
+							if (text.toUpperCase().contains(str[0].toUpperCase()) == true
+									&& text.toUpperCase().contains(str[1].toUpperCase()) == true) {
+								login.Log4j.info(str[0] + " AND " + str[1] + " exists in " + text);
+							} else {
+								for (String list : str) {
+									showRelatedData(list, j);
+									if (status == false) {
+										Assert.fail(list + " keyword doesn't exists " + showdata);
 									}
 								}
 							}
-
-						} else if (searchData.contains("*")) {
-							String[] str = searchData.split("\\*");
-							// login.Log4j.info(str.length);
-							switch (str.length) {
+							break;
+						default:
+							login.Log4j.error(searchData + " size is more than " + str.length);
+						}
+					} else {
+						if (searchData.contains("?")) {
+							String[] str1 = searchData.split("\\?");
+							login.Log4j.info(str1.length);
+							switch (str1.length) {
 							case 1:
-								if (text.toUpperCase().contains(str[0].toUpperCase()) == true) {
-									login.Log4j.info(str[0] + " exists in " + text);
+								if (text.toUpperCase().contains(str1[0].toUpperCase()) == true) {
+									login.Log4j.info(str1[0] + " exists in " + text);
 
 								} else {
-									showRelatedData(str[0], j);
+									showRelatedData(str1[0], j);
 									if (status == false) {
-										Assert.fail(str[0] + " keyword doesn't exists " + showdata);
+										Assert.fail(str1[0] + " keyword doesn't exists " + showdata);
 									}
+
 								}
 								break;
 
 							case 2:
-								login.Log4j.info(str[0]);
-								login.Log4j.info(str[1]);
-								if (text.toUpperCase().contains(str[0].toUpperCase()) == true
-										&& text.toUpperCase().contains(str[1].toUpperCase()) == true) {
-									login.Log4j.info(str[0] + " AND " + str[1] + " exists in " + text);
+								// login.Log4j.info(str1[0]);
+								// login.Log4j.info(str1[1]);
+								if (text.toUpperCase().contains(str1[0].toUpperCase()) == true
+										&& text.toUpperCase().contains(str1[1].toUpperCase()) == true) {
+									login.Log4j.info(str1[0] + " AND " + str1[1] + " exists in " + text);
 								} else {
-									for (String list : str) {
+									for (String list : str1) {
 										showRelatedData(list, j);
 										if (status == false) {
 											Assert.fail(list + " keyword doesn't exists " + showdata);
@@ -423,55 +475,18 @@ public class Filters {
 								}
 								break;
 							default:
-								login.Log4j.error(searchData + " size is more than " + str.length);
-							}
-						} else {
-							if (searchData.contains("?")) {
-								String[] str1 = searchData.split("\\?");
-								login.Log4j.info(str1.length);
-								switch (str1.length) {
-								case 1:
-									if (text.toUpperCase().contains(str1[0].toUpperCase()) == true) {
-										login.Log4j.info(str1[0] + " exists in " + text);
-
-									} else {
-										showRelatedData(str1[0], j);
-										if (status == false) {
-											Assert.fail(str1[0] + " keyword doesn't exists " + showdata);
-										}
-
-									}
-									break;
-
-								case 2:
-									// login.Log4j.info(str1[0]);
-									// login.Log4j.info(str1[1]);
-									if (text.toUpperCase().contains(str1[0].toUpperCase()) == true
-											&& text.toUpperCase().contains(str1[1].toUpperCase()) == true) {
-										login.Log4j.info(str1[0] + " AND " + str1[1] + " exists in " + text);
-									} else {
-										for (String list : str1) {
-											showRelatedData(list, j);
-											if (status == false) {
-												Assert.fail(list + " keyword doesn't exists " + showdata);
-											}
-										}
-									}
-									break;
-								default:
-									login.Log4j.error(searchData + " size is more than " + str1.length);
-								}
+								login.Log4j.error(searchData + " size is more than " + str1.length);
 							}
 						}
 					}
-
-				} else {
-					Assert.fail("List size is null");
 				}
-			} catch (NoSuchElementException e) {
 
-				Assert.fail("WebElement is null " + e.getMessage());
+			} else {
+				Assert.fail("List size is null");
 			}
+		} catch (NoSuchElementException e) {
+
+			Assert.fail("WebElement is null " + e.getMessage());
 		}
 	}
 
@@ -965,7 +980,7 @@ public class Filters {
 		} else {
 			keywords = sourcearr2.split(" ");
 		}
-		//login.Log4j.info(keywords.length);
+		// login.Log4j.info(keywords.length);
 		switch (keywords.length) {
 		case 1:
 			if (searchText.toUpperCase().contains(keywords[0].toUpperCase()) == true) {

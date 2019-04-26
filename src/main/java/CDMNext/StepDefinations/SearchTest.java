@@ -1,4 +1,3 @@
-
 package CDMNext.StepDefinations;
 
 import org.testng.AssertJUnit;
@@ -114,11 +113,17 @@ public class SearchTest {
 
 		login.Log4j.info("Array size is " + listwords.length);
 		// validating for two pages[per page=10 series]
-
 		List<WebElement> No_of_pages = login.driver
 				.findElements(By.xpath("//span[@class='search-series-pagination-pages-wrapper']//span"));
 		login.Log4j.info("Total no.of pages is :" + No_of_pages.size());
-		for (int l = 0; l < No_of_pages.size(); l++) {
+//		ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+//		AssertJUnit.assertNotNull(ul_element);
+//		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+//		login.Log4j.info("List size is :" + li_All.size());
+
+		//if No_of_pages.size()>=0 and li_All.size()>0
+		if(No_of_pages.size()>0) {
+		 for (int l = 0; l < No_of_pages.size(); l++) {
 			if (l == 1) {
 				int m = l + 1;
 				Thread.sleep(2000);
@@ -497,6 +502,9 @@ public class SearchTest {
 
 				AssertJUnit.fail("The WebElement is not visisble! " + e.getMessage());
 			}
+	     }
+		} else {
+			AssertJUnit.fail("Sorry,No results were found ");
 		}
 	}
 

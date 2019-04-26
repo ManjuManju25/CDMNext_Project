@@ -426,83 +426,86 @@ public class DatabasesTab {
 		List<WebElement> multidb = login.driver
 				.findElements(By.xpath("//div[@class='child-container']//div[@class='database-node tree-node']"));
 		login.Log4j.info("Size of database selection is " + multidb.size());
-		try {
-			if (multidb.size() == 3) {
+		if (multidb.size() > 0) {
+			try {
+				if (multidb.size() == 3) {
 
-				for (int i = 0; i < multidb.size(); i++) {
-					login.Log4j.info(DataBase[0]);
-					login.Log4j.info(DataBase[1]);
-					login.Log4j.info(DataBase[2]);
-					login.Log4j.info(i);
-					Thread.sleep(3000);
-					if (DataBase[i].equalsIgnoreCase("China Premium Database")) {
-						dbarr = DataBase[i].split(" ");
-						login.driver
-								.findElement(By.xpath(
-										"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath("//div[@class='child-container']//div[3]/div[1]//div[1]"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath(
-								"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath(
-								"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
-								.click();
+					for (int i = 0; i < multidb.size(); i++) {
+						login.Log4j.info(DataBase[0]);
+						login.Log4j.info(DataBase[1]);
+						login.Log4j.info(DataBase[2]);
+						login.Log4j.info(i);
+						Thread.sleep(3000);
+						if (DataBase[i].equalsIgnoreCase("China Premium Database")) {
+							dbarr = DataBase[i].split(" ");
+							login.driver
+									.findElement(By.xpath(
+											"//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath("//div[@class='child-container']//div[3]/div[1]//div[1]"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[3]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']"))
+									.click();
 
-					} else if (DataBase[i].equalsIgnoreCase("Brazil Premium Database")) {
-						dbarr = DataBase[i].split(" ");
-						login.driver
-								.findElement(By.xpath(
-										"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[1]//div[1]"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath(
-								"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[@class='toggle']"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath(
-								"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[3]//div[1]//div[@class='toggle']"))
-								.click();
+						} else if (DataBase[i].equalsIgnoreCase("Brazil Premium Database")) {
+							dbarr = DataBase[i].split(" ");
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]"))
+									.click();
+							Thread.sleep(2000);
+							login.driver
+									.findElement(By.xpath("//div[@class='child-container']//div[1]//div[1]//div[1]"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[@class='toggle']"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[1]//div[@class='child-container']//div[1]//div[3]//div[2]//div[3]//div[1]//div[@class='toggle']"))
+									.click();
 
-					} else if (DataBase[i].equalsIgnoreCase("Russia Premium Database")) {
-						dbarr = DataBase[i].split(" ");
-						login.driver
-								.findElement(By.xpath(
-										"//div[@class='child-container']//div[@data-node-model-id='RUSSIA']//div[1]"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath(
-								"//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[1]"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath(
-								"//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
-								.click();
-						Thread.sleep(2000);
-						login.driver.findElement(By.xpath(
-								"//div[@class='child-container']//div[2]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[4]//div[@class='toggle']"))
-								.click();
+						} else if (DataBase[i].equalsIgnoreCase("Russia Premium Database")) {
+							dbarr = DataBase[i].split(" ");
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[@data-node-model-id='RUSSIA']//div[1]"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[1]"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[2]/div[@class='child-container']//div[1]//div[3]//div[1]//div[@class='toggle']"))
+									.click();
+							Thread.sleep(2000);
+							login.driver.findElement(By.xpath(
+									"//div[@class='child-container']//div[2]//div[@class='child-container']//div[1]//div[3]//div[1]//div[3]//div[4]//div[@class='toggle']"))
+									.click();
+						}
+						DatabaseValidation();
+						if (database == true) {
+							login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
+						} else if (database == false) {
+							AssertJUnit.fail("Results is not shown correctly for selected " + DataBase[i]);
+						}
 					}
-					DatabaseValidation();
-					if (database == true) {
-						login.Log4j.info("Results is shown correctly for selected " + DataBase[i]);
-					} else if (database == false) {
-						AssertJUnit.fail("Results is not shown correctly for selected " + DataBase[i]);
-					}
+
+				} else {
+					login.Log4j.info("dbsize is more than 3");
 				}
-
-			} else {
-				login.Log4j.info("dbsize is more than 3");
+			} catch (Exception e) {
+				AssertJUnit.fail(e.getMessage());
 			}
-		} catch (Exception e) {
-			AssertJUnit.fail(e.getMessage());
+		} else {
+			Assert.fail("Database level is not displayed");
 		}
 
 	}
@@ -741,11 +744,7 @@ public class DatabasesTab {
 	@Then("^The data tree should be expanded$")
 	public void the_data_tree_should_be_expanded() throws Throwable {
 		Thread.sleep(2000);
-		WebElement data_tree_ele = login.driver.findElement(
-				By.xpath("//div[@class='database-node tree-node open']//div[1]//div[1]//div[3]//div[1]//div[2]"));
-		if (data_tree_ele.isDisplayed()) {
-			Thread.sleep(1000);
-			action.moveToElement(data_tree_ele).build().perform();
+		if (login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).isDisplayed()) {
 			login.Log4j.info("The data tree is expanded");
 		} else {
 			AssertJUnit.fail("The data tree is not expanded");
@@ -754,7 +753,13 @@ public class DatabasesTab {
 
 	@Then("^The data tree should be collapsed$")
 	public void the_data_tree_should_be_collapsed() throws Throwable {
-		login.Log4j.info("The data tree is collapsed");
+		Thread.sleep(3000);
+		if (login.driver.findElement(By.xpath("//span[contains(text(),'Expand')]")).isDisplayed()) {
+			login.Log4j.info("The data tree is collapsed");
+		} else {
+			Assert.fail("The data tree is not collapsed");
+		}
+
 	}
 
 	@Then("^\"([^\"]*)\" message should be displayed$")
@@ -839,6 +844,8 @@ public class DatabasesTab {
 		} else {
 			AssertJUnit.fail("The result is not loaded without search");
 		}
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_left"))).click();
 	}
 
 	@And("^Right click on \"([^\"]*)\"$")
@@ -969,13 +976,13 @@ public class DatabasesTab {
 		switch (arg1) {
 		case "Copy link(s)":
 			copy_link = login.driver.findElement(By.xpath(
-					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[1]//i"));
+					"The entire table should be added to my series"));
 			copy_link.click();
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Footnotes":
 			footnote = login.driver.findElement(By.xpath(
-					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//i[2]"));
+					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//span[2]"));
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "+":
@@ -1203,6 +1210,7 @@ public class DatabasesTab {
 			login.Log4j.info(dropdownStr[0] + " AND " + dropdownStr[1] + " AND " + dropdownStr[2] + " AND "
 					+ dropdownStr[3] + " AND " + dropdownStr[4] + " are available in dropdown on table level");
 			DeleteVisual();
+			DeleteSeries();
 		} else {
 			AssertJUnit.fail(dropdownStr[0] + " AND " + dropdownStr[1] + " AND " + dropdownStr[2] + " AND "
 					+ dropdownStr[3] + " AND " + dropdownStr[4] + " are not available in dropdown on table level");
@@ -3562,17 +3570,18 @@ public class DatabasesTab {
 	public void search_panel_should_be_expanded_and_Databases_tab_should_be_loaded() throws Throwable {
 		database_tab_should_be_loaded_as_default_tab_for_the_insight();
 		login.Log4j.info("Search pannel is expanded and Databases tab is loaded");
-//		Thread.sleep(5000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("logout_dropdown"))).click();
-//		Thread.sleep(2000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("logout"))).click();
+		// Thread.sleep(5000);
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("logout_dropdown"))).click();
+		// Thread.sleep(2000);
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("logout"))).click();
 
 	}
 
 	@And("^Select \"([^\"]*)\" from More filter$")
 	public void select_from_More_filter(String arg1) throws Throwable {
 		Thread.sleep(10000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("input_username"))).sendKeys("ceicsuresh@gmail.com");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("input_username")))
+				.sendKeys("ceicsuresh@gmail.com");
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("input_password"))).sendKeys("Ceic@123");
 		Thread.sleep(1000);
@@ -3587,20 +3596,20 @@ public class DatabasesTab {
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//span[@title='More']")).click();
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'"+ arg1 +"')]")).click();
-		
+		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+
 	}
 
 	@Then("^Unsubscribed database should not be shown in database tab$")
 	public void unsubscribed_database_should_not_be_shown_in_database_tab() throws Throwable {
 		Thread.sleep(5000);
-		List<WebElement> unsubscribed_db_AfterApplyFilter =login.driver.findElements(By.xpath("//div[@class='child-container']//div[@class='unsubscribed-series database-node tree-node']"));
-		if(unsubscribed_db_AfterApplyFilter.size() != 0){
-			//If list size is non-zero, element is present
+		List<WebElement> unsubscribed_db_AfterApplyFilter = login.driver.findElements(
+				By.xpath("//div[@class='child-container']//div[@class='unsubscribed-series database-node tree-node']"));
+		if (unsubscribed_db_AfterApplyFilter.size() != 0) {
+			// If list size is non-zero, element is present
 			Assert.fail("Element present");
-		}
-		else{
-			//Else if size is 0, then element is not present
+		} else {
+			// Else if size is 0, then element is not present
 			System.out.println("Unsubscribed database is not shown");
 		}
 		ResetMethod();
@@ -3644,10 +3653,14 @@ public class DatabasesTab {
 
 	public void CollapseTreeMethod() throws InterruptedException {
 		Thread.sleep(2000);
-		WebElement collapseTree = login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
-		if (collapseTree.isDisplayed()) {
-			collapseTree.click();
-			login.Log4j.info("Clicking on collapseTree");
+		try {
+			WebElement collapseTree = login.driver.findElement(By.xpath("//span[@title='Collapse tree']"));
+			if (collapseTree.isDisplayed()) {
+				collapseTree.click();
+				login.Log4j.info("Clicking on collapseTree");
+			}
+		} catch (Exception e) {
+
 		}
 	}
 
