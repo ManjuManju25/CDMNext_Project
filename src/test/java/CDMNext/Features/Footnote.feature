@@ -23,7 +23,6 @@ Scenario: Tc_Footnotes_04: Verify footnotes open in new tab
 @Footnote
 Scenario: Tc_Footnotes_05: Verify minimizing the footnote window
  		   And Find the Footnote option in menu bar 
-          And Click Open 
 	       And Select '-' icon to minimize  
 		   And Verify minimizing the footnote window
 @Footnote
@@ -32,23 +31,23 @@ Scenario: Tc_Footnotes_06: Verify maximizing the footnote window
           And Verify maximizing the footnote window
 @Footnote
 Scenario: Tc_Footnotes_07: Verify opening footnotes in new tab from footnote window
-          And Click on Footnotes tab choose Open
-          And Click on Open icon to verify footnotes open in new tab
+           And Find the Footnote option in menu bar 
+           And Click on Open icon to verify footnotes open in new tab
 @Footnote
 Scenario: Tc_Footnotes_08: Verify opening of footnotes as full screen
-            And Click on Footnotes tab choose Open
+            And Find the Footnote option in menu bar 
             And Click on cross arrow marks to verify footnotes as full screen
 @Footnote
 Scenario: Tc_Footnotes_09: Verify exit of Footnotes from full screen 
-          And Click on Footnotes tab choose Open
+          And Find the Footnote option in menu bar 
           And Click on cross arrow marks to verify footnotes exit full screen
 @Footnote
 Scenario: Tc_Footnotes_10: Verify download option in footnotes when Db's are not selected
-          And Click on Footnotes tab choose Open
+          And Find the Footnote option in menu bar 
           And Verify the download option is disabled    
 @Footnote
 Scenario: Tc_Footnotes_11: Verify download option in footnotes enabled when Db's are  selected
-			 And Click on Footnotes tab choose Open           
+			 And Find the Footnote option in menu bar 
             And Verify the download option in footnotes is enabled 
 @Footnote
 Scenario: Tc_Footnotes_12: Verify tooltips for footnotes
@@ -64,11 +63,6 @@ Scenario: Tc_Footnotes_13: Verify crossbutton in footnotes window
 @Footnote
 Scenario: Tc_Footnotes_14: Verify opening of footnotes in new tab from maximized
          And Click on Footnotes tab
-         And Click on Open in new tab icon to verify footnotes open in new tab
-@Footnote
-Scenario: Tc_Footnotes_15: Verify opening of footnotes in new tab from minimized form
-         And Click on Footnotes tab
-         And Click on minimize icon
          And Click on Open in new tab icon to verify footnotes open in new tab
 @Footnote
 Scenario: Tc_Footnotes_16: Verify footnotes open from series search tab
@@ -113,7 +107,6 @@ Scenario: Tc_Footnotes_23:Verify menu bar options
 		
 @Footnote
 Scenario: Tc_Footnotes_24:Verify view comments, view notifications, view and edit profile 
-		  And Click on Footnotes tab
 		  And click on Open in new tab 
 		  And Verify view comments, view notifications, view and edit profile dropdowns are shown
 @Footnote
@@ -147,7 +140,7 @@ Scenario: Tc_Footnotes_30:Verify refreshing footnotes in new tab with f5 when op
 		 And Expand the database
 		 And right click , select Footnotes
 		 And Click on Open button and verify refreshing footnotes in new tab
-@Footnote
+@Footnote2
 Scenario: Tc_Footnotes_31:Verify translation for footnotes opened in window
 		  And Goto Database Search tab 
           And Expand the database
@@ -330,14 +323,6 @@ Scenario: Tc_Footnotes_64:Footnotes: Verify Footnotes download message
 			 And Open footnotes for table level
 			 And Verify footnote download message	
 @Footnote
-Scenario: Tc_Footnotes_65:Footnotes:Verify if Footnotes in minimized state displays tooltip while downloading
-			And Goto Db Search tab 
-			And Expand the global database
-			And Open footnotes for table level
-			And Select '-' icon to minimize   
-			And Click on Download button
-			And Verify footnote download message
-@Footnote
 Scenario: Tc_Footnotes_66: Verify if Hyperlinks from market purchasing managers' index are redirectable
 			  And Goto Db Search tab 
               And Expand the Markit database
@@ -385,6 +370,28 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 			And Translate to Japanese
 			And Click on Open icon to open footnotes in new tab
 			And Verify footnotes opened in new tab retain the japanese language
+	
+@Footnote
+Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
+			 And Goto Db Search tab 
+            And Expand the Markit database
+            And Open footnotes for section level, change to Japanese
+            And Click on PMI glossary link,Verify the glossary     
+                                                      
+#@Footnote
+#Scenario: Tc_Footnotes_15: Verify opening of footnotes in new tab from minimized form
+#         And Click on Footnotes tab
+#         And Click on minimize icon
+#         And Click on Open in new tab icon to verify footnotes open in new tab  
+#
+#@Footnote
+#Scenario: Tc_Footnotes_65:Footnotes:Verify if Footnotes in minimized state displays tooltip while downloading
+#			And Goto Db Search tab 
+#			And Expand the global database
+#			And Open footnotes for table level
+#			And Select '-' icon to minimize   
+#			And Click on Download button
+#			And Verify footnote download message	  
 
 #	
 #@Footnote
