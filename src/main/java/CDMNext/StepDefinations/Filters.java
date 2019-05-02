@@ -168,15 +168,15 @@ public class Filters {
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).clear();
 					Thread.sleep(2000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).sendKeys(arg2);
-					unitarr = var.split(";");
-					for (String list : unitarr) {
-						login.Log4j.info("clicking on " + list);
-						Thread.sleep(3000);
-						element = login.driver.findElement(By.xpath("//tr[@title='" + list + "']"));
-						jse.executeScript("arguments[0].scrollIntoView(true);", element);
-						Thread.sleep(2000);
-						element.click();
-					}
+				}
+				unitarr = var.split(";");
+				for (String list : unitarr) {
+					login.Log4j.info("clicking on " + list);
+					Thread.sleep(3000);
+					element = login.driver.findElement(By.xpath("//tr[@title='" + list + "']"));
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					Thread.sleep(2000);
+					element.click();
 				}
 			}
 			if (arg1.equals("Region")) {
@@ -635,7 +635,7 @@ public class Filters {
 		} else {
 			Assert.fail("The series count is shown incorrectly for " + Morefilter);
 		}
-		
+
 		if (Morefilter.equalsIgnoreCase("With suggestions for rebased/discontinued series")) {
 			Thread.sleep(3000);
 			DatabasesTab.ResetMethod();
@@ -830,10 +830,10 @@ public class Filters {
 						login.Log4j.info(sourcearr[0]
 								+ " does exists as Organisation for Economic Co-operation and Development in \n"
 								+ text);
-
-					} else if ((sourcearr.length == 1) && text.contains("International Monetary Fund")) {
-						login.Log4j.info(var + " exists as International Monetary Fund in \n" + text);
-
+					} else if((sourcearr.length == 1) && text.contains("Федеральная служба государственной статистики") == true) {
+						login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);	
+					} else if((sourcearr.length == 1) && text.contains("中国汽车工业协会") == true) {
+						login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);	
 					} else if ((sourcearr.length == 1) && validation(text, sourcearr[0]) == true) {
 						login.Log4j.info(sourcearr[0] + " is exists in the" + "\n" + text);
 
@@ -993,6 +993,7 @@ public class Filters {
 				}
 			}
 		}
+
 	}
 
 	public boolean validation(String searchText, String sourcearr2) throws Throwable {

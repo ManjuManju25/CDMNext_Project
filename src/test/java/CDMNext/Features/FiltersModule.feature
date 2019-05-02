@@ -2,7 +2,7 @@ Feature: Filters
 
 Background:
  	Given User has successful logged in
- 	
+	
 @FilterSearch
 Scenario: TC_Filters_Search_01
 Given User enters "GDP"
@@ -13,7 +13,7 @@ Then  User verify the search results
 @FilterSearch
 Scenario: TC_Filters_Search_02  
 Given User enters "228912101"
-And   User selects "Source" as "International Monetary Fund - World Economic Outlook"
+And   User selects "Source" as "International Monetary Fund"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Global Database"
 Then  User verify the search results 
@@ -189,7 +189,7 @@ Then  User verify the search results
 @FilterSearch
 Scenario: TC_Filters_Search_24 
 Given User enters "261975301"
-And   User selects "Source" as "International Monetary Fund - World Economic Outlook"
+And   User selects "Source" as "International Monetary Fund"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "World Trend Plus"
 Then  User verify the search results 
@@ -351,11 +351,11 @@ Given User enters "BRDLAC;CABB"
 And   User selected "All databases" as "Brazil Premium Database,China Premium Database"
 Then  User verify the search results 
 
-@FilterSearch
-Scenario: TC_Filters_Search_51
-Given User enters "consumer"
-And   User selected "All databases" as "China Premium Database"
-Then  User verify the search results 
+#@FilterSearch
+#Scenario: TC_Filters_Search_51
+#Given User enters "consumer"
+#And   User selected "All databases" as "China Premium Database"
+#Then  User verify the search results 
  
 @FilterSearch
 Scenario: TC_Filters_Search_52
@@ -387,12 +387,12 @@ Given User enters "consumer expenditure"
 And   User selected "All databases" as "India Premium Database"
 Then  User verify the search results 
 
-@FilterSearch
-Scenario: TC_Filters_Search_57
-Given User enters "Construction"
-And   User selected "All databases" as "World Trend Plus"
-Then  User verify the search results 
-
+#@FilterSearch
+#Scenario: TC_Filters_Search_57
+#Given User enters "Construction"
+#And   User selected "All databases" as "World Trend Plus"
+#Then  User verify the search results 
+#
 @FilterSearch
 Scenario: TC_Filters_Search_58
 Given User enters "Agar"
@@ -471,16 +471,16 @@ And   User selects "Subscribed series only"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Brazil Premium Database"
 Then  User verify the search results 
-
-@FilterSearch
-Scenario: TC_Filters_Search_69
-Given User enters "Insurance"
-And   User selects "Status" as "Active"
-And   User has clicked on "Apply filter"
-And   User selects "Name only" 
-And   User selected "All databases" as "China Premium Database"
-Then  User verify the search results 
-
+#
+#@FilterSearch
+#Scenario: TC_Filters_Search_69
+#Given User enters "Insurance"
+#And   User selects "Status" as "Active"
+#And   User has clicked on "Apply filter"
+#And   User selects "Name only" 
+#And   User selected "All databases" as "China Premium Database"
+#Then  User verify the search results 
+#
 @FilterSearch
 Scenario: TC_Filters_Search_70
 Given User enters "demand"
@@ -899,7 +899,7 @@ Scenario: TC_Filters_Search_127
 Given User enters "money"
 And   User selects "Subscribed series only" 
 And   User selects "Frequency" as "Quarterly"
-And   User selects "Source" as "International Monetary Fund - World Economic Outlook"
+And   User selects "Source" as "International Monetary Fund"
 And   User selects "Unit" as "MUR"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Global Database"
@@ -911,7 +911,7 @@ Given User enters "money"
 And   User selects "Name only" 
 And   User selects "Frequency" as "Quarterly"
 And   User selects "Unit" as "MUR"
-And   User selects "Source" as "International Monetary Fund - World Economic Outlook"
+And   User selects "Source" as "International Monetary Fund"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Global Database"
 Then  User verify the search results 
@@ -931,10 +931,10 @@ Scenario: TC_Filters_Search_131
 Given User enters "Exchange Rate"
 Then  User verify the search results  
 
-@FilterSearch
-Scenario: TC_Filters_Search_132
-Given User enters "Res*"
-Then  User verifies Filter search results  
+#@FilterSearch
+#Scenario: TC_Filters_Search_132
+#Given User enters "Res*"
+#Then  User verifies Filter search results  
 
 @FilterSearch
 Scenario: TC_Filters_Search_133
