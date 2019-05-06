@@ -17,7 +17,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
@@ -65,7 +64,7 @@ public class SeriesTab {
 
 	@Given("^User enters seriesID \"([^\"]*)\"$")
 	public void user_enters_seriesID(String arg1) throws Throwable {
-
+		DatabasesTab.ResetMethod();
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
@@ -309,7 +308,7 @@ public class SeriesTab {
 				}
 			} else if (arg1.equals("Show Dataset")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("show_dataset_validateTxt")))
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Backbutton")))
 						.isDisplayed()) {
 					login.Log4j.info("Dataset is displayed for given SeriesID");
 					Thread.sleep(2000);
@@ -370,7 +369,7 @@ public class SeriesTab {
 					Thread.sleep(1000);
 					action.moveToElement(element).click().build().perform();
 					// Until the element is not visible keep scrolling
-					// jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					ssp_window_should_be_displayed();
 				}
 			} else {
@@ -388,7 +387,7 @@ public class SeriesTab {
 		try {
 
 			if (login.driver.findElement(
-					By.xpath("//div[@class='series-preview--header ui-draggable-handle']//div[contains(text(),'" + sname
+					By.xpath("//div[@class='series-preview--header ui-draggable-handle']//span[contains(text(),'" + sname
 							+ "')]"))
 					.isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
@@ -475,8 +474,12 @@ public class SeriesTab {
 		case "Add":
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[1]//span[contains(text(),'" + arg1 + "')]")).click();
-			//login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[1]//span[@title='Add series (A)']")).click();
+			login.driver
+					.findElement(
+							By.xpath("//div[@class='items-wrapper']//li[1]//span[contains(text(),'" + arg1 + "')]"))
+					.click();
+			// login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[1]//span[@title='Add
+			// series (A)']")).click();
 			break;
 
 		case "Add and replace":
@@ -591,8 +594,7 @@ public class SeriesTab {
 		case "Databases":
 			login.Log4j.info("Clicking on " + arg1);
 			Thread.sleep(3000);
-			login.driver
-					.findElement(By.xpath(login.LOCATORS.getProperty("DatabasesTab_Active"))).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DatabasesTab_Active"))).click();
 			break;
 		default:
 			login.Log4j.info("Clicking on " + arg1);
@@ -696,7 +698,7 @@ public class SeriesTab {
 					Thread.sleep(1000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
-					// jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = tooltip.getText();
 					String[] linesplit = text.split("\n");
 					for (String str : linesplit) {
@@ -829,32 +831,7 @@ public class SeriesTab {
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					action.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
-					// jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					if (j == 11) {
-						element = login.driver.findElement(By.xpath("//li[11]//div[@class='series-item--name']"));
-						jse.executeScript("arguments[0].scrollIntoView(true);", element);
-						action.moveToElement(element).build().perform();
-						Thread.sleep(2000);
-						ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-						AssertJUnit.assertNotNull(ul_element);
-						List<WebElement> list = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-						login.Log4j.info("List size is :" + list.size());
-						for (int l = 3; l < list.size(); l++) {
-							int m = l + 1;
-							login.Log4j.info(l);
-							login.Log4j.info(list.size());
-							Thread.sleep(5000);
-							checkbox = login.driver.findElement(
-									By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
-							action.moveToElement(checkbox).click().build().perform();
-							Thread.sleep(1000);
-							element = login.driver
-									.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
-							action.moveToElement(element).build().perform();
-						}
-
-					}
-
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					if (filter.equalsIgnoreCase("Key only")) {
 						if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("key_icon"))).isDisplayed()) {
 							login.Log4j.info(filter + " series are exists");
@@ -1105,12 +1082,12 @@ public class SeriesTab {
 		}
 	}
 
-	/*@And("^Apply \"([^\"]*)\"$")
-	public void apply(String arg1) throws Throwable {
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[@class='context-menu-item link   ']//span[contains(text(),'Add')]"))
-				.click();
-	}*/
+	/*
+	 * @And("^Apply \"([^\"]*)\"$") public void apply(String arg1) throws Throwable
+	 * { Thread.sleep(2000); login.driver.findElement(By.
+	 * xpath("//span[@class='context-menu-item link   ']//span[contains(text(),'Add')]"
+	 * )) .click(); }
+	 */
 
 	@When("^Click on \\+ icon on series$")
 	public void click_on_icon_on_series() throws Throwable {
@@ -1298,7 +1275,7 @@ public class SeriesTab {
 						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 				checkbox.click();
 				// Until the element is not visible keep scrolling
-				// jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+				jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 			}
 			WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("preview_selection")));
 			String count = ele.getText();

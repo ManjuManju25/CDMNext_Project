@@ -983,20 +983,21 @@ footnotes_close();
 		List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
 	  /*  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("comments"))).click();
 	    Thread.sleep(5000);*/
+		Thread.sleep(6000);
 	    login.driver.findElement(By.xpath(login.LOCATORS.getProperty("notifications"))).click();
 	    Thread.sleep(5000);
 	    login.driver.findElement(By.xpath(login.LOCATORS.getProperty("view_edit"))).click();
 	    
-	    List<WebElement> comments = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("view_comments_drpdwn")));
+	   // List<WebElement> comments = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("view_comments_drpdwn")));
 	    
 	    List<WebElement> notifications = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("view_notifications_drpdwn")));
 	    List<WebElement> viewEdit = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("view_edit_profile_drpdwn")));
-	    if(comments.size()!=0){
+	   /* if(comments.size()!=0){
 	    	System.out.println("Comments dropdown is shown");
 	    }
 	    else{
 	    	Assert.fail("Comments dropdown is not shown");
-	    }
+	    }*/
 	    
 	   if(notifications.size()!=0){
 		   System.out.println("Notifications dropdown is shown");
@@ -1097,7 +1098,7 @@ footnotes_close();
 		WebElement file = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("file")));
 		file.click();
 		Thread.sleep(4000);
-		String[] file_list={"View","New","Open","Save","Delete","Save as","Refresh","Settings","Download","Share"};
+		String[] file_list={"View","Add to favorite","New","Open","Save","Delete","Save as","Refresh","Settings","Protect","Download","Share"};
 		  List<WebElement> elements = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("file_drpdwn")));
 		  for (int i = 0; i < file_list.length; i++) {
 			    String optionValue = elements.get(i).getText();
@@ -1280,6 +1281,9 @@ footnotes_close();
 	
 	@Given("^Click on Footnotes menu bar , click Open$")
 	public void click_on_Footnotes_menu_bar_click_Open() throws Throwable {
+		WebElement file = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("file")));
+		file.click();
+		Thread.sleep(2000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("HELP"))).click();
 		 Thread.sleep(3000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FOOTNOTES"))).click();
@@ -1350,8 +1354,13 @@ footnotes_close();
 		//WebDriverWait wait = new WebDriverWait(login.driver,500); 
 		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnotes_tab"))));
 		// Thread.sleep(10000);
+//		WebElement file = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("file")));
+//		file.click();
+//		Thread.sleep(2000);
+		Thread.sleep(10000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("HELP"))).click();
 		 Thread.sleep(3000);
+		 //login.driver.findElement(By.xpath(login.LOCATORS.getProperty("HELP"))).click();
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FOOTNOTES"))).click();
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
 				 Thread.sleep(20000);
@@ -4046,7 +4055,7 @@ Thread.sleep(15000);
 
 		@Given("^Expand the database then translate to japanese and verify Back button$")
 		public void Expand_the_database_then_translate_to_japanese_and_verify_Back_button() throws Throwable {
-			 WebDriverWait wait=new WebDriverWait(login.driver, 90);
+			 WebDriverWait wait=new WebDriverWait(login.driver, 120);
 			 List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
 			   login.driver.switchTo().window(browserTabs .get(1));
 				    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("db"))));
