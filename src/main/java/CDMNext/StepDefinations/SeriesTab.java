@@ -65,15 +65,15 @@ public class SeriesTab {
 	@Given("^User enters seriesID \"([^\"]*)\"$")
 	public void user_enters_seriesID(String arg1) throws Throwable {
 		DatabasesTab.ResetMethod();
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-		}
 		searchData = arg1;
 		login.Log4j.info("Searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
+		}
 
 	}
 
@@ -369,7 +369,7 @@ public class SeriesTab {
 					Thread.sleep(1000);
 					action.moveToElement(element).click().build().perform();
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					//jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					ssp_window_should_be_displayed();
 				}
 			} else {
@@ -386,9 +386,7 @@ public class SeriesTab {
 
 		try {
 
-			if (login.driver.findElement(
-					By.xpath("//div[@class='series-preview--header ui-draggable-handle']//span[contains(text(),'" + sname
-							+ "')]"))
+			if (login.driver.findElement(By.xpath("//div[@class='series-preview--header ui-draggable-handle']//div[@class='single-series-preview--title ']"))
 					.isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
 				Thread.sleep(2000);
@@ -397,7 +395,7 @@ public class SeriesTab {
 				Assert.fail("SSP window is not displayed");
 			}
 		} catch (NoSuchElementException e) {
-
+			//Assert.fail("WebElement is null");
 		}
 	}
 
@@ -435,9 +433,8 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Expand":
-			// Thread.sleep(2000);
-			// login.driver.findElement(By.xpath("//div[contains(text(),'Matches
-			// only')]")).click();
+			 Thread.sleep(5000);
+			 login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).click();
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
@@ -698,7 +695,8 @@ public class SeriesTab {
 					Thread.sleep(1000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					//in rc.9 it should be uncomment(below line)				
+					//jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = tooltip.getText();
 					String[] linesplit = text.split("\n");
 					for (String str : linesplit) {
@@ -749,6 +747,7 @@ public class SeriesTab {
 	@Then("^Selected options should be reset to default$")
 	public void selected_options_should_be_reset_to_default() throws Throwable {
 		// login.Log4j.info(Filters.var);
+		Thread.sleep(2000);
 		if (!login.driver.findElement(By.xpath(login.LOCATORS.getProperty("selected_field"))).isDisplayed()) {
 			login.Log4j.info("Selected option is get Reset");
 		} else {
@@ -831,7 +830,7 @@ public class SeriesTab {
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					action.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					//jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					if (filter.equalsIgnoreCase("Key only")) {
 						if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("key_icon"))).isDisplayed()) {
 							login.Log4j.info(filter + " series are exists");
@@ -904,7 +903,7 @@ public class SeriesTab {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		// Thread.sleep(2000);
+		Thread.sleep(3000);
 		element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Title_of_the_series")));
 		stext = element.getText();
 		login.Log4j.info(stext);
@@ -970,13 +969,18 @@ public class SeriesTab {
 		} else {
 			Assert.fail(db + " is not displayed for " + MousehoverIcon + " icon");
 		}
+		if(Filters.searchData.equals("295755902")) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_left"))).click();
+		}
 	}
 
 	@Then("^User can see the Chart Visual in the right pannel$")
 	public void user_can_see_the_Chart_Visual_in_the_right_pannel() throws Throwable {
-
+        Thread.sleep(5000);
 		WebElement ctitle = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title")));
 		String ctext = ctitle.getText();
+		login.Log4j.info(stext);
 		login.Log4j.info(ctext);
 		if (stext.equals(ctext)) {
 			login.Log4j.info("Chart visual is created for Mouse hover icon");
@@ -1117,8 +1121,10 @@ public class SeriesTab {
 			} else {
 				Assert.fail("Sorry,No results were found ");
 			}
-			Thread.sleep(2000);
+			login.Log4j.info(j);
+			Thread.sleep(3000);
 			addIcon = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='add-to-data-selection--icon']"));
+			Thread.sleep(1000);
 			addIcon.click();
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());
@@ -1275,7 +1281,7 @@ public class SeriesTab {
 						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 				checkbox.click();
 				// Until the element is not visible keep scrolling
-				jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+				//jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 			}
 			WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("preview_selection")));
 			String count = ele.getText();
@@ -1283,7 +1289,7 @@ public class SeriesTab {
 			login.Log4j.info("Selected series count is :" + SeriesCount);
 			if (list == SeriesCount) {
 				login.Log4j.info("Selected series count is shown correctly");
-
+				
 			} else {
 				Assert.fail("Selected series count is not shown correctly");
 			}

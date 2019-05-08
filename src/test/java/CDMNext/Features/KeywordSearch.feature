@@ -39,10 +39,10 @@ Scenario: TC_SynonymSearch_07 : Search for an Acronym as "fdi"
 Given User enters keyword "fdi"
 Then User verify keyword search results
 
-@SynonymSearch
-Scenario: TC_SynonymSearch_8 : Search for an Acronym as "GCF"
-Given User enters keyword "GCF"
-Then User verify keyword search results
+#@SynonymSearch
+#Scenario: TC_SynonymSearch_8 : Search for an Acronym as "GCF"
+#Given User enters keyword "GCF"
+#Then User verify keyword search results
 
 @SynonymSearch
 Scenario: TC_SynonymSearch_9 : Search for an Acronym as "imf"
@@ -153,10 +153,10 @@ Scenario: TC_SynonymSearch_30 : Search for an Acronym as "eu"
 Given User enters keyword "eu"
 Then User verify keyword search results
 
-@SynonymSearch
-Scenario: TC_SynonymSearch_31 : Search for an Acronym as "bdi"
-Given User enters keyword "bdi"
-Then User verify keyword search results
+#@SynonymSearch
+#Scenario: TC_SynonymSearch_31 : Search for an Acronym as "bdi"
+#Given User enters keyword "bdi"
+#Then User verify keyword search results
 
 @SynonymSearch
 Scenario: TC_SynonymSearch_32 : Search for an Acronym as "r&d"
@@ -277,11 +277,11 @@ Then User verify keyword search results
 #Scenario: TC_SynonymSearch_55: Search for an Acronym as "wsa"
 #Given User enters keyword "wsa"
 #Then User verify keyword search results
-
-@SynonymSearch
-Scenario: TC_SynonymSearch_56 : Search for an Acronym as "LME"
-Given User enters keyword "LME"
-Then User verify keyword search results
+#
+#@SynonymSearch
+#Scenario: TC_SynonymSearch_56 : Search for an Acronym as "LME"
+#Given User enters keyword "LME"
+#Then User verify keyword search results
 
 @SynonymSearch
 Scenario: TC_SynonymSearch_57 : Search for an Acronym as "incl"
@@ -472,11 +472,11 @@ Then User verify keyword search results
 Scenario: TC_SynonymSearch_94 : Search for an Acronym as "ron"
 Given User enters keyword "ron"
 Then User verify keyword search results
-
-@SynonymSearch
-Scenario: TC_SynonymSearch_95 : Search for an Acronym as "adp"
-Given User enters keyword "adp"
-Then User verify keyword search results
+#
+#@SynonymSearch
+#Scenario: TC_SynonymSearch_95 : Search for an Acronym as "adp"
+#Given User enters keyword "adp"
+#Then User verify keyword search results
 
 @SynonymSearch
 Scenario: TC_SynonymSearch_96 : Search for an Acronym as "ASEAN"
@@ -652,11 +652,11 @@ Then User verify keyword search results
 Scenario: TC_SynonymSearch_130 : Search for an Acronym as "fce"
 Given User enters keyword "fce"
 Then User verify keyword search results
-
-@SynonymSearch
-Scenario: TC_SynonymSearch_131 : Search for an Acronym as "Fed rate"
-Given User enters keyword "Fed rate"
-Then User verify keyword search results
+#
+#@SynonymSearch
+#Scenario: TC_SynonymSearch_131 : Search for an Acronym as "Fed rate"
+#Given User enters keyword "Fed rate"
+#Then User verify keyword search results
 
 @SynonymSearch
 Scenario: TC_SynonymSearch_132 : Search for an Acronym as "FTSE"

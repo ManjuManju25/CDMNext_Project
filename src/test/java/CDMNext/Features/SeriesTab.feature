@@ -94,7 +94,7 @@ Given User enters seriesID "322968702;213834902"
 When User right click on any series
 Then User can able to see "Copy link(s)" option from dropdown menu
 
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_16:Verifying "Show Dataset" option for series level
 Given User enters seriesID "258074801;406097377" 
 When User right click on any series
@@ -106,7 +106,7 @@ Given User enters seriesID "5823601;5793201(CIUA)"
 When User right click on any series
 Then User can able to see "Show Database" option from dropdown menu
 
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_18:Verifying SSP for series
 Given User enters "GDP" 
 When Click on (i) icon
@@ -229,31 +229,31 @@ Then User can see the selected database in Databases tab
 
 @SeriesTab
 Scenario: TC_SeriesTab_36:Verify 'Mouse over' icons for series level
-Given User enters "371376337"
+Given User enters seriesID "371376337"
 When User Mouse hover on "View as Chart. Type `c`" icon
 Then User can see the Chart Visual in the right pannel  
 
 @SeriesTab
 Scenario: TC_SeriesTab_37:Verify 'Add and replace' from dropdown
-Given User enters "5724301;5958801"
+Given User enters seriesID "5724301;5958801"
 And  Click on drop down icon next to +
 And  Click on "Add and replace"
 Then Highlighted visual series should be replaced new series
 
 @SeriesTab
 Scenario: TC_SeriesTab_38:Verify 'Mouse over' icons for series level
-Given User enters "368921927"
+Given User enters seriesID "368921927"
 When User Mouse hover on "Open footnote" icon
 Then Footnotes window should be open 
 
 @SeriesTab
 Scenario: TC_SeriesTab_39:Verify selected 'series count' under series tab.
-Given User enters "146381801;1380601;245178303"
+Given User enters seriesID "146381801;1380601;245178303"
 Then Verify the selected series count
 
 @SeriesTab
 Scenario: TC_SeriesTab_40:Verify "Add series" by click on '+'
-Given User enters "7872901;7874601"
+Given User enters seriesID "7872901;7874601"
 When Click on + icon on series
 Then The series should be added to Data tab
 
@@ -264,14 +264,14 @@ Then filter should be pined/unpined the filter to left panel
 
 @SeriesTab
 Scenario: TC_SeriesTab_42:Verify 'Add' series from dropdown
-Given User enters "368921927;371376337"
+Given User enters seriesID "368921927;371376337"
 And Click on drop down icon next to +
 And Click on "Add"
 Then The series should be added to Data tab
 
 @SeriesTab
 Scenario: TC_SeriesTab_43:Verify 'add to exist insight' in dropdown
-Given User enters "368921927;371376337"
+Given User enters seriesID "368921927;371376337"
 And  Click on drop down icon next to +
 And  Click on "Add to existing insight"
 Then Choose any existing insights to add this series
@@ -279,7 +279,7 @@ Then The series should be added to selected insight
 
 @SeriesTab
 Scenario: TC_SeriesTab_44:Verify 'Add to new insight' in dropdown
-Given User enters "122834404;295755902"
+Given User enters seriesID "122834404;295755902"
 And  Click on drop down icon next to +
 And  Click on "Add to new insight"
 Then New insight should be created and the series should be added to the insight

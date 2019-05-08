@@ -155,7 +155,7 @@ public class Footnotes {
 		
 		 WebDriverWait wait = new WebDriverWait(login.driver,80);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("dropdown_btn"))).click();
-		Thread.sleep(3000);
+		Thread.sleep(6000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("set_preference"))).click();
 		Thread.sleep(7000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("new_insight_btn"))));
@@ -3024,8 +3024,20 @@ login.driver.switchTo().window(browserTabs.get(0));
 
 		@Given("^verify Back button$")
 		public void verify_Back_button() throws Throwable {
-		
-				try{
+			 List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
+			  login.driver.switchTo().window(browserTabs .get(1));
+		        login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ceic_logo"))).click();
+		        if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("back_button"))).size()!=0){
+					   System.out.println("Back button is displayed");
+					    login.driver.close();
+						login.driver.switchTo().window(browserTabs.get(0));
+				   }
+				   else{
+					   login.driver.close();
+						login.driver.switchTo().window(browserTabs.get(0));
+					   Assert.fail("Back button is not displayed");
+				   }
+				/*try{
 					 List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
 						 //switch to new tab
 			        login.driver.switchTo().window(browserTabs .get(1));
@@ -3033,7 +3045,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 			  
 			   if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("back_button"))).isDisplayed()){
 				   System.out.println("Back button is displayed");
-				   login.driver.close();
+				    login.driver.close();
 					login.driver.switchTo().window(browserTabs.get(0));
 			   }
 			   else{
@@ -3041,11 +3053,12 @@ login.driver.switchTo().window(browserTabs.get(0));
 					login.driver.switchTo().window(browserTabs.get(0));
 				   Assert.fail("Back button is not displayed");
 			   }
-			  
+			   login.driver.switchTo().window(browserTabs.get(0));
 			}
 				catch(Exception e){
 					Assert.fail("Back button is not displayed");
 				}
+				*/
 	    }
 
 
@@ -4030,6 +4043,7 @@ Thread.sleep(15000);
 
 		@Given("^Verify footnotes for transformed series$")
 		public void verify_footnotes_for_transformed_series() throws Throwable {
+			WebDriverWait wait=new WebDriverWait(login.driver, 70);
 			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("footnote_window"))).size()!=0)
 			{
 				System.out.println("Footnotes opened for transformed series");
@@ -4039,7 +4053,12 @@ Thread.sleep(15000);
 				footnotes_close();
 				Assert.fail("Footnotes failed to open for transformed series");
 			}
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
+			Thread.sleep(2000);
+			//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
 			
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("delete_myeries"))));
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("delete_myeries"))).click();
 		}
 
 		//TC_Footnotes_70

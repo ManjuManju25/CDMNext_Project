@@ -116,7 +116,7 @@ public class DatabasesTab {
 	@Then("^Result should be loaded only for selected database$")
 	public void result_should_be_loaded_only_for_selected_database() throws Throwable {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
 		dbarr = DataBase[0].split(" ");
 		if (DataBase[0].equals("India Premium Database")) {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DB_level_1"))).click();
@@ -976,7 +976,7 @@ public class DatabasesTab {
 		switch (arg1) {
 		case "Copy link(s)":
 			copy_link = login.driver.findElement(By.xpath(
-					"The entire table should be added to my series"));
+					"//div[@class='database-node tree-node open']//div[3]//div[@class='tree-node active']//span[@class='actions']//span[1]"));
 			copy_link.click();
 			login.Log4j.info("Clicking on " + arg1);
 			break;
@@ -1035,7 +1035,7 @@ public class DatabasesTab {
 		if (arg1.equalsIgnoreCase("Copy link(s)")) {
 			copy_link = login.driver
 					.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='" + arg1 + "']"));
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			copy_link.click();
 			login.Log4j.info("Clicking on " + arg1);
 		} else if (arg1.equalsIgnoreCase("Footnotes")) {
@@ -1489,6 +1489,7 @@ public class DatabasesTab {
 	@And("^Right click on any table level$")
 	public void right_click_on_any_table_level() throws Throwable {
 		CollapseTreeMethod();
+		ResetMethod();
 		try {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
 					.isDisplayed()) {
@@ -1586,8 +1587,8 @@ public class DatabasesTab {
 			// Thread.sleep(2000);
 			// action.contextClick(ele).build().perform();
 			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='" + arg1 + "']")).click();
 			login.Log4j.info("Clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
 		}
 	}
 
@@ -1722,10 +1723,14 @@ public class DatabasesTab {
 		ele = login.driver.findElement(By.xpath("//div[@class='download-modal-title']"));
 		String downloadTitle = ele.getText();
 		login.Log4j.info(downloadTitle);
-		if (downloadTitle.substring(SeriesCount) != null) {
+		String countStr=String.valueOf(SeriesCount);
+		login.Log4j.info(countStr);
+		if(downloadTitle.contains(countStr)) {
+		//if (downloadTitle.substring(SeriesCount) != null) {
 			login.Log4j.info("Download window is displayed with selected series count");
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+			
 		} else {
 			AssertJUnit.fail("Download window is not displayed with selected series count");
 		}
@@ -1741,9 +1746,9 @@ public class DatabasesTab {
 	@Then("^All the series under the table should be shown$")
 	public void all_the_series_under_the_table_should_be_shown() throws Throwable {
 		Thread.sleep(2000);
-		if (login.driver.findElement(By.xpath("//span[@class='back-to-series-list']")).isDisplayed()) {
+		if (login.driver.findElement(By.xpath("//div[@class='insight-discovery--popup-back-button']")).isDisplayed()) {
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//span[@class='back-to-series-list']")).click();
+			login.driver.findElement(By.xpath("//div[@class='insight-discovery--popup-back-button']")).click();
 			login.Log4j.info("Show Dataset is working for table level");
 		} else {
 			AssertJUnit.fail("Show Dataset is not working for table level");
@@ -1874,8 +1879,8 @@ public class DatabasesTab {
 	public void series_information_popup_should_be_opened() throws Throwable {
 		Validationstr = ele.getText();
 		login.Log4j.info(Validationstr);
-		Thread.sleep(2000);
-		ele = login.driver.findElement(By.xpath("//div[@class='single-series-preview--title ']"));
+		Thread.sleep(3000);
+		ele = login.driver.findElement(By.xpath("//div[@class='series-preview--header ui-draggable-handle']//div[@class='single-series-preview--title ']"));
 		String ssp_text = ele.getText();
 		login.Log4j.info(ssp_text);
 		AssertJUnit.assertEquals(ssp_text, Validationstr);
@@ -1916,19 +1921,20 @@ public class DatabasesTab {
 	@And("^Click on Show related data icon$")
 	public void click_on_Show_related_data_icon() throws Throwable {
 		Thread.sleep(3000);
-		ele = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
+		ele = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--name']"));
 		str = ele.getText();
-		ele = login.driver.findElement(By.xpath("//div[@class='series-item--country country-information']"));
+		ele = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--country country-information']"));
 		action.moveToElement(ele).click().build().perform();
 		Thread.sleep(2000);
 		try {
 			login.driver.findElement(By.xpath("//div[@title='Hide related data']")).click();
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@title='Show related data']")).click();
+			login.driver.findElement(By.xpath("//li[1]//div[@title='Show related data']")).click();
+			 login.Log4j.info("Clicking on Show related data icon");
 		} catch (NoSuchElementException e) {
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@title='Show related data']")).click();
-
+			login.driver.findElement(By.xpath("//li[1]//div[@title='Show related data']")).click();
+            login.Log4j.info("Clicking on Show related data icon");
 		}
 	}
 
@@ -1942,12 +1948,12 @@ public class DatabasesTab {
 	@Then("^Should redirect to respective datasets$")
 	public void should_redirect_to_respective_datasets() throws Throwable {
 		Thread.sleep(2000);
-		ele = login.driver.findElement(By.xpath("//span[@class='series-table-name']"));
+		ele = login.driver.findElement(By.xpath("//span[@class='insight-discovery--popup-title']"));
 		String tname = ele.getText();
 
 		if (tname.equalsIgnoreCase(tableName)) {
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//span[@class='back-to-series-list']")).click();
+			login.driver.findElement(By.xpath("//div[@class='insight-discovery--popup-back-button']")).click();
 			login.Log4j.info("It is redirected to respective DB");
 		} else {
 			AssertJUnit.fail("It is not redirected");
@@ -2042,10 +2048,14 @@ public class DatabasesTab {
 		Thread.sleep(3000);
 		ele = login.driver.findElement(By.xpath("//a[@class='link insights-grid-row--title-link']"));
 		String expected = ele.getText();
+		login.Log4j.info(expected);
 		ele.click();
 		Thread.sleep(3000);
-		ele = login.driver.findElement(By.xpath("//span[@class='insight-preview--title text-dots']"));
+		login.driver.findElement(By.xpath("//div[@class='related-insights--toggle']")).click();
+		Thread.sleep(3000);
+		ele = login.driver.findElement(By.xpath("//div[@class='related-insight-item--title']"));
 		String actual = ele.getText();
+		login.Log4j.info(actual);
 		// Assert.assertEquals(actual, expected);
 		if (actual.equalsIgnoreCase(expected)) {
 			Thread.sleep(2000);
@@ -2195,7 +2205,7 @@ public class DatabasesTab {
 	@And("^Click on Footnote icon$")
 	public void click_on_Footnote_icon() throws Throwable {
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//span[@title='Open footnote']")).click();
+		login.driver.findElement(By.xpath("//li[1]//div[@class='series-list-item-data']//div[2]//span[@title='Open footnote']")).click();
 	}
 
 	@And("^Mouse hover on any series level of data$")
@@ -3688,7 +3698,7 @@ public class DatabasesTab {
 	public static void DeleteSeries() throws InterruptedException {
 		try {
 			// Deleting series from My Series tab
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			WebElement ele = login.driver.findElement(By.xpath("//span[@class='input-control--indicator']"));
 			action.moveToElement(ele).click().build().perform();
 			Thread.sleep(2000);
@@ -3700,12 +3710,16 @@ public class DatabasesTab {
 
 	public static void ResetMethod() throws InterruptedException {
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-		if (reset.size() > 0) {
+		try {
+		  if (reset.size() > 0) {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 				login.Log4j.info("Clicking on Reset button");
 			}
+		  }
+		}catch(Exception e) {
+			
 		}
 	}
 }
