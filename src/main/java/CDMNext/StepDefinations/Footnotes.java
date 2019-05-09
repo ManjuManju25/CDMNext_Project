@@ -101,6 +101,8 @@ public class Footnotes {
 	//Tc_Footnotes_01
 		@Given("^Set the Preference to insight explorer$")
 	public void set_the_Preference_to_insight_explorer() throws Throwable {
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 
 			if (reset.size() > 0) {
