@@ -101,8 +101,10 @@ public class Footnotes {
 	//Tc_Footnotes_01
 		@Given("^Set the Preference to insight explorer$")
 	public void set_the_Preference_to_insight_explorer() throws Throwable {
-			Thread.sleep(5000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Footnote_Search_input"))).clear();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+			Thread.sleep(3000);
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 
 			if (reset.size() > 0) {
@@ -1230,6 +1232,8 @@ footnotes_close();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_presentation"))).click();
 		
 		Thread.sleep(10000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
 		Thread.sleep(8000);
 		action.sendKeys("a").perform();
@@ -3641,6 +3645,8 @@ login.driver.switchTo().window(browserTabs.get(0));
 		//TC_Footnotes_55
 		@Given("^Select series then click on Related series$")
 		public void select_series_then_click_on_Related_series() throws Throwable {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
 			Thread.sleep(3000);
 			action.sendKeys("a").perform();
@@ -4007,7 +4013,8 @@ Thread.sleep(15000);
 		public void Add_series_to_my_series() throws Throwable {
 			WebDriverWait wait=new WebDriverWait(login.driver, 150);
 			Thread.sleep(7000);
-			
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 			Thread.sleep(2000);
 			//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();

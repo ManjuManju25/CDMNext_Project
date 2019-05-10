@@ -2124,7 +2124,7 @@ public class DatabasesTab {
 				.findElement(By.xpath("//div[@class='link link__medium insight-icon-item--bottom-panel-title']"));
 		String actual = ele.getText();
 		if (str.equalsIgnoreCase(actual) == true) {
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			WebElement mouseHover = login.driver.findElement(By.xpath("//div[@class='insight-icon-item--preview']"));
 			action.moveToElement(mouseHover).build().perform();
 			Thread.sleep(3000);

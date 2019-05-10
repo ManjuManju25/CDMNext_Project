@@ -186,11 +186,11 @@ Scenario: Tc_Footnotes_37:Verify back button in footnotes in new tab
 		   And Click on CEIC logo
 		   And Goto Footnotes menu bar , click Open new tab
           And verify Back button
-@Footnote
-Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
-		     And Click on Footnotes tab Open new tab
-            And Expand the tree change the language ,verify the Back button
-				
+#@Footnote
+#Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
+#		     And Click on Footnotes tab Open new tab
+#            And Expand the tree change the language ,verify the Back button
+#				
 @Footnote
 Scenario: Tc_Footnotes_39:Verify click on back in the table opened footnote
 		   And Set the Preference to new insight 
@@ -347,13 +347,13 @@ Scenario: Tc_Footnotes_69:	Verify if Footnotes loads for transformed series
 		      And Add series to my series
 		      And Apply function
 		      And Verify footnotes for transformed series
-@Footnote
-Scenario: Tc_Footnotes_70:	Verify the action of  'Back' button
-			 And Goto Footnotes menu bar , click Open new tab
-			 And Set the Preference to insight explorer
-			 And Close the new tab
-			 And Goto Footnotes menu bar , click Open new tab
-			 And Expand the database then translate to japanese and verify Back button
+#@Footnote
+#Scenario: Tc_Footnotes_70:	Verify the action of  'Back' button
+#			 And Goto Footnotes menu bar , click Open new tab
+#			 And Set the Preference to insight explorer
+#			 And Close the new tab
+#			 And Goto Footnotes menu bar , click Open new tab
+#			 And Expand the database then translate to japanese and verify Back button
 @Footnote
 Scenario: Tc_Footnotes_71:Check footnotes access for Investment Table in World trend plus DB 		
 			And Goto Db Search tab 
@@ -390,7 +390,7 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 #			And Open footnotes for table level
 #			And Select '-' icon to minimize   
 #			And Click on Download button
-#			And Verify footnote download message	  enario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
+#			And Verify footnote download message	  otnotes_61:Check the translation of Glossary link page of Footnotes
 #			 And Goto Db Search tab 
 #            And Expand the Markit database
 #            And Open footnotes for section level, change to Japanese

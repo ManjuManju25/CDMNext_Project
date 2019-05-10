@@ -107,7 +107,7 @@ public class Exceldatacompare {
 	
 	@And("^User1 Select pop up Download button$")
 	public void user_Select_pop_up_Download_button() throws Throwable {
-		WebElement element = login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/button[4]/span"));
+		WebElement element = login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/div[2]/button[3]"));
 		Actions action = new Actions(login.driver);
 		Thread.sleep(5000);
 		action.moveToElement(element).click().perform();                                   
