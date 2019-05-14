@@ -3,7 +3,7 @@ Feature: SeriesTab
 Background:
  	Given User has successful logged in
 	
-@SeriesTab1
+@SeriesTab
 Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
 And Select indicator "Transport" as "Freight Traffic"
 And Select indicator "Tourism" as "Tourism Statistics"

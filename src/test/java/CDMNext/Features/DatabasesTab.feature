@@ -68,19 +68,19 @@ Given Click on "All insights" option
 When Click on Close
 Then The Insight Explorer popup should be closed
 
-@DB
-Scenario: TC_DB_11: Verifying Filters for DB tab
-And Select filter "Region" as "Japan"
-And User has clicked on "Apply filter"
-And User selected "All databases" as "Global Database"
-Then Result should be displayed as per the filters applied
-
-@DB
-Scenario: TC_DB_12: Verifying remove icon for filters.
-And  User selects "Frequency" as "Monthly"
-And User has clicked on "Apply filter"
-When Click on x icon 
-Then The applied filters should be removed 
+#@DB
+#Scenario: TC_DB_11: Verifying Filters for DB tab
+#And Select filter "Region" as "Japan"
+#And User has clicked on "Apply filter"
+#And User selected "All databases" as "Global Database"
+#Then Result should be displayed as per the filters applied
+#
+#@DB
+#Scenario: TC_DB_12: Verifying remove icon for filters.
+#And  User selects "Frequency" as "Monthly"
+#And User has clicked on "Apply filter"
+#When Click on x icon 
+#Then The applied filters should be removed 
 
 @DB
 Scenario: TC_DB_13: Verifying Collapse option when search/filter applied
@@ -110,6 +110,20 @@ Scenario: TC_DB_17: Verifying 'our help desk team'
 Given User enters "UN"
 And  Click on "our help desk team"
 Then User should redirect to "https://support.ceicdata.com/support/tickets/new"
+
+@DB
+Scenario: TC_DB_11: Verifying Filters for DB tab
+And Select filter "Region" as "Japan"
+And User has clicked on "Apply filter"
+And User selected "All databases" as "Global Database"
+Then Result should be displayed as per the filters applied
+
+@DB
+Scenario: TC_DB_12: Verifying remove icon for filters.
+And  User selects "Frequency" as "Monthly"
+And User has clicked on "Apply filter"
+When Click on x icon 
+Then The applied filters should be removed 
 
 @DB
 Scenario: TC_DB_18: Verifying behavior after search removed
@@ -464,14 +478,14 @@ And Mouse hover on any table level
 And  Drag and drop to my series/visual
 Then The entire table should be added to my series
 
-@DB
+@DB1
 Scenario: TC_DB_73:Verifying clicking on series name
 And  Select database as Daily Database
 And  Expand till series level
 And Click on series name
 Then Series information popup should be opened
 
-@DB
+@DB1
 Scenario: TC_DB_74:Verifying related data
 And   Select database as Daily Database 
 And  Expand till series level

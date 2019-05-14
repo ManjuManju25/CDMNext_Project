@@ -101,6 +101,7 @@ public class Footnotes {
 	//Tc_Footnotes_01
 		@Given("^Set the Preference to insight explorer$")
 	public void set_the_Preference_to_insight_explorer() throws Throwable {
+			//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Footnote_Search_input"))).click();
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Footnote_Search_input"))).clear();
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
@@ -3091,6 +3092,8 @@ login.driver.switchTo().window(browserTabs.get(0));
 			for (String tab : login.driver.getWindowHandles()) {
 			    if (!tab.equals(currentTab)){
 			        login.driver.switchTo().window(tab); 
+			        click_on_CEIC_logo();
+			        login.driver.findElement(By.xpath(login.LOCATORS.getProperty("back_button"))).click();
 			    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("db"))));
 				    login.driver.findElement(By.xpath(login.LOCATORS.getProperty("db"))).click();
 				    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("topic"))));
