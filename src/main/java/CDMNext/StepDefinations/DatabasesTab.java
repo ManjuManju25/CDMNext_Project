@@ -137,6 +137,7 @@ public class DatabasesTab {
 
 	@And("^Select database as Daily Database$")
 	public void select_database_as_Daily_Database() throws Throwable {
+		
 		Thread.sleep(5000);
 		TopMethod();
 		AlldbClear();
@@ -686,6 +687,13 @@ public class DatabasesTab {
 
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
+		login.driver.navigate().refresh();
+		Thread.sleep(5000);
+		WebElement ClearSearchInput = login.driver
+				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
+		action.moveToElement(ClearSearchInput).click().build().perform();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
 	}
 
 	public void DatabaseValidation() throws InterruptedException {
