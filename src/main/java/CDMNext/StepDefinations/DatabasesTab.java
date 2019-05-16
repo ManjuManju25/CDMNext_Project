@@ -617,9 +617,11 @@ public class DatabasesTab {
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 				} else {
-					login.Log4j.info("Results has not shown correctly for applied region filter is " + countryVar);
 					Thread.sleep(1000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+					Assert.fail("Results has not shown correctly for applied region filter is " + countryVar);
+					
+					
 				}
 			}
 		}
@@ -719,7 +721,7 @@ public class DatabasesTab {
 
 			} finally {
 				// Until the element is not visible keep scrolling
-				// jse.executeScript("arguments[0].scrollIntoView(true);", element);
+				 jse.executeScript("arguments[0].scrollIntoView(true);", element);
 				Thread.sleep(2000);
 				// WebElement region = null;
 
@@ -739,10 +741,7 @@ public class DatabasesTab {
 				}
 
 			}
-			// just checking for 4 series
-			if (i == 4) {
-				break;
-			}
+			
 		}
 
 		TopMethod();

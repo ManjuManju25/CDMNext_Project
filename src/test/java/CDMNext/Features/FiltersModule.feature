@@ -351,11 +351,11 @@ Given User enters "BRDLAC;CABB"
 And   User selected "All databases" as "Brazil Premium Database,China Premium Database"
 Then  User verify the search results 
 
-#@FilterSearch
-#Scenario: TC_Filters_Search_51
-#Given User enters "consumer"
-#And   User selected "All databases" as "China Premium Database"
-#Then  User verify the search results 
+@FilterSearch
+Scenario: TC_Filters_Search_51
+Given User enters "consumer"
+And   User selected "All databases" as "China Premium Database"
+Then  User verify the search results 
  
 @FilterSearch
 Scenario: TC_Filters_Search_52
@@ -387,12 +387,12 @@ Given User enters "consumer expenditure"
 And   User selected "All databases" as "India Premium Database"
 Then  User verify the search results 
 
-#@FilterSearch
-#Scenario: TC_Filters_Search_57
-#Given User enters "Construction"
-#And   User selected "All databases" as "World Trend Plus"
-#Then  User verify the search results 
-#
+@FilterSearch
+Scenario: TC_Filters_Search_57
+Given User enters "Construction"
+And   User selected "All databases" as "World Trend Plus"
+Then  User verify the search results 
+
 @FilterSearch
 Scenario: TC_Filters_Search_58
 Given User enters "Agar"
@@ -471,16 +471,16 @@ And   User selects "Subscribed series only"
 And   User has clicked on "Apply filter"
 And   User selected "All databases" as "Brazil Premium Database"
 Then  User verify the search results 
-#
-#@FilterSearch
-#Scenario: TC_Filters_Search_69
-#Given User enters "Insurance"
-#And   User selects "Status" as "Active"
-#And   User has clicked on "Apply filter"
-#And   User selects "Name only" 
-#And   User selected "All databases" as "China Premium Database"
-#Then  User verify the search results 
-#
+
+@FilterSearch
+Scenario: TC_Filters_Search_69
+Given User enters "Insurance"
+And   User selects "Status" as "Active"
+And   User has clicked on "Apply filter"
+And   User selects "Name only" 
+And   User selected "All databases" as "China Premium Database"
+Then  User verify the search results 
+
 @FilterSearch
 Scenario: TC_Filters_Search_70
 Given User enters "demand"
@@ -931,10 +931,10 @@ Scenario: TC_Filters_Search_131
 Given User enters "Exchange Rate"
 Then  User verify the search results  
 
-#@FilterSearch
-#Scenario: TC_Filters_Search_132
-#Given User enters "Res*"
-#Then  User verifies Filter search results  
+@FilterSearch
+Scenario: TC_Filters_Search_132
+Given User enters "Res*"
+Then  User verifies Filter search results  
 
 @FilterSearch
 Scenario: TC_Filters_Search_133
@@ -1090,14 +1090,14 @@ And   User selects "Subscribed series only"
 And   User has clicked on "Apply filter"
 Then  User check for the scubscribed series
 
-@FilterSearch
+@FilterSearch1
 Scenario: TC_Filters_Search_157
 Given User enters "money"
 And   User selects "New only" 
 And   User has clicked on "Apply filter"
 Then  User verify the search results
 
-@FilterSearch
+@FilterSearch1
 Scenario: TC_Filters_Search_158
 And   Select "New only" from "More" filter
 And   User has clicked on "Apply filter"

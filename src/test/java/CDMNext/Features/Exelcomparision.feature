@@ -648,7 +648,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
         And Select Download Button
         And select the "xlsx" format   
         Then Chart download should be Sucess
-   
+#   
 #   @FormatVerification   
 # Scenario: TC_83:Downloading HeatMap created from view tab into Excel format
 #       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
@@ -828,52 +828,52 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
 ###        And Verify label for different frequency series from "SSP" "Tooltips" "Tables" "Preview" and "My Series"
 ###         #And Select Download button    
 #
-#            
-#     @UI      
-#     Scenario: TC_105: verify state of download button when there are no series in myseries/no views.
-#        And User verify state of download button when there are no series in myseries/no views
+            
+     @UI      
+     Scenario: TC_105: verify state of download button when there are no series in myseries/no views.
+        And User verify state of download button when there are no series in myseries/no views
 
-#
-#@FormatVerification       
-#     Scenario: TC_110: Verify the formats available for visual download.
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#        And Create a Table 
-#        And Select Download Button    
-#       And  verify the available formats 
-#         
-# @FormatVerification       
-#     Scenario: TC_111: Verify the Download table visual to Excel Format.
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#        And Create a Table 
-#        And Select Download Button
-#        And select the "xlsx" format 
-#        Then Tabel download should be Sucess   
-#
-#        
-# @FormatVerification       
-#     Scenario: TC_112: Verify the Download table visual to PNG Format.
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#      And Create a Table 
-#      And Select Download Button
-#     And select the "png" format 
-#     Then Tabel download should be Sucess    
-#  
-#   
-#   @FormatVerification       
-#    Scenario: TC_113: Verify the Download table visual to JPG Format.
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#      And Create a Table 
-#      And Select Download Button
-#     And select the "jpeg" format 
-#      Then Tabel download should be Sucess       
-#
-#@FormatVerification       
-#     Scenario: TC_114: Verify the formats available for views download.
-#      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#      And Create a Table 
-#      And Select Download Button
-#     And verify the formats available for views download 
-#     
+
+@FormatVerification       
+     Scenario: TC_110: Verify the formats available for visual download.
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+        And Create a Table 
+        And Select Download Button    
+       And  verify the available formats 
+         
+ @FormatVerification       
+     Scenario: TC_111: Verify the Download table visual to Excel Format.
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+        And Create a Table 
+        And Select Download Button
+        And select the "xlsx" format 
+        Then Tabel download should be Sucess   
+
+        
+ @FormatVerification       
+     Scenario: TC_112: Verify the Download table visual to PNG Format.
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+      And Create a Table 
+      And Select Download Button
+     And select the "png" format 
+     Then Tabel download should be Sucess    
+  
+   
+   @FormatVerification       
+    Scenario: TC_113: Verify the Download table visual to JPG Format.
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+      And Create a Table 
+      And Select Download Button
+     And select the "jpeg" format 
+      Then Tabel download should be Sucess       
+
+@FormatVerification       
+     Scenario: TC_114: Verify the formats available for views download.
+      And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+      And Create a Table 
+      And Select Download Button
+     And verify the formats available for views download 
+     
   @FormatVerification       
      Scenario: TC_115: Verify the Download table visual to Excel Format.
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
@@ -888,12 +888,12 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
       And Select Download Button
       And select the "pdf" format 
      Then Tabel download should be Sucess  
-#
-#     @UI   
-#   Scenario: TC_124: Verify whether Data referesh option is checked by deault.
-#      And User Select Series ID  as "310911001"
-#      And Select Download Button
-#      And Verify Data referesh option is checked by deault
+
+     @UI   
+   Scenario: TC_124: Verify whether Data referesh option is checked by deault.
+      And User Select Series ID  as "310911001"
+      And Select Download Button
+      And Verify Data referesh option is checked by deault
 
 
     @ExelDatacomparision  
@@ -1041,7 +1041,6 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Add to Right panel
          And Select Download button
          And Select with timeframe no of obs end date = "10"
-          # And User1 Select pop up Download button
          And Compare "TC_144" exel sheet with Actual data     
 
 @ExelDatacomparision  
@@ -1060,12 +1059,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "10"
          And Compare "TC_146" exel sheet with Actual data     
 
-#
-##@AlertColorDownload
-##   Scenario: TC_146: Create Table visual -General Series- New or Revised Normal Timepoint Less than 30 days
-##       And User Selects the Series ID  as "177359202"
-##       And Create a table
-##       And Verify the Expected colour as Blue 
+ 
            
 
 

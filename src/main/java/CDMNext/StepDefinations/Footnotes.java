@@ -48,7 +48,7 @@ public class Footnotes {
 	    action.moveToElement(table_row).perform();
 	 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("table_footnote_hat_icon"))));
 	 	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_footnote_hat_icon"))).click();
-	 	Thread.sleep(5000);
+	 	Thread.sleep(10000);
 	}
 	public void footnote_open_new_window() throws Exception{
 		WebDriverWait wait=new WebDriverWait(login.driver, 150) ;
@@ -104,17 +104,19 @@ public class Footnotes {
 			//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Footnote_Search_input"))).click();
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Footnote_Search_input"))).clear();
 			Thread.sleep(3000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+			//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
 			Thread.sleep(3000);
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-
-			if (reset.size() > 0) {
-						if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-							login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
-							login.Log4j.info("Clicking on Reset button");
-						}
-					}
-		 WebDriverWait wait = new WebDriverWait(login.driver,200);
+			List<WebElement> Replacement = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("replacement_window")));
+			
+			if (Replacement.size()!=0) {
+				 {
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+					login.Log4j.info("Clicking on Reset button");
+				}
+			}
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		 WebDriverWait wait = new WebDriverWait(login.driver,150);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("dropdown_btn"))).click();
 		login.driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 		Thread.sleep(3000);
@@ -1234,7 +1236,7 @@ footnotes_close();
 		
 		Thread.sleep(10000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
-		Thread.sleep(3000);
+		Thread.sleep(6000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
 		Thread.sleep(8000);
 		action.sendKeys("a").perform();
@@ -1278,8 +1280,9 @@ footnotes_close();
 			footnotes_close();
 		}
 		else{
-			System.out.println("Footnotes window is not shown");
 			footnotes_close();
+			System.out.println("Footnotes window is not shown");
+			
 		}
 		//Thread.sleep(1000);
 	
@@ -1448,7 +1451,7 @@ footnotes_close();
 	public void Click_on_Open_button_and_verify_refreshing_footnotes_in_new_tab() throws Throwable {
 		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("open_icon"))).click();
 		  Thread.sleep(25000);
-			login.driver.navigate().refresh();
+			
 		  try{
 				//get window handlers as list
 				 List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
@@ -1456,6 +1459,12 @@ footnotes_close();
 				 login.driver.switchTo().window(browserTabs .get(1));
 				 Thread.sleep(4000);
 				 //check comparing url
+//				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ceic_logo"))).click();
+//				 Thread.sleep(2000);
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Open_sidebar"))).click();
+				 Thread.sleep(2000);
+				 login.driver.navigate().refresh();
+				 Thread.sleep(8000);
 				 List<WebElement> tree = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("db")));
 				 if(tree.size()!=0){
 					 System.out.println("Database tree is collapsed");
@@ -2975,7 +2984,7 @@ login.driver.switchTo().window(browserTabs.get(0));
 
 		   Thread.sleep(7000);
 		   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_download"))).click();
-		   Thread.sleep(50000);
+		   Thread.sleep(55000);
 
 		  
 		   String downloadPath =System.getProperty("user.home")+"\\Downloads";
@@ -3038,10 +3047,12 @@ login.driver.switchTo().window(browserTabs.get(0));
 					   System.out.println("Back button is displayed");
 					    login.driver.close();
 						login.driver.switchTo().window(browserTabs.get(0));
+						  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ceic_logo"))).click();
 				   }
 				   else{
 					   login.driver.close();
 						login.driver.switchTo().window(browserTabs.get(0));
+						  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ceic_logo"))).click();
 					   Assert.fail("Back button is not displayed");
 				   }
 				/*try{
@@ -4074,7 +4085,23 @@ Thread.sleep(15000);
 		}
 
 		//TC_Footnotes_70
-
+		@Given("^Set the Preference to insight$")
+		public void set_the_Preference_to_insight() throws Throwable {
+			 WebDriverWait wait = new WebDriverWait(login.driver,100);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("dropdown_btn"))).click();
+				login.driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("set_preference"))).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("insight_explorer"))));
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("insight_explorer"))).click();
+						WebElement preferences = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("text")));
+			    js.executeScript("arguments[0].scrollIntoView(true);", preferences);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("save_btn"))));
+				Thread.sleep(10000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("save_btn"))).click();
+				Thread.sleep(7000);
+		}
 		@Given("^Close the new tab$")
 		public void close_the_new_tab() throws Throwable {
 			  List<String> browserTabs = new ArrayList<String> (login.driver.getWindowHandles());
@@ -4175,6 +4202,17 @@ Thread.sleep(15000);
 		  
 		}
 		//TC_Footnotes_72
+		@Given("^Open footnotes for tablelevel$")
+		public void open_footnotes_for_tablelevel() throws Throwable {
+			WebDriverWait wait=new WebDriverWait(login.driver, 150) ;
+			WebElement table_row = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("hover_table")));
+			action.moveToElement(table_row).perform();
+		 	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnote_global_table_icon1"))));
+		 	Thread.sleep(8000);
+		 	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_global_table_icon1"))).click();
+		 	
+			Thread.sleep(4000);
+		}
 		@Given("^Click on Open icon to open footnotes in new tab$")
 		public void click_on_Open_icon_to_open_footnotes_in_new_tab() throws Throwable {
 			Thread.sleep(3000);

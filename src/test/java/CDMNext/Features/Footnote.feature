@@ -104,7 +104,6 @@ Scenario: Tc_Footnotes_22:Verify Country > geo_province > geo_city > geo_county 
 @Footnote
 Scenario: Tc_Footnotes_23:Verify menu bar options 
 		  And Hover on menu bar options and verify
-		
 @Footnote
 Scenario: Tc_Footnotes_24:Verify view comments, view notifications, view and edit profile 
 		  And click on Open in new tab 
@@ -171,26 +170,22 @@ Scenario: Tc_Footnotes_33:Verify show original option in footnotes
 Scenario: Tc_Footnotes_34:Verify click on show original option 
 		  And Click on  Show Original option 
 		  And Verify the text changed to English
-#@Footnote
-#Scenario: Tc_Footnotes_35:Verify download option in translated footnotes
-#		 And Goto Db Search tab 
-#		 And Expand the database
-#		 And Select language Japanese and verify download option
 @Footnote
-Scenario: Tc_Footnotes_36:Verify back button in footnotes
-		    And Goto Footnotes menu bar , click Open new tab
-            And click on CEIC logo,verify Back button 
+Scenario: Tc_Footnotes_35:Verify download option in translated footnotes
+		 And Goto Db Search tab 
+		 And Expand the database
+		 And Select language Japanese and verify download option
 @Footnote
 Scenario: Tc_Footnotes_37:Verify back button in footnotes in new tab
 		   And Set the Preference to insight explorer
 		   And Click on CEIC logo
 		   And Goto Footnotes menu bar , click Open new tab
           And verify Back button
-#@Footnote
-#Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
-#		     And Click on Footnotes tab Open new tab
-#            And Expand the tree change the language ,verify the Back button
-#				
+@Footnote
+Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
+		     And Click on Footnotes tab Open new tab
+            And Expand the tree change the language ,verify the Back button
+				
 @Footnote
 Scenario: Tc_Footnotes_39:Verify click on back in the table opened footnote
 		   And Set the Preference to new insight 
@@ -272,61 +267,60 @@ Scenario: Tc_Footnotes_55:Verify footnotes open in suggested indicators
 			  And Goto Db Search tab 
 		      And Select series then click on Related series
 		      And Click on i icon to verify footnotes
-		      
-#@Footnote
-#Scenario: Tc_Footnotes_56:Verify chinese translated footnotes for any of the global db table
-#			 And Goto Db Search tab 
-#			 And Expand the global database
-#             And Open footnotes for table level
-#             And Download chinese language footnote file
-#@Footnote
-#Scenario: Tc_Footnotes_57:Verify Korean translated footnotes for any of the global series
-#			And Goto Db Search tab 
-#            And Expand the global database
-#            And Open footnotes for series level
-#            And Download japanese language footnote file
-#@Footnote
-#Scenario: Tc_Footnotes_58:Verify Korean translated footnotes for any of the global db table
-#			 And Goto Db Search tab 
-#            And Expand the global database
-#            And Open footnotes for table level
-#            And Download Korean language footnote file
-#@Footnote
-#Scenario: Tc_Footnotes_59:Verify Russian translated footnotes for any of the russian db series
-#			 And Goto Db Search tab 
-#            And Expand the russian database
-#            And Open footnotes for russian series level
-#            And Download Russian language footnote file
-#@Footnote
-#Scenario: Tc_Footnotes_60:Verify Indonesian translated footnotes for any of the indonesian db series
-#			 And Goto Db Search tab 
-#            And Expand the indonesian database
-#            And Open footnotes for indonesian series level
-#            And Download Indonesian language footnote file
+@Footnote
+Scenario: Tc_Footnotes_56:Verify chinese translated footnotes for any of the global db table
+			 And Goto Db Search tab 
+			 And Expand the global database
+             And Open footnotes for table level
+             And Download chinese language footnote file
+@Footnote
+Scenario: Tc_Footnotes_57:Verify Korean translated footnotes for any of the global series
+			And Goto Db Search tab 
+            And Expand the global database
+            And Open footnotes for series level
+            And Download japanese language footnote file
+@Footnote
+Scenario: Tc_Footnotes_58:Verify Korean translated footnotes for any of the global db table
+			 And Goto Db Search tab 
+            And Expand the global database
+            And Open footnotes for table level
+            And Download Korean language footnote file
+@Footnote
+Scenario: Tc_Footnotes_59:Verify Russian translated footnotes for any of the russian db series
+			 And Goto Db Search tab 
+            And Expand the russian database
+            And Open footnotes for russian series level
+            And Download Russian language footnote file
+@Footnote
+Scenario: Tc_Footnotes_60:Verify Indonesian translated footnotes for any of the indonesian db series
+			 And Goto Db Search tab 
+            And Expand the indonesian database
+            And Open footnotes for indonesian series level
+            And Download Indonesian language footnote file
 @Footnote
 Scenario: Tc_Footnotes_62:Footnotes: 'Ask question' should include the selected table name
 			 And Goto Db Search tab 
 			 And Expand the global database
 			 And Open footnotes for table level
 			 And Click 'Ask a question' verify the table name
-#@Footnote
-#Scenario: Tc_Footnotes_63:Footnotes: Verify Shortcut 'd' for footnotes download
-#			 And Goto Db Search tab 
-#			 And Expand the global database
-#			 And Open footnotes for table level
-#			 And Press 'd' to verify footnote download
+@Footnote
+Scenario: Tc_Footnotes_63:Footnotes: Verify Shortcut 'd' for footnotes download
+			 And Goto Db Search tab 
+			 And Expand the global database
+			 And Open footnotes for table level
+			 And Press 'd' to verify footnote download
 @Footnote
 Scenario: Tc_Footnotes_64:Footnotes: Verify Footnotes download message
 			 And Goto Db Search tab 
 			 And Expand the global database
 			 And Open footnotes for table level
 			 And Verify footnote download message	
-#@Footnote
-#Scenario: Tc_Footnotes_66: Verify if Hyperlinks from market purchasing managers' index are redirectable
-#			  And Goto Db Search tab 
-#              And Expand the Markit database
-#              And Open footnotes for section level
-#              And Access links verify hyperlinks are redirectable
+@Footnote
+Scenario: Tc_Footnotes_66: Verify if Hyperlinks from market purchasing managers' index are redirectable
+			  And Goto Db Search tab 
+              And Expand the Markit database
+              And Open footnotes for section level
+              And Access links verify hyperlinks are redirectable
 @Footnote
 Scenario: Tc_Footnotes_67:	'Ask question' option is  available for translated footnotes
 			And Goto Db Search tab 
@@ -347,13 +341,13 @@ Scenario: Tc_Footnotes_69:	Verify if Footnotes loads for transformed series
 		      And Add series to my series
 		      And Apply function
 		      And Verify footnotes for transformed series
-#@Footnote
-#Scenario: Tc_Footnotes_70:	Verify the action of  'Back' button
-#			 And Goto Footnotes menu bar , click Open new tab
-#			 And Set the Preference to insight explorer
-#			 And Close the new tab
-#			 And Goto Footnotes menu bar , click Open new tab
-#			 And Expand the database then translate to japanese and verify Back button
+@Footnote
+Scenario: Tc_Footnotes_70:	Verify the action of  'Back' button
+			 And Goto Footnotes menu bar , click Open new tab
+			 And Set the Preference to insight
+			 And Close the new tab
+			 And Goto Footnotes menu bar , click Open new tab
+			 And Expand the database then translate to japanese and verify Back button
 @Footnote
 Scenario: Tc_Footnotes_71:Check footnotes access for Investment Table in World trend plus DB 		
 			And Goto Db Search tab 
@@ -365,11 +359,10 @@ Scenario: Tc_Footnotes_71:Check footnotes access for Investment Table in World t
 Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected language when opened in new tab
 			And Goto Db Search tab 
 			And Expand the database
-			And Open footnotes for table level
+			And Open footnotes for tablelevel
 			And Translate to Japanese
 			And Click on Open icon to open footnotes in new tab
 			And Verify footnotes opened in new tab retain the japanese language
-	
 #@Footnote
 #Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
 #			 And Goto Db Search tab 
@@ -390,6 +383,12 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 #			And Open footnotes for table level
 #			And Select '-' icon to minimize   
 #			And Click on Download button
+#			And Verify footnote download message	
+#@Footnote
+#Scenario: Tc_Footnotes_36:Verify back button in footnotes
+#			And Create an insight
+#		    And Goto Footnotes menu bar , click Open new tab
+#            And click on CEIC logo,verify Back button   oad button
 #			And Verify footnote download message	  otnotes_61:Check the translation of Glossary link page of Footnotes
 #			 And Goto Db Search tab 
 #            And Expand the Markit database

@@ -1,7 +1,7 @@
 Feature:  verifying Insight Explorer Functionality
 
 Background:
-   Given User2 has successful logged in
+   Given User has successful logged in
 
 @LandingPage
 Scenario: TC_IE_01: Verify All Tabs in Landing page

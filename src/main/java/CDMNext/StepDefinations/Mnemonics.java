@@ -3,24 +3,26 @@ package CDMNext.StepDefinations;
 import java.io.File;
 
 
+
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormatter;
+//import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
+//import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+//import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
-import org.testng.asserts.SoftAssert;
+//import org.testng.asserts.SoftAssert;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -39,7 +41,7 @@ public class Mnemonics {
 
 		Thread.sleep(10000);
 		WebElement element;
-		SoftAssert s_assert = new SoftAssert();
+		//SoftAssert s_assert = new SoftAssert();
 		// Create an object of File class to open xlsx file
 		File src = new File(System.getProperty("user.dir") + "\\" + "MnemonicsSheet2.xlsx");
 		// Create an object of FileInputStream class to read excel file

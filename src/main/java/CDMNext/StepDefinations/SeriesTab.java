@@ -369,7 +369,7 @@ public class SeriesTab {
 					Thread.sleep(1000);
 					action.moveToElement(element).click().build().perform();
 					// Until the element is not visible keep scrolling
-					//jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					ssp_window_should_be_displayed();
 				}
 			} else {
@@ -440,6 +440,8 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Collapse":
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Matches only')]")).click();
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
@@ -694,11 +696,11 @@ public class SeriesTab {
 					action.moveToElement(element).build().perform();
 					Thread.sleep(1000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
-					// Until the element is not visible keep scrolling
-					//in rc.9 it should be uncomment(below line)				
-					//jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					text = tooltip.getText();
+					// Until the element is not visible keep scrolling
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					String[] linesplit = text.split("\n");
+					
 					for (String str : linesplit) {
 						if (str.contains("Indicator")) {
 							if (indicator.size() == 2) {
@@ -830,7 +832,7 @@ public class SeriesTab {
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					action.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
-					//jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					if (filter.equalsIgnoreCase("Key only")) {
 						if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("key_icon"))).isDisplayed()) {
 							login.Log4j.info(filter + " series are exists");
@@ -1281,7 +1283,7 @@ public class SeriesTab {
 						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 				checkbox.click();
 				// Until the element is not visible keep scrolling
-				//jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+				jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 			}
 			WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("preview_selection")));
 			String count = ele.getText();
