@@ -1739,6 +1739,8 @@ public class DatabasesTab {
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			
 		} else {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			AssertJUnit.fail("Download window is not displayed with selected series count");
 		}
 		// TC-158,159[closing search selection window]

@@ -117,7 +117,7 @@ Scenario: TC_SeriesTab_19:Verifying "key only" filter for series tab
 Given User enters keyword "GCF"
 And   User has selects "More" as "Key only"
 When  Click on "Apply filter"
-Then  User verify corresponding results for selected filter
+Then  "Key series" should be displayed
 
 @SeriesTab
 Scenario: TC_SeriesTab_20:Verifying "with release schedule" filter for series tab
@@ -283,3 +283,4 @@ Given User enters seriesID "122834404;295755902"
 And  Click on drop down icon next to +
 And  Click on "Add to new insight"
 Then New insight should be created and the series should be added to the insight
+

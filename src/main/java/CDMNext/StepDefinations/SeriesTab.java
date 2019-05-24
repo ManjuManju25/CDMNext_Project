@@ -308,8 +308,7 @@ public class SeriesTab {
 				}
 			} else if (arg1.equals("Show Dataset")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Backbutton")))
-						.isDisplayed()) {
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Backbutton"))).isDisplayed()) {
 					login.Log4j.info("Dataset is displayed for given SeriesID");
 					Thread.sleep(2000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Backbutton"))).click();
@@ -386,7 +385,8 @@ public class SeriesTab {
 
 		try {
 
-			if (login.driver.findElement(By.xpath("//div[@class='series-preview--header ui-draggable-handle']//div[@class='single-series-preview--title ']"))
+			if (login.driver.findElement(By.xpath(
+					"//div[@class='series-preview--header ui-draggable-handle']//div[@class='single-series-preview--title ']"))
 					.isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
 				Thread.sleep(2000);
@@ -395,7 +395,7 @@ public class SeriesTab {
 				Assert.fail("SSP window is not displayed");
 			}
 		} catch (NoSuchElementException e) {
-			//Assert.fail("WebElement is null");
+			// Assert.fail("WebElement is null");
 		}
 	}
 
@@ -433,8 +433,8 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Expand":
-			 Thread.sleep(5000);
-			 login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).click();
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).click();
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
@@ -700,7 +700,7 @@ public class SeriesTab {
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					String[] linesplit = text.split("\n");
-					
+
 					for (String str : linesplit) {
 						if (str.contains("Indicator")) {
 							if (indicator.size() == 2) {
@@ -810,6 +810,47 @@ public class SeriesTab {
 
 	}
 
+	@Then("^\"([^\"]*)\" should be displayed$")
+	public void should_be_displayed(String arg1) throws Throwable {
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		ul_element = null;
+		try {
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			login.Log4j.info("List size is :" + li_All.size());
+			if (li_All.size() > 0) {
+				for (int i = 0; i < li_All.size(); i++) {
+					login.Log4j.info(i);
+					login.Log4j.info(li_All.size());
+					Thread.sleep(5000);
+					int j = i + 1;
+					checkbox = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					action.moveToElement(checkbox).click().build().perform();
+					Thread.sleep(1500);
+					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					action.moveToElement(element).build().perform();
+					Thread.sleep(2000);
+					WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					String TooltipInfo = tooltip.getText();
+					// Until the element is not visible keep scrolling
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+
+					if (TooltipInfo.contains(arg1)) {
+						login.Log4j.info(arg1 + " series are exists");
+					} else {
+						Assert.fail(arg1 + " series doesnot exists");
+					}
+				}
+			}
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+
+	}
+
 	@Then("^User verify corresponding results for selected filter$")
 	public void user_verify_corresponding_results_for_selected_filter() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
@@ -829,17 +870,11 @@ public class SeriesTab {
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					action.moveToElement(checkbox).click().build().perform();
+					Thread.sleep(1100);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					action.moveToElement(element).build().perform();
 					// Until the element is not visible keep scrolling
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					if (filter.equalsIgnoreCase("Key only")) {
-						if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("key_icon"))).isDisplayed()) {
-							login.Log4j.info(filter + " series are exists");
-						} else {
-							Assert.fail(filter + " series doesnot exists");
-						}
-					} else if (filter.equalsIgnoreCase("With release schedule")) {
+					if (filter.equalsIgnoreCase("With release schedule")) {
 						Thread.sleep(2000);
 						element.click();
 						if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("with_Release")))
@@ -971,7 +1006,7 @@ public class SeriesTab {
 		} else {
 			Assert.fail(db + " is not displayed for " + MousehoverIcon + " icon");
 		}
-		if(Filters.searchData.equals("295755902")) {
+		if (Filters.searchData.equals("295755902")) {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_left"))).click();
 		}
@@ -979,7 +1014,7 @@ public class SeriesTab {
 
 	@Then("^User can see the Chart Visual in the right pannel$")
 	public void user_can_see_the_Chart_Visual_in_the_right_pannel() throws Throwable {
-        Thread.sleep(5000);
+		Thread.sleep(5000);
 		WebElement ctitle = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title")));
 		String ctext = ctitle.getText();
 		login.Log4j.info(stext);
@@ -1291,7 +1326,7 @@ public class SeriesTab {
 			login.Log4j.info("Selected series count is :" + SeriesCount);
 			if (list == SeriesCount) {
 				login.Log4j.info("Selected series count is shown correctly");
-				
+
 			} else {
 				Assert.fail("Selected series count is not shown correctly");
 			}

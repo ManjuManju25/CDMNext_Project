@@ -188,16 +188,16 @@ public class login {
 		Log4j.info("Launching site .. ");
 		driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).clear();
 		Log4j.info("Trying to login with Username:");
-		//Thread.sleep(2000);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).sendKeys(CONFIG.getProperty("username"));
 		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).clear();
 		Log4j.info("Trying to login with Password:");
-		//Thread.sleep(2000);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).sendKeys(CONFIG.getProperty("password"));
 		Log4j.info("Clicking on login button ");
-		//Thread.sleep(2000);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath(LOCATORS.getProperty("btnLogin"))).click();
-		//logged_in = true;
+		logged_in = true;
 		// invoke_browser();
 		// Navigate to login page
 		// Enter username

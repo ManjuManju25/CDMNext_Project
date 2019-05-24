@@ -2,16 +2,15 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 
+
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import cucumber.api.java.en.And;
@@ -546,11 +545,12 @@ public class Filters {
 
 										if (advancedfltr.equals("Subscribed series only")) {
 											Thread.sleep(1000);
-											if (!checkbox.isSelected()) {
-												checkbox.click();
-												login.Log4j.info("Element is clickable");
+											if (checkbox.isDisplayed()) {
+												Thread.sleep(1000);
+												mouseOver.moveToElement(checkbox).click().build().perform();
+												login.Log4j.info("Subscribed series are clickable");
 											} else {
-												Assert.fail("Element is not clickable");
+												Assert.fail("Subscribed series are not clickable");
 											}
 										} else {
 											if (advancedfltr.equals("Name only") && seriesName.toUpperCase()

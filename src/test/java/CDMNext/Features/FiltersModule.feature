@@ -269,7 +269,7 @@ Then  User verify the search results
 
 @FilterSearch
 Scenario: TC_Filters_Search_37
-Given User enters "280621302;79238002"
+Given User enters "280621302"
 And   User selected "All databases" as "OECD - Main Economic Indicators"
 Then  User verify the search results 
 
@@ -1090,14 +1090,14 @@ And   User selects "Subscribed series only"
 And   User has clicked on "Apply filter"
 Then  User check for the scubscribed series
 
-@FilterSearch1
+@FilterSearch
 Scenario: TC_Filters_Search_157
 Given User enters "money"
 And   User selects "New only" 
 And   User has clicked on "Apply filter"
 Then  User verify the search results
 
-@FilterSearch1
+@FilterSearch
 Scenario: TC_Filters_Search_158
 And   Select "New only" from "More" filter
 And   User has clicked on "Apply filter"
