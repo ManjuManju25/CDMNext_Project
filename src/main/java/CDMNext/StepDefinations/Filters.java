@@ -50,6 +50,7 @@ public class Filters {
 	String TooltipInfo;
 	String Morefilter;
 	WebElement SeriesTab;
+	static String Alldb_db;
 	// create instance of JavaScriptExecutor
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	// create object of Actions class
@@ -210,6 +211,7 @@ public class Filters {
 
 	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selected_as(String arg1, String arg2) throws Throwable {
+		Alldb_db=arg2;
 		login.Log4j.info("Clicking on " + arg1);
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();

@@ -54,6 +54,7 @@ public class SeriesTab {
 	public WebElement ul_element = null;
 	Boolean refresh = false;
 	String text;
+	int matched_insightsCount;
 	List<String> seriesText = null;
 	SoftAssert s_assert = new SoftAssert();
 	Boolean newInsight = false;
@@ -230,6 +231,49 @@ public class SeriesTab {
 					DatabasesTab.DeleteSeries();
 				} else {
 					Assert.fail("Table visual is not created");
+				}
+			} else if (arg1.equals("View as Pie")) {
+				login.driver.findElement(By.xpath("//span[@title='View as ...']")).click();
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath("//span[@title='Pie']")).click();
+				try {
+					if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
+							.isDisplayed()) {
+						Thread.sleep(1500);
+						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
+								.click();
+					}
+				} catch (NoSuchElementException e) {
+
+				}
+				if (login.driver.findElement(By.xpath("//div[@class='text-dots']")).isDisplayed()) {
+					login.Log4j.info(arg1 + " visual is created for right click option on series level");
+					DatabasesTab.DeleteVisual();
+					DatabasesTab.DeleteSeries();
+				} else {
+					Assert.fail(arg1 + " visual is not created");
+				}
+			} else if (arg1.equals("View as Heat map")) {
+				login.driver.findElement(By.xpath("//span[@title='View as ...']")).click();
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath("//span[@title='Heat map']")).click();
+				if (login.driver.findElement(By.xpath("//div[@class='text-dots']")).isDisplayed()) {
+					login.Log4j.info(arg1 + " visual is created for right click option on series level");
+					DatabasesTab.DeleteVisual();
+					DatabasesTab.DeleteSeries();
+				} else {
+					Assert.fail(arg1 + " visual is not created");
+				}
+			} else if (arg1.equals("View as Histogram")) {
+				login.driver.findElement(By.xpath("//span[@title='View as ...']")).click();
+				Thread.sleep(3000);
+				login.driver.findElement(By.xpath("//span[@title='Histogram']")).click();
+				if (login.driver.findElement(By.xpath("//div[@class='text-dots']")).isDisplayed()) {
+					login.Log4j.info(arg1 + " visual is created for right click option on series level");
+					DatabasesTab.DeleteVisual();
+					DatabasesTab.DeleteSeries();
+				} else {
+					Assert.fail(arg1 + " visual is not created");
 				}
 			} else if (arg1.equals("Download")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
@@ -595,6 +639,13 @@ public class SeriesTab {
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DatabasesTab_Active"))).click();
 			break;
+		case "Download":
+			login.Log4j.info("Clicking on " + arg1);
+			Thread.sleep(3000);
+			login.driver
+					.findElement(By.xpath("//div[@title='Download. Type `d`']//span[contains(text(),'" + arg1 + "')]"))
+					.click();
+			break;
 		default:
 			login.Log4j.info("Clicking on " + arg1);
 			Thread.sleep(1000);
@@ -814,6 +865,7 @@ public class SeriesTab {
 	public void should_be_displayed(String arg1) throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		Thread.sleep(3000);
 		ul_element = null;
 		try {
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -839,9 +891,9 @@ public class SeriesTab {
 					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 
 					if (TooltipInfo.contains(arg1)) {
-						login.Log4j.info(arg1 + " series are exists");
+						login.Log4j.info(arg1 + "  are exists");
 					} else {
-						Assert.fail(arg1 + " series doesnot exists");
+						Assert.fail(arg1 + "  doesnot exists");
 					}
 				}
 			}
@@ -1351,6 +1403,202 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on Unpin");
 		} else {
 			Assert.fail("Filter is not pinned");
+		}
+	}
+
+	@And("^Open \"([^\"]*)\" tab$")
+	public void open_tab(String arg1) throws Throwable {
+		login.driver.navigate().refresh();
+		DatabasesTab.ResetMethod();
+		Thread.sleep(5000);
+		WebElement ClearSearchInput = login.driver
+				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
+		action.moveToElement(ClearSearchInput).click().build().perform();
+		Thread.sleep(3000);
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+	}
+
+	@Then("^\"([^\"]*)\" symbol to be displayed for \"([^\"]*)\"$")
+	public void symbol_to_be_displayed_for(String arg1, String arg2) throws Throwable {
+		Thread.sleep(3000);
+		ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		login.Log4j.info("List size is :" + li_All.size());
+
+		if (li_All.size() > 0) {
+			for (int i = 0; i < li_All.size(); i++) {
+				Thread.sleep(4000);
+				int j = i + 1;
+				WebElement checkbox = login.driver
+						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+				checkbox.click();
+				Thread.sleep(1000);
+				element = login.driver.findElement(By.xpath("//li[" + j
+						+ "]//div[@class='series-item--status-icons']//span[contains(text(),'" + arg1 + "')]"));
+				String strLabel = element.getText();
+				// Until the element is not visible keep scrolling
+				jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+				login.Log4j.info(strLabel);
+				if (strLabel.equalsIgnoreCase(arg1)) {
+					login.Log4j.info(arg1 + " is displayed for " + arg2);
+				} else {
+					Assert.fail(arg1 + " is not displayed for " + arg2);
+				}
+			}
+		}
+	}
+
+	@Then("^Search results should include series only from world trend plus DB$")
+	public void search_results_should_include_series_only_from_world_trend_plus_DB() throws Throwable {
+		Thread.sleep(3000);
+		WebElement ele;
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		ul_element = null;
+		try {
+			Thread.sleep(4000);
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			login.Log4j.info("List size is :" + li_All.size());
+			if (li_All.size() > 0) {
+				for (int i = 0; i < li_All.size(); i++) {
+					login.Log4j.info(i);
+					login.Log4j.info(li_All.size());
+					int j = i + 1;
+					Thread.sleep(7000);
+					ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					ele.click();
+					Thread.sleep(2000);
+					login.driver.findElement(By.xpath(
+							"//div[@class='main-series-information--remarks']//span[@class='main-series-information--link']"))
+							.click();
+					Thread.sleep(3000);
+					element = login.driver.findElement(
+							By.xpath("//div[@class='footnotes-bread-crumbs']//div[@class='footnotes-bread-crumb'][1]"));
+					str1 = element.getText();
+					// login.Log4j.info(str1);
+					// login.Log4j.info(Filters.Alldb_db);
+					// Until the element is not visible keep scrolling
+					jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+
+					if (Filters.Alldb_db.equals(str1)) {
+						login.Log4j.info("Search results displayed from World Trend Plus db");
+						Thread.sleep(1000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@title='Close']"))
+								.click();
+						Thread.sleep(1000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='movable-modal--header ui-draggable-handle']//div[@title='Close']"))
+								.click();
+					} else {
+						Assert.fail("Search results not displayed from World Trend Plus db");
+					}
+				}
+			} else {
+				Assert.fail("Sorry,No results were found ");
+			}
+
+		} catch (NoSuchElementException e) {
+			Assert.fail("WebElement is null " + e.getMessage());
+		}
+	}
+
+	@And("^Click on open icon of All insight$")
+	public void click_on_open_icon_of_All_insight() throws Throwable {
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//div[@class='insights-search-count--open-icon']")).click();
+		login.Log4j.info("Clicking on open icon of All insight");
+	}
+
+	@And("^Click on three dots$")
+	public void click_on_three_dots() throws Throwable {
+		Thread.sleep(8000);
+		login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs--drop-down-title']")).click();
+		login.Log4j.info("Clicking on three dots");
+	}
+
+	@Then("^\"([^\"]*)\" popup should be display$")
+	public void popup_should_be_display(String arg1) throws Throwable {
+		Thread.sleep(3000);
+		element = login.driver.findElement(By.xpath("//h4[contains(text(),'" + arg1 + "')]"));
+		str1 = element.getText();
+		if (str1.equals(arg1)) {
+			login.Log4j.info(arg1 + " popup is displayed");
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+		} else {
+			Assert.fail(arg1 + " popup is not displayed");
+		}
+	}
+
+	@And("^Enter keyword \"([^\"]*)\"$")
+	public void enter_keyword(String arg1) throws Throwable {
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(arg1);
+	}
+
+	@And("^Click on x Matched Insights hyperlink$")
+	public void click_on_x_Matched_Insights_hyperlink() throws Throwable {
+		Thread.sleep(5000);
+		element = login.driver.findElement(By.xpath("//span[@class='insights-search-count--count']"));
+		str1 = element.getText();
+		matched_insightsCount = Integer.parseInt(str1);
+		login.Log4j.info(matched_insightsCount);
+		login.driver.findElement(By.xpath("//div[@class='insights-search-count--message']")).click();
+	}
+
+	@Then("^Insights explorer modal window should open with x number of insights listed$")
+	public void insights_explorer_modal_window_should_open_with_x_number_of_insights_listed() throws Throwable {
+		Thread.sleep(5000);
+		element = login.driver.findElement(
+				By.xpath("//div[@class='insights-groups']//div[6]//span[@class='insights-group-item--count']"));
+		str2 = element.getText();
+		login.Log4j.info(str2);
+		str1 = str2.replaceAll("\\(", "").replaceAll("\\)", "");
+		int insightsCount = Integer.parseInt(str1);
+		login.Log4j.info(insightsCount);
+		if (matched_insightsCount == insightsCount) {
+			login.Log4j.info("Insights explorer modal window opened with " + insightsCount + " number of insights");
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+		} else {
+			Assert.fail("Insights explorer modal window not opened with " + insightsCount + " number of insights");
+		}
+	}
+
+	@And("^Select series$")
+	public void select_series() throws Throwable {
+		Thread.sleep(3000);
+		login.Log4j.info("Clicking on  Series tab ");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		login.Log4j.info("List size is :" + li_All.size());
+		for (int i = 0; i < li_All.size(); i++) {
+			Thread.sleep(3000);
+			int j = i + 1;
+			checkbox = login.driver
+					.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+			checkbox.click();
+		}
+	}
+
+	@Then("^\"([^\"]*)\" window should be appeared for selected series$")
+	public void window_should_be_appeared_for_selected_series(String arg1) throws Throwable {
+		Thread.sleep(3000);
+		element = login.driver.findElement(By.xpath("//div[@class='download-modal-title']"));
+		str2 = element.getText();
+		if (str2.contains(arg1)) {
+			login.Log4j.info(arg1 + " window is appeared ");
+			Thread.sleep(1500);
+			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
+		} else {
+			Assert.fail(arg1 + " window is not appeared ");
 		}
 	}
 

@@ -284,3 +284,94 @@ And  Click on drop down icon next to +
 And  Click on "Add to new insight"
 Then New insight should be created and the series should be added to the insight
 
+@SeriesTab
+Scenario: TC_SeriesTab_45:Verify 'Add and group' from dropdown
+Given User enters seriesID "368921927;371376337"
+And  Click on drop down icon next to +
+And  Click on "Add and group"
+Then Selected series should be added as group in My series
+#
+#@SeriesTab
+#Scenario: TC_SeriesTab_46:Check 'N' symbol for key only series filter
+#And   Open "Series" tab
+#And   User has selects "More" as "New only"
+#When  Click on "Apply filter"
+#Then  "N" symbol to be displayed for "New only"
+
+@SeriesTab
+Scenario: TC_SeriesTab_47:Check 'k' symbol for kew only filter
+And   Open "Series" tab
+And   User has selects "More" as "Key only"
+When  Click on "Apply filter"
+Then  "k" symbol to be displayed for "Key only"
+
+@SeriesTab
+Scenario: TC_SeriesTab_48:Check 'F' symbol for forecast series filter
+And   Open "Series" tab
+And   User has selects "More" as "Forecast"
+When  Click on "Apply filter"
+Then  "f" symbol to be displayed for "Forecast series only"
+
+@SeriesTab
+Scenario: TC_SeriesTab_49:Verify 'S' symbol for series suggestions filter
+And   Open "Series" tab
+And   User has selects "More" as "With suggestions for rebased/discontinued series"
+When  Click on "Apply filter"
+Then  "s" symbol to be displayed for "replacement suggestions series"
+
+@SeriesTab
+Scenario: TC_SeriesTab_50:Verifying "New only" filter for series tab
+And   Open "Series" tab
+And   User has selects "More" as "New only"
+When  Click on "Apply filter"
+Then  "new series" should be displayed
+
+@SeriesTab
+Scenario: TC_SeriesTab_51:Verify results by World trend plus database
+And   User enters "GDP" 
+And   User selected "All databases" as "World Trend Plus"
+Then  Search results should include series only from world trend plus DB
+
+@SeriesTab
+Scenario: TC_SeriesTab_52:Verify click of open icon of 'All insights' 
+And   Open "Series" tab
+And Click on open icon of All insight
+Then  The "Insight Explorer" popup should be appeared
+
+@SeriesTab
+Scenario: TC_SeriesTab_53:Verify tabs to display
+And  Click on three dots
+Then  "Select tabs to display" popup should be display
+
+@SeriesTab
+Scenario: TC_SeriesTab_54:Verify hyperlink of matched insights
+And Enter keyword "GDP"
+And Click on x Matched Insights hyperlink
+Then  Insights explorer modal window should open with x number of insights listed
+
+@SeriesTab
+Scenario: TC_SeriesTab_55:Verifying "View as Pie" option for series level
+Given User enters seriesID "7872901;7874601" 
+When User right click on any series
+Then User can able to see "View as Pie" option from dropdown menu
+
+@SeriesTab
+Scenario: TC_SeriesTab_56:Verifying "View as Heat map" option for series level
+Given User enters seriesID "230798301;7027801" 
+When User right click on any series
+Then User can able to see "View as Heat map" option from dropdown menu
+
+@SeriesTab
+Scenario: TC_SeriesTab_57:Verifying "View as Histogram" option for series level
+Given User enters seriesID "230798301" 
+When User right click on any series
+Then User can able to see "View as Histogram" option from dropdown menu
+
+@SeriesTab
+Scenario: TC_SeriesTab_58:Verifying "Download" option for selected series
+Given User enters seriesID "7872901;7874601" 
+And   Select series
+When  Click on "Download"
+Then  "Download" window should be appeared for selected series 
+
+
