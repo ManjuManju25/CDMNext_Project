@@ -2,7 +2,6 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 
-
 import org.testng.AssertJUnit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class Filters {
 	public static String var;
 	public String fltrStatus;
 	String[] unitarr = null;
+	String[] regionarr = null;
 	List<String> filters = new ArrayList<>();
 	String[] sourcearr = null;
 	String[] datearr = null;
@@ -37,6 +37,7 @@ public class Filters {
 	static Boolean status = true;
 	public String seriesId;
 	public String seriesName;
+	public String region;
 	public String unit;
 	public String frequency;
 	String[] source = null;
@@ -110,6 +111,7 @@ public class Filters {
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selects_as(String arg1, String arg2) throws Throwable {
+		Thread.sleep(2000);
 		k = 0;
 		filters.add(arg1);
 		login.Log4j.info(filters);
@@ -183,8 +185,33 @@ public class Filters {
 				login.Log4j.info("clicking on " + arg1);
 				Thread.sleep(3000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_filter"))).click();
-				Thread.sleep(3000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_By_group"))).click();
+				try {
+					regionarr = var.split(";");
+					login.Log4j.info(regionarr[0]);
+					if (regionarr[0].equals("Albania") || regionarr[1].equals("Japan")) {
+						for (String list : regionarr) {
+							Thread.sleep(4000);
+							if (list.equals("Japan")) {
+								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_option"))).click();
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter"))).clear();
+								Thread.sleep(2000);
+								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unit_filter")))
+										.sendKeys(list);
+								Thread.sleep(3000);
+								login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
+							} else {
+								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_option"))).click();
+								Thread.sleep(1000);
+								login.driver.findElement(By.xpath("//tr[@title='" + list + "']")).click();
+							}
+						}
+					}
+
+				} catch (Exception e) {
+					Thread.sleep(3000);
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("region_By_group"))).click();
+				}
 			}
 		} catch (
 
@@ -211,7 +238,7 @@ public class Filters {
 
 	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selected_as(String arg1, String arg2) throws Throwable {
-		Alldb_db=arg2;
+		Alldb_db = arg2;
 		login.Log4j.info("Clicking on " + arg1);
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
@@ -262,7 +289,7 @@ public class Filters {
 					text = tooltip.getText();
 					// login.Log4j.info("Title information is \n" + text);
 					// Until the element is not visible keep scrolling
-					 jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					lines = text.split("\n");
 					login.Log4j.info("filter is " + filters);
 					for (String Tooltip : lines) {
@@ -275,6 +302,8 @@ public class Filters {
 							unit = Tooltip;
 						} else if (Tooltip.contains("Frequency")) {
 							frequency = Tooltip;
+						} else if (Tooltip.contains("Region")) {
+							region = Tooltip;
 						}
 					}
 
@@ -541,8 +570,9 @@ public class Filters {
 
 							if (filters.get(k).equals("Status")) {
 								login.Log4j.info(advancedfltr);
-								sid = searchData.split(";");
+                                Thread.sleep(2000);
 								try {
+									sid = searchData.split(";");
 									if (advancedfltr != null) {
 
 										if (advancedfltr.equals("Subscribed series only")) {
@@ -564,9 +594,13 @@ public class Filters {
 												Assert.fail(sid[0] + " doesn't exists in the  : " + seriesName);
 											}
 										}
+									} else if (seriesId.contains(sid[0]) == true) {
+										login.Log4j.info(sid[0] + " is exists in the" + "\n" + seriesId);
+									} else {
+										Assert.fail(sid[0] + " doesn't exist in " + seriesId);
 									}
 								} catch (NullPointerException e) {
-									Assert.fail("Nullpointer Exception " + e.getMessage());
+									// Assert.fail("Nullpointer Exception " + e.getMessage());
 								}
 
 								if (fltrStatus.equals("Active")) {
@@ -584,24 +618,52 @@ public class Filters {
 										Assert.fail(fltrStatus + " doesn't exists");
 									}
 
-								} else if (seriesId.contains(sid[0]) == true) {
-									login.Log4j.info(sid[0] + " is exists in the" + "\n" + seriesId);
-								} else {
-									Assert.fail(sid[0] + " doesn't exist in " + seriesId);
-
+								} else if (fltrStatus.equals("Rebased")) {
+									login.Log4j.info(fltrStatus);
+									Thread.sleep(2000);
+									element.click();
+									if (login.driver.findElement(By.xpath(
+											"//div[@class='series-changes-time-line--status series-changes-time-line--status__rebased']"))
+											.isDisplayed()) {
+										Thread.sleep(2000);
+										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+												.click();
+										login.Log4j.info(fltrStatus + " series exists");
+									} else {
+										Assert.fail(fltrStatus + " doesn't exists");
+									}
 								}
 							}
 							if (filters.get(k).equals("Unit")) {
 								login.Log4j.info("filter  is : " + filters.get(k));
-								for (int m = 0; m < unitarr.length; m++) {
-									login.Log4j.info("filter option is : " + unitarr[m]);
-									if (unit.contains(unitarr[m]) == true) {
-										login.Log4j.info(unitarr[m] + " is exists in the" + "\n" + unit);
-									} else {
-										Assert.fail(unitarr[m] + " doesn't exist in " + unit);
+								if (unitarr.length == 1) {
+									for (int m = 0; m < unitarr.length; m++) {
+										login.Log4j.info("filter option is : " + unitarr[m]);
+										if (unit.contains(unitarr[m]) == true) {
+											login.Log4j.info(unitarr[m] + " is exists in the" + "\n" + unit);
+										} else {
+											Assert.fail(unitarr[m] + " doesn't exist in " + unit);
+
+										}
 
 									}
+								} else if (unitarr.length == 2) {
+									if (unit.contains(unitarr[0]) == true || unit.contains(unitarr[1]) == true) {
+										login.Log4j.info(
+												unitarr[0] + " OR " + unitarr[1] + " is exists in the" + "\n" + unit);
+									} else {
+										Assert.fail(unitarr[0] + " OR " + unitarr[1] + " doesn't exist in " + unit);
+									}
+								}
+							}
+							if (filters.get(k).equals("Region")) {
+								login.Log4j.info("filter  is : " + filters.get(k));
 
+								if (region.contains(regionarr[0]) == true || region.contains(regionarr[1]) == true) {
+									login.Log4j.info(
+											regionarr[0] + " OR " + regionarr[1] + " is exists in the" + "\n" + region);
+								} else {
+									Assert.fail(regionarr[0] + " OR " + regionarr[1] + " doesn't exist in " + region);
 								}
 							}
 						}
@@ -683,8 +745,8 @@ public class Filters {
 					text = tooltip.getText();
 					// login.Log4j.info(text);
 					// Until the element is not visible keep scrolling
-					 jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					
+					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+
 					if (searchData.contains("AND")) {
 						String[] keyword1 = searchData.split(" AND ");
 						for (String result : keyword1) {
@@ -897,7 +959,7 @@ public class Filters {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					 jse.executeScript("arguments[0].scrollIntoView(true);", checkbox );
+					jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 					if (checkbox.isDisplayed()) {
 						Thread.sleep(1000);
 						mouseOver.moveToElement(checkbox).click().build().perform();

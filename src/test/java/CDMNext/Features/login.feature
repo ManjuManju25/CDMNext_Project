@@ -1,14 +1,14 @@
-Feature: Login to the application under test
+Feature: Login to the application under test 
 
 @Login 
-Scenario Outline: Login functionality for Success and Failure TC'S
- Given User navigates to the CDMNext appliction 
- And   Enters username <username>       
- And   Enters password <password>                
- When  User clicks on "login"    
- Then  Application login should be <status>     
-  
- Examples: 
+Scenario Outline: Login functionality for Success and Failure TC'S 
+	Given User navigates to the CDMNext appliction 
+	And   Enters username <username> 
+	And   Enters password <password> 
+	When  User clicks on "login" 
+	Then  Application login should be <status> 
+	
+	Examples: 
 	
 		| username | password | status |
 		| "nadiya.maduru@shravas.com" | "Thulasi@1988" | successful |  
@@ -23,5 +23,5 @@ Scenario Outline: Login functionality for Success and Failure TC'S
 		| "" | "Thulasi@1988" | unsuccessful-UI |
 		|  "nadiya.maduru@shravas.com" | "" | unsuccessful-UI |
 		
- 
+		
  

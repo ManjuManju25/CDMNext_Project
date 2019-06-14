@@ -13,11 +13,11 @@ import CDMNext.StepDefinations.login;
 		strict = true,
 	  	features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-	   // tags = {"@DB"},
-		tags = {"@FormatVerification,@UI,@ExelDatacomparision,@FilterSearch,@Search,@Footnote,@InsightGeneral,@SeriesTab" },
+	   // tags = {"@DB,@SeriesTab"},
+		tags = {"@UI1,@ExelDatacomparision1,@FilterSearch1,@KeywordSearch1,@SynonymSearch1,@Footnote1,@SeriesTab1" },
 	     monochrome = true,
 		//dryRun = true,
-	    plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
+		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
 				 })
 public class TestRunner {
 	private TestNGCucumberRunner testNGCucumberRunner;

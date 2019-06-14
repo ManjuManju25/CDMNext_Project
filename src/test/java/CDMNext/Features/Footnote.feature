@@ -2,46 +2,46 @@ Feature:  verifying Footnote Functionality
 
 Background:
    Given User has successful logged in
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_01: Verify opening of footnotes from insight explorer window 
     And Set the Preference to insight explorer 
     And Find the Footnote option in menu bar 
      And Click Open to verify the footnotes
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_02: Verify opening of footnotes from new insight
      And Set the Preference to new insight
      And Find the Footnote option in menu bar  
      And Click Open to verify the footnotes
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_03: Verify footnotes open in current tab
      And Find the Footnote option in menu bar  
 	 And Click Open to verify the footnotes
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_04: Verify footnotes open in new tab
           And Find the Footnote option in menu bar 
           And Click 'Open in a new tab' to verify footnotes
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_05: Verify minimizing the footnote window
  		   And Find the Footnote option in menu bar 
 	       And Select '-' icon to minimize  
 		   And Verify minimizing the footnote window
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_06: Verify maximizing the footnote window
           And  select '-' icon to maximize
           And Verify maximizing the footnote window
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_07: Verify opening footnotes in new tab from footnote window
            And Find the Footnote option in menu bar 
            And Click on Open icon to verify footnotes open in new tab
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_08: Verify opening of footnotes as full screen
             And Find the Footnote option in menu bar 
             And Click on cross arrow marks to verify footnotes as full screen
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_09: Verify exit of Footnotes from full screen 
           And Find the Footnote option in menu bar 
           And Click on cross arrow marks to verify footnotes exit full screen
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_10: Verify download option in footnotes when Db's are not selected
           And Find the Footnote option in menu bar 
           And Verify the download option is disabled    

@@ -3,19 +3,19 @@ Feature: SeriesTab
 Background: 
 	Given User has successful logged in 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab 
 	And Select indicator "Transport" as "Freight Traffic" 
 	And Select indicator "Tourism" as "Tourism Statistics" 
 	When Click on "Apply filter" 
 	Then Result should be displayed as per selection 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_02:Verify "All Insights" option 
 	When Click on "All insights" 
 	Then The "Insight Explorer" popup should be appeared 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_03:Verify Reset option  for series tab 
 	Given User enters "GDP" 
 	And   User selects "Source" as "World Bank" 
@@ -23,42 +23,42 @@ Scenario: TC_SeriesTab_03:Verify Reset option  for series tab
 	When Click on "Reset" 
 	Then Selected options should be reset to default 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_04:Verifying "Unselect all" option for series level 
 	Given User enters seriesID "146381801;1380601;245178303" 
 	When User right click on any series 
 	Then User can able to see "Unselect all" option from dropdown menu 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_05:Verify series count for search 
 	Given User enters keyword "gdp" 
 	Then Series count should be matched with displayed result 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_06:Verifying "Copy" option for series level 
 	Given User enters seriesID "1380601;245178303" 
 	When User right click on any series 
 	Then User can able to see "Copy" option from dropdown menu 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_07:Verifying "Copy data" option for series level 
 	Given User enters seriesID "146381801;228912101" 
 	When User right click on any series 
 	Then User can able to see "Copy data" option from dropdown menu 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_08:Verifying "Series Info" option for series level 
 	Given User enters seriesID "261975301;237211603" 
 	When User right click on any series 
 	Then User can able to see "Series Info" option from dropdown menu 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_09:Verifying "View as Chart" option for series level 
 	Given User enters seriesID "357567097;357567537" 
 	When User right click on any series 
 	Then User can able to see "View as Chart" option from dropdown menu 
 	
-@SeriesTab 
+@SeriesTab1 
 Scenario: TC_SeriesTab_10:Verifying "View as Map" option for series level 
 	Given User enters seriesID "7872901;7874601" 
 	When User right click on any series 
@@ -120,16 +120,14 @@ Scenario: TC_SeriesTab_19:Verifying "key only" filter for series tab
 	Then  "Key series" should be displayed 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_20:Verifying "with release schedule" filter for series tab 
+Scenario: TC_SeriesTab_20:Verifying "with release schedule" filter for series tab 
 	Given User enters "FDI" 
 	And   User has selects "More" as "With release schedule" 
 	When  Click on "Apply filter" 
 	Then  User verify corresponding results for selected filter 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_21:Verifying "with suggestions for rebased/discontinued series " filter for series tab 
+Scenario: TC_SeriesTab_21:Verifying "with suggestions for rebased/discontinued series " filter for series tab 
 	Given User enters "PSI" 
 	And   User has selects "More" as "With suggestions for rebased/discontinued series" 
 	When  Click on "Apply filter" 
@@ -292,13 +290,13 @@ Scenario: TC_SeriesTab_45:Verify 'Add and group' from dropdown
 	And  Click on drop down icon next to + 
 	And  Click on "Add and group" 
 	Then Selected series should be added as group in My series 
-	#
-	#@SeriesTab
-	#Scenario: TC_SeriesTab_46:Check 'N' symbol for key only series filter
-	#And   Open "Series" tab
-	#And   User has selects "More" as "New only"
-	#When  Click on "Apply filter"
-	#Then  "N" symbol to be displayed for "New only"
+	
+@SeriesTab 
+Scenario: TC_SeriesTab_46:Check 'N' symbol for key only series filter 
+	And   Open "Series" tab 
+	And   User has selects "More" as "New only" 
+	When  Click on "Apply filter" 
+	Then  "N" symbol to be displayed for "New only" 
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_47:Check 'k' symbol for kew only filter 
@@ -398,16 +396,14 @@ Scenario: TC_SeriesTab_61:Verify "Unselect all" from More actions
 	Then The selected series should be unselected 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_62:Verify Download option for selected series from More actions 
+Scenario: TC_SeriesTab_62:Verify Download option for selected series from More actions 
 	Given User enters seriesID "7027601;6273401" 
 	And  Select series and Click on More actions 
 	And  Select "Download" 
 	Then Download window should be appeared with selected series count 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_63:Verify Footnotes option for series from right pane from More actions 
+Scenario: TC_SeriesTab_63:Verify Footnotes option for series from right pane from More actions 
 	Given User enters seriesID "7876001;6231201" 
 	And  Select series and Click on More actions 
 	And Select "Footnotes" 
@@ -428,8 +424,7 @@ Scenario: TC_SeriesTab_65:Verify "View as Heat map" for series from More actions
 	Then Visual should be created with "Edit Heat map" 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_66:Verify "View as Histogram" for series from More actions 
+Scenario: TC_SeriesTab_66:Verify "View as Histogram" for series from More actions 
 	Given User enters seriesID "6249001" 
 	And  Select series and Click on More actions 
 	And Select "Histogram" 
@@ -443,16 +438,14 @@ Scenario: TC_SeriesTab_67:Verify 'Copy data' from More actions
 	Then The download popup should be opened 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_68:Verify "View as Table" for series level from More actions 
+Scenario: TC_SeriesTab_68:Verify "View as Table" for series level from More actions 
 	Given User enters seriesID "239796903;69851501" 
 	And  Select series and Click on More actions 
 	And Select "View as Table" 
 	Then Visual should be created with "Edit Table" 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_69:Verify Download option for series level from More actions 
+Scenario: TC_SeriesTab_69:Verify Download option for series level from More actions 
 	Given User enters seriesID "1380601;245178303" 
 	And  Select series and Click on More actions 
 	And  Select "Download" 
@@ -473,14 +466,14 @@ Scenario: TC_SeriesTab_71:Verify ' Show Dataset' option from More actions
 	And Click on Back button 
 	Then Should redirect to database tab 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_72:Verify 'Show Database' option from More actions 
 	Given User enters seriesID "1380601;245178303" 
 	And  Select series and Click on More actions 
 	And Select "Show Database" 
 	Then Navigate to the series from db tab 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_73:Verify 'Copy' option from More actions 
 	Given User enters seriesID "261975301;237211603" 
 	And  Select series and Click on More actions 
@@ -544,7 +537,7 @@ Scenario: TC_SeriesTab_81:Verify selected frequency results
 	When Click on "Apply filter" 
 	Then User verify the search results 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_82:Verify selected unit results 
 	And Clear search input 
 	And User selects "Unit" as "IDR;kg" 
@@ -552,37 +545,36 @@ Scenario: TC_SeriesTab_82:Verify selected unit results
 	Then User verify the search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_84:Verify selected status results 
+Scenario: TC_SeriesTab_83:Verify selected status results 
 	And Clear search input 
 	And User selects "Status" as "Rebased" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
 	
 @SeriesTab 
-Scenario:
-TC_SeriesTab_85:Verify selected First obs before and Last ob after results 
+Scenario: TC_SeriesTab_84:Verify selected First obs before and Last ob after results 
 	And Clear search input 
 	And   User selects "Date" as "First observation before;Last observation after" 
 	And   User has clicked on "Apply filter" 
 	Then User verify the search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_86 : Verify keyword search 
+Scenario: TC_SeriesTab_85: Verify keyword search 
 	And Clear search input 
 	Given User enters keyword "gdp" 
 	Then User verify keyword search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_87 : Verify series id search 
+Scenario: TC_SeriesTab_86 : Verify series id search 
 	Given User enters "2113401" 
 	Then  User verify the search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_88 : Verify SR code search 
+Scenario: TC_SeriesTab_87 : Verify SR code search 
 	Given User enters "SR495594" 
 	Then  Verify the search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_89 : Verify mnemonic search 
+Scenario: TC_SeriesTab_88 : Verify mnemonic search 
 	Given User enters "CN.GDP.NM.YTD-RMB-BN-Q" 
 	Then  Verify the search results

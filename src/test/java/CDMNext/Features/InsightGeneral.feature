@@ -470,7 +470,7 @@ Scenario: Tc_InsightGeneral_89:Verify the insight for added keywords in insight 
           And Click on Keywords tab
           And Add Keywords
 		  And Verify the insight for added keywords in insight explorer.
-@InsightGeneral
+@InsightGeneral 
 Scenario: Tc_InsightGeneral_90:Verify adding multiple keywords.
 		  And Create insight
           And Click on File menu

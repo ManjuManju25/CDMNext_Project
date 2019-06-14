@@ -9,44 +9,44 @@ Scenario: TC_01:Verifying Date drop down for available options
     And Select Date drop down
     Then Automatic and Custom Date drop down should be available
 
-@UI   
+@UI1   
 Scenario: TC_02:Verifying default decimal place
     And User Select Series ID  as "310902301"
     And Select Download button
     Then default decimal place to be as 3
 
-@UI     
+@UI1     
 Scenario: TC_03:Verifying available range of decimal places
     And User Select Series ID  as "310902301"
     And Select Download button
     And Select Decimal drop down
     Then decimal range should be as 0-8
 
-@UI     
+@UI1     
 Scenario: TC_04:Verifying Adjust column and wrap text option
     And User Select Series ID  as "310902301"
     And Select Download button
     Then  Adjust column and wrap text option should be present
 
-@UI
+@UI1
 Scenario: TC_05:Verifying Create a chart with series is available
     And User Select Series ID  as "310902301"
     And Select Download button
     Then  Create a chart with series is available
 
-@UI 
+@UI1 
 Scenario: TC_07:Verifying Date order option is available
     And User Select Series ID  as "310902301"
     And Select Download button
    Then  Ascending and  Descending date order radio buttons should be present
 
-@UI     
+@UI1     
  Scenario: TC_08:Verifying orientation option option is available
     And User Select Series ID  as "310902301"
     And Select Download button
     Then  Columns and Rows radio buttons should be present
 
-@UI        
+@UI1        
  Scenario: TC_10:Verifying ADD function option is available
     And User Select Series ID  as "310902301"
     And Select Download button 
@@ -89,7 +89,7 @@ Scenario: TC_15:Verifying Timeframe options
     And Select Download button
    Then Sample=10 should be the default timeframe option
  
-@ExelDatacomparision   
+@ExelDatacomparision1   
 Scenario: TC_19:Verifying Date format as Automic date format
       And User Select Series ID  as "310902301"
       And Select Download button	
@@ -105,7 +105,7 @@ Scenario: TC_19:Verifying Date format as Automic date format
 ########     And User1 Compare "TC_02" exel sheet with Actual data   
 ####
 
-@ExelDatacomparision         
+@ExelDatacomparision1         
   Scenario Outline: TC_20:Verifying Date format as Custom date format
      And User Select Series ID  as "310902301" 
      And Select Download button
@@ -122,21 +122,21 @@ Scenario: TC_19:Verifying Date format as Automic date format
          |"MM/YYYY"                       | "TC_23"          | 
         |"YYYY"                          | "TC_24"          | 
       
- @ExelDatacomparision     
+ @ExelDatacomparision1     
 Scenario: TC_25:Verifying Decimal place option as 0
      And User Select Series ID  as "310902301"
      And Select Download button
     And Select Decimal input as "0"     
      And Compare "TC_25" exel sheet with Actual data
 
- @ExelDatacomparision      
+ @ExelDatacomparision1      
    Scenario: TC_26:Verifying Decimal place option as 8
       And User Select Series ID  as "310902301"
       And Select Download button
       And Select Decimal input as "8"
       And Compare "TC_26" exel sheet with Actual data
 
-@ExelDatacomparision  
+@ExelDatacomparision1  
 Scenario: TC_27: Verifying Data order Series in column as Ascending 
       And User Select Series ID  as "310902301"
      And Select Download button
