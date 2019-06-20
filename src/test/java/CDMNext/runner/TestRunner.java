@@ -1,7 +1,6 @@
 package CDMNext.runner;
 
 import cucumber.api.CucumberOptions;
-
 import cucumber.api.testng.TestNGCucumberRunner;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import org.testng.annotations.*;
@@ -13,8 +12,8 @@ import CDMNext.StepDefinations.login;
 		strict = true,
 	  	features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-	   // tags = {"@DB,@SeriesTab"},
-		tags = {"@UI1,@ExelDatacomparision1,@FilterSearch1,@KeywordSearch1,@SynonymSearch1,@Footnote1,@SeriesTab1" },
+	     tags = {"@Mnemonics1"},
+		//tags = {"@DB1,@Mnemonics1,@SeriesTab1" },
 	     monochrome = true,
 		//dryRun = true,
 		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",

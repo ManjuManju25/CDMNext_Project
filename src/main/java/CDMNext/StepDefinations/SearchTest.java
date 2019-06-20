@@ -1,6 +1,7 @@
 package CDMNext.StepDefinations;
 
 import org.testng.AssertJUnit;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -124,7 +125,7 @@ public class SearchTest {
 				for (int i = 0; i < li_All.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -132,7 +133,7 @@ public class SearchTest {
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					mouseOver.moveToElement(element).build().perform();
-					Thread.sleep(2000);
+					Thread.sleep(1500);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					TooltipInfo = tooltip.getText();
 					//login.Log4j.info("Title information is \n" + TooltipInfo);
@@ -436,7 +437,7 @@ public class SearchTest {
 				for (int i = 0; i < li_All.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -444,7 +445,7 @@ public class SearchTest {
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					mouseOver.moveToElement(element).build().perform();
-					Thread.sleep(2000);
+					Thread.sleep(1500);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					TooltipInfo = tooltip.getText();
 					// Until the element is not visible keep scrolling

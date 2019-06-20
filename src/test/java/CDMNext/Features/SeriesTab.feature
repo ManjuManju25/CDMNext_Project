@@ -3,19 +3,19 @@ Feature: SeriesTab
 Background: 
 	Given User has successful logged in 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab 
 	And Select indicator "Transport" as "Freight Traffic" 
 	And Select indicator "Tourism" as "Tourism Statistics" 
 	When Click on "Apply filter" 
 	Then Result should be displayed as per selection 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_02:Verify "All Insights" option 
 	When Click on "All insights" 
 	Then The "Insight Explorer" popup should be appeared 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_03:Verify Reset option  for series tab 
 	Given User enters "GDP" 
 	And   User selects "Source" as "World Bank" 
@@ -23,42 +23,42 @@ Scenario: TC_SeriesTab_03:Verify Reset option  for series tab
 	When Click on "Reset" 
 	Then Selected options should be reset to default 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_04:Verifying "Unselect all" option for series level 
 	Given User enters seriesID "146381801;1380601;245178303" 
 	When User right click on any series 
 	Then User can able to see "Unselect all" option from dropdown menu 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_05:Verify series count for search 
 	Given User enters keyword "gdp" 
 	Then Series count should be matched with displayed result 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_06:Verifying "Copy" option for series level 
 	Given User enters seriesID "1380601;245178303" 
 	When User right click on any series 
 	Then User can able to see "Copy" option from dropdown menu 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_07:Verifying "Copy data" option for series level 
 	Given User enters seriesID "146381801;228912101" 
 	When User right click on any series 
 	Then User can able to see "Copy data" option from dropdown menu 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_08:Verifying "Series Info" option for series level 
 	Given User enters seriesID "261975301;237211603" 
 	When User right click on any series 
 	Then User can able to see "Series Info" option from dropdown menu 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_09:Verifying "View as Chart" option for series level 
 	Given User enters seriesID "357567097;357567537" 
 	When User right click on any series 
 	Then User can able to see "View as Chart" option from dropdown menu 
 	
-@SeriesTab1 
+@SeriesTab 
 Scenario: TC_SeriesTab_10:Verifying "View as Map" option for series level 
 	Given User enters seriesID "7872901;7874601" 
 	When User right click on any series 

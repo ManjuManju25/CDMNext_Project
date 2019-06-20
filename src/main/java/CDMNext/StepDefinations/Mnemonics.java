@@ -2,9 +2,6 @@ package CDMNext.StepDefinations;
 
 import java.io.File;
 
-
-
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -41,7 +38,7 @@ public class Mnemonics {
 
 		Thread.sleep(10000);
 		WebElement element;
-		//SoftAssert s_assert = new SoftAssert();
+		// SoftAssert s_assert = new SoftAssert();
 		// Create an object of File class to open xlsx file
 		File src = new File(System.getProperty("user.dir") + "\\" + "MnemonicsSheet2.xlsx");
 		// Create an object of FileInputStream class to read excel file
@@ -130,7 +127,7 @@ public class Mnemonics {
 					Assert.fail("Sorry, no results were found here. ");
 				}
 			} catch (NoSuchElementException e) {
-				Assert.fail( e.getMessage());
+				Assert.fail(e.getMessage());
 			}
 		}
 		// close the input stream
@@ -152,6 +149,8 @@ public class Mnemonics {
 
 	@Given("^User enters Mnemonic \"([^\"]*)\"$")
 	public void user_enters_Mnemonic(String arg1) throws Throwable {
+//		login.driver.navigate().refresh();
+//		Thread.sleep(3000);
 		mnemonictxt = arg1;
 		login.Log4j.info("Searching with " + mnemonictxt);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
@@ -175,19 +174,19 @@ public class Mnemonics {
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 			login.Log4j.info("List size is :" + li_All.size());
 
-			if (li_All.size() > 0) {
-				for (int i = 0; i < li_All.size(); i++) {
+			for (int i = 0; i < li_All.size(); i++) {
 
-					if (li_All.size() == 1) {
-						Thread.sleep(2000);
-						element = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
-						mouseOver.moveToElement(element).click().build().perform();
+				if (li_All.size() == 1) {
+					Thread.sleep(2000);
+					element = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
+					mouseOver.moveToElement(element).click().build().perform();
+					try {
 						Thread.sleep(3000);
-						List<WebElement> seriesinfo = login.driver
-								.findElements(By.xpath(login.LOCATORS.getProperty("sid_srcode_mnemonic")));
-						for (WebElement mnemonicText : seriesinfo) {
-							String ssi = mnemonicText.getText();
-							// login.Log4j.info(ssi);
+						WebElement seriesinfo = login.driver
+								.findElement(By.xpath(login.LOCATORS.getProperty("sid_srcode_mnemonic")));
+						String ssi = seriesinfo.getText();
+						// login.Log4j.info(ssi);
+						if (ssi != null) {
 							if ((series_id.length) == 1 && ssi.contains(mnemonictxt) == true
 									&& ssi.contains(series_id[0]) == true) {
 								login.Log4j.info(mnemonictxt + " AND " + series_id[0] + " exists in " + "\n" + ssi);
@@ -197,21 +196,14 @@ public class Mnemonics {
 								MnemonicSearch = true;
 
 							}
-							/*
-							 * } else if ((series_id.length) == 2 && ssi.contains(mnemonictxt) == true &&
-							 * ssi.contains(series_id[0]) == true || ssi.contains(series_id[1]) == true) {
-							 * login.Log4j.info(mnemonictxt + " AND " + series_id[0] + " OR " + series_id[1]
-							 * + " exists in " + "\n" + ssi); Thread.sleep(2000);
-							 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
-							 * .click(); login.Log4j.info("Closing... SSI window"); MnemonicSearch = true; }
-							 */
+							
 							if (MnemonicSearch == false) {
 								if (ssi.contains(mnemonictxt) != true) {
 									Thread.sleep(3000);
 									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 											.click();
 									login.Log4j.info("Closing... SSI window");
-									Assert.fail(mnemonictxt + "  does not exists in " + "\n" +ssi);
+									Assert.fail(mnemonictxt + "  does not exists in " + "\n" + ssi);
 								} else {
 									Thread.sleep(3000);
 									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
@@ -220,18 +212,25 @@ public class Mnemonics {
 									Assert.fail(series_id[0] + "  does not exists in " + "\n" + ssi);
 								}
 							}
+
 						}
-					} else if (li_All.size() == 2) {
+					} catch (Exception e) {
 						Thread.sleep(2000);
-						int j = i + 1;
-						element = login.driver
-								.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-						mouseOver.moveToElement(element).click().build().perform();
+						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+						Assert.fail("SSP window is blank");
+					}
+
+				} else if (li_All.size() == 2) {
+					Thread.sleep(2000);
+					int j = i + 1;
+					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+					mouseOver.moveToElement(element).click().build().perform();
+					try {
 						Thread.sleep(3000);
-						List<WebElement> seriesinfo = login.driver
-								.findElements(By.xpath(login.LOCATORS.getProperty("sid_srcode_mnemonic")));
-						for (WebElement mnemonicText : seriesinfo) {
-							String ssi = mnemonicText.getText();
+						WebElement seriesinfo = login.driver
+								.findElement(By.xpath(login.LOCATORS.getProperty("sid_srcode_mnemonic")));
+						String ssi = seriesinfo.getText();
+						if (ssi != null) {
 							// login.Log4j.info(ssi);
 							if ((series_id.length) == 2 && ssi.contains(mnemonictxt) == true
 									&& ssi.contains(series_id[0]) == true || ssi.contains(series_id[1]) == true) {
@@ -248,25 +247,29 @@ public class Mnemonics {
 									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 											.click();
 									login.Log4j.info("Closing... SSI window");
-									Assert.fail(mnemonictxt + "  does not exists in "+ "\n" + ssi);
+									Assert.fail(mnemonictxt + "  does not exists in " + "\n" + ssi);
 								} else {
 									Thread.sleep(3000);
 									login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 											.click();
 									login.Log4j.info("Closing... SSI window");
-									Assert.fail(series_id[0] + " OR " + series_id[1] + "  does not exists in " + "\n" + ssi);
+									Assert.fail(series_id[0] + " OR " + series_id[1] + "  does not exists in " + "\n"
+											+ ssi);
 								}
 
 							}
 						}
-
-					} else {
-						Assert.fail("List size is more than 2");
+					} catch (Exception e) {
+						Thread.sleep(2000);
+						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+						Assert.fail("SSP window is blank");
 					}
-			 }
-			} else {
-				Assert.fail("Sorry, no results were found here. ");
+
+				} else {
+					Assert.fail("List size is more than 2");
+				}
 			}
+
 		} catch (NoSuchElementException e) {
 			Assert.fail("Sorry, no results were found here. ");
 

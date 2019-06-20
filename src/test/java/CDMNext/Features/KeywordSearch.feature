@@ -4,152 +4,152 @@ Feature: Synonym Search
 Background: 
 	Given User has successful logged in 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_01 : Search for an Acronym as "gdp" 
 	Given User enters keyword "gdp" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_02 : Search for an Acronym as "PMI" 
 	Given User enters keyword "PMI" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_03 : Search for an Acronym as "cpi" 
 	Given User enters keyword "cpi" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_04 : Search for an Acronym as "EFTA" 
 	Given User enters keyword "EFTA" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_05 : Search for an Acronym as "GIO" 
 	Given User enters keyword "GIO" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_06 : Search for an Acronym as "FAI" 
 	Given User enters keyword "FAI" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_07 : Search for an Acronym as "fdi" 
 	Given User enters keyword "fdi" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_8 : Search for an Acronym as "GCF" 
 	Given User enters keyword "GCF" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_9 : Search for an Acronym as "imf" 
 	Given User enters keyword "imf" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_10 : Search for an Acronym as "SOE" 
 	Given User enters keyword "SOE" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_11 : Search for an Acronym as "fob" 
 	Given User enters keyword "fob" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_12 : Search for an Acronym as "gnp" 
 	Given User enters keyword "gnp" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_13 : Search for an Acronym as "ppp" 
 	Given User enters keyword "ppp" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_14 : Search for an Acronym as "lcd" 
 	Given User enters keyword "lcd" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 	
+@SynonymSearch 	
 Scenario: TC_SynonymSearch_15 : Search for an Acronym as "PCE" 
 	Given User enters keyword "PCE" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_16 : Search for an Acronym as "bis" 
 	Given User enters keyword "bis" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_17 : Search for an Acronym as "icbc" 
 	Given User enters keyword "icbc" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_18 : Search for an Acronym as "ipi" 
 	Given User enters keyword "ipi" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_19 : Search for an Acronym as "ytd" 
 	Given User enters keyword "ytd" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_20 : Search for an Acronym as "NPL" 
 	Given User enters keyword "NPL" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_21 : Search for an Acronym as "usd" 
 	Given User enters keyword "usd" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_22 : Search for an Acronym as "yoy" 
 	Given User enters keyword "yoy" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_23 : Search for an Acronym as "mfg" 
 	Given User enters keyword "mfg" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_24 : Search for an Acronym as "crb" 
 	Given User enters keyword "crb" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_25 : Search for an Acronym as "ism" 
 	Given User enters keyword "ism" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_26 : Search for an Acronym as "avg" 
 	Given User enters keyword "avg" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_27 : Search for an Acronym as "wti" 
 	Given User enters keyword "wti" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_28 : Search for an Acronym as "fed" 
 	Given User enters keyword "fed" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_29 : Search for an Acronym as "atm" 
 	Given User enters keyword "atm" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_30 : Search for an Acronym as "eu" 
 	Given User enters keyword "eu" 
 	Then User verify keyword search results 
@@ -539,47 +539,47 @@ Scenario: TC_SynonymSearch_107 : Search for an Acronym as "cbi"
 	Given User enters keyword "cbi" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_108: Search for an Acronym as "cci" 
 	Given User enters keyword "cci" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_109 : Search for an Acronym as "CD" 
 	Given User enters keyword "CD" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_110 : Search for an Acronym as "CDS" 
 	Given User enters keyword "CDS" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_111 : Search for an Acronym as "cgpi" 
 	Given User enters keyword "cgpi" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_112 : Search for an Acronym as "Cil" 
 	Given User enters keyword "Cil" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1
+@SynonymSearch
 Scenario: TC_SynonymSearch_113 : Search for an Acronym as "Cis" 
 	Given User enters keyword "Cis" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_114 : Search for an Acronym as "cli" 
 	Given User enters keyword "cli" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_115 : Search for an Acronym as "cnh" 
 	Given User enters keyword "cnh" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_116 : Search for an Acronym as "ccfi" 
 	Given User enters keyword "ccfi" 
 	Then  User verify keyword search results 
@@ -1024,37 +1024,37 @@ Scenario: TC_SynonymSearch_204 : Search for an Acronym as "VAT"
 	Given User enters keyword "VAT" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_205 : Search for an Acronym as "Pondicherry" 
 	Given User enters keyword "Pondicherry" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_206 : Search for an Acronym as "Kolkata" 
 	Given User enters keyword "Kolkata" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch
 Scenario: TC_SynonymSearch_207 : Search for an Acronym as "Odisha" 
 	Given User enters keyword "Odisha" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_208 : Search for an Acronym as "Mumbai" 
 	Given User enters keyword "Mumbai" 
 	Then User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_209 : Search for an Acronym as "Madras" 
 	Given User enters keyword "Madras" 
 	Then User verify keyword search results 
 	
-@KeywordSearch1 
+@KeywordSearch 
 Scenario: TC_KeywordSearch_210 
 	Given User enters keyword "agricultural machinery" 
 	Then  User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch 
 Scenario: TC_SynonymSearch_211 : Search for an Acronym as "embi" 
 	Given User enters keyword "embi" 
 	Then  User verify keyword search results 
@@ -1064,7 +1064,7 @@ Scenario: TC_KeywordSearch_212 : Search for an Acronym as "real state"
 	Given User enters keyword "real state" 
 	Then  User verify keyword search results 
 	
-@SynonymSearch1 
+@SynonymSearch
 Scenario: TC_SynonymSearch_213 : Search for an Acronym as "lme" 
 	Given User enters keyword "lme" 
 	Then User verify keyword search results 
@@ -1079,7 +1079,7 @@ Scenario: TC_SynonymSearch_215 : Search for an Acronym as "cis"
 	Given User enters keyword "cis" 
 	Then User verify keyword search results 
 	
-@KeywordSearch1 
+@KeywordSearch 
 Scenario: TC_KeywordSearch_216 
 	Given User enters keyword "Electricity AND gas AND India" 
 	Then  User verifies keyword search results 
@@ -1094,7 +1094,7 @@ Scenario: TC_KeywordSearch_218
 	Given User enters keyword "Electricity AND gas and India" 
 	Then  User verifies keyword search results 
 	
-@KeywordSearch1 
+@KeywordSearch 
 Scenario: TC_KeywordSearch_219 
 	Given User enters keyword "oil OR water OR industry" 
 	Then  User verifies keyword search results 
@@ -1109,7 +1109,7 @@ Scenario: TC_KeywordSearch_221
 	Given User enters keyword "oil or water or industry" 
 	Then  User verifies keyword search results 
 	
-@KeywordSearch11 
+@KeywordSearch 
 Scenario: TC_KeywordSearch_222 
 	Given User enters keyword "capital NOT price NOT Algeria" 
 	Then  User verifies keyword search results 
@@ -1139,7 +1139,7 @@ Scenario: TC_KeywordSearch_227
 	Given User enters keyword "capital and price or Algeria" 
 	Then  User verifies keyword search results 
 	
-@KeywordSearch1 
+@KeywordSearch 
 Scenario: TC_KeywordSearch_228 
 	Given User enters keyword "fuel OR price AND Albania" 
 	Then  User verifies keyword search results 
@@ -1154,7 +1154,7 @@ Scenario: TC_KeywordSearch_230
 	Given User enters keyword "fuel or price and Albania" 
 	Then  User verifies keyword search results 
 	
-@KeywordSearch1 
+@KeywordSearch 
 Scenario: TC_KeywordSearch_231 
 	Given User enters keyword "population OR India NOT average" 
 	Then  User verifies keyword search results 
@@ -1174,7 +1174,7 @@ Scenario: TC_KeywordSearch_234
 	Given User enters keyword "gas NOT oil AND state" 
 	Then  User verifies keyword search results 
 	
-@KeywordSearch1 
+@KeywordSearch 
 Scenario: TC_KeywordSearch_235 
 	Given User enters keyword "gas not oil AND state" 
 	Then  User verifies keyword search results 

@@ -1,0 +1,17 @@
+
+{
+	"browserTimeout" : 0,
+	"debug" : false,
+	"host" : 10.20.70.1,
+	"port" : 4444,
+	"role" : "hub",
+	"timeout" : 3000,
+	"cleanUpCycle" : 5000,
+	"capabilityMatcher" : "org.openqa.grid.internal.utils.DefaultCapabilityMatcher",
+	"newSessionWaitTimeout" : -1,
+	"throwOnCapabilityNotPresent" : true,
+	"registry" : "org.openqa.grid.internal.DefaultGridRegistry",
+	"servlets" : [],
+	"withoutServlets": [],
+	"custom": {},
+}
