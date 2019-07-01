@@ -1,24 +1,30 @@
 package CDMNext.runner;
 
+import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
 import cucumber.api.CucumberOptions;
-import cucumber.api.testng.TestNGCucumberRunner;
+
 import cucumber.api.testng.CucumberFeatureWrapper;
+import cucumber.api.testng.TestNGCucumberRunner;
+
+
 import org.testng.annotations.*;
 import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
+
 //import CDMNext.util.SendmailWithAttachment;
 
 @CucumberOptions(// features="classpath:",
 		strict = true,
-	  	features = "src/test/java/CDMNext/Features/",
+		features = "src/test/java/CDMNext/Features/", 
 		glue = { "CDMNext.StepDefinations" }, 
-	     tags = {"@Mnemonics1"},
-		//tags = {"@DB1,@Mnemonics1,@SeriesTab1" },
-	     monochrome = true,
+		tags = {"@SeriesTab,@DB,@Search,@FilterSearch ,@Footnote,@ExelDatacomparision,@FormatVerification,@UI" },
+		// tags = {"@DB1,@Mnemonics1,@SeriesTab1" },
+		monochrome = true,
 		//dryRun = true,
-		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
-				 })
+		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
 public class TestRunner {
+
 	private TestNGCucumberRunner testNGCucumberRunner;
 
 	@BeforeSuite
@@ -32,18 +38,24 @@ public class TestRunner {
 
 	// TestNG @Test
 	@Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
-	public void feature(CucumberFeatureWrapper cucumberFeature) {
+	public void feature(CucumberFeatureWrapper cucumberFeature) throws Throwable {
 		login.Log4j.info("\nInside TestNG > @Test");
 		testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
+//		testNGCucumberRunner.runScenario(eventwrapper.getPickleEvent());
+
+
 	}
 
 	// TestNG @DataProvider
-	@DataProvider
-	public Object[][] features() {
-		login.Log4j.info("\nInside TestNG > @DataProvider");
-		return testNGCucumberRunner.provideFeatures();
-	}
-
+	 @DataProvider public Object[][] features() {
+	 login.Log4j.info("\nInside TestNG > @DataProvider");
+	 return testNGCucumberRunner.provideFeatures(); }
+	
+	/*@DataProvider(parallel=true)
+    public Object[][] features() {
+       // return testNGCucumberRunner.provideFeatures();    	
+    	 return testNGCucumberRunner.provideScenarios();
+    }*/
 	// TestNG @Aftersuite
 	@AfterSuite
 	public void tearDownClass() throws Throwable {
@@ -56,8 +68,8 @@ public class TestRunner {
 			login.driver = null;
 			HTML_Report.html_Footer();
 			HTML_Report.bw.close();
-		// login.Log4j.info("\n ****Inside Email*****");
-		// SendmailWithAttachment.report();
+			// login.Log4j.info("\n ****Inside Email*****");
+			// SendmailWithAttachment.report();
 		}
 	}
 }

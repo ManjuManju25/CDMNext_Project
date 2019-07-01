@@ -22,6 +22,7 @@ import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.asserts.SoftAssert;
 
+import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -66,17 +67,14 @@ public class SeriesTab {
 
 	@Given("^User enters seriesID \"([^\"]*)\"$")
 	public void user_enters_seriesID(String arg1) throws Throwable {
-		login.driver.navigate().refresh();
-		DatabasesTab.ResetMethod();
+//		login.driver.navigate().refresh();
+		CommonFunctionality.ResetMethod();
 		searchData = arg1;
 		login.Log4j.info("Searching with " + searchData);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-		}
+		CommonFunctionality.UnselectMethod();
 
 	}
 
@@ -186,8 +184,14 @@ public class SeriesTab {
 				}
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title"))).isDisplayed()) {
 					login.Log4j.info("Chart visual is created for " + arg1 + " right click option");
-					DatabasesTab.DeleteVisual();
-					DatabasesTab.DeleteSeries();
+					CommonFunctionality.DeleteVisual();
+					/*try {
+						Thread.sleep(1000);
+						login.driver.findElement(By.xpath("//button[contains(text(),'Refresh')]")).click();
+					}catch(Exception e) {
+						//
+					}*/
+					CommonFunctionality.DeleteSeries();
 				} else {
 					Assert.fail("Chart visual is not created");
 				}
@@ -207,8 +211,8 @@ public class SeriesTab {
 				}
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title"))).isDisplayed()) {
 					login.Log4j.info("Map visual is created " + arg1 + " right click option");
-					DatabasesTab.DeleteVisual();
-					DatabasesTab.DeleteSeries();
+					CommonFunctionality.DeleteVisual();
+					CommonFunctionality.DeleteSeries();
 				} else {
 					Assert.fail("Map visual is not created");
 				}
@@ -229,8 +233,8 @@ public class SeriesTab {
 
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_title"))).isDisplayed()) {
 					login.Log4j.info("Table visual is created for right click option on series level");
-					DatabasesTab.DeleteVisual();
-					DatabasesTab.DeleteSeries();
+					CommonFunctionality.DeleteVisual();
+					CommonFunctionality.DeleteSeries();
 				} else {
 					Assert.fail("Table visual is not created");
 				}
@@ -250,8 +254,8 @@ public class SeriesTab {
 				}
 				if (login.driver.findElement(By.xpath("//div[@class='text-dots']")).isDisplayed()) {
 					login.Log4j.info(arg1 + " visual is created for right click option on series level");
-					DatabasesTab.DeleteVisual();
-					DatabasesTab.DeleteSeries();
+					CommonFunctionality.DeleteVisual();
+					CommonFunctionality.DeleteSeries();
 				} else {
 					Assert.fail(arg1 + " visual is not created");
 				}
@@ -261,8 +265,8 @@ public class SeriesTab {
 				login.driver.findElement(By.xpath("//span[@title='Heat map']")).click();
 				if (login.driver.findElement(By.xpath("//div[@class='text-dots']")).isDisplayed()) {
 					login.Log4j.info(arg1 + " visual is created for right click option on series level");
-					DatabasesTab.DeleteVisual();
-					DatabasesTab.DeleteSeries();
+					CommonFunctionality.DeleteVisual();
+					CommonFunctionality.DeleteSeries();
 				} else {
 					Assert.fail(arg1 + " visual is not created");
 				}
@@ -272,8 +276,8 @@ public class SeriesTab {
 				login.driver.findElement(By.xpath("//span[@title='Histogram']")).click();
 				if (login.driver.findElement(By.xpath("//div[@class='text-dots']")).isDisplayed()) {
 					login.Log4j.info(arg1 + " visual is created for right click option on series level");
-					DatabasesTab.DeleteVisual();
-					DatabasesTab.DeleteSeries();
+					CommonFunctionality.DeleteVisual();
+					CommonFunctionality.DeleteSeries();
 				} else {
 					Assert.fail(arg1 + " visual is not created");
 				}
@@ -431,13 +435,19 @@ public class SeriesTab {
 
 		try {
 
-			if (login.driver.findElement(By.xpath(
+			/*if (login.driver.findElement(By.xpath(
 					"//div[@class='series-preview--header ui-draggable-handle']//div[@class='single-series-preview--title ']"))
 					.isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-			} else {
+			}*/
+			if(login.driver.findElement(By.xpath("//div[@class='single-series-preview--title discounted']")).isDisplayed()) {
+				login.Log4j.info("SSP window is displayed");
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+			}
+			else {
 				Assert.fail("SSP window is not displayed");
 			}
 		} catch (NoSuchElementException e) {
@@ -514,11 +524,7 @@ public class SeriesTab {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 				login.Log4j.info("Clicking on Top button");
 			}
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-				Thread.sleep(6000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-				login.Log4j.info("Clicking on Unselect");
-			}
+			CommonFunctionality.UnselectMethod();
 			break;
 
 		case "Add":
@@ -715,14 +721,14 @@ public class SeriesTab {
 			ele=login.driver.findElement(By.xpath("//div[@class='insight-page-view-tab ui-sortable-handle']//a[@title='View 1']"));
 	        action.contextClick(ele).build().perform();
 	        Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[4]//span[@title='Delete view']")).click();
+	        login.driver.findElement(By.xpath("//span[contains(text(),'Delete view')]")).click();
 			login.driver.navigate().refresh();
 			System.out.println("Refresh :" + login.driver.getCurrentUrl());
 			Thread.sleep(5000);
 			WebElement ClearSearchInput = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
 			action.moveToElement(ClearSearchInput).click().build().perform();
-			SearchTest.ClearSelection();
+			CommonFunctionality.ClearSelection();
 			refresh = true;
 		}
 		login.Log4j.info("indicator size is " + indicator.size());
@@ -1260,7 +1266,7 @@ public class SeriesTab {
 				Assert.fail("The selected series are not added to the series tab");
 			}
 		}
-		DatabasesTab.DeleteSeries();
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@Then("^Highlighted visual series should be replaced new series$")
@@ -1291,8 +1297,8 @@ public class SeriesTab {
 				login.Log4j.info("Highlighted visual series not replaced with new series");
 			}
 		}
-		DatabasesTab.DeleteVisual();
-		DatabasesTab.DeleteSeries();
+		CommonFunctionality.DeleteVisual();
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@Then("^Choose any existing insights to add this series$")
@@ -1335,7 +1341,7 @@ public class SeriesTab {
 					Assert.fail("The selected series are not added to the existing insight");
 				}
 			}
-			DatabasesTab.DeleteSeries();
+			CommonFunctionality.DeleteSeries();
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
 
@@ -1373,7 +1379,7 @@ public class SeriesTab {
 					Assert.fail("The selected series are not added to the new insight");
 				}
 			}
-			DatabasesTab.DeleteSeries();
+			CommonFunctionality.DeleteSeries();
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
 		} else {
@@ -1437,10 +1443,9 @@ public class SeriesTab {
 	@And("^Open \"([^\"]*)\" tab$")
 	public void open_tab(String arg1) throws Throwable {
 //		login.driver.navigate().refresh();
-		DatabasesTab.TopMethod();
+		CommonFunctionality.TopMethod();
 		try {
 			Thread.sleep(5000);
-			login.Log4j.info("vchbjcbk");
 			login.driver.findElement(By.xpath("//div[@class='dropdown--button']//div[@class='icon--red-cross database-selector--clear-icon']")).click();
 		}catch(Exception e) {
 			
@@ -1451,7 +1456,7 @@ public class SeriesTab {
 		} catch (Exception e) {
 
 		}
-		DatabasesTab.ResetMethod();
+		CommonFunctionality.ResetMethod();
 		Thread.sleep(5000);
 		WebElement ClearSearchInput = login.driver
 				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
@@ -1470,7 +1475,7 @@ public class SeriesTab {
 
 		if (li_All.size() > 0) {
 			for (int i = 0; i < li_All.size(); i++) {
-				Thread.sleep(4000);
+				Thread.sleep(2000);
 				int j = i + 1;
 				WebElement checkbox = login.driver
 						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -1857,7 +1862,7 @@ public class SeriesTab {
 		WebElement ClearSearchInput = login.driver
 				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
 		action.moveToElement(ClearSearchInput).click().build().perform();
-		DatabasesTab.ResetMethod();
+		CommonFunctionality.ResetMethod();
 	}
 
 	@Then("^Verify the search results$")

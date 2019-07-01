@@ -114,7 +114,7 @@ Scenario: TC_SeriesTab_18:Verifying SSP for series
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_19:Verifying "key only" filter for series tab 
-	Given User enters keyword "GCF" 
+	Given User enters "GCF" 
 	And   User has selects "More" as "Key only" 
 	When  Click on "Apply filter" 
 	Then  "Key series" should be displayed 

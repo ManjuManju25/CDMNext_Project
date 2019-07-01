@@ -1,6 +1,6 @@
 package CDMNext.StepDefinations;
-
 import org.testng.AssertJUnit;
+import CDMNext.util.CommonFunctionality;
 
 import java.io.File;
 import java.io.FileReader;
@@ -64,9 +64,10 @@ public class SearchTest {
 		Thread.sleep(5000);
 		currentKeyword = keyword;
 		login.driver.navigate().refresh();
+		
 		login.Log4j.info("Searching with " + currentKeyword);
 		try {
-			ClearSelection();
+			CommonFunctionality.ClearSelection();
 		} catch (Exception e) {
 			//
 		} finally {
@@ -719,28 +720,6 @@ public class SearchTest {
 				Filters.showdata = list.getText();
 			}
 		}
-	}
-
-	public static void ClearSelection() throws InterruptedException {
-		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
-			login.Log4j.info("Clicking on Top button");
-		}
-		if (reset.size() > 0) {
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
-				login.Log4j.info("Clicking on Reset button");
-			}
-		}
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-			login.Log4j.info("Clicking on Unselect button");
-		}
-
 	}
 
 	public boolean search_validation(String searchText, String listwords) throws Throwable {

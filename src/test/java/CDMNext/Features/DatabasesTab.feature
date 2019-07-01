@@ -1168,10 +1168,5 @@ Scenario: TC_DB_100:More actions - Verify Copy links for multiple series
 			#			And Click on "Databases" 
 			#			Then Search panel should be expanded and Databases tab should be loaded 
 			#			
-			#		@DB 
-			#		Scenario: TC_DB_172:Verify unsubscribed filter 
-			#			And Select "Subscribed series only" from More filter 
-			#			And User has clicked on "Apply filter" 
-			#			Then Unsubscribed database should not be shown in database tab 
-			#			
+			
 			

@@ -3,6 +3,9 @@ package CDMNext.StepDefinations;
 import org.testng.Assert;
 
 import org.testng.AssertJUnit;
+
+import CDMNext.util.CommonFunctionality;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -69,25 +72,14 @@ public class Filters {
 		}
 		try {
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-			List<WebElement> clearIcon = login.driver
-					.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
-
+			
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 				login.Log4j.info("Clicking on Top button");
 			}
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-				login.Log4j.info("Clicking on Unselect");
-			}
-			if (clearIcon.size() > 0) {
-				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).isDisplayed()) {
-					Thread.sleep(2000);
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).click();
-				}
-			}
+			CommonFunctionality.UnselectMethod();
+			CommonFunctionality.AlldbClear();
 			if (reset.size() > 0) {
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
 					Thread.sleep(2000);
@@ -890,8 +882,8 @@ public class Filters {
 		Morefilter = arg1;
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		DatabasesTab.TopMethod();
-		DatabasesTab.ResetMethod();
+		CommonFunctionality.TopMethod();
+		CommonFunctionality.ResetMethod();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[@title='" + arg2 + "']")).click();
 		login.Log4j.info("Clicking on " + arg2);
@@ -935,7 +927,7 @@ public class Filters {
 
 		if (Morefilter.equalsIgnoreCase("With suggestions for rebased/discontinued series")) {
 			Thread.sleep(3000);
-			DatabasesTab.ResetMethod();
+			CommonFunctionality.ResetMethod();
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_left"))).click();
 		}
