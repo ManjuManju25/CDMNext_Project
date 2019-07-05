@@ -63,7 +63,7 @@ public class SearchTest {
 	public void user_enters_keyword(String keyword) throws Throwable {
 		Thread.sleep(5000);
 		currentKeyword = keyword;
-		login.driver.navigate().refresh();
+//		login.driver.navigate().refresh();
 		
 		login.Log4j.info("Searching with " + currentKeyword);
 		try {

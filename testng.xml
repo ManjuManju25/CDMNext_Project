@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-	 <listeners>
-		<listener class-name="Analyzer.Transformer" />
-	</listeners> 
-	<test thread-count="5" name="Test">
+<suite name="My Test Suite" verbose="2" parallel="methods"
+	thread-count="2">
+<!-- 	<listeners>
+	<listener class-name="Analyzer.Transformer" />
+</listeners> -->
+	<test name="Test">
 		<classes>
 			<class name="CDMNext.runner.TestRunner" />
 		</classes>

@@ -3,6 +3,7 @@ package CDMNext.util;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -10,6 +11,8 @@ import CDMNext.StepDefinations.login;
 
 public class CommonFunctionality {
 	static Actions action = new Actions(login.driver);
+	// create instance of JavaScriptExecutor
+		public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 
 	public static void ClearSelection() throws InterruptedException {
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));

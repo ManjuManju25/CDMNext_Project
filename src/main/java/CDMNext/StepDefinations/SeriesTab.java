@@ -442,7 +442,7 @@ public class SeriesTab {
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 			}*/
-			if(login.driver.findElement(By.xpath("//div[@class='single-series-preview--title discounted']")).isDisplayed()) {
+			if(login.driver.findElement(By.xpath("//div[@class='single-series-preview--title ']")).isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
@@ -492,8 +492,8 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Expand":
-			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).click();
+			//Thread.sleep(5000);
+			//login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).click();
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
@@ -503,8 +503,8 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on Matches only" );
 			login.driver.findElement(By.xpath("//span[contains(text(),'Matches only')]")).click();
 			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
-//			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+		//	login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
+			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "See our Search help":
@@ -1475,12 +1475,12 @@ public class SeriesTab {
 
 		if (li_All.size() > 0) {
 			for (int i = 0; i < li_All.size(); i++) {
-				Thread.sleep(2000);
+				Thread.sleep(1500);
 				int j = i + 1;
 				WebElement checkbox = login.driver
 						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 				checkbox.click();
-				Thread.sleep(1000);
+				Thread.sleep(500);
 				element = login.driver.findElement(By.xpath("//li[" + j
 						+ "]//div[@class='series-item--status-icons']//span[contains(text(),'" + arg1 + "')]"));
 				String strLabel = element.getText();
@@ -1498,9 +1498,9 @@ public class SeriesTab {
 
 	@Then("^Search results should include series only from world trend plus DB$")
 	public void search_results_should_include_series_only_from_world_trend_plus_DB() throws Throwable {
-		Thread.sleep(3000);
 		WebElement ele;
 		login.Log4j.info("Clicking on  Series tab ");
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		ul_element = null;
 		try {
