@@ -292,7 +292,7 @@ Scenario: TC_SeriesTab_45:Verify 'Add and group' from dropdown
 	Then Selected series should be added as group in My series 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_46:Check 'N' symbol for key only series filter 
+Scenario: TC_SeriesTab_46:Check 'N' symbol for new only series filter 
 	And   Open "Series" tab 
 	And   User has selects "More" as "New only" 
 	When  Click on "Apply filter" 
@@ -451,15 +451,15 @@ Scenario: TC_SeriesTab_69:Verify Download option for series level from More acti
 	And  Select "Download" 
 	Then Download window should be appeared with selected series count 
 	
-@SeriesTab 
-Scenario: TC_SeriesTab_70:Verify 'Series info' option from More actions 
-	Given User enters seriesID "146381801;228912101" 
-	And  Select series and Click on More actions 
-	And  Select "Series Info" 
-	Then The SSP window should be opened 
+#@SeriesTab 
+#Scenario: TC_SeriesTab_70:Verify 'Series info' option from More actions 
+#	Given User enters seriesID "146381801;228912101" 
+#	And  Select series and Click on More actions 
+#	And  Select "Series Info" 
+#	Then The SSP window should be opened 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_71:Verify ' Show Dataset' option from More actions 
+Scenario: TC_SeriesTab_70:Verify ' Show Dataset' option from More actions 
 	Given User enters seriesID "239796903;69851501" 
 	And  Select series and Click on More actions 
 	And Select "Show Dataset" 
@@ -467,14 +467,14 @@ Scenario: TC_SeriesTab_71:Verify ' Show Dataset' option from More actions
 	Then Should redirect to database tab 
 	
 @SeriesTab
-Scenario: TC_SeriesTab_72:Verify 'Show Database' option from More actions 
+Scenario: TC_SeriesTab_71:Verify 'Show Database' option from More actions 
 	Given User enters seriesID "1380601;245178303" 
 	And  Select series and Click on More actions 
 	And Select "Show Database" 
 	Then Navigate to the series from db tab 
 	
 @SeriesTab
-Scenario: TC_SeriesTab_73:Verify 'Copy' option from More actions 
+Scenario: TC_SeriesTab_72:Verify 'Copy' option from More actions 
 	Given User enters seriesID "261975301;237211603" 
 	And  Select series and Click on More actions 
 	And Click on "Copy" 
@@ -482,26 +482,26 @@ Scenario: TC_SeriesTab_73:Verify 'Copy' option from More actions
 	Then Series should be pasted in excel as refreshable links 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_74:Verify showing results per page 
+Scenario: TC_SeriesTab_73:Verify showing results per page 
 	And Scroll down and set showing results as "50" per page 
 	Then "50" results should display in a page 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_75:Verify show related data dropdown 
+Scenario: TC_SeriesTab_74:Verify show related data dropdown 
 	And User enters seriesID "5958801" 
 	And Click on Series tab 
 	And Click on "Show related data" 
 	Then "Active,Read More" and "DATASETS" should be available 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_76:Check if the status is correctly displayed 
+Scenario: TC_SeriesTab_75:Check if the status is correctly displayed 
 	And User enters seriesID "5958801" 
 	And Click on Series tab 
 	And Click on "Show related data" 
 	Then Status has to be "Active" 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_77:Check if the 'Read more' is correctly displayed 
+Scenario: TC_SeriesTab_76:Check if the 'Read more' is correctly displayed 
 	And User enters seriesID "5958801" 
 	And Click on Series tab 
 	And Click on "Show related data" 
@@ -509,14 +509,14 @@ Scenario: TC_SeriesTab_77:Check if the 'Read more' is correctly displayed
 	Then Read more should open footnotes of the respective series 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_78:Check if the data sets are correctly displayed 
+Scenario: TC_SeriesTab_77:Check if the data sets are correctly displayed 
 	And User enters seriesID "5958801" 
 	And Click on Series tab 
 	And Click on "Show related data" 
 	Then Respective dataset to be opened when click on each datasets link 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_79:Verify hide related data 
+Scenario: TC_SeriesTab_78:Verify hide related data 
 	And User enters seriesID "5958801" 
 	And Click on Series tab 
 	And Click on "Show related data" 
@@ -524,57 +524,64 @@ Scenario: TC_SeriesTab_79:Verify hide related data
 	Then The related data dropdown should be collapsed 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_80:Verify selected Region results 
+Scenario: TC_SeriesTab_79:Verify selected Region results 
 	And Clear search input 
 	And User selects "Region" as "Albania;Japan" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_81:Verify selected frequency results 
+Scenario: TC_SeriesTab_80:Verify selected frequency results 
 	And Clear search input 
 	And User selects "Frequency" as "Monthly;Semiannually" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
 	
 @SeriesTab
-Scenario: TC_SeriesTab_82:Verify selected unit results 
+Scenario: TC_SeriesTab_81:Verify selected unit results 
 	And Clear search input 
 	And User selects "Unit" as "IDR;kg" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
-	
-@SeriesTab 
-Scenario: TC_SeriesTab_83:Verify selected status results 
-	And Clear search input 
-	And User selects "Status" as "Rebased" 
-	When Click on "Apply filter" 
-	Then User verify the search results 
-	
-@SeriesTab 
-Scenario: TC_SeriesTab_84:Verify selected First obs before and Last ob after results 
+
+@SeriesTab
+Scenario: TC_SeriesTab_82:Verify selected First obs before and Last ob after results 
 	And Clear search input 
 	And   User selects "Date" as "First observation before;Last observation after" 
 	And   User has clicked on "Apply filter" 
 	Then User verify the search results 
 	
+@SeriesTab
+Scenario: TC_SeriesTab_83:Verify selected status results 
+	And Clear search input 
+	And User selects "Status" as "Rebased" 
+	When Click on "Apply filter" 
+	Then User verify the search results
+	
 @SeriesTab 
-Scenario: TC_SeriesTab_85: Verify keyword search 
+Scenario: TC_SeriesTab_84: Verify keyword search 
 	And Clear search input 
 	Given User enters keyword "gdp" 
 	Then User verify keyword search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_86 : Verify series id search 
+Scenario: TC_SeriesTab_85 : Verify series id search 
 	Given User enters "2113401" 
 	Then  User verify the search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_87 : Verify SR code search 
+Scenario: TC_SeriesTab_86 : Verify SR code search 
 	Given User enters "SR495594" 
 	Then  Verify the search results 
 	
 @SeriesTab 
-Scenario: TC_SeriesTab_88 : Verify mnemonic search 
+Scenario: TC_SeriesTab_87 : Verify mnemonic search 
 	Given User enters "CN.GDP.NM.YTD-RMB-BN-Q" 
 	Then  Verify the search results
+	
+@SeriesTab 
+Scenario: TC_SeriesTab_88:Verify 'Series info' option from More actions 
+	Given User enters seriesID "146381801;228912101" 
+	And  Select series and Click on More actions 
+	And  Select "Series Info" 
+	Then The SSP window should be opened 

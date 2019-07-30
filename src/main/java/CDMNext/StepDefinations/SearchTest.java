@@ -37,13 +37,9 @@ public class SearchTest {
 	String keyword;
 	String[] listwords = null;
 	Boolean CreateInsight = false;
-	// create instance of JavaScriptExecutor
-	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	// create object of Actions class
-	Actions mouseOver = new Actions(login.driver);
-
+	
 	@Given("^User has successful logged in$")
-	public void user_has_successful_logged_in() throws Throwable {
+	public static void user_has_successful_logged_in() throws Throwable {
 		if (login.logged_in = false) {
 			login.Invoke_browser();
 			login.application_login();
@@ -130,16 +126,16 @@ public class SearchTest {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					mouseOver.moveToElement(checkbox).click().build().perform();
-					Thread.sleep(1000);
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
+					Thread.sleep(500);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					mouseOver.moveToElement(element).build().perform();
-					Thread.sleep(1500);
+					CommonFunctionality.action.moveToElement(element).build().perform();
+					Thread.sleep(1000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					TooltipInfo = tooltip.getText();
-					//login.Log4j.info("Title information is \n" + TooltipInfo);
+					login.Log4j.info("Title information is \n" + TooltipInfo);
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					
 					Boolean KeywordMatch = false;
 					switch (listwords.length) {
@@ -442,15 +438,15 @@ public class SearchTest {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					mouseOver.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					mouseOver.moveToElement(element).build().perform();
+					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(1500);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					TooltipInfo = tooltip.getText();
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					
 					Boolean KeywordMatch = false;
 					if (currentKeyword.toUpperCase().contains("AND") && currentKeyword.toUpperCase().contains("OR")) {

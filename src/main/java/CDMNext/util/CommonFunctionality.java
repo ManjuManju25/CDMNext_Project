@@ -10,9 +10,13 @@ import org.openqa.selenium.interactions.Actions;
 import CDMNext.StepDefinations.login;
 
 public class CommonFunctionality {
-	static Actions action = new Actions(login.driver);
+	public static WebElement footnoteDb;
+	public static String sname;
+	public static int SeriesCount;
+	// create object of Actions class
+	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
-		public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 
 	public static void ClearSelection() throws InterruptedException {
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
@@ -106,6 +110,37 @@ public class CommonFunctionality {
 			login.Log4j.info("Clicking on Top button");
 		}
 	}
+
+	public static void RightClickOnAnySeries() throws InterruptedException {
+		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		login.Log4j.info("List size is :" + li_All.size());
+		for (int i = 0; i < li_All.size(); i++) {
+			// int j = i + 1;
+			int m = i + 1;
+			Thread.sleep(3000);
+			WebElement checkbox = login.driver
+					.findElement(By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+			checkbox.click();
+			WebElement ele = login.driver.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
+			if (i == 4) {
+				Thread.sleep(2000);
+				CommonFunctionality.action.contextClick(ele).build().perform();
+				break;
+			}
+		}
+	}
+
+	public static void SelectedSeriessCount() {
+		try {
+			WebElement count = login.driver.findElement(By.xpath("//span[@class='search-input--selected-count']"));
+			SeriesCount = Integer.parseInt(count.getText());
+			login.Log4j.info(SeriesCount);
+		} catch (NumberFormatException e) {
+			login.Log4j.info(e.getMessage());
+		}
+	}
+
 	public static void AlldbClear() throws InterruptedException {
 		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
 		if (clearIcon.size() > 0) {

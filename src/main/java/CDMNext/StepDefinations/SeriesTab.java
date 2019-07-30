@@ -60,14 +60,10 @@ public class SeriesTab {
 	List<String> seriesText = null;
 	SoftAssert s_assert = new SoftAssert();
 	Boolean newInsight = false;
-	// create object of Actions class
-	Actions action = new Actions(login.driver);
-	// create instance of JavaScriptExecutor
-	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-
+	
 	@Given("^User enters seriesID \"([^\"]*)\"$")
 	public void user_enters_seriesID(String arg1) throws Throwable {
-//		login.driver.navigate().refresh();
+		login.driver.navigate().refresh();
 		CommonFunctionality.ResetMethod();
 		searchData = arg1;
 		login.Log4j.info("Searching with " + searchData);
@@ -97,7 +93,7 @@ public class SeriesTab {
 					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					action.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					copiedSeries = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					SeriesNames = copiedSeries.getText();
@@ -111,7 +107,7 @@ public class SeriesTab {
 			Thread.sleep(2000);
 			rightClickElement = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 			// contextClick() method to do right click on the element
-			action.contextClick(rightClickElement).build().perform();
+			CommonFunctionality.action.contextClick(rightClickElement).build().perform();
 			Thread.sleep(3000);
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());
@@ -416,9 +412,9 @@ public class SeriesTab {
 					element = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--info-icon-i']"));
 					Thread.sleep(1000);
-					action.moveToElement(element).click().build().perform();
+					CommonFunctionality.action.moveToElement(element).click().build().perform();
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					ssp_window_should_be_displayed();
 				}
 			} else {
@@ -492,15 +488,15 @@ public class SeriesTab {
 			login.Log4j.info("Clicking on " + arg1);
 			break;
 		case "Expand":
-			//Thread.sleep(5000);
-			//login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).click();
-			Thread.sleep(3000);
-			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			Thread.sleep(5000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
+			Thread.sleep(7000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Expand')]")).click();
 			break;
 		case "Collapse":
-			Thread.sleep(5000);
 			login.Log4j.info("Clicking on Matches only" );
+			Thread.sleep(10000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'Matches only')]")).click();
 			Thread.sleep(5000);
 		//	login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
@@ -613,18 +609,18 @@ public class SeriesTab {
 
 			}
 			element = login.driver.findElement(By.xpath("//div[@class='series-item--country country-information']"));
-			action.moveToElement(element).click().build().perform();
+			CommonFunctionality.action.moveToElement(element).click().build().perform();
 			Thread.sleep(2000);
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			element = login.driver.findElement(By.xpath("//div[@title='" + arg1 + "']"));
 			Thread.sleep(2000);
-			action.moveToElement(element).click().build().perform();
+			CommonFunctionality.action.moveToElement(element).click().build().perform();
 			break;
 		case "Hide related data":
 			login.Log4j.info("Clicking on " + arg1 + " icon ");
 			element = login.driver.findElement(By.xpath("//div[@title='" + arg1 + "']"));
 			Thread.sleep(2000);
-			action.moveToElement(element).click().build().perform();
+			CommonFunctionality.action.moveToElement(element).click().build().perform();
 			break;
 		case "Read More":
 			Thread.sleep(4000);
@@ -719,7 +715,7 @@ public class SeriesTab {
 			login.driver.findElement(By.xpath("//div[@class='panel-expander panel-expander__left']")).click();
 			Thread.sleep(5000);
 			ele=login.driver.findElement(By.xpath("//div[@class='insight-page-view-tab ui-sortable-handle']//a[@title='View 1']"));
-	        action.contextClick(ele).build().perform();
+			CommonFunctionality.action.contextClick(ele).build().perform();
 	        Thread.sleep(2000);
 	        login.driver.findElement(By.xpath("//span[contains(text(),'Delete view')]")).click();
 			login.driver.navigate().refresh();
@@ -727,7 +723,7 @@ public class SeriesTab {
 			Thread.sleep(5000);
 			WebElement ClearSearchInput = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
-			action.moveToElement(ClearSearchInput).click().build().perform();
+			CommonFunctionality.action.moveToElement(ClearSearchInput).click().build().perform();
 			CommonFunctionality.ClearSelection();
 			refresh = true;
 		}
@@ -773,15 +769,15 @@ public class SeriesTab {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					action.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					action.moveToElement(element).build().perform();
+					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(1000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					text = tooltip.getText();
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					String[] linesplit = text.split("\n");
 
 					for (String str : linesplit) {
@@ -845,7 +841,7 @@ public class SeriesTab {
 
 		if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 			WebElement ele = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
-			action.moveToElement(ele).build().perform();
+			CommonFunctionality.action.moveToElement(ele).build().perform();
 			login.Log4j.info("Selecting " + arg2);
 			Thread.sleep(2000);
 			login.driver
@@ -912,15 +908,15 @@ public class SeriesTab {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					action.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					Thread.sleep(1500);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					action.moveToElement(element).build().perform();
+					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(2000);
 					WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					String TooltipInfo = tooltip.getText();
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 
 					if (TooltipInfo.contains(arg1)) {
 						login.Log4j.info(arg1 + "  are exists");
@@ -953,11 +949,11 @@ public class SeriesTab {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					action.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					Thread.sleep(1100);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					if (filter.equalsIgnoreCase("With release schedule")) {
 						Thread.sleep(2000);
 						element.click();
@@ -1030,7 +1026,7 @@ public class SeriesTab {
 		login.Log4j.info(stext);
 		Thread.sleep(2000);
 		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_item_info")));
-		action.moveToElement(ele1).build().perform();
+		CommonFunctionality.action.moveToElement(ele1).build().perform();
 		login.Log4j.info("Clicking on " + arg1 + " icon");
 		Thread.sleep(3000);
 		login.driver
@@ -1072,7 +1068,7 @@ public class SeriesTab {
 		}
 		Thread.sleep(5000);
 		// Until the element is not visible keep scrolling
-		jse.executeScript("arguments[0].scrollIntoView(true);", dbase);
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", dbase);
 		String txt = dbase.getText();
 		login.Log4j.info(txt);
 		if (txt.equals(db)) {
@@ -1164,7 +1160,7 @@ public class SeriesTab {
 			Thread.sleep(2000);
 			addSeries_dropdown = login.driver
 					.findElement(By.xpath("//li[" + j + "]//div[@class='add-to-data-selection--toggle']"));
-			action.moveToElement(addSeries_dropdown).click().build().perform();
+			CommonFunctionality.action.moveToElement(addSeries_dropdown).click().build().perform();
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());
 		}
@@ -1189,7 +1185,7 @@ public class SeriesTab {
 					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					action.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					copiedSeries = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					SeriesNames = copiedSeries.getText();
@@ -1202,7 +1198,7 @@ public class SeriesTab {
 			}
 			mouseHoverElement = login.driver
 					.findElement(By.xpath("//li[" + j + "]//div[@class='add-to-data-selection--toggle']"));
-			action.moveToElement(mouseHoverElement).click().build().perform();
+			CommonFunctionality.action.moveToElement(mouseHoverElement).click().build().perform();
 		} catch (NoSuchElementException e) {
 			Assert.fail("WebElement is null " + e.getMessage());
 		}
@@ -1233,7 +1229,7 @@ public class SeriesTab {
 					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					action.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					copiedSeries = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					SeriesNames = copiedSeries.getText();
@@ -1404,7 +1400,7 @@ public class SeriesTab {
 						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 				checkbox.click();
 				// Until the element is not visible keep scrolling
-				jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+				CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 			}
 			WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("preview_selection")));
 			String count = ele.getText();
@@ -1424,7 +1420,7 @@ public class SeriesTab {
 		login.Log4j.info("Clicking on Pin");
 		element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("filter_by_indicator")));
 		Thread.sleep(2000);
-		action.moveToElement(element).click().build().perform();
+		CommonFunctionality.action.moveToElement(element).click().build().perform();
 	}
 
 	@Then("^filter should be pined/unpined the filter to left panel$")
@@ -1460,7 +1456,7 @@ public class SeriesTab {
 		Thread.sleep(5000);
 		WebElement ClearSearchInput = login.driver
 				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
-		action.moveToElement(ClearSearchInput).click().build().perform();
+		CommonFunctionality.action.moveToElement(ClearSearchInput).click().build().perform();
 		Thread.sleep(3000);
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
@@ -1485,7 +1481,7 @@ public class SeriesTab {
 						+ "]//div[@class='series-item--status-icons']//span[contains(text(),'" + arg1 + "')]"));
 				String strLabel = element.getText();
 				// Until the element is not visible keep scrolling
-				jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+				CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 				login.Log4j.info(strLabel);
 				if (strLabel.equalsIgnoreCase(arg1)) {
 					login.Log4j.info(arg1 + " is displayed for " + arg2);
@@ -1528,7 +1524,7 @@ public class SeriesTab {
 					// login.Log4j.info(str1);
 					// login.Log4j.info(Filters.Alldb_db);
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 
 					if (Filters.Alldb_db.equals(str1)) {
 						login.Log4j.info("Search results displayed from World Trend Plus db");
@@ -1671,7 +1667,7 @@ public class SeriesTab {
 			if (i == 1 || i == 0 && li_All.size() == 1) {
 				ele = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 				element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item-information']"));
-				action.moveToElement(element).build().perform();
+				CommonFunctionality.action.moveToElement(element).build().perform();
 				Thread.sleep(1500);
 				login.driver.findElement(By.xpath("//li[" + j + "]//span[@title='More actions']")).click();
 			}
@@ -1699,9 +1695,9 @@ public class SeriesTab {
 
 	@Then("^Navigate to the series from db tab$")
 	public void navigate_to_the_series_from_db_tab() throws Throwable {
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		element = login.driver.findElement(By.xpath("//span[contains(text(),'Collapse')]"));
-		jse.executeScript("arguments[0].scrollIntoView(true);", element);
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 		Thread.sleep(2000);
 		str1 = element.getText();
 		if (str1.equals("Collapse")) {
@@ -1724,13 +1720,13 @@ public class SeriesTab {
 		Thread.sleep(7000);
 		WebElement ClearSearchInput = login.driver
 				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
-		action.moveToElement(ClearSearchInput).click().build().perform();
+		CommonFunctionality.action.moveToElement(ClearSearchInput).click().build().perform();
 		Thread.sleep(3000);
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(5000);
 		element = login.driver.findElement(By.xpath("//div[@class='search-series-pagination-count']//select"));
-		jse.executeScript("arguments[0].scrollIntoView(true);", element);
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 		Thread.sleep(1500);
 		element.click();
 		Thread.sleep(1500);
@@ -1750,7 +1746,7 @@ public class SeriesTab {
 				WebElement checkbox = login.driver
 						.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 				checkbox.click();
-				jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+				CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 			}
 
 			Thread.sleep(3000);
@@ -1861,7 +1857,7 @@ public class SeriesTab {
 		Thread.sleep(7000);
 		WebElement ClearSearchInput = login.driver
 				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
-		action.moveToElement(ClearSearchInput).click().build().perform();
+		CommonFunctionality.action.moveToElement(ClearSearchInput).click().build().perform();
 		CommonFunctionality.ResetMethod();
 	}
 

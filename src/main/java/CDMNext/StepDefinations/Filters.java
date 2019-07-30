@@ -55,11 +55,7 @@ public class Filters {
 	String Morefilter;
 	WebElement SeriesTab;
 	static String Alldb_db;
-	// create instance of JavaScriptExecutor
-	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	// create object of Actions class
-	Actions mouseOver = new Actions(login.driver);
-
+	
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
@@ -72,7 +68,7 @@ public class Filters {
 		}
 		try {
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-			
+
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
@@ -168,7 +164,7 @@ public class Filters {
 					login.Log4j.info("clicking on " + list);
 					Thread.sleep(3000);
 					element = login.driver.findElement(By.xpath("//tr[@title='" + list + "']"));
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					Thread.sleep(2000);
 					element.click();
 				}
@@ -272,16 +268,16 @@ public class Filters {
 					j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					mouseOver.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					mouseOver.moveToElement(element).build().perform();
+					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(2000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					text = tooltip.getText();
 					// login.Log4j.info("Title information is \n" + text);
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					lines = text.split("\n");
 					login.Log4j.info("filter is " + filters);
 					for (String Tooltip : lines) {
@@ -549,6 +545,13 @@ public class Filters {
 												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true)) {
 									login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1] + " is exists in the"
 											+ "\n" + frequency);
+								} else if ((frequencyarr.length == 2)
+										&& (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| frequency.toUpperCase()
+														.contains(frequencyarr[1].toUpperCase()) == true
+												|| frequency.toUpperCase().contains(str.toUpperCase()) == true)) {
+									login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1] + str +" is exists in the"
+											+ "\n" + frequency);
 								} else {
 									if (frequencyarr.length == 1) {
 										Assert.fail(frequencyarr[0] + " doesn't exist in " + frequency);
@@ -562,7 +565,7 @@ public class Filters {
 
 							if (filters.get(k).equals("Status")) {
 								login.Log4j.info(advancedfltr);
-                                Thread.sleep(2000);
+								Thread.sleep(2000);
 								try {
 									sid = searchData.split(";");
 									if (advancedfltr != null) {
@@ -571,7 +574,7 @@ public class Filters {
 											Thread.sleep(1000);
 											if (checkbox.isDisplayed()) {
 												Thread.sleep(1000);
-												mouseOver.moveToElement(checkbox).click().build().perform();
+												CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 												login.Log4j.info("Subscribed series are clickable");
 											} else {
 												Assert.fail("Subscribed series are not clickable");
@@ -599,7 +602,7 @@ public class Filters {
 									Thread.sleep(2000);
 									WebElement list = login.driver
 											.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-									mouseOver.moveToElement(list).click().build().perform();
+									CommonFunctionality.action.moveToElement(list).click().build().perform();
 									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
 											.isDisplayed()) {
 										Thread.sleep(2000);
@@ -687,7 +690,7 @@ public class Filters {
 		Thread.sleep(2000);
 		WebElement Topic = login.driver.findElement(By.xpath("//span[contains(text(),'" + topic + "')]"));
 		// Until the element is not visible keep scrolling
-		jse.executeScript("arguments[0].scrollIntoView(true);", Topic);
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", Topic);
 		login.Log4j.info("Is 'Topic' displayed? - True/False:: " + Topic.isDisplayed());
 
 	}
@@ -728,16 +731,16 @@ public class Filters {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					mouseOver.moveToElement(checkbox).click().build().perform();
+					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-					mouseOver.moveToElement(element).build().perform();
+					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(1000);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					text = tooltip.getText();
 					// login.Log4j.info(text);
 					// Until the element is not visible keep scrolling
-					jse.executeScript("arguments[0].scrollIntoView(true);", element);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 
 					if (searchData.contains("AND")) {
 						String[] keyword1 = searchData.split(" AND ");
@@ -951,10 +954,10 @@ public class Filters {
 					int j = i + 1;
 					checkbox = login.driver
 							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
+					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 					if (checkbox.isDisplayed()) {
 						Thread.sleep(1000);
-						mouseOver.moveToElement(checkbox).click().build().perform();
+						CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 						login.Log4j.info("Subscribed series are clickable");
 					} else {
 						Assert.fail("Subscribed series are not clickable");
