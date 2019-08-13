@@ -286,7 +286,6 @@ public class login {
 			options.setExperimentalOption("prefs", chromePrefs);
 			options.addArguments("disable-infobars"); // To disable infobars
 			driver = new ChromeDriver(options);
-
 		}
 		long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));
 		driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);

@@ -11,9 +11,9 @@ public class File_delete {
     		File file = new File(System.getProperty("user.home") + "\\Downloads\\Untitled insight.xlsx");
     		
     		if(file.delete()){
-    			System.out.println(file.getName() + " is deleted!");
+    			//System.out.println(file.getName() + " is deleted!");
     		}else{
-    			System.out.println("Delete operation is failed.");
+    			//System.out.println("Delete operation is failed.");
     		}
     	   
     	}catch(Exception e){
