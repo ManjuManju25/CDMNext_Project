@@ -108,7 +108,7 @@ Scenario: Tc_Footnotes_23:Verify menu bar options
 Scenario: Tc_Footnotes_24:Verify view comments, view notifications, view and edit profile 
 		  And click on Open in new tab 
 		  And Verify view comments, view notifications, view and edit profile dropdowns are shown
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_25:Verify redirection to Country specific information in world trend db
 		  And Goto Database Search tab
 		  And Expand the Section
@@ -155,7 +155,7 @@ Scenario: Tc_Footnotes_32:Verify translation for footnotes opened in new tab
 		   And Expand the database
 		   And verify language translation db_level in new tab
 		   And verify language translation Country_level in new tab
-          And verify language translation Topic_level in new tab
+           And verify language translation Topic_level in new tab
           And verify language translation Section_level in new tab
           And verify language translation Table_level in new tab
           And verify language translation Series_level in new tab
@@ -185,31 +185,32 @@ Scenario: Tc_Footnotes_37:Verify back button in footnotes in new tab
 Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
 		     And Click on Footnotes tab Open new tab
             And Expand the tree change the language ,verify the Back button
+            And Set the Preference to new insight 
 				
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_39:Verify click on back in the table opened footnote
 		   And Set the Preference to new insight 
 		   And Goto Database Search tab
 		   And Expand the Section
           And Check the navigation onclick Back button
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_40:Verify click on back in table opened translated footnote
 		  And Goto Database Search tab
 		  And Expand the Section
          And check the page navigates to translated footnote page  
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_41:Verify country specific information  in new window of footnotes opened
 		  And Goto Database Search tab
 		  And Expand the Section
           And Open footnotes in new tab
           And check the country specific information
-@Footnote
+@Footnote1
 Scenario: Tc_Footnotes_42:Verify Back button  in new window of footnotes opened
 		  And Goto Database Search tab
 		   And Expand the Section
           And Open footnotes in new tab
           And check the Back button navigates to Footnotes page
- @Footnote
+ @Footnote1
 Scenario: Tc_Footnotes_43:Verify Back button  in new window of translated footnotes opened
 		  And Goto Database Search tab
 		  And Expand the Section
@@ -253,11 +254,6 @@ Scenario: Tc_Footnotes_52:Verify guest mode from footnotes
 		    And Expand the database
 		    And Click on guestmode option, verify the page
 @Footnote
-Scenario: Tc_Footnotes_53:Verify our support team link  from footnotes
-			And Goto Db Search tab 
-		    And Expand the database
-		    And Click on link - our support team,verify
-@Footnote
 Scenario: Tc_Footnotes_54:Verify opening footnotes from dropdown in series tab
 			And Goto Series Search tab
 		    And Click on the down arrow present 
@@ -265,6 +261,7 @@ Scenario: Tc_Footnotes_54:Verify opening footnotes from dropdown in series tab
 @Footnote
 Scenario: Tc_Footnotes_55:Verify footnotes open in suggested indicators
 			  And Goto Db Search tab 
+			 
 		      And Select series then click on Related series
 		      And Click on i icon to verify footnotes
 @Footnote
@@ -355,28 +352,28 @@ Scenario: Tc_Footnotes_71:Check footnotes access for Investment Table in World t
 			And Goto table Table:Investment: % of Nominal GDP: Asia open footnotes
 			And Translate to Japanese
 			And Verify translated page should appear once after the click on 'Back'
-@Footnote
-Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected language when opened in new tab
-			And Goto Db Search tab 
-			And Expand the database
-			And Open footnotes for tablelevel
-			And Translate to Japanese
-			And Click on Open icon to open footnotes in new tab
-			And Verify footnotes opened in new tab retain the japanese language
 #@Footnote
-#Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
-#			 And Goto Db Search tab 
-#            And Expand the Markit database
-#            And Open footnotes for section level, change to Japanese
-#            And Click on PMI glossary link,Verify the glossary     
-#                                                      
-#@Footnote
+#Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected language when opened in new tab
+#			And Goto Db Search tab 
+#			And Expand the database
+#			And Open footnotes for tablelevel
+#			And Translate to Japanese
+#			And Click on Open icon to open footnotes in new tab
+#			And Verify footnotes opened in new tab retain the japanese language
+@Footnote1
+Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
+			 And Goto Db Search tab 
+            And Expand the Markit database
+            And Open footnotes for section level, change to Japanese
+            And Click on PMI glossary link,Verify the glossary     
+                                                     
+#@Footnote1
 #Scenario: Tc_Footnotes_15: Verify opening of footnotes in new tab from minimized form
 #         And Click on Footnotes tab
 #         And Click on minimize icon
 #         And Click on Open in new tab icon to verify footnotes open in new tab  
 #
-#@Footnote
+#@Footnote1
 #Scenario: Tc_Footnotes_65:Footnotes:Verify if Footnotes in minimized state displays tooltip while downloading
 #			And Goto Db Search tab 
 #			And Expand the global database
@@ -384,16 +381,16 @@ Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected langua
 #			And Select '-' icon to minimize   
 #			And Click on Download button
 #			And Verify footnote download message	
-#@Footnote
+#@Footnote1
 #Scenario: Tc_Footnotes_36:Verify back button in footnotes
 #			And Create an insight
 #		    And Goto Footnotes menu bar , click Open new tab
-#            And click on CEIC logo,verify Back button   oad button
-#			And Verify footnote download message	  otnotes_61:Check the translation of Glossary link page of Footnotes
-#			 And Goto Db Search tab 
-#            And Expand the Markit database
-#            And Open footnotes for section level, change to Japanese
-#            And Click on PMI glossary link,Verify the glossary                                               
+#            And click on CEIC logo,verify Back button   
+#@Footnote1
+#Scenario: Tc_Footnotes_53:Verify our support team link  from footnotes
+#			And Goto Db Search tab 
+#		    And Expand the database
+#		    And Click on link - our support team,verify     
      
 #
 #		  

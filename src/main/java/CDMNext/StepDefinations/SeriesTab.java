@@ -168,16 +168,7 @@ public class SeriesTab {
 
 			} else if (arg1.equals("View as Chart")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
-				try {
-					if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-							.isDisplayed()) {
-						Thread.sleep(1500);
-						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-								.click();
-					}
-				} catch (NoSuchElementException e) {
-
-				}
+				CommonFunctionality.SeriesHormonizationWindowClose();
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title"))).isDisplayed()) {
 					login.Log4j.info("Chart visual is created for " + arg1 + " right click option");
 					CommonFunctionality.DeleteVisual();
@@ -195,16 +186,7 @@ public class SeriesTab {
 			} else if (arg1.equals("View as Map")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
 				Thread.sleep(3000);
-				try {
-					if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-							.isDisplayed()) {
-						Thread.sleep(1500);
-						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-								.click();
-					}
-				} catch (NoSuchElementException e) {
-
-				}
+				CommonFunctionality.SeriesHormonizationWindowClose();
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title"))).isDisplayed()) {
 					login.Log4j.info("Map visual is created " + arg1 + " right click option");
 					CommonFunctionality.DeleteVisual();
@@ -216,17 +198,7 @@ public class SeriesTab {
 			} else if (arg1.equals("View as Table")) {
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 				Thread.sleep(3000);
-				try {
-					if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-							.isDisplayed()) {
-						Thread.sleep(1500);
-						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-								.click();
-					}
-				} catch (NoSuchElementException e) {
-
-				}
-
+				CommonFunctionality.SeriesHormonizationWindowClose();
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table_title"))).isDisplayed()) {
 					login.Log4j.info("Table visual is created for right click option on series level");
 					CommonFunctionality.DeleteVisual();
@@ -238,16 +210,7 @@ public class SeriesTab {
 				login.driver.findElement(By.xpath("//span[@title='View as ...']")).click();
 				Thread.sleep(3000);
 				login.driver.findElement(By.xpath("//span[@title='Pie']")).click();
-				try {
-					if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-							.isDisplayed()) {
-						Thread.sleep(1500);
-						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-								.click();
-					}
-				} catch (NoSuchElementException e) {
-
-				}
+				CommonFunctionality.SeriesHormonizationWindowClose();
 				if (login.driver.findElement(By.xpath("//div[@class='text-dots']")).isDisplayed()) {
 					login.Log4j.info(arg1 + " visual is created for right click option on series level");
 					CommonFunctionality.DeleteVisual();
@@ -1130,6 +1093,12 @@ public class SeriesTab {
 		int j = 0;
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		try {
+			//highliting visual for add and replace function after refresh
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper']")).click();
+		} catch(Exception e) {
+		}
 		Thread.sleep(3000);
 		WebElement ul_element = null;
 		try {
@@ -1268,15 +1237,7 @@ public class SeriesTab {
 	@Then("^Highlighted visual series should be replaced new series$")
 	public void highlighted_visual_series_should_be_replaced_new_series() throws Throwable {
 		WebElement ele;
-		try {
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-					.isDisplayed()) {
-				Thread.sleep(1500);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).click();
-			}
-		} catch (NoSuchElementException e) {
-
-		}
+		CommonFunctionality.SeriesHormonizationWindowClose();
 		Thread.sleep(2000);
 		List<WebElement> elements = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("highcharts_legend")));
@@ -1446,12 +1407,7 @@ public class SeriesTab {
 		}catch(Exception e) {
 			
 		}
-		try {
-			Thread.sleep(5000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
-		} catch (Exception e) {
-
-		}
+		CommonFunctionality.ExpandRight();
 		CommonFunctionality.ResetMethod();
 		Thread.sleep(5000);
 		WebElement ClearSearchInput = login.driver
@@ -1848,12 +1804,7 @@ public class SeriesTab {
 	@And("^Clear search input$")
 	public void clear_search_input() throws Throwable {
 		login.driver.navigate().refresh();
-		try {
-			Thread.sleep(5000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
-		} catch (Exception e) {
-
-		}
+		CommonFunctionality.ExpandRight();
 		Thread.sleep(7000);
 		WebElement ClearSearchInput = login.driver
 				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));

@@ -2,8 +2,10 @@ package CDMNext.util;
 
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -13,6 +15,7 @@ public class CommonFunctionality {
 	public static WebElement footnoteDb;
 	public static String sname;
 	public static int SeriesCount;
+	public static int m;
 	// create object of Actions class
 	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
@@ -117,7 +120,7 @@ public class CommonFunctionality {
 		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			// int j = i + 1;
-			int m = i + 1;
+			m = i + 1;
 			Thread.sleep(3000);
 			WebElement checkbox = login.driver
 					.findElement(By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -149,5 +152,37 @@ public class CommonFunctionality {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).click();
 			}
 		}
+	}
+	public static void AlertPopup() {
+		try {
+			Thread.sleep(2000);
+			Alert alert=login.driver.switchTo().alert();
+			String alertText = alert.getText();
+	        System.out.println("Alert data: " + alertText);
+			alert.dismiss();
+		} catch(Exception e) {
+			
+		}
+	}
+	public static void ExpandRight() throws InterruptedException {
+		Thread.sleep(5000);
+		try {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
+		} catch (Exception e) {
+
+		}
+	}
+	public static void SeriesHormonizationWindowClose() throws InterruptedException {
+		try {
+			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
+					.isDisplayed()) {
+				Thread.sleep(1500);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
+						.click();
+			}
+		} catch (NoSuchElementException e) {
+
+		}
+		
 	}
 }

@@ -344,10 +344,10 @@ Scenario: Tc_InsightGeneral_69:Verify Cancel/X buttons.
          And Click on File menu
 		 And Click on Settings
 		 And Verify Cancel/X buttons. 
-@InsightGeneral
+@InsightGeneral1
 Scenario: Tc_InsightGeneral_70:Verify Created field under Information tab.
 		 And Verify Created field under Information tab.
-@InsightGeneral
+@InsightGeneral1
 Scenario: Tc_InsightGeneral_71:Verify Last editor field.
 		 And Verify Last editor field.	
 @InsightGeneral
@@ -363,7 +363,7 @@ Scenario: Tc_InsightGeneral_73:Verify 'Change' option for sharing settings.
          And Click on File menu
          And Click on Settings
 		 And Verify 'Change' option for sharing settings.
-@InsightGeneral
+@InsightGeneral1
 Scenario: Tc_InsightGeneral_74:Verify number of the view/s for the insight.
          And Add Views
          And Verify number of the view/s for the insight. 
@@ -454,7 +454,7 @@ Scenario: Tc_InsightGeneral_87:Verify remove icon for selected product codes.
 		 And Click on File menu
          And Click on Settings
          And Click on Subscription tab
-         And Verify remove icon for selected product codes.  
+        And Verify remove icon for selected product codes.  
 @InsightGeneral
 Scenario: Tc_InsightGeneral_88:Verify keywords for the insights.
          And Create insight
@@ -470,14 +470,14 @@ Scenario: Tc_InsightGeneral_89:Verify the insight for added keywords in insight 
           And Click on Keywords tab
           And Add Keywords
 		  And Verify the insight for added keywords in insight explorer.
-@InsightGeneral 
+@InsightGeneral
 Scenario: Tc_InsightGeneral_90:Verify adding multiple keywords.
 		  And Create insight
           And Click on File menu
           And Click on Settings
           And Click on Keywords tab
           And Add Multiple Keywords and Verify
-@InsightGeneral
+@InsightGeneral1
 Scenario: Tc_InsightGeneral_91:Verify remove icon for keywords. 
 	       And Click on File menu
 	       And Click on Settings
@@ -533,7 +533,344 @@ Scenario: Tc_InsightGeneral_102:Verify open recent insight.
 		  And Create a new insight
  	      And Click on recent insight
  	      And Verify insight open in preview mode
-#@InsightGeneral
-#Scenario: Tc_InsightGeneral_103:Verify 'Latest CEIC Insights'
-#		   And Verify 'Latest CEIC Insights'
-#   	      	   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_103:Verify 'Latest CEIC Insights'
+		   And Verify 'Latest CEIC Insights'
+@InsightGeneral
+Scenario: Tc_InsightGeneral_104:Verify number of displayed insights for latest CEIC Insights.
+		   And Verify number of displayed insights for latest CEIC Insights.
+		   And Verify More option   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_105:Open 'Latest CEIC Insights'
+		   And Click on Latest insight
+		   And Verify insight open in preview mode	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_106:Verify  'Latest EMIS Insights'.
+		   And Verify  'Latest EMIS Insights'.
+@InsightGeneral
+Scenario: Tc_InsightGeneral_107:Verify number of displayed insights for Latest EMIS Insights.
+		   And Click on Insights
+		   And Verify number of displayed insights for Latest EMIS Insights.
+@InsightGeneral
+Scenario: Tc_InsightGeneral_108:Open 'Latest EMIS Insights'
+		   And Open 'Latest EMIS Insights'   	
+		   And Verify insight open in preview mode	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_109:Verify More option for Latest EMIS Insights
+		   And Click on Insights
+		   And Click on  More option under EMIS insight  	
+		   And Verify More option for Latest EMIS Insights	  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_110:Verify default tab for open insight explorer.
+		   And Click on Open insight Explorer
+		   And Verify default tab for open insight explorer.     
+@InsightGeneral
+Scenario: Tc_InsightGeneral_111:Verify "Product" on landing page
+		   And Click on Products
+		   And Verify "Products" dropdown
+@InsightGeneral
+Scenario: Tc_InsightGeneral_112:Verify 'What's New'.
+		   And Click on Explore data under What's New
+		   And  Verify for new announcement pop up
+@InsightGeneral
+Scenario: Tc_InsightGeneral_113:Verify 'Contact Us'
+		   And Click on Help
+		   And Click on contact us
+		   And Verify redirection to contact page		
+@InsightGeneral
+Scenario: Tc_InsightGeneral_114:Verify 'Email Us'
+		  And Click on Help
+		   And Click on Email us
+		   And Verify Email us pop up is shown  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_115:Verify 'Email Us'for mandatory fields 
+		   And Click on Help
+		   And Click on Email us
+		   And Verify red color for mandatory fields   	 
+@InsightGeneral
+Scenario: Tc_InsightGeneral_116:Verify sending email for multiple recipients
+		   And Click on Help
+		   And Click on Email us
+		   And Enter all fields 
+		   And Upload file using upload button
+		   And Click on Send
+		   And Verify confirmation message is shown 
+@InsightGeneral
+Scenario: Tc_InsightGeneral_117:Verify sending email for no recipient
+		   And Click on Help
+		   And Click on Email us
+		   And Enter all fields with no recipient
+           And Upload file using drag and drop
+		   And Click on Send
+		   And Verify confirmation message is shown  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_118:Verify invalid  email under recipient
+		   And Click on Help
+		   And Click on Email us
+		   And Verify invalid  email under recipient
+@InsightGeneral
+Scenario: Tc_InsightGeneral_119:Verify remove option for attachments.
+		   And Click on Help
+		   And Click on Email us
+		   And Verify remove option for attachments.	   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_120:Verify 'Cancel/Dismiss' button in Email popup.
+		   And Click on Help
+		   And Click on Email us
+		   And Verify 'Cancel/Dismiss' button in Email popup.	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_121:Verify 'Knowledge base'
+		   And Click on Help
+		   And Click on Knowledge base
+		   And Verify 'Knowledge base'
+@InsightGeneral
+Scenario: Tc_InsightGeneral_122:Verify 'Diagnostics'.
+		   And Click on Help
+		   And Click on Diagnostics
+		   And Verify 'Diagnostics'. 
+@InsightGeneral
+Scenario: Tc_InsightGeneral_123:Verify Diagnostics configurations options.
+		   And Click on Help
+		   And Click on Diagnostics
+		   And Verify Diagnostics configurations options.   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_124: Verify 'Report a problem' in Diagnostics page.
+		   And Click on Help
+		   And Click on Diagnostics
+		   And Verify 'Report a problem' in Diagnostics page.    
+@InsightGeneral
+Scenario: Tc_InsightGeneral_125:Verify 'Send' button on Report a problem window.
+		   And Click on Help
+		   And Click on Diagnostics
+		   And verify 'Send' button on Report a problem window.   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_126:Verify 'Attachments' on Report a problem 
+		   And Click on Help
+		   And Click on Diagnostics
+		   And Verify 'Attachments' on Report a problem   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_127: Verify 'Cancel and dismiss' buttons on the window.
+		   And Click on Help
+		   And Click on Diagnostics
+		   And Verify 'Cancel and dismiss' buttons on the window.  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_128: Verify 'Report a problem' under Help menu.
+		   And Click on Help
+		   And Click on Report button
+		   And Verify 'Report a problem' under Help menu.	  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_129: Verify Send the Report with attachment
+		   And Click on Help
+		   And Click on Report button
+		   And Enter the description
+		   And Add the attachment
+		   And Verify Send Report
+@InsightGeneral
+Scenario: Tc_InsightGeneral_130: Verify Cancel/x buttons for report a problem under HElp dropdown.
+		   And Click on Help
+		   And Click on Report button
+		   And Verify Cancel/x buttons for report a problem under HElp dropdown.
+@InsightGeneral
+Scenario: Tc_InsightGeneral_131: Verify Live Chat
+		   And Click on Help
+		   And Click on Live chat
+		   And Verify Live Chat Option		
+@InsightGeneral
+Scenario: Tc_InsightGeneral_132:Verify 'Video tutorials'
+		   And Click on Help
+		   And Click on Vedio tutorial
+		   And Verify 'Video tutorials'
+@InsightGeneral
+Scenario: Tc_InsightGeneral_133:Verify 'Quick start Guide'
+		   And Click on Help
+		   And Click on Quick Start Guide
+		   And Verify 'Quick start Guide'	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_134:Verify window dismiss button.
+		   And Click on Help
+		   And Click on Vedio tutorial
+		   And Verify window dismiss button.   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_135:Verify tours 
+		   And Click on Help
+		   And Click on Tour
+		   And Verify tours 	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_136:Verify 'Tour 1'
+		   And Set preference to Insight Explorer
+		   And Click on Help Menu
+		   And Click on Tour
+		   And Verify Tour to landing page
+@InsightGeneral
+Scenario: Tc_InsightGeneral_137:Verify 'Tour 2'
+		    And Click on Help
+		    And Click on Tour
+		    And Verify Tour to Search Panel	  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_138:Verify 'Tour 3'
+		    And Click on Help
+		    And Click on Tour
+		    And Verify Tour to My series 	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_139:Verify 'Tour 4'
+		  And Verify Tour to visuals
+@InsightGeneral
+Scenario: Tc_InsightGeneral_140:Verify 'Previous' button.
+		  And Click on Help
+		  And Click on Tour
+		  And Click on Next Tour
+		  And Verify Previous button 	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_141:Verify 'I'm Done' option.
+		  And Click on Help
+		  And Click on Tour
+		  And Verify 'I'm Done' option. 
+@InsightGeneral
+Scenario: Tc_InsightGeneral_142: Verify window 'dismiss(x)' option.
+		  And Click on Help
+		  And Click on Tour
+		  And Verify window 'dismiss(x)' option.	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_143:Verify 'search help'
+		  And Click on Help
+		  And Click on Search Help
+		  And Verify 'search help'	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_144:Verify serarch help window close buttons.
+		  And Click on Help
+		  And Click on Search Help
+		  And Verify serarch help window close buttons.	 		
+@InsightGeneral
+Scenario: Tc_InsightGeneral_145:Verify 'Keyboard shortcuts'
+		  And Click on Help
+		  And Click on Keyboard shortcuts
+		  And Verify 'Keyboard shortcuts'	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_146:Verify clicking on applications.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Verify Excel Add-in tab is open		 
+@InsightGeneral
+Scenario: Tc_InsightGeneral_147:Verify Excel add-in version on popup.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Verify Excel add-in version in popup		   	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_148:Verify 'OS and MS Office' selection on popup.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Verify 'OS and MS Office' selection on popup.  	 
+@InsightGeneral
+Scenario: Tc_InsightGeneral_149:Verify 'Download' CDMNext add-in.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Verify 'Download' CDMNext add-in navigate to new tab	   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_150:Verify available 'Documents' in add-in popup.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Click on Document link
+		  And Verify available 'Documents' in add-in popup		
+@InsightGeneral
+Scenario: Tc_InsightGeneral_151:Verify 'Open' the popup with new tab.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Verify 'Open' the popup with new tab	  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_152:Verify Popup dismiss(x) option.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Verify Popup dismiss(x) option.   
+@InsightGeneral
+Scenario: Tc_InsightGeneral_153:Verify the 'next tabs' in the popup.
+		  And Click on Help
+		  And Click on Application Excel Add-in
+		  And Click on API tab and Verify
+		  And Click on R tab and Verify
+		  And Click on Eviews tab and Verify  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_154:Verify API.
+		  And Click on Help
+		  And Click on API and Verify
+@InsightGeneral
+Scenario: Tc_InsightGeneral_155:Verify 'API SDK' download.
+		  And Click on Help
+		  And Click on API 
+		  And Click on Python SDK and Verify 'API SDK' download
+@InsightGeneral
+Scenario: Tc_InsightGeneral_156:Verify 'API SDK' download through URL.
+		  And Click on Help
+		  And Click on API 
+		  And Verify 'API SDK' download through URL 
+@InsightGeneral
+Scenario: Tc_InsightGeneral_157:Verify 'R'.
+		  And Click on Help
+		  And Click on R 
+		  And Verify R tab is open	  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_158:Verify 'R' package download.
+		  And Click on Help
+		  And Click on R 
+		  And Verify 'R' package download		
+@InsightGeneral
+Scenario: Tc_InsightGeneral_159:Verify available 'Documents' in R popup.
+		  And Click on Help
+		  And Click on R 
+		  And Click on Document links and Verify	  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_160:Verify 'EViews'
+		  And Click on Help
+		  And Click on Eviews 
+		  And Verify 'EViews' 		  
+@InsightGeneral
+Scenario: Tc_InsightGeneral_161:Verify Eviews download (x86 and x64 bit)
+		  And Click on Help
+		  And Click on Eviews 
+		  And Click on Download CEIC EViews Module 32-Bit and Verify
+		  And Click on Download CEIC EViews Module 64-Bit
+@InsightGeneral
+Scenario: Tc_InsightGeneral_162:Verify available 'Documents' in EViews popup.
+		  And Click on Help
+		  And Click on Eviews 
+		  And Click on  Eviews Document links and Verify	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_163:Verify Undo option enable.
+		  And Add Series to myseries
+		  And Verify Undo option enable.
+@InsightGeneral
+Scenario: Tc_InsightGeneral_164:Verify Redo option enable.
+		  And Add Series to myseries
+		  And Click on Undo icon
+		  And Verify Redo option enable	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_165:Verify Undo option behavior for My series tab.
+		  And Adding series to myseries
+		  And Click on Undo icon
+		  And Verify Undo option behavior for My series tab.	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_166:Verify Redo option behavior for my series tab.
+		  And Adding series to myseries
+		  And Click on Undo icon
+		  And Click on Redo icon
+		  And Verify Redo option behavior for my series tab.	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_167:Verify Undo option for views tab.
+		  And Add Visual
+		  And Click on Undo icon
+		  And Verify Undo option for views tab.
+@InsightGeneral
+Scenario: Tc_InsightGeneral_168:Verify Redo option for views tab.
+		And Click on Redo icon
+		  And Verify Redo option for views tab.  	
+@InsightGeneral
+Scenario: Tc_InsightGeneral_169:Verify Undo/Redo with more actions.
+		  And Adding series to visual
+		  And Click on Undo and Verify
+		  And Click on Redo and Verify
+@InsightGeneral
+Scenario: Tc_InsightGeneral_170:Verify Undo for search tab.
+		  And Enter Keyword GDP in Search
+		  And Click on Undo and Verify Undo for search tab.
+		  And Click on Redo and Verify Redo for search tab.		  
+	  
+		 	  

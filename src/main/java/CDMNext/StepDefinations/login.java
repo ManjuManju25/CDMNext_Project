@@ -1,8 +1,11 @@
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
+import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,14 +15,17 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
 import cucumber.api.java.After;
@@ -84,12 +90,12 @@ public class login {
 	public void setup() throws Throwable {
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
 		logged_in = false;
-		day = date.get(Calendar.DAY_OF_MONTH);
-		month = date.get(Calendar.MONTH);
-		year = date.get(Calendar.YEAR);
-		second = date.get(Calendar.SECOND);
-		minute = date.get(Calendar.MINUTE);
-		hour = date.get(Calendar.HOUR);
+//		day = date.get(Calendar.DAY_OF_MONTH);
+//		month = date.get(Calendar.MONTH);
+//		year = date.get(Calendar.YEAR);
+//		second = date.get(Calendar.SECOND);
+//		minute = date.get(Calendar.MINUTE);
+//		hour = date.get(Calendar.HOUR);
 		Invoke_browser();
 
 	}
@@ -127,7 +133,7 @@ public class login {
 
 	@When("^User clicks on \"([^\"]*)\"$")
 	public void user_clicks_on(String arg1) throws Throwable {
-		
+
 		switch (arg1) {
 		case "login":
 			Log4j.info("Clicking on login button ");
@@ -204,7 +210,6 @@ public class login {
 		// enter password
 		// click login
 		// asset login and set 'logged_in' = True
-		
 
 	}
 
@@ -267,9 +272,27 @@ public class login {
 			driver = new InternetExplorerDriver(capabilities);
 
 		} else if (CONFIG.getProperty("browserType").equals("CHROME")) {
-			System.setProperty("webdriver.chrome.driver",
-					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
-			driver = new ChromeDriver();
+			/*DesiredCapabilities cap = DesiredCapabilities.chrome();
+			cap.setBrowserName("chrome");
+			 cap.setCapability(CapabilityType.VERSION, "75");
+			cap.setCapability("marionette", true);
+			cap.setPlatform(Platform.ANY);*/
+			
+			 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") +
+			 "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
+			  driver = new ChromeDriver();
+			  
+			/*try {
+				RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:39574/wd/hub"), cap);
+				long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));
+				driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);
+				// driver.manage().timeouts().pageLoadTimeout(implicitWaitTime,
+				// TimeUnit.SECONDS);
+				driver.manage().timeouts().setScriptTimeout(implicitWaitTime, TimeUnit.SECONDS);
+				driver.manage().window().maximize();
+			} catch (MalformedURLException e) {
+
+			}*/
 		}
 		long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));
 		driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);

@@ -666,6 +666,7 @@ public class SearchTest {
 							}
 						}
 					} else if (Filters.searchData.contains("*")) {
+						Thread.sleep(2000);
 						String[] currentLine = Filters.searchData.split(";");
 						login.Log4j.info(currentLine[0]);
 						login.Log4j.info(currentLine[1]);

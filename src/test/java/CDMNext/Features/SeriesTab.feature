@@ -296,7 +296,7 @@ Scenario: TC_SeriesTab_46:Check 'N' symbol for new only series filter
 	And   Open "Series" tab 
 	And   User has selects "More" as "New only" 
 	When  Click on "Apply filter" 
-	Then  "N" symbol to be displayed for "New only" 
+	Then  "new" symbol to be displayed for "New only" 
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_47:Check 'k' symbol for kew only filter 
@@ -451,13 +451,6 @@ Scenario: TC_SeriesTab_69:Verify Download option for series level from More acti
 	And  Select "Download" 
 	Then Download window should be appeared with selected series count 
 	
-#@SeriesTab 
-#Scenario: TC_SeriesTab_70:Verify 'Series info' option from More actions 
-#	Given User enters seriesID "146381801;228912101" 
-#	And  Select series and Click on More actions 
-#	And  Select "Series Info" 
-#	Then The SSP window should be opened 
-	
 @SeriesTab 
 Scenario: TC_SeriesTab_70:Verify ' Show Dataset' option from More actions 
 	Given User enters seriesID "239796903;69851501" 
@@ -466,14 +459,14 @@ Scenario: TC_SeriesTab_70:Verify ' Show Dataset' option from More actions
 	And Click on Back button 
 	Then Should redirect to database tab 
 	
-@SeriesTab
+@SeriesTab 
 Scenario: TC_SeriesTab_71:Verify 'Show Database' option from More actions 
 	Given User enters seriesID "1380601;245178303" 
 	And  Select series and Click on More actions 
 	And Select "Show Database" 
 	Then Navigate to the series from db tab 
 	
-@SeriesTab
+@SeriesTab 
 Scenario: TC_SeriesTab_72:Verify 'Copy' option from More actions 
 	Given User enters seriesID "261975301;237211603" 
 	And  Select series and Click on More actions 
@@ -537,26 +530,26 @@ Scenario: TC_SeriesTab_80:Verify selected frequency results
 	When Click on "Apply filter" 
 	Then User verify the search results 
 	
-@SeriesTab
+@SeriesTab 
 Scenario: TC_SeriesTab_81:Verify selected unit results 
 	And Clear search input 
 	And User selects "Unit" as "IDR;kg" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
-
-@SeriesTab
+	
+@SeriesTab 
 Scenario: TC_SeriesTab_82:Verify selected First obs before and Last ob after results 
 	And Clear search input 
 	And   User selects "Date" as "First observation before;Last observation after" 
 	And   User has clicked on "Apply filter" 
 	Then User verify the search results 
 	
-@SeriesTab
+@SeriesTab 
 Scenario: TC_SeriesTab_83:Verify selected status results 
 	And Clear search input 
 	And User selects "Status" as "Rebased" 
 	When Click on "Apply filter" 
-	Then User verify the search results
+	Then User verify the search results 
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_84: Verify keyword search 
@@ -577,7 +570,7 @@ Scenario: TC_SeriesTab_86 : Verify SR code search
 @SeriesTab 
 Scenario: TC_SeriesTab_87 : Verify mnemonic search 
 	Given User enters "CN.GDP.NM.YTD-RMB-BN-Q" 
-	Then  Verify the search results
+	Then  Verify the search results 
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_88:Verify 'Series info' option from More actions 

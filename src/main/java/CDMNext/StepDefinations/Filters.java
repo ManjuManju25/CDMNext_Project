@@ -60,20 +60,10 @@ public class Filters {
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
 		login.driver.navigate().refresh();
-		Thread.sleep(10000);
-		try {
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
-		} catch (Exception e) {
-
-		}
+	    CommonFunctionality.ExpandRight();
 		try {
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-
-			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
-				login.Log4j.info("Clicking on Top button");
-			}
+			CommonFunctionality.TopMethod();
 			CommonFunctionality.UnselectMethod();
 			CommonFunctionality.AlldbClear();
 			if (reset.size() > 0) {
@@ -359,7 +349,10 @@ public class Filters {
 									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " is exists in the" + "\n" + text);
 							} else {
-								Assert.fail(sid[0] + " OR " + sid[1] + " doesn't exists");
+								showRelatedData(searchData ,j);
+								if(status == false) {
+								Assert.fail(sid[0] + " OR " + sid[1] + " doesn't exists \n"+showdata);
+								}
 							}
 							break;
 
@@ -867,7 +860,39 @@ public class Filters {
 
 	public static boolean showRelatedData(String keyword, int j) throws Throwable {
 		SearchTest.sspValidation(j);
-		if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
+		String[] strarr=keyword.split(";");
+		switch(strarr.length) {
+		case 1:
+			if (showdata.toUpperCase().contains(strarr[0].toUpperCase()) == true) {
+				login.Log4j.info(strarr[0] + " is exists in the" + "\n" + showdata);
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+				status = true;
+			} else {
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+				status = false;
+			}
+					
+		case 2:
+			
+			if (showdata.toUpperCase().contains(strarr[0].toUpperCase()) == true || showdata.toUpperCase().contains(strarr[1].toUpperCase()) == true) {
+				login.Log4j.info(strarr[0]+ " OR"+ strarr[1]+ " is exists in the" + "\n" + showdata);
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+				status = true;
+			} else {
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
+				status = false;
+			}
+		
+		default:
+			break;
+				
+		}
+		return status;
+		/*if (showdata.toUpperCase().contains(keyword.toUpperCase()) == true) {
 			login.Log4j.info(keyword + " is exists in the" + "\n" + showdata);
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
@@ -877,7 +902,7 @@ public class Filters {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 			status = false;
 		}
-		return status;
+		return status;*/
 	}
 
 	@And("^Select \"([^\"]*)\" from \"([^\"]*)\" filter$")

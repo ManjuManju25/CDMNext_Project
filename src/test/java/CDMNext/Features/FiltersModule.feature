@@ -761,7 +761,7 @@ Scenario: TC_Filters_Search_106
 	And   User selected "All databases" as "Global Database" 
 	Then  User verify the search results 
 	
-@FilterSearch 
+@FilterSearch
 Scenario: TC_Filters_Search_107 
 	Given User enters "commodity" 
 	And   User selects "Frequency" as "Daily" 
@@ -1061,7 +1061,7 @@ Scenario: TC_Filters_Search_152
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
-@FilterSearch 
+@FilterSearch
 Scenario: TC_Filters_Search_153 
 	Given User enters "account" 
 	And   User selects "Frequency" as "Monthly;Quarterly" 

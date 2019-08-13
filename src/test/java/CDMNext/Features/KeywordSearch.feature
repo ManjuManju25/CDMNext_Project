@@ -54,7 +54,7 @@ Scenario: TC_SynonymSearch_10 : Search for an Acronym as "SOE"
 	Given User enters keyword "SOE" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_11 : Search for an Acronym as "fob" 
 	Given User enters keyword "fob" 
 	Then User verify keyword search results 
@@ -194,7 +194,7 @@ Scenario: TC_SynonymSearch_38 : Search for an Acronym as "ind"
 	Given User enters keyword "ind" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_39 : Search for an Acronym as "us" 
 	Given User enters keyword "us" 
 	Then User verify keyword search results 
@@ -404,12 +404,12 @@ Scenario: TC_SynonymSearch_80 : Search for an Acronym as "sa"
 	Given User enters keyword "sa" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_81 : Search for an Acronym as "nibfc" 
 	Given User enters keyword "nibfc" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_82 : Search for an Acronym as "cpo" 
 	Given User enters keyword "cpo" 
 	Then User verify keyword search results 
@@ -504,7 +504,7 @@ Scenario: TC_SynonymSearch_100 : Search for an Acronym as "bldg"
 	Given User enters keyword "bldg" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_101 : Search for an Acronym as "BLS" 
 	Given User enters keyword "BLS" 
 	Then User verify keyword search results 
@@ -549,7 +549,7 @@ Scenario: TC_SynonymSearch_109 : Search for an Acronym as "CD"
 	Given User enters keyword "CD" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_110 : Search for an Acronym as "CDS" 
 	Given User enters keyword "CDS" 
 	Then User verify keyword search results 
@@ -654,7 +654,7 @@ Scenario: TC_SynonymSearch_130 : Search for an Acronym as "fce"
 	Given User enters keyword "fce" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_131 : Search for an Acronym as "Fed rate" 
 	Given User enters keyword "Fed rate" 
 	Then User verify keyword search results 
@@ -759,7 +759,7 @@ Scenario: TC_SynonymSearch_151 : Search for an Acronym as "Money Supply"
 	Given User enters keyword "Money Supply" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_152 : Search for an Acronym as "M&A" 
 	Given User enters keyword "M&A" 
 	Then User verify keyword search results 
@@ -1009,7 +1009,7 @@ Scenario: TC_SynonymSearch_201 : Search for an Acronym as "SUV"
 	Given User enters keyword "SUV" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_202 : Search for an Acronym as "X" 
 	Given User enters keyword "X" 
 	Then User verify keyword search results 
@@ -1169,7 +1169,7 @@ Scenario: TC_KeywordSearch_233
 	Given User enters keyword "population or India not average" 
 	Then  User verifies keyword search results 
 	
-@KeywordSearch 
+@KeywordSearch
 Scenario: TC_KeywordSearch_234 
 	Given User enters keyword "gas NOT oil AND state" 
 	Then  User verifies keyword search results 
