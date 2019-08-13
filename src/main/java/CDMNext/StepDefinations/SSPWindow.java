@@ -20,7 +20,7 @@ public class SSPWindow {
 	public static String indicator_value;
 	public static String values;
 	public static String text;
-	public static String manage_series_id;
+//	public static String manage_series_id;
 	public static String suggested_series;
 	public static String function_name;
 	WebDriverWait wait = new WebDriverWait(login.driver, 100);
@@ -389,14 +389,14 @@ public class SSPWindow {
 		Thread.sleep(2000);
 	}
 
-	@And("^Click on \"([^\"]*)\" link$")
+	/*@And("^Click on \"([^\"]*)\" link$")
 	public void click_on_link(String arg1) throws Throwable {
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+arg1+"']")));
 	    manage_series_id = login.driver.findElement(By.xpath(
 				"//*[@class='main-series-information--right']//*[@class='main-series-information--series-id']/div[1]")).getText();
         login.driver.findElement(By.xpath("//*[text()='"+arg1+"']")).click();
         Thread.sleep(2000);
-     }
+     }*/
 	
 	@And("^Download data to excel$")
 	public void download_data_to_excel() throws Throwable {
@@ -740,13 +740,13 @@ public class SSPWindow {
 		new Actions(login.driver).moveToElement(ask_link).click().build().perform();
 	}
 
-	@And("^Click on \"([^\"]*)\" tab$")
+	/*@And("^Click on \"([^\"]*)\" tab$")
 	public void click_on_tab(String arg1) throws Throwable {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg1 + "')]")));
 		login.driver.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg1 + "')]")).click();
 		Thread.sleep(2000);
-	}
+	}*/
 	
 	@And("^Click on replacement series name hyperlink$")
 	public void click_on_replacement_series_name_hyperlink() throws Throwable {
@@ -1062,7 +1062,7 @@ public class SSPWindow {
 		WebElement one_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
 		new Actions(login.driver).moveToElement(one_series).pause(3000).click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_series_info")))).build().perform();
 	    String replaced_text = login.driver.findElement(By.xpath("//*[@class='main-series-information--right']//*[@class='main-series-information--series-id']/div[1]")).getText();
-	    if(!(manage_series_id.equals(replaced_text))) {
+	    if(!(CommonFunctionality.manage_series_id.equals(replaced_text))) {
 	    	login.Log4j.info("Discontinued series has to be replaced with suggested series and its verified successfully");
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 	    	Thread.sleep(500);

@@ -26,6 +26,7 @@ public class CommonFunctionality {
 	// create instance of JavaScriptExecutor
 	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	static WebDriverWait wait = new WebDriverWait(login.driver, 60);
+	public static String manage_series_id;
 
 	public static void ClearSelection() throws InterruptedException {
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
@@ -244,5 +245,63 @@ public class CommonFunctionality {
 		}
 		Assert.fail("Download to Excel verification failed");
 		return false;
+	}
+
+	public static void TabSelection(String arg) throws Exception {
+		/*
+		 * try { wait.until(ExpectedConditions.visibilityOfElementLocated(
+		 * By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg +
+		 * "')]"))); login.driver.findElement(By.xpath(
+		 * "//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]")) .click();
+		 * Thread.sleep(2000); } catch (Exception e) {
+		 * login.driver.navigate().refresh(); // CommonFunctionality.TopMethod();
+		 * Thread.sleep(5000); login.driver .findElement(
+		 * By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='" +
+		 * arg + "']")) .click(); }
+		 */
+		if (arg.equals("All")) {
+			login.driver.navigate().refresh();
+			// CommonFunctionality.TopMethod();
+			Thread.sleep(5000);
+			login.driver
+					.findElement(
+							By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='" + arg + "']"))
+					.click();
+		} else {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]")));
+			login.driver.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]"))
+					.click();
+			Thread.sleep(2000);
+		}
+	}
+
+	public static void VerifyLink(String arg) throws Exception {
+		/*
+		 * try { wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+		 * "//*[text()='" + arg + "']"))); manage_series_id =
+		 * login.driver.findElement(By.xpath(
+		 * "//*[@class='main-series-information--right']//*[@class='main-series-information--series-id']/div[1]"
+		 * )) .getText(); login.driver.findElement(By.xpath("//*[text()='" + arg +
+		 * "']")).click(); Thread.sleep(2000); } catch (Exception e) {
+		 * Thread.sleep(3000); login.driver .findElement( By.
+		 * xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"
+		 * )) .click(); login.Log4j.info("Clicking on " + arg); }
+		 */
+		if (arg.equals("View more")) {
+			Thread.sleep(3000);
+			login.driver
+					.findElement(
+							By.xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"))
+					.click();
+			login.Log4j.info("Clicking on " + arg);
+		} else {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='" + arg + "']")));
+			manage_series_id = login.driver.findElement(By.xpath(
+					"//*[@class='main-series-information--right']//*[@class='main-series-information--series-id']/div[1]"))
+					.getText();
+			login.driver.findElement(By.xpath("//*[text()='" + arg + "']")).click();
+			Thread.sleep(2000);
+		}
 	}
 }

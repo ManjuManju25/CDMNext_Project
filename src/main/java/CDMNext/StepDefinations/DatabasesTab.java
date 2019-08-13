@@ -271,12 +271,11 @@ public class DatabasesTab {
 	public void hover_the_mouse_on_any_Database() throws Throwable {
 		login.driver.navigate().refresh();
 		Thread.sleep(7000);
-		WebElement db;
 		login.driver
 				.findElement(By
 						.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Databases')]"))
 				.click();
-		db = login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[2]"));
+		//WebElement db = login.driver.findElement(By.xpath("//div[@class='child-container']//div[1]//div[2]"));
 		ele = login.driver.findElement(
 				By.xpath("//div[@class='child-container']//div[1]//div[@class='title']//span[@class='name']//span[1]"));
 		CommonFunctionality.action.moveToElement(ele).build().perform();

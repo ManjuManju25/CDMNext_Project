@@ -1,5 +1,6 @@
 package CDMNext.StepDefinations;
 import org.testng.AssertJUnit;
+
 import CDMNext.util.CommonFunctionality;
 
 import java.io.File;
@@ -8,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.apache.commons.io.FileUtils;
@@ -18,7 +18,6 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;

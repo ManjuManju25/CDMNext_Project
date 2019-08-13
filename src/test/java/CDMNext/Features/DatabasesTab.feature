@@ -761,8 +761,8 @@ Scenario: TC_DB_115:Verify 'add to existing' insight
 	And  Select a series and Click on dropdown icon 
 	And Click on "Add to existing insight" 
 	Then The "Insight Explorer" popup should be appeared 
-	
-#@DB 
+#	
+#@DB1 
 #Scenario: TC_DB_116:Validate the added series by opening existing insight 
 #	And  Select a series and Click on dropdown icon 
 #	And Click on "Add to existing insight" 

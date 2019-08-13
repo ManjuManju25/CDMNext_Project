@@ -339,7 +339,7 @@ Scenario: TC_SSP_52: Verify click on the replacement suggestion series dropdown
    And Click on replacement series name dropdown
    Then Both inactive and suggestion should be viewed as chart
    
-@SSPWindow1
+@SSPWindow
 Scenario: TC_SSP_53: Verify SSP for calculated series
    #And Checking modalbox is open
    And Search for the series "1053401" 

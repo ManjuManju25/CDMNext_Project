@@ -1,6 +1,7 @@
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
+
 import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.event.KeyEvent;
@@ -15,9 +16,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.asserts.SoftAssert;
@@ -60,7 +59,7 @@ public class SeriesTab {
 	List<String> seriesText = null;
 	SoftAssert s_assert = new SoftAssert();
 	Boolean newInsight = false;
-	
+
 	@Given("^User enters seriesID \"([^\"]*)\"$")
 	public void user_enters_seriesID(String arg1) throws Throwable {
 		login.driver.navigate().refresh();
@@ -172,12 +171,11 @@ public class SeriesTab {
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title"))).isDisplayed()) {
 					login.Log4j.info("Chart visual is created for " + arg1 + " right click option");
 					CommonFunctionality.DeleteVisual();
-					/*try {
-						Thread.sleep(1000);
-						login.driver.findElement(By.xpath("//button[contains(text(),'Refresh')]")).click();
-					}catch(Exception e) {
-						//
-					}*/
+					/*
+					 * try { Thread.sleep(1000);
+					 * login.driver.findElement(By.xpath("//button[contains(text(),'Refresh')]")).
+					 * click(); }catch(Exception e) { // }
+					 */
 					CommonFunctionality.DeleteSeries();
 				} else {
 					Assert.fail("Chart visual is not created");
@@ -394,19 +392,19 @@ public class SeriesTab {
 
 		try {
 
-			/*if (login.driver.findElement(By.xpath(
-					"//div[@class='series-preview--header ui-draggable-handle']//div[@class='single-series-preview--title ']"))
-					.isDisplayed()) {
+			/*
+			 * if (login.driver.findElement(By.xpath(
+			 * "//div[@class='series-preview--header ui-draggable-handle']//div[@class='single-series-preview--title ']"
+			 * )) .isDisplayed()) { login.Log4j.info("SSP window is displayed");
+			 * Thread.sleep(2000);
+			 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
+			 * .click(); }
+			 */
+			if (login.driver.findElement(By.xpath("//div[@class='single-series-preview--title ']")).isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-			}*/
-			if(login.driver.findElement(By.xpath("//div[@class='single-series-preview--title ']")).isDisplayed()) {
-				login.Log4j.info("SSP window is displayed");
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-			}
-			else {
+			} else {
 				Assert.fail("SSP window is not displayed");
 			}
 		} catch (NoSuchElementException e) {
@@ -458,11 +456,11 @@ public class SeriesTab {
 			login.driver.findElement(By.xpath("//span[contains(text(),'Expand')]")).click();
 			break;
 		case "Collapse":
-			login.Log4j.info("Clicking on Matches only" );
+			login.Log4j.info("Clicking on Matches only");
 			Thread.sleep(10000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'Matches only')]")).click();
 			Thread.sleep(5000);
-		//	login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
+			// login.driver.findElement(By.xpath("//span[@title='Collapse tree']")).click();
 			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("Clicking on " + arg1);
 			break;
@@ -677,10 +675,11 @@ public class SeriesTab {
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//div[@class='panel-expander panel-expander__left']")).click();
 			Thread.sleep(5000);
-			ele=login.driver.findElement(By.xpath("//div[@class='insight-page-view-tab ui-sortable-handle']//a[@title='View 1']"));
+			ele = login.driver.findElement(
+					By.xpath("//div[@class='insight-page-view-tab ui-sortable-handle']//a[@title='View 1']"));
 			CommonFunctionality.action.contextClick(ele).build().perform();
-	        Thread.sleep(2000);
-	        login.driver.findElement(By.xpath("//span[contains(text(),'Delete view')]")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Delete view')]")).click();
 			login.driver.navigate().refresh();
 			System.out.println("Refresh :" + login.driver.getCurrentUrl());
 			Thread.sleep(5000);
@@ -1094,10 +1093,10 @@ public class SeriesTab {
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		try {
-			//highliting visual for add and replace function after refresh
+			// highliting visual for add and replace function after refresh
 			Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper']")).click();
-		} catch(Exception e) {
+		} catch (Exception e) {
 		}
 		Thread.sleep(3000);
 		WebElement ul_element = null;
@@ -1399,13 +1398,15 @@ public class SeriesTab {
 
 	@And("^Open \"([^\"]*)\" tab$")
 	public void open_tab(String arg1) throws Throwable {
-//		login.driver.navigate().refresh();
+		// login.driver.navigate().refresh();
 		CommonFunctionality.TopMethod();
 		try {
 			Thread.sleep(5000);
-			login.driver.findElement(By.xpath("//div[@class='dropdown--button']//div[@class='icon--red-cross database-selector--clear-icon']")).click();
-		}catch(Exception e) {
-			
+			login.driver.findElement(By.xpath(
+					"//div[@class='dropdown--button']//div[@class='icon--red-cross database-selector--clear-icon']"))
+					.click();
+		} catch (Exception e) {
+
 		}
 		CommonFunctionality.ExpandRight();
 		CommonFunctionality.ResetMethod();
@@ -1820,7 +1821,7 @@ public class SeriesTab {
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//div[@class='series-item--name']")).click();
 		Thread.sleep(3000);
-		
+
 		if (Filters.searchData.equals("SR495594")) {
 			element = login.driver.findElement(By.xpath("//div[@class='main-series-information--series-id']//div[2]"));
 			String SR_code = element.getText();
@@ -1831,7 +1832,7 @@ public class SeriesTab {
 			} else {
 				Assert.fail(Filters.searchData + " doesn't exists in " + SR_code);
 			}
-		} else if(Filters.searchData.equals("CN.GDP.NM.YTD-RMB-BN-Q")) {
+		} else if (Filters.searchData.equals("CN.GDP.NM.YTD-RMB-BN-Q")) {
 			element = login.driver.findElement(By.xpath("//div[@class='main-series-information--series-id']//div[3]"));
 			String Mnemonic_code = element.getText();
 			if (Mnemonic_code.contains(Filters.searchData)) {
@@ -1845,6 +1846,7 @@ public class SeriesTab {
 	}
 
 	public void PasteIntoExcel(List<String> string) throws Throwable {
+		XSSFSheet sheet;
 		XSSFWorkbook wb = new XSSFWorkbook();
 		File file = new File(System.getProperty("user.dir") + "\\" + "Sample.xlsx");
 		FileOutputStream fileOut = new FileOutputStream(file);
@@ -1855,12 +1857,12 @@ public class SeriesTab {
 			} catch (Exception e) {
 				// e.printStackTrace();
 			}
-			XSSFSheet sheet = wb.createSheet("Copy");
+			sheet = wb.createSheet("Copy");
 		} else {
 			wb = new XSSFWorkbook();
-			XSSFSheet sheet = wb.createSheet("sheet1");
+			sheet = wb.createSheet("sheet1");
 		}
-		XSSFSheet sheet = wb.getSheet("Copy");
+		sheet = wb.getSheet("Copy");
 		int rownum = 0;
 		int columnCount = 0;
 		for (String str : string) {

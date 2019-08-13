@@ -423,12 +423,12 @@ Scenario: TC_AT_68:Verify Add to new insight option
 	And Click on "Add to new insight" option from dropdown 
 	Then The selected series should get added to the new insight 
 	
-@Alltab 
-Scenario: TC_AT_69:Verify Add to existing insight option 
-	And Expand the dataset and select "Add to existing insight" option 
-	And Select multiple insights 
-	And Click on "Add to insights" 
-	Then Open the insights and verify the series in My series 
+	#@Alltab 
+	#Scenario: TC_AT_69:Verify Add to existing insight option 
+	#	And Expand the dataset and select "Add to existing insight" option 
+	#	And Select multiple insights 
+	#	And Click on "Add to insights" 
+	#	Then Open the insights and verify the series in My series 
 	
 @Alltab 
 Scenario: TC_AT_70:Verify Unselect All option 

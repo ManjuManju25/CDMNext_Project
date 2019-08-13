@@ -5,7 +5,6 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -33,12 +32,12 @@ public class AllTab {
 
 	@And("^Click on \"([^\"]*)\" tab$")
 	public void click_on_tab(String arg1) throws Throwable {
-
-		login.driver.navigate().refresh();
+		CommonFunctionality.TabSelection(arg1);
+		/*login.driver.navigate().refresh();
 		// CommonFunctionality.TopMethod();
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='All']"))
-				.click();
+				.click();*/
 
 	}
 
@@ -49,7 +48,7 @@ public class AllTab {
 		Thread.sleep(5000);
 		List<WebElement> list_of_tabs = login.driver.findElements(By.xpath("//div[@class='all-item--title']"));
 		login.Log4j.info(list_of_tabs.size());
-		for (int i = 1; i <= list_of_tabs.size(); i++) {
+		for (int i = 0; i <= list_of_tabs.size(); i++) {
 			int j = i + 1;
 			Thread.sleep(3000);
 			ele = login.driver.findElement(By.xpath("//div[@class='all-representation--content']//div[" + j
@@ -123,11 +122,12 @@ public class AllTab {
 
 	@And("^Click on \"([^\"]*)\" link$")
 	public void click_on_link(String arg1) throws Throwable {
-		Thread.sleep(3000);
+		CommonFunctionality.VerifyLink(arg1);
+		/*Thread.sleep(3000);
 		login.driver
 				.findElement(By.xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"))
 				.click();
-		login.Log4j.info("Clicking on " + arg1);
+		login.Log4j.info("Clicking on " + arg1);*/
 	}
 
 	@Then("^User should be navigated to \"([^\"]*)\" page$")
