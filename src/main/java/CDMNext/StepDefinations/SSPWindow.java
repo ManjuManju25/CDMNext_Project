@@ -697,16 +697,16 @@ public class SSPWindow {
 
 	@And("^clicking indicator drop down$")
 	public void clicking_indicator_drop_down() throws Throwable {
-		CommonFunctionality.webDriverwait_locator("//span[@class='main-series-information--see-indicators']", "xpath");
+		//CommonFunctionality.webDriverwait_locator("//span[@class='main-series-information--see-indicators']", "xpath");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("indicator_dropdown"))).click();
 		Thread.sleep(500);
 	}
 
 	@And("^Click on \"([^\"]*)\" name$")
 	public void click_on_name(String arg1) throws Throwable {
-		CommonFunctionality
-				.webDriverwait_locator("//*[@class='main-series-information--field-name' and contains(text(),'" + arg1
-						+ "')]/following-sibling::*", "xpath");
+//		CommonFunctionality
+//				.webDriverwait_locator("//*[@class='main-series-information--field-name' and contains(text(),'" + arg1
+//						+ "')]/following-sibling::*", "xpath");
 		login.driver.findElement(By.xpath("//*[@class='main-series-information--field-name' and contains(text(),'"
 				+ arg1 + "')]/following-sibling::*")).click();
 		Thread.sleep(500);
