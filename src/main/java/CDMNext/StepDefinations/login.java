@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -90,12 +91,12 @@ public class login {
 	public void setup() throws Throwable {
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
 		logged_in = false;
-//		day = date.get(Calendar.DAY_OF_MONTH);
-//		month = date.get(Calendar.MONTH);
-//		year = date.get(Calendar.YEAR);
-//		second = date.get(Calendar.SECOND);
-//		minute = date.get(Calendar.MINUTE);
-//		hour = date.get(Calendar.HOUR);
+		// day = date.get(Calendar.DAY_OF_MONTH);
+		// month = date.get(Calendar.MONTH);
+		// year = date.get(Calendar.YEAR);
+		// second = date.get(Calendar.SECOND);
+		// minute = date.get(Calendar.MINUTE);
+		// hour = date.get(Calendar.HOUR);
 		Invoke_browser();
 
 	}
@@ -271,28 +272,21 @@ public class login {
 					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\MicrosoftWebDriver.exe");
 			driver = new InternetExplorerDriver(capabilities);
 
-		} else if (CONFIG.getProperty("browserType").equals("CHROME")) {
-			/*DesiredCapabilities cap = DesiredCapabilities.chrome();
-			cap.setBrowserName("chrome");
-			 cap.setCapability(CapabilityType.VERSION, "75");
-			cap.setCapability("marionette", true);
-			cap.setPlatform(Platform.ANY);*/
-			
-			 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") +
-			 "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
-			  driver = new ChromeDriver();
-			  
-			/*try {
-				RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:39574/wd/hub"), cap);
-				long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));
-				driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);
-				// driver.manage().timeouts().pageLoadTimeout(implicitWaitTime,
-				// TimeUnit.SECONDS);
-				driver.manage().timeouts().setScriptTimeout(implicitWaitTime, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
-			} catch (MalformedURLException e) {
+		} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("CHROME")) {
+			System.setProperty("webdriver.chrome.driver",
+					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
+			ChromeOptions options = new ChromeOptions();
+			// Added this for downloading files into default project folder
+			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			chromePrefs.put("profile.default_content_settings.popups", 0);
+			chromePrefs.put("download.default_directory", System.getProperty("user.dir"));
+			// To disable save password dialog during runtime
+			chromePrefs.put("credentials_enable_service", false);
+			chromePrefs.put("profile.password_manager_enabled", false);
+			options.setExperimentalOption("prefs", chromePrefs);
+			options.addArguments("disable-infobars"); // To disable infobars
+			driver = new ChromeDriver(options);
 
-			}*/
 		}
 		long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));
 		driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);

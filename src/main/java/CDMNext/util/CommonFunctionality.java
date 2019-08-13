@@ -1,5 +1,6 @@
 package CDMNext.util;
 
+import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.Alert;
@@ -8,6 +9,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.Reporter;
 
 import CDMNext.StepDefinations.login;
 
@@ -20,6 +25,7 @@ public class CommonFunctionality {
 	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
 	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+	static WebDriverWait wait = new WebDriverWait(login.driver, 60);
 
 	public static void ClearSelection() throws InterruptedException {
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
@@ -153,17 +159,19 @@ public class CommonFunctionality {
 			}
 		}
 	}
+
 	public static void AlertPopup() {
 		try {
 			Thread.sleep(2000);
-			Alert alert=login.driver.switchTo().alert();
+			Alert alert = login.driver.switchTo().alert();
 			String alertText = alert.getText();
-	        System.out.println("Alert data: " + alertText);
+			System.out.println("Alert data: " + alertText);
 			alert.dismiss();
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 	}
+
 	public static void ExpandRight() throws InterruptedException {
 		Thread.sleep(5000);
 		try {
@@ -172,17 +180,78 @@ public class CommonFunctionality {
 
 		}
 	}
+
 	public static void SeriesHormonizationWindowClose() throws InterruptedException {
 		try {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
 					.isDisplayed()) {
 				Thread.sleep(1500);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
-						.click();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).click();
 			}
 		} catch (NoSuchElementException e) {
 
 		}
-		
+
+	}
+
+	public static void webDriverwait_keyvalue(String text) throws Exception {
+		// explicit wait for property values
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(text))));
+	}
+
+	public static void webDriverwait_locator(String locator, String locatorType) throws Exception {
+		// explicit wait for locator values
+		if (locatorType == "xpath") {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+		} else if (locatorType == "classname") {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+		}
+	}
+
+	public static boolean DownloadFileVerify() throws Exception {
+		// Verify the downloaded file as excel by comparing the filename title and
+		// downloaded file name
+		Thread.sleep(5000);
+		String series_title = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_title"))).getText();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+		String downloadPath = System.getProperty("user.dir");
+		File dir = new File(downloadPath);
+		File[] dirContents = dir.listFiles();
+		for (int i = 0; i < dirContents.length; i++) {
+			if (dirContents[i].getName().contains(series_title)) {
+				// File has been found, it can now be deleted:
+				dirContents[i].delete();
+				login.Log4j.info("File has been download to Excel and its verified");
+				return true;
+			}
+		}
+		Assert.fail("Download to Excel verification failed");
+		return false;
+	}
+
+	public static void search_without_filter() throws Throwable {
+		// Thread.sleep(4000);
+		List<WebElement> filter = login.driver
+				.findElements(By.xpath("//button[contains(text(),'Search without any filters')]"));
+		if (filter.size() > 1) {
+			for (WebElement search : filter) {
+				search.click();
+			}
+		} else {
+			System.out.println("===Search without filter button is not visible===");
+		}
+	}
+
+	public static void modelbox() {
+		// check whether the model box is displayed or not
+		try {
+			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Modal_dialog"))).size() > 0) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Model_dialog_cancel"))).click();
+			} else {
+				Reporter.log("No modal dialog appears", true);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
