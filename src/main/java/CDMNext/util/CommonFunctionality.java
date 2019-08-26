@@ -1,15 +1,19 @@
 package CDMNext.util;
 
 import java.io.File;
+
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -25,28 +29,36 @@ public class CommonFunctionality {
 	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
 	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	static WebDriverWait wait = new WebDriverWait(login.driver, 60);
+	public static WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	public static String manage_series_id;
 
 	public static void ClearSelection() throws InterruptedException {
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("TopButton"))))
+					.click();
+			// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 			login.Log4j.info("Clicking on Top button");
 		}
 		if (reset.size() > 0) {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+				// Thread.sleep(2000);
+				// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Reset"))))
+						.click();
 				login.Log4j.info("Clicking on Reset button");
 			}
 		}
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).isDisplayed()) {
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
-			login.Log4j.info("Clicking on Unselect button");
-		}
+		/*
+		 * if
+		 * (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).
+		 * isDisplayed()) { // Thread.sleep(2000); //
+		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).
+		 * click();
+		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.
+		 * LOCATORS.getProperty("unselect")))) .click();
+		 * login.Log4j.info("Clicking on Unselect button"); }
+		 */
 
 	}
 
@@ -55,8 +67,10 @@ public class CommonFunctionality {
 		try {
 			if (reset.size() > 0) {
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-					Thread.sleep(2000);
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+					// Thread.sleep(2000);
+					// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Reset")))).click();
 					login.Log4j.info("Clicking on Reset button");
 				}
 			}
@@ -86,27 +100,31 @@ public class CommonFunctionality {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void DeleteVisual() throws InterruptedException {
 		// Deleting visual
-		Thread.sleep(3000);
+		// Thread.sleep(3000);
 		WebElement ele = login.driver.findElement(By.xpath(
 				"//div[@class='insight-page-menu-views-container--view-tabs ui-sortable']//a[@class='insight-page-view-tab--link insight-page-view-tab--link__active']"));
-		action.contextClick(ele).build().perform();
-		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Delete view')]")).click();
-		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+		action.contextClick(ele).pause(2000).build().perform();
+		// Thread.sleep(3000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Delete view')]")))
+				.click();
+		// Thread.sleep(3000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Ok')]"))).click();
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void DeleteSeries() throws InterruptedException {
 		try {
 			// Deleting series from My Series tab
-			Thread.sleep(3000);
+			// Thread.sleep(3000);
 			WebElement ele = login.driver
 					.findElement(By.xpath("//div[@class='check-all-series']//span[@class='input-control--indicator']"));
-			action.moveToElement(ele).click().build().perform();
+			action.moveToElement(ele).pause(3000).click().build().perform();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+
 		} catch (Exception e) {
 
 		}
@@ -121,6 +139,7 @@ public class CommonFunctionality {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void RightClickOnAnySeries() throws InterruptedException {
 		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
@@ -128,14 +147,14 @@ public class CommonFunctionality {
 		for (int i = 0; i < li_All.size(); i++) {
 			// int j = i + 1;
 			m = i + 1;
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			WebElement checkbox = login.driver
 					.findElement(By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
 			checkbox.click();
 			WebElement ele = login.driver.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
 			if (i == 4) {
-				Thread.sleep(2000);
-				CommonFunctionality.action.contextClick(ele).build().perform();
+				// Thread.sleep(2000);
+				CommonFunctionality.action.contextClick(ele).pause(2000).build().perform();
 				break;
 			}
 		}
@@ -151,12 +170,23 @@ public class CommonFunctionality {
 		}
 	}
 
+	public static void SelectedSeriesClear() {
+		if (!login.driver
+				.findElement(By.xpath("//div[@class='search-input--series-indicator search-input--series-selected']"))
+				.isSelected()) {
+			login.Log4j.info("The selected count got unselected");
+		} else {
+			Assert.fail("The selected count not get unselected");
+		}
+	}
+
 	public static void AlldbClear() throws InterruptedException {
 		List<WebElement> clearIcon = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")));
 		if (clearIcon.size() > 0) {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).isDisplayed()) {
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon"))).click();
+				// Thread.sleep(2000);
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Alldb_clearIcon")))).click();
 			}
 		}
 	}
@@ -174,9 +204,11 @@ public class CommonFunctionality {
 	}
 
 	public static void ExpandRight() throws InterruptedException {
-		Thread.sleep(5000);
+		// Thread.sleep(5000);
 		try {
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_right"))).click();
+			wait.until(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Expand_right"))))
+					.click();
 		} catch (Exception e) {
 
 		}
@@ -186,13 +218,14 @@ public class CommonFunctionality {
 		try {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
 					.isDisplayed()) {
-				Thread.sleep(1500);
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))).click();
+				// Thread.sleep(1500);
+				wait.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))))
+						.click();
 			}
 		} catch (NoSuchElementException e) {
 
 		}
-
 	}
 
 	public static void webDriverwait_keyvalue(String text) throws Exception {
@@ -248,25 +281,13 @@ public class CommonFunctionality {
 	}
 
 	public static void TabSelection(String arg) throws Exception {
-		/*
-		 * try { wait.until(ExpectedConditions.visibilityOfElementLocated(
-		 * By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg +
-		 * "')]"))); login.driver.findElement(By.xpath(
-		 * "//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]")) .click();
-		 * Thread.sleep(2000); } catch (Exception e) {
-		 * login.driver.navigate().refresh(); // CommonFunctionality.TopMethod();
-		 * Thread.sleep(5000); login.driver .findElement(
-		 * By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='" +
-		 * arg + "']")) .click(); }
-		 */
+
 		if (arg.equals("All")) {
 			login.driver.navigate().refresh();
 			// CommonFunctionality.TopMethod();
-			Thread.sleep(5000);
-			login.driver
-					.findElement(
-							By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='" + arg + "']"))
-					.click();
+			// Thread.sleep(5000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='" + arg + "']"))).click();
 		} else {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
 					By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]")));
@@ -277,22 +298,11 @@ public class CommonFunctionality {
 	}
 
 	public static void VerifyLink(String arg) throws Exception {
-		/*
-		 * try { wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-		 * "//*[text()='" + arg + "']"))); manage_series_id =
-		 * login.driver.findElement(By.xpath(
-		 * "//*[@class='main-series-information--right']//*[@class='main-series-information--series-id']/div[1]"
-		 * )) .getText(); login.driver.findElement(By.xpath("//*[text()='" + arg +
-		 * "']")).click(); Thread.sleep(2000); } catch (Exception e) {
-		 * Thread.sleep(3000); login.driver .findElement( By.
-		 * xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"
-		 * )) .click(); login.Log4j.info("Clicking on " + arg); }
-		 */
+
 		if (arg.equals("View more")) {
-			Thread.sleep(3000);
-			login.driver
-					.findElement(
-							By.xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"))
+			// Thread.sleep(3000);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(
+					By.xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']")))
 					.click();
 			login.Log4j.info("Clicking on " + arg);
 		} else {
@@ -303,5 +313,54 @@ public class CommonFunctionality {
 			login.driver.findElement(By.xpath("//*[text()='" + arg + "']")).click();
 			Thread.sleep(2000);
 		}
+	}
+
+	public static WebElement getElementByXpath(WebDriver driver, String locator, int time) throws InterruptedException {
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(login.driver).withTimeout(time, TimeUnit.SECONDS)
+				.pollingEvery(5, TimeUnit.SECONDS).ignoring(Throwable.class);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+		WebElement element = login.driver.findElement(By.xpath(locator));
+		elementHighlight(login.driver, element, 8);
+		Thread.sleep(500);
+		return element;
+	}
+
+	public static WebElement getElementByProperty(WebDriver driver, String property_value, int time) throws Exception {
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(login.driver).withTimeout(time, TimeUnit.SECONDS)
+				.pollingEvery(5, TimeUnit.SECONDS).ignoring(Throwable.class);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
+		WebElement element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty(property_value)));
+		try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		elementHighlight(login.driver, element, 8);
+		Thread.sleep(5000);
+		return element;
+	}
+
+	public static void elementHighlight(WebDriver driver, WebElement Webelement, int wait_time) {
+		String originalStyle = Webelement.getAttribute("style");
+		jse.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 1px solid yellow;');",
+				Webelement);
+		jse.executeScript("arguments[0].setAttribute('style', '" + originalStyle + "');", Webelement);
+	}
+
+	public static void Views_list() throws Exception {
+		List<WebElement> views = login.driver
+				.findElements(By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
+		if (views.size() > 0) {
+			for (WebElement view : views) {
+				new Actions(login.driver).contextClick(view).build().perform();
+				getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 8).click();
+				getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 8).click();
+			}
+		}
+		getElementByProperty(login.driver, "Series_tab", 8).click();
+		DeleteSeries();
 	}
 }

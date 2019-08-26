@@ -427,6 +427,7 @@ public class InsightGeneral {
 			Thread.sleep(2000);
 			close_insight();
 		} else {
+			close_insight();
 			Assert.fail("Tag is not shown in insight explorer");
 		}
 	}

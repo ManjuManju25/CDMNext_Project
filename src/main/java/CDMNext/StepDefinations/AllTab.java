@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.asserts.SoftAssert;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -27,41 +29,48 @@ public class AllTab {
 	List<WebElement> list_of_series;
 	static List<String> sname = new ArrayList<>();
 	static List<String> Add_replce = new ArrayList<>();
-	WebElement checkbox;
+	static WebElement checkbox;
 	SoftAssert softAssert = new SoftAssert();
+	static WebElement unselect;
+	int MaxDatasetsCount;
 
 	@And("^Click on \"([^\"]*)\" tab$")
 	public void click_on_tab(String arg1) throws Throwable {
+		CommonFunctionality.wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Search"))))
+				.clear();
 		CommonFunctionality.TabSelection(arg1);
-		/*login.driver.navigate().refresh();
-		// CommonFunctionality.TopMethod();
-		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='All']"))
-				.click();*/
-
 	}
 
 	@Then("^All tab should contain these sections \"([^\"]*)\"$")
 	public void all_tab_should_contain_these_sections(String arg1) throws Throwable {
 
-		String[] arr = arg1.split(";");
-		Thread.sleep(5000);
+		String[] arr = arg1.split(",");
 		List<WebElement> list_of_tabs = login.driver.findElements(By.xpath("//div[@class='all-item--title']"));
 		login.Log4j.info(list_of_tabs.size());
-		for (int i = 0; i <= list_of_tabs.size(); i++) {
-			int j = i + 1;
+		for (int i = 0; i < list_of_tabs.size(); i++) {
 			Thread.sleep(3000);
-			ele = login.driver.findElement(By.xpath("//div[@class='all-representation--content']//div[" + j
-					+ "]//div[1]//div[@class='all-item--title']"));
+			if (arg1.contains("Top Insight")) {
+				int j = i + 2;
+				ele = login.driver.findElement(By.xpath("//div[@class='all-representation--content']//div[" + j
+						+ "]//div[1]//div[@class='all-item--title']"));
+			} else {
+				int j = i + 1;
+				ele = login.driver.findElement(By.xpath("//div[@class='all-representation--content']//div[" + j
+						+ "]//div[1]//div[@class='all-item--title']"));
+			}
 			CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 			String str = ele.getText();
 			// login.Log4j.info(str);
+			boolean KeywordMatch = false;
 			for (String arr1 : arr) {
 				if (arr1.contains(str)) {
 					login.Log4j.info(" All tab contain " + str);
-				} else {
-					Assert.fail("All tab doesn't contain " + str);
+					KeywordMatch = true;
 				}
+			}
+			if (KeywordMatch == false) {
+				Assert.fail("All tab doesn't contain " + str);
 			}
 		}
 	}
@@ -78,28 +87,25 @@ public class AllTab {
 			login.Log4j.info(" Clicking on " + arg1);
 		}
 	}
-
-	@Then("^All Tab should show insights from All Insights in Top Insights section$")
-	public void all_Tab_should_show_insights_from_All_Insights_in_Top_Insights_section() throws Throwable {
-		Thread.sleep(3000);
-		ele = login.driver.findElement(
-				By.xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"));
-		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
-		Thread.sleep(1500);
-		ele.click();
-		AllInsightsValidation();
-	}
-
-	@Then("^All Tab should show insights from EMIS Insights in Top Insights section$")
-	public void all_Tab_should_show_insights_from_EMIS_Insights_in_Top_Insights_section() throws Throwable {
-		Thread.sleep(3000);
-		ele = login.driver.findElement(
-				By.xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"));
-		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
-		Thread.sleep(1500);
-		ele.click();
-		EMISInsightsValidation();
-	}
+	/*
+	 * @Then("^All Tab should show insights from All Insights in Top Insights section$"
+	 * ) public void
+	 * all_Tab_should_show_insights_from_All_Insights_in_Top_Insights_section()
+	 * throws Throwable { Thread.sleep(3000); ele = login.driver.findElement( By.
+	 * xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"
+	 * ));
+	 * CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);",
+	 * ele); Thread.sleep(1500); ele.click(); AllInsightsValidation(); }
+	 * 
+	 * @Then("^All Tab should show insights from EMIS Insights in Top Insights section$"
+	 * ) public void
+	 * all_Tab_should_show_insights_from_EMIS_Insights_in_Top_Insights_section()
+	 * throws Throwable { Thread.sleep(3000); ele = login.driver.findElement( By.
+	 * xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"
+	 * ));
+	 * CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);",
+	 * ele); Thread.sleep(1500); ele.click(); EMISInsightsValidation(); }
+	 */
 
 	@And("^Observe the number of insights displayed by default$")
 	public void observe_the_number_of_insights_displayed_by_default() throws Throwable {
@@ -123,34 +129,15 @@ public class AllTab {
 	@And("^Click on \"([^\"]*)\" link$")
 	public void click_on_link(String arg1) throws Throwable {
 		CommonFunctionality.VerifyLink(arg1);
-		/*Thread.sleep(3000);
-		login.driver
-				.findElement(By.xpath("//div[@class='top-insights all-item']//div[@class='all-item--view-more-title']"))
-				.click();
-		login.Log4j.info("Clicking on " + arg1);*/
 	}
 
 	@Then("^User should be navigated to \"([^\"]*)\" page$")
 	public void user_should_be_navigated_to_page(String arg1) throws Throwable {
 		Thread.sleep(2000);
 		if (InsightsSwitch.equals("All Insights")) {
-			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()
-					&& login.driver.findElement(By.xpath("//div[@data-type='gallery']")).isDisplayed()) {
-				login.Log4j.info("Insight Explorer page is opened ");
-				Thread.sleep(1000);
-				login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
-			} else {
-				AssertJUnit.fail("Insight Explorer page is not opened");
-			}
+			AllInsightsValidation();
 		} else if (InsightsSwitch.equals("EMIS Insights")) {
-			if (login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).isDisplayed()
-					&& login.driver.findElement(By.xpath("//div[@data-type='emis']")).isDisplayed()) {
-				login.Log4j.info("Insight Explorer page is opened ");
-				Thread.sleep(1000);
-				login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
-			} else {
-				AssertJUnit.fail("Insight Explorer page is not opened");
-			}
+			EMISInsightsValidation();
 		}
 	}
 
@@ -339,6 +326,16 @@ public class AllTab {
 		}
 	}
 
+	@Then("^Context menu should be poped up$")
+	public void context_menu_should_be_poped_up() throws Throwable {
+		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("items-wrapper")));
+		if (login.driver.findElement(By.className("items-wrapper")).isDisplayed()) {
+			login.Log4j.info("PASS");
+		} else {
+			Assert.fail("FAIL");
+		}
+	}
+
 	@And("^Hover the mouse on any series level$")
 	public void hover_the_mouse_on_any_series_level() throws Throwable {
 		CommonFunctionality.UnselectMethod();
@@ -392,11 +389,11 @@ public class AllTab {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Click on ' v ' icon to expand the series details$")
 	public void click_on_v_icon_to_expand_the_series_details() throws Throwable {
-		Thread.sleep(2000);
 		ele = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--country country-information']"));
-		CommonFunctionality.action.moveToElement(ele).click().build().perform();
+		CommonFunctionality.action.moveToElement(ele).pause(2000).click().build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//li[1]//div[@title='Show related data']")).click();
 		login.Log4j.info("Clicking on Show related data icon");
@@ -455,15 +452,15 @@ public class AllTab {
 				.click();
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Hover the mouse on any series click on dropdown icon$")
 	public void hover_the_mouse_on_any_series_click_on_dropdown_icon() throws Throwable {
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs--visible']//span[@title='All']"))
 				.click();
 		hover_the_mouse_on_any_series();
-		Thread.sleep(3000);
 		ele = login.driver.findElement(By.xpath("//ul//li[1]//div[@class='add-to-data-selection--toggle']"));
-		CommonFunctionality.action.moveToElement(ele).click().build().perform();
+		CommonFunctionality.action.moveToElement(ele).pause(3000).click().build().perform();
 	}
 
 	@And("^Right click on any series level$")
@@ -509,17 +506,9 @@ public class AllTab {
 
 	@And("^Recently updated datasets should contain max \"([^\"]*)\" datasets$")
 	public void recently_updated_datasets_should_contain_max_datasets(String arg1) throws Throwable {
-		int RecentlyUpdatedDatasetsCount = Integer.parseInt(arg1);
+		MaxDatasetsCount = Integer.parseInt(arg1);
 		RecentlyUpdatedDatasets();
-		Thread.sleep(3000);
-		List<WebElement> list = login.driver.findElements(
-				By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node']"));
-		int list_of_datasets = list.size();
-		if (RecentlyUpdatedDatasetsCount == list_of_datasets) {
-			login.Log4j.info("PASS");
-		} else {
-			Assert.fail("10 datasets are not displayed");
-		}
+		VerifyMaxDatasets();
 	}
 
 	@And("^Click on View More link for Recently updated datasets$")
@@ -613,14 +602,27 @@ public class AllTab {
 
 	@Then("^\"([^\"]*)\" icons should get displayed$")
 	public void icons_should_get_displayed(String arg1) throws Throwable {
+		WebElement dropdown;
+		String str;
 		String[] mouseHoverOptions = arg1.split(",");
 		String[] arr = mouseHoverOptions[1].split(" or ");
 		Thread.sleep(2000);
-		ele = login.driver.findElement(By.xpath(
-				"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
-		String str = ele.getAttribute("title");
-		WebElement dropdown = login.driver.findElement(By.xpath(
-				"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//div[@class='add-to-data-selection--title']"));
+		try {
+			// with out search
+			ele = login.driver.findElement(By.xpath(
+					"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
+			str = ele.getAttribute("title");
+			dropdown = login.driver.findElement(By.xpath(
+					"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//div[@class='add-to-data-selection--title']"));
+		} catch (Exception e) {
+			// with search[keyword]
+			ele = login.driver.findElement(By.xpath(
+					"//div[@class='all-representation--content']//div[2]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
+			str = ele.getAttribute("title");
+			dropdown = login.driver.findElement(By.xpath(
+					"//div[@class='all-representation--content']//div[2]//div[@class='tree-node data-set-node'][1]//div[@class='add-to-data-selection--title']"));
+		}
+
 		String str1 = dropdown.getAttribute("title");
 		Thread.sleep(2000);
 		if (mouseHoverOptions[0].equalsIgnoreCase(str) == true && str1.contains(arr[0]) == true
@@ -634,13 +636,13 @@ public class AllTab {
 	@And("^Click on Open footnote icon$")
 	public void click_on_Open_footnote_icon() throws Throwable {
 		try {
-			//RecentlyUpdatedSeries
+			// RecentlyUpdatedSeries
 			Thread.sleep(2000);
 			ele = login.driver.findElement(By.xpath(
 					"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
 			ele.click();
 		} catch (Exception e) {
-			//New Datasets
+			// New Datasets
 			Thread.sleep(2000);
 			ele = login.driver.findElement(By.xpath(
 					"//div[@class='all-representation--content']//div[5]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
@@ -728,7 +730,7 @@ public class AllTab {
 					By.xpath("//tr[3]//td[@class='series-tooltip-table--cell series-tooltip-table--value']"));
 			String Tooltip_name = tooltip.getText();
 			login.Log4j.info(Tooltip_name);
-			ele=login.driver.findElement(By.xpath("//div[@class='text-dots']"));
+			ele = login.driver.findElement(By.xpath("//div[@class='text-dots']"));
 			CommonFunctionality.action.moveToElement(ele).build().perform();
 			if (sname.contains(Tooltip_name) == true) {
 				login.Log4j.info(Tooltip_name + " added to visual");
@@ -775,7 +777,7 @@ public class AllTab {
 					"//ul[@class='search-series-list scrollable']//li[" + j + "]//div[@class='series-item--name']"));
 			String str = ele.getText();
 			Add_replce.add(str);
-			
+
 			if (i == 1) {
 				// CommonFunctionality.action.moveToElement(checkbox).build().perform();
 				// Thread.sleep(2000);
@@ -818,7 +820,7 @@ public class AllTab {
 					"//ul[@class='search-series-list scrollable']//li[" + j + "]//div[@class='series-item--name']"));
 			CommonFunctionality.sname = ele.getText();
 			sname.add(CommonFunctionality.sname);
-			
+
 			if (i == 1) {
 				CommonFunctionality.action.moveToElement(checkbox).build().perform();
 				Thread.sleep(2000);
@@ -858,7 +860,7 @@ public class AllTab {
 			String Tooltip_name = tooltip.getText();
 			// login.Log4j.info(Tooltip_name);
 			// login.Log4j.info(sname);
-			ele=login.driver.findElement(By.xpath("//div[@class='text-dots']"));
+			ele = login.driver.findElement(By.xpath("//div[@class='text-dots']"));
 			CommonFunctionality.action.moveToElement(ele).build().perform();
 			if (Add_replce.contains(Tooltip_name) != true) {
 				login.Log4j.info("Replaced with the series : " + Tooltip_name);
@@ -901,67 +903,21 @@ public class AllTab {
 	@And("^Expand the dataset and right click on any series$")
 	public void expand_the_dataset_and_right_click_on_any_series() throws Throwable {
 		click_on_box();
-		Thread.sleep(1000);
-		List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable']//li"));
-		for (int i = 0; i < list.size(); i++) {
-			int j = i + 3;
-			Thread.sleep(2000);
-			checkbox = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']//li[" + j
-					+ "]//div[@class='series-list-item--checkbox-wrapper']"));
-			checkbox.click();
-			ele = login.driver.findElement(By.xpath(
-					"//ul[@class='search-series-list scrollable']//li[" + j + "]//div[@class='series-item--name']"));
-			CommonFunctionality.sname = ele.getText();
-			sname.add(CommonFunctionality.sname);
-			if (i == 1) {
-				CommonFunctionality.action.contextClick(ele).build().perform();
-				break;
-			}
-		}
+		VerifyRightClickOnAnySeries();
 	}
 
 	@And("^Observe column for no of series for each Dataset$")
 	public void observe_column_for_no_of_series_for_each_Dataset() throws Throwable {
 		CommonFunctionality.ExpandRight();
 		RecentlyUpdatedDatasets();
-		Thread.sleep(3000);
-		List<WebElement> list_of_datasets = login.driver.findElements(
-				By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node']"));
-		for (int i = 0; i < list_of_datasets.size(); i++) {
-			int j = i + 1;
-			Thread.sleep(1000);
-			ele = login.driver.findElement(
-					By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node'][" + j
-							+ "]//div[@class='data-set-node--count']"));
-			CommonFunctionality.action.moveToElement(ele).build().perform();
-			if (ele.isDisplayed()) {
-				login.Log4j.info("no.of series column is displayed for each dataset");
-			} else {
-				Assert.fail("FAIL");
-			}
-		}
+		VerifySeriesColumn();
 	}
 
 	@And("^Observe column for updated Date for each Dataset$")
 	public void observe_column_for_updated_Date_for_each_Dataset() throws Throwable {
 		CommonFunctionality.ExpandRight();
 		RecentlyUpdatedDatasets();
-		Thread.sleep(3000);
-		List<WebElement> list_of_datasets = login.driver.findElements(
-				By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node']"));
-		for (int i = 0; i < list_of_datasets.size(); i++) {
-			int j = i + 1;
-			Thread.sleep(1000);
-			ele = login.driver.findElement(
-					By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node'][" + j
-							+ "]//div[@class='data-set-node--updated']"));
-			CommonFunctionality.action.moveToElement(ele).build().perform();
-			if (ele.isDisplayed()) {
-				login.Log4j.info("Updated column is displayed for each dataset");
-			} else {
-				Assert.fail("FAIL");
-			}
-		}
+		VerifyDateColumn();
 	}
 
 	@And("^Click on View tab$")
@@ -1029,6 +985,7 @@ public class AllTab {
 		// login.Log4j.info(CommonFunctionality.sname);
 		CommonFunctionality.action.moveToElement(ele).build().perform();
 	}
+
 	@And("^Select any of the datasets for New datasets$")
 	public void select_any_of_the_datasets_for_New_datasets() throws Throwable {
 		NewDatasets();
@@ -1037,10 +994,12 @@ public class AllTab {
 				"//div[@class='all-representation--content']//div[5]//div[@class='tree-node data-set-node'][1]//span[@class='svg-checkbox']"));
 		ele.click();
 	}
+
 	@And("^Expand the dataset for New datasets$")
 	public void expand_the_dataset_for_New_datasets() throws Throwable {
 		click_on_box_for_New_datasets();
 	}
+
 	@And("^Expand the dataset for New datasets and select \"([^\"]*)\" option$")
 	public void expand_the_dataset_for_New_datasets_and_select_option(String arg1) throws Throwable {
 		click_on_box_for_New_datasets();
@@ -1058,34 +1017,154 @@ public class AllTab {
 				.click();
 		login.driver.findElement(By.xpath("//div[@class='items-wrapper']//li[6]//span//span")).click();
 	}
-	public void AllInsightsValidation() throws InterruptedException {
+
+	@And("^Expand the dataset for New datasets and right click on any series$")
+	public void expand_the_dataset_for_New_datasets_and_right_click_on_any_series() throws Throwable {
+		click_on_box_for_New_datasets();
+		VerifyRightClickOnAnySeries();
+	}
+
+	@And("^Observe column for no of series for each Dataset under NewDatasets$")
+	public void observe_column_for_no_of_series_for_each_Dataset_under_NewDatasets() throws Throwable {
+		CommonFunctionality.ExpandRight();
+		NewDatasets();
+		VerifySeriesColumn();
+	}
+
+	@And("^Observe column for updated Date for each Dataset under NewDatasets$")
+	public void observe_column_for_updated_Date_for_each_Dataset_under_NewDatasets() throws Throwable {
+		CommonFunctionality.ExpandRight();
+		NewDatasets();
+		VerifyDateColumn();
+	}
+
+	@And("^Select few series in any of the sections$")
+	public void select_few_series_in_any_of_the_sections() throws Throwable {
+		click_on_box_for_New_datasets();
+		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				"//ul[@class='search-series-list scrollable']//li[1]//div[@class='series-list-item--checkbox-wrapper']")))
+				.click();
+	}
+
+	@Then("^Unselect link should be displayed at the top with red color font$")
+	public void unselect_link_should_be_displayed_at_the_top_with_red_color_font() throws Throwable {
+		UnselectLink();
+		if (unselect.isDisplayed()) {
+			login.Log4j.info("Unselect link is displayed");
+		} else {
+			Assert.fail("Unselect link is not displayed");
+		}
+	}
+
+	@And("^Click in the Unselect link$")
+	public void click_in_the_Unselect_link() throws Throwable {
+		select_few_series_in_any_of_the_sections();
+		CommonFunctionality.TopMethod();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unselect"))).click();
+	}
+
+	@Then("^The series / datasets selection should get cleared off$")
+	public void the_series_datasets_selection_should_get_cleared_off() throws Throwable {
+		CommonFunctionality.SelectedSeriesClear();
+	}
+
+	@And("^Explore Datasets should contain max \"([^\"]*)\" datasets$")
+	public void explore_Datasets_should_contain_max_datasets(String arg1) throws Throwable {
+		MaxDatasetsCount = Integer.parseInt(arg1);
+		ExploreDatasets();
+		VerifyMaxDatasets();
+	}
+
+	@And("^Search keyword with \"([^\"]*)\"$")
+	public void search_keyword_with(String arg1) throws Throwable {
+		CommonFunctionality.wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Search"))));
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(arg1);
+
+	}
+
+	@And("^Click on View More link for Explore datasets$")
+	public void click_on_View_More_link_for_Explore_datasets() throws Throwable {
+		ExploreDatasets();
+		Thread.sleep(3000);
+		ele = login.driver.findElement(
+				By.xpath("//div[@class='all-representation--content']//div[3]//div[contains(text(),'View more')]"));
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+		Thread.sleep(2000);
+		ele.click();
+	}
+
+	@Then("^User Should be navigated to Datasets tab$")
+	public void user_Should_be_navigated_to_Datasets_tab() throws Throwable {
+		WebElement datasets = CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath("//div[@class='search-presentation-tabs--visible']//span[contains(text(),'Datasets')]")));
+		if (datasets.isDisplayed()) {
+			login.Log4j.info("Navigated to Datasets tab");
+		} else {
+			Assert.fail("it's not navigated to Datasets tab");
+		}
+	}
+
+	@And("^Click on \\+ box for Explore datasets$")
+	public void click_on_box_for_Explore_datasets() throws Throwable {
+		ExploreDatasets();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(
+				"//div[@class='all-representation--content']//div[2]//div[@class='tree-node data-set-node'][1]//div[@class='toggle']"))
+				.click();
+	}
+
+	@And("^Click on - icon for Explore datasets$")
+	public void click_on_icon_for_Explore_datasets() throws Throwable {
+		click_on_box_for_Explore_datasets();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@class='tree-node data-set-node open']//div[@class='toggle']"))
+				.click();
+		Thread.sleep(2000);
+	}
+
+	@And("^Hover the mouse on any of the Datasets under Explore datasets$")
+	public void hover_the_mouse_on_any_of_the_Datasets_under_Explore_datasets() throws Throwable {
+		ExploreDatasets();
+		Thread.sleep(2000);
+		ele = login.driver.findElement(By.xpath(
+				"//div[@class='all-representation--content']//div[2]//div[@class='tree-node data-set-node'][1]//div[@class='series-data-set--table-name']"));
+		CommonFunctionality.sname = ele.getText();
+		// login.Log4j.info(CommonFunctionality.sname);
+		CommonFunctionality.action.moveToElement(ele).build().perform();
+	}
+
+	void AllInsightsValidation() throws InterruptedException {
 		Thread.sleep(3000);
 		if (login.driver.findElement(By.xpath("//div[@data-type='gallery']")).isDisplayed()) {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 		} else {
-			Assert.fail("All tab not shown insights from All Insights in Top Insights section");
+			Assert.fail("Insight Explorer page is not navigated");
 		}
 	}
 
-	public void EMISInsightsValidation() throws InterruptedException {
+	void EMISInsightsValidation() throws InterruptedException {
 		Thread.sleep(3000);
 		if (login.driver.findElement(By.xpath("//div[@data-type='emis']")).isDisplayed()) {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 		} else {
-			Assert.fail("All tab not shown insights from EMIS Insights in Top Insights section");
+			Assert.fail("Insight Explorer page is not navigated");
 		}
 	}
 
-	public static void PopularSeriesMethod() throws InterruptedException {
+	static void PopularSeriesMethod() throws InterruptedException {
 		Thread.sleep(3000);
 		ele = login.driver.findElement(
 				By.xpath("//div[@class='all-representation--content']//div[3]//div[1]//div[@class='all-item--title']"));
 		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 	}
 
-	public static void TotalUsageValidation() throws InterruptedException {
+	static void TotalUsageValidation() throws InterruptedException {
 		Thread.sleep(1500);
 		login.driver.findElement(By.xpath(
 				"//div[@class='all-representation--content']//div[@class='popular-series all-item']//div[contains(text(),'View more')]"))
@@ -1098,21 +1177,40 @@ public class AllTab {
 		}
 	}
 
-	public static void RecentlyUpdatedDatasets() throws InterruptedException {
+	static void RecentlyUpdatedDatasets() throws InterruptedException {
 		Thread.sleep(3000);
 		ele = login.driver.findElement(
 				By.xpath("//div[@class='all-representation--content']//div[4]//div[1]//div[@class='all-item--title']"));
 		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 	}
 
-	public static void NewDatasets() throws InterruptedException {
+	static void NewDatasets() throws InterruptedException {
 		Thread.sleep(3000);
 		ele = login.driver.findElement(
 				By.xpath("//div[@class='all-representation--content']//div[5]//div[1]//div[@class='all-item--title']"));
 		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 	}
 
-	public static void AddtoNewInsight() throws InterruptedException {
+	void ExploreDatasets() throws Exception {
+		Thread.sleep(3000);
+		ele = login.driver.findElement(
+				By.xpath("//div[@class='all-representation--content']//div[2]//div[1]//div[@class='all-item--title']"));
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+	}
+
+	void VerifyMaxDatasets() throws Exception {
+		Thread.sleep(3000);
+		List<WebElement> list = login.driver.findElements(
+				By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node']"));
+		int list_of_datasets = list.size();
+		if (MaxDatasetsCount == list_of_datasets || list_of_datasets < MaxDatasetsCount) {
+			login.Log4j.info("MaxDatasets count is " + list_of_datasets);
+		} else {
+			Assert.fail("Max datasets are not displayed");
+		}
+	}
+
+	static void AddtoNewInsight() throws InterruptedException {
 		List<WebElement> Serieslist = login.driver.findElements(By.xpath(
 				"//div[@class='webix_column list-series-name webix_last']//div[@class='webix_cell']//span[@class='series-name-field-title']"));
 		for (int i = 0; i < Serieslist.size(); i++) {
@@ -1129,5 +1227,69 @@ public class AllTab {
 			}
 		}
 		CommonFunctionality.DeleteSeries();
+	}
+
+	static void VerifyRightClickOnAnySeries() throws Exception {
+		Thread.sleep(1000);
+		List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable']//li"));
+		for (int i = 0; i < list.size(); i++) {
+			int j = i + 3;
+			Thread.sleep(2000);
+			checkbox = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']//li[" + j
+					+ "]//div[@class='series-list-item--checkbox-wrapper']"));
+			checkbox.click();
+			ele = login.driver.findElement(By.xpath(
+					"//ul[@class='search-series-list scrollable']//li[" + j + "]//div[@class='series-item--name']"));
+			CommonFunctionality.sname = ele.getText();
+			sname.add(CommonFunctionality.sname);
+			if (i == 1) {
+				CommonFunctionality.action.contextClick(ele).build().perform();
+				break;
+			}
+		}
+	}
+
+	static void VerifySeriesColumn() throws Exception {
+		Thread.sleep(3000);
+		List<WebElement> list_of_datasets = login.driver.findElements(
+				By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node']"));
+		for (int i = 0; i < list_of_datasets.size(); i++) {
+			int j = i + 1;
+			Thread.sleep(1000);
+			ele = login.driver.findElement(
+					By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node'][" + j
+							+ "]//div[@class='data-set-node--count']"));
+			CommonFunctionality.action.moveToElement(ele).build().perform();
+			if (ele.isDisplayed()) {
+				login.Log4j.info("no.of series column is displayed for each dataset");
+			} else {
+				Assert.fail("FAIL");
+			}
+		}
+	}
+
+	static void VerifyDateColumn() throws Exception {
+		Thread.sleep(3000);
+		List<WebElement> list_of_datasets = login.driver.findElements(
+				By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node']"));
+		for (int i = 0; i < list_of_datasets.size(); i++) {
+			int j = i + 1;
+			Thread.sleep(1000);
+			ele = login.driver.findElement(
+					By.xpath("//div[@class='data-sets all-item'][1]//div[2]//div[@class='tree-node data-set-node'][" + j
+							+ "]//div[@class='data-set-node--updated']"));
+			CommonFunctionality.action.moveToElement(ele).build().perform();
+			if (ele.isDisplayed()) {
+				login.Log4j.info("Updated column is displayed for each dataset");
+			} else {
+				Assert.fail("FAIL");
+			}
+		}
+	}
+
+	static void UnselectLink() {
+		unselect = CommonFunctionality.wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("unselect"))));
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", unselect);
 	}
 }

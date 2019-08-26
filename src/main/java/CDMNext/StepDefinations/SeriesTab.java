@@ -646,7 +646,7 @@ public class SeriesTab {
 			break;
 		case "Selected series added to insights:":
 			Thread.sleep(2000);
-			WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("first_insight")));
+			WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("second_insight")));
 			ele.click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_insights"))).click();
@@ -1845,7 +1845,7 @@ public class SeriesTab {
 		}
 	}
 
-	public void PasteIntoExcel(List<String> string) throws Throwable {
+	  void PasteIntoExcel(List<String> string) throws Throwable {
 		XSSFSheet sheet;
 		XSSFWorkbook wb = new XSSFWorkbook();
 		File file = new File(System.getProperty("user.dir") + "\\" + "Sample.xlsx");

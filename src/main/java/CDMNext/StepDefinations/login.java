@@ -4,6 +4,7 @@ import java.awt.Robot;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Properties;
@@ -276,7 +277,9 @@ public class login {
 			chromePrefs.put("credentials_enable_service", false);
 			chromePrefs.put("profile.password_manager_enabled", false);
 			options.setExperimentalOption("prefs", chromePrefs);
-			options.addArguments("disable-infobars"); // To disable infobars
+			// To disable infobars
+			options.setExperimentalOption("useAutomationExtension", false);
+			options.setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"));
 			driver = new ChromeDriver(options);
 		}
 		long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));

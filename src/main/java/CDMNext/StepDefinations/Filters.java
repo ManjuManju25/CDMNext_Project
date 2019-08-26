@@ -254,10 +254,10 @@ public class Filters {
 					login.Log4j.info(li_All.size());
 					Thread.sleep(5000);
 					j = i + 1;
-					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
-					Thread.sleep(1000);
+//					checkbox = login.driver
+//							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+//					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
+//					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(2000);
@@ -718,12 +718,11 @@ public class Filters {
 
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(4000);
+					Thread.sleep(3000);
 					int j = i + 1;
-					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
-					Thread.sleep(1000);
+					//checkbox = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					//CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
+					//Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(1000);
@@ -992,7 +991,7 @@ public class Filters {
 		}
 	}
 
-	public boolean validation(String searchText, String sourcearr2) throws Throwable {
+	boolean validation(String searchText, String sourcearr2) throws Throwable {
 		String[] keywords = null;
 		if (sourcearr2.contains(",")) {
 			keywords = sourcearr2.split(",");

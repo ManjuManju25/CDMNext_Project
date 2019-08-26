@@ -1079,420 +1079,425 @@ Scenario: TC_SynonymSearch_215 : Search for an Acronym as "cis"
 	Given User enters keyword "cis" 
 	Then User verify keyword search results 
 	
+@SynonymSearch 
+Scenario: TC_SynonymSearch_216 : Search for an Acronym as "sale" 
+	Given User enters keyword "sale" 
+	Then User verify keyword search results 
+	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_216 
+Scenario: TC_KeywordSearch_217 
 	Given User enters keyword "Electricity AND gas AND India" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_217 
+Scenario: TC_KeywordSearch_218 
 	Given User enters keyword "Electricity and gas and India" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_218 
+Scenario: TC_KeywordSearch_219 
 	Given User enters keyword "Electricity AND gas and India" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_219 
+Scenario: TC_KeywordSearch_220 
 	Given User enters keyword "oil OR water OR industry" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_220 
+Scenario: TC_KeywordSearch_221 
 	Given User enters keyword "oil or water OR industry" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_221 
+Scenario: TC_KeywordSearch_222 
 	Given User enters keyword "oil or water or industry" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_222 
+Scenario: TC_KeywordSearch_223 
 	Given User enters keyword "capital NOT price NOT Algeria" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_223 
+Scenario: TC_KeywordSearch_224 
 	Given User enters keyword "capital not price not Algeria" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_224 
+Scenario: TC_KeywordSearch_225 
 	Given User enters keyword "capital NOT price not Algeria" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_225 
+Scenario: TC_KeywordSearch_226 
 	Given User enters keyword "capital AND price OR Algeria" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_226 
+Scenario: TC_KeywordSearch_227 
 	Given User enters keyword "capital and price OR Algeria" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_227 
+Scenario: TC_KeywordSearch_228 
 	Given User enters keyword "capital and price or Algeria" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_228 
+Scenario: TC_KeywordSearch_229 
 	Given User enters keyword "fuel OR price AND Albania" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_229 
+Scenario: TC_KeywordSearch_230 
 	Given User enters keyword "fuel OR price and Albania" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_230 
+Scenario: TC_KeywordSearch_231 
 	Given User enters keyword "fuel or price and Albania" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_231 
+Scenario: TC_KeywordSearch_232 
 	Given User enters keyword "population OR India NOT average" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_232 
+Scenario: TC_KeywordSearch_233 
 	Given User enters keyword "population or India NOT average" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_233 
+Scenario: TC_KeywordSearch_234 
 	Given User enters keyword "population or India not average" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch
-Scenario: TC_KeywordSearch_234 
+Scenario: TC_KeywordSearch_235 
 	Given User enters keyword "gas NOT oil AND state" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_235 
+Scenario: TC_KeywordSearch_236 
 	Given User enters keyword "gas not oil AND state" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_236 
+Scenario: TC_KeywordSearch_237 
 	Given User enters keyword "gas not oil and state" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_237 
+Scenario: TC_KeywordSearch_238 
 	Given User enters keyword "gas NOT India OR state" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_238 
+Scenario: TC_KeywordSearch_239 
 	Given User enters keyword "gas NOT India or state" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_239 
+Scenario: TC_KeywordSearch_240 
 	Given User enters keyword "gas not India or state" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_240 
+Scenario: TC_KeywordSearch_241 
 	Given User enters keyword "Bank AND Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_241 
+Scenario: TC_KeywordSearch_242 
 	Given User enters keyword "Bank and Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_242 
+Scenario: TC_KeywordSearch_243 
 	Given User enters keyword "Bank And Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_243 
+Scenario: TC_KeywordSearch_244 
 	Given User enters keyword "Bank OR Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch
-Scenario: TC_KeywordSearch_244 
+Scenario: TC_KeywordSearch_245 
 	Given User enters keyword "Bank or Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_245 
+Scenario: TC_KeywordSearch_246 
 	Given User enters keyword "Bank oR Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_246 
+Scenario: TC_KeywordSearch_247 
 	Given User enters keyword "Bank NOT Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_247 
+Scenario: TC_KeywordSearch_248 
 	Given User enters keyword "Bank not Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_248 
+Scenario: TC_KeywordSearch_249 
 	Given User enters keyword "Bank Not Deposits" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_249 
+Scenario: TC_KeywordSearch_250 
 	Given User enters "IAPAFABH" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_250 
+Scenario: TC_KeywordSearch_251 
 	Given User enters "134347308" 
 	Then  User verify the search results 
 	
 @KeywordSearch
-Scenario: TC_KeywordSearch_251 
+Scenario: TC_KeywordSearch_252 
 	Given User enters keyword "Business AND Economic" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_252 
+Scenario: TC_KeywordSearch_253 
 	Given User enters keyword "Selenium OR Pottasium" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_253 
+Scenario: TC_KeywordSearch_254 
 	Given User enters keyword "Cheese OR Honey" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_254 
+Scenario: TC_KeywordSearch_255 
 	Given User enters "Agar;Methylene" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_255 
+Scenario: TC_KeywordSearch_256 
 	Given User enters "Agar;BRDLAC;228912101" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_256 
+Scenario: TC_KeywordSearch_257 
 	Given User enters "1380601" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_257 
+Scenario: TC_KeywordSearch_258 
 	Given User enters "State Bank of Mysore;shanghai stock exchange" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_258 
+Scenario: TC_KeywordSearch_259 
 	Given User enters "miner*;Seleni*" 
 	Then  User verifies keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_259 
+Scenario: TC_KeywordSearch_260 
 	Given User enters "Mean;low" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_260 
+Scenario: TC_KeywordSearch_261 
 	Given User enters "1000220125;1000205324;Low;High" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_261 
+Scenario: TC_KeywordSearch_262 
 	Given User enters "134347308;IAPAFABH" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_262 
+Scenario: TC_KeywordSearch_263 
 	Given User enters "134347308;Agar" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_263 
+Scenario: TC_KeywordSearch_264 
 	Given User enters "134347308;IAPAFABH;Agar" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_264 
+Scenario: TC_KeywordSearch_265 
 	Given User enters "228912101;crgabyu;honey;1380601;cheese;brjac" 
 	Then  User verify the search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_265 
+Scenario: TC_KeywordSearch_266 
 	Given User enters keyword "State Bank of Mysore" 
 	Then  User verify keyword search results 
 	
 @KeywordSearch 
-Scenario: TC_KeywordSearch_266 
+Scenario: TC_KeywordSearch_267 
 	Given User enters "Tes*" 
 	Then  User verifies Filter search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_267 : Search for an Acronym as "上交所" 
+#Scenario: TC_KeywordSearch_268 : Search for an Acronym as "上交所" 
 #	Given User enters keyword "上交所" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_268 : Search for an Acronym as "上海" 
+#Scenario: TC_KeywordSearch_269 : Search for an Acronym as "上海" 
 #	Given User enters keyword "上海" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_269 : Search for an Acronym as "个人消费支出" 
+#Scenario: TC_KeywordSearch_270 : Search for an Acronym as "个人消费支出" 
 #	Given User enters keyword "个人消费支出" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_270 : Search for an Acronym as "冰箱" 
+#Scenario: TC_KeywordSearch_271 : Search for an Acronym as "冰箱" 
 #	Given User enters keyword "冰箱" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_271 : Search for an Acronym as "印尼" 
+#Scenario: TC_KeywordSearch_272 : Search for an Acronym as "印尼" 
 #	Given User enters keyword "印尼" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_272 : Search for an Acronym as "国债利率" 
+#Scenario: TC_KeywordSearch_273 : Search for an Acronym as "国债利率" 
 #	Given User enters keyword "国债利率" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_273 : Search for an Acronym as "张家界" 
+#Scenario: TC_KeywordSearch_274 : Search for an Acronym as "张家界" 
 #	Given User enters keyword "张家界" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_274 : Search for an Acronym as "活猪存栏量" 
+#Scenario: TC_KeywordSearch_275 : Search for an Acronym as "活猪存栏量" 
 #	Given User enters keyword "活猪存栏量" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_275 : Search for an Acronym as "深交所" 
+#Scenario: TC_KeywordSearch_276 : Search for an Acronym as "深交所" 
 #	Given User enters keyword "深交所" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_276 : Search for an Acronym as "生产率" 
+#Scenario: TC_KeywordSearch_277 : Search for an Acronym as "生产率" 
 #	Given User enters keyword "生产率" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_277 : Search for an Acronym as "草鱼" 
+#Scenario: TC_KeywordSearch_278 : Search for an Acronym as "草鱼" 
 #	Given User enters keyword "草鱼" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_278 : Search for an Acronym as "货币供应量" 
+#Scenario: TC_KeywordSearch_279 : Search for an Acronym as "货币供应量" 
 #	Given User enters keyword "货币供应量" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_279 : Search for an Acronym as "金融资产总量" 
+#Scenario: TC_KeywordSearch_280 : Search for an Acronym as "金融资产总量" 
 #	Given User enters keyword "金融资产总量" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_280 : Search for an Acronym as "程限" 
+#Scenario: TC_KeywordSearch_281 : Search for an Acronym as "程限" 
 #	Given User enters keyword "程2" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_281 : Search for an Acronym as "文化" 
+#Scenario: TC_KeywordSearch_282 : Search for an Acronym as "文化" 
 #	Given User enters keyword "文化" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_282 : Search for an Acronym as "一月" 
+#Scenario: TC_KeywordSearch_283 : Search for an Acronym as "一月" 
 #	Given User enters keyword "一月" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_283 : Search for an Acronym as "职工" 
+#Scenario: TC_KeywordSearch_284 : Search for an Acronym as "职工" 
 #	Given User enters keyword "职工" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_284 : Search for an Acronym as "年尾年末" 
+#Scenario: TC_KeywordSearch_285 : Search for an Acronym as "年尾年末" 
 #	Given User enters keyword "年尾年末" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_285 : Search for an Acronym as "交易" 
+#Scenario: TC_KeywordSearch_286 : Search for an Acronym as "交易" 
 #	Given User enters keyword "交易" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_286 : Search for an Acronym as "建造" 
+#Scenario: TC_KeywordSearch_287 : Search for an Acronym as "建造" 
 #	Given User enters keyword "建造" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_287 : Search for an Acronym as "假期" 
+#Scenario: TC_KeywordSearch_288 : Search for an Acronym as "假期" 
 #	Given User enters keyword "假期" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_288 : Search for an Acronym as "季节" 
+#Scenario: TC_KeywordSearch_289 : Search for an Acronym as "季节" 
 #	Given User enters keyword "季节" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_289 : Search for an Acronym as "加强" 
+#Scenario: TC_KeywordSearch_290 : Search for an Acronym as "加强" 
 #	Given User enters keyword "加强" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_290 : Search for an Acronym as "计算" 
+#Scenario: TC_KeywordSearch_291 : Search for an Acronym as "计算" 
 #	Given User enters keyword "计算" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_291 : Search for an Acronym as "出产" 
+#Scenario: TC_KeywordSearch_292 : Search for an Acronym as "出产" 
 #	Given User enters keyword "出产" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_292 : Search for an Acronym as "出入收支" 
+#Scenario: TC_KeywordSearch_293 : Search for an Acronym as "出入收支" 
 #	Given User enters keyword "出入收支" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_293 : Search for an Acronym as "摩托车" 
+#Scenario: TC_KeywordSearch_294 : Search for an Acronym as "摩托车" 
 #	Given User enters keyword "摩托车" 
 #	Then User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_294 
+#Scenario: TC_KeywordSearch_295 
 #	Given User enters "从业人数 AND ВВП" 
 #	Then  User verifies keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_295 
+#Scenario: TC_KeywordSearch_296 
 #	Given User enters keyword "国内総生産 OR ВВП OR gas" 
 #	Then  User verifies keyword search results 
 #	
 #@RussianKeywordSearch 
-#Scenario: TC_KeywordSearch_296 
+#Scenario: TC_KeywordSearch_297 
 #	Given User enters keyword "среднегодовым" 
 #	Then  User verify keyword search results 
 #	
 #@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_297 
+#Scenario: TC_KeywordSearch_298 
 #	Given User enters "摩托车" 
 #	And   User selects "Source" as "China Association of Automobile Manufacturers" 
 #	And   User has clicked on "Apply filter" 
 #	Then  User verify the search results 
 #	
 #@RussianKeywordSearch 
-#Scenario: TC_KeywordSearch_298 
+#Scenario: TC_KeywordSearch_299 
 #	Given User enters "среднегодовым" 
 #	And   User selects "Source" as "Federal State Statistics Service" 
 #	And   User has clicked on "Apply filter" 

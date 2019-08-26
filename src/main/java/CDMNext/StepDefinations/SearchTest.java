@@ -59,7 +59,6 @@ public class SearchTest {
 		Thread.sleep(5000);
 		currentKeyword = keyword;
 //		login.driver.navigate().refresh();
-		
 		login.Log4j.info("Searching with " + currentKeyword);
 		try {
 			CommonFunctionality.ClearSelection();
@@ -82,7 +81,7 @@ public class SearchTest {
 		SeriesTab.click();
 		// text file location where it contains synonyms
 		FileReader file = new FileReader(
-				System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\synonyms.txt");
+				System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\Updatedsynonyms.txt");
 		Scanner txtscan = new Scanner(file);
 		// String[] listwords = null;
 		while (txtscan.hasNextLine()) {
@@ -123,10 +122,10 @@ public class SearchTest {
 					login.Log4j.info(li_All.size());
 					Thread.sleep(3000);
 					int j = i + 1;
-					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
-					Thread.sleep(500);
+//					checkbox = login.driver
+//							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+//					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
+//					Thread.sleep(500);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(1000);
@@ -435,10 +434,9 @@ public class SearchTest {
 					login.Log4j.info(li_All.size());
 					Thread.sleep(3000);
 					int j = i + 1;
-					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
-					Thread.sleep(1000);
+					//checkbox = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					//CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
+					//Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					CommonFunctionality.action.moveToElement(element).build().perform();
 					Thread.sleep(1500);
@@ -718,7 +716,7 @@ public class SearchTest {
 		}
 	}
 
-	public boolean search_validation(String searchText, String listwords) throws Throwable {
+	boolean search_validation(String searchText, String listwords) throws Throwable {
 
 		/*
 		 * if (searchText.toUpperCase().contains(Keyword.toUpperCase()) == true) {
