@@ -3,7 +3,7 @@ Feature: Verifying SSP window Functionality
 Background:
    Given User has successful logged in
 
-@SSPWindow
+@SSPWindow1
 Scenario: TC_SSP_01: Try to open SSP window from myseries
    #And Checking modalbox is open
    And Add few series to myseries

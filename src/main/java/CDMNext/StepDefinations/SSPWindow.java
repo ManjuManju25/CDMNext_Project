@@ -1,6 +1,7 @@
 package CDMNext.StepDefinations;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -36,8 +37,9 @@ public class SSPWindow {
 	public void add_few_series_to_myseries() throws Throwable {
 		String id ="205424302";
 		// CommonFunctionality.search_without_filter();
-		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		//CommonFunctionality.webDriverwait_keyvalue("Series_tab");
+		CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 4).click();
+		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),id);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.ENTER);

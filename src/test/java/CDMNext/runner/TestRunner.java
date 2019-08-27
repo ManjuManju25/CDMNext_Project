@@ -18,8 +18,7 @@ import CDMNext.StepDefinations.login;
 		strict = true,
 		features = "src/test/java/CDMNext/Features/", 
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@InsightGeneral,@Search,@MySeries1,@SeriesTab,@SSPWindow" },
-		// tags = {"@DB1,@Mnemonics1,@SeriesTab1,@KeywordSearch1,@Filte						eq2rSearch1" },
+		tags = {"@Search,@FilterSearch,@MySeries1" },
 		monochrome = true,
 		//dryRun = true,
 		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })

@@ -661,15 +661,15 @@ Scenario: TC_DB_100:More actions - Verify Copy links for multiple series
 	And Click on "More actions" 
 	And Select "Copy link(s)" 
 	Then URL should be generated for selected series 
-##	
-##@DB 
-##Scenario: TC_DB_101:More actions - Validate copied URL for multiple series 
-##	And Mouse hover on any series level of data 
-##	And Click on "More actions" 
-##	And Select "Copy link(s)" 
-##	And Paste in clipboard and take url one by one 
-##	Then The Series information popup should be opened 
-##	
+	
+@DB 
+Scenario: TC_DB_101:More actions - Validate copied URL for multiple series 
+	And Mouse hover on any series level of data 
+	And Click on "More actions" 
+	And Select "Copy link(s)" 
+	And Paste in clipboard and take url one by one 
+	Then The SSP window should be opened 
+	
 @DB 
 Scenario: TC_DB_102:More actions - Verify 'Series info' option for series 
 	And Mouse hover on any series level 
@@ -761,12 +761,12 @@ Scenario: TC_DB_115:Verify 'add to existing' insight
 	And  Select a series and Click on dropdown icon 
 	And Click on "Add to existing insight" 
 	Then The "Insight Explorer" popup should be appeared 
-#	
-#@DB1 
-#Scenario: TC_DB_116:Validate the added series by opening existing insight 
-#	And  Select a series and Click on dropdown icon 
-#	And Click on "Add to existing insight" 
-#	Then The series should be added to My series tab for selected insight 
+	
+@DB 
+Scenario: TC_DB_116:Validate the added series by opening existing insight 
+	And  Select a series and Click on dropdown icon 
+	And Click on "Add to existing insight" 
+	Then The series should be added to My series tab for selected insight 
 	
 @DB 
 Scenario: TC_DB_117:Verify adding series to existing insight 
@@ -927,13 +927,14 @@ Scenario: TC_DB_141:Right click - Verify Copy links for multiple series
 	And Select "Copy link(s)" 
 	Then URL should be generated for selected series 
 	
-#@DB 
-#Scenario: TC_DB_142:Right click - Validate copied URL for multiple series 
-#	And Right click on any series level of data 
-#	And Select "Copy link(s)" 
-#	And Paste in clipboard and take url one by one 
-#	Then The Series information popup should be opened 
-#	
+@DB 
+Scenario: TC_DB_142:Right click - Validate copied URL for multiple series 
+	And Create a "New" insight	
+	And Right click on any series level of data 
+	And Select "Copy link(s)" 
+	And Paste in clipboard and take url one by one 
+	Then The SSP window should be opened 
+	
 @DB 
 Scenario: TC_DB_143:Right click - Verify 'Series info' option for series 
 	And Right click on any series 
@@ -964,10 +965,10 @@ Scenario: TC_DB_147:Verify series order when table data added
 	And Select a table and add to my series 
 	Then The series in the table should be ordered as in the table in search panel 
 	
-#@DB1 
-#Scenario: TC_DB_148:Verify selected 'series count' under DB tab 
-#	And Select some series 
-#	Then Selected series count should be shown correctly 
+@DB 
+Scenario: TC_DB_148:Verify selected 'series count' under DB tab 
+	And Select some series 
+	Then Selected series count should be shown correctly 
 	
 @DB 
 Scenario: TC_DB_149:Verify 'Search selection' 
@@ -1026,14 +1027,14 @@ Scenario: TC_DB_155:Series selection - Verify 'Add and replace' from dropdown
 	And Click on "Add and replace" 
 	And Close search selection window 
 	Then The selected series should be replaced with existing series on the visual 
-#	
-#@DB1 
-#Scenario: TC_DB_156:Series selection - Verify 'Add to existing insight' in dropdown 
-#	And Select any series 
-#	And Click on selected series count 
-#	And Click on dropdown icon next to + 
-#	And Click on "Add to existing insight" 
-#	Then The series should be added to My series tab for selected insight
+	
+@DB 
+Scenario: TC_DB_156:Series selection - Verify 'Add to existing insight' in dropdown 
+	And Select any series 
+	And Click on selected series count 
+	And Click on dropdown icon next to + 
+	And Click on "Add to existing insight" 
+	Then The series should be added to My series tab for selected insight
 	
 	
 @DB 
@@ -1129,7 +1130,7 @@ Scenario: TC_DB_168:Verify 'K' icon for key series
 	And Expand till table level 
 	Then "k" icon should be displayed for series 
 	
-@DB 
+@DB
 Scenario: TC_DB_169:Verify 'F' icon for key series 
 	And User selects "Forecast" 
 	And User has clicked on "Apply filter" 
