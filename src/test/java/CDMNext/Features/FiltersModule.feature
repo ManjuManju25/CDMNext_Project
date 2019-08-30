@@ -85,7 +85,7 @@ Scenario: TC_Filters_Search_10
 @FilterSearch 
 Scenario: TC_Filters_Search_11 
 	Given User enters "322968702" 
-	And   User selects "Source" as "Hong Kong SAR AIA Group Limited" 
+	And   User selects "Source" as "Hong Kong SAR, China AIA Group Limited" 
 	And   User has clicked on "Apply filter" 
 	And   User selected "All databases" as "World Trend Plus" 
 	Then  User verify the search results 
@@ -165,7 +165,7 @@ Scenario: TC_Filters_Search_20
 @FilterSearch 
 Scenario: TC_Filters_Search_21 
 	Given User enters "HKIRGAAAUA" 
-	And   User selects "Source" as "Hong Kong SAR AIA Group Limited" 
+	And   User selects "Source" as "Hong Kong SAR, China AIA Group Limited" 
 	And   User has clicked on "Apply filter" 
 	And   User selected "All databases" as "World Trend Plus" 
 	Then  User verify the search results 

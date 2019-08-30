@@ -620,127 +620,127 @@ Scenario: TC_AT_100:Verify Add and group option
 	And Expand the dataset for New datasets 
 	And Click on "Add and group" option from dropdown 
 	Then The selected series should get grouped in My Series 
-#	
-#@Alltab 
-#Scenario: TC_AT_101:Verify Add to new insight option 
-#	And Expand the dataset for New datasets 
-#	And Click on "Add to new insight" option from dropdown 
-#	Then The selected series should get added to the new insight 
-#	
-#@Alltab 
-#Scenario: TC_AT_102:Verify Add to existing insight option 
-#	And Expand the dataset for New datasets and select "Add to existing insight" option 
-#	And Select multiple insights 
-#	And Click on "Add to insights" 
-#	Then Open the insights and verify the series in My series
-#	
-#@Alltab 
-#Scenario: TC_AT_103:Verify Unselect All option 
-#	And Expand the dataset for New datasets and right click on any series
-#	Then Context menu should be poped up
-#	
-#@Alltab 
-#Scenario: TC_AT_104:Verify Unselect All option 
-#	And Expand the dataset for New datasets and right click on any series 
-#	And  Select "Unselect all" 
-#	Then The selected series should be unselected 
-#	
-#@Alltab 
-#Scenario: TC_AT_105:Verify View as Chart option 
-#	And Expand the dataset for New datasets and right click on any series 
-#	And  Select "View as Chart" 
-#	Then Visual should be created with "Edit Chart"
-#	
-#@Alltab 
-#Scenario: TC_AT_106:Verify View as Map option 
-#	And Expand the dataset for New datasets and right click on any series 
-#	And  Select "View as Map" 
-#	Then Visual should be created with "Edit Map" 
-#	
-#@Alltab 
-#Scenario: TC_AT_107:Verify View as Table option 
-#	And Expand the dataset for New datasets and right click on any series 
-#	And  Select "View as Table" 
-#	Then Visual should be created with "Edit Table" 
-#	
-#@Alltab 
-#Scenario: TC_AT_108:Verify View as Pie option 
-#	And Expand the dataset for New datasets and right click on any series 
-#	And Select "Pie" 
-#	Then Visual should be created with "Edit Pie" 
-#	
-#@Alltab 
-#Scenario: TC_AT_109:Verify View as Heat map option 
-#	And Expand the dataset for New datasets and right click on any series 
-#	And Select "Heat map" 
-#	Then Visual should be created with "Edit Heat map" 
-#	
-#@Alltab 
-#Scenario: TC_AT_110:Verify View as Histogram option 
-#	And Expand the dataset for New datasets and right click on any series 
-#	And Select "Histogram" 
-#	Then Visual should be created with "Edit Histogram" 
-#	
-#@Alltab
-#Scenario: TC_AT_111:Verify Download option 
-#	And  Expand the dataset for New datasets and right click on any series 
-#	And  Select "Download" 
-#	Then Download window should be appeared with selected series count 	
-#	
-#@Alltab 
-#Scenario: TC_AT_112:Verify Copy option 
-#	And  Expand the dataset for New datasets and right click on any series 
-#	And  Select "Copy" 
-#	Then The message should be in growl popup as "Selected series copied." 
-#	
-#@Alltab 
-#Scenario: TC_AT_113:Verify Copy data option 
-#	And  Expand the dataset for New datasets and right click on any series
-#	And  Select "Copy data" 
-#	Then Download window should be appeared with selected series count 
-#	
-#@Alltab 
-#Scenario: TC_AT_114:Verify Copy link(s) option 
-#	And  Expand the dataset for New datasets and right click on any series 
-#	And  Select "Copy link(s)" 
-#	Then URL should be generated for selected series 
-#	
-#@Alltab 
-#Scenario: TC_AT_115:Verify Series Info option 
-#	And Expand the dataset for New datasets and right click on any series
-#	And  Select "Series Info" 
-#	Then The SSP window should be opened 
-#	
-#@Alltab 
-#Scenario: TC_AT_116:Verify Footnote option 
-#	And  Expand the dataset for New datasets and right click on any series 
-#	And  Select "Footnotes" 
-#	Then Footnote window should be opened for the selected series 
-#	
-#@Alltab 
-#Scenario: TC_AT_117:Verify Show Dataset option 
-#	And  Expand the dataset for New datasets and right click on any series 
-#	And Select "Show Dataset" 
-#	And Click on Back button 
-#	Then Should redirect to database tab 
-#	
-#@Alltab 
-#Scenario: TC_AT_118:Verify column for no of series for each Dataset 
-#	And  Observe column for no of series for each Dataset under NewDatasets
-#	
-#@Alltab 
-#Scenario: TC_AT_119:Verify column for Datasets updated Date 
-#	And  Observe column for updated Date for each Dataset under NewDatasets
-#	
-#@Alltab
-#Scenario: TC_AT_120:Verify for Unselect link related to  all sections
-#	And Select few series in any of the sections
-#	Then Unselect link should be displayed at the top with red color font
-#	
-#@Alltab
-#Scenario: TC_AT_121:Verify for Unselect link related to  all sections
-#	And Click in the Unselect link
-#	Then The series / datasets selection should get cleared off
+	
+@Alltab 
+Scenario: TC_AT_101:Verify Add to new insight option 
+	And Expand the dataset for New datasets 
+	And Click on "Add to new insight" option from dropdown 
+	Then The selected series should get added to the new insight 
+	
+@Alltab 
+Scenario: TC_AT_102:Verify Add to existing insight option 
+	And Expand the dataset for New datasets and select "Add to existing insight" option 
+	And Select multiple insights 
+	And Click on "Add to insights" 
+	Then Open the insights and verify the series in My series
+	
+@Alltab 
+Scenario: TC_AT_103:Verify Unselect All option 
+	And Expand the dataset for New datasets and right click on any series
+	Then Context menu should be poped up
+	
+@Alltab 
+Scenario: TC_AT_104:Verify Unselect All option 
+	And Expand the dataset for New datasets and right click on any series 
+	And  Select "Unselect all" 
+	Then The selected series should be unselected 
+	
+@Alltab 
+Scenario: TC_AT_105:Verify View as Chart option 
+	And Expand the dataset for New datasets and right click on any series 
+	And  Select "View as Chart" 
+	Then Visual should be created with "Edit Chart"
+	
+@Alltab 
+Scenario: TC_AT_106:Verify View as Map option 
+	And Expand the dataset for New datasets and right click on any series 
+	And  Select "View as Map" 
+	Then Visual should be created with "Edit Map" 
+	
+@Alltab 
+Scenario: TC_AT_107:Verify View as Table option 
+	And Expand the dataset for New datasets and right click on any series 
+	And  Select "View as Table" 
+	Then Visual should be created with "Edit Table" 
+	
+@Alltab 
+Scenario: TC_AT_108:Verify View as Pie option 
+	And Expand the dataset for New datasets and right click on any series 
+	And Select "Pie" 
+	Then Visual should be created with "Edit Pie" 
+	
+@Alltab 
+Scenario: TC_AT_109:Verify View as Heat map option 
+	And Expand the dataset for New datasets and right click on any series 
+	And Select "Heat map" 
+	Then Visual should be created with "Edit Heat map" 
+	
+@Alltab 
+Scenario: TC_AT_110:Verify View as Histogram option 
+	And Expand the dataset for New datasets and right click on any series 
+	And Select "Histogram" 
+	Then Visual should be created with "Edit Histogram" 
+	
+@Alltab
+Scenario: TC_AT_111:Verify Download option 
+	And  Expand the dataset for New datasets and right click on any series 
+	And  Select "Download" 
+	Then Download window should be appeared with selected series count 	
+	
+@Alltab 
+Scenario: TC_AT_112:Verify Copy option 
+	And  Expand the dataset for New datasets and right click on any series 
+	And  Select "Copy" 
+	Then The message should be in growl popup as "Selected series copied." 
+	
+@Alltab 
+Scenario: TC_AT_113:Verify Copy data option 
+	And  Expand the dataset for New datasets and right click on any series
+	And  Select "Copy data" 
+	Then Download window should be appeared with selected series count 
+	
+@Alltab 
+Scenario: TC_AT_114:Verify Copy link(s) option 
+	And  Expand the dataset for New datasets and right click on any series 
+	And  Select "Copy link(s)" 
+	Then URL should be generated for selected series 
+	
+@Alltab 
+Scenario: TC_AT_115:Verify Series Info option 
+	And Expand the dataset for New datasets and right click on any series
+	And  Select "Series Info" 
+	Then The SSP window should be opened 
+	
+@Alltab 
+Scenario: TC_AT_116:Verify Footnote option 
+	And  Expand the dataset for New datasets and right click on any series 
+	And  Select "Footnotes" 
+	Then Footnote window should be opened for the selected series 
+	
+@Alltab 
+Scenario: TC_AT_117:Verify Show Dataset option 
+	And  Expand the dataset for New datasets and right click on any series 
+	And Select "Show Dataset" 
+	And Click on Back button 
+	Then Should redirect to database tab 
+	
+@Alltab 
+Scenario: TC_AT_118:Verify column for no of series for each Dataset 
+	And  Observe column for no of series for each Dataset under NewDatasets
+	
+@Alltab 
+Scenario: TC_AT_119:Verify column for Datasets updated Date 
+	And  Observe column for updated Date for each Dataset under NewDatasets
+	
+@Alltab
+Scenario: TC_AT_120:Verify for Unselect link related to  all sections
+	And Select few series in any of the sections
+	Then Unselect link should be displayed at the top with red color font
+	
+@Alltab
+Scenario: TC_AT_121:Verify for Unselect link related to  all sections
+	And Click in the Unselect link
+	Then The series / datasets selection should get cleared off
 #	
 #@Alltab 
 #Scenario: TC_AT_122: All Tab's contents when there is keyword search applied
@@ -850,4 +850,246 @@ Scenario: TC_AT_100:Verify Add and group option
 #	And  Expand the dataset from Explore datasets 
 #	And Create a visual 
 #	And Click on "Add and replace" option from dropdown 
-#	Then The selected series should replace the series in the visual in the focus 
+#	Then The selected series should replace the series in the visual in the focus
+#	
+#@Alltab 
+#Scenario: TC_AT_139:Verify Add and group option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets 
+#	And Click on "Add and group" option from dropdown 
+#	Then The selected series should get grouped in My Series 
+#	
+#@Alltab 
+#Scenario: TC_AT_140:Verify Add to new insight option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets 
+#	And Click on "Add to new insight" option from dropdown 
+#	Then The selected series should get added to the new insight  
+#	
+#@Alltab 
+#Scenario: TC_AT_141:Verify Add to existing insight option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets and select "Add to existing insight" option 
+#	And Select multiple insights 
+#	And Click on "Add to insights" 
+#	Then Open the insights and verify the series in My series 
+#	
+#@Alltab 
+#Scenario: TC_AT_142:Verify Unselect All option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	Then Context menu should be poped up
+#	
+#@Alltab 
+#Scenario: TC_AT_143:Verify Unselect All option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "Unselect all" 
+#	Then The selected series should be unselected 
+#	
+#@Alltab 
+#Scenario: TC_AT_144:Verify View as Chart option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "View as Chart" 
+#	Then Visual should be created with "Edit Chart"
+#	
+#@Alltab 
+#Scenario: TC_AT_145:Verify View as Map option
+##	And Search keyword with "gdp" 
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "View as Map" 
+#	Then Visual should be created with "Edit Map" 
+#	
+#@Alltab 
+#Scenario: TC_AT_146:Verify View as Table option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "View as Table" 
+#	Then Visual should be created with "Edit Table" 
+#	
+#@Alltab 
+#Scenario: TC_AT_147:Verify View as Pie option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	And Select "Pie" 
+#	Then Visual should be created with "Edit Pie" 
+#	
+#@Alltab 
+#Scenario: TC_AT_148:Verify View as Heat map option 
+##	And Search keyword with "gdp"
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	And Select "Heat map" 
+#	Then Visual should be created with "Edit Heat map" 
+#	
+#@Alltab 
+#Scenario: TC_AT_149:Verify View as Histogram option
+##	And Search keyword with "gdp" 
+#	And Expand the dataset from Explore datasets and right click on any series 
+#	And Select "Histogram" 
+#	Then Visual should be created with "Edit Histogram" 
+#	
+#@Alltab 
+#Scenario: TC_AT_150:Verify Download option
+##	And Search keyword with "gdp" 
+#	And  Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "Download" 
+#	Then Download window should be appeared with selected series count 
+#	
+#@Alltab 
+#Scenario: TC_AT_151:Verify Copy option 
+##	And Search keyword with "gdp"
+#	And  Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "Copy" 
+#	Then The message should be in growl popup as "Selected series copied." 
+#	
+#@Alltab 
+#Scenario: TC_AT_152:Verify Copy data option 
+##	And Search keyword with "gdp"
+#	And  Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "Copy data" 
+#	Then Download window should be appeared with selected series count 
+#	
+#@Alltab 
+#Scenario: TC_AT_153:Verify Copy link(s) option 
+##	And Search keyword with "gdp"
+#	And  Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "Copy link(s)" 
+#	Then URL should be generated for selected series 
+#	
+#@Alltab 
+#Scenario: TC_AT_154:Verify Series Info option 
+##	And Search keyword with "gdp"
+#	And  Expand the dataset from Explore datasets and right click on any series 
+#	And  Select "Series Info" 
+#	Then The SSP window should be opened 
+#	
+#@Alltab
+#Scenario: TC_AT_155:Verify Footnote option 
+##	And Search keyword with "gdp"
+#	And  Expand the dataset from Explore datasets and right click on any series
+#	And  Select "Footnotes" 
+#	Then Footnote window should be opened for the selected series 
+#	
+#@Alltab 
+#Scenario: TC_AT_156:Verify Show Dataset option 
+##	And Search keyword with "gdp"
+#	And  Expand the dataset from Explore datasets and right click on any series
+#	And Select "Show Dataset" 
+#	And Click on Back button 
+#	Then Should redirect to database tab 
+#	
+#@Alltab 
+#Scenario: TC_AT_157:Verify column for no of series for each Dataset 
+#	And  Observe column for no of series for each Dataset under Explore dataset
+#	
+#@Alltab 
+#Scenario: TC_AT_158:Verify column for Datasets updated Date 
+#	And  Observe column for updated Date for each Dataset under Explore dataset
+#
+#@Alltab 
+#Scenario: TC_AT_159: Verify Explore Series section contents
+# 	And "10" explore series should be displayed by default 
+# 	
+# @Alltab 
+#Scenario: TC_AT_160: Verify SSP 
+#	And Hover the mouse on any series under explore series
+#	And Click on i icon in blue 
+#	Then SSP window should be poped up 
+# 	
+# @Alltab 
+#Scenario: TC_AT_161: Verify Tooltip 
+#	And Hover the mouse on any series under explore series 
+#	Then Series info as tooltip should get poped up 
+#	
+#@Alltab
+#Scenario: TC_AT_162: Verify mouse hover options 
+#	And Hover the mouse on any series under explore series 
+#	Then "Show Database,View as Chart. Type `c`,Open footnote,More actions" should get displayed 
+#	
+#@Alltab 
+#Scenario: TC_AT_163:Verify Show Database option 
+#	And Hover the mouse on any series under explore series 
+#	And Click on "Show Database" mouse hover icon 
+#	Then Database should navigate to the particular database and highlight the series 
+#	
+#@Alltab 
+#Scenario: TC_AT_164:Verify View As Chart option 
+#	And Hover the mouse on any series under explore series
+#	And Click on "View as Chart. Type `c`" mouse hover icon 
+#	Then Chart should be created with the selected series 
+#	
+#@Alltab 
+#Scenario: TC_AT_165:Verify Open Footnote option 
+#	And Hover the mouse on any series under explore series 
+#	And Click on "Open footnote" mouse hover icon 
+#	Then Footnote window should be opened for the selected series 
+#	
+#@Alltab 
+#Scenario: TC_AT_166:Verify Unselect All option 
+#	And Hover the mouse on any series level under explore series
+#	And Click on "More actions" 
+#	Then Context menu should be poped up
+#	
+#@Alltab1 
+#Scenario: TC_AT_167:Verify Unselect All option 
+#	And  Hover the mouse on any series under explore series 
+#	And Click on "More actions" 
+#	And Click on "Unselect all" 
+#	Then The selected series should be unselected 
+#	
+#@Alltab 
+#Scenario: TC_AT_168:Verify View as Chart option 
+#	And Hover the mouse on any series under explore series  
+#	And Click on "More actions" 
+#	And Select "View as Chart" 
+#	Then Visual should be created with "Edit Chart" 
+#	
+#@Alltab 
+#Scenario: TC_AT_169:Verify View as Map option 
+#	And Hover the mouse on any series under explore series  
+#	And Click on "More actions" 
+#	And Select "View as Map" 
+#	Then Visual should be created with "Edit Map" 
+#	
+#@Alltab 
+#Scenario: TC_AT_170:Verify View as Table option 
+#	And Hover the mouse on any series under explore series 
+#	And Click on "More actions" 
+#	And Select "View as Table" 
+#	Then Visual should be created with "Edit Table" 
+#	
+#@Alltab 
+#Scenario: TC_AT_171:Verify View as Pie option 
+#	And Hover the mouse on any series under explore series 
+#	And Click on "More actions" 
+#	And Select "Pie" 
+#	Then Visual should be created with "Edit Pie" 
+#	
+#@Alltab 
+#Scenario: TC_AT_172:Verify View as Heat map option 
+#	And Hover the mouse on any series under explore series  
+#	And Click on "More actions" 
+#	And Select "Heat map" 
+#	Then Visual should be created with "Edit Heat map" 
+#	
+#@Alltab 
+#Scenario: TC_AT_173:Verify View as Histogram  option 
+#	And Hover the mouse on any series under explore series  
+#	And Click on More actions 
+#	And Select "Histogram" 
+#	Then Visual should be created with "Edit Histogram" 
+#	
+#@Alltab 
+#Scenario: TC_AT_174:Verify Download  option 
+#	And Hover the mouse on any series under explore series  
+#	And Click on "More actions" 
+#	And  Select "Download" 
+#	Then Download window should be appeared with selected series count 
+#	
+#@Alltab 
+#Scenario: TC_AT_175:Verify Copy  option 
+#	And Hover the mouse on any series under explore series  
+#	And Click on "More actions" 
+#	And Select "Copy" 
+#	Then The message should be in growl popup as "Selected series copied." 

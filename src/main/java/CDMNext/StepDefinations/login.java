@@ -198,6 +198,7 @@ public class login {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath(LOCATORS.getProperty("btnLogin"))).click();
 		logged_in = true;
+		Thread.sleep(1000);
 		// invoke_browser();
 		// Navigate to login page
 		// Enter username

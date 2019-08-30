@@ -62,7 +62,7 @@ public class Filters {
 		try {
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 			CommonFunctionality.TopMethod();
-			CommonFunctionality.UnselectMethod();
+			//CommonFunctionality.UnselectMethod();
 			CommonFunctionality.AlldbClear();
 			if (reset.size() > 0) {
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
@@ -252,15 +252,15 @@ public class Filters {
 				for (int i = 0; i < li_All.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(5000);
+					Thread.sleep(3000);
 					j = i + 1;
-//					checkbox = login.driver
-//							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					checkbox = login.driver
+							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 //					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 //					Thread.sleep(1000);
 					element = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 					CommonFunctionality.action.moveToElement(element).build().perform();
-					Thread.sleep(2000);
+					Thread.sleep(500);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					text = tooltip.getText();
 					// login.Log4j.info("Title information is \n" + text);
@@ -293,7 +293,7 @@ public class Filters {
 								if (advancedfltr.equals("Subscribed series only")
 										&& seriesId.contains(sid[0]) == true) {
 									if (!checkbox.isSelected()) {
-										Thread.sleep(1000);
+										Thread.sleep(500);
 										checkbox.click();
 										login.Log4j.info("Element is clickable");
 									} else {
@@ -681,7 +681,7 @@ public class Filters {
 		Thread.sleep(2000);
 		WebElement Topic = login.driver.findElement(By.xpath("//span[contains(text(),'" + topic + "')]"));
 		// Until the element is not visible keep scrolling
-		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", Topic);
+		//CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", Topic);
 		login.Log4j.info("Is 'Topic' displayed? - True/False:: " + Topic.isDisplayed());
 
 	}

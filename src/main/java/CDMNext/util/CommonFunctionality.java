@@ -25,6 +25,11 @@ public class CommonFunctionality {
 	public static String sname;
 	public static int SeriesCount;
 	public static int m;
+	public static String seriesId;
+	public String seriesName;
+	public String region;
+	public String unit;
+	public String frequency;
 	// create object of Actions class
 	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
@@ -105,10 +110,10 @@ public class CommonFunctionality {
 		// Deleting visual
 		// Thread.sleep(3000);
 		WebElement ele = login.driver.findElement(By.xpath(
-				"//div[@class='insight-page-menu-views-container--view-tabs ui-sortable']//a[@class='insight-page-view-tab--link insight-page-view-tab--link__active']"));
+				"//*[@class='insight-page-menu-views-container--view-tabs ui-sortable']//*[@class='insight-page-view-tab--link insight-page-view-tab--link__active']"));
 		action.contextClick(ele).pause(2000).build().perform();
 		// Thread.sleep(3000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Delete view')]")))
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Delete view')]")))
 				.click();
 		// Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Ok')]"))).click();
@@ -120,10 +125,10 @@ public class CommonFunctionality {
 			// Deleting series from My Series tab
 			// Thread.sleep(3000);
 			WebElement ele = login.driver
-					.findElement(By.xpath("//div[@class='check-all-series']//span[@class='input-control--indicator']"));
+					.findElement(By.xpath("//*[@class='check-all-series']//*[@class='input-control--indicator']"));
 			action.moveToElement(ele).pause(3000).click().build().perform();
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+			login.driver.findElement(By.xpath("//*[@data-action='delete']")).click();
 
 		} catch (Exception e) {
 
@@ -131,11 +136,15 @@ public class CommonFunctionality {
 	}
 
 	public static void TopMethod() throws InterruptedException {
-		Thread.sleep(3000);
-		WebElement topButton = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
-		if (topButton.isDisplayed()) {
-			topButton.click();
-			login.Log4j.info("Clicking on Top button");
+		try {
+			WebElement topButton = wait.until(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("TopButton"))));
+			if (topButton.isDisplayed()) {
+				topButton.click();
+				login.Log4j.info("Clicking on Top button");
+			}
+		} catch (Exception e) {
+
 		}
 	}
 

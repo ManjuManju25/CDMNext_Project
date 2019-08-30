@@ -797,7 +797,8 @@ public class SearchTest {
 				// Copy files to specific location
 				FileUtils.copyFile(srcFile, destFile);
 				login.Log4j.info("Screenshot is taken successfully.");
-
+				//ExtentReports extent = ExtentReports.get(AdvanceReporting.class);
+				//extent.attachScreenshot("C:\\Mukesh\\image1.jpg");
 			} catch (IOException e) {
 				login.Log4j.error("Exception while taking screenshot\n " + e.getMessage());
 

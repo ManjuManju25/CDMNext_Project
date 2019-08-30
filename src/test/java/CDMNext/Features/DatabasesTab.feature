@@ -1145,24 +1145,24 @@ Scenario: TC_DB_170:Verify 'S' icon for with suggestions for rebased/discountinu
 	And Select Global database 
 	And Expand till table level 
 	Then "s" icon should be displayed for series 
-	
-@DB 
-Scenario: TC_DB_171:Verify Default tab for insight 
-	And Database tab should be loaded as default tab for the insight 
-	
-@DB 
-Scenario: TC_DB_172:Verify clicking on Database when view panel in full screen 
-	And Make View pannel as fullscreen 
-	And Click on "Databases" 
-	Then Search panel should be exapanded and Databases tab should be loaded 
-	
-@DB
-Scenario: TC_DB_73:Verifying clicking on series name 
-	And  Select database as Daily Database 
-	And  Expand till series level 
-	And Click on series name 
-   Then Series information popup should be opened 
-	
+#	
+#@DB 
+#Scenario: TC_DB_171:Verify Default tab for insight 
+#	And Database tab should be loaded as default tab for the insight 
+#	
+#@DB 
+#Scenario: TC_DB_172:Verify clicking on Database when view panel in full screen 
+#	And Make View pannel as fullscreen 
+#	And Click on "Databases" 
+#	Then Search panel should be exapanded and Databases tab should be loaded 
+#	
+#@DB
+#Scenario: TC_DB_73:Verifying clicking on series name 
+#	And  Select database as Daily Database 
+#	And  Expand till series level 
+#	And Click on series name 
+#   Then Series information popup should be opened 
+#	
 	
 			
 			

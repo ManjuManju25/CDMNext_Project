@@ -2,6 +2,7 @@ package CDMNext.StepDefinations;
 
 import org.testng.Assert;
 
+
 import org.testng.AssertJUnit;
 
 import org.testng.asserts.SoftAssert;
@@ -21,9 +22,7 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.SessionId;
@@ -87,6 +86,7 @@ public class DatabasesTab {
 	@Given("^Click on All Databases dropdown$")
 	public void click_on_All_Databases_dropdown() throws Throwable {
 		// SearchTest.ClearSelection();
+		login.driver.navigate().refresh();
 		CommonFunctionality.AlldbClear();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
@@ -137,11 +137,10 @@ public class DatabasesTab {
 
 	@And("^Select database as Daily Database$")
 	public void select_database_as_Daily_Database() throws Throwable {
-		Thread.sleep(5000);
-		CommonFunctionality.TopMethod();
+		//CommonFunctionality.TopMethod();
 		CommonFunctionality.AlldbClear();
 		CommonFunctionality.CollapseTreeMethod();
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Daily_db"))).click();
 		login.Log4j.info("Clicking on Database level");
 		database = true;
@@ -1678,11 +1677,9 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		if (arg1.equalsIgnoreCase(VisualTitle)) {
 			login.Log4j.info(arg1 + " visual is created");
-			Thread.sleep(3000);
 			CommonFunctionality.Views_list();
 		} else if (ele.isDisplayed()) {
 			login.Log4j.info(arg1 + " visual is created");
-			Thread.sleep(3000);
 			CommonFunctionality.Views_list();
 		} else {
 			AssertJUnit.fail(arg1 + " visual is not created");
@@ -2517,7 +2514,7 @@ public class DatabasesTab {
 	}
 
 	@Then("^Should redirect to database tab$")
-	public void should_redirect_to_database_tab() throws Throwable {
+	public static void should_redirect_to_database_tab() throws Throwable {
 		Thread.sleep(2000);
 		if (login.driver.findElement(By.className("series-tab--text")).isDisplayed()) {
 			login.Log4j.info("Redirected to database tab");
@@ -2554,7 +2551,6 @@ public class DatabasesTab {
 
 	@Then("^The series should be added to my series$")
 	public void the_series_should_be_added_to_my_series() throws Throwable {
-		Thread.sleep(3000);
 		try {
 			ele = login.driver.findElement(By.className("group-name"));
 		} catch (Exception e) {
@@ -2657,7 +2653,7 @@ public class DatabasesTab {
 		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		// Navigate to New Tab
 		login.driver.switchTo().window(tabs2.get(1));
-		Thread.sleep(10000);
+		Thread.sleep(3000);
 		the_series_should_be_added_to_my_series();
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
@@ -2683,8 +2679,6 @@ public class DatabasesTab {
 		the_series_should_be_added_to_my_series();
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
-		Thread.sleep(3000);
-
 		try {
 			close_search_selection_window();
 		} catch (Exception e) {
