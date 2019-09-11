@@ -23,7 +23,7 @@ public class AllTab {
 	String insightName;
 	String str;
 	// public String sname;
-	String db_name;
+	//String db_name;
 	WebElement element;
 	List<WebElement> list_of_series;
 	static List<String> sname = new ArrayList<>();
@@ -51,10 +51,9 @@ public class AllTab {
 		login.Log4j.info(list_of_tabs.size());
 		for (int i = 0; i < list_of_tabs.size(); i++) {
 			Thread.sleep(3000);
-			if (arg1.contains("Top Insight")) {
-				int j = i + 2;
-				ele = login.driver.findElement(By.xpath("//div[@class='all-representation--content']//div[" + j
-						+ "]//div[1]//div[@class='all-item--title']"));
+			if (arg1.contains("Top Insights")) {
+				int j = i + 1;
+				ele = login.driver.findElement(By.xpath("//*[@class='all-representation--content']//*[" + j + "]//*//*[@class='all-item--title']"));
 			} else {
 				int j = i + 1;
 				ele = login.driver.findElement(By.xpath("//div[@class='all-representation--content']//div[" + j
@@ -84,7 +83,7 @@ public class AllTab {
 			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info(" Clicking on " + arg1);
 		} else if (arg1.equals("EMIS Insights")) {
-			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
+			login.driver.findElement(By.xpath("//label//*[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info(" Clicking on " + arg1);
 		}
 	}
@@ -253,8 +252,8 @@ public class AllTab {
 							.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']//li[" + j + "]"));
 					element = login.driver.findElement(
 							By.xpath("//ul[@class='dropdown-menu context-menu ']//li[" + j + "]//span//span//b"));
-					db_name = element.getText();
-					login.Log4j.info(db_name);
+					CommonFunctionality.db_name = element.getText();
+					login.Log4j.info(CommonFunctionality.db_name);
 					ele.click();
 					if (j == 1) {
 						break;
@@ -280,12 +279,12 @@ public class AllTab {
 		try {
 			// it will execute when show db has mutiple db's
 			WebElement db_ele = login.driver
-					.findElement(By.xpath("//*[@class='name']//*[contains(text(),'" + db_name + "')]"));
+					.findElement(By.xpath("//*[@class='name']//*[contains(text(),'" + CommonFunctionality.db_name + "')]"));
 			CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", db_ele);
 			Thread.sleep(3000);
 			String dbase = db_ele.getText();
 			login.Log4j.info(dbase);
-			if (dbase.equals(db_name)) {
+			if (dbase.equals(CommonFunctionality.db_name)) {
 				login.Log4j.info("PASS");
 			} else {
 				Assert.fail("FAIL");
@@ -457,7 +456,7 @@ public class AllTab {
 				.click();
 		hover_the_mouse_on_any_series();
 		ele = login.driver.findElement(By.xpath("//ul//li[1]//div[@class='add-to-data-selection--toggle']"));
-		CommonFunctionality.action.moveToElement(ele).pause(3000).click().build().perform();
+		CommonFunctionality.action.moveToElement(ele).pause(2000).click().build().perform();
 	}
 
 	@And("^Right click on any series level$")
@@ -590,7 +589,7 @@ public class AllTab {
 		RecentlyUpdatedDatasets();
 		Thread.sleep(2000);
 		ele = login.driver.findElement(By.xpath(
-				"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//div[@class='series-data-set--table-name']"));
+				"//div[@class='all-representation--content']//div[1]//div[@class='tree-node data-set-node'][1]//div[@class='series-data-set--table-name']"));
 		CommonFunctionality.sname = ele.getText();
 		// login.Log4j.info(CommonFunctionality.sname);
 		CommonFunctionality.action.moveToElement(ele).build().perform();
@@ -636,13 +635,13 @@ public class AllTab {
 			// RecentlyUpdatedSeries
 			Thread.sleep(2000);
 			ele = login.driver.findElement(By.xpath(
-					"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
+					"//div[@class='data-sets all-item'][1]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
 			ele.click();
 		} catch (Exception e) {
 			// New Datasets
 			Thread.sleep(2000);
 			ele = login.driver.findElement(By.xpath(
-					"//div[@class='all-representation--content']//div[5]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
+					"//div[@class='data-sets all-item'][2]//div[@class='tree-node data-set-node'][1]//span[@class='actions']//i[@class='actions-item--icon']"));
 			ele.click();
 		}
 	}
@@ -658,7 +657,7 @@ public class AllTab {
 		RecentlyUpdatedDatasets();
 		Thread.sleep(2000);
 		ele = login.driver.findElement(By.xpath(
-				"//div[@class='all-representation--content']//div[4]//div[@class='tree-node data-set-node'][1]//span[@class='svg-checkbox']"));
+				"//div[@class='all-representation--content']//div[1]//div[@class='tree-node data-set-node'][1]//span[@class='svg-checkbox']"));
 		ele.click();
 	}
 
@@ -792,7 +791,7 @@ public class AllTab {
 		Thread.sleep(1000);
 		List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable']//li"));
 		for (int i = 0; i < list.size(); i++) {
-			int j = i + 2;
+			int j = i + 3;
 			Thread.sleep(2000);
 			checkbox = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']//li[" + j
 					+ "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -869,7 +868,7 @@ public class AllTab {
 		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		// Navigate to New Tab
 		login.driver.switchTo().window(tabs2.get(1));
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		AddtoNewInsight();
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
@@ -956,7 +955,7 @@ public class AllTab {
 		NewDatasets();
 		Thread.sleep(2000);
 		ele = login.driver.findElement(By.xpath(
-				"//div[@class='all-representation--content']//div[5]//div[@class='tree-node data-set-node'][1]//div[@class='series-data-set--table-name']"));
+				"//div[@class='data-sets all-item'][2]//div[@class='tree-node data-set-node'][1]//div[@class='series-data-set--table-name']"));
 		CommonFunctionality.sname = ele.getText();
 		// login.Log4j.info(CommonFunctionality.sname);
 		CommonFunctionality.action.moveToElement(ele).build().perform();
@@ -967,7 +966,7 @@ public class AllTab {
 		NewDatasets();
 		Thread.sleep(2000);
 		ele = login.driver.findElement(By.xpath(
-				"//div[@class='all-representation--content']//div[5]//div[@class='tree-node data-set-node'][1]//span[@class='svg-checkbox']"));
+				"//div[@class='data-sets all-item'][2]//div[@class='tree-node data-set-node'][1]//span[@class='svg-checkbox']"));
 		ele.click();
 	}
 
@@ -1183,7 +1182,21 @@ public class AllTab {
 		ExploreSeries();
 		mouseHoverOnseries();
 	}
-
+	@And("^Hover the mouse on any series level under explore series$")
+	public void hover_the_mouse_on_any_series_level_under_explore_series() throws Throwable {
+		CommonFunctionality.UnselectMethod();
+		ExploreSeries();
+		Thread.sleep(2000);
+		List<WebElement> series_list = login.driver.findElements(
+				By.xpath("//ul[@class='search-series-list']//li//div[@class='series-list-item--checkbox-wrapper']"));
+		for (int i = 0; i < series_list.size(); i++) {
+			Thread.sleep(1000);
+			series_list.get(i).click();
+			if (i == 4) {
+				break;
+			}
+		}
+	}
 	void DefaultSeries(int Count) throws Exception {
 		Thread.sleep(2000);
 		List<WebElement> SeriesCount = login.driver.findElements(By.cssSelector(".series-item--name"));
@@ -1277,7 +1290,7 @@ public class AllTab {
 			int j = i + 1;
 			Thread.sleep(1000);
 			ele = login.driver.findElement(By.xpath(
-					"//*[@class='webix_column list-series-name webix_last']//*[@class='webix_cell recently-updated-series']["
+					"//*[@class='webix_column list-series-name webix_last']//*[contains(@class,'webix_cell')]["
 							+ j + "]//*[@class='series-name-field--series-name']"));
 			CommonFunctionality.sname = ele.getText();
 			login.Log4j.info(sname);
@@ -1337,7 +1350,7 @@ public class AllTab {
 			int j = i + 1;
 			Thread.sleep(1000);
 			ele = login.driver.findElement(
-					By.xpath("//*[@class='tree-node data-set-node'][" + j + "]//*[@class='data-set-node--count']"));
+					By.xpath("//*[@class='tree-node data-set-node matched'][" + j + "]//*[@class='data-set-node--count']"));
 			CommonFunctionality.action.moveToElement(ele).build().perform();
 			if (ele.isDisplayed()) {
 				login.Log4j.info("no.of series column is displayed for each dataset");
@@ -1354,7 +1367,7 @@ public class AllTab {
 			int j = i + 1;
 			Thread.sleep(1000);
 			ele = login.driver.findElement(
-					By.xpath("//*[@class='tree-node data-set-node'][" + j + "]//*[@class='data-set-node--updated']"));
+					By.xpath("//*[@class='tree-node data-set-node matched'][" + j + "]//*[@class='data-set-node--updated']"));
 			CommonFunctionality.action.moveToElement(ele).build().perform();
 			if (ele.isDisplayed()) {
 				login.Log4j.info("Updated column is displayed for each dataset");

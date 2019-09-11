@@ -21,6 +21,7 @@ import org.testng.Reporter;
 import CDMNext.StepDefinations.login;
 
 public class CommonFunctionality {
+	public static String db_name;
 	public static WebElement footnoteDb;
 	public static String sname;
 	public static int SeriesCount;
