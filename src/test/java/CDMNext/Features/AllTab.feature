@@ -210,8 +210,8 @@ Scenario: TC_AT_30:Verify ' ^ ' icon to Collapse
 @Alltab 
 Scenario: TC_AT_31:Verify ' + ' icon 
 	And Hover the mouse on any series 
-	And Click on + icon for a series 
-	Then The series should be added to my series 
+	And Click on '+' icon for series level
+	Then The selected series should get added to the visual in focus 
 	
 @Alltab 
 Scenario: TC_AT_32:Verify + dropdown 
@@ -221,9 +221,10 @@ Scenario: TC_AT_32:Verify + dropdown
 	
 @Alltab 
 Scenario: TC_AT_33:Verify Add option 
+	And Click on View tab 
 	And Hover the mouse on any series 
 	And Select "Add" option 
-	Then The series should be added to my series 
+	Then The selected series should get added to the visual in focus  
 	
 @Alltab 
 Scenario: TC_AT_34:Verify Add and Replace option 
@@ -253,7 +254,7 @@ Scenario: TC_AT_37:Verify Add to existing insight option
 	Then Open the insights and verify the series in My series 
 	
 @Alltab 
-Scenario: TC_AT_38:Verify Unselect All option 
+Scenario: TC_AT_38:Verify right click options for the series
 	And  Right click on any series level 
 	Then Context menu should be poped up
 		
@@ -396,7 +397,7 @@ Scenario: TC_AT_62:Verify ' ^ ' icon to Collapse
 	And Click on "Hide related data" 
 	Then The related data dropdown should be collapsed 
 	
-@Alltab 
+@Alltab
 Scenario: TC_AT_63:Verify ' + ' icon 
 	And Expand the dataset 
 	And Click on '+' icon 
@@ -422,7 +423,7 @@ Scenario: TC_AT_66:Verify Add and replace option
 	And Click on "Add and replace" option from dropdown 
 	Then The selected series should replace the series in the visual in the focus 
 	
-@Alltab 
+@Alltab
 Scenario: TC_AT_67:Verify Add and group option 
 	And Expand the dataset 
 	And Click on "Add and group" option from dropdown 
@@ -442,7 +443,7 @@ Scenario: TC_AT_69:Verify Add to existing insight option
 	Then Open the insights and verify the series in My series 
 	
 @Alltab 
-Scenario: TC_AT_70:Verify Unselect All option 
+Scenario: TC_AT_70:Verify right click options for the series
 	And Expand the dataset and right click on any series 
 	Then Context menu should be poped up
 		
@@ -635,7 +636,7 @@ Scenario: TC_AT_102:Verify Add to existing insight option
 	Then Open the insights and verify the series in My series
 	
 @Alltab 
-Scenario: TC_AT_103:Verify Unselect All option 
+Scenario: TC_AT_103:Verify right click options for the series
 	And Expand the dataset for New datasets and right click on any series
 	Then Context menu should be poped up
 	
@@ -875,7 +876,7 @@ Scenario: TC_AT_141:Verify Add to existing insight option
 	Then Open the insights and verify the series in My series 
 	
 @Alltab 
-Scenario: TC_AT_142:Verify Unselect All option 
+Scenario: TC_AT_142:Verify right click options for the series
 #	And Search keyword with "gdp"
 	And Expand the dataset from Explore datasets and right click on any series 
 	Then Context menu should be poped up
@@ -1136,3 +1137,357 @@ Scenario: TC_AT_181:Verify Show Database option
 	And Click on More actions 
 	And Select "Show Database"
 	Then Database should navigate to the particular database and highlight the series 
+	
+@Alltab 
+Scenario: TC_AT_182:Verify Selection of any series 
+	And Hover the mouse on any series level under explore series 
+	Then Download button should get enabled 
+	Then In search field,'x selected' should appear with edit icon 
+	
+@Alltab 
+Scenario: TC_AT_183:Verify ' v ' icon for a series to display details 
+	And Hover the mouse on any series under explore series 
+	And Click on ' v ' icon to expand the series details 
+	Then Should display "Active/Discontinued,Read More,DATASETS,INSIGHTS" 
+	
+@Alltab 
+Scenario: TC_AT_184:Verify ' ^ ' icon to Collapse 
+	And Hover the mouse on any series under explore series 
+	And Click on "Show related data" 
+	And Click on "Hide related data" 
+	Then The related data dropdown should be collapsed 
+	
+@Alltab 
+Scenario: TC_AT_185:Verify ' + ' icon 
+	And Hover the mouse on any series under explore series 
+	And Click on '+' icon for series level 
+	Then The selected series should get added to the visual in focus 
+	
+@Alltab
+Scenario: TC_AT_186:Verify + dropdown 
+	And Hover the mouse on any series under explore series 
+	And Click on the 'v' icon to expand the dropdown 
+	Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to existing insight" 
+	
+@Alltab 
+Scenario: TC_AT_187:Verify Add option 
+	And Click on View tab 
+	And Hover the mouse on any series under explore series 
+	And Select "Add" option 
+	Then The selected series should get added to the visual in focus 
+	
+@Alltab 
+Scenario: TC_AT_188:Verify Add and Replace option 
+	And Create a visual and select visual 
+	And Search keyword with "gdp"
+	And Hover the mouse on any series under explore series and click on dropdown icon 
+	And Click on "Add and replace" 
+	Then The selected series should be replaced with existing series on the visual 
+	
+@Alltab
+Scenario: TC_AT_189:Verify Add and group option 
+	And Hover the mouse on any series under explore series and click on dropdown icon  
+	And Click on "Add and group" 
+	Then Selected series should be added as group in My series 
+	
+@Alltab 
+Scenario: TC_AT_190:Verify Add to new insight option 
+	And Hover the mouse on any series under explore series and click on dropdown icon  
+	And Click on "Add to new insight" 
+	Then The new insight should be created with selected series 
+	
+@Alltab 
+Scenario: TC_AT_191:Verify Add to existing insight option 
+	And Hover the mouse on any series under explore series and click on dropdown icon 
+	And Click on "Add to existing insight" 
+	And Select multiple insights 
+	And Click on "Add to insights" 
+	Then Open the insights and verify the series in My series  
+	
+@Alltab 
+Scenario: TC_AT_192:Verify right click options for the series
+	And  Right click on any Explore series 
+	Then Context menu should be poped up
+		
+@Alltab 
+Scenario: TC_AT_193:Verify Unselect All option 
+	And  Right click on any Explore series 
+	And  Select "Unselect all" 
+	Then The selected series should be unselected 
+	
+@Alltab 
+Scenario: TC_AT_194:Verify View as Chart option 
+	And  Right click on any Explore series 
+	And  Select "View as Chart" 
+	Then Visual should be created with "Edit Chart" 
+	
+@Alltab 
+Scenario: TC_AT_195:Verify View as Map option 
+	And  Right click on any Explore series 
+	And  Select "View as Map" 
+	Then Visual should be created with "Edit Map" 
+	
+@Alltab 
+Scenario: TC_AT_196:Verify View as Table option 
+	And  Right click on any Explore series 
+	And  Select "View as Table" 
+	Then Visual should be created with "Edit Table" 
+	
+@Alltab 
+Scenario: TC_AT_197:Verify View as Pie  option 
+	And  Right click on any Explore series 
+	And  Select "Pie" 
+	Then Visual should be created with "Edit Pie" 
+	
+@Alltab 
+Scenario: TC_AT_198:Verify View as Heat map  option 
+	And  Right click on any Explore series
+	And  Select "Heat map" 
+	Then Visual should be created with "Edit Heat map" 
+	
+@Alltab 
+Scenario: TC_AT_199:Verify View as Histogram  option 
+	And  Right click on any Explore series 
+	And  Select "Histogram" 
+	Then Visual should be created with "Edit Histogram" 
+	
+@Alltab 
+Scenario: TC_AT_200:Verify Download  option 
+	And  Right click on any Explore series 
+	And  Select "Download" 
+	Then Download window should be appeared with selected series count 
+	
+@Alltab
+Scenario: TC_AT_201:Verify Copy  option 
+	And  Right click on any Explore series 
+	And   Select "Copy" 
+	Then The message should be in growl popup as "Selected series copied." 
+	
+@Alltab 
+Scenario: TC_AT_202:Verify Copy data option 
+	And  Right click on any Explore series 
+	And   Select "Copy data" 
+	Then Download window should be appeared with selected series count 
+	
+@Alltab
+Scenario: TC_AT_203:Verify Copy link(s) option 
+	And  Right click on any Explore series 
+	And Select "Copy link(s)" 
+	Then URL should be generated for selected series 
+	
+@Alltab 
+Scenario: TC_AT_204:Verify Series Info option 
+	And  Right click on any Explore series 
+	And Select "Series Info" 
+	Then The SSP window should be opened 
+	
+@Alltab 
+Scenario: TC_AT_205:Verify Footnote option 
+	And  Right click on any Explore series 
+	And  Select "Footnotes" 
+	Then Footnote window should be opened for the selected series 
+	
+@Alltab 
+Scenario: TC_AT_206:Verify Show Dataset option 
+	And  Right click on any Explore series 
+	And Select "Show Dataset" 
+	And Click on Back button 
+	Then Should redirect to database tab 
+	
+@Alltab
+Scenario: TC_AT_207:Verify Show Database option 
+	And Right click on any Explore series 
+	And Select "Show Database"
+	Then Database should navigate to the particular database and highlight the series 
+
+@Alltab 
+Scenario: TC_AT_208:Verify View More link for popular series 
+	And  Click in View More link for Explore series
+	Then Should be navigated to Series Tab 
+	
+@Altab 
+Scenario: TC_AT_209:Verify Explore releases section contents
+	And  Explore Releases section should contain max "10" datasets 
+	
+@Alltab 
+Scenario: TC_AT_210:Expand the one of the  releaseDatasets
+	And  Click on + box under Explore releases
+	Then The dataset should get expanded 
+	
+@Alltab 
+Scenario: TC_AT_211:Collapse the datasets 
+	And Click on - icon under Explore releases
+	Then The dataset should get collapsed 
+	
+@Alltab 
+Scenario: TC_AT_212:Verify mouse hover options 
+	And Hover the mouse on any of the Datasets unser Explore releases
+	Then "Add series or Add and replace series" icon should get displayed 
+	
+@Alltab
+Scenario: TC_AT_213:Verify Selection of any datasets
+	And  Select any of the datasets under Explore releases 
+	Then Download button should get enabled 
+	Then In search field,'x selected' should appear with edit icon 
+	
+@Alltab 
+Scenario: TC_AT_214:Verify ' v ' icon for a series to display details 
+	And  Expand any dataset under Explore releases 
+	And Click on 'v' icon for a series to display details 
+	Then Should display "Active/Discontinued,Read More,DATASETS,INSIGHTS" 
+	
+@Alltab 
+Scenario: TC_AT_215:Verify ' ^ ' icon to Collapse 
+	And Expand any dataset under Explore releases 
+	And Click on 'v' icon for a series to display details 
+	And Click on "Hide related data" 
+	Then The related data dropdown should be collapsed 
+	
+@Alltab 
+Scenario: TC_AT_216:Verify ' + ' icon 
+	And  Expand any dataset under Explore releases 
+	And Click on '+' icon 
+	Then The selected series should get added to the visual in focus 
+	
+@Alltab
+Scenario: TC_AT_217:Verify + dropdown 
+	And Expand any dataset under Explore releases 
+	And Click on the v to expand the dropdown 
+	Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to existing insight"
+	
+@Alltab 
+Scenario: TC_AT_218:Verify Add option 
+	And Click on View tab 
+	And Expand any dataset under Explore releases 
+	And Click on "Add" option from dropdown 
+	Then The selected series should get added to the visual in focus 
+	
+@Alltab
+Scenario: TC_AT_219:Verify Add and replace option 
+	And Expand any dataset under Explore releases 
+	And Create a visual 
+	And Click on "Add and replace" option from dropdown 
+	Then The selected series should replace the series in the visual in the focus 
+	
+@Alltab 
+Scenario: TC_AT_220:Verify Add and group option 
+	And Expand any dataset under Explore releases
+	And Click on "Add and group" option from dropdown 
+	Then The selected series should get grouped in My Series 
+	
+@Alltab 
+Scenario: TC_AT_221:Verify Add to new insight option 
+	And Expand any dataset under Explore releases 
+	And Click on "Add to new insight" option from dropdown 
+	Then The selected series should get added to the new insight 
+	
+@Alltab 
+Scenario: TC_AT_222:Verify Add to existing insight option 
+	And Expand any dataset under Explore releases and select "Add to existing insight" option 
+	And Select multiple insights 
+	And Click on "Add to insights" 
+	Then Open the insights and verify the series in My series
+	
+@Alltab 
+Scenario: TC_AT_223:Verify right click options for the series
+	And Expand any dataset under Explore releases and right click on any series
+	Then Context menu should be poped up 
+	
+@Alltab
+Scenario: TC_AT_224:Verify Unselect All option 
+	And Expand any dataset under Explore releases and right click on any series 
+	And  Select "Unselect all" 
+	Then The selected series should be unselected 
+	
+@Alltab 
+Scenario: TC_AT_225:Verify View as Chart option 
+	And Expand any dataset under Explore releases and right click on any series 
+	And  Select "View as Chart" 
+	Then Visual should be created with "Edit Chart"
+	
+@Alltab 
+Scenario: TC_AT_226:Verify View as Map option 
+	And Expand any dataset under Explore releases and right click on any series 
+	And  Select "View as Map" 
+	Then Visual should be created with "Edit Map" 
+	
+@Alltab 
+Scenario: TC_AT_227:Verify View as Table option 
+	And Expand any dataset under Explore releases and right click on any series 
+	And  Select "View as Table" 
+	Then Visual should be created with "Edit Table" 
+	
+@Alltab 
+Scenario: TC_AT_228:Verify View as Pie option 
+	And Expand any dataset under Explore releases and right click on any series 
+	And Select "Pie" 
+	Then Visual should be created with "Edit Pie" 
+	
+@Alltab 
+Scenario: TC_AT_229:Verify View as Heat map option 
+	And Expand any dataset under Explore releases and right click on any series 
+	And Select "Heat map" 
+	Then Visual should be created with "Edit Heat map" 
+	
+@Alltab 
+Scenario: TC_AT_230:Verify View as Histogram option 
+	And Expand any dataset under Explore releases and right click on any series 
+	And Select "Histogram" 
+	Then Visual should be created with "Edit Histogram" 
+	
+@Alltab
+Scenario: TC_AT_231:Verify Download option 
+	And  Expand any dataset under Explore releases and right click on any series 
+	And  Select "Download" 
+	Then Download window should be appeared with selected series count 	
+	
+@Alltab 
+Scenario: TC_AT_232:Verify Copy option 
+	And  Expand any dataset under Explore releases and right click on any series 
+	And  Select "Copy" 
+	Then The message should be in growl popup as "Selected series copied." 
+	
+@Alltab 
+Scenario: TC_AT_233:Verify Copy data option 
+	And  Expand any dataset under Explore releases and right click on any series
+	And  Select "Copy data" 
+	Then Download window should be appeared with selected series count 
+	
+@Alltab 
+Scenario: TC_AT_234:Verify Copy link(s) option 
+	And  Expand any dataset under Explore releases and right click on any series 
+	And  Select "Copy link(s)" 
+	Then URL should be generated for selected series 
+	
+@Alltab 
+Scenario: TC_AT_235:Verify Series Info option 
+	And Expand any dataset under Explore releases and right click on any series
+	And  Select "Series Info" 
+	Then The SSP window should be opened 
+	
+@Alltab 
+Scenario: TC_AT_236:Verify Footnote option 
+	And  Expand any dataset under Explore releases and right click on any series 
+	And  Select "Footnotes" 
+	Then Footnote window should be opened for the selected series 
+	
+@Alltab 
+Scenario: TC_AT_237:Verify Show Dataset option 
+	And  Expand any dataset under Explore releases and right click on any series 
+	And Select "Show Dataset" 
+	And Click on Back button 
+	Then Should redirect to database tab 
+#	
+#@Alltab1 
+#Scenario: TC_AT_238:Verify column for no of series for each Dataset 
+#	And  Observe column for no of series for each Dataset under Explore releases
+#	
+#@Alltab1 
+#Scenario: TC_AT_239:Verify column for Datasets updated Date 
+#	And  Observe column for updated Date for each Dataset under Explore releases
+
+@Alltab
+Scenario: TC_AT_239:Verify for Unselect link related to  all sections
+	And Select few series in any of the sections for releases
+	Then Unselect link should be displayed at the top with red color font
+	
