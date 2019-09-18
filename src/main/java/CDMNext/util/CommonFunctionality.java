@@ -2,6 +2,7 @@ package CDMNext.util;
 
 import java.io.File;
 
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
+
 
 import CDMNext.StepDefinations.login;
 
@@ -92,6 +94,13 @@ public class CommonFunctionality {
 			unselect.click();
 		}
 	}
+	public static void wait(int time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void CollapseTreeMethod() throws InterruptedException {
 		Thread.sleep(2000);
@@ -151,6 +160,7 @@ public class CommonFunctionality {
 
 	@SuppressWarnings("deprecation")
 	public static void RightClickOnAnySeries() throws InterruptedException {
+		Thread.sleep(2000);
 		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		login.Log4j.info("List size is :" + li_All.size());
@@ -162,8 +172,10 @@ public class CommonFunctionality {
 					.findElement(By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
 			checkbox.click();
 			WebElement ele = login.driver.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
+			//sname = ele.getText();
 			if (i == 4) {
 				// Thread.sleep(2000);
+				sname = ele.getText();
 				CommonFunctionality.action.contextClick(ele).pause(2000).build().perform();
 				break;
 			}
