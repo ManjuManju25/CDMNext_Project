@@ -253,6 +253,27 @@ public class CommonFunctionality {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(text))));
 	}
 
+	public static boolean DownloadFileVerify() throws Exception {
+		// Verify the downloaded file as excel by comparing the filename title and
+		// downloaded file name
+		Thread.sleep(5000);
+		String series_title = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_title"))).getText();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+		String downloadPath = System.getProperty("user.dir");
+		File dir = new File(downloadPath);
+		File[] dirContents = dir.listFiles();
+		for (int i = 0; i < dirContents.length; i++) {
+			if (dirContents[i].getName().contains(series_title)) {
+				// File has been found, it can now be deleted:
+				dirContents[i].delete();
+				login.Log4j.info("File has been download to Excel and its verified");
+				return true;
+			}
+		}
+		Assert.fail("Download to Excel verification failed");
+		return false;
+	}
+
 	public static void search_without_filter() throws Throwable {
 		// Thread.sleep(4000);
 		List<WebElement> filter = login.driver
@@ -515,3 +536,4 @@ public class CommonFunctionality {
 		return elements;
 	}
 }
+
