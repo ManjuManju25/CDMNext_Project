@@ -7,6 +7,7 @@ ASEAN, ASEAN4, AEC, A6, A5, A4, CLMV
 atm,automated teller machine
 avg,average
 Average Annual Wage, Average Wage
+automobile, car, vehicle
 BCI,Business Climate Index
 bdi,baltic dry index
 bdo,banco de oro
@@ -128,7 +129,6 @@ ncd,negotiable certificate of deposit
 NCD,Negotiable Certificates of Deposit
 ndf,non deliverable forward
 ndi,national disposable income
-NEER,Nominal Effective Exchange Rate
 nibfc,national interbank funding center
 nim,net interest margin
 no,no.,number,count,unit
@@ -204,8 +204,8 @@ X, Exports
 yoy,year on year
 ytd,year to date
 gds,Gross Domestic Saving
-real state,property,housing,apartments,dwellings
-
+real state,property,housing,apartments,dwellings,gas NOT oil AND state
+inflation
 # Chinese
 
 上 交 所, 上 海 证 券 交 易 所

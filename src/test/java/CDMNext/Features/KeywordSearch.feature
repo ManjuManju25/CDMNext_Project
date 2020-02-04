@@ -14,7 +14,7 @@ Scenario: TC_SynonymSearch_02 : Search for an Acronym as "PMI"
 	Given User enters keyword "PMI" 
 	Then User verify keyword search results 
 	
-@SynonymSearch 
+@SynonymSearch
 Scenario: TC_SynonymSearch_03 : Search for an Acronym as "cpi" 
 	Given User enters keyword "cpi" 
 	Then User verify keyword search results 
@@ -48,7 +48,7 @@ Scenario: TC_SynonymSearch_8 : Search for an Acronym as "GCF"
 Scenario: TC_SynonymSearch_9 : Search for an Acronym as "imf" 
 	Given User enters keyword "imf" 
 	Then User verify keyword search results 
-	
+
 @SynonymSearch 
 Scenario: TC_SynonymSearch_10 : Search for an Acronym as "SOE" 
 	Given User enters keyword "SOE" 
@@ -1289,7 +1289,7 @@ Scenario: TC_KeywordSearch_257
 	Given User enters "1380601" 
 	Then  User verify the search results 
 	
-@KeywordSearch 
+@KeywordSearch
 Scenario: TC_KeywordSearch_258 
 	Given User enters "State Bank of Mysore;shanghai stock exchange" 
 	Then  User verify the search results 
@@ -1338,168 +1338,178 @@ Scenario: TC_KeywordSearch_266
 Scenario: TC_KeywordSearch_267 
 	Given User enters "Tes*" 
 	Then  User verifies Filter search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_268 : Search for an Acronym as "上交所" 
-#	Given User enters keyword "上交所" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_269 : Search for an Acronym as "上海" 
-#	Given User enters keyword "上海" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_270 : Search for an Acronym as "个人消费支出" 
-#	Given User enters keyword "个人消费支出" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_271 : Search for an Acronym as "冰箱" 
-#	Given User enters keyword "冰箱" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_272 : Search for an Acronym as "印尼" 
-#	Given User enters keyword "印尼" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_273 : Search for an Acronym as "国债利率" 
-#	Given User enters keyword "国债利率" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_274 : Search for an Acronym as "张家界" 
-#	Given User enters keyword "张家界" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_275 : Search for an Acronym as "活猪存栏量" 
-#	Given User enters keyword "活猪存栏量" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_276 : Search for an Acronym as "深交所" 
-#	Given User enters keyword "深交所" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_277 : Search for an Acronym as "生产率" 
-#	Given User enters keyword "生产率" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_278 : Search for an Acronym as "草鱼" 
-#	Given User enters keyword "草鱼" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_279 : Search for an Acronym as "货币供应量" 
-#	Given User enters keyword "货币供应量" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_280 : Search for an Acronym as "金融资产总量" 
-#	Given User enters keyword "金融资产总量" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_281 : Search for an Acronym as "程限" 
-#	Given User enters keyword "程2" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_282 : Search for an Acronym as "文化" 
-#	Given User enters keyword "文化" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_283 : Search for an Acronym as "一月" 
-#	Given User enters keyword "一月" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_284 : Search for an Acronym as "职工" 
-#	Given User enters keyword "职工" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_285 : Search for an Acronym as "年尾年末" 
-#	Given User enters keyword "年尾年末" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_286 : Search for an Acronym as "交易" 
-#	Given User enters keyword "交易" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_287 : Search for an Acronym as "建造" 
-#	Given User enters keyword "建造" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_288 : Search for an Acronym as "假期" 
-#	Given User enters keyword "假期" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_289 : Search for an Acronym as "季节" 
-#	Given User enters keyword "季节" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_290 : Search for an Acronym as "加强" 
-#	Given User enters keyword "加强" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_291 : Search for an Acronym as "计算" 
-#	Given User enters keyword "计算" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_292 : Search for an Acronym as "出产" 
-#	Given User enters keyword "出产" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_293 : Search for an Acronym as "出入收支" 
-#	Given User enters keyword "出入收支" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_294 : Search for an Acronym as "摩托车" 
-#	Given User enters keyword "摩托车" 
-#	Then User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_295 
-#	Given User enters "从业人数 AND ВВП" 
-#	Then  User verifies keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_296 
-#	Given User enters keyword "国内総生産 OR ВВП OR gas" 
-#	Then  User verifies keyword search results 
-#	
-#@RussianKeywordSearch 
-#Scenario: TC_KeywordSearch_297 
-#	Given User enters keyword "среднегодовым" 
-#	Then  User verify keyword search results 
-#	
-#@ChineseKeywordSearch 
-#Scenario: TC_KeywordSearch_298 
-#	Given User enters "摩托车" 
-#	And   User selects "Source" as "China Association of Automobile Manufacturers" 
-#	And   User has clicked on "Apply filter" 
-#	Then  User verify the search results 
-#	
-#@RussianKeywordSearch 
-#Scenario: TC_KeywordSearch_299 
-#	Given User enters "среднегодовым" 
-#	And   User selects "Source" as "Federal State Statistics Service" 
-#	And   User has clicked on "Apply filter" 
-#	Then  User verify the search results 
-#	
+	
+@KeywordSearch 
+Scenario: TC_KeywordSearch_268 
+	Given User enters "inflation" 
+	Then  User verify the search results 
+	
+@SynonymSearch 
+Scenario: TC_KeywordSearch_269 : Search for an Acronym as "automobile" 
+	Given User enters keyword "automobile" 
+	Then  User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_270 : Search for an Acronym as "上交所" 
+	Given User enters keyword "上交所" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_271 : Search for an Acronym as "个人消费支出" 
+	Given User enters keyword "个人消费支出" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_272 : Search for an Acronym as "冰箱" 
+	Given User enters keyword "冰箱" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_273 : Search for an Acronym as "印尼" 
+	Given User enters keyword "印尼" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_274 : Search for an Acronym as "国债利率" 
+	Given User enters keyword "国债利率" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_275 : Search for an Acronym as "张家界" 
+	Given User enters keyword "张家界" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_276 : Search for an Acronym as "活猪存栏量" 
+	Given User enters keyword "活猪存栏量" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_277 : Search for an Acronym as "深交所" 
+	Given User enters keyword "深交所" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_278 : Search for an Acronym as "生产率" 
+	Given User enters keyword "生产率" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_279 : Search for an Acronym as "草鱼" 
+	Given User enters keyword "草鱼" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_280 : Search for an Acronym as "货币供应量" 
+	Given User enters keyword "货币供应量" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_281 : Search for an Acronym as "金融资产总量" 
+	Given User enters keyword "金融资产总量" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_282 : Search for an Acronym as "程限" 
+	Given User enters keyword "程2" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_283 : Search for an Acronym as "文化" 
+	Given User enters keyword "文化" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_284 : Search for an Acronym as "一月" 
+	Given User enters keyword "一月" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_285 : Search for an Acronym as "职工" 
+	Given User enters keyword "职工" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_286 : Search for an Acronym as "年尾年末" 
+	Given User enters keyword "年尾年末" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_287 : Search for an Acronym as "交易" 
+	Given User enters keyword "交易" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_288 : Search for an Acronym as "建造" 
+	Given User enters keyword "建造" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_289 : Search for an Acronym as "假期" 
+	Given User enters keyword "假期" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_290 : Search for an Acronym as "季节" 
+	Given User enters keyword "季节" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_291 : Search for an Acronym as "加强" 
+	Given User enters keyword "加强" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_292 : Search for an Acronym as "计算" 
+	Given User enters keyword "计算" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_293 : Search for an Acronym as "出产" 
+	Given User enters keyword "出产" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_294 : Search for an Acronym as "出入收支" 
+	Given User enters keyword "出入收支" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_295 : Search for an Acronym as "摩托车" 
+	Given User enters keyword "摩托车" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_296 : Search for an Acronym as "上海" 
+	Given User enters keyword "上海" 
+	Then User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_297 
+	Given User enters "从业人数 AND ВВП" 
+	Then  User verifies keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_298 
+	Given User enters keyword "国内総生産 OR ВВП OR gas" 
+	Then  User verifies keyword search results 
+	
+@RussianKeywordSearch 
+Scenario: TC_KeywordSearch_299
+	Given User enters keyword "среднегодовым" 
+	Then  User verify keyword search results 
+	
+@ChineseKeywordSearch 
+Scenario: TC_KeywordSearch_300
+	Given User enters "摩托车" 
+	And   User selects "Source" as "China Association of Automobile Manufacturers" 
+	And   User has clicked on "Apply filter" 
+	Then  User verify the search results 
+	
+@RussianKeywordSearch 
+Scenario: TC_KeywordSearch_301 
+	Given User enters "среднегодовым" 
+	And   User selects "Source" as "Federal State Statistics Service" 
+	And   User has clicked on "Apply filter" 
+	Then  User verify the search results 
+	

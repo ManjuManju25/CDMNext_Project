@@ -204,7 +204,7 @@ yoy,year on year
 ytd,year to date
 gds,Gross Domestic Saving
 real state,property,housing
-
+inflation
 # Chinese
 
 上 交 所, 上 海 证 券 交 易 所

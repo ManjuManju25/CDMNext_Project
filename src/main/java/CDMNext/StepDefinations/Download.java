@@ -1,42 +1,25 @@
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
+
 //import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileFilter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.comparator.LastModifiedFileComparator;
-import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 //import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
-
-import com.gargoylesoftware.htmlunit.javascript.host.Iterator;
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
-
-import Javaxlxs.Last_file_download;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.runtime.Utils;
 
 public class Download {
 	public static String DownloadedFilesCount;
@@ -50,7 +33,7 @@ public class Download {
 	// "C:\\Users\\Admin\\Downloads\\CDMNext_Download";
 	public static final Logger Log4j = Logger.getLogger("Log4j");
 	public static Properties LOCATORS;
-	private static Boolean logged = false;
+	//private static Boolean logged = false;
 	public static String InsightName; 
 	// Actions action = new Actions(driver);
 

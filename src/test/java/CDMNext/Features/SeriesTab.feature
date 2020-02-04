@@ -3,18 +3,18 @@ Feature: SeriesTab
 Background: 
 	Given User has successful logged in 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab 
 	And Select indicator "Transport" as "Freight Traffic" 
 	And Select indicator "Tourism" as "Tourism Statistics" 
 	When Click on "Apply filter" 
 	Then Result should be displayed as per selection 
 	
-@SeriesTab 
-Scenario: TC_SeriesTab_02:Verify "All Insights" option 
-	When Click on "All insights" 
-	Then The "Insight Explorer" popup should be appeared 
-	
+##@SeriesTab1 
+##Scenario: TC_SeriesTab_02:Verify "All Insights" option 
+##	When Click on "All insights" 
+##	Then The "Insight Explorer" popup should be appeared 
+##	
 @SeriesTab 
 Scenario: TC_SeriesTab_03:Verify Reset option  for series tab 
 	Given User enters "GDP" 
@@ -119,7 +119,7 @@ Scenario: TC_SeriesTab_19:Verifying "key only" filter for series tab
 	When  Click on "Apply filter" 
 	Then  "Key series" should be displayed 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_20:Verifying "with release schedule" filter for series tab 
 	Given User enters "FDI" 
 	And   User has selects "More" as "With release schedule" 
@@ -135,7 +135,7 @@ Scenario: TC_SeriesTab_21:Verifying "with suggestions for rebased/discontinued s
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_22:Verifying "Forecast" filter for series tab 
-	Given User enters "FDI" 
+	Given  Open "Series" tab
 	And   User has selects "More" as "Forecast" 
 	When  Click on "Apply filter" 
 	Then  User verify corresponding results for selected filter 
@@ -165,7 +165,7 @@ Scenario: TC_SeriesTab_25:Verify 'Mouse over' icons for series level
 Scenario: TC_SeriesTab_26:Verify 'Mouse over' icons for series level 
 	Given User enters "5823501" 
 	When User Mouse hover on "Show Database" icon 
-	Then User can selects "World Trend Plus" 
+	Then User can selects "Global Database" 
 	Then User can see the selected database in Databases tab 
 	
 @SeriesTab 
@@ -256,10 +256,11 @@ Scenario: TC_SeriesTab_40:Verify "Add series" by click on '+'
 	Given User enters seriesID "7872901;7874601" 
 	When Click on + icon on series 
 	Then The series should be added to Data tab 
-	
+
 @SeriesTab 
 Scenario: TC_SeriesTab_41:Verify Pin/unpin filters 
-	When Hover the mouse on any filter and click on Pin 
+	And Click on any filter
+	And Select "Pin to left"
 	Then filter should be pined/unpined the filter to left panel 
 	
 @SeriesTab 
@@ -268,18 +269,18 @@ Scenario: TC_SeriesTab_42:Verify 'Add' series from dropdown
 	And Click on drop down icon next to + 
 	And Click on "Add" 
 	Then The series should be added to Data tab 
-	
-@SeriesTab 
-Scenario: TC_SeriesTab_43:Verify 'add to exist insight' in dropdown 
-	Given User enters seriesID "368921927;371376337" 
-	And  Click on drop down icon next to + 
-	And  Click on "Add to existing insight" 
-	Then Choose any existing insights to add this series 
-	Then The series should be added to selected insight 
+#	
+#@SeriesTab 
+#Scenario: TC_SeriesTab_43:Verify 'add to exist insight' in dropdown 
+#	Given User enters seriesID "368921927;371376337" 
+#	And  Click on drop down icon next to + 
+#	And  Click on "Add to existing insight" 
+#	Then Choose any existing insights to add this series 
+#	Then The series should be added to selected insight 
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_44:Verify 'Add to new insight' in dropdown 
-	Given User enters seriesID "122834404;295755902" 
+	Given User enters seriesID "53211802;386600807" 
 	And  Click on drop down icon next to + 
 	And  Click on "Add to new insight" 
 	Then New insight should be created and the series should be added to the insight 
@@ -329,25 +330,27 @@ Scenario: TC_SeriesTab_50:Verifying "New only" filter for series tab
 @SeriesTab 
 Scenario: TC_SeriesTab_51:Verify results by World trend plus database 
 	And   User enters "GDP" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And   Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   Click on "Apply filter" 
 	Then  Search results should include series only from world trend plus DB 
-	
-@SeriesTab 
-Scenario: TC_SeriesTab_52:Verify click of open icon of 'All insights' 
-	And   Open "Series" tab 
-	And Click on open icon of All insight 
-	Then  The "Insight Explorer" popup should be appeared 
-	
-@SeriesTab 
-Scenario: TC_SeriesTab_53:Verify tabs to display 
-	And  Click on three dots 
-	Then  "Select tabs to display" popup should be display 
-	
-@SeriesTab 
-Scenario: TC_SeriesTab_54:Verify hyperlink of matched insights 
-	And Enter keyword "GDP" 
-	And Click on x Matched Insights hyperlink 
-	Then  Insights explorer modal window should open with x number of insights listed 
+#	
+#@SeriesTab1  
+#Scenario: TC_SeriesTab_52:Verify click of open icon of 'All insights' 
+#	And   Open "Series" tab 
+#	And Click on open icon of All insight 
+#	Then  The "Insight Explorer" popup should be appeared 
+#
+#@SeriesTab1
+#Scenario: TC_SeriesTab_53:Verify tabs to display 
+#	And  Click on cogwheel
+#	Then  "Select tabs to display" popup should be display 
+#	
+#@SeriesTab1 
+#Scenario: TC_SeriesTab_54:Verify hyperlink of matched insights 
+#	And Enter keyword "GDP" 
+#	And Click on x Matched Insights hyperlink 
+#	Then  Insights explorer modal window should open with x number of insights listed 
 	
 @SeriesTab 
 Scenario: TC_SeriesTab_55:Verifying "View as Pie" option for series level 
@@ -516,23 +519,24 @@ Scenario: TC_SeriesTab_78:Verify hide related data
 	And Click on "Hide related data" 
 	Then The related data dropdown should be collapsed 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_79:Verify selected Region results 
 	And Clear search input 
-	And User selects "Region" as "Albania;Japan" 
+	And User selects "All Regions" as "Albania;Japan" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_80:Verify selected frequency results 
 	And Clear search input 
 	And User selects "Frequency" as "Monthly;Semiannually" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
 	
-@SeriesTab 
+@SeriesTab
 Scenario: TC_SeriesTab_81:Verify selected unit results 
 	And Clear search input 
+	And Click on "More" filter
 	And User selects "Unit" as "IDR;kg" 
 	When Click on "Apply filter" 
 	Then User verify the search results 
@@ -540,6 +544,7 @@ Scenario: TC_SeriesTab_81:Verify selected unit results
 @SeriesTab 
 Scenario: TC_SeriesTab_82:Verify selected First obs before and Last ob after results 
 	And Clear search input 
+	And Click on "More" filter
 	And   User selects "Date" as "First observation before;Last observation after" 
 	And   User has clicked on "Apply filter" 
 	Then User verify the search results 

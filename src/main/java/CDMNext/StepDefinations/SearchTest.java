@@ -1,7 +1,9 @@
 package CDMNext.StepDefinations;
-import org.testng.annotations.AfterMethod;
+
 import org.testng.Assert;
+
 import org.testng.AssertJUnit;
+
 import CDMNext.util.CommonFunctionality;
 
 import java.io.File;
@@ -15,12 +17,16 @@ import org.openqa.selenium.OutputType;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import cucumber.api.Scenario;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -37,17 +43,21 @@ public class SearchTest {
 	String keyword;
 	String[] listwords = null;
 	Boolean CreateInsight = false;
-	
+	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
+	Actions action = new Actions(login.driver);
+	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+
 	@Given("^User has successful logged in$")
 	public static void user_has_successful_logged_in() throws Throwable {
 		if (login.logged_in = false) {
+			login.Log4j.info("It is in If block");
 			login.Invoke_browser();
 			login.application_login();
-			login.Log4j.info("It is in If block");
+
 		} else if (login.logged_in = true && !SearchTest.logged) {
+			login.Log4j.info("It is in else If block");
 			login.application_login();
 			SearchTest.logged = true;
-			login.Log4j.info("It is in else If block");
 
 		} else {
 			login.Log4j.info("If User has already logged in pelase continue....");
@@ -60,24 +70,23 @@ public class SearchTest {
 		currentKeyword = keyword;
 		login.driver.navigate().refresh();
 		login.Log4j.info("Searching with " + currentKeyword);
-		/*try {
-			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-			if (reset.size() > 0) {
-				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-					Thread.sleep(2000);
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
-					login.Log4j.info("Clicking on Reset button");
-				}
-			} 
-		} catch (Exception e) {
-			//
-		} finally {
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
-		}*/
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
-		Thread.sleep(2000);
+		/*
+		 * try { List<WebElement> reset =
+		 * login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset"))); if
+		 * (reset.size() > 0) { if
+		 * (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).
+		 * isDisplayed()) { Thread.sleep(2000);
+		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click
+		 * (); login.Log4j.info("Clicking on Reset button"); } } } catch (Exception e) {
+		 * // } finally {
+		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).
+		 * clear(); Thread.sleep(2000);
+		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).
+		 * sendKeys(currentKeyword); }
+		 */
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Search"))))
+				.clear();
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(currentKeyword);
 	}
 
@@ -85,9 +94,8 @@ public class SearchTest {
 	public void user_verify_keyword_search_results() throws Throwable {
 		String Content = "";
 		Boolean SynomymSearch = false;
-		Thread.sleep(1000);
 		login.Log4j.info("Clicking on  Series tab ");
-		SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
+		SeriesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
 		// text file location where it contains synonyms
 		FileReader file = new FileReader(
@@ -122,30 +130,28 @@ public class SearchTest {
 		ul_element = null;
 		try {
 			CommonFunctionality.wait(2000);
-			ul_element = CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(login.LOCATORS.getProperty("UL"))));
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 			login.Log4j.info("List size is :" + li_All.size());
-
+			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
+			// List<WebElement> checkBox = login.driver
+			// .findElements(By.xpath("//li//div[@class='series-list-item--checkbox-wrapper']"));
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(2000);
+					Thread.sleep(500);
 					int j = i + 1;
-//					checkbox = login.driver
-//							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-//					CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
-//					Thread.sleep(500);
-					element = login.driver.findElement(By.xpath("//li[" + j + "]//*[@class='series-item--name']"));
-					CommonFunctionality.action.moveToElement(element).build().perform();
-					Thread.sleep(1000);
+					// action.moveToElement(checkBox.get(i)).click().build().perform();
+					action.moveToElement(sName.get(i)).build().perform();
+					Thread.sleep(800);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					TooltipInfo = tooltip.getText();
 					login.Log4j.info("Title information is \n" + TooltipInfo);
 					// Until the element is not visible keep scrolling
-					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					
+					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
+
 					Boolean KeywordMatch = false;
 					switch (listwords.length) {
 					case 1:
@@ -162,8 +168,8 @@ public class SearchTest {
 							} else {
 								Thread.sleep(500);
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-								AssertJUnit.fail(listwords[0] + " keyword doesn't exists in the " + TooltipInfo + " AND "
-										+ "\n" + Filters.showdata);
+								AssertJUnit.fail(listwords[0] + " keyword doesn't exists in the " + TooltipInfo
+										+ " AND " + "\n" + Filters.showdata);
 							}
 						}
 
@@ -185,8 +191,9 @@ public class SearchTest {
 							} else {
 								Thread.sleep(500);
 								login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
-								AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " keyword doesn't exists in the "
-										+ TooltipInfo + " AND " + "\n" + Filters.showdata);
+								AssertJUnit
+										.fail(listwords[0] + " OR " + listwords[1] + " keyword doesn't exists in the "
+												+ TooltipInfo + " AND " + "\n" + Filters.showdata);
 							}
 						}
 
@@ -404,8 +411,7 @@ public class SearchTest {
 
 						login.Log4j.error(
 								currentKeyword + " has more than 8 synonyms which is not handled.  Please handle!");
-						Assert.fail(
-								currentKeyword + " has more than 8 synonyms which is not handled.  Please handle!");
+						Assert.fail(currentKeyword + " has more than 8 synonyms which is not handled.  Please handle!");
 					}
 
 				}
@@ -429,34 +435,36 @@ public class SearchTest {
 	@Then("^User verifies keyword search results$")
 	public void user_verifies_keyword_search_results() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		Thread.sleep(2000);
-		SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
+		// Thread.sleep(2000);
+		SeriesTab = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
 
 		ul_element = null;
 		try {
 			CommonFunctionality.wait(2000);
-			ul_element = CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(login.LOCATORS.getProperty("UL"))));
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 			login.Log4j.info("List size is :" + li_All.size());
+			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
+					int j = i + 1;
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
-					Thread.sleep(2000);
-					int j = i + 1;
-					//checkbox = login.driver.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					//CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
-					//Thread.sleep(1000);
-					element = login.driver.findElement(By.xpath("//li[" + j + "]//*[@class='series-item--name']"));
-					CommonFunctionality.action.moveToElement(element).build().perform();
-					Thread.sleep(1000);
+					Thread.sleep(600);
+					// checkbox = login.driver.findElement(By.xpath("//li[" + j +
+					// "]//div[@class='series-list-item--checkbox-wrapper']"));
+					// CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
+					// Thread.sleep(1000);
+					action.moveToElement(sName.get(i)).build().perform();
+					Thread.sleep(800);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					TooltipInfo = tooltip.getText();
 					// Until the element is not visible keep scrolling
-					CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					
+					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
+
 					Boolean KeywordMatch = false;
 					if (currentKeyword.toUpperCase().contains("AND") && currentKeyword.toUpperCase().contains("OR")) {
 						String[] keywords = currentKeyword.toUpperCase().trim().split("\\s*AND\\s*|\\s*OR\\s* ");
@@ -675,7 +683,7 @@ public class SearchTest {
 							}
 						}
 					} else if (Filters.searchData.contains("*")) {
-						Thread.sleep(2000);
+						Thread.sleep(1000);
 						String[] currentLine = Filters.searchData.split(";");
 						login.Log4j.info(currentLine[0]);
 						login.Log4j.info(currentLine[1]);
@@ -710,7 +718,7 @@ public class SearchTest {
 		} catch (NoSuchElementException e) {
 			AssertJUnit.fail("WebElement is null " + e.getMessage());
 		}
-		
+
 	}
 
 	public static void sspValidation(int j) throws InterruptedException {
@@ -793,7 +801,7 @@ public class SearchTest {
 	}
 
 	// It will execute after every test execution
-	@AfterMethod
+	@After
 	public void takeScreenshotOnFailure(Scenario scenario) throws IOException {
 		// if test case is failing then only it will enter into if condition
 		if (scenario.isFailed()) {
@@ -809,8 +817,8 @@ public class SearchTest {
 				// Copy files to specific location
 				FileUtils.copyFile(srcFile, destFile);
 				login.Log4j.info("Screenshot is taken successfully.");
-				//ExtentReports extent = ExtentReports.get(AdvanceReporting.class);
-				//extent.attachScreenshot("C:\\Mukesh\\image1.jpg");
+				// ExtentReports extent = ExtentReports.get(AdvanceReporting.class);
+				// extent.attachScreenshot("C:\\Mukesh\\image1.jpg");
 			} catch (IOException e) {
 				login.Log4j.error("Exception while taking screenshot\n " + e.getMessage());
 

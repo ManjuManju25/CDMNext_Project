@@ -1,30 +1,27 @@
 package CDMNext.runner;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.DataProvider;
 import cucumber.api.CucumberOptions;
 
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
-
-
 import org.testng.annotations.*;
 import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
-
 //import CDMNext.util.SendmailWithAttachment;
 
 @CucumberOptions(// features="classpath:",
-		strict = true,
-		features = "src/test/java/CDMNext/Features/", 
+		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Alltab1" },
+		tags = {"@Commentary1" }, 
 		monochrome = true,
 		//dryRun = true,
-		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
+		plugin = {"html:target/cucumber-reports/cucumber-pretty",
+				 "json:target/cucumber-reportsa/CucumberTestReport.json",
+				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
 public class TestRunner {
 
 	private TestNGCucumberRunner testNGCucumberRunner;
+
 
 	@BeforeSuite
 	public void setUpClass() throws Throwable {
@@ -36,27 +33,27 @@ public class TestRunner {
 	}
 
 	// TestNG @Test
+
 	@Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
 	public void feature(CucumberFeatureWrapper cucumberFeature) throws Throwable {
 		login.Log4j.info("\nInside TestNG > @Test");
 		testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
-//		testNGCucumberRunner.runScenario(eventwrapper.getPickleEvent());
-
+		// .runScenario(eventwrapper.getPickleEvent());
 
 	}
 
-	// TestNG @DataProvider
-	 @DataProvider public Object[][] features() {
-	 login.Log4j.info("\nInside TestNG > @DataProvider");
-	 return testNGCucumberRunner.provideFeatures(); }
-	
-	/*@DataProvider(parallel=true)
-    public Object[][] features() {
-       // return testNGCucumberRunner.provideFeatures();    	
-    	 return testNGCucumberRunner.provideScenarios();
-    }*/
-	// TestNG @Aftersuite
-	@AfterSuite
+	@DataProvider
+	public Object[][] features() {
+		login.Log4j.info("\nInside TestNG > @DataProvider");
+		return testNGCucumberRunner.provideFeatures();
+	}
+
+	/*@AfterMethod
+	public static void afterMethod(ITestResult result) throws IOException {
+		 ErrorScreenshot.takeScreenshotOnFailure(result);
+		}
+*/
+	@AfterSuite(alwaysRun = true)
 	public void tearDownClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @AfterSuite");
 		testNGCucumberRunner.finish();

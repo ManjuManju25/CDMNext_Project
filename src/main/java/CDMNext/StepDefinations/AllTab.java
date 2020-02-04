@@ -1297,6 +1297,7 @@ public class AllTab {
 			Assert.fail("FAIL");
 		}
 	}
+
 	@And("^Select any of the datasets under Explore releases$")
 	public void select_any_of_the_datasets_under_Explore_releases() throws Throwable {
 		ExploreReleases();
@@ -1305,34 +1306,39 @@ public class AllTab {
 				"//*[@class='tree-node release-scheduler-tree-node'][1]//*[@class='release-scheduler-tree-node--checker svg-checkbox']"));
 		ele.click();
 	}
+
 	@And("^Expand any dataset under Explore releases$")
 	public void expand_any_dataset_under_Explore_releases() throws Throwable {
 		click_on_box_under_Explore_releases();
 	}
+
 	@And("^Expand any dataset under Explore releases and select \"([^\"]*)\" option$")
 	public void expand_any_dataset_under_Explore_releases_and_select_option(String arg1) throws Throwable {
 		click_on_box_under_Explore_releases();
 		SelectAddtoExistingInsight();
 	}
+
 	@And("^Expand any dataset under Explore releases and right click on any series$")
 	public void expand_any_dataset_under_Explore_releases_and_right_click_on_any_series() throws Throwable {
 		click_on_box_under_Explore_releases();
 		VerifyRightClickOnAnySeries();
 	}
-	@And("^Observe column for no of series for each Dataset under Explore releases$")
-	public void observe_column_for_no_of_series_for_each_Dataset_under_Explore_releases() throws Throwable {
-		CommonFunctionality.ExpandRight();
-		ExploreReleases();
-		VerifySeriesColumn_ExploreDatasets();
 
-	}
-
-	@And("^Observe column for updated Date for each Dataset under Explore releases$")
-	public void observe_column_for_updated_Date_for_each_Dataset_under_Explore_releases() throws Throwable {
-		CommonFunctionality.ExpandRight();
-		ExploreReleases();
-		VerifyDateColumn_Exploredataset();
-	}
+	/*
+	 * @And("^Observe column for no of series for each Dataset under Explore releases$"
+	 * ) public void
+	 * observe_column_for_no_of_series_for_each_Dataset_under_Explore_releases()
+	 * throws Throwable { CommonFunctionality.ExpandRight(); ExploreReleases();
+	 * VerifySeriesColumn_ExploreDatasets();
+	 * 
+	 * }
+	 * 
+	 * @And("^Observe column for updated Date for each Dataset under Explore releases$"
+	 * ) public void
+	 * observe_column_for_updated_Date_for_each_Dataset_under_Explore_releases()
+	 * throws Throwable { CommonFunctionality.ExpandRight(); ExploreReleases();
+	 * VerifyDateColumn_Exploredataset(); }
+	 */
 	@And("^Select few series in any of the sections for releases$")
 	public void select_few_series_in_any_of_the_sections_for_releases() throws Throwable {
 		click_on_box_under_Explore_releases();
@@ -1340,6 +1346,15 @@ public class AllTab {
 				"//ul[@class='search-series-list scrollable']//li[1]//div[@class='series-list-item--checkbox-wrapper']")))
 				.click();
 	}
+
+	@And("^Observe columns for release date and observation date$")
+	public void observe_columns_for_release_date_and_observation_date() throws Throwable {
+		CommonFunctionality.ExpandRight();
+		ExploreReleases();
+		VerifyReleaseDate();
+		VerifyObservationDate();
+	}
+
 	void DefaultSeries(int Count) throws Exception {
 		List<WebElement> SeriesCount = CommonFunctionality.wait
 				.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(".series-item--name")));
@@ -1530,6 +1545,42 @@ public class AllTab {
 				login.Log4j.info("Updated column is displayed for each dataset");
 			} else {
 				Assert.fail("FAIL");
+			}
+		}
+	}
+
+	void VerifyReleaseDate() throws Exception {
+		List<WebElement> list_of_datasets = CommonFunctionality.wait.until(ExpectedConditions
+				.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='release-scheduler-tree-node--release-date']")));
+		for (int i = 0; i < list_of_datasets.size(); i++) {
+			int j = i + 1;
+			Thread.sleep(1000);
+			ele = login.driver.findElement(By
+					.xpath("//*[@class='explore-releases--content']//*[@class='tree-node release-scheduler-tree-node']["
+							+ j + "]//*[@class='release-scheduler-tree-node--release-date']"));
+			CommonFunctionality.action.moveToElement(ele).build().perform();
+			if (ele.isDisplayed()) {
+				System.out.print("\nReleased date column is displayed for each dataset");
+			} else {
+				Assert.fail("Verification is failed");
+			}
+		}
+	}
+
+	void VerifyObservationDate() throws Exception {
+		List<WebElement> list_of_datasets = CommonFunctionality.wait.until(ExpectedConditions
+				.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='release-scheduler-tree-node--last-obs']")));
+		for (int i = 0; i < list_of_datasets.size(); i++) {
+			int j = i + 1;
+			Thread.sleep(1000);
+			ele = login.driver.findElement(By
+					.xpath("//*[@class='explore-releases--content']//*[@class='tree-node release-scheduler-tree-node']["
+							+ j + "]//*[@class='release-scheduler-tree-node--last-obs']"));
+			CommonFunctionality.action.moveToElement(ele).build().perform();
+			if (ele.isDisplayed()) {
+				login.Log4j.info("Observation date column is displayed for each dataset");
+			} else {
+				Assert.fail("Verification is failed");
 			}
 		}
 	}

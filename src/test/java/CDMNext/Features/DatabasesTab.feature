@@ -5,14 +5,16 @@ Background:
 	
 @DB 
 Scenario: TC_DB_01: Verify multiple databases selection 
-	Given Click on All Databases dropdown 
+	Given Click on More filter 
 	And Select database as "China Premium Database,Brazil Premium Database,Russia Premium Database" 
+	And   User has clicked on "Apply filter" 
 	Then User can see the results for multiple database selection 
 	
 @DB
 Scenario: TC_DB_02: Verifying Database selection 
-	Given Click on All Databases dropdown 
+	Given Click on More filter 
 	And Select database as "India Premium Database" 
+	And   User has clicked on "Apply filter" 
 	Then Result should be loaded only for selected database 
 	
 @DB 
@@ -25,7 +27,7 @@ Scenario: TC_DB_03: Verifying Expand --> DB > Topic > Section > Table
 Scenario: TC_DB_04: Verifying Collapse option 
 	And Select Global database 
 	And Expand till series level 
-	And Click on Collapse option 
+	And Click on Collapse all option 
 	Then Opened data tree should be collapsed 
 	
 @DB 
@@ -57,16 +59,17 @@ Scenario: TC_DB_08: Verifying 'Footnotes' for DB level
 	
 @DB
 Scenario: TC_DB_09: Verifying remove icon for database 
-	Given Click on All Databases dropdown 
+	Given Click on More filter
 	And Select database as "World Trend Plus" 
+	And   User has clicked on "Apply filter" 
 	And Click on x icon to remove DB 
 	Then Selected database shold be removed 
-	
-@DB 
-Scenario: TC_DB_10: Verify closing of insight explorer window 
-	Given Click on "All insights" option 
-	When Click on Close 
-	Then The Insight Explorer popup should be closed 
+#	
+#@DB1 
+#Scenario: TC_DB_10: Verify closing of insight explorer window 
+#	Given Click on "All insights" option 
+#	When Click on Close 
+#	Then The Insight Explorer popup should be closed 
 	
 @DB
 Scenario: TC_DB_11: Verifying message if no results found for the search 
@@ -75,7 +78,7 @@ Scenario: TC_DB_11: Verifying message if no results found for the search
 @DB
 Scenario: TC_DB_12: Verifying Collapse option when search/filter applied 
 	Given User enters keyword "Banglore" 
-	And Click on "Collapse" 
+	And Click on "Collapse all" 
 	Then The data tree should be collapsed 
 	
 @DB 
@@ -87,7 +90,7 @@ Scenario: TC_DB_13: Verifying 'See our search help'
 @DB 
 Scenario: TC_DB_14: Verifying Expand option when search/filter applied 
 	Given User enters keyword "Banglore" 
-	And Click on "Expand" 
+	And Click on "Expand all" 
 	Then The data tree should be expanded 
 	
 @DB 
@@ -96,11 +99,13 @@ Scenario: TC_DB_15: Verifying 'our help desk team'
 	And  Click on "our help desk team" 
 	Then User should redirect to "https://support.ceicdata.com/support/tickets/new" 
 	
-@DB 
+@DB1 
 Scenario: TC_DB_16: Verifying Filters for DB tab 
-	And Select filter "Region" as "Japan" 
+	And  User selects "All Regions" as "Japan" 
 	And User has clicked on "Apply filter" 
-	And User selected "All databases" as "Global Database" 
+	And Click on "More" filter
+	And User selected "Database" as "Global Database" 
+	And User has clicked on "Apply filter" 
 	Then Result should be displayed as per the filters applied 
 	
 @DB 
@@ -110,7 +115,7 @@ Scenario: TC_DB_17: Verifying remove icon for filters.
 	When Click on x icon 
 	Then The applied filters should be removed 
 	
-@DB 
+@DB
 Scenario: TC_DB_18: Verifying behavior after search removed 
 	Given User enters "money" 
 	And After loaded the results ,click on Remove for search keyword 
@@ -128,10 +133,10 @@ Scenario Outline: <TCID>: Verifying DB language change in right click
 	Then The Databases language should be changed to selected language 
 	
 	Examples: 
-		| TCID |     database               | language |
-		| 20   | World Trend Plus           | 中文  |
-		| 21   | Russia Premium Database    | Русский  |
-		| 22   | Indonesia Premium Database | Bahasa   |
+		| TCID     |     database               | language |
+		| TC_DB_20 | World Trend Plus           | 中文  |
+		| TC_DB_21 | Russia Premium Database    | Русский  |
+		| TC_DB_22 | Indonesia Premium Database | Bahasa   |
 		
 @DB 
 Scenario: TC_DB_23: Verifying DB language change for right click when the database is expaned 
@@ -232,7 +237,7 @@ Scenario: TC_DB_37:Verifying Copy link for multiple tables selected
 	And Click on "Copy link(s)" 
 	Then The links should be generated for selected tables 
 	
-@DB 
+@DB
 Scenario: TC_DB_38: Validating copied link for multiple tables selection. 
 	And  Select multiple tables 
 	And Click on "Copy link(s)" 
@@ -256,7 +261,7 @@ Scenario: TC_DB_40:Verifying + icon for table level
 Scenario: TC_DB_41:Verifying Add dropdown for table level 
 	And Mouse hover on any table level 
 	And Click on dropdown next to + icon 
-	Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to existing insight" 
+	Then The dropdown should be opened with these items "Add,Add and replace,Add and group,Add to new insight,Add to recent insight" 
 	
 @DB 
 Scenario: TC_DB_42:Verifying Add option under add dropdown for table level 
@@ -271,7 +276,7 @@ Scenario: TC_DB_43:Verifying Add and Replace for table level
 	And  Click on "Add and replace" 
 	Then The selected table data should be replaced with existing data on the visual 
 	
-@DB 
+@DB
 Scenario: TC_DB_44:Verifying Add and Group for table level 
 	And Mouse hover on any table level 
 	And  Click on dropdown icon 
@@ -298,59 +303,59 @@ Scenario: TC_DB_47:Validating the added series by opening new insight
 	And  Click on dropdown icon 
 	And  Click on "Add to new insight" 
 	Then The insight should be opened and added series should be available in My series 
-	
-@DB 
-Scenario: TC_DB_48:Verifying 'add to existing' insight for table level 
-	And Mouse hover on any table level 
-	And  Click on dropdown icon 
-	And  Click on "Add to existing insight" 
-	Then The "Insight Explorer" popup should be appeared 
-	
-@DB 
-Scenario: TC_DB_49:Verifying 'Add to insights' button 
-	And Mouse hover on any table level 
-	And  Click on dropdown icon 
-	And  Click on "Add to existing insight" 
-	Then The "Add to insights" button should be disabled by default and enable after any insight selection 
-	
-@DB 
-Scenario: TC_DB_50:Verifying adding data to existing insight 
-	And Mouse hover on any table level 
-	And  Click on dropdown icon 
-	And  Click on "Add to existing insight" 
-	Then The "Selected series added to insights:" popup should be appeared 
-			
-@DB 					
-Scenario: TC_DB_51:Validating the added table data by opening existing insight 
-	And Mouse hover on any table level 
-	And  Click on dropdown icon 
-	And  Click on "Add to existing insight" 
-	Then The data should be added to My series for selected insight 
-	
-@DB 
-Scenario: TC_DB_52:Verifying number of selected insights count 
-	And Mouse hover on any table level 
-	And  Click on dropdown icon 
-	And  Click on "Add to existing insight" 
-	And Select multiple insights 
-	Then The number of selected insights count should be shown on popup header 
-	
-@DB 
-Scenario: TC_DB_53:Verifying Open option 
-	And Mouse hover on any table level 
-	And  Click on dropdown icon 
-	And  Click on "Add to existing insight" 
-	And Click on "Open" 
-	Then "Insight Explorer" page should be opened in new tab 
-	
-@DB 
-Scenario: TC_DB_54:Verifying Close/x for insight explorer modal window 
-	And Mouse hover on any table level 
-	And  Click on dropdown icon 
-	And  Click on "Add to existing insight" 
-	And Click on "×" 
-	Then The insight explorer popup should be closed 
-	
+#	
+##@DB 
+##Scenario: TC_DB_48:Verifying 'add to existing' insight for table level 
+##	And Mouse hover on any table level 
+##	And  Click on dropdown icon 
+##	And  Click on "Add to existing insight" 
+##	Then The "Insight Explorer" popup should be appeared 
+###	
+###@DB 
+###Scenario: TC_DB_49:Verifying 'Add to insights' button 
+###	And Mouse hover on any table level 
+###	And  Click on dropdown icon 
+###	And  Click on "Add to existing insight" 
+###	Then The "Add to insights" button should be disabled by default and enable after any insight selection 
+###	
+###@DB 
+###Scenario: TC_DB_50:Verifying adding data to existing insight 
+###	And Mouse hover on any table level 
+###	And  Click on dropdown icon 
+###	And  Click on "Add to existing insight" 
+###	Then The "Selected series added to insights:" popup should be appeared 
+###			
+###@DB 					
+###Scenario: TC_DB_51:Validating the added table data by opening existing insight 
+###	And Mouse hover on any table level 
+###	And  Click on dropdown icon 
+###	And  Click on "Add to existing insight" 
+###	Then The data should be added to My series for selected insight 
+###	
+###@DB 
+###Scenario: TC_DB_52:Verifying number of selected insights count 
+###	And Mouse hover on any table level 
+###	And  Click on dropdown icon 
+###	And  Click on "Add to existing insight" 
+###	And Select multiple insights 
+###	Then The number of selected insights count should be shown on popup header 
+###	
+###@DB 
+###Scenario: TC_DB_53:Verifying Open option 
+###	And Mouse hover on any table level 
+###	And  Click on dropdown icon 
+###	And  Click on "Add to existing insight" 
+###	And Click on "Open" 
+###	Then "Insight Explorer" page should be opened in new tab 
+###	
+###@DB 
+###Scenario: TC_DB_54:Verifying Close/x for insight explorer modal window 
+###	And Mouse hover on any table level 
+###	And  Click on dropdown icon 
+###	And  Click on "Add to existing insight" 
+###	And Click on "×" 
+###	Then The insight explorer popup should be closed 
+#
 @DB 
 Scenario: TC_DB_55:Verifying 'Unselect all' for table level 
 	And Right click on any table level 
@@ -445,6 +450,7 @@ Scenario: TC_DB_69:Verifying Show dataset for table level
 	
 @DB 
 Scenario: TC_DB_70:Verifying 'NEW' icon for table level 
+	And Click on "More" filter
 	And User selects "New only" 
 	And User has clicked on "Apply filter" 
 	And Select Global database 
@@ -453,7 +459,8 @@ Scenario: TC_DB_70:Verifying 'NEW' icon for table level
 	
 @DB 
 Scenario: TC_DB_71:Verifying adding table by keyboard shortcut 
-	And  Right click on any table level 
+#	And  Right click on any table level 
+	And  Mouse hover on any table level 
 	And  Press A on keyboard 
 	Then The entire table should be added to my series 
 	
@@ -462,14 +469,14 @@ Scenario: TC_DB_72:Verifying adding table by drag and drop
 	And Mouse hover on any table level 
 	And  Drag and drop to my series/visual 
 	Then The entire table should be added to my series 
-##	
+
 ##@DB
 ##Scenario: TC_DB_73:Verifying clicking on series name 
 ##	And  Select database as Daily Database 
 ##	And  Expand till series level 
 ##	And Click on series name 
 ##   Then Series information popup should be opened 
-##	
+
 @DB
 Scenario: TC_DB_74:Verifying related data 
 	And   Select database as Daily Database 
@@ -479,20 +486,20 @@ Scenario: TC_DB_74:Verifying related data
 	
 @DB
 Scenario: TC_DB_75:Verify Related data > Remarks 
-	And  Expand World Trend Plus till series level 
+	And Expand World Trend Plus till series level 
 	And Click on Show related data icon 
 	Then "Remarks:" should be displayed if available for the series 
 	
 @DB 
 Scenario: TC_DB_76:Verify 'Read more' for Remarks under Related data 
-	And  Expand World Trend Plus till series level 
+	And Expand World Trend Plus till series level 
 	And Click on Show related data icon 
 	And Click on "Read More" 
 	Then Should open related footnotes 
 	
 @DB 
 Scenario: TC_DB_77:Verify clicking Datasets 
-	And   Select database as Daily Database 
+	And Select database as Daily Database 
 	And  Expand till series level 
 	And Click on Show related data icon 
 	And Click on datalinks under datasets 
@@ -500,15 +507,15 @@ Scenario: TC_DB_77:Verify clicking Datasets
 	
 @DB 
 Scenario: TC_DB_78:Verify related insights 
-	And   Select database as Daily Database 
+	And Select database as Daily Database 
 	And  Expand till series level 
-	And Click on Show related data icon 
+#	And Click on Show related data icon 
 	And Click on any insights under insights section 
 	Then Insights should be opened in preview mode 
 	
-@DB 
+@DB
 Scenario: TC_DB_79:Verify share icon for insight 
-	And   Select database as Daily Database 
+	And Select database as Daily Database 
 	And  Expand till series level 
 	And Click on Show related data icon 
 	And Click on share under insights section 
@@ -756,31 +763,31 @@ Scenario: TC_DB_114:Validate the added series by opening new insight
 	And Click on "Add to new insight" 
 	Then The new insight should be created with selected series 
 	
-@DB 
-Scenario: TC_DB_115:Verify 'add to existing' insight 
-	And  Select a series and Click on dropdown icon 
-	And Click on "Add to existing insight" 
-	Then The "Insight Explorer" popup should be appeared 
-	
-@DB 
-Scenario: TC_DB_116:Validate the added series by opening existing insight 
-	And  Select a series and Click on dropdown icon 
-	And Click on "Add to existing insight" 
-	Then The series should be added to My series tab for selected insight 
-	
-@DB 
-Scenario: TC_DB_117:Verify adding series to existing insight 
-	And  Select a series and Click on dropdown icon 
-	And Click on "Add to existing insight" 
-	Then The "Selected series added to insights:" popup should be appeared 
-	
-@DB 
-Scenario: TC_DB_118:Verify adding series to multiple existing insights 
-	And  Select a series and Click on dropdown icon 
-	And Click on "Add to existing insight" 
-	And Select multiple insights 
-	And Click on "Add to insights" 
-	Then Open the insights and verify the series in My series 
+##@DB 
+##Scenario: TC_DB_115:Verify 'add to existing' insight 
+##	And  Select a series and Click on dropdown icon 
+##	And Click on "Add to existing insight" 
+##	Then The "Insight Explorer" popup should be appeared 
+##	
+##@DB 
+##Scenario: TC_DB_116:Validate the added series by opening existing insight 
+##	And  Select a series and Click on dropdown icon 
+##	And Click on "Add to existing insight" 
+##	Then The series should be added to My series tab for selected insight 
+##	
+##@DB 
+##Scenario: TC_DB_117:Verify adding series to existing insight 
+##	And  Select a series and Click on dropdown icon 
+##	And Click on "Add to existing insight" 
+##	Then The "Selected series added to insights:" popup should be appeared 
+##	
+##@DB 
+##Scenario: TC_DB_118:Verify adding series to multiple existing insights 
+##	And  Select a series and Click on dropdown icon 
+##	And Click on "Add to existing insight" 
+##	And Select multiple insights 
+##	And Click on "Add to insights" 
+##	Then Open the insights and verify the series in My series 
 	
 @DB 
 Scenario: TC_DB_119:Verify adding series by drag and drop to my series 
@@ -899,7 +906,7 @@ Scenario: TC_DB_136:Right click - Verify pasting the copied series
 @DB 
 Scenario: TC_DB_137:Right click - Verify the confirmation message 
 	And Right click on any series level of data 
-	And   Select "Copy" 
+	And Select "Copy" 
 	Then The message should be in growl popup as "Selected series copied." 
 	
 @DB
@@ -954,11 +961,11 @@ Scenario: TC_DB_145:Right click - Verify back button
 	And Click on Back button 
 	Then Should redirect to database tab 
 	
-#@DB1
-#Scenario: TC_DB_146:Verify adding separators with series 
-#	And Select series with separators 
-#	And Add to my series 
-#	Then Selected series and separators should be added to my series 
+@DB
+Scenario: TC_DB_146:Verify adding separators with series 
+	And Select series with separators 
+	And Add to my series 
+	Then Selected series and separators should be added to my series 
 	
 @DB 
 Scenario: TC_DB_147:Verify series order when table data added 
@@ -987,14 +994,14 @@ Scenario: TC_DB_150:Series selection - Verify 'SSP' in series selection
 Scenario: TC_DB_151:Series selection - Verify 'SSP' in series selection 
 	And  Select some series from series level 
 	And Click on selected series count 
-	And Observe the series count in Series Selection window 
-	Then Series count should be match with available series 
+#	And Observe the series count in Series Selection window 
+	Then Series count should be match with available series in Series Selection window
 	
 @DB 
 Scenario: TC_DB_152:Series selection - Verify add series to My series tab from search selection 
 	And  Select some series from series level 
 	And Click on selected series count 
-	And Observe the series count in Series Selection window 
+#	And Observe the series count in Series Selection window 
 	And Click on +icon on series 
 	And Close search selection window
 	Then The series should add to My series panel 
@@ -1003,7 +1010,7 @@ Scenario: TC_DB_152:Series selection - Verify add series to My series tab from s
 Scenario: TC_DB_153:Series selection - Add series to My Series tab by using + icon on series selection header 
 	And  Select some series from series level 
 	And Click on selected series count 
-	And Observe the series count in Series Selection window 
+#	And Observe the series count in Series Selection window 
 	And Click on +icon on header 
 	And Close search selection window
 	Then The series should be added to My series panel 
@@ -1012,7 +1019,7 @@ Scenario: TC_DB_153:Series selection - Add series to My Series tab by using + ic
 Scenario: TC_DB_154:Series selection - Verify 'add' series from dropdown 
 	And  Select some series from series level 
 	And Click on selected series count 
-	And Observe the series count in Series Selection window 
+#	And Observe the series count in Series Selection window 
 	And Click on dropdown icon next to + 
 	And Click on "Add" 
 	And Close search selection window
@@ -1027,21 +1034,21 @@ Scenario: TC_DB_155:Series selection - Verify 'Add and replace' from dropdown
 	And Click on "Add and replace" 
 	And Close search selection window 
 	Then The selected series should be replaced with existing series on the visual 
-	
-@DB 
-Scenario: TC_DB_156:Series selection - Verify 'Add to existing insight' in dropdown 
-	And Select any series 
-	And Click on selected series count 
-	And Click on dropdown icon next to + 
-	And Click on "Add to existing insight" 
-	Then The series should be added to My series tab for selected insight
-	
-	
+#	
+#@DB 
+#Scenario: TC_DB_156:Series selection - Verify 'Add to existing insight' in dropdown 
+#	And Select any series 
+#	And Click on selected series count 
+#	And Click on dropdown icon next to + 
+#	And Click on "Add to existing insight" 
+#	Then The series should be added to My series tab for selected insight
+#	
+#	
 @DB 
 Scenario: TC_DB_157:Series selection - Verify 'Create new insight' in dropdown 
 	And Select some series from series level 
 	And Click on selected series count 
-	And Observe the series count in Series Selection window 
+#	And Observe the series count in Series Selection window 
 	And Click on dropdown icon next to + 
 	And Click on "Add to new insight" 
 	Then New insight should be created with selected series in my series 
@@ -1060,12 +1067,12 @@ Scenario: TC_DB_159:Series selection - Verify CTC
 	And Click on "Copy to Clipboard" icon on header 
 	Then  Download window should be appeared with selected series count 
 	
-#@DB1 
-#Scenario: TC_DB_160:Series selection - Verify Download 
-#	And Select some series from series level 
-#	And Click on selected series count 
-#	And Click on "Download" icon on header 
-#	Then  Download window should be appeared with selected series count 
+@DB 
+Scenario: TC_DB_160:Series selection - Verify Download 
+	And Select some series from series level 
+	And Click on selected series count 
+	And Click on "Download" icon on header 
+	Then  Download window should be appeared with selected series count 
 	
 @DB 
 Scenario: TC_DB_161:Series selection - Verify minimize option 
@@ -1093,7 +1100,7 @@ Scenario: TC_DB_163:Series selection - Verify exit full screen icon
 Scenario: TC_DB_164:Series selection - Verify series count after removed some series 
 	And Select some series from series level 
 	And Click on selected series count 
-	And Observe the series count in Series Selection window 
+#	And Observe the series count in Series Selection window 
 	And Mouse hover on any series 
 	And Click on close icon 
 	Then Series count should be reduced as per the series deletion 
@@ -1102,7 +1109,7 @@ Scenario: TC_DB_164:Series selection - Verify series count after removed some se
 Scenario: TC_DB_165:Series selection - verify series remove icon 
 	And Select some series from series level 
 	And Click on selected series count 
-	And Observe the series count in Series Selection window 
+#	And Observe the series count in Series Selection window 
 	And Mouse hover on any series 
 	And Click on close icon 
 	Then The series should be removed from the popup 
@@ -1116,14 +1123,18 @@ Scenario: TC_DB_166:Series selection - Verify close button(x)
 	
 @DB
 Scenario: TC_DB_167:Verify 'New' label for new series 
+	And Click on "More" filter
 	And User selects "New only" 
 	And User has clicked on "Apply filter" 
+	And Select Matches only
 	And Select Global database 
 	And Expand till table level 
 	Then "NEW" icon should be displayed for series 
 	
-@DB 
+@DB
 Scenario: TC_DB_168:Verify 'K' icon for key series 
+	And Clear the applied filters
+	And Click on "More" filter
 	And User selects "Key only" 
 	And User has clicked on "Apply filter" 
 	And Select Global database 
@@ -1132,37 +1143,41 @@ Scenario: TC_DB_168:Verify 'K' icon for key series
 	
 @DB
 Scenario: TC_DB_169:Verify 'F' icon for key series 
+	And Clear the applied filters
+	And Click on "More" filter
 	And User selects "Forecast" 
 	And User has clicked on "Apply filter" 
 	And Select Global database 
 	And Expand till table level 
 	Then "f" icon should be displayed for series 
 	
-@DB 
+@DB
 Scenario: TC_DB_170:Verify 'S' icon for with suggestions for rebased/discountinued series 
+	And Clear the applied filters
+	And Click on "More" filter
 	And User selects "With suggestions for rebased/discontinued series" 
 	And User has clicked on "Apply filter" 
 	And Select Global database 
 	And Expand till table level 
 	Then "s" icon should be displayed for series 
-#	
-#@DB 
-#Scenario: TC_DB_171:Verify Default tab for insight 
-#	And Database tab should be loaded as default tab for the insight 
-#	
-#@DB 
-#Scenario: TC_DB_172:Verify clicking on Database when view panel in full screen 
-#	And Make View pannel as fullscreen 
-#	And Click on "Databases" 
-#	Then Search panel should be exapanded and Databases tab should be loaded 
-#	
-#@DB
-#Scenario: TC_DB_73:Verifying clicking on series name 
-#	And  Select database as Daily Database 
-#	And  Expand till series level 
-#	And Click on series name 
-#   Then Series information popup should be opened 
-#	
+	
+@DB 
+Scenario: TC_DB_171:Verify Default tab for insight 
+	And Database tab should be loaded as default tab for the insight 
+	
+@DB 
+Scenario: TC_DB_172:Verify clicking on Database when view panel in full screen 
+	And Make View pannel as fullscreen 
+	And Click on "Databases" 
+	Then Search panel should be exapanded and Databases tab should be loaded 
+	
+@DB
+Scenario: TC_DB_73:Verifying clicking on series name 
+	And  Select database as Daily Database 
+	And  Expand till series level 
+	And Click on series name 
+   Then Series information popup should be opened 
+	
 	
 			
 			

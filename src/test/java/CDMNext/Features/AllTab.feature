@@ -1477,14 +1477,10 @@ Scenario: TC_AT_237:Verify Show Dataset option
 	And Select "Show Dataset" 
 	And Click on Back button 
 	Then Should redirect to database tab 
-#	
-#@Alltab1 
-#Scenario: TC_AT_238:Verify column for no of series for each Dataset 
-#	And  Observe column for no of series for each Dataset under Explore releases
-#	
-#@Alltab1 
-#Scenario: TC_AT_239:Verify column for Datasets updated Date 
-#	And  Observe column for updated Date for each Dataset under Explore releases
+	
+@Alltab 
+Scenario: TC_AT_238:Verify columns for Dataset for releases
+	And  Observe columns for release date and observation date
 
 @Alltab
 Scenario: TC_AT_239:Verify for Unselect link related to  all sections

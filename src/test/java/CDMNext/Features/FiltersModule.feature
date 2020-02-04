@@ -3,35 +3,41 @@ Feature: Filters
 Background: 
 	Given User has successful logged in 
 	
-@FilterSearch 
+@FilterSearch
 Scenario: TC_Filters_Search_01 
 	Given User enters "GDP" 
 	And   User selects "Source" as "World Bank" 
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
-@FilterSearch 
+@FilterSearch1 
 Scenario: TC_Filters_Search_02 
 	Given User enters "228912101" 
-	And   User selects "Source" as "International Monetary Fund" 
+	And   User selects "Source" as "International Monetary Fund - World Economic Outlook" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_03 
 	Given User enters "Agar" 
-	And   User selects "Source" as "India Ministry of Commerce and Industry" 
+	And   User selects "Source" as "Ministry of Commerce and Industry" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "India Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch
 Scenario: TC_Filters_Search_04 
 	Given User enters "Agar" 
-	And   User selects "Source" as "India Ministry of Commerce and Industry;Morocco Foreign Exchange Office" 
+	And   User selects "Source" as "Ministry of Commerce and Industry;Foreign Exchange Office" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database,India Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "Global Database,India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -39,23 +45,29 @@ Scenario: TC_Filters_Search_5
 	Given User enters "BRJLA" 
 	And   User selects "Source" as "Central Bank of Brazil" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_06 
 	Given User enters "19289601" 
-	And   User selects "Source" as "India Bombay Stock Exchange Limited" 
+	And   User selects "Source" as "Bombay Stock Exchange Limited" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Daily Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch
 Scenario: TC_Filters_Search_07 
 	Given User enters "1380601" 
-	And   User selects "Source" as "Brazil Ministry of Development, Industry and Trade" 
+	And   User selects "Source" as "Ministry of Development, Industry and Trade" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -63,7 +75,9 @@ Scenario: TC_Filters_Search_08
 	Given User enters "245178303" 
 	And   User selects "Source" as "The Central Bank of the Russian Federation" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Russia Premium Database" 
+    And   Click on "More" filter
+	And   User selected "Database" as "Russia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -71,7 +85,9 @@ Scenario: TC_Filters_Search_09
 	Given User enters "213834902" 
 	And   User selects "Source" as "Reserve Bank of India" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "India Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch
@@ -79,15 +95,19 @@ Scenario: TC_Filters_Search_10
 	Given User enters "146381801" 
 	And   User selects "Source" as "National Bureau of Statistics" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "China Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_11 
 	Given User enters "322968702" 
-	And   User selects "Source" as "Hong Kong SAR, China AIA Group Limited" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And   User selects "Source" as "AIA Group Limited" 
+	And   User has clicked on "Apply filter"
+   And   Click on "More" filter 
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -95,23 +115,29 @@ Scenario: TC_Filters_Search_12
 	Given User enters "278655402" 
 	And   User selects "Source" as "International Organisation for Economic Co-operation and Development" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - Main Economic Indicators" 
+   And   Click on "More" filter
+	And   User selected "Database" as "OECD - Main Economic Indicators" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_13 
 	Given User enters "277207202" 
 	And   User selects "Source" as "International Organisation for Economic Co-operation and Development" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - Economic Outlook" 
+	And   User has clicked on "Apply filter"
+   And   Click on "More" filter 
+	And   User selected "Database" as "OECD - Economic Outlook" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_14 
 	Given User enters "298772102" 
 	And   User selects "Source" as "International Organisation for Economic Co-operation and Development" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - National Accounts" 
+	And   User has clicked on "Apply filter"
+   And   Click on "More" filter 
+	And   User selected "Database" as "OECD - National Accounts" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -119,7 +145,9 @@ Scenario: TC_Filters_Search_15
 	Given User enters "293654602" 
 	And   User selects "Source" as "International Organisation for Economic Co-operation and Development" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - Productivity" 
+   And   Click on "More" filter
+	And   User selected "Database" as "OECD - Productivity" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -127,7 +155,9 @@ Scenario: TC_Filters_Search_16
 	Given User enters "MDPIJB" 
 	And   User selects "Source" as "Malaysian Rubber Board" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
+   And   Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -135,7 +165,9 @@ Scenario: TC_Filters_Search_17
 	Given User enters "BRAFAC" 
 	And   User selects "Source" as "Central Bank of Brazil" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -143,15 +175,19 @@ Scenario: TC_Filters_Search_18
 	Given User enters "BRDLAC" 
 	And   User selects "Source" as "Central Bank of Brazil" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Daily Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_19 
 	Given User enters "IDIAAAG" 
-	And   User selects "Source" as "India Bombay Stock Exchange Limited" 
+	And   User selects "Source" as "Bombay Stock Exchange Limited" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "India Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -159,44 +195,55 @@ Scenario: TC_Filters_Search_20
 	Given User enters "CZACKC" 
 	And   User selects "Source" as "China Banking and Insurance Regulatory Commission" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "China Premium Database" 
+   And   Click on "More" filter
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_21 
 	Given User enters "HKIRGAAAUA" 
-	And   User selects "Source" as "Hong Kong SAR, China AIA Group Limited" 
+	And   User selects "Source" as "AIA Group Limited" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
+   And   Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_22 
 	Given User enters "Agar" 
-	And   User selects "Source" as "Morocco Foreign Exchange Office" 
+	And   User selects "Source" as "Foreign Exchange Office" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+    And   Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_23 
 	Given User enters "IDIAB" 
-	And   User selects "Source" as "India Bombay Stock Exchange Limited" 
+	And   User selects "Source" as "Bombay Stock Exchange Limited" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "India Premium Database" 
+    And   Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_24 
 	Given User enters "261975301" 
-	And   User selects "Source" as "International Monetary Fund" 
+	And   User selects "Source" as "International Monetary Fund - World Economic Outlook" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
+    And   Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_25 
 	Given User enters "GDP" 
+	And   Click on "More" filter
 	And   User selects "Date" as "First observation before" 
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
@@ -216,213 +263,281 @@ Scenario: TC_Filters_Search_27
 @FilterSearch 
 Scenario: TC_Filters_Search_28 
 	Given User enters "261968101;261967901;261968401" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_29 
 	Given User enters "228912101;223399201;223398801" 
-	And   User selected "All databases" as "Global Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_30 
 	Given User enters "227807102;1086201;1086701" 
-	And   User selected "All databases" as "Daily Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_31 
 	Given User enters "1380601;1440601;1440701" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_32 
 	Given User enters "181692002;194081702;194081802" 
-	And   User selected "All databases" as "Russia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Russia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_33 
 	Given User enters "21355201;61149902;61150002" 
-	And   User selected "All databases" as "India Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_34 
 	Given User enters "245732302;205673602" 
-	And   User selected "All databases" as "Indonesia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Indonesia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_35 
 	Given User enters "3782201;94664201" 
-	And   User selected "All databases" as "China Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_36 
 	Given User enters "323022102;323023302;33241901" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And Click on "More" filter 
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_37 
 	Given User enters "280621302" 
-	And   User selected "All databases" as "OECD - Main Economic Indicators" 
+	And Click on "More" filter 
+	And   User selected "Database" as "OECD - Main Economic Indicators" 
+	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_38 
 	Given User enters "291714302;277061402" 
-	And   User selected "All databases" as "OECD - Economic Outlook" 
+	And  Click on "More" filter 
+	And   User selected "Database" as "OECD - Economic Outlook" 
+	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_39 
 	Given User enters "294769102;295423302" 
-	And   User selected "All databases" as "OECD - National Accounts" 
+	And  Click on "More" filter 
+	And   User selected "Database" as "OECD - National Accounts" 
+	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_40 
 	Given User enters "293611402;293607802" 
-	And   User selected "All databases" as "OECD - Productivity" 
+	And  Click on "More" filter 
+	And   User selected "Database" as "OECD - Productivity" 
+	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_41 
 	Given User enters "215439102;9552901" 
-	And   User selected "All databases" as "Global Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_42 
 	Given User enters "MDPIJB;VDPACA" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch
 Scenario: TC_Filters_Search_43 
 	Given User enters "BRAFAC;BRJAC" 
-	And   User selected "All databases" as "Global Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_44 
-	Given User enters "BRDLAC;BRDLAA;BRDLAB" 
-	And   User selected "All databases" as "Daily Database" 
+	Given User enters "BRDLAC;BRDLAA;BRDLAB"
+	And Click on "More" filter 
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_45 
 	Given User enters "BRJAC;BRJLA;BRJLAA" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_46 
 	Given User enters "IDIAB;IDIAF;IDIAG" 
-	And   User selected "All databases" as "India Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_47 
 	Given User enters "DKCBG;DKCBGA" 
-	And   User selected "All databases" as "Indonesia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Indonesia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_48 
 	Given User enters "CFPAA;CFAPAT" 
-	And   User selected "All databases" as "China Premium Database" 
+   And Click on "More" filter
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_49 
 	Given User enters "NLIRAAAFUL;NLIRAAAFUX;NNRAAAAAA" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_50 
 	Given User enters "BRDLAC;CABB" 
-	And   User selected "All databases" as "Brazil Premium Database,China Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database,China Premium Database"
+	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_51 
-	Given User enters "consumer" 
-	And   User selected "All databases" as "China Premium Database" 
+	Given User enters "consumer"
+	And Click on "More" filter 
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_52 
 	Given User enters "GDP" 
-	And   User selected "All databases" as "Global Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_53 
 	Given User enters "Tirana" 
-	And   User selected "All databases" as "Daily Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch
 Scenario: TC_Filters_Search_54 
-	Given User enters "monetary base" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	Given User enters "monetary base"
+	And Click on "More" filter 
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_55 
 	Given User enters "household income" 
-	And   User selected "All databases" as "Russia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Russia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_56 
 	Given User enters "consumer expenditure" 
-	And   User selected "All databases" as "India Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_57 
 	Given User enters "Construction" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_58 
 	Given User enters "Agar" 
+	And Click on "More" filter
 	And   User selects "Date" as "First observation before" 
+	And   User selected "Database" as "Global Database" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_59 
 	Given User enters "Changes" 
-	And   User selected "All databases" as "OECD - Main Economic Indicators" 
+	And Click on "More" filter
+	And   User selected "Database" as "OECD - Main Economic Indicators" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_60 
 	Given User enters "formation" 
-	And   User selected "All databases" as "OECD - Economic Outlook" 
+	And Click on "More" filter
+	And   User selected "Database" as "OECD - Economic Outlook" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_61 
 	Given User enters "Reference;employment" 
-	And   User selected "All databases" as "OECD - National Accounts" 
+	And Click on "More" filter
+	And   User selected "Database" as "OECD - National Accounts" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_62 
 	Given User enters "Reserve" 
-	And   User selected "All databases" as "Global Database,Daily Database,Russia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Global Database,Daily Database,Russia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -442,6 +557,7 @@ Scenario: TC_Filters_Search_64
 @FilterSearch 
 Scenario: TC_Filters_Search_65 
 	Given User enters "Agar" 
+	And Click on "More" filter
 	And   User selects "Name only" 
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
@@ -449,6 +565,7 @@ Scenario: TC_Filters_Search_65
 @FilterSearch 
 Scenario: TC_Filters_Search_66 
 	Given User enters "297756101" 
+	And Click on "More" filter
 	And   User selects "Subscribed series only" 
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
@@ -458,27 +575,31 @@ Scenario: TC_Filters_Search_67
 	Given User enters "293847801" 
 	And   User selects "Status" as "Active" 
 	And   User has clicked on "Apply filter" 
+	And Click on "More" filter
 	And   User selects "Subscribed series only" 
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
 	
-@FilterSearch 
+@FilterSearch
 Scenario: TC_Filters_Search_68 
 	Given User enters "BRJAC" 
 	And   User selects "Status" as "Active" 
 	And   User has clicked on "Apply filter" 
+	And Click on "More" filter
 	And   User selects "Subscribed series only" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
-@FilterSearch 
+@FilterSearch
 Scenario: TC_Filters_Search_69 
 	Given User enters "Insurance" 
 	And   User selects "Status" as "Active" 
 	And   User has clicked on "Apply filter" 
+	And   Click on "More" filter
 	And   User selects "Name only" 
-	And   User selected "All databases" as "China Premium Database" 
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -486,6 +607,7 @@ Scenario: TC_Filters_Search_70
 	Given User enters "demand" 
 	And   User selects "Status" as "Active" 
 	And   User has clicked on "Apply filter" 
+	And Click on "More" filter
 	And   User selects "Subscribed series only" 
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
@@ -493,272 +615,324 @@ Scenario: TC_Filters_Search_70
 @FilterSearch 
 Scenario: TC_Filters_Search_71 
 	Given User enters "261968101" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And Click on "More" filter
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Aggregate: World" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_72 
 	Given User enters "228912101" 
-	And   User selected "All databases" as "Global Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Albania" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_73 
 	Given User enters "227807102" 
-	And   User selected "All databases" as "Daily Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Lending Rates" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_74 
 	Given User enters "1380601" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Foreign Trade" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_75 
 	Given User enters "181692002" 
-	And   User selected "All databases" as "Russia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Russia Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Energy Sector" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_76 
 	Given User enters "21355201" 
-	And   User selected "All databases" as "India Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Investment" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_77 
 	Given User enters "245732302" 
-	And   User selected "All databases" as "Indonesia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Indonesia Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Business and Economic Survey" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_78 
 	Given User enters "3782201" 
-	And   User selected "All databases" as "China Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Financial Market" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_79 
 	Given User enters "279238002" 
-	And   User selected "All databases" as "OECD - Main Economic Indicators" 
+	And Click on "More" filter
+	And   User selected "Database" as "OECD - Main Economic Indicators" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Aggregate: 7 Major OECD Countries" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_80 
 	Given User enters "277061402" 
-	And   User selected "All databases" as "OECD - Economic Outlook" 
+	And Click on "More" filter
+	And   User selected "Database" as "OECD - Economic Outlook" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Aggregate: Non-OECD Countries" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_81 
 	Given User enters "295423302" 
-	And   User selected "All databases" as "OECD - National Accounts" 
+	And Click on "More" filter
+	And   User selected "Database" as "OECD - National Accounts" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Aggregate: North American Free Trade Agreement (NAFTA)" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_82 
 	Given User enters "293607802" 
-	And   User selected "All databases" as "OECD - Productivity" 
+	And Click on "More" filter
+	And   User selected "Database" as "OECD - Productivity" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "OECD Members: Austria" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_83 
 	Given User enters "brdlac" 
-	And   User selected "All databases" as "Daily Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Lending Rates" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_84 
 	Given User enters "brjac" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Foreign Trade" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_85 
 	Given User enters "idiab" 
-	And   User selected "All databases" as "India Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Financial Market" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_86 
 	Given User enters "DKCBGA" 
-	And   User selected "All databases" as "Indonesia Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Indonesia Premium Database"
+	And   User has clicked on "Apply filter" 
 	When  User get the topics as "Monetary" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_87 
 	Given User enters "CZACKC" 
-	And   User selected "All databases" as "China Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	When  User get the topics as "Insurance Sector" 
 	Then  User verify the results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_88 
 	Given User enters "194081702" 
+	And Click on "More" filter
 	And   User selects "Unit" as "kg" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Russia Premium Database" 
+	And   User selected "Database" as "Russia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_89 
 	Given User enters "228912101" 
+	And Click on "More" filter
 	And   User selects "Unit" as "ALL" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
-@FilterSearch 
+@FilterSearch
 Scenario: TC_Filters_Search_90 
 	Given User enters "1086701" 
+	And Click on "More" filter
 	And   User selects "Unit" as "BDT/USD" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Daily Database" 
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_91 
 	Given User enters "1440701" 
+	And Click on "More" filter
 	And   User selects "Unit" as "BRL" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_92 
 	Given User enters "261967901" 
+	And Click on "More" filter
 	And   User selects "Unit" as "%" 
+	And   User selected "Database" as "World Trend Plus"
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_93 
 	Given User enters "189144402" 
+	And Click on "More" filter
 	And   User selects "Unit" as "USD" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_94 
 	Given User enters "279238002" 
+	And Click on "More" filter
 	And   User selects "Unit" as "2005=100" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - Main Economic Indicators" 
+	And   User selected "Database" as "OECD - Main Economic Indicators" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_95 
 	Given User enters "277061402" 
+	And Click on "More" filter
 	And   User selects "Unit" as "USD" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - Economic Outlook" 
+	And   User selected "Database" as "OECD - Economic Outlook" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_96 
 	Given User enters "295423302" 
+	And Click on "More" filter
 	And   User selects "Unit" as "USD" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - National Accounts" 
+	And   User selected "Database" as "OECD - National Accounts" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_97 
 	Given User enters "293607802" 
+	And Click on "More" filter
 	And   User selects "Unit" as "ATS" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "OECD - Productivity" 
+	And   User selected "Database" as "OECD - Productivity" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_98 
 	Given User enters "VDPACA" 
+	And Click on "More" filter
 	And   User selects "Unit" as "MN VND/Tael" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_99 
 	Given User enters "BRAFAC" 
+	And Click on "More" filter
 	And   User selects "Unit" as "BRL" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_100 
 	Given User enters "WHO001" 
+	And Click on "More" filter
 	And   User selects "Unit" as "Person" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Daily Database" 
+	And   User selected "Database" as "Daily Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_101 
 	Given User enters "BRDLAC" 
+	And Click on "More" filter
 	And   User selects "Unit" as "% pa" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_102 
 	Given User enters "IZINO" 
+	And Click on "More" filter
 	And   User selects "Unit" as "2005=1000" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "India Premium Database" 
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_103 
 	Given User enters "NLIRCAAAEX" 
+	And Click on "More" filter
 	And   User selects "Unit" as "USD" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "World Trend Plus" 
+	And   User selected "Database" as "World Trend Plus" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_104 
 	Given User enters "Agar" 
+	And Click on "More" filter
 	And   User selects "Unit" as "MAD" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_105 
 	Given User enters "228912101" 
+	And Click on "More" filter
 	And   User selects "Unit" as "ALL" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_106 
 	Given User enters "126074608" 
+	And Click on "More" filter
 	And   User selects "Unit" as "Ton" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   User selected "Database" as "Global Database" 
 	Then  User verify the search results 
 	
 @FilterSearch
@@ -811,79 +985,82 @@ Scenario: TC_Filters_Search_113
 @FilterSearch 
 Scenario: TC_Filters_Search_114 
 	Given User enters "126074608" 
+	And Click on "More" filter
 	And   User selects "Unit" as "Ton" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_115 
 	Given User enters "242994803" 
+	And Click on "More" filter
 	And   User selects "Unit" as "RUB" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Russia Premium Database" 
+	And   User selected "Database" as "Russia Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_116 
 	Given User enters "3782201" 
+	And Click on "More" filter
 	And   User selects "Unit" as "19Dec1990=100" 
-	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "China Premium Database" 
+	And   User selected "Database" as "China Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_117 
 	Given User enters "1055401 (BAEAE)" 
-	And   User selects "Region" as "Asia Pacific" 
+	And   User selects "All Regions" as "Asia Pacific" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_118 
 	Given User enters "1382601 (BRJAEN)" 
-	And   User selects "Region" as "Americas" 
+	And   User selects "All Regions" as "Americas" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_119 
 	Given User enters "121587008" 
-	And   User selects "Region" as "Europe" 
+	And   User selects "All Regions" as "Europe" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_120 
 	Given User enters "99459607" 
-	And   User selects "Region" as "Middle East" 
+	And   User selects "All Regions" as "Middle East" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_121 
 	Given User enters "132330608" 
-	And   User selects "Region" as "Africa" 
+	And   User selects "All Regions" as "Africa" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_122 
 	Given User enters "225939502 (EJGAADH)" 
-	And   User selects "Region" as "G7" 
+	And   User selects "All Regions" as "G7" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_123 
 	Given User enters "68951101 (BRFGG)" 
-	And   User selects "Region" as "G20" 
+	And   User selects "All Regions" as "G20" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_124 
 	Given User enters "61540402 (BNAAAAA)" 
-	And   User selects "Region" as "ASEAN" 
+	And   User selects "All Regions" as "ASEAN" 
 	Then  User should get the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_125 
 	Given User enters "230792902 (IAPAFABH)" 
-	And   User selects "Region" as "BRIC" 
+	And   User selects "All Regions" as "BRIC" 
 	Then  User should get the search results 
 	
 @FilterSearch 
@@ -891,29 +1068,38 @@ Scenario: TC_Filters_Search_126
 	Given User enters "1380601" 
 	And   User selects "Frequency" as "Monthly" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_127 
 	Given User enters "money" 
+	And Click on "More" filter
 	And   User selects "Subscribed series only" 
-	And   User selects "Frequency" as "Quarterly" 
-	And   User selects "Source" as "International Monetary Fund" 
-	And   User selects "Unit" as "MUR" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And   User selects "Frequency" as "Quarterly" 
+	And   User selects "Source" as "International Monetary Fund - World Economic Outlook" 
+	And Click on "More" filter
+	And   User selects "Unit" as "MUR" 
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
-Scenario: TC_Filters_Search_128 
+Scenario: TC_Filters_Search_128
 	Given User enters "money" 
+	And Click on "More" filter
 	And   User selects "Name only" 
 	And   User selects "Frequency" as "Quarterly" 
+	And Click on "More" filter
 	And   User selects "Unit" as "MUR" 
-	And   User selects "Source" as "International Monetary Fund" 
+	And   User selects "Source" as "International Monetary Fund - World Economic Outlook" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Global Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -939,7 +1125,9 @@ Scenario: TC_Filters_Search_132
 @FilterSearch 
 Scenario: TC_Filters_Search_133 
 	Given User enters "Seleni*" 
-	And   User selected "All databases" as "India Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verifies Filter search results 
 	
 @FilterSearch 
@@ -965,7 +1153,9 @@ Scenario: TC_Filters_Search_137
 @FilterSearch 
 Scenario: TC_Filters_Search_138 
 	Given User enters "1380*1" 
-	And   User selected "All databases" as "Brazil Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "Brazil Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verifies Filter search results 
 	
 @FilterSearch 
@@ -991,15 +1181,18 @@ Scenario: TC_Filters_Search_142
 @FilterSearch 
 Scenario: TC_Filters_Search_143 
 	Given User enters "?1373201" 
-	And   User selected "All databases" as "India Premium Database" 
+	And Click on "More" filter
+	And   User selected "Database" as "India Premium Database" 
+	And   User has clicked on "Apply filter"
 	Then  User verifies Filter search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_144 
 	Given User enters "mfg" 
+	And Click on "More" filter
 	And   User selects "Unit" as "2005=100" 
+	And   User selected "Database" as "Global Database" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -1021,9 +1214,10 @@ Scenario: TC_Filters_Search_147
 	Given User enters "mfg" 
 	And   User selects "Frequency" as "Monthly" 
 	And   User selects "Source" as "Federal Statistics Office Germany" 
+	And Click on "More" filter
 	And   User selects "Unit" as "2005=100" 
+	And   User selected "Database" as "Global Database" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
 	Then  User verify the search results 
 	
 @FilterSearch 
@@ -1078,14 +1272,16 @@ Scenario: TC_Filters_Search_154
 @FilterSearch 
 Scenario: TC_Filters_Search_155 
 	Given User enters "money" 
+	And Click on "More" filter
 	And   User selects "Date" as "First observation before;Last observation after" 
+	And   User selected "Database" as "Global Database" 
 	And   User has clicked on "Apply filter" 
-	And   User selected "All databases" as "Global Database" 
 	Then  User verify the search results 
 	
 @FilterSearch 
 Scenario: TC_Filters_Search_156 
 	Given User enters "money" 
+	And Click on "More" filter
 	And   User selects "Subscribed series only" 
 	And   User has clicked on "Apply filter" 
 	Then  User check for the scubscribed series 
@@ -1093,38 +1289,39 @@ Scenario: TC_Filters_Search_156
 @FilterSearch 
 Scenario: TC_Filters_Search_157 
 	Given User enters "money" 
+	And Click on "More" filter
 	And   User selects "New only" 
 	And   User has clicked on "Apply filter" 
 	Then  User verify the search results 
-	
-@FilterSearch 
-Scenario: TC_Filters_Search_158 
-	And   Select "New only" from "More" filter 
-	And   User has clicked on "Apply filter" 
-	Then  User verify the series count 
-	
-@FilterSearch 
-Scenario: TC_Filters_Search_159 
-	And   Select "Key only" from "More" filter 
-	And   User has clicked on "Apply filter" 
-	Then  User verify the series count 
-	
-@FilterSearch 
-Scenario: TC_Filters_Search_160 
-	And   Select "Forecast" from "More" filter 
-	And   User has clicked on "Apply filter" 
-	Then  User verify the series count 
-	
-@FilterSearch 
-Scenario: TC_Filters_Search_161 
-	And   Select "With release schedule" from "More" filter 
-	And   User has clicked on "Apply filter" 
-	Then  User verify the series count 
-	
-@FilterSearch 
-Scenario: TC_Filters_Search_162 
-	And   Select "With suggestions for rebased/discontinued series" from "More" filter 
-	And   User has clicked on "Apply filter" 
-	Then  User verify the series count 
-	
-	
+##	
+##@FilterSearch 
+##Scenario: TC_Filters_Search_158 
+##	And   Select "New only" from "More" filter 
+##	And   User has clicked on "Apply filter" 
+##	Then  User verify the series count 
+##	
+##@FilterSearch 
+##Scenario: TC_Filters_Search_159 
+##	And   Select "Key only" from "More" filter 
+##	And   User has clicked on "Apply filter" 
+##	Then  User verify the series count 
+##	
+##@FilterSearch 
+##Scenario: TC_Filters_Search_160 
+##	And   Select "Forecast" from "More" filter 
+##	And   User has clicked on "Apply filter" 
+##	Then  User verify the series count 
+##	
+##@FilterSearch 
+##Scenario: TC_Filters_Search_161 
+##	And   Select "With release schedule" from "More" filter 
+##	And   User has clicked on "Apply filter" 
+##	Then  User verify the series count 
+##	
+##@FilterSearch 
+##Scenario: TC_Filters_Search_162 
+##	And   Select "With suggestions for rebased/discontinued series" from "More" filter 
+##	And   User has clicked on "Apply filter" 
+##	Then  User verify the series count 
+##	
+##	

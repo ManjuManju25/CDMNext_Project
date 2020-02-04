@@ -24,13 +24,11 @@ import cucumber.api.java.en.Then;
 
 public class Exceldatacompare {
 	
-	private static Boolean logged = false;
 	public static String testcase_num;
 	public static String format;
 	WebElement element;
 	//boolean isChecked;
-	private String isChecked; 
-	private WebElement e; 
+	
 	
 	/*@And("^User has successful logged in$")
 	public void user_has_successful_logged_in() throws Throwable {

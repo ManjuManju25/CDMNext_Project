@@ -7,10 +7,12 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 
-@CucumberOptions(features = { "src/test/java/CDMNext/Features/search.Feature" }, glue = { "CDMNext.StepDefinations" },
+@CucumberOptions(
+		//features = { "src/test/java/CDMNext/Features/" }, 
+		//glue = { "CDMNext.StepDefinations" },
 		// tags="@search",
-		monochrome = true, plugin = { "pretty", "html:target/cucumber", "json:target/Cucumber.json",
-				"com.cucumber.listener.ExtentCucumberFormatter:target/report.html" }
+		//monochrome = true, 
+		plugin = { "pretty" }
 
 )
 
