@@ -27,8 +27,7 @@ public class TestRunner {
 	public void setUpClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @BeforeSuite");
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
-		HTML_Report.openHTMLReport();
-		HTML_Report.html_Header();
+		
 
 	}
 
