@@ -34,13 +34,13 @@ public class AllTab {
 	static WebElement unselect;
 	int MaxDatasetsCount;
 
-	@And("^Click on \"([^\"]*)\" tab$")
+	/*@And("^Click on \"([^\"]*)\" tab$")
 	public void click_on_tab(String arg1) throws Throwable {
 		// CommonFunctionality.wait
 		// .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Search"))))
 		// .clear();
 		CommonFunctionality.TabSelection(arg1);
-	}
+	}*/
 
 	@Then("^All tab should contain these sections \"([^\"]*)\"$")
 	public void all_tab_should_contain_these_sections(String arg1) throws Throwable {

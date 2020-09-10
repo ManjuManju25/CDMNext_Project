@@ -3,10 +3,16 @@ package CDMNext.StepDefinations;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -15,6 +21,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import CDMNext.util.CommonFunctionality;
 import Javaxlxs.Last_file_download;
 import Javaxlxs.File_delete;
 import Javaxlxs.Last_file_download;
@@ -24,11 +32,16 @@ import cucumber.api.java.en.Then;
 
 public class Exceldatacompare {
 	
+	private static Boolean logged = false;
 	public static String testcase_num;
+	public static String Seriesname;
+	public static String r;
+	public static String multipleseries;
 	public static String format;
 	WebElement element;
 	//boolean isChecked;
-	
+	private String isChecked; 
+	private WebElement e; 
 	
 	/*@And("^User has successful logged in$")
 	public void user_has_successful_logged_in() throws Throwable {
@@ -43,11 +56,19 @@ public class Exceldatacompare {
 			System.out.println("Already Loggedin...Continue....!!!!");
 		}
         
-		// login.Invoke_browser();
-		// login.application_login();
+		 login.Invoke_browser();
+		login.application_login();
 	}*/
 	
-
+	/*@And("^Check for prerequesties$")
+	public void check_for_prerequesties() throws Throwable {
+		CommonFunctionality.modelbox();
+	    login.driver.navigate().refresh();
+		//CommonFunctionality.check_for_keeping_insight_popup();
+		CommonFunctionality.ResetMethod();
+		CommonFunctionality.Views_list();
+	}*/
+	
 	@And("^User Select Series ID  as \"([^\"]*)\"$")
 	public void user_Select_Series_ID_as(String arg2) throws Throwable {
 		Thread.sleep(2000);
@@ -62,6 +83,8 @@ public class Exceldatacompare {
 		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
+		Thread.sleep(5000);
+		get_the_Series_name();
 	}
 	
 	@And("^User  Download button$")
@@ -76,6 +99,8 @@ public class Exceldatacompare {
 		login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
 	}
 	
+	 
+	
 	@And("^Select Download button$")
 	public void select_Download_button() throws Throwable {
 		Thread.sleep(5000);
@@ -84,9 +109,17 @@ public class Exceldatacompare {
 		login.driver.findElement(By.xpath("//span[contains(text(),'Range')]")).click();
 		Thread.sleep(4000);
 		user_Select_Reset_button();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
 	}
+	
+	@Given("^get the Series name$")
+	public void get_the_Series_name() throws Throwable {
+		Seriesname = login.driver.findElement(By.xpath("//div[@class='series-item--name']")).getText();
+		 r = Seriesname.replace(":","");
+		System.out.println(r);
+	}
+	
 	
 	@And("^User(\\d+) Select the \"([^\"]*)\"$")
 	public void user_Select_the(int arg1, String arg2) throws Throwable {
@@ -105,7 +138,7 @@ public class Exceldatacompare {
 	
 	@And("^User1 Select pop up Download button$")
 	public void user_Select_pop_up_Download_button() throws Throwable {
-		WebElement element = login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/div[2]/button[3]"));
+		WebElement element = login.driver.findElement(By.xpath("//div[@class='sphere-modal-controls']/div[3]/button[4]/span"));
 		Actions action = new Actions(login.driver);
 		Thread.sleep(5000);
 		action.moveToElement(element).click().perform();                                   
@@ -115,7 +148,7 @@ public class Exceldatacompare {
 	public void user_Compare_exel_sheet() throws Throwable {
 		Thread.sleep(10000);
 		System.out.println("Comparing Data in Two Exel Sheets");
-		CompareExcel.Excel();
+		//CompareExcel.Excel();
 	}
 	
 	@And("^Compare \"([^\"]*)\" exel sheet with Actual data$")
@@ -124,13 +157,47 @@ public class Exceldatacompare {
 		user_Select_pop_up_Download_button();
 		Thread.sleep(15000);
 		testcase_num=arg2;
-		System.out.println("Comparing Data of " + testcase_num +  " with Actual data");
-		//Thread.sleep(15000);
-		//CompareExcel.Excel();
-		Thread.sleep(15000);
-		File_delete.delete();
-		Thread.sleep(15000);
-		user_signout();
+		
+		
+		  List<WebElement> totalseries = login.driver.findElements(By.xpath("//div[@class='series-item--name']"));
+			 System.out.println("Total Size are- " + totalseries.size());
+			 
+			 if(totalseries.size() == 1) {
+				
+				 System.out.println("Comparing Data of " + testcase_num +  " with Actual data" + Seriesname );
+					Thread.sleep(8000);
+					CompareExcel.Excel();
+					Thread.sleep(18000);
+                     File file = new File(System.getProperty("user.home") + "\\Downloads\\"+r+".xlsx");
+		    		if(file.delete()){
+		    			System.out.println(file.getName() + " is deleted!");
+		    		}else{
+		    			//System.out.println("Delete operation is failed.");
+		    		}
+					Thread.sleep(8000);
+					user_signout();
+			 }
+		
+			 else {
+				 
+				 System.out.println("Comparing Data of " + testcase_num +  " with Actual data" +  multipleseries);
+					Thread.sleep(8000);
+					multipleseriesExcelcompare();
+					Thread.sleep(8000);
+					
+					File file = new File(System.getProperty("user.home") + "\\Downloads\\"+multipleseries+".xlsx");
+		    		
+		    		if(file.delete()){
+		    			System.out.println(file.getName() + " is deleted!");
+		    		}else{
+		    			//System.out.println("Delete operation is failed.");
+		    		}
+		    	   
+					Thread.sleep(8000);
+					user_signout();
+			 }
+		
+	
 		}catch(Exception E){
 			System.out.println("Entered to catch" + E.getMessage());
 		}
@@ -147,13 +214,14 @@ public class Exceldatacompare {
 	@And("^User signout$")
 	public void user_signout() throws Throwable {
 		
-				
-		Thread.sleep(500);
+		CommonFunctionality.DeleteSeries();
+		//CommonFunctionality.Views_list();
+		/*Thread.sleep(500);
 		if(login.driver.findElements(By.xpath("//span[@class='series-name-field-title']")).size() != 0){
 			login.driver.findElement(By.xpath("//div[@class='insight-series-container']/div/div/div/div/label/span")).click();
 		 Thread.sleep(1000);
 		 login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]")).click();
-		}
+		}*/
 	}
 	
 	@And("^User(\\d+) Select date format$")
@@ -241,9 +309,9 @@ public class Exceldatacompare {
 	@And("^Select Filter out dates with no observations$")
 	public void Select_Filter_out_dates_with_no_observations() throws Throwable {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//*[@class='select2-container form--control blank-input']/a/span[2]/b")).click();
+		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath( "//ul[@class='select2-results']/li[1]/div/div")).click();
+		login.driver.findElement(By.xpath( "//ul[@class='custom-select--body']/li[1]")).click();
 		
 	}
 
@@ -270,9 +338,9 @@ public class Exceldatacompare {
 	public void Select_Leave_as_Blank() throws Throwable {
 		
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//*[@class='select2-container form--control blank-input']/a/span[2]/b")).click();
+		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath( "//ul[@class='select2-results']/li[2]/div/div")).click();
+		login.driver.findElement(By.xpath( "//ul[@class='custom-select--body']/li[2]")).click();
 	}
 	
 	@And("^Select All button$")
@@ -309,7 +377,9 @@ public class Exceldatacompare {
 	@And("^Select the Function as \"([^\"]*)\"$")
 	public void Select_the_Function_as(String arg2) throws Throwable {
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='download-data-transformation']/div/div[5]")).click();
+		login.driver.findElement(By.xpath("//div[@class='download-data-transformation']/div/div[5]/div/div[2]")).click();
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//*[contains(text(),'All functions')]")).click();
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).sendKeys(arg2);
 		Thread.sleep(5000);
@@ -323,7 +393,8 @@ public class Exceldatacompare {
 	@And("^select the Replace selected series option$")
 	public void select_the_Replace_selected_series_option() throws Throwable {
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div[1]/label/span[1]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'Replace selected series')]")).click();
+
 	}
 	
 	@And("^Select the Start Date as \"([^\"]*)\" and End Date \"([^\"]*)\"$")
@@ -353,7 +424,7 @@ public class Exceldatacompare {
 			login.driver.findElement(By.xpath("//button[@class='insight-download-datepicker-custom-button']")).click();
 		}else if(arg3.equalsIgnoreCase("2004-01-01")){
 			
-			login.driver.findElement(By.xpath("//td[@class='active day']")).click();
+			login.driver.findElement(By.xpath("(//td[contains(text(),'1')])[2]")).click();
 		}
 		else{
 		login.driver.findElement(By.xpath("//td[contains(text(),'31')]")).click();
@@ -404,9 +475,9 @@ public class Exceldatacompare {
 	@And("^Select Fill with NA$")
 	public void Select_Fill_with_NA() throws Throwable {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//*[@class='select2-container form--control blank-input']/a/span[2]/b")).click();
+		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath( "//ul[@class='select2-results']/li[3]/div/div")).click();
+		login.driver.findElement(By.xpath( "//ul[@class='custom-select--body']/li[3]")).click();
 	}
 	@Given("^Deselect last observation date and time$")
 	public void Deselect_last_observation_date_and_time() throws Throwable {
@@ -566,7 +637,8 @@ public class Exceldatacompare {
 	@Then("^Blank Observations  with THREE options should be present$")
 	public void blank_Observations_with_THREE_options_should_be_present() throws Throwable {
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//*[@class='select2-container form--control blank-input']/a/span[2]/b")).click();
+		login.driver.findElement(By.xpath("(//div[@class='custom-select dropdown'])[3]/div/div/div/span[2]")).click();
+		Thread.sleep(5000);
 		WebElement noobservations = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("noobservations")));
 		  Assert.assertEquals(true,noobservations.isDisplayed());
 		  WebElement Leaveasblank = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Leaveasblank")));
@@ -574,7 +646,7 @@ public class Exceldatacompare {
 		  WebElement FillNA = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("FillNA")));
 		  Assert.assertEquals(true,FillNA.isDisplayed());
 		  Thread.sleep(2000);
-		  login.driver.findElement(By.xpath( "//ul[@class='select2-results']/li[1]/div/div")).click();
+		  login.driver.findElement(By.xpath( "(//div[@class='dropdown--button dropdown--button__bordered'])/div/div/span[2]")).click();
 		  login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 		  user_signout();
 	}
@@ -635,16 +707,16 @@ public class Exceldatacompare {
 	
 	@And("^Verify Data referesh option is checked by deault$")
 	public void verify_Data_referesh_option_is_checked_by_deault() throws Throwable {
-		
-		element = login.driver.findElement(By.xpath("//div[@class='insight-download-formats']/div[7]/div[2]/label/input"));
-		
-		if(element.isSelected()){
-			System.out.println("Data Refresh is checked");
+		Thread.sleep(2000);
+		boolean element = login.driver.findElement(By.xpath("//div[@class='insight-download-formats']/div[3]/div[2]/label/input")).isSelected();
+		Thread.sleep(2000);
+		if(element==true){
+			System.out.println("Data Refresh is checked"+  element);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			user_signout();
 		}
-		else if(!element.isSelected()){
-			 Assert.fail( "Data Refresh is NOT checked by default and It's BUG.");
+		else {
+			 Assert.fail( "Data Refresh is NOT checked by default");
 			 login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 				user_signout();
 		}
@@ -743,12 +815,12 @@ public class Exceldatacompare {
 	@And("^Create a Table$")
 	public void create_a_Table() throws Throwable {
 		
-		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container series-list-item--container__with_actions']"));
+		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container']"));
 		System.out.println("Total Size are- " + objLinks.size());
 		
 		for(int i=1;i<=objLinks.size();i++){
 			Thread.sleep(2000);
-			 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+			 login.driver.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]")).click();
 		}
 		
 		 Robot r = new Robot();
@@ -767,15 +839,7 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		user_Select_pop_up_Download_button();
 		Thread.sleep(2000);
-		
-		Actions action = new Actions(login.driver);
-		WebElement we = login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-item insight-page-menu-item']/a/span[1]"));
-		action.moveToElement(we).build().perform();
-		login.driver.findElement(By.xpath("//i[@class='fa fa-times']")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div/button[2]")).click();
-		
-		login.driver.findElement(By.xpath("//a[@class='insight-page-menu-item-link active']")).click();
+		CommonFunctionality.DeleteVisual();
 		user_signout();
 		Last_file_download.getTheNewestFile();
 	}
@@ -785,12 +849,12 @@ public class Exceldatacompare {
 	@And("^Create a Chart$")
 	public void create_a_Chart() throws Throwable {
 		Thread.sleep(2000);
-		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container series-list-item--container__with_actions']"));
+		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container']"));
 		System.out.println("Total Size are- " + objLinks.size());
 		
 		for(int i=1;i<=objLinks.size();i++){
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+			login.driver.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]")).click();
 		}
 		
 		 Robot r = new Robot();
@@ -803,12 +867,12 @@ public class Exceldatacompare {
 	public void create_a_Map() throws Throwable {
      Thread.sleep(2000);
 		
-		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container series-list-item--container__with_actions']"));
+		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container']"));
 		System.out.println("Total Size are- " + objLinks.size());
 		
 		for(int i=1;i<=objLinks.size();i++){
 			Thread.sleep(2000);
-			 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+			 login.driver.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]")).click();
 			
 		}
 		 Robot r = new Robot();
@@ -819,17 +883,9 @@ public class Exceldatacompare {
 	@Then("^Map download should be Sucess$")
 	public void map_download_should_be_Sucess() throws Throwable {
 		Thread.sleep(2000);
-		user_Select_pop_up_Download_button();
+		user_Select_pop_up_Download_button();	
 		Thread.sleep(2000);
-		
-		Actions action = new Actions(login.driver);
-		WebElement we = login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-item insight-page-menu-item']/a/span[1]"));
-		action.moveToElement(we).build().perform();
-		login.driver.findElement(By.xpath("//i[@class='fa fa-times']")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div/button[2]")).click();
-		
-		login.driver.findElement(By.xpath("//a[@class='insight-page-menu-item-link active']")).click();
+		CommonFunctionality.DeleteVisual();
 		user_signout();
 		Last_file_download.getTheNewestFile();
 	}
@@ -838,12 +894,12 @@ public class Exceldatacompare {
 	public void create_a_HeatMap() throws Throwable {
 		 Thread.sleep(2000);
 			
-			List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container series-list-item--container__with_actions']"));
+			List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container']"));
 			System.out.println("Total Size are- " + objLinks.size());
 			
 			for(int i=1;i<=objLinks.size();i++){
 				Thread.sleep(2000);
-				 login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[" + i + "]/div/a/div[2]")).click();
+				 login.driver.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]")).click();
 			}
 			 Robot r = new Robot();
 			 r.keyPress(KeyEvent.VK_H);
@@ -856,15 +912,7 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		user_Select_pop_up_Download_button();
 		Thread.sleep(2000);
-		
-		Actions action = new Actions(login.driver);
-		WebElement we = login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-item insight-page-menu-item']/a/span[1]"));
-		action.moveToElement(we).build().perform();
-		login.driver.findElement(By.xpath("//i[@class='fa fa-times']")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div/button[2]")).click();
-		
-		login.driver.findElement(By.xpath("//a[@class='insight-page-menu-item-link active']")).click();
+		CommonFunctionality.DeleteVisual();
 		user_signout();
 		Last_file_download.getTheNewestFile();
 	}
@@ -874,15 +922,7 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		user_Select_pop_up_Download_button();
 		Thread.sleep(2000);
-		
-		Actions action = new Actions(login.driver);
-		WebElement we = login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-item insight-page-menu-item']/a/span[1]"));
-		action.moveToElement(we).build().perform();
-		login.driver.findElement(By.xpath("//i[@class='fa fa-times']")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div/button[2]")).click();
-		
-		login.driver.findElement(By.xpath("//a[@class='insight-page-menu-item-link active']")).click();
+		CommonFunctionality.DeleteVisual();
 		user_signout();
 			Last_file_download.getTheNewestFile();
 	}
@@ -981,7 +1021,7 @@ public class Exceldatacompare {
 		testcase_num=arg1;
 		System.out.println("Comparing Data of " + testcase_num +  " with Actual data");
 		CompareExcel.Excel();
-		Thread.sleep(50000);
+		Thread.sleep(5000);
 		File_delete.delete();
 		Thread.sleep(5000);
 		user_signout();
@@ -989,23 +1029,21 @@ public class Exceldatacompare {
 	
 	@And("^Reset button should Successfully work$")
 	public void reset_button_should_Successfully_work() throws Throwable {
+		
 		Thread.sleep(2000);
 		user_Select_Reset_button();
-		Thread.sleep(1000);
-		WebElement Columns = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Columns")));
-		  Assert.assertEquals(true,Columns.isDisplayed());
-		Thread.sleep(1000);
-		WebElement Adjustcolumnno = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Adjustcolumnno")));
-		  Assert.assertEquals(true,Adjustcolumnno.isDisplayed());
-		  Thread.sleep(1000);
-		  WebElement Ascending = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Ascending")));
-		  Assert.assertEquals(true,Ascending.isDisplayed());
-		  Thread.sleep(1000);
-		  WebElement Sample = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Sample")));
-			Assert.assertEquals(true,Sample.isDisplayed());
-		Thread.sleep(1000);
-		WebElement Allattributes = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Allattributes")));
-		Assert.assertEquals(true,Allattributes.isDisplayed());
+		Thread.sleep(2000);
+		boolean Reset=login.driver.findElement(By.xpath("//div[@class='choosable-selected-item choosable-selected-item--small-purple']")).isEnabled();
+		System.out.println(Reset);
+		Thread.sleep(3000);
+		if(Reset==true)
+		{
+			System.out.println("Reset button is working Successfully");
+		}else
+		{
+			Assert.fail("Reset button is NOT Working Successfully");
+	
+		}
 		Thread.sleep(2500);
 		login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 		Thread.sleep(1500);
@@ -1098,7 +1136,7 @@ public class Exceldatacompare {
 	public void user_verify_state_of_download_button_when_there_are_no_series_in_myseries_no_views() throws Throwable {
 		
 		Thread.sleep(1000);
-		if(login.driver.findElements(By.xpath("//div[@class='download-button download-button__header download-button__algae download-button__disabled download-button__unavailable']")).size() != 0){
+		if(login.driver.findElements(By.xpath("//div[@class='download-button download-button__header small-download-btn download-button__unavailable']")).size() != 0){
 			System.out.println("Download Button is disabled.");
 			}else{
 				 Assert.fail( "Download Button is Enabled. Series or Views may Present.");
@@ -1146,14 +1184,15 @@ public class Exceldatacompare {
 		
 		Thread.sleep(5000);
 		
-		Actions action = new Actions(login.driver);
+	    CommonFunctionality.Views_list();
+		/*Actions action = new Actions(login.driver);
 		WebElement we = login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-item insight-page-menu-item']/a/span[1]"));
 		action.moveToElement(we).build().perform();
 		login.driver.findElement(By.xpath("//i[@class='fa fa-times']")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div/button[2]")).click();
 		
-		login.driver.findElement(By.xpath("//a[@class='insight-page-menu-item-link active']")).click();
+		login.driver.findElement(By.xpath("//a[@class='insight-page-menu-item-link active']")).click();*/
 		
 	}
 	
@@ -1170,15 +1209,9 @@ public class Exceldatacompare {
 		Assert.assertEquals(true,PDF_Format.isDisplayed());
 		 Thread.sleep(9500);
 		  login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
-			Thread.sleep(5000);
-			
-			Actions action = new Actions(login.driver);
-			WebElement we = login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-item insight-page-menu-item']/a/span[1]"));
-			action.moveToElement(we).build().perform();
-			login.driver.findElement(By.xpath("//i[@class='fa fa-times']")).click();
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div/button[2]")).click();
-			login.driver.findElement(By.xpath("//a[@class='insight-page-menu-item-link active']")).click();
+			Thread.sleep(6000);
+		
+			CommonFunctionality.DeleteVisual();
 			user_signout();
 	}
 	
@@ -1251,16 +1284,16 @@ public class Exceldatacompare {
 		Actions action = new Actions(login.driver);
 		WebElement we = login.driver.findElement(By.xpath("//div[@class='series-item--main-info']"));
 		action.moveToElement(we).build().perform();
-		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']/span[4]")).click();
+		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']/span[5]")).click();
 		Thread.sleep(10000);
 		login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[9]")).click();
 	}
 	@And("^select the download present in the File menu option$")
 	public void select_the_download_present_in_the_File_menu_option() throws Throwable {
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[@class='header-menu-file header-menu-item']")).click();
+		login.driver.findElement(By.xpath("//div[@class='insight-context-menu--menu-icon']")).click();
 		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//div[@class='header-menu-item--dropdown']/div[11]")).click();
+		login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[10]")).click();
 	}
 	
 	@And("^select the download present from SSP window$")
@@ -1268,16 +1301,17 @@ public class Exceldatacompare {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[@class='series-item--main-info']")).click();
 		Thread.sleep(8000);
-		login.driver.findElement(By.xpath("//div[@class='series-preview--header ui-draggable-handle']/div[2]/div[4]")).click();
+		login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[2]")).click();
 	}
 	
 	@And("^select the download present from Footnotes window$")
 	public void select_the_download_present_from_Footnotes_window() throws Throwable {
 		Thread.sleep(1000);
-		Actions action = new Actions(login.driver);
-		WebElement we = login.driver.findElement(By.xpath("//div[@class='series-item--main-info']"));
-		action.moveToElement(we).build().perform();
-		login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']/span[3]")).click();
+		Actions action1 = new Actions(login.driver);
+		WebElement we = login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']"));
+		action1.moveToElement(we).build().perform();
+		login.driver.findElement(By.xpath("//div[@class='open-footnote menu-icon']")).click();
+		
 	}
 	@Then("^Download option from Footnotes window should be Sucess$")
 	public void Download_option_from_Footnotes_window_should_be_Sucess() throws Throwable {
@@ -1287,8 +1321,7 @@ public class Exceldatacompare {
 		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
 		Thread.sleep(3000);
 		Latestfiledownload.lastFileModified();
-		Thread.sleep(1000);
-		user_signout();
+		 user_signout();
 	}
 	
 	@And("^select the download by right click option from Myseries Panal$")
@@ -1316,9 +1349,9 @@ public class Exceldatacompare {
 	@And("^select the download by right click option from Myseries Panal under under file menu option$")
 	public void select_the_download_by_right_click_option_from_Myseries_Panal_under_under_file_menu_option() throws Throwable {
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[@class='header-menu-file header-menu-item']")).click();
+		login.driver.findElement(By.xpath("//div[@class='insight-context-menu--menu-icon']")).click();
 		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//div[@class='header-menu-item--dropdown']/div[11]")).click();
+		login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[10]")).click();
 	}
 	
 	
@@ -1326,13 +1359,15 @@ public class Exceldatacompare {
 	public void select_the_download_from_SSP_window_from_Myseries_Panal() throws Throwable {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[@class='series-item--main-info']")).click();
-		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("	//div[@class='series-preview--header ui-draggable-handle']/div[2]/div[4]")).click();
-	
+		Thread.sleep(8000);
+		login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[2]")).click();
+		
 	}
 
 	@And("^Compare \"([^\"]*)\" exel sheet of SSP window with Actual data$")
 	public void compare_exel_sheet_of_SSP_window_with_Actual_data(String arg1) throws Throwable {
+		
+	
 		Thread.sleep(1000);
 		user_Select_pop_up_Download_button();
 		Thread.sleep(1000);
@@ -1341,7 +1376,12 @@ public class Exceldatacompare {
 		System.out.println("Comparing Data of " + testcase_num +  " with Actual data");
 		CompareExcel.Excel();
 		Thread.sleep(5000);
-		File_delete.delete();
+	    File file = new File(System.getProperty("user.home") + "\\Downloads\\Seriesname.xlsx");
+		if(file.delete()){
+			System.out.println(file.getName() + " is deleted!");
+		}else{
+			//System.out.println("Delete operation is failed.");
+		}
 		Thread.sleep(5000);
 		user_signout();
 	}
@@ -1389,12 +1429,234 @@ public class Exceldatacompare {
 		Thread.sleep(5000);
 		login.driver.navigate().refresh();
 	}
+
 	
 	
+	
+	//Excel compare multiple series
+	
+	  public static void  multipleseriesExcelcompare(){
+	        try {
+	            // get input excel files
+	        	//Exceldatacompare obj= new Exceldatacompare();
+	        	 String x=Exceldatacompare.testcase_num;
+	        	 //String y=Exceldatacompare.r;
+	        multipleseries ="Name your insight";
+	        	System.out.println(x);
+	        	System.out.println(multipleseries);
+	            FileInputStream excellFile1 = new FileInputStream(
+	            //FileInputStream excellFile1 = new FileInputStream(
+	                    //"C:\\Users\\Admin\\Documents\\Cucumber_Project\\Cucumber_Project\\securities-cucumber-3c396d71c6ca\\Testdata\\" +x+ ".xlsx");
+	            		System.getProperty("user.dir")  + "\\Testdata\\" +x+ ".xlsx");
+	            FileInputStream excellFile2 = new FileInputStream(
+	           // FileInputStream excellFile2 = new FileInputStream(
+	                   // "C:\\Users\\Admin\\Downloads\\Untitled insight.xlsx");
+	            		System.getProperty("user.home") + "\\Downloads\\"+"Name your insight.xlsx");
+	            // Create Workbook instance holding reference to .xlsx file
+	            XSSFWorkbook TestData = new XSSFWorkbook(excellFile1);
+	            XSSFWorkbook ActualData = new XSSFWorkbook(excellFile2);
+
+	            // Get first/desired sheet from the workbook
+	            XSSFSheet Testdatasheet1 = TestData.getSheetAt(0);
+	            XSSFSheet ActualDatasheet1 = ActualData.getSheetAt(0);
+
+	            // Compare sheets
+	            if(compareTwoSheets(Testdatasheet1, ActualDatasheet1)) {
+	                System.out.println("\n\nThe two excel sheets are Equal");
+	            } else {
+	                System.out.println("\n\nThe two excel sheets are Not Equal");
+	            }
+	            
+	            //close files
+	            excellFile1.close();
+	            excellFile2.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	       
+	    }
+
+	    // Compare Two Sheets
+	    public static boolean compareTwoSheets(XSSFSheet Testdatasheet1, XSSFSheet ActualDatasheet1) throws InterruptedException {
+	    	
+	    		
+	    	
+	        int firstRow1 = Testdatasheet1.getFirstRowNum();
+	        int lastRow1 = ActualDatasheet1.getLastRowNum();
+	        boolean equalSheets = true;
+	        for(int i=firstRow1; i <= lastRow1; i++) {
+	        	
+	        	 
+	            System.out.println("\n\nComparing Row "+i);
+	            
+	            XSSFRow Testdatarows = Testdatasheet1.getRow(i);
+	            XSSFRow Actualdatarows = ActualDatasheet1.getRow(i);
+	            if(!compareTwoRows(Testdatarows, Actualdatarows)) {
+	                equalSheets = false;
+	                System.out.println("Row "+i+" - Not Equal");
+	                break;
+	            } else {
+	                System.out.println("Row "+i+" - Equal");
+	            }
+	        }
+	        return equalSheets;
+	    }
+
+	    // Compare Two Rows
+	    public static boolean compareTwoRows(XSSFRow Testdatarows, XSSFRow Actualdatarows) throws InterruptedException {
+	    	
+	    		
+	    	
+	        if((Testdatarows == null) && (Actualdatarows == null)) {
+	            return true;
+	        } else if((Testdatarows == null) || (Actualdatarows == null)) {
+	            return false;
+	        }
+	      
+	        int firstCell1 = Testdatarows.getFirstCellNum();
+	        int lastCell1 = Testdatarows.getLastCellNum();
+	        boolean equalRows = true;
+	        
+	        // Compare all cells in a row
+	        for(int i=firstCell1; i <= lastCell1-1; i++) {
+	            XSSFCell Testdata_cell = Testdatarows.getCell(i);
+	            XSSFCell Actual_cell = Actualdatarows.getCell(i);
+	       
+	            if(!compareTwoCells(Testdata_cell, Actual_cell)) {
+	               equalRows = false;
+	               File_delete.delete();
+	             //  user_signoutmultilpeseries();
+	               Assert.fail( "Data verification failed in Downloaded Excel:-"  + Testdata_cell +  "' <> '" + Actual_cell + "'");
+	              // Assert.fail( "Cell "+i+" - Not Equal" +"; Value of Testdata_cell is \"" +Testdata_cell + "\" - Value of Actual_cell is \"" +Actual_cell + "\""); 
+	       		 
+	               System.err.println("       Cell "+i+" - Not Equal" +"; Value of Testdata_cell is \"" +Testdata_cell + "\" - Value of Actual_cell is \"" +Actual_cell + "\"");
+	                //System.out.println("       Cell "+i+" - NOt Equal");
+	               //break;
+	            } else  {
+	                //System.out.println("       Cell "+i+" - Equal");
+	                System.out.println("       Cell "+i+" - Equal" +"; Value of Testdata_cell is \"" +Testdata_cell + "\" - Value of Actual_cell is \"" +Actual_cell + "\"");
+	               //System.out.println("Actual data"+Actual_cell.getStringCellvalue());
+	            	//System.out.println("Actual data"+Actual_cell.getStringCellValue());
+	            }									
+	        }
+	        return equalRows; 
+	    	
+	    	
+	    	
+	    }
+
+	  /*  private static void user_signoutmultilpeseries() throws InterruptedException {
+			// TODO Auto-generated method stub
+	    	Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='insight-series-container']/div/div/div/div/label/span")).click();
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]")).click();
+			
+		}
+*/
+		// Compare Two Cells
+	    public static boolean compareTwoCells(XSSFCell Testdata_cell, XSSFCell Actual_cell) {
+	        if((Testdata_cell == null) && (Actual_cell == null)) {
+	            return true;
+	        } else if((Testdata_cell == null) || (Actual_cell == null)) {
+	            return false;
+	        }
+	        
+	        boolean equalCells = false;
+	        int type1 = Testdata_cell.getCellType();
+	        int type2 = Actual_cell.getCellType();
+	        if (type1 == type2) {
+	            if (Testdata_cell.getCellStyle().equals(Actual_cell.getCellStyle())) {
+	            	
+	                // Compare cells based on its type
+	                switch (Testdata_cell.getCellType()) {
+	                case HSSFCell.CELL_TYPE_FORMULA:
+	                    if (Testdata_cell.getCellFormula().equals(Actual_cell.getCellFormula())) {
+	                        equalCells = true;
+	                    }
+	                    break;
+	                case HSSFCell.CELL_TYPE_NUMERIC:
+	                    if (Testdata_cell.getNumericCellValue() == Actual_cell
+	                            .getNumericCellValue()) {
+	                        equalCells = true;
+	                    }
+	                    break;
+	                case HSSFCell.CELL_TYPE_STRING:
+	                	
+	                    if (Testdata_cell.getStringCellValue().equals(Actual_cell
+	                            .getStringCellValue())) {
+	                        equalCells = true;
+	                    }
+	                    break;     	
+	                case HSSFCell.CELL_TYPE_BLANK:
+	                    if (Actual_cell.getCellType() == HSSFCell.CELL_TYPE_BLANK) {
+	                        equalCells = true;
+	                    }
+	                    break;
+	                case HSSFCell.CELL_TYPE_BOOLEAN:
+	                    if (Testdata_cell.getBooleanCellValue() == Actual_cell
+	                            .getBooleanCellValue()) {
+	                        equalCells = true;
+	                    }
+	                    break;
+	                case HSSFCell.CELL_TYPE_ERROR:
+	                    if (Testdata_cell.getErrorCellValue() == Actual_cell.getErrorCellValue()) {
+	                        equalCells = true;
+	                    }
+	                    break;
+	                default:
+	                    if (Testdata_cell.getStringCellValue().equals(
+	                    		Actual_cell.getStringCellValue())) {
+	                    	//System.out.println("Testdata"+ Testdata_cell.getStringCellValue());
+	                    	//System.out.println("Actual data"+Actual_cell.getStringCellValue());
+	                        equalCells = true;
+	                    }
+	                    break;
+	                }
+	            } else {
+	                return false;
+	            }
+	        } else {
+	            return false;
+	        }
+	        return equalCells;
+	    }
+	   
+
+	    
+	    public static void delete()
+	    {	
+	    	try{
+	    		
+	    		//File file = new File("C:\\Users\\Admin\\Downloads\\Untitled insight.xlsx");
+	    		File file = new File(System.getProperty("user.home") + "\\Downloads\\Untitled insight.xlsx");
+	    		
+	    		if(file.delete()){
+	    			//System.out.println(file.getName() + " is deleted!");
+	    		}else{
+	    			//System.out.println("Delete operation is failed.");
+	    		}
+	    	   
+	    	}catch(Exception e){
+	    		
+	    		e.printStackTrace();
+	    		
+	    	}
+	    	
+	    }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    //}
+
 }
 
 
-
+//}
 
 
 

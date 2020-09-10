@@ -46,6 +46,8 @@ public class Filters {
 	public String region;
 	public String unit;
 	public String frequency;
+	public String Last_value;
+	public String country;
 	String[] source = null;
 	public WebElement tooltip;
 	public WebElement element;
@@ -67,26 +69,27 @@ public class Filters {
 		searchData = arg1;
 		login.driver.navigate().refresh();
 		CommonFunctionality.ExpandRight();
-	
+		//CommonFunctionality.TopMethod();
+		CommonFunctionality.ResetMethod();
+		login.Log4j.info("searching with " + searchData);
+		CommonFunctionality.getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
+		/*CommonFunctionality.wait(2000);
 			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 			// CommonFunctionality.TopMethod();
 			// CommonFunctionality.UnselectMethod();
 			CommonFunctionality.AlldbClear();
 			if (reset.size() > 0) {
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-					Thread.sleep(1000);
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+					CommonFunctionality.getElementByProperty(login.driver, "Reset" ,4).click();
 					login.Log4j.info("Clicking on Reset button");
 				}
 			} 
 	
-
 		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).isDisplayed()) {
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+			CommonFunctionality.getElementByProperty(login.driver, "Search" , 4).clear();
 			login.Log4j.info("searching with " + searchData);
-			Thread.sleep(1500);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(searchData);
-		}
+			CommonFunctionality.getElementByProperty(login.driver, "Search" ,   4).sendKeys(searchData);
+		}*/
 	}
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")
@@ -164,7 +167,9 @@ public class Filters {
 					login.Log4j.info(list);
 					login.Log4j.info(SearchTxt);
 					if(list.equalsIgnoreCase(SearchTxt) == true) {
+						Thread.sleep(500);
 						element.click();
+						login.driver.findElement(By.className("filters-search--search-field")).clear();
 						break;
 					}
 					
@@ -190,11 +195,12 @@ public class Filters {
 			break;
 		case "Source":
 			Sourcearr = var.split(";");
+			Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//*[@class='dropdown--title']//*[contains(text(),'" + arg1 + "')]")).click();
 			for (String list : Sourcearr) {
 				login.Log4j.info("clicking on " + list);
 				Thread.sleep(1000);
-				login.driver.findElement(By.xpath("//*[contains(text(),'" + list + "')]")).click();
+				login.driver.findElement(By.xpath("//*[@class='dropdown-search-filter-wrapper--body']//*[contains(text(),'" + list + "')]")).click();
 				
 			}
 			break;
@@ -329,13 +335,12 @@ public class Filters {
 	@And("^User selects \"([^\"]*)\"$")
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
-		List<WebElement> ele = login.driver.findElements(By.xpath("//*[@class='more-filter-content--section'][3]//*[@class='filter-list']//*[@class='filter-item']"));
+		CommonFunctionality.wait(1000);
+		List<WebElement> ele = login.driver.findElements(By.xpath("//*[@class='more-filter-content--left']//*[contains(@class,'section__other')]//*[@class='filter-item']//span[@class='text-dots']"));
 		for(int i = 0; i < ele.size(); i++) {
-			Thread.sleep(1000);
-			element = ele.get(i);
-			String fltrTxt = element.getText();
+			String fltrTxt = ele.get(i).getText();
 			if(fltrTxt.contains(arg1)) {
-				element.click();
+				ele.get(i).click();
 			}
 		}
 	}
@@ -343,16 +348,12 @@ public class Filters {
 	@And("^User selected \"([^\"]*)\" as \"([^\"]*)\"$")
 	public void user_selected_as(String arg1, String arg2) throws Throwable {
 		Alldb_db = arg2;
-//		login.Log4j.info("Clicking on " + arg1);
-//		Thread.sleep(2000);
-//		login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
 		String[] database = arg2.split(",");
 		for (String dblist : database) {
 			Thread.sleep(2000);
 			login.Log4j.info("Selecting " + dblist);
 			List<WebElement> checkbox = login.driver.findElements(By.xpath("//*[@class='more-filter-content']/div[2]/div[1]//span[@class='text-dots' and contains(text(),'" + dblist + "')]"));
-//			List<WebElement> checkbox = login.driver.findElements(By.xpath("//*//*[contains(text(),'" + dblist
-//					+ "')]/preceding-sibling::label/*[@class='input-control--indicator']"));
+			
 			if (checkbox.size() > 0) {
 				login.driver.findElement(By.xpath("//*[@class='more-filter-content']/div[2]/div[1]//span[@class='text-dots' and contains(text(),'" + dblist + "')]")).click();
 			} else {
@@ -365,7 +366,7 @@ public class Filters {
 	public void user_verify_the_search_results() throws Throwable {
 
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(7000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		ul_element = null;
@@ -576,7 +577,12 @@ public class Filters {
 									login.Log4j.info(Sourcearr[0]
 											+ " does exists as Organisation for Economic Co-operation and Development in \n"
 											+ text);
-								} else if((Sourcearr.length == 1)
+								}  else if((Sourcearr.length == 1) && text.contains("International Monetary Fund") == true) {
+									login.Log4j.info(Sourcearr[0]
+											+ " does exists as Internationa Monetary Fund in \n"
+											+ text);
+								}
+								else if((Sourcearr.length == 1)
 										&& text.contains("Федеральная служба государственной статистики") == true) {
 									login.Log4j.info(Sourcearr[0] + " is exists in the" + "\n" + text);
 							    } else if ((Sourcearr.length == 1) && text.contains("AIA Group Limited") == true) {
@@ -763,7 +769,7 @@ public class Filters {
 								}
 							}
 							if (filters.get(k).equals("Unit")) {
-								login.Log4j.info("filter  is : " + filters.get(k));
+								login.Log4j.info("filter is : " + filters.get(k));
 								if (unitarr.length == 1) {
 										if (unit.contains(unitarr[0]) == true) {
 											login.Log4j.info(unitarr[0] + " is exists in the" + "\n" + unit);
@@ -811,21 +817,30 @@ public class Filters {
 	public void user_get_the_topics_as(String arg1) throws Throwable {
 		topic = arg1;
 		login.Log4j.info("topic is " + topic);
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 		login.Log4j.info("Clicking on Databases");
 		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab")));
 		db.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 20).click();
 
 	}
 
 	@Then("^User verify the results$")
 	public void user_verify_the_results() throws Throwable {
 		Thread.sleep(2000);
-		WebElement Topic = login.driver.findElement(By.xpath("//*[contains(text(),'" + topic + "')]"));
-		// Until the element is not visible keep scrolling
-		// CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);",
-		// Topic);
-		login.Log4j.info("Is 'Topic' displayed? - True/False:: " + Topic.isDisplayed());
+		WebElement ele;
+		if (topic.equals("Aggregate: North American Free Trade Agreement (NAFTA)")) {
+			ele = login.driver.findElement(By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
+		} else {
+//			ele = login.driver.findElement(
+//					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
+			ele = login.driver.findElement(
+					By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
+		}
+		String Actual_Topic = ele.getText();
+		login.Log4j.info(Actual_Topic);
+		Assert.assertEquals(Actual_Topic, topic);
+		//login.Log4j.info("Is 'Topic' displayed? - True/False:: " + Topic.isDisplayed());
 
 	}
 
@@ -845,13 +860,13 @@ public class Filters {
 	@Then("^User verifies Filter search results$")
 	public void user_verifies_Filter_search_results() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
 		SeriesTab.click();
 
 		ul_element = null;
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			ul_element = wait.until(
 					ExpectedConditions.visibilityOfElementLocated(By.cssSelector(login.LOCATORS.getProperty("UL"))));
 			AssertJUnit.assertNotNull(ul_element);
@@ -1140,7 +1155,52 @@ public class Filters {
 			login.Log4j.info(e.getMessage());
 		}
 	}
+	@Then("^Should get list of series$")
+	public void should_get_list_of_series() throws Throwable {
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		Thread.sleep(3000);
+		List<WebElement> ListOfPages = login.driver
+				.findElements(By.xpath("//*[@class='search-series-pagination-pages-wrapper']//span"));
+		for (int m = 0; m < ListOfPages.size(); m++) {
+			CommonFunctionality.wait(2000);
+			ListOfPages.get(m).click();
+			CommonFunctionality.wait(3000);
+			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
+			login.Log4j.info("List size is :" + sName.size());
 
+			for (int i = 0; i < sName.size(); i++) {
+				action.pause(1500).moveToElement(sName.get(i)).build().perform();
+				CommonFunctionality.wait(800);
+				tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+				TooltipInfo = tooltip.getText();
+				// Until the element is not visible keep scrolling
+				jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
+				//login.Log4j.info(TooltipInfo);
+				lines = TooltipInfo.split("\n");
+				CommonFunctionality.wait(200);
+				for (String Tooltip : lines) {
+					// String str=null;
+					if (Tooltip.contains("Series id")) {
+						seriesId = Tooltip;
+					}
+					if (Tooltip.contains("Region")) {
+						country = Tooltip;
+					}
+					if (Tooltip.contains("Frequency")) {
+						frequency = Tooltip;
+					}
+					if (Tooltip.contains("Last value")) {
+						Last_value = Tooltip;
+					}
+				}
+				login.Log4j.info(seriesId  + country +  frequency + Last_value);
+
+			}
+		}
+	}
 	boolean validation(String searchText, String sourcearr2) throws Throwable {
 		String[] keywords = null;
 		if (sourcearr2.contains(",")) {

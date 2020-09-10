@@ -204,8 +204,9 @@ X, Exports
 yoy,year on year
 ytd,year to date
 gds,Gross Domestic Saving
-real state,property,housing,apartments,dwellings,gas NOT oil AND state
+real state,property,housing,apartments,dwellings,gas NOT oil AND state,cis
 inflation
+NEER,Nominal Effective Exchange Rate
 # Chinese
 
 上 交 所, 上 海 证 券 交 易 所

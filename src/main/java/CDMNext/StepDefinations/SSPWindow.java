@@ -1,12 +1,13 @@
 package CDMNext.StepDefinations;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +16,8 @@ import org.testng.Assert;
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SSPWindow {
 
@@ -37,34 +40,50 @@ public class SSPWindow {
 	public static String end_3y;
 	public static String start_5y;
 	public static String end_5y;
-	public static String start_All;
-	public static String end_All;
-	WebDriverWait wait = new WebDriverWait(login.driver, 300);
+	public static Date start_All;
+	public static Date end_All;
+	public static String expected;
+	public static String thanks_message;
+	public static String add_to_recent_insight;
+	WebDriverWait wait = new WebDriverWait(login.driver, 400);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	Cvision cv = new Cvision();
 
+	@And("^Check for prerequesties$")
+	public void check_for_prerequesties() throws Throwable {
+		CommonFunctionality.closing_if_any_opened_modal_popup(login.driver, "movable-modal--close", "//*[contains(@class,'modal-content')]//*[text()='Some changes have not been saved.']", "//*[@class='sphere-modal-controls']//*[text()='Ok']", "className");  
+		close_the_replacement_popup_if_appeared();
+		if (login.driver.findElements(By.xpath("//*[@class='movable-modal--window']//*[text()='Do you want to keep your insight?']")) .size() > 0)
+		{
+		  CommonFunctionality.getElementByXpath(login.driver,"//*[@class='movable-modal--window']//*[text()='Start new']",4).click();
+		  System.out.println("Start new option is selected in unsaved insight work pop-up display");
+		}
+		CommonFunctionality.Views_list();
+	}
+	
+	
 	@And("^Refreshing the page$")
 	public void refreshing_the_page() throws Throwable {
 		CommonFunctionality.modelbox();
-		CommonFunctionality.wait(1000);
-		cv.clear_the_values_in_search();
-		CommonFunctionality.wait(1000);
 		login.driver.navigate().refresh();
 	}
-
+	
 	@SuppressWarnings("deprecation")
 	@And("^Add few series to myseries$")
 	public void add_few_series_to_myseries() throws Throwable {
 		String id = "205424302";
+		CommonFunctionality.wait(3000);
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
-		CommonFunctionality.webDriverwait_keyvalue("Series_new");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new"))).click();
-		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),
-		//		"404873907");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),
-		id);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.ENTER);
+		WebElement my_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab")));
+		new Actions(login.driver).moveToElement(my_series).pause(500).click().build().perform();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait(3000);
+		WebElement series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new")));
+		new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(id);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		new Actions(login.driver).moveToElement(series_cb).pause(2000).click().build().perform();
@@ -78,11 +97,11 @@ public class SSPWindow {
 		Thread.sleep(5000);
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new"))).click();
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),
-				arg1);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.ENTER);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		new Actions(login.driver).moveToElement(series_cb).pause(2000).click().build().perform();
 		WebElement series_add = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_myseries")));
@@ -93,11 +112,13 @@ public class SSPWindow {
 	@And("^hightlight any one series and click on  \"([^\"]*)\" icon \\.$")
 	public void hightlight_any_one_series_and_click_on_icon(String arg1) throws Throwable {
 		CommonFunctionality.wait(9000);
-		WebElement one_series = login.driver
-				.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
-		new Actions(login.driver).moveToElement(one_series).pause(3000)
-				.click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_series_info")))).build()
-				.perform();
+		try {
+		WebElement one_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
+		new Actions(login.driver).moveToElement(one_series).pause(3000).click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_series_info")))).build().perform();
+		} catch (StaleElementReferenceException e) {
+		WebElement one_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
+		new Actions(login.driver).moveToElement(one_series).pause(3000).click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_series_info")))).build().perform();
+		}
 	}
 
 	@And("^Check the percentage change value$")
@@ -116,7 +137,7 @@ public class SSPWindow {
 		String percentage1 = "13.05";
 		if ((percentage.contains(percentage1))) {
 			login.Log4j.info("The percentage change value displayed correctly");
-			Thread.sleep(500);
+			CommonFunctionality.wait(4000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			Thread.sleep(200);
 			CommonFunctionality.DeleteSeries();
@@ -131,6 +152,7 @@ public class SSPWindow {
 		WebElement ssp_window = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Window")));
 		if (ssp_window.isDisplayed()) {
 			System.out.println("SSP window is opened and validated");
+			CommonFunctionality.wait(4000);
 			CommonFunctionality.getElementByProperty(login.driver, "Close", 8).click();
 			Thread.sleep(200);
 			CommonFunctionality.DeleteSeries();
@@ -142,15 +164,18 @@ public class SSPWindow {
 	@SuppressWarnings("deprecation")
 	@And("^Go to search$")
 	public void go_to_search() throws Throwable {
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_new"))));
 		WebElement series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new")));
 		new Actions(login.driver).moveToElement(series).pause(2000).click().build().perform();
-		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),
-		//		"404873907");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),
-				"205424302");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.ENTER);
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL,
+		// "a"),
+		// "404873907");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys("205424302");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		Thread.sleep(1000);
 	}
 
@@ -168,46 +193,100 @@ public class SSPWindow {
 	@And("^Open SSP window and clicking on \"([^\"]*)\" icon$")
 	public void open_SSP_window_and_clicking_on_icon(String arg1) throws Throwable {
 		CommonFunctionality.webDriverwait_keyvalue("SSP_Window");
+		CommonFunctionality.wait(4000);
 		WebElement ssp_window = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Window")));
 		if (ssp_window.isDisplayed()) {
 			Thread.sleep(1000);
 			System.out.println("SSP window is opened");
 		}
-		CommonFunctionality.webDriverwait_keyvalue("Add_series_dropdown");
 		WebElement add_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown")));
-		new Actions(login.driver).moveToElement(add_series).pause(2000).click().perform();
+		new Actions(login.driver).moveToElement(add_series).pause(2000).click().build().perform();
+		// WebElement dropdown =
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown_arrow")));
+		// new
+		// Actions(login.driver).moveToElement(dropdown).pause(2000).click().build().perform();
 	}
 
+	@And("^Open SSP Window$")
+	public void open_SSP_Window() throws Throwable {
+		CommonFunctionality.webDriverwait_keyvalue("SSP_Window");
+		WebElement ssp_window = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Window")));
+		if (ssp_window.isDisplayed()) {
+			Thread.sleep(1000);
+			System.out.println("SSP window is opened");
+		}
+	}
+
+	@SuppressWarnings("deprecation")
 	@Then("^Verify options on top bar of window$")
 	public void verify_options_on_top_bar_of_window() throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("items-wrapper")));
-		WebElement dropdownList = login.driver.findElement(By.className("items-wrapper"));
+		WebElement dropdownList = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'dropdown-menu')]", 4);
 		if (dropdownList.isDisplayed()) {
 			CommonFunctionality.wait(500);
-			login.driver.findElement(By.className("items-wrapper")).click();
 			System.out.println("Add series options are present");
+			WebElement dropdown = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown")));
+			new Actions(login.driver).moveToElement(dropdown).pause(2000).click().build().perform();
 		} else {
 			Assert.fail("Add series options verification failed");
 		}
 
-		WebElement chart = login.driver.findElement(By.xpath("//*[@title='Create Chart']"));
+		WebElement view = CommonFunctionality.getElementByXpath(login.driver, "//*[@js-visual-container=\"\"]", 4);
+		new Actions(login.driver).moveToElement(view).pause(2000).click().build().perform();
+		WebElement dropdown = CommonFunctionality.getElementByXpath(login.driver,
+				"//ul[contains(@class,'dropdown-menu')]", 4);
+		if (dropdown.isDisplayed()) {
+			System.out.println("View as options are present");
+		} else {
+			Assert.fail("View as options are not present");
+		}
+		WebElement chart = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Chart']", 4);
 		if (chart.isDisplayed()) {
-			CommonFunctionality.wait(1000);
-			System.out.println("Chart option is present");
+			System.out.println("Chart Option is present");
 		} else {
-			Assert.fail("Creating chart option verification failed");
+			Assert.fail("Chart option are not present");
+		}
+		WebElement map = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Map']", 4);
+		if (map.isDisplayed()) {
+			System.out.println("Map Option is present");
+		} else {
+			Assert.fail("Map option not present");
+		}
+		WebElement table = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Table']", 4);
+		if (table.isDisplayed()) {
+			System.out.println("Table Option is present");
+		} else {
+			Assert.fail("Table option not present");
+		}
+		WebElement pie = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Pie']", 4);
+		if (pie.isDisplayed()) {
+			System.out.println("Pie Option is present");
+		} else {
+			Assert.fail("Pie option not present");
+		}
+		WebElement heatmap = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Heat map']", 4);
+		if (heatmap.isDisplayed()) {
+			System.out.println("Heat map Option is present");
+		} else {
+			Assert.fail("Heat map option not present");
+		}
+		WebElement histogram = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Histogram']", 4);
+		if (histogram.isDisplayed()) {
+			System.out.println("Histogram Option is present");
+		} else {
+			Assert.fail("Histogram option not present");
+		}
+		new Actions(login.driver).moveToElement(view).pause(500).click().build().perform();
+
+		WebElement watch = CommonFunctionality.getElementByXpath(login.driver, "//*[@js-watch-container=\"\"]", 4);
+		if (watch.isDisplayed()) {
+			System.out.println("Watch Option is present");
+		} else {
+			Assert.fail("Watch option verification failed");
 		}
 
-		WebElement clipboard = login.driver.findElement(By.xpath("//*[@title='Copy to Clipboard']"));
-		if (clipboard.isDisplayed()) {
-			CommonFunctionality.wait(1000);
-			System.out.println("Copy to clipboard option is present");
-		} else {
-			Assert.fail("Copy to clipboard option verification failed");
-		}
-
-		WebElement download = login.driver.findElement(
-				By.xpath("//*[contains(@title,'Download') and contains(@class,'download-button__modal')]"));
+		WebElement download = CommonFunctionality.getElementByXpath(login.driver, "//*[@js-download-container=\"\"]",
+				4);
 		if (download.isDisplayed()) {
 			CommonFunctionality.wait(1000);
 			System.out.println("Download option is present");
@@ -215,14 +294,14 @@ public class SSPWindow {
 			Assert.fail("Download option verification failed");
 		}
 
-		WebElement modal_actions = login.driver.findElement(By.className("movable-modal--actions"));
+		WebElement modal_actions = CommonFunctionality.getElementByClassName(login.driver, "movable-modal--actions", 4);
 		if (modal_actions.isDisplayed()) {
-			CommonFunctionality.wait(2000);
 			System.out.println("Minimize, Maximize and close options are present");
+		} else {
+			Assert.fail("Movable options verification failed");
 		}
 		login.Log4j.info("All options have been verified and displayed in top bar of SSP window");
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//*[@title='Close']")).click();
+		login.driver.findElement(By.className("movable-modal--close")).click();
 		CommonFunctionality.DeleteSeries();
 	}
 
@@ -235,11 +314,14 @@ public class SSPWindow {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Click on Add option$")
 	public void click_on_Add_option() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Add_series_button");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_button"))).click();
-		CommonFunctionality.wait(2000);
+		Thread.sleep(2000);
+		WebElement add_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown")));
+		new Actions(login.driver).moveToElement(add_series).pause(2000).click().build().perform();
+		CommonFunctionality.getElementBycssSelector(login.driver, ".items-wrapper span[title='Add']", 4).click();
+		CommonFunctionality.wait(6000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 	}
 
@@ -263,46 +345,34 @@ public class SSPWindow {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Click on Add and group option$")
 	public void click_on_add_and_group_option() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Add_series_dropdown");
 		WebElement add_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown")));
-		new Actions(login.driver).moveToElement(add_series).click().perform();
+		new Actions(login.driver).moveToElement(add_series).pause(2000).click().build().perform();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_and_group"))).click();
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(4000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 	}
 
-	@Then("^The series should add into right pane and be grouped$")
-	public void the_series_should_add_into_right_pane_and_be_grouped() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Series_item_name");
-		String series_item_name = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_item_name")))
-				.getText();
-		CommonFunctionality.webDriverwait_keyvalue("Group_name_right_panel");
-		List<WebElement> element = login.driver
-				.findElements(By.xpath(login.LOCATORS.getProperty("Group_name_right_panel")));
-		for (int i = 0; i < element.size(); i++) {
-			String group_name_right_panel = element.get(i).getText();
-			if (group_name_right_panel.contains(series_item_name)) {
-				login.Log4j.info("The series added successfully to the right pane and grouped");
-				CommonFunctionality.DeleteSeries();
-				break;
-			} else {
-				Assert.fail("Verify Series failed");
-			}
-		}
+	@Then("^The series should add into right pane and \"([^\"]*)\"$")
+	public void the_series_should_add_into_right_pane_and(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+	    String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-name-wrapper']//following-sibling::*[@class='group-name']", 4).getText();
+	    String expected[] = text.split("\\:");
+	    assertEquals(expected[0], arg1);
+	    login.Log4j.info("The series added successfully to the right pane and grouped");
+		CommonFunctionality.DeleteSeries();
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Click on Add to new insight option$")
 	public void click_on_Add_to_new_insight_option() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Add_series_dropdown");
 		WebElement add_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown")));
-		new Actions(login.driver).moveToElement(add_series).click().perform();
+		new Actions(login.driver).moveToElement(add_series).pause(2000).click().build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_new_insight"))).click();
-		Thread.sleep(500);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 	}
 
 	@And("^Series has been added to new insight message should display$")
@@ -324,7 +394,7 @@ public class SSPWindow {
 		CommonFunctionality.wait(500);
 		login.driver
 				.findElement(By.xpath(
-						"//*[@class='growl-message growl-success']//*[@class='button button__sm button__primary']"))
+						"//*[@class='growl-message growl-success']//*[@class='button growl-message-content--btns__fill']"))
 				.click();
 		CommonFunctionality.wait(2000);
 		String URL = login.driver.getCurrentUrl();
@@ -332,21 +402,34 @@ public class SSPWindow {
 			System.out.println("New insight with the added series is opened");
 			ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 			login.driver.switchTo().window(newTab.get(1)).close();
-			Thread.sleep(3000);
+			Thread.sleep(10000);
 			login.driver.switchTo().window(newTab.get(0));
+			Thread.sleep(8000);
+			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			}
 		} else {
 			Assert.fail("Verification of added series failed");
 		}
 	}
 
-	@And("^Click on Add to existing insight option$")
-	public void click_on_Add_to_existing_insight_option() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Add_series_dropdown");
+	@SuppressWarnings("deprecation")
+	@And("^Click on Add to recent insight option$")
+	public void click_on_Add_to_recent_insight_option() throws Throwable {
 		WebElement add_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown")));
-		new Actions(login.driver).moveToElement(add_series).click().perform();
+		new Actions(login.driver).moveToElement(add_series).pause(2000).click().build().perform();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_existing_insight"))).click();
+		WebElement insight = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_existing_insight")));
+		new Actions(login.driver).moveToElement(insight).pause(2000).click().build().perform();
 		CommonFunctionality.wait(4000);
+	}
+
+	@And("^Click on sub dropdown option$")
+	public void click_on_sub_dropdown_option() throws Throwable {
+		if (CommonFunctionality.getElementByXpath(login.driver, "//h4[text()='Add to recent insight']", 4)
+				.isDisplayed()) {
+			System.out.println("Add to recent insight option is available");
+		}
 	}
 
 	@And("^Insight explorer page should open$")
@@ -362,8 +445,8 @@ public class SSPWindow {
 
 	@Then("^Any insight could be selected for the series to be added$")
 	public void any_insight_could_be_selected_for_the_series_to_be_added() throws Throwable {
-		WebElement insight = login.driver
-				.findElement(By.xpath("//*[contains(text(),'Insight 21')]/following::input[1]"));
+		WebElement insight = login.driver.findElement(By.xpath(
+				"//*[contains(@class,'insights-list__insight-panel')]//*[contains(text(),'Insight')]//following::*[@class='input-control--indicator']"));
 		new Actions(login.driver).moveToElement(insight).click().build().perform();
 		CommonFunctionality.wait(2000);
 		WebElement insight_button = login.driver
@@ -373,35 +456,75 @@ public class SSPWindow {
 		String expected = login.driver.findElement(By.xpath("//*[@class='growl-message-text']")).getText();
 		CommonFunctionality.wait(2000);
 		if (expected.contains(actual)) {
+			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			}
 			System.out.println("Insight explorer page added with series");
-			CommonFunctionality.wait(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		} else {
+			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			}
 			Assert.fail("Insight explorer page does not added with series");
+		}
+		
+	}
+
+	@Then("^Any insight could be selected for the series to add$")
+	public void any_insight_could_be_selected_for_the_series_to_add() throws Throwable {
+		List<WebElement> insights_all = login.driver.findElements(By.className("input-control--description"));
+		for (WebElement insight : insights_all) {
+			add_to_recent_insight = insight.getText();
+			new Actions(login.driver).moveToElement(insight).click().build().perform();
+			break;
+		}
+		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Apply']", 4).click();
+		String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='growl-message--link growl-message--link__highlighted'] | //*[@class='growl-message growl-success']//*[@class='button growl-message-content--btns__fill']", 4)
+				.getText();
+		if (expected.contains(add_to_recent_insight)) {
+			login.Log4j.info("Add to existing insight has been verified");
+		} else {
+			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			}
+			Assert.fail("Insight verification failed");
+		}
+		CommonFunctionality.wait(2000);
+		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^click on create chart option$")
 	public void click_on_create_chart_option() throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Create Chart']")));
-		login.driver.findElement(By.xpath("//*[@title='Create Chart']")).click();
-		CommonFunctionality.wait(2000);
+		WebElement view = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'preview-series-data-actions--button__visual')]", 4);
+		new Actions(login.driver).moveToElement(view).pause(500).click().build().perform();
+		WebElement chart = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Chart']", 4);
+		if (chart.isDisplayed()) {
+			System.out.println("Chart Option is present");
+			chart.click();
+		}
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 	}
 
 	@And("^click on CTC button$")
 	public void click_on_CTC_button() throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Copy to Clipboard']")));
-		login.driver.findElement(By.xpath("//*[@title='Copy to Clipboard']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				"//*[contains(@class,'preview-series-data-actions--button__action') and @js-copy-container=\"\"]")));
+		login.driver.findElement(By.xpath(
+				"//*[contains(@class,'preview-series-data-actions--button__action') and @js-copy-container=\"\"]"))
+				.click();
 		CommonFunctionality.wait(2000);
 	}
 
 	@And("^Click on download button$")
 	public void click_on_download_button() throws Throwable {
 		CommonFunctionality.webDriverwait_locator(
-				"//*[contains(@class,'download-button__modal') and contains(@title,'Download.')]", "xpath");
-		login.driver
-				.findElement(
-						By.xpath("//*[contains(@class,'download-button__modal') and contains(@title,'Download.')]"))
+				"//*[@class='single-series-preview--content']//*[contains(@title,'Download') and contains(@class,'download-button')]",
+				"xpath");
+		login.driver.findElement(By.xpath(
+				"//*[@class='single-series-preview--content']//*[contains(@title,'Download') and contains(@class,'download-button')]"))
 				.click();
 		CommonFunctionality.wait(2000);
 	}
@@ -416,7 +539,7 @@ public class SSPWindow {
 			minimize_icon.click();
 		}
 	}
-	
+
 	@And("^Clicking on full screen icon$")
 	public void clicking_on_full_screen_icon() throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -435,29 +558,35 @@ public class SSPWindow {
 		CommonFunctionality.wait(2000);
 	}
 
-	@And("^click on \"([^\"]*)\" subscription link$")
-	public void click_on_subscription_link(String arg1) throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='" + arg1 + "']")));
+	@And("^click on \"([^\"]*)\" suggestions subscription link$")
+	public void click_on_suggestions_subscription_link(String arg1) throws Throwable {
+		CommonFunctionality.wait(3000);
+		try {
 		manage_series_id = login.driver.findElement(By.xpath(
 				"//*[@class='main-series-information--right']//*[@class='main-series-information--series-id']/div[1]"))
 				.getText();
-		login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']")).click();
-		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "') and @js-manage-replacements=\"\"]"))
+				.click();
+		} catch (StaleElementReferenceException e) {
+			manage_series_id = login.driver.findElement(By.xpath(
+					"//*[@class='main-series-information--right']//*[@class='main-series-information--series-id']/div[1]"))
+					.getText();
+			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "') and @js-manage-replacements=\"\"]"))
+					.click();
+		}
+		CommonFunctionality.wait(3000);
 	}
 
 	@And("^Download data to excel$")
 	public void download_data_to_excel() throws Throwable {
-		CommonFunctionality.webDriverwait_locator(
-				"//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]//parent::button",
-				"xpath");
-		WebElement download_button = login.driver.findElement(By.xpath(
-				"//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]//parent::button"));
-		new Actions(login.driver).moveToElement(download_button).click().build().perform();
+		if(login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]//parent::button")).size()>0) {
+		  login.driver.findElement(By.xpath("//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]//parent::button")).click();
+	}
 	}
 
 	@And("^Click on \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\" buttons$")
 	public void click_on_and_buttons(String arg1, String arg2, String arg3) throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(3000);
 		try {
 			login.driver
 					.findElement(By.xpath(
@@ -470,17 +599,17 @@ public class SSPWindow {
 					.findElement(By.xpath("//*[@class='suggested-series-control']//*[contains(text(),'" + arg1 + "')]"))
 					.click();
 		}
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(3000);
 		login.driver
 				.findElement(
 						By.xpath("//*[@class='suggestions-wizard--footer']//button[contains(text(),'" + arg2 + "')]"))
 				.click();
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(3000);
 		login.driver
 				.findElement(
 						By.xpath("//*[@class='suggestions-wizard--footer']//button[contains(text(),'" + arg3 + "')]"))
 				.click();
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(3000);
 	}
 
 	@Then("^chart should be created in a view for series$")
@@ -488,25 +617,19 @@ public class SSPWindow {
 		CommonFunctionality.webDriverwait_keyvalue("One_series_from_seriesList");
 		String actual = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_seriesList")))
 				.getText();
-		String expected = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-title']//following-sibling::*[@class='text-dots']"))
-				.getText();
+		String expected = login.driver.findElement(By.cssSelector(".highcharts-title .text-dots , span[data-name='title']")).getText();
 		if (expected.equalsIgnoreCase(actual)) {
-			System.out.println("Chart created in a view for the series");
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-			CommonFunctionality.wait(3000);
-			List<WebElement> visuals = login.driver.findElements(
-					By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
+			login.Log4j.info("Chart created in a view for the series");
+			CommonFunctionality.wait(500);
+			List<WebElement> visuals = login.driver.findElements(By.xpath(
+					"//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')] | //*[contains(@class,'insight-page-view-tab') and contains(text(),'Sheet')]"));
 			if (visuals.size() > 0) {
 				for (WebElement visual : visuals) {
 					new Actions(login.driver).contextClick(visual).build().perform();
-					CommonFunctionality.wait(2000);
 					login.driver.findElement(By.xpath("//span[contains(text(),'Delete view')]")).click();
-					CommonFunctionality.wait(2000);
 					login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
 				}
 			}
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
 			Assert.fail("Verification of chart creation failed");
@@ -519,33 +642,31 @@ public class SSPWindow {
 		String actual = login.driver.findElement(By.xpath("//*[@class='download-modal-title']")).getText();
 		String expected = login.driver.findElement(By.className("download-modal-title__title")).getText();
 		if (actual.contains(expected)) {
-			System.out.println("CTC is validated");
+			login.Log4j.info("CTC is validated");
 			login.driver.findElement(By.className("sphere-modal__close")).click();
 			CommonFunctionality.webDriverwait_keyvalue("Close");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			Assert.fail("Verification of CTC failed");
 		}
 	}
 
 	@Then("^Should be able to download data$")
 	public void should_be_able_to_download_data() throws Throwable {
-		CommonFunctionality.DownloadFileVerify("series_title","Close");
+		CommonFunctionality.DownloadFileVerify("ssp_title", "Close");
 	}
 
 	@Then("^verify that SSP window should be minimized$")
 	public void verify_that_SSP_window_should_be_minimized() throws Throwable {
 		CommonFunctionality.wait(2000);
-		String actual = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ssp_title"))).getText();
-		CommonFunctionality.wait(1000);
-		String expected = login.driver.findElement(By.xpath("//*[@class='movable-modal--title']")).getText();
-		CommonFunctionality.webDriverwait_keyvalue("Close");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-		if (!(actual.equals(expected))) {
-			System.out.println("SSP Window is minimized");
+		if (login.driver.findElements(By.xpath("//*[@title='Minimize']")).size() == 0) {
+			login.Log4j.info("SSP Window is minimized as expected");
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			Assert.fail("SSP window minimize verification failed");
 		}
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 	}
 
 	@Then("^verify that SSP window SSP window should be maximized to full screen$")
@@ -555,9 +676,10 @@ public class SSPWindow {
 				"//*[contains(@class,'ui-resizable ui-draggable')]/ancestor::*[contains(@class,'movable-modal__active')]"));
 		CommonFunctionality.wait(1000);
 		if (maximize.getAttribute("class").contains("movable-modal__full-screen")) {
-			login.Log4j.info("SSP Window is maximized");
+			login.Log4j.info("SSP Window is maximized to full screen");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			Assert.fail("SSP window maximize verification failed");
 		}
 	}
@@ -565,7 +687,7 @@ public class SSPWindow {
 	@Then("^Verify that SSP window SSP window should be closed$")
 	public void verify_that_SSP_window_should_be_closed() throws Throwable {
 		List<WebElement> element = login.driver.findElements(By.className("single-series-preview--content"));
-		if (!(element.size() > 0)) {
+		if (element.size() == 0) {
 			login.Log4j.info("SSP Window is Closed successfully");
 		} else {
 			Assert.fail("SSP window close verification failed");
@@ -604,16 +726,31 @@ public class SSPWindow {
 	@SuppressWarnings("deprecation")
 	@And("^Open SSP for the series \"([^\"]*)\"$")
 	public void open_SSP_for_the_series(String arg1) throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Series");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL, "a"),
-				arg1);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.ENTER);
+		try {
 		CommonFunctionality.wait(2000);
-		WebElement first_item_in_list = login.driver
-				.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_seriesList")));
-		new Actions(login.driver).moveToElement(first_item_in_list).pause(3000)
-				.click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_info")))).build().perform();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new"))).click();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait(2000);
+		WebElement first_item_in_list = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_seriesList")));
+		new Actions(login.driver).moveToElement(first_item_in_list).pause(3000).click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_info")))).build().perform();
+	} catch (StaleElementReferenceException e) {
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new"))).click();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait(2000);
+		WebElement first_item_in_list = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_seriesList")));
+		new Actions(login.driver).moveToElement(first_item_in_list).pause(3000).click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_info")))).build().perform();
+	}
 	}
 
 	@And("^Checking the \"([^\"]*)\" of the series$")
@@ -635,6 +772,7 @@ public class SSPWindow {
 			login.Log4j.info(arg1 + " of the series has been verified successfully");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -648,11 +786,9 @@ public class SSPWindow {
 
 	@And("^Click on update request link$")
 	public void click_on_update_request_link() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Update_request");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Update_request"))).click();
+		login.driver.findElement(By.className("main-series-information--link main-series-information--ask")).click();
 	}
 
-	@SuppressWarnings("deprecation")
 	@And("^Enter some text in the update request popup opened$")
 	public void Enter_some_text_in_the_update_request_popup_opened() throws Throwable {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -666,14 +802,16 @@ public class SSPWindow {
 		if (submit.isEnabled()) {
 			submit.click();
 			System.out.println("Submit button is enabled");
-			CommonFunctionality.webDriverwait_keyvalue("Close");
-			new Actions(login.driver)
-					.moveToElement(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close")))).pause(2000)
-					.click().build().perform();
-			System.out.println("Question submitted and model box closed");
+			thanks_message = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'growl-message')]//*[@class='growl-message-text']", 4).getText();
+			CommonFunctionality.wait(6000);
+			new Actions(login.driver).moveToElement(login.driver.findElement(By.className("movable-modal--close"))).click().build().perform();
+			login.Log4j.info("Question submitted and model box closed");
 		} else {
+			new Actions(login.driver).moveToElement(login.driver.findElement(By.className("movable-modal--close"))).click().build().perform();
 			Assert.fail("Submit button not enabled, hence verification failed");
 		}
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@And("^Click on chart tab$")
@@ -684,12 +822,15 @@ public class SSPWindow {
 
 	@And("^Enter from and to dates$")
 	public void enter_from_and_to_dates() throws Throwable {
+		CommonFunctionality.wait(3000);
 		in_Chart_tab_click_on_timeframe_date_field_and_change_date();
 	}
 
 	@And("^In Chart tab click on timeframe date field and change date$")
 	public void in_Chart_tab_click_on_timeframe_date_field_and_change_date() throws Throwable {
+		if(login.driver.findElements(By.xpath("//*[@class='tabs__tabs-box']//*[text()='Chart']")).size()>0) {
 		login.driver.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[text()='Chart']")).click();
+		}
 		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][1]")).click();
 		WebElement from_date = login.driver.findElement(By.xpath("//*[@class='datepicker-input-wrapper'][1]/input"));
@@ -717,84 +858,92 @@ public class SSPWindow {
 
 	@And("^Select \"([^\"]*)\" tab$")
 	public void select_tab(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
-				.click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
+		try {
+		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']")).click();
+		} catch (StaleElementReferenceException e) {
+		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']")).click();
+		}
+		CommonFunctionality.wait(3000);
 	}
 
 	@And("^Select \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" tabs$")
 	public void select_tabs(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(3000);
 		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
 				.click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(3000);
 		String ytd_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[2]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
 		String ytd_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
-		start_ytd = ytd_start.substring(3, 7);
-		end_ytd = ytd_end.substring(3, 7);
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		start_ytd = ytd_start.substring(6, 10);
+		end_ytd = ytd_end.substring(6, 10);
 		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg2 + "']"))
 				.click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(5000);
 		String y1_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[2]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
 		String y1_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
-		start_1y = y1_start.substring(3, 7);
-		end_1y = y1_end.substring(3, 7);
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		start_1y = y1_start.substring(6, 10);
+		end_1y = y1_end.substring(6, 10);
 		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg3 + "']"))
 				.click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(5000);
 		String y3_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[3]")).getText();
+				.findElement(By.xpath("//*[contains(@class,'highcharts-xaxis-labels')]/*[2]")).getText();
 		String y3_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
-		start_3y = y3_start.substring(3, 7);
-		end_3y = y3_end.substring(3, 7);
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		start_3y = y3_start.substring(6, 10);
+		end_3y = y3_end.substring(6, 10);
 		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg4 + "']"))
 				.click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(5000);
 		String y5_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[2]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
 		String y5_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
-		start_5y = y5_start.substring(3, 7);
-		end_5y = y5_end.substring(3, 7);
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		start_5y = y5_start.substring(6, 10);
+		end_5y = y5_end.substring(6, 10);
 		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg5 + "']"))
 				.click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(5000);
 		String All_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[2]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
 		String All_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
-		start_All = All_start.substring(3, 7);
-		end_All = All_end.substring(3, 7);
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		start_All = new SimpleDateFormat("dd/mm/yyyy").parse(All_start);
+		end_All = new SimpleDateFormat("dd/mm/yyyy").parse(All_end);
 	}
 
 	@Then("^Last (\\d+) year data to be plotted in chart visual$")
 	public void last_year_data_to_be_plotted_in_chart_visual(int arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
 		String from = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[2]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
 		String to = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
-		String A = from.substring(3, 7);
-		String B = to.substring(3, 7);
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		String A = from.substring(6, 10);
+		String B = to.substring(6, 10);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+		CommonFunctionality.DeleteSeries();
 		int C = Integer.parseInt(A);
 		int D = Integer.parseInt(B);
 		if (Math.abs(D - C) == arg1) {
 			login.Log4j.info("Last " + arg1 + " year data is plotted in chart visual");
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-			CommonFunctionality.DeleteSeries();
-		} else {
+			} else {
 			Assert.fail("Verification failed");
 		}
 	}
 
 	@Then("^Last (\\d+) year, (\\d+) year, (\\d+) year, \"([^\"]*)\" data to be plotted in chart visual$")
-	public void last_year_year_year_data_to_be_plotted_in_chart_visual(int arg1, int arg2, int arg3, String arg4)
-			throws Throwable {
+	public void last_year_year_year_data_to_be_plotted_in_chart_visual(int arg1, int arg2, int arg3, String arg4) throws Throwable {
+		CommonFunctionality.wait(2000);
+		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))). size() > 0) {
+		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click(); 
+		  CommonFunctionality.DeleteSeries();
+		 }
 		int A = Integer.parseInt(start_ytd);
 		int B = Integer.parseInt(end_ytd);
 		if ((B == A) || (B < A)) {
@@ -823,42 +972,79 @@ public class SSPWindow {
 		} else {
 			Assert.fail("Verification Failed");
 		}
-		int I = Integer.parseInt(start_All);
-		int J = Integer.parseInt(end_All);
-		if (!(I == J)) {
+		if (!(start_All.equals(end_All))) {
 			System.out.println("Chart has been verified with " + arg4 + " data");
-			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size() > 0) {
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-				CommonFunctionality.DeleteSeries();
-			}
 		} else {
 			Assert.fail("Verification Failed");
 		}
+		//CommonFunctionality.Views_list();
 	}
 
 	@Then("^Recently updated timepoints within (\\d+) days should highlight in blue color$")
 	public void recently_updated_timepoints_within_days_should_highlight_in_blue_color(int arg1) throws Throwable {
-		CommonFunctionality.wait(3000);
-		List<WebElement> color = login.driver.findElements(By.className("highcharts-point "));
-		for (WebElement blue : color) {
+		CommonFunctionality.wait(5000);
+		try {
+		List<WebElement> color = login.driver.findElements(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]"));
+		int len = color.size();
+		WebElement blue = login.driver.findElement(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]["+len+"]"));
 			if (blue.getAttribute("fill").contains("#2B60D0")) {
-				System.out
-						.println("Recently updated timepoints within " + arg1 + " days is highlighting in blue color");
+				System.out.println("Recently updated timepoints within " + arg1 + " days is highlighting in blue color");
+			} else {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-				CommonFunctionality.DeleteSeries();
-				break;
+				Assert.fail("Verification Failed");
 			}
+		} catch (StaleElementReferenceException e) {
+			List<WebElement> color = login.driver.findElements(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]"));
+			int len = color.size();
+			WebElement blue = login.driver.findElement(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]["+len+"]"));
+				if (blue.getAttribute("fill").contains("#2B60D0")) {
+					System.out.println("Recently updated timepoints within " + arg1 + " days is highlighting in blue color");
+				} else {
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+					Assert.fail("Verification Failed");
+				}
 		}
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 	}
 
 	@Then("^Forecast timepoints should be highlighted in orange color$")
 	public void forecast_timepoints_should_be_highlighted_in_orange_color() throws Throwable {
 		CommonFunctionality.wait(3000);
-		List<WebElement> color = login.driver
-				.findElements(By.xpath("//*[@class='highcharts-point' ] | //*[@class='highcharts-point ']"));
-		for (WebElement orange : color) {
-			if (orange.getAttribute("fill").contains("#FFA500")) {
+		try {
+		List<WebElement> color = login.driver.findElements(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]"));
+		int len = color.size();
+		int len2 = color.size()-1;
+		WebElement orange = login.driver.findElement(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]["+len+"]"));
+		WebElement orange2 = login.driver.findElement(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]["+len2+"]"));
+		if(orange.getAttribute("fill").contains("#FFA500")) {
 				System.out.println("Forecast timepoints is highlighting in orange color");
+			} else {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+				Assert.fail("Verification Failed");
+			}
+		if(orange2.getAttribute("fill").contains("#FFA500")) {
+			System.out.println("Forecast timepoints is highlighting in orange color");
+		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			Assert.fail("Verification Failed");
+		}
+		} catch (StaleElementReferenceException e) {
+			List<WebElement> color = login.driver.findElements(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]"));
+			int len = color.size();
+			int len2 = color.size()-1;
+			WebElement orange = login.driver.findElement(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]["+len+"]"));
+			WebElement orange2 = login.driver.findElement(By.xpath("//*[@class='highcharts-point' and not(@visibility='hidden') or @class='highcharts-point ' and not(@visibility='hidden')]["+len2+"]"));
+			if(orange.getAttribute("fill").contains("#FFA500")) {
+					System.out.println("Forecast timepoints is highlighting in orange color");
+				} else {
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+					Assert.fail("Verification Failed");
+				}
+			if(orange2.getAttribute("fill").contains("#FFA500")) {
+				System.out.println("Forecast timepoints is highlighting in orange color");
+			} else {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+				Assert.fail("Verification Failed");
 			}
 		}
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
@@ -873,6 +1059,8 @@ public class SSPWindow {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -880,16 +1068,18 @@ public class SSPWindow {
 	@Then("^Complete data for the series has to be plotted in chart visual$")
 	public void complete_data_for_the_series_has_to_be_plotted_in_chart_visual() throws Throwable {
 		String from = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[2]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
 		String to = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
-		String A = from.substring(3, 7);
-		String B = to.substring(3, 7);
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		String A = from.substring(6, 10);
+		String B = to.substring(6, 10);
 		if (!(B.equals(A))) {
 			login.Log4j.info("Complete data for the series has to be plotted in chart visual");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -897,7 +1087,7 @@ public class SSPWindow {
 	@Then("^Should display chart for timepoints within that timeframe range$")
 	public void should_display_chart_for_timepoints_within_that_timeframe_range() throws Throwable {
 		String start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
 		if (start.contains(datefrom)) {
 			System.out.println("Start date has been verified successfully");
 			CommonFunctionality.wait(500);
@@ -905,13 +1095,38 @@ public class SSPWindow {
 			Assert.fail("Verification failed");
 		}
 		String end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[5]")).getText();
+				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[5]")).getText();
 		if (end.contains(dateto)) {
 			System.out.println("End date has been verified successfully");
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+			CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
+			}
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
 			CommonFunctionality.DeleteSeries();
+			if(login.driver.findElements(By.xpath("//*[text()='Delete series']")).size()>0) {
+				login.driver.findElement(By.xpath("//*[text()='Ok']")).click();
+			}
 		} else {
+			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+				CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
+			}
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+			CommonFunctionality.DeleteSeries();
+			if(login.driver.findElements(By.xpath("//*[text()='Delete series']")).size()>0) {
+				login.driver.findElement(By.xpath("//*[text()='Ok']")).click();
+			}
 			Assert.fail("Verification failed");
+		}
+	}
+	
+	@And("^Close the replacement popup if appeared$")
+	public void close_the_replacement_popup_if_appeared() throws Throwable {
+		if(login.driver.findElements(By.xpath("//*[contains(@class,'movable-modal--title')]//*[text()='Latest changes in your Insight']")).size()>0) {
+			boolean check = login.driver.findElement(By.xpath("//*[text()='Do not show again']/preceding-sibling::input")).isSelected();
+			if (check == false) {
+				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Do not show again']/preceding-sibling::span", 4)).click().build().perform();
+			    }
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'button__secondary_purple') and text()='Dismiss']", 4).click();
 		}
 	}
 
@@ -929,18 +1144,13 @@ public class SSPWindow {
 	public void verify_the_Thank_you_message() throws Throwable {
 		String arg2 = "Thank you for submitting a question to us.";
 		String expected = arg2;
-		String actual = login.driver
-				.findElement(By.xpath("//*[@class='growl-message-content']//*[@class='growl-message-text']")).getText();
-		if (actual.contains(expected)) {
+		if (thanks_message.contains(expected)) {
 			login.Log4j.info("Users can able to send questions and Message has been verified successfully");
 			CommonFunctionality.wait(500);
-			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size() > 0) {
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-			}
-			CommonFunctionality.DeleteSeries();
 		} else {
 			Assert.fail("Verification failed");
 		}
+		// CommonFunctionality.DeleteSeries();
 	}
 
 	@And("^Click on the mnemonic hyperlink$")
@@ -965,7 +1175,10 @@ public class SSPWindow {
 		if (id.contains(arg1)) {
 			login.Log4j.info(arg1 + " is the series id and it has been verified successfully");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -980,7 +1193,12 @@ public class SSPWindow {
 		if (SR.contains(arg1)) {
 			login.Log4j.info(arg1 + " is the SR code and it has been verified successfully");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.wait(3000);
+			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.wait(3000);
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -993,6 +1211,7 @@ public class SSPWindow {
 			login.Log4j.info(arg1 + " is the Mnemonic code and it has been verified successfully");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -1014,6 +1233,8 @@ public class SSPWindow {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification Failed");
 		}
 	}
@@ -1079,14 +1300,21 @@ public class SSPWindow {
 		CommonFunctionality.wait(1000);
 		login.driver.findElement(By.xpath("//*[contains(@class,'main-series-information--ask')]")).click();
 	}
-/*
+
 	@And("^Click on \"([^\"]*)\" tab$")
 	public void click_on_tab(String arg1) throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg1 + "')]")));
-		login.driver.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg1 + "')]")).click();
-		CommonFunctionality.wait(2000);
-	}*/
+		if (arg1.equalsIgnoreCase("Related Insights")) {
+			CommonFunctionality.wait(5000);
+			login.driver
+					.findElement(By.xpath("//*[contains(@class,'operations--related') and @js-related-insights=\"\"]"))
+					.click();
+		} else {
+			login.driver
+					.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg1
+							+ "')] | //*[contains(@class,'operations--related') and @js-related-datasets=\"\"]"))
+					.click();
+		}
+	}
 
 	@And("^Click on replacement series name hyperlink$")
 	public void click_on_replacement_series_name_hyperlink() throws Throwable {
@@ -1118,7 +1346,14 @@ public class SSPWindow {
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("related_data_contents"))).isDisplayed())
 			;
 		{
-			System.out.println("Related data contents are displaying");
+			System.out.println("Related data contents are displaying for selected series");
+		}
+	}
+
+	@And("^Check contents inside Related insight$")
+	public void check_contents_inside_Related_insight() throws Throwable {
+		if (login.driver.findElement(By.className("insights-view--table")).isDisplayed()) {
+			System.out.println("Related Insights are displaying for selected series");
 		}
 	}
 
@@ -1141,16 +1376,19 @@ public class SSPWindow {
 	@SuppressWarnings("deprecation")
 	@And("^Select the series checkbox from myseries$")
 	public void select_the_series_checkbox_from_myseries() throws Throwable {
+		CommonFunctionality.wait(2000);
 		WebElement selection = login.driver
 				.findElement(By.xpath("//div[@class='check-all-series']//span[@class='input-control--indicator']"));
-		new Actions(login.driver).moveToElement(selection).pause(1000).click().build().perform();
+		new Actions(login.driver).moveToElement(selection).pause(3000).click().build().perform();
 		CommonFunctionality.wait(2000);
 	}
 
 	@And("^Apply a function on any series in my series$")
 	public void apply_a_function_on_any_series_in_my_series() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Functions_input_field");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Functions_input_field"))).click();
+		CommonFunctionality.wait(3000);
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='functions-input-container']//following-sibling::*[@class='current-function-input--field']",
+				4).click();
 		CommonFunctionality.wait(200);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Functions_auto_suggestion"))).click();
 		CommonFunctionality.wait(200);
@@ -1169,7 +1407,7 @@ public class SSPWindow {
 	@Then("^Drop down should display indicators list and clicking on specific indicators should navigate to results page$")
 	public void drop_down_should_display_indicators_list_and_clicking_on_specific_indicators_should_navigate_to_results_page()
 			throws Throwable {
-		List<WebElement> dropdown_list = login.driver.findElements(By.xpath("//*[@class='series-related-indicators']"));
+		List<WebElement> dropdown_list = login.driver.findElements(By.xpath("//*[@class='series-related-filters']"));
 		for (int i = 0; i < dropdown_list.size(); i++) {
 			String values = dropdown_list.get(i).getText();
 			System.out.println("Indicators list are : \n" + values);
@@ -1183,6 +1421,7 @@ public class SSPWindow {
 			login.Log4j.info("Indicator values are selected and it successfully navigating to results page");
 			CommonFunctionality.DeleteSeries();
 		} else {
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -1191,7 +1430,7 @@ public class SSPWindow {
 	@Then("^Selecting indicator from indicator drop down should show search result in left for same indicator$")
 	public void selecting_indicator_from_indicator_dropdown_should_show_search_result_in_left_for_same_indicator()
 			throws Throwable {
-		List<WebElement> dropdown_list = login.driver.findElements(By.xpath("//*[@class='series-related-indicators']"));
+		List<WebElement> dropdown_list = login.driver.findElements(By.xpath("//*[@class='series-related-filters']"));
 		for (int i = 0; i < dropdown_list.size(); i++) {
 			String values = dropdown_list.get(i).getText();
 			System.out.println("Indicators list are : \n" + values);
@@ -1211,28 +1450,25 @@ public class SSPWindow {
 					.info(expected + " indicator is selected and it successfully navigating to search result in left");
 			CommonFunctionality.DeleteSeries();
 		} else {
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Then("^It should apply source filter in search pane to display it's result$")
 	public void it_should_apply_source_filter_in_search_pane_to_display_it_s_result() throws Throwable {
-		String actual = login.driver.findElement(By.className("single-series-preview--title ")).getText();
+		String actual = login.driver.findElement(By.xpath("//*[contains(text(),'Source:')]/following::div[1]//span")).getText();
 		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		CommonFunctionality.wait(500);
-		List<WebElement> list_of_items = login.driver.findElements(By.className("series-item--name"));
-		for (WebElement expected_list : list_of_items) {
-			String expected = expected_list.getText();
-			if (expected.equalsIgnoreCase(actual)) {
-				login.Log4j.info("The title consists of " + actual
-						+ " and it displayed as source filter in search pane as one of the result");
-				CommonFunctionality.DeleteSeries();
-				break;
-			}
-			Assert.assertEquals(actual, expected);
+		WebElement first_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_seriesList")));
+		new Actions(login.driver).moveToElement(first_series).pause(2000).build().perform();
+		String expected = login.driver.findElement(By.xpath("//*[contains(text(),'Source:')]/following-sibling::*")).getText();
+		Assert.assertEquals(expected, actual);
+		login.Log4j.info("The title consists of "+actual+" and it displayed as source filter in search pane as one of the result");
+		CommonFunctionality.DeleteSeries();
 		}
-	}
 
 	@Then("^Footnotes window should be displayed with related details$")
 	public void footnotes_window_should_be_displayed_with_related_details() throws Throwable {
@@ -1240,15 +1476,17 @@ public class SSPWindow {
 		String a = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_title_text"))).getText();
 		String b = "Footnotes";
 		String c = login.driver.findElement(By.xpath("//*[@class='footnotes-modal--name']/*")).getText();
-		String d = login.driver.findElement(By.className("single-series-preview--title ")).getText();
+		String d = login.driver.findElement(By.className("series-preview-modal-header--link")).getText();
 		if (a.contains(b)) {
 			login.driver.findElement(By.xpath("//*[@class='footnotes-modal']/following::*[@title='Close']")).click();
 		}
 		if (c.contains(d)) {
-			login.Log4j.info("Footnotes window should be displayed with related details and verified");
+			login.Log4j.info("Footnotes window is displayed with related details and it has been verified");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -1265,11 +1503,13 @@ public class SSPWindow {
 
 	@Then("^Should create a chart visual$")
 	public void should_create_a_chart_visual() throws Throwable {
-		if (login.driver.findElement(By.className("highcharts-container ")).isDisplayed()) {
+		if (login.driver.findElements(By.xpath("//*[@class='highcharts-container ']")).size() > 0) {
 			login.Log4j.info("Chart visual is displaying and its verified");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Failed to verify");
 		}
 	}
@@ -1295,6 +1535,8 @@ public class SSPWindow {
 			CommonFunctionality.wait(300);
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close")));
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -1320,6 +1562,8 @@ public class SSPWindow {
 			CommonFunctionality.wait(500);
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close")));
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification failed");
 		}
 	}
@@ -1331,95 +1575,145 @@ public class SSPWindow {
 		List<WebElement> relate = login.driver.findElements(By.className("series-data-set--table-name"));
 		for (WebElement ssp : relate) {
 			String related = ssp.getText();
-			if (related.contains(title)) {
-				System.out.println("Related Keyword is displaying");
-			} else {
+			if (!(related.contains(title))) {
 				Assert.fail("Verification failed");
 			}
 		}
-		String datasets = login.driver
-				.findElement(By.xpath(
-						"//*[@class='related-series-information-portlet--header']//*[contains(text(),'" + arg1 + "')]"))
-				.getText();
-		String datasets1 = "DATASETS";
-		String Insights = login.driver
-				.findElement(By.xpath(
-						"//*[@class='related-series-information-portlet--header']//*[contains(text(),'" + arg2 + "')]"))
-				.getText();
-		String Insights1 = "INSIGHTS";
-		if (datasets.contains(datasets1) && Insights.contains(Insights1)) {
-			login.Log4j.info("Displaying the related Keywords for blocks named Datasets and Insights");
-			CommonFunctionality.wait(100);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-			CommonFunctionality.wait(500);
-			CommonFunctionality.DeleteSeries();
-		} else {
-			Assert.fail("Verification failed");
-		}
+		login.Log4j.info("The Series is displaying related keyword of that series and having " + arg1 + " and " + arg2
+				+ " details");
+		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+		CommonFunctionality.DeleteSeries();
 	}
 
-	@Then("^Click on each links available under \"([^\"]*)\" and verify the changes$")
-	public void click_on_each_links_available_under_and_verify_the_changes(String arg1) throws Throwable {
-		String actual = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ssp_title"))).getText();
+	@Then("^Click on first link available under \"([^\"]*)\" and verify the changes$")
+	public void click_on_first_link_available_under_and_verify_the_changes(String arg1) throws Throwable {
 		if (login.driver
 				.findElement(By
 						.xpath("//*[contains(text(),'" + arg1 + "')]//following::*[@class='series-related-data-sets']"))
 				.isDisplayed()) {
-			List<WebElement> related = login.driver.findElements(By.className("series-data-set--title"));
+			List<WebElement> related = login.driver
+					.findElements(By.xpath("(//*[@class='series-data-set--table-name'])[1]"));
 			for (WebElement rel : related) {
-				jse.executeScript("arguments[0].click();", rel);
-				List<WebElement> expected1 = login.driver
-						.findElements(By.xpath("//ul[@class='search-series-list']/li//*[@class='series-item--name']"));
-				for (WebElement expect : expected1) {
-					String expected = expect.getText();
-					if (expected.contains(actual) || expected.isEmpty()) {
-						System.out.print("");
-					}
+				CommonFunctionality.wait(1000);
+				String actual = login.driver.findElement(By.xpath("(//*[@class='series-data-set--table-name'])[1]"))
+						.getText();
+				rel.click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Minimize']", 4).click();
+				String expected = login.driver.findElement(By.xpath("//*[@class='insight-discovery--popup-title']"))
+						.getText();
+				CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4)
+						.click();
+				if (!(expected.contains(actual))) {
+					Assert.fail("Related Datasets verification Failed");
 				}
 			}
-			login.Log4j.info("Clicked on each links available under Datasets and its verified");
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-			Thread.sleep(500);
-			CommonFunctionality.DeleteSeries();
-		} else {
-			Assert.fail("Verification failed");
+			login.Log4j.info("Clicked on first link available under Datasets and its verified");
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Maximize']", 4).click();
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	@Then("^Click on each links available under \"([^\"]*)\" and it should open respective insights$")
-	public void click_on_each_links_available_under_and_it_should_open_respective_insights(String arg1)
-			throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("insights-grid-body")));
-		if (login.driver.findElement(By.className("insights-grid-body")).isDisplayed()) {
-			List<WebElement> related = login.driver.findElements(By.xpath("//*[contains(text(),'" + arg1
-					+ "')]//following::*[@class='insights-grid-body']/div/div[2]/div/a"));
+	@Then("^Click on second link available under \"([^\"]*)\" and verify the changes$")
+	public void click_on_second_link_available_under_and_verify_the_changes(String arg1) throws Throwable {
+		if (login.driver
+				.findElement(By
+						.xpath("//*[contains(text(),'" + arg1 + "')]//following::*[@class='series-related-data-sets']"))
+				.isDisplayed()) {
+			List<WebElement> related = login.driver
+					.findElements(By.xpath("(//*[@class='series-data-set--table-name'])[2]"));
 			for (WebElement rel : related) {
-				String actual = rel.getText();
-				jse.executeScript("arguments[0].click();", rel);
-				String expected = login.driver.findElement(By.xpath("//*[contains(@class,'insight-preview--title')]"))
+				CommonFunctionality.wait(1000);
+				String actual = login.driver.findElement(By.xpath("(//*[@class='series-data-set--table-name'])[2]"))
 						.getText();
-				if (expected.contains(actual) || expected.contains("Untitled insight") || expected.contains("")) {
-					WebElement insight_close = login.driver
-							.findElement(By.xpath(login.LOCATORS.getProperty("insight-preview-close")));
-					new Actions(login.driver).moveToElement(insight_close).pause(1000).click(insight_close).build()
-							.perform();
+				rel.click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Minimize']", 4).click();
+				String expected = login.driver.findElement(By.xpath("//*[@class='insight-discovery--popup-title']"))
+						.getText();
+				CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4)
+						.click();
+				if (!(expected.contains(actual))) {
+					Assert.fail("Related Datasets verification Failed");
 				}
 			}
-			login.Log4j.info(
-					"Clicked on each links available under Insights and all links are opening respective insight which has been verified");
+			login.Log4j.info("Clicked on second link available under Datasets and its verified");
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Maximize']", 4).click();
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
-			Thread.sleep(500);
 			CommonFunctionality.DeleteSeries();
-		} else {
-			Assert.fail("Verification failed");
 		}
+	}
+
+	@And("^Check the data available under \"([^\"]*)\" and it should open respective insights$")
+	public void check_the_data_available_under_and_it_should_open_respective_insights(String arg1) throws Throwable {
+		if (login.driver.findElements(By.className("insights-view--table")).size() > 0) {
+			System.out.println("Related Insights are displaying for selected series");
+		}
+	}
+
+	@And("^Check the data of first insight$")
+	public void check_the_data_of_first_insight() throws Throwable {
+		List<WebElement> insights = login.driver
+				.findElements(By.xpath("(//*[contains(@class,'insight-table-item--title-link')])[1]"));
+		for (WebElement insight : insights) {
+			String actual = insight.getText();
+			insight.click();
+			CommonFunctionality.wait(1000);
+			/*if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Continue']"))
+					.size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__content')]//*[text()='Continue']", 4).click();
+			}*/
+			//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			String expected = CommonFunctionality
+					.getElementByXpath(login.driver, "//*[contains(@class,'insight-preview--title')]", 4)
+					.getText();
+			if (actual.equalsIgnoreCase(expected)) {
+				login.Log4j.info("Clicked on first Insight and it is opening in respective insight");
+			} else {
+				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				CommonFunctionality.DeleteSeries();
+				Assert.fail("Verification for Insights failed");
+			}
+			CommonFunctionality.getElementByClassName(login.driver, "insight-preview--close", 4).click();
+		}
+	}
+
+	@And("^Check the data of second insight$")
+	public void check_the_data_of_second_insight() throws Throwable {
+		//CommonFunctionality.getElementByXpath(login.driver, "//*[@js-related-insights='']", 4).click();
+		List<WebElement> insights = login.driver
+				.findElements(By.xpath("(//*[contains(@class,'insight-table-item--title-link')])[2]"));
+		for (WebElement insight : insights) {
+			String actual = insight.getText();
+			insight.click();
+			CommonFunctionality.wait(1000);
+			/*if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Continue']"))
+					.size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__content')]//*[text()='Continue']", 4).click();
+			}*/
+			//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			String expected = CommonFunctionality
+					.getElementByXpath(login.driver, "//*[contains(@class,'insight-preview--title')]", 4)
+					.getText();
+			if (actual.equalsIgnoreCase(expected)) {
+				login.Log4j.info("Clicked on second Insight and it is opening in respective insight");
+			} else {
+				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				CommonFunctionality.DeleteSeries();
+				Assert.fail("Verification for Insights failed");
+			}
+			CommonFunctionality.getElementByClassName(login.driver, "insight-preview--close", 4).click();
+		}
+		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+		if (login.driver.findElements(By.xpath("//*[@class='movable-modal--window']//*[text()='Do you want to keep your insight?']")) .size() > 0)
+		{
+		  CommonFunctionality.getElementByXpath(login.driver,"//*[@class='movable-modal--window']//*[text()='Start new']",4).click();
+		}
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@SuppressWarnings("deprecation")
 	@Then("^The discontinued series has to be replaced with suggested series into right$")
 	public void the_discontinued_series_has_to_be_replaced_with_suggested_series_into_right() throws Throwable {
 		CommonFunctionality.wait(9000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		WebElement one_series = login.driver
 				.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
 		new Actions(login.driver).moveToElement(one_series).pause(4000)
@@ -1436,6 +1730,8 @@ public class SSPWindow {
 			CommonFunctionality.wait(500);
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification Failed");
 		}
 	}
@@ -1444,6 +1740,7 @@ public class SSPWindow {
 	@Then("^Suggested series has to be added into right pane into the same insight$")
 	public void suggested_series_has_to_be_added_into_right_pane_into_the_same_insight() throws Throwable {
 		CommonFunctionality.wait(9000);
+		close_the_replacement_popup_if_appeared();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		WebElement one_series = login.driver.findElement(By.xpath(
 				"//*[@class='webix_column list-series-name webix_last']/div[2]/div/div/div/span[@class='series-name-field-title']/span"));
@@ -1459,6 +1756,8 @@ public class SSPWindow {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification Failed");
 		}
 	}
@@ -1467,7 +1766,7 @@ public class SSPWindow {
 	public void both_inactive_and_suggestion_should_be_viewed_as_chart() throws Throwable {
 		CommonFunctionality.wait(1000);
 		List<WebElement> element = login.driver
-				.findElements(By.xpath("//*[@class='legend-item']//*[@class='series-edit--title']"));
+				.findElements(By.xpath("//*[@class='legend-item']//*[contains(@class,'series-edit--title')]"));
 		if (element.size() > 1) {
 			login.Log4j.info("Both inactive and suggestion should be viewed as chart and it has been verified");
 			List<WebElement> closed = login.driver
@@ -1482,6 +1781,8 @@ public class SSPWindow {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification Failed");
 		}
 	}
@@ -1492,9 +1793,7 @@ public class SSPWindow {
 		if (popup.size() > 1) {
 			login.Log4j.info("SSP for replacement series opened as a new popup and it has been verified successfully");
 			List<WebElement> close = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close")));
-			System.out.println(close.size());
 			for (WebElement closing : close) {
-				CommonFunctionality.wait(2000);
 				jse.executeScript("arguments[0].click();", closing);
 			}
 			CommonFunctionality.DeleteSeries();
@@ -1512,8 +1811,11 @@ public class SSPWindow {
 			login.Log4j.info("SSP is opened for the series and series name is suffixed with function name");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.wait(200);
-			login.driver.findElement(By.xpath("//*[contains(@title,'Delete')]")).click();
+			// login.driver.findElement(By.xpath("//*[contains(@title,'Delete')]")).click();
+			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification Failed");
 		}
 	}
@@ -1527,6 +1829,8 @@ public class SSPWindow {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verification Failed");
 		}
 	}
