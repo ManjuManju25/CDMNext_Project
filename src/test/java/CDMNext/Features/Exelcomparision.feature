@@ -4,6 +4,7 @@ Background:
    
 @UI
 Scenario: TC_01:Verifying Date drop down for available options
+    And Check for prerequesties		
     And User Select Series ID  as "310902301"
     And Select Download button
     And Select Date drop down
