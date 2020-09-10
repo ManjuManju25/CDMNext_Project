@@ -7531,3 +7531,18 @@ Inside setup
 Inside setup
 2020-09-10 18:38:15 INFO  Log4j:242 - Reusing same driver..
 2020-09-10 18:38:15 INFO  Log4j:63 - If User has already logged in pelase continue....
+2020-09-10 18:58:46 INFO  Log4j:29 - 
+Inside TestNG > @BeforeSuite
+2020-09-10 18:58:46 INFO  Log4j:47 - 
+Inside TestNG > @DataProvider
+2020-09-10 18:58:47 INFO  Log4j:39 - 
+Inside TestNG > @Test
+2020-09-10 18:58:48 INFO  Log4j:238 - Logger initialized and writing using logger
+2020-09-10 18:58:48 INFO  Log4j:239 - 
+Inside setup
+2020-09-10 18:58:55 INFO  Log4j:58 - It is in else If block
+2020-09-10 18:59:03 INFO  Log4j:202 - Launching site .. 
+2020-09-10 18:59:03 INFO  Log4j:204 - Trying to login with Username:
+2020-09-10 18:59:04 INFO  Log4j:208 - Trying to login with Password:
+2020-09-10 18:59:05 INFO  Log4j:211 - Clicking on login button 
+2020-09-10 18:59:16 INFO  Log4j:74 - searching with 261968101
