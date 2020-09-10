@@ -7,18 +7,19 @@ import java.io.FileInputStream;
 import java.lang.reflect.Method;
 //import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+//import java.util.logging.Level;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 //import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -27,14 +28,15 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 //import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-
+import CDMNext.util.CommonFunctionality;
+import CDMNext.util.ErrorScreenshot;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class login {
 	public static WebDriver driver;
@@ -89,9 +91,11 @@ public class login {
 
 	@Before
 	public void setup() throws Throwable {
-		driver.manage().deleteAllCookies();
+		//driver.manage().deleteAllCookies();
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
 		logged_in = false;
+		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger("org.apache.http");
+	    root.setLevel(ch.qos.logback.classic.Level.INFO);
 		// day = date.get(Calendar.DAY_OF_MONTH);
 		// month = date.get(Calendar.MONTH);
 		// year = date.get(Calendar.YEAR);
@@ -102,8 +106,9 @@ public class login {
 	}
 
 	@After
-	public void tearDownClass() throws Exception {
-		System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
+	public void tearDownClass(Scenario scenario) throws Exception {
+		ErrorScreenshot.takeScreenshotOnFailure(scenario);
+//		System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
 		// driver.quit();
 
 	}
@@ -117,7 +122,7 @@ public class login {
 
 	@And("^Enters username \"([^\"]*)\"$")
 	public void enters_username(String username) throws Throwable {
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		driver.findElement(By.name("user-id")).clear();
 		Log4j.info("Trying to login with Username:" + username);
 		driver.findElement(By.name("user_id")).sendKeys(username);
@@ -126,6 +131,7 @@ public class login {
 
 	@And("^Enters password \"([^\"]*)\"$")
 	public void enters_password(String password) throws Throwable {
+		Thread.sleep(1000);
 		driver.findElement(By.name("password")).clear();
 		Log4j.info("Trying to login with Password:" + password);
 		driver.findElement(By.name("password")).sendKeys(password);
@@ -134,11 +140,12 @@ public class login {
 
 	@When("^User clicks on \"([^\"]*)\"$")
 	public void user_clicks_on(String arg1) throws Throwable {
-
+		Thread.sleep(2000);
 		switch (arg1) {
 		case "login":
 			Log4j.info("Clicking on login button ");
 			driver.findElement(By.xpath(LOCATORS.getProperty("btnLogin"))).click();
+			Thread.sleep(2000);
 			break;
 		case "download":
 			break;
@@ -148,7 +155,7 @@ public class login {
 
 	@Then("^Application login should be successful$")
 	public void application_login_should_be_successful() throws Throwable {
-		// Thread.sleep(2000);
+		 Thread.sleep(2000);
 		WebElement downloadButton = driver.findElement(By.cssSelector(LOCATORS.getProperty("download")));
 		Log4j.info("Is 'Download' button displayed? - True/False:: " + downloadButton.isDisplayed());
 		Assert.assertEquals(true, downloadButton.isDisplayed());
@@ -239,10 +246,10 @@ public class login {
 		if (CONFIG.getProperty("browserType").equals("Mozilla")) {
 			DesiredCapabilities capa = DesiredCapabilities.firefox();
 			capa.setCapability("marionette", true);
-			WebDriverManager.firefoxdriver().setup();
-//			System.setProperty("webdriver.gecko.driver",
-//					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\geckodriver.exe");
-
+			//WebDriverManager.firefoxdriver().setup();
+			System.setProperty("webdriver.gecko.driver",
+					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\geckodriver.exe");
+			System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"null");
 			driver = new FirefoxDriver(capa);
 
 			driver.manage().window().maximize();
@@ -274,14 +281,18 @@ public class login {
 			driver = new InternetExplorerDriver(capabilities);
 
 		} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("CHROME")) {
+			//disableSeleniumLogs();
 			// Killing the running chromedriver instances
 			WindowsUtils.killByName("chromedriver.exe");
 			 //setup the chromedriver using WebDriverManager
-	        WebDriverManager.chromedriver().version("79.0.3945.36").setup();
-//			System.setProperty("webdriver.chrome.driver",
-//					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
+		//	WebDriverManager.chromedriver().version("83").setup();
+			System.setProperty("webdriver.chrome.driver",
+					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
+			//disable chrome logs
+			System.setProperty("webdriver.chrome.silentOutput","true");
 			ChromeOptions options = new ChromeOptions();
-			// Added this for downloading files into default project folder
+			options.addArguments("--incognito");
+			/*// Added this for downloading files into default project folder
 			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 			chromePrefs.put("profile.default_content_settings.popups", 0);
 			chromePrefs.put("download.default_directory", System.getProperty("user.dir"));
@@ -292,7 +303,7 @@ public class login {
 			// To disable infobars
 		
 			 options.setExperimentalOption("useAutomationExtension", false);
-			options.setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"));
+			options.setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"));*/
 			driver = new ChromeDriver(options);
 		
 		}
@@ -303,5 +314,32 @@ public class login {
 		driver.manage().timeouts().setScriptTimeout(implicitWaitTime, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
+	//Method for disabling ChromeDriverService loggers
+	public static void disableSeleniumLogs() {    
+	    System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+	    Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
+	}
+	public static void flex_application_login() throws InterruptedException {
+		driver.get(CONFIG.getProperty("testsiteURL"));
+		Log4j.info("Launching site");
+		CommonFunctionality.getElementByProperty(driver, "input_username", 1).clear();
+		CommonFunctionality.getElementByProperty(driver, "input_username", 1)
+				.sendKeys(CONFIG.getProperty("flex_username"));
+		Log4j.info("Login with Flex Username");
+		CommonFunctionality.getElementByProperty(driver, "input_password", 1).clear();
+		CommonFunctionality.getElementByProperty(driver, "input_password", 1)
+				.sendKeys(CONFIG.getProperty("flex_password"));
+		Log4j.info("Login with Flex Password");
+		boolean login = CommonFunctionality.getElementByXpath(driver, "//*[@class='form-group']//*[@class='btn']", 1)
+				.isEnabled();
+		if (login == true) {
+			WebElement signin = CommonFunctionality.getElementByProperty(driver, "btnLogin", 1);
+			signin.click();
 
+			Log4j.info("Clicking on login button");
+		} else {
+			Assert.fail("Login failure");
+		}
+		logged_in = true;
+	}
 }

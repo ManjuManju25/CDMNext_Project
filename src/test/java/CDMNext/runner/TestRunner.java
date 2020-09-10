@@ -12,12 +12,13 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Commentary1" }, 
+		tags = {"@Attachments"}, 
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
-				 "json:target/cucumber-reportsa/CucumberTestReport.json",
-				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html", })
+			//	 "json:target/cucumber-reportsa/CucumberTestReport.json",
+				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
+				})
 public class TestRunner {
 
 	private TestNGCucumberRunner testNGCucumberRunner;
@@ -41,7 +42,7 @@ public class TestRunner {
 		// .runScenario(eventwrapper.getPickleEvent());
 
 	}
-
+	
 	@DataProvider
 	public Object[][] features() {
 		login.Log4j.info("\nInside TestNG > @DataProvider");

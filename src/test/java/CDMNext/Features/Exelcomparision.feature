@@ -15,7 +15,7 @@ Scenario: TC_02:Verifying default decimal place
     And Select Download button
     Then default decimal place to be as 3
 
-@UI     
+@UI    
 Scenario: TC_03:Verifying available range of decimal places
     And User Select Series ID  as "310902301"
     And Select Download button
@@ -89,7 +89,7 @@ Scenario: TC_15:Verifying Timeframe options
     And Select Download button
    Then Sample=10 should be the default timeframe option
  
-@ExelDatacomparision   
+@ExelDatacomparision
 Scenario: TC_19:Verifying Date format as Automic date format
       And User Select Series ID  as "310902301"
       And Select Download button	
@@ -105,7 +105,7 @@ Scenario: TC_19:Verifying Date format as Automic date format
 ########     And User1 Compare "TC_02" exel sheet with Actual data   
 ####
 
-@ExelDatacomparision         
+@ExelDatacomparision        
   Scenario Outline: TC_20:Verifying Date format as Custom date format
      And User Select Series ID  as "310902301" 
      And Select Download button
@@ -116,13 +116,13 @@ Scenario: TC_19:Verifying Date format as Automic date format
         Examples:
      
         | formatinput                    | TC_No            |  
-         |"DD-MM-YY"                      | "TC_20"          | 
+        |"DD-MM-YY"                      | "TC_20"          | 
         |"ddd,MMM DD,YYYY"               | "TC_21"          | 
-         |"D-MMM-YYYY"                    | "TC_22"          | 
+        |"D-MMM-YYYY"                    | "TC_22"          | 
          |"MM/YYYY"                       | "TC_23"          | 
         |"YYYY"                          | "TC_24"          | 
       
- @ExelDatacomparision     
+ @ExelDatacomparision
 Scenario: TC_25:Verifying Decimal place option as 0
      And User Select Series ID  as "310902301"
      And Select Download button
@@ -153,12 +153,13 @@ Scenario: TC_28:Verifying Data order Series in Rows as Descending
      And Select Data order as  Descending  
      And Compare "TC_28" exel sheet with Actual data
 
-@ExelDatacomparision 
+@ExelDatacomparision
 Scenario: TC_29:Verifying Start Date and End Date
      And User Select Series ID  as "310902301"
-     And Select Download button
+     And get the Series name
+    And Select Download button
      And Select on Range
-     And Select the Start Date as "01-01-2000" and End Date "01-01-2001"
+    And Select the Start Date as "2000-01-01" and End Date "2001-01-01"
      And Compare "TC_29" exel sheet with Actual data
 
 @ExelDatacomparision
@@ -174,7 +175,7 @@ Scenario: TC_31: Verifying ALL Series Attributes
      And Select Download button
      And Compare "TC_31" exel sheet with Actual data
      
-@ExelDatacomparision 
+@ExelDatacomparision
 Scenario: TC_32: Verifying Output series details with Filter out dates with no observations with Selected Attributes
      And User Select Series ID  as "310902301"
      And Select Download button
@@ -182,7 +183,7 @@ Scenario: TC_32: Verifying Output series details with Filter out dates with no o
      And Select the Selected Attributes    
     And Compare "TC_32" exel sheet with Actual data
 
-@ExelDatacomparision  
+@ExelDatacomparision 
 Scenario: TC_33:Verifying Output series details with Leave as Blank with Selected Attributes
      And User Select Series ID  as "310902301"
     And Select Download button
@@ -225,7 +226,7 @@ Scenario: TC_37: Verifying Download with Automatic date format + Series in Colum
     And Select Filter out dates with no observations
     And Compare "TC_37" exel sheet with Actual data
     
-@ExelDatacomparision     
+@ExelDatacomparision    
 Scenario: TC_38: Verifying Download with Automatic date format + Series in Columns + Descending + All Attributes + Filter Blanks with Leave as Blank
     And User Select Series ID  as "310902301"
     And Select Download button
@@ -353,7 +354,7 @@ Scenario: TC_49:Verifying Download with Custom date format + Series in Columns +
     And deSelect Series Attributes 
     And Compare "TC_50" exel sheet with Actual data
 
-@ExelDatacomparision        
+@ExelDatacomparision         
 Scenario: TC_51:Verifying Download with Custom date format + Series in Columns + Ascending + Selected Attributes  + Fill with NA
     And User Select Series ID  as "310902301"
     And Select Download button
@@ -388,7 +389,7 @@ Scenario: TC_53:Verifying Download with Custom date format + Series in Columns +
     And Compare "TC_53" exel sheet with Actual data
 
 
-@ExelDatacomparision 
+@ExelDatacomparision
   Scenario: TC_54:Verifying the function CurrencyConversion using an unsupported currency.
     And User Select Series ID  as "310902301"
     And Select Download button
@@ -409,7 +410,7 @@ Scenario: TC_55:Verifying the function Disaggregate.
     And Select the Selected Attributes
     And Compare "TC_55" exel sheet with Actual data
 
-@ExelDatacomparision     
+@ExelDatacomparision    
   Scenario: TC_56: Verifying the function Natural log.
      And User Select Series ID  as "310902301"
      And Select Download button
@@ -429,18 +430,18 @@ Scenario: TC_55:Verifying the function Disaggregate.
      And Select the Selected Attributes
      And Compare "TC_57" exel sheet with Actual data
 
-@ExelDatacomparision      
+@ExelDatacomparision   
  Scenario: TC_58:Verifying the function SUM.
      And User Select Series ID  as "310902301"
-     And add Series
+     #And add Series
      And Select Download button
-     And Verify the Function as "SUM" 
+     And Select the Function as "SUM" 
      And Select the Applay button
      And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
      And Select the Selected Attributes
      And Compare "TC_58" exel sheet with Actual data
 
-@ExelDatacomparision       
+@ExelDatacomparision      
 Scenario: TC_59: Verifying Download with no end date with Leave as Blank
      And User Select Series ID  as "310902301"
       And Select Download button
@@ -449,11 +450,11 @@ Scenario: TC_59: Verifying Download with no end date with Leave as Blank
      And Select the Selected Attributes
      And Compare "TC_59" exel sheet with Actual data
     
-@ExelDatacomparision 
+@ExelDatacomparision
 Scenario: TC_62:Verifying the Data download with wrap text format.
      And User Select Series ID  as "310902301"
      And Select Download button
-     And Select the Start Date as "01-01-2000" and End Date "2004-01-01"
+     And Select the Start Date as "2000-01-01" and End Date "2004-01-01"
      And Select the  Adjust columns as wrap text
      And Select the Selected Attributes
      And Compare "TC_62" exel sheet with Actual data
@@ -475,7 +476,7 @@ Scenario: TC_64:Verifying Download with observation 10 by Selecting only Series 
      And uncheck the Date column
      And Compare "TC_64" exel sheet with Actual data
 
-@ExelDatacomparision     
+@ExelDatacomparision    
 Scenario: TC_65:Verifying Download Series in Rows with Selecting only Series name with Time frame 
      And User Select Series ID  as "310902301"
      And Select Download button
@@ -484,7 +485,7 @@ Scenario: TC_65:Verifying Download Series in Rows with Selecting only Series nam
      And uncheck the Date column
      And Compare "TC_65" exel sheet with Actual data
 
-@ExelDatacomparision     
+@ExelDatacomparision    
 Scenario: TC_66:Verifying Download Series in Rows with No End date  
      And User Select Series ID  as "310902301"
      And Select Download button
@@ -494,7 +495,7 @@ Scenario: TC_66:Verifying Download Series in Rows with No End date
      And deSelect Series Attributes
      And Compare "TC_66" exel sheet with Actual data
 
-@ExelDatacomparision     
+@ExelDatacomparision    
   Scenario: TC_67:Verifying Download with applied function along with Series Name in row wise  
      And User Select Series ID  as "310907701"
      And Select Download button
@@ -513,7 +514,7 @@ Scenario: TC_66:Verifying Download Series in Rows with No End date
        And Select Decimal input-4
        And Compare "TC_68" exel sheet with Actual data
  
-@ExelDatacomparision 
+@ExelDatacomparision
 Scenario: TC_69:Verifying Download Series in Columns- with Decimal points =4 with Date coloumn Select with No attribute
     And User Select Series ID  as "310907701"
     And Select Download button
@@ -574,7 +575,7 @@ Scenario: TC_69:Verifying Download Series in Columns- with Decimal points =4 wit
     And uncheck the Date column
     And Compare "TC_74" exel sheet with Actual data
   
-@ExelDatacomparision     
+@ExelDatacomparision    
  Scenario: TC_75:Verifying Download by Selecting Only Time Points without Series Name and Date Stamp
     And User Select Series ID  as "310907701"
     And Select Download button
@@ -617,7 +618,7 @@ Scenario: TC_78:Verifying Download by Selecting Selected Attributes
       And uncheck the Date column
       And Compare "TC_78" exel sheet with Actual data
       
-@FormatVerification     
+@FormatVerification  
 Scenario: TC_79:Downloading data in CSV Format from Selection
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
       And Add to Right panel
@@ -625,7 +626,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
       And select the "csv" format
       Then download should be Sucess
    
-@FormatVerification   
+@FormatVerification
  Scenario: TC_80:Downloading Table created from view tab into Excel format
        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
        And Create a Table 
@@ -633,15 +634,15 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
        And select the "xlsx" format 
        Then Tabel download should be Sucess
 
-#@FormatVerification   
-# Scenario: TC_81:Downloading Map created from view tab into Excel format
-#       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
-#       And Create a Map 
-#       And Select Download Button
-#       And select the "xlsx" format 
-#       Then Map download should be Sucess
+@FormatVerification
+ Scenario: TC_81:Downloading Map created from view tab into Excel format
+       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
+       And Create a Map 
+       And Select Download Button
+       And select the "xlsx" format 
+       Then Map download should be Sucess
    
-@FormatVerification    
+@FormatVerification 
    Scenario: TC_82:Downloading Chart created from view tab into Excel format.
         And User Select  Multiple Series ID  as "310901701;310901801;310902601"
         And Create a Chart
@@ -665,7 +666,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
         And select the "jpeg" format   
         Then Tabel download should be Sucess
    
-@FormatVerification    
+@FormatVerification  
    Scenario: TC_85:Downloading Table created from view tab in format = "PNG".
        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
        And Create a Table
@@ -673,7 +674,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
        And select the "png" format   
        Then Tabel download should be Sucess 
    
-@FormatVerification    
+@FormatVerification  
     Scenario: TC_86:Downloading Chart created from view tab in format = "JPEG".
        And User Select  Multiple Series ID  as "310901701;310901801;310902601"
        And Create a Chart
@@ -681,7 +682,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
        And select the "jpeg" format   
       Then Chart download should be Sucess
 
-@FormatVerification      
+@FormatVerification     
       Scenario: TC_87:Downloading Chart created from view tab in format = "PNG".
         And User Select  Multiple Series ID  as "310901701;310901801;310902601"
         And Create a Chart
@@ -707,8 +708,8 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
       And Select the Selected Attributes
       And Compare "TC_89" exel sheet with Actual data  
     
-  
-  @ExelDatacomparision      
+ 
+  @ExelDatacomparision
       Scenario: TC_90:Verifying Download with specific download settings: Date order - Descending,Orientation- rows, Show - only date column, Blank observation - Leave as blank.
       And User Select  Multiple Series ID  as "310901701;310902601;310901801"
       And Add to Right panel
@@ -718,7 +719,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
       And Select Leave as Blank  
      And Compare "TC_90" exel sheet with Actual data    
      
-     @ExelDatacomparision      
+     @ExelDatacomparision     
       Scenario: TC_91:Verifying Download with Series Statistics.
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
        And Add to Right panel
@@ -737,7 +738,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
       And Select All button
       And Compare "TC_92" exel sheet with Actual data    
       
-@ExelDatacomparision      
+@ExelDatacomparision   
       Scenario: TC_93:Verifying Download data into excel with timeframe Specific period.
         And User Select Series ID  as "310902301"
         And Select Download button
@@ -745,7 +746,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
        And Select the Start Date as "01-03-2003" and End Date "2011-03-01"
       And Compare "TC_93" exel sheet with Actual data   
       
- @ExelDatacomparision      
+ @ExelDatacomparision    
       Scenario: TC_94:Verifying Download data into excel with timeframe Specific Sample as No of observation = 10.
         And User Select Series ID  as "310902301"
         And Select Download button
@@ -758,9 +759,9 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
 ##        And Select Download button
 #      #And User1 Select pop up Download button 
 #        # And Compares "TC_96" exel sheet with Actual data   
-#        
+       
 
-    @UI      
+    @UI    
       Scenario: TC_97:Verifying Reset button of download settings window.
         And User Select Series ID  as "310902301"
         And Select Download button
@@ -773,14 +774,14 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
         And Reset button should Successfully work 
   
      
-      @ExelDatacomparision      
+     @ExelDatacomparision
       Scenario: TC_98:Verifying Download by selecting separator.
         And User Select  Multiple Series ID  as "310901701;310901801;310902601"
         And Add to Right panel
         And select the "Separator"
       And Select Download button
      And Compare "TC_98" exel sheet with Actual data 
-
+  
 
    @UI      
       Scenario: TC_99:Verifying Cancel button in the Download Window.
@@ -788,14 +789,14 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
        And Select Download button  
        And Sucessfully verify the Cancel button
    
-  @UI      
+  @UI    
       Scenario: TC_100:Verify Attributes Srcode exist or not.
         And User Select Series ID  as "310902301"
        And Select Download button  
        And Sucessfully verify the Srcode exist or not
          
             
-@ExelDatacomparision      
+@ExelDatacomparision     
        Scenario: TC_101:Apply function through the function tab Present on the My series panel.
           And User Select  Multiple Series ID  as "310901701;310901801;310902601"
          And Add to Right panel
@@ -815,7 +816,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select the Applay button  
        And Compare "TC_102" exel sheet with Actual data  
           
- @UI      
+ @UI1      
      Scenario: TC_103: Verifying order of series selection to download when series selected from both search and myseries.
         And User Select Series ID  as "310902301"
         And Select series from Series and myseries
@@ -829,19 +830,19 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
 ###         #And Select Download button    
 #
             
-     @UI      
+     @UI1      
      Scenario: TC_105: verify state of download button when there are no series in myseries/no views.
         And User verify state of download button when there are no series in myseries/no views
 
 
-@FormatVerification       
+@FormatVerification123  
      Scenario: TC_110: Verify the formats available for visual download.
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
         And Create a Table 
         And Select Download Button    
        And  verify the available formats 
          
- @FormatVerification       
+ @FormatVerification      
      Scenario: TC_111: Verify the Download table visual to Excel Format.
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
         And Create a Table 
@@ -850,7 +851,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
         Then Tabel download should be Sucess   
 
         
- @FormatVerification       
+ @FormatVerification  
      Scenario: TC_112: Verify the Download table visual to PNG Format.
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
       And Create a Table 
@@ -867,7 +868,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
      And select the "jpeg" format 
       Then Tabel download should be Sucess       
 
-@FormatVerification       
+@FormatVerification   
      Scenario: TC_114: Verify the formats available for views download.
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
       And Create a Table 
@@ -889,21 +890,21 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
       And select the "pdf" format 
      Then Tabel download should be Sucess  
 
-     @UI   
+     @UI  
    Scenario: TC_124: Verify whether Data referesh option is checked by deault.
       And User Select Series ID  as "310911001"
       And Select Download Button
       And Verify Data referesh option is checked by deault
 
 
-    @ExelDatacomparision  
+    @ExelDatacomparision
    Scenario: TC_125: verify download option in right click context menu from search database tree.
       And User Search for Series ID  as "310919001"
       And Expand the database tree 
       And select the download by right click option from database tree
       And Compare "TC_125" exel sheet with Actual data
 
-   @ExelDatacomparision  
+   @ExelDatacomparision
    Scenario: TC_126: verify download option in right click context menu from series tab .
       And User Select Series ID  as "310918701"
       And select the download by right click option from series tab
@@ -916,32 +917,32 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
         And Compare "TC_127" exel sheet with Actual data  
  
  
- @ExelDatacomparision  
+ @ExelDatacomparision
    Scenario: TC_128: verify download option in right click option under file menu option.
      And User Select Series ID  as "310918701"
       And select the download present in the File menu option
       And Compare "TC_128" exel sheet with Actual data  
      
-     @ExelDatacomparision  
+     @ExelDatacomparision
    Scenario: TC_129: verify download option from SSP window.
      And User Select Series ID  as "310918701"
       And select the download present from SSP window
        And Compare "TC_129" exel sheet of SSP window with Actual data 
 
-      @ExelDatacomparision  
+     @ExelDatacomparision
    Scenario: TC_130: verify download option from Footnotes window.
      And User Select Series ID  as "1355101"
       And select the download present from Footnotes window 
        Then Download option from Footnotes window should be Sucess   
 
 
-      @ExelDatacomparision  
+      @ExelDatacomparision
    Scenario: TC_131: verify download option in right click context menu from Myseries Panal.
      And User Select Series ID  as "310918701"
       And select the download by right click option from Myseries Panal
       And Compare "TC_131" exel sheet with Actual data  
      
-  @ExelDatacomparision  
+  @ExelDatacomparision
    Scenario: TC_132: verify download option in right click context menu from Myseries Panal under more option.
      And User Select Series ID  as "310918701"
       And select the download by right click option from Myseries Panal under more option
@@ -954,14 +955,14 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
       And select the download by right click option from Myseries Panal under under file menu option
       And Compare "TC_133" exel sheet with Actual data  
     
-     @ExelDatacomparision  
+     @ExelDatacomparision
    Scenario: TC_134: verify download option in from SSP window under Myseries Panal.
      And User Select Series ID  as "310918701"
       And select the download from SSP window from Myseries Panal
       And Compare "TC_134" exel sheet of SSP window with Actual data 
       
       
-      @ExelDatacomparision  
+     @ExelDatacomparision
    Scenario: TC_135:  Verify 'N ' no of obs results on different combination of multiple frequency series.(Y,S,Q,M).
          And User Select  Multiple Series ID  as "310901701;310905901;310911001;310908401"
          And Add to Right panel
@@ -977,7 +978,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "12" 
          And Compare "TC_136" exel sheet with Actual data   
      
-   @ExelDatacomparision  
+   @ExelDatacomparision
    Scenario: TC_137:  Verify 'N ' no of obs results on different combination of multiple frequency series.(S,Q,W,D).
          And User Select  Multiple Series ID  as "310905901;310911001;310913301;310905801"
          And Add to Right panel
@@ -985,7 +986,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "12"
         And Compare "TC_137" exel sheet with Actual data        
       
-  @ExelDatacomparision  
+  @ExelDatacomparision 
    Scenario: TC_138:  Verify 'N ' no of obs results on different combination of multiple frequency series.(S,Q,M,D).
          And User Select  Multiple Series ID  as "310905901;310911001;310913301;310905801"
          And Add to Right panel
@@ -993,7 +994,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "14"
         And Compare "TC_138" exel sheet with Actual data    
       
-   @ExelDatacomparision  
+   @ExelDatacomparision 
    Scenario: TC_139:  Verify 'N ' no of obs results on different combination of multiple frequency series.(Q,W,D).
          And User Select  Multiple Series ID  as "310911001;310913301;310905801"
          And Add to Right panel
@@ -1001,7 +1002,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "7"
         And Compare "TC_139" exel sheet with Actual data     
       
-   @ExelDatacomparision  
+   @ExelDatacomparision 
    Scenario: TC_140:  Verify 'N ' no of obs results on different combination of multiple frequency series.(Q,M,W).
          And User Select  Multiple Series ID  as "310911001;310908401;310913501"
          And Add to Right panel
@@ -1017,7 +1018,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "15"
         And Compare "TC_141" exel sheet with Actual data   
        
- @ExelDatacomparision  
+ @ExelDatacomparision 
    Scenario: TC_142: Verify 'N ' no of obs results on different combination of multiple frequency series.(M,D).
          And User Select  Multiple Series ID  as "310908401;310905701"
          And Add to Right panel
@@ -1026,7 +1027,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Compare "TC_142" exel sheet with Actual data    
        
        
-@ExelDatacomparision  
+@ExelDatacomparision
    Scenario: TC_143: Verify 'N ' no of obs results on different combination of multiple frequency series.(W,D).
          And User Select  Multiple Series ID  as "310913301;310905701"
          And Add to Right panel
@@ -1035,7 +1036,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
        And Compare "TC_143" exel sheet with Actual data  
     
     
- @ExelDatacomparision  
+ @ExelDatacomparision
    Scenario: TC_144: Verify 'N ' no of obs results on  multiple different frequency series.
          And User Select  Multiple Series ID  as "310901701;310901801;310902601;310905801;310905701"
          And Add to Right panel
@@ -1043,7 +1044,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "10"
          And Compare "TC_144" exel sheet with Actual data     
 
-@ExelDatacomparision  
+@ExelDatacomparision
    Scenario: TC_145: Verify 'N ' no of obs results on  multiple same frequency series
          And User Select  Multiple Series ID  as "310901701;310901801;310902601"
          And Add to Right panel
@@ -1051,7 +1052,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
          And Select with timeframe no of obs end date = "10"
          And Compare "TC_145" exel sheet with Actual data     
 
-@ExelDatacomparision  
+@ExelDatacomparision
    Scenario: TC_146: Verify 'N ' no of obs results on  multiple same frequency series
          And User Select  Multiple Series ID  as "310905801;310905701"
          And Add to Right panel

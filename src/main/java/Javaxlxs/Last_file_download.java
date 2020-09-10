@@ -15,11 +15,11 @@ import java.util.*;
 
 
 public class Last_file_download {
-	
+	static File theNewestFile = null;
 /* Get the newest file for a specific extension */
 //public File getTheNewestFile(String filePath, String ext) 
 public static void getTheNewestFile() throws IOException {
-    File theNewestFile = null;
+	//static File theNewestFile = null;
     File dir = new File(System.getProperty("user.home") + "\\Downloads");
     String y=Exceldatacompare.format;
     //System.out.println("^^^^^^^^^^^^"+y);

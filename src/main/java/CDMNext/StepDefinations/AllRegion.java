@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.IndexedColors;
+//import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -24,6 +24,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import CDMNext.util.Baseclass;
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -37,6 +38,9 @@ public class AllRegion {
 	List<String> countiesTD = null;
 	String ProvinceTxtEle;
 	String PrefectureTxt = null;
+	public static final String ANSI_RESET ="\u001B[0m";
+	public static final String ANSI_BLACK="\u001B[30m";
+	public static final String ANSI_RED="\u001B[31m";
 
 	@SuppressWarnings("unchecked")
 	@And("^Read the Excel file \"([^\"]*)\"$")
@@ -55,13 +59,13 @@ public class AllRegion {
 		login.Log4j.info("Total number of columns present in the sheet: " + colcount);
 		XSSFCell provinceTxt;
 		// Row row = sheet1.getRow(0);
-		// login.Log4j.info(row.getLastCellNum());
+		// Log4j.info(row.getLastCellNum());
 
 		for (int i = 1; i <= rowcount; i++) {
 			provinceTxt = sheet.getRow(i).getCell(1);
-			style.setFillForegroundColor(IndexedColors.RED.getIndex());
+			//style.setFillForegroundColor(IndexedColors.RED.getIndex());
 			// style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-			provinceTxt.setCellStyle(style);
+			//provinceTxt.setCellStyle(style);
 			prefetureTD = (Map<String, Object>) provinceTD.get(provinceTxt.getStringCellValue());
 			if (prefetureTD == null) {
 				// prefetureList = new ArrayList<>();
@@ -72,14 +76,14 @@ public class AllRegion {
 				if (sheet.getRow(i).getCell(3) != null) {
 					countiesTD = new ArrayList<>();
 					countiesTD.add(sheet.getRow(i).getCell(3).getStringCellValue());
-					// login.Log4j.info("Counties list: " + countiesTD);
+					// Log4j.info("Counties list: " + countiesTD);
 				}
 				if (sheet.getRow(i).getCell(3) == null) {
 					countiesTD = null;
 				}
 				if (sheet.getRow(i).getCell(2) != null) {
 					prefetureTD.put(sheet.getRow(i).getCell(2).getStringCellValue(), countiesTD);
-					// login.Log4j.info("Prefecture : " + prefetureTD);
+					// Log4j.info("Prefecture : " + prefetureTD);
 
 				}
 
@@ -87,20 +91,20 @@ public class AllRegion {
 
 				if (sheet.getRow(i).getCell(2) != null) {
 					countiesTD = (List<String>) prefetureTD.get(sheet.getRow(i).getCell(2).getStringCellValue());
-					// login.Log4j.info(countiesTD);
+					// Log4j.info(countiesTD);
 					if (countiesTD == null && sheet.getRow(i).getCell(3) != null) {
 						countiesTD = new ArrayList<>();
 					}
 					if (sheet.getRow(i).getCell(3) != null) {
 						countiesTD.add(sheet.getRow(i).getCell(3).getStringCellValue());
-						// login.Log4j.info("Counties list: " + countiesTD);
+						// Log4j.info("Counties list: " + countiesTD);
 					}
 					prefetureTD.put(sheet.getRow(i).getCell(2).getStringCellValue(), countiesTD);
-					// login.Log4j.info("prefectureL: " + prefetureTD);
+					// Log4j.info("prefectureL: " + prefetureTD);
 				}
 			}
 			provinceTD.put(provinceTxt.getStringCellValue(), prefetureTD);
-			// login.Log4j.info("Province data : " + provinceTD.toString());
+			// Log4j.info("Province data : " + provinceTD.toString());
 
 		}
 		fis.close();
@@ -109,6 +113,7 @@ public class AllRegion {
 
 	@And("^Click on \"([^\"]*)\" dropdown$")
 	public void click_on_dropdown(String arg1) throws Throwable {
+		CommonFunctionality.ResetMethod();
 		login.Log4j.info("Clicking on All Regions filter");
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
 
@@ -155,7 +160,7 @@ public class AllRegion {
 				login.Log4j.info(i);
 				//CommonFunctionality.wait(500);
 				GridActiveElements.get(i).click();
-				String PrefectureXpath = "//*[contains(@class,'tree-filter-item__open')]//*[@class='tree-filter-list']//*[@class='filter-item--body'][1]//following-sibling::*[@class='text-dots']";
+				String PrefectureXpath = "//*[contains(@class,'subnational--section__second')]//*[contains(@class,'tree-filter-item__open')]//*[@class='tree-filter-list']//*[@class='filter-item--body'][1]//following-sibling::*[@class='text-dots']";
 				ValidationMethod(prefetureTDKeys, PrefectureXpath);
 				provinceVar = i + 1;
 				break;
@@ -166,9 +171,10 @@ public class AllRegion {
 					.click();
 			// break;
 		}
+		//CommonFunctionality.getElementByXpath(driver, "//*[@class='dropdown--body dropdown--body__open']//*[contains(text(),'Collapse all')]", 20).click();
 		CommonFunctionality.wait(1000);
 		ProvinceXpath = "//div[@class='subnational--section subnational--section__third']/div/div[2]/div/div[1]/div[2]";
-		List<WebElement> ProvinceElements = login.driver.findElements(By.xpath(ProvinceXpath));
+		List<WebElement> ProvinceElements =login.driver.findElements(By.xpath(ProvinceXpath));
 		provinceVar = 0;
 
 		/*prefetureTD = (Map<String, Object>) provinceTD.get("Inner Mongolia");
@@ -176,7 +182,7 @@ public class AllRegion {
 			
 				for (String countie : countiesTD) {
 					if (countie.equals("Erenhot City")) {
-						login.Log4j.info("Countie ele from excel:'"+countie.trim() +"'");
+						Log4j.info("Countie ele from excel:'"+countie.trim() +"'");
 						wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 								"//div[@class='subnational--section subnational--section__third']//div[@class='filter-item tree-filter-item'][13]/div[1]/div[1]//div[1]")))
 								.click();
@@ -188,36 +194,36 @@ public class AllRegion {
 						String countieAD = ele.getText().trim();
 						countieAD = countieAD.replace("&nbsp;", "GURU");
 						
-						login.Log4j.info("Countie ele is on site:'" + countieAD +"'");
-						login.Log4j.info("Countie IN eXCEL is:'" + countie +"'");
+						Log4j.info("Countie ele is on site:'" + countieAD +"'");
+						Log4j.info("Countie IN eXCEL is:'" + countie +"'");
 						if(countie.equalsIgnoreCase(countieAD)) {
-							login.Log4j.info("PASS : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
+							Log4j.info("PASS : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
 						} else {
-							login.Log4j.error("Verification failed");
-							login.Log4j.error("ERROR : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
+							Log4j.error("Verification failed");
+							Log4j.error("ERROR : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
 						}
 						countieAD = ele.getText().trim();
 						countieAD = countieAD.replace(" ", "GURU");
 						
 						
-						login.Log4j.info("Countie ele is on site:'" + countieAD +"'");
-						login.Log4j.info("Countie IN eXCEL is:'" + countie +"'");
+						Log4j.info("Countie ele is on site:'" + countieAD +"'");
+						Log4j.info("Countie IN eXCEL is:'" + countie +"'");
 						if(countie.equalsIgnoreCase(countieAD)) {
-							login.Log4j.info("PASS : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
+							Log4j.info("PASS : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
 						} else {
-							login.Log4j.error("Verification failed");
-							login.Log4j.error("ERROR : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
+							Log4j.error("Verification failed");
+							Log4j.error("ERROR : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
 						}
 						countieAD = ele.getText().trim();
 						countieAD = countieAD.replace("\u00A0", "GURU");
 						
-						login.Log4j.info("Countie ele is on site:'" + countieAD +"'");
-						login.Log4j.info("Countie IN eXCEL is:'" + countie +"'");
+						Log4j.info("Countie ele is on site:'" + countieAD +"'");
+						Log4j.info("Countie IN eXCEL is:'" + countie +"'");
 						if(countie.equalsIgnoreCase(countieAD)) {
-							login.Log4j.info("PASS : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
+							Log4j.info("PASS : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
 						} else {
-							login.Log4j.error("Verification failed");
-							login.Log4j.error("ERROR : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
+							Log4j.error("Verification failed");
+							Log4j.error("ERROR : Xilingol prefecture Countie Data '" + countie +"' '" + countieAD + "'");
 						}
 						break;
 					}
@@ -232,9 +238,13 @@ public class AllRegion {
 			for (int i = provinceVar; i < ProvinceElements.size();) {
 				String provinceTxt = ProvinceElements.get(i).getText();
 				if (provinceName.equals(provinceTxt)) {
-					//Thread.sleep(700);
+					Thread.sleep(200);
 					GridActiveElements.get(i).click();
-
+					Thread.sleep(300);
+					Boolean expand = (login.driver.findElements(By.xpath("//*[contains(@class,'subnational--section__third')]//*[@class='filter-item tree-filter-item tree-filter-item__open']//*[@class='filter-item tree-filter-item tree-filter-item__open']/*[1]/*[1]")).size()) == 0;
+					if(expand == false) {
+						CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'subnational--section__third')]//*[@class='filter-item tree-filter-item tree-filter-item__open']//*[@class='filter-item tree-filter-item tree-filter-item__open']/*[1]/*[1]", 15).click();
+					}
 					for (String Prefecture : prefetureTDKeys) {
 						//Thread.sleep(700);
 						int CountieList = 0;
@@ -245,23 +255,31 @@ public class AllRegion {
 							CountieListTD = new HashSet<String>(countiesTD);
 							CountieList = CountieListTD.size();
 						}
-					//	Thread.sleep(1000);
+						/*Thread.sleep(300);
+						Boolean expand = (driver.findElements(By.xpath("(//*[contains(@class,'subnational--section__third')]//*[@class='tree-filter-list'])[2]//*[contains(@class,'tree-filter-item__open')]/*[1]/*[1]")).size()) == 0;
+						if(expand == false) {
+							CommonFunctionality.getElementByXpath(driver,"(//*[contains(@class,'subnational--section__third')]//*[@class='tree-filter-list'])[2]//*[contains(@class,'tree-filter-item__open')]/*[1]/*[1]" , 15).click();
+						}*/
+						Thread.sleep(300);
 					    String ActiveEleXpath1 = "(//*[contains(@class,'subnational--section__third')]//*[contains(@class,'tree-filter-item__open')])[1]/div[2]//div[1]//following-sibling::*[@class='tree-filter-item--open-icon']";
 						List<WebElement> GridActiveElements1 = login.driver.findElements(By.xpath(ActiveEleXpath1));
-						String PrefectureXpath = "//div[@class='filter-item tree-filter-item tree-filter-item__open']/div[2]/div[1]/div/div[1]/div[2]";
+						Thread.sleep(300);
+						String PrefectureXpath = "//div[@class='subnational--section subnational--section__third']//*[contains(@class,'tree-filter-item__open')]/div[2]/div[1]/div/div[1]/div[2]";
 						List<WebElement> PrefectureElements = login.driver.findElements(By.xpath(PrefectureXpath));
 						for (int k = prefectureVar; k < PrefectureElements.size();) {
 							String prefectureTxt = PrefectureElements.get(k).getText();
 							if (Prefecture.equals(prefectureTxt)) {
-								//CommonFunctionality.wait(500);
+								CommonFunctionality.wait(200);
 								GridActiveElements1.get(k).click();
-								CommonFunctionality.wait(500);
+								CommonFunctionality.wait(400);
 								//String CountieXpath = "//*[contains(@class,'tree-filter-item__select-all tree-filter-item__open')]/*[2]//*[@class='filter-item--body'][1]//following-sibling::*[@class='text-dots']";
 								String CountieXpath = "(//*[contains(@class,'subnational--section__third')]//*[@class='tree-filter-list']//*[contains(@class,'tree-filter-item__open')])[2]//*[@class='tree-filter-item--children']//*[@class='tree-filter-list']//*[@class='tree-filter-item--title']//following-sibling::*[@class='text-dots']";
+								login.Log4j.info("Province in Excel is: " + provinceName);
+								login.Log4j.info("Prefecture in Excel is: " + Prefecture);
 								ValidationMethod(CountieListTD, CountieXpath);
 								prefectureVar = k + 1;
 							} else {
-								//login.Log4j.error("We don't see " + Prefecture + "  on site");
+								//Log4j.error("We don't see " + Prefecture + "  on site");
 
 							}
 
@@ -279,10 +297,11 @@ public class AllRegion {
 					}
 					provinceVar = i + 1;
 				} else {
-					//login.Log4j.error("We don't see " + provinceName + " on site");
+					//Log4j.error("We don't see " + provinceName + " on site");
 
 				}
 				try {
+					CommonFunctionality.wait(200);
 					login.driver
 							.findElement(By.xpath(
 									"(//*[contains(@class,'subnational--section__third')]//*[contains(@class,'tree-filter-item__open')])[1]/*[1]//*[@class='tree-filter-item--close-icon']"))
@@ -299,7 +318,7 @@ public class AllRegion {
 	void ScrollToBottom(WebElement Grid, String XpathGridEle, int ListSizeTD) throws InterruptedException {
 		int loopCount = 0;
 		Thread.sleep(2000);
-		List<WebElement> GridElements = login.driver.findElements(By.xpath(XpathGridEle));
+		List<WebElement> GridElements =login.driver.findElements(By.xpath(XpathGridEle));
 		int GridElementsCount = GridElements.size(); // Expecting default visible elements count
 		login.Log4j.info("Default list size in WE is: " + GridElementsCount);
 
@@ -328,7 +347,7 @@ public class AllRegion {
 
 		for (int i = 0; i < GridElements.size(); i++) {
 			// String WebEle = GridElements.get(i).getText();
-			// login.Log4j.info("WebElement is : " + GridElements.get(i).getText());
+			// Log4j.info("WebElement is : " + GridElements.get(i).getText());
 			ListOfWebElements.add(GridElements.get(i).getText());
 		}
 
@@ -338,6 +357,8 @@ public class AllRegion {
 		} else if (ListElementsTD.size() != ListOfWebElements.size()) {
 			login.Log4j.error("ERROR : We have " + ListElementsTD.size() + " elements in Excel but see only "
 					+ ListOfWebElements.size() + " elements on site");
+//			Log4j.error(ANSI_RED + " This text is red! "
+//					+ ANSI_RESET);
 		}
 
 		for (String str : ListOfWebElements) {
@@ -352,7 +373,7 @@ public class AllRegion {
 			if (ListOfWebElements.contains(str)) {
 				login.Log4j.info("Excel item " + str + " found on site");
 			} else {
-				login.Log4j.error("ERROR : We don't find " + str + " in on Site");
+				login.Log4j.error("ERROR : We don't find " + str + " is on Site");
 			}
 		}
 

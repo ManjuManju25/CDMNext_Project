@@ -1,5 +1,6 @@
 package CDMNext.StepDefinations;
 
+import java.io.File;
 import java.io.FileInputStream;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -18,7 +19,9 @@ public class CompareExcel {
             // get input excel files
         	//Exceldatacompare obj= new Exceldatacompare();
         	 String x=Exceldatacompare.testcase_num;
+        	 String y=Exceldatacompare.r;
         	System.out.println(x);
+        	System.out.println(y);
             FileInputStream excellFile1 = new FileInputStream(
             //FileInputStream excellFile1 = new FileInputStream(
                     //"C:\\Users\\Admin\\Documents\\Cucumber_Project\\Cucumber_Project\\securities-cucumber-3c396d71c6ca\\Testdata\\" +x+ ".xlsx");
@@ -26,7 +29,7 @@ public class CompareExcel {
             FileInputStream excellFile2 = new FileInputStream(
            // FileInputStream excellFile2 = new FileInputStream(
                    // "C:\\Users\\Admin\\Downloads\\Untitled insight.xlsx");
-            		System.getProperty("user.home") + "\\Downloads\\Untitled insight.xlsx");
+            		System.getProperty("user.home") + "\\Downloads\\"+y+ ".xlsx");
             // Create Workbook instance holding reference to .xlsx file
             XSSFWorkbook TestData = new XSSFWorkbook(excellFile1);
             XSSFWorkbook ActualData = new XSSFWorkbook(excellFile2);
@@ -125,7 +128,7 @@ public class CompareExcel {
     	Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[@class='insight-series-container']/div/div/div/div/label/span")).click();
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[6]")).click();
+		login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']/div[7]")).click();
 		
 	}
 
