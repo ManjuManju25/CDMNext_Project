@@ -86,7 +86,7 @@ public class SearchTest {
 		FileReader file = new FileReader(
 				System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\LatestSynonymFile.txt");
 		Scanner txtscan = new Scanner(file);
-		// String[] listwords = null;
+		
 		while (txtscan.hasNextLine()) {
 			Content = txtscan.nextLine();
 			listwords = Content.trim().split("\\s*,\\s*");
@@ -138,7 +138,31 @@ public class SearchTest {
 					//jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 
 					Boolean KeywordMatch = false;
-					switch (listwords.length) {
+					for(String keyword : listwords) {
+						if (search_validation(TooltipInfo, keyword) == true) {
+							login.Log4j.info(keyword + " is exists in the" + "\n" + TooltipInfo);
+							KeywordMatch = true;
+							break;
+						} else if (KeywordMatch == false) {
+							sspValidation(j);
+							if (search_validation(Filters.showdata, keyword) == true) {
+								login.Log4j.info(keyword + " is exists in the" + "\n" + Filters.showdata);
+								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 4).click();
+								KeywordMatch = true;
+								break;
+							} /*else {
+								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 4).click();
+								AssertJUnit.fail(keyword + " keyword doesn't exists in the " + TooltipInfo
+										+ " AND " + "\n" + Filters.showdata);
+							}*/
+						}
+					}
+					 if (KeywordMatch == false) {
+						 CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
+							AssertJUnit.fail(keyword + " keyword doesn't exists in the " + TooltipInfo
+									+ " AND " + "\n" + Filters.showdata);
+					 }
+					/*switch (listwords.length) {
 					case 1:
 						if (search_validation(TooltipInfo, listwords[0]) == true) {
 							login.Log4j.info(listwords[0] + " is exists in the" + "\n" + TooltipInfo);
@@ -423,7 +447,7 @@ public class SearchTest {
 						login.Log4j.error(
 								currentKeyword + " has more than 9 synonyms which is not handled.  Please handle!");
 						Assert.fail(currentKeyword + " has more than 9 synonyms which is not handled.  Please handle!");
-					}
+					}*/
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 				}
 			} else {

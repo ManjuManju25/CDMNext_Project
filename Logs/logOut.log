@@ -7511,3 +7511,3016 @@ Inside setup
 2020-09-10 17:44:58 INFO  Log4j:204 - Trying to login with Username:
 2020-09-10 17:44:59 INFO  Log4j:208 - Trying to login with Password:
 2020-09-10 17:45:00 INFO  Log4j:211 - Clicking on login button 
+2020-09-11 10:06:52 INFO  Log4j:29 - 
+Inside TestNG > @BeforeSuite
+2020-09-11 10:06:52 INFO  Log4j:48 - 
+Inside TestNG > @DataProvider
+2020-09-11 10:06:53 INFO  Log4j:40 - 
+Inside TestNG > @Test
+2020-09-11 10:06:53 INFO  Log4j:238 - Logger initialized and writing using logger
+2020-09-11 10:06:53 INFO  Log4j:239 - 
+Inside setup
+2020-09-11 10:07:01 INFO  Log4j:58 - It is in else If block
+2020-09-11 10:07:06 INFO  Log4j:202 - Launching site .. 
+2020-09-11 10:07:07 INFO  Log4j:204 - Trying to login with Username:
+2020-09-11 10:07:08 INFO  Log4j:208 - Trying to login with Password:
+2020-09-11 10:07:09 INFO  Log4j:211 - Clicking on login button 
+2020-09-11 10:11:40 INFO  Log4j:29 - 
+Inside TestNG > @BeforeSuite
+2020-09-11 10:11:41 INFO  Log4j:48 - 
+Inside TestNG > @DataProvider
+2020-09-11 10:11:41 INFO  Log4j:40 - 
+Inside TestNG > @Test
+2020-09-11 10:11:42 INFO  Log4j:238 - Logger initialized and writing using logger
+2020-09-11 10:11:42 INFO  Log4j:239 - 
+Inside setup
+2020-09-11 10:11:49 INFO  Log4j:58 - It is in else If block
+2020-09-11 10:11:57 INFO  Log4j:202 - Launching site .. 
+2020-09-11 10:11:57 INFO  Log4j:204 - Trying to login with Username:
+2020-09-11 10:11:58 INFO  Log4j:208 - Trying to login with Password:
+2020-09-11 10:12:00 INFO  Log4j:211 - Clicking on login button 
+2020-09-11 10:12:02 INFO  Log4j:72 - Searching with gdp
+2020-09-11 10:12:22 INFO  Log4j:82 - Clicking on  Series tab 
+2020-09-11 10:12:22 INFO  Log4j:95 - Synonym text file contains gdp
+2020-09-11 10:12:24 INFO  Log4j:121 - List size is :20
+2020-09-11 10:12:24 INFO  Log4j:127 - 0
+2020-09-11 10:12:24 INFO  Log4j:128 - 20
+2020-09-11 10:12:26 INFO  Log4j:136 - Title information is 
+Region: Singapore
+Name: Gross Domestic Product
+Unit: SGD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1975
+Last date: 06/01/2020
+Observations: 182
+Last change %: 18.06
+Last value: 102,636.50
+Last updated: 08/11/2020
+Source: Department of Statistics
+Series id: 383937057(SAZGAAAAAAAALS)
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:30 INFO  Log4j:148 - gdp is exists in the
+GDP by Expenditure: Current Price
+Global Database
+>
+Singapore
+>
+Singapore: National Accounts
+GDP by Income: SSIC 2015: Current Price
+Global Database
+>
+Singapore
+>
+Singapore: National Accounts
+2020-09-11 10:12:32 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Singapore
+Name: Gross Domestic Product
+Unit: SGD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1975
+Last date: 06/01/2020
+Observations: 182
+Last change %: 18.06
+Last value: 102,636.50
+Last updated: 08/11/2020
+Source: Department of Statistics
+Series id: 383937057(SAZGAAAAAAAALS)
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:32 INFO  Log4j:127 - 1
+2020-09-11 10:12:32 INFO  Log4j:128 - 20
+2020-09-11 10:12:34 INFO  Log4j:136 - Title information is 
+Region: Russia
+Name: Gross Domestic Product (GDP)
+Unit: RUB bn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2011
+Last date: 03/01/2020
+Observations: 37
+Last change %: 1.49
+Last value: 25,317.67
+Last updated: 06/18/2020
+Source: Federal State Statistics Service
+Series id: 375567977
+Mnemonic: RU.GDP.NM.RUB-BN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:34 INFO  Log4j:143 - gdp is exists in the
+Region: Russia
+Name: Gross Domestic Product (GDP)
+Unit: RUB bn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2011
+Last date: 03/01/2020
+Observations: 37
+Last change %: 1.49
+Last value: 25,317.67
+Last updated: 06/18/2020
+Source: Federal State Statistics Service
+Series id: 375567977
+Mnemonic: RU.GDP.NM.RUB-BN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:34 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Russia
+Name: Gross Domestic Product (GDP)
+Unit: RUB bn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2011
+Last date: 03/01/2020
+Observations: 37
+Last change %: 1.49
+Last value: 25,317.67
+Last updated: 06/18/2020
+Source: Federal State Statistics Service
+Series id: 375567977
+Mnemonic: RU.GDP.NM.RUB-BN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:34 INFO  Log4j:127 - 2
+2020-09-11 10:12:34 INFO  Log4j:128 - 20
+2020-09-11 10:12:35 INFO  Log4j:136 - Title information is 
+Region: Lithuania
+Name: GDP
+Unit: EUR mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1995
+Last date: 06/01/2020
+Observations: 102
+Last change %: 4.82
+Last value: 11,471.89
+Last updated: 08/03/2020
+Source: Statistics Lithuania
+Series id: 357591667
+Mnemonic: LT.GDP.NM.EUR-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:35 INFO  Log4j:143 - gdp is exists in the
+Region: Lithuania
+Name: GDP
+Unit: EUR mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1995
+Last date: 06/01/2020
+Observations: 102
+Last change %: 4.82
+Last value: 11,471.89
+Last updated: 08/03/2020
+Source: Statistics Lithuania
+Series id: 357591667
+Mnemonic: LT.GDP.NM.EUR-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:35 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Lithuania
+Name: GDP
+Unit: EUR mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1995
+Last date: 06/01/2020
+Observations: 102
+Last change %: 4.82
+Last value: 11,471.89
+Last updated: 08/03/2020
+Source: Statistics Lithuania
+Series id: 357591667
+Mnemonic: LT.GDP.NM.EUR-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:35 INFO  Log4j:127 - 3
+2020-09-11 10:12:35 INFO  Log4j:128 - 20
+2020-09-11 10:12:37 INFO  Log4j:136 - Title information is 
+Region: Switzerland
+Name: Gross Domestic Product (GDP)
+Unit: CHF mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1980
+Last date: 06/01/2020
+Observations: 162
+Last change %: 9.71
+Last value: 158,408.90
+Last updated: 08/27/2020
+Source: State Secretariat for Economic Affairs
+Series id: 357588347
+Mnemonic: CH.GDP.NM.CHF-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:37 INFO  Log4j:143 - gdp is exists in the
+Region: Switzerland
+Name: Gross Domestic Product (GDP)
+Unit: CHF mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1980
+Last date: 06/01/2020
+Observations: 162
+Last change %: 9.71
+Last value: 158,408.90
+Last updated: 08/27/2020
+Source: State Secretariat for Economic Affairs
+Series id: 357588347
+Mnemonic: CH.GDP.NM.CHF-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:37 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Switzerland
+Name: Gross Domestic Product (GDP)
+Unit: CHF mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1980
+Last date: 06/01/2020
+Observations: 162
+Last change %: 9.71
+Last value: 158,408.90
+Last updated: 08/27/2020
+Source: State Secretariat for Economic Affairs
+Series id: 357588347
+Mnemonic: CH.GDP.NM.CHF-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:37 INFO  Log4j:127 - 4
+2020-09-11 10:12:37 INFO  Log4j:128 - 20
+2020-09-11 10:12:39 INFO  Log4j:136 - Title information is 
+Region: Serbia
+Name: Gross Domestic Product (GDP)
+Unit: RSD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1996
+Last date: 03/01/2020
+Observations: 97
+Last change %: 7.48
+Last value: 1,296,134.56
+Last updated: 06/02/2020
+Source: Statistical Office of the Republic of Serbia
+Series id: 359430197
+Mnemonic: RS.GDP.NM.RSD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:39 INFO  Log4j:143 - gdp is exists in the
+Region: Serbia
+Name: Gross Domestic Product (GDP)
+Unit: RSD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1996
+Last date: 03/01/2020
+Observations: 97
+Last change %: 7.48
+Last value: 1,296,134.56
+Last updated: 06/02/2020
+Source: Statistical Office of the Republic of Serbia
+Series id: 359430197
+Mnemonic: RS.GDP.NM.RSD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:39 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Serbia
+Name: Gross Domestic Product (GDP)
+Unit: RSD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1996
+Last date: 03/01/2020
+Observations: 97
+Last change %: 7.48
+Last value: 1,296,134.56
+Last updated: 06/02/2020
+Source: Statistical Office of the Republic of Serbia
+Series id: 359430197
+Mnemonic: RS.GDP.NM.RSD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:39 INFO  Log4j:127 - 5
+2020-09-11 10:12:39 INFO  Log4j:128 - 20
+2020-09-11 10:12:41 INFO  Log4j:136 - Title information is 
+Region: Turkey
+Name: Gross Domestic Product (GDP)
+Unit: TRY mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1998
+Last date: 03/01/2020
+Observations: 89
+Last change %: 16.17
+Last value: 1,071,097.81
+Last updated: 05/29/2020
+Source: Turkish Statistical Institute
+Series id: 383438957(TRARDGHAAAAANY)
+Mnemonic: TR.GDP.NM.TRY-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:41 INFO  Log4j:143 - gdp is exists in the
+Region: Turkey
+Name: Gross Domestic Product (GDP)
+Unit: TRY mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1998
+Last date: 03/01/2020
+Observations: 89
+Last change %: 16.17
+Last value: 1,071,097.81
+Last updated: 05/29/2020
+Source: Turkish Statistical Institute
+Series id: 383438957(TRARDGHAAAAANY)
+Mnemonic: TR.GDP.NM.TRY-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:41 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Turkey
+Name: Gross Domestic Product (GDP)
+Unit: TRY mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1998
+Last date: 03/01/2020
+Observations: 89
+Last change %: 16.17
+Last value: 1,071,097.81
+Last updated: 05/29/2020
+Source: Turkish Statistical Institute
+Series id: 383438957(TRARDGHAAAAANY)
+Mnemonic: TR.GDP.NM.TRY-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:41 INFO  Log4j:127 - 6
+2020-09-11 10:12:41 INFO  Log4j:128 - 20
+2020-09-11 10:12:43 INFO  Log4j:136 - Title information is 
+Region: Georgia
+Name: Gross Domestic Product (GDP)
+Unit: GEL mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.47
+Last value: 11,063.76
+Last updated: 06/19/2020
+Source: National Statistics Office of Georgia
+Series id: 446154357
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:43 INFO  Log4j:143 - gdp is exists in the
+Region: Georgia
+Name: Gross Domestic Product (GDP)
+Unit: GEL mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.47
+Last value: 11,063.76
+Last updated: 06/19/2020
+Source: National Statistics Office of Georgia
+Series id: 446154357
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:43 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Georgia
+Name: Gross Domestic Product (GDP)
+Unit: GEL mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.47
+Last value: 11,063.76
+Last updated: 06/19/2020
+Source: National Statistics Office of Georgia
+Series id: 446154357
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:43 INFO  Log4j:127 - 7
+2020-09-11 10:12:43 INFO  Log4j:128 - 20
+2020-09-11 10:12:44 INFO  Log4j:136 - Title information is 
+Region: Slovakia
+Name: Gross Domestic Product (GDP)
+Unit: EUR mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1995
+Last date: 03/01/2020
+Observations: 101
+Last change %: 0.79
+Last value: 21,485.30
+Last updated: 06/05/2020
+Source: Statistical Office of the Slovak Republic
+Series id: 359207557
+Mnemonic: SK.GDP.NM.EUR-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:44 INFO  Log4j:143 - gdp is exists in the
+Region: Slovakia
+Name: Gross Domestic Product (GDP)
+Unit: EUR mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1995
+Last date: 03/01/2020
+Observations: 101
+Last change %: 0.79
+Last value: 21,485.30
+Last updated: 06/05/2020
+Source: Statistical Office of the Slovak Republic
+Series id: 359207557
+Mnemonic: SK.GDP.NM.EUR-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:44 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Slovakia
+Name: Gross Domestic Product (GDP)
+Unit: EUR mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/1995
+Last date: 03/01/2020
+Observations: 101
+Last change %: 0.79
+Last value: 21,485.30
+Last updated: 06/05/2020
+Source: Statistical Office of the Slovak Republic
+Series id: 359207557
+Mnemonic: SK.GDP.NM.EUR-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:45 INFO  Log4j:127 - 8
+2020-09-11 10:12:45 INFO  Log4j:128 - 20
+2020-09-11 10:12:46 INFO  Log4j:136 - Title information is 
+Region: Libya
+Name: Gross Domestic Product (GDP)
+Unit: LYD mn
+Frequency: Annual
+First date: 12/01/1989
+Last date: 12/01/2013
+Observations: 25
+Last change %: 28.99
+Last value: 79,952.60
+Last updated: 03/12/2015
+Source: Ministry of Planning
+Series id: 302916104
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:46 INFO  Log4j:143 - gdp is exists in the
+Region: Libya
+Name: Gross Domestic Product (GDP)
+Unit: LYD mn
+Frequency: Annual
+First date: 12/01/1989
+Last date: 12/01/2013
+Observations: 25
+Last change %: 28.99
+Last value: 79,952.60
+Last updated: 03/12/2015
+Source: Ministry of Planning
+Series id: 302916104
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:46 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Libya
+Name: Gross Domestic Product (GDP)
+Unit: LYD mn
+Frequency: Annual
+First date: 12/01/1989
+Last date: 12/01/2013
+Observations: 25
+Last change %: 28.99
+Last value: 79,952.60
+Last updated: 03/12/2015
+Source: Ministry of Planning
+Series id: 302916104
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:46 INFO  Log4j:127 - 9
+2020-09-11 10:12:46 INFO  Log4j:128 - 20
+2020-09-11 10:12:48 INFO  Log4j:136 - Title information is 
+Region: Sudan
+Name: Gross Domestic Product (GDP)
+Unit: SDG mn
+Frequency: Annual
+First date: 12/01/1960
+Last date: 12/01/2018
+Observations: 59
+Last change %: 58.89
+Last value: 1,228,967.30
+Last updated: 07/22/2019
+Source: Central Bureau of Statistics
+Series id: 235766402
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:48 INFO  Log4j:143 - gdp is exists in the
+Region: Sudan
+Name: Gross Domestic Product (GDP)
+Unit: SDG mn
+Frequency: Annual
+First date: 12/01/1960
+Last date: 12/01/2018
+Observations: 59
+Last change %: 58.89
+Last value: 1,228,967.30
+Last updated: 07/22/2019
+Source: Central Bureau of Statistics
+Series id: 235766402
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:48 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Sudan
+Name: Gross Domestic Product (GDP)
+Unit: SDG mn
+Frequency: Annual
+First date: 12/01/1960
+Last date: 12/01/2018
+Observations: 59
+Last change %: 58.89
+Last value: 1,228,967.30
+Last updated: 07/22/2019
+Source: Central Bureau of Statistics
+Series id: 235766402
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:48 INFO  Log4j:127 - 10
+2020-09-11 10:12:48 INFO  Log4j:128 - 20
+2020-09-11 10:12:50 INFO  Log4j:136 - Title information is 
+Region: Egypt
+Name: Gross Domestic Product (GDP)
+Unit: EGP mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 09/01/2001
+Last date: 03/01/2020
+Observations: 75
+Last change %: 8.05
+Last value: 1,334,514.11
+Last updated: 07/05/2020
+Source: Ministry of Planning
+Series id: 95233607
+Mnemonic: EG.GDP.NM.EGP-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:50 INFO  Log4j:143 - gdp is exists in the
+Region: Egypt
+Name: Gross Domestic Product (GDP)
+Unit: EGP mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 09/01/2001
+Last date: 03/01/2020
+Observations: 75
+Last change %: 8.05
+Last value: 1,334,514.11
+Last updated: 07/05/2020
+Source: Ministry of Planning
+Series id: 95233607
+Mnemonic: EG.GDP.NM.EGP-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:50 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Egypt
+Name: Gross Domestic Product (GDP)
+Unit: EGP mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 09/01/2001
+Last date: 03/01/2020
+Observations: 75
+Last change %: 8.05
+Last value: 1,334,514.11
+Last updated: 07/05/2020
+Source: Ministry of Planning
+Series id: 95233607
+Mnemonic: EG.GDP.NM.EGP-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:50 INFO  Log4j:127 - 11
+2020-09-11 10:12:50 INFO  Log4j:128 - 20
+2020-09-11 10:12:52 INFO  Log4j:136 - Title information is 
+Region: Kuwait
+Name: Gross Domestic Product (GDP)
+Unit: KWD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.83
+Last value: 9,196.52
+Last updated: 08/05/2020
+Source: Central Statistical Bureau
+Series id: 399965617
+Mnemonic: KW.GDP.NM.KWD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:52 INFO  Log4j:143 - gdp is exists in the
+Region: Kuwait
+Name: Gross Domestic Product (GDP)
+Unit: KWD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.83
+Last value: 9,196.52
+Last updated: 08/05/2020
+Source: Central Statistical Bureau
+Series id: 399965617
+Mnemonic: KW.GDP.NM.KWD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:52 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Kuwait
+Name: Gross Domestic Product (GDP)
+Unit: KWD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.83
+Last value: 9,196.52
+Last updated: 08/05/2020
+Source: Central Statistical Bureau
+Series id: 399965617
+Mnemonic: KW.GDP.NM.KWD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:52 INFO  Log4j:127 - 12
+2020-09-11 10:12:52 INFO  Log4j:128 - 20
+2020-09-11 10:12:54 INFO  Log4j:136 - Title information is 
+Region: Kuwait
+Name: Gross Domestic Product (GDP)
+Unit: KWD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.83
+Last value: 9,196.52
+Last updated: 08/05/2020
+Source: Central Statistical Bureau
+Series id: 399965617
+Mnemonic: KW.GDP.NM.KWD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:54 INFO  Log4j:143 - gdp is exists in the
+Region: Kuwait
+Name: Gross Domestic Product (GDP)
+Unit: KWD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.83
+Last value: 9,196.52
+Last updated: 08/05/2020
+Source: Central Statistical Bureau
+Series id: 399965617
+Mnemonic: KW.GDP.NM.KWD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:54 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Kuwait
+Name: Gross Domestic Product (GDP)
+Unit: KWD mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2010
+Last date: 03/01/2020
+Observations: 41
+Last change %: 8.83
+Last value: 9,196.52
+Last updated: 08/05/2020
+Source: Central Statistical Bureau
+Series id: 399965617
+Mnemonic: KW.GDP.NM.KWD-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:54 INFO  Log4j:127 - 13
+2020-09-11 10:12:54 INFO  Log4j:128 - 20
+2020-09-11 10:12:55 INFO  Log4j:136 - Title information is 
+Region: Azerbaijan
+Name: Gross Domestic Product (GDP)
+Unit: AZN mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2001
+Last date: 12/01/2019
+Observations: 76
+Last change %: 0.68
+Last value: 22,786.80
+Last updated: 04/21/2020
+Source: The State Statistical Committee of the Republic of Azerbaijan
+Series id: 176301102
+Mnemonic: AZ.GDP.NM.AZN-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:55 INFO  Log4j:143 - gdp is exists in the
+Region: Azerbaijan
+Name: Gross Domestic Product (GDP)
+Unit: AZN mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2001
+Last date: 12/01/2019
+Observations: 76
+Last change %: 0.68
+Last value: 22,786.80
+Last updated: 04/21/2020
+Source: The State Statistical Committee of the Republic of Azerbaijan
+Series id: 176301102
+Mnemonic: AZ.GDP.NM.AZN-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:55 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Azerbaijan
+Name: Gross Domestic Product (GDP)
+Unit: AZN mn
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 03/01/2001
+Last date: 12/01/2019
+Observations: 76
+Last change %: 0.68
+Last value: 22,786.80
+Last updated: 04/21/2020
+Source: The State Statistical Committee of the Republic of Azerbaijan
+Series id: 176301102
+Mnemonic: AZ.GDP.NM.AZN-MN-Q
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:55 INFO  Log4j:127 - 14
+2020-09-11 10:12:55 INFO  Log4j:128 - 20
+2020-09-11 10:12:57 INFO  Log4j:136 - Title information is 
+Region: Lebanon
+Name: Gross Domestic Product (GDP)
+Unit: LBP bn
+Frequency: Annual
+First date: 12/01/2004
+Last date: 12/01/2018
+Observations: 15
+Last change %: 3.43
+Last value: 82,854.12
+Last updated: 12/24/2019
+Source: Central Administration of Statistics
+Series id: 298619504
+Mnemonic: LB.GDP.NM.LBP-BN-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:57 INFO  Log4j:143 - gdp is exists in the
+Region: Lebanon
+Name: Gross Domestic Product (GDP)
+Unit: LBP bn
+Frequency: Annual
+First date: 12/01/2004
+Last date: 12/01/2018
+Observations: 15
+Last change %: 3.43
+Last value: 82,854.12
+Last updated: 12/24/2019
+Source: Central Administration of Statistics
+Series id: 298619504
+Mnemonic: LB.GDP.NM.LBP-BN-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:57 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Lebanon
+Name: Gross Domestic Product (GDP)
+Unit: LBP bn
+Frequency: Annual
+First date: 12/01/2004
+Last date: 12/01/2018
+Observations: 15
+Last change %: 3.43
+Last value: 82,854.12
+Last updated: 12/24/2019
+Source: Central Administration of Statistics
+Series id: 298619504
+Mnemonic: LB.GDP.NM.LBP-BN-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:57 INFO  Log4j:127 - 15
+2020-09-11 10:12:57 INFO  Log4j:128 - 20
+2020-09-11 10:12:59 INFO  Log4j:136 - Title information is 
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:59 INFO  Log4j:143 - gdp is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:59 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:12:59 INFO  Log4j:127 - 16
+2020-09-11 10:12:59 INFO  Log4j:128 - 20
+2020-09-11 10:13:01 INFO  Log4j:136 - Title information is 
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:01 INFO  Log4j:143 - gdp is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:01 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:01 INFO  Log4j:127 - 17
+2020-09-11 10:13:01 INFO  Log4j:128 - 20
+2020-09-11 10:13:02 INFO  Log4j:136 - Title information is 
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:02 INFO  Log4j:143 - gdp is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:02 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:02 INFO  Log4j:127 - 18
+2020-09-11 10:13:02 INFO  Log4j:128 - 20
+2020-09-11 10:13:04 INFO  Log4j:136 - Title information is 
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:04 INFO  Log4j:143 - gdp is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:04 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:04 INFO  Log4j:127 - 19
+2020-09-11 10:13:04 INFO  Log4j:128 - 20
+2020-09-11 10:13:06 INFO  Log4j:136 - Title information is 
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:06 INFO  Log4j:143 - gdp is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:06 INFO  Log4j:143 - gross domestic product is exists in the
+Region: Australia
+Name: GDP per Capita
+Unit: AUD
+Frequency: Annual
+First date: 06/01/1960
+Last date: 06/01/2019
+Observations: 60
+Last change %: 3.57
+Last value: 77,347
+Last updated: 10/25/2019
+Source: Australian Bureau of Statistics
+Series id: 316160501
+Mnemonic: AU.GDPPC.NM.AUD-A
+Classification: National Accounts
+Indicator: Gross Domestic Product
+More: (K) Key series
+2020-09-11 10:13:06 INFO  Log4j:238 - Logger initialized and writing using logger
+2020-09-11 10:13:06 INFO  Log4j:239 - 
+Inside setup
+2020-09-11 10:13:06 INFO  Log4j:242 - Reusing same driver..
+2020-09-11 10:13:06 INFO  Log4j:63 - If User has already logged in pelase continue....
+2020-09-11 10:13:06 INFO  Log4j:72 - Searching with PMI
+2020-09-11 10:13:09 INFO  Log4j:102 - Clicking on Reset button
+2020-09-11 10:13:12 INFO  Log4j:82 - Clicking on  Series tab 
+2020-09-11 10:13:12 INFO  Log4j:95 - Synonym text file contains PMI
+2020-09-11 10:13:14 INFO  Log4j:121 - List size is :20
+2020-09-11 10:13:14 INFO  Log4j:127 - 0
+2020-09-11 10:13:14 INFO  Log4j:128 - 20
+2020-09-11 10:13:16 INFO  Log4j:136 - Title information is 
+Region: Philippines
+Name: Purchasing Managers Index (PMI)
+Unit: Index
+Frequency: Monthly
+First date: 01/01/2011
+Last date: 06/01/2020
+Observations: 114
+Last change %: 17.98
+Last value: 43.80
+Last updated: 07/21/2020
+Source: Bangko Sentral ng Pilipinas
+Series id: 409536987(PSGJAAAAAAAAEN)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:16 INFO  Log4j:143 - PMI is exists in the
+Region: Philippines
+Name: Purchasing Managers Index (PMI)
+Unit: Index
+Frequency: Monthly
+First date: 01/01/2011
+Last date: 06/01/2020
+Observations: 114
+Last change %: 17.98
+Last value: 43.80
+Last updated: 07/21/2020
+Source: Bangko Sentral ng Pilipinas
+Series id: 409536987(PSGJAAAAAAAAEN)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:16 INFO  Log4j:143 - Purchasing Managers Index is exists in the
+Region: Philippines
+Name: Purchasing Managers Index (PMI)
+Unit: Index
+Frequency: Monthly
+First date: 01/01/2011
+Last date: 06/01/2020
+Observations: 114
+Last change %: 17.98
+Last value: 43.80
+Last updated: 07/21/2020
+Source: Bangko Sentral ng Pilipinas
+Series id: 409536987(PSGJAAAAAAAAEN)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:16 INFO  Log4j:127 - 1
+2020-09-11 10:13:16 INFO  Log4j:128 - 20
+2020-09-11 10:13:18 INFO  Log4j:136 - Title information is 
+Region: Nigeria
+Name: Purchasing Managers Index (PMI)
+Unit: %
+Frequency: Monthly
+First date: 07/01/2014
+Last date: 08/01/2020
+Observations: 73
+Last change %: 16.23
+Last value: 48.50
+Last updated: 08/27/2020
+Source: Central Bank of Nigeria
+Series id: 367048727
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:18 INFO  Log4j:143 - PMI is exists in the
+Region: Nigeria
+Name: Purchasing Managers Index (PMI)
+Unit: %
+Frequency: Monthly
+First date: 07/01/2014
+Last date: 08/01/2020
+Observations: 73
+Last change %: 16.23
+Last value: 48.50
+Last updated: 08/27/2020
+Source: Central Bank of Nigeria
+Series id: 367048727
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:18 INFO  Log4j:143 - Purchasing Managers Index is exists in the
+Region: Nigeria
+Name: Purchasing Managers Index (PMI)
+Unit: %
+Frequency: Monthly
+First date: 07/01/2014
+Last date: 08/01/2020
+Observations: 73
+Last change %: 16.23
+Last value: 48.50
+Last updated: 08/27/2020
+Source: Central Bank of Nigeria
+Series id: 367048727
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:18 INFO  Log4j:127 - 2
+2020-09-11 10:13:18 INFO  Log4j:128 - 20
+2020-09-11 10:13:19 INFO  Log4j:136 - Title information is 
+Region: Mexico
+Name: Purchasing Managers Index (PMI)
+Unit: Point
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 07/01/2020
+Observations: 199
+Last change %: 1.52
+Last value: 49.84
+Last updated: 08/03/2020
+Source: National Institute of Statistics and Geography
+Series id: 414224067(MXSCBEAAAAAAAD)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:19 INFO  Log4j:143 - PMI is exists in the
+Region: Mexico
+Name: Purchasing Managers Index (PMI)
+Unit: Point
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 07/01/2020
+Observations: 199
+Last change %: 1.52
+Last value: 49.84
+Last updated: 08/03/2020
+Source: National Institute of Statistics and Geography
+Series id: 414224067(MXSCBEAAAAAAAD)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:19 INFO  Log4j:143 - Purchasing Managers Index is exists in the
+Region: Mexico
+Name: Purchasing Managers Index (PMI)
+Unit: Point
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 07/01/2020
+Observations: 199
+Last change %: 1.52
+Last value: 49.84
+Last updated: 08/03/2020
+Source: National Institute of Statistics and Geography
+Series id: 414224067(MXSCBEAAAAAAAD)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:20 INFO  Log4j:127 - 3
+2020-09-11 10:13:20 INFO  Log4j:128 - 20
+2020-09-11 10:13:21 INFO  Log4j:136 - Title information is 
+Region: Mexico
+Name: PMI: sa
+Unit: Point
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 07/01/2020
+Observations: 199
+Last change %: 1.68
+Last value: 49.15
+Last updated: 08/10/2020
+Source: National Institute of Statistics and Geography
+Series id: 414224157(MXSCBEAAAAAAAL)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:21 INFO  Log4j:143 - PMI is exists in the
+Region: Mexico
+Name: PMI: sa
+Unit: Point
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 07/01/2020
+Observations: 199
+Last change %: 1.68
+Last value: 49.15
+Last updated: 08/10/2020
+Source: National Institute of Statistics and Geography
+Series id: 414224157(MXSCBEAAAAAAAL)
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:21 INFO  Log4j:127 - 4
+2020-09-11 10:13:21 INFO  Log4j:128 - 20
+2020-09-11 10:13:23 INFO  Log4j:136 - Title information is 
+Region: Israel
+Name: PMI: Seasonally Adjusted (sa)
+Unit: NA
+Frequency: Monthly
+First date: 01/01/1996
+Last date: 07/01/2020
+Observations: 295
+Last change %: 4.6
+Last value: 49.80
+Last updated: 08/19/2020
+Source: Bank Hapoalim
+Series id: 233999403
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:23 INFO  Log4j:143 - PMI is exists in the
+Region: Israel
+Name: PMI: Seasonally Adjusted (sa)
+Unit: NA
+Frequency: Monthly
+First date: 01/01/1996
+Last date: 07/01/2020
+Observations: 295
+Last change %: 4.6
+Last value: 49.80
+Last updated: 08/19/2020
+Source: Bank Hapoalim
+Series id: 233999403
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+More: (K) Key series
+2020-09-11 10:13:23 INFO  Log4j:127 - 5
+2020-09-11 10:13:23 INFO  Log4j:128 - 20
+2020-09-11 10:13:25 INFO  Log4j:136 - Title information is 
+Region: Germany
+Name: BME Germany Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 04/01/1996
+Last date: 08/01/2020
+Observations: 293
+Last change %: 21.84
+Last value: 53
+Last updated: 08/21/2020
+Source: IHS Markit
+Series id: 400825487
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:25 INFO  Log4j:143 - PMI is exists in the
+Region: Germany
+Name: BME Germany Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 04/01/1996
+Last date: 08/01/2020
+Observations: 293
+Last change %: 21.84
+Last value: 53
+Last updated: 08/21/2020
+Source: IHS Markit
+Series id: 400825487
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:25 INFO  Log4j:127 - 6
+2020-09-11 10:13:25 INFO  Log4j:128 - 20
+2020-09-11 10:13:27 INFO  Log4j:136 - Title information is 
+Region: Nigeria
+Name: Non Manufacturing PMI (NMI)
+Unit: %
+Frequency: Monthly
+First date: 07/01/2014
+Last date: 08/01/2020
+Observations: 73
+Last change %: 23.98
+Last value: 44.70
+Last updated: 08/27/2020
+Source: Central Bank of Nigeria
+Series id: 410608287
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:27 INFO  Log4j:143 - PMI is exists in the
+Region: Nigeria
+Name: Non Manufacturing PMI (NMI)
+Unit: %
+Frequency: Monthly
+First date: 07/01/2014
+Last date: 08/01/2020
+Observations: 73
+Last change %: 23.98
+Last value: 44.70
+Last updated: 08/27/2020
+Source: Central Bank of Nigeria
+Series id: 410608287
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:27 INFO  Log4j:127 - 7
+2020-09-11 10:13:27 INFO  Log4j:128 - 20
+2020-09-11 10:13:29 INFO  Log4j:136 - Title information is 
+Region: Israel
+Name: Purchasing Managers Index (PMI)
+Unit: NA
+Frequency: Monthly
+First date: 01/01/1996
+Last date: 07/01/2020
+Observations: 295
+Last change %: 8.3
+Last value: 50.80
+Last updated: 08/19/2020
+Source: Bank Hapoalim
+Series id: 234190103
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:29 INFO  Log4j:143 - PMI is exists in the
+Region: Israel
+Name: Purchasing Managers Index (PMI)
+Unit: NA
+Frequency: Monthly
+First date: 01/01/1996
+Last date: 07/01/2020
+Observations: 295
+Last change %: 8.3
+Last value: 50.80
+Last updated: 08/19/2020
+Source: Bank Hapoalim
+Series id: 234190103
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:29 INFO  Log4j:143 - Purchasing Managers Index is exists in the
+Region: Israel
+Name: Purchasing Managers Index (PMI)
+Unit: NA
+Frequency: Monthly
+First date: 01/01/1996
+Last date: 07/01/2020
+Observations: 295
+Last change %: 8.3
+Last value: 50.80
+Last updated: 08/19/2020
+Source: Bank Hapoalim
+Series id: 234190103
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:29 INFO  Log4j:127 - 8
+2020-09-11 10:13:29 INFO  Log4j:128 - 20
+2020-09-11 10:13:31 INFO  Log4j:136 - Title information is 
+Region: Poland
+Name: Poland Manufacturing PMI: non-sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 06/01/1998
+Last date: 07/01/2020
+Observations: 266
+Last change %: 13.41
+Last value: 51.60
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400822917
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:31 INFO  Log4j:143 - PMI is exists in the
+Region: Poland
+Name: Poland Manufacturing PMI: non-sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 06/01/1998
+Last date: 07/01/2020
+Observations: 266
+Last change %: 13.41
+Last value: 51.60
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400822917
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:31 INFO  Log4j:127 - 9
+2020-09-11 10:13:31 INFO  Log4j:128 - 20
+2020-09-11 10:13:33 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:33 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:33 INFO  Log4j:127 - 10
+2020-09-11 10:13:33 INFO  Log4j:128 - 20
+2020-09-11 10:13:34 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:34 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:34 INFO  Log4j:127 - 11
+2020-09-11 10:13:34 INFO  Log4j:128 - 20
+2020-09-11 10:13:36 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:36 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:36 INFO  Log4j:127 - 12
+2020-09-11 10:13:36 INFO  Log4j:128 - 20
+2020-09-11 10:13:38 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:38 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:38 INFO  Log4j:127 - 13
+2020-09-11 10:13:38 INFO  Log4j:128 - 20
+2020-09-11 10:13:40 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:40 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:40 INFO  Log4j:127 - 14
+2020-09-11 10:13:40 INFO  Log4j:128 - 20
+2020-09-11 10:13:41 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:41 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:41 INFO  Log4j:127 - 15
+2020-09-11 10:13:41 INFO  Log4j:128 - 20
+2020-09-11 10:13:43 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:43 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:43 INFO  Log4j:127 - 16
+2020-09-11 10:13:43 INFO  Log4j:128 - 20
+2020-09-11 10:13:45 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:45 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:45 INFO  Log4j:127 - 17
+2020-09-11 10:13:45 INFO  Log4j:128 - 20
+2020-09-11 10:13:47 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:47 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:47 INFO  Log4j:127 - 18
+2020-09-11 10:13:47 INFO  Log4j:128 - 20
+2020-09-11 10:13:48 INFO  Log4j:136 - Title information is 
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:48 INFO  Log4j:143 - PMI is exists in the
+Region: India
+Name: India Manufacturing PMI: sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 03/01/2005
+Last date: 07/01/2020
+Observations: 185
+Last change %: 12.38
+Last value: 46
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400823167
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:48 INFO  Log4j:127 - 19
+2020-09-11 10:13:48 INFO  Log4j:128 - 20
+2020-09-11 10:13:50 INFO  Log4j:136 - Title information is 
+Region: Spain
+Name: AERCE Spain Manufacturing PMI: non-sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 02/01/1998
+Last date: 07/01/2020
+Observations: 270
+Last change %: 2.63
+Last value: 50.80
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400826377
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:50 INFO  Log4j:143 - PMI is exists in the
+Region: Spain
+Name: AERCE Spain Manufacturing PMI: non-sa: PMI
+Unit: NA
+Frequency: Monthly
+First date: 02/01/1998
+Last date: 07/01/2020
+Observations: 270
+Last change %: 2.63
+Last value: 50.80
+Last updated: 08/03/2020
+Source: IHS Markit
+Series id: 400826377
+Classification: Business and economic survey
+Indicator: Purchasing Manager Index
+2020-09-11 10:13:50 INFO  Log4j:238 - Logger initialized and writing using logger
+2020-09-11 10:13:50 INFO  Log4j:239 - 
+Inside setup
+2020-09-11 10:13:50 INFO  Log4j:242 - Reusing same driver..
+2020-09-11 10:13:50 INFO  Log4j:63 - If User has already logged in pelase continue....
+2020-09-11 10:13:50 INFO  Log4j:72 - Searching with cpi
+2020-09-11 10:13:53 INFO  Log4j:102 - Clicking on Reset button
+2020-09-11 10:13:56 INFO  Log4j:82 - Clicking on  Series tab 
+2020-09-11 10:13:56 INFO  Log4j:95 - Synonym text file contains cpi
+2020-09-11 10:13:58 INFO  Log4j:121 - List size is :20
+2020-09-11 10:13:58 INFO  Log4j:127 - 0
+2020-09-11 10:13:58 INFO  Log4j:128 - 20
+2020-09-11 10:14:00 INFO  Log4j:136 - Title information is 
+Region: Bahrain
+Name: Consumer Price Index (CPI)
+Unit: Apr2019=100
+Frequency: Monthly
+First date: 12/01/2016
+Last date: 06/01/2020
+Observations: 43
+Last change %: 3.41
+Last value: 96.40
+Last updated: 07/28/2020
+Source: Central Informatics Organisation
+Series id: 417801947
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:00 INFO  Log4j:143 - cpi is exists in the
+Region: Bahrain
+Name: Consumer Price Index (CPI)
+Unit: Apr2019=100
+Frequency: Monthly
+First date: 12/01/2016
+Last date: 06/01/2020
+Observations: 43
+Last change %: 3.41
+Last value: 96.40
+Last updated: 07/28/2020
+Source: Central Informatics Organisation
+Series id: 417801947
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:00 INFO  Log4j:143 - consumer price index is exists in the
+Region: Bahrain
+Name: Consumer Price Index (CPI)
+Unit: Apr2019=100
+Frequency: Monthly
+First date: 12/01/2016
+Last date: 06/01/2020
+Observations: 43
+Last change %: 3.41
+Last value: 96.40
+Last updated: 07/28/2020
+Source: Central Informatics Organisation
+Series id: 417801947
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:00 INFO  Log4j:127 - 1
+2020-09-11 10:14:00 INFO  Log4j:128 - 20
+2020-09-11 10:14:02 INFO  Log4j:136 - Title information is 
+Region: Tanzania
+Name: Consumer Price Index (CPI)
+Unit: Sep2010=100
+Frequency: Monthly
+First date: 01/01/2010
+Last date: 07/01/2015
+Observations: 67
+Last change %: 6.45
+Last value: 158.78
+Last updated: 08/13/2015
+Source: National Bureau of Statistics
+Series id: 316399402
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:02 INFO  Log4j:143 - cpi is exists in the
+Region: Tanzania
+Name: Consumer Price Index (CPI)
+Unit: Sep2010=100
+Frequency: Monthly
+First date: 01/01/2010
+Last date: 07/01/2015
+Observations: 67
+Last change %: 6.45
+Last value: 158.78
+Last updated: 08/13/2015
+Source: National Bureau of Statistics
+Series id: 316399402
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:02 INFO  Log4j:143 - consumer price index is exists in the
+Region: Tanzania
+Name: Consumer Price Index (CPI)
+Unit: Sep2010=100
+Frequency: Monthly
+First date: 01/01/2010
+Last date: 07/01/2015
+Observations: 67
+Last change %: 6.45
+Last value: 158.78
+Last updated: 08/13/2015
+Source: National Bureau of Statistics
+Series id: 316399402
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:02 INFO  Log4j:127 - 2
+2020-09-11 10:14:02 INFO  Log4j:128 - 20
+2020-09-11 10:14:04 INFO  Log4j:136 - Title information is 
+Region: Libya
+Name: Consumer Price Index (CPI)
+Unit: 2003=100
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 09/01/2014
+Observations: 129
+Last change %: 2.43
+Last value: 168.60
+Last updated: 12/29/2014
+Source: Central Bank of Libya
+Series id: 302955304
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:04 INFO  Log4j:143 - cpi is exists in the
+Region: Libya
+Name: Consumer Price Index (CPI)
+Unit: 2003=100
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 09/01/2014
+Observations: 129
+Last change %: 2.43
+Last value: 168.60
+Last updated: 12/29/2014
+Source: Central Bank of Libya
+Series id: 302955304
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:04 INFO  Log4j:143 - consumer price index is exists in the
+Region: Libya
+Name: Consumer Price Index (CPI)
+Unit: 2003=100
+Frequency: Monthly
+First date: 01/01/2004
+Last date: 09/01/2014
+Observations: 129
+Last change %: 2.43
+Last value: 168.60
+Last updated: 12/29/2014
+Source: Central Bank of Libya
+Series id: 302955304
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:04 INFO  Log4j:127 - 3
+2020-09-11 10:14:04 INFO  Log4j:128 - 20
+2020-09-11 10:14:05 INFO  Log4j:136 - Title information is 
+Region: Iraq
+Name: Consumer Price Index (CPI)
+Unit: 2007=100
+Frequency: Monthly
+First date: 01/01/2010
+Last date: 10/01/2015
+Observations: 69
+Last change %: 1.57
+Last value: 148.60
+Last updated: 12/21/2015
+Source: Central Statistical Organization
+Series id: 303099304
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:05 INFO  Log4j:143 - cpi is exists in the
+Region: Iraq
+Name: Consumer Price Index (CPI)
+Unit: 2007=100
+Frequency: Monthly
+First date: 01/01/2010
+Last date: 10/01/2015
+Observations: 69
+Last change %: 1.57
+Last value: 148.60
+Last updated: 12/21/2015
+Source: Central Statistical Organization
+Series id: 303099304
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:05 INFO  Log4j:143 - consumer price index is exists in the
+Region: Iraq
+Name: Consumer Price Index (CPI)
+Unit: 2007=100
+Frequency: Monthly
+First date: 01/01/2010
+Last date: 10/01/2015
+Observations: 69
+Last change %: 1.57
+Last value: 148.60
+Last updated: 12/21/2015
+Source: Central Statistical Organization
+Series id: 303099304
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:06 INFO  Log4j:127 - 4
+2020-09-11 10:14:06 INFO  Log4j:128 - 20
+2020-09-11 10:14:07 INFO  Log4j:136 - Title information is 
+Region: Iraq
+Name: Consumer Price Index (CPI)
+Unit: 2007=100
+Frequency: Annual
+First date: 12/01/2009
+Last date: 12/01/2012
+Observations: 4
+Last change %: 3.61
+Last value: 140.50
+Last updated: 02/08/2014
+Source: Central Statistical Organization
+Series id: 303104204
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:07 INFO  Log4j:143 - cpi is exists in the
+Region: Iraq
+Name: Consumer Price Index (CPI)
+Unit: 2007=100
+Frequency: Annual
+First date: 12/01/2009
+Last date: 12/01/2012
+Observations: 4
+Last change %: 3.61
+Last value: 140.50
+Last updated: 02/08/2014
+Source: Central Statistical Organization
+Series id: 303104204
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:07 INFO  Log4j:143 - consumer price index is exists in the
+Region: Iraq
+Name: Consumer Price Index (CPI)
+Unit: 2007=100
+Frequency: Annual
+First date: 12/01/2009
+Last date: 12/01/2012
+Observations: 4
+Last change %: 3.61
+Last value: 140.50
+Last updated: 02/08/2014
+Source: Central Statistical Organization
+Series id: 303104204
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:07 INFO  Log4j:127 - 5
+2020-09-11 10:14:07 INFO  Log4j:128 - 20
+2020-09-11 10:14:09 INFO  Log4j:136 - Title information is 
+Region: Jordan
+Name: Consumer Price Index (CPI)
+Unit: 2018=100
+Frequency: Monthly
+First date: 01/01/2006
+Last date: 07/01/2020
+Observations: 175
+Last change %: 0.56
+Last value: 100.59
+Last updated: 08/26/2020
+Source: Department of Statistics
+Series id: 448623227
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:09 INFO  Log4j:143 - cpi is exists in the
+Region: Jordan
+Name: Consumer Price Index (CPI)
+Unit: 2018=100
+Frequency: Monthly
+First date: 01/01/2006
+Last date: 07/01/2020
+Observations: 175
+Last change %: 0.56
+Last value: 100.59
+Last updated: 08/26/2020
+Source: Department of Statistics
+Series id: 448623227
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:09 INFO  Log4j:143 - consumer price index is exists in the
+Region: Jordan
+Name: Consumer Price Index (CPI)
+Unit: 2018=100
+Frequency: Monthly
+First date: 01/01/2006
+Last date: 07/01/2020
+Observations: 175
+Last change %: 0.56
+Last value: 100.59
+Last updated: 08/26/2020
+Source: Department of Statistics
+Series id: 448623227
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:09 INFO  Log4j:127 - 6
+2020-09-11 10:14:09 INFO  Log4j:128 - 20
+2020-09-11 10:14:11 INFO  Log4j:136 - Title information is 
+Region: Qatar
+Name: Consumer Price Index (CPI)
+Unit: 2018=100
+Frequency: Monthly
+First date: 01/01/2019
+Last date: 07/01/2020
+Observations: 14
+Last change %: 3.41
+Last value: 95.73
+Last updated: 08/16/2020
+Source: Planning and Statistics Authority
+Series id: 448656437
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:11 INFO  Log4j:143 - cpi is exists in the
+Region: Qatar
+Name: Consumer Price Index (CPI)
+Unit: 2018=100
+Frequency: Monthly
+First date: 01/01/2019
+Last date: 07/01/2020
+Observations: 14
+Last change %: 3.41
+Last value: 95.73
+Last updated: 08/16/2020
+Source: Planning and Statistics Authority
+Series id: 448656437
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:11 INFO  Log4j:143 - consumer price index is exists in the
+Region: Qatar
+Name: Consumer Price Index (CPI)
+Unit: 2018=100
+Frequency: Monthly
+First date: 01/01/2019
+Last date: 07/01/2020
+Observations: 14
+Last change %: 3.41
+Last value: 95.73
+Last updated: 08/16/2020
+Source: Planning and Statistics Authority
+Series id: 448656437
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:11 INFO  Log4j:127 - 7
+2020-09-11 10:14:11 INFO  Log4j:128 - 20
+2020-09-11 10:14:13 INFO  Log4j:136 - Title information is 
+Region: Kuwait
+Name: Consumer Price Index (CPI)
+Unit: 2013=100
+Frequency: Monthly
+First date: 05/01/2016
+Last date: 06/01/2020
+Observations: 50
+Last change %: 1.75
+Last value: 116.10
+Last updated: 07/29/2020
+Source: Central Statistical Bureau
+Series id: 389072877
+Mnemonic: KW.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:13 INFO  Log4j:143 - cpi is exists in the
+Region: Kuwait
+Name: Consumer Price Index (CPI)
+Unit: 2013=100
+Frequency: Monthly
+First date: 05/01/2016
+Last date: 06/01/2020
+Observations: 50
+Last change %: 1.75
+Last value: 116.10
+Last updated: 07/29/2020
+Source: Central Statistical Bureau
+Series id: 389072877
+Mnemonic: KW.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:13 INFO  Log4j:143 - consumer price index is exists in the
+Region: Kuwait
+Name: Consumer Price Index (CPI)
+Unit: 2013=100
+Frequency: Monthly
+First date: 05/01/2016
+Last date: 06/01/2020
+Observations: 50
+Last change %: 1.75
+Last value: 116.10
+Last updated: 07/29/2020
+Source: Central Statistical Bureau
+Series id: 389072877
+Mnemonic: KW.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:13 INFO  Log4j:127 - 8
+2020-09-11 10:14:13 INFO  Log4j:128 - 20
+2020-09-11 10:14:15 INFO  Log4j:136 - Title information is 
+Region: Finland
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2015
+Last date: 07/01/2020
+Observations: 67
+Last change %: 0.59
+Last value: 103.69
+Last updated: 08/14/2020
+Source: Statistics Finland
+Series id: 374392597
+Mnemonic: FI.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:15 INFO  Log4j:143 - cpi is exists in the
+Region: Finland
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2015
+Last date: 07/01/2020
+Observations: 67
+Last change %: 0.59
+Last value: 103.69
+Last updated: 08/14/2020
+Source: Statistics Finland
+Series id: 374392597
+Mnemonic: FI.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:15 INFO  Log4j:143 - consumer price index is exists in the
+Region: Finland
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2015
+Last date: 07/01/2020
+Observations: 67
+Last change %: 0.59
+Last value: 103.69
+Last updated: 08/14/2020
+Source: Statistics Finland
+Series id: 374392597
+Mnemonic: FI.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:15 INFO  Log4j:127 - 9
+2020-09-11 10:14:15 INFO  Log4j:128 - 20
+2020-09-11 10:14:16 INFO  Log4j:136 - Title information is 
+Region: Italy
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2016
+Last date: 07/01/2020
+Observations: 55
+Last change %: 0.39
+Last value: 102.70
+Last updated: 08/12/2020
+Source: National Institute of Statistics
+Series id: 374399697(ITIRASAAAAAAAB)
+Mnemonic: IT.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:16 INFO  Log4j:143 - cpi is exists in the
+Region: Italy
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2016
+Last date: 07/01/2020
+Observations: 55
+Last change %: 0.39
+Last value: 102.70
+Last updated: 08/12/2020
+Source: National Institute of Statistics
+Series id: 374399697(ITIRASAAAAAAAB)
+Mnemonic: IT.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:16 INFO  Log4j:143 - consumer price index is exists in the
+Region: Italy
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2016
+Last date: 07/01/2020
+Observations: 55
+Last change %: 0.39
+Last value: 102.70
+Last updated: 08/12/2020
+Source: National Institute of Statistics
+Series id: 374399697(ITIRASAAAAAAAB)
+Mnemonic: IT.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:16 INFO  Log4j:127 - 10
+2020-09-11 10:14:16 INFO  Log4j:128 - 20
+2020-09-11 10:14:18 INFO  Log4j:136 - Title information is 
+Region: Cyprus
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2000
+Last date: 07/01/2020
+Observations: 247
+Last change %: 1.5
+Last value: 98.52
+Last updated: 08/06/2020
+Source: Statistical Service of the Republic of Cyprus
+Series id: 374408647
+Mnemonic: CY.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:18 INFO  Log4j:143 - cpi is exists in the
+Region: Cyprus
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2000
+Last date: 07/01/2020
+Observations: 247
+Last change %: 1.5
+Last value: 98.52
+Last updated: 08/06/2020
+Source: Statistical Service of the Republic of Cyprus
+Series id: 374408647
+Mnemonic: CY.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:18 INFO  Log4j:143 - consumer price index is exists in the
+Region: Cyprus
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2000
+Last date: 07/01/2020
+Observations: 247
+Last change %: 1.5
+Last value: 98.52
+Last updated: 08/06/2020
+Source: Statistical Service of the Republic of Cyprus
+Series id: 374408647
+Mnemonic: CY.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:18 INFO  Log4j:127 - 11
+2020-09-11 10:14:18 INFO  Log4j:128 - 20
+2020-09-11 10:14:20 INFO  Log4j:136 - Title information is 
+Region: Oman
+Name: Consumer Price Index (CPI)
+Unit: 2012=100
+Frequency: Monthly
+First date: 12/01/2012
+Last date: 07/01/2020
+Observations: 92
+Last change %: 1.41
+Last value: 105.10
+Last updated: 08/25/2020
+Source: National Center for Statistics and Information
+Series id: 303126604
+Mnemonic: OM.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:20 INFO  Log4j:143 - cpi is exists in the
+Region: Oman
+Name: Consumer Price Index (CPI)
+Unit: 2012=100
+Frequency: Monthly
+First date: 12/01/2012
+Last date: 07/01/2020
+Observations: 92
+Last change %: 1.41
+Last value: 105.10
+Last updated: 08/25/2020
+Source: National Center for Statistics and Information
+Series id: 303126604
+Mnemonic: OM.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:20 INFO  Log4j:143 - consumer price index is exists in the
+Region: Oman
+Name: Consumer Price Index (CPI)
+Unit: 2012=100
+Frequency: Monthly
+First date: 12/01/2012
+Last date: 07/01/2020
+Observations: 92
+Last change %: 1.41
+Last value: 105.10
+Last updated: 08/25/2020
+Source: National Center for Statistics and Information
+Series id: 303126604
+Mnemonic: OM.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:20 INFO  Log4j:127 - 12
+2020-09-11 10:14:20 INFO  Log4j:128 - 20
+2020-09-11 10:14:22 INFO  Log4j:136 - Title information is 
+Region: Malaysia
+Name: Consumer Price Index (CPI)
+Unit: 2010=100
+Frequency: Monthly
+First date: 01/01/2005
+Last date: 07/01/2020
+Observations: 187
+Last change %: 1.32
+Last value: 119.90
+Last updated: 08/18/2020
+Source: Department of Statistics
+Series id: 251784202(MIYKFP)
+Mnemonic: MY.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:22 INFO  Log4j:143 - cpi is exists in the
+Region: Malaysia
+Name: Consumer Price Index (CPI)
+Unit: 2010=100
+Frequency: Monthly
+First date: 01/01/2005
+Last date: 07/01/2020
+Observations: 187
+Last change %: 1.32
+Last value: 119.90
+Last updated: 08/18/2020
+Source: Department of Statistics
+Series id: 251784202(MIYKFP)
+Mnemonic: MY.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:22 INFO  Log4j:143 - consumer price index is exists in the
+Region: Malaysia
+Name: Consumer Price Index (CPI)
+Unit: 2010=100
+Frequency: Monthly
+First date: 01/01/2005
+Last date: 07/01/2020
+Observations: 187
+Last change %: 1.32
+Last value: 119.90
+Last updated: 08/18/2020
+Source: Department of Statistics
+Series id: 251784202(MIYKFP)
+Mnemonic: MY.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:22 INFO  Log4j:127 - 13
+2020-09-11 10:14:22 INFO  Log4j:128 - 20
+2020-09-11 10:14:24 INFO  Log4j:136 - Title information is 
+Region: Luxembourg
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/1995
+Last date: 07/01/2020
+Observations: 307
+Last change %: 0.94
+Last value: 105.82
+Last updated: 08/05/2020
+Source: The Portal of Statistics of Luxembourg
+Series id: 374724807
+Mnemonic: LU.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:24 INFO  Log4j:143 - cpi is exists in the
+Region: Luxembourg
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/1995
+Last date: 07/01/2020
+Observations: 307
+Last change %: 0.94
+Last value: 105.82
+Last updated: 08/05/2020
+Source: The Portal of Statistics of Luxembourg
+Series id: 374724807
+Mnemonic: LU.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:24 INFO  Log4j:143 - consumer price index is exists in the
+Region: Luxembourg
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/1995
+Last date: 07/01/2020
+Observations: 307
+Last change %: 0.94
+Last value: 105.82
+Last updated: 08/05/2020
+Source: The Portal of Statistics of Luxembourg
+Series id: 374724807
+Mnemonic: LU.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:24 INFO  Log4j:127 - 14
+2020-09-11 10:14:24 INFO  Log4j:128 - 20
+2020-09-11 10:14:25 INFO  Log4j:136 - Title information is 
+Region: New Zealand
+Name: Consumer Price Index (CPI)
+Unit: Jun2017=1000
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 06/01/1914
+Last date: 06/01/2020
+Observations: 425
+Last change %: 1.45
+Last value: 1,047
+Last updated: 08/10/2020
+Source: Statistics New Zealand
+Series id: 399976317
+Mnemonic: NZ.CPI.FI.Q
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:25 INFO  Log4j:143 - cpi is exists in the
+Region: New Zealand
+Name: Consumer Price Index (CPI)
+Unit: Jun2017=1000
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 06/01/1914
+Last date: 06/01/2020
+Observations: 425
+Last change %: 1.45
+Last value: 1,047
+Last updated: 08/10/2020
+Source: Statistics New Zealand
+Series id: 399976317
+Mnemonic: NZ.CPI.FI.Q
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:25 INFO  Log4j:143 - consumer price index is exists in the
+Region: New Zealand
+Name: Consumer Price Index (CPI)
+Unit: Jun2017=1000
+Frequency: Quarterly, ending "Mar, June, Sep, Dec"
+First date: 06/01/1914
+Last date: 06/01/2020
+Observations: 425
+Last change %: 1.45
+Last value: 1,047
+Last updated: 08/10/2020
+Source: Statistics New Zealand
+Series id: 399976317
+Mnemonic: NZ.CPI.FI.Q
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:25 INFO  Log4j:127 - 15
+2020-09-11 10:14:25 INFO  Log4j:128 - 20
+2020-09-11 10:14:27 INFO  Log4j:136 - Title information is 
+Region: Spain
+Name: Consumer Price Index (CPI)
+Unit: 2016=100
+Frequency: Monthly
+First date: 01/01/2002
+Last date: 07/01/2020
+Observations: 223
+Last change %: 0.62
+Last value: 103.53
+Last updated: 08/13/2020
+Source: National Statistics Institute
+Series id: 384103857
+Mnemonic: ES.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:27 INFO  Log4j:143 - cpi is exists in the
+Region: Spain
+Name: Consumer Price Index (CPI)
+Unit: 2016=100
+Frequency: Monthly
+First date: 01/01/2002
+Last date: 07/01/2020
+Observations: 223
+Last change %: 0.62
+Last value: 103.53
+Last updated: 08/13/2020
+Source: National Statistics Institute
+Series id: 384103857
+Mnemonic: ES.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:27 INFO  Log4j:143 - consumer price index is exists in the
+Region: Spain
+Name: Consumer Price Index (CPI)
+Unit: 2016=100
+Frequency: Monthly
+First date: 01/01/2002
+Last date: 07/01/2020
+Observations: 223
+Last change %: 0.62
+Last value: 103.53
+Last updated: 08/13/2020
+Source: National Statistics Institute
+Series id: 384103857
+Mnemonic: ES.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:27 INFO  Log4j:127 - 16
+2020-09-11 10:14:27 INFO  Log4j:128 - 20
+2020-09-11 10:14:29 INFO  Log4j:136 - Title information is 
+Region: Malawi
+Name: Consumer Price Index (CPI)
+Unit: Dec2017=100
+Frequency: Monthly
+First date: 01/01/2018
+Last date: 07/01/2020
+Observations: 31
+Last change %: 8.02
+Last value: 119.90
+Last updated: 08/25/2020
+Source: National Statistics Office of Malawi
+Series id: 408336467
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:29 INFO  Log4j:143 - cpi is exists in the
+Region: Malawi
+Name: Consumer Price Index (CPI)
+Unit: Dec2017=100
+Frequency: Monthly
+First date: 01/01/2018
+Last date: 07/01/2020
+Observations: 31
+Last change %: 8.02
+Last value: 119.90
+Last updated: 08/25/2020
+Source: National Statistics Office of Malawi
+Series id: 408336467
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:29 INFO  Log4j:143 - consumer price index is exists in the
+Region: Malawi
+Name: Consumer Price Index (CPI)
+Unit: Dec2017=100
+Frequency: Monthly
+First date: 01/01/2018
+Last date: 07/01/2020
+Observations: 31
+Last change %: 8.02
+Last value: 119.90
+Last updated: 08/25/2020
+Source: National Statistics Office of Malawi
+Series id: 408336467
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:29 INFO  Log4j:127 - 17
+2020-09-11 10:14:29 INFO  Log4j:128 - 20
+2020-09-11 10:14:31 INFO  Log4j:136 - Title information is 
+Region: Tunisia
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2015
+Last date: 07/01/2020
+Observations: 67
+Last change %: 5.7
+Last value: 132.04
+Last updated: 08/05/2020
+Source: National Statistics Institute
+Series id: 412397537
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:31 INFO  Log4j:143 - cpi is exists in the
+Region: Tunisia
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2015
+Last date: 07/01/2020
+Observations: 67
+Last change %: 5.7
+Last value: 132.04
+Last updated: 08/05/2020
+Source: National Statistics Institute
+Series id: 412397537
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:31 INFO  Log4j:143 - consumer price index is exists in the
+Region: Tunisia
+Name: Consumer Price Index (CPI)
+Unit: 2015=100
+Frequency: Monthly
+First date: 01/01/2015
+Last date: 07/01/2020
+Observations: 67
+Last change %: 5.7
+Last value: 132.04
+Last updated: 08/05/2020
+Source: National Statistics Institute
+Series id: 412397537
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:31 INFO  Log4j:127 - 18
+2020-09-11 10:14:31 INFO  Log4j:128 - 20
+2020-09-11 10:14:33 INFO  Log4j:136 - Title information is 
+Region: Ireland
+Name: Consumer Price Index (CPI)
+Unit: Dec2016=100
+Frequency: Monthly
+First date: 11/01/1996
+Last date: 07/01/2020
+Observations: 285
+Last change %: 0.39
+Last value: 101.90
+Last updated: 08/13/2020
+Source: Central Statistics Office of Ireland
+Series id: 384178247
+Mnemonic: IE.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:33 INFO  Log4j:143 - cpi is exists in the
+Region: Ireland
+Name: Consumer Price Index (CPI)
+Unit: Dec2016=100
+Frequency: Monthly
+First date: 11/01/1996
+Last date: 07/01/2020
+Observations: 285
+Last change %: 0.39
+Last value: 101.90
+Last updated: 08/13/2020
+Source: Central Statistics Office of Ireland
+Series id: 384178247
+Mnemonic: IE.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:33 INFO  Log4j:143 - consumer price index is exists in the
+Region: Ireland
+Name: Consumer Price Index (CPI)
+Unit: Dec2016=100
+Frequency: Monthly
+First date: 11/01/1996
+Last date: 07/01/2020
+Observations: 285
+Last change %: 0.39
+Last value: 101.90
+Last updated: 08/13/2020
+Source: Central Statistics Office of Ireland
+Series id: 384178247
+Mnemonic: IE.CPI.FICL.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:33 INFO  Log4j:127 - 19
+2020-09-11 10:14:33 INFO  Log4j:128 - 20
+2020-09-11 10:14:34 INFO  Log4j:136 - Title information is 
+Region: Lebanon
+Name: Consumer Price Index (CPI)
+Unit: Dec2013=100
+Frequency: Monthly
+First date: 12/01/2007
+Last date: 07/01/2020
+Observations: 152
+Last change %: 112
+Last value: 230.45
+Last updated: 08/26/2020
+Source: Central Administration of Statistics
+Series id: 304904304
+Mnemonic: LB.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:34 INFO  Log4j:143 - cpi is exists in the
+Region: Lebanon
+Name: Consumer Price Index (CPI)
+Unit: Dec2013=100
+Frequency: Monthly
+First date: 12/01/2007
+Last date: 07/01/2020
+Observations: 152
+Last change %: 112
+Last value: 230.45
+Last updated: 08/26/2020
+Source: Central Administration of Statistics
+Series id: 304904304
+Mnemonic: LB.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:34 INFO  Log4j:143 - consumer price index is exists in the
+Region: Lebanon
+Name: Consumer Price Index (CPI)
+Unit: Dec2013=100
+Frequency: Monthly
+First date: 12/01/2007
+Last date: 07/01/2020
+Observations: 152
+Last change %: 112
+Last value: 230.45
+Last updated: 08/26/2020
+Source: Central Administration of Statistics
+Series id: 304904304
+Mnemonic: LB.CPI.FI.M
+Classification: Inflation and price
+Indicator: Consumer Prices
+More: (K) Key series
+2020-09-11 10:14:34 INFO  Log4j:238 - Logger initialized and writing using logger
+2020-09-11 10:14:34 INFO  Log4j:239 - 
+Inside setup
+2020-09-11 10:14:34 INFO  Log4j:242 - Reusing same driver..
+2020-09-11 10:14:34 INFO  Log4j:63 - If User has already logged in pelase continue....
+2020-09-11 10:14:34 INFO  Log4j:72 - Searching with EFTA
+2020-09-11 10:14:37 INFO  Log4j:102 - Clicking on Reset button
+2020-09-11 10:14:40 INFO  Log4j:82 - Clicking on  Series tab 
+2020-09-11 10:14:40 INFO  Log4j:95 - Synonym text file contains EFTA
+2020-09-11 10:14:42 INFO  Log4j:121 - List size is :20
+2020-09-11 10:14:42 INFO  Log4j:127 - 0
+2020-09-11 10:14:42 INFO  Log4j:128 - 20
+2020-09-11 10:14:44 INFO  Log4j:136 - Title information is 
+Region: Austria
+Name: Tourist Arrivals: Europe: EFTA: Switzerland and Liechtenstein
+Unit: Person
+Frequency: Monthly
+First date: 01/01/1974
+Last date: 06/01/2020
+Observations: 558
+Last change %: 66.16
+Last value: 44,184
+Last updated: 08/20/2020
+Source: Statistics Austria
+Series id: 276875203
+Classification: Tourism
+Indicator: Tourism Statistics
+More: (K) Key series
+2020-09-11 10:14:44 INFO  Log4j:143 - EFTA is exists in the
+Region: Austria
+Name: Tourist Arrivals: Europe: EFTA: Switzerland and Liechtenstein
+Unit: Person
+Frequency: Monthly
+First date: 01/01/1974
+Last date: 06/01/2020
+Observations: 558
+Last change %: 66.16
+Last value: 44,184
+Last updated: 08/20/2020
+Source: Statistics Austria
+Series id: 276875203
+Classification: Tourism
+Indicator: Tourism Statistics
+More: (K) Key series
+2020-09-11 10:14:44 INFO  Log4j:127 - 1
+2020-09-11 10:14:44 INFO  Log4j:128 - 20
+2020-09-11 10:14:46 INFO  Log4j:136 - Title information is 
+Region: Israel
+Name: Imports: Europe: EFTA: Switzerland
+Unit: USD mn
+Frequency: Monthly
+First date: 01/01/1988
+Last date: 07/01/2020
+Observations: 391
+Last change %: 6.78
+Last value: 466.40
+Last updated: 08/19/2020
+Source: Central Bureau of Statistics
+Series id: 118825008
+Classification: Foreign trade
+Indicator: Merchandise Trade
+More: (K) Key series
+2020-09-11 10:14:46 INFO  Log4j:143 - EFTA is exists in the
+Region: Israel
+Name: Imports: Europe: EFTA: Switzerland
+Unit: USD mn
+Frequency: Monthly
+First date: 01/01/1988
+Last date: 07/01/2020
+Observations: 391
+Last change %: 6.78
+Last value: 466.40
+Last updated: 08/19/2020
+Source: Central Bureau of Statistics
+Series id: 118825008
+Classification: Foreign trade
+Indicator: Merchandise Trade
+More: (K) Key series
+2020-09-11 10:14:46 INFO  Log4j:127 - 2
+2020-09-11 10:14:46 INFO  Log4j:128 - 20
+2020-09-11 10:14:48 INFO  Log4j:136 - Title information is 
+Region: India
+Name: Imports: INR: Switzerland
+Unit: INR mn
+Frequency: Monthly
+First date: 03/01/1992
+Last date: 07/01/2020
+Observations: 339
+Last change %: 39.34
+Last value: 49,878.32
+Last updated: 08/28/2020
+Source: Ministry of Commerce and Industry
+Series id: 19671201(IJADN)
+Classification: Foreign trade
+Indicator: Merchandise Trade
+More: (K) Key series
+2020-09-11 10:14:54 INFO  Log4j:29 - Screenshot is taken successfully.
+2020-09-11 10:14:54 INFO  Log4j:238 - Logger initialized and writing using logger
+2020-09-11 10:14:54 INFO  Log4j:239 - 
+Inside setup
+2020-09-11 10:14:54 INFO  Log4j:242 - Reusing same driver..
+2020-09-11 10:14:54 INFO  Log4j:63 - If User has already logged in pelase continue....
+2020-09-11 10:14:54 INFO  Log4j:72 - Searching with GIO
+2020-09-11 10:14:57 INFO  Log4j:102 - Clicking on Reset button
+2020-09-11 10:14:59 INFO  Log4j:82 - Clicking on  Series tab 
+2020-09-11 10:14:59 INFO  Log4j:95 - Synonym text file contains GIO
+2020-09-11 10:15:02 INFO  Log4j:121 - List size is :20
+2020-09-11 10:15:02 INFO  Log4j:127 - 0
+2020-09-11 10:15:02 INFO  Log4j:128 - 20
+2020-09-11 10:15:03 INFO  Log4j:136 - Title information is 
+Region: China
+Name: Gross Industrial Output: Total
+Unit: RMB mn
+Frequency: Annual
+First date: 12/01/1952
+Last date: 12/01/2011
+Observations: 51
+Last change %: 20.85
+Last value: 84,426,879.04
+Last updated: 04/15/2020
+Source: National Bureau of Statistics
+Series id: 3647001(CBEPAA)
+Mnemonic: CN.IP.NMVA.RMB-MN-A
+Classification: Production
+Indicator: Industrial Production
+More: (K) Key series
+2020-09-11 10:15:03 INFO  Log4j:143 - GIO is exists in the
+Region: China
+Name: Gross Industrial Output: Total
+Unit: RMB mn
+Frequency: Annual
+First date: 12/01/1952
+Last date: 12/01/2011
+Observations: 51
+Last change %: 20.85
+Last value: 84,426,879.04
+Last updated: 04/15/2020
+Source: National Bureau of Statistics
+Series id: 3647001(CBEPAA)
+Mnemonic: CN.IP.NMVA.RMB-MN-A
+Classification: Production
+Indicator: Industrial Production
+More: (K) Key series
+2020-09-11 10:15:03 INFO  Log4j:143 - Gross Industrial Output is exists in the
+Region: China
+Name: Gross Industrial Output: Total
+Unit: RMB mn
+Frequency: Annual
+First date: 12/01/1952
+Last date: 12/01/2011
+Observations: 51
+Last change %: 20.85
+Last value: 84,426,879.04
+Last updated: 04/15/2020
+Source: National Bureau of Statistics
+Series id: 3647001(CBEPAA)
+Mnemonic: CN.IP.NMVA.RMB-MN-A
+Classification: Production
+Indicator: Industrial Production
+More: (K) Key series
+2020-09-11 10:15:03 INFO  Log4j:127 - 1
+2020-09-11 10:15:03 INFO  Log4j:128 - 20
+2020-09-11 14:23:22 INFO  Log4j:29 - 
+Inside TestNG > @BeforeSuite
+2020-09-11 14:23:23 INFO  Log4j:48 - 
+Inside TestNG > @DataProvider
+2020-09-11 14:23:23 INFO  Log4j:40 - 
+Inside TestNG > @Test
+2020-09-11 14:23:24 INFO  Log4j:59 - 
+Inside TestNG > @AfterSuite
