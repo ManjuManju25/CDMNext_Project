@@ -5,12 +5,8 @@ Background:
    
 @ChartVisual
 Scenario: TC_Chart_01: Verify Chart option under Views > Visuals tab
- 		And Check for prerequesties					
-    #And Closing the unsaved popup if opened
-    #And Check for keeping_insight popup
+    And Check for keeping_insight popup
     And Resetting the filters
-    And Setting values in preference
-    #And Refreshing the page
     And Creating an Insight by selecting few series
     And Click to create an empty visual
     Then Should display "Chart" options on the right pane under "Views" > "Visuals" tab
@@ -20,8 +16,7 @@ Scenario: TC_Chart_02: Verify if chart is created for more than 20 series
     And Open preference dropdown
     And Clicking on "Show search results without pagination" option under user preference to be "Check" 
     And Open preference dropdown
-    And Select more than 20 series from browse tab
-    And  Click on more actions to create "View as Chart" 
+    And Select 21 series for chart and click on chart option
     Then Validation message should appear and chart is created only with 20 series
     
 @ChartVisual
@@ -1143,6 +1138,11 @@ Scenario: TC_Chart_85: Verify Tooltips - style
    
 @ChartVisual
 Scenario: TC_Chart_86: Verify Tooltips - Read tooltips data from Excel (Negative timepoints)
+   And Check for keeping_insight popup
+   And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
+   And Check for keeping_insight popup
+   And Resetting the filters
+   And Setting values in preference
    And Read the "Timepoints" and "Date" from excel file "TC_Chart86.xlsx" 
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
@@ -1153,7 +1153,7 @@ Scenario: TC_Chart_86: Verify Tooltips - Read tooltips data from Excel (Negative
    And Clicking "Save" option
    Then Excel data is compared with application data
   
-@ChartVisual
+@ChartVisual1
 Scenario: TC_Chart_87: Verify Tooltips - Read tooltips data from Excel (Positive timepoints)
    And Read the "Timepoints" and "Date" from excel file "TC_Chart_87.xlsx" 
    And Search for the series with SID "369035327" 
@@ -1178,6 +1178,9 @@ Scenario: TC_Chart_88: Verify Tooltips - Get timepoint values from application (
    And Check the timeframe checkbox for "All observations" section
    And Clicking "Save" option
    Then The SSP timepoints inside series are compared with timepoints reflecting in visual
+   And Login back to default execution login
+   And Check for keeping_insight popup
+   And Resetting the filters
    
 @ChartVisual
 Scenario: TC_Chart_89: Verify Tooltips - Get timepoint values from application (positive timepoints)
@@ -1192,9 +1195,12 @@ Scenario: TC_Chart_89: Verify Tooltips - Get timepoint values from application (
    And Check the timeframe checkbox for "All observations" section
    And Clicking "Save" option
    Then The SSP timepoints inside series are compared with timepoints reflecting in visual
+   And Check for keeping_insight popup
+   And Resetting the filters
    
 @ChartVisual
 Scenario Outline: TC_Chart_90: Verify Tooltips - number format
+   And Resetting the filters
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1563,6 +1569,7 @@ Scenario: TC_Chart_123: Verify Source Copyright
    
 @ChartVisual
 Scenario: TC_Chart_124: Verify Source Copyright title checkbox
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1577,6 +1584,8 @@ Scenario: TC_Chart_124: Verify Source Copyright title checkbox
    
 @ChartVisual
 Scenario: TC_Chart_125: Verify Source Copyright title text link
+   And Check for keeping_insight popup
+   And Disable the Chat bubble
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1591,6 +1600,7 @@ Scenario: TC_Chart_125: Verify Source Copyright title text link
    
 @ChartVisual
 Scenario: TC_Chart_127: Verify Copyright - Font size
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1605,6 +1615,7 @@ Scenario: TC_Chart_127: Verify Copyright - Font size
    
 @ChartVisual
 Scenario: TC_Chart_128: Verify Copyright - Font style
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1619,6 +1630,7 @@ Scenario: TC_Chart_128: Verify Copyright - Font style
    
 @ChartVisual
 Scenario: TC_Chart_129: Verify Copyright - Text color
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1634,6 +1646,7 @@ Scenario: TC_Chart_129: Verify Copyright - Text color
    
 @ChartVisual
 Scenario: TC_Chart_129_1: Verify Copyright - Image
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1645,7 +1658,7 @@ Scenario: TC_Chart_129_1: Verify Copyright - Image
    
 @ChartVisual
 Scenario: TC_Chart_129_2: Verify Source Copyright Image text link
-   And Move the Chat bubble to header
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1660,6 +1673,7 @@ Scenario: TC_Chart_129_2: Verify Source Copyright Image text link
    
 @ChartVisual
 Scenario Outline: <TC_ID>: Verify Source Copyright Image position
+  And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1679,6 +1693,7 @@ Examples:
      
 @ChartVisual
 Scenario: TC_Chart_129_5: Verify Source Copyright Image
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1688,9 +1703,11 @@ Scenario: TC_Chart_129_5: Verify Source Copyright Image
    And  "Copyright" popup should appeared
    And Click on upload Image button
    Then The Uploaded image should reflect in the chart visual legand
+   And Enable the Chat bubble
    
 @ChartVisual
 Scenario: TC_Chart_130: Verify Show controls of Zoom - Check/Uncheck
+   And Check for keeping_insight popup
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -1771,7 +1788,7 @@ Scenario: TC_Chart_139: Verify Copy icon
    And Write the copied data into a text file
    Then Verify the contents in text file
    
-@ChartVisualTest
+@ChartVisual
 Scenario: TC_Chart_140: Verify Copy to excel icon
    And Select few series
    And Open a "Chart" visual
@@ -1817,7 +1834,7 @@ Scenario: TC_Chart_146: Chart context menu
    Then The text and sub text options are present in context click
    
 @ChartVisual
-Scenario: TC_Chart_147: Verify Insert visual - xt menu
+Scenario: TC_Chart_147: Verify Insert visual - context menu
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart"
    And Right Click the "Chart" visual
@@ -1826,7 +1843,7 @@ Scenario: TC_Chart_147: Verify Insert visual - xt menu
    Then The "Insert visual" options have been verified
    
 @ChartVisual
-Scenario: TC_Chart_148: Verify View as - xt menu
+Scenario: TC_Chart_148: Verify View as - context menu
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart"
    And Right Click the "Chart" visual
@@ -1835,7 +1852,7 @@ Scenario: TC_Chart_148: Verify View as - xt menu
    Then The "View as" options have been verified
    
 @ChartVisual
-Scenario: TC_Chart_149: Verify Edit series - xt menu
+Scenario: TC_Chart_149: Verify Edit series - context menu
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Right Click the "Chart" visual
@@ -1843,15 +1860,15 @@ Scenario: TC_Chart_149: Verify Edit series - xt menu
    Then The "Edit series" options have been verified
    
 @ChartVisual
-Scenario: TC_Chart_150: Verify Clear nts - xt menu
+Scenario: TC_Chart_150: Verify Clear contents - context menu
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
    And Right Click the "Chart" visual
    And Click on "Edit series" inside the visual
    And Click on "Add more from My Series" option in the visual
    And Right Click the "Chart" visual
-   And Click on "Clear nts" inside the visual
-   Then The "Clear nts" options have been verified
+   And Click on "Clear contents" inside the visual
+   Then The "Clear contents" options have been verified
  
 @ChartVisual
 Scenario: TC_Chart_154: Verify Undo-Redo
@@ -2130,7 +2147,7 @@ Scenario: TC_Chart_178: Check for preview of multiple series in chart visual
    Then The "Preview" action is performed successfully
    
 @ChartVisual
-Scenario: TC_Chart_179: Verify view as chart from selection xt menu
+Scenario: TC_Chart_179: Verify view as chart from selection context menu
    And Add few series to myseries
    And Highlight any one series
    And Click on More actions button in myseries
@@ -2138,7 +2155,7 @@ Scenario: TC_Chart_179: Verify view as chart from selection xt menu
    Then Verify the top panel should change to "Edit Chart" 
    
 @ChartVisual
-Scenario: TC_Chart_180: Verify downloading chart series to excel from selection xt menu
+Scenario: TC_Chart_180: Verify downloading chart series to excel from selection context menu
    And Add few series to myseries
    And Copy the myseries title
    And Highlight any one series
@@ -2284,7 +2301,9 @@ Scenario: TC_Chart_197: Verify download of native charts from views tab
    
 @ChartVisual
 Scenario: TC_Chart_198: Verify CEIC logo for chart visual
+   And Disable the Chat bubble
    And Search for the series with SID "205424302" and click on "C" option
    And Click credits image
    Then The URL should navigate to "https://www.ceicdata.com/en" 
+   And Enable the Chat bubble
    

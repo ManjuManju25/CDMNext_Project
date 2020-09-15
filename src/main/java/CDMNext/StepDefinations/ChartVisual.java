@@ -380,14 +380,35 @@ public class ChartVisual {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@And("^Move the Chat bubble to header$")
-	public void move_the_Chat_bubble_to_header() throws Throwable {
+	@And("^Disable the Chat bubble$")
+	public void disable_the_Chat_bubble() throws Throwable {
 	 if(login.driver.findElements(By.id("live-chat-bubble")).size()>0) {
-	    WebElement source = login.driver.findElement(By.id("live-chat-bubble"));
-	    WebElement target = login.driver.findElement(By.className("insight-header-control"));
-	    new Actions(login.driver).moveToElement(source).pause(1000).dragAndDrop(source, target).build().perform();
-	    CommonFunctionality.wait(2000);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='data-manager']//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
+	    WebElement chat = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Live chat']/following::div[2]", 4);
+	    if(chat.getAttribute("class").contains("bootstrap-switch-on")) {
+	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='bootstrap-switch-label']", 4)).pause(500).click().build().perform();
+	    } else {
+	    	System.out.println("Live Chat is already off");
+	    }
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'data-manager')]//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
 	 }
+	 CommonFunctionality.wait(4000);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Enable the Chat bubble$")
+	public void enable_the_Chat_bubble() throws Throwable {
+	 if(login.driver.findElements(By.id("live-chat-bubble")).size()==0) {
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='data-manager']//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
+	    WebElement chat = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Live chat']/following::div[2]", 4);
+	    if(chat.getAttribute("class").contains("bootstrap-switch-off")) {
+	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='bootstrap-switch-label']", 4)).pause(500).click().build().perform();
+	    } else {
+	    	System.out.println("Live Chat is already on");
+	    }
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'data-manager')]//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
+	 }
+	 CommonFunctionality.wait(4000);
 	}
 
 	@And("^Select more than (\\d+) series from browse tab$")
@@ -430,6 +451,22 @@ public class ChartVisual {
 	@And("^Copy the insight title$")
 	public void copy_the_insight_title() throws Throwable {
 	   visual_title = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-title--text.text-dots", 4).getText();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Select (\\d+) series for chart and click on chart option$")
+	public void select_series_for_chart_and_click_on_chart_option(int arg1) throws Throwable {
+		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
+		for(int i = 1; i <= arg1; i++) {
+		WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
+		if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
+		new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
+		}
+		}
+		WebElement actions = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'series-item--country')])["+arg1+"]", 8);
+		new Actions(login.driver).moveToElement(actions).pause(1000).build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'view-chart-icon')])["+arg1+"]", 8)).pause(500).click().build().perform();
 	}
 		
 	@SuppressWarnings("deprecation")
@@ -2324,6 +2361,7 @@ public class ChartVisual {
 	@And("^Observe the value order \"([^\"]*)\" selecting \"([^\"]*)\" for \"([^\"]*)\"$")
 	public void observe_the_value_order_selecting_for(String arg1,String arg2,String arg3) throws Throwable {
 	cv.clicking_option("Save");
+	CommonFunctionality.wait(2000);
 	if(arg1.equals("before") && arg2.equalsIgnoreCase("Reversed direction") && arg3.equalsIgnoreCase("Left Axis") && axis_setup_checkboxes_uncheck == false) {
 	   List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]//*[not(@y='-9999')]"));
 	   for (WebElement element : elements) {
@@ -2499,6 +2537,7 @@ public class ChartVisual {
 	public void click_on_upload_Image_button() throws Throwable {
 		CommonFunctionality.getElementBycssSelector(login.driver, "form[enctype='multipart/form-data']", 4).click();
 		CommonFunctionality.wait(2000);
+		//AutoIT path
 		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe", System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 		CommonFunctionality.wait(2000);
 	}
@@ -3238,26 +3277,18 @@ public class ChartVisual {
 	public void validation_message_should_appear_and_chart_is_created_only_with_series(int arg1) throws Throwable {
 		if (login.driver.findElements(By.xpath("//*[text()='Confirmation']//following::*[contains(text(),'Proceed with 20 series?')]")).size()>0) {
 			login.Log4j.info("Validation message appears to create chart with only " + arg1 + " series");
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4)
-					.click();
-			if (login.driver
-					.findElements(By.xpath("//*[contains(@class,'growl-message')]//*[text()='Ok']"))
-					.size() > 0) {
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(@class,'growl-message')]//*[text()='Ok']", 4).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
+			if(login.driver.findElements(By.xpath("//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]", 4).click();
 			}
-			if (login.driver
-					.findElements(
-							By.xpath("//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]"))
-					.size() > 0) {
-				CommonFunctionality
-						.getElementByXpath(login.driver,
-								"//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]", 4)
-						.click();
-			}
+			/*if(login.driver.findElements(By.xpath("//*[contains(@class,'growl-message')]//*[text()='Ok']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'growl-message')]//*[text()='Ok']", 4).click();
+			}*/
 		} else {
 			fail("Chart is created with more than " + arg1 + " series and hence failed");
+			CommonFunctionality.UnselectMethod();
+			CommonFunctionality.Views_list();
+			
 		}
 		CommonFunctionality.wait(3000);
 		CommonFunctionality.Views_list();
@@ -3398,6 +3429,7 @@ public class ChartVisual {
 	@Then("^The Uploaded image should reflect in the chart visual legand$")
 	public void the_Uploaded_image_should_reflect_in_the_chart_visual_legand() throws Throwable {
 		cv.click_button("Save");
+		CommonFunctionality.wait(2000);
     	String image = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-item-wrapper--logo", 4).getAttribute("src");
     	if(!image.contains("credits_image")) {
     		fail("Verification Failed");
@@ -3409,6 +3441,7 @@ public class ChartVisual {
 		popup_should_appear("Copyright");
 		CommonFunctionality.getElementBycssSelector(login.driver, ".copyright-config--remove-icon", 4).click();
 		cv.click_button("Save");
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.Views_list();
 	}
 
@@ -3937,11 +3970,11 @@ public class ChartVisual {
 		CommonFunctionality.wait(2000);
         login.driver.switchTo().window(tabs.get(1));
         String new_URL = login.driver.getCurrentUrl();
-        assertEquals(arg1, new_URL);
 	   	login.driver.switchTo().window(tabs.get(1)).close();
         login.driver.switchTo().window(tabs.get(0));
         login.Log4j.info("The new URL has been Verified successfully");
         CommonFunctionality.Views_list();
+        assertEquals(arg1, new_URL);
  	} 
 
 	@Then("^Entered timeframe date should update in chart$")
@@ -4662,10 +4695,10 @@ public class ChartVisual {
 	    	ArrayList<String> browserTabs = new ArrayList<String>(login.driver.getWindowHandles());
 			login.driver.switchTo().window(browserTabs.get(1));
 			String URL = login.driver.getCurrentUrl();
-			Assert.assertEquals(URL, copyright_title_link);
 			login.Log4j.info("The selected "+arg1+" is reflecting in chart visual");
 			login.driver.close();
 			login.driver.switchTo().window(browserTabs.get(0));
+			sa.assertEquals(URL, copyright_title_link);
 	    	cv.click_on_visual("Edit");
 			click_on_the_checkbox_to("Copyright:", "Check");
 			click_on_the_Container("Copyright:");
@@ -4676,10 +4709,10 @@ public class ChartVisual {
 	    	ArrayList<String> browserTabs = new ArrayList<String>(login.driver.getWindowHandles());
 			login.driver.switchTo().window(browserTabs.get(1));
 			String URL = login.driver.getCurrentUrl();
-			Assert.assertEquals(URL, copyright_title_link);
 			login.Log4j.info("The selected "+arg1+" is reflecting in chart visual");
 			login.driver.close();
 			login.driver.switchTo().window(browserTabs.get(0));
+			sa.assertEquals(URL, copyright_title_link);
 	    	cv.click_on_visual("Edit");
 			click_on_the_checkbox_to("Copyright:", "Check");
 			click_on_the_Container("Copyright:");
@@ -4829,10 +4862,10 @@ public class ChartVisual {
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(newTab.get(1));
 		String actual_text = CommonFunctionality.getElementByClassName(login.driver, "series-name-field--series-name", 4).getText();
-		assertEquals(actual_text, visual_title);
 		login.driver.switchTo().window(newTab.get(1)).close();
 		login.driver.switchTo().window(newTab.get(0));
 		CommonFunctionality.Views_list();
+		sa.assertEquals(actual_text, visual_title);
 	}
 	
 	@Then("^Verify the contents in text file$")

@@ -23,6 +23,9 @@ public class ErrorScreenshot {
 			// test case number
 			String dest = System.getProperty("user.dir") + "/ErrorScreenshot/" + TC[0] + ".png";
 			File destFile = new File(dest);
+//			Screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(login.driver);
+//
+//			ImageIO.write(screenshot.getImage(), "jpg", new File("c:\\ElementScreenshot.jpg"));
 			try {
 				// Copy files to specific location
 				FileUtils.copyFile(srcFile, destFile);

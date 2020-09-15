@@ -6,9 +6,9 @@ Background:
 
 @CrossSection
 Scenario: Tc_Cross Section_01: Verify cross section functionality for series
-   #And Refreshing the page
-   #And Login as current execution login by taking username rowcount as 2 and cellcount as 0 and for password rowcount as 2 and cellcount as 1
-   #And Check for keeping_insight popup
+   And Check for keeping_insight popup
+   And Login as current execution login by taking username rowcount as 2 and cellcount as 0 and for password rowcount as 2 and cellcount as 1
+   And Check for keeping_insight popup
    And Resetting the filters
    And Open preference dropdown
    And Clicking on "Show search results without pagination" option under user preference to be "Uncheck" 
@@ -564,7 +564,7 @@ Scenario: Tc_Cross Section_62: Verify applying crosssec func from edit visual wi
    
 @CrossSection
 Scenario: Tc_Cross Section_65: Verify applying crosssec function over search pane series throught download window
-   And Rename Insight to Download
+   #And Rename Insight to Download
    And Search for the series with SID "310901701;310901801" and click on "Download" option
    And Select "series" tab in download popup and click on "fx" option and pass as "CROSSSEC" 
 	 Then The "Download button" in Download window has to be present
@@ -574,6 +574,6 @@ Scenario: Tc_Cross Section_66: Verify cancel applied function over search pane s
    And Search for the series with SID "310901701;310901801" and click on "Download" option
    And Select "series" tab in download popup and click on "fx" option and pass as "CROSSSEC" 
 	 Then The "Cancel button" in Download window has to be present   
-	 #And Sort the default series in left pane
+	 And Sort the default series in left pane
 	 And Rename Insight to Download
    And Login back to default execution login

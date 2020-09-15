@@ -610,17 +610,18 @@ public class SprintCases {
 						CommonFunctionality
 								.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 10)
 								.click();
+						break;
 					}
 					
 				}
-				break;
+
 			}
 		}
-	CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
+	CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 20).click();
 	if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
 			.size() > 0) {
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10)
+				.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 20)
 				.click();
 	}
 		CommonFunctionality.Views_list();

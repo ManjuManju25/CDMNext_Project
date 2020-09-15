@@ -563,93 +563,102 @@ public class SeriesTab {
 			// element=login.driver.findElement(By.xpath("//li[1]//span[@class='series-item-information--additional-info-field
 			// series-item-information--additional-info-field__dates']"));
 			// action.moveToElement(element).build().perform();
-			CommonFunctionality.getElementByXpath(login.driver,"//li[1]//span[@title='" + arg1 + "']",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//li[1]//span[@title='" + arg1 + "']",10).click();
 			break;
 		case "More actions":
-			CommonFunctionality.getElementByXpath(login.driver,"//li[5]//span[@title='" + arg1 + "']",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//li[5]//span[@title='" + arg1 + "']",10).click();
 			break;
 		case "Unselect all":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",10).click();
 			break;
 		case "Add to insights":
-			CommonFunctionality.getElementByXpath(login.driver,"//button[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//button[contains(text(),'" + arg1 + "')]",10).click();
 			break;
 		case "Databases":
-			CommonFunctionality.getElementByProperty(login.driver,"DatabasesTab_Active",4).click();
+			CommonFunctionality.getElementByProperty(login.driver,"DatabasesTab_Active",15).click();
 			break;
 		case "Download":
 			try {
 				//download button in page
 			   CommonFunctionality.getElementByXpath(login.driver,
-					"//button[contains(@class,'button__download-btn')]//*[contains(text(),'" + arg1 + "')]",4)
+					"//button[contains(@class,'button__download-btn')]//*[contains(text(),'" + arg1 + "')]",15)
 					.click();
 			} catch(Exception e) {
 				//download button in download popup
 				  CommonFunctionality.getElementByXpath(login.driver,
-							"(//button[contains(@class,'button__download-btn')])[3]//*[contains(text(),'" + arg1 + "')]",4)
+							"(//button[contains(@class,'button__download-btn')])[3]//*[contains(text(),'" + arg1 + "')]",15)
 							.click();
 			  }
 			break;
 		case "Search without any filters":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Go to new insight":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[@class='growl-message-nav--button']//a",6).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[@class='growl-message-nav--button']//a",15).click();
 			break;
 		case "delete":
 			login.driver.switchTo().defaultContent();
 			CommonFunctionality.getElementByXpath(login.driver,"//*[@data-action='" + arg1 + "']",10).click();
 				break;
 		case "Table properties":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Delete table":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Cell":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'mce-menu-item-expand')]//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'mce-menu-item-expand')]//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Cell properties":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Merge cells":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Split cell":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Row":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'mce-menu-item-expand')]//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'mce-menu-item-expand')]//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Column":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'mce-menu-item-expand')]//*[contains(text(),'" + arg1 + "')]",4).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'mce-menu-item-expand')]//*[contains(text(),'" + arg1 + "')]",15).click();
 			break;
 		case "Bullet list":
-			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15).click();
 			 break;
 		case "Numbered list":
-			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15).click();
 			 break;
 		case "Increase indent":
 			login.driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "a");
 			login.driver.switchTo().defaultContent();
-			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15).click();
 			 break;
 		case "Bold":
 			login.driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "a");
 			login.driver.switchTo().defaultContent();
-			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15).click();
 			 break;
 		case "Italic":
 			login.driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "a");
 			login.driver.switchTo().defaultContent();
-			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15).click();
 			 break;
 		case "Upload image":
-			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15).click();
 			 break;
 		case "Insert Commentary":
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 4).click();
+			CommonFunctionality.wait(500);
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20).click();
+			try {
+				Boolean CommentaryTitle = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
+				if(CommentaryTitle == true) {
+					login.Log4j.info("Attachments visual is created");
+				}
+			} catch(Exception e) {
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20).click();
+			}
 			 break;
 		case "+ Add from My Series":
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='link']", 6).click();
@@ -1092,7 +1101,7 @@ public class SeriesTab {
 	public void user_Mouse_hover_on_icon(String arg1) throws Throwable {
 		MousehoverIcon = arg1;
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver , "Series" , 8).click();
+		CommonFunctionality.getElementByProperty(login.driver , "Series" , 20).click();
 		CommonFunctionality.wait(5000);
 		element =login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Title_of_the_series")));
 		stext = element.getText();
@@ -1637,6 +1646,10 @@ public void create_any_visual() throws Throwable {
 								.click();
 						
 					} else {
+						Thread.sleep(1000);
+						login.driver.findElement(By.xpath(
+								"//div[@class='movable-modal movable-modal__draggable movable-modal__active']//div[@title='Close']"))
+								.click();
 						Assert.fail("Search results not displayed from World Trend Plus db");
 					}
 				}
@@ -1980,8 +1993,8 @@ public void create_any_visual() throws Throwable {
 	@Then("^Verify the search results$")
 	public void verify_the_search_results() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver,"Series",4).click();
-		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='series-item--name']",4).click();
+		CommonFunctionality.getElementByProperty(login.driver,"Series",10).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='series-item--name']",10).click();
 		if (Filters.searchData.equals("SR495594")) {
 			element = login.driver.findElement(By.xpath("//div[@class='main-series-information--series-id']//div[2]"));
 			String SR_code = element.getText();
@@ -2018,14 +2031,14 @@ public void create_any_visual() throws Throwable {
 			CommonFunctionality.wait(500);
 			if (login.driver
 					.findElement(
-							By.xpath("//*[@class='series-changes-time-line--header']//*[contains(text(),'Rebased')]"))
+							By.xpath("//*[@class='series-changes-time-line--header']//*[contains(text(),'" + Filters.var + "')]"))
 					.isDisplayed()) {
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//div[@class='movable-modal single-series-preview--modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--close']", 20).click();
+//				wait.until(ExpectedConditions
+//						.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
 				login.Log4j.info("Rebased series exists");
 			} else {
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//div[@class='movable-modal single-series-preview--modal movable-modal__draggable movable-modal__active']//div[@class='movable-modal--close']", 20).click();
 				Assert.fail("Rebased doesn't exists");
 			}
 		}

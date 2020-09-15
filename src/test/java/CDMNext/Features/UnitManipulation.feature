@@ -6,10 +6,9 @@ Background:
 
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_01: Verify applying unit manipulation for series
-   And Check for prerequesties	
-   #And Refreshing the page
-   #And Login as current execution login by taking username rowcount as 2 and cellcount as 0 and for password rowcount as 2 and cellcount as 1
-   #And Check for keeping_insight popup
+   And Check for keeping_insight popup
+   And Login as current execution login by taking username rowcount as 2 and cellcount as 0 and for password rowcount as 2 and cellcount as 1
+   And Check for keeping_insight popup
    And Resetting the filters
    And Open preference dropdown
    And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check" 
@@ -249,4 +248,5 @@ Scenario: Tc_Unit Manipulation_27: Verify applying unit multiplier with %,2000=1
    And Click "By function" tab and enter "UNIT" in search field
    Then The function should not apply for selected series
    And Rename Insight to Download
+   And Sort the default series in left pane
    And Login back to default execution login

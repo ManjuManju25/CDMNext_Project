@@ -137,13 +137,25 @@ public class CrossSection {
 				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
 				}
 			}
+		} if(arg1.equals("204883202;202916302;292524004;77161701")) {
+			CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
+			CommonFunctionality.wait(2000);
+		    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[@class='dropdown--button']", 4)).pause(500).click().build().perform();
+		    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Unit']", 4)).pause(500).click().build().perform();
+			for(int i = list.size(); i >= 1; i--) {
+			WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
+			WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
+			if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
+			new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+			}
+		}
 		} else {
 			for(int i = 1; i <= list.size(); i++) {
-				WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
-				WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
-				if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
-				}
+			WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
+			WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
+			if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
+			new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+			}
 			}	
 		} if(arg2.equalsIgnoreCase("A")) {
 			new Actions(login.driver).sendKeys("a").pause(1000).build().perform();
@@ -380,7 +392,7 @@ public class CrossSection {
 	public void sort_the_default_series_in_left_pane() throws Throwable {
 		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[@class='dropdown--button']", 4)).pause(500).click().build().perform();
-	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Sort by series usage']", 4)).pause(500).click().build().perform();
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "custom-select-title--reset-icon", 4)).pause(500).click().build().perform();
 	    CommonFunctionality.wait(1000);
 	}
 	

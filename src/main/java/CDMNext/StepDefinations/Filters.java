@@ -189,9 +189,10 @@ public class Filters {
 			}
 			break;
 		case "Status":
+			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("clicking on " + arg2);
-		    CommonFunctionality.getElementByXpath(login.driver,"//*[@class='dropdown-search-filter-wrapper']//*[contains(text(),'" + arg2 + "')]",5).click();
+		    CommonFunctionality.getElementByXpath(login.driver,"//*[@class='dropdown-search-filter-wrapper']//*[contains(text(),'" + arg2 + "')]",10).click();
 			break;
 		case "Source":
 			Sourcearr = var.split(";");

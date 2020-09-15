@@ -1884,14 +1884,14 @@ public class Cvision {
 	public static void the_newly_created_template(String arg1) throws Throwable {
 		List<WebElement> deleting_template = login.driver.findElements(By.xpath("//*[@title='" + arg1 + "']"));
 		WebElement close = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@title='" + arg1 + "']/ancestor::div[1]", 4);
+				"//*[@title='" + arg1 + "']/ancestor::div[1]", 15);
 		for (WebElement delete : deleting_template) {
 			if (close.getAttribute("title").contains(send)) {
 				delete.click();
 				if (login.driver.findElements(By.xpath("//*[contains(@class,'modal-content')]//*[text()='Ok']"))
 						.size() > 0) {
 					CommonFunctionality
-							.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 4)
+							.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 15)
 							.click();
 				}
 				break;

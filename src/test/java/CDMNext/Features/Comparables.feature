@@ -5,10 +5,7 @@ Background:
 
 @Comparables
 Scenario: Tc_Comparables_01: Verify results loading in comparable tab
-	And Check for prerequesties	
-  #And Refreshing the page
-  #And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
-  #And Check for keeping_insight popup
+  And Check for keeping_insight popup
   And Resetting the filters
   And Clicking "Comparables" icon
   Then The Section level results for series should be present
@@ -103,7 +100,7 @@ Scenario: Tc_Comparables_13: Verify right click options for section level's in c
     And Right Click "National Accounts" section from Comparables tab
     Then The "Copy link(s)" and "Footnotes" option should present
     
-@Comparables
+@ComparablesCheck
 Scenario: Tc_Comparables_14: Verify copy link on right click in comparables
     And Clicking "Comparables" icon
     And Right Click "National Accounts" section from Comparables tab
@@ -1025,6 +1022,7 @@ Scenario: Tc_Comparables_123: Verify unchecking comparables in three dot option 
     And Click three dots in search pane
     And  "Check"  "Comparables" checkbox
     And Clicking "Save" button in search popup
+    
 #TC_124 and TC_125   
 @Comparables
 Scenario: Tc_Comparables_124: Verify maximizing and minimizing comprables tab
@@ -1051,7 +1049,7 @@ Scenario: Tc_Comparables_128: Verify contents in dropdown beside series name
     And Click "Show related data" option in series 
     Then The "Read More" option in series should present
     Then The "Datasets" option in series should present
-    Then The "Insights" option in series should present
+    And The "Related Insights" option in series should present
     Then The "related-series-data--remarks" option in series should be present  
     And Click "Hide related data" option in series
     
@@ -1107,7 +1105,7 @@ Scenario: Tc_Comparables_134: Verify related insights for comparables in series 
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
     And Click "Show related data" option in series 
-    Then The "Insights" option in series should present
+    Then The "Related Insights" option in series should present
     And Click "Hide related data" option in series
     
 @Comparables
@@ -1116,7 +1114,7 @@ Scenario: Tc_Comparables_136: Verify opening any of related insights in comparab
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
     And Click "Show related data" option in series 
-    And The "Insights" option in series should present
+    And The "Related Insights" option in series should present
     And Check the data of first insight
     And Click "Hide related data" option in series
     
@@ -1126,7 +1124,7 @@ Scenario: Tc_Comparables_137: Verify favoriting related insight in comparables
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
     And Click "Show related data" option in series 
-    And The "Insights" option in series should present
+    And The "Related Insights" option in series should present
     And The "First" Insight should present
     And Clicking favorite icon of related insight
     And Click on "My insights" option in insights page
@@ -1138,11 +1136,14 @@ Scenario: Tc_Comparables_138: Verify sharing of related insight in comparables
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
     And Click "Show related data" option in series 
-    And The "Insights" option in series should present
+    And The "Related Insights" option in series should present
     Then The Sharing insight window should be opened
     
 @Comparables
 Scenario: Tc_Comparables_139: Verify sharing of non sharing related insight
+    And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
+    And Check for keeping_insight popup
+    And Resetting the filters
     And Clicking "Comparables" icon
     And Search for "249416501"
     And Expand "Production" > "Global Economic Monitor" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" > "Industrial Production Index: YoY: Monthly: sa: Japan" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia"  
@@ -1151,10 +1152,11 @@ Scenario: Tc_Comparables_139: Verify sharing of non sharing related insight
     And The "Insights" option in series should present
     And The "Non shareable Insight" Insight should present
     Then The Share icon should not present for non sharing related insight 
+    And Login back to default execution login
     
 @Comparables
 Scenario: Tc_Comparables_140: Verify series added to new insight in comparables using growl popup
-    #And Check for keeping_insight popup
+    And Check for keeping_insight popup
     And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"
@@ -1239,7 +1241,7 @@ Scenario: Tc_Comparables_152: Verify presence of related insights in series leve
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
     And Click "Show related data" option in series
-    And The "Insights" option in series should present
+    And The "Related Insights" option in series should present
     Then The tooltip as "Name" and "Number of series" should present
     
 @Comparables
@@ -1248,7 +1250,7 @@ Scenario: Tc_Comparables_153: Verify creator of related insight present in serie
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
     And Click "Show related data" option in series
-    And The "Insights" option in series should present
+    And The "Related Insights" option in series should present
     Then The creator tooltip should present
     
 @Comparables
@@ -1257,7 +1259,7 @@ Scenario: Tc_Comparables_154: Verify time period of related insight present in s
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
     And Click "Show related data" option in series
-    And The "Insights" option in series should present
+    And The "Related Insights" option in series should present
     Then The Modified time tooltip should present
     
 @Comparables
@@ -1299,4 +1301,3 @@ Scenario: TC_Comparables_157: Verify Add to Watchlist option in series level mor
   And User has clicked on "Apply" 
   And Growl message as "Watchlist changes applied" should display
   Then The selected actions should reflect inside watchlist tab
-  #And Login back to default execution login

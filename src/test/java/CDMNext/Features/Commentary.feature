@@ -356,14 +356,6 @@ Feature: Verifying Commentary Visual functionality
     And Select "png" format
     And Click on "Download"
     Then Commentary should be downloaded in "PNG" format
-
-  #@Commentary
-  #Scenario: TC_Commentary_47:Download - Verify visual download to JPG format
-  #	And Add some text in the description field
-  #	And  Click on Download icon
-  #	And Select "jpeg" format
-  #	And Click on "Download"
-  #	Then Commentary should be downloaded in "JPG" format
   
   @Commentary
   Scenario: TC_Commentary_52:Verify 'Add to insight' option

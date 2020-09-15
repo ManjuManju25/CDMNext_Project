@@ -2,7 +2,6 @@ Feature: Verify ReleasesTab functionality
  
 Background:
   Given User has successful logged in
-  And Resetting the filters
 
 @ReleasesTab
 Scenario: TC_Releases_01: Verify the contents for Releases tab
@@ -1085,6 +1084,9 @@ Scenario: Tc_Releases_138: Verify sharing of related insight
     
 @ReleasesTab
 Scenario: Tc_Releases_139: Verify sharing of non sharing related insight
+    And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
+    And Check for keeping_insight popup
+    And Resetting the filters
     And Clicking "Releases" icon
     And Search for the series "449379557" in ReleasesTab
     And Select "-1Y" timeframe button
@@ -1094,9 +1096,11 @@ Scenario: Tc_Releases_139: Verify sharing of non sharing related insight
     And The "Related Insights" option in series should present
     And The "Non shareable Insight" Insight should present
     Then The Share icon should not present for non sharing related insight 
+    And Login back to default execution login
     
 @ReleasesTab
 Scenario: Tc_Releases_140: Verify presence of related insights tooltip
+    And Check for keeping_insight popup
     And Resetting the filters
     And Clicking "Releases" icon
     And Expand first Dataset  
@@ -1221,4 +1225,3 @@ Scenario: Tc_Comparables_150: Verify adding series into existing insight with ex
     And Clicking + option from series
     And Clicking "Add to recent insight" from dropdown list
     Then Should be able to navigate to existing insight
-    

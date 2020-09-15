@@ -51,7 +51,7 @@ public class SSPWindow {
 
 	@And("^Check for prerequesties$")
 	public void check_for_prerequesties() throws Throwable {
-		CommonFunctionality.closing_if_any_opened_modal_popup(login.driver, "movable-modal--close", "//*[contains(@class,'modal-content')]//*[text()='Some changes have not been saved.']", "//*[@class='sphere-modal-controls']//*[text()='Ok']", "className");  
+		CommonFunctionality.closing_if_any_opened_modal_popup(login.driver, "movable-modal--close", "//*[contains(@class,'modal-content')]//*[text()='Some changes have not been saved.']", "//*[@class='sphere-modal-controls']//*[text()='Ok']");  
 		close_the_replacement_popup_if_appeared();
 		if (login.driver.findElements(By.xpath("//*[@class='movable-modal--window']//*[text()='Do you want to keep your insight?']")) .size() > 0)
 		{

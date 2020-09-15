@@ -272,7 +272,7 @@ Feature: SeriesTab
     And Click on "Add"
     Then The series should be added to Data tab
 
-   @SeriesTab1
+   @SeriesTab
   Scenario: TC_SeriesTab_42:Verify 'add to exist insight' in dropdown
   	Given User enters seriesID "368921927;371376337"
   	And  Click on drop down icon next to +
