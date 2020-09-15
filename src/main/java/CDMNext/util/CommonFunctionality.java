@@ -164,13 +164,13 @@ public class CommonFunctionality {
 	@SuppressWarnings("deprecation")
 	public static void DeleteSeries() throws InterruptedException {
 		try {
-			getElementByProperty(login.driver, "Series_tab", 8).click();
+			//getElementByProperty(login.driver, "Series_tab", 8).click();
 			// Deleting series from My Series tab
-			WebElement ele = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='check-all-series']//*[@class='input-control--indicator']")));
+			WebElement ele = getElementByXpath(login.driver,"//*[@class='check-all-series']//*[@class='input-control--indicator']",20);
 			action.moveToElement(ele).pause(800).click().build().perform();
 			WebElement delete = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-action='delete']")));
 			action.moveToElement(delete).pause(700).click().build().perform();
-			wait(5000);
+			wait(3000);
 		} catch (Exception e) {
 
 		}
@@ -275,11 +275,10 @@ public class CommonFunctionality {
 	}
 	public static void SeriesHormonizationWindowClose() throws InterruptedException {
 		try {
+			wait(1500);
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
 					.isDisplayed()) {
-				// Thread.sleep(1500);
-				wait.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close"))))
+				getElementByProperty(login.driver,"unexpected_popup_close",10)
 						.click();
 			}
 		} catch (NoSuchElementException e) {
@@ -424,8 +423,8 @@ public class CommonFunctionality {
 	}
 
 	public static WebElement getElementByProperty(WebDriver driver, String property_value, int time) {
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(login.driver).withTimeout(time, TimeUnit.SECONDS)
-				.pollingEvery(5, TimeUnit.SECONDS).ignoring(Throwable.class);
+		wait(500);
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
@@ -458,8 +457,8 @@ public class CommonFunctionality {
 	}
 
 	public static WebElement getElementByXpath(WebDriver driver, String locator, int time) throws InterruptedException {
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(login.driver).withTimeout(time, TimeUnit.SECONDS)
-				.pollingEvery(10, TimeUnit.SECONDS).ignoring(Throwable.class);
+		wait(500);
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
@@ -468,8 +467,8 @@ public class CommonFunctionality {
 		return element;
 	}
 	public static WebElement getElementBycssSelector(WebDriver driver, String locator, int time) throws InterruptedException {
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(login.driver).withTimeout(time, TimeUnit.SECONDS)
-				.pollingEvery(10, TimeUnit.SECONDS).ignoring(Throwable.class);
+		wait(500);
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(locator)));
@@ -480,8 +479,8 @@ public class CommonFunctionality {
 
 	public static WebElement getElementByClassName(WebDriver driver, String locator, int time)
 			throws InterruptedException {
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(login.driver).withTimeout(time, TimeUnit.SECONDS)
-				.pollingEvery(5, TimeUnit.SECONDS).ignoring(Throwable.class);
+		wait(500);
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.className(locator)));
 		WebElement element = login.driver.findElement(By.className(locator));
@@ -558,9 +557,11 @@ public class CommonFunctionality {
 	}
 	public static void ChartSuggestionPopUp() {
 		// check whether the Chart Suggestion pop up is displayed or not
-		wait(700);
-		if (login.driver.findElements(By.className("growl-message-close")).size() > 0) {
+		try {
+			wait(1000);
 			login.driver.findElement(By.className("growl-message-close")).click();
+		} catch(Exception e) {
+			login.Log4j.info("Chart suggestion popup is not displayed");
 		}
 	}
 
@@ -710,6 +711,7 @@ public class CommonFunctionality {
 public static void Create_New_Insight() throws Exception {
 	getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
 	getElementByXpath(login.driver, "//li//*[contains(text(),'New')]", 20).click();
+	getElementByXpath(login.driver, "//*[@class='create']//input", 20).clear();
 	getElementByXpath(login.driver, "//*[@class='create']//input", 20).sendKeys("Testing Insight");
 	getElementByXpath(login.driver, "//*[contains(text(),'Create insight')]", 20).click();
 }
@@ -752,13 +754,16 @@ public static void Create_New_Insight() throws Exception {
 		driver.findElement(By.cssSelector(arg3)).click();
 	}
 	
-	public static void closing_if_any_opened_modal_popup(WebDriver driver,String arg1,String arg2,String arg3,String arg4) throws Throwable {
+	public static void closing_if_any_opened_modal_popup(WebDriver driver,String arg1,String arg2,String arg3) throws Throwable {
 		List<WebElement> popup = driver.findElements(By.className(arg1));
 		for(int i=1;i<=popup.size();i++) {
-			Hidden_Webelements_handling(driver, arg4, arg1);
-			if(driver.findElements(By.xpath(arg2)).size()>0) {
-				getElementByXpath(driver, arg3, 4).click();
-			}
+		getElementByClassName(driver, arg1, 4).click();
+		if(driver.findElements(By.xpath(arg2)).size()>0) {
+			getElementByXpath(driver, arg3, 4).click();
+		}
+		}
+		if(popup.size() != 0) {
+		Views_list();
 		}
 	}
 	public static void Crosssection_Excelverify(WebDriver driver, String Excel1, String Excel2) throws Throwable {

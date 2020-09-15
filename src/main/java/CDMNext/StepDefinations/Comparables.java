@@ -73,7 +73,7 @@ public class Comparables {
 @And("^Clicking \"([^\"]*)\" icon$")
 	public void clicking_icon(String arg1) throws Throwable { 
 	   login.driver.navigate().refresh();
-	    CommonFunctionality.wait(4000);
+	    CommonFunctionality.wait(6000);
 	    WebElement show= CommonFunctionality.getElementBycssSelector(login.driver, ".series-tab.ui-sortable-handle", 4);
 	    if(!(show.getAttribute("class").contains("series-tab__hidden"))) {
 	    	if(arg1.equalsIgnoreCase("Data")) {
@@ -82,6 +82,7 @@ public class Comparables {
 	    		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4)).pause(1000).click().build().perform();
 	    	}
 	    }
+	    CommonFunctionality.wait(4000);
 	}
      
    @And("^Clicking Collapse tree$")
@@ -219,7 +220,7 @@ public class Comparables {
     	  text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Insights')]", 4);
     	  js.executeScript("arguments[0].scrollIntoView(true);",text);
     	  if(!(text.isDisplayed())) {
-    		  fail("Verification Failed");
+    		  sa.fail("Verification Failed");
     	  }
     	  } else {
 		  CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'My insights')]", 4).click();
@@ -236,7 +237,7 @@ public class Comparables {
 		  text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Insights')]", 4);
    	      js.executeScript("arguments[0].scrollIntoView(true);",text);
        	  if(!(text.isDisplayed())) {
-       		   fail("Verification Failed");
+       		   sa.fail("Verification Failed");
        	  }
        	  CommonFunctionality.DeleteSeries();
     	  }
@@ -244,7 +245,7 @@ public class Comparables {
     	   text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4);
     	   js.executeScript("arguments[0].scrollIntoView(true);",text);
     	   if(!(text.isDisplayed())) {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        }
        login.Log4j.info("The "+arg1+" block is present");
@@ -258,7 +259,7 @@ public class Comparables {
    		   text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='"+arg1+"']", 4);
    		   js.executeScript("arguments[0].scrollIntoView(true);",text);
    		   String remarks = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='"+arg1+"']//span", 4).getText();
-   		   assertEquals(remarks, "Remarks:");
+   		   sa.assertEquals(remarks, "Remarks:");
           } 
    }
    
@@ -715,9 +716,9 @@ public class Comparables {
 		Thread.sleep(1000);
 		login.driver.switchTo().window(newTab.get(0));
 		Thread.sleep(1000);
-		assertEquals(table_text, expected);
 		System.out.println("New insight with the added series is opened and has been verified successfully");
 		CommonFunctionality.DeleteSeries();
+		assertEquals(table_text, expected);
    }
    
    @Then("^Any insight could be selected for the table to add$")
@@ -731,9 +732,9 @@ public class Comparables {
 		}
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Apply']", 4).click();
 		String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'growl-message--link__highlighted')]", 4).getText();
-		assertEquals(first_insight, expected);
 		login.Log4j.info("Add to existing insight has been verified");
 		CommonFunctionality.DeleteSeries();
+		assertEquals(first_insight, expected);
 	}
    
    @Then("^The Section level results for series should be present$")
@@ -757,8 +758,8 @@ public class Comparables {
       } else {
     	  fail("Verification Failed");
       }
-     // CollabarationSharing share = new CollabarationSharing();
-     // share.navigate_insights();
+      CollabarationSharing share = new CollabarationSharing();
+      share.navigate_insights();
    }
    
    @Then("^Comparables tab \"([^\"]*)\" be visible in search pane$")
@@ -827,9 +828,9 @@ public class Comparables {
 	   String actual = login.driver.findElement(By.xpath("//*[@class='series-preview-modal-header--link']")).getText();
 	   CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 	   login.driver.switchTo().window(tabs.get(1)).close();
-	   assertEquals(actual, series_name);
 	   login.Log4j.info("The copy link feature has been verified successfully");
 	   login.driver.switchTo().window(tabs.get(0));
+	   assertEquals(actual, series_name);
 	   //CommonFunctionality.CollapseTreeMethod();
 	   }
    
@@ -883,17 +884,15 @@ public class Comparables {
    @Then("^Copied URL should navigate to home page$")
    public void copied_URL_should_navigate_to_home_page() throws Throwable {
 	   String currentURL = login.driver.getCurrentUrl();
-	   // To open a new tab to establish second connection
        js.executeScript("window.open('"+copied_link+"')");
        ArrayList<String> tabs = new ArrayList<String>(login.driver.getWindowHandles());
        login.driver.switchTo().window(tabs.get(1));
-	   CommonFunctionality.wait(4000);
+	   CommonFunctionality.wait(6000);
 	   String newURL = login.driver.getCurrentUrl();
 	   login.driver.switchTo().window(tabs.get(1)).close();
-	   assertEquals(currentURL, newURL);
 	   login.Log4j.info("The Copied URL is navigating to home page and it has been verified successfully");
 	   login.driver.switchTo().window(tabs.get(0));
-	   //login.driver.navigate().refresh();
+	   assertEquals(currentURL, newURL);
 	   }
    
    @Then("^The Footnotes window should be opened$")
@@ -1003,11 +1002,11 @@ public class Comparables {
     	   if(text.equals(arg1) || text.equals(arg2) || text.equals(arg3) || text.equals(arg4) || text.equals(arg5)) {
     		   login.Log4j.info(text+" is present");
     	   } else {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        }
    } else {
-	   fail("Dropdown is not Opened");
+	   sa.fail("Dropdown is not Opened");
    }
 	   login.Log4j.info("The "+arg1+" , "+arg2+" , "+arg3+" , "+arg4+" , "+arg5+" Options are present and has been verified successfully");
    }
@@ -1018,10 +1017,10 @@ public class Comparables {
        String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-name-wrapper']//following-sibling::*[@class='group-name']", 4).getText();
        String count = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-panel--count']/span/span", 4).getText();
        int actual = Integer.parseInt(count);
+       CommonFunctionality.DeleteSeries();
        assertEquals(actual, series_count);
        assertEquals(expected, table_text);
        login.Log4j.info("The Table level series are added into my series panel and it has been verified successfully");
-       CommonFunctionality.DeleteSeries();
 	   }
    
    @Then("^The Selected series should get added into right pane with \"([^\"]*)\"$")
@@ -1031,10 +1030,10 @@ public class Comparables {
        String expected[] = text.split("\\:");
        String count = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-panel--count']/span/span", 4).getText();
        int actual = Integer.parseInt(count);
+       CommonFunctionality.DeleteSeries();
        assertEquals(actual, series_count_inside_table);
        assertEquals(expected[0], arg1);
        login.Log4j.info("The Selected series is getting added into right pane with Grouping and it has been verified successfully");
-       CommonFunctionality.DeleteSeries();
 	   }
    
    @Then("^The Applied \"([^\"]*)\" filter is displaying under Comparables$")
@@ -1045,13 +1044,13 @@ public class Comparables {
     	   if(actual.contains(filter_text)) {
     		   login.Log4j.info("The Applied "+arg1+" filter is displaying under Comparables");
     	   } else {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        } if(arg1.equalsIgnoreCase("Multiple")) { 
     	   if(actual.contains(filter_text) && actual.contains(filter_text1)) {
     		   login.Log4j.info("The Applied "+arg1+" filter is displaying under Comparables");
     	   } else {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        }
    }
@@ -1062,7 +1061,7 @@ public class Comparables {
 	   List<WebElement> li_All = ul_element.findElements(By.xpath("//ul[contains(@class,'search-series-list')]/li"));
 		for(WebElement li: li_All) {
 	     if(!(li.getAttribute("class").contains("series-list-item__selected"))) {
-	    	 fail("Verification Failed");
+	    	 sa.fail("Verification Failed");
 	     }
 	   }
 		login.Log4j.info("The Series present inside the Table are selected and has been verified successfully");
@@ -1074,7 +1073,7 @@ public class Comparables {
 	   List<WebElement> li_All = ul_element.findElements(By.xpath("//ul[contains(@class,'search-series-list')]/li"));
 		for(WebElement li: li_All) {
 	     if(li.getAttribute("class").contains("series-list-item__selected")) {
-	    	 fail("Verification Failed");
+	    	 sa.fail("Verification Failed");
 	     }
 	   }
 		login.Log4j.info("The Series present inside the Table are deselected and has been verified successfully");
@@ -1085,7 +1084,7 @@ public class Comparables {
 		for(int i=1; i<=series_count_inside_table; i++) {
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]/li["+i+"]", 4);
 	     if(!(ele.getAttribute("class").contains("series-list-item__selected"))) {
-	    	 fail("Verification Failed");
+	    	 sa.fail("Verification Failed");
 	     }
 	   }
 		login.Log4j.info("The Series present are selected and has been verified successfully");
@@ -1096,7 +1095,7 @@ public class Comparables {
 		for(int i=1; i<=series_count_inside_table_deselect; i++) {
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]/li["+i+"]", 4);
 	     if(ele.getAttribute("class").contains("series-list-item__selected")) {
-	    	 fail("Verification Failed");
+	    	 sa.fail("Verification Failed");
 	     }
 	   }
 		login.Log4j.info("The Series present are deselected and has been verified successfully");
@@ -1125,7 +1124,7 @@ public class Comparables {
 		assertEquals(actual, expected);
 		login.Log4j.info("The SSP window for specific series has been opened and has been verified successfully");
    } else {
-	   fail("SSP Window not opened");
+	   sa.fail("SSP Window not opened");
    }
    } 
    
@@ -1208,11 +1207,11 @@ public class Comparables {
    public void the_Option_for_the_series_should_present(String arg1) throws Throwable {
        if(arg1.equalsIgnoreCase("Show related data")) {
     	   if(!(login.driver.findElements(By.className("related-series-data--content")).size() == 1 && arg1.equals("Show related data"))) {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        } if(arg1.equalsIgnoreCase("Hide related data")) {
     	   if(!(login.driver.findElements(By.className("related-series-data--content")).size() == 0 && arg1.equals("Hide related data"))) {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        } 
        login.Log4j.info("The "+arg1+" option has been present and it has been verified successfully");
@@ -1259,7 +1258,7 @@ public class Comparables {
     	   if(value.equals(arg1) || value.equals(arg2) || value.equals(arg3) || value.equals(arg4) || value.equals(arg5) || value.equals(arg6) || value.equals(arg7) || value.equals(arg8) || value.equals(arg9) || value.equals(arg10)) {
     		  login.Log4j.info(value+" option is present inside Table");
     	   } else {
-    		   fail(item+" not present");
+    		   sa.fail(item+" not present");
     	   }
        }
    }
@@ -1270,7 +1269,7 @@ public class Comparables {
     if(checkbox.getAttribute("class").contains("series-list-item__selected")) {
     	login.Log4j.info("The Series gets selected by default and has been verified successfully");
     } else {
-    	fail("Verification Failed");
+    	sa.fail("Verification Failed");
     }
    }
    
@@ -1278,9 +1277,9 @@ public class Comparables {
    public void the_option_is_displayed(String arg1) throws Throwable {
 	CommonFunctionality.wait(2000);
 	String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+	CommonFunctionality.Views_list();
 	assertEquals(arg1, expected);
 	login.Log4j.info("The "+arg1+" option is displayed and verified successfully");
-	CommonFunctionality.Views_list();
    }
    
    @Then("^The \"([^\"]*)\" option should present$")
@@ -1308,18 +1307,18 @@ public class Comparables {
 		if(back_button.isDisplayed()) {
 			back_button.click();
 		} else {
-			fail("Back button is not present");
+			sa.fail("Back button is not present");
 		}
 	} if(arg1.equalsIgnoreCase("Back button in Dataset")) {
 		WebElement back_button = CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4);
 		if(back_button.isDisplayed()) {
 			back_button.click();
 		} else {
-			fail("Back button is not present");
+			sa.fail("Back button is not present");
 		} if(CommonFunctionality.getElementByClassName(login.driver, "search-presentation-tabs--visible", 4).isDisplayed()) {
 			System.out.println("Back button functionality is working fine");
 		} else {
-			fail("Back button is not clicked");
+			sa.fail("Back button is not clicked");
 		}
 	}
 	login.Log4j.info("The "+arg1+" is displayed and has been verified successfully");
@@ -1333,7 +1332,7 @@ public class Comparables {
     WebElement checkbox = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]//li["+i+"]", 4);   
     CommonFunctionality.wait(2000);
     if(checkbox.getAttribute("class").contains("series-list-item__selected")) {
-    	fail("Verification Failed");
+    	sa.fail("Verification Failed");
     }
 	}
 	login.Log4j.info("The Series gets deselected by default and has been verified successfully");
@@ -1347,7 +1346,7 @@ public class Comparables {
 			login.Log4j.info("The Data tab is active and has been verified successfully");
 		}
 	} else {
-		fail("Data tab is not active");
+		sa.fail("Data tab is not active");
 	}
    }
    
@@ -1375,15 +1374,15 @@ public class Comparables {
     	   String actual = text.substring(0, text.length()-1);
     	   CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "sphere-modal__close");
     	   CommonFunctionality.wait(2000);
-    	   assertEquals(actual, arg1);
+    	   sa.assertEquals(actual, arg1);
        } if(arg1.equalsIgnoreCase("Copy")) {
-    	   assertEquals(hovered_series_name, ChartVisual.copied_text);
+    	   sa.assertEquals(hovered_series_name, ChartVisual.copied_text);
        } if(arg1.equalsIgnoreCase("Copy data")) {
     	   String text = CommonFunctionality.getElementBycssSelector(login.driver, ".sphere-modal__content .download-modal-title__title", 4).getText();
     	   String actual = text.substring(0, text.length()-1);
     	   CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "sphere-modal__close");
     	   String expected = arg1.substring(0, 4);
-    	   assertEquals(actual, expected);
+    	   sa.assertEquals(actual, expected);
        } if(arg1.equalsIgnoreCase("Copy link(s)")) {
     	   js.executeScript("window.open('"+copied_link+"')");
            ArrayList<String> tabs = new ArrayList<String>(login.driver.getWindowHandles());
@@ -1403,8 +1402,8 @@ public class Comparables {
 	   	   int expected = Integer.parseInt(Series_item_id_without_click);
 	   	   CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 	   	   login.driver.switchTo().window(tabs.get(1)).close();
-	   	   assertEquals(actual, expected);
            login.driver.switchTo().window(tabs.get(0));
+           sa.assertEquals(actual, expected);
     	   } if(arg1.equalsIgnoreCase("Series Info")) {
     	   CommonFunctionality.wait(2000);
 		   String actual = login.driver.findElement(By.xpath("//*[@class='series-preview-modal-header--link']")).getText();
@@ -1428,10 +1427,10 @@ public class Comparables {
 			   if(iframe_text.contains(breadcrumb)) {
 				   System.out.println("Related footnotes are displaying");
 			   } else {
-				   fail("Related Footnotes verification failed");
+				   sa.fail("Related Footnotes verification failed");
 			   }
 		   }
-		   assertEquals(actual, hovered_series_name);
+		   sa.assertEquals(actual, hovered_series_name);
     	   } if(arg1.equalsIgnoreCase("Show Dataset")) {
     	   WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'"+hovered_series_name+"')]/ancestor::li)[1]", 4);
     	   if(series.getAttribute("class").contains("series-list-item__selected") && series.getAttribute("class").contains("series-list-item__highlighted")) {
@@ -1446,10 +1445,10 @@ public class Comparables {
     		 if(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]", 4).isDisplayed()) {
     			 login.Log4j.info("The application has been returned back to series level and verified successfully");
     		 } else {
-    			 fail("Verification Failed");
+    			 sa.fail("Verification Failed");
     		 }
     	   } else {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   } login.driver.navigate().refresh();
 	       }  if(arg1.equalsIgnoreCase("Back Button Click")) {
 	    	   if(login.driver.findElements(By.xpath("(//*[@js-show-more=''])[1]")).size()>1) {
@@ -1469,60 +1468,60 @@ public class Comparables {
 	    	   if(series.getAttribute("class").contains("series-list-item__selected") && series.getAttribute("class").contains("series-list-item__highlighted")) {
 	    		 CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4).click();
 	    	   } else {
-	    		   fail("Verification Failed");
+	    		   sa.fail("Verification Failed");
 	    	   }
 		       } if(arg1.equalsIgnoreCase("Table - Unselect all")) {
     	   WebElement check = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+section_name+"')]/preceding::span[1]", 4);
     	   List<WebElement> check1 = login.driver.findElements(By.xpath("//*[contains(text(),'"+section_name+"')]//following::ul[1]/li"));
     	   if(check.getAttribute("class").contains("svg-checkbox__selected")) {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
     	   for(int i=1; i<=check1.size(); i++) {
     		   WebElement checking = login.driver.findElement(By.xpath("//*[contains(text(),'"+section_name+"')]//following::ul[1]/li["+i+"]"));
     		   CommonFunctionality.wait(1000);
     		   if(checking.getAttribute("class").contains("series-list-item__selected")) {
-    			   fail("Verification Failed");
+    			   sa.fail("Verification Failed");
     		   }
     	   }
     	   boolean section = login.driver.findElement(By.xpath("//*[contains(text(),'"+section_name+"')]/preceding::input[1]")).isSelected();
     	   if(section == true) {
-    		   fail("Section Verification failed");
+    		   sa.fail("Section Verification failed");
     	   }
     	   }if(arg1.equalsIgnoreCase("Table - Edit Chart")) {
     		   List<WebElement> chart_series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
     		   int actual = series_count_inside_first_table;
     		   int expected = chart_series.size();
-    		   assertEquals(actual, expected);
+    		   sa.assertEquals(actual, expected);
     		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
-    		   assertEquals(text, value);
     		   CommonFunctionality.Views_list();
+    		   sa.assertEquals(text, value);
     	   } if(arg1.equalsIgnoreCase("Table - Edit Map")) {
     		   List<WebElement> map_series = login.driver.findElements(By.xpath("//*[@class='highcharts-series-group']//following::*[contains(@class,'highcharts-data-label-color-1')]"));
     		   int actual = series_count_inside_first_table;
     		   int expected = map_series.size();
-    		   assertEquals(actual, expected);
     		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
-    		   assertEquals(text, value);
     		   CommonFunctionality.Views_list();
+    		   sa.assertEquals(actual, expected);
+    		   sa.assertEquals(text, value);
     	   } if(arg1.equalsIgnoreCase("Table - Edit Table")) {
     		   List<WebElement> table_series = login.driver.findElements(By.xpath("//thead//tr[@class=' heading'][1]//th[@class='series-edit']"));
     		   int actual = series_count_inside_first_table;
     		   int expected = table_series.size();
-    		   assertEquals(actual, expected);
+    		   sa.assertEquals(actual, expected);
     		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
-    		   assertEquals(text, value);
+    		   sa.assertEquals(text, value);
     		   CommonFunctionality.Views_list();
     	   } if(arg1.equalsIgnoreCase("Table - Edit Pie")) {
     		   List<WebElement> pie_series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
     		   int actual = series_count_inside_first_table;
     		   int expected = pie_series.size();
-    		   assertEquals(actual, expected);
+    		   sa.assertEquals(actual, expected);
     		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
-    		   assertEquals(text, value);
+    		   sa.assertEquals(text, value);
     		   if(login.driver.findElements(By.className("growl-message-close")).size()>0) {
     			  CommonFunctionality.getElementByClassName(login.driver, "growl-message-close", 4).click();
     		   }
@@ -1531,10 +1530,10 @@ public class Comparables {
     		   List<WebElement> heatmap_series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
     		   int actual = series_count_inside_first_table;
     		   int expected = heatmap_series.size();
-    		   assertEquals(actual, expected);
+    		   sa.assertEquals(actual, expected);
     		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
-    		   assertEquals(text, value);
+    		   sa.assertEquals(text, value);
     		   CommonFunctionality.Views_list();
     	   } if(arg1.equalsIgnoreCase("Table - Edit Histogram")) {
     		   List<WebElement> heatmap_series = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-legend-item')]//following-sibling::*[contains(@class,'highcharts-histogram-series')]"));
@@ -1545,7 +1544,7 @@ public class Comparables {
     		   }
     		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
-    		   assertEquals(text, value);
+    		   sa.assertEquals(text, value);
     		   CommonFunctionality.Views_list();
     	   } if(arg1.equalsIgnoreCase("Table - Download")) {
     		   CommonFunctionality.wait(3000);
@@ -1564,14 +1563,14 @@ public class Comparables {
         	   Files.deleteIfExists(Paths.get(path));
         	   boolean result = Arrays.equals(series_values_in_table.toArray(), table_excel_values.toArray());
         	   login.Log4j.info("Comparision is: \n" +result);
-        	   assertEquals(series_values_in_table.toArray(), table_excel_values.toArray());
+        	   sa.assertEquals(series_values_in_table.toArray(), table_excel_values.toArray());
         	   login.Log4j.info("The Series is getting downloaded to excel and has been verified successfully and series count is "+series_count_inside_first_table);
     	   } if(arg1.equalsIgnoreCase("Top button")) {
     		   if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
     				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
     				login.Log4j.info("Clicking on Top button");
     			} else {
-    				fail("Verification Failed");
+    				sa.fail("Verification Failed");
     			}
            }
        login.Log4j.info("The "+arg1+" Option is present");
@@ -1583,12 +1582,12 @@ public class Comparables {
 	   if(arg1.equalsIgnoreCase("Maximized")) {
 		   WebElement maximize = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@title,'Expand views')])[2]//div", 4);
     	   if(!(maximize.getAttribute("class").contains("panel-expander--icon__left"))) {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        } if(arg1.equalsIgnoreCase("Minimized")) {
     	   WebElement minimize = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@title,'Expand views')]//div)[1]", 4);
     	   if(!(minimize.getAttribute("class").contains("panel-expander--icon__left"))) {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        }
        login.Log4j.info("The Comparables tab is "+arg1+" and has been verified successfully");
@@ -1600,7 +1599,7 @@ public class Comparables {
     	   String text = CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-title", 4).getText();
     	   CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4).click();
     	   if(!(text.contains(related_data_text))) {
-    		fail("Verification Failed");   
+    		sa.fail("Verification Failed");   
     	   }
        } if(arg1.equalsIgnoreCase("Multiple Series")) {
     	   List<WebElement> datasets = login.driver.findElements(By.className("series-data-set--table-name"));
@@ -1615,7 +1614,7 @@ public class Comparables {
     			   expected = expected.replaceAll("Quarterly: ", "");
     		   }
     		   if(!(expected.contains(actual))) {
-    			   fail("Verification failed");
+    			   sa.fail("Verification failed");
     		   }
     	   } 
        }
@@ -1629,7 +1628,7 @@ public class Comparables {
     	   WebElement database = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+related_dataset_text+"')]/ancestor::div[2]", 4);
     	   js.executeScript("arguments[0].scrollIntoView(true);",database);
     	   if(!(database.getAttribute("class").contains("open"))) {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
        }
        login.Log4j.info("The related "+arg1+" for the series has been verified successfully");
@@ -1649,18 +1648,18 @@ public class Comparables {
         		   login.Log4j.info("The Sharing insight window is opened and has been verified successfully");
         		   CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
         	   } else {
-        		   fail("Sharing window is not displayed");
+        		   sa.fail("Sharing window is not displayed");
         	   }
     	   } else {
     		   if(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal-dialog')]//*[contains(@class,'modal-title') and contains(text(),'Share')]", 4).isDisplayed()) {
     		   login.Log4j.info("The Sharing insight window is opened and has been verified successfully");
     		   CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
     	   } else {
-    		   fail("Sharing window is not displayed");
+    		   sa.fail("Sharing window is not displayed");
     	   }
     	   }
        } else {
-    	   fail("Insights are not there for the series");
+    	   sa.fail("Insights are not there for the series");
        }
        //CommonFunctionality.CollapseTreeMethod();
        //login.driver.navigate().refresh();
@@ -1675,9 +1674,9 @@ public class Comparables {
 	    String actual = CommonFunctionality.getElementByProperty(login.driver, "One_series_from_myserieslist", 4).getText();
 	    CommonFunctionality.Views_list();
 	    login.driver.switchTo().window(tabs.get(1)).close();
-	    assertEquals(actual, hovered_series_name);
 	    login.Log4j.info("The Add to new insight feature has been verified successfully");
 	    login.driver.switchTo().window(tabs.get(0));
+	    sa.assertEquals(actual, hovered_series_name);
 	    //CommonFunctionality.CollapseTreeMethod();
 	    //CommonFunctionality.UnselectMethod();
 	}
@@ -1796,7 +1795,7 @@ public class Comparables {
 	   if(login.driver.findElements(By.xpath("//*[@class='dropdown-menu']//h4[text()='Add to recent insight']")).size() == 0) {
 		   login.Log4j.info("Insight explorer window has been closed and verified successfully");
 	   } else {
-		   fail("Insight explorer window not closed");
+		   sa.fail("Insight explorer window not closed");
 	   }
 	   CommonFunctionality.DeleteSeries();
    }
@@ -1820,7 +1819,6 @@ public class Comparables {
 		ArrayList<String> tabs = new ArrayList<String>(login.driver.getWindowHandles());
         login.driver.switchTo().window(tabs.get(1));
 	    CommonFunctionality.wait(2000);
-	    cv.check_for_keeping_insight_popup();
 	    String actual = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-breadcrumb--title-block')]", 4).getText();
 	    login.driver.switchTo().window(tabs.get(1)).close();
 	    login.driver.switchTo().window(tabs.get(0)); 

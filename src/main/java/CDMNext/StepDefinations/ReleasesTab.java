@@ -14,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
+
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -28,6 +30,7 @@ public class ReleasesTab {
 	public static String watchlist_text;
 	public static String new_insight_name;
 	ArrayList<String> watchlist_dropdown_text = new ArrayList<String>();
+	SoftAssert sa = new SoftAssert();
 	
 	@And("^The \"([^\"]*)\" should present$")
 	public void the_should_present(String arg1) throws Throwable {
@@ -35,16 +38,16 @@ public class ReleasesTab {
 	    	List<WebElement> timeframes = login.driver.findElements(By.xpath("//*[contains(@class,'time-frame-button')]"));
 	    	for(int i=1; i<=timeframes.size();i++) {
 	    		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'time-frame-button')]["+i+"]", 4)).click().build().perform();
-	    		CommonFunctionality.wait(3000);
+	    		CommonFunctionality.wait(4000);
 	    		if(login.driver.findElements(By.cssSelector(".tree-node.release-scheduler-tree-node")).size()>0) {
 	    			System.out.println("Timeframe buttons are clickable");
 	    		} else {
-	    			fail("Timeframe buttons are not clickable");
+	    			sa.fail("Timeframe buttons are not clickable");
 	    		}
 	    	}
 	    	login.Log4j.info("The "+arg1+" has been present and verified successfully");
 	    } else {
-	    	fail(arg1+" failed");
+	    	sa.fail(arg1+" failed");
 	    }
 	}
 	
@@ -58,9 +61,13 @@ public class ReleasesTab {
 	@SuppressWarnings("deprecation")
 	@And("^Select \"([^\"]*)\" timeframe button$")
 	public void select_timeframe_button(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
+		try {
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'time-frame-button') and contains(text(),'"+arg1+"')]", 4)).pause(1000).click().build().perform();
-		CommonFunctionality.wait(3000);
+		} catch (Exception e) {
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'time-frame-button') and contains(text(),'"+arg1+"')]", 4)).pause(1000).click().build().perform();
+		}
+		CommonFunctionality.wait(4000);
 	}
 
 	@And("^Hovor on to the \"([^\"]*)\" option$")
@@ -74,7 +81,7 @@ public class ReleasesTab {
 	    if(status.isDisplayed()) {
 	    	login.Log4j.info(arg1+" Status is present and verified successfully");
 	    } else {
-	    	fail(arg1+" Status is not present");
+	    	sa.fail(arg1+" Status is not present");
 	    }
 	}
 	
@@ -86,7 +93,7 @@ public class ReleasesTab {
 	@And("^Growl message as \"([^\"]*)\" should display$")
 	public void growl_message_as_should_display(String arg1) throws Throwable {
 		String watchlist = login.driver.findElement(By.xpath("//div[@class='growl-message-text']")).getText();
-		System.out.println(watchlist);
+		//System.out.println(watchlist);
 		assertEquals(arg1, watchlist);
 	}
 	   
@@ -117,7 +124,7 @@ public class ReleasesTab {
 		List<WebElement> deselect_all = login.driver.findElements(By.xpath("//*[contains(@class,'toggler-control__light_purple')]//label[contains(@class,'toggler-control-item')]"));
 		for(WebElement deselect:deselect_all) {
 			if(deselect.getAttribute("class").contains("toggler-control-item__selected")) {
-				fail("Verification failed as status icon is selected");
+				sa.fail("Verification failed as status icon is selected");
 			}
 		}
 	}
@@ -313,12 +320,12 @@ public class ReleasesTab {
 	    		   fail("Other icons are also present on clicking "+arg1+ " status icon");   
 	    	   }
 	    	} else {
-	 	    	fail("No data is present on clicking "+arg1+" tab");
+	 	    	sa.fail("No data is present on clicking "+arg1+" tab");
 	 	    }
 	    } if(arg1.equalsIgnoreCase("All")) {
 	    	select_timeframe_button("-1Y");
     	    if(!(login.driver.findElements(By.xpath("//*[contains(@class,'release-scheduler-tree-node--marker__released')]")).size()>0 || login.driver.findElements(By.cssSelector(".release-scheduler-tree-node--marker__delayed")).size()>0)) {
-	    		   fail("No data is present on clicking "+arg1+" tab");   
+	    		   sa.fail("No data is present on clicking "+arg1+" tab");   
 	    	   }
 	    }
 	    login.Log4j.info(arg1+" status icon is present and has been verified successfully");
@@ -330,7 +337,7 @@ public class ReleasesTab {
 	    if(download.isEnabled()) {
 	    	login.Log4j.info("Download button is enabled");
 	    } else {
-	    	fail("Verification Failed");
+	    	sa.fail("Verification Failed");
 	    }
 	    String text = CommonFunctionality.getElementByClassName(login.driver, "search-input--selected-count", 4).getText();
 	    int count = Integer.parseInt(text);
@@ -339,10 +346,10 @@ public class ReleasesTab {
 	    	if(series_count.isDisplayed()) {
 	    		login.Log4j.info("The Series count is displaying in search box");
 	    	} else {
-	    		fail("Series count is not displaying");
+	    		sa.fail("Series count is not displaying");
 	    	}
 	    } else {
-	    	fail("Count is equal to 0");
+	    	sa.fail("Count is equal to 0");
 	    }
 	}
 	
@@ -355,19 +362,19 @@ public class ReleasesTab {
 	    if(actual.contains(arg1) && expected.contains(arg2)) {
 	    	login.Log4j.info("The title present is: "+arg1+" and "+arg2);
 	    } else {
-	    	fail("Title is not present");
+	    	sa.fail("Title is not present");
 	    }
 	}
 	
 	@Then("^The \"([^\"]*)\" tooltip should be displayed$")
 	public void the_tooltip_should_be_displayed(String arg1) throws Throwable {
-	    assertEquals(arg1, dropdown_title);
+	    sa.assertEquals(arg1, dropdown_title);
 	    login.Log4j.info("The "+arg1+" has been verified successfully");
 	}
 	
 	@Then("^The \"([^\"]*)\" watchlist tooltip should be displayed$")
 	public void the_watchlist_tooltip_should_be_displayed(String arg1) throws Throwable {
-	    assertEquals(arg1, watchlist_text);
+	    sa.assertEquals(arg1, watchlist_text);
 	    login.Log4j.info("The "+arg1+" has been verified successfully");
 	}
 		
@@ -375,11 +382,11 @@ public class ReleasesTab {
 	public void check_the_download_button_and_search_box() throws Throwable {
 		CommonFunctionality.wait(6000);
 		WebElement download = login.driver.findElement(By.xpath("//*[contains(@title,'Download')]"));
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
 		if(download.getAttribute("class").contains("download-button__unavailable")) {
 	    	login.Log4j.info("Download button is disabled");
 	    } else {
-	    	fail("Download button is not disabled");
+	    	sa.fail("Download button is not disabled");
 	    }
 	    String text = login.driver.findElement(By.className("series-series-count--number")).getText();
 	    int count = Integer.parseInt(text);
@@ -388,10 +395,10 @@ public class ReleasesTab {
 	    	if(!series_count.isDisplayed()) {
 	    		login.Log4j.info("The Series count is not displaying in search box");
 	    	} else {
-	    		fail("Series count is displaying");
+	    		sa.fail("Series count is displaying");
 	    	}
 	    } else {
-	    	fail("Count is equal to 0");
+	    	sa.fail("Count is equal to 0");
 	    }
 	}
 	
@@ -399,9 +406,9 @@ public class ReleasesTab {
 	public void the_Dataset_level_series_are_added_into_my_series_panel() throws Throwable {
 		CommonFunctionality.wait(2000);
 	    String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-name-wrapper']//following-sibling::*[@class='group-name']", 4).getText();
-	    assertEquals(expected, dataset_text);
-	    login.Log4j.info("The Dataset is added into my series panel and it has been verified successfully");
 	    CommonFunctionality.DeleteSeries();
+	    sa.assertEquals(expected, dataset_text);
+	    login.Log4j.info("The Dataset is added into my series panel and it has been verified successfully");
 	}
 	
 	@Then("^Clicking on the insight name should open the new insight for Dataset$")
@@ -415,9 +422,9 @@ public class ReleasesTab {
 		Thread.sleep(1000);
 		login.driver.switchTo().window(newTab.get(0));
 		Thread.sleep(1000);
+		CommonFunctionality.DeleteSeries();
 		assertEquals(dataset_text, expected);
 		System.out.println("New insight with the added series is opened and has been verified successfully");
-		CommonFunctionality.DeleteSeries();
    }
 	
 	@SuppressWarnings("deprecation")
@@ -451,7 +458,7 @@ public class ReleasesTab {
     	   if(series.getAttribute("class").contains("series-list-item__selected") && series.getAttribute("class").contains("series-list-item__highlighted")) {
     		 CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4).click();
     	   } else {
-    		   fail("Verification Failed");
+    		   sa.fail("Verification Failed");
     	   }
     	   if(i != datasets.size()) {
    			Comparables co = new Comparables();
@@ -477,7 +484,7 @@ public class ReleasesTab {
 	    	   if(value.equals(arg1) || value.equals(arg2) || value.equals(arg3) || value.equals(arg4) || value.equals(arg5) || value.equals(arg6)) {
 	    		  login.Log4j.info(value+" option is present on hovoring/right clicking the Datatable");
 	    	   } else {
-	    		   fail(item+" not present");
+	    		   sa.fail(item+" not present");
 	    	   }
 	       }
 	   }
@@ -492,7 +499,7 @@ public class ReleasesTab {
 			 new Actions(login.driver).moveToElement(load).click().build().perform();
 			 login.Log4j.info("The "+arg1+" button is present and verified successfully");
 		} else {
-			 fail("Verification Failed");
+			 sa.fail("Verification Failed");
 		}
 	  } else {
 		select_timeframe_button("-1Y");
@@ -502,7 +509,7 @@ public class ReleasesTab {
 			 new Actions(login.driver).moveToElement(load).click().build().perform();
 			 login.Log4j.info("The "+arg1+" button is present and verified successfully");
 		} else {
-			 fail("Verification Failed");
+			 sa.fail("Verification Failed");
 		}
 	  }
 	}
@@ -511,7 +518,7 @@ public class ReleasesTab {
 	public void selected_dataset_should_get_deselected() throws Throwable {
 	    WebElement deselect = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='release-scheduler-tree-node--title'])[1]/preceding-sibling::*", 4);
 	    if(deselect.getAttribute("class").contains("svg-checkbox__selected")) {
- 		   fail("Verification Failed");
+ 		   sa.fail("Verification Failed");
  	   }
 	  login.Log4j.info("The Unselect all in Dataset has been verified successfully");
 	}
@@ -524,7 +531,7 @@ public class ReleasesTab {
 		   CommonFunctionality.wait(3000);
 		   click_on_Growl_popup();
 		   List<WebElement> series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
-		   assertEquals(20, series.size());
+		   sa.assertEquals(20, series.size());
 		} else {
 		   click_on_Growl_popup();
 		   List<WebElement> chart_series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
@@ -532,13 +539,13 @@ public class ReleasesTab {
  		   int expected = chart_series.size();
  		   assertEquals(actual, expected);
  		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
- 		   assertEquals(text, arg1);
+ 		   sa.assertEquals(text, arg1);
 		}
 		}if(arg1.equalsIgnoreCase("Edit Map")) {
   		   List<WebElement> map_series = login.driver.findElements(By.xpath("//*[@class='highcharts-series-group']//following::*[contains(@class,'highcharts-data-label-color-1')]"));
   		   int actual = Comparables.series_count_inside_first_table;
   		   int expected = map_series.size();
-  		   assertEquals(actual, expected);
+  		   sa.assertEquals(actual, expected);
   		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
   		   assertEquals(text, arg1);
 		}if(arg1.equalsIgnoreCase("Edit Table")) {
@@ -546,42 +553,42 @@ public class ReleasesTab {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
 			CommonFunctionality.wait(3000);
 			List<WebElement> series = login.driver.findElements(By.className("series-edit"));
-			assertEquals(100, series.size());
+			sa.assertEquals(100, series.size());
 		} else {
 		   List<WebElement> table_series = login.driver.findElements(By.className("series-edit"));
  		   int actual = Comparables.series_count_inside_first_table;
  		   int expected = table_series.size();
- 		   assertEquals(actual, expected);
+ 		   sa.assertEquals(actual, expected);
  		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
- 		   assertEquals(text, arg1);
+ 		   sa.assertEquals(text, arg1);
 		}
 		}if(arg1.equalsIgnoreCase("Edit Pie")) {
 		if (login.driver.findElements(By.xpath("//*[text()='Confirmation']//following::*[contains(text(),'Proceed with')]")).size()>0) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
 			CommonFunctionality.wait(3000);
 			List<WebElement> series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
-			assertEquals(20, series.size());
+			sa.assertEquals(20, series.size());
 		} else {
 		   List<WebElement> pie_series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
  		   int actual = Comparables.series_count_inside_first_table;
  		   int expected = pie_series.size();
- 		   assertEquals(actual, expected);
+ 		   sa.assertEquals(actual, expected);
  		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
- 		   assertEquals(text, arg1);
+ 		   sa.assertEquals(text, arg1);
 		}
 		}if(arg1.equalsIgnoreCase("Edit Heat map")) {
 		if (login.driver.findElements(By.xpath("//*[text()='Confirmation']//following::*[contains(text(),'Proceed with')]")).size()>0) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
 			CommonFunctionality.wait(3000);
 			List<WebElement> series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
-			assertEquals(20, series.size());
+			sa.assertEquals(20, series.size());
 		} else {
 		   List<WebElement> heatmap_series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
  		   int actual = Comparables.series_count_inside_first_table;
  		   int expected = heatmap_series.size();
- 		   assertEquals(actual, expected);
+ 		   sa.assertEquals(actual, expected);
  		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
- 		   assertEquals(text, arg1);
+ 		   sa.assertEquals(text, arg1);
 		}
 		} if(arg1.equalsIgnoreCase("Edit Histogram")) {
   		   List<WebElement> histogram_series = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-legend-item')]//following-sibling::*[contains(@class,'highcharts-histogram-series')]"));
@@ -589,7 +596,7 @@ public class ReleasesTab {
   		   int expected = histogram_series.size();
   		   if(actual != expected || actual == 1) {
   			 String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
-  			 assertEquals(arg1, text);
+  			 sa.assertEquals(arg1, text);
   		   }
 		}
 		CommonFunctionality.Views_list();
@@ -601,8 +608,8 @@ public class ReleasesTab {
 	    String actual = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='selection-control' and not(contains(@style,'display: none;'))]", 4).getText();
 	    String unselect_color = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='selection-control' and not(contains(@style,'display: none;'))]", 4).getCssValue("color");
 	    String red = Color.fromString(unselect_color).asHex();
-	    assertEquals(actual, arg1);
-	    assertEquals(red, arg2);
+	    sa.assertEquals(actual, arg1);
+	    sa.assertEquals(red, arg2);
 	    login.Log4j.info("The "+arg1+" color has been verified successfully");
 	}
 	
@@ -612,7 +619,7 @@ public class ReleasesTab {
 	   for(int i=1; i<= Comparables.series_count_inside_table; i++) {
 			WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]/li["+i+"]", 4);
 			if(ele.getAttribute("class").contains("series-list-item__selected")) {
-			   	 fail("Verification Failed");
+			   	 sa.fail("Verification Failed");
 			 }
 		} 
 	    String count = login.driver.findElement(By.className("search-input--selected-count")).getAttribute("innerHTML");
@@ -650,42 +657,42 @@ public class ReleasesTab {
 	    		int diff = sDate.get(Calendar.YEAR) - eDate.get(Calendar.YEAR);
 	    		String SubString = timeframe_date.substring(0, 2);
 	    		String actual = String.valueOf(diff);
-	    		assertEquals(actual, SubString);
+	    		sa.assertEquals(actual, SubString);
     		} if(timeframe_date.equals("-1M") || timeframe_date.equals("-3M")) {
     			int diff = sDate.get(Calendar.MONTH) - eDate.get(Calendar.MONTH);
     			String SubString = timeframe_date.substring(0, 2);
     			String actual = String.valueOf(diff);
-    			assertEquals(actual, SubString);
+    			sa.assertEquals(actual, SubString);
     		} if(timeframe_date.equals("-1W")) {
     			int diff = sDate.get(Calendar.WEEK_OF_YEAR) - eDate.get(Calendar.WEEK_OF_YEAR);
     			String SubString = timeframe_date.substring(0, 2);
     			String actual = String.valueOf(diff);
-    			assertEquals(actual, SubString);
+    			sa.assertEquals(actual, SubString);
     		} if(timeframe_date.equals("-1D")) {
     			int diff = sDate.get(Calendar.DAY_OF_MONTH) - eDate.get(Calendar.DAY_OF_MONTH);
     			String SubString = timeframe_date.substring(0, 2);
     			String actual = String.valueOf(diff);
-    			assertEquals(actual, SubString);
+    			sa.assertEquals(actual, SubString);
     		}  if(timeframe_date.equals("+1Y")) {
     			int diff = eDate.get(Calendar.YEAR) - sDate.get(Calendar.YEAR);
     			String SubString = timeframe_date.substring(1, 2);
     			String actual = String.valueOf(diff);
-    			assertEquals(actual, SubString);
+    			sa.assertEquals(actual, SubString);
     		} if(timeframe_date.equals("+1M") || timeframe_date.equals("+3M")) {
     			int diff = eDate.get(Calendar.MONTH) - sDate.get(Calendar.MONTH);
     			String SubString = timeframe_date.substring(1, 2);
     			String actual = String.valueOf(diff);
-    			assertEquals(actual, SubString);
+    			sa.assertEquals(actual, SubString);
     		} if(timeframe_date.equals("+1W")) {
     			int diff = eDate.get(Calendar.WEEK_OF_YEAR) - sDate.get(Calendar.WEEK_OF_YEAR);
     			String SubString = timeframe_date.substring(1, 2);
     			String actual = String.valueOf(diff);
-    			assertEquals(actual, SubString);
+    			sa.assertEquals(actual, SubString);
     		} if(timeframe_date.equals("+1D")) {
     			int diff = eDate.get(Calendar.DAY_OF_MONTH) - sDate.get(Calendar.DAY_OF_MONTH);
     			String SubString = timeframe_date.substring(1, 2);
     			String actual = String.valueOf(diff);
-    			assertEquals(actual, SubString);
+    			sa.assertEquals(actual, SubString);
     		}
 	    		login.Log4j.info("The "+timeframe_date+" has been verified successfully");
 	    	}
@@ -720,21 +727,21 @@ public class ReleasesTab {
 	  String expected13 = text1.substring(2,text1.length());
 	  String expected1 = expected12+expected13;
 	  if(Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
-		  assertEquals("Real GDP: YoY: sa", actual);
+		  sa.assertEquals("Real GDP: YoY: sa", actual);
 	  } else {
-	     assertEquals(Comparables.series_name, actual);
+	     sa.assertEquals(Comparables.series_name, actual);
 	  }
 	  if(watchlist_dropdown_text.contains(expected) && watchlist_dropdown_text.contains(expected1)) {
 		  login.Log4j.info("The Watchlist functionality has been verified successfully");
 	  } else {
-		  fail("Watchlist verification failed");
+		  sa.fail("Watchlist verification failed");
 	  }
 	}
 	
 	@Then("^The \"([^\"]*)\" for series should present$")
 	public void the_for_series_should_present(String arg1) throws Throwable {
 	   String title = CommonFunctionality.getElementByXpath(login.driver, "//span[@title='"+arg1+"']", 4).getAttribute("title");
-	   assertEquals(title, arg1);
+	   sa.assertEquals(title, arg1);
 	   login.Log4j.info("The "+arg1+" icon is present and has been verified successfully");
 	}
 }

@@ -281,6 +281,11 @@ public class SprintCases {
 				.click();
 	}
 
+	@And("^Create new insight$")
+	public void create_new_insight() throws Throwable {
+		CommonFunctionality.Create_New_Insight();
+	}
+
 	@Then("^The copied View and its contents should be pasted in the same insight$")
 	public void the_copied_View_and_its_contents_should_be_pasted_in_the_same_insight() throws Throwable {
 		CopyView_Sameinsight();
@@ -365,11 +370,7 @@ public class SprintCases {
 		Thread.sleep(2000);
 		WebElement Gradient = login.driver.findElement(By.xpath("//*[contains(text(),'Gradient')]"));
 		Gradient.click();
-		/*if (Gradient.isSelected() == true) {
-			login.Log4j.info("Gradient is selected");
-		} else {
-			Gradient.click();
-		}*/
+		
 	}
 
 	@Then("^Default value should be \"([^\"]*)\" and the steps range should be from \"([^\"]*)\"$")
@@ -532,41 +533,7 @@ public class SprintCases {
 			CommonFunctionality.Views_list();
 			Assert.fail("Taiwan is not included in China map");
 		}
-//		List<WebElement> list_of_states = login.driver
-//				.findElements(By.xpath("//div[@class='visual-item']/div/*/*[10]/*//*/*"));
-		/*for (int i = 0; i < list_of_states.size(); i++) {
-			// int j = i + 1;
-			CommonFunctionality.wait(1000);
-			String state = list_of_states.get(i).getText();
-			login.Log4j.info(state);
-			if (state.equals("Taiwan")) {
-				// Thread.sleep(2000);
-				WebElement ele = list_of_states.get(i);
-				CommonFunctionality.action.moveToElement(ele).pause(2000).build().perform();
-				String tooltip = login.driver.findElement(By.xpath(
-						"//div[@class='highcharts-label highcharts-tooltip highcharts-color-0']//span//div[@class='table-tooltip']"))
-						.getText();
-				// login.Log4j.info(tooltip);
-				String tooltipArr[] = tooltip.split("\n");
-				for (int m = 0; m < tooltipArr.length; m++) {
-					int n = m + 1;
-					// login.Log4j.info(tooltipArr);
 
-					if (tooltipArr[n].contains("Subnational") == true) {
-						String[] arr = tooltipArr[n].split(":");
-						String subnational = arr[1].trim();
-						login.Log4j.info(subnational);
-						if (subnational.equals(state) == true) {
-							login.Log4j.info("PASS");
-							break;
-						}
-
-					}
-				}
-				break;
-			}
-		}
-		CommonFunctionality.Views_list();*/
 	}
 
 	@And("^Uncheck the \"([^\"]*)\" option$")
@@ -643,17 +610,18 @@ public class SprintCases {
 						CommonFunctionality
 								.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 10)
 								.click();
+						break;
 					}
 					
 				}
-				break;
+
 			}
 		}
-	CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
+	CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 20).click();
 	if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
 			.size() > 0) {
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10)
+				.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 20)
 				.click();
 	}
 		CommonFunctionality.Views_list();
