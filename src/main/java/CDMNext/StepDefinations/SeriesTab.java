@@ -550,8 +550,9 @@ public class SeriesTab {
 			action.pause(1000).moveToElement(element).click().build().perform();
 			break;
 		case "Hide related data":
-			Thread.sleep(1000);
-			element = login.driver.findElement(By.xpath("//*[@title='" + arg1 + "']"));
+			Thread.sleep(3000);
+//			element = login.driver.findElement(By.xpath("//*[@title='" + arg1 + "']"));
+			element = login.driver.findElement(By.xpath("//*[@title='Hide related data']"));
 			action.pause(1000).moveToElement(element).click().build().perform();
 			break;
 		case "Read More":

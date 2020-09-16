@@ -47,7 +47,7 @@ public class SSPWindow {
 	public static String add_to_recent_insight;
 	WebDriverWait wait = new WebDriverWait(login.driver, 400);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	Cvision cv = new Cvision();
+	CDMNextSprintCases cv = new CDMNextSprintCases();
 
 	@And("^Check for prerequesties$")
 	public void check_for_prerequesties() throws Throwable {

@@ -87,7 +87,7 @@ public class DatabasesTab {
 	Actions action = new Actions(login.driver);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
-	
+	SeriesTab st = new SeriesTab();
 	 @Given("^Click on More filter$")
 	 public void click_on_More_filter() throws Throwable {
 	    // SearchTest.ClearSelection();
@@ -730,10 +730,10 @@ public class DatabasesTab {
 				login.Log4j.info(rgnstr);
 				if (rgnstr.contains(dbarr[0]) == true) {
 					database = true;
-					CommonFunctionality.getElementByXpath(login.driver,"//div[@class='movable-modal--close']",4).click();
+					CommonFunctionality.getElementByXpath(login.driver,"//div[@class='movable-modal--close']",8).click();
 				} else {
 					database = false;
-					CommonFunctionality.getElementByXpath(login.driver,"//div[@class='movable-modal--close']",4).click();
+					CommonFunctionality.getElementByXpath(login.driver,"//div[@class='movable-modal--close']",8).click();
 				}
 
 			}
@@ -1985,8 +1985,8 @@ public class DatabasesTab {
 	@SuppressWarnings("deprecation")
 	@And("^Click on Show related data icon$")
 	public void click_on_Show_related_data_icon() throws Throwable {
-		str = CommonFunctionality.getElementByXpath(login.driver,"//li[1]//div[@class='series-item--name']",4).getText();
-		ele = CommonFunctionality.getElementByXpath(login.driver,"//li[1]//div[@class='series-item--country country-information']",4);
+		str = CommonFunctionality.getElementByXpath(login.driver,"//li[1]//div[@class='series-item--name']",8).getText();
+		ele = CommonFunctionality.getElementByXpath(login.driver,"//li[1]//div[@class='series-item--country country-information']",8);
 		action.pause(500).moveToElement(ele).click().build().perform();
 		try {
 			CommonFunctionality.getElementByXpath(login.driver, "//li[1]//div[@title='Show related data']", 20).click();
@@ -2078,8 +2078,8 @@ public class DatabasesTab {
 	@And("^Click on any insights under insights section$")
 	public void click_on_any_insights_under_insights_section() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Open Recent')]", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='dropdown-menu']//li//*[@class='recent-insight-sub-menu-item-view'][1]", 15).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Open Recent')]", 30).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='dropdown-menu']//li//*[@class='recent-insight-sub-menu-item-view'][1]", 25).click();
 		click_on_Show_related_data_icon();
 		try {
 			ele = login.driver.findElement(By.xpath(
@@ -2219,9 +2219,10 @@ public class DatabasesTab {
 		String chartTitle = ele.getText();
 		login.Log4j.info(chartTitle);
 		login.Log4j.info(CommonFunctionality.sname);
+		CommonFunctionality.Views_list();
 		AssertJUnit.assertEquals(CommonFunctionality.sname, chartTitle);
 		login.Log4j.info("chart is created for series level");
-		CommonFunctionality.Views_list();
+//		CommonFunctionality.Views_list();
 		}
 
 	@Then("^The series should be selected in search panel although visual created$")
@@ -2818,10 +2819,16 @@ public class DatabasesTab {
 	@SuppressWarnings("deprecation")
 	@And("^Drag and drop on visual$")
 	public void drag_and_drop_on_visual() throws Throwable {
-		Thread.sleep(1000);
-		WebElement dest = login.driver
-				.findElement(By.xpath("//*[@class='empty-visual-overlay--icon-block']"));
-		new Actions(login.driver).pause(500).dragAndDrop(ele, dest).release().perform();
+		st.user_enters_seriesID("28496901");
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
+		Thread.sleep(2000);
+		WebElement ele = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
+		CommonFunctionality.sname = ele.getText();
+		login.Log4j.info(CommonFunctionality.sname);
+//		WebElement dest = login.driver
+//				.findElement(By.xpath("//*[@class='empty-visual-overlay--icon-block']"));
+		WebElement dest = CommonFunctionality.getElementByXpath(login.driver,"//*[text()='Drag series here' and @class='empty-visual-overlay--text']",8);
+		new Actions(login.driver).dragAndDrop(ele, dest).pause(2000).release().perform();
 	}
 
 	@Then("^The series should be added to the visual$")
@@ -3753,8 +3760,8 @@ public class DatabasesTab {
 		CommonFunctionality.wait(1500);
 		WebElement file = login.driver.findElement(By.xpath("//*[@class='insight-context-menu--menu-icon']"));
 		file.click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[contains(text(),'" + arg1 + "')]",4).click();
-		CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'Create insight')]",4).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[contains(text(),'" + arg1 + "')]",15).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'Create insight')]",15).click();
 		
 	}
 
@@ -3787,11 +3794,11 @@ public class DatabasesTab {
 	}
    static void BrazilPremiumDb() throws InterruptedException {
     	// Right clicking on Brazil Premium Database for table level
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]",6)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]",20)
 				.click();
-		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[@class='toggle']",6).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[@class='toggle']",20).click();
 		CommonFunctionality.getElementByXpath(login.driver,
-						"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[@class='toggle']",6)
+						"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[@class='toggle']",20)
 				.click();
  }
 	

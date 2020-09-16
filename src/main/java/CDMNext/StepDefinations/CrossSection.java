@@ -28,7 +28,7 @@ public class CrossSection {
 
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
 	SoftAssert sa = new SoftAssert();
-	Cvision cv = new Cvision();
+	CDMNextSprintCases cv = new CDMNextSprintCases();
 	ChartVisual chart = new ChartVisual();
 	Comparables cmp = new Comparables();
 	public static String functions_item_id;

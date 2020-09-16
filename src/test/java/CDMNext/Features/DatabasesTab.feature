@@ -5,7 +5,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_01: Verify multiple databases selection
- 	 And Check for prerequesties	
+ #	 And Check for prerequesties	
     Given Click on More filter
     And Select database as "China Premium Database,Brazil Premium Database,Russia Premium Database"
     And User has clicked on "Apply filter"
@@ -835,7 +835,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_111:Verify drag and drop series to visual
     And Create a visual with series/empty
-    And Select a series
+    #And Select a series
     And Drag and drop on visual
     Then The series should be added to the visual
 

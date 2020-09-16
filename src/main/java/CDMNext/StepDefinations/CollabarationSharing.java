@@ -31,7 +31,7 @@ public class CollabarationSharing {
 	 
 	WebDriverWait wait = new WebDriverWait(login.driver, 50);
 	JavascriptExecutor js = (JavascriptExecutor)login.driver;
-	Cvision cv = new Cvision();
+	CDMNextSprintCases cv = new CDMNextSprintCases();
 	public static String Untitled_insight = "Shravas";
 	public SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy_hh-mm-ss");
 	public static Date date = new Date();
@@ -596,7 +596,7 @@ public class CollabarationSharing {
 		CommonFunctionality.wait(3000);
 	    String actual_mail = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='share-specific--users-list']//*[contains(@class,'share-user-email')]", 4).getText();
 	    CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
-	    assertEquals(Cvision.mail, actual_mail);
+	    assertEquals(CDMNextSprintCases.mail, actual_mail);
 	    login.Log4j.info("The shared email is displaying in the list and has been verified successfully");
 	    deleting_insights("//*[@data-id='Untitled-insight' and text()='Name your insight'] | //*[text()='"+new_insight_name+"']");
 	}
