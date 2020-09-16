@@ -6,6 +6,8 @@ Background:
 @ChartVisual
 Scenario: TC_Chart_01: Verify Chart option under Views > Visuals tab
     And Check for keeping_insight popup
+    And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
+    And Check for keeping_insight popup
     And Resetting the filters
     And Creating an Insight by selecting few series
     And Click to create an empty visual
@@ -1139,8 +1141,6 @@ Scenario: TC_Chart_85: Verify Tooltips - style
 @ChartVisual
 Scenario: TC_Chart_86: Verify Tooltips - Read tooltips data from Excel (Negative timepoints)
    And Check for keeping_insight popup
-   And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
-   And Check for keeping_insight popup
    And Resetting the filters
    And Setting values in preference
    And Read the "Timepoints" and "Date" from excel file "TC_Chart86.xlsx" 
@@ -1153,8 +1153,10 @@ Scenario: TC_Chart_86: Verify Tooltips - Read tooltips data from Excel (Negative
    And Clicking "Save" option
    Then Excel data is compared with application data
   
-@ChartVisual1
+@ChartVisual
 Scenario: TC_Chart_87: Verify Tooltips - Read tooltips data from Excel (Positive timepoints)
+   And Refresh page
+   And Check for keeping_insight popup
    And Read the "Timepoints" and "Date" from excel file "TC_Chart_87.xlsx" 
    And Search for the series with SID "369035327" 
    And  Click on more actions to create "View as Chart" 
@@ -1167,6 +1169,8 @@ Scenario: TC_Chart_87: Verify Tooltips - Read tooltips data from Excel (Positive
    
 @ChartVisual
 Scenario: TC_Chart_88: Verify Tooltips - Get timepoint values from application (negative timepoints)
+   And Refresh page
+   And Check for keeping_insight popup
    And Open SSP for the series "357534787" 
    And Click on "Data" tab
    And Observe the entire list of "Timepoints" 
@@ -1178,12 +1182,12 @@ Scenario: TC_Chart_88: Verify Tooltips - Get timepoint values from application (
    And Check the timeframe checkbox for "All observations" section
    And Clicking "Save" option
    Then The SSP timepoints inside series are compared with timepoints reflecting in visual
-   And Login back to default execution login
-   And Check for keeping_insight popup
    And Resetting the filters
    
 @ChartVisual
 Scenario: TC_Chart_89: Verify Tooltips - Get timepoint values from application (positive timepoints)
+   And Refresh page
+   And Check for keeping_insight popup
    And Open SSP for the series "369035327" 
    And Click on "Data" tab
    And Observe the entire list of "Timepoints" 
@@ -1195,6 +1199,8 @@ Scenario: TC_Chart_89: Verify Tooltips - Get timepoint values from application (
    And Check the timeframe checkbox for "All observations" section
    And Clicking "Save" option
    Then The SSP timepoints inside series are compared with timepoints reflecting in visual
+   And Refresh page
+   #And Check for keeping_insight popup
    And Check for keeping_insight popup
    And Resetting the filters
    
@@ -2306,4 +2312,5 @@ Scenario: TC_Chart_198: Verify CEIC logo for chart visual
    And Click credits image
    Then The URL should navigate to "https://www.ceicdata.com/en" 
    And Enable the Chat bubble
+   And Login back to default execution login
    

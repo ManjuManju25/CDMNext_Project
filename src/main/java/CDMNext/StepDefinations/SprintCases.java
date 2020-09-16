@@ -21,7 +21,7 @@ public class SprintCases {
 	String[] send = new String[] { "Shravas", "template1", "template2", "template3" };
 	String minimize;
 	String view1;
-	WebDriverWait wait = new WebDriverWait(login.driver, 1000);
+	static WebDriverWait wait = new WebDriverWait(login.driver, 1000);
 
 	@Then("^Search without any filters link should be removed$")
 	public void search_without_any_filters_link_should_be_removed() throws Throwable {
@@ -594,7 +594,7 @@ public class SprintCases {
 		String style = login.driver.findElement(By
 				.xpath("//*[@class='style-templates-menu--items']//*[contains(@class,'style-templates-item__active')]"))
 				.getAttribute("title");
-		assertEquals(Cvision.title_text, style);
+		assertEquals(CDMNextSprintCases.title_text, style);
 		login.Log4j.info("Selected template is visible/highlighted in the template menu");
 					
 	for (String template : send) {
@@ -627,15 +627,15 @@ public class SprintCases {
 		CommonFunctionality.Views_list();
 	}
 	@Then("^The new template should be created$")
-	public void the_new_template_should_be_created() throws Throwable {
+	public static void the_new_template_should_be_created() throws Throwable {
 		String arg1 = "Delete template";
 		String new_template = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//*[contains(@class,'style-templates-item__active')][1]")))
 				.getAttribute("title");
-		if (new_template.equals(Cvision.send)) {
+		if (new_template.equals(CDMNextSprintCases.send)) {
 			login.Log4j.info("The new template is created");
 		}
-		Cvision.the_newly_created_template(arg1);
+		CDMNextSprintCases.the_newly_created_template(arg1);
 		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
 		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
 				.size() > 0) {

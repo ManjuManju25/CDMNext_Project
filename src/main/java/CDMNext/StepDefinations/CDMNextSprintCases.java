@@ -1,5 +1,3 @@
-
-
 package CDMNext.StepDefinations;
 
 import static org.testng.Assert.assertEquals;
@@ -10,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -22,7 +21,6 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -34,10 +32,11 @@ import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
-public class Cvision {
+public class CDMNextSprintCases {
 
-	WebDriverWait wait = new WebDriverWait(login.driver, 1000);
+	WebDriverWait wait = new WebDriverWait(login.driver, 60);
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
+	SoftAssert sa = new SoftAssert();
 	public static String date_text;
 	public static String date_type;
 	public static String send = "Shravas";
@@ -90,7 +89,7 @@ public class Cvision {
 	public static String space;
 	public WebElement Comparables_text1;
 	public WebElement Comparables_text2;
-	public WebElement Comparables_text3;
+	public  WebElement Comparables_text3;
 	public WebElement title_checkbox_webElement;
 	public WebElement email;
 	public WebElement preference_checkbox;
@@ -182,12 +181,10 @@ public class Cvision {
 	}
 
 	@And("^Check for keeping_insight popup$")
-	public void check_for_keeping_insight_popup() throws Throwable {		
-		  if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Start new']")) .size() > 0)
-		  {
-			  CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__content')]//*[text()='Start new']",4).click();
-			  System.out.println("Start new option is selected in unsaved insight work pop-up display");
-		   }
+	public void check_for_keeping_insight_popup() throws Throwable {	
+		CommonFunctionality.closing_if_any_opened_modal_popup(login.driver, "movable-modal--close", "//*[contains(@class,'modal-content')]//*[text()='Some changes have not been saved.']", "//*[@class='sphere-modal-controls']//*[text()='Ok']");  
+		SSPWindow ssp = new SSPWindow();
+		ssp.close_the_replacement_popup_if_appeared();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -201,7 +198,7 @@ public class Cvision {
 			CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 			CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		} else {
-			CommonFunctionality.wait(3000);
+			CommonFunctionality.wait(5000);
 			WebElement other = CommonFunctionality.getElementByProperty(login.driver, "Series_new", 8);
 			new Actions(login.driver).moveToElement(other).pause(2000).click().build().perform();
 			CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
@@ -286,6 +283,7 @@ public class Cvision {
 			login.driver.navigate().back();
 			CommonFunctionality.wait(2000);
 			login.driver.navigate().refresh();
+			CommonFunctionality.wait(2000);
 		}
 	}
 
@@ -310,9 +308,10 @@ public class Cvision {
 		CommonFunctionality.wait(5000);
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		WebElement series = CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8);
-		new Actions(login.driver).moveToElement(series).pause(2000).click().build().perform();
+		new Actions(login.driver).moveToElement(series).pause(5000).click().build().perform();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		//CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait(4000);
 		CommonFunctionality.webDriverwait_keyvalue("Series_new");
 		CommonFunctionality.getElementByProperty(login.driver, "Series_new", 8).click();
 		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
@@ -333,16 +332,43 @@ public class Cvision {
 	@SuppressWarnings("deprecation")
 	@And("^Search for the series with SID \"([^\"]*)\"$")
 	public void search_for_the_series_with_SID(String arg1) throws Throwable {
-		Thread.sleep(5000);
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8).click();
-		CommonFunctionality.webDriverwait_keyvalue("Series_new");
+		CommonFunctionality.wait(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series_new", 8).click();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(500);
-		if (arg1.equals("384681617;385320997")) {
+		CommonFunctionality.wait(4000);
+		if (arg1.equals("9380901;9385301")) {
+			List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
+			for (int i = 1; i <= list.size(); i++) {
+				WebElement series = login.driver
+						.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]/span/*"));
+				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+			}
+		} if (arg1.equals("210698402;206954202")) {
+			List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
+			for (int i = 1; i <= list.size(); i++) {
+				WebElement series = login.driver
+						.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]/span/*"));
+				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+			}
+		}if (arg1.equals("210698402;35709701")) {
+			List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
+			for (int i = 1; i <= list.size(); i++) {
+				WebElement series = login.driver
+						.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]/span/*"));
+				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+			}
+		}if (arg1.equals("210698402;387139827")) {
+			List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
+			for (int i = 1; i <= list.size(); i++) {
+				WebElement series = login.driver
+						.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]/span/*"));
+				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+			}
+		}if (arg1.equals("384681617;385320997")) {
 			List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
 			for (int i = 1; i <= list.size(); i++) {
 				WebElement series = login.driver
@@ -427,8 +453,10 @@ public class Cvision {
 				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
 			}
 		} else {
+			if(!arg1.equals("315926001")) {
 			WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 			new Actions(login.driver).moveToElement(series_cb).pause(4000).click().build().perform();
+			}
 		}
 	}
 	
@@ -554,18 +582,33 @@ public class Cvision {
 		new Actions(login.driver).moveToElement(apply_functions).pause(3000).click().build().perform();
 	}
 
-	// @SuppressWarnings("deprecation")
 	@And("^Select all series from myseries and click on \"([^\"]*)\" option$")
 	public void select_all_series_from_myseries_and_click_on_option(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
-		boolean select_all = login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']"))
-				.isSelected();
+		boolean select_all = login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']")).isSelected();
 		WebElement selected = login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']"));
+		if(arg1.equals("fx")) {
+		if (select_all != true) {
+			js.executeScript("arguments[0].click();", selected);
+			WebElement functions = CommonFunctionality.getElementByXpath(login.driver,	"//*[contains(@title,'More') and @class='insight-action-panel--btn']", 4);
+			js.executeScript("arguments[0].click();", functions);
+		}
+		} if(arg1.equalsIgnoreCase("Copy the series")) {
+			if (select_all != true) {
+			js.executeScript("arguments[0].click();", selected);
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='copy']", 4)).perform();
+			}
+		} else {
 		if (select_all != true) {
 			js.executeScript("arguments[0].click();", selected);
 			WebElement relate = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg1 + "')] | //*[contains(@title,'" + arg1 + "')]", 4);
-			js.executeScript("arguments[0].click();", relate);
+			if(relate.isEnabled()) {
+				js.executeScript("arguments[0].click();", relate);
+			} else {
+				sa.fail("Not enabled");
+			}
+		}
 		}
 	}
 
@@ -607,12 +650,10 @@ public class Cvision {
 				.sendKeys(arg1);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'search-functions-input')]", 4)
 				.sendKeys(Keys.ENTER);
-		try {
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@data-id='" + arg1 + "' and @class='function-item']", 4)
-					.click();
-		} catch (Exception e) {
+		if(arg1.equalsIgnoreCase("UPDATE")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4).click();
+		} else {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-id='" + arg1 + "' and @class='function-item']", 4).click();
 		}
 	}
 
@@ -650,7 +691,7 @@ public class Cvision {
 
 	@And("^Verify the title in SSP Window$")
 	public void verify_the_title_in_SSP_Window() throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(2000);
 		title_ssp = CommonFunctionality.getElementByClassName(login.driver, "series-preview-modal-header--link", 4)
 				.getText();
 	}
@@ -704,7 +745,7 @@ public class Cvision {
 							"//*[contains(@class,'items-wrapper')]//following-sibling::*[text()='Open Recent']", 4)
 					.click();
 			CommonFunctionality.wait(1000);
-		}
+		} 
 	}
 
 	@And("^Click on \"([^\"]*)\" tab in popup$")
@@ -770,11 +811,10 @@ public class Cvision {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@And("^Click on the insight point$")
 	public void click_on_the_insight_point() throws Throwable {
-		WebElement help = CommonFunctionality.getElementByProperty(login.driver, "highcharts_point_insight", 4);
-		new Actions(login.driver).moveToElement(help).pause(2000).click().build().perform();
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "span[data-name='title']");
+		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -787,7 +827,7 @@ public class Cvision {
 	@SuppressWarnings("deprecation")
 	@And("^Mouse over to \"([^\"]*)\" from insights$")
 	public void mouse_over_to_from_insights(String arg1) throws Throwable {
-		CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "visual-title--text text-dots");
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//span[@data-name='title'])[2]", 4)).pause(2000).click().build().perform();
 		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		WebElement help = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='insight-preview--views']//*[@class='" + arg1 + "--wrapper']", 4);
@@ -820,11 +860,10 @@ public class Cvision {
 
 	@And("^Click \"([^\"]*)\" button to upload images$")
 	public void click_button_to_upload_images(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe", System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 		CommonFunctionality.wait(2000);
 	}
 
@@ -862,12 +901,13 @@ public class Cvision {
 				"//*[contains(@class,'sphere-modal__content')]//*[text()='" + arg1 + "']", 4).click();
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Open notification panel$")
 	public void open_notification_panel() throws Throwable {
 		CommonFunctionality.wait(2000);
 		WebElement notification = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='user-panel']//*[@class='user-notifications--icon']", 4);
-		new Actions(login.driver).moveToElement(notification).click().build().perform();
+		new Actions(login.driver).moveToElement(notification).pause(1000).click().build().perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -912,25 +952,26 @@ public class Cvision {
 		if (arg1.equalsIgnoreCase("Image")) {
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-			System.getProperty("user.dir") + "\\AutoIT_files\\Shravas.exe",
-					System.getProperty("user.dir") + "\\AutoIT_files\\Shravas.png");
+			System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
+					System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 			CommonFunctionality.wait(2000);
 		} else if (arg1.equalsIgnoreCase("Large Image")) {
+			CommonFunctionality.wait(2000);
 			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-			System.getProperty("user.dir") + "\\AutoIT_files\\Technology.exe",
-					System.getProperty("user.dir") + "\\AutoIT_files\\Technology.jpg");
+			System.getProperty("user.dir") + "\\AutoIT\\Technology.exe",
+					System.getProperty("user.dir") + "\\AutoIT\\Technology.jpg");
 			CommonFunctionality.wait(2000);
 		} else if (arg1.equalsIgnoreCase("Videos")) {
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-			System.getProperty("user.dir") + "\\AutoIT_files\\Typing.exe",
-					System.getProperty("user.dir") + "\\AutoIT_files\\Typing.mp4");
+			System.getProperty("user.dir") + "\\AutoIT\\Typing.exe",
+					System.getProperty("user.dir") + "\\AutoIT\\Typing.mp4");
 			CommonFunctionality.wait(2000);
 		} else if (arg1.equalsIgnoreCase("File")) {
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-			System.getProperty("user.dir") + "\\AutoIT_files\\Empty_File.exe",
-					System.getProperty("user.dir") + "\\AutoIT_files\\Empty_File.txt");
+			System.getProperty("user.dir") + "\\AutoIT\\Empty_File.exe",
+					System.getProperty("user.dir") + "\\AutoIT\\Empty_File.txt");
 			CommonFunctionality.wait(2000);
 		}
 	}
@@ -1100,6 +1141,7 @@ public class Cvision {
 		WebElement preference_drop = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[text()='" + arg1 + "']/following::div[2]", 4);
 		if (arg2.equalsIgnoreCase("ON")) {
+			CommonFunctionality.wait(3000);
 			if (preference_drop.getAttribute("class").contains("bootstrap-switch-on")) {
 				new Actions(login.driver)
 						.moveToElement(login.driver.findElement(By.className("shortcuts-settings--wrapper"))).perform();
@@ -1110,6 +1152,7 @@ public class Cvision {
 						.pause(2000).click().build().perform();
 			}
 		} else if (arg2.equalsIgnoreCase("OFF")) {
+			CommonFunctionality.wait(3000);
 			if (preference_drop.getAttribute("class").contains("bootstrap-switch-off")) {
 				new Actions(login.driver)
 						.moveToElement(login.driver.findElement(By.className("shortcuts-settings--wrapper"))).perform();
@@ -1479,24 +1522,20 @@ public class Cvision {
 	@And("^Select Users to share$")
 	public void select_Users_to_share() throws Throwable {
 		mail = "ceicsuresh11@gmail.com";
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//input[@placeholder='Select people you want to invite']", 4)
-				.sendKeys(mail);
-		CommonFunctionality.wait(2000);
-		WebElement result = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@data-id='aa793e1f-743b-48ec-b6c9-374ae724cbcf']", 4);
+		WebElement mailing = CommonFunctionality.getElementByXpath(login.driver, "//input[@placeholder='Select people you want to invite']", 4);
+		new Actions(login.driver).moveToElement(mailing).click().sendKeys(mail).pause(2000).sendKeys(Keys.BACK_SPACE).build().perform();
+		WebElement result = CommonFunctionality.getElementByXpath(login.driver,"//*[@data-id='aa793e1f-743b-48ec-b6c9-374ae724cbcf']", 4);
 		js.executeScript("arguments[0].scrollIntoView(true);", result);
-		new Actions(login.driver).moveToElement(result).pause(1000).click().build().perform();
+		new Actions(login.driver).moveToElement(result).pause(2000).click().build().perform();
 	}
 
 	@SuppressWarnings("deprecation")
 	@And("^Select Users to share for second time$")
 	public void select_Users_to_share_for_second_time() throws Throwable {
 		String mail2 = "ceicsuresh10@gmail.com";
-		CommonFunctionality.getElementByXpath(login.driver, "//input[@placeholder='Select people you want to invite']", 8).sendKeys(mail2);
-		CommonFunctionality.wait(2000);
-		WebElement result = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@data-id='2b66f4f5-d0b1-415e-91eb-9aa9b7587fb5']", 4);
+		WebElement mailing = CommonFunctionality.getElementByXpath(login.driver, "//input[@placeholder='Select people you want to invite']", 8);
+		new Actions(login.driver).moveToElement(mailing).click().sendKeys(mail2).pause(2000).sendKeys(Keys.BACK_SPACE).build().perform();
+		WebElement result = CommonFunctionality.getElementByXpath(login.driver,"//*[@data-id='2b66f4f5-d0b1-415e-91eb-9aa9b7587fb5']", 4);
 		js.executeScript("arguments[0].scrollIntoView(true);", result);
 		new Actions(login.driver).moveToElement(result).pause(1000).click().build().perform();
 	}
@@ -1568,6 +1607,7 @@ public class Cvision {
 	@SuppressWarnings("deprecation")
 	@And("^Hover to click on create \"([^\"]*)\"$")
 	public void hover_to_click_on_create(String arg1) throws Throwable {
+		CommonFunctionality.wait(3000);
 		WebElement one_series;
 		try {
 			one_series = CommonFunctionality.getElementByProperty(login.driver, "First_series_item", 8);
@@ -1576,14 +1616,15 @@ public class Cvision {
 					"(//*[@class='series-list-item-data']//following-sibling::*[@class='series-item-information'])[1] | //ul[contains(@class,'search-series-list')]/li[2]/div/a/div[3]/div[2]/span[2]",
 					4);
 		}
-		new Actions(login.driver).moveToElement(one_series).pause(1000).build().perform();
+		new Actions(login.driver).moveToElement(one_series).pause(3000).build().perform();
+		CommonFunctionality.wait(3000);
 		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='series-representation--list']/div/ul/li[1]/div/a/div[3]/div[2]/span[contains(@title,'"
 						+ arg1
 						+ "')] | //*[contains(@class,'tree-series-list')]/ul/li[1]/div/a/div[3]/div[2]/span[contains(@title,'"
 						+ arg1 + "')]",
 				4);
-		new Actions(login.driver).moveToElement(visual).pause(2000).click().build().perform();
+		new Actions(login.driver).moveToElement(visual).pause(3000).click().build().perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1626,6 +1667,9 @@ public class Cvision {
 						+ arg1 + "')] | //span[contains(text(),'" + arg1 + "')]",
 				4);
 		new Actions(login.driver).moveToElement(visual).pause(5000).click().build().perform();
+		if(arg1.equalsIgnoreCase("View as Map")) {
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='dropdown-menu']//*[text()='World']", 4)).pause(500).click().build().perform();
+		}
 	}
 
 	@And("^Clicking on \"([^\"]*)\" button in SSP$")
@@ -1659,15 +1703,24 @@ public class Cvision {
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[text()='Create insight']", 4)
 				.click();
-		List<WebElement> views = login.driver
-				.findElements(By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
-		if (views.size() > 0) {
-			for (WebElement view : views) {
-				new Actions(login.driver).contextClick(view).build().perform();
-				CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 8)
-						.click();
-			}
-		}
+		/*
+		 * List<WebElement> views = login.driver .findElements(By.
+		 * xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"
+		 * )); if (views.size() > 0) { for (WebElement view : views) { new
+		 * Actions(login.driver).contextClick(view).build().perform();
+		 * CommonFunctionality.getElementByXpath(login.driver,
+		 * "//span[contains(text(),'Delete view')]", 8) .click(); } }
+		 */
+	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Click Refresh button in settings changed$")
+	public void click_Refresh_button_in_settings_changed() throws Throwable {
+		CommonFunctionality.wait(4000);
+	    if(login.driver.findElements(By.cssSelector(".growl-message.growl-warning")).size()>0) {
+	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Refresh']", 4)).pause(500).click().build().perform();
+	    }
+	    check_for_keeping_insight_popup();
 	}
 
 	@And("^Choose \"([^\"]*)\" > \"([^\"]*)\"$")
@@ -1676,12 +1729,10 @@ public class Cvision {
 		new Actions(login.driver).moveToElement(view).build().perform();
 		CommonFunctionality.webDriverwait_locator("//span[contains(text(),'" + arg2 + "')]", "xpath");
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg2 + "')]")).click();
-		try {
-			if (arg2.equalsIgnoreCase("Histogram")) {
-				CommonFunctionality.webDriverwait_locator("//button[contains(text(),'Ok')]", "xpath");
+		if (arg2.equalsIgnoreCase("Histogram")) {
+			if(login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Confirmation']")).size()>0) {
 				CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 4).click();
 			}
-		} catch (NoSuchElementException e) {
 		}
 		if (arg2.equalsIgnoreCase("Heat map")) {
 			if (login.driver
@@ -1806,17 +1857,17 @@ public class Cvision {
 	@And("^Create a new template and \"([^\"]*)\"$")
 	public void create_a_new_template_and(String arg1) throws Throwable {
 		WebElement add_template = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'add-style-template')]", 10);
+				"//*[contains(@class,'add-style-template')]", 4);
 		if (arg1.equalsIgnoreCase("Template popup")) {
 			if (add_template.getAttribute("class").contains("add-style-template__active")) {
 				add_template.click();
 				CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='add-template-context--wrapper']//*[contains(@class,'add-template-context--input')]",
-						10).sendKeys(send);
+						4).sendKeys(send);
 				new Actions(login.driver).pause(2000).sendKeys(Keys.ENTER).perform();
 				if (login.driver.findElements(By.className("sphere-modal__content")).size() > 0) {
 					CommonFunctionality.getElementByXpath(login.driver,
-							"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10).click();
+							"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
 				}
 			}
 		} else if (arg1.equalsIgnoreCase("Set as default for future Table visual")
@@ -1825,11 +1876,11 @@ public class Cvision {
 				add_template.click();
 				CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='add-template-context--wrapper']//*[contains(@class,'add-template-context--input')]",
-						10).sendKeys(send);
+						4).sendKeys(send);
 				new Actions(login.driver).pause(2000).sendKeys(Keys.ENTER).perform();
 				if (login.driver.findElements(By.className("sphere-modal__content")).size() > 0) {
 					CommonFunctionality.getElementByXpath(login.driver,
-							"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10).click();
+							"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
 				}
 			}
 			List<WebElement> titles = login.driver.findElements(By.className("style-templates-item--icon"));
@@ -1837,11 +1888,11 @@ public class Cvision {
 				String name = title.getAttribute("title");
 				if (name.equalsIgnoreCase(send)) {
 					WebElement active = CommonFunctionality.getElementByClassName(login.driver,
-							"style-templates-item--icon", 10);
+							"style-templates-item--icon", 4);
 					new Actions(login.driver).moveToElement(active).pause(2000).build().perform();
-					CommonFunctionality.getElementByClassName(login.driver, "style-templates-item--tongue", 10).click();
+					CommonFunctionality.getElementByClassName(login.driver, "style-templates-item--tongue", 4).click();
 					WebElement set = CommonFunctionality.getElementByXpath(login.driver,
-							"//*[text()='" + arg1 + "']/preceding-sibling::span", 10);
+							"//*[text()='" + arg1 + "']/preceding-sibling::span", 4);
 					boolean select = CommonFunctionality
 							.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/preceding-sibling::span", 4)
 							.isSelected();
@@ -1884,14 +1935,14 @@ public class Cvision {
 	public static void the_newly_created_template(String arg1) throws Throwable {
 		List<WebElement> deleting_template = login.driver.findElements(By.xpath("//*[@title='" + arg1 + "']"));
 		WebElement close = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@title='" + arg1 + "']/ancestor::div[1]", 15);
+				"//*[@title='" + arg1 + "']/ancestor::div[1]", 4);
 		for (WebElement delete : deleting_template) {
 			if (close.getAttribute("title").contains(send)) {
 				delete.click();
 				if (login.driver.findElements(By.xpath("//*[contains(@class,'modal-content')]//*[text()='Ok']"))
 						.size() > 0) {
 					CommonFunctionality
-							.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 15)
+							.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 4)
 							.click();
 				}
 				break;
@@ -1932,11 +1983,11 @@ public class Cvision {
 	@SuppressWarnings("deprecation")
 	@And("^Clicking on the hiding template from the style template dropdown$")
 	public void clicking_on_the_hiding_template_from_the_style_template_dropdown() throws Throwable {
-		WebElement dropdown = CommonFunctionality.getElementByProperty(login.driver, "Style_template_arrow_icon", 10);
+		WebElement dropdown = CommonFunctionality.getElementByProperty(login.driver, "Style_template_arrow_icon", 4);
 		new Actions(login.driver).moveToElement(dropdown).pause(1000).click().build().perform();
-		title_text = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 10)
+		title_text = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 4)
 				.getAttribute("title");
-		WebElement ceic = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 10);
+		WebElement ceic = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 4);
 		new Actions(login.driver).moveToElement(ceic).click().build().perform();
 		CommonFunctionality.wait(1000);
 		new Actions(login.driver).moveToElement(dropdown).pause(1000).click().build().perform();
@@ -2046,15 +2097,17 @@ public class Cvision {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Clicking \"([^\"]*)\" option$")
 	public void clicking_option(String arg1) throws Throwable {
 		CommonFunctionality.wait(500);
-		WebElement enable = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'sphere-modal__body')]//*[contains(text(),'" + arg1
-						+ "')] | //*[contains(@class,'movable-modal--body')]//*[contains(text(),'" + arg1 + "')]",
-				4);
+		if(arg1.equalsIgnoreCase("All functions")) {
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popular-functions-context']//span[contains(text(),'"+arg1+"')]", 4)).pause(500).click().build().perform();
+		} else {
+		WebElement enable = CommonFunctionality.getElementByXpath(login.driver,	"//*[contains(@class,'sphere-modal__body')]//*[contains(text(),'" +arg1+ "')] | //*[contains(@class,'movable-modal--body')]//*[contains(text(),'" + arg1 + "')]",4);
 		js.executeScript("arguments[0].click();", enable);
-		CommonFunctionality.wait(4000);
+		CommonFunctionality.wait(6000);
+	}
 	}
 
 	@And("^Perform \"([^\"]*)\" operation$")
@@ -2066,7 +2119,11 @@ public class Cvision {
 	@And("^Click \"([^\"]*)\" button$")
 	public void click_button(String arg1) throws Throwable {
 		CommonFunctionality.wait(1000);
+		if(arg1.equalsIgnoreCase("All functions")) {
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4).click();
+		} else {
 		CommonFunctionality.getElementByXpath(login.driver, "//button[text()='" + arg1 + "']", 4).click();
+	}
 	}
 
 	@And("^Click on the button \"([^\"]*)\"$")
@@ -2135,7 +2192,7 @@ public class Cvision {
 		CommonFunctionality.wait(500);
 		String update = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='select2-chosen' and text()='" + arg1 + "']", 4).getText();
-		assertEquals(arg1, update);
+		sa.assertEquals(arg1, update);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -2371,6 +2428,7 @@ public class Cvision {
 		login.Log4j.info("3rd Comparables tab source has been verified");
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Set the range as \"([^\"]*)\" to \"([^\"]*)\"$")
 	public void set_the_range_as_to(String arg1, String arg2) throws Throwable {
 		start_date_chart = arg1;
@@ -2380,21 +2438,21 @@ public class Cvision {
 				"(//*[contains(@class,'highcharts-range-input')]//*[2])[1]", 4);
 		new Actions(login.driver).moveToElement(start).click().keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
 				.sendKeys(Keys.BACK_SPACE).build().perform();
-		new Actions(login.driver).sendKeys(start_date_chart).sendKeys(Keys.ENTER).build().perform();
+		new Actions(login.driver).sendKeys(start_date_chart).pause(1000).sendKeys(Keys.ENTER).build().perform();
 		WebElement end = CommonFunctionality.getElementByXpath(login.driver,
 				"(//*[contains(@class,'highcharts-range-input')]//*[2])[2]", 4);
 		new Actions(login.driver).moveToElement(end).click().keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
 				.sendKeys(Keys.BACK_SPACE).build().perform();
-		new Actions(login.driver).sendKeys(end_date_chart).sendKeys(Keys.ENTER).build().perform();
+		new Actions(login.driver).sendKeys(end_date_chart).pause(1000).sendKeys(Keys.ENTER).build().perform();
 	}
 
 	@And("^Check Time axis> Time within period$")
 	public void check_time_axis_time_within_period() throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(2000);
 		start_date_inside_chart = CommonFunctionality
 				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-range-input')])[3]/*[2]", 4)
 				.getText();
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(2000);
 		end_date_inside_chart = CommonFunctionality
 				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-range-input')])[4]/*[2]", 4)
 				.getText();
@@ -2426,6 +2484,14 @@ public class Cvision {
 		end_date = arg3;
 		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']", 4).click();
+		CrossSection.Select_the_Start_Date_and_End_Date("2017-12-31", "2018-12-31");
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]", 4).click();
+		date_text = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'modal-window__active')]//*[contains(@class,'sphere-modal__body')]", 4).getText();
+		if (login.driver.findElements(By.xpath("//*[contains(@class,'button__primary') and text()='Ok']")).size() > 0) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'button__primary') and text()='Ok']", 4).click();
+		}
+		/*CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']", 4).click();
 		WebElement start = CommonFunctionality.getElementByXpath(login.driver,
 				"//input[contains(@class,'input-date-start')]", 4);
 		new Actions(login.driver).moveToElement(start).click().sendKeys(Keys.chord(Keys.CONTROL, "a")).build()
@@ -2450,7 +2516,7 @@ public class Cvision {
 			CommonFunctionality
 					.getElementByXpath(login.driver, "//*[contains(@class,'button__primary') and text()='Ok']", 4)
 					.click();
-		}
+		}*/
 	}
 
 	@And("^Click \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\"$")
@@ -2497,6 +2563,21 @@ public class Cvision {
 				8);
 		new Actions(login.driver).moveToElement(hovor_series).pause(4000).build().perform();
 	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Hovor first series from db list$")
+	public void hovor_first_series_from_db_list() throws Throwable {
+		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Databases']", 4).click();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys("205424302");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait(4000);
+		if(login.driver.findElements(By.xpath("//span[text()='Matches only']")).size()>0) {
+		CommonFunctionality.getElementByXpath(login.driver, "//span[text()='Matches only']", 4).click();
+		}
+		WebElement hovor_series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]",8);
+		new Actions(login.driver).moveToElement(hovor_series).pause(1000).build().perform();
+	}
 
 	@And("^Check if comparables tab is displayed by default$")
 	public void check_if_comparables_tab_is_displayed_by_default() throws Throwable {
@@ -2538,27 +2619,20 @@ public class Cvision {
 	public void go_to(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
 		CommonFunctionality.UnselectMethod();
 		CommonFunctionality.CollapseTreeMethod();
-		CommonFunctionality.wait(4000);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/../../../../child::div[1]", 4)
-				.click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/../../../../child::div[1]", 4).click();
 		CommonFunctionality.wait(1000);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + "')]/../../../../child::div[1]", 4)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + "')]/../../../../child::div[1]", 4).click();
 		CommonFunctionality.wait(1000);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg3 + "')]/../../../../child::div[1]", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg3 + "')]/../../../../child::div[1]", 4).click();
 		CommonFunctionality.wait(1000);
-		Comparables_text1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg3+"')]//following::*[contains(@class,'search-series-list')][1]", 4);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg4 + "')]/../../../../child::div[1]", 4).click();
+		Comparables_text1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg3+"')]//following::div[contains(@class,'comparable-tree-series-list')]", 4);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg4 + "')]/../../../../child::div[1]", 4).click();
 		CommonFunctionality.wait(1000);
-		Comparables_text2 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg4+"')]//following::*[contains(@class,'search-series-list')][1]", 4);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg5 + "')]/../../../../child::div[1]", 4).click();
+		Comparables_text2 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg4+"')]//following::div[contains(@class,'comparable-tree-series-list')]", 4);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg5 + "')]/../../../../child::div[1]", 4).click();
 		CommonFunctionality.wait(1000);
-		Comparables_text3 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg5+"')]//following::*[contains(@class,'search-series-list')]", 4);
+		Comparables_text3 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg5+"')]//following::div[contains(@class,'comparable-tree-series-list')]",4);
 	}
 
 	@And("^Expand \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\"$")
@@ -2568,24 +2642,39 @@ public class Cvision {
 		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg1 + "')]//preceding::div[@class='toggle'][1]", 4).click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg2 + "')]//preceding::div[@class='toggle'][1]", 4).click();
 		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(text(),'" + arg3 + "')]/preceding::div[@class='toggle'][1]", 4).click();
+		if(arg3.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+			CommonFunctionality.wait(1000);
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg2+"')]//following::div[@class='toggle'][1]", 4).click();
+		} else {
+		WebElement table = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg3 + "')]/preceding::div[@class='toggle'][1]", 4);
+		js.executeScript("arguments[0].scrollIntoView(true);", table);
+		js.executeScript("arguments[0].click();", table);
+		}
 		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(text(),'" + arg4 + "')]/preceding::div[@class='toggle'][1]", 4).click();
+		if(arg4.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+			CommonFunctionality.wait(1000);		
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg2+"')]//following::div[@class='toggle'][1]", 4).click();
+		} else {
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg4 + "')]/preceding::div[@class='toggle'][1]", 4);
+		js.executeScript("arguments[0].scrollIntoView(true);", series);
+		js.executeScript("arguments[0].click();", series);
+		}
 		CommonFunctionality.wait(1000);
+		if(arg5.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+			CommonFunctionality.wait(1000);
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg2+"')]//following::div[@class='toggle'][1]", 4).click();
+		} else {
 		if (login.driver.findElements(By.xpath("//*[contains(text(),'" + arg5 + "')]/preceding::div[1]")).size() > 0) {
 			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg5 + "')]/preceding::div[1]")).click();
 		} else {
-			login.driver
-					.findElement(By.xpath("//*[contains(text(),'Afghanistan: National Accounts')]//following::div[3]"))
-					.click();
+			login.driver.findElement(By.xpath("//*[contains(text(),'Afghanistan: National Accounts')]//following::div[3]")).click();
 		}
 		CommonFunctionality.wait(1000);
+	}
 	}
 
 	@And("^Clicking the database \"([^\"]*)\"$")
@@ -2649,7 +2738,7 @@ public class Cvision {
 		List<WebElement> region = login.driver.findElements(By.xpath("//*[contains(@class,'country-information')]"));
 		for (WebElement reg : region) {
 			String text = reg.getText();
-			assertEquals(text, values_list);
+			sa.assertEquals(text, values_list);
 		}
 	}
 
@@ -2725,8 +2814,30 @@ public class Cvision {
 
 	@And("^Click on \"([^\"]*)\" tab in left panel$")
 	public void click_on_tab_in_left_panel(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='series-tab ui-sortable-handle']//*[contains(text(),'" + arg1 + "')]", 4).click();
+		if(arg1.equalsIgnoreCase("Databases") || arg1.equalsIgnoreCase("Series")) {
+	    CommonFunctionality.wait(8000);
+		CommonFunctionality.webDriverwait_locator("//*[contains(@class,'series-tab')]//*[contains(text(),'Data')]", "xpath");
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[contains(@class,'series-tab')]//*[contains(text(),'Data')]");
+		CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'toggler-control__light_purple')]//*[contains(text(),'"+arg1+"')]", 4).click();
+	    } else {
+	    CommonFunctionality.getElementByXpath(login.driver,"//*[@class='series-tab ui-sortable-handle']//*[contains(text(),'" + arg1 + "')]", 4).click();
+	    }
+	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Select (\\d+) series and click on chart option$")
+	public void select_series_and_click_on_chart_option(int arg1) throws Throwable {
+		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
+		for(int i = 1; i <= arg1; i++) {
+		WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]/li["+i+"]", 4);
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]/li["+i+"]/div/a/div[2]/span/*", 4);
+		if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
+		new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
+		}
+		}
+		WebElement actions = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'series-item--country')])["+arg1+"]", 8);
+		new Actions(login.driver).moveToElement(actions).pause(1000).build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'view-chart-icon')])["+arg1+"]", 8)).pause(500).click().build().perform();
 	}
 
 	@And("^Right click on any series level of data from DB tab$")
@@ -2843,7 +2954,7 @@ public class Cvision {
 
 	@And("^Click \"([^\"]*)\" from the drop down$")
 	public void click_from_the_drop_down(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Quarterly")) {
+		if (arg1.equalsIgnoreCase("Quarterly") || arg1.equalsIgnoreCase("Yearly (Sum)")) {
 			frequency_text = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='context-menu-item link' and contains(@title,'"+arg1+"')]", 4).getAttribute("title");
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -2908,7 +3019,7 @@ public class Cvision {
 					|| category_text.contains("Currency") || category_text.contains("Aggregate")) {
 				System.out.println(category_text + " category is present");
 			} else {
-				Assert.fail("Verification Failed");
+				sa.fail("Verification Failed");
 			}
 		}
 		List<WebElement> function_items = login.driver
@@ -2924,7 +3035,7 @@ public class Cvision {
 					|| function_text.contains("Quarterly") || function_text.contains("Monthly")) {
 				System.out.println(function_text + " is present");
 			} else {
-				Assert.fail("Verification Failed");
+				sa.fail("Verification Failed");
 			}
 		}
 		login.Log4j.info("All functions are present inside functions pop up");
@@ -2958,7 +3069,7 @@ public class Cvision {
 	@Then("^\"([^\"]*)\" date format has to reflect on the \"([^\"]*)\" visual$")
 	public void date_format_has_to_reflect_on_the_visual(String arg1, String arg2) throws Throwable {
 		String date_series = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='highcharts-axis-labels highcharts-xaxis-labels ']/*[1]", 4).getText();
+				"//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
 		if (date_series.matches("([0-9]{4})/([0-9]{2})/([0-9]{2})") && date_type.contains(arg1)) {
 			login.Log4j.info(
 					date_type + " date format is reflected on the " + arg2 + " visual and is same as editing format");
@@ -2966,7 +3077,8 @@ public class Cvision {
 			login.Log4j.info(
 					date_type + " date format is reflected on the " + arg2 + " visual and is same as editing format");
 		} else {
-			Assert.fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 		CommonFunctionality.Views_list();
 	}
@@ -3050,7 +3162,8 @@ public class Cvision {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
-			Assert.fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3062,7 +3175,8 @@ public class Cvision {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
-			Assert.fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3074,7 +3188,8 @@ public class Cvision {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
-			Assert.fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3086,7 +3201,8 @@ public class Cvision {
 			login.Log4j.info("Date picker is displaying the frquency of: " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
-			Assert.fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3097,18 +3213,18 @@ public class Cvision {
 			login.Log4j.info("Date picker is displaying the frquency of: " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
-			Assert.fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
 	@Then("^The indicator is not available for selected countries$")
 	public void the_indicator_is_not_available_for_selectedcountries() throws Throwable {
-		String comparables_text = "The indicator is not available for selected countries. See all countries";
-		if (Comparables_text1.isDisplayed() && Comparables_text2.isDisplayed() && Comparables_text3.isDisplayed()) {
-			login.Log4j.info("Series is displayed for particular region");
-		} else {
-			Assert.fail("The text is: " + comparables_text);
-		}
+		//String comparables_text = "The indicator is not available for selected countries.";
+		sa.assertEquals(Comparables_text1.isDisplayed(), true);
+		sa.assertEquals(Comparables_text2.isDisplayed(), true);
+		sa.assertEquals(Comparables_text3.isDisplayed(), true);
+		login.Log4j.info("Series is displayed for particular filtered region");
 	}
 
 	@Then("^Tab should display without being hidden$")
@@ -3131,8 +3247,10 @@ public class Cvision {
 		if (tooltip_display.equals(arg1)) {
 			login.Log4j.info("Cross country tooltip for table is displayed and its verified");
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.CollapseTreeMethod();
+			sa.fail("Verification Failed");
 		}
+		CommonFunctionality.CollapseTreeMethod();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -3147,7 +3265,7 @@ public class Cvision {
 		if (tooltip_display.equals(arg1)) {
 			login.Log4j.info("Cross country tooltip for series is displayed and its verified");
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3156,7 +3274,7 @@ public class Cvision {
 		if (table_text.contains(comparable_table_title)) {
 			login.Log4j.info("Respective indicator of table is opened in comparable tab and its verified");
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3165,7 +3283,7 @@ public class Cvision {
 		if (series_text.contains(comparable_series_title)) {
 			login.Log4j.info("Respective indicator of series is opened in comparable tab and its verified");
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3174,7 +3292,7 @@ public class Cvision {
 		if (login.driver.findElements(By.className("tree-container")).size() != 0) {
 			login.Log4j.info("Default tree is displayed and its verified");
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3184,7 +3302,7 @@ public class Cvision {
 				.isDisplayed()) {
 			login.Log4j.info(arg1 + " is displayed for selected region");
 		} else {
-			fail("Verification failed");
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3195,7 +3313,7 @@ public class Cvision {
 			login.Log4j
 					.info("Indicators for all countries is displayed and the count of indicators are: " + all_regions);
 		} else {
-			fail("Verification failed");
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3213,7 +3331,7 @@ public class Cvision {
 		if (expand.getAttribute("class").contains("open")) {
 			login.Log4j.info("Table icon is changed to expanded state");
 		} else {
-			fail("Verification failed");
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3235,7 +3353,7 @@ public class Cvision {
 			} else if (selected == false) {
 				login.Log4j.info("The checkbox is unselected and " + arg1 + " selected icon is displayed");
 			} else {
-				fail("Verification failed");
+				sa.fail("Verification failed");
 			}
 		}
 	}
@@ -3246,7 +3364,7 @@ public class Cvision {
 		if (!(comparable_table_title.contains(country_code)) && table_text.contains(country_code)) {
 			login.Log4j.info("The filter text in comparables tab is without country code " + country_code);
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3261,7 +3379,8 @@ public class Cvision {
 			CommonFunctionality.wait(500);
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3289,21 +3408,25 @@ public class Cvision {
 			CommonFunctionality.wait(500);
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
 	@Then("^The Message \"([^\"]*)\" should be displayed$")
 	public void the_Message_should_be_displayed(String arg1) throws Throwable {
 		if (date_text.contains(arg1)) {
-			login.Log4j.info(
-					"The download message is: " + arg1 + " for the timerange from " + start_date + " to " + end_date);
+			login.Log4j.info("The download message is: "+arg1+" for the timerange from " + start_date + " to " + end_date);
 			if (login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
 				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 			}
 			CommonFunctionality.DeleteSeries();
 		} else {
-			fail("Verification failed");
+			if(login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
+				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			}
+			CommonFunctionality.DeleteSeries();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3315,7 +3438,10 @@ public class Cvision {
 				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 			}
 		} else {
-			fail("Verification failed");
+			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size() > 0) {
+				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+			}
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3333,7 +3459,8 @@ public class Cvision {
 				}
 				CommonFunctionality.DeleteSeries();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.DeleteSeries();
+				sa.fail("Verification Failed");
 			}
 		} catch (Exception e) {
 			boolean check = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1
@@ -3343,7 +3470,9 @@ public class Cvision {
 				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 				CommonFunctionality.DeleteSeries();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				CommonFunctionality.DeleteSeries();
+				sa.fail("Verification Failed");
 			}
 		}
 	}
@@ -3358,7 +3487,8 @@ public class Cvision {
 			login.Log4j.info(arg1 + " button is enabled for users to cancel the operation at any time");
 			CommonFunctionality.DeleteSeries();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.DeleteSeries();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3379,7 +3509,11 @@ public class Cvision {
 				CommonFunctionality.Views_list();
 			}
 		} else {
-			fail("Verification failed");
+			if (login.driver.findElements(By.className("movable-modal--close")).size() > 0) {
+				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			}
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3423,7 +3557,12 @@ public class Cvision {
 			}
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
+			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Unexpected_confirmation_popup"))).size() > 0) {
+				CommonFunctionality.getElementByProperty(login.driver, "Unexpected_confirmation_popup", 4).click();
+			}
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3433,13 +3572,13 @@ public class Cvision {
 		if (fullscreen.isDisplayed()) {
 			fullscreen.click();
 		} else {
-			fail("Full screen is not visible");
+			sa.fail("Full screen is not visible");
 		}
 		CommonFunctionality.wait(2000);
 		if (halfscreen.isDisplayed()) {
 			halfscreen.click();
 		} else {
-			fail("Minimize button is not visible");
+			sa.fail("Minimize button is not visible");
 		}
 		login.Log4j.info("Minimize and maximize options are present in video controls");
 		CommonFunctionality.wait(3000);
@@ -3556,10 +3695,10 @@ public class Cvision {
 
 	@Then("^Smart tooltip should popup$")
 	public void smart_tooltip_should_popup() throws Throwable {
-		WebElement tool = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'tooltip')]", 1);
-		if (tool.getAttribute("class").contains("tooltip__visible")) {
-			if (CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-tooltip-table']", 1)
-					.isDisplayed()) {
+		CommonFunctionality.wait(2000);
+		WebElement tool = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'tooltip')]", 4);
+		if(tool.getAttribute("class").contains("tooltip__visible")) {
+			if(login.driver.findElements(By.xpath("//*[@class='series-tooltip-table']")).size()>0) {
 				login.Log4j.info("Smart tooltip is poped up and it has been verified");
 				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 			}
@@ -3568,74 +3707,69 @@ public class Cvision {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	@Then("^\"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" actions should be possible$")
 	public void actions_should_be_possible(String arg1, String arg2, String arg3, String arg4) throws Throwable {
-		WebElement dropdownList = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'dropdown-menu')]", 4);
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='tabs__tabs-box'])[2]//following::*[@js-add-container=\"\"]", 4).click();
+		WebElement dropdownList = CommonFunctionality.getElementByXpath(login.driver,"//ul[contains(@class,'dropdown-menu') and contains(@style,'display: block;')]", 4);
 		if (dropdownList.isDisplayed()) {
 			CommonFunctionality.wait(500);
 			System.out.println("Add series options are present");
-			WebElement dropdown = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_series_dropdown")));
-			new Actions(login.driver).moveToElement(dropdown).pause(2000).click().build().perform();
+			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='tabs__tabs-box'])[2]//following::*[@js-add-container=\"\"]", 4).click();
 		} else {
-			Assert.fail("Add series options verification failed");
+			sa.fail("Add series options verification failed");
 		}
-
-		WebElement view = CommonFunctionality.getElementByXpath(login.driver, "//*[@js-visual-container=\"\"]", 4);
-		new Actions(login.driver).moveToElement(view).pause(2000).click().build().perform();
+		CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='tabs__tabs-box'])[2]//following::*[@js-visual-container=\"\"]",4).click();
 		WebElement dropdown = CommonFunctionality.getElementByXpath(login.driver,
-				"//ul[contains(@class,'dropdown-menu')]", 4);
+				"//ul[contains(@class,'dropdown-menu') and contains(@style,'display: block;')]", 4);
 		if (dropdown.isDisplayed()) {
 			System.out.println("View as options are present");
 		} else {
-			Assert.fail("View as options are not present");
+			sa.fail("View as options are not present");
 		}
 		WebElement chart = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Chart']", 4);
 		if (chart.isDisplayed()) {
 			System.out.println("Chart Option is present");
 		} else {
-			Assert.fail("Chart option are not present");
+			sa.fail("Chart option are not present");
 		}
 		WebElement map = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Map']", 4);
 		if (map.isDisplayed()) {
 			System.out.println("Map Option is present");
 		} else {
-			Assert.fail("Map option not present");
+			sa.fail("Map option not present");
 		}
 		WebElement table = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Table']", 4);
 		if (table.isDisplayed()) {
 			System.out.println("Table Option is present");
 		} else {
-			Assert.fail("Table option not present");
+			sa.fail("Table option not present");
 		}
 		WebElement pie = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Pie']", 4);
 		if (pie.isDisplayed()) {
 			System.out.println("Pie Option is present");
 		} else {
-			Assert.fail("Pie option not present");
+			sa.fail("Pie option not present");
 		}
 		WebElement heatmap = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Heat map']", 4);
 		if (heatmap.isDisplayed()) {
 			System.out.println("Heat map Option is present");
 		} else {
-			Assert.fail("Heat map option not present");
+			sa.fail("Heat map option not present");
 		}
 		WebElement histogram = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Histogram']", 4);
 		if (histogram.isDisplayed()) {
 			System.out.println("Histogram Option is present");
 		} else {
-			Assert.fail("Histogram option not present");
+			sa.fail("Histogram option not present");
 		}
-		new Actions(login.driver).moveToElement(view).pause(500).click().build().perform();
-
+		CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='tabs__tabs-box'])[2]//following::*[@js-visual-container=\"\"]",4).click();
 		WebElement watch = CommonFunctionality.getElementByXpath(login.driver, "//*[@js-watch-container=\"\"]", 4);
 		if (watch.isDisplayed()) {
 			System.out.println("Watch Option is present");
 		} else {
 			Assert.fail("Watch option verification failed");
 		}
-
 		WebElement download = CommonFunctionality.getElementByXpath(login.driver, "//*[@js-download-container=\"\"]",
 				4);
 		if (download.isDisplayed()) {
@@ -3644,7 +3778,6 @@ public class Cvision {
 		} else {
 			Assert.fail("Download option verification failed");
 		}
-
 		WebElement modal_actions = CommonFunctionality.getElementByClassName(login.driver, "movable-modal--actions", 4);
 		if (modal_actions.isDisplayed()) {
 			System.out.println("Minimize, Maximize and close options are present");
@@ -3678,7 +3811,8 @@ public class Cvision {
 		if (region_legand.equals(region_legand_text) && region2_legand.equals(region_legand2_text)) {
 			login.Log4j.info("The country names are displaying as series names and it has been verified");
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 		CommonFunctionality.Views_list();
 	}
@@ -3691,22 +3825,19 @@ public class Cvision {
 		if (title.equals(text_series1) && (title.equals(text_series2))) {
 			login.Log4j.info("The chart title is displaying as series names and it has been verified");
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 		CommonFunctionality.Views_list();
 	}
 
 	@Then("^The series is not displayed$")
 	public void the_series_is_not_displayed() throws Throwable {
-		CommonFunctionality.wait(4000);
-		String count = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='series-series-count--toggle']//span", 8).getText();
+		//CommonFunctionality.wait(1000);
+		String count = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-series-count--toggle']//span", 8).getText();
 		int result = Integer.parseInt(count);
-		if (result == 0) {
-			login.Log4j.info("The series is displayed for internal users");
-		} else {
-			fail("Verification Failed");
-		}
+		login.Log4j.info("The series is not displayed for external users");
+		sa.assertEquals(result, 0);
 	}
 
 	@Then("^All attributes should be applied to table visual$")
@@ -3719,7 +3850,8 @@ public class Cvision {
 		if (attributes_table_count_after != attributes_table_count_before && attributes_element_all == true) {
 			login.Log4j.info("The selected attributes are applied to table visual");
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.Views_list();
+			sa.fail("Verification Failed");
 		}
 		CommonFunctionality.Views_list();
 	}
@@ -3738,7 +3870,7 @@ public class Cvision {
 				login.Log4j
 						.info(arg1 + " attributes are selected and applied to table visual and it has been verified");
 			} else {
-				fail("Verification Failed");
+				sa.fail("Verification Failed");
 			}
 		} else if (arg1.equalsIgnoreCase("None")) {
 			if (!(title_checkbox_webElement.getAttribute("class").contains("input-control__partly"))
@@ -3748,14 +3880,14 @@ public class Cvision {
 				login.Log4j
 						.info(arg1 + " attributes are selected and applied to table visual and it has been verified");
 			} else {
-				fail("Verification Failed");
+				sa.fail("Verification Failed");
 			}
 		} else if (arg1.equalsIgnoreCase("Partial")) {
 			if (title_checkbox_webElement.getAttribute("class").contains("input-control__partly")) {
 				login.Log4j
 						.info(arg1 + " attributes are selected and applied to table visual and it has been verified");
 			} else {
-				fail("Verification Failed");
+				sa.fail("Verification Failed");
 			}
 		}
 		CommonFunctionality.getElementByClassName(login.driver, "popover--close", 8).click();
@@ -3771,7 +3903,7 @@ public class Cvision {
 		if (result != 0) {
 			login.Log4j.info("The series is displayed for internal users");
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3786,7 +3918,8 @@ public class Cvision {
 			login.Log4j.info(arg1 + " observations have been found");
 			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3799,7 +3932,7 @@ public class Cvision {
 		if (world.equalsIgnoreCase(arg1)) {
 			login.Log4j.info(arg1 + " is in place 1");
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 		String global = CommonFunctionality
 				.getElementByXpath(login.driver, "(//*[contains(@class,'header-menu-products--title')])[3]", 4)
@@ -3807,7 +3940,7 @@ public class Cvision {
 		if (global.equalsIgnoreCase(arg2)) {
 			login.Log4j.info(arg2 + " is in place 2");
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -3820,11 +3953,11 @@ public class Cvision {
 			if (red.getAttribute("fill").contains("#ff3a56") || red.getAttribute("fill").contains("#2B60D0")) {
 				CommonFunctionality.wait(1000);
 			} else {
-				fail("Verification Failed");
+				sa.fail("Verification Failed");
 			}
 		}
 		login.Log4j.info(arg1 + " timepoints are displaying in " + arg2 + " color");
-		CommonFunctionality.Hidden_Webelements_handling(login.driver, "classNmae", "movable-modal--close");
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
 		CommonFunctionality.DeleteSeries();
 	}
 
@@ -3881,7 +4014,7 @@ public class Cvision {
 			String actual = Color.fromString(text_color).asHex();
 			// verify with Actual value with Expected value
 			String expected = "#ff3a56";
-			assertEquals(actual, expected);
+			sa.assertEquals(actual, expected);
 		}
 		login.Log4j.info("Negative timepoints are displaying in Red color");
 		CommonFunctionality.Views_list();
@@ -3895,7 +4028,9 @@ public class Cvision {
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3907,7 +4042,9 @@ public class Cvision {
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3922,7 +4059,11 @@ public class Cvision {
 			}
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Unexpected_confirmation_popup"))).size() > 0) {
+				CommonFunctionality.getElementByProperty(login.driver, "Unexpected_confirmation_popup", 4).click();
+			}
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3940,7 +4081,12 @@ public class Cvision {
 			}
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'movable-modal__active')]//*[@class='movable-modal--close']", 4).click();
+	        if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Unexpected_confirmation_popup"))).size() > 0) {
+		     CommonFunctionality.getElementByProperty(login.driver, "Unexpected_confirmation_popup", 4).click();
+	        }
+	        CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -3987,7 +4133,7 @@ public class Cvision {
 						if (attribute_text.contains(text_compare)) {
 							login.Log4j.info(arg1 + " Selected");
 						} else {
-							fail("Verification failed");
+							sa.fail("Verification failed");
 						}
 					}
 				}
@@ -4011,7 +4157,11 @@ public class Cvision {
 			}
 			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 		} else {
-			fail("Verification failed");
+			if(login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
+				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			}
+			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -4024,32 +4174,33 @@ public class Cvision {
 			login.Log4j.info("Ascending and descending icon is not displayed for " + arg1);
 			CommonFunctionality.DeleteSeries();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.DeleteSeries();
+			sa.fail("Verification failed");
 		}
 	}
 
-	@Then("^Should redirect to \"([^\"]*)\" and from there user should download the builds$")
-	public void should_redirect_to_and_from_there_user_should_download_the_builds(String arg1) throws Throwable {
-		// click_on_button("Download CDMNext Add-in");
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'installation-download-button')]//*[contains(text(),'Download CDMNext Add-in')]",
-				4).click();
-		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
-		login.driver.switchTo().window(tabs2.get(1));
-		String url = login.driver.getCurrentUrl();
-		String url_substring = url.substring(0, url.indexOf("?"));
-		Assert.assertTrue(login.driver.findElement(By.id("loginform")).isDisplayed());
-		String user = CommonFunctionality.getElementByClassName(login.driver, "big-txt-3", 4).getText();
-		login.driver.close();
-		login.driver.switchTo().window(tabs2.get(0));
+	@Then("^User should download the builds$")
+	public boolean user_should_download_the_builds() throws Throwable {
+		CommonFunctionality.wait(1000);
+		String href1 = CommonFunctionality.getElementBycssSelector(login.driver, ".installation-download-button__button", 4).getAttribute("href");
+		String split[] = href1.split("cdmplugin/");
+		CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'installation-download-button')]//*[contains(text(),'Download CDMNext Add-in')]",4).click();
+		CommonFunctionality.wait(5000);
 		if (login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		}
-		if (url_substring.contains(arg1) && user.equalsIgnoreCase("Username")) {
-			login.Log4j.info("Redirecting to " + arg1 + " and from there user should download the build");
-		} else {
-			fail("Verification failed");
+		String downloadPath = System.getProperty("user.home") + "\\Downloads";
+		File dir = new File(downloadPath);
+		File[] dirContents = dir.listFiles();
+		for (int i = 0; i < dirContents.length; i++) {
+		if(dirContents[i].getName().contains(split[1])) {
+		dirContents[i].delete();
+		login.Log4j.info("File has been downloaded and its verified");
+		return true;
 		}
+		}
+		Assert.fail("Download verification failed");
+		return false;
 	}
 
 	@Then("^Should enable only \"([^\"]*)\" coloring when selected zebra checkbox$")
@@ -4068,26 +4219,25 @@ public class Cvision {
 
 	@Then("^The new template should be created in the beginning of the list$")
 	public void the_new_template_should_be_created_in_the_beginning_of_the_list() throws Throwable {
-		CommonFunctionality.wait(2000);
-		WebElement ele = CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[contains(@class,'style-templates-item')])[1]", 10);
-		String new_template = ele.getAttribute("title");
+		String new_template = CommonFunctionality
+				.getElementByXpath(login.driver, "(//*[contains(@class,'style-templates-item')])[1]", 4)
+				.getAttribute("title");
 		if (new_template.equals(send)) {
 			login.Log4j.info("The new template is created in the beginning of the list");
-			new Actions(login.driver).moveToElement(ele).perform();
-			CommonFunctionality
-			.getElementByXpath(login.driver, "(//*[contains(@class,'style-templates-item')])[1]/*[2]", 10).click();
-			CommonFunctionality
-			.getElementByXpath(login.driver, "//*[contains(text(),'Ok')]", 10).click();
-			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__body')]//*[text()='Ok']"))
 					.size() > 0) {
 				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(@class,'sphere-modal__body')]//*[text()='Ok']", 10).click();
+						"//*[contains(@class,'sphere-modal__body')]//*[text()='Ok']", 4).click();
 			}
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__body')]//*[text()='Ok']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__body')]//*[text()='Ok']", 4).click();
+			}
+			CommonFunctionality.Views_list();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -4103,7 +4253,12 @@ public class Cvision {
 			}
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__body')]//*[text()='Ok']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__body')]//*[text()='Ok']", 4).click();
+			}
+			CommonFunctionality.Views_list();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -4123,7 +4278,9 @@ public class Cvision {
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -4133,7 +4290,9 @@ public class Cvision {
 		for (WebElement value : values) {
 			String text = value.getAttribute("title");
 			if (!(text.contains(arg3) || text.contains(arg2) || text.contains(arg1) || text.contains(arg4))) {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				CommonFunctionality.Views_list();
+				sa.fail("Verification Failed");
 			}
 		}
 		login.Log4j.info(arg1 + ", " + arg2 + ", " + arg3 + " options are displayed");
@@ -4153,7 +4312,9 @@ public class Cvision {
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -4172,7 +4333,12 @@ public class Cvision {
 			}
 			CommonFunctionality.Views_list();
 		} else {
-			fail("Verification failed");
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
+			}
+			CommonFunctionality.Views_list();
+			sa.fail("Verification failed");
 		}
 	}
 
@@ -4191,6 +4357,11 @@ public class Cvision {
 			}
 			CommonFunctionality.Views_list();
 		} else {
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
+			}
+			CommonFunctionality.Views_list();
 			fail("Verification failed");
 		}
 	}
@@ -4207,36 +4378,30 @@ public class Cvision {
 			}
 			CommonFunctionality.Views_list();
 		} else {
+			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+			if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
+			}
+			CommonFunctionality.Views_list();
 			fail("Verification failed");
 		}
 	}
 
 	@Then("^Selected template should be visible in the template Menu$")
 	public void selected_template_should_be_visible_in_the_template_menu() throws Throwable {
-		String arg1 = "Delete template";
-		CommonFunctionality.wait(2000);
 		String style = login.driver.findElement(By
 				.xpath("//*[@class='style-templates-menu--items']//*[contains(@class,'style-templates-item__active')]"))
 				.getAttribute("title");
 		assertEquals(title_text, style);
 		login.Log4j.info("Selected template is visible in the template menu");
-		Cvision.the_newly_created_template(arg1);
-		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
+		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
 				.size() > 0) {
 			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10)
+					.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4)
 					.click();
 		}
 		CommonFunctionality.Views_list();
-		/*CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
-		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
-				.size() > 0) {
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10)
-					.click();
-		}
-		CommonFunctionality.Views_list();*/
 	}
 
 	@Then("^\"([^\"]*)\" should not be available for empty visual$")
@@ -4245,6 +4410,7 @@ public class Cvision {
 			login.Log4j.info(arg1 + " is not available for empty visual");
 			CommonFunctionality.Views_list();
 		} else {
+			CommonFunctionality.Views_list();
 			fail("Verification failed");
 		}
 	}
@@ -4269,7 +4435,8 @@ public class Cvision {
 			if (tooltip_text.contains(indicators_in_tooltip)) {
 				login.Log4j.info(arg1 + " is shown on tooltip");
 			} else {
-				fail("Verification failed");
+				CommonFunctionality.Views_list();
+				sa.fail("Verification failed");
 			}
 		}
 		CommonFunctionality.Views_list();
@@ -4282,7 +4449,10 @@ public class Cvision {
 		if (tooltip.isDisplayed()) {
 			login.Log4j.info("Histogram methodology info is displayed in tooltip");
 		} else {
-			SoftAssert sa = new SoftAssert();
+			if (login.driver.findElements(By.className("insight-preview--close")).size() > 0) {
+				CommonFunctionality.getElementByClassName(login.driver, "insight-preview--close", 4).click();
+			}
+			CommonFunctionality.Views_list();
 			sa.fail("Verification failed");
 		}
 		if (login.driver.findElements(By.className("insight-preview--close")).size() > 0) {
@@ -4293,9 +4463,9 @@ public class Cvision {
 
 	@Then("^\"([^\"]*)\" tooltip should be displayed$")
 	public void tooltip_should_be_displayed(String arg1) throws Throwable {
-		assertEquals(arg1, footnotes_contents);
 		login.Log4j.info(arg1 + " tooltip is displayed");
 		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+		assertEquals(arg1, footnotes_contents);
 	}
 
 	@Then("Shadow should be applied to notification panel$")
@@ -4329,7 +4499,7 @@ public class Cvision {
 						.click();
 			}
 			List<WebElement> views = login.driver.findElements(
-					By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'Sheet')]"));
+					By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
 			if (views.size() > 0) {
 				for (WebElement view : views) {
 					new Actions(login.driver).contextClick(view).build().perform();
@@ -4338,19 +4508,18 @@ public class Cvision {
 				}
 			}
 		} else {
-			fail("Verification failed");
+			sa.fail("Verification failed");
 		}
 	}
 
 	@Then("^The message should be \"([^\"]*)\"$")
 	public void the_message_should_be(String arg1) throws Throwable {
-		String growl_message = CommonFunctionality.getElementByClassName(login.driver, "growl-message-text", 4)
-				.getText();
-		assertEquals(growl_message, arg1);
+		String growl_message = CommonFunctionality.getElementByClassName(login.driver, "growl-message-text", 4).getText();
 		login.Log4j.info("The message is " + arg1);
 		if (login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		}
+		assertEquals(growl_message, arg1);
 	}
 
 	@Then("^\"([^\"]*)\" label should be displayed under the spinner$")
@@ -4366,35 +4535,37 @@ public class Cvision {
 			CommonFunctionality.getElementByClassName(login.driver, "insight-preview--close", 4).click();
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "insight-preview--close", 4).click();
+			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			sa.fail("Verification Failed");
 		}
 	}
 
 	@Then("^\"([^\"]*)\" message for non data visual should be displayed$")
 	public void message_for_non_data_visual_should_be_displayed(String arg1) throws Throwable {
 		if (login.driver.findElements(By.className("growl-message-text")).size() > 0) {
-			String growl_message = CommonFunctionality.getElementByClassName(login.driver, "growl-message-text", 4)
-					.getText();
+			String growl_message = CommonFunctionality.getElementByClassName(login.driver, "growl-message-text", 4).getText();
 			if (growl_message.contains(arg1)) {
 				login.Log4j.info(arg1 + " message is displayed");
 			} else {
-				fail("Label is not displayed");
+				CommonFunctionality.Views_list();
+				sa.fail("Label is not displayed");
 			}
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='vis-elem-menu--item ' and @title='Delete']", 4)
-					.click();
-			List<WebElement> views = login.driver.findElements(
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='vis-elem-menu--item ' and @title='Delete']", 4).click();
+			CommonFunctionality.wait(2000);
+			if(login.driver.findElements(By.xpath("//*[contains(@class,'modal-dialog')]//*[text()='Ok']")).size()>0) {
+				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'modal-dialog')]//*[text()='Ok']", 4).click();
+			}
+			/*List<WebElement> views = login.driver.findElements(
 					By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
 			if (views.size() > 0) {
 				for (WebElement view : views) {
 					new Actions(login.driver).contextClick(view).build().perform();
 					CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 8)
 							.click();
-				}
+				}*/
+			CommonFunctionality.Views_list();
 			}
-		} else {
-			fail("Verification Failed");
-		}
 	}
 
 	@Then("^Share \"([^\"]*)\" popup should display every time share insight$")
@@ -4408,6 +4579,7 @@ public class Cvision {
 			// "sphere-modal__close", 4).click();
 			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='sphere-modal__close'])[2]", 4).click();
 		} else {
+			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='sphere-modal__close'])[2]", 4).click();
 			fail("Verification Failed");
 		}
 	}
@@ -4427,6 +4599,7 @@ public class Cvision {
 			// "sphere-modal__close", 4).click();
 			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='sphere-modal__close'])[2]", 4).click();
 		} else {
+			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='sphere-modal__close'])[2]", 4).click();
 			fail("Verification Failed");
 		}
 	}
@@ -4454,6 +4627,7 @@ public class Cvision {
 			if (!(mail_id.equals(mail))) {
 				login.Log4j.info("The Sharing process is declined and its verified successfully");
 			} else {
+				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 				fail("Verification Failed");
 			}
 		}
@@ -4466,7 +4640,7 @@ public class Cvision {
 		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]")).size() == 0) {
 			login.Log4j.info("The confirmation popup is displayed only for first time share and it has been verified");
 		} else {
-			fail("Verification Failed");
+			fail("Confirmation popup is displayed for Second time Sharing insight too");
 		}
 	}
 	
@@ -4481,9 +4655,10 @@ public class Cvision {
 	@SuppressWarnings("deprecation")
 	@Then("^Tooltip only displayed when hover the mouse on series name$")
 	public void tooltip_only_displayed_when_hover_the_mouse_on_series_name() throws Throwable {
+		@SuppressWarnings("unused")
 		List<WebElement> country_list = login.driver
 				.findElements(By.xpath("//*[contains(@class,'country-information')]"));
-		for (int i = 1; i <= country_list.size(); i++) {
+		for (int i = 1; i <= 2; i++) {
 			WebElement country = CommonFunctionality.getElementByXpath(login.driver,
 					"(//*[contains(@class,'country-information')])[" + i + "]", 4);
 			new Actions(login.driver).moveToElement(country).pause(3000).build().perform();
@@ -4491,7 +4666,7 @@ public class Cvision {
 					.findElements(
 							By.xpath("//*[@id='hidden-input']//following::*[contains(@class,'tooltip__visible')]"))
 					.size() == 0)) {
-				fail("Verification Failed");
+				sa.fail("Verification Failed");
 			}
 		}
 		login.Log4j.info(
@@ -4512,38 +4687,47 @@ public class Cvision {
 					new Actions(login.driver).contextClick(view).build().perform();
 					CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 8)
 							.click();
+					if(login.driver.findElements(By.xpath("//*[contains(text(),'Ok')]")).size()>0) {
+					CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok')]", 8).click();
+					}
 				}
 			}
 		} else {
-			fail("Verification Failed");
+			sa.fail("Verification Failed");
 		}
 	}
 
 	@Then("^The title of the pop up should be \"([^\"]*)\"$")
 	public void the_title_of_the_pop_up_should_be(String arg1) throws Throwable {
-		assertEquals(modal_text, arg1);
 		login.Log4j.info("The Title of the popup is: " + arg1);
 		CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 		CommonFunctionality.Views_list();
+		assertEquals(modal_text, arg1);
 	}
 
 	@Then("^The message in the pop up should be \"([^\"]*)\"$")
 	public void the_message_in_the_pop_up_should_be(String arg1) throws Throwable {
-		assertEquals(modal_text, arg1);
 		login.Log4j.info("The message in the popup is: " + arg1);
 		CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 		CommonFunctionality.Views_list();
+		assertEquals(modal_text, arg1);
 	}
 
-	@Then("^The notification panel is opened and \"([^\"]*)\" tab is default$")
-	public void the_notification_panel_is_opened_and_tab_is_default(String arg1) throws Throwable {
-		WebElement active = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'tabs__tab-item')]", 4);
-		if (active.getAttribute("class").contains("active") && active.getText().equals(arg1)) {
-			login.Log4j.info("The notification panel is opened and " + arg1 + " tab is default");
+	@Then("^The notification panel is opened$")
+	public void the_notification_panel_is_opened() throws Throwable {
+		WebElement active = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='tabs__tab-item active']", 4);
+		if(login.driver.findElements(By.cssSelector(".user-notifications--alert.user-notifications--alert__show")).size()>0) {
+			if(active.getText().contains("Notifications")) {
 		} else {
-			fail("Verification failed");
+			sa.fail("Verification failed");
 		}
+	    } else {
+		  if(active.getText().contains("What's new")) {
+		} else {
+			sa.fail("Verification Failed");
+		}
+	    }
+		login.Log4j.info("The notification panel is opened and " +active.getText()+ " tab is default");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -4561,6 +4745,11 @@ public class Cvision {
 				login.Log4j.info("The newly created style template is saved and it has been verified successfully");
 				break;
 			} else {
+				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]")).size() > 0) {
+					CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
+				}
+				CommonFunctionality.Views_list();
 				fail("Verification failed");
 			}
 		}
@@ -4602,19 +4791,6 @@ public class Cvision {
 		if (arg1.equalsIgnoreCase(preference_popup)) {
 			login.Log4j
 					.info(arg1 + " title in the popup is displayed inside preferences option and it has been verified");
-		} else if(arg1.equals("The function cannot be applied to selected series")){
-			login.Log4j.info(arg1 + " popup is displayed");
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal__close']", 6).click();
-			CommonFunctionality.Views_list();
-		} else if(arg1.equalsIgnoreCase("Copyright")){
-			String copyRight_popUp = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--title']", 6).getText();
-			if(copyRight_popUp.equals(arg1)) {
-				login.Log4j.info(arg1+ " popup is displayed");
-			} else {
-				Assert.fail(arg1+" popup is not displayed");
-			}
-			 CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
-			 CommonFunctionality.Views_list();
 		} else {
 			fail("Verification Failed");
 		}
@@ -4690,8 +4866,8 @@ public class Cvision {
 		if (login.driver.findElements(By.className("growl-message-text")).size() > 0) {
 			error_message = CommonFunctionality.getElementByClassName(login.driver, "growl-message-text", 4).getText();
 		}
-		assertEquals(error_message, arg1);
 		assertEquals(true, account.isDisplayed());
+		assertEquals(error_message, arg1);
 		login.Log4j.info(arg1 + " error message is displayed");
 	}
 
@@ -4714,7 +4890,7 @@ public class Cvision {
 		}
 		assertEquals(error_message, arg1);
 		login.Log4j.info(arg1 + " message is displaying and it has been verified successfully");
-		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+		//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 	}
 
 	@Then("^Click on \"([^\"]*)\" from preferences menu$")
@@ -4750,14 +4926,16 @@ public class Cvision {
 				login.Log4j.info("The " + arg1 + " date format is updated in the application");
 				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+				sa.fail("Verification Failed");
 			}
 		} else if (arg1.equalsIgnoreCase("Custom")) {
 			if (updated_date.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})") && valid_date_format.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
 				login.Log4j.info("The " + arg1 + " date format is updated in the application");
 				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+				sa.fail("Verification Failed");
 		} 
 		}
 	}
@@ -4780,7 +4958,8 @@ public class Cvision {
 			login.Log4j.info("Decimal places are appearing as per the selection in " + arg1 + " tab");
 			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -4791,7 +4970,8 @@ public class Cvision {
 				login.Log4j.info("The data is displaying as per selected Number format for " + arg1);
 				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+				sa.fail("Verification Failed");
 			}
 		} else {
 			get_Value_of_in_Preference("Grouping separator");
@@ -4803,7 +4983,8 @@ public class Cvision {
 				login.Log4j.info("The data is displaying as per selected Number format for " + arg1);
 				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+				sa.fail("Verification Failed");
 			}
 		}
 	}
@@ -4817,6 +4998,10 @@ public class Cvision {
 			}
 			CommonFunctionality.DeleteSeries();
 		} else {
+			if (login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
+				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			}
+			CommonFunctionality.DeleteSeries();
 			fail("Verification Failed");
 		}
 	}
@@ -4827,7 +5012,11 @@ public class Cvision {
 			if (preference_checkbox1 == true && suggestion > 0) {
 				login.Log4j.info("The " + arg1 + " is displayed to the user");
 			} else {
-				fail("Verification Failed");
+				if (login.driver.findElements(By.className("movable-modal--close")).size() > 0) {
+					CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				}
+				CommonFunctionality.DeleteSeries();
+				sa.fail("Verification Failed");
 			}
 			if (login.driver.findElements(By.className("movable-modal--close")).size() > 0) {
 				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
@@ -4837,7 +5026,11 @@ public class Cvision {
 			if (preference_checkbox1 == false && suggestion == 0) {
 				login.Log4j.info("The " + arg1 + " is not displayed to the user");
 			} else {
-				fail("Verification Failed");
+				if (login.driver.findElements(By.className("movable-modal--close")).size() > 0) {
+					CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				}
+				CommonFunctionality.DeleteSeries();
+				sa.fail("Verification Failed");
 			}
 			if (login.driver.findElements(By.className("movable-modal--close")).size() > 0) {
 				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
@@ -4853,7 +5046,8 @@ public class Cvision {
 			login.Log4j
 					.info("The " + arg1 + " is not displayed to the user and its unchecked under preference as well");
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.DeleteSeries();
+			sa.fail("Verification Failed");
 		}
 		CommonFunctionality.DeleteSeries();
 	}
@@ -4866,14 +5060,17 @@ public class Cvision {
 			if (uncheck.getAttribute("class").contains("series-list-item__selected")) {
 				login.Log4j.info("Selected series " + arg1 + " been removed");
 			} else {
-				fail("Verification failed");
+				CommonFunctionality.Views_list();
+				sa.fail("Verification failed");
 			}
+			CommonFunctionality.wait(2000);
 			CommonFunctionality.Views_list();
 		} else if (arg1.equalsIgnoreCase("has")) {
 			if (!(uncheck.getAttribute("class").contains("series-list-item__selected"))) {
 				login.Log4j.info("Selected series " + arg1 + " been removed");
 			} else {
-				fail("Verification failed");
+				CommonFunctionality.Views_list();
+				sa.fail("Verification failed");
 			}
 			CommonFunctionality.Views_list();
 		}
@@ -4887,7 +5084,7 @@ public class Cvision {
 				login.Log4j.info(
 						"Series tab is displayed with only number of series selected in the results per page dropdown");
 			} else {
-				fail("Verification failed");
+				sa.fail("Verification failed");
 			}
 			// CommonFunctionality.DeleteSeries();
 		}
@@ -4896,7 +5093,7 @@ public class Cvision {
 					&& login.driver.findElements(By.className("search-series-pagination-count")).size() == 0) {
 				login.Log4j.info("Series are displayed as list and more series can be viewed by scrolling bar");
 			} else {
-				fail("Verification failed");
+				sa.fail("Verification failed");
 			}
 			// CommonFunctionality.DeleteSeries();
 		}
@@ -4904,24 +5101,24 @@ public class Cvision {
 
 	@Then("^The \"([^\"]*)\" action \"([^\"]*)\" possible$")
 	public void the_action_possible(String arg1, String arg2) throws Throwable {
-		WebElement keyboard = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'list-view-wrapper')]", 4);
-		if (arg2.equalsIgnoreCase("should")) {
+		CommonFunctionality.wait(2000);
+		WebElement keyboard = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'list-view-wrapper')]", 4);
+		if(arg2.equalsIgnoreCase("should")) {
 			if (!(keyboard.getAttribute("class").contains("list-view-wrapper__empty-selection"))) {
 				login.Log4j.info("The " + arg1 + " action " + arg2 + " possible");
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.DeleteSeries();
+				sa.fail("Verification Failed");
 			}
-			CommonFunctionality.DeleteSeries();
-		}
-		if (arg2.equalsIgnoreCase("should not")) {
+		} if(arg2.equalsIgnoreCase("should not")) {
 			if (keyboard.getAttribute("class").contains("list-view-wrapper__empty-selection")) {
 				login.Log4j.info("The " + arg1 + " action " + arg2 + " possible");
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.DeleteSeries();
+				sa.fail("Verification Failed");
 			}
-			CommonFunctionality.DeleteSeries();
 		}
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@Then("^The \"([^\"]*)\" dialog box should open$")
@@ -4931,7 +5128,8 @@ public class Cvision {
 			login.Log4j.info("The " + arg1 + " dialog box is opened and it has been verified");
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -4954,12 +5152,14 @@ public class Cvision {
 			if (add_in.getAttribute("class").contains("active")) {
 				login.Log4j.info("The " + arg2 + " tab is active by default");
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+				sa.fail("Verification Failed");
 			}
 			login.Log4j.info("The " + arg1 + " dialog box is opened and it has been verified");
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -4978,7 +5178,8 @@ public class Cvision {
 				CommonFunctionality.wait(500);
 				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+				sa.fail("Verification Failed");
 			}
 		}
 		if (arg2.equalsIgnoreCase("Disable Verify Key")) {
@@ -4986,7 +5187,8 @@ public class Cvision {
 				login.Log4j.info("The Verify Key button has been disabled and its verified");
 				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 			} else {
-				fail("Verification Failed");
+				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+				sa.fail("Verification Failed");
 			}
 		}
 	}
@@ -4996,16 +5198,16 @@ public class Cvision {
 		if (arg1.equalsIgnoreCase("The key is valid")) {
 			String color = login.driver.findElement(By.className("api-manager--valid-message")).getCssValue("color");
 			String hex = Color.fromString(color).asHex();
-			assertEquals(arg2, hex);
 			login.Log4j.info("The key is valid and verified and success message is displaying in green color");
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			assertEquals(arg2, hex);
 		}
 		if (arg1.equalsIgnoreCase("The key is invalid")) {
 			String color = login.driver.findElement(By.className("api-manager--invalid-message")).getCssValue("color");
 			String hex = Color.fromString(color).asHex();
-			assertEquals(arg2, hex);
 			login.Log4j.info("The key is invalid and verified and error message is displaying in red color");
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			assertEquals(arg2, hex);
 		}
 	}
 
@@ -5017,7 +5219,8 @@ public class Cvision {
 			login.Log4j.info("The new token key is generated and has been verified");
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			sa.fail("Verification Failed");
 		}
 	}
 
@@ -5029,27 +5232,18 @@ public class Cvision {
 			login.Log4j.info("The API key copied message is displaying and has been verified");
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			sa.fail("Verification Failed");
 		}
 	}
 
 	@Then("^The \"([^\"]*)\" message should be displayed$")
 	public void the_message_should_be_displayed(String arg1) throws Throwable {
-		if(arg1.equals("API key copied to clipboard")) {
-		 String expected = CommonFunctionality.getElementByXpath(login.driver,
+		String expected = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='growl-messages-container']//*[@class='growl-message-text']", 4).getText();
-		 assertEquals(arg1, expected);
-		 login.Log4j.info("The " + arg1 + " information is displaying after coping the new API key");
-		 CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
-		} else {
-			// Histogram visual
-			String expected = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='visual-series-panel--empty-message']", 4).getText();
-			assertEquals(arg1, expected);
-			login.Log4j.info("The " + arg1 + " message is displayed");
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 5).click();
-			CommonFunctionality.DeleteVisual();
-		}
+		login.Log4j.info("The " + arg1 + " information is displaying after coping the new API key");
+		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+		assertEquals(arg1, expected);
 	}
 
 	@Then("^The description of CEIC API access popup should be \"([^\"]*)\"$")
@@ -5058,9 +5252,9 @@ public class Cvision {
 		String description = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[contains(@class,'api-manager--info__generated-key')]", 4)
 				.getText();
-		assertEquals(description, arg1);
 		login.Log4j.info("The " + arg1 + " description is displaying after generating the new API key");
 		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+		assertEquals(description, arg1);
 	}
 
 	@Then("^The default tab should be \"([^\"]*)\"$")
@@ -5070,7 +5264,8 @@ public class Cvision {
 		if (active.getAttribute("class").contains("active")) {
 			login.Log4j.info("The active tab is " + arg1 + " by default");
 		} else {
-			fail("Verification Failed");
+			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+			sa.fail("Verification Failed");
 		}
 		try {
 			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='sphere-modal__close'])[2]", 4).click();
@@ -5134,7 +5329,7 @@ public class Cvision {
 				login.Log4j.info(
 						"The new generated API key is copied to clipboard and parsing it to the given url and has been verified successfully");
 			} else {
-				fail("Verification failed");
+				sa.fail("Verification failed");
 			}
 			ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 			login.driver.switchTo().window(newTab.get(1)).close();

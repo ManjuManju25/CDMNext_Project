@@ -52,7 +52,7 @@ import static org.testng.Assert.fail;
 
 public class ChartVisual {
 
-	Cvision cv = new Cvision();
+	CDMNextSprintCases cv = new CDMNextSprintCases();
 	WebDriverWait wait = new WebDriverWait(login.driver, 800);
 	SoftAssert sa = new SoftAssert();
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
@@ -2350,7 +2350,7 @@ public class ChartVisual {
 
 	@And("^Get Text on \"([^\"]*)\" in Chart visual$")
 	public void get_Text_on_in_format_in_Chart_visual(String arg1) throws Throwable {
-		position = Integer.parseInt(Cvision.separator_value);
+		position = Integer.parseInt(CDMNextSprintCases.separator_value);
 	}
 	
 	@And("^Select data label \"([^\"]*)\" from the list$")
@@ -3815,10 +3815,10 @@ public class ChartVisual {
 
 	@Then("^\"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" values has been updated$")
 	public void values_has_been_updated(String arg1, String arg2, String arg3) throws Throwable {
-		int integer = chart_axis_multipler_value_numberformat.indexOf(Cvision.decimal_seperator);
+		int integer = chart_axis_multipler_value_numberformat.indexOf(CDMNextSprintCases.decimal_seperator);
 		decimalValues = chart_axis_multipler_value_numberformat.length() - integer - 1;
 		if (arg1.equalsIgnoreCase("Decimal places")) {
-			int value = Integer.parseInt(Cvision.separator_value);
+			int value = Integer.parseInt(CDMNextSprintCases.separator_value);
 			if (value == decimalValues) {
 				login.Log4j.info("Decimal places are appearing as per the selection in " + arg1);
 			} else {
@@ -3833,13 +3833,13 @@ public class ChartVisual {
 			}
 		}
 		if (arg3.equalsIgnoreCase("Grouping Separator")) {
-			if(Cvision.grouping_seperator.contains("Space")) {
-				Cvision.grouping_seperator = " ";
+			if(CDMNextSprintCases.grouping_seperator.contains("Space")) {
+				CDMNextSprintCases.grouping_seperator = " ";
 			} 
-			if(Cvision.grouping_seperator.contains("None")) {
-				Cvision.grouping_seperator = "";
+			if(CDMNextSprintCases.grouping_seperator.contains("None")) {
+				CDMNextSprintCases.grouping_seperator = "";
 			}
-			if (chart_axis_multipler_value_numberformat.contains(Cvision.grouping_seperator)) {
+			if (chart_axis_multipler_value_numberformat.contains(CDMNextSprintCases.grouping_seperator)) {
 				login.Log4j.info(arg3 + " value has been updated and has been verified successfully");
 			} else {
 				fail("Verification Failed");

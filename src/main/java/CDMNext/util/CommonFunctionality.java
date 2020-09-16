@@ -34,7 +34,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
@@ -63,19 +62,16 @@ public class CommonFunctionality {
 	public static File theNewestFile = null;
 
 	public static void ClearSelection() throws InterruptedException {
+		 Thread.sleep(2000);
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("TopButton"))))
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")))
 					.click();
-			// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 			login.Log4j.info("Clicking on Top button");
 		}
 		if (reset.size() > 0) {
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-				// Thread.sleep(2000);
-				// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
-				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Reset"))))
-						.click();
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 				login.Log4j.info("Clicking on Reset button");
 			}
 		}
@@ -178,7 +174,8 @@ public class CommonFunctionality {
 
 	public static void TopMethod() throws InterruptedException {
 		try {
-			WebElement topButton = getElementByProperty(login.driver,"TopButton",5);
+			wait(1000);
+			WebElement topButton = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")));
 			if (topButton.isDisplayed()) {
 				topButton.click();
 				login.Log4j.info("Clicking on Top button");
@@ -275,7 +272,7 @@ public class CommonFunctionality {
 	}
 	public static void SeriesHormonizationWindowClose() throws InterruptedException {
 		try {
-			wait(1500);
+			wait(1000);
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
 					.isDisplayed()) {
 				getElementByProperty(login.driver,"unexpected_popup_close",10)

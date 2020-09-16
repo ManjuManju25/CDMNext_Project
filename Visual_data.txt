@@ -1,0 +1,36 @@
+	Consolidated Govt Overall Deficit
+Region	Pakistan
+Subnational	
+Frequency	Annual, ending "Jun" of each year
+Unit	PKR mn
+Source	Ministry of Finance
+Status	Active
+Series ID	46224501 (ZFEDD)
+SR Code	SR532591
+Mnemonic	
+Function Description	
+First Obs. Date	06/01/1991
+Last Obs. Date	06/01/2018
+Last Update Time	12/06/2019
+Series remarks	2009-10 datapoint is budget estimates value.
+Suggestions	
+Mean	-1471735.6
+Variance	223333490093.15558
+Standard Deviation	472581.7284800118
+Skewness	0.07462107627446195
+Kurtosis	-0.3150186939485664
+Coefficient Variation	-0.32110504664017897
+Min	-2260380
+Max	-680407
+Median	-1422722
+No. of Obs	10
+06/01/2009	-680407
+06/01/2010	-929061
+06/01/2011	-1194409
+06/01/2012	-1760671
+06/01/2013	-1833864
+06/01/2014	-1388719
+06/01/2015	-1456725
+06/01/2016	-1349323
+06/01/2017	-1863797
+06/01/2018	-2260380

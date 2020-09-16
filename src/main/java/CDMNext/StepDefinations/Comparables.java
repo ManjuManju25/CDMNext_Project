@@ -34,7 +34,7 @@ public class Comparables {
 
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
 	SoftAssert sa = new SoftAssert();
-	Cvision cv = new Cvision();
+	CDMNextSprintCases cv = new CDMNextSprintCases();
 	ReleasesTab rt = new ReleasesTab();
 	public int count;
 	public int comparables_count;
@@ -541,15 +541,15 @@ public class Comparables {
 	  if(arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 	   section_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]/following::span[@class='name-text'][1]", 4).getText();
 	   WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+section_name+"')]", 4);
-	   new Actions(login.driver).moveToElement(ele).pause(2000).contextClick().build().perform();
+	   new Actions(login.driver).moveToElement(ele).pause(4000).contextClick().build().perform();
 	  } if(arg1.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 	   section_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]/following::div[@class='series-item--name'][1]", 4).getText();
 	   WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+section_name+"')]", 4);
-	   new Actions(login.driver).moveToElement(ele).pause(2000).contextClick().build().perform();
+	   new Actions(login.driver).moveToElement(ele).pause(4000).contextClick().build().perform();
 	  } else {
 	  section_name = arg1;
       WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4);
-      new Actions(login.driver).moveToElement(ele).pause(2000).contextClick().build().perform();
+      new Actions(login.driver).moveToElement(ele).pause(4000).contextClick().build().perform();
 	  }
    }
 
@@ -639,9 +639,11 @@ public class Comparables {
    @And("^Select the \"([^\"]*)\" option$")
    public void select_the_option(String arg1) throws Throwable {
 	   login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='"+arg1+"']")).click();
+	   if(arg1.equalsIgnoreCase("Copy link(s)")) {
 	   Toolkit toolkit = Toolkit.getDefaultToolkit();
 	   Clipboard clipboard = toolkit.getSystemClipboard();
 	   copied_link = (String) clipboard.getData(DataFlavor.stringFlavor);
+       }
    }
    
    @And("^Message should display$")
@@ -756,7 +758,7 @@ public class Comparables {
       if(tabs.size() == 1) {
     	  login.Log4j.info("Insight explorer window is opened in same tab and has been verified"); 
       } else {
-    	  fail("Verification Failed");
+    	  sa.fail("Verification Failed");
       }
       CollabarationSharing share = new CollabarationSharing();
       share.navigate_insights();
@@ -931,10 +933,10 @@ public class Comparables {
        ArrayList<String> tabs = new ArrayList<String>(login.driver.getWindowHandles());
        login.driver.switchTo().window(tabs.get(1));
        CommonFunctionality.wait(2000);
-       assertEquals(copied_link, section_link);
        login.Log4j.info("The Copied URL is navigating to respective section and it has been verified successfully");
 	   login.driver.switchTo().window(tabs.get(1)).close();
 	   login.driver.switchTo().window(tabs.get(0));
+	   assertEquals(copied_link, section_link);
 	   //login.driver.navigate().refresh();
 	   }
    
