@@ -5,7 +5,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_01: Verify multiple databases selection
- #	 And Check for prerequesties	
+    And Check for prerequesties
     Given Click on More filter
     And Select database as "China Premium Database,Brazil Premium Database,Russia Premium Database"
     And User has clicked on "Apply filter"
@@ -730,8 +730,8 @@ Feature: Verifying Databases tab functionality
     And Mouse hover on any series level
     And Click on + icon
     Then Chart should be created with the series
+
   #	Then Chart should be created with selected seires
-  
   @DB
   Scenario: TC_DB_100:Verify Add option under add dropdown
     And Mouse hover on any series level
@@ -832,7 +832,7 @@ Feature: Verifying Databases tab functionality
     And Drag and drop to any visual template
     Then Respective visual should be created as per the series drop
 
-  @DB
+  @DB1
   Scenario: TC_DB_111:Verify drag and drop series to visual
     And Create a visual with series/empty
     #And Select a series
@@ -1072,10 +1072,8 @@ Feature: Verifying Databases tab functionality
   #	And Click on dropdown icon next to +
   #	And Click on "Add to recent insight"
   #	And Select any recent insight from the dropdown
-    #And Click on "Apply"
-   #	Then The series should be added to My series tab for selected insight
-  
-  
+  #And Click on "Apply"
+  #	Then The series should be added to My series tab for selected insight
   @DB
   Scenario: TC_DB_146:Series selection - Verify 'Create new insight' in dropdown
     And Select some series from series level
@@ -1209,13 +1207,13 @@ Feature: Verifying Databases tab functionality
     And Expand till series level
     And Click on series name
     Then Series information popup should be opened
-    
-    @DB
+
+  @DB
   Scenario: TC_DB_163:Series selection - Verify 'Add to recent insight' in dropdown
-  	And Select any series
-  	And Click on selected series count
-  	And Click on dropdown icon next to +
-  	And Click on "Add to recent insight"
-  	And Select any recent insight from the dropdown
+    And Select any series
+    And Click on selected series count
+    And Click on dropdown icon next to +
+    And Click on "Add to recent insight"
+    And Select any recent insight from the dropdown
     And Click on "Apply"
-   	Then The series should be added to My series tab for selected insight
+    Then The series should be added to My series tab for selected insight

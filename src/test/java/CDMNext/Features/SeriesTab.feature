@@ -5,6 +5,7 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
+    And Check for prerequesties
     And Select indicator "Transport" as "Freight Traffic"
     And Select indicator "Tourism" as "Tourism Statistics"
     When Click on "Apply filter"

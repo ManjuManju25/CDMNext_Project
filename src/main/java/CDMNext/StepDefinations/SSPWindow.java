@@ -58,7 +58,7 @@ public class SSPWindow {
 		  CommonFunctionality.getElementByXpath(login.driver,"//*[@class='movable-modal--window']//*[text()='Start new']",4).click();
 		  System.out.println("Start new option is selected in unsaved insight work pop-up display");
 		}
-		CommonFunctionality.Views_list();
+		//CommonFunctionality.Views_list();
 	}
 	
 	

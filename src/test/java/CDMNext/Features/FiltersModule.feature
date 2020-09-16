@@ -5,6 +5,7 @@ Feature: Filters
 
   @FilterSearch
   Scenario: TC_Filters_Search_01
+  	And Check for prerequesties
     Given User enters "GDP"
     And User selects "Source" as "World Bank"
     And User has clicked on "Apply filter"

@@ -41,6 +41,7 @@ import org.testng.Reporter;
 
 import CDMNext.StepDefinations.login;
 import java.awt.image.PixelGrabber;
+
 public class CommonFunctionality {
 	public static String db_name;
 	public static WebElement footnoteDb;
@@ -54,7 +55,7 @@ public class CommonFunctionality {
 	public String frequency;
 	public static String ActualColor;
 	// create object of Actions class
-	public	static Actions action = new Actions(login.driver);
+	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
 	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	public static WebDriverWait wait = new WebDriverWait(login.driver, 500);
@@ -62,11 +63,10 @@ public class CommonFunctionality {
 	public static File theNewestFile = null;
 
 	public static void ClearSelection() throws InterruptedException {
-		 Thread.sleep(2000);
+		Thread.sleep(2000);
 		List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).isDisplayed()) {
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton")))
-					.click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("TopButton"))).click();
 			login.Log4j.info("Clicking on Top button");
 		}
 		if (reset.size() > 0) {
@@ -94,7 +94,7 @@ public class CommonFunctionality {
 		try {
 			if (reset.size() > 0) {
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-					getElementByProperty(login.driver, "Reset" , 8).click();
+					getElementByProperty(login.driver, "Reset", 8).click();
 					login.Log4j.info("Clicking on Reset button");
 				}
 			}
@@ -142,29 +142,35 @@ public class CommonFunctionality {
 					wait(700);
 					new Actions(login.driver).contextClick(view).build().perform();
 					getElementByXpath(login.driver, "//*[contains(text(),'Delete view')]", 30).click();
-					getElementByXpath(login.driver, "//*[@class='modal-dialog sphere-modal-dialog ']//button[contains(text(),'Ok')]", 20).click();
+					getElementByXpath(login.driver,
+							"//*[@class='modal-dialog sphere-modal-dialog ']//button[contains(text(),'Ok')]", 20)
+									.click();
 				}
 			}
 		} catch (Exception e) {
 
 		}
 		// Deleting visual
-		/*WebElement ele = login.driver.findElement(By.xpath(
-				"//*[@class='insight-page-menu-views-container--view-tabs ui-sortable']//*[@class='insight-page-view-tab--link insight-page-view-tab--link__active']"));
-		action.contextClick(ele).pause(1000).build().perform();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Delete view')]")))
-				.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Ok')]"))).click();*/
+		/*
+		 * WebElement ele = login.driver.findElement(By.xpath(
+		 * "//*[@class='insight-page-menu-views-container--view-tabs ui-sortable']//*[@class='insight-page-view-tab--link insight-page-view-tab--link__active']"
+		 * )); action.contextClick(ele).pause(1000).build().perform();
+		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.
+		 * xpath("//*[contains(text(),'Delete view')]"))) .click();
+		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+		 * "//button[contains(text(),'Ok')]"))).click();
+		 */
 	}
 
 	@SuppressWarnings("deprecation")
 	public static void DeleteSeries() throws InterruptedException {
 		try {
-			//getElementByProperty(login.driver, "Series_tab", 8).click();
+			// getElementByProperty(login.driver, "Series_tab", 8).click();
 			// Deleting series from My Series tab
-			WebElement ele = getElementByXpath(login.driver,"//*[@class='check-all-series']//*[@class='input-control--indicator']",20);
+			WebElement ele = getElementByXpath(login.driver,
+					"//*[@class='check-all-series']//*[@class='input-control--indicator']", 20);
 			action.moveToElement(ele).pause(800).click().build().perform();
-			WebElement delete = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-action='delete']")));
+			WebElement delete = getElementByXpath(login.driver, "//*[@data-action='delete']", 10);
 			action.moveToElement(delete).pause(700).click().build().perform();
 			wait(3000);
 		} catch (Exception e) {
@@ -253,7 +259,7 @@ public class CommonFunctionality {
 	}
 
 	public static void ExpandRight() throws InterruptedException {
-		//wait(1000);
+		// wait(1000);
 		try {
 			wait.until(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Expand_right"))))
@@ -262,21 +268,22 @@ public class CommonFunctionality {
 
 		}
 	}
+
 	public static void ExpandLeft() throws InterruptedException {
-		
+
 		try {
-			getElementByProperty(login.driver, "Expand_left" , 5).click();
+			getElementByProperty(login.driver, "Expand_left", 5).click();
 		} catch (Exception e) {
 
 		}
 	}
+
 	public static void SeriesHormonizationWindowClose() throws InterruptedException {
 		try {
 			wait(1000);
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("unexpected_popup_close")))
 					.isDisplayed()) {
-				getElementByProperty(login.driver,"unexpected_popup_close",10)
-						.click();
+				getElementByProperty(login.driver, "unexpected_popup_close", 10).click();
 			}
 		} catch (NoSuchElementException e) {
 
@@ -360,18 +367,19 @@ public class CommonFunctionality {
 
 	public static void TabSelection(String arg) throws Exception {
 
-		 if (arg.equals("Comparables")) {
+		if (arg.equals("Comparables")) {
 			login.driver.navigate().refresh();
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
 					By.xpath("//*[@class='search-presentation-tabs--visible']//*[contains(text(),'" + arg + "')]")))
 					.click();
-		}else if (arg.equalsIgnoreCase("Related Insights")) {
+		} else if (arg.equalsIgnoreCase("Related Insights")) {
 			login.driver
 					.findElement(By.xpath("//*[contains(@class,'operations--related') and @js-related-insights=\"\"]"))
 					.click();
-		} else if(arg.equalsIgnoreCase("Links")){
-			getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]", 6).click();
-			
+		} else if (arg.equalsIgnoreCase("Links")) {
+			getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]", 6)
+					.click();
+
 		} else {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(
 					By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg + "')]")));
@@ -399,7 +407,6 @@ public class CommonFunctionality {
 		}
 	}
 
-	
 	public static void Views_list() throws Exception {
 		try {
 			wait(1000);
@@ -409,8 +416,9 @@ public class CommonFunctionality {
 				for (WebElement view : views) {
 					wait(1000);
 					new Actions(login.driver).contextClick(view).build().perform();
-					getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]",30).click();
-					getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//button[contains(text(),'Ok')]", 20).click();
+					getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 30).click();
+					getElementByXpath(login.driver,
+							"//*[@class='sphere-modal-controls']//button[contains(text(),'Ok')]", 20).click();
 				}
 			}
 		} catch (Exception e) {
@@ -463,7 +471,9 @@ public class CommonFunctionality {
 		elementHighlight(login.driver, element);
 		return element;
 	}
-	public static WebElement getElementBycssSelector(WebDriver driver, String locator, int time) throws InterruptedException {
+
+	public static WebElement getElementBycssSelector(WebDriver driver, String locator, int time)
+			throws InterruptedException {
 		wait(500);
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
@@ -520,6 +530,7 @@ public class CommonFunctionality {
 			wait.until(ExpectedConditions.elementToBeClickable(By.className(locator)));
 		}
 	}
+
 	public static void uploadTheFileusingAutoIT(WebDriver driver, String exeFile, String uploadFile) {
 		try {
 			Runtime.getRuntime().exec(exeFile + " " + uploadFile);
@@ -527,6 +538,7 @@ public class CommonFunctionality {
 			Reporter.log("Failed to upload AutoIT script", true);
 		}
 	}
+
 	public static void click_on_search_close() {
 		// check whether the search close button is displayed or not
 		try {
@@ -540,24 +552,27 @@ public class CommonFunctionality {
 		} catch (Exception e) {
 		}
 	}
+
 	public static void InsightConfirmationPopUp() {
 		// check whether the Insight confirmation pop up is displayed or not
 		try {
-			if (login.driver.findElement(By.xpath("//*[contains(text(),'Do you want to keep your insight?')]")).isDisplayed()) {
+			if (login.driver.findElement(By.xpath("//*[contains(text(),'Do you want to keep your insight?')]"))
+					.isDisplayed()) {
 				Thread.sleep(1000);
 				login.driver.findElement(By.xpath("//button[contains(text(),'Continue')]")).click();
-				
-			} 
+
+			}
 		} catch (Exception e) {
 			//
 		}
 	}
+
 	public static void ChartSuggestionPopUp() {
 		// check whether the Chart Suggestion pop up is displayed or not
 		try {
 			wait(1000);
 			login.driver.findElement(By.className("growl-message-close")).click();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			login.Log4j.info("Chart suggestion popup is not displayed");
 		}
 	}
@@ -565,22 +580,26 @@ public class CommonFunctionality {
 	public static void CreateNewInsight() throws InterruptedException {
 		wait(700);
 		try {
-			login.driver.findElement(By.xpath("//*[@class='movable-modal--body-wrapper']//*[text()='Start new']")).click();
+			login.driver.findElement(By.xpath("//*[@class='movable-modal--body-wrapper']//*[text()='Start new']"))
+					.click();
 			System.out.println("Start new option is selected in unsaved insight work pop-up display");
-		} catch(Exception e) {
-			
+		} catch (Exception e) {
+
 		}
 	}
+
 	public static void ContinueSameInsight() throws InterruptedException {
 		wait(5000);
 		try {
-			login.driver.findElement(By.xpath("//*[@class='movable-modal--body-wrapper']//*[text()='Continue']")).click();
+			login.driver.findElement(By.xpath("//*[@class='movable-modal--body-wrapper']//*[text()='Continue']"))
+					.click();
 			System.out.println("Continue the same insight");
 
 		} catch (Exception e) {
 			System.out.println("Continue popup is not displayed");
 		}
 	}
+
 	public static List<WebElement> Hidden_Webelements_handling(WebDriver driver, String locatorType, String value) {
 		List<WebElement> elements = null;
 		if (locatorType.equalsIgnoreCase("xpath")) {
@@ -588,63 +607,67 @@ public class CommonFunctionality {
 		} else if (locatorType.equalsIgnoreCase("className")) {
 			elements = driver.findElements(By.className(value));
 		}
-		for(WebElement element : elements) {
+		for (WebElement element : elements) {
 			int x = element.getLocation().getX();
-			if(x!=0) {
+			if (x != 0) {
 				ActualColor = element.getAttribute("title");
 				login.Log4j.info(ActualColor);
-			  element.click();
-			  break;
+				element.click();
+				break;
 			}
 		}
 		return elements;
 	}
-	public static void CompareImage(WebDriver driver,String Image1, String Image2) throws Exception {
+
+	public static void CompareImage(WebDriver driver, String Image1, String Image2) throws Exception {
 		String file1 = Image1;
 		String file2 = Image2;
 		Image image1 = Toolkit.getDefaultToolkit().getImage(file1);
 		Image image2 = Toolkit.getDefaultToolkit().getImage(file2);
 		try {
-		PixelGrabber grab1 =new PixelGrabber(image1, 0, 0, -1, -1, false);
-		PixelGrabber grab2 =new PixelGrabber(image2, 0, 0, -1, -1, false);
-		int[] data1 = null;
-		if (grab1.grabPixels()) {
-		int width = grab1.getWidth();
-		int height = grab1.getHeight();
-		data1 = new int[width * height];
-		data1 = (int[]) grab1.getPixels();
-		}
-		int[] data2 = null;
-		if (grab2.grabPixels()) {
-		int width = grab2.getWidth();
-		int height = grab2.getHeight();
-		data2 = new int[width * height];
-		data2 = (int[]) grab2.getPixels();
-		}
-		if(Arrays.equals(data1, data2)) {
-		System.out.println("Image comparision is successful");
-		} else {
-		Assert.fail("Image comparision is not successful");
-		}
+			PixelGrabber grab1 = new PixelGrabber(image1, 0, 0, -1, -1, false);
+			PixelGrabber grab2 = new PixelGrabber(image2, 0, 0, -1, -1, false);
+			int[] data1 = null;
+			if (grab1.grabPixels()) {
+				int width = grab1.getWidth();
+				int height = grab1.getHeight();
+				data1 = new int[width * height];
+				data1 = (int[]) grab1.getPixels();
+			}
+			int[] data2 = null;
+			if (grab2.grabPixels()) {
+				int width = grab2.getWidth();
+				int height = grab2.getHeight();
+				data2 = new int[width * height];
+				data2 = (int[]) grab2.getPixels();
+			}
+			if (Arrays.equals(data1, data2)) {
+				System.out.println("Image comparision is successful");
+			} else {
+				Assert.fail("Image comparision is not successful");
+			}
 		} catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
-	public static void Download_to_Excel(String title,int rowno, int columnno, String public_variable) throws Throwable {
+
+	public static void Download_to_Excel(String title, int rowno, int columnno, String public_variable)
+			throws Throwable {
 		CommonFunctionality.wait(1000);
-		String path= System.getProperty("user.home") + "\\Downloads\\" +title+".xlsx";
+		String path = System.getProperty("user.home") + "\\Downloads\\" + title + ".xlsx";
 		File src = new File(path);
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sheet1 = wb.getSheetAt(0);
 		String data = sheet1.getRow(rowno).getCell(columnno).getStringCellValue();
 		System.out.println(data);
-		if(!(data.equalsIgnoreCase(public_variable)) || (!(data.contains(public_variable)))) {
-		  fail("Verification Failed");
+		if (!(data.equalsIgnoreCase(public_variable)) || (!(data.contains(public_variable)))) {
+			fail("Verification Failed");
 		}
 		fis.close();
 		Files.deleteIfExists(Paths.get(path));
 	}
+
 	public static void ReplacementPopUpClose() throws InterruptedException {
 
 		Thread.sleep(3000);
@@ -658,6 +681,7 @@ public class CommonFunctionality {
 		}
 
 	}
+
 	public static void GrowlPopUp() {
 		WebElement ele = login.driver.findElement(By.xpath("//div[@class='growl-message-text']"));
 		String growlText = ele.getText();
@@ -668,6 +692,7 @@ public class CommonFunctionality {
 			AssertJUnit.fail(growlText + "is not displayed  ");
 		}
 	}
+
 	public static void ValidateGrowlText(String ExpectedTxt) throws Exception {
 		CommonFunctionality.wait(300);
 		WebElement ele = login.driver.findElement(By.xpath("//div[@class='growl-message-text']"));
@@ -679,10 +704,10 @@ public class CommonFunctionality {
 			AssertJUnit.fail(ActualTxt + "is not displayed  ");
 		}
 	}
-	
+
 	/* Get the newest file for a specific extension */
 	public static void getTheNewestFile(String ext) {
-		
+
 		File dir = new File(System.getProperty("user.home") + "\\Downloads");
 		FileFilter fileFilter = new WildcardFileFilter("*." + ext);
 
@@ -705,13 +730,15 @@ public class CommonFunctionality {
 			}
 		}
 	}
-public static void Create_New_Insight() throws Exception {
-	getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
-	getElementByXpath(login.driver, "//li//*[contains(text(),'New')]", 20).click();
-	getElementByXpath(login.driver, "//*[@class='create']//input", 20).clear();
-	getElementByXpath(login.driver, "//*[@class='create']//input", 20).sendKeys("Testing Insight");
-	getElementByXpath(login.driver, "//*[contains(text(),'Create insight')]", 20).click();
-}
+
+	public static void Create_New_Insight() throws Exception {
+		getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
+		getElementByXpath(login.driver, "//li//*[contains(text(),'New')]", 20).click();
+		getElementByXpath(login.driver, "//*[@class='create']//input", 20).clear();
+		getElementByXpath(login.driver, "//*[@class='create']//input", 20).sendKeys("Testing Insight");
+		getElementByXpath(login.driver, "//*[contains(text(),'Create insight')]", 20).click();
+	}
+
 	public static String getFileExtension(File file) {
 		String name = file.getName();
 		try {
@@ -721,194 +748,202 @@ public static void Create_New_Insight() throws Exception {
 			return "";
 		}
 	}
-	public static void login_as_next_user(WebDriver driver,String arg1,String arg2,String arg3,String arg4) throws Throwable {
+
+	public static void login_as_next_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)
+			throws Throwable {
 		URL url = new URL(driver.getCurrentUrl());
-		driver.get(url.getProtocol()+"://"+url.getHost()+"/login");
+		driver.get(url.getProtocol() + "://" + url.getHost() + "/login");
 		driver.findElement(By.cssSelector(arg1)).clear();
 		driver.findElement(By.cssSelector(arg1)).sendKeys(arg4);
 		driver.findElement(By.cssSelector(arg2)).clear();
 		driver.findElement(By.cssSelector(arg2)).sendKeys("Ceic@123");
 		driver.findElement(By.cssSelector(arg3)).click();
 	}
-	
-	public static void login_as_internal_user(WebDriver driver,String arg1,String arg2,String arg3,String arg4) throws Throwable {
+
+	public static void login_as_internal_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)
+			throws Throwable {
 		URL url = new URL(driver.getCurrentUrl());
-		driver.get(url.getProtocol()+"://"+url.getHost()+"/login");
+		driver.get(url.getProtocol() + "://" + url.getHost() + "/login");
 		driver.findElement(By.cssSelector(arg1)).clear();
 		driver.findElement(By.cssSelector(arg1)).sendKeys("speriyasamy@isimarkets.com");
 		driver.findElement(By.cssSelector(arg2)).clear();
 		driver.findElement(By.cssSelector(arg2)).sendKeys(arg4);
 		driver.findElement(By.cssSelector(arg3)).click();
 	}
-	
-	public static void login_as_ceic_user(WebDriver driver,String arg1,String arg2,String arg3,String arg4) throws Throwable {
+
+	public static void login_as_ceic_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)
+			throws Throwable {
 		URL url = new URL(driver.getCurrentUrl());
-		driver.get(url.getProtocol()+"://"+url.getHost()+"/login");
+		driver.get(url.getProtocol() + "://" + url.getHost() + "/login");
 		driver.findElement(By.cssSelector(arg1)).clear();
 		driver.findElement(By.cssSelector(arg1)).sendKeys(arg4);
 		driver.findElement(By.cssSelector(arg2)).clear();
 		driver.findElement(By.cssSelector(arg2)).sendKeys("Ceic@123");
 		driver.findElement(By.cssSelector(arg3)).click();
 	}
-	
-	public static void closing_if_any_opened_modal_popup(WebDriver driver,String arg1,String arg2,String arg3) throws Throwable {
+
+	public static void closing_if_any_opened_modal_popup(WebDriver driver, String arg1, String arg2, String arg3)
+			throws Throwable {
 		List<WebElement> popup = driver.findElements(By.className(arg1));
-		for(int i=1;i<=popup.size();i++) {
-		getElementByClassName(driver, arg1, 4).click();
-		if(driver.findElements(By.xpath(arg2)).size()>0) {
-			getElementByXpath(driver, arg3, 4).click();
+		for (int i = 1; i <= popup.size(); i++) {
+			getElementByClassName(driver, arg1, 10).click();
+			if (driver.findElements(By.xpath(arg2)).size() > 0) {
+				getElementByXpath(driver, arg3, 10).click();
+			}
 		}
-		}
-		if(popup.size() != 0) {
-		Views_list();
+		if (popup.size() != 0) {
+			Views_list();
 		}
 	}
+
 	public static void Crosssection_Excelverify(WebDriver driver, String Excel1, String Excel2) throws Throwable {
-		String path1 = System.getProperty("user.dir") + "\\Testdata\\" +Excel1+".xlsx";
-		String path2 = System.getProperty("user.home") + "\\Downloads\\" +Excel2+".xlsx";
+		String path1 = System.getProperty("user.dir") + "\\Testdata\\" + Excel1 + ".xlsx";
+		String path2 = System.getProperty("user.home") + "\\Downloads\\" + Excel2 + ".xlsx";
 		File src1 = new File(path1);
 		File src2 = new File(path2);
 		FileInputStream excellFile1 = new FileInputStream(src1);
 		FileInputStream excellFile2 = new FileInputStream(src2);
-        XSSFWorkbook TestData = new XSSFWorkbook(excellFile1);
-        XSSFWorkbook ActualData = new XSSFWorkbook(excellFile2);
-        XSSFSheet Testdatasheet1 = TestData.getSheetAt(0);
-        XSSFSheet ActualDatasheet1 = ActualData.getSheetAt(0);
-        XSSFRow Testdatarows = Testdatasheet1.getRow(0);
-        XSSFRow Actualdatarows = ActualDatasheet1.getRow(0);
-		CompareComments(Testdatarows, Actualdatarows);	 
-        if(compareTwoSheets(Testdatasheet1, ActualDatasheet1)) {
-            login.Log4j.info("The two excel sheets are Equal");
-        } else {
-            fail("The two excel sheets are not Equal");
-        }
-        excellFile1.close();
-        excellFile2.close();
-        Files.deleteIfExists(Paths.get(path2));
-     }
-	// Compare Two Sheets
-	public static boolean compareTwoSheets(XSSFSheet Testdatasheet1, XSSFSheet ActualDatasheet1) throws InterruptedException {	
-    int firstRow1 = Testdatasheet1.getFirstRowNum();
-    int lastRow1 = ActualDatasheet1.getLastRowNum();
-    boolean equalSheets = true;
-    for(int i=firstRow1; i <= lastRow1; i++) {    	 
-        System.out.println("Comparing Row "+i);
-        XSSFRow Testdatarows = Testdatasheet1.getRow(i);
-        XSSFRow Actualdatarows = ActualDatasheet1.getRow(i);
-        if(!compareTwoRows(Testdatarows, Actualdatarows)) {
-            equalSheets = false;
-            System.err.println("Row "+i+" - Not Equal");
-            break;
-        } else {
-            System.out.println("Row "+i+" - Equal");
-        }
-    }
-    	return equalSheets;
+		XSSFWorkbook TestData = new XSSFWorkbook(excellFile1);
+		XSSFWorkbook ActualData = new XSSFWorkbook(excellFile2);
+		XSSFSheet Testdatasheet1 = TestData.getSheetAt(0);
+		XSSFSheet ActualDatasheet1 = ActualData.getSheetAt(0);
+		XSSFRow Testdatarows = Testdatasheet1.getRow(0);
+		XSSFRow Actualdatarows = ActualDatasheet1.getRow(0);
+		CompareComments(Testdatarows, Actualdatarows);
+		if (compareTwoSheets(Testdatasheet1, ActualDatasheet1)) {
+			login.Log4j.info("The two excel sheets are Equal");
+		} else {
+			fail("The two excel sheets are not Equal");
+		}
+		excellFile1.close();
+		excellFile2.close();
+		Files.deleteIfExists(Paths.get(path2));
 	}
+
+	// Compare Two Sheets
+	public static boolean compareTwoSheets(XSSFSheet Testdatasheet1, XSSFSheet ActualDatasheet1)
+			throws InterruptedException {
+		int firstRow1 = Testdatasheet1.getFirstRowNum();
+		int lastRow1 = ActualDatasheet1.getLastRowNum();
+		boolean equalSheets = true;
+		for (int i = firstRow1; i <= lastRow1; i++) {
+			System.out.println("Comparing Row " + i);
+			XSSFRow Testdatarows = Testdatasheet1.getRow(i);
+			XSSFRow Actualdatarows = ActualDatasheet1.getRow(i);
+			if (!compareTwoRows(Testdatarows, Actualdatarows)) {
+				equalSheets = false;
+				System.err.println("Row " + i + " - Not Equal");
+				break;
+			} else {
+				System.out.println("Row " + i + " - Equal");
+			}
+		}
+		return equalSheets;
+	}
+
 	// Compare Two Rows
 	public static boolean compareTwoRows(XSSFRow Testdatarows, XSSFRow Actualdatarows) throws InterruptedException {
-		if((Testdatarows == null) && (Actualdatarows == null)) {
-	        return true;
-	    } else if((Testdatarows == null) || (Actualdatarows == null)) {
-	        return false;
-	    }
-	    int firstCell1 = Testdatarows.getFirstCellNum();
-	    int lastCell1 = Testdatarows.getLastCellNum();
-	    boolean equalRows = true;
-	    // Compare all cells in a row
-	    for(int i=firstCell1; i < lastCell1; i++) {
-	        XSSFCell cell1 = Testdatarows.getCell(i);
-	        XSSFCell cell2 = Actualdatarows.getCell(i);
-	        if(!compareTwoCells(cell1, cell2)) {
-	           equalRows = false;
-	           System.err.println("Cell "+i+" - Not Equal" +"; Value of Testdata_cell is \"" +cell1 + "\" - Value of Actual_cell is \"" +cell2 + "\"");
-	        } else  {
-	            System.out.println("Cell "+i+" - Equal" +"; Value of Testdata_cell is \"" +cell1 + "\" - Value of Actual_cell is \"" +cell2 + "\"");
-	        }									
-	    }
-	    return equalRows; 
+		if ((Testdatarows == null) && (Actualdatarows == null)) {
+			return true;
+		} else if ((Testdatarows == null) || (Actualdatarows == null)) {
+			return false;
+		}
+		int firstCell1 = Testdatarows.getFirstCellNum();
+		int lastCell1 = Testdatarows.getLastCellNum();
+		boolean equalRows = true;
+		// Compare all cells in a row
+		for (int i = firstCell1; i < lastCell1; i++) {
+			XSSFCell cell1 = Testdatarows.getCell(i);
+			XSSFCell cell2 = Actualdatarows.getCell(i);
+			if (!compareTwoCells(cell1, cell2)) {
+				equalRows = false;
+				System.err.println("Cell " + i + " - Not Equal" + "; Value of Testdata_cell is \"" + cell1
+						+ "\" - Value of Actual_cell is \"" + cell2 + "\"");
+			} else {
+				System.out.println("Cell " + i + " - Equal" + "; Value of Testdata_cell is \"" + cell1
+						+ "\" - Value of Actual_cell is \"" + cell2 + "\"");
+			}
+		}
+		return equalRows;
 	}
+
 	// Compare Two Cells
 	public static boolean compareTwoCells(XSSFCell Testdata_cell, XSSFCell Actual_cell) {
-	    if((Testdata_cell == null) && (Actual_cell == null)) {
-	        return true;
-	    } else if((Testdata_cell == null) || (Actual_cell == null)) {
-	        return false;
-	    } 
-	    boolean equalCells = false;
-	    int type1 = Testdata_cell.getCellType();
-	    int type2 = Actual_cell.getCellType();
-	    if (type1 == type2) {
-	        if (Testdata_cell.getCellStyle().equals(Actual_cell.getCellStyle())) { 	
-	            // Compare cells based on its type
-	            switch (Testdata_cell.getCellType()) {
-	            case HSSFCell.CELL_TYPE_FORMULA:
-	                if (Testdata_cell.getCellFormula().equals(Actual_cell.getCellFormula())) {
-	                    equalCells = true;
-	                }
-	                break;
-	            case HSSFCell.CELL_TYPE_NUMERIC:
-	                if (Testdata_cell.getNumericCellValue() == Actual_cell
-	                        .getNumericCellValue()) {
-	                    equalCells = true;
-	                }
-	                break;
-	            case HSSFCell.CELL_TYPE_STRING:
-	                if (Testdata_cell.getStringCellValue().equals(Actual_cell
-	                        .getStringCellValue())) {
-	                    equalCells = true;
-	                }
-	                break;     	
-	            case HSSFCell.CELL_TYPE_BLANK:
-	                if (Actual_cell.getCellType() == HSSFCell.CELL_TYPE_BLANK) {
-	                    equalCells = true;
-	                }
-	                break;
-	            case HSSFCell.CELL_TYPE_BOOLEAN:
-	                if (Testdata_cell.getBooleanCellValue() == Actual_cell
-	                        .getBooleanCellValue()) {
-	                    equalCells = true;
-	                }
-	                break;
-	            case HSSFCell.CELL_TYPE_ERROR:
-	                if (Testdata_cell.getErrorCellValue() == Actual_cell.getErrorCellValue()) {
-	                    equalCells = true;
-	                }
-	                break;
-	            default:
-	                if (Testdata_cell.getStringCellValue().equals(Actual_cell.getStringCellValue())) {
-	                    equalCells = true;
-	                }
-	                break;
-	            }
-	        } else {
-	            return false;
-	        }
-	    } else {
-	        return false;
-	    }
-	    return equalCells;
+		if ((Testdata_cell == null) && (Actual_cell == null)) {
+			return true;
+		} else if ((Testdata_cell == null) || (Actual_cell == null)) {
+			return false;
+		}
+		boolean equalCells = false;
+		int type1 = Testdata_cell.getCellType();
+		int type2 = Actual_cell.getCellType();
+		if (type1 == type2) {
+			if (Testdata_cell.getCellStyle().equals(Actual_cell.getCellStyle())) {
+				// Compare cells based on its type
+				switch (Testdata_cell.getCellType()) {
+				case HSSFCell.CELL_TYPE_FORMULA:
+					if (Testdata_cell.getCellFormula().equals(Actual_cell.getCellFormula())) {
+						equalCells = true;
+					}
+					break;
+				case HSSFCell.CELL_TYPE_NUMERIC:
+					if (Testdata_cell.getNumericCellValue() == Actual_cell.getNumericCellValue()) {
+						equalCells = true;
+					}
+					break;
+				case HSSFCell.CELL_TYPE_STRING:
+					if (Testdata_cell.getStringCellValue().equals(Actual_cell.getStringCellValue())) {
+						equalCells = true;
+					}
+					break;
+				case HSSFCell.CELL_TYPE_BLANK:
+					if (Actual_cell.getCellType() == HSSFCell.CELL_TYPE_BLANK) {
+						equalCells = true;
+					}
+					break;
+				case HSSFCell.CELL_TYPE_BOOLEAN:
+					if (Testdata_cell.getBooleanCellValue() == Actual_cell.getBooleanCellValue()) {
+						equalCells = true;
+					}
+					break;
+				case HSSFCell.CELL_TYPE_ERROR:
+					if (Testdata_cell.getErrorCellValue() == Actual_cell.getErrorCellValue()) {
+						equalCells = true;
+					}
+					break;
+				default:
+					if (Testdata_cell.getStringCellValue().equals(Actual_cell.getStringCellValue())) {
+						equalCells = true;
+					}
+					break;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+		return equalCells;
 	}
-	
+
 	public static boolean CompareComments(XSSFRow Testdatarows, XSSFRow Actualdatarows) {
-		if((Testdatarows == null) && (Actualdatarows == null)) {
-	        return true;
-	    } else if((Testdatarows == null) || (Actualdatarows == null)) {
-	        return false;
-	    } 
+		if ((Testdatarows == null) && (Actualdatarows == null)) {
+			return true;
+		} else if ((Testdatarows == null) || (Actualdatarows == null)) {
+			return false;
+		}
 		boolean equallinks = true;
 		int firstcommentCell = Testdatarows.getFirstCellNum();
-	    int lastcommentCell = Testdatarows.getLastCellNum();
-		for(int i=firstcommentCell; i < lastcommentCell; i++) {
+		int lastcommentCell = Testdatarows.getLastCellNum();
+		for (int i = firstcommentCell; i < lastcommentCell; i++) {
 			XSSFCell Testdatacommentcell = Testdatarows.getCell(i);
 			XSSFCell Actualdatacommentcell = Actualdatarows.getCell(i);
 			XSSFComment Testdatacomment = Testdatacommentcell.getCellComment();
 			XSSFComment Actualdatacomment = Actualdatacommentcell.getCellComment();
-		    if(Testdatacomment != null && Actualdatacomment != null) {
-		    assertNotEquals(Testdatacomment.getString(), Actualdatacomment.getString());
-		    } 
-	  }
-	  return equallinks;
+			if (Testdatacomment != null && Actualdatacomment != null) {
+				assertNotEquals(Testdatacomment.getString(), Actualdatacomment.getString());
+			}
+		}
+		return equallinks;
+	}
 }
-}
-

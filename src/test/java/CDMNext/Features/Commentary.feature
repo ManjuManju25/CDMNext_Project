@@ -5,6 +5,7 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_01:Verify 'Insert Commentary' under View tab
+  	And Check for prerequesties
     And Go to View tab
     And Click on "Insert Commentary"
     Then Commentary should be inserted
@@ -319,22 +320,22 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_46:Validate copied visual by pasting to excel
-   	And Add some text in the description field
-   	And  Click on Copy icon
-   	Then Paste in Excel and the text should be pasted to excel
-  
+    And Add some text in the description field
+    And Click on Copy icon
+    Then Paste in Excel and the text should be pasted to excel
+
   @Commentary
   Scenario: TC_Commentary_47:Validate copied visual by pasting to word
-   	And Add some text in the description field
-   	And  Click on Copy icon
-   	Then Paste in word and the text should be pasted in word file
-  
+    And Add some text in the description field
+    And Click on Copy icon
+    Then Paste in word and the text should be pasted in word file
+
   @Commentary
   Scenario: TC_Commentary_48:Validate copied visual by pasting to power point
-   	And Add some text in the description field
-   	And  Click on Copy icon
-   	Then Paste in ppt and the text should be pasted PPT
-  
+    And Add some text in the description field
+    And Click on Copy icon
+    Then Paste in ppt and the text should be pasted PPT
+
   @Commentary
   Scenario: TC_Commentary_49:Verify Download option
     And Add some text in the description field
@@ -356,7 +357,7 @@ Feature: Verifying Commentary Visual functionality
     And Select "png" format
     And Click on "Download"
     Then Commentary should be downloaded in "PNG" format
-  
+
   @Commentary
   Scenario: TC_Commentary_52:Verify 'Add to insight' option
     And Add some text in the description field

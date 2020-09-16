@@ -2827,8 +2827,10 @@ public class DatabasesTab {
 		login.Log4j.info(CommonFunctionality.sname);
 //		WebElement dest = login.driver
 //				.findElement(By.xpath("//*[@class='empty-visual-overlay--icon-block']"));
-		WebElement dest = CommonFunctionality.getElementByXpath(login.driver,"//*[text()='Drag series here' and @class='empty-visual-overlay--text']",8);
-		new Actions(login.driver).dragAndDrop(ele, dest).pause(2000).release().perform();
+		//WebElement dest = CommonFunctionality.getElementByXpath(login.driver,"//*[text()='Drag series here' and @class='empty-visual-overlay--text']",20);
+		WebElement dest = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='empty-visual-overlay--content']",20);
+//		new Actions(login.driver).dragAndDrop(ele, dest).perform();
+		new Actions(login.driver).moveToElement(ele).pause(500).dragAndDrop(ele, dest).build().perform();
 	}
 
 	@Then("^The series should be added to the visual$")
