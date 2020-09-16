@@ -5,6 +5,7 @@ Feature: Verifying sprint cases functionality
 
   @Sprint
   Scenario: TC_12744_01: Clear All filters button to clear all filters set
+  	And Check for prerequesties
     And User enters keyword "Banglore"
     And Click on "More" filter
     And User selects "Date" as "Last observation after"
@@ -33,7 +34,7 @@ Feature: Verifying sprint cases functionality
     Then For search results less than 100, the system will display all the tables and on the first table – down to series level
 
   @Sprint
-  Scenario: TC_13722_05: 
+  Scenario: TC_13722_05:
     And User enters "94277107;96334807"
     And Select "Matches only" filter
     Then For search results less than 10, the system will expand all the levels
@@ -135,8 +136,8 @@ Feature: Verifying sprint cases functionality
     And Uncheck the "Legend" option
     And Create a new template and "Template popup"
     Then The new template should be created
-    
-    @Sprint
+
+  @Sprint
   Scenario: TC_14218_18:Add a possibility to copy a view from new insight
     And User enters "212298602"
     And Create visual
@@ -144,8 +145,6 @@ Feature: Verifying sprint cases functionality
     And Create new insight
     And Paste in the View section for new insight
     Then The copied View and its contents should be pasted in other/new insight
-    
-
   #@Sprint11
   #Scenario: flex details
     #And Enter "366672387"
