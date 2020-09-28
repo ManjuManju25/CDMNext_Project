@@ -2866,7 +2866,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		Thread.sleep(2000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
 		Thread.sleep(2000);
-	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function"))).click();
+	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_functionWithoutseriesid"))).click();
 	   Thread.sleep(1000);
 	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_link"))).click();
 	   Assert.assertTrue(
@@ -2884,7 +2884,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		Thread.sleep(2000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
 		Thread.sleep(2000);
-	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function"))).click();
+	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_functionWithoutseriesid"))).click();
 	   Thread.sleep(1000);
 	   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_link"))).click();
 	   Thread.sleep(1000);
@@ -3055,7 +3055,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
 		 Thread.sleep(2000);
 		   Actions action = new Actions(login.driver);
-			WebElement we = login.driver.findElement(By.xpath("//div[@class='series-name--title']"));
+			WebElement we = login.driver.findElement(By.xpath("(//div[@class='series-name--icon'])[1]"));
 			action.moveToElement(we).pause(5000).build().perform();
 			Thread.sleep(2000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_icon_rename"))).click();
@@ -3077,7 +3077,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
 		 Thread.sleep(2000);
 		   Actions action = new Actions(login.driver);
-			WebElement we = login.driver.findElement(By.xpath("//div[@class='series-name--title']"));
+			WebElement we = login.driver.findElement(By.xpath("(//div[@class='series-name--icon'])[1]"));
 			action.moveToElement(we).pause(5000).build().perform();
 			Thread.sleep(2000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_icon_setting"))).click();
@@ -3099,7 +3099,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
 		 Thread.sleep(2000);
 		   Actions action = new Actions(login.driver);
-			WebElement we = login.driver.findElement(By.xpath("//div[@class='series-name--title']"));
+			WebElement we = login.driver.findElement(By.xpath("(//div[@class='series-name--icon'])[1]"));
 			action.moveToElement(we).pause(5000).build().perform();
 			Thread.sleep(2000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_icon_setting"))).click();
@@ -3133,7 +3133,11 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				 Actions action1 = new Actions(login.driver);
 					WebElement we1 = login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu edit-series--context-menu']//following ::div[3]/li[3]"));
 					action1.moveToElement(we1).pause(5000).build().perform();
-					 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_icon_setting_dropdown_frequency_SUM"))).click();
+					Thread.sleep(1000);
+					Actions action2 = new Actions(login.driver);
+					WebElement we2 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_icon_setting_dropdown_frequency_SUM")));
+					action2.moveToElement(we2).click().build().perform();
+					 //login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_icon_setting_dropdown_frequency_SUM"))).click();
 					 Thread.sleep(2000);
 					 String y=  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Sname_EditSeries"))).getText();
 					  System.out.println("Verified" + x+y );

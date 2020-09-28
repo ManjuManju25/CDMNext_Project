@@ -1,27 +1,22 @@
+Feature: Verifying Sprintcases
 
-Feature: Verifying Cvision Functionality
-
-Background:
-   Given User has successful logged in
+#Background:
+   #Given User has successful logged in
    
 @SprintCases
 Scenario: TC_Cvision_15211_01: Verify the quick functions in All functions popup
-   And Check for keeping_insight popup
-   And Login as current execution login by taking username rowcount as 3 and cellcount as 0 and for password rowcount as 3 and cellcount as 1
-   And Check for keeping_insight popup
-   And Resetting the filters
    And Add to myseries
    And Select a series on right
    And Click on functions wizard from right panel series
    And Check for the function buttons
    Then Accumulate-QTD, YTD;Calculate change- YOY,%YOY,POP,%POP;Currency - USD, RMB, GBP, JPY, RUB, MYR, EUR;Aggregate - Sum, Avg & frequency dropdown
    
-@Cvision12345
-Scenario: TC_Cvision_15211_02: Check for the tooltips of quick functions in 'All functions' popup
-   And Add few series to myseries
-   And Select a series on right
-   And Click on functions wizard from right panel series
-   And Highlight the functions and check for the tooltips
+#@Cvision12345
+#Scenario: TC_Cvision_15211_02: Check for the tooltips of quick functions in 'All functions' popup
+   #And Add few series to myseries
+   #And Select a series on right
+   #And Click on functions wizard from right panel series
+   #And Highlight the functions and check for the tooltips
    #Then Tooltips should display for each functions methods
    
 @SprintCases
@@ -124,7 +119,6 @@ Scenario: TC_Cvision_15402_01: Check if the axis date format - Automatic is appl
    
 @SprintCases
 Scenario: TC_Cvision_15402_02: Check if the axis date format - Custom is applied
-   And Resetting the filters
    And Search for the series with SID "385345667"
    And Open a "Chart" visual
    And Click on "Edit" visual 
@@ -142,7 +136,6 @@ Scenario: TC_Cvision_15335: Check for possibility to hover over smart series too
    
 @SprintCases
 Scenario: TC_Cvision_15662_01: Verify date picker in timeframe for yearly frequency
-   And Resetting the filters
    And User selects "Frequency" as "Yearly" 
    And User has selected "Yearly" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -153,7 +146,6 @@ Scenario: TC_Cvision_15662_01: Verify date picker in timeframe for yearly freque
    
 @SprintCases
 Scenario: TC_Cvision_15662_02: Verify date picker in timeframe for semi annual frequency
-   And Resetting the filters
    And User selects "Frequency" as "Semiannually" 
    And User has selected "Semiannually" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -164,7 +156,6 @@ Scenario: TC_Cvision_15662_02: Verify date picker in timeframe for semi annual f
   
 @SprintCases
 Scenario: TC_Cvision_15662_03: Verify date picker in timeframe for quarterly frequency
-   And Resetting the filters
    And User selects "Frequency" as "Quarterly" 
    And User has selected "Quarterly" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -175,7 +166,6 @@ Scenario: TC_Cvision_15662_03: Verify date picker in timeframe for quarterly fre
    
 @SprintCases
 Scenario: TC_Cvision_15662_04: Verify date picker in timeframe for monthly frequency
-   And Resetting the filters
    And User selects "Frequency" as "Monthly" 
    And User has selected "Monthly" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -186,7 +176,6 @@ Scenario: TC_Cvision_15662_04: Verify date picker in timeframe for monthly frequ
    
 @SprintCases
 Scenario: TC_Cvision_15662_05: Verify date picker in timeframe for weekly frequency
-   And Resetting the filters
    And User selects "Frequency" as "Weekly" 
    And User has selected "Weekly" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -197,7 +186,6 @@ Scenario: TC_Cvision_15662_05: Verify date picker in timeframe for weekly freque
    
 @SprintCases
 Scenario: TC_Cvision_15662_06: Verify date picker in timeframe for daily frequency
-   And Resetting the filters
    And User selects "Frequency" as "Daily" 
    And User has selected "Daily" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -208,7 +196,6 @@ Scenario: TC_Cvision_15662_06: Verify date picker in timeframe for daily frequen
    
 @SprintCases
 Scenario: TC_Cvision_15662_07: Verify date picker in timeframe for mixed frequencies - daily, quaterly, yearly
-   And Resetting the filters
    And User selects "Frequency" as "Daily;Quarterly;Yearly" 
    And User has selected "Daily;Quarterly;Yearly" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -219,7 +206,6 @@ Scenario: TC_Cvision_15662_07: Verify date picker in timeframe for mixed frequen
    
 @SprintCases
 Scenario: TC_Cvision_15662_08: Verify date picker in timeframe for mixed frequencies - monthly, yearly
-   And Resetting the filters
    And User selects "Frequency" as "Monthly;Yearly" 
    And User has selected "Monthly;Yearly" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -230,8 +216,6 @@ Scenario: TC_Cvision_15662_08: Verify date picker in timeframe for mixed frequen
    
 @SprintCases
 Scenario: TC_Cvision_15242_02: Verify stroke option for non-line charts
-   And Resetting the filters
-   #And Close the filter button
    And Search for the series "360937287"
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
@@ -241,7 +225,6 @@ Scenario: TC_Cvision_15242_02: Verify stroke option for non-line charts
    
 @SprintCases
 Scenario: TC_Cvision_15242_03: Verify move to right for per-series
-   #And Resetting the filters
    And Search for the series with SID "Registered unemployment Rate" 
    And Select 2 series and click on "Chart" option
    And Click on "Edit" visual
@@ -279,7 +262,6 @@ Scenario: TC_Cvision_15262_02: Check if the Chart within option is synced with z
 
 @SprintCases
 Scenario: TC_Cvision_16457: Validate the message for comaprables when no indicators available for specific countries
-   And Resetting the filters
    And Goto comparables search tab
    And User selects "Region" as "Albania;Finland;Portugal" 
    And User has clicked on "Apply filter"
@@ -288,13 +270,11 @@ Scenario: TC_Cvision_16457: Validate the message for comaprables when no indicat
    
 @SprintCases
 Scenario: TC_Cvision_16312_01: Check if comparables tab is default
-   And Resetting the filters
    And Check if comparables tab is displayed by default
    Then Tab should display without being hidden
    
 @SprintCases
 Scenario: TC_Cvision_16312_02: Check the tooltip for table-level comparables hover
-   And Resetting the filters 
    And Click on closing active comparatable icon and "Databases" tab
    And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual" 
    And Hover on icon 
@@ -302,10 +282,8 @@ Scenario: TC_Cvision_16312_02: Check the tooltip for table-level comparables hov
       
 @SprintCases
 Scenario: TC_Cvision_16312_03: Check the tooltip for series-level comparables hover
-   And Resetting the filters
    And Click on closing active comparatable icon and "Databases" tab
    And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual" 
-   #And Hover on icon
    Then Tooltip as "View series cross country" should display for series
    
 @SprintCases
@@ -332,7 +310,6 @@ Scenario: TC_Cvision_16312_06: Verify for default tree when clicked on cross ico
    
 @SprintCases
 Scenario: TC_Cvision_16312_07: Verify region filter selection
-   And Resetting the filters
    And Click on closing active comparatable icon and "Databases" tab 
    And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual" 
    And Click on series level
@@ -344,7 +321,6 @@ Scenario: TC_Cvision_16312_07: Verify region filter selection
    
 @SprintCases
 Scenario: TC_Cvision_16312_08: Verify 'All countries' display in comparables tab
-   And Resetting the filters
    And Click on closing active comparatable icon and "Databases" tab
    And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual" 
    And Click on series level
@@ -355,8 +331,6 @@ Scenario: TC_Cvision_16312_08: Verify 'All countries' display in comparables tab
    
 @SprintCases
 Scenario: TC_Cvision_16312_09: Verify default results sorting
-   #And Check for keeping_insight popup
-   And Resetting the filters
    And Click on closing active comparatable icon and "Databases" tab
    And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual" 
    And Click on series level
@@ -364,7 +338,6 @@ Scenario: TC_Cvision_16312_09: Verify default results sorting
    
 @SprintCases
 Scenario: TC_Cvision_16312_10: Verify expanded state of icon
-   And Check for keeping_insight popup
    And Click on closing active comparatable icon and "Databases" tab
    And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual" 
    And Click on table level
@@ -396,7 +369,6 @@ Scenario: TC_Cvision_16312_13: Verify unselected state of series
    
 @SprintCases
 Scenario: TC_Cvision_16312_14: Verify label in the filter
-   And Resetting the filters
    And Click on closing active comparatable icon and "Databases" tab
    And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual" 
    And Click on table level
@@ -409,8 +381,6 @@ Scenario: TC_Cvision_16312_15: Verify the sources for comparables tab
    And Select all series from the table
    And Also Expand "Table AF.World Bank.WDI: Agricultural Production and Consumption" 
    And Select all series from the table2
-   #And Then Expand "Table AF.World Bank.WDI: Land Use, Protected Areas and National Wealth" 
-   #And Select all series from the table3
    
 @SprintCases
 Scenario: TC_Cvision_13924_1: Verify cogwheel icon for series
@@ -458,8 +428,6 @@ Scenario: TC_Cvision_16392: Verify the text for not found FN
    
 @SprintCases
 Scenario: TC_Cvision_14635: Trend method should be default selection in Function Toolbar
-   And Resetting the filters
-   And Refresh page
    And Add few series to myseries
    And Select a series on right
    And click on 'fx' to open 'All functions' popup
@@ -544,7 +512,6 @@ Scenario: TC_Cvision_15497_01: Verify if manage all option is hidden if there is
    
 @SprintCases
 Scenario: TC_Cvision_15497_03: Verify if manage all option is hidden if there is only 1 series for forecast
-   #And Refreshing the page
    And Add few series to myseries
    And Search for the series with SID "32189801"
    And Add few series to myseries
@@ -554,7 +521,6 @@ Scenario: TC_Cvision_15497_03: Verify if manage all option is hidden if there is
    
 @SprintCases
 Scenario: TC_Cvision_15497_04: Verify if manage all option is hidden if there is only 1 dependency series
-   #And Refreshing the page
    And Add few series to myseries
    And Search for the series with SID "389705827"
    And Add few series to myseries
@@ -564,7 +530,6 @@ Scenario: TC_Cvision_15497_04: Verify if manage all option is hidden if there is
    
 @SprintCases
 Scenario: TC_Cvision_15909_01: Verify if preserve formula is hidden for series not applied with function
-   #And Refreshing the page
    And Add few series to myseries
    And Search for the series with SID "253736802"
    And Add few series to myseries
@@ -574,7 +539,6 @@ Scenario: TC_Cvision_15909_01: Verify if preserve formula is hidden for series n
    
 @SprintCases
 Scenario: TC_Cvision_15909_02: Verify if preserve formula is hidden for series not applied with function
-   #And Refreshing the page
    And Add few series to myseries
    And Search for the series with SID "32189801"
    And Add few series to myseries
@@ -584,7 +548,6 @@ Scenario: TC_Cvision_15909_02: Verify if preserve formula is hidden for series n
    
 @SprintCases
 Scenario: TC_Cvision_15909_03: Verify if preserve names is hidden for series not available with differently named dependency series
-   #And Refreshing the page
    And Add few series to myseries
    And Search for the series with SID "389705827"
    And Add few series to myseries
@@ -634,8 +597,6 @@ Scenario: TC_Cvision_15749: Verify title bar actions for breakdown series
   
 @SprintCases
 Scenario: TC_Cvision_7067_01: Verify if series name are same, then country name is displayed as series name in chart
-   And Check for keeping_insight popup
-   And Refresh page
    And Search for the series with SID "Registered unemployment Rate"
    And Select 2 series and click on "Chart" option
    Then Country names should be series names
@@ -696,14 +657,11 @@ Scenario: TC_Cvision_16499_03: Verify if tables have negative timepoint indicate
    And  Click on more actions to create "View as Table"  
    And Check for the font color of negative timepoints in table
    Then Negative timepoints should be in red color
-   And Login back to default execution login
    
    # ---------------------------------------------------- CDMNext sprint cases 3.1 and above -----------------------------------------
    
 @CDMNextsprintcases3.1
 Scenario: TC_15341_01: Verify selecting attributes under attributes popup
-   And Check for keeping_insight popup
-   And Resetting the filters
    And Select few series
    And  Click on more actions to create "View as Table" 
    And Check the count of attributes in table
@@ -763,7 +721,6 @@ Scenario: TC_14142_01: Verify downloading CNA packages
    
 @CDMNextsprintcases3.1
 Scenario: TC_14668_01: Verify zebra selection under Edit table
-   And Resetting the filters
    And Select few series
    And  Click on more actions to create "View as Table"
    And Click on "Edit Table" visual
@@ -773,7 +730,6 @@ Scenario: TC_14668_01: Verify zebra selection under Edit table
 #TC_14172_01 and TC_14172_03
 @CDMNextsprintcases3.1
 Scenario: TC_14172_01: Verify click on '+' icon and save option to save a custome style
-   And Resetting the filters
    And Select few series
    And  Click on more actions to create "View as Table"
    And Click on "Edit Table" visual
@@ -832,7 +788,7 @@ Scenario: TC_13924_03: Cogwheel - Verify Frequency
    And Click on "Edit Table" visual
    And Check the legend icon at visual and edit visual
    And Click "Frequency" text from cogwheel
-   And Click "Yearly (Sum)" from the drop down
+   And Click "Monthly (Distribute)" from the drop down
    Then The selected "Frequency" is applied to the table
    
 @CDMNextsprintcases3.1
@@ -893,13 +849,11 @@ Scenario: TC_15656_02: Verify Histogram methodology in Insight view mode
    And Choose "View as ..." > "Histogram" 
    And Click "File" > "View" 
    And Click the new insight option
-   #And Click on the insight point
    And Mouse over to "help-button" from insights
    Then Histogram methodology info should be displayed in tooltip
    
 @CDMNextsprintcases3.1
 Scenario: TC_13671_01: Verify tooltip for 'Contents' icon on footnotes
-   And Refreshing the page
    And Click "Help" > "Footnotes" 
    And Collapse the footnotes
    And Hover on to the "Open Contents" 
@@ -951,13 +905,11 @@ Scenario: TC_15328_01: Verify loader for PDF viewer
        
 @CDMNextsprintcases3.1
 Scenario: TC_15336_01: Verify mouse hover tooltip when only move the mouse on series name
-   And Refreshing the page
    And Select "Series" tab in header
    Then Tooltip only displayed when hover the mouse on series name
    
 @CDMNextsprintcases3.1
 Scenario: TC_14781_01: Verify creating non data visuals with series
-   #And Refresh page
    And Select few series
    And Click to create an empty visual
    And Click "Insert Image" option from empty list
@@ -967,7 +919,6 @@ Scenario: TC_14781_01: Verify creating non data visuals with series
    
 @CDMNextsprintcases3.1
 Scenario: TC-15107_01: Verify search with old city name and updated city name.
-   And Check for keeping_insight popup
    And Search for the series with SID "Bengaluru" 
    And Getting the text of first search keyword
    And Search for the series with SID "Bangalore" 
@@ -1017,9 +968,7 @@ Scenario: TC_16428_02: Verify Notification tab
    
 @Preferences
 Scenario: TC_16310_01: Verify user name on preference dropdown
-   And Check for keeping_insight popup
-   And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
-   And Check for keeping_insight popup
+   #And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
    And Open preference dropdown
    And Click on "profile-menu--edit-icon" from preferences
    And Choose "Prefix" , "First Name" , "Last Name" from preferences
@@ -1278,7 +1227,6 @@ Scenario: TC_16310_30: Verify saving with empty date format
    And Click "Custom" format date option
    And Enter "Empty" custom date
    Then  "Custom date pattern cannot be empty" message should display in "Red" color
-   #And Click "Auto" format date option
    And Open preference dropdown
    
 @Preferences
@@ -1355,7 +1303,6 @@ Scenario: TC_16310_35: Preferences - Verify 'Ask me to confirm the download sett
    
 @Preferences
 Scenario: TC_16310_36: Preferences - Verify the case for Download window appered even download settings unchecked
-   #And Check for keeping_insight popup
    And Open preference dropdown
    And Clicking on "Ask me to confirm the download settings" option under user preference to be "Uncheck" 
    And Open preference dropdown
@@ -1636,5 +1583,4 @@ Scenario: TC_16310_70: Verify closing of Preference dropdown
 Scenario: TC_16310_71: Preference - Verify Sign out option
    And Open preference dropdown
    And Click on "Sign out" from the application
-   #Then The application should be logged out
-   And Login back to default execution login
+   Then The application should be logged out

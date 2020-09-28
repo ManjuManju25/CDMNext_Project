@@ -1,16 +1,10 @@
 Feature: Verifying SSP window Functionality
 
-Background:
-   Given User has successful logged in
-   And Refresh page
+#Background:
+   #Given User has successful logged in
    
 @SSPWindow
 Scenario: TC_SSP_01: Try to open SSP window from myseries
-   #And Refreshing the page
-   #And Check for keeping_insight popup
-   #And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
-   #And Check for keeping_insight popup
-   And Resetting the filters
    And Open preference dropdown
    And Clicking on "Date format" option in preference
    And Click "Custom" format date option
@@ -172,39 +166,35 @@ Scenario: TC_SSP_24: Verify Mnemonic hyperlink in SSP window
    
 @SSPWindow
 Scenario: TC_SSP_25: Verify blue color for udpated timepoint
-   #And Refreshing the page
    And Open SSP for the series "5724301"
    Then Recently updated timepoints within 30 days should highlight in blue color
    
 @SSPWindow
 Scenario: TC_SSP_26: Verify orange color for forecast timepoint
-   #And Refreshing the page
-   And Open SSP for the series " 72903202"
+   And Open SSP for the series "72903202"
    Then Forecast timepoints should be highlighted in orange color
    
-@SSPWindow
-Scenario: TC_SSP_27: Verify indicator drop down
-   And Close the popup
-   And Add few series to myseries
-   And hightlight any one series and click on  "i" icon .
-   And Open SSP window
-   And clicking indicator drop down
-   Then Drop down should display indicators list and clicking on specific indicators should navigate to results page
+#@SSPWindow
+#Scenario: TC_SSP_27: Verify indicator drop down
+   #And Close the popup
+   #And Add few series to myseries
+   #And hightlight any one series and click on  "i" icon .
+   #And Open SSP window
+   #And clicking indicator drop down
+   #Then Drop down should display indicators list and clicking on specific indicators should navigate to results page
    
-@SSPWindow
-Scenario: TC_SSP_28: Verify indicator selection from drop down
-   And Close the popup
-   And Resetting the filters
-   And Add few series to myseries
-   And hightlight any one series and click on  "i" icon .
-   And Open SSP window
-   And clicking indicator drop down
-   Then Selecting indicator from indicator drop down should show search result in left for same indicator
+#@SSPWindow
+#Scenario: TC_SSP_28: Verify indicator selection from drop down
+   #And Close the popup
+   #And Resetting the filters
+   #And Add few series to myseries
+   #And hightlight any one series and click on  "i" icon .
+   #And Open SSP window
+   #And clicking indicator drop down
+   #Then Selecting indicator from indicator drop down should show search result in left for same indicator
    
 @SSPWindow
 Scenario: TC_SSP_29: Verify source link
-   And Close the popup
-   And Resetting the filters
    And Add few series to myseries
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -213,8 +203,6 @@ Scenario: TC_SSP_29: Verify source link
    
 @SSPWindow
 Scenario: TC_SSP_30: Verify display of remarks for a series in SSP
-   And Close the popup
-   And Resetting the filters
    And Search for the series "1053401" 
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -255,7 +243,6 @@ Scenario: TC_SSP_34: Verify chart tab
    
 @SSPWindow
 Scenario: TC_SSP_35: Verify zoom=1y
-   #And Refreshing the page
    And Add few series to myseries 
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -265,7 +252,6 @@ Scenario: TC_SSP_35: Verify zoom=1y
    
 @SSPWindow
 Scenario: TC_SSP_36: Verify zoom=3y
-   #And Refreshing the page
    And Add few series to myseries
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -275,7 +261,6 @@ Scenario: TC_SSP_36: Verify zoom=3y
  
 @SSPWindow
 Scenario: TC_SSP_37: Verify zoom=5y
-   #And Refreshing the page
    And Add few series to myseries
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -285,7 +270,6 @@ Scenario: TC_SSP_37: Verify zoom=5y
    
 @SSPWindow
 Scenario: TC_SSP_38: Verify zoom=All
-   #And Refreshing the page
    And Add few series to myseries
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -295,7 +279,6 @@ Scenario: TC_SSP_38: Verify zoom=All
      
 @SSPWindow
 Scenario: TC_SSP_39: Verify From and To dates
-   #And Refreshing the page
    And Search for the series "1053401" 
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -321,7 +304,6 @@ Scenario: TC_SSP_41: Verify default no of timepoints displayed in chart
    
 @SSPWindow
 Scenario: TC_SSP_42: Verify YTD,1Y,3Y,5Y,ALL options
-   #And Refreshing the page
    And Search for the series "210337202" 
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -331,7 +313,6 @@ Scenario: TC_SSP_42: Verify YTD,1Y,3Y,5Y,ALL options
    
 @SSPWindow
 Scenario: TC_SSP_43: Verify timeframe option for chart
-   #And Refreshing the page
    And Search for the series "1053401" 
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -358,8 +339,8 @@ Scenario: TC_SSP_45: Verify related data tab
    And Click on "Related Insights" tab
    And Check contents inside Related insight
    And Click on "Related Insights" tab
-   And Click on "Related Data" tab
-   Then Should display related keyword of that series and have "Datasets" and "Insights" details
+   #And Click on "Related Data" tab
+   #Then Should display related keyword of that series and have "Datasets" and "Insights" details
    
 @SSPWindow
 Scenario: TC_SSP_46: Click on each links under datasets and verify
@@ -368,9 +349,7 @@ Scenario: TC_SSP_46: Click on each links under datasets and verify
    And Open SSP window
    And Click on "Related Data" tab
    Then Click on first link available under "Datasets" and verify the changes
-   And Click on "Related Data" tab
-   Then Click on second link available under "Datasets" and verify the changes
-   
+      
 @SSPWindow
 Scenario: TC_SSP_47: Click on each links under insights and verify
    And Add few series to myseries
@@ -379,18 +358,12 @@ Scenario: TC_SSP_47: Click on each links under insights and verify
    And Click on "Related Insights" tab
    And Check the data available under "Insights" and it should open respective insights
    And Check the data of first insight
-   #And Add few series to myseries
-   #And hightlight any one series and click on  "i" icon .
-   #And Open SSP window
    And Click on "Related Insights" tab
    And Check the data available under "Insights" and it should open respective insights
    And Check the data of second insight
    
 @SSPWindow
 Scenario: TC_SSP_48: Check for adding suggested series from SSP window
-   #And Resetting the filters
-   And Close the replacement popup if appeared
-   And Remove series from myseries pane
    And Search for the series "253736802" 
    And hightlight any one series and click on  "i" icon .
    And click on "Manage" suggestions subscription link
@@ -399,8 +372,6 @@ Scenario: TC_SSP_48: Check for adding suggested series from SSP window
    
 @SSPWindow
 Scenario: TC_SSP_49: Check for adding suggested series from SSP window
-   #And Refreshing the page
-   And Close the replacement popup if appeared
    And Search for the series "253736802" 
    And hightlight any one series and click on  "i" icon .
    And click on "Manage" suggestions subscription link
@@ -409,8 +380,6 @@ Scenario: TC_SSP_49: Check for adding suggested series from SSP window
    
 @SSPWindow
 Scenario: TC_SSP_50: Verify the preview option for rebased series in SSP window
-   #And Refreshing the page
-   And Close the replacement popup if appeared
    And Search for the series "253736802" 
    And hightlight any one series and click on  "i" icon .
    And click on "Manage" suggestions subscription link
@@ -419,8 +388,6 @@ Scenario: TC_SSP_50: Verify the preview option for rebased series in SSP window
    
 @SSPWindow
 Scenario: TC_SSP_51: Verify click on the replacement suggestion series
-   #And Refreshing the page
-   And Close the replacement popup if appeared
    And Search for the series "1053401" 
    And hightlight any one series and click on  "i" icon .
    And click on "Manage" suggestions subscription link
@@ -429,8 +396,6 @@ Scenario: TC_SSP_51: Verify click on the replacement suggestion series
    
 @SSPWindow
 Scenario: TC_SSP_52: Verify click on the replacement suggestion series dropdown
-   #And Refreshing the page
-   And Close the replacement popup if appeared
    And Search for the series "1053401" 
    And hightlight any one series and click on  "i" icon .
    And click on "Manage" suggestions subscription link
@@ -438,7 +403,6 @@ Scenario: TC_SSP_52: Verify click on the replacement suggestion series dropdown
    
 @SSPWindow
 Scenario: TC_SSP_53: Verify SSP for calculated series
-   #And Refreshing the page
    And Search for the series "1053401" 
    And Select the series checkbox from myseries
    And Apply a function on any series in my series
@@ -447,7 +411,6 @@ Scenario: TC_SSP_53: Verify SSP for calculated series
    
 @SSPWindow
 Scenario: TC_SSP_54: Verify percentage change value
-   #And Refreshing the page
    And Search for the series "1053401" 
    And hightlight any one series and click on  "i" icon .
    And Open SSP window
@@ -456,8 +419,6 @@ Scenario: TC_SSP_54: Verify percentage change value
    
 @SSPWindow
 Scenario: TC_SSP_55: Verify manage suggestions from search pane
-   #And Refreshing the page
    And Search for the series "1053401" 
    And  hightlight any one series from search list and click on  "i" icon .
    Then Manage suggestions option is not present
-   #And Login back to default execution login

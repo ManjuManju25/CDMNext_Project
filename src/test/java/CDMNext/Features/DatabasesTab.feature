@@ -1,11 +1,11 @@
 Feature: Verifying Databases tab functionality
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @DB
   Scenario: TC_DB_01: Verify multiple databases selection
-    And Check for prerequesties
+    #And Check for prerequesties
     Given Click on More filter
     And Select database as "China Premium Database,Brazil Premium Database,Russia Premium Database"
     And User has clicked on "Apply filter"
@@ -66,6 +66,7 @@ Feature: Verifying Databases tab functionality
     And Click on x icon to remove DB
     Then Selected database shold be removed
 
+  #
   #
   #@DB
   #Scenario: TC_DB_10: Verify closing of insight explorer window
@@ -522,7 +523,7 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_71:Verify related insights
     And Select database as Daily Database
     And Expand till series level
-    #	And Click on Show related data icon
+    And Click on Show related data icon
     And Click on any insights under insights section
     Then Insights should be opened in preview mode
 
@@ -556,6 +557,7 @@ Feature: Verifying Databases tab functionality
     And Click on "View as Chart. Type `c`"
     Then Chart should be created with the series
 
+  #
   #@DB
   #Scenario: TC_DB_83: Verify the series selection in Database after creating visual
   #	And Mouse hover on any series level
@@ -730,8 +732,8 @@ Feature: Verifying Databases tab functionality
     And Mouse hover on any series level
     And Click on + icon
     Then Chart should be created with the series
-
   #	Then Chart should be created with selected seires
+  
   @DB
   Scenario: TC_DB_100:Verify Add option under add dropdown
     And Mouse hover on any series level
@@ -743,9 +745,9 @@ Feature: Verifying Databases tab functionality
     And Click on View tab on right side
     And Mouse hover on any series level
     And Select "Add" option
-    Then Chart should be created with the series
-
-  #	Then Chart should be created with selected seires
+   Then Chart should be created with the series
+ #	Then Chart should be created with selected seires
+ 
   @DB
   Scenario: TC_DB_102:Verify Add and Replace
     And Create a visual and select visual
@@ -793,6 +795,7 @@ Feature: Verifying Databases tab functionality
     And Click on "Apply"
     Then The series should be added to My series tab for selected insight
 
+  #
   ##@DB
   ##Scenario: TC_DB_115:Verify 'add to existing' insight
   ##	And  Select a series and Click on dropdown icon
@@ -832,140 +835,133 @@ Feature: Verifying Databases tab functionality
     And Drag and drop to any visual template
     Then Respective visual should be created as per the series drop
 
-  @DB1
-  Scenario: TC_DB_111:Verify drag and drop series to visual
-    And Create a visual with series/empty
-    #And Select a series
-    And Drag and drop on visual
-    Then The series should be added to the visual
-
   @DB
-  Scenario: TC_DB_112:Verify adding series by keyboard shortcut
+  Scenario: TC_DB_111:Verify adding series by keyboard shortcut
     And Select a series
     And Click on 'A' on keyboard
     Then The series should be added to my series
 
   @DB
-  Scenario: TC_DB_113:Verify adding series by double click on series
+  Scenario: TC_DB_112:Verify adding series by double click on series
     And Select some series
     And Just double click on series
     Then The selected series should be added to My series/visuals
 
   @DB
-  Scenario: TC_DB_114:Verify adding series to my series with expanded search panel
+  Scenario: TC_DB_113:Verify adding series to my series with expanded search panel
     And Expand search panel
     And Select series in any database
     And Click on My series
     Then The selected series should be added to My series/visuals
 
   @DB
-  Scenario: TC_DB_115:Verify creating visuals with selected series from expanded search panel
+  Scenario: TC_DB_114:Verify creating visuals with selected series from expanded search panel
     And Expand search panel
     And Select series in any database
     And Click on any visual type
     Then The selected series should be added to visuals
 
   @DB
-  Scenario: TC_DB_116:Right click - Verify Unselect all
+  Scenario: TC_DB_115:Right click - Verify Unselect all
     And Right click on any series level of data
     And Select "Unselect all"
     Then The selected series should be unselected
 
   @DB
-  Scenario: TC_DB_117:Right click - Verify "View as Chart" for series level
+  Scenario: TC_DB_116:Right click - Verify "View as Chart" for series level
     And Right click on any series level of data
     And Select "View as Chart"
     Then Visual should be created with "Edit Chart"
 
   @DB
-  Scenario: TC_DB_118:Right click - Verify "View as Map" for series level
+  Scenario: TC_DB_117:Right click - Verify "View as Map" for series level
     And Right click on any series level of data
     And Select "View as Map" as "World"
     Then Visual should be created with "Edit Map"
 
   @DB
-  Scenario: TC_DB_119:Right click - Verify "View as Table" for series level
+  Scenario: TC_DB_118:Right click - Verify "View as Table" for series level
     And Right click on any series level of data
     And Select "View as Table"
     Then Visual should be created with "Edit Table"
 
   @DB
-  Scenario: TC_DB_120:Right click - Verify "View as Pie" for series level
+  Scenario: TC_DB_119:Right click - Verify "View as Pie" for series level
     And Right click on any series level of data
     And Select "Pie"
     Then Visual should be created with "Edit Pie"
 
   @DB
-  Scenario: TC_DB_121:Right click - Verify "View as Heat map" for series level
+  Scenario: TC_DB_120:Right click - Verify "View as Heat map" for series level
     And Right click on any series level of data
     And Select "Heat map"
     Then Visual should be created with "Edit Heat map"
 
   @DB
-  Scenario: TC_DB_122:Right click - Verify "View as Histogram" for series level
+  Scenario: TC_DB_121:Right click - Verify "View as Histogram" for series level
     And Right click on any series level of data
     And Select "Histogram"
     Then Visual should be created with "Edit Histogram"
 
   @DB
-  Scenario: TC_DB_123:Right click - Verify creating visual with more than max seires selection
+  Scenario: TC_DB_122:Right click - Verify creating visual with more than max seires selection
     And Right click on any series level and select more than max series
     And Select "View as Chart"
     Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
     Then "Chart" visual should be created with max series
 
   @DB
-  Scenario: TC_DB_124:Right click - Verify download option for series
+  Scenario: TC_DB_123:Right click - Verify download option for series
     And Right click on any series level of data
     And Select "Download"
     Then Download window should be appeared with selected series count
 
   @DB
-  Scenario: TC_DB_125:Right click - Verify 'Copy' for series level
+  Scenario: TC_DB_124:Right click - Verify 'Copy' for series level
     And Right click on any series level of data
     And Select "Copy"
     Then Selected series should be copied
 
   @DB
-  Scenario: TC_DB_126:Right click - Verify pasting the copied series
+  Scenario: TC_DB_125:Right click - Verify pasting the copied series
     And Right click on any series level of data
     And Select "Copy"
     And Paste in application
     Then Copied series should be pasted to my series tab
 
   @DB
-  Scenario: TC_DB_127:Right click - Verify the confirmation message
+  Scenario: TC_DB_126:Right click - Verify the confirmation message
     And Right click on any series level of data
     And Select "Copy"
     Then The message should be in growl popup as "Selected series copied."
 
   @DB
-  Scenario: TC_DB_128:Right click - Verify copy data for series
+  Scenario: TC_DB_127:Right click - Verify copy data for series
     And Right click on any series level of data
     And Select "Copy data"
     Then The download popup should be opened
 
   @DB
-  Scenario: TC_DB_129:Right click - Verify Copy links for a series
+  Scenario: TC_DB_128:Right click - Verify Copy links for a series
     And Right click on any series
     And Select "Copy link(s)"
     Then URL should be generated for selected series
 
   @DB
-  Scenario: TC_DB_130:Right click - Validate copied URL
+  Scenario: TC_DB_129:Right click - Validate copied URL
     And Right click on any of the series
     And Select "Copy link(s)"
     When Paste it in new tab
     Then The Series information popup should be opened in untitled insight for selected series
 
   @DB
-  Scenario: TC_DB_131:Right click - Verify Copy links for multiple series
+  Scenario: TC_DB_130:Right click - Verify Copy links for multiple series
     And Right click on any series level of data
     And Select "Copy link(s)"
     Then URL should be generated for selected series
 
   @DB
-  Scenario: TC_DB_132:Right click - Validate copied URL for multiple series
+  Scenario: TC_DB_131:Right click - Validate copied URL for multiple series
     And Create a "New" insight
     And Right click on any series level of data
     And Select "Copy link(s)"
@@ -973,62 +969,62 @@ Feature: Verifying Databases tab functionality
     Then The SSP window should be opened
 
   @DB
-  Scenario: TC_DB_133:Right click - Verify 'Series info' option for series
+  Scenario: TC_DB_132:Right click - Verify 'Series info' option for series
     And Right click on any series
     And Select "Series Info"
     Then The SSP window should be opened
 
   @DB
-  Scenario: TC_DB_134:Right click - Verify 'Footnotes' option for series
+  Scenario: TC_DB_133:Right click - Verify 'Footnotes' option for series
     And Right click on any series
     And Select "Footnotes"
     Then Footnotes should be opened for related "series"
 
   @DB
-  Scenario: TC_DB_135:Right click - Verify back button
+  Scenario: TC_DB_134:Right click - Verify back button
     And Right click on any series
     And Select "Show Dataset"
     And Click on Back button
     Then Should redirect to database tab
 
   @DB
-  Scenario: TC_DB_136:Verify adding separators with series
+  Scenario: TC_DB_135:Verify adding separators with series
     And Select series with separators
     And Add to my series
     Then Selected series and separators should be added to my series
 
   @DB
-  Scenario: TC_DB_137:Verify series order when table data added
+  Scenario: TC_DB_136:Verify series order when table data added
     And Select a table and add to my series
     Then The series in the table should be ordered as in the table in search panel
 
   @DB
-  Scenario: TC_DB_138:Verify selected 'series count' under DB tab
+  Scenario: TC_DB_137:Verify selected 'series count' under DB tab
     And Select some series
     Then Selected series count should be shown correctly
 
   @DB
-  Scenario: TC_DB_139:Verify 'Search selection'
+  Scenario: TC_DB_138:Verify 'Search selection'
     And Select some series from series level
     And Click on selected series count
     Then "Search Selection" panel should be opened
 
   @DB
-  Scenario: TC_DB_140:Series selection - Verify 'SSP' in series selection
+  Scenario: TC_DB_139:Series selection - Verify 'SSP' in series selection
     And Select some series from series level
     And Click on selected series count
     And Click on series
     Then SSP window should be opened
 
   @DB
-  Scenario: TC_DB_141:Series selection - Verify 'SSP' in series selection
+  Scenario: TC_DB_140:Series selection - Verify 'SSP' in series selection
     And Select some series from series level
     And Click on selected series count
     #	And Observe the series count in Series Selection window
     Then Series count should be match with available series in Series Selection window
 
   @DB
-  Scenario: TC_DB_142:Series selection - Verify add series to My series tab from search selection
+  Scenario: TC_DB_141:Series selection - Verify add series to My series tab from search selection
     And Select some series from series level
     And Click on selected series count
     #	And Observe the series count in Series Selection window
@@ -1037,7 +1033,7 @@ Feature: Verifying Databases tab functionality
     Then The series should add to My series panel
 
   @DB
-  Scenario: TC_DB_143:Series selection - Add series to My Series tab by using + icon on series selection header
+  Scenario: TC_DB_142:Series selection - Add series to My Series tab by using + icon on series selection header
     And Select some series from series level
     And Click on selected series count
     #	And Observe the series count in Series Selection window
@@ -1046,7 +1042,7 @@ Feature: Verifying Databases tab functionality
     Then The series should be added to My series panel
 
   @DB
-  Scenario: TC_DB_144:Series selection - Verify 'add' series from dropdown
+  Scenario: TC_DB_143:Series selection - Verify 'add' series from dropdown
     And Select some series from series level
     And Click on selected series count
     #	And Observe the series count in Series Selection window
@@ -1056,7 +1052,7 @@ Feature: Verifying Databases tab functionality
     Then The series should be added to My series panel
 
   @DB
-  Scenario: TC_DB_145:Series selection - Verify 'Add and replace' from dropdown
+  Scenario: TC_DB_144:Series selection - Verify 'Add and replace' from dropdown
     And Create a visual and select visual
     And Select any series
     And Click on selected series count
@@ -1074,52 +1070,53 @@ Feature: Verifying Databases tab functionality
   #	And Select any recent insight from the dropdown
   #And Click on "Apply"
   #	Then The series should be added to My series tab for selected insight
+  
   @DB
-  Scenario: TC_DB_146:Series selection - Verify 'Create new insight' in dropdown
+  Scenario: TC_DB_145:Series selection - Verify 'Create new insight' in dropdown
     And Select some series from series level
     And Click on selected series count
-    #	And Observe the series count in Series Selection window
+    #And Observe the series count in Series Selection window
     And Click on dropdown icon next to +
     And Click on "Add to new insight"
     Then New insight should be created with selected series in my series
 
   @DB
-  Scenario: TC_DB_147:Series selection - Verify chart option
+  Scenario: TC_DB_146:Series selection - Verify chart option
     And Select some series from series level
     And Click on selected series count
     And Click on "Create Chart" icon on header
     Then Visual should be created with "Edit Chart"
 
   @DB
-  Scenario: TC_DB_148:Series selection - Verify CTC
+  Scenario: TC_DB_147:Series selection - Verify CTC
     And Select some series from series level
     And Click on selected series count
     And Click on "Copy to Clipboard" icon on header
     Then Download window should be appeared with selected series count
 
   @DB
-  Scenario: TC_DB_149:Series selection - Verify Download
+  Scenario: TC_DB_148:Series selection - Verify Download
     And Select some series from series level
     And Click on selected series count
     And Click on "Download" icon on header
     Then Download window should be appeared with selected series count
 
   @DB
-  Scenario: TC_DB_150:Series selection - Verify minimize option
+  Scenario: TC_DB_149:Series selection - Verify minimize option
     And Select some series from series level
     And Click on selected series count
     And Click on "Minimize" icon on header
     Then The window should be "minimized"
 
   @DB
-  Scenario: TC_DB_151:Series selection - Verify maximize option
+  Scenario: TC_DB_150:Series selection - Verify maximize option
     And Select some series from series level
     And Click on selected series count
     And Click on "Maximize" icon on header
     Then The window should be "maximized"
 
   @DB
-  Scenario: TC_DB_152:Series selection - Verify exit full screen icon
+  Scenario: TC_DB_151:Series selection - Verify exit full screen icon
     And Select some series from series level
     And Click on selected series count
     And Click on "Maximize" icon on header
@@ -1127,32 +1124,32 @@ Feature: Verifying Databases tab functionality
     Then The popup should be displayed in normal size
 
   @DB
-  Scenario: TC_DB_153:Series selection - Verify series count after removed some series
+  Scenario: TC_DB_152:Series selection - Verify series count after removed some series
     And Select some series from series level
     And Click on selected series count
-    #	And Observe the series count in Series Selection window
+    #And Observe the series count in Series Selection window
     And Mouse hover on any series
     And Click on close icon
     Then Series count should be reduced as per the series deletion
 
   @DB
-  Scenario: TC_DB_154:Series selection - verify series remove icon
+  Scenario: TC_DB_153:Series selection - verify series remove icon
     And Select some series from series level
     And Click on selected series count
-    #	And Observe the series count in Series Selection window
+    #And Observe the series count in Series Selection window
     And Mouse hover on any series
     And Click on close icon
     Then The series should be removed from the popup
 
   @DB
-  Scenario: TC_DB_155:Series selection - Verify close button(x)
+  Scenario: TC_DB_154:Series selection - Verify close button(x)
     And Select some series from series level
     And Click on selected series count
     And Click on "Close" icon on header
     Then The window should be closed
 
   @DB
-  Scenario: TC_DB_156:Verify 'New' label for new series
+  Scenario: TC_DB_155:Verify 'New' label for new series
     And Click on "More" filter
     And User selects "New only"
     And User has clicked on "Apply filter"
@@ -1162,7 +1159,7 @@ Feature: Verifying Databases tab functionality
     Then "NEW" icon should be displayed for series
 
   @DB
-  Scenario: TC_DB_157:Verify 'K' icon for key series
+  Scenario: TC_DB_156:Verify 'K' icon for key series
     And Clear the applied filters
     And Click on "More" filter
     And User selects "Key only"
@@ -1172,7 +1169,7 @@ Feature: Verifying Databases tab functionality
     Then "k" icon should be displayed for series
 
   @DB
-  Scenario: TC_DB_158:Verify 'F' icon for key series
+  Scenario: TC_DB_157:Verify 'F' icon for key series
     And Clear the applied filters
     And Click on "More" filter
     And User selects "Forecast"
@@ -1182,7 +1179,7 @@ Feature: Verifying Databases tab functionality
     Then "f" icon should be displayed for series
 
   @DB
-  Scenario: TC_DB_159:Verify 'S' icon for with suggestions for rebased/discountinued series
+  Scenario: TC_DB_158:Verify 'S' icon for with suggestions for rebased/discountinued series
     And Clear the applied filters
     And Click on "More" filter
     And User selects "With suggestions for rebased/discontinued series"
@@ -1192,24 +1189,24 @@ Feature: Verifying Databases tab functionality
     Then "s" icon should be displayed for series
 
   @DB
-  Scenario: TC_DB_160:Verify Default tab for insight
+  Scenario: TC_DB_159:Verify Default tab for insight
     And Database tab should be loaded as default tab for the insight
 
   @DB
-  Scenario: TC_DB_161:Verify clicking on Database when view panel in full screen
+  Scenario: TC_DB_160:Verify clicking on Database when view panel in full screen
     And Make View pannel as fullscreen
     And Click on "Databases"
     Then Search panel should be exapanded and Databases tab should be loaded
 
   @DB
-  Scenario: TC_DB_162:Verifying clicking on series name
+  Scenario: TC_DB_161:Verifying clicking on series name
     And Select database as Daily Database
     And Expand till series level
     And Click on series name
     Then Series information popup should be opened
 
   @DB
-  Scenario: TC_DB_163:Series selection - Verify 'Add to recent insight' in dropdown
+  Scenario: TC_DB_162:Series selection - Verify 'Add to recent insight' in dropdown
     And Select any series
     And Click on selected series count
     And Click on dropdown icon next to +

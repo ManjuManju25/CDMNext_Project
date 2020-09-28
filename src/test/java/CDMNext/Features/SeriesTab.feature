@@ -1,17 +1,17 @@
 Feature: SeriesTab
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @SeriesTab
   Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
-    And Check for prerequesties
+    #And Check for prerequesties
     And Select indicator "Transport" as "Freight Traffic"
     And Select indicator "Tourism" as "Tourism Statistics"
     When Click on "Apply filter"
     Then Result should be displayed as per selection
 
-  ##@SeriesTab1
+  ##@SeriesTab
   ##Scenario: TC_SeriesTab_02:Verify "All Insights" option
   ##	When Click on "All insights"
   ##	Then The "Insight Explorer" popup should be appeared
@@ -341,18 +341,18 @@ Feature: SeriesTab
     Then Search results should include series only from world trend plus DB
 
   #
-  ##@SeriesTab1
+  ##@SeriesTab
   #Scenario: TC_SeriesTab_52:Verify click of open icon of 'All insights'
   ##	And   Open "Series" tab
   ##	And Click on open icon of All insight
   ##	Then  The "Insight Explorer" popup should be appeared
   ##
-  ##@SeriesTab1
+  ##@SeriesTab
   ##Scenario: TC_SeriesTab_53:Verify tabs to display
   ##	And  Click on cogwheel
   ##	Then  "Select tabs to display" popup should be display
   ##
-  ##@SeriesTab1
+  ##@SeriesTab
   ##Scenario: TC_SeriesTab_54:Verify hyperlink of matched insights
   ##	And Enter keyword "GDP"
   ##	And Click on x Matched Insights hyperlink
@@ -561,8 +561,7 @@ Feature: SeriesTab
     And User selects "Status" as "Rebased"
     When Click on "Apply filter"
     Then Should display the rebased series
-
-  @SeriesTab
+  
   Scenario: TC_SeriesTab_80: Verify keyword search
     And Clear search input
     Given User enters keyword "gdp"

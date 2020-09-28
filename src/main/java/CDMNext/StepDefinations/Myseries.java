@@ -58,17 +58,8 @@ public class Myseries {
 	public String lastupdatevalue;
 	public String Seriesnametodrag;
 	public String searchSeriesname;
+	
 
-	@And("^Check for the Start new pop up$")
-	public void check_for_the_Start_new_pop_up() throws Throwable {
-		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Start new']"))
-				.size() > 0) 
-		{
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@class,'sphere-modal__content')]//*[text()='Start new']", 4).click();
-			System.out.println("Start new option is selected in unsaved insight work pop-up display");
-		}
-	}
 	
 	// TC_MS_01
 	@And("^Select the Expand Icon$")
@@ -2367,6 +2358,8 @@ public class Myseries {
 			}
 			Thread.sleep(3000);
 			CommonFunctionality.DeleteSeries();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
 		}
 	  
 	//TC_MS_100
@@ -2436,6 +2429,8 @@ public class Myseries {
 			}
 			Thread.sleep(3000);
 			CommonFunctionality.DeleteSeries();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
 		}
 
 	  
@@ -2474,6 +2469,8 @@ public class Myseries {
 			}
 			Thread.sleep(3000);
 			CommonFunctionality.DeleteSeries();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
 		}
 		
 	//TC_MS_103
@@ -2508,6 +2505,8 @@ public class Myseries {
 			}
 			Thread.sleep(3000);
 			CommonFunctionality.DeleteSeries();
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
 		}
 		
 		
@@ -4089,13 +4088,13 @@ public class Myseries {
 		  Thread.sleep(3000);
 		  CommonFunctionality.getElementByProperty(login.driver, "First_series_check_box", 6).click();
 		  CommonFunctionality.getElementByProperty(login.driver, "Calculate_change_dropdown", 6).click();
-		  CommonFunctionality.getElementByProperty(login.driver, "YOY_Function", 6).click();
+		  CommonFunctionality.getElementByProperty(login.driver, "yoy_FD_Function", 6).click();
 		  Thread.sleep(2000);
 		  CommonFunctionality.getElementByProperty(login.driver, "First_series_check_box", 6).click();
 		  Thread.sleep(3000);
 		  CommonFunctionality.getElementByProperty(login.driver, "Second_series_check_box", 6).click();
 		  CommonFunctionality.getElementByProperty(login.driver, "Calculate_change_dropdown", 6).click();
-		  CommonFunctionality.getElementByProperty(login.driver, "%YOY_Function", 6).click();
+		  CommonFunctionality.getElementByProperty(login.driver, "%yoy_FD_Function", 6).click();
 		  Thread.sleep(2000);
 		  CommonFunctionality.getElementByProperty(login.driver, "Second_series_check_box", 6).click();
 		  Thread.sleep(3000);
@@ -4770,32 +4769,30 @@ public class Myseries {
 		  
 		  
 		  
-		  new Actions(login.driver).moveToElement( login.driver.findElement(By.cssSelector(".dropdown-menu.context-menu span[title='Map']"))).pause(2000).click().build().perform();
 		 
-		  login.driver.findElement(By.cssSelector(".dropdown-menu span[title='World']")).click();
 		    
 		    
 		 
 		  
 		  
-		 /* Thread.sleep(3000);
+		  Thread.sleep(3000);
 		  Actions action = new Actions(login.driver);
-			WebElement map = login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[4]"));
-					action.moveToElement(map).build().perform();	
+			WebElement map = login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[4]/span[2]"));
+					action.moveToElement(map).click().build().perform();	
 					try {
 					 Actions action1 = new Actions(login.driver);
-					WebElement world = login.driver.findElement(By.xpath("(//ul[@class='dropdown-menu']/li[1])[1]/span"));
-					action1.moveToElement(world).build().perform();	
+					WebElement world = login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']/li[4]"));
+					action1.moveToElement(world).click().build().perform();	
 					}
 					catch(org.openqa.selenium.JavascriptException e) {
 						 Actions action1 = new Actions(login.driver);
-							WebElement world = login.driver.findElement(By.xpath("(//ul[@class='dropdown-menu']/li[1])[1]/span"));
-							action1.moveToElement(world).build().perform();	
+							WebElement world = login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']/li[4]"));
+							action1.moveToElement(world).click().build().perform();	
 					}
-					  Thread.sleep(2000);*/
-		  Thread.sleep(3000);
-		 // Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("moreMap"))).isDisplayed());
-		  if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("moreMap"))).size() != 0) {
+					  Thread.sleep(2000);
+		  
+	
+		  if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("MAP_created"))).size() != 0) {
 				System.out.println("More option View as MAP is Verified Successfully!!! ");
 			} else {
 				CommonFunctionality.Views_list();
@@ -4952,6 +4949,7 @@ public class Myseries {
 		  }
 		  Thread.sleep(3000);
 		  CommonFunctionality.DeleteSeries();
+		  
 	  }
 	  
 	//TC_MS_200
@@ -5805,6 +5803,9 @@ public class Myseries {
 	//TC_MS_256
 	  @And("^Verify Right click insert copied option if not data in clipboard$")
 	  public void verify_Right_click_insert_copied_option_if_not_data_in_clipboard() throws Throwable {
+		
+		  Thread.sleep(3000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("rightclicksortby"))).click();
 		  verify_More_actions_insert_copied_option_if_not_data_in_clipboard();
 	  }
 	//TC_MS_257
@@ -5838,7 +5839,7 @@ public class Myseries {
 	  public void verify_Right_click_Delete_the_associated_visuals_after_deleted_series() throws Throwable {
 		  verify_More_actions_Delete_the_associated_visuals_after_deleted_series();
 	  }
-	//TC_MS_263
+	//TC_MS_2631
 	  @And("^Verify Right click Delete Cancel/x icon for the popup$")
 	  public void verify_Right_click_Delete_Cancel_x_icon_for_the_popup() throws Throwable {
 		  verify_More_actions_Delete_Cancel_x_icon_for_the_popup();

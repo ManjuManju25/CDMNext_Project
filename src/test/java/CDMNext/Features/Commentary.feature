@@ -1,11 +1,10 @@
 Feature: Verifying Commentary Visual functionality
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @Commentary
   Scenario: TC_Commentary_01:Verify 'Insert Commentary' under View tab
-  	And Check for prerequesties
     And Go to View tab
     And Click on "Insert Commentary"
     Then Commentary should be inserted
@@ -227,7 +226,7 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_33:Verify backgroud color for visual
-    #	And Click on "Visual" option on visual header
+    	And Click on "Visual" option on visual header
     And Enter some data to description field
     And Check for Background
     And Select color for visual background
@@ -292,7 +291,7 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_42:Verify confirmation message for copy visual
-    #And Create Commentary visual
+    And Create Commentary visual
     And Add some text in the description field
     And Click on Copy icon
     Then "Commentary copied." message should be displayed
@@ -923,7 +922,7 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_117:Verify 'Share' for insight having all type of visuals
-    #	And  Create all visuals in an insight
+    	And  Create all visuals in an insight
     And Perform Share
     Then Share popup should be opened
 

@@ -59,15 +59,7 @@ public class Exceldatacompare {
 		 login.Invoke_browser();
 		login.application_login();
 	}*/
-	
-	/*@And("^Check for prerequesties$")
-	public void check_for_prerequesties() throws Throwable {
-		CommonFunctionality.modelbox();
-	    login.driver.navigate().refresh();
-		//CommonFunctionality.check_for_keeping_insight_popup();
-		CommonFunctionality.ResetMethod();
-		CommonFunctionality.Views_list();
-	}*/
+
 	
 	@And("^User Select Series ID  as \"([^\"]*)\"$")
 	public void user_Select_Series_ID_as(String arg2) throws Throwable {
@@ -162,7 +154,7 @@ public class Exceldatacompare {
 		  List<WebElement> totalseries = login.driver.findElements(By.xpath("//div[@class='series-item--name']"));
 			 System.out.println("Total Size are- " + totalseries.size());
 			 
-			 if(totalseries.size() == 1) {
+			/* if(totalseries.size() == 1) {
 				
 				 System.out.println("Comparing Data of " + testcase_num +  " with Actual data" + Seriesname );
 					Thread.sleep(8000);
@@ -195,8 +187,9 @@ public class Exceldatacompare {
 		    	   
 					Thread.sleep(8000);
 					user_signout();
-			 }
-		
+			 }*/
+			 Thread.sleep(8000);
+				user_signout();
 	
 		}catch(Exception E){
 			System.out.println("Entered to catch" + E.getMessage());

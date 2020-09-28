@@ -67,29 +67,13 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		login.driver.navigate().refresh();
+		//login.driver.navigate().refresh();
 		CommonFunctionality.ExpandRight();
 		//CommonFunctionality.TopMethod();
-		CommonFunctionality.ResetMethod();
+		//CommonFunctionality.ResetMethod();
 		login.Log4j.info("searching with " + searchData);
 		CommonFunctionality.getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
-		/*CommonFunctionality.wait(2000);
-			List<WebElement> reset = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Reset")));
-			// CommonFunctionality.TopMethod();
-			// CommonFunctionality.UnselectMethod();
-			CommonFunctionality.AlldbClear();
-			if (reset.size() > 0) {
-				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).isDisplayed()) {
-					CommonFunctionality.getElementByProperty(login.driver, "Reset" ,4).click();
-					login.Log4j.info("Clicking on Reset button");
-				}
-			} 
-	
-		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).isDisplayed()) {
-			CommonFunctionality.getElementByProperty(login.driver, "Search" , 4).clear();
-			login.Log4j.info("searching with " + searchData);
-			CommonFunctionality.getElementByProperty(login.driver, "Search" ,   4).sendKeys(searchData);
-		}*/
+		
 	}
 
 	@And("^User selects \"([^\"]*)\" as \"([^\"]*)\"$")

@@ -1,11 +1,11 @@
 Feature: Verifying sprint cases functionality
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @Sprint
   Scenario: TC_12744_01: Clear All filters button to clear all filters set
-  	And Check for prerequesties
+  #	And Check for prerequesties
     And User enters keyword "Banglore"
     And Click on "More" filter
     And User selects "Date" as "Last observation after"
@@ -145,7 +145,7 @@ Feature: Verifying sprint cases functionality
     And Create new insight
     And Paste in the View section for new insight
     Then The copied View and its contents should be pasted in other/new insight
-  #@Sprint11
+  #@Sprint
   #Scenario: flex details
     #And Enter "366672387"
     #And Verify the time points

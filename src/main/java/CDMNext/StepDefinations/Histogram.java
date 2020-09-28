@@ -3050,6 +3050,36 @@ public class Histogram {
 	public void selected_currency_should_be_applied_to_the_series() throws Throwable {
 		SeriesByEditSeriesInfo(function);
 	}
+	@Then("^\"([^\"]*)\" popup should be opened$")
+	public void popup_should_be_opened(String arg1) throws Throwable {
+		
+		try {
+			String SeriesData_conversion_popup = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//*[@class='movable-modal--title-message']", 30).getText();
+			if(SeriesData_conversion_popup.equals(arg1)) {
+				login.Log4j.info(arg1 + " popup is displayed");
+				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,' movable-modal__active')]//*[@title='Close']", 20).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,' movable-modal__full-screen')]//*[@title='Close']", 20).click();
+				CommonFunctionality.Views_list();
+			}
+		}catch(Exception e) {
+			Assert.fail(arg1 + " popup is not displayed");
+		}
+	}
+
+@And("^Select \"([^\"]*)\" as \"([^\"]*)\" from dropdown$")
+public void select_as_from_dropdown(String arg1, String arg2) throws Throwable {
+		if (arg2.equalsIgnoreCase("Frequency")) {
+			DailyFrequency = arg2;
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@name='frequency']", 20).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + "')]", 20).click();
+		} else if (arg1.equalsIgnoreCase("Missing values method")) {
+			MissingValueMethod = arg2;
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@name='missing_values']", 20).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + "')]", 20).click();
+		}
+	
+}
+
 	void VisualSelection(String Selected_visual) throws Exception {
 		CommonFunctionality.wait(1200);
 		String Edit_Visual_title = CommonFunctionality
@@ -3133,6 +3163,13 @@ public class Histogram {
 		login.Log4j.info(Series);
 		if (Series.contains(SelectedFunction)) {
 			login.Log4j.info(SelectedFunction + " is displayed in seres name");
+			try {
+				//Close Edit Histogram window
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 8).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 6).click();
+			} catch(Exception e) {
+				
+			}
 			CommonFunctionality.Views_list();
 		} else {
 			Assert.fail(SelectedFunction + " Series is not displayed in series name");

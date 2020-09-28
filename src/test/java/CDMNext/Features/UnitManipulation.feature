@@ -1,15 +1,10 @@
 Feature: Verify Unit Manipulation functionality
  
-Background:
-  Given User has successful logged in
-  And Remove series from myseries pane
+#Background:
+  #Given User has successful logged in
 
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_01: Verify applying unit manipulation for series
-   And Check for keeping_insight popup
-   And Login as current execution login by taking username rowcount as 2 and cellcount as 0 and for password rowcount as 2 and cellcount as 1
-   And Check for keeping_insight popup
-   And Resetting the filters
    And Open preference dropdown
    And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check" 
    And Clicking on "Keyboard shortcuts" option under user preference be "ON" 
@@ -180,7 +175,6 @@ Scenario: Tc_Unit Manipulation_18: Verify cancel applying function for unit mult
 	 
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_19: Verify applying function for visuals like chart/pie/map/table
-   And Refreshing the page
    And Search for the series with SID "254123002" and click on "C" option
    And Right Click the "Chart" visual
    And Click on "Calculate series" to check the type of visual
@@ -247,6 +241,4 @@ Scenario: Tc_Unit Manipulation_27: Verify applying unit multiplier with %,2000=1
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
    Then The function should not apply for selected series
-   And Rename Insight to Download
    And Sort the default series in left pane
-   And Login back to default execution login

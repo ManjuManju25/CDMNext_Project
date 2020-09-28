@@ -1,12 +1,10 @@
 Feature: Verify Comparables feature
  
-Background:
-  Given User has successful logged in
+#Background:
+  #Given User has successful logged in
 
 @Comparables
 Scenario: Tc_Comparables_01: Verify results loading in comparable tab
-  And Check for keeping_insight popup
-  And Resetting the filters
   And Clicking "Comparables" icon
   Then The Section level results for series should be present
 
@@ -31,7 +29,6 @@ Scenario: Tc_Comparables_05: Verify changing order of placing comparables with o
   
 @Comparables
 Scenario: Tc_Comparables_06: Verify disappearing comparables in search tab
-    And Refresh page
     And Click three dots in search pane
     And  "Uncheck"  "Comparables" checkbox
     And Clicking "Save" button in search popup
@@ -39,7 +36,6 @@ Scenario: Tc_Comparables_06: Verify disappearing comparables in search tab
     
 @Comparables
 Scenario: Tc_Comparables_07: Verify showing comparables in search tab
-    And Refresh page
     And Click three dots in search pane
     And  "Check"  "Comparables" checkbox
     And Clicking "Save" button in search popup
@@ -47,14 +43,12 @@ Scenario: Tc_Comparables_07: Verify showing comparables in search tab
 
 @Comparables
 Scenario: Tc_Comparables_08: Verify expanding section level's in comparables
-    #And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     Then Should be able to expand section levels results upto table level  
      
 @Comparables
 Scenario: Tc_Comparables_09: Verify expanding section level's in comparables with keyboard shortcuts
-    And Refresh page
     And Open preference dropdown
     And Clicking on "Keyboard shortcuts" option under user preference be "ON" 
     And Open preference dropdown
@@ -67,7 +61,6 @@ Scenario: Tc_Comparables_09: Verify expanding section level's in comparables wit
     
 @Comparables
 Scenario: Tc_Comparables_10: Verify changing section level's in comparables with keyboard shortcuts
-    And Refresh page
     And Open preference dropdown
     And Clicking on "Keyboard shortcuts" option under user preference be "ON" 
     And Open preference dropdown
@@ -135,7 +128,6 @@ Scenario: Tc_Comparables_17: Very message for copied link cogwheel popup
     
 @Comparables
 Scenario: Tc_Comparables_18: Verify results for applying filters in comparables
-    And Resetting the filters
     And Clicking "Comparables" icon
     And User selects "Frequency" as "Monthly"
     And Count the series in selected Filter 
@@ -144,7 +136,6 @@ Scenario: Tc_Comparables_18: Verify results for applying filters in comparables
 	  
 @Comparables
 Scenario: Tc_Comparables_19: Verifying removing filters in comparables
-    And Resetting the filters
     And Clicking "Comparables" icon
     And The Section level results for series should be present
     And User selects "Frequency" as "Monthly"
@@ -155,7 +146,6 @@ Scenario: Tc_Comparables_19: Verifying removing filters in comparables
 	  
 @Comparables
 Scenario: Tc_Comparables_20: Verify applying multiple filters to get required results
-    And Resetting the filters
     And Clicking "Comparables" icon
     And User selects "Frequency" as "Daily;Quarterly;Monthly;Yearly"
     And Count the series in multiple selected Filter  
@@ -164,8 +154,6 @@ Scenario: Tc_Comparables_20: Verify applying multiple filters to get required re
 	  
 @Comparables
 Scenario: Tc_Comparables_21: Verify reset button in comparables tab
-    And Resetting the filters
-    And Refresh page
     And Clicking "Comparables" icon
     And The Section level results for series should be present
     And User selects "Frequency" as "Daily;Quarterly;Monthly;Yearly"
@@ -177,7 +165,6 @@ Scenario: Tc_Comparables_21: Verify reset button in comparables tab
 	  
 @Comparables
 Scenario: Tc_Comparables_28: Verify search results for comparables
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Search for "249416501"
     And Expand "Production" > "Global Economic Monitor" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" > "Industrial Production Index: YoY: Monthly: sa: Japan" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia"  
@@ -202,7 +189,6 @@ Scenario: Tc_Comparables_30: Verify collapse all option for comparables->series
     
 @Comparables
 Scenario: Tc_Comparables_31: Verify options for table level's in comparables
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" to collapse
@@ -212,7 +198,6 @@ Scenario: Tc_Comparables_31: Verify options for table level's in comparables
         
 @Comparables
 Scenario: Tc_Comparables_32: Verify right click options in table level of comparables
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Search for "249416501"
     And Expand "Production" > "Global Economic Monitor" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" > "Industrial Production Index: YoY: Monthly: sa: Japan" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" 
@@ -235,7 +220,6 @@ Scenario: Tc_Comparables_33: Verify footnotes in table level of comparables
     
 @Comparables
 Scenario: Tc_Comparables_34: Verify add series in table level of comparables
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Get the count of series inside table
@@ -250,7 +234,7 @@ Scenario: Tc_Comparables_34: Verify add series in table level of comparables
 Scenario: Tc_Comparables_36: Verify add and group for comparables in table level
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Select 5 series inside table
+    And Select 2 series inside table
     And Clicking + option from series
     And Clicking "Add and group series" from dropdown list
     Then The Selected series should get added into right pane with "Group" 
@@ -280,24 +264,16 @@ Scenario: Tc_Comparables_38: Verify add to existing insight
     
 @Comparables
 Scenario: Tc_Comparables_39: Verify new/replace/forescast/key icon's infront of series name in comparables
-    And Check for keeping_insight popup
-    And Closing the chart visual
-    And Resetting the filters
-    And Refresh page
     And Verify Subscribed series only filter under filters
     And Select "new" checkbox from more section
     And User has clicked on "Apply filter" 
     And Clicking "Comparables" icon
-    #And Search for "449596037"
     And Expand the tree for key icons 
     And Hovor on the series from table
     Then The Applied "Single" filter is displaying under Comparables
     
 @Comparables
 Scenario: Tc_Comparables_40: Verify multiple above icons to be present in series level
-    And Check for keeping_insight popup
-    And Resetting the filters
-    And Refresh page
     And Verify Subscribed series only filter under filters
     And Select "new" checkbox from more section
     And User has clicked on "Apply filter" 
@@ -305,15 +281,12 @@ Scenario: Tc_Comparables_40: Verify multiple above icons to be present in series
     And Select "Key" checkbox from more section
     And User has clicked on "Apply filter" 
     And Clicking "Comparables" icon
-    #And Search for "449596037"
     And Expand the tree for key icons   
     And Hovor on the series from table
     Then The Applied "Multiple" filter is displaying under Comparables
     
 @Comparables
 Scenario: Tc_Comparables_41: Verify SSP window for series level
-    And Check for keeping_insight popup
-    And Resetting the filters 
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon
@@ -337,7 +310,7 @@ Scenario: Tc_Comparables_43: Verify check box selection for series
 Scenario: Tc_Comparables_44: Verify check box selection for multiple series
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Select 3 series inside table
+    And Select 2 series inside table
     Then The series should gets selected
     
 @Comparables
@@ -349,10 +322,9 @@ Scenario: Tc_Comparables_45: Verify unchecking selection of tables
     
 @Comparables
 Scenario: Tc_Comparables_46: Verify unchecking selection of series
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"   
-    And Deselect 3 series inside table
+    And Deselect 2 series inside table
     Then The series should gets deselected
     
 @Comparables
@@ -384,7 +356,7 @@ Scenario: Tc_Comparables_50: Verify drag and drop for multiple comparable series
 Scenario: Tc_Comparables_51: Verify downloading series selected in comparables
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Select 5 series inside table
+    And Select 2 series inside table
     And Get the name of series
     And Clicking "Download" button from Header portion 
     Then The Series selected should gets downloaded to excel
@@ -402,7 +374,6 @@ Scenario: Tc_Comparables_52: Verify CTC of series in comparables
     
 @Comparables
 Scenario: Tc_Comparables_53: Verify opening dropdown for series in comparables
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
@@ -420,7 +391,6 @@ Scenario: Tc_Comparables_54: Verify closing dropdown for series in comparables
     
 @Comparables
 Scenario: Tc_Comparables_55: Verify collapse all for series in comparables without any filter's
-    #And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Clicking Collapse tree
@@ -428,7 +398,6 @@ Scenario: Tc_Comparables_55: Verify collapse all for series in comparables witho
     
 @Comparables
 Scenario: Tc_Comparables_56: Verify creating chart for selected series
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Select 1 series inside table
@@ -450,7 +419,7 @@ Scenario: Tc_Comparables_57: Verify creating chart for unselected series
 Scenario: Tc_Comparables_58: Verify creating chart for multiple series
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Select 3 series inside table
+    And Select 2 series inside table
     And Hovor on to i icon without click
     And  Click on more actions to create "View as Chart"
     Then The "Multiple Series Chart" should create for the series
@@ -459,7 +428,7 @@ Scenario: Tc_Comparables_58: Verify creating chart for multiple series
 Scenario: Tc_Comparables_59: Verify opening footnotes for series
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Select 3 series inside table
+    And Select 2 series inside table
     And Click on "Open footnote" option in series level
     Then The Footnotes window tab should be opened
  
@@ -504,7 +473,7 @@ Scenario: Tc_Comparables_65: Verify add to new insight
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Get the count of series inside table
-    And Select 3 series inside table
+    And Select 2 series inside table
     And Clicking "add-to-data-selection--toggle" option from Series list
     And Clicking "Add to new insight" from dropdown list
     And Series has been added to new insight message should display
@@ -514,10 +483,9 @@ Scenario: Tc_Comparables_65: Verify add to new insight
     
 @Comparables
 Scenario: Tc_Comparables_66: Verify add to existing insight
-    #And Check for keeping_insight popup
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Select 3 series inside table
+    And Select 2 series inside table
     And Clicking "add-to-data-selection--toggle" option from Series list
     And Clicking "Add to recent insight" from dropdown list
     Then Any insight could be selected for the series to add
@@ -528,7 +496,7 @@ Scenario: Tc_Comparables_67: Verify unselect all in more option
     And Remove series from myseries pane
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Select 3 series inside table
+    And Select 2 series inside table
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
     And Click on "Unselect all" button in Comparables
@@ -536,7 +504,6 @@ Scenario: Tc_Comparables_67: Verify unselect all in more option
    
 @Comparables
 Scenario: Tc_Comparables_68: Verify view as chart in more options
-And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
@@ -722,7 +689,6 @@ Scenario: Tc_Comparables_87: Verify unselect all in table level
     
 @Comparables
 Scenario: Tc_Comparables_88: Verify view as chart in table level
-And Resetting the filters
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Count the series inside "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" 
@@ -1015,7 +981,6 @@ Scenario: Tc_Comparables_122: Verify top button when comparables tab is scrolled
    
 @Comparables
 Scenario: Tc_Comparables_123: Verify unchecking comparables in three dot option (stay on comparables)
-    And Refresh page
     And Click three dots in search pane
     And  "Uncheck"  "Comparables" checkbox
     And Clicking "Save" button in search popup
@@ -1142,9 +1107,6 @@ Scenario: Tc_Comparables_138: Verify sharing of related insight in comparables
     
 @Comparables
 Scenario: Tc_Comparables_139: Verify sharing of non sharing related insight
-    And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
-    And Check for keeping_insight popup
-    And Resetting the filters
     And Clicking "Comparables" icon
     And Search for "249416501"
     And Expand "Production" > "Global Economic Monitor" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" > "Industrial Production Index: YoY: Monthly: sa: Japan" > "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia"  
@@ -1153,13 +1115,10 @@ Scenario: Tc_Comparables_139: Verify sharing of non sharing related insight
     And The "Insights" option in series should present
     And The "Non shareable Insight" Insight should present
     Then The Share icon should not present for non sharing related insight 
-    And Login back to default execution login
     
 @Comparables
 Scenario: Tc_Comparables_140: Verify series added to new insight in comparables using growl popup
-    And Check for keeping_insight popup
-    And Resetting the filters
-    And Clicking "Comparables" icon
+     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"
     And Hovor on to i icon without click
     And Clicking + option from series
@@ -1169,7 +1128,6 @@ Scenario: Tc_Comparables_140: Verify series added to new insight in comparables 
     
 @Comparables
 Scenario: Tc_Comparables_141: Verify opening insight explorer window for series added to existing insight in comprables
-    #And Check for keeping_insight popup
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
@@ -1190,7 +1148,6 @@ Scenario: Tc_Comparables_144: Verify adding series into existing insight by add 
     
 @Comparables
 Scenario: Tc_Comparables_145: Verify adding series into existing insight with existing insight shown in growl msg popup
-    And Check for keeping_insight popup
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to i icon without click
@@ -1201,7 +1158,6 @@ Scenario: Tc_Comparables_145: Verify adding series into existing insight with ex
 
 @Comparables
 Scenario: Tc_Comparables_147: Verify series tooltip for series in comparables
-    And Check for keeping_insight popup
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor only series name 

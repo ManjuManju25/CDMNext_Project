@@ -197,6 +197,9 @@ public class SeriesTab {
 
 			} else if (arg1.equals("View as Map")) {
 				login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
+				CommonFunctionality
+				.getElementByXpath(login.driver, "//ul[@class='dropdown-menu']//li//*[@title='China']", 15)
+				.click();
 				CommonFunctionality.SeriesHormonizationWindowClose();
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("VisualTitle_txt"))).isDisplayed()) {
 					login.Log4j.info("Map visual is created " + arg1 + " right click option");
@@ -550,9 +553,8 @@ public class SeriesTab {
 			action.pause(1000).moveToElement(element).click().build().perform();
 			break;
 		case "Hide related data":
-			Thread.sleep(3000);
-//			element = login.driver.findElement(By.xpath("//*[@title='" + arg1 + "']"));
-			element = login.driver.findElement(By.xpath("//*[@title='Hide related data']"));
+			Thread.sleep(2000);
+			element = login.driver.findElement(By.xpath("//*[@title='" + arg1 + "']"));
 			action.pause(1000).moveToElement(element).click().build().perform();
 			break;
 		case "Read More":
@@ -674,7 +676,7 @@ public class SeriesTab {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 8).click();
 			break;
 		case "Frequency":
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-series-list']//*[contains(text(),'" + arg1 + "')]", 5).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-series-list']//*[contains(text(),'" + arg1 + "')]", 8).click();
 			break;
 		case "Apply function":
 			CommonFunctionality.wait(1000);

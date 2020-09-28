@@ -29,7 +29,7 @@ import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
-public class AllRegion {
+public class ChinaFilter {
 	WebDriverWait wait = new WebDriverWait(login.driver, 3000);
 	Actions action = new Actions(login.driver);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;

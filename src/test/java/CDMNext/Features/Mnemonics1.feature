@@ -1,7 +1,7 @@
 Feature: MnemonicSearch
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @MnemonicSearch1
   Scenario Outline: <TCID>:Search for Mnemonic as <Mnemonic>

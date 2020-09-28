@@ -88,6 +88,7 @@ public class DatabasesTab {
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	SeriesTab st = new SeriesTab();
+	
 	 @Given("^Click on More filter$")
 	 public void click_on_More_filter() throws Throwable {
 	    // SearchTest.ClearSelection();
@@ -238,7 +239,7 @@ public class DatabasesTab {
 	@And("^Select any number of series$")
 	public void select_any_number_of_series() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver,"Series",4).click();
+		CommonFunctionality.getElementByProperty(login.driver,"Series",8).click();
 		WebElement ul_element = null;
 		try {
 			Thread.sleep(3000);
@@ -364,9 +365,9 @@ public class DatabasesTab {
 
 	@Then("^The selected \"([^\"]*)\" should be highlighted$")
 	public void the_selected_should_be_highlighted(String arg1) throws Throwable {
-		WebElement highlightdtext = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'full-expanded open highlight') or contains(@class,'last-open-node highlight')]",4);
-
+		
 		try {
+			WebElement highlightdtext = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'full-expanded open highlight') or contains(@class,'last-open-node highlight')]",20);
 			if (highlightdtext.isDisplayed()) {
 				login.Log4j.info(
 						"The selected " + arg1 + " is highlighted for right click action/mouse hover Copy link(s)");
@@ -1614,16 +1615,16 @@ public class DatabasesTab {
 
 		} 
 		if (arg1.equals("Total Usage")) {
-			AllTab.PopularSeriesMethod();
+			PopularSeriesMethod();
 			Thread.sleep(2000);
 			if (login.driver.findElement(By.xpath("//span[contains(text(),'Total Usage')]")).isDisplayed()) {
-				AllTab.TotalUsageValidation();
+				TotalUsageValidation();
 			} else {
 				login.driver.findElement(By.xpath(
 						"//div[@class='dashboard-filter']//div[@class='dashboard-filter-item'][1]//span[@class='dropdown--icon']"))
 						.click();
 				login.driver.findElement(By.xpath("//div[@title='Total Usage']")).click();
-				AllTab.TotalUsageValidation();
+				TotalUsageValidation();
 			}
 		} 
 		if (arg1.equalsIgnoreCase("Insert row before") || arg1.equalsIgnoreCase("Insert row after")
@@ -2175,7 +2176,9 @@ public class DatabasesTab {
 			login.driver.findElement(By.xpath("//*[@class='insight-preview--header']//*[@title='Remove from favorite']")).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='insight-preview--close']",10).click();
 			login.Log4j.info("The insight is added to favorite");
+			CommonFunctionality.getElementByXpath(login.driver,"//*[@title='Hide related data']",20).click();
 		} else {
+			CommonFunctionality.getElementByXpath(login.driver,"//*[@title='Hide related data']",20).click();
 			Assert.fail("The insight is not added to favorite");
 		}
 		
@@ -3803,5 +3806,25 @@ public class DatabasesTab {
 						"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[@class='toggle']",20)
 				.click();
  }
+   void PopularSeriesMethod() throws InterruptedException {
+
+		ele = CommonFunctionality.wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Popular Series')]")));
+		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", ele);
+	}
+
+	 void TotalUsageValidation() throws InterruptedException {
+		Thread.sleep(1500);
+		login.driver.findElement(By.xpath(
+				"//div[@class='all-representation--content']//div[@class='popular-series all-item']//div[contains(text(),'View more')]"))
+				.click();
+		WebElement popularity = CommonFunctionality.wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Popularity')]")));
+		if (popularity.isDisplayed()) {
+			login.Log4j.info("PASS");
+		} else {
+			Assert.fail("Popularity is not displayed");
+		}
+	}
 	
 }

@@ -1,7 +1,7 @@
 Feature: Mnemonic Search
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @MnemonicSearch1
   Scenario: Searching for Mnemonics and SeriesID in SSP window

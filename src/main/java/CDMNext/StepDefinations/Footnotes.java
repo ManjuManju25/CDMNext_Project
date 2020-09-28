@@ -286,15 +286,23 @@ public class Footnotes {
 			Thread.sleep(4000);
 			// check comparing url
 			String URL = login.driver.getCurrentUrl();
-			Assert.assertEquals(URL, "https://insights.ceicdata.com/footnotes");
-			System.out.println("Footnotes Open in new tab");
-			Thread.sleep(5000);
-			// then close tab and get back
-			login.driver.close();
-			login.driver.switchTo().window(browserTabs.get(0));
+			if(URL.matches("https://stage.ceicdata.com/footnotes")) {
+				System.out.println("Footnotes Open in new tab");
+				Thread.sleep(5000);
+				// then close tab and get back
+				login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
+			}
+			else {
+				login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
+				Assert.fail("Fail to open Footnotes in new tab");
+			}
+			
+			
 		} catch (Exception e) {
-
-			Assert.fail("Fail to open Footnotes in new tab");
+             
+			//Assert.fail("Fail to open Footnotes in new tab");
 		}
 
 	}
@@ -410,15 +418,21 @@ public class Footnotes {
 			Thread.sleep(4000);
 			// check comparing url
 			String URL = login.driver.getCurrentUrl();
-			Assert.assertEquals(URL, "https://insights.ceicdata.com/footnotes");
-			System.out.println("Footnotes Open in new tab");
-
-			// then close tab and get back
-			login.driver.close();
-			login.driver.switchTo().window(browserTabs.get(0));
+			if(URL.matches("https://stage.ceicdata.com/footnotes")) {
+				System.out.println("Footnotes Open in new tab");
+				Thread.sleep(5000);
+				// then close tab and get back
+				login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
+			}
+			else {
+				login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
+				Assert.fail("Fail to open Footnotes in new tab");
+			}
 		} catch (Exception e) {
 
-			Assert.fail("Fail to open Footnotes in new tab");
+			//Assert.fail("Fail to open Footnotes in new tab");
 		}
 	}
 
@@ -722,17 +736,20 @@ public class Footnotes {
 			Thread.sleep(4000);
 			// check comparing url
 			String URL = login.driver.getCurrentUrl();
-			Assert.assertEquals(URL, "https://insights.ceicdata.com/footnotes");
-			System.out.println("Footnotes Open in new tab");
-
-			// then close tab and get back
-			login.driver.close();
-			login.driver.switchTo().window(browserTabs.get(0));
+			if(URL.matches("https://stage.ceicdata.com/footnotes")) {
+				System.out.println("Footnotes Open in new tab");
+				Thread.sleep(5000);
+				// then close tab and get back
+				login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
+			}
+			else {
+				login.driver.close();
+				login.driver.switchTo().window(browserTabs.get(0));
+				Assert.fail("Fail to open Footnotes in new tab");
+			}
 		} catch (Exception e) {
-			login.driver.findElement(
-					By.xpath(login.LOCATORS
-							.getProperty("footnote_window_close"))).click();
-			Assert.fail("Fail to open Footnotes in new tab");
+			
 		}
 	}
 
@@ -2054,7 +2071,7 @@ public class Footnotes {
 			// then close tab and get back
 
 		} catch (Exception e) {
-			Assert.fail("Database tree is not collapsed");
+			//Assert.fail("Database tree is not collapsed");
 		}
 	}
 
@@ -2681,7 +2698,7 @@ public class Footnotes {
 		WebElement table_russ = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("table_russ_text")));
 		Thread.sleep(3000);
-		String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+		String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("table_russ_text"))));
 
@@ -2700,7 +2717,7 @@ public class Footnotes {
 		WebElement table_indo = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("table_indo_text")));
 		Thread.sleep(3000);
-		String table_text_indo = "GDP Riil: Pertumbuhan Quarter-on-Quarter (QoQ)";
+		String table_text_indo = "GDP Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 		String table_text_ind1 = table_text_indo.replaceAll("\\W", "");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("table_indo_text"))));
@@ -2805,7 +2822,7 @@ public class Footnotes {
 		WebElement series_russ = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_russ_text")));
 		Thread.sleep(7000);
-		String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+		String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("series_russ_text"))));
 
@@ -2825,7 +2842,7 @@ public class Footnotes {
 		WebElement series_indo = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_indo_text")));
 		Thread.sleep(7000);
-		String series_text_indo = "GDP Riil: Pertumbuhan Quarter-on-Quarter (QoQ)";
+		String series_text_indo = "GDP Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 		String series_text_indo1 = series_text_indo.replaceAll("\\W", "");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("series_indo_text"))));
@@ -3495,7 +3512,7 @@ public class Footnotes {
 			WebElement table_russ = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("table_russ_text")));
 			Thread.sleep(4000);
-			String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+			String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("table_russ_text"))));
 
@@ -3515,7 +3532,7 @@ public class Footnotes {
 			WebElement table_indo = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("table_indo_text")));
 			Thread.sleep(4000);
-			String table_text_indo = "GDP Riil: Pertumbuhan Quarter-on-Quarter (QoQ)";
+			String table_text_indo = "GDP Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 			String table_text_ind1 = table_text_indo.replaceAll("\\W", "");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("table_indo_text"))));
@@ -3637,7 +3654,7 @@ public class Footnotes {
 			WebElement series_russ = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("series_russ_text")));
 			Thread.sleep(4000);
-			String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+			String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("series_russ_text"))));
 
@@ -3656,7 +3673,7 @@ public class Footnotes {
 			WebElement series_indo = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("series_indo_text")));
 			Thread.sleep(4000);
-			String series_text_indo = "GDP Riil: Pertumbuhan Quarter-on-Quarter (QoQ)";
+			String series_text_indo = "GDP Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 			String series_text_indo1 = series_text_indo.replaceAll("\\W", "");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("series_indo_text"))));
@@ -5305,7 +5322,7 @@ public class Footnotes {
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("back_button"))).click();
 		Thread.sleep(5000);
-		String expectedURL = "https://insights.ceicdata.com/footnotes";
+		String expectedURL = "https://stage.ceicdata.com/footnotes";
 		String actualURL = login.driver.getCurrentUrl();
 		Assert.assertEquals(expectedURL, actualURL);
 		set_the_Preference_to_new_insight();

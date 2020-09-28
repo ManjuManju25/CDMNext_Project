@@ -5,6 +5,7 @@ import java.awt.Robot;
 
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
+import java.net.URL;
 //import java.net.URL;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -30,6 +31,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.ErrorScreenshot;
+import CDMNext.util.Hooks;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -90,25 +92,22 @@ public class login {
 	public static String parameters;
 
 	@Before
-	public void setup() throws Throwable {
+	public void setUp() throws Throwable {
 		//driver.manage().deleteAllCookies();
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
 		logged_in = false;
 		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger("org.apache.http");
 	    root.setLevel(ch.qos.logback.classic.Level.INFO);
-		// day = date.get(Calendar.DAY_OF_MONTH);
-		// month = date.get(Calendar.MONTH);
-		// year = date.get(Calendar.YEAR);
-		// second = date.get(Calendar.SECOND);
-		// minute = date.get(Calendar.MINUTE);
-		// hour = date.get(Calendar.HOUR);
 		Invoke_browser();
+		SearchTest.user_has_successful_logged_in();
+		Hooks.before_run();
 	}
-
+	
 	@After
-	public void tearDownClass(Scenario scenario) throws Exception {
+	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);
-//		System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
+		Hooks.after_run();
+		//System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
 		// driver.quit();
 
 	}
@@ -117,7 +116,10 @@ public class login {
 	public void user_navigates_to_the_CDMNext_appliction() throws Throwable {
 		// Thread.sleep(3000);
 		driver.get(CONFIG.getProperty("testsiteURL"));
+//		URL url = new URL(login.CONFIG.getProperty("testsiteURL"));
+//		login.driver.get(url.getProtocol() + "://" + url.getHost() + "/Untitled-insight/myseries");
 		Log4j.info("Launching site .. ");
+		
 	}
 
 	@And("^Enters username \"([^\"]*)\"$")
@@ -307,12 +309,15 @@ public class login {
 			driver = new ChromeDriver(options);
 		
 		}
+		driver.manage().window().maximize();
 		long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));
 		driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);
 		// driver.manage().timeouts().pageLoadTimeout(implicitWaitTime,
 		// TimeUnit.SECONDS);
-		driver.manage().timeouts().setScriptTimeout(implicitWaitTime, TimeUnit.SECONDS);
-		driver.manage().window().maximize();
+		login.driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+		//driver.manage().timeouts().setScriptTimeout(implicitWaitTime, TimeUnit.SECONDS);
+		
+			
 	}
 	//Method for disabling ChromeDriverService loggers
 	public static void disableSeleniumLogs() {    

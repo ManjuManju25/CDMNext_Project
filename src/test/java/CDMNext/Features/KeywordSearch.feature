@@ -1,12 +1,12 @@
 @Search
 Feature: Synonym Search
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @SynonymSearch
   Scenario: TC_SynonymSearch_01 : Search for an Acronym as "gdp"
-    And Check for prerequesties
+    #And Check for prerequesties
     Given User enters keyword "gdp"
     Then User verify keyword search results
 

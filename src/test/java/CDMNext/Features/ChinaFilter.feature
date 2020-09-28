@@ -1,7 +1,7 @@
 Feature: Verifying AllRegion filter functionality
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @AllRegion
   Scenario: TC_AR_01: Verifying provinces , prefectures and counties for subnational "China"

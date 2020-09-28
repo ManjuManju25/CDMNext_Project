@@ -1,12 +1,10 @@
 Feature: Verify ReleasesTab functionality
  
-Background:
-  Given User has successful logged in
+#Background:
+  #Given User has successful logged in
 
 @ReleasesTab
 Scenario: TC_Releases_01: Verify the contents for Releases tab
-  And Check for keeping_insight popup
-  And Resetting the filters
   And Clicking "Releases" icon
   And The "Release time interval matrix" should present
   And Release status "Pending" should present
@@ -73,6 +71,8 @@ Scenario: TC_Releases_10: Collapse the datasets
 @ReleasesTab
 Scenario: TC_Releases_12: Verify Selection of any datasets
   And Clicking "Releases" icon
+  And Search for the series "176412302" in ReleasesTab
+  And Select "-1Y" timeframe button
   And Select first Dataset
   Then Download button should enable and x series selected should appear in search
   
@@ -432,7 +432,6 @@ Scenario: TC_Releases_54: Verify Footnotes option for the series(Multiple Footno
   
 @ReleasesTab
 Scenario: TC_Releases_57: Hovor on to Show Dataset option for the series
-  And Resetting the filters
   And Clicking "Releases" icon
   And Expand first Dataset
   And Right click the first series
@@ -452,7 +451,6 @@ Scenario: TC_Releases_58: Verify Show Dataset option for the series(Multiple dat
   
 @ReleasesTab
 Scenario: TC_Releases_58: Verify Show Dataset option for the series
-  And Resetting the filters
   And Clicking "Releases" icon 
   And Expand first Dataset
   And Hovor on to i icon without click
@@ -574,7 +572,7 @@ Scenario: TC_Releases_85: Hovor on to unselect All option for the series in more
 Scenario: TC_Releases_86: Verify unselect All option for the series in more actions
   And Clicking "Releases" icon
   And Expand first Dataset
-  And Select 3 series inside table
+  And Select 1 series inside table
   And Hovor on to i icon without click
   And Click on "More actions" option in series level
   And Click on "Unselect all" button in Comparables
@@ -844,14 +842,14 @@ Scenario: TC_Releases_114: Verify Show Dataset option for the series in more act
 Scenario: TC_Releases_117: Verify for Unselect link related to  all sections
   And Clicking "Releases" icon
   And Expand first Dataset
-  And Select 5 series inside table
+  And Select 1 series inside table
   Then The "Unselect" link should display in "#ef5350" color
   
 @ReleasesTab
 Scenario: TC_Releases_118: Verify Unselect link
   And Clicking "Releases" icon
   And Expand first Dataset
-  And Select 5 series inside table
+  And Select 1 series inside table
   Then The "Unselect" link should be clicked
   
 @ReleasesTab
@@ -929,7 +927,7 @@ Scenario: TC_Releases_125: Verify View as Chart option for the Datasets
  
 @ReleasesTab
 Scenario: TC_Releases_126: Verify View as Map option for the Datasets
-  And Resetting the filters 
+  #And Resetting the filters 
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
   And Select "-1Y" timeframe button
@@ -941,7 +939,6 @@ Scenario: TC_Releases_126: Verify View as Map option for the Datasets
 
 @ReleasesTab
 Scenario: TC_Releases_127: Verify View as Table option for the Datasets
-  And Resetting the filters
   And Clicking "Releases" icon
   And Search for the series "176412302" in ReleasesTab
   And Select "-1Y" timeframe button
@@ -953,7 +950,6 @@ Scenario: TC_Releases_127: Verify View as Table option for the Datasets
     
 @ReleasesTab
 Scenario: TC_Releases_128: Verify View as Pie option for the Datasets
-  And Resetting the filters
   And Clicking "Releases" icon
   And Search for the series "176412302" in ReleasesTab
   And Select "-1Y" timeframe button
@@ -965,7 +961,6 @@ Scenario: TC_Releases_128: Verify View as Pie option for the Datasets
   
 @ReleasesTab
 Scenario: TC_Releases_129: Verify View as Heat map option for the Datasets
-  And Resetting the filters
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
   And Select "-1Y" timeframe button
@@ -977,7 +972,6 @@ Scenario: TC_Releases_129: Verify View as Heat map option for the Datasets
  
 @ReleasesTab
 Scenario: TC_Releases_130: Verify View as Histogram option for the Datasets
-  And Resetting the filters
   And Clicking "Releases" icon
   And Search for the series "176412302" in ReleasesTab
   And Select "-1Y" timeframe button
@@ -989,7 +983,6 @@ Scenario: TC_Releases_130: Verify View as Histogram option for the Datasets
  
 @ReleasesTab
 Scenario: TC_Releases_131: Verify Download option for the Datasets
-  And Resetting the filters
   And Open preference dropdown
   And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check" 
   And Open preference dropdown
@@ -1006,7 +999,6 @@ Scenario: TC_Releases_131: Verify Download option for the Datasets
   
 @ReleasesTab
 Scenario: Tc_Releases_132: Verify Read more for series in ReleasesTab
-    And Resetting the filters
     And Clicking "Releases" icon
     And Expand first Dataset  
     And Hovor on to i icon without click
@@ -1078,15 +1070,11 @@ Scenario: Tc_Releases_138: Verify sharing of related insight
     And Expand first Dataset  
     And Hovor on to i icon without click
     And Click "Show related data" option in series 
-    #And The "Related Insights" option in series should present
     And Click to "Share Insight" 
     Then The Sharing insight window should be opened
     
 @ReleasesTab
 Scenario: Tc_Releases_139: Verify sharing of non sharing related insight
-    And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
-    And Check for keeping_insight popup
-    And Resetting the filters
     And Clicking "Releases" icon
     And Search for the series "449379557" in ReleasesTab
     And Select "-1Y" timeframe button
@@ -1096,12 +1084,9 @@ Scenario: Tc_Releases_139: Verify sharing of non sharing related insight
     And The "Related Insights" option in series should present
     And The "Non shareable Insight" Insight should present
     Then The Share icon should not present for non sharing related insight 
-    And Login back to default execution login
     
 @ReleasesTab
 Scenario: Tc_Releases_140: Verify presence of related insights tooltip
-    And Check for keeping_insight popup
-    And Resetting the filters
     And Clicking "Releases" icon
     And Expand first Dataset  
     And Hovor on to i icon without click
@@ -1165,7 +1150,7 @@ Scenario Outline: TC_Releases_145: Verify showing tool tip for mouse hover optio
     | "Open footnote" |
     | "More actions"  |
      
-@ReleasesTab
+@ReleasesTab1
 Scenario: TC_Releases_146: Verify Add to Watchlist icon in series level
   And Clicking "Releases" icon
   And Select released database
@@ -1177,7 +1162,7 @@ Scenario: TC_Releases_146: Verify Add to Watchlist icon in series level
   And Growl message as "Watchlist changes applied" should display
   Then The selected actions should reflect inside watchlist tab
   
-@ReleasesTab
+@ReleasesTab1
 Scenario: TC_Releases_147: Verify Add to Watchlist option in series level right click
   And Clicking "Releases" icon
   And Select released database
@@ -1190,7 +1175,7 @@ Scenario: TC_Releases_147: Verify Add to Watchlist option in series level right 
   And Growl message as "Watchlist changes applied" should display
   Then The selected actions should reflect inside watchlist tab
   
-@ReleasesTab
+@ReleasesTab1
 Scenario: TC_Releases_148: Verify Add to Watchlist option in series level more actions
   And Clicking "Releases" icon
   And Select released database

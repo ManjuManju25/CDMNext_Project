@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -134,7 +133,7 @@ public class UnitManipulation {
     		assertEquals(split1[0], unit_manipulation_checkbox);	
     	}
     }
-    
+          
     @And("^Copy the visual title$")
     public void copy_the_visual_title() throws Throwable {
     	String title = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-title--text.text-dots", 4).getText();

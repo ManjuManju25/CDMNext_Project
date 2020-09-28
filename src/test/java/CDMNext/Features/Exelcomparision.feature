@@ -1,6 +1,6 @@
 Feature: Comparing Data in Two Exel sheet 
-Background:
-   Given User has successful logged in
+#Background:
+   #Given User has successful logged in
    
 @UI
 Scenario: TC_01:Verifying Date drop down for available options
@@ -836,7 +836,7 @@ Scenario: TC_79:Downloading data in CSV Format from Selection
         And User verify state of download button when there are no series in myseries/no views
 
 
-@FormatVerification123  
+@FormatVerification 
      Scenario: TC_110: Verify the formats available for visual download.
       And User Select  Multiple Series ID  as "310901701;310901801;310902601"
         And Create a Table 

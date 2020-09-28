@@ -4,13 +4,11 @@ import static org.junit.Assert.assertNotEquals;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.fail;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -65,7 +63,7 @@ public class CrossSection {
 	}
 	
 	@And("^Remove series from myseries pane$")
-	public void remove_series_from_myseries_pane() throws Throwable {
+	public static void remove_series_from_myseries_pane() throws Throwable {
 		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",4);
 		if(selected.getAttribute("class").contains("without-data")) {
 			login.Log4j.info("No Series is added in myseries list to delete");
@@ -88,9 +86,9 @@ public class CrossSection {
 	
 	@And("^Count the total series$")
 	public void count_the_total_series() throws Throwable {
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(4000);
 		List<WebElement> series = login.driver.findElements(By.className("series-name-field--series-name"));
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(2000);
 		assertNotEquals(ChartVisual.myseries_before, series.size());
 	}
 	
@@ -119,7 +117,7 @@ public class CrossSection {
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(3000);
 		List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
 		if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || arg1.equals("310901701") || arg1.equals("205424302")) {
 			for(int i = 1; i <= list.size(); i++) {
@@ -142,7 +140,8 @@ public class CrossSection {
 			CommonFunctionality.wait(2000);
 		    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[@class='dropdown--button']", 4)).pause(500).click().build().perform();
 		    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Unit']", 4)).pause(500).click().build().perform();
-			for(int i = list.size(); i >= 1; i--) {
+			CommonFunctionality.wait(3000);
+		    for(int i = list.size(); i >= 1; i--) {
 			WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
 			if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
@@ -336,11 +335,6 @@ public class CrossSection {
 	@And("^Change the result count per page to (\\d+)$")
 	public void change_the_result_count_per_page_to(int arg1) throws Throwable {
 		cv.resetting_the_filters();
-		//cv.open_preference_dropdown();
-		//cv.clicking_on_option_under_user_preference_to_be("Show search results without pagination", "Uncheck");
-		//cv.open_preference_dropdown();
-		//login.driver.navigate().refresh();
-		//CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
 	    Select result_count = new Select(CommonFunctionality.getElementByXpath(login.driver, "//*[@js-pre-page='']", 4));
 	    String value = Integer.toString(arg1);
