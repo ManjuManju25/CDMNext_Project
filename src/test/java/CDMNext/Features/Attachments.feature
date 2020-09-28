@@ -1,9 +1,9 @@
 Feature: Verifying Attachments Visual functionality
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
-  @Attachments
+ @Attachments
   Scenario: TC_Attachments_01:Verify 'Insert Attachments' under View tab
     And Go to View tab
     And Click on Insert Attachments

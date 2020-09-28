@@ -1,11 +1,11 @@
 Feature: Filters
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 
   @FilterSearch
   Scenario: TC_Filters_Search_01
-  	And Check for prerequesties
+  #	And Check for prerequesties
     Given User enters "GDP"
     And User selects "Source" as "World Bank"
     And User has clicked on "Apply filter"
@@ -71,7 +71,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch2
+  @FilterSearch
   Scenario: TC_Filters_Search_08
     Given User enters "245178303"
     And User selects "Source" as "The Central Bank of the Russian Federation"
@@ -151,7 +151,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch2
+  @FilterSearch
   Scenario: TC_Filters_Search_16
     Given User enters "MDPIJB"
     And User selects "Source" as "Malaysian Rubber Board"
@@ -161,7 +161,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch2
+  @FilterSearch
   Scenario: TC_Filters_Search_17
     Given User enters "BRAFAC"
     And User selects "Source" as "Central Bank of Brazil"
@@ -171,7 +171,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch2
+  @FilterSearch
   Scenario: TC_Filters_Search_18
     Given User enters "BRDLAC"
     And User selects "Source" as "Central Bank of Brazil"
@@ -191,7 +191,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch2
+  @FilterSearch
   Scenario: TC_Filters_Search_20
     Given User enters "CZACKC"
     And User selects "Source" as "China Banking and Insurance Regulatory Commission"
@@ -613,7 +613,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch1
+  @FilterSearch
   Scenario: TC_Filters_Search_71
     Given User enters "261968101"
     And Click on "More" filter
@@ -622,7 +622,7 @@ Feature: Filters
     When User get the topics as "Aggregate: World"
     Then User verify the results
 
-  @FilterSearch1
+  @FilterSearch
   Scenario: TC_Filters_Search_72
     Given User enters "228912101"
     And Click on "More" filter

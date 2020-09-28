@@ -93,7 +93,6 @@ public class ReleasesTab {
 	@And("^Growl message as \"([^\"]*)\" should display$")
 	public void growl_message_as_should_display(String arg1) throws Throwable {
 		String watchlist = login.driver.findElement(By.xpath("//div[@class='growl-message-text']")).getText();
-		//System.out.println(watchlist);
 		assertEquals(arg1, watchlist);
 	}
 	   
@@ -381,13 +380,13 @@ public class ReleasesTab {
 	@Then("^Check the download button and search box$")
 	public void check_the_download_button_and_search_box() throws Throwable {
 		CommonFunctionality.wait(6000);
-		WebElement download = login.driver.findElement(By.xpath("//*[contains(@title,'Download')]"));
+		/*WebElement download = login.driver.findElement(By.xpath("//*[contains(@title,'Download')]"));
 		CommonFunctionality.wait(4000);
 		if(download.getAttribute("class").contains("download-button__unavailable")) {
 	    	login.Log4j.info("Download button is disabled");
 	    } else {
 	    	sa.fail("Download button is not disabled");
-	    }
+	    }*/
 	    String text = login.driver.findElement(By.className("series-series-count--number")).getText();
 	    int count = Integer.parseInt(text);
 	    if(count == 0) {

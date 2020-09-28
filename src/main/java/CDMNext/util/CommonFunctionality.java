@@ -8,9 +8,17 @@ import java.awt.Robot;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
@@ -18,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -58,7 +67,7 @@ public class CommonFunctionality {
 	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
 	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	public static WebDriverWait wait = new WebDriverWait(login.driver, 500);
+	public static WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	public static String manage_series_id;
 	public static File theNewestFile = null;
 
@@ -150,16 +159,8 @@ public class CommonFunctionality {
 		} catch (Exception e) {
 
 		}
-		// Deleting visual
-		/*
-		 * WebElement ele = login.driver.findElement(By.xpath(
-		 * "//*[@class='insight-page-menu-views-container--view-tabs ui-sortable']//*[@class='insight-page-view-tab--link insight-page-view-tab--link__active']"
-		 * )); action.contextClick(ele).pause(1000).build().perform();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.
-		 * xpath("//*[contains(text(),'Delete view')]"))) .click();
-		 * wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-		 * "//button[contains(text(),'Ok')]"))).click();
-		 */
+		
+		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -427,12 +428,33 @@ public class CommonFunctionality {
 		DeleteSeries();
 	}
 
+	public static void Delete_AllViews() throws Exception {
+		try {
+			wait(1000);
+			List<WebElement> views = login.driver.findElements(
+					By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
+			if (views.size() > 0) {
+
+				WebElement Active_view = getElementByXpath(login.driver,
+						"//*[contains(@class,'insight-page-view-tab--link__active')]", 30);
+				wait(1000);
+				new Actions(login.driver).contextClick(Active_view).build().perform();
+				getElementByXpath(login.driver, "//*[contains(text(),'Delete all views')]", 30).click();
+				getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//button[contains(text(),'Ok')]",
+						20).click();
+			}
+
+		} catch (Exception e) {
+
+		}
+		DeleteSeries();
+	}
+
 	public static WebElement getElementByProperty(WebDriver driver, String property_value, int time) {
 		wait(500);
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
 		WebElement element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty(property_value)));
 		elementHighlight(login.driver, element);
 		try {
@@ -462,11 +484,11 @@ public class CommonFunctionality {
 	}
 
 	public static WebElement getElementByXpath(WebDriver driver, String locator, int time) throws InterruptedException {
-		wait(500);
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+		wait(1000);
+		//driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+		//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
 		WebElement element = login.driver.findElement(By.xpath(locator));
 		elementHighlight(login.driver, element);
 		return element;
@@ -474,11 +496,11 @@ public class CommonFunctionality {
 
 	public static WebElement getElementBycssSelector(WebDriver driver, String locator, int time)
 			throws InterruptedException {
-		wait(500);
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(locator)));
+		wait(1000);
+//		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+//		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(locator)));
 		WebElement element = login.driver.findElement(By.cssSelector(locator));
 		elementHighlight(login.driver, element);
 		return element;
@@ -487,12 +509,11 @@ public class CommonFunctionality {
 	public static WebElement getElementByClassName(WebDriver driver, String locator, int time)
 			throws InterruptedException {
 		wait(500);
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
-		wait.until(ExpectedConditions.elementToBeClickable(By.className(locator)));
+		//driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(locator)));
+		//wait.until(ExpectedConditions.elementToBeClickable(By.className(locator)));
 		WebElement element = login.driver.findElement(By.className(locator));
 		elementHighlight(login.driver, element);
-		wait(500);
 		return element;
 	}
 
@@ -706,6 +727,7 @@ public class CommonFunctionality {
 	}
 
 	/* Get the newest file for a specific extension */
+
 	public static void getTheNewestFile(String ext) {
 
 		File dir = new File(System.getProperty("user.home") + "\\Downloads");
@@ -724,6 +746,21 @@ public class CommonFunctionality {
 			// return theNewestFile;
 			if (E.equalsIgnoreCase(ext)) {
 				System.out.println("Downloaded File Format Matched Successfully." + "'" + E + "' <> '" + ext + "'");
+				String sourceFile = null;
+				try {
+					sourceFile = FileUtils.readFileToString(theNewestFile);
+					MovingDownloadedFileToTargetLocation(sourceFile,E);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				/*try {
+					MovingDownloadedFileToTargetLocation(theNewestFile);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					 System.exit(0);
+				}*/
 			} else {
 
 				Assert.fail("Downloaded File Format is NOT Matched." + "'" + E + "' <> '" + ext + "'");
@@ -731,6 +768,40 @@ public class CommonFunctionality {
 		}
 	}
 
+	public static void MovingDownloadedFileToTargetLocation(String sourceFile, String E) throws IOException {
+		// move file from Downloads
+//		File Targetdir = new File(System.getProperty("user.home") + "\\downloads\\" + theNewestFile.getName());
+		String Targetdir = System.getProperty("user.home") + "\\downloads +\\destination"+"\\.\\"+E;
+		Path dest = Paths.get(Targetdir);
+		 Path src = Paths.get(sourceFile);
+		 Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
+//		 Files.copy(src.toFile(), dest.toFile());
+		/*if (theNewestFile.isFile()) {
+			if (!Targetdir.exists()) {
+				Targetdir.mkdir();
+
+			}
+			String[] children = theNewestFile.list();
+			for (int i = 0; i < children.length; i++) {
+				copy(new File(theNewestFile, children[i]), new File(Targetdir, children[i]));
+			}
+
+		} else {
+			InputStream in = new FileInputStream(theNewestFile);
+			OutputStream out = new FileOutputStream(Targetdir);
+
+			// Copy the bits from instream to outstream
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = in.read(buf)) > 0) {
+				out.write(buf, 0, len);
+			}
+			in.close();
+			out.close();
+
+		}*/
+
+	}
 	public static void Create_New_Insight() throws Exception {
 		getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
 		getElementByXpath(login.driver, "//li//*[contains(text(),'New')]", 20).click();
@@ -748,7 +819,17 @@ public class CommonFunctionality {
 			return "";
 		}
 	}
-
+	public static List<WebElement> Hidden_Webelements(WebDriver driver, String value) {
+		List<WebElement> elements = driver.findElements(By.xpath(value));
+		for(WebElement element : elements) {
+			int x = element.getLocation().getX();
+			if(x!=0) {
+              element.click();
+			  break;
+			}
+		}
+		return elements;
+	}
 	public static void login_as_next_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)
 			throws Throwable {
 		URL url = new URL(driver.getCurrentUrl());
@@ -784,16 +865,21 @@ public class CommonFunctionality {
 
 	public static void closing_if_any_opened_modal_popup(WebDriver driver, String arg1, String arg2, String arg3)
 			throws Throwable {
+
 		List<WebElement> popup = driver.findElements(By.className(arg1));
-		for (int i = 1; i <= popup.size(); i++) {
-			getElementByClassName(driver, arg1, 10).click();
-			if (driver.findElements(By.xpath(arg2)).size() > 0) {
-				getElementByXpath(driver, arg3, 10).click();
+		try {
+			for (int i = 1; i <= popup.size(); i++) {
+				getElementByClassName(driver, arg1, 10).click();
+				if (driver.findElements(By.xpath(arg2)).size() > 0) {
+					getElementByXpath(driver, arg3, 10).click();
+				}
 			}
+			
+		} catch (Exception e) {
+			
 		}
-		if (popup.size() != 0) {
-			Views_list();
-		}
+		ResetMethod();
+		Views_list();
 	}
 
 	public static void Crosssection_Excelverify(WebDriver driver, String Excel1, String Excel2) throws Throwable {

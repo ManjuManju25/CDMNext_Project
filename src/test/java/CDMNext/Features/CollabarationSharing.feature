@@ -1,18 +1,11 @@
 Feature: Verifying Insight Share functionality
  
-Background:
-  Given User has successful logged in
-  And Navigate insights
-
+#Background:
+  #Given User has successful logged in
+  
 @CollabarationSharing
 Scenario: TC_Share_02: Verify Share option from insight > File
-   And Check for keeping_insight popup
-   And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
-   And Check for keeping_insight popup
-   And Resetting the filters
-   And Remove series from myseries pane
-   And Resetting the filters
-   And Rename Insight to Download
+   #And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
    And Navigate to "File" -> "Share" 
    Then The "Share" window should present
    
@@ -522,5 +515,17 @@ Scenario: TC_Share_07: Verify 'Share' option for Guest users.
    And Click "Create insight" to create a new insight
    And Click on "Insight" icon to share insight
    Then The "Register now!" popup should appears
-   #And Logout from current user
-   And Login back to default execution login
+   And Logout from current user
+   #And Login back to internal user with password "Ceic@12345678" 
+   
+#@CollabarationSharingCheck
+#Scenario: TC_Share_08: Verify 'Multiple insights' sharing.
+   #And Enter mail for "Multiple insights sharing" with action as "shared" an insight
+   #
+#@CollabarationSharingCheck
+#Scenario: TC_Share_47: Verify notification for shared insight.
+   #And Enter mail for "Notification for shared insight" with action as "shared" an insight
+   #
+#@CollabarationSharingCheck
+#Scenario: TC_Share_48: Verify growl message for shared insight.
+   #And Enter mail for "Growl message for shared insight" with action as "shared" an insight

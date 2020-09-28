@@ -1,22 +1,15 @@
 Feature: Verify Cross section functionality
  
-Background:
-  Given User has successful logged in
-  And Navigate insights
+#Background:
+  #Given User has successful logged in
 
 @CrossSection
 Scenario: Tc_Cross Section_01: Verify cross section functionality for series
-   And Check for keeping_insight popup
-   And Login as current execution login by taking username rowcount as 2 and cellcount as 0 and for password rowcount as 2 and cellcount as 1
-   And Check for keeping_insight popup
-   And Resetting the filters
    And Open preference dropdown
-   And Clicking on "Show search results without pagination" option under user preference to be "Uncheck" 
    And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check" 
    And Clicking on "Keyboard shortcuts" option under user preference be "ON" 
    And Open preference dropdown
    And Sort the series in left pane
-   And Change the result count per page to 10
    And Search for the series with SID "310901701;310901801" and click on "A" option
    And Select all series from myseries and click on "Open function editor" option
 	 And Click "By function" tab and enter "CROSSSEC" in search field
@@ -24,6 +17,7 @@ Scenario: Tc_Cross Section_01: Verify cross section functionality for series
 	 
 @CrossSection
 Scenario: Tc_Cross Section_02: Verify cross section function for single series
+   And Sort the series in left pane
    And Search for the series with SID "310901701" and click on "A" option
    And Select all series from myseries and click on "Open function editor" option
 	 And Click "By function" tab and enter "CROSSSEC" in search field
@@ -40,7 +34,6 @@ Scenario: Tc_Cross Section_03: Verify crosssec output series in excel
 	 
 @CrossSection
 Scenario: Tc_Cross Section_04: Verify crosssec func with list mode in myseries
-   And Check for popup
    And Search for the series with SID "310901701;310901801" and click on "A" option
    And Clicking "List" option from myseries
    And Select all series from myseries and click on "Open function editor" option
@@ -49,7 +42,6 @@ Scenario: Tc_Cross Section_04: Verify crosssec func with list mode in myseries
 	 
 @CrossSection
 Scenario: Tc_Cross Section_05: Verify crosssec func with table mode in myseries
-   And Check for popup
    And Search for the series with SID "310901701;310901801" and click on "A" option
    And Clicking "Table" option from myseries
    And Select all series from table in myseries and click on "Open function editor" option
@@ -58,7 +50,6 @@ Scenario: Tc_Cross Section_05: Verify crosssec func with table mode in myseries
 	 
 @CrossSection
 Scenario: Tc_Cross Section_06: Verify replace base series with its base series
-   #And Check for popup
    And List option should select
    And Search for the series with SID "310901701;310901801" and click on "A" option
    And Select all series from myseries and click on "Open function editor" option
@@ -74,7 +65,6 @@ Scenario: Tc_Cross Section_07: Verify sorting output series with sort by options
 	 
 @CrossSection
 Scenario: Tc_Cross Section_08: Verify applying crossec func with func wizard window by myseries
-   And Refreshing the page
    And Search for the series with SID "310901701;310901801" and click on "A" option
    And Select all series from myseries and click on "Copy the series" option
 	 And Count the series in myseries
@@ -83,7 +73,6 @@ Scenario: Tc_Cross Section_08: Verify applying crossec func with func wizard win
 	 
 @CrossSection
 Scenario: Tc_Cross Section_09: Verify applying crossec func with func wizard window by function dropdown
-   And Check for popup
    And Search for the series with SID "310901701;310901801" and click on "A" option
 	 Then The Crosssec functions can validate through functions wizard
 	 
@@ -555,7 +544,6 @@ Scenario: Tc_Cross Section_61: Verify applying crosssec for visuals with its fre
 @CrossSection
 Scenario: Tc_Cross Section_62: Verify applying crosssec func from edit visual window for visuals
    And Search for the series with SID "310901701;310901801" and click on "Pie" option
-   #And Close the Growl popup
    And Click "More" option from insight action panel
    And Click "All functions" button
    And Click "By function" tab and enter "CROSSSEC" in search field
@@ -564,7 +552,6 @@ Scenario: Tc_Cross Section_62: Verify applying crosssec func from edit visual wi
    
 @CrossSection
 Scenario: Tc_Cross Section_65: Verify applying crosssec function over search pane series throught download window
-   #And Rename Insight to Download
    And Search for the series with SID "310901701;310901801" and click on "Download" option
    And Select "series" tab in download popup and click on "fx" option and pass as "CROSSSEC" 
 	 Then The "Download button" in Download window has to be present
@@ -575,5 +562,3 @@ Scenario: Tc_Cross Section_66: Verify cancel applied function over search pane s
    And Select "series" tab in download popup and click on "fx" option and pass as "CROSSSEC" 
 	 Then The "Cancel button" in Download window has to be present   
 	 And Sort the default series in left pane
-	 And Rename Insight to Download
-   And Login back to default execution login

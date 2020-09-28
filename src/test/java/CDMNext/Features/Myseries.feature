@@ -1,7 +1,7 @@
 Feature: verifying My Series Tab Functionality 
 
-Background: 
-	Given User has successful logged in 
+#Background: 
+#	Given User has successful logged in 
 	#And Check for popup
 	#And Check for prerequesties
 	#And  User Refersh the page
@@ -184,7 +184,7 @@ Scenario: TC_MS_28: Verify Rename - Function discription - apply original title 
 	And Verify Function description apply original title icon 
 	
 	
-@MySeries
+@MySeries12345
 Scenario: TC_MS_30: Verify Rename - Function discription - apply original title icon for more tha one series. 
 	#And Select random series to my series tab 
 	 And User Select Series ID  as "402529207"
@@ -790,7 +790,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Select the Cancel/X option
 	          And Verify the Cancel/X option
 	
-	             @MySeries23
+	             @MySeries
 	Scenario: TC_MS_131:Verify suggested indicator
 	          And Select series to my series tab of different country 
 	          And Select all series   
@@ -798,7 +798,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Verify suggested indicator
 	
 	
-	             @MySeries23
+	             @MySeries
 	Scenario: TC_MS_133:Verify Suggested indicators -(i) icon
 	           And Select random series to my series tab 
 	          And Select all series   
@@ -806,7 +806,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	        And select the (i) icon
 	          And Verify Suggested indicators (i) icon
 	
-	             @MySeries23
+	             @MySeries
 	Scenario: TC_MS_134:Verify Suggested indicators -(i) icon tootltip
 	           And Select random series to my series tab 
 	          And Select all series   
@@ -814,7 +814,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	         #And mover the (i) icon
 	          And Verify Suggested indicators tooltip for (i) icon
 	          
-	             @MySeries23
+	             @MySeries
 	Scenario: TC_MS_135:Verify Suggested indicators -contries tab
 	           And Select random series to my series tab 
 	          And Select all series   
@@ -822,7 +822,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Verify contries tab under suggested indicator
 	
 	
-	             @MySeries23
+	             @MySeries
 	Scenario: TC_MS_136:Verify Suggested indicators -max contires display
 	          And Select random six different series to my series tab 
 	          And Select all series   
@@ -830,7 +830,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Verify max contires display
 	
 
-             @MySeries23
+             @MySeries
 	Scenario: TC_MS_137:Verify Suggested indicators -click on indicators
 	           And Select random series to my series tab 
 	          And Select all series   
@@ -839,14 +839,14 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Verify Suggested indicators on clicking indicators
 	
 	
-	        @MySeries23
+	        @MySeries
 	Scenario: TC_MS_138:Verify Suggested indicators -greyed out indicators
 	           And Select random series to my series tab 
 	          And Select all series   
 	          And select the Related series option 
 	          And Verify Suggested indicators greyed out indicators
 	
-	        @MySeries23
+	        @MySeries
 	Scenario: TC_MS_139:Verify Suggested indicators -+ icon click
 	           And Select random series to my series tab 
 	          And Select all series  
@@ -856,7 +856,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	
 	
 	
-		        @MySeries23
+		        @MySeries
 	Scenario: TC_MS_140:Verify Suggested indicators -Select a countries dropdown
 	           And Select random series to my series tab 
 	           And Select all series  
@@ -865,7 +865,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Verify Suggested indicators countries dropdown
 	
 	
-			        @MySeries23
+			        @MySeries
 	Scenario: TC_MS_141:Verify Suggested indicators - Select a Region
 	           And Select random series to my series tab 
 	           And Select all series  
@@ -874,7 +874,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	           And select any one country
 	          And Verify Suggested indicators Select a Region
 	
-			        @MySeries23
+			        @MySeries
 	Scenario: TC_MS_142:Verify Suggested indicators -search for a Region
 	           And Select random series to my series tab 
 	           And Select all series  
@@ -884,7 +884,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Verify Suggested indicators search for a Region
 	
 	
-			        @MySeries23
+			        @MySeries
 	Scenario: TC_MS_143:Verify Suggested indicators- minimize and maximizeoption
 	           And Select random series to my series tab 
 	           And Select all series  
@@ -892,7 +892,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And select the minimize option
 	          And Verify Suggested indicators min and max option
 	
-			        @MySeries23
+			        @MySeries
 	Scenario: TC_MS_145:Verify Suggested indicators - resize window
 	           And Select random series to my series tab 
 	           And Select all series  
@@ -901,7 +901,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And Verify Suggested indicators expand option
 
 	
-			        @MySeries23
+			        @MySeries
 	Scenario: TC_MS_146:Verify Suggested indicators - window move
 	           And Select random series to my series tab 
 	           And Select all series  
@@ -909,7 +909,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	          And try to drag window
 	          And Verify Suggested indicators window move
 	
-			        @MySeries23
+			        @MySeries
 	Scenario: TC_MS_147:Verify Suggested indicators - close button(x)
 	           And Select random series to my series tab 
 	           And Select all series  
@@ -2421,7 +2421,7 @@ Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
 	             And Select the "Insert Copied" option
 		         And Verify Right click insert copied option in table mode  
 		
-	@MySeries9
+	@MySeries
 		Scenario: TC_MS_342:  Verify Right click insert copied growl message-in table mode 
 			And Select some series to my series tab 
 		    And Select all series 

@@ -3,7 +3,6 @@ package CDMNext.StepDefinations;
 import static org.junit.Assert.assertNotEquals;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
@@ -11,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+//import java.util.Set;
 import java.util.regex.Pattern;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -18,11 +18,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+//import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -59,7 +60,6 @@ public class CollabarationSharing {
 	public void navigate_insights() throws Throwable {
 		URL url = new URL(login.driver.getCurrentUrl());
 	    login.driver.get(url.getProtocol()+"://"+url.getHost()+"/Untitled-insight/myseries");
-	    CommonFunctionality.wait(2000);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -100,7 +100,6 @@ public class CollabarationSharing {
 		} else {
 		   new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 4)).pause(1000).click().build().perform();
 		}
-		//new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='View as a table']", 4)).pause(500).click().build().perform();
 		List<WebElement> untitled_count = login.driver.findElements(By.xpath(arg1));
 	    for(WebElement untitled:untitled_count) {
 	    new Actions(login.driver).moveToElement(untitled).pause(2000).contextClick().build().perform();
@@ -391,7 +390,6 @@ public class CollabarationSharing {
     	 }
     	CommonFunctionality.wait(4000);
     	}
-	    //CommonFunctionality.wait(2000);
     	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//span[@title='"+arg2+"']", 4).click();
 		permission_type = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='share-specific-search-user']//button//span[1]", 4).getText();
 		searched_user = arg1;
@@ -458,6 +456,128 @@ public class CollabarationSharing {
 		CommonFunctionality.wait(2000);
 	}
 	
+	//@SuppressWarnings("deprecation")
+	/*@And("^Enter mail for \"([^\"]*)\" with action as \"([^\"]*)\" an insight$")
+	public void enter_mail_for_with_action_as_an_insight(String arg1, String arg2) throws Throwable {
+		String parentWindow = login.driver.getWindowHandle();
+		WebDriver driver2 = new ChromeDriver();
+		Set<String> handles =  driver2.getWindowHandles();
+		for(String windowHandle : handles)
+	    {
+	       if(!windowHandle.equals(parentWindow)) {
+	        driver2.switchTo().window(windowHandle);
+	        driver2.manage().window().maximize();
+	        URL url1 = new URL(login.driver.getCurrentUrl()); 
+	  	    driver2.get(url1.getProtocol()+"://"+url1.getHost()+"/login");
+	  	    driver2.findElement(By.name("user_id")).sendKeys("ceicsuresh10@gmail.com");
+		    driver2.findElement(By.name("password")).sendKeys("Ceic@123");
+		    driver2.findElement(By.cssSelector("button[type='submit']")).click();
+		    CommonFunctionality.wait(20000);
+	        login.driver.switchTo().window(parentWindow); 
+	        CommonFunctionality.wait(5000);
+	        capture_the_creator_user_name();
+	        CommonFunctionality.wait(2000);
+	        if(arg1.equalsIgnoreCase("Multiple insights sharing")) {
+	        create_new_insights(3);
+	        cv.click_on_my_insights();
+	        cv.click_option_from_empty_list("View as a table");	
+	        select_newly_created_insights_in_table_mode();
+	        click_option("Insight Share");
+	        entering_mail_to_share_the_insight();
+	        perform_Share_action();
+	        } if(arg1.equalsIgnoreCase("Notification for shared insight")) {
+	        cv.click("File", "New");
+		    create_a_fresh_insight();
+	        cv.click_on_icon_to_share_insight("Insight");
+	        entering_mail_to_share_the_insight();
+	        perform_Share_action();
+	        }
+	        /*cv.click("File", "New");
+	        create_a_fresh_insight();
+		    CommonFunctionality.wait(10000);
+		    login.driver.findElement(By.cssSelector("*[title='Open File menu']")).click();
+		    CommonFunctionality.wait(1000);
+		    login.driver.findElement(By.xpath("//*[text()='Share']")).click();
+		    CommonFunctionality.wait(3000);
+		    String share_mail = "ceicsuresh13@gmail.com";
+		    WebElement mailing = login.driver.findElement(By.xpath("//input[@placeholder='Select people you want to invite']"));
+			CommonFunctionality.wait(2000);
+			new Actions(login.driver).moveToElement(mailing).click().sendKeys(share_mail).pause(2000).sendKeys(Keys.BACK_SPACE).build().perform();
+			CommonFunctionality.wait(2000);
+			WebElement result = login.driver.findElement(By.xpath("//*[contains(text(),'(ceicsuresh13@gmail.com)')]"));
+			js.executeScript("arguments[0].scrollIntoView(true);", result);
+			CommonFunctionality.wait(1000);
+			new Actions(login.driver).moveToElement(result).pause(1000).click().build().perform();
+			CommonFunctionality.wait(2000);
+		    login.driver.findElement(By.xpath("//*[text()='Save']")).click();
+		    CommonFunctionality.wait(500);
+		    login.driver.findElement(By.xpath("//*[text()='OK']")).click();*/
+		    /*CommonFunctionality.wait(2000);
+		    driver2.switchTo().window(windowHandle);
+		    CommonFunctionality.wait(2000);
+		    int actual = 0;
+		    String shared_username = null;
+		    String shared_insightname = null;
+		    String expected = null;
+		    List<WebElement> growl_display = null;
+		    String[] firstline = null;
+		    String[] secondline = null;
+		    String[] thirdline = null;
+		    if(arg1.equalsIgnoreCase("Multiple insights sharing")) {
+			List<WebElement> growl = driver2.findElements(By.className("growl-message-text"));  
+			actual = growl.size();
+			System.out.println("The number of insights displaying is: "+actual);
+			} if(arg1.equalsIgnoreCase("Notification for shared insight")) {
+	        driver2.findElement(By.className("user-notifications--icon")).click();
+	        WebElement notification = driver2.findElement(By.xpath("//*[@data-tab='notifications']"));
+	        if(notification.getAttribute("class").contains("active")) {
+	        	System.out.println("Notification tab is clicked already");
+	        } else {
+	        	notification.click();
+	        }
+	        CommonFunctionality.wait(3000);
+	        shared_username = driver2.findElement(By.xpath("(//div[@class='insights-notifications-item-body']//b)[1]")).getText();
+	        shared_insightname = driver2.findElement(By.xpath("(//div[@class='insights-notifications-item-body']//a)[1]")).getText();
+	        System.out.println("The insight details are: "+shared_username+ " and "+shared_insightname);
+	        driver2.findElement(By.cssSelector(".user-notifications.dropdown__open")).click();
+	        } if(arg1.equalsIgnoreCase("Growl message for shared insight")) {
+	        expected = driver2.findElement(By.className("growl-message-text")).getText();
+	        System.out.println(expected);
+	        growl_display = driver2.findElements(By.className("growl-messages-container"));
+	        System.out.println(expected);
+	        firstline = expected.split("\n");
+		    secondline = firstline[2].split("\n");
+		    thirdline = secondline[0].split("\n");	        	
+	        }
+		    /*String expected = driver2.findElement(By.className("growl-message-text")).getText();
+		    String firstline[] = expected.split("\n");
+		    String secondline[] = firstline[2].split("\n");
+		    String action[] = firstline[1].split("\\s");
+		    String action2[] = action[1].split("\\s");
+		    String thirdline[] = secondline[0].split("\n");*/
+		    /*driver2.switchTo().window(windowHandle).close();
+		    login.driver.switchTo().window(parentWindow);
+		    if(arg1.equalsIgnoreCase("Multiple insights sharing")) {
+		    assertEquals(actual, 3);
+		    }  if(arg1.equalsIgnoreCase("Notification for shared insight")) {
+		    assertEquals(creator_name, shared_username);
+		    assertEquals(new_insight_name, shared_insightname);
+		    } if(arg1.equalsIgnoreCase("Growl message for shared insight")) {
+		    assertEquals(growl_display.size(), 1);
+		    assertEquals(creator_name, firstline[0]);
+			assertEquals(new_insight_name, thirdline[0]);
+		    }
+		    /*System.out.println("The creator name is: "+firstline[0]);
+		    System.out.println("The Insight name is: "+secondline[0]);
+		    System.out.println("The Insight action is: "+action2[0]);
+		    assertEquals(creator_name, firstline[0]);
+		    assertEquals(new_insight_name, thirdline[0]);
+		    assertEquals(action2[0], arg2);*/
+	     //}
+	     //login.Log4j.info("The growl popup is displaying");
+	  //}
+	//}*/
+		    
 	@SuppressWarnings("deprecation")
 	@And("^Login back to default execution login$")
 	public void login_back_to_default_execution_login() throws Throwable {
@@ -626,15 +746,14 @@ public class CollabarationSharing {
 	    }
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Then("^The newly created Insights should appear in next user login$")
 	public void the_newly_created_Insights_should_appear_in_next_user_login() throws Throwable {
-		if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+		/*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 		    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 			if(open.getAttribute("class").contains("dropdown--body__open")) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
 			} 
-		}
+		}*/
 	    WebElement insight1 = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+first_insight+"']", 4);
 	    WebElement insight2 = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+second_insight+"']", 4);
 	    WebElement insight3 = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+third_insight+"']", 4);
@@ -645,15 +764,14 @@ public class CollabarationSharing {
 	    }
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Then("^The newly created Insight should appear in next user login at first place$")
 	public void the_newly_created_Insight_should_appear_in_next_user_login_at_first_place() throws Throwable {
-		if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+		/*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 		    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 			if(open.getAttribute("class").contains("dropdown--body__open")) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
 			} 
-		}
+		}*/
 		WebElement first = CommonFunctionality.getElementByXpath(login.driver, "(//div[contains(@class,'insight-grid-item--bottom-panel-title')])[1][@title='"+new_insight_name+"']", 4);
 	    List<WebElement> first_insight = login.driver.findElements(By.xpath("(//div[contains(@class,'insight-grid-item--bottom-panel-title')])[1][@title='"+new_insight_name+"']"));
 	    assertEquals(first.isDisplayed(), true);
@@ -688,7 +806,7 @@ public class CollabarationSharing {
 	  	} else {
 	  	   new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a grid']", 4)).pause(500).click().build().perform();
 	  	}
-	  	if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+	  	/*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 		    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 			if(open.getAttribute("class").contains("dropdown--body__open")) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
@@ -696,7 +814,7 @@ public class CollabarationSharing {
 			} 
 		} else {
 			System.out.println("No notification pop up displayed");
-		}
+		}*/
 		WebElement permission = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+new_insight_name+"']", 4);
 		new Actions(login.driver).moveToElement(permission).pause(2000).perform();
 	    if(arg1.equalsIgnoreCase("view")) {
@@ -903,16 +1021,15 @@ public class CollabarationSharing {
 		assertEquals(permission_type, permission_text);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Then("^The newly created Insight should appear in second login before stopping of sharing with shared user name$")
 	public void the_newly_created_Insight_should_appear_in_second_login_before_stopping_of_sharing_with_shared_user_name() throws Throwable {
 	    cv.click_on_my_insights();
-	    if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+	    /*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 		    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 			if(open.getAttribute("class").contains("dropdown--body__open")) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
 			} 
-		}
+		}*/
 	    click_tab("Shared");
 	    CommonFunctionality.wait(2000);
 		WebElement before_stop_sharing = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'insight-grid-item--bottom-panel-title') and @title='"+new_insight_name+"']", 4);
@@ -922,17 +1039,16 @@ public class CollabarationSharing {
 	    assertEquals(creator_name, creator);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Then("^The newly created insight should vanish in second login when insight is stopped sharing$")
 	public void the_newly_created_insight_should_vanish_in_second_login_when_insight_is_stopped_sharing() throws Throwable {
 	    login_as_next_user();
 	    cv.click_on_my_insights();
-	    if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+	    /*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 		    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 			if(open.getAttribute("class").contains("dropdown--body__open")) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
 			} 
-		}
+		}*/
 	    click_tab("Shared");
 	    CommonFunctionality.wait(2000);
 	    List<WebElement> after_stop = login.driver.findElements(By.xpath("//div[contains(@class,'insight-grid-item--bottom-panel-title') and @title='"+new_insight_name+"']"));
@@ -973,7 +1089,6 @@ public class CollabarationSharing {
 	    deleting_insights("//*[text()='Name your insigh']");
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Then("^Perform some actions in Manage insight of next login$")
 	public void perform_some_actions_in_Manage_insight_of_next_login() throws Throwable {
 		the_newly_created_insight_should_appear_as_permission_in_next_user_login("manage");
@@ -982,12 +1097,12 @@ public class CollabarationSharing {
 		}
 		List<WebElement> before = login.driver.findElements(By.className("insight-page-view-tab--title"));
 		int before_refresh = before.size();
-		if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+		/*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 		    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 			if(open.getAttribute("class").contains("dropdown--body__open")) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
 			} 
-		}
+		}*/
 		CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Open File menu']", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[text()='Refresh']", 4).click();
 		CommonFunctionality.wait(2000);
@@ -1009,12 +1124,12 @@ public class CollabarationSharing {
 	  	}
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+new_insight_name+"']", 4)).pause(1000).perform();
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Open')]", 4)).pause(500).click().build().perform();
-	    if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+	    /*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 		    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 			if(open.getAttribute("class").contains("dropdown--body__open")) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
 			} 
-		}
+		}*/
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 4)).pause(200).click().build().perform();
 	    List<WebElement> save_all = login.driver.findElements(By.xpath("//*[@class='items-wrapper']//*[text()='"+arg2+"']/ancestor::li"));
 		for(WebElement save:save_all) {
@@ -1044,12 +1159,12 @@ public class CollabarationSharing {
 	  	}
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+new_insight_name+"']", 4)).pause(1000).perform();
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Open')]", 4)).pause(500).click().build().perform();
-	    if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
+	    /*if(login.driver.findElements(By.xpath("//*[contains(@class,'user-notifications--body')]")).size()>0) {
 	    WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'user-notifications--body')]", 4);
 		if(open.getAttribute("class").contains("dropdown--body__open")) {
 			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "user-notifications--icon", 4)).pause(500).click().build().perform();
 		} 
-	    }
+	    }*/
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 4)).pause(200).click().build().perform();
 		List<WebElement> saving = login.driver.findElements(By.xpath("//*[@class='items-wrapper']//*[@title='"+arg2+"']/parent::*"));
 		for(WebElement save: saving) {

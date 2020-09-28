@@ -9,10 +9,11 @@ import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
+
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@DB1"}, 
+		tags = {"@ChartVisual1"}, 
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
@@ -22,8 +23,8 @@ import CDMNext.StepDefinations.login;
 public class TestRunner {
 
 	private TestNGCucumberRunner testNGCucumberRunner;
-
-
+	//CommonFunctionality commonUtilities = new CommonFunctionality();
+	
 	@BeforeSuite
 	public void setUpClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @BeforeSuite");
@@ -32,9 +33,8 @@ public class TestRunner {
 		HTML_Report.html_Header();
 
 	}
-
-	// TestNG @Test
-
+		
+	// TestNG @TestZZZ
 	@Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
 	public void feature(CucumberFeatureWrapper cucumberFeature) throws Throwable {
 		login.Log4j.info("\nInside TestNG > @Test");

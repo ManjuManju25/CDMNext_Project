@@ -34,7 +34,7 @@ import cucumber.api.java.en.Then;
 
 public class CDMNextSprintCases {
 
-	WebDriverWait wait = new WebDriverWait(login.driver, 60);
+	WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
 	SoftAssert sa = new SoftAssert();
 	public static String date_text;
@@ -177,6 +177,7 @@ public class CDMNextSprintCases {
 
 	@And("^Refresh page$")
 	public void refreshe_page() throws Throwable {
+		CommonFunctionality.wait(500);
 		login.driver.navigate().refresh();
 	}
 
@@ -698,10 +699,7 @@ public class CDMNextSprintCases {
 
 	@And("^Navigating to back$")
 	public void navigating_to_back() throws Throwable {
-		CommonFunctionality.wait(1000);
 		login.driver.navigate().back();
-		CommonFunctionality.wait(1000);
-		login.driver.navigate().refresh();
 	}
 
 	@And("^Click on my insights$")
@@ -2954,7 +2952,7 @@ public class CDMNextSprintCases {
 
 	@And("^Click \"([^\"]*)\" from the drop down$")
 	public void click_from_the_drop_down(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Quarterly") || arg1.equalsIgnoreCase("Yearly (Sum)")) {
+		if (arg1.contains("Quarterly") || arg1.equalsIgnoreCase("Yearly (Sum)") || arg1.equalsIgnoreCase("Monthly (Distribute)")) {
 			frequency_text = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='context-menu-item link' and contains(@title,'"+arg1+"')]", 4).getAttribute("title");
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -3086,9 +3084,9 @@ public class CDMNextSprintCases {
 	// TC_Cvision_16283_01 to TC_Cvision_16283_12
 	@Then("^Series selected should be removed$")
 	public void series_selected_should_be_removed() throws Throwable {
-		if (login.driver.findElements(By.className("growl-message-close")).size() > 0) {
+		/*if (login.driver.findElements(By.className("growl-message-close")).size() > 0) {
 			login.driver.findElement(By.className("growl-message-close")).click();
-		}
+		}*/
 		if (login.driver
 				.findElements(By.xpath("//*[text()='Series Harmonization']//following::*[contains(text(),'Apply')]"))
 				.size() > 0) {
@@ -3788,8 +3786,7 @@ public class CDMNextSprintCases {
 		login.driver.findElement(By.xpath("(//*[@class='movable-modal--close'])[2]")).click();
 		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath("//*[@class='movable-modal--close']")).click();
-		login.Log4j.info(
-				arg1 + ", " + arg2 + ", " + arg3 + " and " + arg4 + " actions are possible and it has been verified");
+		login.Log4j.info(arg1 + ", " + arg2 + ", " + arg3 + " and " + arg4 + " actions are possible and it has been verified");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -4556,14 +4553,6 @@ public class CDMNextSprintCases {
 			if(login.driver.findElements(By.xpath("//*[contains(@class,'modal-dialog')]//*[text()='Ok']")).size()>0) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'modal-dialog')]//*[text()='Ok']", 4).click();
 			}
-			/*List<WebElement> views = login.driver.findElements(
-					By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
-			if (views.size() > 0) {
-				for (WebElement view : views) {
-					new Actions(login.driver).contextClick(view).build().perform();
-					CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 8)
-							.click();
-				}*/
 			CommonFunctionality.Views_list();
 			}
 	}

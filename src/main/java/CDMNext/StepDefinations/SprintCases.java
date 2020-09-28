@@ -39,23 +39,30 @@ public class SprintCases {
 	public void create_India_map_with_indian_cities_supporting_subnational_attribute() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 20).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 20).click();
-		//Expand 1st db till series level
-		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='database-node tree-node'])[1]/*[1]", 200).click();
+		// Expand 1st db till series level
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='database-node tree-node'])[1]/*[1]", 200)
+				.click();
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300).click();
+		CommonFunctionality
+				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.click();
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300).click();
+		CommonFunctionality
+				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.click();
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'full-expanded open last-open-node')]/*[3]/*[1]/*[1]", 300).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'full-expanded open last-open-node')]/*[3]/*[1]/*[1]", 300).click();
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300).click();
-		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",100);
+		CommonFunctionality
+				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.click();
+		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 100);
 		new Actions(login.driver).pause(500).contextClick(sname).perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'View on India Map')]", 20).click();
-		
+
 	}
 
-	
 	@Then("^Andhra Pradesh subnational city should appear on India map$")
 	public void andhra_Pradesh_subnational_city_should_appear_on_India_map() throws Throwable {
 		Thread.sleep(5000);
@@ -65,54 +72,38 @@ public class SprintCases {
 					.findElement(By.xpath("//*[contains(@class,'highcharts-data-label ')]/*/*[2]")).getText();
 			login.Log4j.info("Subnational attribute is " + subnational_attribute);
 			if (subnational_attribute.equals(SearchTest.currentKeyword)) {
+				CommonFunctionality.Views_list();
 				login.Log4j.info("Subnational attribute is plotted on an indian map");
 			}
 		} catch (Exception e) {
 			CommonFunctionality.Views_list();
 			Assert.fail("Subnational attribute is not plotted on an indian map");
 		}
-		
-		
-//		List<WebElement> list_of_states = login.driver
-//				.findElements(By.xpath("//div[@class='visual-item']/div/*/*[10]/*//*/*"));
-		/*if (list_of_states.size() > 0) {
-			for (int i = 0; i < list_of_states.size(); i++) {
-				// int j = i + 1;
-				CommonFunctionality.wait(1000);
-				String state = list_of_states.get(i).getText();
-				login.Log4j.info(state);
-				if (state.equals("Andhra Pradesh")) {
-					// Thread.sleep(2000);
-					WebElement ele = list_of_states.get(i);
-					CommonFunctionality.action.moveToElement(ele).pause(2000).build().perform();
-					String tooltip = login.driver.findElement(By.xpath(
-							"//div[@class='highcharts-label highcharts-tooltip highcharts-color-0']//span//div[@class='table-tooltip']"))
-							.getText();
-					// login.Log4j.info(tooltip);
-					String tooltipArr[] = tooltip.split("\n");
-					for (int m = 0; m < tooltipArr.length; m++) {
-						int n = m + 1;
-						// login.Log4j.info(tooltipArr);
 
-						if (tooltipArr[n].contains("Subnational") == true) {
-							String[] arr = tooltipArr[n].split(":");
-							String subnational = arr[1].trim();
-							login.Log4j.info(subnational);
-							if (subnational.equals(SearchTest.currentKeyword) == true) {
-								login.Log4j.info("PASS");
-								break;
-							}
-
-						}
-					}
-					break;
-				}
-			}
-		} else {
-			CommonFunctionality.Views_list();
-			Assert.fail("Subnational attribute is not plotted on an indian map");
-		}*/
-		
+		// List<WebElement> list_of_states = login.driver
+		// .findElements(By.xpath("//div[@class='visual-item']/div/*/*[10]/*//*/*"));
+		/*
+		 * if (list_of_states.size() > 0) { for (int i = 0; i < list_of_states.size();
+		 * i++) { // int j = i + 1; CommonFunctionality.wait(1000); String state =
+		 * list_of_states.get(i).getText(); login.Log4j.info(state); if
+		 * (state.equals("Andhra Pradesh")) { // Thread.sleep(2000); WebElement ele =
+		 * list_of_states.get(i);
+		 * CommonFunctionality.action.moveToElement(ele).pause(2000).build().perform();
+		 * String tooltip = login.driver.findElement(By.xpath(
+		 * "//div[@class='highcharts-label highcharts-tooltip highcharts-color-0']//span//div[@class='table-tooltip']"
+		 * )) .getText(); // login.Log4j.info(tooltip); String tooltipArr[] =
+		 * tooltip.split("\n"); for (int m = 0; m < tooltipArr.length; m++) { int n = m
+		 * + 1; // login.Log4j.info(tooltipArr);
+		 * 
+		 * if (tooltipArr[n].contains("Subnational") == true) { String[] arr =
+		 * tooltipArr[n].split(":"); String subnational = arr[1].trim();
+		 * login.Log4j.info(subnational); if
+		 * (subnational.equals(SearchTest.currentKeyword) == true) {
+		 * login.Log4j.info("PASS"); break; }
+		 * 
+		 * } } break; } } } else { CommonFunctionality.Views_list();
+		 * Assert.fail("Subnational attribute is not plotted on an indian map"); }
+		 */
 
 	}
 
@@ -120,7 +111,7 @@ public class SprintCases {
 	public void open_ssp_window() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']" , 20).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 20).click();
 		Thread.sleep(2000);
 		minimize = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Minimize']")))
 				.getAttribute("title");
@@ -128,7 +119,7 @@ public class SprintCases {
 
 	@And("^Minimize ssp window$")
 	public void minimize_ssp_window() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Minimize']" ,20).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Minimize']", 20).click();
 	}
 
 	@Then("^The modal window should get collapsed into row$")
@@ -137,7 +128,9 @@ public class SprintCases {
 				.getAttribute("title");
 		if (minimize.equals(maximize) != true) {
 			login.Log4j.info("SSP window is minimized");
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Close']"))).click();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+					"//*[contains(@class,'movable-modal__active movable-modal__collapsed')]//*[@title='Close']")))
+					.click();
 
 		} else {
 			Assert.fail("Verifivation failed");
@@ -157,27 +150,26 @@ public class SprintCases {
 	public void for_search_results_less_than_the_system_will_display_all_the_tables_and_on_the_first_table_down_to_series_level(
 			int arg1) throws Throwable {
 		Thread.sleep(5000);
-		List<WebElement> seriesLevel_ULele = login.driver.findElements(By.xpath("//*[contains(@class,'search-series-list')]"));
+		List<WebElement> seriesLevel_ULele = login.driver
+				.findElements(By.xpath("//*[contains(@class,'search-series-list')]"));
 		login.Log4j.info("size : " + seriesLevel_ULele.size());
 		if (seriesLevel_ULele.size() == 1 || seriesLevel_ULele.size() > 1) {
-			login.Log4j.info(
-					"Series level is displayed for less than " + arg1 + " search results");
+			login.Log4j.info("Series level is displayed for less than " + arg1 + " search results");
 		} else {
 			Assert.fail("Verification failed");
 		}
 	}
 
-
 	@Then("^For search results less than (\\d+), the system will expand all the levels$")
 	public void for_search_results_less_than_the_system_will_expand_all_the_levels(int arg1) throws Throwable {
 		Thread.sleep(5000);
-		List<WebElement> seriesLevel = login.driver.findElements(By.xpath(
-				"//*[@class='database-node tree-node open full-expanded']"));
+		List<WebElement> seriesLevel = login.driver
+				.findElements(By.xpath("//*[@class='database-node tree-node open full-expanded']"));
 		login.Log4j.info("size : " + seriesLevel.size());
 		for (int i = 0; i < seriesLevel.size(); i++) {
 			Thread.sleep(1000);
 			WebElement SeriesLevel = seriesLevel.get(i);
-			//CommonFunctionality.action.pause(500).moveToElement(SeriesLevel).build().perform();
+			// CommonFunctionality.action.pause(500).moveToElement(SeriesLevel).build().perform();
 			if (SeriesLevel.isDisplayed()) {
 				login.Log4j.info("series are expanded till series level for search results than " + arg1);
 			} else {
@@ -190,9 +182,9 @@ public class SprintCases {
 	@And("^Hover the mouse over series in Search panel or in My series tab$")
 	public void hover_the_mouse_over_series_in_Search_panel_or_in_My_series_tab() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver,"Series",20)
-				.click();
-		WebElement seriesName = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",20);
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
+		WebElement seriesName = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",
+				20);
 		CommonFunctionality.action.pause(1000).moveToElement(seriesName).build().perform();
 	}
 
@@ -240,13 +232,14 @@ public class SprintCases {
 		Thread.sleep(2000);
 		login.driver.navigate().refresh();
 		CommonFunctionality.ContinueSameInsight();
-		WebElement eleChanges = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]",30);
+		WebElement eleChanges = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(text(),'" + arg1 + "')]", 30);
 		if (eleChanges.isDisplayed()) {
 			login.Log4j.info(arg1 + " is displayed");
 		}
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//*[@title='Close']")).click();
-		if(arg1.equals("Replacements")) {
+		if (arg1.equals("Replacements")) {
 			CommonFunctionality.Views_list();
 		}
 	}
@@ -254,31 +247,32 @@ public class SprintCases {
 	@And("^Right click on the View and select Copy View$")
 	public void right_click_on_the_View_and_select_Copy_View() throws Throwable {
 		CommonFunctionality.wait(5000);
-		WebElement eleView1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]", 30);
+		WebElement eleView1 = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]", 30);
 		view1 = eleView1.getText();
 		new Actions(login.driver).contextClick(eleView1).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Copy view')]", 20).click();
-		
+
 	}
 
 	@And("^Paste in the View section$")
 	public void paste_in_the_View_section() throws Throwable {
 		Thread.sleep(2000);
-		WebElement eleView1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]", 30);
+		WebElement eleView1 = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]", 30);
 		new Actions(login.driver).contextClick(eleView1).build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Paste view(s)')]",20)
-				.click();
-		//CommonFunctionality.ContinueSameInsight();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Paste view(s)')]", 20).click();
+		// CommonFunctionality.ContinueSameInsight();
 	}
 
 	@And("^Paste in the View section for new insight$")
 	public void paste_in_the_View_section_for_new_insight() throws Throwable {
-		//paste_in_the_View_section();
+		// paste_in_the_View_section();
 		Thread.sleep(2000);
-		WebElement eleView1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]", 30);
+		WebElement eleView1 = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]", 30);
 		new Actions(login.driver).contextClick(eleView1).build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Paste view(s)')]",20)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Paste view(s)')]", 20).click();
 	}
 
 	@And("^Create new insight$")
@@ -295,9 +289,9 @@ public class SprintCases {
 
 	@Then("^The copied View and its contents should be pasted in other/new insight$")
 	public void the_copied_View_and_its_contents_should_be_pasted_in_other_new_insight() throws Throwable {
-		//CommonFunctionality.ReplacementPopUpClose();
+		// CommonFunctionality.ReplacementPopUpClose();
 		CopyView_Sameinsight();
-		//CommonFunctionality.Views_list();
+		// CommonFunctionality.Views_list();
 		DeleteInsight();
 	}
 
@@ -315,26 +309,27 @@ public class SprintCases {
 
 	@Then("^All Views and contents from the insight should be pasted in the same insight$")
 	public void all_Views_and_contents_from_the_insight_should_be_pasted_in_the_same_insight() throws Throwable {
-		//CommonFunctionality.ReplacementPopUpClose();
+		// CommonFunctionality.ReplacementPopUpClose();
 		CopyView_Newinsight();
-		CommonFunctionality.Views_list();
+		CommonFunctionality.ContinueSameInsight();
+		CommonFunctionality.Delete_AllViews();
 	}
 
 	@Then("^All Views and contents from the insight should be pasted in the new/other insight$")
 	public void all_Views_and_contents_from_the_insight_should_be_pasted_in_the_new_other_insight() throws Throwable {
 		CopyView_Newinsight();
 		try {
-			//delete insight
+			// delete insight
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Delete')]", 20).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Delete forever')]", 20).click();
 			CommonFunctionality.wait(20000);
-			//CommonFunctionality.ContinueSameInsight();
-//			CommonFunctionality.wait(5000);
-			CommonFunctionality.Views_list();
-			
-		} catch(Exception e) {
-			
+			// CommonFunctionality.ContinueSameInsight();
+			// CommonFunctionality.wait(5000);
+			CommonFunctionality.Delete_AllViews();
+
+		} catch (Exception e) {
+
 		}
 	}
 
@@ -370,7 +365,7 @@ public class SprintCases {
 		Thread.sleep(2000);
 		WebElement Gradient = login.driver.findElement(By.xpath("//*[contains(text(),'Gradient')]"));
 		Gradient.click();
-		
+
 	}
 
 	@Then("^Default value should be \"([^\"]*)\" and the steps range should be from \"([^\"]*)\"$")
@@ -462,11 +457,11 @@ public class SprintCases {
 		if (color_picker.isDisplayed() == true) {
 			login.Log4j.info("Color picker is displayed");
 		} else {
-//			Thread.sleep(1000);
-//			login.driver.findElement(By.xpath("//*[@title='Close']")).click();
-//			Thread.sleep(1000);
-//			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-//			CommonFunctionality.Views_list();
+			// Thread.sleep(1000);
+			// login.driver.findElement(By.xpath("//*[@title='Close']")).click();
+			// Thread.sleep(1000);
+			// login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+			// CommonFunctionality.Views_list();
 			Assert.fail("Color picker is not displayed");
 		}
 		Thread.sleep(1000);
@@ -507,7 +502,8 @@ public class SprintCases {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//li[1]//*[@class='series-list-item--checkbox svg-checkbox']")).click();
-		//CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Create new View tab']", 20).click();
+		// CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Create new
+		// View tab']", 20).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 				"//*[@data-type='world']//*[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")))
 				.click();
@@ -520,10 +516,13 @@ public class SprintCases {
 		String Taiwan_attribute = null;
 		try {
 			CommonFunctionality.wait(5000);
-//			Taiwan_attribute = login.driver
-//					.findElement(By.xpath("//*[@class='highcharts-container ']/*//*[contains(@class,'highcharts-data-labels highcharts-series-2')]/*[1]/*[1]/*[@class='highcharts-text-outline']")).getText();
-			Taiwan_attribute = login.driver
-					.findElement(By.xpath("//*[@class='highcharts-container ']/*//*[contains(@class,'highcharts-data-labels highcharts-series-2')]/*[1]/*[1]/*[2]")).getAttribute("innerHTML");
+			// Taiwan_attribute = login.driver
+			// .findElement(By.xpath("//*[@class='highcharts-container
+			// ']/*//*[contains(@class,'highcharts-data-labels
+			// highcharts-series-2')]/*[1]/*[1]/*[@class='highcharts-text-outline']")).getText();
+			Taiwan_attribute = login.driver.findElement(By.xpath(
+					"//*[@class='highcharts-container ']/*//*[contains(@class,'highcharts-data-labels highcharts-series-2')]/*[1]/*[1]/*[2]"))
+					.getAttribute("innerHTML");
 			login.Log4j.info(Taiwan_attribute);
 			if (Taiwan_attribute.equals("Taiwan")) {
 				login.Log4j.info("Taiwan is included in China map");
@@ -542,24 +541,22 @@ public class SprintCases {
 
 	}
 
-	/*@SuppressWarnings("deprecation")
-	@And("^Create a new template and \"([^\"]*)\"$")
-	public void create_a_new_template_and(String arg1) throws Throwable {
-		WebElement add_template = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'add-style-template')]", 4);
-		if (arg1.equalsIgnoreCase("Template popup")) {
-			if (add_template.getAttribute("class").contains("add-style-template__active")) {
-				login.Log4j.info("Add Custom template icon is Enabled and Displayed");
-				add_template.click();
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='add-template-context--wrapper']//*[contains(@class,'add-template-context--input')]",
-						4).sendKeys(Cvision.send);
-				new Actions(login.driver).pause(2000).sendKeys(Keys.ENTER).perform();
-			}
-		} else {
-			fail("Add template popup is not enabled");
-		}
-	}*/
+	/*
+	 * @SuppressWarnings("deprecation")
+	 * 
+	 * @And("^Create a new template and \"([^\"]*)\"$") public void
+	 * create_a_new_template_and(String arg1) throws Throwable { WebElement
+	 * add_template = CommonFunctionality.getElementByXpath(login.driver,
+	 * "//*[contains(@class,'add-style-template')]", 4); if
+	 * (arg1.equalsIgnoreCase("Template popup")) { if
+	 * (add_template.getAttribute("class").contains("add-style-template__active")) {
+	 * login.Log4j.info("Add Custom template icon is Enabled and Displayed");
+	 * add_template.click(); CommonFunctionality.getElementByXpath(login.driver,
+	 * "//*[@class='add-template-context--wrapper']//*[contains(@class,'add-template-context--input')]",
+	 * 4).sendKeys(Cvision.send); new
+	 * Actions(login.driver).pause(2000).sendKeys(Keys.ENTER).perform(); } } else {
+	 * fail("Add template popup is not enabled"); } }
+	 */
 
 	@SuppressWarnings("deprecation")
 	@And("^Create multiple templates$")
@@ -578,15 +575,20 @@ public class SprintCases {
 						"//*[@class='add-template-context--wrapper']//*[contains(@class,'add-template-context--input')]",
 						10).sendKeys(send[i]);
 				new Actions(login.driver).pause(1000).sendKeys(Keys.ENTER).perform();
-				/*if (login.driver.findElements(By.className("sphere-modal__content")).size() > 0) {
-					CommonFunctionality.getElementByXpath(login.driver,
-							"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10).click();
-				}*/
+				try {
+					// If confirmation popup is open...click on Ok
+					CommonFunctionality.wait(500);
+				login.driver.findElement(By.xpath("//*[@class='modal-content sphere-modal__content']//button[contains(text(),'Ok')]"))
+							.click();
+				} catch (Exception e) {
+					// confirmation popup is not opened
+				}
 
 				UncheckORCheckLegendOption(arg);
 			}
 		}
 	}
+
 	@Then("^Selected template should be highlighted in the template Menu$")
 	public void selected_template_should_be_highlighted_in_the_template_Menu() throws Throwable {
 		String arg1 = "Delete template";
@@ -596,36 +598,37 @@ public class SprintCases {
 				.getAttribute("title");
 		assertEquals(CDMNextSprintCases.title_text, style);
 		login.Log4j.info("Selected template is visible/highlighted in the template menu");
-					
-	for (String template : send) {
-		CommonFunctionality.wait(2000);
-		List<WebElement> deleting_template = login.driver.findElements(By.xpath("//*[@class='style-templates-menu--items']/*"));
-			for(int i = 0 ;i < deleting_template.size() ; i++) {
+
+		for (String template : send) {
+			CommonFunctionality.wait(2000);
+			List<WebElement> deleting_template = login.driver
+					.findElements(By.xpath("//*[@class='style-templates-menu--items']/*"));
+			for (int i = 0; i < deleting_template.size(); i++) {
 				String templateStr = deleting_template.get(i).getAttribute("title");
-				if(template.equalsIgnoreCase(templateStr)) {
+				if (template.equalsIgnoreCase(templateStr)) {
 					CommonFunctionality.wait(300);
-					login.driver.findElement(By.xpath("//*[@class='style-templates-menu--items']//*[@title='" + template + "']//*[@title='" + arg1 + "']")).click();
+					login.driver.findElement(By.xpath("//*[@class='style-templates-menu--items']//*[@title='" + template
+							+ "']//*[@title='" + arg1 + "']")).click();
 					if (login.driver.findElements(By.xpath("//*[contains(@class,'modal-content')]//*[text()='Ok']"))
 							.size() > 0) {
-						CommonFunctionality
-								.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 10)
-								.click();
+						CommonFunctionality.getElementByXpath(login.driver,
+								"//*[contains(@class,'modal-content')]//*[text()='Ok']", 10).click();
 						break;
 					}
-					
+
 				}
 
 			}
 		}
-	CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 20).click();
-	if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
-			.size() > 0) {
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 20)
-				.click();
-	}
+		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 20).click();
+		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
+				.size() > 0) {
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 20).click();
+		}
 		CommonFunctionality.Views_list();
 	}
+
 	@Then("^The new template should be created$")
 	public static void the_new_template_should_be_created() throws Throwable {
 		String arg1 = "Delete template";
@@ -639,9 +642,8 @@ public class SprintCases {
 		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
 		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']"))
 				.size() > 0) {
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10)
-					.click();
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 10).click();
 		}
 		CommonFunctionality.Views_list();
 	}
@@ -661,49 +663,47 @@ public class SprintCases {
 		SeriesTab.click();
 		Thread.sleep(3000);
 		WebElement sname = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
-	CommonFunctionality.action.moveToElement(sname).build().perform();
-	login.driver.findElement(By.xpath("//span[@class='view-chart-icon menu-icon']")).click();
-	
-		/*	// data in ssp
-		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//div[@class='tabs__tabs-box']//div[2]")).click();
+		CommonFunctionality.action.moveToElement(sname).build().perform();
+		login.driver.findElement(By.xpath("//span[@class='view-chart-icon menu-icon']")).click();
+
+		/*
+		 * // data in ssp Thread.sleep(3000);
+		 * login.driver.findElement(By.xpath("//div[@class='tabs__tabs-box']//div[2]")).
+		 * click(); Thread.sleep(5000); List<WebElement> time_points =
+		 * login.driver.findElements(By.xpath(
+		 * "//div[@class='preview-series-time-points']//div//span[@class='preview-series-time-points--point-value']"
+		 * )); login.Log4j.info("Size of timepoints " + time_points.size()); for (int i
+		 * = 0; i < time_points.size(); i++) { Thread.sleep(6000); int j = i + 1;
+		 * System.out.println(i); System.out.println(time_points.size()); WebElement
+		 * element = login.driver.findElement(By.xpath(
+		 * "//div[@class='preview-series-time-points']//div[" + j +
+		 * "]//span[@class='preview-series-time-points--point-value']")); String str =
+		 * element.getText(); login.Log4j.info("Time_point_value " + str);
+		 * 
+		 * }
+		 */
+		// chart visual in view pannel
+
 		Thread.sleep(5000);
-		List<WebElement> time_points = login.driver.findElements(By.xpath(
-				"//div[@class='preview-series-time-points']//div//span[@class='preview-series-time-points--point-value']"));
+		List<WebElement> time_points = login.driver.findElements(By.xpath("//*[@class='highcharts-point']"));
 		login.Log4j.info("Size of timepoints " + time_points.size());
 		for (int i = 0; i < time_points.size(); i++) {
-			Thread.sleep(6000);
+			Thread.sleep(4000);
 			int j = i + 1;
 			System.out.println(i);
 			System.out.println(time_points.size());
-			WebElement element = login.driver.findElement(By.xpath("//div[@class='preview-series-time-points']//div["
-					+ j + "]//span[@class='preview-series-time-points--point-value']"));
-			String str = element.getText();
-			login.Log4j.info("Time_point_value " + str);
+			WebElement element = login.driver.findElement(By.xpath("//*[@class='highcharts-point'][" + j + "]"));
+			CommonFunctionality.action.moveToElement(element).build().perform();
+			Thread.sleep(2000);
+			String ele = login.driver.findElement(By.xpath("//*[@visibility='visible']")).getText();
+			CommonFunctionality.jse.executeScript(ele);
+			login.Log4j.info(ele);
+			element = login.driver.findElement(
+					By.xpath("//*[@class='highcharts-label highcharts-tooltip highcharts-color-undefined']/span/b"));
+			String str1 = element.getText();
+			login.Log4j.info("Time_point_value " + str1);
 
-		}*/
-		   //chart visual in view pannel
-		  
-		  	
-			Thread.sleep(5000);
-			List<WebElement> time_points=login.driver.findElements(By.xpath("//*[@class='highcharts-point']"));
-			   login.Log4j.info("Size of timepoints "+time_points.size() );
-			   for(int i=0;i<time_points.size();i++) {
-				   Thread.sleep(4000);
-				   int j=i+1;
-				   System.out.println(i);
-				   System.out.println(time_points.size());
-				   WebElement element=login.driver.findElement(By.xpath("//*[@class='highcharts-point'][" + j + "]"));
-				  CommonFunctionality.action.moveToElement(element).build().perform();
-				   Thread.sleep(2000);
-				   String ele = login.driver.findElement(By.xpath("//*[@visibility='visible']")).getText();
-				   CommonFunctionality.jse.executeScript(ele);
-				   login.Log4j.info(ele);
-			       element=login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-tooltip highcharts-color-undefined']/span/b"));
-			       String str1 =element.getText();
-				   login.Log4j.info("Time_point_value " + str1);
-				   	  
-			   }
+		}
 	}
 
 	void CopyView_Sameinsight() throws Exception {
@@ -719,6 +719,7 @@ public class SprintCases {
 			Assert.fail("Verification is failed");
 		}
 	}
+
 	void CopyView_Newinsight() throws Exception {
 		Thread.sleep(2000);
 		List<String> views = new ArrayList<>();
@@ -757,21 +758,23 @@ public class SprintCases {
 		login.Log4j.info("Unselecting " + arg + " option");
 		wait.until(ExpectedConditions.elementToBeClickable(legend)).click();
 	}
+
 	void DeleteInsight() {
 		try {
-			//delete insight
+			// delete insight
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Delete')]", 20).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Delete forever')]", 20).click();
 			CommonFunctionality.wait(7000);
 			CommonFunctionality.ContinueSameInsight();
-			login.driver.findElement(
-					By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]")).click();
+			login.driver
+					.findElement(By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"))
+					.click();
 			CommonFunctionality.DeleteVisual();
 			CommonFunctionality.DeleteSeries();
-			
-		} catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 		}
 	}
 }

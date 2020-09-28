@@ -45,7 +45,7 @@ public class SSPWindow {
 	public static String expected;
 	public static String thanks_message;
 	public static String add_to_recent_insight;
-	WebDriverWait wait = new WebDriverWait(login.driver, 400);
+	WebDriverWait wait = new WebDriverWait(login.driver, 120);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	CDMNextSprintCases cv = new CDMNextSprintCases();
 
@@ -61,7 +61,6 @@ public class SSPWindow {
 		//CommonFunctionality.Views_list();
 	}
 	
-	
 	@And("^Refreshing the page$")
 	public void refreshing_the_page() throws Throwable {
 		CommonFunctionality.modelbox();
@@ -71,14 +70,11 @@ public class SSPWindow {
 	@SuppressWarnings("deprecation")
 	@And("^Add few series to myseries$")
 	public void add_few_series_to_myseries() throws Throwable {
-		String id = "205424302";
-		CommonFunctionality.wait(3000);
+		String id = "279629203";
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		WebElement my_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab")));
 		new Actions(login.driver).moveToElement(my_series).pause(500).click().build().perform();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(500);
 		WebElement series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new")));
 		new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
@@ -94,10 +90,9 @@ public class SSPWindow {
 	@SuppressWarnings("deprecation")
 	@And("^Search for the series \"([^\"]*)\"$")
 	public void search_for_the_series(String arg1) throws Throwable {
-		Thread.sleep(5000);
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
-		Thread.sleep(4000);
+		Thread.sleep(500);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new"))).click();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
@@ -111,7 +106,7 @@ public class SSPWindow {
 	@SuppressWarnings("deprecation")
 	@And("^hightlight any one series and click on  \"([^\"]*)\" icon \\.$")
 	public void hightlight_any_one_series_and_click_on_icon(String arg1) throws Throwable {
-		CommonFunctionality.wait(9000);
+		CommonFunctionality.wait(2000);
 		try {
 		WebElement one_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
 		new Actions(login.driver).moveToElement(one_series).pause(3000).click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_series_info")))).build().perform();
@@ -133,7 +128,7 @@ public class SSPWindow {
 
 	@Then("^Verify if the percentage change value displayed is correct$")
 	public void verify_if_the_percentage_change_value_displayed_is_correct() throws Throwable {
-		CommonFunctionality.wait(3000);
+		//CommonFunctionality.wait(3000);
 		String percentage1 = "13.05";
 		if ((percentage.contains(percentage1))) {
 			login.Log4j.info("The percentage change value displayed correctly");
@@ -152,11 +147,11 @@ public class SSPWindow {
 		WebElement ssp_window = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Window")));
 		if (ssp_window.isDisplayed()) {
 			System.out.println("SSP window is opened and validated");
-			CommonFunctionality.wait(4000);
 			CommonFunctionality.getElementByProperty(login.driver, "Close", 8).click();
-			Thread.sleep(200);
 			CommonFunctionality.DeleteSeries();
 		} else {
+			CommonFunctionality.getElementByProperty(login.driver, "Close", 8).click();
+			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verify SSP window failed");
 		}
 	}
@@ -165,16 +160,13 @@ public class SSPWindow {
 	@And("^Go to search$")
 	public void go_to_search() throws Throwable {
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		//CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		//CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_new"))));
 		WebElement series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new")));
 		new Actions(login.driver).moveToElement(series).pause(2000).click().build().perform();
-		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.chord(Keys.CONTROL,
-		// "a"),
-		// "404873907");
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys("205424302");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys("279629203");
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		Thread.sleep(1000);
 	}
@@ -1640,7 +1632,7 @@ public class SSPWindow {
 			CommonFunctionality.DeleteSeries();
 		}
 	}
-
+	
 	@And("^Check the data available under \"([^\"]*)\" and it should open respective insights$")
 	public void check_the_data_available_under_and_it_should_open_respective_insights(String arg1) throws Throwable {
 		if (login.driver.findElements(By.className("insights-view--table")).size() > 0) {

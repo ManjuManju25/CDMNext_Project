@@ -27,7 +27,7 @@ import cucumber.api.java.en.Then;
 
 public class SearchTest {
 	public static String currentKeyword = "";
-	private static Boolean logged = false;
+	public static Boolean logged = false;
 	List<String> status = new ArrayList<>();
 	public WebElement tooltip;
 	public WebElement element;
@@ -65,8 +65,8 @@ public class SearchTest {
 	public void user_enters_keyword(String keyword) throws Throwable {
 		currentKeyword = keyword;
 		//login.driver.navigate().refresh();
+		//CommonFunctionality.ResetMethod();
 		login.Log4j.info("Searching with " + currentKeyword);
-		CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver,"Search",10).sendKeys(currentKeyword);
 	}
 

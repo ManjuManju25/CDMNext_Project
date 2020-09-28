@@ -27,6 +27,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.asserts.SoftAssert;
 import CDMNext.util.CommonFunctionality;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -36,6 +38,7 @@ public class Comparables {
 	SoftAssert sa = new SoftAssert();
 	CDMNextSprintCases cv = new CDMNextSprintCases();
 	ReleasesTab rt = new ReleasesTab();
+	public WebElement dropdown_open;
 	public int count;
 	public int comparables_count;
 	public WebElement element;
@@ -70,10 +73,9 @@ public class Comparables {
 	ArrayList<String> visualtitle= new ArrayList<String>();
 	
    @SuppressWarnings("deprecation")
-@And("^Clicking \"([^\"]*)\" icon$")
-	public void clicking_icon(String arg1) throws Throwable { 
-	   login.driver.navigate().refresh();
-	    CommonFunctionality.wait(6000);
+   @And("^Clicking \"([^\"]*)\" icon$")
+   public void clicking_icon(String arg1) throws Throwable { 
+	   CommonFunctionality.wait(3000);
 	    WebElement show= CommonFunctionality.getElementBycssSelector(login.driver, ".series-tab.ui-sortable-handle", 4);
 	    if(!(show.getAttribute("class").contains("series-tab__hidden"))) {
 	    	if(arg1.equalsIgnoreCase("Data")) {
@@ -148,6 +150,13 @@ public class Comparables {
 			new Actions(login.driver).moveToElement(check).pause(1000).click().build().perform();
 		}
    }
+   
+   @And("^Verify Subscribed series only filter under filters$")
+	public void verify_Subscribed_series_only_filter_under_filters() throws Throwable {
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'search-filters-panel ps-container')]//*[text()='More']", 4).click();
+		CommonFunctionality.wait(200);
+		dropdown_open = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'dropdown--body__open')]", 4);
+	}
    
    @And("^Deselect (\\d+) series inside table$")
    public void deselect_series_inside_table(int arg1) throws Throwable {
@@ -473,7 +482,12 @@ public class Comparables {
    
    @And("^Count the series in selected Filter$")
    public void count_the_series_in_selected_Filter() throws Throwable {
-      String filter_count = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2])[2] | //div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2]", 4).getText();
+      String filter_count = null;
+      try {
+    	  filter_count = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2])[2]", 4).getText();
+      } catch (Exception e) {
+    	  filter_count = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2]", 4).getText();
+	}
       String filter = filter_count.substring(1, filter_count.length()-1);
       String fcount = filter.replaceAll(",", "");
       filterCount = Integer.parseInt(fcount);
@@ -485,7 +499,11 @@ public class Comparables {
 	  int var_count = filters.length;
 	  String filter_count = null;
 	  for(int i=0; i<=var_count-1;i++) {
-      filter_count = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2])[2] | (//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2])[1]", 4).getText();
+      try {
+    	 filter_count = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2])[2]", 4).getText();
+      } catch (Exception e) {
+    	  filter_count = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2]", 4).getText();
+	}
 	  String filter = filter_count.substring(1, filter_count.length()-1);
       String fcount = filter.replaceAll(",", "");
       filterCount1 = Integer.parseInt(fcount);
@@ -538,6 +556,7 @@ public class Comparables {
    @SuppressWarnings("deprecation")
    @And("^Right Click \"([^\"]*)\" section from Comparables tab$")
    public void right_click_section_from_Comparables_tab(String arg1) throws Throwable {
+	  CommonFunctionality.wait(2000);
 	  if(arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 	   section_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]/following::span[@class='name-text'][1]", 4).getText();
 	   WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+section_name+"')]", 4);
@@ -551,8 +570,9 @@ public class Comparables {
       WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4);
       new Actions(login.driver).moveToElement(ele).pause(4000).contextClick().build().perform();
 	  }
+	  CommonFunctionality.wait(2000);
    }
-
+   
    @SuppressWarnings("deprecation")
    @And("^Using keyboard shortcuts for \"([^\"]*)\" the section$")
    public void using_keyboard_shortcuts_for_the_section(String arg1) throws Throwable {
@@ -639,11 +659,9 @@ public class Comparables {
    @And("^Select the \"([^\"]*)\" option$")
    public void select_the_option(String arg1) throws Throwable {
 	   login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='"+arg1+"']")).click();
-	   if(arg1.equalsIgnoreCase("Copy link(s)")) {
 	   Toolkit toolkit = Toolkit.getDefaultToolkit();
 	   Clipboard clipboard = toolkit.getSystemClipboard();
 	   copied_link = (String) clipboard.getData(DataFlavor.stringFlavor);
-       }
    }
    
    @And("^Message should display$")
@@ -705,6 +723,27 @@ public class Comparables {
    public void get_the_count_of_series_inside_table() throws Throwable {
        List<WebElement> series = login.driver.findElements(By.xpath("(//*[contains(@class,'tree-series-list list-view-component series-table-list__all-shown')])[1]//li"));
        series_count = series.size();
+   }
+   
+   @Then("^\"([^\"]*)\" should not be displayed for flex users$")
+	public void should_not_be_displayed_for_flex_users(String arg1) throws Throwable {
+		if(dropdown_open.isDisplayed()) {
+			if(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]", 4).isDisplayed()) {
+				List<WebElement> items = login.driver.findElements(By.xpath("//*[contains(@class,'more-filter-content--section__other')]//*[@class='filter-list']//*[@class='filter-item--title']//following-sibling::*[@class='filter-item--label']"));
+				for(WebElement item : items) {
+			    js.executeScript("arguments[0].scrollIntoView(true);", item);
+				String flextext = item.getText();
+				if(flextext.equalsIgnoreCase(arg1)) {
+	            	fail(arg1+" filter is displayed. Hence verification failed");
+	             }
+			   }
+			   login.Log4j.info("The "+arg1+" is not displayed for flex user and it has been verified successfully");
+			 } else {
+				fail("The Others block in More items field is not displaying");
+			 }
+		} else {
+				fail("The dialog/Modal box is not opened");
+		}
    }
    
    @Then("^Clicking on the insight name should open the new insight$")
@@ -905,7 +944,6 @@ public class Comparables {
 	   CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 	   assertEquals(actual, section_name);
 	   login.Log4j.info("Footnotes window has been opened correctly and it has been verified successfully");
-	   //login.driver.navigate().refresh();
    	}
    
    @Then("^The Footnotes window should be open$")
@@ -916,7 +954,6 @@ public class Comparables {
 	   CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 	   assertEquals(actual, hovered_series_name);
 	   login.Log4j.info("Footnotes window has been opened correctly and it has been verified successfully");
-	   //CommonFunctionality.CollapseTreeMethod();
    	}
    
    @Then("^The \"([^\"]*)\" message should be popped up$")
@@ -1020,6 +1057,7 @@ public class Comparables {
        String count = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-panel--count']/span/span", 4).getText();
        int actual = Integer.parseInt(count);
        CommonFunctionality.DeleteSeries();
+       CommonFunctionality.wait(2000);
        assertEquals(actual, series_count);
        assertEquals(expected, table_text);
        login.Log4j.info("The Table level series are added into my series panel and it has been verified successfully");
@@ -1198,8 +1236,7 @@ public class Comparables {
 	   }
 		fos.close();
 		fis.close();
-		//Files.deleteIfExists(Paths.get(path));
-	    boolean result = Arrays.equals(series_values.toArray(), excel_values.toArray());
+		boolean result = Arrays.equals(series_values.toArray(), excel_values.toArray());
 	    login.Log4j.info("Comparision is: \n" +result);
 	    assertEquals(series_values.toArray(), excel_values.toArray());
 	    login.Log4j.info("The Series is getting copied to excel and has been verified successfully");
@@ -1324,8 +1361,6 @@ public class Comparables {
 		}
 	}
 	login.Log4j.info("The "+arg1+" is displayed and has been verified successfully");
-	//CommonFunctionality.UnselectMethod();
-	//CommonFunctionality.CollapseTreeMethod();
    }
    
    @Then("^Selected series should get deselected$")
@@ -1770,8 +1805,15 @@ public class Comparables {
        //login.driver.navigate().refresh();
    }
    
+   @SuppressWarnings("deprecation")
    @Then("^The Related insights should be added to favourite list in insight explorer window of favorite tab$")
    public void the_Related_insights_should_be_added_to_favourite_list_in_insight_explorer_window_of_favorite_tab() throws Throwable {
+	   WebElement grid_mode = CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a grid']/parent::div", 4);
+	  	if(grid_mode.getAttribute("class").contains("insights-view-modes__grid-mode-teal")) {
+	  	   System.out.println("Already grid mode is clicked");
+	  	} else {
+	  	   new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a grid']", 4)).pause(500).click().build().perform();
+	  	}
 	   WebElement title_name = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'bottom-panel-title') and @title='"+insight_text+"']", 4);
 	   js.executeScript("arguments[0].scrollIntoView(true);",title_name);
 	   if(title_name.isDisplayed()) {

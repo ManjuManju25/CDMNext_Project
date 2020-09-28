@@ -1,7 +1,7 @@
 Feature: Verifying Histogram Visual functionality
 
-  Background: 
-    Given User has successful logged in
+  #Background: 
+    #Given User has successful logged in
 #
   #@Histogram
   #Scenario: TC_Histogram_01:Verify creating Histogram visual from View panel by drag and drop
@@ -1693,3 +1693,29 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit series" icon
     And Select "Change" as "% Year-over-Year (%YoY)"
     Then Selected change function should be applied to the series
+    
+  @Histogram
+  Scenario: TC_Histogram_188:Edit Histogram - Edit series - Verify clicking on frequency or dropdown
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    Then "Series Harmonization" popup should be opened
+    
+      @Histogram
+  Scenario: TC_Histogram_189:Edit Histogram - Edit series - Series data conversion - Verify applying frequency
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    And Select "Frequency" as "Daily" from dropdown
+    And Click on "Apply"
+    Then The selected frequency should be applied to available series
+    
+      @Histogram1
+  Scenario: TC_Histogram_190:Edit Histogram - Edit series - Series data conversion - Verify applying Missing values method
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    And Select "Frequency" as "Daily" from dropdown
+    And Select "Missing values method" as "Next value" from dropdown
+    Then Missing values method should be applied with selected frequency
+

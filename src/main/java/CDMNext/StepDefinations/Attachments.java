@@ -438,11 +438,11 @@ public void the_file_should_be_downloaded() throws Throwable {
 	String format = "png";
     CommonFunctionality.getTheNewestFile(format);
     File file = CommonFunctionality.theNewestFile;
-	if (file.delete()) {
-		System.out.println(file.getName() + " is deleted!");
-	} else {
-		System.out.println("Delete operation is failed.");
-	}
+/*		if (file.delete()) {
+			System.out.println(file.getName() + " is deleted!");
+		} else {
+			System.out.println("Delete operation is failed.");
+		}*/
 	CommonFunctionality.DeleteVisual();
 }
 @And("^Try to upload multiple files in the same visual$")

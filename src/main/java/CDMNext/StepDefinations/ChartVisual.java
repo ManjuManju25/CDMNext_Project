@@ -29,7 +29,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -53,7 +53,7 @@ import static org.testng.Assert.fail;
 public class ChartVisual {
 
 	CDMNextSprintCases cv = new CDMNextSprintCases();
-	WebDriverWait wait = new WebDriverWait(login.driver, 800);
+	WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	SoftAssert sa = new SoftAssert();
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
 	public int m;
@@ -264,7 +264,6 @@ public class ChartVisual {
 	ArrayList<String> view_as = new ArrayList<String>();
 	ArrayList<String> download = new ArrayList<String>();
 	
-	@SuppressWarnings("resource")
 	@And("^Read the \"([^\"]*)\" and \"([^\"]*)\" from excel file \"([^\"]*)\"$")
 	public void read_the_from_excel(String arg1,String arg2,String arg3) throws Throwable {
 	    // Create an object of File class to open xlsx file
@@ -347,7 +346,7 @@ public class ChartVisual {
 	@And("^Creating an Insight by selecting few series$")
 	public void creating_an_Insight_by_selecting_few_series() throws Throwable {
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.getElementByProperty(login.driver, "Series1", 4).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 4).click();
 		WebElement first_series = CommonFunctionality.getElementByProperty(login.driver, "First_series_item_in_series",
 				8);
 		new Actions(login.driver).moveToElement(first_series).pause(4000).click().build().perform();
@@ -413,8 +412,8 @@ public class ChartVisual {
 
 	@And("^Select more than (\\d+) series from browse tab$")
 	public void select_more_than_series_from_browse_tab(int arg1) throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Series1");
-		CommonFunctionality.getElementByProperty(login.driver, "Series1", 4).click();
+		CommonFunctionality.webDriverwait_keyvalue("Series");
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 4).click();
 		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		for (int i = 1; i <= li_All.size(); i++) {
@@ -487,6 +486,7 @@ public class ChartVisual {
 	
 	@And("^Count the list of views \"([^\"]*)\" clicking the New option$")
 	public void count_the_list_of_views_clicking_the_New_option(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
 	    if(arg1.equalsIgnoreCase("Before")) {
 	    	List<WebElement> views = login.driver.findElements(By.cssSelector(".insight-page-view-tab--title"));
 	    	 views_before = views.size();
@@ -806,6 +806,23 @@ public class ChartVisual {
 	}
 
 	@SuppressWarnings("deprecation")
+	@And("^Click on chart option from hover$")
+	public void click_on_chart_option_from_hover() throws Throwable {
+		CommonFunctionality.wait(500);
+        List<WebElement> total_count = login.driver.findElements(By.xpath("//ul[contains(@class,'search-series-list')]/li"));
+		for(int i = 1; i <= total_count.size(); i++) {
+		WebElement unselect_check = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]/li["+i+"]", 4);
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-list-item--checkbox-wrapper']//*[contains(@class,'series-list-item--checkbox')])["+i+"]", 4);
+		if(!(unselect_check.getAttribute("class").contains("series-list-item__selected"))) {
+		new Actions(login.driver).moveToElement(series).pause(100).click().build().perform();
+		}
+		}
+		WebElement actions = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'series-item--country')])[1]", 8);
+		new Actions(login.driver).moveToElement(actions).pause(500).build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'view-chart-icon')])[1]", 8)).pause(500).click().build().perform();
+	}
+
+	@SuppressWarnings("deprecation")
 	@And("^Click \"([^\"]*)\" option from \"([^\"]*)\" popup$")
 	public void click_options_from_popup(String arg1, String arg2) throws Throwable {
 		WebElement color;
@@ -1084,7 +1101,7 @@ public class ChartVisual {
 						By.xpath("//*[text()='" + arg2 + "']/preceding-sibling::input[@class='input-control--input']"))
 				.isSelected();
 	}
-
+	
 	@And("^\"([^\"]*)\" the new insight$")
 	public void the_new_insight(String arg1) throws Throwable {
 		date = new Date();
@@ -3065,14 +3082,13 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Get the text of sub dropdowns available$")
 	public void get_the_text_of_sub_dropdowns_available() throws Throwable {
-		String a= "Insert visual"; String b="View as"; String c="Download"; String d="Calculate series"; String e="Paste visual"; String f="Reset format";
+		String a= "Insert visual"; String b="View as"; String c="Download"; /*String d="Calculate series"; String e="Paste visual"; String f="Reset format";*/
 		if(rightclick_element.contains(a)) {
 	    	List<WebElement> sub = login.driver.findElements(By.xpath("//*[@title='"+a+"']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 	    	for(int i=1; i<=sub.size();i++) {
 			WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+a+"']", 4);
 	    	new Actions(login.driver).moveToElement(hover).pause(2000).build().perform();
 	    	String subdropdown_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+a+"']//following-sibling::ul[@class='dropdown-menu']/li["+i+"]/span", 4).getAttribute("title");
-	    	//CommonFunctionality.wait(2000);
 	    	insert_visual_list.add(subdropdown_text);
 	    	}
 	    	} else {
@@ -3081,11 +3097,9 @@ public class ChartVisual {
 		if(rightclick_element.contains(b)) {
 	    	List<WebElement> sub = login.driver.findElements(By.xpath("//*[@title='"+b+"']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 	    	for(int j=1; j<=sub.size();j++) {
-	    	//CommonFunctionality.wait(2000);
 			WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+b+"']", 4);
 	    	new Actions(login.driver).moveToElement(hover).pause(2000).build().perform();
 	    	String subdropdown_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+b+"']//following-sibling::ul[@class='dropdown-menu']/li["+j+"]/span", 4).getAttribute("title");
-	    	//CommonFunctionality.wait(2000);
 	    	view_as.add(subdropdown_text);
 	    	}
 	    	} else {
@@ -3094,19 +3108,16 @@ public class ChartVisual {
 		if(rightclick_element.contains(c)) {
 	    	List<WebElement> sub = login.driver.findElements(By.xpath("//*[@title='"+c+"']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 	    	for(int k=1; k<=sub.size();k++) {
-	    	//CommonFunctionality.wait(2000);
 	    	WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+c+"']", 4);
 	    	new Actions(login.driver).moveToElement(hover).pause(500).build().perform();
 	    	String subdropdown_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+c+"']//following-sibling::ul[@class='dropdown-menu']/li["+k+"]/span", 4).getAttribute("title");
-	    	//CommonFunctionality.wait(2000);
 	    	download.add(subdropdown_text);
 	    	}
 	    	} else {
 	    		fail("Subdropdown items are not present");
 	    	}
 		
-		if(rightclick_element.contains(d)) {
-			//CommonFunctionality.wait(2000);
+		/*if(rightclick_element.contains(d)) {
 			WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+d+"']", 4);
 			new Actions(login.driver).moveToElement(hover).pause(500).build().perform();
 			if(login.driver.findElements(By.xpath("//*[@title='"+d+"']//following-sibling::ul[@class='dropdown-menu']/li")).size()>0) {
@@ -3114,19 +3125,28 @@ public class ChartVisual {
 	    	} else {
 	    		fail(d+" verification failed");
 	    	}
-			
-		}
+		} 
 		
-		if(rightclick_element.contains(e) && rightclick_element.contains(f)) {
+		if(rightclick_element.contains(e)) {
 			new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "span[title='Delete chart']", 4)).pause(500).build().perform();
 			WebElement disabled = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+e+"'] | //*[@title='"+f+"']", 4);
 			CommonFunctionality.wait(1000);
-			if(disabled.getAttribute("class").contains("disabled")) {
-				System.out.println("The "+e+" and "+f+" options are in disabled state by default");
+			if(!disabled.getAttribute("class").contains("disabled")) {
+				System.out.println("The "+e+" options are enabled by default");
 	    	} else {
 	    		fail("Verification failed");
 	    	}
-		}
+		}	
+			
+		if(rightclick_element.contains(f)) {
+			WebElement disabled = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+e+"'] | //*[@title='"+f+"']", 4);
+			CommonFunctionality.wait(1000);
+			if(disabled.getAttribute("class").contains("disabled")) {
+				System.out.println("The "+f+" option is in disabled state by default");
+	    	} else {
+	    		fail("Verification failed");
+	    	}
+		}*/
 	 }
 	
 	@SuppressWarnings("deprecation")
@@ -3991,7 +4011,7 @@ public class ChartVisual {
 		assertEquals(timepoints_end_date, timepoints_end_date_ssp);
 		login.Log4j.info("The start date of " + timepoints_start_date + " and end date of " + timepoints_end_date
 				+ " has been updated and has been Verified successfully");
-		CommonFunctionality.Views_list();
+		//CommonFunctionality.Views_list();
 	}
 
 	@Then("^Entered timeframe date should update in chart for \"([^\"]*)\"$")
