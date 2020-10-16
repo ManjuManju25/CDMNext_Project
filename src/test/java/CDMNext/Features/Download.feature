@@ -1,7 +1,4 @@
 Feature: Downloading Insights from Analytical Tab 
-#
-#Background:
-   #Given User has successful logged in
 
 Scenario: Downloading CEIC GALLERY Insight 
     And User Select Analytic tab		

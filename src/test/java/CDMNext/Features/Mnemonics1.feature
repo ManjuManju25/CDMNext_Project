@@ -1,8 +1,5 @@
 Feature: MnemonicSearch
 
-  #Background: 
-    #Given User has successful logged in
-
   @MnemonicSearch1
   Scenario Outline: <TCID>:Search for Mnemonic as <Mnemonic>
     Given Series_id  is "<SID>"

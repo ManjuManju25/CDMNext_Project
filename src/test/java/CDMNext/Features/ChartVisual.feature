@@ -1,8 +1,5 @@
 Feature: Verifying Chart Visual Functionality
-
-#Background:
-   #Given User has successful logged in
-   
+ 
 @ChartVisual
 Scenario: TC_Chart_01: Verify Chart option under Views > Visuals tab
     And Creating an Insight by selecting few series
@@ -14,6 +11,7 @@ Scenario: TC_Chart_02: Verify if chart is created for more than 20 series
     And Open preference dropdown
     And Clicking on "Show search results without pagination" option under user preference to be "Check" 
     And Open preference dropdown
+    And Setting values in preference
     And Select 21 series for chart and click on chart option
     Then Validation message should appear and chart is created only with 20 series
     
@@ -52,6 +50,7 @@ Scenario: TC_Chart_07: Verify if 'Default' format is retained for Chart option
    And Check the style attribute title
    And Clicking "Save" option
    And Click on "Edit" visual
+   And Remove the customized template
    Then  "Default" style is applied
     
 @ChartVisual
@@ -334,14 +333,13 @@ Scenario: TC_Chart_30: Check for Image proportion percentage change horizontally
 @ChartVisual
 Scenario: TC_Chart_33: Verify chart area background image
    And Search for the series with SID "1355101;353749717"
-   And  Click on more actions to create "View as Chart" 
+   And Click on chart option from hover 
    And Click on "Edit" visual
    And Click on the Visual "Background:" Container
    And Click on the "Chart" checkbox to be "Checked"
    And Select any "image" for chart visual
    And Clicking "Save" option
    Then The background image should be updated
-   #And Click on the Visual "Background:" Container
    And Click on "Edit" visual
    And Click on the Visual "Background:" Container
    And Click on the "Chart" checkbox to be "Checked"
@@ -487,13 +485,13 @@ Scenario: TC_Chart_43: Check if the default axis is 'left'
 Scenario: TC_Chart_45_01: Verify reverse direction values on left axis
    And Search for the series with SID "51287302;383440717"
    And Click on chart option from hover 
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Left Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Left Axis" 
    And Uncheck the checkbox for "Reversed direction" sections 
    And Observe the value order "before" selecting "Reversed direction" for "Left Axis" 
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Left Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Left Axis" 
@@ -504,13 +502,13 @@ Scenario: TC_Chart_45_01: Verify reverse direction values on left axis
 Scenario: TC_Chart_45_02: Verify logarithmic values on left axis
    And Search for the series with SID "1355101;353749717"
    And Click on chart option from hover
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Left Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Left Axis" 
    And Uncheck the checkbox for "Logarithmic" sections 
    And Observe the value order "before" selecting "Logarithmic" for "Left Axis" 
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Left Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Left Axis" 
@@ -521,13 +519,13 @@ Scenario: TC_Chart_45_02: Verify logarithmic values on left axis
 Scenario: TC_Chart_46_01: Verify reverse direction values on right axis
    And Search for the series with SID "51287302;383440717"
    And Click on chart option from hover
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Right Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Right Axis" 
    And Uncheck the checkbox for "Reversed direction" sections of Right Axis 
    And Observe the value order "before" selecting "Reversed direction" for "Right Axis" 
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Right Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Right Axis" 
@@ -538,13 +536,13 @@ Scenario: TC_Chart_46_01: Verify reverse direction values on right axis
 Scenario: TC_Chart_46_02: Verify logarithmic values on right axis
    And Search for the series with SID "51287302;383440717"
    And Click on chart option from hover 
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Right Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Right Axis" 
    And Uncheck the checkbox for "Logarithmic" sections 
    And Observe the value order "before" selecting "Logarithmic" for "Right Axis" 
-   And Click on "Edit" visual
+   And Click on Edit Chart
    And Click on the "Values axis" checkbox to "Check" 
    And Activate the "Right Axis" header
    And Expanding "Axis Setup" section from "Values Axis" popup of "Right Axis" 

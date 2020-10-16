@@ -7095,7 +7095,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_format"))).isDisplayed());
 	    	String x=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_format"))).getText();
 	    	
-	    	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/YYYY");
+	    	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY");
 	    	   LocalDateTime now = LocalDateTime.now();
 	    	  
 	    	   System.out.println(dtf.format(now));
@@ -7161,8 +7161,8 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	ArrayList<Integer> ar = new ArrayList<Integer>();
 	    	for(int i=0;i<Dates.size();i++) { 
 	    		String GotDates = Dates.get(i).getText();
-	    		String[] x1 =GotDates.split("/");
-	    		int q = Integer.parseInt(x1[1]);
+	    	//	String[] x1 =GotDates.split("/");
+	    		int q = Integer.parseInt(GotDates);
 	    	
 	    		ar.add(q);
 	    	}
@@ -7209,8 +7209,8 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	
 	    	for(int i=0;i<Dates.size();i++) { 
 	    		String GotDates = Dates.get(i).getText();
-	    		String[] x1 =GotDates.split("/");
-	    		int q = Integer.parseInt(x1[1]);
+	    		//String[] x1 =GotDates.split("/");
+	    		int q = Integer.parseInt(GotDates);
 	    		
 	    		ar.add(q);
 	    		
@@ -10238,7 +10238,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				 Actions action = new Actions(login.driver);
-				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 					action.contextClick(ele).pause(6000).build().perform();
 					Thread.sleep(2000);
 					 Assert.assertTrue(
@@ -10256,7 +10256,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				 Actions action = new Actions(login.driver);
-				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 					action.contextClick(ele).pause(6000).build().perform();
 					Thread.sleep(2000);
 					 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_copy"))).click();
@@ -10275,7 +10275,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				 Actions action = new Actions(login.driver);
-				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 					action.contextClick(ele).pause(6000).build().perform();
 					Thread.sleep(2000);
 					 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_copy"))).click();
@@ -10309,7 +10309,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				 Actions action = new Actions(login.driver);
-				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 					action.contextClick(ele).pause(6000).build().perform();
 					Thread.sleep(2000);
 					 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_cut"))).click();
@@ -10325,7 +10325,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				 Actions action = new Actions(login.driver);
-				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 					action.contextClick(ele).pause(6000).build().perform();
 					Thread.sleep(2000);
 					 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_cut"))).click();
@@ -10357,7 +10357,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				 Actions action = new Actions(login.driver);
-				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				  WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 					action.contextClick(ele).pause(6000).build().perform();
 					Thread.sleep(2000);
 					 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_delete"))).click();
@@ -10377,7 +10377,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10397,7 +10397,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10418,7 +10418,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10436,9 +10436,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click  table under insert visual$")
 			public void verify_right_click_table_under_insert_visual() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10459,7 +10459,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10477,9 +10477,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click  Heatmap under insert visual$")
 			public void verify_right_click_Heatmap_under_insert_visual() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10499,7 +10499,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10522,7 +10522,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10540,9 +10540,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click  Attachment under insert visual$")
 			public void verify_right_click_Attachment_under_insert_visual() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10562,7 +10562,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
@@ -10580,10 +10580,12 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click  Filter under insert visual$")
 			public void verify_right_click_Filter_under_insert_visual() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
-				action.contextClick(ele).pause(6000).build().perform();
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
+				CommonFunctionality.action.contextClick(ele).pause(2000).build().perform();
+				//action.moveToElement(ele).contextClick(ele).build().perform();
+				//action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_insertvisual")));
@@ -10606,7 +10608,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_copy"))).click();
@@ -10640,7 +10642,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_viewas")));
@@ -10676,7 +10678,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_viewas")));
@@ -10696,10 +10698,11 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click View as Map$")
 			public void verify_right_click_View_as_Map() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
-				action.contextClick(ele).pause(6000).build().perform();
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
+				CommonFunctionality.action.contextClick(ele).pause(2000).build().perform();
+				//action.moveToElement(ele).contextClick(ele).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_viewas")));
 				action1.moveToElement(ele1).pause(6000).build().perform();
@@ -10718,10 +10721,11 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click View as Histogram$")
 			public void verify_right_click_View_as_Histogram() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
-				action.contextClick(ele).pause(6000).build().perform();
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
+				CommonFunctionality.action.contextClick(ele).pause(2000).build().perform();
+				//action.moveToElement(ele).contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_viewas")));
 				action1.moveToElement(ele1).pause(6000).build().perform();
@@ -10743,7 +10747,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_viewas")));
@@ -10765,7 +10769,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_viewas")));
@@ -10791,7 +10795,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_calculate_series")));
@@ -10810,7 +10814,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				String beforeseriesname = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_calculateseries_changeYoYSeries"))).getText();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_calculate_series")));
@@ -10842,7 +10846,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_Editseries"))).click();
@@ -10861,7 +10865,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Thread.sleep(2000);
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_clearcontent"))).click();
@@ -10913,7 +10917,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 					Actions action = new Actions(login.driver);
-					WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+					WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 					action.contextClick(ele).pause(6000).build().perform();
 					Thread.sleep(2000);
 				String ressetrightclick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_reset_disable"))).getAttribute("class");
@@ -10934,7 +10938,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				CreateTable();
 				Thread.sleep(2000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_download")));
@@ -10967,9 +10971,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click download > Table$")
 			public void verify_right_click_download_Table() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
 				action.contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_download")));
@@ -10990,10 +10994,11 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			@And("^verify right click download > View$")
 			public void verify_right_click_download_View() throws Throwable {
 				CreateTable();
-				Thread.sleep(2000);
+				Thread.sleep(8000);
 				Actions action = new Actions(login.driver);
-				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Name")));
-				action.contextClick(ele).pause(6000).build().perform();
+				WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("RClickTable")));
+				CommonFunctionality.action.contextClick(ele).pause(2000).build().perform();
+				//action.moveToElement(ele).contextClick(ele).pause(6000).build().perform();
 				Actions action1 = new Actions(login.driver);
 				WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_rightclick_download")));
 				action1.moveToElement(ele1).pause(6000).build().perform();

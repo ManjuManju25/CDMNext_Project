@@ -150,7 +150,7 @@ public class SSPWindow {
 			CommonFunctionality.getElementByProperty(login.driver, "Close", 8).click();
 			CommonFunctionality.DeleteSeries();
 		} else {
-			CommonFunctionality.getElementByProperty(login.driver, "Close", 8).click();
+			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 			CommonFunctionality.DeleteSeries();
 			Assert.fail("Verify SSP window failed");
 		}

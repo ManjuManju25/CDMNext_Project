@@ -1,11 +1,7 @@
 Feature: Verifying Databases tab functionality
 
-  #Background: 
-    #Given User has successful logged in
-
   @DB
   Scenario: TC_DB_01: Verify multiple databases selection
-    #And Check for prerequesties
     Given Click on More filter
     And Select database as "China Premium Database,Brazil Premium Database,Russia Premium Database"
     And User has clicked on "Apply filter"
@@ -732,8 +728,8 @@ Feature: Verifying Databases tab functionality
     And Mouse hover on any series level
     And Click on + icon
     Then Chart should be created with the series
+
   #	Then Chart should be created with selected seires
-  
   @DB
   Scenario: TC_DB_100:Verify Add option under add dropdown
     And Mouse hover on any series level
@@ -745,9 +741,9 @@ Feature: Verifying Databases tab functionality
     And Click on View tab on right side
     And Mouse hover on any series level
     And Select "Add" option
-   Then Chart should be created with the series
- #	Then Chart should be created with selected seires
- 
+    Then Chart should be created with the series
+
+  #	Then Chart should be created with selected seires
   @DB
   Scenario: TC_DB_102:Verify Add and Replace
     And Create a visual and select visual
@@ -1070,7 +1066,6 @@ Feature: Verifying Databases tab functionality
   #	And Select any recent insight from the dropdown
   #And Click on "Apply"
   #	Then The series should be added to My series tab for selected insight
-  
   @DB
   Scenario: TC_DB_145:Series selection - Verify 'Create new insight' in dropdown
     And Select some series from series level

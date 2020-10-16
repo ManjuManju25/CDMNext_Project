@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -250,9 +251,9 @@ public class ChartVisual {
 	ArrayList<Date> date_excel = new ArrayList<Date>();
 	ArrayList<Date> date_app = new ArrayList<Date>();
 	ArrayList<Double> timepoints_excel = new ArrayList<Double>();
-	ArrayList<Integer> list1 = new ArrayList<Integer>();
-	ArrayList<Integer> list2 = new ArrayList<Integer>();
-	ArrayList<Integer> list3 = new ArrayList<Integer>();
+	ArrayList<BigInteger> list1 = new ArrayList<BigInteger>();
+	ArrayList<BigInteger> list2 = new ArrayList<BigInteger>();
+	ArrayList<BigInteger> list3 = new ArrayList<BigInteger>();
 	ArrayList<Integer> list4 = new ArrayList<Integer>();
 	ArrayList<Double> timepoints_app = new ArrayList<Double>();
 	ArrayList<String> timepoint_ssp = new ArrayList<String>();
@@ -560,6 +561,18 @@ public class ChartVisual {
 		}
 		close_the_chart_visual();
 	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Remove the customized template$")
+	public void remove_the_customized_template() throws Throwable {
+		if(login.driver.findElements(By.cssSelector("div[title='Shravas']")).size() > 0) {
+		new Actions(login.driver).moveToElement(login.driver.findElement(By.cssSelector("div[title='Shravas']"))).pause(1000).build().perform();
+		CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Delete template']", 4).click();
+		if(login.driver.findElements(By.xpath("//*[contains(@class,'modal-content')]//*[text()='Ok']")).size() > 0) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'modal-content')]//*[text()='Ok']", 4).click();
+		  }
+		}
+	}
 
 	@And("^Check the style attribute title$")
 	public void check_the_style_attribute_title() throws Throwable {
@@ -820,6 +833,13 @@ public class ChartVisual {
 		WebElement actions = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'series-item--country')])[1]", 8);
 		new Actions(login.driver).moveToElement(actions).pause(500).build().perform();
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'view-chart-icon')])[1]", 8)).pause(500).click().build().perform();
+	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Click on Edit Chart$")
+	public void click_on_Edit_Chart() throws Throwable {
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//button[text()='Edit Chart']", 4)).pause(1000).click().build().perform();
+		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1238,7 +1258,7 @@ public class ChartVisual {
 			CommonFunctionality .getElementByXpath(login.driver,"//*[@class='background-image']//*[@value='Browse...']", 4) .click();
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
-			CommonFunctionality.wait(2000);
+			CommonFunctionality.wait(6000);
 		} else if (arg1.equalsIgnoreCase("Values Axis_Label Color")) {
 			CommonFunctionality.getElementByProperty(login.driver, "Value_axes_label_color", 4).click();
 		} else if (arg1.equalsIgnoreCase("Values Axis_Label Line Color")) {
@@ -2380,18 +2400,42 @@ public class ChartVisual {
 	cv.clicking_option("Save");
 	CommonFunctionality.wait(2000);
 	if(arg1.equals("before") && arg2.equalsIgnoreCase("Reversed direction") && arg3.equalsIgnoreCase("Left Axis") && axis_setup_checkboxes_uncheck == false) {
-	   List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]//*[not(@y='-9999')]"));
-	   for (WebElement element : elements) {
+	   List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[4][not(@x='0')]"));
+	   for(WebElement element : elements) {
 		   String text = element.getText();
 		   String text1[] = text.split("\\.");
-		   Integer integer = null;
+		   BigInteger integer1 = null;
 		   if(text1[0].contains(",")) {
 			String text2 = text1[0].replaceAll(",", "");
-			integer = Integer.parseInt(text2);
+			integer1 = new BigInteger(text2);
 		   } else {
-		    integer = Integer.parseInt(text1[0]);
+		    integer1 = new BigInteger(text1[0]);
 		   }
-		   list1.add(integer);
+		   list1.add(integer1);
+	   }List<WebElement> elements1 = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[1][not(@x='0')]"));
+	   for(WebElement element : elements1) {
+		   String text1 = element.getText();
+		   String text2[] = text1.split("\\.");
+		   BigInteger integer2 = null;
+		   if(text2[0].contains(",")) {
+			String text3 = text2[0].replaceAll(",", "");
+			integer2 = new BigInteger(text3);
+		   } else {
+		    integer2 = new BigInteger(text2[0]);
+		   }
+		   list1.add(integer2);
+	   }List<WebElement> elements3 = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[2][not(@x='0')]"));
+	   for(WebElement element : elements3) {
+		   String text2 = element.getText();
+		   String text3[] = text2.split("\\.");
+		   BigInteger integer3 = null;
+		   if(text3[0].contains(",")) {
+			String text4 = text3[0].replaceAll(",", "");
+			integer3 = new BigInteger(text4);
+		   } else {
+		    integer3 = new BigInteger(text3[0]);
+		   }
+		   list1.add(integer3);
 	   }
 		boolean sorted = Ordering.natural().isOrdered(list1);
 			if(sorted == true) {
@@ -2400,19 +2444,43 @@ public class ChartVisual {
 				fail("Verification Failed");
 			}
 	} else if(arg1.equals("after") && arg2.equalsIgnoreCase("Reversed direction") && arg3.equalsIgnoreCase("Left Axis") && time_axis_checkboxes == true) {
-		   List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]//*[not(@y='-9999')]"));
-		   for(int i=elements.size(); i > 0; i--) {
-			   String text = login.driver.findElement(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]//*[not(@y='-9999')]["+i+"]")).getText();
+		List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[3][not(@x='0')]"));
+		   for(WebElement element : elements) {
+			   String text = element.getText();
 			   String text1[] = text.split("\\.");
-			   Integer integer = null;
+			   BigInteger integer1 = null;
 			   if(text1[0].contains(",")) {
 				String text2 = text1[0].replaceAll(",", "");
-				integer = Integer.parseInt(text2);
+				integer1 = new BigInteger(text2);
 			   } else {
-			    integer = Integer.parseInt(text1[0]);
+			    integer1 = new BigInteger(text1[0]);
 			   }
-			   list2.add(integer);
-		    }
+			   list2.add(integer1);
+		   }List<WebElement> elements1 = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[2][not(@x='0')]"));
+		   for(WebElement element : elements1) {
+			   String text1 = element.getText();
+			   String text2[] = text1.split("\\.");
+			   BigInteger integer2 = null;
+			   if(text2[0].contains(",")) {
+				String text3 = text2[0].replaceAll(",", "");
+				integer2 = new BigInteger(text3);
+			   } else {
+			    integer2 = new BigInteger(text2[0]);
+			   }
+			   list2.add(integer2);
+		   }List<WebElement> elements3 = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[1][not(@x='0')]"));
+		   for(WebElement element : elements3) {
+			   String text2 = element.getText();
+			   String text3[] = text2.split("\\.");
+			   BigInteger integer3 = null;
+			   if(text3[0].contains(",")) {
+				String text4 = text3[0].replaceAll(",", "");
+				integer3 = new BigInteger(text4);
+			   } else {
+			    integer3 = new BigInteger(text3[0]);
+			   }
+			   list2.add(integer3);
+		   }
 		    boolean sorted = Ordering.natural().reverse().isOrdered(list2);
 			if(sorted == true) {
 				login.Log4j.info("The text are displaying in Descending order");
@@ -2436,8 +2504,14 @@ public class ChartVisual {
 		   List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')]"));
 		   for (WebElement element : elements) {
 			   String text = element.getText();
-			   String text1[] = text.split("\\,");
-			   Integer integer = Integer.parseInt(text1[0]);
+			   String text1[] = null;
+			   if(text.contains("1,000,00")) {
+				  String text_replace = text.replaceAll("1,000,00", "1000,00"); 
+				  text1 = text_replace.split("\\,");
+			   } else {
+				   text1 = text.split("\\,");  
+			   }
+			   BigInteger integer = new BigInteger(text1[0]);
 			   list3.add(integer);
 		   }
 			boolean sorted = Ordering.natural().isOrdered(list3);
@@ -2450,7 +2524,13 @@ public class ChartVisual {
 			String first = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[3]",4).getText();
 			String second = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[2]",4).getText();
 			String third = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[1]",4).getText();
-			String first_element[] = first.split("\\,");
+			String first_element[] = null;
+			if(first.contains("1,000,00")) {
+			  String text_replace = first.replaceAll("1,000,00", "1000,00"); 
+			  first_element = text_replace.split("\\,");
+			} else {
+			   first_element = first.split("\\,");  
+			}
 			String second_element[] = second.split("\\,");
 			String third_element[] = third.split("\\,");
 			Integer first_element_int = Integer.parseInt(first_element[0]);
@@ -2460,20 +2540,20 @@ public class ChartVisual {
 			Integer third_element_int = Integer.parseInt(third_element[0]);
 			list4.add(third_element_int);
 			boolean sorted = Ordering.natural().reverse().isOrdered(list4);
-				if(sorted == true) {
-					login.Log4j.info("The text are displaying in Descending order");
-				} else {
-					fail("Verification Failed");
-				}
-				CommonFunctionality.Views_list();	
+			if(sorted == true) {
+			   login.Log4j.info("The text are displaying in Descending order");
+			} else {
+				fail("Verification Failed");
+			}
+		CommonFunctionality.Views_list();	
 		} if(arg1.equals("before") && arg2.equalsIgnoreCase("Logarithmic") && arg3.equalsIgnoreCase("Right Axis") && axis_setup_checkboxes_uncheck_right == false) {
 		   List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')]"));
 		   logarithmic_before_right = elements.size();
 		} if(arg1.equals("after") && arg2.equalsIgnoreCase("Logarithmic") && arg3.equalsIgnoreCase("Right Axis") && axis_checkboxes_right == true) {
 		   List<WebElement> elements = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')]"));
 		   logarithmic_after_right = elements.size();
-		   if(logarithmic_after_right > logarithmic_before_right) {
-			   login.Log4j.info("The "+arg2+"of "+arg3+" has been verified successfully");
+		   if(logarithmic_after_right >= logarithmic_before_right) {
+			   login.Log4j.info("The "+arg2+" of "+arg3+" has been verified successfully");
 		   } else {
 			   fail("Verification Failed");
 		   }

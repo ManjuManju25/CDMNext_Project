@@ -27,8 +27,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.asserts.SoftAssert;
 import CDMNext.util.CommonFunctionality;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -41,6 +39,7 @@ public class Comparables {
 	public WebElement dropdown_open;
 	public int count;
 	public int comparables_count;
+	public int series_count_in_first_table;
 	public WebElement element;
 	public static String series_name;
 	public static String copied_link;
@@ -659,9 +658,11 @@ public class Comparables {
    @And("^Select the \"([^\"]*)\" option$")
    public void select_the_option(String arg1) throws Throwable {
 	   login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='"+arg1+"']")).click();
+	   if(arg1.equalsIgnoreCase("Copy link(s)")) {
 	   Toolkit toolkit = Toolkit.getDefaultToolkit();
 	   Clipboard clipboard = toolkit.getSystemClipboard();
 	   copied_link = (String) clipboard.getData(DataFlavor.stringFlavor);
+	   }
    }
    
    @And("^Message should display$")
@@ -723,6 +724,12 @@ public class Comparables {
    public void get_the_count_of_series_inside_table() throws Throwable {
        List<WebElement> series = login.driver.findElements(By.xpath("(//*[contains(@class,'tree-series-list list-view-component series-table-list__all-shown')])[1]//li"));
        series_count = series.size();
+   }
+   
+   @And("^Get the count of series inside first table$")
+   public void get_the_count_of_series_inside_first_table() throws Throwable {
+       List<WebElement> series = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable'][1]/li"));
+       series_count_in_first_table = series.size();
    }
    
    @Then("^\"([^\"]*)\" should not be displayed for flex users$")
@@ -1057,8 +1064,7 @@ public class Comparables {
        String count = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-panel--count']/span/span", 4).getText();
        int actual = Integer.parseInt(count);
        CommonFunctionality.DeleteSeries();
-       CommonFunctionality.wait(2000);
-       assertEquals(actual, series_count);
+       assertEquals(actual, series_count_in_first_table);
        assertEquals(expected, table_text);
        login.Log4j.info("The Table level series are added into my series panel and it has been verified successfully");
 	   }
@@ -1721,14 +1727,14 @@ public class Comparables {
    @Then("^The options should present inside tooltip$")
 	public void the_options_should_present_inside_tooltip() throws Throwable {
 	    String a= "Region"; String b= "Name"; String c= "Unit"; String d= "Frequency"; String e= "First date"; String f= "Last date"; String g= "Observations"; String h= "Last change %"; String i= "Last value"; String j= "Last updated";
-	    String k= "Source"; String l= "Series id"; String m= "Mnemonic"; String n="More";
+	    String k= "Source"; String l= "Series id"; String m= "Classification"; String n="More"; String o = "Indicator";
 		CommonFunctionality.wait(2000);
 		List<WebElement> tooltips = login.driver.findElements(By.xpath("//tr[@class='series-tooltip-table--row']//td[1]"));
 		for(int z=1; z<tooltips.size(); z++) {
 			WebElement tooltip = login.driver.findElement(By.xpath("(//tr[@class='series-tooltip-table--row']//td[1])["+z+"]"));
 			String split = tooltip.getText();
 			String[] text = split.split("\\:");
-			if(text[0].equals(a) || text[0].equals(b) || text[0].equals(c) || text[0].equals(d) || text[0].equals(e) || text[0].equals(f) || text[0].equals(g) || text[0].equals(h) || text[0].equals(i) || text[0].equals(j) || text[0].equals(k) || text[0].equals(l) || text[0].equals(m) || text[0].equals(n)) {
+			if(text[0].equals(a) || text[0].equals(b) || text[0].equals(c) || text[0].equals(d) || text[0].equals(e) || text[0].equals(f) || text[0].equals(g) || text[0].equals(h) || text[0].equals(i) || text[0].equals(j) || text[0].equals(k) || text[0].equals(l) || text[0].equals(n) || text[0].equals(m) || text[0].equals(o)) {
 			System.out.println("The tooltip value is: "+text[0]);	
 			} else {
 				fail(text[0]+" is not present");

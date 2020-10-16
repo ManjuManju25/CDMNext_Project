@@ -113,7 +113,7 @@ public class ChinaFilter {
 
 	@And("^Click on \"([^\"]*)\" dropdown$")
 	public void click_on_dropdown(String arg1) throws Throwable {
-		CommonFunctionality.ResetMethod();
+		//CommonFunctionality.ResetMethod();
 		login.Log4j.info("Clicking on All Regions filter");
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
 
@@ -359,6 +359,9 @@ public class ChinaFilter {
 					+ ListOfWebElements.size() + " elements on site");
 //			Log4j.error(ANSI_RED + " This text is red! "
 //					+ ANSI_RESET);
+			HTML_Report.strTCResult = "FAIL";
+			HTML_Report.execRemarks = "ERROR : We have " + ListElementsTD.size() + " elements in Excel but see only "
+					+ ListOfWebElements.size() + " elements on site";
 		}
 
 		for (String str : ListOfWebElements) {
@@ -366,6 +369,8 @@ public class ChinaFilter {
 				login.Log4j.info("Web element " + str + " Found in Excel");
 			} else {
 				login.Log4j.error("ERROR : We don't find " + str + " in Excel");
+				HTML_Report.strTCResult = "FAIL";
+				HTML_Report.execRemarks = "ERROR : We don't find " + str + " in Excel";
 			}
 		}
 
@@ -374,6 +379,8 @@ public class ChinaFilter {
 				login.Log4j.info("Excel item " + str + " found on site");
 			} else {
 				login.Log4j.error("ERROR : We don't find " + str + " is on Site");
+				HTML_Report.strTCResult = "FAIL";
+				HTML_Report.execRemarks = "ERROR : We don't find " + str + " is on Site";
 			}
 		}
 

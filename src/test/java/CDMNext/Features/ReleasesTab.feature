@@ -1,8 +1,5 @@
 Feature: Verify ReleasesTab functionality
  
-#Background:
-  #Given User has successful logged in
-
 @ReleasesTab
 Scenario: TC_Releases_01: Verify the contents for Releases tab
   And Clicking "Releases" icon
@@ -1150,7 +1147,7 @@ Scenario Outline: TC_Releases_145: Verify showing tool tip for mouse hover optio
     | "Open footnote" |
     | "More actions"  |
      
-@ReleasesTab1
+@ReleasesTab
 Scenario: TC_Releases_146: Verify Add to Watchlist icon in series level
   And Clicking "Releases" icon
   And Select released database
@@ -1162,7 +1159,7 @@ Scenario: TC_Releases_146: Verify Add to Watchlist icon in series level
   And Growl message as "Watchlist changes applied" should display
   Then The selected actions should reflect inside watchlist tab
   
-@ReleasesTab1
+@ReleasesTab
 Scenario: TC_Releases_147: Verify Add to Watchlist option in series level right click
   And Clicking "Releases" icon
   And Select released database
@@ -1175,7 +1172,7 @@ Scenario: TC_Releases_147: Verify Add to Watchlist option in series level right 
   And Growl message as "Watchlist changes applied" should display
   Then The selected actions should reflect inside watchlist tab
   
-@ReleasesTab1
+@ReleasesTab
 Scenario: TC_Releases_148: Verify Add to Watchlist option in series level more actions
   And Clicking "Releases" icon
   And Select released database

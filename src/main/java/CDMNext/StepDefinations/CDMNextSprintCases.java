@@ -615,16 +615,13 @@ public class CDMNextSprintCases {
 
 	@And("^click on 'fx' to open 'All functions' popup$")
 	public void click_on_fx_to_open_All_functions_popup() throws Throwable {
-		// CommonFunctionality.webDriverwait_keyvalue("fx");
-		WebElement toolbar = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'fx-panel-toggle')]", 4);
+		WebElement toolbar = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'fx-panel-toggle')]", 4);
 		if (!(toolbar.getAttribute("class").contains("fx-panel-toggle__is-open"))) {
 			toolbar.click();
 		}
-		WebElement function = CommonFunctionality.getElementByProperty(login.driver, "fx_new", 4);
+		WebElement function = CommonFunctionality.getElementByClassName(login.driver, "function-editor-window--icon", 4);
 		js.executeScript("arguments[0].click();", function);
-		CommonFunctionality.webDriverwait_keyvalue("function_wizard");
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("function_wizard"))).isDisplayed()) {
+		if (login.driver.findElement(By.xpath("//*[@class='function-wizard']")).isDisplayed()) {
 			System.out.println("Functions wizard is displaying");
 		}
 	}
@@ -2252,6 +2249,14 @@ public class CDMNextSprintCases {
 				break;
 			}
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Select type as Column chart$")
+	public void select_type_as_Column_chart() throws Throwable {
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "type-select--icon", 4)).pause(500).click().build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[class='items-wrapper'] span[title='Column']", 4)).pause(500).build().perform();
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='items-wrapper']//span[@title='Column'])[2]", 4).click();
 	}
 
 	@And("^Check \"([^\"]*)\" option$")
@@ -4048,17 +4053,13 @@ public class CDMNextSprintCases {
 	@Then("^Stroke options to be in disabled state$")
 	public void stroke_options_to_be_in_disabled_state() throws Throwable {
 		if (stroke.getAttribute("class").contains("insight-action-panel--btn__disabled")) {
-			login.Log4j.info("Stroke option is in disabled state for " + type_chart);
-			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
-			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Unexpected_confirmation_popup")))
-					.size() > 0) {
-				CommonFunctionality.getElementByProperty(login.driver, "Unexpected_confirmation_popup", 4).click();
+			login.Log4j.info("Stroke option is in disabled state and has been verified successfully");
+			CommonFunctionality.Hidden_Webelements(login.driver, "//*[@class='movable-modal--close']");
+			if(login.driver.findElements(By.cssSelector(".modal-content.sphere-modal__content")).size()>0) {
+				CommonFunctionality.getElementBycssSelector(login.driver, ".sphere-modal-controls--right .button__primary", 4).click();
 			}
 			CommonFunctionality.Views_list();
 		} else {
-			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Unexpected_confirmation_popup"))).size() > 0) {
-				CommonFunctionality.getElementByProperty(login.driver, "Unexpected_confirmation_popup", 4).click();
-			}
 			CommonFunctionality.Views_list();
 			sa.fail("Verification failed");
 		}

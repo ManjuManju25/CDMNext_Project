@@ -3,25 +3,17 @@ package CDMNext.util;
 import java.net.URL;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import CDMNext.StepDefinations.SearchTest;
 import CDMNext.StepDefinations.login;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
+
 
 public class Hooks {
 
 	@SuppressWarnings("deprecation")
-//	@Before("@Commentary,@Attachments")
 	public static void before_run() throws Throwable {
-		//user_has_successful_logged_in();
-		/*login.driver.manage().window().maximize();
-		login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		login.driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);*/
 		URL url = new URL(login.CONFIG.getProperty("testsiteURL"));
 		login.driver.get(url.getProtocol() + "://" + url.getHost() + "/Untitled-insight/myseries");
 		unhandled_popup();
@@ -45,7 +37,7 @@ public class Hooks {
 				.pause(100).click().build().perform();
 	}
 
-	//@After("@Commentary")
+	
 	public static void after_run() throws Throwable {
 		String parentWindow = login.driver.getWindowHandle();
 		Set<String> childwindows = login.driver.getWindowHandles();
@@ -74,18 +66,4 @@ public class Hooks {
 		CommonFunctionality.Views_list();
 	}
 
-	public static void user_has_successful_logged_in() throws Throwable {
-		if (login.logged_in = false) {
-			login.Invoke_browser();
-			login.application_login();
-			login.Log4j.info("It is in If block");
-		} else if (login.logged_in = true && !SearchTest.logged) {
-			login.application_login();
-			SearchTest.logged = true;
-			login.Log4j.info("It is in else If block");
-
-		} else {
-			login.Log4j.info("If User has already logged in, pelase continue....");
-		}
-	}
 }
