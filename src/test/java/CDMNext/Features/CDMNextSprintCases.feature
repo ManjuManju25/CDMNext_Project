@@ -1,7 +1,4 @@
 Feature: Verifying Sprintcases
-
-#Background:
-   #Given User has successful logged in
    
 @SprintCases
 Scenario: TC_Cvision_15211_01: Verify the quick functions in All functions popup
@@ -219,7 +216,7 @@ Scenario: TC_Cvision_15242_02: Verify stroke option for non-line charts
    And Search for the series "360937287"
    And  Click on more actions to create "View as Chart" 
    And Click on "Edit" visual
-   And Select type as "Column chart" 
+   And Select type as Column chart 
    And Check "stroke" option
    Then Stroke options to be in disabled state
    
@@ -587,7 +584,7 @@ Scenario: TC_Cvision_16243: Verify for minimize and full screen controls on the 
    And Check for "Fullscreen" and "Non-Fullscreen" controls
    Then Both should be available
    
-@SprintCasesre
+@SprintCases
 Scenario: TC_Cvision_15749: Verify title bar actions for breakdown series
    And Open SSP for the series "383937057" 
    And Click on "Drilldown" icon from SSP window

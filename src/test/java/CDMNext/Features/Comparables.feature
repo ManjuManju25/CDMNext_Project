@@ -1,7 +1,4 @@
 Feature: Verify Comparables feature
- 
-#Background:
-  #Given User has successful logged in
 
 @Comparables
 Scenario: Tc_Comparables_01: Verify results loading in comparable tab
@@ -222,7 +219,7 @@ Scenario: Tc_Comparables_33: Verify footnotes in table level of comparables
 Scenario: Tc_Comparables_34: Verify add series in table level of comparables
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Get the count of series inside table
+    And Get the count of series inside first table
     And Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" to collapse
     And Clicking "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
     And Clicking "add-to-data-selection--toggle" option from Table
@@ -774,7 +771,7 @@ Scenario: Tc_Comparables_95: Verify download in table
 Scenario: Tc_Comparables_96: Verify copy links in table
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
-    And Get href of "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
+    And Get href of "Table: Real GDP: Q-o-Q Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
     And Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" to collapse
     And Right Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
     And Select the "Copy link(s)" option
@@ -787,7 +784,7 @@ Scenario: Tc_Comparables_97: Verify footnotes in table
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" to collapse
-    And Right Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
+    And Right Click "Table: Real GDP: Q-o-Q Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
     And Select the "Footnotes" option
     Then The Footnotes window should be opened
     

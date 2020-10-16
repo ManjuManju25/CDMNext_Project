@@ -298,7 +298,8 @@ public class ReleasesTab {
 	public void only_status_icon_should_present(String arg1) throws Throwable {
 	    if(arg1.equalsIgnoreCase("Released")) {
 	    	if(login.driver.findElements(By.cssSelector("span[title='Released']")).size()>0) {
-	    	   if(login.driver.findElements(By.xpath("//*[@class='release-scheduler-tree-node--markers']/span[not(contains(@title,'elease'))]")).size()>0 || login.driver.findElements(By.cssSelector("span[title='Delayed releases']")).size()>0) {
+	    	   //if(login.driver.findElements(By.xpath("//*[@class='release-scheduler-tree-node--markers']/span[not(contains(@title,'elease'))]")).size()>0 || login.driver.findElements(By.cssSelector("span[title='Delayed releases']")).size()>0) {
+	    		if( login.driver.findElements(By.cssSelector("span[title='Delayed releases']")).size()>0) {
 	    		   fail("Other icons are also present on clicking "+arg1+ " status icon");   
 	    	   }
 	    	} else {
@@ -379,18 +380,16 @@ public class ReleasesTab {
 		
 	@Then("^Check the download button and search box$")
 	public void check_the_download_button_and_search_box() throws Throwable {
-		CommonFunctionality.wait(6000);
-		/*WebElement download = login.driver.findElement(By.xpath("//*[contains(@title,'Download')]"));
-		CommonFunctionality.wait(4000);
+		WebElement download = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='page-main-header--buttons']//*[contains(@title,'Download')]", 4);
 		if(download.getAttribute("class").contains("download-button__unavailable")) {
 	    	login.Log4j.info("Download button is disabled");
 	    } else {
 	    	sa.fail("Download button is not disabled");
-	    }*/
-	    String text = login.driver.findElement(By.className("series-series-count--number")).getText();
+	    }
+	    String text = CommonFunctionality.getElementByClassName(login.driver,"search-input--selected-count", 4).getAttribute("innerHTML");
 	    int count = Integer.parseInt(text);
 	    if(count == 0) {
-	    	WebElement series_count = login.driver.findElement(By.cssSelector("span[title='Edit your result selection']"));
+	    	WebElement series_count = CommonFunctionality.getElementBycssSelector(login.driver, "span[title='Edit your result selection']", 4);
 	    	if(!series_count.isDisplayed()) {
 	    		login.Log4j.info("The Series count is not displaying in search box");
 	    	} else {
@@ -403,7 +402,7 @@ public class ReleasesTab {
 	
 	@Then("^The Dataset level series are added into my series panel$")
 	public void the_Dataset_level_series_are_added_into_my_series_panel() throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(5000);
 	    String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-name-wrapper']//following-sibling::*[@class='group-name']", 4).getText();
 	    CommonFunctionality.DeleteSeries();
 	    sa.assertEquals(expected, dataset_text);
@@ -516,6 +515,7 @@ public class ReleasesTab {
 	@Then("^Selected dataset should get deselected$")
 	public void selected_dataset_should_get_deselected() throws Throwable {
 	    WebElement deselect = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='release-scheduler-tree-node--title'])[1]/preceding-sibling::*", 4);
+	    CommonFunctionality.wait(500);
 	    if(deselect.getAttribute("class").contains("svg-checkbox__selected")) {
  		   sa.fail("Verification Failed");
  	   }

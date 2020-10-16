@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -2017,7 +2018,6 @@ public class Myseries {
 			System.out.println("Text is" + Text);
 			String mystring = Text;
 			String arr[] = mystring.split(" ", 2);
-
 			String firstWord = arr[0];
 			firstWord = firstWord.replaceAll("[^a-zA-Z0-9]", "");
 			System.out.println(GroupVerification + ":" + firstWord);
@@ -2028,7 +2028,8 @@ public class Myseries {
 				Assert.fail("Grouping Functionality is Not working Successfully:-(");
 			}
 			Thread.sleep(3000);
-			CommonFunctionality.DeleteSeries();
+			CommonFunctionality.Views_list();
+			
 	  }
 	  
 	  
@@ -3211,9 +3212,11 @@ public class Myseries {
 	  public void verify_suggested_indicator() throws Throwable {
 		  Thread.sleep(5000);
 		  List<WebElement> objLinks = login.driver.findElements(By.xpath("//div[contains(@class,'visual-indicator-countries-tabs')]"));
-		  String C_name1 = "South Korea" ;
-		  String C_name2 = 	"South Korea";
-		  String C_name3 = "South Korea";
+		  Thread.sleep(3000);
+			String C_name1 = login.driver.findElement(By.xpath("(//div[@class='series-item--country country-information'])[1]")).getText();
+			String C_name2 = login.driver.findElement(By.xpath("(//div[@class='series-item--country country-information'])[2]")).getText();
+			String C_name3 = login.driver.findElement(By.xpath("(//div[@class='series-item--country country-information'])[3]")).getText();
+			 Thread.sleep(5000);
 		  for(WebElement countryname :objLinks ){
 			  String c = countryname.getText();
 			  if(c.contains(C_name1) || c.contains(C_name2) || c.contains(C_name3)){
@@ -4236,14 +4239,14 @@ public class Myseries {
 		  Robot r = new Robot();
 			r.keyPress(KeyEvent.VK_SHIFT);
 			
-		//  Actions keyAction = new Actions(login.driver);     
-		//  keyAction.keyUp(Keys.SHIFT).perform();
-			//Thread.sleep(3000);
+		 Actions keyAction = new Actions(login.driver);     
+	keyAction.keyUp(Keys.SHIFT).perform();
+			Thread.sleep(3000);
 			 Thread.sleep(2000);
 			  login.driver.findElement(By.xpath("//*[@class='input-control--indicator']")).click();
-			// Thread.sleep(3000);
+			 Thread.sleep(3000);
 			 r.keyRelease(KeyEvent.VK_SHIFT);
-		//	  keyAction.keyDown(Keys.SHIFT).perform(); 
+			  keyAction.keyDown(Keys.SHIFT).perform(); 
 			
 	  }
 	//TC_MS_165
@@ -4297,13 +4300,13 @@ public class Myseries {
 	  @And("^Mouse hover the first series$")
 	  public void mouse_hover_the_first_series() throws Throwable {
 		  try {
-		  Thread.sleep(1000);
+			  login.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 		  Actions action = new Actions(login.driver);
 			WebElement we = login.driver.findElement(By.xpath("//span[@class='series-item--icon series-item--icon__edit']"));
 			action.moveToElement(we).pause(8000).build().perform();
 		  }
 		  catch(org.openqa.selenium.StaleElementReferenceException ex) {
-			  Thread.sleep(1000);
+			  login.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 			  Actions action = new Actions(login.driver);
 				WebElement we = login.driver.findElement(By.xpath("//span[@class='series-item--icon series-item--icon__edit']"));
 				action.moveToElement(we).pause(8000).build().perform();
@@ -4346,6 +4349,11 @@ public class Myseries {
 	//TC_MS_169
 	  @And("^Verify series tooltip in my series$")
 	  public void verify_series_tooltip_in_my_series() throws Throwable {
+		  Thread.sleep(3000);
+		  Actions action = new Actions(login.driver);
+			WebElement we = login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']"));
+			action.moveToElement(we).pause(8000).build().perform();
+			Thread.sleep(3000);
 		  boolean tooltip =  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text_Myseries"))).isDisplayed();
 		  if(tooltip==true)	  
 	 {
@@ -4429,12 +4437,12 @@ public class Myseries {
 	//TC_MS_173
 	  @And("^Verify Edit series Rename - clicking on OK button$")
 	  public void verify_Edit_series_Rename_clicking_on_OK_button() throws Throwable {
-		  Thread.sleep(3000);
-		  String seriesname = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("rename_series_group")))
+		 Thread.sleep(3000);
+		  String seriesname = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("rename_series_grouplevel")))
 					.getText();
 		System.out.println(seriesname);
 		  String Seriesnameafter = "Test";
-		  if(seriesname.contains(Seriesnameafter)){
+	  if(seriesname.contains(Seriesnameafter)){
 			  
 			  System.out.println("Edit series Rename clicking on OK button is verified Successfully");
 		  }else{
@@ -4687,7 +4695,6 @@ public class Myseries {
 	@And("^Select the More option$")
 		public void select_the_More_option() throws Throwable {
 		  
-		  
 		  try {
 			  Thread.sleep(1000);
 			  Actions action = new Actions(login.driver);
@@ -4764,40 +4771,18 @@ public class Myseries {
 	  
 	  
 	//TC_MS_190
-	  @And("^Verify More View as Map$")
+	  @SuppressWarnings("deprecation")
+	@And("^Verify More View as Map$")
 	  public void verify_More_View_as_Map() throws Throwable {
-		  
-		  
-		  
-		 
-		    
-		    
-		 
-		  
-		  
-		  Thread.sleep(3000);
-		  Actions action = new Actions(login.driver);
-			WebElement map = login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[4]/span[2]"));
-					action.moveToElement(map).click().build().perform();	
-					try {
-					 Actions action1 = new Actions(login.driver);
-					WebElement world = login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']/li[4]"));
-					action1.moveToElement(world).click().build().perform();	
-					}
-					catch(org.openqa.selenium.JavascriptException e) {
-						 Actions action1 = new Actions(login.driver);
-							WebElement world = login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']/li[4]"));
-							action1.moveToElement(world).click().build().perform();	
-					}
-					  Thread.sleep(2000);
-		  
+		
+			  new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "*[title='View as Map']", 4)).pause(500).click().build().perform();
+			  new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".dropdown-menu.context-menu span[title='World']", 4)).pause(2000).click().build().perform();
 	
 		  if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("MAP_created"))).size() != 0) {
 				System.out.println("More option View as MAP is Verified Successfully!!! ");
 			} else {
 				CommonFunctionality.Views_list();
-				Assert.fail("More option View as MAP is NOT Verified Successfully");
-				 
+				Assert.fail("More option View as MAP is NOT Verified Successfully"); 
 			}
 		  CommonFunctionality.Views_list();
 	  }
@@ -5004,7 +4989,7 @@ public class Myseries {
 		  Thread.sleep(3000);
 		  CommonFunctionality.getElementByProperty(login.driver, "Customize_Close_window", 6).click();
 		  Thread.sleep(3000);
-		  CommonFunctionality.DeleteSeries();
+		  CommonFunctionality.Views_list();
 		  
 	  }
 	  
@@ -5275,16 +5260,26 @@ public class Myseries {
 	  
 	  
 	//TC_MS_223
-	  @And("^Add select one more series$")
+	  @SuppressWarnings("deprecation")
+	@And("^Add select one more series$")
 	  public void add_select_one_more_series() throws Throwable {
 		  select_some_series_to_my_series_tab();
 		  Thread.sleep(1000);
 		 Secondseriesname = CommonFunctionality.getElementByProperty(login.driver, "Second_series_name", 6).getText();
 		  Thread.sleep(1000);
 		  Actions action = new Actions(login.driver);
-			WebElement we = login.driver.findElement(By.xpath("//div[@class='webix_column list-series-name webix_last']/div[2]/div[1]/div[1]/div[1]/span[1]/span"));
-			action.moveToElement(we).pause(5000).build().perform();
-			select_the_More_option();
+			WebElement we = login.driver.findElement(By.xpath("//div[contains(@class,'webix_last')]/div[2]/div[1]/div[1]/div[1]/span[1]/span"));
+			action.moveToElement(we).pause(2000).build().perform();
+			 try {
+				  
+				  
+				  Thread.sleep(3000);
+				  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_icon"))).click();
+				  }
+				  catch(Exception e) {
+					  Thread.sleep(3000);
+					  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_icon"))).click();
+				  }
 	  }
 	//TC_MS_223
 	  @And("^Verify More actions Group if already have a group in my series$")
@@ -5631,8 +5626,6 @@ public class Myseries {
 		     WebElement we =login.driver.findElement(By.xpath(
 						"(//span[@class='series-name-field--series-name'])[1]"));
 		     action.moveToElement(we).build().perform();
-		 
-		  
 		  
 		  try {
 		  Actions action2 = new Actions(login.driver);
@@ -5671,6 +5664,7 @@ public class Myseries {
 	  @And("^Verify Right click View as Map$")
 	  public void verify_Right_click_View_as_Map() throws Throwable {
 		  verify_More_View_as_Map() ;
+		  //CommonFunctionality.Views_list();
 	  }
 	//TC_MS_237
 	  @And("^Verify Right click View as Table$")
@@ -5804,9 +5798,11 @@ public class Myseries {
 	  @And("^Verify Right click insert copied option if not data in clipboard$")
 	  public void verify_Right_click_insert_copied_option_if_not_data_in_clipboard() throws Throwable {
 		
-		  Thread.sleep(3000);
+		 Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("rightclicksortby"))).click();
 		  verify_More_actions_insert_copied_option_if_not_data_in_clipboard();
+		  
+		 // CommonFunctionality.Views_list();
 	  }
 	//TC_MS_257
 	  @And("^Verify Right click insert copied option$")
@@ -5901,6 +5897,7 @@ public class Myseries {
 	  @And("^Verify Right click Group if already have a group in my series$")
 	  public void verify_Right_click_Group_if_already_have_a_group_in_my_series() throws Throwable {
 		  verify_More_actions_Group_if_already_have_a_group_in_my_series();
+		 // CommonFunctionality.Views_list();
 	  }
 	//TC_MS_270
 	  @And("^Verify Right click search field for existing group$")

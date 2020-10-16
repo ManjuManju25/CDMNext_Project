@@ -1,11 +1,8 @@
 Feature: Verifying Insight Share functionality
- 
-#Background:
-  #Given User has successful logged in
   
 @CollabarationSharing
 Scenario: TC_Share_02: Verify Share option from insight > File
-   #And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
+   And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
    And Navigate to "File" -> "Share" 
    Then The "Share" window should present
    
@@ -29,7 +26,7 @@ Scenario: TC_15259_01: Verify confirmation popup for insight sharing
    And Click "File" > "New" 
    And Click "Create insight" to create a new insight
    And Click on "Insight" icon to share insight
-   And Select Users to share
+   And Entering mail to share the insight
    And Click on "Save" button to share
    Then Share "Confirmation" popup should display every time share insight
    
@@ -515,17 +512,40 @@ Scenario: TC_Share_07: Verify 'Share' option for Guest users.
    And Click "Create insight" to create a new insight
    And Click on "Insight" icon to share insight
    Then The "Register now!" popup should appears
-   And Logout from current user
-   #And Login back to internal user with password "Ceic@12345678" 
+   #And Logout from current user
+   And Login back to default execution login
+
+# ------------------------------------------------- Growl message ----------------------------------------------------------------------------
    
-#@CollabarationSharingCheck
-#Scenario: TC_Share_08: Verify 'Multiple insights' sharing.
-   #And Enter mail for "Multiple insights sharing" with action as "shared" an insight
-   #
-#@CollabarationSharingCheck
-#Scenario: TC_Share_47: Verify notification for shared insight.
-   #And Enter mail for "Notification for shared insight" with action as "shared" an insight
-   #
-#@CollabarationSharingCheck
-#Scenario: TC_Share_48: Verify growl message for shared insight.
-   #And Enter mail for "Growl message for shared insight" with action as "shared" an insight
+@CollabarationSharing1
+Scenario: TC_Share_08: Verify 'Multiple insights' sharing.
+   And Enter mail for "Multiple insights sharing" with action as "shared" an insight
+   
+@CollabarationSharing1
+Scenario: TC_Share_47: Verify notification for shared insight.
+   And Enter mail for "Notification for shared insight" with action as "shared" an insight
+   
+@CollabarationSharing1
+Scenario: TC_Share_48: Verify growl message for shared insight.
+   And Enter mail for "Growl message for shared insight" with action as "shared" an insight
+   
+@CollabarationSharing1
+Scenario: TC_Share_49: Verify clicking on insight title in growl message
+   And Enter mail for "Clicking Insight title for shared insight" with action as "shared" an insight
+   
+@CollabarationSharing1
+Scenario: TC_Share_50: Verify closing of growl popup.
+   And Enter mail for "Closing growl popup" with action as "shared" an insight
+   
+@CollabarationSharing1
+Scenario: TC_Share_54: Verify growl message for stoping shared insight.
+   And Enter mail for "Growl popup for stopped sharing" with action as "stopped sharing" an insight
+   
+@CollabarationSharing1
+Scenario: TC_Share_55: Verify growl message for insight stopped sharing.
+   And Enter mail for "Notification for stopped sharing" with action as "stopped sharing" an insight
+   
+#TC_Share_59 - TC_Share-61   
+@CollabarationSharing1
+Scenario: TC_Share_59: Verify notification for changes in shared insight
+   And Enter mail for "Notification for changes in shared insight" with action as "sharing" an insight
