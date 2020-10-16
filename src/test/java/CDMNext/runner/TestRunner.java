@@ -4,16 +4,20 @@ import cucumber.api.CucumberOptions;
 
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
+
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
+import CDMNext.util.ErrorScreenshot;
+import CDMNext.util.Hooks;
 //import CDMNext.util.SendmailWithAttachment;
 
 
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Attachments,@Commentary"}, 
+		tags = {"@AllRegion"}, 
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
@@ -33,8 +37,14 @@ public class TestRunner {
 		HTML_Report.html_Header();
 
 	}
-		
-	// TestNG @TestZZZ
+	
+	/*@AfterMethod
+	public void tearDown(ITestResult result) throws Throwable {
+		ErrorScreenshot.takeScreenshotOnFailure1(result);
+		Hooks.after_run();
+	}*/
+	
+	// TestNG @Test
 	@Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
 	public void feature(CucumberFeatureWrapper cucumberFeature) throws Throwable {
 		login.Log4j.info("\nInside TestNG > @Test");
@@ -49,11 +59,7 @@ public class TestRunner {
 		return testNGCucumberRunner.provideFeatures();
 	}
 
-	/*@AfterMethod
-	public static void afterMethod(ITestResult result) throws IOException {
-		 ErrorScreenshot.takeScreenshotOnFailure(result);
-		}
-*/
+	
 	@AfterSuite(alwaysRun = true)
 	public void tearDownClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @AfterSuite");
@@ -65,8 +71,8 @@ public class TestRunner {
 			login.driver = null;
 			HTML_Report.html_Footer();
 			HTML_Report.bw.close();
-			// login.Log4j.info("\n ****Inside Email*****");
-			// SendmailWithAttachment.report();
+		//	login.Log4j.info("\n ****Inside Email*****");
+			 //SendmailWithAttachment.report();
 		}
 	}
 }
