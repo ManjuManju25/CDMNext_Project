@@ -1813,7 +1813,8 @@ public void create_any_visual() throws Throwable {
 	@Then("^Navigate to the series from db tab$")
 	public void navigate_to_the_series_from_db_tab() throws Throwable {
 		Thread.sleep(5000);
-		WebElement collapse_all = login.driver.findElement(By.xpath("//*[@class='database-representation--link-text']"));
+		CommonFunctionality.TopMethod();
+		WebElement collapse_all = login.driver.findElement(By.xpath("//*[@title='Collapse tree']//*[@class='database-representation--link-text']"));
 		CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", collapse_all);
 		Thread.sleep(2000);
 		str1 = collapse_all.getText();
@@ -1833,17 +1834,17 @@ public void create_any_visual() throws Throwable {
 
 	@And("^Scroll down and set showing results as \"([^\"]*)\" per page$")
 	public void scroll_down_and_set_showing_results_as_per_page(String arg1) throws Throwable {
-		login.driver.navigate().refresh();
-		Thread.sleep(5000);
-		WebElement SearchIcon = login.driver
-				.findElement(By.xpath("//div[@class='search-input-field--item search-input-button']"));
-		action.moveToElement(SearchIcon).build().perform();
+//		login.driver.navigate().refresh();
+//		Thread.sleep(5000);
+//		WebElement SearchIcon = login.driver
+//				.findElement(By.xpath("//div[@class='search-input-field--item search-input-button']"));
+//		action.moveToElement(SearchIcon).build().perform();
 		
-   	    WebElement ClearSearchInput = login.driver
-  				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
-   	    ClearSearchInput.click();
+//   	    WebElement ClearSearchInput = login.driver
+//  				.findElement(By.xpath(login.LOCATORS.getProperty("Clear_Search_Input")));
+//   	    ClearSearchInput.click();
 //		action.moveToElement(ClearSearchInput).click().build().perform();
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		Thread.sleep(3000);
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
@@ -1852,7 +1853,7 @@ public void create_any_visual() throws Throwable {
 	    jse.executeScript("arguments[0].scrollIntoView(true);", element);
 		Thread.sleep(1500);
 		element.click();
-		Thread.sleep(1500);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//*[@value='" + arg1 + "']")).click();
 	}
 

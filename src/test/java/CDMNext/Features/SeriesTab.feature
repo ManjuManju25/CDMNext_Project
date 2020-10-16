@@ -1,11 +1,7 @@
 Feature: SeriesTab
 
-  #Background: 
-    #Given User has successful logged in
-
   @SeriesTab
   Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
-    #And Check for prerequesties
     And Select indicator "Transport" as "Freight Traffic"
     And Select indicator "Tourism" as "Tourism Statistics"
     When Click on "Apply filter"
@@ -273,16 +269,16 @@ Feature: SeriesTab
     And Click on "Add"
     Then The series should be added to Data tab
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_42:Verify 'add to exist insight' in dropdown
-  	Given User enters seriesID "368921927;371376337"
-  	And  Click on drop down icon next to +
-  	And  Click on "Add to recent insight"
-  	And Select any recent insight from the dropdown
+    Given User enters seriesID "368921927;371376337"
+    And Click on drop down icon next to +
+    And Click on "Add to recent insight"
+    And Select any recent insight from the dropdown
     And Click on "Apply"
     #Then The series should be added to My series tab for selected insight
-  	Then The series should be added to selected insight
-  
+    Then The series should be added to selected insight
+
   @SeriesTab
   Scenario: TC_SeriesTab_43:Verify 'Add to new insight' in dropdown
     Given User enters seriesID "53211802;386600807"
@@ -561,7 +557,7 @@ Feature: SeriesTab
     And User selects "Status" as "Rebased"
     When Click on "Apply filter"
     Then Should display the rebased series
-  
+
   Scenario: TC_SeriesTab_80: Verify keyword search
     And Clear search input
     Given User enters keyword "gdp"
@@ -588,5 +584,3 @@ Feature: SeriesTab
     And Select series and Click on More actions
     And Select "Series Info"
     Then The SSP window should be opened
-    
-   

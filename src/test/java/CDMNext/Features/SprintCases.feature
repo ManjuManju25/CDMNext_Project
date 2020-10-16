@@ -1,11 +1,7 @@
 Feature: Verifying sprint cases functionality
 
-  #Background: 
-    #Given User has successful logged in
-
   @Sprint
   Scenario: TC_12744_01: Clear All filters button to clear all filters set
-  #	And Check for prerequesties
     And User enters keyword "Banglore"
     And Click on "More" filter
     And User selects "Date" as "Last observation after"

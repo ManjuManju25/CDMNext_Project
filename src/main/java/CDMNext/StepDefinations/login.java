@@ -29,6 +29,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 //import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
+
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.ErrorScreenshot;
 import CDMNext.util.Hooks;
@@ -111,13 +113,11 @@ public class login {
 		// driver.quit();
 
 	}
-
+	
 	@Given("^User navigates to the CDMNext appliction$")
 	public void user_navigates_to_the_CDMNext_appliction() throws Throwable {
 		// Thread.sleep(3000);
 		driver.get(CONFIG.getProperty("testsiteURL"));
-//		URL url = new URL(login.CONFIG.getProperty("testsiteURL"));
-//		login.driver.get(url.getProtocol() + "://" + url.getHost() + "/Untitled-insight/myseries");
 		Log4j.info("Launching site .. ");
 		
 	}

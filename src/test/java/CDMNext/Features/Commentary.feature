@@ -1,8 +1,5 @@
 Feature: Verifying Commentary Visual functionality
 
-  #Background: 
-    #Given User has successful logged in
-
   @Commentary
   Scenario: TC_Commentary_01:Verify 'Insert Commentary' under View tab
     And Go to View tab
@@ -226,7 +223,8 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_33:Verify backgroud color for visual
-    	And Click on "Visual" option on visual header
+    And Create Commentary visual
+    And Click on "Visual" option on visual header
     And Enter some data to description field
     And Check for Background
     And Select color for visual background
@@ -922,12 +920,13 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_117:Verify 'Share' for insight having all type of visuals
-    	And  Create all visuals in an insight
+    And Create all visuals in an insight
     And Perform Share
     Then Share popup should be opened
 
   @Commentary
   Scenario: TC_Commentary_118:Verify Download insight having all type of visuals
+    And Create all visuals in an insight
     And Perform download to excel with all views
     Then All visuals should be downloaded successfully
 
