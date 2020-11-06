@@ -458,16 +458,20 @@ public class SeriesTab {
 					.click();
 			break;
 		case "Expand all":
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'Collapse all')]",8).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[@title='Collapse tree']",10).click();
+//			CommonFunctionality.getElementByXpath(login.driver,
+//					"//*[@class='database-representation--state-actions']/*[2]//*[contains(text(),'" + arg1 + "')]",4)
+//					.click();
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='database-representation--state-actions']/*[2]//*[contains(text(),'" + arg1 + "')]",4)
+					"//*[@title='Expand tree']",8)
 					.click();
 			break;
 		case "Collapse all":
-			CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 8).click();
+			CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 15).click();
 			login.Log4j.info("Clicking on Matches only");
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'Matches only')]",8).click();
-			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",6).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'Matches only')]",12).click();
+//			CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]",6).click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[@title='Collapse tree']",10).click();
 			break;
 		case "See our Search help":
 			CommonFunctionality.getElementByXpath(login.driver,"//li[contains(text(), '" + arg1 + "')]",8).click();

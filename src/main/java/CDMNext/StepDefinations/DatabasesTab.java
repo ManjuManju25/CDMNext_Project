@@ -748,7 +748,7 @@ public class DatabasesTab {
 	@Then("^The data tree should be expanded$")
 	public void the_data_tree_should_be_expanded() throws Throwable {
 		Thread.sleep(2000);
-		if (login.driver.findElement(By.xpath("//*[contains(text(),'Collapse all')]")).isDisplayed()) {
+		if (login.driver.findElement(By.xpath("//*[@title='Collapse tree']")).isDisplayed()) {
 			login.Log4j.info("The data tree is expanded");
 		} else {
 			AssertJUnit.fail("The data tree is not expanded");
