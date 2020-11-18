@@ -1,0 +1,385 @@
+2020-11-03 11:24:17 INFO  Log4j:34 - 
+Inside TestNG > @BeforeSuite
+2020-11-03 11:24:17 INFO  Log4j:58 - 
+Inside TestNG > @DataProvider
+2020-11-03 11:24:18 INFO  Log4j:50 - 
+Inside TestNG > @Test
+2020-11-03 11:24:18 INFO  Log4j:240 - Logger initialized and writing using logger
+2020-11-03 11:24:18 INFO  Log4j:241 - 
+Inside setup
+2020-11-03 11:24:25 INFO  Log4j:54 - It is in else If block
+2020-11-03 11:24:40 INFO  Log4j:204 - Launching site .. 
+2020-11-03 11:24:41 INFO  Log4j:206 - Trying to login with Username:
+2020-11-03 11:24:42 INFO  Log4j:210 - Trying to login with Password:
+2020-11-03 11:24:43 INFO  Log4j:213 - Clicking on login button 
+2020-11-03 11:26:08 INFO  Log4j:48 - Total number of rows present in the sheet: 249
+2020-11-03 11:26:08 INFO  Log4j:50 - Total number of columns present in the sheet: 3
+2020-11-03 11:26:09 INFO  Log4j:117 - Clicking on All Regions filter
+2020-11-03 11:26:15 INFO  Log4j:110 - clicking on All regions tab
+2020-11-03 11:26:17 INFO  Log4j:238 - WebElements size is on site: 4
+2020-11-03 11:26:18 INFO  Log4j:248 - Both list have same size of 4
+2020-11-03 11:26:18 INFO  Log4j:257 - Web element Africa and The Middle East Found in Excel
+2020-11-03 11:26:18 INFO  Log4j:257 - Web element America Found in Excel
+2020-11-03 11:26:18 INFO  Log4j:257 - Web element Asia Pacific Found in Excel
+2020-11-03 11:26:18 INFO  Log4j:257 - Web element Europe and Central Asia Found in Excel
+2020-11-03 11:26:19 INFO  Log4j:153 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:19 INFO  Log4j:154 - SubRegion Count in Excel is: {MENA=[Algeria, Bahrain, Egypt, Iran (Islamic Republic of), Iraq, Jordan, Kuwait, Lebanon, Libya, Morocco, Oman, State of Palestine, Qatar, Saudi Arabia, Sudan, Syrian Arab Republic, Tunisia, United Arab Emirates, Yemen], Northern Africa=[Algeria, Egypt, Libya, Morocco, Sudan, Tunisia], Sub-Saharan Africa=null, Eastern Africa=[Burundi, Comoros, Djibouti, Eritrea, Ethiopia, Kenya, Madagascar, Malawi, Mauritius, Mozambique, Rwanda, Seychelles, Somalia, South Sudan, Tanzania, United Republic of, Uganda, Zambia, Zimbabwe], Middle Africa=[Angola, Cameroon, Central African Republic, Chad, Congo, Congo, Dem. Rep. of the, Equatorial Guinea, Gabon, Sao Tome and Principe], Southern Africa=[Botswana, Eswatini, Lesotho, Namibia, South Africa], Western Africa=[Benin, Burkina Faso, Cabo Verde, Côte d'Ivoire, Gambia, Ghana, Guinea, Guinea-Bissau, Liberia, Mali, Mauritania, Niger, Nigeria, Senegal, Sierra Leone, Togo], The Middle East=[Bahrain, Iran (Islamic Republic of), Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, State of Palestine, Syrian Arab Republic, United Arab Emirates, Yemen]}
+2020-11-03 11:26:19 INFO  Log4j:156 - 0
+2020-11-03 11:26:21 INFO  Log4j:238 - WebElements size is on site: 8
+2020-11-03 11:26:21 INFO  Log4j:248 - Both list have same size of 8
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element MENA Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element Northern Africa Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element Sub-Saharan Africa Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element Eastern Africa Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element Middle Africa Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element Southern Africa Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element Western Africa Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:257 - Web element The Middle East Found in Excel
+2020-11-03 11:26:21 INFO  Log4j:181 - Country list : [Algeria, Bahrain, Egypt, Iran (Islamic Republic of), Iraq, Jordan, Kuwait, Lebanon, Libya, Morocco, Oman, State of Palestine, Qatar, Saudi Arabia, Sudan, Syrian Arab Republic, Tunisia, United Arab Emirates, Yemen]
+2020-11-03 11:26:22 INFO  Log4j:198 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:22 INFO  Log4j:199 - Sub region in Excel is: MENA
+2020-11-03 11:26:22 INFO  Log4j:238 - WebElements size is on site: 15
+2020-11-03 11:26:22 ERROR Log4j:250 - ERROR : We have 19 elements in Excel but see only 15 elements on site
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Algeria Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Bahrain Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Egypt Found in Excel
+2020-11-03 11:26:22 ERROR Log4j:259 - ERROR : We don't find Iran in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Iraq Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Jordan Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Kuwait Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Lebanon Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Libya Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Morocco Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Oman Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Qatar Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Saudi Arabia Found in Excel
+2020-11-03 11:26:22 ERROR Log4j:259 - ERROR : We don't find State of Palestine (West Bank and Gaza) in Excel
+2020-11-03 11:26:22 INFO  Log4j:257 - Web element Sudan Found in Excel
+2020-11-03 11:26:22 INFO  Log4j:181 - Country list : [Algeria, Egypt, Libya, Morocco, Sudan, Tunisia]
+2020-11-03 11:26:23 INFO  Log4j:198 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:23 INFO  Log4j:199 - Sub region in Excel is: Northern Africa
+2020-11-03 11:26:23 INFO  Log4j:238 - WebElements size is on site: 6
+2020-11-03 11:26:24 INFO  Log4j:248 - Both list have same size of 6
+2020-11-03 11:26:24 INFO  Log4j:257 - Web element Algeria Found in Excel
+2020-11-03 11:26:24 INFO  Log4j:257 - Web element Egypt Found in Excel
+2020-11-03 11:26:24 INFO  Log4j:257 - Web element Libya Found in Excel
+2020-11-03 11:26:24 INFO  Log4j:257 - Web element Morocco Found in Excel
+2020-11-03 11:26:24 INFO  Log4j:257 - Web element Sudan Found in Excel
+2020-11-03 11:26:24 INFO  Log4j:257 - Web element Tunisia Found in Excel
+2020-11-03 11:26:24 INFO  Log4j:181 - Country list : null
+2020-11-03 11:26:24 INFO  Log4j:181 - Country list : [Burundi, Comoros, Djibouti, Eritrea, Ethiopia, Kenya, Madagascar, Malawi, Mauritius, Mozambique, Rwanda, Seychelles, Somalia, South Sudan, Tanzania, United Republic of, Uganda, Zambia, Zimbabwe]
+2020-11-03 11:26:24 INFO  Log4j:198 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:24 INFO  Log4j:199 - Sub region in Excel is: Eastern Africa
+2020-11-03 11:26:25 INFO  Log4j:238 - WebElements size is on site: 15
+2020-11-03 11:26:25 ERROR Log4j:250 - ERROR : We have 18 elements in Excel but see only 15 elements on site
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Burundi Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Comoros Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Djibouti Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Eritrea Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Ethiopia Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Kenya Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Madagascar Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Malawi Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Mauritius Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Mozambique Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Rwanda Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Seychelles Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element Somalia Found in Excel
+2020-11-03 11:26:25 INFO  Log4j:257 - Web element South Sudan Found in Excel
+2020-11-03 11:26:25 ERROR Log4j:259 - ERROR : We don't find Tanzania in Excel
+2020-11-03 11:26:25 INFO  Log4j:181 - Country list : [Angola, Cameroon, Central African Republic, Chad, Congo, Congo, Dem. Rep. of the, Equatorial Guinea, Gabon, Sao Tome and Principe]
+2020-11-03 11:26:26 INFO  Log4j:198 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:26 INFO  Log4j:199 - Sub region in Excel is: Middle Africa
+2020-11-03 11:26:26 INFO  Log4j:238 - WebElements size is on site: 9
+2020-11-03 11:26:26 INFO  Log4j:248 - Both list have same size of 9
+2020-11-03 11:26:26 INFO  Log4j:257 - Web element Angola Found in Excel
+2020-11-03 11:26:26 INFO  Log4j:257 - Web element Cameroon Found in Excel
+2020-11-03 11:26:26 INFO  Log4j:257 - Web element Central African Republic Found in Excel
+2020-11-03 11:26:26 INFO  Log4j:257 - Web element Chad Found in Excel
+2020-11-03 11:26:26 ERROR Log4j:259 - ERROR : We don't find Congo, Democratic Republic of in Excel
+2020-11-03 11:26:26 ERROR Log4j:259 - ERROR : We don't find Congo, Republic of in Excel
+2020-11-03 11:26:26 INFO  Log4j:257 - Web element Equatorial Guinea Found in Excel
+2020-11-03 11:26:26 INFO  Log4j:257 - Web element Gabon Found in Excel
+2020-11-03 11:26:26 INFO  Log4j:257 - Web element Sao Tome and Principe Found in Excel
+2020-11-03 11:26:26 INFO  Log4j:181 - Country list : [Botswana, Eswatini, Lesotho, Namibia, South Africa]
+2020-11-03 11:26:27 INFO  Log4j:198 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:27 INFO  Log4j:199 - Sub region in Excel is: Southern Africa
+2020-11-03 11:26:27 INFO  Log4j:238 - WebElements size is on site: 5
+2020-11-03 11:26:27 INFO  Log4j:248 - Both list have same size of 5
+2020-11-03 11:26:27 INFO  Log4j:257 - Web element Botswana Found in Excel
+2020-11-03 11:26:27 INFO  Log4j:257 - Web element Eswatini Found in Excel
+2020-11-03 11:26:27 INFO  Log4j:257 - Web element Lesotho Found in Excel
+2020-11-03 11:26:27 INFO  Log4j:257 - Web element Namibia Found in Excel
+2020-11-03 11:26:27 INFO  Log4j:257 - Web element South Africa Found in Excel
+2020-11-03 11:26:27 INFO  Log4j:181 - Country list : [Benin, Burkina Faso, Cabo Verde, Côte d'Ivoire, Gambia, Ghana, Guinea, Guinea-Bissau, Liberia, Mali, Mauritania, Niger, Nigeria, Senegal, Sierra Leone, Togo]
+2020-11-03 11:26:28 INFO  Log4j:198 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:28 INFO  Log4j:199 - Sub region in Excel is: Western Africa
+2020-11-03 11:26:28 INFO  Log4j:238 - WebElements size is on site: 15
+2020-11-03 11:26:29 ERROR Log4j:250 - ERROR : We have 16 elements in Excel but see only 15 elements on site
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Benin Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Burkina Faso Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Cabo Verde Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Gambia Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Ghana Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Guinea Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Guinea-Bissau Found in Excel
+2020-11-03 11:26:29 ERROR Log4j:259 - ERROR : We don't find Ivory Coast in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Liberia Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Mali Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Mauritania Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Niger Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Nigeria Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Senegal Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:257 - Web element Sierra Leone Found in Excel
+2020-11-03 11:26:29 INFO  Log4j:181 - Country list : [Bahrain, Iran (Islamic Republic of), Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi Arabia, State of Palestine, Syrian Arab Republic, United Arab Emirates, Yemen]
+2020-11-03 11:26:30 INFO  Log4j:198 - Region in Excel is: Africa and The Middle East
+2020-11-03 11:26:30 INFO  Log4j:199 - Sub region in Excel is: The Middle East
+2020-11-03 11:26:30 INFO  Log4j:238 - WebElements size is on site: 14
+2020-11-03 11:26:30 INFO  Log4j:248 - Both list have same size of 14
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Bahrain Found in Excel
+2020-11-03 11:26:30 ERROR Log4j:259 - ERROR : We don't find Iran in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Iraq Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Israel Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Jordan Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Kuwait Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Lebanon Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Oman Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Qatar Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Saudi Arabia Found in Excel
+2020-11-03 11:26:30 ERROR Log4j:259 - ERROR : We don't find State of Palestine (West Bank and Gaza) in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Syrian Arab Republic Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element United Arab Emirates Found in Excel
+2020-11-03 11:26:30 INFO  Log4j:257 - Web element Yemen Found in Excel
+2020-11-03 11:26:32 INFO  Log4j:153 - Region in Excel is: America
+2020-11-03 11:26:32 INFO  Log4j:154 - SubRegion Count in Excel is: {Central America and the Caribbean=null, Caribbean=[Antigua and Barbuda, Aruba, Bahamas, Barbados, Cayman Islands, Cuba, Curaçao, Dominica, Dominican Republic, Grenada, Haiti, Jamaica, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Sint Maarten (Dutch part), Trinidad and Tobago], Central America=[Belize, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, Panama], North America=[Bermuda, Canada, Greenland, Mexico, United States of America], South America=[Argentina, Bolivia (Plurinational State of), Brazil, Chile, Colombia, Ecuador, Guyana, Paraguay, Peru, South Georgia and South Sandwich Islands, Suriname, Uruguay, Venezuela (Bolivarian Rep. of)]}
+2020-11-03 11:26:32 INFO  Log4j:156 - 1
+2020-11-03 11:26:34 INFO  Log4j:238 - WebElements size is on site: 5
+2020-11-03 11:26:34 INFO  Log4j:248 - Both list have same size of 5
+2020-11-03 11:26:34 INFO  Log4j:257 - Web element Central America and the Caribbean Found in Excel
+2020-11-03 11:26:34 INFO  Log4j:257 - Web element Caribbean Found in Excel
+2020-11-03 11:26:34 INFO  Log4j:257 - Web element Central America Found in Excel
+2020-11-03 11:26:34 INFO  Log4j:257 - Web element North America Found in Excel
+2020-11-03 11:26:34 INFO  Log4j:257 - Web element South America Found in Excel
+2020-11-03 11:26:34 INFO  Log4j:181 - Country list : null
+2020-11-03 11:26:34 INFO  Log4j:181 - Country list : [Antigua and Barbuda, Aruba, Bahamas, Barbados, Cayman Islands, Cuba, Curaçao, Dominica, Dominican Republic, Grenada, Haiti, Jamaica, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, Sint Maarten (Dutch part), Trinidad and Tobago]
+2020-11-03 11:26:35 INFO  Log4j:198 - Region in Excel is: America
+2020-11-03 11:26:35 INFO  Log4j:199 - Sub region in Excel is: Caribbean
+2020-11-03 11:26:35 INFO  Log4j:238 - WebElements size is on site: 15
+2020-11-03 11:26:35 ERROR Log4j:250 - ERROR : We have 17 elements in Excel but see only 15 elements on site
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Antigua and Barbuda Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Aruba Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Bahamas Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Barbados Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Cayman Islands Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Cuba Found in Excel
+2020-11-03 11:26:35 ERROR Log4j:259 - ERROR : We don't find Curacao in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Dominica Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Dominican Republic Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Grenada Found in Excel
+2020-11-03 11:26:35 INFO  Log4j:257 - Web element Haiti Found in Excel
+2020-11-03 11:26:36 INFO  Log4j:257 - Web element Jamaica Found in Excel
+2020-11-03 11:26:36 INFO  Log4j:257 - Web element Saint Kitts and Nevis Found in Excel
+2020-11-03 11:26:36 INFO  Log4j:257 - Web element Saint Lucia Found in Excel
+2020-11-03 11:26:36 INFO  Log4j:257 - Web element Saint Vincent and the Grenadines Found in Excel
+2020-11-03 11:26:36 INFO  Log4j:181 - Country list : [Belize, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua, Panama]
+2020-11-03 11:26:36 INFO  Log4j:198 - Region in Excel is: America
+2020-11-03 11:26:36 INFO  Log4j:199 - Sub region in Excel is: Central America
+2020-11-03 11:26:36 INFO  Log4j:238 - WebElements size is on site: 7
+2020-11-03 11:26:37 INFO  Log4j:248 - Both list have same size of 7
+2020-11-03 11:26:37 INFO  Log4j:257 - Web element Belize Found in Excel
+2020-11-03 11:26:37 INFO  Log4j:257 - Web element Costa Rica Found in Excel
+2020-11-03 11:26:37 INFO  Log4j:257 - Web element El Salvador Found in Excel
+2020-11-03 11:26:37 INFO  Log4j:257 - Web element Guatemala Found in Excel
+2020-11-03 11:26:37 INFO  Log4j:257 - Web element Honduras Found in Excel
+2020-11-03 11:26:37 INFO  Log4j:257 - Web element Nicaragua Found in Excel
+2020-11-03 11:26:37 INFO  Log4j:257 - Web element Panama Found in Excel
+2020-11-03 11:26:37 INFO  Log4j:181 - Country list : [Bermuda, Canada, Greenland, Mexico, United States of America]
+2020-11-03 11:26:38 INFO  Log4j:198 - Region in Excel is: America
+2020-11-03 11:26:38 INFO  Log4j:199 - Sub region in Excel is: North America
+2020-11-03 11:26:38 INFO  Log4j:238 - WebElements size is on site: 5
+2020-11-03 11:26:38 INFO  Log4j:248 - Both list have same size of 5
+2020-11-03 11:26:38 INFO  Log4j:257 - Web element Bermuda Found in Excel
+2020-11-03 11:26:38 INFO  Log4j:257 - Web element Canada Found in Excel
+2020-11-03 11:26:38 INFO  Log4j:257 - Web element Greenland Found in Excel
+2020-11-03 11:26:38 INFO  Log4j:257 - Web element Mexico Found in Excel
+2020-11-03 11:26:38 ERROR Log4j:259 - ERROR : We don't find United States in Excel
+2020-11-03 11:26:38 INFO  Log4j:181 - Country list : [Argentina, Bolivia (Plurinational State of), Brazil, Chile, Colombia, Ecuador, Guyana, Paraguay, Peru, South Georgia and South Sandwich Islands, Suriname, Uruguay, Venezuela (Bolivarian Rep. of)]
+2020-11-03 11:26:39 INFO  Log4j:198 - Region in Excel is: America
+2020-11-03 11:26:39 INFO  Log4j:199 - Sub region in Excel is: South America
+2020-11-03 11:26:39 INFO  Log4j:238 - WebElements size is on site: 13
+2020-11-03 11:26:39 INFO  Log4j:248 - Both list have same size of 13
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Argentina Found in Excel
+2020-11-03 11:26:39 ERROR Log4j:259 - ERROR : We don't find Bolivia in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Brazil Found in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Chile Found in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Colombia Found in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Ecuador Found in Excel
+2020-11-03 11:26:39 ERROR Log4j:259 - ERROR : We don't find Falkland Islands in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Guyana Found in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Paraguay Found in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Peru Found in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Suriname Found in Excel
+2020-11-03 11:26:39 INFO  Log4j:257 - Web element Uruguay Found in Excel
+2020-11-03 11:26:39 ERROR Log4j:259 - ERROR : We don't find Venezuela in Excel
+2020-11-03 11:26:40 INFO  Log4j:153 - Region in Excel is: Asia Pacific
+2020-11-03 11:26:40 INFO  Log4j:154 - SubRegion Count in Excel is: {East Asia=[China, China, Hong Kong SAR, China, Macao SAR, China, Taiwan Province of, Japan, Korea, Dem. People's Rep. of, Korea, Republic of], Oceania=[Australia, Fiji, French Polynesia, Kiribati, Marshall Islands, Micronesia, Nauru, New Caledonia, New Zealand, Palau, Papua New Guinea, Samoa, Solomon Islands, Tonga, Tuvalu, Vanuatu], South Asia=[Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka], Southeast Asia=[Brunei Darussalam, Cambodia, Indonesia, Lao People's Dem. Rep., Malaysia, Myanmar, Philippines, Singapore, Thailand, Timor-Leste, Viet Nam]}
+2020-11-03 11:26:40 INFO  Log4j:156 - 2
+2020-11-03 11:27:02 INFO  Log4j:238 - WebElements size is on site: 4
+2020-11-03 11:27:02 INFO  Log4j:248 - Both list have same size of 4
+2020-11-03 11:27:02 INFO  Log4j:257 - Web element East Asia Found in Excel
+2020-11-03 11:27:02 INFO  Log4j:257 - Web element Oceania Found in Excel
+2020-11-03 11:27:02 INFO  Log4j:257 - Web element South Asia Found in Excel
+2020-11-03 11:27:02 INFO  Log4j:257 - Web element Southeast Asia Found in Excel
+2020-11-03 11:27:02 INFO  Log4j:181 - Country list : [China, China, Hong Kong SAR, China, Macao SAR, China, Taiwan Province of, Japan, Korea, Dem. People's Rep. of, Korea, Republic of]
+2020-11-03 11:27:03 INFO  Log4j:198 - Region in Excel is: Asia Pacific
+2020-11-03 11:27:03 INFO  Log4j:199 - Sub region in Excel is: East Asia
+2020-11-03 11:27:03 INFO  Log4j:238 - WebElements size is on site: 7
+2020-11-03 11:27:03 INFO  Log4j:248 - Both list have same size of 7
+2020-11-03 11:27:03 INFO  Log4j:257 - Web element China Found in Excel
+2020-11-03 11:27:03 ERROR Log4j:259 - ERROR : We don't find Hong Kong SAR (China) in Excel
+2020-11-03 11:27:03 INFO  Log4j:257 - Web element Japan Found in Excel
+2020-11-03 11:27:03 ERROR Log4j:259 - ERROR : We don't find Macau SAR (China) in Excel
+2020-11-03 11:27:03 ERROR Log4j:259 - ERROR : We don't find North Korea in Excel
+2020-11-03 11:27:03 ERROR Log4j:259 - ERROR : We don't find South Korea in Excel
+2020-11-03 11:27:03 ERROR Log4j:259 - ERROR : We don't find Taiwan in Excel
+2020-11-03 11:27:03 INFO  Log4j:181 - Country list : [Australia, Fiji, French Polynesia, Kiribati, Marshall Islands, Micronesia, Nauru, New Caledonia, New Zealand, Palau, Papua New Guinea, Samoa, Solomon Islands, Tonga, Tuvalu, Vanuatu]
+2020-11-03 11:27:04 INFO  Log4j:198 - Region in Excel is: Asia Pacific
+2020-11-03 11:27:04 INFO  Log4j:199 - Sub region in Excel is: Oceania
+2020-11-03 11:27:04 INFO  Log4j:238 - WebElements size is on site: 15
+2020-11-03 11:27:05 ERROR Log4j:250 - ERROR : We have 16 elements in Excel but see only 15 elements on site
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Australia Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Fiji Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element French Polynesia Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Kiribati Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Marshall Islands Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Micronesia Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Nauru Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element New Caledonia Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element New Zealand Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Palau Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Papua New Guinea Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Samoa Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Solomon Islands Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Tonga Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:257 - Web element Tuvalu Found in Excel
+2020-11-03 11:27:05 INFO  Log4j:181 - Country list : [Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka]
+2020-11-03 11:27:05 INFO  Log4j:198 - Region in Excel is: Asia Pacific
+2020-11-03 11:27:05 INFO  Log4j:199 - Sub region in Excel is: South Asia
+2020-11-03 11:27:06 INFO  Log4j:238 - WebElements size is on site: 8
+2020-11-03 11:27:06 INFO  Log4j:248 - Both list have same size of 8
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element Afghanistan Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element Bangladesh Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element Bhutan Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element India Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element Maldives Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element Nepal Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element Pakistan Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:257 - Web element Sri Lanka Found in Excel
+2020-11-03 11:27:06 INFO  Log4j:181 - Country list : [Brunei Darussalam, Cambodia, Indonesia, Lao People's Dem. Rep., Malaysia, Myanmar, Philippines, Singapore, Thailand, Timor-Leste, Viet Nam]
+2020-11-03 11:27:07 INFO  Log4j:198 - Region in Excel is: Asia Pacific
+2020-11-03 11:27:07 INFO  Log4j:199 - Sub region in Excel is: Southeast Asia
+2020-11-03 11:27:07 INFO  Log4j:238 - WebElements size is on site: 11
+2020-11-03 11:27:07 INFO  Log4j:248 - Both list have same size of 11
+2020-11-03 11:27:07 ERROR Log4j:259 - ERROR : We don't find Brunei in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Cambodia Found in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Indonesia Found in Excel
+2020-11-03 11:27:07 ERROR Log4j:259 - ERROR : We don't find Laos in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Malaysia Found in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Myanmar Found in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Philippines Found in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Singapore Found in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Thailand Found in Excel
+2020-11-03 11:27:07 INFO  Log4j:257 - Web element Timor-Leste Found in Excel
+2020-11-03 11:27:07 ERROR Log4j:259 - ERROR : We don't find Vietnam in Excel
+2020-11-03 11:27:08 INFO  Log4j:153 - Region in Excel is: Europe and Central Asia
+2020-11-03 11:27:08 INFO  Log4j:154 - SubRegion Count in Excel is: {Central Asia=[Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan, Armenia, Azerbaijan, Georgia, Turkey, Mongolia], Eastern Europe=[Belarus, Bulgaria, Czech Republic, Hungary, Moldova, Republic of, Poland, Romania, Russian Federation, Slovakia, Ukraine], Northern Europe=[Denmark, Estonia, Faroe Islands, Finland, Iceland, Ireland, Latvia, Lithuania, Norway, Sweden, United Kingdom], Southern Europe=[Albania, Bosnia and Herzegovina, Croatia, Cyprus, Greece, Italy, Malta, Montenegro, North Macedonia, Portugal, San Marino, Serbia, Slovenia, Spain, Kosovo], Western Europe=[Austria, Belgium, France, Germany, Luxembourg, Netherlands, Switzerland, Liechtenstein]}
+2020-11-03 11:27:08 INFO  Log4j:156 - 3
+2020-11-03 11:27:30 INFO  Log4j:238 - WebElements size is on site: 5
+2020-11-03 11:27:30 INFO  Log4j:248 - Both list have same size of 5
+2020-11-03 11:27:30 INFO  Log4j:257 - Web element Central Asia Found in Excel
+2020-11-03 11:27:30 INFO  Log4j:257 - Web element Eastern Europe Found in Excel
+2020-11-03 11:27:30 INFO  Log4j:257 - Web element Northern Europe Found in Excel
+2020-11-03 11:27:30 INFO  Log4j:257 - Web element Southern Europe Found in Excel
+2020-11-03 11:27:30 INFO  Log4j:257 - Web element Western Europe Found in Excel
+2020-11-03 11:27:30 INFO  Log4j:181 - Country list : [Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan, Uzbekistan, Armenia, Azerbaijan, Georgia, Turkey, Mongolia]
+2020-11-03 11:27:31 INFO  Log4j:198 - Region in Excel is: Europe and Central Asia
+2020-11-03 11:27:31 INFO  Log4j:199 - Sub region in Excel is: Central Asia
+2020-11-03 11:27:31 INFO  Log4j:238 - WebElements size is on site: 10
+2020-11-03 11:27:32 INFO  Log4j:248 - Both list have same size of 10
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Armenia Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Azerbaijan Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Georgia Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Kazakhstan Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Kyrgyzstan Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Mongolia Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Tajikistan Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Turkey Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Turkmenistan Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:257 - Web element Uzbekistan Found in Excel
+2020-11-03 11:27:32 INFO  Log4j:181 - Country list : [Belarus, Bulgaria, Czech Republic, Hungary, Moldova, Republic of, Poland, Romania, Russian Federation, Slovakia, Ukraine]
+2020-11-03 11:27:32 INFO  Log4j:198 - Region in Excel is: Europe and Central Asia
+2020-11-03 11:27:32 INFO  Log4j:199 - Sub region in Excel is: Eastern Europe
+2020-11-03 11:27:32 INFO  Log4j:238 - WebElements size is on site: 10
+2020-11-03 11:27:33 INFO  Log4j:248 - Both list have same size of 10
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Belarus Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Bulgaria Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Czech Republic Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Hungary Found in Excel
+2020-11-03 11:27:33 ERROR Log4j:259 - ERROR : We don't find Moldova in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Poland Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Romania Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Russian Federation Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Slovakia Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:257 - Web element Ukraine Found in Excel
+2020-11-03 11:27:33 INFO  Log4j:181 - Country list : [Denmark, Estonia, Faroe Islands, Finland, Iceland, Ireland, Latvia, Lithuania, Norway, Sweden, United Kingdom]
+2020-11-03 11:27:34 INFO  Log4j:198 - Region in Excel is: Europe and Central Asia
+2020-11-03 11:27:34 INFO  Log4j:199 - Sub region in Excel is: Northern Europe
+2020-11-03 11:27:34 INFO  Log4j:238 - WebElements size is on site: 11
+2020-11-03 11:27:34 INFO  Log4j:248 - Both list have same size of 11
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Denmark Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Estonia Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Faroe Islands Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Finland Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Iceland Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Ireland Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Latvia Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Lithuania Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Norway Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element Sweden Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:257 - Web element United Kingdom Found in Excel
+2020-11-03 11:27:34 INFO  Log4j:181 - Country list : [Albania, Bosnia and Herzegovina, Croatia, Cyprus, Greece, Italy, Malta, Montenegro, North Macedonia, Portugal, San Marino, Serbia, Slovenia, Spain, Kosovo]
+2020-11-03 11:27:35 INFO  Log4j:198 - Region in Excel is: Europe and Central Asia
+2020-11-03 11:27:35 INFO  Log4j:199 - Sub region in Excel is: Southern Europe
+2020-11-03 11:27:35 INFO  Log4j:238 - WebElements size is on site: 15
+2020-11-03 11:27:36 INFO  Log4j:248 - Both list have same size of 15
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Albania Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Bosnia and Herzegovina Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Croatia Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Cyprus Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Greece Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Italy Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Kosovo Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Malta Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Montenegro Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element North Macedonia Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Portugal Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element San Marino Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Serbia Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Slovenia Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:257 - Web element Spain Found in Excel
+2020-11-03 11:27:36 INFO  Log4j:181 - Country list : [Austria, Belgium, France, Germany, Luxembourg, Netherlands, Switzerland, Liechtenstein]
+2020-11-03 11:27:37 INFO  Log4j:198 - Region in Excel is: Europe and Central Asia
+2020-11-03 11:27:37 INFO  Log4j:199 - Sub region in Excel is: Western Europe
+2020-11-03 11:27:37 INFO  Log4j:238 - WebElements size is on site: 7
+2020-11-03 11:27:37 INFO  Log4j:248 - Both list have same size of 7
+2020-11-03 11:27:37 INFO  Log4j:257 - Web element Austria Found in Excel
+2020-11-03 11:27:37 INFO  Log4j:257 - Web element Belgium Found in Excel
+2020-11-03 11:27:37 INFO  Log4j:257 - Web element France Found in Excel
+2020-11-03 11:27:37 INFO  Log4j:257 - Web element Germany Found in Excel
+2020-11-03 11:27:37 INFO  Log4j:257 - Web element Luxembourg Found in Excel
+2020-11-03 11:27:37 INFO  Log4j:257 - Web element Netherlands Found in Excel
+2020-11-03 11:27:37 ERROR Log4j:259 - ERROR : We don't find Switzerland in Excel
+2020-11-03 11:27:37 INFO  Log4j:65 - 
+Inside TestNG > @AfterSuite
+2020-11-03 11:27:38 INFO  Log4j:68 - 
+ CLOSING THE BROWSER WE YOU GO

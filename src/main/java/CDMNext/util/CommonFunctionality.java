@@ -131,7 +131,7 @@ public class CommonFunctionality {
 	public static void CollapseTreeMethod() throws InterruptedException {
 		wait(1000);
 		try {
-			WebElement collapseTree = login.driver.findElement(By.xpath("//*[contains(text(),'Collapse all')]"));
+			WebElement collapseTree = login.driver.findElement(By.xpath("//*[@title='Collapse tree']"));
 			if (collapseTree.isDisplayed()) {
 				collapseTree.click();
 				login.Log4j.info("Clicking on collapse all");
@@ -262,10 +262,10 @@ public class CommonFunctionality {
 
 	public static void AlertPopup() {
 		try {
-			wait(2000);
+			wait(5000);
 			Alert alert = login.driver.switchTo().alert();
 			String alertText = alert.getText();
-			System.out.println("Alert data: " + alertText);
+		    System.out.println("Alert data: " + alertText);
 			alert.dismiss();
 		} catch (Exception e) {
 

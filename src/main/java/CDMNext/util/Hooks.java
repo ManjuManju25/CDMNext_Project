@@ -1,6 +1,8 @@
 package CDMNext.util;
 
+import java.awt.Robot;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.openqa.selenium.By;
@@ -8,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import CDMNext.StepDefinations.login;
-
 
 public class Hooks {
 
@@ -37,7 +38,6 @@ public class Hooks {
 				.pause(100).click().build().perform();
 	}
 
-	
 	public static void after_run() throws Throwable {
 		String parentWindow = login.driver.getWindowHandle();
 		Set<String> childwindows = login.driver.getWindowHandles();
