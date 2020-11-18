@@ -735,12 +735,12 @@ public class Commentary {
 	public void select_border_width_for_visual_border(int arg1) throws Throwable {
 		// Thread.sleep(1000);
 		BorderCheckbox();
-		String BorderWidth = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@name='visual_area_border_width']", 20)
-				.getAttribute("aria-valuenow");
-		int length = arg1 - Integer.parseInt(BorderWidth);
+//		String BorderWidth = CommonFunctionality
+//				.getElementByXpath(login.driver, "//*[@name='visual_area_border_width']", 20)
+//				.getAttribute("aria-valuenow");
+//		int length = arg1 - Integer.parseInt(BorderWidth);
 
-		for (int i = 1; i <= length; i++) {
+		for (int i = 1; i <= arg1; i++) {
 			Thread.sleep(500);
 			login.driver.findElement(By.xpath(
 					"(//*[@class='border-settings--container']//*[contains(@class,'ui-spinner')]//button[contains(@class,'ui-spinner-up')])[1]"))
@@ -1998,6 +1998,8 @@ public class Commentary {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Views')]", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='sphere-modal-controls--right']//*[contains(text(),'Download')]", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='sphere-modal-controls--right']//*[contains(text(),'Download')]", 10).click();
 	}
 
 	@Then("^All visuals should be downloaded successfully$")
@@ -2438,17 +2440,18 @@ void BoldFormatVerification(String arg1) throws Exception {
 	}
 	void Radius(int arg1) throws InterruptedException {
 		Thread.sleep(500);
-		String radius = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='visual_area_border_radius']", 10)
-				.getAttribute("aria-valuenow");
-		login.Log4j.info(radius);
-		int length = arg1 - Integer.parseInt(radius);
+//		String radius = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='visual_area_border_radius']", 10)
+//				.getAttribute("aria-valuenow");
+//		login.Log4j.info(radius);
+//		int length = arg1 - Integer.parseInt(radius);
 
-		for (int i = 1; i <= length; i++) {
-			Thread.sleep(300);
+		for (int i = 1; i <= arg1; i++) {
+			Thread.sleep(400);
 			login.driver.findElement(By.xpath("//*[@class='spinner-control'][2]//button[contains(@class,'ui-spinner-up')]")).click();
 //			login.driver.findElement(By.xpath(
 //					"(//*[@class='spinner-control']//button[contains(@class,'ui-spinner-up')])[3]"))
 //					.click();
 		}
+		Thread.sleep(2000);
 	}
 }

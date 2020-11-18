@@ -130,7 +130,7 @@ public class Filters {
 				frequencyarr = var.split(";");
 				for (String list : frequencyarr) {
 					login.Log4j.info("clicking on " + list);
-					Thread.sleep(1000);
+					Thread.sleep(3000);
 					login.driver.findElement(By.xpath("//*[@class='text-dots' and contains(text(),'" + list + "')]")).click();
 					
 				}
@@ -820,7 +820,7 @@ public class Filters {
 //			ele = login.driver.findElement(
 //					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
 			ele = login.driver.findElement(
-					By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
+					By.xpath("(//*[@class='tree-node full-expanded open'])[1]/*[2]/*[2]/*[1]/*[1]"));
 		}
 		String Actual_Topic = ele.getText();
 		login.Log4j.info(Actual_Topic);

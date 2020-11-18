@@ -5,19 +5,16 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
 
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
-import CDMNext.util.ErrorScreenshot;
-import CDMNext.util.Hooks;
 //import CDMNext.util.SendmailWithAttachment;
 
 
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@AllRegion"}, 
+		tags = {"@Chinafilter"}, 
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
@@ -69,8 +66,8 @@ public class TestRunner {
 			login.driver.manage().deleteAllCookies();
 			login.driver.quit();
 			login.driver = null;
-			HTML_Report.html_Footer();
-			HTML_Report.bw.close();
+			//HTML_Report.html_Footer();
+			//HTML_Report.bw.close();
 		//	login.Log4j.info("\n ****Inside Email*****");
 			 //SendmailWithAttachment.report();
 		}

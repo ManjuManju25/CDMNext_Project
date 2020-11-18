@@ -489,11 +489,12 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
+  @FilterSearch1
   Scenario: TC_Filters_Search_57
     Given User enters "Construction"
     And Click on "More" filter
     And User selected "Database" as "World Trend Plus"
+    And User has clicked on "Apply filter"
     Then User verify the search results
 
   @FilterSearch
@@ -529,7 +530,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
+  @FilterSearch1
   Scenario: TC_Filters_Search_62
     Given User enters "Reserve"
     And Click on "More" filter
@@ -609,7 +610,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
+  @FilterSearch1
   Scenario: TC_Filters_Search_71
     Given User enters "261968101"
     And Click on "More" filter
@@ -618,7 +619,7 @@ Feature: Filters
     When User get the topics as "Aggregate: World"
     Then User verify the results
 
-  @FilterSearch
+  @FilterSearch1
   Scenario: TC_Filters_Search_72
     Given User enters "228912101"
     And Click on "More" filter
@@ -1070,28 +1071,33 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
+  @FilterSearch1
   Scenario: TC_Filters_Search_118
     Given User enters "money"
     And Click on "More" filter
     And User selects "Subscribed series only"
     And User has clicked on "Apply filter"
     And User selects "Frequency" as "Quarterly"
+    And User has clicked on "Apply filter"
     And User selects "Source" as "International Monetary Fund - World Economic Outlook"
+    And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selects "Unit" as "MUR"
     And User selected "Database" as "Global Database"
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
+  @FilterSearch1
   Scenario: TC_Filters_Search_119
     Given User enters "money"
     And Click on "More" filter
     And User selects "Name only"
+    And User has clicked on "Apply filter"
     And User selects "Frequency" as "Quarterly"
+     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selects "Unit" as "MUR"
+     And User has clicked on "Apply filter"
     And User selects "Source" as "International Monetary Fund - World Economic Outlook"
     And User has clicked on "Apply filter"
     And Click on "More" filter
@@ -1165,7 +1171,7 @@ Feature: Filters
     Given User enters "IZI*O"
     Then User verifies Filter search results
 
-  @FilterSearch
+  @FilterSearch1
   Scenario: TC_Filters_Search_132
     Given User enters "*ZINO"
     Then User verifies Filter search results

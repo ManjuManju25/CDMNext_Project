@@ -406,9 +406,9 @@ public class SeriesTab {
 
 	@Then("^SSP window should be displayed$")
 	public void ssp_window_should_be_displayed() throws Throwable {
-
+		CommonFunctionality.wait(1000);
 		try {
-			if (login.driver.findElement(By.xpath("//div[@class='series-preview-modal-header--title ']//span")).isDisplayed()) {
+			if (login.driver.findElement(By.xpath("//div[contains(@class,'series-preview-modal-header--title ')]//span")).isDisplayed()) {
 				login.Log4j.info("SSP window is displayed");
 				CommonFunctionality.getElementByProperty(login.driver,"closeAction",4).click();
 			} else {
@@ -1161,7 +1161,7 @@ public class SeriesTab {
 		if (txt.equals(db)) {
 			login.Log4j.info(db + " is displayed for " + MousehoverIcon + " icon when mouse hovered");
 
-		} else if (txt.equals("Markit Purchasing Managers' Index")) {
+		} else if (txt.contains("Markit Purchasing Managers' Index")) {
 			login.Log4j.info(txt + " is displayed for " + MousehoverIcon + " icon when mouse hovered");
 
 		} else if (txt.equals("OECD - Main Economic Indicators")) {
@@ -1177,6 +1177,7 @@ public class SeriesTab {
 			CommonFunctionality.ExpandLeft();
 			
 	    }
+		CommonFunctionality.TopMethod();
 		CommonFunctionality.UnselectMethod();
 	}
 
@@ -1185,7 +1186,7 @@ public class SeriesTab {
 		CommonFunctionality.ChartSuggestionPopUp();
 		CommonFunctionality.SeriesHormonizationWindowClose();
 		Thread.sleep(3000);
-		WebElement ctitle = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Chart_title")));
+		WebElement ctitle = login.driver.findElement(By.xpath("//*[@data-name='title']"));
 		String ctext = ctitle.getText();
 		login.Log4j.info(stext);
 		login.Log4j.info(ctext);
