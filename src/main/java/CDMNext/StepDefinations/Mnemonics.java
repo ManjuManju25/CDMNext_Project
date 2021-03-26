@@ -16,7 +16,7 @@ import org.openqa.selenium.By;
 //import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
@@ -100,18 +100,14 @@ public class Mnemonics {
 						login.Log4j.info(seriesid);
 						if (ssp.contains(mnemonic) == true && ssp.contains(String.valueOf(seriesid)) == true) {
 							login.Log4j.info(mnemonic + " AND " + seriesid + " exists in " + "\n" + ssp);
-							wait.until(ExpectedConditions
-									.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("closeAction"))))
-									.click();
+							CommonFunctionality.getElementByProperty(login.driver, "closeAction", 4).click();
 							login.Log4j.info("Closing... SSP window");
 							// Cell status = currentRow.createCell(3);
 							status.setCellValue("PASS");
 							MnemonicSearch = true;
 							break;
 						} else {
-							wait.until(ExpectedConditions
-									.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("closeAction"))))
-									.click();
+							CommonFunctionality.getElementByProperty(login.driver, "closeAction", 4).click();
 						}
 					}
 					if (MnemonicSearch == false) {
@@ -152,29 +148,29 @@ public class Mnemonics {
 
 	@Given("^Series_id  is \"([^\"]*)\"$")
 	public void series_id_is(String arg1) throws Throwable {
-		series_id = arg1.split(";");
+		series_id = arg1	
+				.split(";");
 
 	}
 
 	@Given("^User enters Mnemonic \"([^\"]*)\"$")
 	public void user_enters_Mnemonic(String arg1) throws Throwable {
-		// login.driver.navigate().refresh();
 		mnemonictxt = arg1;
-		login.Log4j.info("Searching with " + mnemonictxt);
 		CommonFunctionality.ResetMethod();
-		// CommonFunctionality.getElementByProperty(login.driver,"Search",4).clear();
+		login.Log4j.info("Searching with " + mnemonictxt);
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 4).sendKeys(mnemonictxt);
 	}
 
 	@Then("^User should get Mnemonic Code and Series_id in SSI window$")
 	public void user_should_get_Mnemonic_Code_and_Series_id_in_SSI_window() throws Throwable {
 		// WebElement element;
+		String TooltipInfo = null;
 		Boolean MnemonicSearch = false;
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 4).click();
 		WebElement ul_element = null;
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.xpath("//li//div[@class='series-item--name']"));
@@ -183,12 +179,63 @@ public class Mnemonics {
 			for (int i = 0; i < li_All.size(); i++) {
 
 				if (li_All.size() == 1) {
-					li_All.get(i).click();
+					CommonFunctionality.wait(500);
+					new Actions(login.driver).pause(400).moveToElement(li_All.get(i)).perform();
+					CommonFunctionality.wait(800);
+					WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					TooltipInfo = tooltip.getText();
+					//login.Log4j.info("Title information is \n" + TooltipInfo);
+
+					if (TooltipInfo.contains(mnemonictxt) == true && TooltipInfo.contains(series_id[0]) == true) {
+						login.Log4j.info(mnemonictxt + " AND " + series_id[0] + " exists in " + "\n" + TooltipInfo);
+						MnemonicSearch = true;
+
+					}
+
+					if (MnemonicSearch == false) {
+						if (TooltipInfo.contains(mnemonictxt) != true) {
+
+							Assert.fail(mnemonictxt + "  does not exists in " + "\n" + TooltipInfo);
+						} else {
+							Assert.fail(series_id[0] + "  does not exists in " + "\n" + TooltipInfo);
+						}
+					}
+
+				} else if (li_All.size() == 2) {
+
+					if ((series_id.length) == 2 && TooltipInfo.contains(mnemonictxt) == true
+
+							&& TooltipInfo.contains(series_id[0]) == true
+							|| TooltipInfo.contains(series_id[1]) == true) {
+						login.Log4j.info(mnemonictxt + " AND " + series_id[0] + " OR " + series_id[1] + " exists in "
+								+ "\n" + TooltipInfo);
+						MnemonicSearch = true;
+					}
+					if (MnemonicSearch == false) {
+						if (TooltipInfo.contains(mnemonictxt) != true) {
+							Assert.fail(mnemonictxt + "  does not exists in " + "\n" + TooltipInfo);
+						} else {
+							Assert.fail(series_id[0] + " OR " + series_id[1] + "  does not exists in " + "\n"
+									+ TooltipInfo);
+						}
+
+					}
+
+				} else {
+					Assert.fail("List size is more than 2");
+				}
+			}
+		} catch (NoSuchElementException e) {
+			Assert.fail("Sorry, no results were found here. ");
+
+		}
+		
+					
+					/*li_All.get(i).click();
 
 					try {
 						WebElement seriesinfo = CommonFunctionality.getElementByProperty(login.driver,
-								"sid_srcode_mnemonic", 4);
-						// wait.until(ExpectedConditions.visibilityOf(seriesinfo));
+								"sid_srcode_mnemonic", 8);
 						String ssi = seriesinfo.getText();
 						// login.Log4j.info(ssi);
 						// WebElement sr_code = login.driver
@@ -196,25 +243,24 @@ public class Mnemonics {
 						// String sr_code1 = sr_code.getText();
 						// login.Log4j.info(sr_code1);
 						if (ssi != null) {
-							if (ssi.contains(mnemonictxt) == true
-									&& ssi.contains(series_id[0]) == true) {
+							if (ssi.contains(mnemonictxt) == true 	
+									) {
 								login.Log4j.info(mnemonictxt + " AND " + series_id[0] + " exists in " + "\n" + ssi);
-								wait.until(ExpectedConditions.visibilityOfElementLocated(
-										By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
 								login.Log4j.info("Closing... SSI window");
+								
 								MnemonicSearch = true;
 
 							}
 
 							if (MnemonicSearch == false) {
 								if (ssi.contains(mnemonictxt) != true) {
-									wait.until(ExpectedConditions.visibilityOfElementLocated(
-											By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+									
+									CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
 									login.Log4j.info("Closing... SSI window");
 									Assert.fail(mnemonictxt + "  does not exists in " + "\n" + ssi);
 								} else {
-									wait.until(ExpectedConditions.visibilityOfElementLocated(
-											By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+									CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
 									login.Log4j.info("Closing... SSI window");
 									Assert.fail(series_id[0] + "  does not exists in " + "\n" + ssi);
 								}
@@ -222,9 +268,7 @@ public class Mnemonics {
 
 						}
 					} catch (Exception e) {
-						wait.until(ExpectedConditions
-								.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("closeAction"))))
-								.click();
+						CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
 						Assert.fail("SSP window is blank");
 					}
 
@@ -234,29 +278,28 @@ public class Mnemonics {
 					try {
 
 						WebElement seriesinfo = CommonFunctionality.getElementByProperty(login.driver,
-								"sid_srcode_mnemonic", 4);
+								"sid_srcode_mnemonic", 8);
 						// wait.until(ExpectedConditions.visibilityOf(seriesinfo));
 						String ssi = seriesinfo.getText();
 						if (ssi != null) {
 							// login.Log4j.info(ssi);
 							if ((series_id.length) == 2 && ssi.contains(mnemonictxt) == true
+
 									&& ssi.contains(series_id[0]) == true || ssi.contains(series_id[1]) == true) {
 								login.Log4j.info(mnemonictxt + " AND " + series_id[0] + " OR " + series_id[1]
 										+ " exists in " + "\n" + ssi);
-								wait.until(ExpectedConditions.visibilityOfElementLocated(
-										By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
 								login.Log4j.info("Closing... SSI window");
 								MnemonicSearch = true;
 							}
 							if (MnemonicSearch == false) {
 								if (ssi.contains(mnemonictxt) != true) {
-									wait.until(ExpectedConditions.visibilityOfElementLocated(
-											By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+									CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
 									login.Log4j.info("Closing... SSI window");
 									Assert.fail(mnemonictxt + "  does not exists in " + "\n" + ssi);
 								} else {
-									wait.until(ExpectedConditions.visibilityOfElementLocated(
-											By.xpath(login.LOCATORS.getProperty("closeAction")))).click();
+									CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
+
 									login.Log4j.info("Closing... SSI window");
 									Assert.fail(series_id[0] + " OR " + series_id[1] + "  does not exists in " + "\n"
 											+ ssi);
@@ -265,9 +308,7 @@ public class Mnemonics {
 							}
 						}
 					} catch (Exception e) {
-						wait.until(ExpectedConditions
-								.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("closeAction"))))
-								.click();
+						CommonFunctionality.getElementByProperty(login.driver, "closeAction", 4).click();
 						Assert.fail("SSP window is blank");
 					}
 
@@ -279,8 +320,9 @@ public class Mnemonics {
 		} catch (NoSuchElementException e) {
 			Assert.fail("Sorry, no results were found here. ");
 
-		}
-	}
+		}*/
+
+}
 
 	void ValidationMethod(int seriesid, String mnemonic, Cell status) throws InterruptedException {
 		Thread.sleep(500);

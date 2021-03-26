@@ -861,7 +861,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download Button
     Then Tabel download should be Sucess
 
-  @FormatVerification
+  @FormatVerification1
   Scenario: TC_116: Verify the Download table visual to PDF Format.
     And User Select  Multiple Series ID  as "310901701;310901801;310902601"
     And Create a Table

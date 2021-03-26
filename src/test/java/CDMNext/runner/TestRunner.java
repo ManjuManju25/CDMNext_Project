@@ -6,7 +6,7 @@ import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
 
 import org.testng.annotations.*;
-import CDMNext.StepDefinations.HTML_Report;
+//import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
@@ -14,7 +14,8 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Chinafilter"}, 
+		tags = {"@ImageVisual"
+				}, 
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
@@ -30,8 +31,8 @@ public class TestRunner {
 	public void setUpClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @BeforeSuite");
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
-		HTML_Report.openHTMLReport();
-		HTML_Report.html_Header();
+		//HTML_Report.openHTMLReport();
+		//HTML_Report.html_Header();
 
 	}
 	

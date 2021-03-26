@@ -1,5 +1,9 @@
 Feature: Verifying Insight Share functionality
   
+@CollabarationSharing12
+Scenario: TC_Delete_Insight: Verify Delete Insight
+   And Deleting insights as prerequesties
+    
 @CollabarationSharing
 Scenario: TC_Share_02: Verify Share option from insight > File
    And Login as current execution login by taking username rowcount as 1 and cellcount as 0 and for password rowcount as 1 and cellcount as 1
@@ -138,7 +142,7 @@ Scenario: TC_Share_20:Verify 'Users' dropdown
    And Click "File" > "New" 
    And Click "Create insight" to create a new insight
    And Click on "Insight" icon to share insight
-   And Click on "Users" dropdown in share popup
+   #And Click on "Users" dropdown in share popup
    Then The list of users name with email ID should be displayed
    
 #TC_21 to TC_24   
@@ -147,7 +151,7 @@ Scenario: TC_Share_21:Users - Search for user name/email ID you want to invite.
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Users" dropdown in share popup
+   #And Click on "Users" dropdown in share popup
    Then The searched user "ceicsuresh10@gmail.com" is fetching proper results and given "can view" permission
    And Logout from current user
    And Login as ceic user
@@ -162,7 +166,7 @@ Scenario: TC_Share_26:User - Verify sharing insight with can edit permission.
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Users" dropdown in share popup
+   #And Click on "Users" dropdown in share popup
    Then The searched user "ceicsuresh10@gmail.com" is fetching proper results and given "can edit" permission
    And Logout from current user
    And Login as ceic user
@@ -177,7 +181,7 @@ Scenario: TC_Share_27:User - Verify sharing insight with can manage permission.
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Users" dropdown in share popup
+   #And Click on "Users" dropdown in share popup
    Then The searched user "ceicsuresh10@gmail.com" is fetching proper results and given "can manage" permission
    And Logout from current user
    And Login as ceic user
@@ -308,7 +312,7 @@ Scenario: TC_Share_51: Verify shared insights under 'Shared insights' tab in ins
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Users" dropdown in share popup
+   #And Click on "Users" dropdown in share popup
    And Entering mail to share the insight
    And Perform Share action
    And Logout from current user
@@ -387,18 +391,18 @@ Scenario: TC_Share_68:Permission - Verify save as option under file when "Copy=O
 #TC 28 - TC 33
 @CollabarationSharing
 Scenario: TC_Share_28:Users - Search for user name/email ID you want to invite.
-   And Login back to internal user with password "Ceic@12345678" 
+   And Login back to internal user with user "nmaduru" and password "Selenium@123$" 
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Accounts" dropdown in share popup
+   And Click on "External users/accounts/companies" dropdown in share popup
    Then The searched user "cvision-suresh" is fetching proper results and given "can view" permission
    And Logout from current user
    And Login as ceic user
    And Click on my insights
    And Click "Shared" tab
    Then The newly created insight should appear as "view" permission in next user login
-   And Login back to internal user with password "Ceic@12345678" 
+   And Login back to internal user with user "nmaduru" and password "Selenium@123$" 
    And Delete Insight
    
 @CollabarationSharing
@@ -406,14 +410,14 @@ Scenario: TC_Share_34:Accounts - Verify sharing insight with can edit permission
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Accounts" dropdown in share popup
+   And Click on "External users/accounts/companies" dropdown in share popup
    Then The searched user "cvision-suresh" is fetching proper results and given "can edit" permission
    And Logout from current user
    And Login as ceic user
    And Click on my insights
    And Click "Shared" tab
    Then The newly created insight should appear as "edit" permission in next user login
-   And Login back to internal user with password "Ceic@12345678" 
+   And Login back to internal user with user "nmaduru" and password "Selenium@123$"
    And Delete Insight
    
 #TC_35 to TC_40
@@ -422,14 +426,14 @@ Scenario: TC_Share_35:Accounts - Verify sharing insight with can view permission
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Companies" dropdown in share popup
+   And Click on "External users/accounts/companies" dropdown in share popup	
    Then The searched user "CEIC Development – CDMNext 2" is fetching proper results and given "can view" permission
    And Logout from current user
    And Login as ceic user
    And Click on my insights
    And Click "Shared" tab
    Then The newly created insight should appear as "view" permission in next user login
-   And Login back to internal user with password "Ceic@12345678" 
+   And Login back to internal user with user "nmaduru" and password "Selenium@123$"  
    And Delete Insight
    
 @CollabarationSharing
@@ -437,14 +441,14 @@ Scenario: TC_Share_41: Accounts - Verify sharing insight with can edit permissio
    And Click "File" > "New" 
    And Create a fresh insight
    And Click on "Insight" icon to share insight
-   And Click on "Companies" dropdown in share popup
+   And Click on "External users/accounts/companies" dropdown in share popup
    Then The searched user "CEIC Development – CDMNext 2" is fetching proper results and given "can edit" permission
    And Logout from current user
    And Login as ceic user
    And Click on my insights
    And Click "Shared" tab
    Then The newly created insight should appear as "edit" permission in next user login
-   And Login back to internal user with password "Ceic@12345678" 
+   And Login back to internal user with user "nmaduru" and password "Selenium@123$" 
    And Delete Insight
    
 @CollabarationSharing
@@ -457,10 +461,10 @@ Scenario Outline: TC_Share_41:Verify remove(x) icon.
    And Click on "Save" button to share
    Then The Verify the remove icon in shared insight
 Examples:
-   |   Invite   |           user_name             |
-   | "Users"    | "ceicsuresh10@gmail.com"        |
-   | "Accounts" | "cvision-suresh"                |
-   | "Companies"| "CEIC Development – CDMNext 2"  |
+   |            Invite                      |           user_name             |
+   | "External users/accounts/companies"    | "ceicsuresh10@gmail.com"        |
+   | "External users/accounts/companies"    | "cvision-suresh"                |
+   | "External users/accounts/companies"    | "CEIC Development – CDMNext 2"  |
    
 @CollabarationSharing
 Scenario Outline: TC_Share_42:Verify selecting user/account/company with permission pre-set for view permission
@@ -471,12 +475,11 @@ Scenario Outline: TC_Share_42:Verify selecting user/account/company with permiss
    And The searched user <user_name> is fetching proper results for "can view" 
    And Click on "Save" button to share
    Then The same permission can prepopulate in insight share field
-   
 Examples:
-   |   Invite   |           user_name             |   
-   | "Users"    | "ceicsuresh10@gmail.com"        |      
-   | "Accounts" | "cvision-suresh"                |     
-   | "Companies"| "CEIC Development – CDMNext 2"  |
+   |            Invite                      |           user_name             |
+   | "External users/accounts/companies"    | "ceicsuresh10@gmail.com"        |
+   | "External users/accounts/companies"    | "cvision-suresh"                |
+   | "External users/accounts/companies"    | "CEIC Development – CDMNext 2"  |
    
 @CollabarationSharing
 Scenario Outline: TC_Share_43:Verify selecting user/account/company with permission pre-set for edit permission
@@ -487,19 +490,18 @@ Scenario Outline: TC_Share_43:Verify selecting user/account/company with permiss
    And The searched user <user_name> is fetching proper results for "can edit" 
    And Click on "Save" button to share
    Then The same permission can prepopulate in insight share field
+ Examples:
+   |            Invite                      |           user_name             |
+   | "External users/accounts/companies"    | "ceicsuresh10@gmail.com"        |
+   | "External users/accounts/companies"    | "cvision-suresh"                |
+   | "External users/accounts/companies"    | "CEIC Development – CDMNext 2"  |
    
-Examples:
-   |   Invite   |           user_name             |   
-   | "Users"    | "ceicsuresh10@gmail.com"        |      
-   | "Accounts" | "cvision-suresh"                |     
-   | "Companies"| "CEIC Development – CDMNext 2"  |
-   
-@CollabarationSharing
+@CollabarationSharing123
 Scenario: TC_Share_43:Verify selecting user with permission pre-set for manage permission
    And Click "File" > "New" 
    And Click "Create insight" to create a new insight
    And Click on "Insight" icon to share insight
-   And Click on "Users" dropdown in share popup
+   And Click on "External users/accounts/companies" dropdown in share popup
    And The searched user "ceicsuresh10@gmail.com" is fetching proper results for "can manage" 
    And Click on "Save" button to share
    Then The same permission can prepopulate in insight share field
@@ -507,18 +509,19 @@ Scenario: TC_Share_43:Verify selecting user with permission pre-set for manage p
    
 @CollabarationSharing
 Scenario: TC_Share_07: Verify 'Share' option for Guest users.
+   And Login back to internal user with user "nmaduru" and password "Selenium@123$" 
    And Click Guest access
    And Click "File" > "New" 
    And Click "Create insight" to create a new insight
    And Click on "Insight" icon to share insight
    Then The "Register now!" popup should appears
-   #And Logout from current user
-   And Login back to default execution login
 
 # ------------------------------------------------- Growl message ----------------------------------------------------------------------------
    
 @CollabarationSharing1
 Scenario: TC_Share_08: Verify 'Multiple insights' sharing.
+   And Logout from current user
+   And Login back to default execution login
    And Enter mail for "Multiple insights sharing" with action as "shared" an insight
    
 @CollabarationSharing1
@@ -549,3 +552,12 @@ Scenario: TC_Share_55: Verify growl message for insight stopped sharing.
 @CollabarationSharing1
 Scenario: TC_Share_59: Verify notification for changes in shared insight
    And Enter mail for "Notification for changes in shared insight" with action as "sharing" an insight
+   
+@CollabarationSharing1
+Scenario:Tc_Share_72: Verify Notifications when turn OFF notification under Profile dropdown
+   And Enter mail for "Notification growl" with action as "Turn OFF notifications" the insight
+   
+@CollabarationSharing1
+Scenario:Tc_Share_73: Verify Notifications when turn ON notification under Profile dropdown
+   And Enter mail for "Notification growl" with action as "Turn ON notifications" the insight
+   And Login back to default execution login

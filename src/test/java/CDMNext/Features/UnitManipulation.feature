@@ -1,16 +1,14 @@
 Feature: Verify Unit Manipulation functionality
  
-#Background:
-  #Given User has successful logged in
-
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_01: Verify applying unit manipulation for series
+   And Login back to internal user with user "speriyasamy@isimarkets.com" and password "Ceic@1234567890" 
    And Open preference dropdown
    And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check" 
    And Clicking on "Keyboard shortcuts" option under user preference be "ON" 
    And Open preference dropdown
    And Sort the series in left pane
-   And Search for the series with SID "SR866744;SR4878432" and click on "A" option
+   And Search for the series with SID "310901701;310901801" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
 	 And Click "By function" tab and enter "UNIT" in search field
@@ -20,7 +18,7 @@ Scenario: Tc_Unit Manipulation_01: Verify applying unit manipulation for series
 	 
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_02: Verify applying unit manipulation for series from function toolbar
-   And Search for the series with SID "SR866744" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Copy the series" option
    And Type "UNIT" in functions input box
@@ -29,7 +27,7 @@ Scenario: Tc_Unit Manipulation_02: Verify applying unit manipulation for series 
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_03: Verify unit manipulation for series with func wizard without selecting any sub-methods
-   And Search for the series with SID "SR4878432" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -39,7 +37,7 @@ Scenario: Tc_Unit Manipulation_03: Verify unit manipulation for series with func
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_04: Verify func for thousand output multiplier with convert all multipliers method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -49,7 +47,7 @@ Scenario: Tc_Unit Manipulation_04: Verify func for thousand output multiplier wi
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_05: Verify func for million output multiplier with convert all multipliers method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -59,7 +57,7 @@ Scenario: Tc_Unit Manipulation_05: Verify func for million output multiplier wit
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_06: Verify func for Billion output multiplier with convert all multipliers method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -69,7 +67,7 @@ Scenario: Tc_Unit Manipulation_06: Verify func for Billion output multiplier wit
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_07: Verify func for Trillion output multiplier with convert all multipliers method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -79,7 +77,7 @@ Scenario: Tc_Unit Manipulation_07: Verify func for Trillion output multiplier wi
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_08: Verify func for hundred output multiplier with convert only multipliers not in the unit name method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -89,7 +87,7 @@ Scenario: Tc_Unit Manipulation_08: Verify func for hundred output multiplier wit
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_09: Verify func for Thousand output multiplier with Convert only multipliers not in the unit name method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -99,7 +97,7 @@ Scenario: Tc_Unit Manipulation_09: Verify func for Thousand output multiplier wi
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_10: Verify func for Million output multiplier with Convert only multipliers not in the unit name method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -109,7 +107,7 @@ Scenario: Tc_Unit Manipulation_10: Verify func for Million output multiplier wit
 
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_11: Verify func for Billion output multiplier with Convert only multipliers not in the unit name method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -119,7 +117,7 @@ Scenario: Tc_Unit Manipulation_11: Verify func for Billion output multiplier wit
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_12: Verify func for Trillion output multiplier with Convert only multipliers not in the unit name method
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -129,7 +127,7 @@ Scenario: Tc_Unit Manipulation_12: Verify func for Trillion output multiplier wi
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_13: Verify applying multiple functions on unit manipulation func
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -137,7 +135,7 @@ Scenario: Tc_Unit Manipulation_13: Verify applying multiple functions on unit ma
 
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_14: Verify applying multiple functions on unit manipulation func with func toolbar
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
@@ -145,7 +143,7 @@ Scenario: Tc_Unit Manipulation_14: Verify applying multiple functions on unit ma
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_15: Verify applying unit manipulation function over other transformed functions
-   And Search for the series with SID "254123002" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Count the series in myseries
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "LAG" in search field
@@ -208,18 +206,18 @@ Scenario: Tc_Unit Manipulation_22: Verify tooltip for unit multipler applied fun
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_23: Verify applying unit multiplier for series in download window from search pane
-   And Search for the series with SID "SR4878432" and click on "C" option
+   And Search for the series with SID "1053401" and click on "C" option
    And Copy the visual title
-   And Search for the series with SID "SR4878432" and click on "Download" option
+   And Search for the series with SID "1053401" and click on "Download" option
    And Select "series" tab in download popup and click on "fx" option and pass as "UNIT" 
    Then The "Download button" in Download window is to be present
    
 @UnitManipulation
 Scenario: Tc_Unit Manipulation_24: Verify applying unit multiplier func on other functions in download window
-   And Search for the series with SID "SR4878432" and click on "A" option
+   And Search for the series with SID "310901701" and click on "A" option
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "AGGREGATE" in search field
-   Then Apply both function and rename series as "24" then validate the Testdata as "TC_Unit_Manipulation_24" 
+   Then Apply both function and rename series as "24" then validate the Testdata as "TC_Unit Manipulation_24" 
    
 @UnitManipulation123
 Scenario: Tc_Unit Manipulation_25: Verify applying unit multiplier for visuals in view mode
@@ -229,16 +227,18 @@ Scenario: Tc_Unit Manipulation_25: Verify applying unit multiplier for visuals i
    Then The "Views button" in Download window is to be present
    
 @UnitManipulation
-Scenario: Tc_Unit Manipulation_26: Verify applying unit multiplier with kg,ton,euro,usd etc
-   And Search for the series with SID "204883202;202916302;292524004;77161701" and click on "A" option
-   And Select all series from myseries and click on "Open function editor" option
-   And Click "By function" tab and enter "UNIT" in search field
-   Then Apply function and rename series as "26" then validate the Testdata as "TC_Unit_Manipulation_26" 
-   
-@UnitManipulation
 Scenario: Tc_Unit Manipulation_27: Verify applying unit multiplier with %,2000=100 etc
    And Search for the series with SID "203982302;198573502" and click on "A" option
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
    Then The function should not apply for selected series
+   
+@UnitManipulation
+Scenario: Tc_Unit Manipulation_26: Verify applying unit multiplier with kg,ton,euro,usd etc
+   And Sort the series by unit in left pane
+   And Search for the series with SID "204883202;202916302;292524004;77161701" and click on "A" option
+   And Select all series from myseries and click on "Open function editor" option
+   And Click "By function" tab and enter "UNIT" in search field
+   Then Apply function and rename series as "26" then validate the Testdata as "TC_Unit Manipulation_26" 
    And Sort the default series in left pane
+   And Login back to default execution login

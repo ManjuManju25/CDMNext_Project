@@ -114,13 +114,15 @@ public class UnitManipulation {
    public void check_the_checkbox_for_Unit_manipulation_as(String arg1) throws Throwable {
 	   unit_manipulation_checkbox_text = arg1;
 	   if(!arg1.equals("")) {
-       boolean checkbox = login.driver.findElement(By.xpath("//*[text()='"+unit_manipulation_checkbox_text+"']/preceding-sibling::input")).isSelected();
+       boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'"+unit_manipulation_checkbox_text+"')]/preceding-sibling::input")).isSelected();
        if(checkbox == false) {
-    	   new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+unit_manipulation_checkbox_text+"']/preceding-sibling::span", 4)).click().build().perform();
+       WebElement check = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+unit_manipulation_checkbox_text+"')]/preceding-sibling::span", 4);
+       js.executeScript("arguments[0].scrollIntoView(true);",check);
+	   new Actions(login.driver).moveToElement(check).pause(500).click().build().perform();
        }
-	   } else {
-		unit_manipulation_checkbox_text = "Convert all multipliers";
-	   }
+	   } else { 
+	    unit_manipulation_checkbox_text = "Convert all multipliers"; 
+	   }  
    }
    
     public void unit_manipulation_method_checkbox() throws Throwable {
@@ -157,7 +159,7 @@ public class UnitManipulation {
 	   	new Actions(login.driver).moveToElement(name).pause(500).sendKeys("UnitManipulation"+arg1+"").build().perform();
 	   	new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Click to edit the Insight']", 4)).click().build().perform();
 	   	CrossSection.renamed_insight_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-breadcrumb--title__editable')]", 4).getText();
-	   	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
+	   	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
 	   	CrossSection.Select_the_Start_Date_and_End_Date("2001-01-01", "2010-12-31");
 	   	chart.uncheck_the_checkbox_for_sections("Data Refresh");
 	   	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[contains(text(),'Download')]", 4).click();
@@ -357,7 +359,7 @@ public class UnitManipulation {
 	String expected = CommonFunctionality.getElementByClassName(login.driver, "series-functions--modal-title-label", 4).getText();
 	if(arg1.equalsIgnoreCase("Download button")) {
 	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__body')]//*[contains(@class,'button__download-btn')]", 4)).click().build().perform();
-	CommonFunctionality.wait(3000);
+	CommonFunctionality.wait(6000);
 	String path= System.getProperty("user.home") + "\\Downloads\\" +visual_tle+".xlsx";
 	File src = new File(path);
 	FileInputStream fis = new FileInputStream(src);

@@ -7,11 +7,10 @@ Feature: SeriesTab
     When Click on "Apply filter"
     Then Result should be displayed as per selection
 
-  ##@SeriesTab
-  ##Scenario: TC_SeriesTab_02:Verify "All Insights" option
-  ##	When Click on "All insights"
-  ##	Then The "Insight Explorer" popup should be appeared
-  ##
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_02:Verify "All Insights" option
+  #	When Click on "All insights"
+  #	Then The "Insight Explorer" popup should be appeared
   @SeriesTab
   Scenario: TC_SeriesTab_02:Verify Reset option  for series tab
     Given User enters "GDP"
@@ -276,7 +275,6 @@ Feature: SeriesTab
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
     And Click on "Apply"
-    #Then The series should be added to My series tab for selected insight
     Then The series should be added to selected insight
 
   @SeriesTab
@@ -298,7 +296,7 @@ Feature: SeriesTab
     And Open "Series" tab
     And User has selects "More" as "New only"
     When Click on "Apply filter"
-    Then "new" symbol to be displayed for "New only"
+    Then "NEW" symbol to be displayed for "New only"
 
   @SeriesTab
   Scenario: TC_SeriesTab_46:Check 'k' symbol for kew only filter
@@ -336,24 +334,22 @@ Feature: SeriesTab
     And Click on "Apply filter"
     Then Search results should include series only from world trend plus DB
 
-  #
-  ##@SeriesTab
+  #@SeriesTab
   #Scenario: TC_SeriesTab_52:Verify click of open icon of 'All insights'
-  ##	And   Open "Series" tab
-  ##	And Click on open icon of All insight
-  ##	Then  The "Insight Explorer" popup should be appeared
-  ##
-  ##@SeriesTab
-  ##Scenario: TC_SeriesTab_53:Verify tabs to display
-  ##	And  Click on cogwheel
-  ##	Then  "Select tabs to display" popup should be display
-  ##
-  ##@SeriesTab
-  ##Scenario: TC_SeriesTab_54:Verify hyperlink of matched insights
-  ##	And Enter keyword "GDP"
-  ##	And Click on x Matched Insights hyperlink
-  ##	Then  Insights explorer modal window should open with x number of insights listed
+  #And Open "Series" tab
+  #And Click on open icon of All insight
+  #Then The "Insight Explorer" popup should be appeared
   #
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_53:Verify tabs to display
+  #And Click on cogwheel
+  #Then "Select tabs to display" popup should be display
+  #
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_54:Verify hyperlink of matched insights
+  #And Enter keyword "GDP"
+  #And Click on x Matched Insights hyperlink
+  #Then Insights explorer modal window should open with x number of insights listed
   @SeriesTab
   Scenario: TC_SeriesTab_51:Verifying "View as Pie" option for series level
     Given User enters seriesID "7872901;7874601"
@@ -558,6 +554,7 @@ Feature: SeriesTab
     When Click on "Apply filter"
     Then Should display the rebased series
 
+  @SeriesTab
   Scenario: TC_SeriesTab_80: Verify keyword search
     And Clear search input
     Given User enters keyword "gdp"
@@ -584,3 +581,8 @@ Feature: SeriesTab
     And Select series and Click on More actions
     And Select "Series Info"
     Then The SSP window should be opened
+
+  @SeriesTab
+  Scenario: TC_SeriesTab_85:Verify tabs to display
+    And Click on three dots
+    Then "Select tabs to display" popup should be display

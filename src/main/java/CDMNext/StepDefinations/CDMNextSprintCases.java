@@ -24,6 +24,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
@@ -717,13 +718,14 @@ public class CDMNextSprintCases {
 	public void click(String arg1, String arg2) throws Throwable {
 		CommonFunctionality.wait(2000);
 		if (arg1.equalsIgnoreCase("File")) {
+			CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Open File menu']")));
 			WebElement file = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 4);
 			new Actions(login.driver).moveToElement(file).pause(1000).click().build().perform();
 		}
 		if (arg1.equalsIgnoreCase("Help")) {
 			CommonFunctionality.wait(3000);
 			WebElement help = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='data-manager']//*[contains(@class,'data-manager--title')]", 8);
+					"//*[@class='data-manager']//*[contains(@class,'data-manager--title')] | //div[@class='help-title']", 8);
 			new Actions(login.driver).moveToElement(help).pause(2000).click().build().perform();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + "')]", 4).click();
 		}
@@ -767,7 +769,7 @@ public class CDMNextSprintCases {
 	public void select_attributes_checkbox() throws Throwable {
 		CommonFunctionality.wait(3000);
 		title_checkbox_webElement = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[text()='Title']/following::*[contains(@class,'input-control__sm')][1]", 4);
+				"//*[contains(text(),'Title')]/following::*[contains(@class,'input-control__sm')][1]", 4);
 	}
 
 	@And("^Click title attribute checkbox$")
@@ -785,14 +787,14 @@ public class CDMNextSprintCases {
 		few_attributes = arg1;
 		boolean attributes_element = login.driver
 				.findElement(By.xpath(
-						"//*[text()='" + few_attributes + "']/following::*[contains(@class,'input-control__sm')][1]"))
+						"//*[contains(text(),'" + few_attributes + "')]/following::*[contains(@class,'input-control__sm')][1]"))
 				.isSelected();
 		if (attributes_element == false) {
 			new Actions(login.driver).moveToElement(login.driver.findElement(By.xpath(
-					"//*[text()='" + few_attributes + "']/following::*[contains(@class,'input-control__sm')][1]")))
+					"//*[contains(text(),'" + few_attributes + "')]/following::*[contains(@class,'input-control__sm')][1]")))
 					.click().build().perform();
-			attributes = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + few_attributes
-					+ "']/following::*[contains(@class,'input-control__sm')][1]/preceding::*[@class='table-property-item--label-text'][1]",
+			attributes = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + few_attributes
+					+ "')]/following::*[contains(@class,'input-control__sm')][1]/preceding::*[@class='table-property-item--label-text'][1]",
 					4).getText();
 		}
 	}
@@ -845,7 +847,7 @@ public class CDMNextSprintCases {
 
 	@And("^Click \"([^\"]*)\" option from empty list$")
 	public void click_option_from_empty_list(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'"+arg1+"')]", 4).click();
 	}
 
 	@And("^Click \"([^\"]*)\" button in images wizard$")
@@ -855,7 +857,7 @@ public class CDMNextSprintCases {
 
 	@And("^Click \"([^\"]*)\" button to upload images$")
 	public void click_button_to_upload_images(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 4).click();
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe", System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
@@ -1006,7 +1008,7 @@ public class CDMNextSprintCases {
 
 	@And("^Check the checkbox for \"([^\"]*)\"$")
 	public void check_the_checkbox_for(String arg1) throws Throwable {
-		preference_checkbox1 = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
+		preference_checkbox1 = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
 				.isSelected();
 	}
 
@@ -1021,7 +1023,7 @@ public class CDMNextSprintCases {
 	public void click_on_edit_in_from_preferences(String arg1) throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::span[1]", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver,
-				"(//ul[@class='select2-results']//*[@class='select2-result-label'])[5]", 4).click();
+				"(//ul[@class='select2-results']//*[@class='select2-result-label'])[4]", 4).click();
 		prefix_edit = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::span[1]", 4).getText();
 	}
@@ -1260,21 +1262,21 @@ public class CDMNextSprintCases {
 	@And("^Clicking on \"([^\"]*)\" option under user preference to be \"([^\"]*)\"$")
 	public void clicking_on_option_under_user_preference_to_be(String arg1, String arg2) throws Throwable {
 		if (arg2.equalsIgnoreCase("Uncheck")) {
-			checkbox_prefer = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
+			checkbox_prefer = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
 					.isSelected();
 			if (checkbox_prefer == true) {
 				new Actions(login.driver)
 						.moveToElement(login.driver
-								.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::span")))
+								.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span")))
 						.pause(2000).click().build().perform();
 			}
 		} else if (arg2.equalsIgnoreCase("Check")) {
-			checkbox_prefer = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
+			checkbox_prefer = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
 					.isSelected();
 			if (checkbox_prefer == false) {
 				new Actions(login.driver)
 						.moveToElement(login.driver
-								.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::span")))
+								.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span")))
 						.pause(2000).click().build().perform();
 			}
 		}
@@ -1290,13 +1292,13 @@ public class CDMNextSprintCases {
 	public void clicking_on_option_under_user_preference_as(String arg1, String arg2) throws Throwable {
 		if (arg2.equalsIgnoreCase("Uncheck")) {
 			preference_checkbox = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[text()='" + arg1 + "']/preceding-sibling::span", 4);
+					"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4);
 			if (preference_checkbox.isSelected()) {
 				new Actions(login.driver).moveToElement(preference_checkbox).pause(2000).click().build().perform();
 			}
 		} else if (arg2.equalsIgnoreCase("Check")) {
 			preference_checkbox = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[text()='" + arg1 + "']/preceding-sibling::span", 4);
+					"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4);
 			if (preference_checkbox.isSelected()) {
 				new Actions(login.driver).moveToElement(preference_checkbox).pause(2000).click().build().perform();
 			}
@@ -1306,7 +1308,7 @@ public class CDMNextSprintCases {
 	@And("^Click on \"([^\"]*)\" in format$")
 	public void click_on_in_format(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Grouping separator")) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following::label[1]", 12)
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following::label[1]", 12)
 					.click();
 		}
 	}
@@ -1314,11 +1316,11 @@ public class CDMNextSprintCases {
 	@And("^Click on \"([^\"]*)\" in format and enter value as (\\d+)$")
 	public void click_on_in_format_and_enter_value_as(String arg1, int arg2) throws Throwable {
 		separator_value = Integer.toString(arg2);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::input[1]", 12)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::input[1]", 12)
 				.click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::input[1]", 12)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::input[1]", 12)
 				.clear();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::input[1]", 12)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::input[1]", 12)
 				.sendKeys(separator_value);
 	}
 
@@ -1327,11 +1329,11 @@ public class CDMNextSprintCases {
 	public void get_Text_on_in_format(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Grouping separator")) {
 			String dec = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::span[1]", 4).getText();
+					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::span[1]", 4).getText();
 		} else {
 			CommonFunctionality.wait(2000);
 			String dec = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following::input[1]", 4)
+					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following::input[1]", 4)
 					.getAttribute("aria-valuenow");
 			decimal_places = Integer.parseInt(dec);
 		}
@@ -1340,9 +1342,9 @@ public class CDMNextSprintCases {
 	@And("^Get Value of \"([^\"]*)\" in Preference$")
 	public void get_Value_of_in_Preference(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Decimal separator")) {
-			decimal_seperator = CommonFunctionality.getElementByXpath(login.driver,"//*[text()='"+arg1+"']//following::*[contains(@class,'toggler-control-item__selected')]/span",4).getText();
+			decimal_seperator = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'"+arg1+"')]//following::*[contains(@class,'toggler-control-item__selected')]/span",4).getText();
 		} else if (arg1.equalsIgnoreCase("Grouping separator")) {
-			grouping_seperator = CommonFunctionality.getElementByXpath(login.driver,"//*[text()='"+arg1+"']//following::*[contains(@class,'toggler-control-item__selected')]/span",4).getText();
+			grouping_seperator = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'"+arg1+"')]//following::*[contains(@class,'toggler-control-item__selected')]/span",4).getText();
 		}
 	}
 
@@ -1385,19 +1387,19 @@ public class CDMNextSprintCases {
 	@And("^Check \"([^\"]*)\" Checkbox in replacement popup$")
 	public void check_Checkbox_in_replacement_popup(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
-		replacement_not_show = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
+		replacement_not_show = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
 				.isSelected();
 		if (replacement_not_show == false) {
 			new Actions(login.driver)
 					.moveToElement(
-							login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::span")))
+							login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span")))
 					.pause(1000).click().build().perform();
 		}
 		if (replacement_not_show == true) {
 			System.out.println("The " + arg1 + " Checkbox is checked");
 		}
 		replacement_not_show_updated = login.driver
-				.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input")).isSelected();
+				.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input")).isSelected();
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='series-changes-summary--footer']//*[text()='Dismiss']", 4)
 				.click();
@@ -1423,12 +1425,12 @@ public class CDMNextSprintCases {
 	public void click_format_date_option(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Auto")) {
 			WebElement auto = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@class,'date-format--context-menu')]//*[text()='" + arg1 + "']/preceding::span[1]",
+					"//*[contains(@class,'date-format--context-menu')]//*[contains(text(),'" + arg1 + "')]/preceding::span[1]",
 					4);
 			new Actions(login.driver).moveToElement(auto).pause(2000).click().build().perform();
 		} else if (arg1.equalsIgnoreCase("Custom")) {
 			WebElement custom = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@class,'date-format--context-menu')]//*[text()='" + arg1 + "']/preceding::span[1]",
+					"//*[contains(@class,'date-format--context-menu')]//*[contains(text(),'" + arg1 + "')]/preceding::span[1]",
 					4);
 			new Actions(login.driver).moveToElement(custom).pause(2000).click().build().perform();
 		}
@@ -1552,11 +1554,9 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@And("^Right click on Insight name and click on \"([^\"]*)\"$")
 	public void right_click_on_Insight_name_and_click_on(String arg1) throws Throwable {
-		WebElement right_click = CommonFunctionality.getElementByProperty(login.driver, "First_insightname_from_list",
-				4);
+		WebElement right_click = CommonFunctionality.getElementByXpath(login.driver, "(//*[@title='Share Insight']/following::*[contains(@class,'insight-table-item--title-link')])[1]",4);
 		new Actions(login.driver).moveToElement(right_click).pause(2000).contextClick().build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[@title='" + arg1 + "']", 4)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[@title='" + arg1 + "']", 4).click();
 		CommonFunctionality.wait(100);
 	}
 
@@ -1591,11 +1591,11 @@ public class CDMNextSprintCases {
 	public void check_for_display_dayunit_date_picker() throws Throwable {
 		CommonFunctionality.wait(2000);
 		start_format_datepicker = CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[@class='highcharts-label highcharts-range-input']/*[2])[1]", 4)
+				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-xaxis-labels')]/*[2])[1]", 4)
 				.getText();
 		CommonFunctionality.wait(500);
 		end_format_datepicker = CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[@class='highcharts-label highcharts-range-input']/*[2])[2]", 4)
+				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-xaxis-labels')]/*[1])[1]", 4)
 				.getText();
 	}
 
@@ -1693,19 +1693,10 @@ public class CDMNextSprintCases {
 		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 4);
 		new Actions(login.driver).moveToElement(title).pause(1000).click().build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[text()='New']", 4).click();
-		New_Insight_Name = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='form--control']", 4)
-				.getAttribute("value");
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[text()='Create insight']", 4)
-				.click();
-		/*
-		 * List<WebElement> views = login.driver .findElements(By.
-		 * xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"
-		 * )); if (views.size() > 0) { for (WebElement view : views) { new
-		 * Actions(login.driver).contextClick(view).build().perform();
-		 * CommonFunctionality.getElementByXpath(login.driver,
-		 * "//span[contains(text(),'Delete view')]", 8) .click(); } }
-		 */
+		New_Insight_Name = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='form--control']", 4).getAttribute("value");
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[text()='Create insight']", 4).click();
+		CommonFunctionality.wait(5000);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -1800,11 +1791,11 @@ public class CDMNextSprintCases {
 
 	@And("^Uncheck the \"([^\"]*)\" and \"([^\"]*)\" options$")
 	public void uncheck_the_and_options(String arg1, String arg2) throws Throwable {
-		text1 = arg1;
+		//text1 = arg1;
 		text2 = arg2;
-		chart_checkbox = login.driver.findElement(By.xpath(
-				"//*[text()='" + text1 + "' and @class='input-control--description']/preceding::input[1] | //*[text()='"
-						+ text1 + "' and @class='table-properties-context-title']/preceding::input[1]"))
+		/*chart_checkbox = login.driver.findElement(By.xpath(
+				"//*[text()='" + text2 + "' and @class='input-control--description']/preceding::input[1] | //*[text()='"
+						+ text2 + "' and @class='table-properties-context-title']/preceding::input[1]"))
 				.isSelected();
 		if (chart_checkbox == true) {
 			CommonFunctionality
@@ -1814,17 +1805,17 @@ public class CDMNextSprintCases {
 									+ text1 + "' and @class='table-properties-context-title']/preceding::span[1]",
 							4)
 					.click();
-		}
+		}*/
 		chart_checkbox1 = login.driver.findElement(By.xpath(
-				"//*[text()='" + text2 + "' and @class='input-control--description']/preceding::input[1] | //*[text()='"
-						+ text2 + "' and @class='table-properties-context-title']/preceding::input[1]"))
+				"//*[contains(text(),'" + text2 + "') and @class='input-control--description']/preceding::input[1] | //*[contains(text(),'"
+						+ text2 + "') and @class='table-properties-context-title']/preceding::input[1]"))
 				.isSelected();
 		if (chart_checkbox1 == true) {
 			CommonFunctionality
 					.getElementByXpath(login.driver,
-							"//*[text()='" + text2
-									+ "' and @class='input-control--description']/preceding::span[1] | //*[text()='"
-									+ text2 + "' and @class='table-properties-context-title']/preceding::span[1]",
+							"//*[contains(text(),'" + text2
+									+ "') and @class='input-control--description']/preceding::span[1] | //*[contains(text(),'"
+									+ text2 + "') and @class='table-properties-context-title']/preceding::span[1]",
 							4)
 					.click();
 		}
@@ -1887,9 +1878,9 @@ public class CDMNextSprintCases {
 					new Actions(login.driver).moveToElement(active).pause(2000).build().perform();
 					CommonFunctionality.getElementByClassName(login.driver, "style-templates-item--tongue", 4).click();
 					WebElement set = CommonFunctionality.getElementByXpath(login.driver,
-							"//*[text()='" + arg1 + "']/preceding-sibling::span", 4);
+							"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4);
 					boolean select = CommonFunctionality
-							.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/preceding-sibling::span", 4)
+							.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4)
 							.isSelected();
 					if (select != true) {
 						new Actions(login.driver).moveToElement(set).pause(2000).click().build().perform();
@@ -1973,6 +1964,7 @@ public class CDMNextSprintCases {
 				break;
 			}
 		}
+		CommonFunctionality.Views_list();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -2001,9 +1993,14 @@ public class CDMNextSprintCases {
 							"//*[contains(text(),'" + arg1 + "')]//preceding::*[@class='input-control--indicator'][1]"))
 					.click();
 		}
-
-		WebElement advanced = CommonFunctionality.getElementByXpath(login.driver,
+		WebElement advanced = null;
+		if(arg4.equalsIgnoreCase("Specific")) {
+			advanced = CommonFunctionality.getElementByXpath(login.driver,
+					"(//*[contains(text(),'" + arg1 + "')]//following::*[contains(@title,'" + arg2 + "')][1])[2]", 4);
+		} else {
+		advanced = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg1 + "')]//following::*[contains(@title,'" + arg2 + "')][1]", 4);
+		}
 		js.executeScript("arguments[0].click();", advanced);
 		CommonFunctionality.wait(1000);
 		WebElement format = CommonFunctionality.getElementByXpath(login.driver,
@@ -2020,9 +2017,9 @@ public class CDMNextSprintCases {
 		}
 		CommonFunctionality.wait(200);
 		WebElement radio = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'--context-menu')]//*[text()='" + arg4
-						+ "']//preceding-sibling::*[@class='input-control--indicator'] | //*[text()='" + arg4
-						+ "']//preceding-sibling::*[@class='input-control--indicator']",
+				"//*[contains(@class,'--context-menu')]//*[contains(text(),'" + arg4
+						+ "')]//preceding-sibling::*[@class='input-control--indicator'] | //*[contains(text(),'" + arg4
+						+ "')]//preceding-sibling::*[@class='input-control--indicator']",
 				4);
 		new Actions(login.driver).moveToElement(radio).pause(2000).click().build().perform();
 		if (arg4.equalsIgnoreCase("Attributes")) {
@@ -2117,7 +2114,7 @@ public class CDMNextSprintCases {
 		if(arg1.equalsIgnoreCase("All functions")) {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4).click();
 		} else {
-		CommonFunctionality.getElementByXpath(login.driver, "//button[text()='" + arg1 + "']", 4).click();
+		CommonFunctionality.Hidden_Webelements(login.driver, "//button[contains(text(),'" + arg1 + "')]");
 	}
 	}
 
@@ -2227,10 +2224,10 @@ public class CDMNextSprintCases {
 	public void get_date_from_chart() throws Throwable {
 		CommonFunctionality.wait(500);
 		chart_from_date = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'highcharts-range-input')][1]/*[2]", 4).getText();
+				.getElementByXpath(login.driver, "//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]", 4).getText();
 		CommonFunctionality.wait(500);
 		chart_to_date = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'highcharts-range-input')][2]/*[2]", 4).getText();
+				.getElementByXpath(login.driver, "//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
 		CommonFunctionality.wait(500);
 	}
 
@@ -2436,16 +2433,13 @@ public class CDMNextSprintCases {
 	public void set_the_range_as_to(String arg1, String arg2) throws Throwable {
 		start_date_chart = arg1;
 		end_date_chart = arg2;
-		CommonFunctionality.wait(2000);
-		WebElement start = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[contains(@class,'highcharts-range-input')]//*[2])[1]", 4);
-		new Actions(login.driver).moveToElement(start).click().keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
-				.sendKeys(Keys.BACK_SPACE).build().perform();
+		CommonFunctionality.wait(4000);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'header-picker_header-module__calendar_icon')]", 4)).pause(500).click().build().perform();
+		WebElement start = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'picker-body-period_picker-module__input') and @placeholder='From']", 4);
+		new Actions(login.driver).moveToElement(start).click().pause(500).sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE)).build().perform();
 		new Actions(login.driver).sendKeys(start_date_chart).pause(1000).sendKeys(Keys.ENTER).build().perform();
-		WebElement end = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[contains(@class,'highcharts-range-input')]//*[2])[2]", 4);
-		new Actions(login.driver).moveToElement(end).click().keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL)
-				.sendKeys(Keys.BACK_SPACE).build().perform();
+		WebElement end = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'picker-body-period_picker-module__input') and @placeholder='To']", 4);
+		new Actions(login.driver).moveToElement(end).click().pause(500).sendKeys(Keys.chord(Keys.CONTROL,"a",Keys.BACK_SPACE)).build().perform();
 		new Actions(login.driver).sendKeys(end_date_chart).pause(1000).sendKeys(Keys.ENTER).build().perform();
 	}
 
@@ -2453,11 +2447,11 @@ public class CDMNextSprintCases {
 	public void check_time_axis_time_within_period() throws Throwable {
 		CommonFunctionality.wait(2000);
 		start_date_inside_chart = CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-range-input')])[3]/*[2]", 4)
+				.getElementByXpath(login.driver, "(//*[@class='highcharts-axis-labels highcharts-xaxis-labels'])[2]/*[1]", 4)
 				.getText();
 		CommonFunctionality.wait(2000);
 		end_date_inside_chart = CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-range-input')])[4]/*[2]", 4)
+				.getElementByXpath(login.driver, "(//*[@class='highcharts-axis-labels highcharts-xaxis-labels'])[2]/*[5]", 4)
 				.getText();
 	}
 
@@ -2486,40 +2480,14 @@ public class CDMNextSprintCases {
 		start_date = arg2;
 		end_date = arg3;
 		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementBycssSelector(login.driver, "div[data-tab='series']", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']", 4).click();
-		CrossSection.Select_the_Start_Date_and_End_Date("2017-12-31", "2018-12-31");
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]", 4).click();
+		CrossSection.Select_the_Start_Date_and_End_Date(arg2, arg3);
+		//CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]", 4).click();
 		date_text = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'modal-window__active')]//*[contains(@class,'sphere-modal__body')]", 4).getText();
 		if (login.driver.findElements(By.xpath("//*[contains(@class,'button__primary') and text()='Ok']")).size() > 0) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'button__primary') and text()='Ok']", 4).click();
 		}
-		/*CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']", 4).click();
-		WebElement start = CommonFunctionality.getElementByXpath(login.driver,
-				"//input[contains(@class,'input-date-start')]", 4);
-		new Actions(login.driver).moveToElement(start).click().sendKeys(Keys.chord(Keys.CONTROL, "a")).build()
-				.perform();
-		new Actions(login.driver).moveToElement(start).sendKeys(arg2).build().perform();
-		new Actions(login.driver).sendKeys(Keys.TAB).build().perform();
-		if (login.driver.findElements(By.xpath("//*[contains(@class,'button__primary') and text()='Ok']")).size() > 0) {
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(@class,'button__primary') and text()='Ok']", 4)
-					.click();
-		}
-		WebElement end = CommonFunctionality.getElementByXpath(login.driver,
-				"//input[contains(@class,'input-date-end')]", 4);
-		new Actions(login.driver).moveToElement(end).click().sendKeys(Keys.chord(Keys.CONTROL, "a")).build().perform();
-		new Actions(login.driver).moveToElement(end).sendKeys(arg3).build().perform();
-		new Actions(login.driver).sendKeys(Keys.ENTER).build().perform();
-		date_text = CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//*[contains(@class,'modal-window__active')]//*[contains(@class,'sphere-modal__body')]", 4)
-				.getText();
-		if (login.driver.findElements(By.xpath("//*[contains(@class,'button__primary') and text()='Ok']")).size() > 0) {
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(@class,'button__primary') and text()='Ok']", 4)
-					.click();
-		}*/
 	}
 
 	@And("^Click \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\"$")
@@ -2541,9 +2509,8 @@ public class CDMNextSprintCases {
 		CommonFunctionality.wait(100);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg4 + "')]", 8).click();
 		if (arg2.equals("CEIC Leading Indicator")) {
-			CommonFunctionality.wait(3000);
-			footnotes_text = CommonFunctionality
-					.getElementByClassName(login.driver, "footnotes--unavailable-message", 4).getText();
+			CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("footnotes--info")));
+			footnotes_text = CommonFunctionality.getElementByClassName(login.driver, "footnotes--info", 4).getText();
 		}
 	}
 
@@ -2957,7 +2924,7 @@ public class CDMNextSprintCases {
 
 	@And("^Click \"([^\"]*)\" from the drop down$")
 	public void click_from_the_drop_down(String arg1) throws Throwable {
-		if (arg1.contains("Quarterly") || arg1.equalsIgnoreCase("Yearly (Sum)") || arg1.equalsIgnoreCase("Monthly (Distribute)")) {
+		if (arg1.contains("Weekly (Distribute)") || arg1.equalsIgnoreCase("Yearly (Sum)") || arg1.equalsIgnoreCase("Monthly (Distribute)")) {
 			frequency_text = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='context-menu-item link' and contains(@title,'"+arg1+"')]", 4).getAttribute("title");
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -3138,8 +3105,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Verify for semi annual series - month and yr date picker$")
 	public void verify_for_semi_annual_series_month_and_yr_datepicker() throws Throwable {
-		if (start_format_datepicker.matches("([0-9]{4})-([0-9]{2})")
-				&& end_format_datepicker.matches("([0-9]{4})-([0-9]{2})") && (values_list.contains("Semiannually"))) {
+		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{4})")
+				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{4})") && (values_list.contains("Semiannually"))) {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
@@ -3149,8 +3116,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Verify for quarterly series - month and yr date picker$")
 	public void verify_for_quarterly_series_month_and_yr_datepicker() throws Throwable {
-		if (start_format_datepicker.matches("([0-9]{4})-([0-9]{2})")
-				&& end_format_datepicker.matches("([0-9]{4})-([0-9]{2})") && (values_list.contains("Quarterly"))) {
+		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{4})")
+				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{4})") && (values_list.contains("Quarterly"))) {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
@@ -3160,8 +3127,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Verify for monthly series - month and yr date picker$")
 	public void verify_for_monthly_series_month_and_yr_datepicker() throws Throwable {
-		if (start_format_datepicker.matches("([0-9]{4})-([0-9]{2})")
-				&& end_format_datepicker.matches("([0-9]{4})-([0-9]{2})") && (values_list.contains("Monthly"))) {
+		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{4})")
+				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{4})") && (values_list.contains("Monthly"))) {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
@@ -3172,8 +3139,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Verify for weekly series - day, month and yr date picker$")
 	public void verify_for_weekly_series_day_month_and_yr_datepicker() throws Throwable {
-		if (start_format_datepicker.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")
-				&& end_format_datepicker.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")
+		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
+				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
 				&& (values_list.contains("Weekly"))) {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
@@ -3185,8 +3152,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Verify for daily series - day, month and yr date picker$")
 	public void verify_for_daily_series_day_month_and_yr_datepicker() throws Throwable {
-		if (start_format_datepicker.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")
-				&& end_format_datepicker.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")
+		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
+				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
 				&& (values_list.contains("Daily"))) {
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
@@ -3198,8 +3165,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Verify that the date picker should display day,month and yr$")
 	public void verify_that_the_datepicker_should_display_day_month_and_yr() throws Throwable {
-		if (start_format_datepicker.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")
-				&& end_format_datepicker.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")
+		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
+				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
 				&& (values_list.contains("Daily;Quarterly;Yearly"))) {
 			login.Log4j.info("Date picker is displaying the frquency of: " + values_list);
 			CommonFunctionality.Views_list();
@@ -3211,8 +3178,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Verify that the date picker should display month and yr$")
 	public void verify_that_the_datepicker_should_display_month_and_yr() throws Throwable {
-		if (start_format_datepicker.matches("([0-9]{4})-([0-9]{2})")
-				&& end_format_datepicker.matches("([0-9]{4})-([0-9]{2})") && (values_list.contains("Monthly;Yearly"))) {
+		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{4})")
+				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{4})") && (values_list.contains("Monthly;Yearly"))) {
 			login.Log4j.info("Date picker is displaying the frquency of: " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
@@ -3241,6 +3208,18 @@ public class CDMNextSprintCases {
 			}
 		}
 	}
+	
+	@SuppressWarnings("deprecation")
+	@And("^Setting the date format values in preferences$")
+	public void setting_the_date_format_values_in_preferences() throws Throwable {
+	  new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='View and edit profile information']", 4)).pause(500).click().build().perform();
+	  clicking_on_option_in_preference("Date format");
+	  click_format_date_option("Auto");
+	  new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='automatic-date-format']//*[contains(@class,'form--control__xs')][1]//span[2]", 4)).pause(500).click().build().perform();
+	  CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'automatic-date-format--dropdown')]//div[text()='MM/DD/YYYY']", 4).click();
+	  new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='View and edit profile information']", 4)).pause(500).click().build().perform();
+	}
+
 
 	@Then("^Tooltip as \"([^\"]*)\" should display for table$")
 	public void tooltip_as_should_display_for_table(String arg1) throws Throwable {
@@ -3415,37 +3394,21 @@ public class CDMNextSprintCases {
 			sa.fail("Verification failed");
 		}
 	}
-
+	
 	@Then("^The Message \"([^\"]*)\" should be displayed$")
 	public void the_Message_should_be_displayed(String arg1) throws Throwable {
-		if (date_text.contains(arg1)) {
-			login.Log4j.info("The download message is: "+arg1+" for the timerange from " + start_date + " to " + end_date);
-			if (login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
-				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
-			}
-			CommonFunctionality.DeleteSeries();
-		} else {
-			if(login.driver.findElements(By.className("sphere-modal__close")).size() > 0) {
-				CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
-			}
-			CommonFunctionality.DeleteSeries();
-			sa.fail("Verification failed");
-		}
+		String date[] = date_text.split("\n");
+		assertEquals(date[0], arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+		login.Log4j.info("The download message is: "+arg1+" for the timerange from " + start_date + " to " + end_date);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@Then("^The Message \"([^\"]*)\" be displayed$")
 	public void the_Message_be_displayed(String arg1) throws Throwable {
-		if (footnotes_text.contains(arg1)) {
-			login.Log4j.info("The message is: " + arg1);
-			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size() > 0) {
-				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
-			}
-		} else {
-			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size() > 0) {
-				CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
-			}
-			sa.fail("Verification failed");
-		}
+		assertEquals(footnotes_text, arg1);
+		login.Log4j.info("The message is: " + footnotes_text);
+		CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
 	}
 
 	@Then("^\"([^\"]*)\" method should be checked$")
@@ -3590,18 +3553,16 @@ public class CDMNextSprintCases {
 
 	@Then("^The new visual should save the changes$")
 	public void the_new_visual_should_save_the_changes() throws Throwable {
-		chart_checkbox2 = login.driver
+		/*chart_checkbox2 = login.driver
 				.findElement(By.xpath(
 						"//*[text()='" + text1 + "' and @class='input-control--description']/preceding::input[1]"))
-				.isSelected();
+				.isSelected();*/
 		chart_checkbox3 = login.driver
 				.findElement(By.xpath(
-						"//*[text()='" + text2 + "' and @class='input-control--description']/preceding::input[1]"))
+						"//*[contains(text(),'" + text2 + "') and @class='input-control--description']/preceding::input[1]"))
 				.isSelected();
-		if ((chart_checkbox != chart_checkbox2) && (chart_checkbox1 != chart_checkbox3)) {
-			login.Log4j.info(text1 + " and " + text2 + " checkbox Changes is affecting in new visual");
-			// check_the_and_options("Zoom", "Slider");
-			// clicking_option("Save");
+		if (chart_checkbox1 != chart_checkbox3) {
+			login.Log4j.info("The checkbox Changes is affecting in new visual");
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
 		} else {
@@ -4025,7 +3986,7 @@ public class CDMNextSprintCases {
 	@Then("^The time within period should sync with chart \"([^\"]*)\" period\\.$")
 	public void the_time_within_period_should_sync_with_chart_period(String arg1) throws Throwable {
 		CommonFunctionality.wait(3000);
-		if (start_date_chart.equals(start_date_inside_chart) && (end_date_chart.equals(end_date_inside_chart))) {
+		if (SSPWindow.datefrom.equals(start_date_inside_chart) && (SSPWindow.dateto.equals(end_date_inside_chart))) {
 			login.Log4j.info("The time within period is syncned with chart " + arg1 + " period");
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
@@ -4039,7 +4000,9 @@ public class CDMNextSprintCases {
 	@Then("^Time within period should sync with chart \"([^\"]*)\" period$")
 	public void time_within_period_should_sync_with_chart_period(String arg1) throws Throwable {
 		CommonFunctionality.wait(500);
-		if (chart_from_date.equals(start_date_inside_chart) && (chart_to_date.equals(end_date_inside_chart))) {
+		String start_date = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='highcharts-axis-labels highcharts-xaxis-labels'])[2]/*[2]", 4).getText();
+		String end_date = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='highcharts-axis-labels highcharts-xaxis-labels'])[2]/*[1]", 4).getText();
+		if (chart_from_date.equals(start_date) && (chart_to_date.equals(end_date))) {
 			login.Log4j.info("The time within period is syncned with chart " + arg1 + " period");
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
@@ -4262,23 +4225,23 @@ public class CDMNextSprintCases {
 
 	@Then("^The new visual should be created with selected template style$")
 	public void the_new_visual_should_be_created_with_selected_template_style() throws Throwable {
-		chart_checkbox2 = login.driver.findElement(By.xpath(
+		/*chart_checkbox2 = login.driver.findElement(By.xpath(
 				"//*[text()='" + text1 + "' and @class='input-control--description']/preceding::input[1] | //*[text()='"
 						+ text1 + "' and @class='table-properties-context-title']/preceding::input[1]"))
-				.isSelected();
+				.isSelected();*/
 		chart_checkbox3 = login.driver.findElement(By.xpath(
-				"//*[text()='" + text2 + "' and @class='input-control--description']/preceding::input[1] | //*[text()='"
-						+ text1 + "' and @class='table-properties-context-title']/preceding::input[1]"))
+				"//*[contains(text(),'" + text2 + "') and @class='input-control--description']/preceding::input[1] | //*[contains(text(),'"
+						+ text1 + "') and @class='table-properties-context-title']/preceding::input[1]"))
 				.isSelected();
-		if ((chart_checkbox != chart_checkbox2) && (chart_checkbox1 != chart_checkbox3)) {
-			login.Log4j.info(text1 + " and " + text2
+		if (chart_checkbox1 != chart_checkbox3) {
+			login.Log4j.info(text2
 					+ " checkbox Changes is affecting in new visual as the new visual is creating with selected template style");
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
 		} else {
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			CommonFunctionality.Views_list();
-			sa.fail("Verification failed");
+			fail("Verification failed");
 		}
 	}
 
@@ -4627,10 +4590,10 @@ public class CDMNextSprintCases {
 	@Then("^The confirmation popup should be displayed only for first time share$")
 	public void the_confirmation_popup_should_be_displayed_only_for_first_time_share() throws Throwable {
 		CommonFunctionality.wait(4000);
-		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]")).size() == 0) {
-			login.Log4j.info("The confirmation popup is displayed only for first time share and it has been verified");
+		if (login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]")).size() > 0) {
+			login.Log4j.info("The confirmation popup is displayed for second time share and it has been verified");
 		} else {
-			fail("Confirmation popup is displayed for Second time Sharing insight too");
+			fail("Confirmation popup is displayed only for first time share insight");
 		}
 	}
 	
@@ -4678,7 +4641,7 @@ public class CDMNextSprintCases {
 					CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 8)
 							.click();
 					if(login.driver.findElements(By.xpath("//*[contains(text(),'Ok')]")).size()>0) {
-					CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok')]", 8).click();
+					CommonFunctionality.Hidden_Webelements(login.driver, "//*[contains(text(),'Ok')]");
 					}
 				}
 			}
@@ -4776,7 +4739,7 @@ public class CDMNextSprintCases {
 		login.Log4j.info("User prefix, First name and Last name is displayed in user preferences");
 	}
 
-	@Then("^\"([^\"]*)\" popup should be displayed$")
+	/*@Then("^\"([^\"]*)\" popup should be displayed$")
 	public void popup_should_be_displayed(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase(preference_popup)) {
 			login.Log4j
@@ -4784,7 +4747,7 @@ public class CDMNextSprintCases {
 		} else {
 			fail("Verification Failed");
 		}
-	}
+	}*/
 
 	@Then("^The updated prefix should show under preference$")
 	public void the_updated_prefix_should_show_under_preference() throws Throwable {
@@ -4944,13 +4907,10 @@ public class CDMNextSprintCases {
 
 	@Then("^Decimal places should be as per the selection in \"([^\"]*)\" tab$")
 	public void decimal_places_should_be_as_per_the_selection_in_tab(String arg1) throws Throwable {
-		if (decimal_places == decimalPlaces) {
-			login.Log4j.info("Decimal places are appearing as per the selection in " + arg1 + " tab");
-			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
-		} else {
-			CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
-			sa.fail("Verification Failed");
-		}
+		assertEquals(decimal_places, decimalPlaces);
+		login.Log4j.info("Decimal places are appearing as per the selection in " + arg1 + " tab");
+		CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@Then("^Check the data in the insight for \"([^\"]*)\"$")
@@ -5328,5 +5288,39 @@ public class CDMNextSprintCases {
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		}
+	}
+	
+	@Then("^\"([^\"]*)\" popup should be displayed$")
+	public void popup_should_be_displayed(String arg1) throws Throwable {
+	if (arg1.equalsIgnoreCase(preference_popup)) {
+	login.Log4j.info(arg1 + " title in the popup is displayed inside preferences option and it has been verified");
+	} else if(arg1.equals("The function cannot be applied to selected series")){
+	String popupTxt_for_invalidFunc = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='modal-title sphere-modal__title text-dots']", 30).getText();
+	if (popupTxt_for_invalidFunc.equalsIgnoreCase(arg1)) {
+	login.Log4j.info("Verification pass");
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='modal-window modal-window__active']//*[@class='sphere-modal__close']", 20).click();
+	} else {
+	fail("Verification Failed");
+	}
+	} else if(arg1.equalsIgnoreCase("Still cannot find an answer?")){
+	String cant_find_ans_popup = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='modal-title sphere-modal__title text-dots']", 30).getText();
+	if (cant_find_ans_popup.equalsIgnoreCase(arg1)) {
+	login.Log4j.info("Still cannot find an answer? popUp is displayed");
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='modal-window modal-window__active']//*[@class='sphere-modal__close']", 20).click();
+	} else {
+	fail("Verification Failed");
+	}
+	} else if(arg1.equals("Copyright")) {
+	String copy_right = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--wrapper']//*[@class='popover--title']", 30).getText();
+	if (copy_right.equalsIgnoreCase(arg1)) {
+	login.Log4j.info("Copyright popUp is displayed");
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--wrapper']//*[@class='popover--close']", 20).click();
+	} else {
+	fail("Verification Failed");
+	}
+	}
+	else {
+	fail("Verification Failed");
+	}
 	}
 }

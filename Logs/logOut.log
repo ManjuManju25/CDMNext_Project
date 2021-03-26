@@ -1,0 +1,135 @@
+2021-03-26 15:12:08 INFO  Log4j:32 - 
+Inside TestNG > @BeforeSuite
+2021-03-26 15:12:09 INFO  Log4j:56 - 
+Inside TestNG > @DataProvider
+2021-03-26 15:12:09 INFO  Log4j:48 - 
+Inside TestNG > @Test
+2021-03-26 15:12:09 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:12:09 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:12:19 INFO  Log4j:207 - Launching site .. 
+2021-03-26 15:12:19 INFO  Log4j:209 - Trying to login with Username:
+2021-03-26 15:12:20 INFO  Log4j:213 - Trying to login with Password:
+2021-03-26 15:12:22 INFO  Log4j:216 - Clicking on login button 
+2021-03-26 15:15:53 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:15:54 INFO  Log4j:44 - Image visual is created
+2021-03-26 15:15:54 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:15:54 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:15:54 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:18:11 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:18:36 INFO  Log4j:68 - Image visual is pasted 
+2021-03-26 15:18:36 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:18:36 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:18:36 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:20:54 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:38:20 INFO  Log4j:83 - Title AND Add to insight AND Download. Type `d` AND Open AND Delete AND Copy options are displayed
+2021-03-26 15:38:20 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:38:20 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:38:20 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:40:39 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:40:44 INFO  Log4j:95 - Upload image AND Insert/edit image AND Original size AND Upload image AND Align center AND Insert/edit image options are displayed
+2021-03-26 15:40:44 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:40:44 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:40:44 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:43:03 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:43:17 INFO  Log4j:434 - Clicking on Add
+2021-03-26 15:43:19 INFO  Log4j:114 - The Image visual is created in view tab
+2021-03-26 15:43:19 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:43:19 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:43:19 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:45:41 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:45:55 INFO  Log4j:434 - Clicking on Add to new insight
+2021-03-26 15:45:59 INFO  Log4j:1042 - New insight with the selected visual created.
+Go to new insight
+2021-03-26 15:45:59 INFO  Log4j:1044 - New insight with the selected visual created.
+Go to new insight is displayed
+2021-03-26 15:45:59 INFO  Log4j:434 - Clicking on Go to new insight
+2021-03-26 15:46:06 INFO  Log4j:131 - The Image visual is created in view tab
+2021-03-26 15:46:12 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:46:12 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:46:12 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:48:31 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:48:34 INFO  Log4j:1287 - The visual is displayed in maximized window
+2021-03-26 15:48:40 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:48:40 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:48:40 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:51:55 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:52:59 INFO  Log4j:1304 - The modal window is closed
+2021-03-26 15:53:05 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:53:05 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:53:05 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:56:20 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:56:37 INFO  Log4j:434 - Clicking on Add to new insight
+2021-03-26 15:56:38 INFO  Log4j:434 - Clicking on Go to new insight
+2021-03-26 15:56:45 INFO  Log4j:131 - The Image visual is created in view tab
+2021-03-26 15:56:51 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:56:51 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:56:51 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 15:59:09 INFO  Log4j:42 - Image visual is created
+2021-03-26 15:59:30 INFO  Log4j:146 - The Image visual is pasted in view tab
+2021-03-26 15:59:30 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 15:59:30 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 15:59:30 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:01:51 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:01:54 INFO  Log4j:526 - Title popup is displayed
+2021-03-26 16:01:57 INFO  Log4j:166 - Updated title name is displayed
+2021-03-26 16:01:57 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:01:57 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:01:57 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:04:15 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:04:18 INFO  Log4j:526 - Title popup is displayed
+2021-03-26 16:04:25 INFO  Log4j:178 - The sub-title is updated with New subtitle
+2021-03-26 16:04:25 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:04:25 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:04:25 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:06:43 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:06:47 INFO  Log4j:166 - Updated title name is displayed
+2021-03-26 16:06:47 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:06:47 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:06:47 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:09:06 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:09:14 INFO  Log4j:178 - The sub-title is updated with New subtitle
+2021-03-26 16:09:14 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:09:14 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:09:14 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:11:33 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:11:35 INFO  Log4j:659 - #2b60d0
+2021-03-26 16:11:37 INFO  Log4j:2137 - #2b60d0
+2021-03-26 16:11:37 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:11:37 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:11:37 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:15:00 INFO  Log4j:659 - #fda546
+2021-03-26 16:15:01 INFO  Log4j:2137 - #fda546
+2021-03-26 16:15:01 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:15:01 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:15:01 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:17:20 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:17:27 INFO  Log4j:104 - 20px
+2021-03-26 16:17:27 INFO  Log4j:2222 - Expected value is :20
+2021-03-26 16:17:27 INFO  Log4j:2224 - PASS
+2021-03-26 16:17:27 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:17:27 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:17:27 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:19:46 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:19:49 INFO  Log4j:2187 - 700
+2021-03-26 16:19:55 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:19:55 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:19:55 INFO  Log4j:247 - Reusing same driver..

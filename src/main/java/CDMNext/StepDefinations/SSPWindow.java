@@ -2,6 +2,8 @@ package CDMNext.StepDefinations;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -574,6 +576,7 @@ public class SSPWindow {
 		if(login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]//parent::button")).size()>0) {
 		  login.driver.findElement(By.xpath("//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]//parent::button")).click();
 	}
+		CommonFunctionality.wait(5000);
 	}
 
 	@And("^Click on \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\" buttons$")
@@ -808,8 +811,7 @@ public class SSPWindow {
 
 	@And("^Click on chart tab$")
 	public void click_on_chart_tab() throws Throwable {
-		login.driver.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[text()='Chart']")).click();
-		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']//*[text()='Chart']", 4).click();
 	}
 
 	@And("^Enter from and to dates$")
@@ -818,126 +820,173 @@ public class SSPWindow {
 		in_Chart_tab_click_on_timeframe_date_field_and_change_date();
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^In Chart tab click on timeframe date field and change date$")
 	public void in_Chart_tab_click_on_timeframe_date_field_and_change_date() throws Throwable {
-		if(login.driver.findElements(By.xpath("//*[@class='tabs__tabs-box']//*[text()='Chart']")).size()>0) {
-		login.driver.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[text()='Chart']")).click();
+		if(login.driver.findElements(By.xpath("//*[@class='single-series-preview']//*[text()='Chart']")).size()>0) {
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[text()='Chart']", 4).click();
 		}
-		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][1]")).click();
-		WebElement from_date = login.driver.findElement(By.xpath("//*[@class='datepicker-input-wrapper'][1]/input"));
-		from_date.click();
-		from_date.clear();
-		from_date.sendKeys("2010");
-		from_date.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
-		datefrom = login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][1]/*[2]"))
-				.getText();
+		CommonFunctionality.getElementByClassName(login.driver, "public-js-views-insight_visuals-chart-parts-range_controls-picker-header-picker_header-module__calendar_icon", 4).click();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='date_from']//div[@class='datepicker-years']//thead//tr[2]//th[3]/span", 4)).pause(500).click().build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='date_from']//div[@class='datepicker-years']//span[text()='2010']", 4)).pause(500).click().build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='date_to']//div[@class='datepicker-years']//span[text()='2012']", 4)).pause(500).click().build().perform();
+		CommonFunctionality.getElementByClassName(login.driver, "public-js-views-insight_visuals-chart-parts-range_controls-picker-header-picker_header-module__calendar_icon", 4).click();
+		String from_date = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'date-picker-dropdown')]//span[1]", 4).getText();
+		if(from_date.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+			datefrom= from_date.substring(6, 10);
+		} else if(from_date.matches("([0-9]{2})/([0-9]{4})")) {
+			datefrom = from_date.substring(3, 7);
+		} else if(from_date.matches("([0-9]{4})")) {
+			datefrom = from_date.substring(0, 4);
+		}
 		System.out.println("Chart values are updated based on " + datefrom + " as start date");
-		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][2]")).click();
-		WebElement to_date = login.driver.findElement(By.xpath("//*[@class='datepicker-input-wrapper']/input"));
-		to_date.click();
-		to_date.clear();
-		to_date.sendKeys("2012");
-		to_date.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
-		dateto = login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][2]/*[2]"))
-				.getText();
+		//login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][2]")).click();
+		String to_date = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'date-picker-dropdown')]//span[3]", 4).getText();
+		if(to_date.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+			dateto= to_date.substring(6, 10);
+		} else if(to_date.matches("([0-9]{2})/([0-9]{4})")) {
+			dateto = to_date.substring(3, 7);
+		} else if(to_date.matches("([0-9]{4})")) {
+			dateto = to_date.substring(0, 4);
+		}
 		System.out.println("Chart values are updated based on " + dateto + " as end date");
-		CommonFunctionality.wait(500);
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Select \"([^\"]*)\" tab$")
 	public void select_tab(String arg1) throws Throwable {
-		CommonFunctionality.wait(4000);
-		try {
-			login.driver
-					.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
-					.click();
-		} catch (StaleElementReferenceException e) {
-			login.driver
-					.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
-					.click();
-		}
-		CommonFunctionality.wait(3000);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='zoom-button--text' and text()='"+arg1+"']", 4)).pause(500).click().build().perform();
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Select \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" tabs$")
 	public void select_tabs(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
-		CommonFunctionality.wait(3000);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
-				.click();
-		CommonFunctionality.wait(3000);
-		String ytd_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
-		String ytd_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
-		start_ytd = ytd_start.substring(6, 10);
-		end_ytd = ytd_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg2 + "']"))
-				.click();
-		CommonFunctionality.wait(5000);
-		String y1_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
-		String y1_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
-		start_1y = y1_start.substring(6, 10);
-		end_1y = y1_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg3 + "']"))
-				.click();
-		CommonFunctionality.wait(5000);
-		String y3_start = login.driver
-				.findElement(By.xpath("//*[contains(@class,'highcharts-xaxis-labels')]/*[2]")).getText();
-		String y3_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
-		start_3y = y3_start.substring(6, 10);
-		end_3y = y3_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg4 + "']"))
-				.click();
-		CommonFunctionality.wait(5000);
-		String y5_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
-		String y5_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
-		start_5y = y5_start.substring(6, 10);
-		end_5y = y5_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg5 + "']"))
-				.click();
-		CommonFunctionality.wait(5000);
-		String All_start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
-		String All_end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='zoom-control--button-wrapper']//*[text()='"+arg1+"']", 4)).pause(500).click().build().perform();
+		String ytd_start = null;
+		ytd_start = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[2] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[3]", 4).getText();
+		String ytd_end = null;
+		ytd_end = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[1] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
+		if(ytd_start.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		start_ytd= ytd_start.substring(6, 10);
+		} else if(ytd_start.matches("([0-9]{2})/([0-9]{4})")) {
+		start_ytd = ytd_start.substring(3, 7);
+		} else if(ytd_start.matches("([0-9]{4})")) {
+		start_ytd = ytd_start.substring(0, 4);
+		} if(ytd_end.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		end_ytd= ytd_end.substring(6, 10);
+		} else if(ytd_end.matches("([0-9]{2})/([0-9]{4})")) {
+		end_ytd = ytd_end.substring(3, 7);
+		} else if(ytd_end.matches("([0-9]{4})")) {
+		end_ytd = ytd_end.substring(0, 4);
+		}
+		//start_ytd = ytd_start.substring(6, 10);
+		//end_ytd = ytd_end.substring(6, 10);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='zoom-control--button-wrapper']//*[text()='"+arg2+"']", 4)).pause(500).click().build().perform();
+		String y1_start = null;
+		y1_start = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[3] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]", 4).getText();
+		String y1_end = null;
+		y1_end = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[1] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
+		if(y1_start.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		start_1y= y1_start.substring(6, 10);
+		} else if(y1_start.matches("([0-9]{2})/([0-9]{4})")) {
+		start_1y = y1_start.substring(3, 7);
+		} else if(y1_start.matches("([0-9]{4})")) {
+		start_1y = y1_start.substring(0, 4);
+		} if(y1_end.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		end_1y= y1_end.substring(6, 10);
+		} else if(y1_end.matches("([0-9]{2})/([0-9]{4})")) {
+		end_1y = y1_end.substring(3, 7);
+		} else if(y1_end.matches("([0-9]{4})")) {
+		end_1y = y1_end.substring(0, 4);
+		}
+		//start_1y = y1_start.substring(6, 10);
+		//end_1y = y1_end.substring(6, 10);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='zoom-control--button-wrapper']//*[text()='"+arg3+"']", 4)).pause(500).click().build().perform();
+		String y3_start = null;
+		y3_start = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[2] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]", 4).getText();
+		String y3_end = null;
+		y3_end = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[1] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
+		if(y3_start.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		start_3y= y3_start.substring(6, 10);
+		} else if(y3_start.matches("([0-9]{2})/([0-9]{4})")) {
+		start_3y = y3_start.substring(3, 7);
+		} else if(y3_start.matches("([0-9]{4})")) {
+		start_3y = y3_start.substring(0, 4);
+		} if(y3_end.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		end_3y= y3_end.substring(6, 10);
+		} else if(y3_end.matches("([0-9]{2})/([0-9]{4})")) {
+		end_3y = y3_end.substring(3, 7);
+		} else if(y3_end.matches("([0-9]{4})")) {
+		end_3y = y3_end.substring(0, 4);
+		}
+		//start_3y = y3_start.substring(6, 10);
+		//end_3y = y3_end.substring(6, 10);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='zoom-control--button-wrapper']//*[text()='"+arg4+"']", 4)).pause(500).click().build().perform();
+		String y5_start = null;
+		y5_start = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[2] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]", 4).getText();
+		String y5_end = null;
+		y5_end = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[1] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
+		if(y5_start.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		start_5y= y5_start.substring(6, 10);
+		} else if(y5_start.matches("([0-9]{2})/([0-9]{4})")) {
+		start_5y = y5_start.substring(3, 7);
+		} else if(y5_start.matches("([0-9]{4})")) {
+		start_5y = y5_start.substring(0, 4);
+		} if(y5_end.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		end_5y= y5_end.substring(6, 10);
+		} else if(y5_end.matches("([0-9]{2})/([0-9]{4})")) {
+		end_5y = y5_end.substring(3, 7);
+		} else if(y5_end.matches("([0-9]{4})")) {
+		end_5y = y5_end.substring(0, 4);
+		}
+		//start_5y = y5_start.substring(6, 10);
+		//end_5y = y5_end.substring(6, 10);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='zoom-control--button-wrapper']//*[text()='"+arg5+"']", 4)).pause(500).click().build().perform();
+		String All_start = null;
+		All_start = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[2] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]", 4).getText();
+		String All_end = null;
+		All_end = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[1] | //*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
 		start_All = new SimpleDateFormat("dd/mm/yyyy").parse(All_start);
 		end_All = new SimpleDateFormat("dd/mm/yyyy").parse(All_end);
 	}
 
 	@Then("^Last (\\d+) year data to be plotted in chart visual$")
 	public void last_year_data_to_be_plotted_in_chart_visual(int arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
-		String from = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[2]")).getText();
-		String to = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
-		String A = from.substring(6, 10);
-		String B = to.substring(6, 10);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+		String from = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[2]", 4).getText();
+		String to = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[1]", 4).getText();
+		String A = null;
+		String B = null;
+		if(from.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+			A= from.substring(6, 10);
+		} else if(from.matches("([0-9]{2})/([0-9]{4})")) {
+			A = from.substring(3, 7);
+		} else if(from.matches("([0-9]{4})")) {
+			A = from.substring(0, 4);
+		} if(to.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+			B= to.substring(6, 10);
+		} else if(to.matches("([0-9]{2})/([0-9]{4})")) {
+			B = to.substring(3, 7);
+		} else if(to.matches("([0-9]{4})")) {
+			B = to.substring(0, 4);
+		}
+		//String A = from.substring(6, 10);
+		//String B = to.substring(6, 10);
+		CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click();
+		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
 		CommonFunctionality.DeleteSeries();
 		int C = Integer.parseInt(A);
 		int D = Integer.parseInt(B);
 		if (Math.abs(D - C) == arg1) {
 			login.Log4j.info("Last " + arg1 + " year data is plotted in chart visual");
-			} else {
-			Assert.fail("Verification failed");
+		} else {
+			fail("Verification failed");
 		}
 	}
 
 	@Then("^Last (\\d+) year, (\\d+) year, (\\d+) year, \"([^\"]*)\" data to be plotted in chart visual$")
 	public void last_year_year_year_data_to_be_plotted_in_chart_visual(int arg1, int arg2, int arg3, String arg4) throws Throwable {
-		CommonFunctionality.wait(2000);
-		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))). size() > 0) {
-		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click(); 
+		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size() > 0) {
+		  CommonFunctionality.getElementByProperty(login.driver, "Close", 4).click(); 
 		  CommonFunctionality.DeleteSeries();
 		 }
 		int A = Integer.parseInt(start_ytd);
@@ -945,33 +994,33 @@ public class SSPWindow {
 		if ((B == A) || (B < A)) {
 			System.out.println("Chart has been verified with YTD data");
 		} else {
-			Assert.fail("Verification Failed");
+			fail("Verification Failed");
 		}
 		int C = Integer.parseInt(start_1y);
 		int D = Integer.parseInt(end_1y);
 		if (Math.abs(D - C) == arg1) {
 			System.out.println("Chart has been verified with " + arg1 + " year data");
 		} else {
-			Assert.fail("Verification Failed");
+			fail("Verification Failed");
 		}
 		int E = Integer.parseInt(start_3y);
 		int F = Integer.parseInt(end_3y);
 		if (Math.abs(F - E) == arg2) {
 			System.out.println("Chart has been verified with " + arg2 + " year data");
 		} else {
-			Assert.fail("Verification Failed");
+			fail("Verification Failed");
 		}
 		int G = Integer.parseInt(start_5y);
 		int H = Integer.parseInt(end_5y);
 		if (Math.abs(H - G) == arg3) {
 			System.out.println("Chart has been verified with " + arg3 + " year data");
 		} else {
-			Assert.fail("Verification Failed");
+			fail("Verification Failed");
 		}
 		if (!(start_All.equals(end_All))) {
 			System.out.println("Chart has been verified with " + arg4 + " data");
 		} else {
-			Assert.fail("Verification Failed");
+			fail("Verification Failed");
 		}
 		//CommonFunctionality.Views_list();
 	}
@@ -1082,36 +1131,43 @@ public class SSPWindow {
 
 	@Then("^Should display chart for timepoints within that timeframe range$")
 	public void should_display_chart_for_timepoints_within_that_timeframe_range() throws Throwable {
-		String start = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
-		if (start.contains(datefrom)) {
-			System.out.println("Start date has been verified successfully");
-			CommonFunctionality.wait(500);
-		} else {
-			Assert.fail("Verification failed");
+		String start = null;
+		try {
+		start = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[1]", 4).getText();
+		} catch (Exception e) {
+			start = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]", 4).getText();
 		}
-		String end = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[5]")).getText();
-		if (end.contains(dateto)) {
-			System.out.println("End date has been verified successfully");
-			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
-			CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
-			}
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
-			CommonFunctionality.DeleteSeries();
-			if(login.driver.findElements(By.xpath("//*[text()='Delete series']")).size()>0) {
-				login.driver.findElement(By.xpath("//*[text()='Ok']")).click();
-			}
-		} else {
-			if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
-				CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
-			}
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
-			CommonFunctionality.DeleteSeries();
-			if(login.driver.findElements(By.xpath("//*[text()='Delete series']")).size()>0) {
-				login.driver.findElement(By.xpath("//*[text()='Ok']")).click();
-			}
-			Assert.fail("Verification failed");
+		if(start.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		start= start.substring(6, 10);
+		} else if(start.matches("([0-9]{2})/([0-9]{4})")) {
+		start = start.substring(3, 7);
+		} else if(start.matches("([0-9]{4})")) {
+		start = start.substring(0, 4);
+		}
+		assertEquals(start, datefrom);
+		String end = null;
+		try {
+	    end = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='single-series-preview']//*[contains(@class,'highcharts-xaxis-labels')]/*[5]", 4).getText();
+		} catch (Exception e) {
+		end = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[5]", 4).getText();
+		}
+		
+		if(end.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+		end= end.substring(6, 10);
+		} else if(end.matches("([0-9]{2})/([0-9]{4})")) {
+		end = end.substring(3, 7);
+		} else if(end.matches("([0-9]{4})")) {
+		end = end.substring(0, 4);
+		}
+		assertEquals(end, dateto);
+		System.out.println("Start date and end date has been verified successfully");
+		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close"))).size()>0) {
+		CommonFunctionality.Hidden_Webelements(login.driver, "//*[@class='movable-modal--close']");
+		}
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		CommonFunctionality.DeleteSeries();
+		if(login.driver.findElements(By.xpath("//*[text()='Delete series']")).size()>0) {
+			login.driver.findElement(By.xpath("//*[text()='Ok']")).click();
 		}
 	}
 	
@@ -1282,8 +1338,8 @@ public class SSPWindow {
 
 	@And("^click on \"([^\"]*)\" link in SSP window$")
 	public void click_on_link_in_SSP_window(String arg1) throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(
-				By.xpath("//*[@class='main-series-information--link' and contains(text(),'" + arg1 + "')]")));
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(
+				//By.xpath("//*[@class='main-series-information--link' and contains(text(),'" + arg1 + "')]")));
 		login.driver
 				.findElement(
 						By.xpath("//*[@class='main-series-information--link' and contains(text(),'" + arg1 + "')]"))
@@ -1294,7 +1350,7 @@ public class SSPWindow {
 	@And("^Click on Ask Question link in SSP window$")
 	public void click_on_Ask_Question_link_in_SSP_window() throws Throwable {
 		CommonFunctionality.wait(1000);
-		login.driver.findElement(By.xpath("//*[contains(@class,'main-series-information--ask')]")).click();
+		login.driver.findElement(By.xpath("//*[contains(@class,'main-series-information--ask') and @js-help='']")).click();
 	}
 
 	@And("^Click on \"([^\"]*)\" tab$")
@@ -1468,17 +1524,13 @@ public class SSPWindow {
 
 	@Then("^Footnotes window should be displayed with related details$")
 	public void footnotes_window_should_be_displayed_with_related_details() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("footnotes_title_text");
-		String a = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_title_text"))).getText();
+		String a = CommonFunctionality.getElementBycssSelector(login.driver, "div[data-tab='footnotes']", 4).getText();
 		String b = "Footnotes";
 		String c = login.driver.findElement(By.xpath("//*[@class='footnotes-modal--name']/*")).getText();
 		String d = login.driver.findElement(By.className("series-preview-modal-header--link")).getText();
-		if (a.contains(b)) {
-			login.driver.findElement(By.xpath("//*[@class='footnotes-modal']/following::*[@title='Close']")).click();
-		}
-		if (c.contains(d)) {
+		if(a.contains(b) && c.contains(d)) {
 			login.Log4j.info("Footnotes window is displayed with related details and it has been verified");
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();
+			CommonFunctionality.Hidden_Webelements(login.driver, "//*[@class='movable-modal--close']");
 			CommonFunctionality.DeleteSeries();
 		} else {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close"))).click();

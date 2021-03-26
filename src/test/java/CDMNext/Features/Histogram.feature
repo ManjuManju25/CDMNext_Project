@@ -1,8 +1,5 @@
 Feature: Verifying Histogram Visual functionality
 
-  #Background: 
-    #Given User has successful logged in
-
   @Histogram
   Scenario: TC_Histogram_01:Verify creating Histogram visual from View panel by drag and drop
     And Go to View tab
@@ -751,13 +748,21 @@ Feature: Verifying Histogram Visual functionality
   Scenario: TC_Histogram_89:Edit Histogram - Verify delete template icon
     And Create histogram visual with series
     And Click on "Edit Histogram"
+    And UnCheck Show Series
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
     And Click on "Delete template" icon
     Then The description should be "Are you sure you want to delete this style template?" diaplayed
 
   @Histogram
-  Scenario: TC_Histogram_90:Edit Histogram - Verify cancel/x icon on confirmation popup
+  Scenario: T1C_Histogram_90:Edit Histogram - Verify cancel/x icon on confirmation popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
+    And UnCheck Show Series
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
     And Click on "Delete template" icon
     And Click on "Cancel"
     Then The confirmation popup should be closed
@@ -766,6 +771,10 @@ Feature: Verifying Histogram Visual functionality
   Scenario: TC_Histogram_91:Edit Histogram - Verify OK button on confirmation popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
+    And UnCheck Show Series
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
     And Click on "Delete template" icon
     And Click on "Ok"
     Then The template should be deleted from the list
@@ -882,7 +891,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on Background drop down
     And Check Histogram and Visual
-    Then Background color should be displayed for histogram and visual
+    Then Background should be displayed for histogram and visual
 
   @Histogram
   Scenario: TC_Histogram_105:Edit Histogram - Background - Verify histogram color
@@ -890,7 +899,6 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on Background drop down
     And Check Histogram for "Background"
-    And Check Histogram
     And Select background color
     Then Background should be displayed for histogram with selected color
 
@@ -900,7 +908,6 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on Background drop down
     And Check Histogram for "Background"
-    And Check Histogram
     And click on Browse > upload image
     Then Uploaded image should be displayed in histogram background
 
@@ -910,9 +917,8 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on Background drop down
     And Check Histogram for "Background"
-    And Check Histogram
     And click on Browse > try to upload PDF file
-    Then "Selected image is not accepted. You can select any image of this types: jpeg, jpg, png, gif" message should be displayed
+    Then "Selected image is not accepted. You can select any image of this types: image/jpeg, image/jpg, image/png, image/gif" message should be displayed
 
   @Histogram
   Scenario: TC_Histogram_108:Edit Histogram - Background - Verify visual color
@@ -939,7 +945,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Background drop down
     And Check Visual check box
     And click on Browse > try to upload PDF file
-    Then "Selected image is not accepted. You can select any image of this types: jpeg, jpg, png, gif" message should be displayed
+    Then "Selected image is not accepted. You can select any image of this types: image/jpeg, image/jpg, image/png, image/gif" message should be displayed
 
   @Histogram
   Scenario: TC_Histogram_111:Edit Histogram - Background - Verify advance settings
@@ -1122,12 +1128,19 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
     And Check "Title"
-    And Select alignment for "title" and Save
-      | left   |
-      | center |
-      | right  |
-    Then The title should align to "left" , "center" and "right" as per the user selection
+    And Select alignment of title to "left"
+    Then The title should align to "left"
+    And Select alignment of title to "center"
+    Then The title should align to "center"
+    And Select alignment of title to "right"
+    Then The title should align to "right"
 
+  #And Select alignment for "title" and Save
+  #| left   |
+  #| center |
+  #| right  |
+  #Then The title should align to "left" , "center" and "right" as per the user selection
+  
   @Histogram
   Scenario: TC_Histogram_133:Edit Histogram - Verify color for visual sub title
     And Create histogram visual with series
@@ -1153,7 +1166,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
-    And Check "sub-title"
+    #And Check "sub-title"
     And Select size for visual "Sub title" as "20"
     When Click on "Save"
     Then The "sub_title" font size should be changed as "20"
@@ -1163,7 +1176,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
-    And Check "sub-title"
+    #And Check "sub-title"
     And Click on B under style for sub-title
     When Click on "Save"
     Then The "sub_title" should be displayed in Bold format
@@ -1192,12 +1205,20 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
     And Check "sub-title"
-    And Select alignment for "Sub title" and Save
-      | left   |
-      | center |
-      | right  |
-    Then The title should align to "left" , "center" and "right" as per the user selection
+    And Select alignment of sub title to "left"
+    Then The subtitle should align to "left"
+    And Select alignment of sub title to "center"
+    Then The subtitle should align to "center"
+    And Select alignment of sub title to "right"
+    Then The subtitle should align to "right"
 
+  
+  #And Select alignment for "Sub title" and Save
+  #| left   |
+  #| center |
+  #| right  |
+  #Then The title should align to "left" , "center" and "right" as per the user selection
+  
   @Histogram
   Scenario: TC_Histogram_140:Edit Histogram - Verify closing of Titles popup
     And Create histogram visual with series
@@ -1214,51 +1235,66 @@ Feature: Verifying Histogram Visual functionality
 
   @Histogram
   Scenario: TC_Histogram_142:Edit Histogram - Size - Verify Horizontal align for visual
-  And Create histogram visual with series
-  And Click on "Edit Histogram"
-  And Open Size dropdown
-  And Reduce proportion to 80
-  And Select alignment for "Horizontal align" and Save
-  | left   |
-  | center |
-  | right  |
-  Then The visual should align to "left" , "center" and "right" as per the user selection
- 
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Open Size dropdown
+    And Reduce proportion to 80
+    And Click on Horizontal align of visual to "Left"
+    Then The Visual area should align to "Left"
+    And Click on Horizontal align of visual to "Center"
+    Then The Visual area should align to "Center"
+    And Click on Horizontal align of visual to "Right"
+    Then The Visual area should align to "Right"
+
+  
+  #And Select alignment for "Horizontal align" and Save
+  #| left   |
+  #| center |
+  #| right  |
+  #Then The visual should align to "left" , "center" and "right" as per the user selection
+  
   @Histogram
-  Scenario: TC_Histogram_142:Edit Histogram - Size - Verify Horizontal align by defaullt
+  Scenario: TC_Histogram_143:Edit Histogram - Size - Verify Horizontal align by defaullt
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Open Size dropdown
     Then The "Horizontal align" should be disabled if proportion is "100%"
 
   @Histogram
-  Scenario: TC_Histogram_143:Edit Histogram - Verify Copyright=Check
+  Scenario: TC_Histogram_144:Edit Histogram - Verify Copyright=Check
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check Copyright and Save
     Then The Copyright logo should be displayed for visual
 
   @Histogram
-  Scenario: TC_Histogram_144:Edit Histogram - Verify Copyright=UnCheck
+  Scenario: TC_Histogram_145:Edit Histogram - Verify Copyright=UnCheck
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And UnCheck Copyright
     Then The Copyright logo should be removed for visual
 
   @Histogram
-  Scenario: TC_Histogram_145:Edit Histogram - Copyright - Verify 'Horizontal align'
+  Scenario: TC_Histogram_146:Edit Histogram - Copyright - Verify 'Horizontal align'
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
     And Open drop down for "Copyright"
-    And Select alignment for "Horizontal align" and Save
-      | left   |
-      | center |
-      | right  |
-    Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
+    And Click on Horizontal align of visual to "Left"
+    Then The copyright image should align to "Left"
+    And Click on Horizontal align of visual to "Center"
+    Then The copyright image should align to "Center"
+    And Click on Horizontal align of visual to "Right"
+    Then The copyright image should align to "Right"
 
+  #And Select alignment for "Horizontal align" and Save
+  #| left   |
+  #| center |
+  #| right  |
+  #Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
+  
   @Histogram
-  Scenario: TC_Histogram_146:Edit Histogram - Copyright - Verify advance settings
+  Scenario: TC_Histogram_147:Edit Histogram - Copyright - Verify advance settings
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1267,7 +1303,7 @@ Feature: Verifying Histogram Visual functionality
     Then "Copyright" popup should be displayed
 
   @Histogram
-  Scenario: TC_Histogram_147:Edit Histogram - Copyright - Verify advance settings cogwheel
+  Scenario: TC_Histogram_148:Edit Histogram - Copyright - Verify advance settings cogwheel
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1275,7 +1311,7 @@ Feature: Verifying Histogram Visual functionality
     Then "Copyright" popup should be displayed
 
   @Histogram
-  Scenario: TC_Histogram_148:Edit Histogram - Copyright - Verify text=check
+  Scenario: TC_Histogram_149:Edit Histogram - Copyright - Verify text=check
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1285,7 +1321,7 @@ Feature: Verifying Histogram Visual functionality
     Then Copyright text "Source: CEIC Data" should be displayed on visual
 
   @Histogram
-  Scenario: TC_Histogram_149:Edit Histogram - Copyright - Verify text change for copyright
+  Scenario: TC_Histogram_150:Edit Histogram - Copyright - Verify text change for copyright
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1295,7 +1331,7 @@ Feature: Verifying Histogram Visual functionality
     Then Updated copyright "CDMNext" should be displayed on visual
 
   @Histogram
-  Scenario: TC_Histogram_150:Edit Histogram - Copyright - Verify link for copyright
+  Scenario: TC_Histogram_151:Edit Histogram - Copyright - Verify link for copyright
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1305,7 +1341,7 @@ Feature: Verifying Histogram Visual functionality
     Then The user should redirect to "https://www.ceicdata.com/en" link
 
   @Histogram
-  Scenario: TC_Histogram_151:Edit Histogram - Copyright - Verify copyright color
+  Scenario: TC_Histogram_152:Edit Histogram - Copyright - Verify copyright color
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1317,7 +1353,7 @@ Feature: Verifying Histogram Visual functionality
     Then Visual "Copyright" should be displayed in selected color
 
   @Histogram
-  Scenario: TC_Histogram_152:Edit Histogram - Copyright - Verify font size
+  Scenario: TC_Histogram_153:Edit Histogram - Copyright - Verify font size
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1328,7 +1364,7 @@ Feature: Verifying Histogram Visual functionality
     Then The "Copyright" font size should be changed as "20"
 
   @Histogram
-  Scenario: TC_Histogram_153:Edit Histogram - Copyright - Verify bold style
+  Scenario: TC_Histogram_154:Edit Histogram - Copyright - Verify bold style
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1339,7 +1375,7 @@ Feature: Verifying Histogram Visual functionality
     Then The "Copyright" should be displayed in Bold format
 
   @Histogram
-  Scenario: TC_Histogram_154:Edit Histogram - Copyright - Verify italic style
+  Scenario: TC_Histogram_155:Edit Histogram - Copyright - Verify italic style
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1350,7 +1386,7 @@ Feature: Verifying Histogram Visual functionality
     Then The "Copyright" should be "italic"
 
   @Histogram
-  Scenario: TC_Histogram_155:Edit Histogram - Copyright - Verify Underline style
+  Scenario: TC_Histogram_156:Edit Histogram - Copyright - Verify Underline style
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
@@ -1361,20 +1397,27 @@ Feature: Verifying Histogram Visual functionality
     Then The "Copyright" should be "underline"
 
   @Histogram
-  Scenario: TC_Histogram_156:Edit Histogram - Copyright - Verify horizontal alignment (left, right, center)
+  Scenario: TC_Histogram_157:Edit Histogram - Copyright - Verify horizontal alignment (left, right, center)
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
     And Click on "Open advanced settings popup" icon
     And Select Text radio button
-    And Select alignment for "Copyright" and Save
-      | left   |
-      | center |
-      | right  |
-    Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
+    And Select Horizontal alignment of copyright to "left"
+    Then The copyright image should align to "Left"
+    And Select Horizontal alignment of copyright to "center"
+    Then The copyright image should align to "Center"
+    And Select Horizontal alignment of copyright to "right"
+    Then The copyright image should align to "Right"
 
+  #And Select alignment for "Copyright" and Save
+  #| left   |
+  #| center |
+  #| right  |
+  #Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
+  
   @Histogram
-  Scenario: TC_Histogram_157:Edit Histogram - Copyright - Verify closing copyright popup
+  Scenario: TC_Histogram_158:Edit Histogram - Copyright - Verify closing copyright popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Open advanced settings popup" icon
@@ -1382,7 +1425,7 @@ Feature: Verifying Histogram Visual functionality
     Then The Title popup should be closed
 
   @Histogram
-  Scenario: TC_Histogram_158:Edit Histogram - Verify tooltip=Check
+  Scenario: TC_Histogram_159:Edit Histogram - Verify tooltip=Check
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1390,7 +1433,7 @@ Feature: Verifying Histogram Visual functionality
     Then Tooltip should be displayed when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_159:Edit Histogram - Verify tooltip=UnCheck
+  Scenario: TC_Histogram_160:Edit Histogram - Verify tooltip=UnCheck
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And UnCheck Tooltips
@@ -1398,7 +1441,7 @@ Feature: Verifying Histogram Visual functionality
     Then No Tooltip should be displayed when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_160:Edit Histogram - Tootip - Verify selecting attributes
+  Scenario: TC_Histogram_161:Edit Histogram - Tootip - Verify selecting attributes
     And Create a histogram visual
     And Add a series to the visual
     And Click on "Edit Histogram"
@@ -1412,7 +1455,7 @@ Feature: Verifying Histogram Visual functionality
     Then Selected attributes should be displayed in tooltip when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_161:Edit Histogram - Tootip - Verify advance settings in dropdown
+  Scenario: TC_Histogram_162:Edit Histogram - Tootip - Verify advance settings in dropdown
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1421,7 +1464,7 @@ Feature: Verifying Histogram Visual functionality
     Then "Tooltip" should be displayed
 
   @Histogram
-  Scenario: TC_Histogram_162:Edit Histogram - Tootip - Verify advance settings in cogwheel
+  Scenario: TC_Histogram_163:Edit Histogram - Tootip - Verify advance settings in cogwheel
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1429,7 +1472,7 @@ Feature: Verifying Histogram Visual functionality
     Then "Tooltip" should be displayed
 
   @Histogram
-  Scenario: TC_Histogram_163:Edit Histogram - Tootip - Verify show tooltip=checked
+  Scenario: TC_Histogram_164:Edit Histogram - Tootip - Verify show tooltip=checked
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1439,7 +1482,7 @@ Feature: Verifying Histogram Visual functionality
     And Tooltip should be displayed when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_164:Edit Histogram - Tootip - Verify show tooltip=Unchecked
+  Scenario: TC_Histogram_165:Edit Histogram - Tootip - Verify show tooltip=Unchecked
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1449,7 +1492,7 @@ Feature: Verifying Histogram Visual functionality
     And No Tooltip should be displayed when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_165:Edit Histogram - Tootip - Verify Items
+  Scenario: TC_Histogram_166:Edit Histogram - Tootip - Verify Items
     And Create a histogram visual
     And Add a series to the visual
     And Click on "Edit Histogram"
@@ -1461,7 +1504,7 @@ Feature: Verifying Histogram Visual functionality
     Then The selected items should be displayed in the tooltip  when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_166:Edit Histogram - Tootip - Verify multiple items selection
+  Scenario: TC_Histogram_167:Edit Histogram - Tootip - Verify multiple items selection
     And Create a histogram visual
     And Add a series to the visual
     And Click on "Edit Histogram"
@@ -1476,7 +1519,7 @@ Feature: Verifying Histogram Visual functionality
     Then Selected attributes should be displayed in tooltip when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_167:Edit Histogram - Tooltip - Verify text color in tooltip
+  Scenario: TC_Histogram_168:Edit Histogram - Tooltip - Verify text color in tooltip
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1488,7 +1531,7 @@ Feature: Verifying Histogram Visual functionality
     Then Visual "tooltip text" should be displayed in selected color
 
   @Histogram
-  Scenario: TC_Histogram_168:Edit Histogram - Tooltip - Verify font size
+  Scenario: TC_Histogram_169:Edit Histogram - Tooltip - Verify font size
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1500,7 +1543,7 @@ Feature: Verifying Histogram Visual functionality
     Then The font size in tooltip should be changed as "15"
 
   @Histogram
-  Scenario: TC_Histogram_169:Edit Histogram - Tooltip - Verify bold style
+  Scenario: TC_Histogram_170:Edit Histogram - Tooltip - Verify bold style
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1512,7 +1555,7 @@ Feature: Verifying Histogram Visual functionality
     Then The text in tooltip should be displayed in "Bold" format
 
   @Histogram
-  Scenario: TC_Histogram_170:Edit Histogram - Tooltip - Verify Italic style
+  Scenario: TC_Histogram_171:Edit Histogram - Tooltip - Verify Italic style
     And Create a histogram visual
     And Add a series to the visual
     And Click on "Edit Histogram"
@@ -1525,7 +1568,7 @@ Feature: Verifying Histogram Visual functionality
     Then The text in tooltip should be displayed in "Italic" format
 
   @Histogram
-  Scenario: TC_Histogram_171:Edit Histogram - Tooltip - Verify underline style
+  Scenario: TC_Histogram_172:Edit Histogram - Tooltip - Verify underline style
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1537,7 +1580,7 @@ Feature: Verifying Histogram Visual functionality
     Then The text in tooltip should be displayed in "Underline" format
 
   @Histogram
-  Scenario Outline: TC_Histogram_171: Edit Histogram - Tooltip - Verify grouping and decimal under number separators.
+  Scenario Outline: TC_Histogram_173: Edit Histogram - Tooltip - Verify grouping and decimal under number separators.
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1560,7 +1603,7 @@ Feature: Verifying Histogram Visual functionality
       | "."     | "None"  |
 
   @Histogram
-  Scenario: TC_Histogram_172: Edit Histogram - Tooltip - Verify decimal places
+  Scenario: TC_Histogram_174: Edit Histogram - Tooltip - Verify decimal places
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1570,7 +1613,7 @@ Feature: Verifying Histogram Visual functionality
     Then Selected decimal places should be displayed with data
 
   @Histogram
-  Scenario: TC_Histogram_173:Edit Histogram - Tooltip - Verify closing tooltip popup
+  Scenario: TC_Histogram_175:Edit Histogram - Tooltip - Verify closing tooltip popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1579,7 +1622,7 @@ Feature: Verifying Histogram Visual functionality
     Then The "tooltip" popup should be closed
 
   @Histogram
-  Scenario: TC_Histogram_174:Edit Histogram - Tooltip - Verify color for tooltip border
+  Scenario: TC_Histogram_176:Edit Histogram - Tooltip - Verify color for tooltip border
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1590,7 +1633,7 @@ Feature: Verifying Histogram Visual functionality
     Then Tooltip border should be displayed with selected color
 
   @Histogram
-  Scenario: TC_Histogram_175:Edit Histogram - Tooltip - Verify border width
+  Scenario: TC_Histogram_177:Edit Histogram - Tooltip - Verify border width
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -1601,7 +1644,7 @@ Feature: Verifying Histogram Visual functionality
     Then The tooltp border width should be updated to "5"
 
   @Histogram
-  Scenario: TC_Histogram_176:Edit Histogram - Verify the changes reflected in edit visual
+  Scenario: TC_Histogram_178:Edit Histogram - Verify the changes reflected in edit visual
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on Border drop down
@@ -1610,7 +1653,7 @@ Feature: Verifying Histogram Visual functionality
     Then The selected border should be applied to the visual
 
   @Histogram
-  Scenario: TC_Histogram_177:Edit Histogram - Verify title icon on visual
+  Scenario: TC_Histogram_179:Edit Histogram - Verify title icon on visual
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Mouse hover on visual title for Edit visual popup
@@ -1618,14 +1661,14 @@ Feature: Verifying Histogram Visual functionality
     Then The "Titles" popup should be appeared
 
   @Histogram
-  Scenario: TC_Histogram_178:Edit Histogram - Verify titles popup open by clicking on visual title
+  Scenario: TC_Histogram_180:Edit Histogram - Verify titles popup open by clicking on visual title
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on the visual title
     Then The "Titles" popup should be appeared
 
   @Histogram
-  Scenario: TC_Histogram_179:Edit Histogram - Verify selecting another visual from visual panel
+  Scenario: TC_Histogram_181:Edit Histogram - Verify selecting another visual from visual panel
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Select any visual from visual panel
@@ -1633,7 +1676,7 @@ Feature: Verifying Histogram Visual functionality
     Then The visual should be converted as user selected
 
   @Histogram
-  Scenario: TC_Histogram_180:Edit Histogram - Verify selecting another visual from dropdown
+  Scenario: TC_Histogram_182:Edit Histogram - Verify selecting another visual from dropdown
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on visual panel dropdown
@@ -1642,28 +1685,28 @@ Feature: Verifying Histogram Visual functionality
     Then The visual should be converted as user selected
 
   @Histogram
-  Scenario: TC_Histogram_181:Edit Histogram - Edit series - Verify delete series icon
+  Scenario: TC_Histogram_183:Edit Histogram - Edit series - Verify delete series icon
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on x icon for a series
     Then The series should be removed from visual and edit series panel
 
   @Histogram
-  Scenario: TC_Histogram_182:Edit Histogram - Edit series - Verify delete series icon
+  Scenario: TC_Histogram_184:Edit Histogram - Edit series - Verify delete series icon
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on Series name
     Then SSP popup should be displayed
 
   @Histogram
-  Scenario: TC_Histogram_183:Edit Histogram - Edit series - Verify Rename series icon
+  Scenario: TC_Histogram_185:Edit Histogram - Edit series - Verify Rename series icon
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Rename series" icon
     Then "Rename" popup should be displayed for selected series
 
   @Histogram
-  Scenario: TC_Histogram_184:Edit Histogram - Edit series - Verify Rename option under edit series.
+  Scenario: TC_Histogram_186:Edit Histogram - Edit series - Verify Rename option under edit series.
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Edit series" icon
@@ -1671,7 +1714,7 @@ Feature: Verifying Histogram Visual functionality
     Then "Rename" popup should be displayed for selected series
 
   @Histogram
-  Scenario: TC_Histogram_185:Edit Histogram - Edit series - Verify Frequency option under edit series.
+  Scenario: TC_Histogram_187:Edit Histogram - Edit series - Verify Frequency option under edit series.
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Edit series" icon
@@ -1679,7 +1722,7 @@ Feature: Verifying Histogram Visual functionality
     Then Selected function should be applied to the series
 
   @Histogram
-  Scenario: TC_Histogram_186:Edit Histogram - Edit series - Verify Currency option under edit series
+  Scenario: TC_Histogram_188:Edit Histogram - Edit series - Verify Currency option under edit series
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Edit series" icon
@@ -1687,31 +1730,31 @@ Feature: Verifying Histogram Visual functionality
     Then Selected currency should be applied to the series
 
   @Histogram
-  Scenario: TC_Histogram_187:Edit Histogram - Edit series - Verify Change option under edit series
+  Scenario: TC_Histogram_189:Edit Histogram - Edit series - Verify Change option under edit series
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Edit series" icon
     And Select "Change" as "% Year-over-Year (%YoY)"
     Then Selected change function should be applied to the series
-    
+
   @Histogram
-  Scenario: TC_Histogram_188:Edit Histogram - Edit series - Verify clicking on frequency or dropdown
+  Scenario: TC_Histogram_190:Edit Histogram - Edit series - Verify clicking on frequency or dropdown
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Frequency"
     Then "Series Harmonization" popup should be opened
-    
-      @Histogram
-  Scenario: TC_Histogram_189:Edit Histogram - Edit series - Series data conversion - Verify applying frequency
+
+  @Histogram
+  Scenario: TC_Histogram_191:Edit Histogram - Edit series - Series data conversion - Verify applying frequency
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Frequency"
     And Select "Frequency" as "Daily" from dropdown
     And Click on "Apply"
     Then The selected frequency should be applied to available series
-    
-      @Histogram1
-  Scenario: TC_Histogram_190:Edit Histogram - Edit series - Series data conversion - Verify applying Missing values method
+
+  @Histogram
+  Scenario: TC_Histogram_192:Edit Histogram - Edit series - Series data conversion - Verify applying Missing values method
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Frequency"
@@ -1719,3 +1762,795 @@ Feature: Verifying Histogram Visual functionality
     And Select "Missing values method" as "Next value" from dropdown
     Then Missing values method should be applied with selected frequency
 
+  @Histogram
+  Scenario: TC_Histogram_193:Edit Histogram - Edit series - Series data conversion -Minimize option
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    And Click on "Minimize" option
+    Then The Series Hormonization popup should be minimized
+
+  @Histogram
+  Scenario: TC_Histogram_194:Edit Histogram - Edit series - Series data conversion -Verify maximize option
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    And Click on "Minimize" option
+    And Click on "Maximize" option
+    Then The Series Hormonization popup should be maximized
+
+  @Histogram
+  Scenario: TC_Histogram_195:Edit Histogram - Edit series - Series data conversion -verify full screen
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    And Click on "Full-screen" option
+    Then The Series Hormonization popup should be displayed in full screen
+
+  @Histogram
+  Scenario: TC_Histogram_196:Edit Histogram - Edit series - Series data conversion -verify exit full screen
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    And Click on "Full-screen" option
+    And Click on "Exit full-screen" option
+    Then The Series Hormonization popup should be displayed in normal screen
+
+  @Histogram
+  Scenario: TC_Histogram_197:Edit Histogram - Edit series - Series data conversion -Verify Cancel/x icon
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Frequency"
+    And Click on Cancel button
+    Then The Series Hormonization popup should be closed
+
+  @Histogram
+  Scenario: TC_Histogram_198:Edit Histogram - Edit series - Verify dropdown for frequency in series level
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on frequency dropdown
+    Then List of frequenceies should be available
+
+  @Histogram
+  Scenario: TC_Histogram_199:Edit Histogram - Edit series - Verify appling frequency in series level
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on frequency dropdown
+    And Select frequence as "Yearly (Sum)"
+    Then Selected frequency should be displayed in the series
+
+  @Histogram
+  Scenario: TC_Histogram_200:Edit Histogram - Edit series - Verify appling currency in series level
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on currency dropdown
+    And Select currency as "USD"
+    Then Selected currency should be displayed in the series
+
+  @Histogram
+  Scenario: TC_Hstogram_201:Edit Histogram - Edit series - Verify clicking on type a function field
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    Then List of functions dropdown should be opened
+
+  @Histogram
+  Scenario: TC_Histogram_202:Edit Histogram - Edit series -  Verify appling function in series level
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on "Apply function"
+    Then The selected function should be applied to the series
+
+  @Histogram
+  Scenario: TC_Histogram_203:Edit Histogram - Edit series -  Verify cancel icon for selected function
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on cancel function icon
+    Then The selected function should be cancelled
+
+  @Histogram
+  Scenario: TC_Histogram_204:Edit Histogram - Edit series - Verify multiple functions apply
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select multiple functions
+    And Click on "Apply function"
+    Then The selected functions should be applied to the series
+
+  @Histogram
+  Scenario: TC_Histogram_205:Edit Histogram - Edit  series - Verify removing applied functions
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on "Apply function"
+    And Click on cancel function icon
+    Then The function should be removed from the series
+
+  @Histogram
+  Scenario: TC_Histogram_206:Edit Histogram - Edit series - Verify appling invalid function for series
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    Then "The function cannot be applied to selected series" popup should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_207:Edit seires - Verify OK button on "The function cannot be applied to selected series" popup
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    And Click on "Ok"
+    Then The function cannot be applied to selected series popup should be closed
+
+  @Histogram
+  Scenario: TC_Histogram_208:Edit Histogram - Verify feedback option
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Feedback" option
+    Then "Still cannot find an answer?" popup should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_209:Edit Histogram - Feedback - Verify description for popup
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Feedback" option
+    Then The description should be "Do you need any additional features? Please send us your feedback for product enhancements."
+
+  @Histogram
+  Scenario: TC_Histogram_210:Edit Histogram - Feedback - Verify cancel button
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Feedback" option
+    And Enter text in description field
+    And Click on cancel button
+    Then The feedback popup should be closed
+
+  @Histogram
+  Scenario: TC_Histogram_211:Edit Histogram - Feedback - Verify growl message after  Submit feedback
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Feedback" option
+    And Enter text in description field
+    And Click on submit button
+    Then "Thank you for submitting a question to us." message should be displayed in a growl popup
+
+  @Histogram
+  Scenario: TC_Histogram_212:Edit Histogram - Verify cancel/x button
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Cancel" button
+    Then The edit visual popup should be closed
+
+  @Histogram
+  Scenario: TC_Histogram_213:Edit Histogram - Verify save button
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Change title in edit visual window
+    And Click on "Save" button
+    Then The changes should be reflected to histogram visual and Edit visual popup should be closed
+
+  @Histogram
+  Scenario: TC_Histogram_214:Verify add to insight option
+    And Create histogram visual with series
+    And Click on + icon on header
+    Then Below options should be displayed
+      | Add                |
+      | Add to new insight |
+
+  @Histogram
+  Scenario: TC_Histogram_215:Add to insight - Verify 'Add' option under Add to insight
+    And Create histogram visual with series
+    And Click on + icon on header
+    And Click on "Add"
+    Then The Histogram visual should be created in vew tab on current insight
+
+  @Histogram
+  Scenario: TC_Histogram_216:Add to insight - Verify confirmation message for adding visual to new insight
+    And Create histogram visual with series
+    And Click on + icon on header
+    And Click on "Add to new insight"
+    Then "New insight with the selected visual created" and "Go to new insight" confirmation message should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_217:Add to insight - Validate the added visual by opening new insight
+    And Create histogram visual with series
+    And Click on + icon on header
+    And Click on "Add to new insight"
+    And Click on "Go to new insight"
+    Then The insight should be opened and added visual should be available in My visual
+
+  @Histogram
+  Scenario: TC_Histogram_218:Copy - Verify confirmation message for copy visual
+    And Create histogram visual with series
+    And Click on "Copy" icon
+    Then "Histogram with series copied." and "More options" confirmation message should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_219:Copy - Validate copied visual by pasting with in the insight
+    And Create histogram visual with series
+    And Click on "Copy" icon
+    And Paste within the insight
+    Then The visual should be pasted in the insight
+
+  @Histogram
+  Scenario: TC_Histogram_220:Copy - Validate copied visual by pasting to new insight
+    And Create histogram visual with series
+    And Click on "Copy" icon
+    And Paste to new insight
+    Then The visual should be pasted to new insight
+
+  @Histogram
+  Scenario: TC_Histogram_221:Copy - Verify the confrimation message for pasting visual in insight
+    And Create histogram visual with series
+    And Click on "Copy" icon
+    And Paste within the insight
+    Then "Data pasted from clipboard" message should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_222:Download - Verify Download option
+    And Create histogram visual with series
+    And Click on Download icon
+    Then Download popup should be appeared
+
+  @Histogram
+  Scenario: TC_Histogram_223:Download - Verify histogram visual download with excel format
+    And Create histogram visual with series
+    And Click on Download icon
+    And Select "xlsx" format
+    And Click on "Download"
+    Then Histogram visual and related series should be downloaded in excel
+
+  @Histogram
+  Scenario: TC_Histogram_224:Download - Verify histogram visual download with PDF format
+    And Create histogram visual with series
+    And Click on Download icon
+    And Select "pdf" format
+    And Click on "Download"
+    Then Histogram visual should be downloaded in PDF format
+
+  @Histogram
+  Scenario: TC_Histogram_225:Download - Verify histogram visual download with PNG format
+    And Create histogram visual with series
+    And Click on Download icon
+    And Select "png" format
+    And Click on "Download"
+    Then Histogram visual should be downloaded in PNG format
+
+  @Histogram
+  Scenario: TC_Histogram_226:Download - Verify histogram visual download with JPG format
+    And Create histogram visual with series
+    And Click on Download icon
+    And Select "jpeg" format
+    And Click on "Download"
+    Then Histogram visual should be downloaded in JPG format
+
+  @Histogram
+  Scenario: TC_Histogram_227:Download - Verify size for JPG/PNG download
+    And Create histogram visual with series
+    And Click on Download icon
+    And Select "jpeg" format
+    And Select width size "652"
+    And Click on "Download"
+    Then The visual should be downloaded with selected size
+
+  @Histogram
+  Scenario: TC_Histogram_228:Verify Open option.
+    And Create histogram visual with series
+    And Click on Open icon
+    Then The visual should be displayed in maximized window
+
+  @Histogram
+  Scenario: TC_Histogram_229:Verify closing of maximized window.
+    And Create histogram visual with series
+    And Click on Open icon
+    And Click on x icon to close
+    Then The modal window should be closed
+
+  @Histogram
+  Scenario: TC_Histogram_230:Verify Delete Histogram
+    And Create histogram visual with series
+    And Click on "delete"
+    Then "Confirmation" popup should be dispalyed
+
+  @Histogram
+  Scenario: TC_Histogram_231:Verify description for delete confirmation popup.
+    And Create histogram visual with series
+    And Click on "delete"
+    Then "Do you want to remove this visual?" popup should be dispalyed
+
+  @Histogram
+  Scenario: TC_Histogram_232:Verify OK button in delete confirmation popup
+    And Create histogram visual with series
+    And Click on "delete"
+    And Click on "Ok"
+    Then The visual should be deleted
+
+  @Histogram
+  Scenario: TC_Histogram_233:Verify Cancel/x icon in delete confirmation popup
+    And Create histogram visual with series
+    And Click on "delete"
+    And Click on "Cancel"
+    Then The popup should be closed and delete visual process should be declined
+
+  @Histogram
+  Scenario: TC_Histogram_234:Right click - Validate copied Histogram
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Copy histogram"
+    And Paste in insight
+    Then Histogram visual should be pasted
+
+  @Histogram
+  Scenario: TC_Histogram_235:Right click - Verify Cut Histogram
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Cut histogram"
+    Then Histogram should be cut
+
+  @Histogram
+  Scenario: TC_Histogram_236:Right click - Validate Cut Histogram
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Cut histogram"
+    And Paste in insight
+    Then Histogram visual should be pasted
+
+  @Histogram
+  Scenario: TC_Histogram_237:Right click - Verify Delete Histogram
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Delete histogram"
+    Then Histogram should be deleted
+
+  @Histogram
+  Scenario: TC_Histogram_238:Right click - Verify chart under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Chart"
+    Then "Chart" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_239:Right click - Verify Pie under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Pie"
+    Then "Pie" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_240:Right click - Verify table under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Table"
+    Then "Table" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_241:Right click - Verify map under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Map"
+    Then "Map" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_242:Right click - Verify Heat map under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Heat map"
+    Then "Heat map" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_243:Right click - Verify Histogram under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Histogram"
+    Then "Histogram" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_244:Right click - Verify commentary under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Commentary"
+    Then The commentary visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_245:Right click - Verify attachments under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Attachments"
+    Then "Attachments" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_246:Right click - Verify Image under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Image"
+    Then "Image" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_247:Right click - Verify Filter under insert visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose Insert visual as "Filter"
+    Then "Filter" visual should be created in the same view tab
+
+  @Histogram
+  Scenario: TC_Histogram_248:Right click - Verify Paste visual
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Copy histogram"
+    And Again Right click on visual header
+    And Choose "Paste visual"
+    Then Copied visual should be pasted
+
+  @Histogram
+  Scenario: TC_Histogram_249:Right click - View as - Verify Chart
+    And Create histogram visual with series
+    And Right click on visual header
+    And Select View as > "Chart"
+    Then The Hisogram visual should be converted as "Chart" visual
+
+  @Histogram
+  Scenario: TC_Histogram_250:Right click - View as - Verify Map
+    And Create histogram visual with series
+    And Right click on visual header
+    And Select View as > "Map"
+    Then The Hisogram visual should be converted as "Map" visual
+
+  @Histogram
+  Scenario: TC_Histogram_251:Right click - View as - Verify Table
+    And Create histogram visual with series
+    And Right click on visual header
+    And Select View as > "Table"
+    Then The Hisogram visual should be converted as "Table" visual
+
+  @Histogram
+  Scenario: TC_Histogram_252:Right click - View as - Verify Pie
+    And Create histogram visual with series
+    And Right click on visual header
+    And Select View as > "Pie"
+    Then The Hisogram visual should be converted as "Pie" visual
+
+  @Histogram
+  Scenario: TC_Histogram_253:Right click - View as - Verify Heat map
+    And Create histogram visual with series
+    And Right click on visual header
+    And Select View as > "Heat map"
+    Then The Hisogram visual should be converted as "Heat map" visual
+
+  @Histogram
+  Scenario: TC_Histogram_254:Right click - Verify Calculated series sub dropdown
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Calculate series"
+    And Select function "RMB"
+    Then The function should be applied for the series
+
+  @Histogram
+  Scenario: TC_Histogram_255:Right click - Verify Edit series option
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Edit series"
+    Then The edit series popup should be opened with Histogram tab
+
+  @Histogram
+  Scenario: TC_Histogram_256:Right click - Verify Clear contents
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Clear contents"
+    Then The content should be removed
+
+  @Histogram
+  Scenario: TC_Histogram_257:Right click - Verify reset format
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And UnCheck Show Series and Save
+    Then Data of series should be removed from the visual
+    And Right click on visual header
+    And Choose "Reset format"
+    Then All the changes should be revert back to default
+
+  @Histogram
+  Scenario: TC_Histogram_258:Right click - Verify reset format option if have no changes in visual
+    And Create histogram visual with series
+    And Right click on visual header
+    Then The Reset format option should be disabled
+
+  @Histogram
+  Scenario: TC_Histogram_259:Right click -  Verify download sub dropdown
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Download"
+    Then "Histogram" and "View" options should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_260:Right click -  Verify download > Histogram
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Download"
+    And Select Histogram
+    Then Download popup should be displayed with Histogram tab selection
+
+  @Histogram
+  Scenario: TC_Histogram_261:Right click -  Verify download > View
+    And Create histogram visual with series
+    And Right click on visual header
+    And Choose "Download"
+    And Select View
+    Then Download popup should be displayed with views tab selection
+
+  @Histogram
+  Scenario: TC_Histogram_262:Verify the visual options if visual is not selected
+    And Create histogram visual with series
+    And Unhighlight the visual
+    Then The visual options should be hidden
+
+  @Histogram
+  Scenario: TC_Histogram_263:Rename - verify for invalid search
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Search with invalid series name
+    Then "No matches found" should be displayed under the find field
+
+  @Histogram
+  Scenario: TC_Histogram_264:Edit series - Verify adding series from my series
+    And Select a series
+    And Click on 'A' on keyboard
+    And Create a Histogram visual without selecting series
+    And Click on Edit series option
+    And Select a series from My series tab
+    And Choose "Histogram" tab
+    Then The added series should be displayed in histogram tab
+
+  @Histogram
+  Scenario: TC_Histogram_265:Rename - Verify 'Edit series info' dropdown
+    And Create histogram visual with series
+	  And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    Then Below options should be displayed
+      | Name                 |
+      | Function description |
+      | Region               |
+      | Unit                 |
+      | Frequency            |
+
+  @Histogram
+  Scenario: TC_Histogram_266:Rename - verify attributes dropdown
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Open dropdown for auto name
+    Then Below options should be available
+      | Name                 |
+      | Function description |
+      | Region               |
+      | Unit                 |
+      | Frequency            |
+
+  @Histogram
+  Scenario: TC_Histogram_267:Rename - Veriy series in My series after visual series renamed
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Name"
+    And Edit series title
+    Then The changes should be applied to only visual and its series in edit series panel NOT for my series
+
+  @Histogram
+  Scenario: TC_Histogram_268:Rename - Verify 'Apply' button
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Name"
+    And Edit series title
+    And Click on "Apply"
+    Then The changes should be saved and rename popup remains displayed
+
+  @Histogram
+  Scenario: TC_Histogram_269:Edit series - Verify edit series icon
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on edit series icon
+    Then Below options should be available
+      | Rename    |
+      | Frequency |
+      | Currency  |
+      | Change    |
+
+  @Histogram
+  Scenario: TC_Histogram_270:Edit series - Verify applying function by clicking on function icon
+    And Create a histogram visual with series
+    And Click on Edit series option
+    And Click on FX icon
+    And Click on type a function field
+    And Select any function
+    And Click on "Apply"
+    Then The selected function should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_271:Edit series - Verify search for functions
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on type a function field in series level
+    And Search with function "YTD"
+    Then Searched functions should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_272:Edit series - Verify clicking on frequency or dropdown
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Frequency"
+    Then "Series Harmonization" popup should be opened
+
+  @Histogram
+  Scenario: TC_Histogram_273:Edit series -  Verify cancel icon for selected function
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on type a function field in series level
+    And Select a function
+    And Click on cancel function icon
+    Then The selected function should be cancelled
+
+  @Histogram
+  Scenario: TC_Histogram_274:Edit seires - Verify OK button on "The function cannot be applied to selected series" popup
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    And Click on "Ok"
+    Then The function cannot be applied to selected series popup should be closed
+
+  @Histogram
+  Scenario: TC_Histogram_275:Verify disabling	both series and histogram legends at a time
+    And Create histogram visual with series
+    And Click on series legend
+    Then Should disable only "series" legend
+    And Click on Histogram legend
+    Then Should disable only "histogram" legend
+
+  @Histogram
+  Scenario: TC_Histogram_276:Edit Histogram - Verify 'Set as default for future Histogram visual' is checked
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Mouse hover on existing visual templates
+    And Click on template dropdown
+    And Check the box for "Set as default for future Histogram visual"
+    And Click on "Save"
+    And Create a new histogram visual
+    Then The Histogram should be created with the format of previous template selection
+
+  @Histogram
+  Scenario: TC_Histogram_277:Edit Histogram - Verify 'Set as default for future Histogram visual' is Unchecked
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Check Show Series
+    And Mouse hover on existing visual templates
+    And Click on template dropdown
+    And Check the box for "Set as default for future Histogram visual" should be unchecked
+    And Click on "Save"
+    And Create a new histogram visual
+    Then The Histogram should be created with default format template
+
+  @Histogram
+  Scenario: TC_Histogram_278:Edit Histogram - Verify bold style default selection.
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    Then The bold icon should be selected by default
+
+  @Histogram
+  Scenario: TC_Histogram_279:Edit Histogram - Size - Verify Proportion for the visual
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Open Size dropdown
+    And Reduce proportion to 80
+    And Click on "Save"
+    Then The visual should change its size to selected size
+
+  @Histogram
+  Scenario: TC_Histogram_280:Edit Histogram - Copyright - Verify expanding and collapsing the copyright sections
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    And Click on "Advanced settings"
+    And Click on - icon in the copyright popup
+    Then The section should be collapsed
+    And Click on + icon in the copyright popup
+    Then The section should be expnaded
+
+  @Histogram
+  Scenario: TC_Histogram_281: Edit Histogram - Tooltip - Verify date format
+    And Create histogram visual with series
+    And Create a histogram visual with series id "365384367"
+    And Click on "Edit Histogram"
+    And Check "Tooltips"
+    And Click on Date format dropdown
+    Then "Auto" format should be selected by default
+
+  @Histogram
+  Scenario: TC_Histogram_282: Edit Histogram - Tooltip - Verify date format selection in the dropdown
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Check "Tooltips"
+    And Click on Date format dropdown
+    And Select custom Date format  as "YYYY/MM/DD"
+    And Click on "Save"
+    Then Selected date format should be displayed in visual
+
+  @Histogram
+  Scenario Outline: TC_Histogram_283:Edit Histogram - Tooltip - Verify expanding and collapsing the tooltip sections
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Check "Tooltips"
+    And Click on cogwheel for advance settings
+    And Expand <Tooltip_expand> from "Tooltip" popup
+    And Collapse <Tooltip_collapse> from "Tooltip" popup
+
+    Examples: 
+      | Tooltip_expand | Tooltip_collapse |
+      | "Common"       | "Common"         |
+      | "Items"        | "Items"          |
+      | "Border"       | "Border"         |
+
+  @Histogram
+  Scenario: TC_Histogram_284:Edit Histogram - Edit series - Verify edit series icon
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on edit series icon
+    Then Below options should be available
+      | Rename    |
+      | Frequency |
+      | Currency  |
+      | Change    |
+
+  @Histogram
+  Scenario: TC_Histogram_285:Edit Histogram - Edit series - Verify search for functions
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Search with function "YTD"
+    Then Searched functions should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_286:Edit Histogram - Edit series - Verify Region, Unit and Series ID fields
+    And Create a histogram visual with series
+    And Click on "Edit Histogram"
+    Then "Region", "Unit" and "Series id" fields should be available for respective series
+
+  @Histogram
+  Scenario: TC_Histogram_287:Edit Histogram - Feedback - Verify Submit and cancel buttons when description field is empty
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on "Feedback" option
+    Then Submit and Cancel buttons should be disabled by default
+
+  @Histogram
+  Scenario: TC_Histogram_288:Verify right click options
+    And Create histogram visual with series
+    And Right click on visual header
+    Then Verify right click options for histogram visual
+
+  @Histogram
+  Scenario: TC_Histogram_289:Right click - Verify insert visual sub dropdown
+    And Create histogram visual with series
+    And Right click on visual header
+    Then Verify insert visual sub dropdown options for histogram visual
+
+  @Histogram
+  Scenario: TC_Histogram_290:Right click - Verify View as sub dropdown.
+    And Create histogram visual with series
+    And Right click on visual header
+    Then Verify View as sub dropdown options for histogram visual

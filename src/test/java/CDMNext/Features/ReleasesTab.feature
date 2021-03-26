@@ -196,7 +196,7 @@ Scenario: TC_Releases_28: Verify right click option for the series
   And Clicking "Releases" icon
   And Expand first Dataset
   And Right click the first series
-  Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy link(s)" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available  
+  Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available  
   
 @ReleasesTab
 Scenario: TC_Releases_29: Hovor on to unselect All option for the series
@@ -368,8 +368,8 @@ Scenario: TC_Releases_49: Hovor on to Copy link(s) option for the series
   And Clicking "Releases" icon
   And Expand first Dataset
   And Right click the first series
-  And Hovoring "Copy link(s)" option from dropdown list
-  Then The "Copy link(s)" tooltip should be displayed
+  And Hovoring "Copy selected links" option from dropdown list
+  Then The "Copy selected links" tooltip should be displayed
   
 @ReleasesTab
 Scenario: TC_Releases_50: Verify Copy link(s) option for the series
@@ -377,10 +377,10 @@ Scenario: TC_Releases_50: Verify Copy link(s) option for the series
   And Expand first Dataset
   And Hovor on to series name without click
   And Right click the first series
-  And Select the "Copy link(s)" option 
+  And Select the "Copy selected links" option 
   And URL should be generated for selected series 
   And Copy the data after clicking Copy button
-  Then The "Copy link(s)" option is shown
+  Then The "Copy selected links" option is shown
   
 @ReleasesTab
 Scenario: TC_Releases_51: Hovor on to Series Info for the series
@@ -420,7 +420,6 @@ Scenario: TC_Releases_54: Verify Footnotes option for the series
 Scenario: TC_Releases_54: Verify Footnotes option for the series(Multiple Footnotes)
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
-  And Select "-1Y" timeframe button
   And Expand first Dataset
   And Hovor on to i icon without click
   And Right click the first series
@@ -439,7 +438,6 @@ Scenario: TC_Releases_57: Hovor on to Show Dataset option for the series
 Scenario: TC_Releases_58: Verify Show Dataset option for the series(Multiple datasets)
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
-  And Select "-1Y" timeframe button
   And Expand first Dataset
   And Hovor on to i icon without click
   And Right click the first series
@@ -554,7 +552,7 @@ Scenario: TC_Releases_84: Verify clicking on more actions option for the series
   And Expand first Dataset
   And Hovor on to i icon without click
   And Click on "More actions" option in series level
-  Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy link(s)" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
+  Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
   
 @ReleasesTab
 Scenario: TC_Releases_85: Hovor on to unselect All option for the series in more actions
@@ -745,8 +743,8 @@ Scenario: TC_Releases_105: Hovor on to Copy link(s) option for the series in mor
   And Expand first Dataset
   And Hovor on to i icon without click
   And Click on "More actions" option in series level
-  And Hovoring "Copy link(s)" option from dropdown list
-  Then The "Copy link(s)" tooltip should be displayed
+  And Hovoring "Copy selected links" option from dropdown list
+  Then The "Copy selected links" tooltip should be displayed
   
 @ReleasesTab
 Scenario: TC_Releases_106: Verify Copy link(s) option for the series in more actions
@@ -754,10 +752,10 @@ Scenario: TC_Releases_106: Verify Copy link(s) option for the series in more act
   And Expand first Dataset
   And Hovor on to series name without click
   And Click on "More actions" option in series level
-  And Select the "Copy link(s)" option 
+  And Select the "Copy selected links" option 
   And URL should be generated for selected series 
   And Copy the data after clicking Copy button
-  Then The "Copy link(s)" option is shown
+  Then The "Copy selected links" option is shown
   
 @ReleasesTab
 Scenario: TC_Releases_107: Hovor on to Series Info for the series in more actions
@@ -799,7 +797,6 @@ Scenario: TC_Releases_110: Verify Footnotes option for the series in more action
 Scenario: TC_Releases_110: Verify Footnotes option for the series in More actions(Multiple Footnotes)
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
-  And Select "-1Y" timeframe button
   And Expand first Dataset
   And Hovor on to i icon without click
   And Click on "More actions" option in series level
@@ -828,7 +825,6 @@ Scenario: TC_Releases_114: Verify Show Dataset option for the series in more act
 Scenario: TC_Releases_114: Verify Show Dataset option for the series in more actions(Multiple datasets)
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
-  And Select "-1Y" timeframe button
   And Expand first Dataset
   And Hovor on to i icon without click
   And Click on "More actions" option in series level
@@ -927,7 +923,6 @@ Scenario: TC_Releases_126: Verify View as Map option for the Datasets
   #And Resetting the filters 
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
-  And Select "-1Y" timeframe button
   And Expand first Dataset
   And Count the series inside "First Dataset" 
   And Right Click the first dataset
@@ -960,7 +955,6 @@ Scenario: TC_Releases_128: Verify View as Pie option for the Datasets
 Scenario: TC_Releases_129: Verify View as Heat map option for the Datasets
   And Clicking "Releases" icon
   And Search for the series "5724301" in ReleasesTab
-  And Select "-1Y" timeframe button
   And Expand first Dataset
   And Count the series inside "First Dataset" 
   And Right Click the first dataset
@@ -1073,9 +1067,8 @@ Scenario: Tc_Releases_138: Verify sharing of related insight
 @ReleasesTab
 Scenario: Tc_Releases_139: Verify sharing of non sharing related insight
     And Clicking "Releases" icon
-    And Search for the series "449379557" in ReleasesTab
-    And Select "-1Y" timeframe button
-    And Expand first Dataset  
+    And Search for the series "5724301" in ReleasesTab 
+    And Expand first Dataset
     And Hovor on to i icon without click
     And Click "Show related data" option in series
     And The "Related Insights" option in series should present
@@ -1152,8 +1145,8 @@ Scenario: TC_Releases_146: Verify Add to Watchlist icon in series level
   And Clicking "Releases" icon
   And Select released database
   And Click on "Add to watchlist" option in series level
-  And Select "Pop-up notifications" option from watchlist 
-  And Select "Email notifications" option from watchlist
+  And Select "popup_notifications" option from watchlist 
+  And Select "email_notifications" option from watchlist
   And Select "Daily" option from watchlist
   And User has clicked on "Apply" 
   And Growl message as "Watchlist changes applied" should display
@@ -1165,8 +1158,8 @@ Scenario: TC_Releases_147: Verify Add to Watchlist option in series level right 
   And Select released database
   And Right click the first series
   And Click on "Add to Watchlist" option in series level
-  And Select "Pop-up notifications" option from watchlist 
-  And Select "Email notifications" option from watchlist
+  And Select "popup_notifications" option from watchlist 
+  And Select "email_notifications" option from watchlist
   And Select "Weekly" option from watchlist
   And User has clicked on "Apply" 
   And Growl message as "Watchlist changes applied" should display
@@ -1178,9 +1171,22 @@ Scenario: TC_Releases_148: Verify Add to Watchlist option in series level more a
   And Select released database
   And Click on "More actions" option in series level
   And Click on "Add to Watchlist" option in series level
-  And Select "Pop-up notifications" option from watchlist 
-  And Select "Email notifications" option from watchlist
+  And Select "popup_notifications" option from watchlist 
+  And Select "email_notifications" option from watchlist
   And Select "Monthly" option from watchlist
+  And User has clicked on "Apply" 
+  And Growl message as "Watchlist changes applied" should display
+  Then The selected actions should reflect inside watchlist tab
+  
+@ReleasesTab
+Scenario: TC_Comparables_149: Verify Add to Watchlist option in series level more actions
+  And Clicking "Releases" icon
+  And Select released database
+  And Click on "More actions" option in series level
+  And Click on "Add to Watchlist" option in series level
+  And Select "popup_notifications" option from watchlist 
+  And Select "email_notifications" option from watchlist
+  And Select "Hourly" option from watchlist
   And User has clicked on "Apply" 
   And Growl message as "Watchlist changes applied" should display
   Then The selected actions should reflect inside watchlist tab

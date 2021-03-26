@@ -222,8 +222,9 @@ real state,property,housing,apartments,dwellings
 Coronavirus, nCoV, covid-19, covid-2019, covi, coronanav, coronovirus, 2019-nCoV
 Guangdong-Hong Kong-Macao Greater Bay Area, Dongguan, Foshan, Guangzhou, Hong Kong, Huizhou, Jiangmen,  Macau SAR (China) , Shenzhen , Zhaoqing , Zhongshan , Zhuhai
 Pearl River Delta, Dongguan, Foshan, Guangzhou,  Heyuan, Huizhou, Qingyuan, Jiangmen, Shanwe, Shaoguan, Shenzhen, Yangjiang, Yunfu, Zhaoqing, Zhongshan, Zhuhai 
-Yangtze River Delta, Changzhou, Hangzhou, Huaian, Huzhou, Jiaxing, Jinhua,  Lianyungang, Lishui, Nanjing, Nantong, Shanghai, Wuxi 
+Yangtze River Delta, Changzhou, Hangzhou, Huaian, Huzhou, Jiaxing, Jinhua,  Lianyungang, Lishui, Nanjing, Nantong, Shanghai, Wuxi, Ningbo, Suzhou, Hefei, Wenzhou, Yangzhou, Xuzhou, Taizhou, Yancheng
 Bohai Economic Rim, Baoding, Beijing, Cangzhou, Dalian, Huludao, Jinan, Qingdao, Qinhuangdao, Shenyang, Shijiazhuang, Tangshan, Tianjin, Yantai 
+FGV, Getulio
 
 # Chinese
 

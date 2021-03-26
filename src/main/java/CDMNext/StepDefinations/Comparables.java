@@ -2,6 +2,7 @@ package CDMNext.StepDefinations;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -36,6 +37,7 @@ public class Comparables {
 	SoftAssert sa = new SoftAssert();
 	CDMNextSprintCases cv = new CDMNextSprintCases();
 	ReleasesTab rt = new ReleasesTab();
+	DatasetsTab dt = new DatasetsTab();
 	public WebElement dropdown_open;
 	public int count;
 	public int comparables_count;
@@ -65,7 +67,7 @@ public class Comparables {
 	public static int series_count_inside_first_table;
 	ArrayList<Integer> fil_count = new ArrayList<Integer>();
 	ArrayList<String> series_values = new ArrayList<String>();
-	ArrayList<String> series_values_in_table = new ArrayList<String>();
+	public static ArrayList<String> series_values_in_table = new ArrayList<String>();
 	ArrayList<String> myseries_values = new ArrayList<String>();
 	ArrayList<String> excel_values = new ArrayList<String>();
 	ArrayList<String> table_excel_values = new ArrayList<String>();
@@ -125,7 +127,7 @@ public class Comparables {
       new Actions(login.driver).moveToElement(ele).pause(2000).click().build().perform();
 	  }
    }
-   
+   	
    @And("^Select (\\d+) series inside table$")
    public void select_series_inside_table(int arg1) throws Throwable {
        series_count_inside_table = arg1;
@@ -215,7 +217,6 @@ public class Comparables {
 		 CommonFunctionality.wait(2000);
 	     new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 	   }
-	   
    }
    
    @SuppressWarnings("deprecation")
@@ -263,12 +264,16 @@ public class Comparables {
       public void the_option_in_series_should_be_present(String arg1) throws Throwable {
    	   WebElement text;
    	   CommonFunctionality.wait(2000);
-   	   if(arg1.equalsIgnoreCase("related-series-data--remarks")) {
-   		   text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='"+arg1+"']", 4);
-   		   js.executeScript("arguments[0].scrollIntoView(true);",text);
-   		   String remarks = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='"+arg1+"']//span", 4).getText();
-   		   sa.assertEquals(remarks, "Remarks:");
-          } 
+   	   if(arg1.equalsIgnoreCase("related-series-data--status")) {
+   		text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'"+arg1+"')]", 4);
+		js.executeScript("arguments[0].scrollIntoView(true);",text);
+		assertTrue(text.isDisplayed());
+   	   }if(arg1.equalsIgnoreCase("related-series-data--remarks")) {
+   		text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='"+arg1+"']", 4);
+   		js.executeScript("arguments[0].scrollIntoView(true);",text);
+   		String remarks = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='"+arg1+"']//span", 4).getText();
+   		sa.assertEquals(remarks, "Remarks:");
+       } 
    }
    
    @And("^The \"([^\"]*)\" Insight should present$")
@@ -466,8 +471,13 @@ public class Comparables {
    
    @And("^Get href of \"([^\"]*)\" section from Comparables tab$")
    public void get_href_of_section_from_Comparables_tab(String arg1) throws Throwable {
-      String link = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]/ancestor::*[2]", 4).getAttribute("href");
-      section_link = link.replaceAll("%7C", "|");
+	  String link = null;
+	  if(arg1.equalsIgnoreCase("First Dataset")) {
+      link = CommonFunctionality.getElementByXpath(login.driver, "//div[@title='"+section_name+"']//ancestor::div[@class='data-set-node--body']", 4).getAttribute("href");
+      } else {
+	  link = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]/ancestor::*[2]", 4).getAttribute("href");
+      }
+	  section_link = link.replaceAll("%7C", "|");
    }
    
    @And("^Search for \"([^\"]*)\"$")
@@ -481,12 +491,7 @@ public class Comparables {
    
    @And("^Count the series in selected Filter$")
    public void count_the_series_in_selected_Filter() throws Throwable {
-      String filter_count = null;
-      try {
-    	  filter_count = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2])[2]", 4).getText();
-      } catch (Exception e) {
-    	  filter_count = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2]", 4).getText();
-	}
+      String filter_count = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2])[2] | //div[@class='search-filter-container']//*[contains(text(),'"+Filters.var+"')]//following::div[2]", 4).getText();
       String filter = filter_count.substring(1, filter_count.length()-1);
       String fcount = filter.replaceAll(",", "");
       filterCount = Integer.parseInt(fcount);
@@ -496,13 +501,8 @@ public class Comparables {
    public void count_the_series_in_multiple_selected_Filter() throws Throwable {
 	  String filters[] = Filters.var.split(";");
 	  int var_count = filters.length;
-	  String filter_count = null;
 	  for(int i=0; i<=var_count-1;i++) {
-      try {
-    	 filter_count = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2])[2]", 4).getText();
-      } catch (Exception e) {
-    	  filter_count = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2]", 4).getText();
-	}
+      String filter_count = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2] | (//div[@class='search-filter-container']//*[contains(text(),'"+filters[i]+"')]//following::div[2])[2]", 4).getText();
 	  String filter = filter_count.substring(1, filter_count.length()-1);
       String fcount = filter.replaceAll(",", "");
       filterCount1 = Integer.parseInt(fcount);
@@ -521,7 +521,7 @@ public class Comparables {
    @And("^Click on \"([^\"]*)\" for related series$")
    public void click_on_for_related_series(String arg1) throws Throwable {
      CommonFunctionality.wait(6000);
-	 WebElement database = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-data-set--node-link' and @js-open-"+arg1+"]", 4);
+	 WebElement database = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='related-series-information-portlet--container']//*[@class='series-data-set--node-link' and @js-open-"+arg1+"]", 4);
      related_dataset_text = database.getText();
      database.click();
    }
@@ -541,6 +541,8 @@ public class Comparables {
 	   List<WebElement> series_inside_table;
 	   if(arg1.equalsIgnoreCase("First Dataset")) {
 	   series_inside_table = login.driver.findElements(By.xpath("(//*[@class='release-scheduler-tree-node--title'])[1]/following::ul[1]/li"));   
+	   } else if(arg1.equalsIgnoreCase("Selected Dataset")) {
+	   series_inside_table = login.driver.findElements(By.xpath("(//*[contains(@class,'tree-series-list list-view-component')])[1]//ul[1]/li"));
 	   } else {
 	   if(arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 	   String series_count = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]/following::span[@class='name-text'][1]", 4).getText();
@@ -548,7 +550,7 @@ public class Comparables {
 	   } else {
 	   series_inside_table = login.driver.findElements(By.xpath("//*[contains(text(),'"+arg1+"')]//following::ul[1]/li"));
 	   }
-	   }
+	   } 
 	   series_count_inside_first_table = series_inside_table.size();
    }
    
@@ -560,10 +562,15 @@ public class Comparables {
 	   section_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]/following::span[@class='name-text'][1]", 4).getText();
 	   WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+section_name+"')]", 4);
 	   new Actions(login.driver).moveToElement(ele).pause(4000).contextClick().build().perform();
-	  } if(arg1.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+	  } else if(arg1.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 	   section_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]/following::div[@class='series-item--name'][1]", 4).getText();
 	   WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+section_name+"')]", 4);
 	   new Actions(login.driver).moveToElement(ele).pause(4000).contextClick().build().perform();
+	  } else if(arg1.equalsIgnoreCase("Dataset")) {
+	   dt.search_for_the_with_ID("Datasets","TB3840");
+	   section_name = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='nodes-list--tree-wrapper']//*[@class='series-data-set--table-name'])[1]", 4).getText();
+	  } else if(arg1.equalsIgnoreCase("Top button")) {
+	   dt.search_for_the_with_ID("Datasets","TB65349");
 	  } else {
 	  section_name = arg1;
       WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4);
@@ -648,6 +655,19 @@ public class Comparables {
       }
    }
    
+   @SuppressWarnings("deprecation")
+   @And("^Click on \"([^\"]*)\" option in series level of Dataset$")
+   public void click_on_option_in_series_level_of_Dataset(String arg1) throws Throwable {
+      dt.hovor_on_icon();
+      series_name = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--name']")).getText();
+      if(arg1.equals("Add to Watchlist")) {
+      CommonFunctionality.wait(2000);
+      new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']//span[@title='"+arg1+"']", 4)).pause(3000).click().build().perform();
+      } else {  
+      new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//li[1]//*[@title='"+arg1+"']", 4)).pause(2000).click().build().perform();
+      }
+   }
+   
    @And("^Also Expand the \"([^\"]*)\"$")
 	public void also_Expand_the(String arg1) throws Throwable {
 		WebElement table = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]/preceding::*[@class='toggle'][1]", 4);
@@ -658,7 +678,7 @@ public class Comparables {
    @And("^Select the \"([^\"]*)\" option$")
    public void select_the_option(String arg1) throws Throwable {
 	   login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='"+arg1+"']")).click();
-	   if(arg1.equalsIgnoreCase("Copy link(s)")) {
+	   if(arg1.equalsIgnoreCase("Copy link(s)") || arg1.equalsIgnoreCase("Copy selected links")) {
 	   Toolkit toolkit = Toolkit.getDefaultToolkit();
 	   Clipboard clipboard = toolkit.getSystemClipboard();
 	   copied_link = (String) clipboard.getData(DataFlavor.stringFlavor);
@@ -769,6 +789,7 @@ public class Comparables {
 		assertEquals(table_text, expected);
    }
    
+   @SuppressWarnings("deprecation")
    @Then("^Any insight could be selected for the table to add$")
 	public void any_insight_could_be_selected_for_the_series_to_add() throws Throwable {
 		List<WebElement> insights_all = login.driver.findElements(By.className("input-control--description"));
@@ -778,7 +799,9 @@ public class Comparables {
 			new Actions(login.driver).moveToElement(insight).click().build().perform();
 			break;
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Apply']", 4).click();
+		WebElement apply = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Apply']", 4);
+		js.executeScript("arguments[0].scrollIntoView(true);", apply);
+		new Actions(login.driver).moveToElement(apply).pause(500).click().build().perform();
 		String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'growl-message--link__highlighted')]", 4).getText();
 		login.Log4j.info("Add to existing insight has been verified");
 		CommonFunctionality.DeleteSeries();
@@ -1321,7 +1344,7 @@ public class Comparables {
    @Then("^The \"([^\"]*)\" option is displayed$")
    public void the_option_is_displayed(String arg1) throws Throwable {
 	CommonFunctionality.wait(2000);
-	String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+	String expected = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
 	CommonFunctionality.Views_list();
 	assertEquals(arg1, expected);
 	login.Log4j.info("The "+arg1+" option is displayed and verified successfully");
@@ -1426,7 +1449,7 @@ public class Comparables {
     	   CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "sphere-modal__close");
     	   String expected = arg1.substring(0, 4);
     	   sa.assertEquals(actual, expected);
-       } if(arg1.equalsIgnoreCase("Copy link(s)")) {
+       } if(arg1.equalsIgnoreCase("Copy selected links")) {
     	   js.executeScript("window.open('"+copied_link+"')");
            ArrayList<String> tabs = new ArrayList<String>(login.driver.getWindowHandles());
            login.driver.switchTo().window(tabs.get(1));
@@ -1488,12 +1511,23 @@ public class Comparables {
     		 if(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Global Economic Monitor')]", 4).isDisplayed()) {
     			 login.Log4j.info("The application has been returned back to series level and verified successfully");
     		 } else {
-    			 sa.fail("Verification Failed");
+    			 sa.fail("Verification Failed");	
     		 }
     	   } else {
     		   sa.fail("Verification Failed");
     	   } login.driver.navigate().refresh();
-	       }  if(arg1.equalsIgnoreCase("Back Button Click")) {
+	       } if(arg1.equalsIgnoreCase("Back Button in Dataset")) {
+    	   WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'"+hovered_series_name+"')]/ancestor::li)[1]", 4);
+    	   if(series.getAttribute("class").contains("series-list-item__selected") && series.getAttribute("class").contains("series-list-item__highlighted")) {
+    		 CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4).click();
+    		 if(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+section_name+"') and not(@class='insight-discovery--popup-title')]",4).isDisplayed()) {
+    			 login.Log4j.info("The application has been returned back to series level and verified successfully");
+    		 } else {
+    			 fail("Verification Failed");	
+    		 }
+    	   } else {
+    		   fail("Verification Failed");
+    	   }} if(arg1.equalsIgnoreCase("Back Button Click")) {
 	    	   if(login.driver.findElements(By.xpath("(//*[@js-show-more=''])[1]")).size()>1) {
 	    	   WebElement load = CommonFunctionality.getElementByXpath(login.driver, "//*[@js-show-more='']", 4);
 	    	   js.executeScript("arguments[0].scrollIntoView(true);",load);
@@ -1535,7 +1569,7 @@ public class Comparables {
     		   int actual = series_count_inside_first_table;
     		   int expected = chart_series.size();
     		   sa.assertEquals(actual, expected);
-    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
     		   CommonFunctionality.Views_list();
     		   sa.assertEquals(text, value);
@@ -1543,7 +1577,7 @@ public class Comparables {
     		   List<WebElement> map_series = login.driver.findElements(By.xpath("//*[@class='highcharts-series-group']//following::*[contains(@class,'highcharts-data-label-color-1')]"));
     		   int actual = series_count_inside_first_table;
     		   int expected = map_series.size();
-    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
     		   CommonFunctionality.Views_list();
     		   sa.assertEquals(actual, expected);
@@ -1553,16 +1587,19 @@ public class Comparables {
     		   int actual = series_count_inside_first_table;
     		   int expected = table_series.size();
     		   sa.assertEquals(actual, expected);
-    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
     		   sa.assertEquals(text, value);
     		   CommonFunctionality.Views_list();
     	   } if(arg1.equalsIgnoreCase("Table - Edit Pie")) {
+    		   if(login.driver.findElements(By.cssSelector(".sphere-modal-dialog")).size()>0) {
+    			   CommonFunctionality.getElementBycssSelector(login.driver, "button__primary", 4).click();
+    		   }
     		   List<WebElement> pie_series = login.driver.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
     		   int actual = series_count_inside_first_table;
     		   int expected = pie_series.size();
     		   sa.assertEquals(actual, expected);
-    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
     		   sa.assertEquals(text, value);
     		   if(login.driver.findElements(By.className("growl-message-close")).size()>0) {
@@ -1574,7 +1611,7 @@ public class Comparables {
     		   int actual = series_count_inside_first_table;
     		   int expected = heatmap_series.size();
     		   sa.assertEquals(actual, expected);
-    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
     		   sa.assertEquals(text, value);
     		   CommonFunctionality.Views_list();
@@ -1585,7 +1622,7 @@ public class Comparables {
     		   if(actual != expected || actual == 1) {
     			   login.Log4j.info("The Histogram with one series is displayed");
     		   }
-    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+    		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
     		   String value = arg1.substring(8, arg1.length());
     		   sa.assertEquals(text, value);
     		   CommonFunctionality.Views_list();
@@ -1803,7 +1840,7 @@ public class Comparables {
        String text[] = tooltip.split("\n");
        String split_time[] = text[1].split("Last modified by ");
        String[] tooltip_time = split_time[1].split("(?<=\\D)(?=\\d)");
-       if(tooltip_time[0].equals(time) || tooltip_time[1].equals(time) || tooltip_time[2].equals(time)) {
+       if(tooltip_time[0].contains(time) || tooltip_time[1].contains(time) || tooltip_time[2].contains(time)) {
     	   login.Log4j.info("The tooltip is present and has been verified successfully");
        } else {
     	   fail("Verification Failed");
