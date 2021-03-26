@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -253,7 +254,6 @@ public class ChartVisual {
 	ArrayList<BigInteger> list1 = new ArrayList<BigInteger>();
 	ArrayList<BigInteger> list2 = new ArrayList<BigInteger>();
 	ArrayList<BigInteger> list3 = new ArrayList<BigInteger>();
-	ArrayList<Integer> list3_1 = new ArrayList<Integer>();
 	ArrayList<Integer> list4 = new ArrayList<Integer>();
 	ArrayList<Double> timepoints_app = new ArrayList<Double>();
 	ArrayList<String> timepoint_ssp = new ArrayList<String>();
@@ -464,7 +464,9 @@ public class ChartVisual {
 		new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
 		}
 		}
-		new Actions(login.driver).sendKeys("c").pause(500).perform();
+		WebElement actions = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'series-item--country')])["+arg1+"]", 8);
+		new Actions(login.driver).moveToElement(actions).pause(1000).build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'view-chart-icon')])["+arg1+"]", 8)).pause(500).click().build().perform();
 	}
 		
 	@SuppressWarnings("deprecation")
@@ -661,7 +663,7 @@ public class ChartVisual {
 
 	@And("^Hovor on Insert Chart$")
 	public void hovor_on_Insert_Chart() throws Throwable {
-		insert_chart = CommonFunctionality.getElementByXpath(login.driver, "//div[@data-type='line']", 4);
+		insert_chart = CommonFunctionality.getElementByXpath(login.driver, "(//*[@title='Insert Chart'])[1]", 4);
 		dest = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='view-components-over--visual-title' and text()='Line']", 4);
 	}
@@ -713,30 +715,31 @@ public class ChartVisual {
 		  CommonFunctionality.getElementByXpath(login.driver,"//*[@class='movable-modal--close']", 4).click(); 
 		}
 	}
-	
-	@And("^Closing the Series Harmonization popup$")
-	public void closing_the_Series_Harmonization_popup() throws Exception {
-		CommonFunctionality.wait(2000);
-		if(login.driver.findElements(By.xpath("//*[contains(@class,'movable-modal--window')] | //*[@class='growl-messages-container']")).size()>0) 
-		{
-		  CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='movable-modal--close'] | //*[@class='growl-message-close']")));
-		  CommonFunctionality.getElementByXpath(login.driver,"//*[@class='movable-modal--close'] | //*[@class='growl-message-close']", 4).click(); 
-		}
-	}
 		
 	@And("^Click on Apply in Series Harmonization popup except for \"([^\"]*)\"$")
 	public void click_on_Apply_in_Series_Harmonization_popup_except_for(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
 		if (!arg1.equalsIgnoreCase("9380901;9380801") || arg1.equalsIgnoreCase("63929901;63928901")) {
-			if (login.driver.findElements(By.xpath("//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]")).size() > 0) {
-				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]", 4).click();
+			if (login.driver
+					.findElements(
+							By.xpath("//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]"))
+					.size() > 0) {
+				CommonFunctionality
+						.getElementByXpath(login.driver,
+								"//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]", 4)
+						.click();
 			}
-			if (login.driver.findElements(By.xpath("//*[contains(@class,'growl-warning')]//*[text()='Ok']")).size() > 0) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'growl-warning')]//*[text()='Ok']", 4).click();
+			if (login.driver.findElements(By.xpath("//*[contains(@class,'growl-warning')]//*[text()='Ok']"))
+					.size() > 0) {
+				CommonFunctionality
+						.getElementByXpath(login.driver, "//*[contains(@class,'growl-warning')]//*[text()='Ok']", 4)
+						.click();
 			}
 		} if (arg1.equalsIgnoreCase("9380901;9380801")) {
-			if (login.driver.findElements(By.xpath("//*[contains(@class,'growl-warning')]//*[text()='Ok'] | //*[@class='movable-modal--header']//*[@title='Close']")).size() > 0) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'growl-warning')]//*[text()='Ok'] | //*[@class='movable-modal--header']//*[@title='Close']", 4).click();
+			if (login.driver.findElements(By.xpath("//*[contains(@class,'growl-warning')]//*[text()='Ok']"))
+					.size() > 0) {
+				CommonFunctionality
+						.getElementByXpath(login.driver, "//*[contains(@class,'growl-warning')]//*[text()='Ok']", 4)
+						.click();
 			}
 			
 			/*
@@ -795,11 +798,6 @@ public class ChartVisual {
 		new Actions(login.driver).moveToElement(color).pause(500).click().build().perform();
 	}
 	
-	@And("^Clicking myseries$")
-	public void clicking_myseries() throws Throwable {
-		CommonFunctionality.getElementBycssSelector(login.driver, "a[data-id='myseries']", 4).click();
-	}
-	
 	@And("^\"([^\"]*)\" popup should appeared$")
 	public void popup_should_appear(String arg1) throws Throwable {
 		WebElement popup = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='popover--wrapper']//*[text()='"+arg1+"']", 4);
@@ -812,7 +810,7 @@ public class ChartVisual {
 	
 	@And("^\"([^\"]*)\" section from Legand popup should expand$")
 	public void section_from_Legand_popup_should_expand(String arg1) throws Throwable {
-	   WebElement section = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--wrapper']//*[contains(text(),'"+arg1+"')]/ancestor::div[2]", 4);
+	   WebElement section = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg1+"']/ancestor::div[2]", 4);
 	   if(section.getAttribute("class").contains("collapsed")) {
 		   section.click(); 
 	   } else {
@@ -931,16 +929,14 @@ public class ChartVisual {
 	
 	@And("^Select the \"([^\"]*)\" data label color from list$")
 	public void select_the_data_label_color_from_list(String arg1) throws Throwable {
-		CommonFunctionality.wait(500);
 		data_label_color = arg1;
-		CommonFunctionality.Hidden_Webelements(login.driver, "//*[@title='" + data_label_color + "']");
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + data_label_color + "']");
 	}
 	
 	@And("^Select the \"([^\"]*)\" data label highlight color from list$")
 	public void select_the_data_label_highlight_color_from_list(String arg1) throws Throwable {
-		CommonFunctionality.wait(500);
 		data_label_highlight_color = arg1;
-		CommonFunctionality.Hidden_Webelements(login.driver, "//*[@title='" + data_label_highlight_color + "']");
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + data_label_highlight_color + "']");
 	}
 
 	@And("^Select the \"([^\"]*)\" title axis color from list$")
@@ -977,16 +973,17 @@ public class ChartVisual {
 		time_axis_bgcolor = arg1;
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
 				"//*[@title='" + time_axis_bgcolor + "']");
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[text()='5Y']", 4)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[text()='5y']", 4)
 				.click();
 	}
 	
 	@And("^Select the \"([^\"]*)\" y axis bgcolor from list$")
 	public void select_the_y_axis_bgcolor_from_list(String arg1) throws Throwable {
 		y_axis_bgcolor = arg1;
-		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + y_axis_bgcolor + "']");
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[text()='Labels']", 4)).click().build().perform();
-		//CommonFunctionality.getElementByProperty(login.driver, "axis_highlight_color_field", 4).click();
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+				"//*[@title='" + y_axis_bgcolor + "']");
+		CommonFunctionality.getElementByProperty(login.driver, "axis_highlight_color_field", 4)
+				.click();
 	}
 	
 	@And("^Select the \"([^\"]*)\" y axis right bgcolor from list$")
@@ -1003,7 +1000,7 @@ public class ChartVisual {
 		time_axis_label_line_color = arg1;
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
 				"//*[@title='" + time_axis_label_line_color + "']");
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[text()='5Y']", 4)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[text()='5y']", 4)
 				.click();
 	}
 
@@ -1080,25 +1077,18 @@ public class ChartVisual {
 			fail(arg1+" is not checked by default");
 		}  
 	}
-	
-	@And("^Enable the download popup$")
-	public void enable_the_download_popup() throws Throwable {
-		CommonFunctionality.getElementBycssSelector(login.driver, "div[title='View and edit profile information']", 4).click();
-		cv.clicking_on_option_under_user_preference_to_be("Ask me to confirm the download settings", "Check");
-		CommonFunctionality.getElementBycssSelector(login.driver, "div[title='View and edit profile information']", 4).click();
-	}
 
 	@And("^Click on the \"([^\"]*)\" Container$")
 	public void click_on_the_Container(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Tooltips:") || arg1.equalsIgnoreCase("Data labels:") || arg1.equalsIgnoreCase("Legend:") || arg1.equalsIgnoreCase("Copyright:")) {
 			CommonFunctionality
 					.getElementByXpath(login.driver,
-							"//*[contains(text(),'" + arg1 + "')]//following::*[@class='base-config--row-settings'][1]", 4)
+							"//*[text()='" + arg1 + "']//following::*[@class='base-config--row-settings'][1]", 4)
 					.click();
 		} else {
 			CommonFunctionality.wait(1000);
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1
-					+ "')]//following-sibling::*[@class='style-container--control-row-control'] | //*[contains(text(),'"
+			CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1
+					+ "']//following-sibling::*[@class='style-container--control-row-control'] | //*[contains(text(),'"
 					+ arg1 + "')]//following::*[@class='context-menu-control']", 8).click();
 			CommonFunctionality.wait(1000);
 		}
@@ -1110,25 +1100,25 @@ public class ChartVisual {
 		CommonFunctionality.wait(1000);
 		checked = login.driver
 				.findElement(
-						By.xpath("//*[contains(text(),'" + arg2 + "')]/preceding-sibling::input[@class='input-control--input']"))
+						By.xpath("//*[text()='" + arg2 + "']/preceding-sibling::input[@class='input-control--input']"))
 				.isSelected();
 		if (arg1.equalsIgnoreCase("Select")) {
 			if (checked == false) {
 				WebElement title = CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(text(),'" + arg2 + "')]/preceding-sibling::span", 4);
+						"//*[text()='" + arg2 + "']/preceding-sibling::span", 4);
 				new Actions(login.driver).moveToElement(title).pause(1000).click().build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("Unselect")) {
 			if (checked == true) {
 				WebElement title = CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(text(),'" + arg2 + "')]/preceding-sibling::span", 4);
+						"//*[text()='" + arg2 + "']/preceding-sibling::span", 4);
 				new Actions(login.driver).moveToElement(title).pause(1000).click().build().perform();
 			}
 		}
 		checkbox_status = login.driver
 				.findElement(
-						By.xpath("//*[contains(text(),'" + arg2 + "')]/preceding-sibling::input[@class='input-control--input']"))
+						By.xpath("//*[text()='" + arg2 + "']/preceding-sibling::input[@class='input-control--input']"))
 				.isSelected();
 	}
 	
@@ -1144,25 +1134,12 @@ public class ChartVisual {
 	@And("^Setting values in preference$")
 	public void setting_values_in_preference() throws Throwable {
 	    cv.open_preference_dropdown();
-	    cv.clicking_on_option_under_user_preference_to_be("Show search results without pagination", "Check");
-	    cv.clicking_on_option_under_user_preference_to_be("Ask me to confirm the download settings", "Check");
-	    cv.clicking_on_option_under_user_preference_be("Keyboard shortcuts", "ON");
 	    cv.clicking_on_option_in_preference("Date format");
 	    cv.click_format_date_option("Custom");
 	    cv.enter_custom_date("Valid");
 	    cv.clicking_on_option_in_preference("Number format");
-	    CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Grouping separator')]//following::*[contains(text(),\",\")][1]", 4).click();
-	    CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Decimal separator')]//following::*[contains(text(),\".\")][1]", 4).click();
-	    cv.click_on_in_format_and_enter_value_as("Decimal places", 2);
-	    cv.open_preference_dropdown();
-	}
-	
-	@And("^Setting the values in preference$")
-	public void setting_the_values_in_preference() throws Throwable {
-	    cv.open_preference_dropdown();
-	    cv.clicking_on_option_in_preference("Number format");
-	    CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Grouping separator')]//following::*[contains(text(),\",\")][1]", 4).click();
-	    CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Decimal separator')]//following::*[contains(text(),\".\")][1]", 4).click();
+	    CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Grouping separator']//following::*[contains(text(),\",\")][1]", 4).click();
+	    CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Decimal separator']//following::*[contains(text(),\".\")][1]", 4).click();
 	    cv.click_on_in_format_and_enter_value_as("Decimal places", 2);
 	    cv.open_preference_dropdown();
 	}
@@ -1171,11 +1148,11 @@ public class ChartVisual {
 	public void click_on_the_Visual_Container(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Border:")) {
 			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following-sibling::div[2]", 4)
+					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following-sibling::div[2]", 4)
 					.click();
 		} else {
 			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following-sibling::div[1]", 4)
+					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following-sibling::div[1]", 4)
 					.click();
 		}
 	}
@@ -1233,20 +1210,20 @@ public class ChartVisual {
 		WebElement proportion;
 		if (arg1.equalsIgnoreCase("Chart width")) {
 			proportion = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='border-control']//*[contains(text(),'Chart')]//following::*[@class='spinner-control'][1]//input",
+					"//*[@class='border-control']//*[text()='Chart']//following::*[@class='spinner-control'][1]//input",
 					4);
 		} else if (arg1.equalsIgnoreCase("Chart radius")) {
 			proportion = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='border-control']//*[contains(text(),'Chart')]//following::*[@class='spinner-control'][2]//input",
+					"//*[@class='border-control']//*[text()='Chart']//following::*[@class='spinner-control'][2]//input",
 					4);
 		} else if (arg1.equalsIgnoreCase("Title_value")) {
-			proportion = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Size')]//preceding::input[1]",
+			proportion = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Size']//preceding::input[1]",
 					4);
 		} else if (arg1.equalsIgnoreCase("Title_Label_value")) {
 			proportion = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='x_axis_label_font_size']", 4);
 		} else {
 			proportion = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg1 + "')]//following::input[1]", 4);
+					"//*[text()='" + arg1 + "']//following::input[1]", 4);
 		}
 		proportion.sendKeys(Keys.chord(Keys.CONTROL, "a"), value);
 		proportion.sendKeys(Keys.TAB);
@@ -1278,7 +1255,7 @@ public class ChartVisual {
 	@And("^Select any \"([^\"]*)\" for chart visual$")
 	public void select_any_for_chart_visual(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("image")) {
-			CommonFunctionality .getElementByXpath(login.driver,"(//*[@class='background-image--form']//*[contains(@class,'background-image--input')])[1]", 4) .click();
+			CommonFunctionality .getElementByXpath(login.driver,"//*[@class='background-image']//*[@value='Browse...']", 4) .click();
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 			CommonFunctionality.wait(6000);
@@ -1570,108 +1547,99 @@ public class ChartVisual {
 		if (arg1.equalsIgnoreCase("Values axis") || arg1.equalsIgnoreCase("Time axis")
 				|| arg1.equalsIgnoreCase("Tooltips:")) {
 			if (arg2.equalsIgnoreCase("Check")) {
-				boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]"))
+				boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding::input[1]"))
 						.isSelected();
 				if (checkbox == false) {
 					CommonFunctionality
-							.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//preceding::span[1]", 4)
+							.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//preceding::span[1]", 4)
 							.click();
 				}
-				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following::div[2]", 4)
+				CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following::div[2]", 4)
 						.click();
 			}
-			values_axis_checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]"))
+			values_axis_checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding::input[1]"))
 					.isSelected();
-		} else if(arg1.equalsIgnoreCase("Labels")) {
-			boolean checkbox = login.driver
-					.findElement(
-							By.xpath("(//*[text()='"+arg1+"']//following::*[@class='popover-block-content']//input)[1]"))
-					.isSelected();
-			if (checkbox == false) {
-				CommonFunctionality
-						.getElementByXpath(login.driver,
-								"(//*[text()='"+arg1+"']//following::*[@class='popover-block-content']//span)[1]", 4)
-						.click();
-			}
 		} else if (arg1.equalsIgnoreCase("Custom")) {
 			boolean checkbox = login.driver
 					.findElement(
-							By.xpath("//*[@class='items-wrapper']//*[contains(text(),'" + arg1 + "')]//preceding-sibling::input"))
+							By.xpath("//*[@class='items-wrapper']//*[text()='" + arg1 + "']//preceding-sibling::input"))
 					.isSelected();
 			if (checkbox == false) {
 				CommonFunctionality
 						.getElementByXpath(login.driver,
-								"//*[@class='items-wrapper']//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span", 4)
+								"//*[@class='items-wrapper']//*[text()='" + arg1 + "']//preceding-sibling::span", 4)
 						.click();
 			}
 		} else if (arg1.equalsIgnoreCase("Text")) {
 			boolean checkbox = login.driver
-					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
+					.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]")).isSelected();
 			if (checkbox == false) {
 				CommonFunctionality
 						.getElementByXpath(login.driver,
-								"//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4).click();
+								"//*[text()='" + arg1 + "']//following::span[1]", 4).click();
 			}
 			copyright_checkbox = login.driver
-					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
+					.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]")).isSelected();
 		} else if (arg1.equalsIgnoreCase("Show tooltips") || arg1.equalsIgnoreCase("Display for all series at once") || arg1.equalsIgnoreCase("Data labels:") || arg1.equalsIgnoreCase("Legend:") || arg1.equalsIgnoreCase("Copyright:") || arg1.equalsIgnoreCase("Slider")) {
-			boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]"))
+			boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding::input[1]"))
 					.isSelected();
 			if (checkbox == false) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//preceding::span[1]", 4)
+				CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//preceding::span[1]", 4)
 						.click();
 			}
-			tooltips_checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]"))
+			tooltips_checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding::input[1]"))
 					.isSelected();
 			if (arg2.equalsIgnoreCase("UnChecked Checkbox")) {
 				boolean checkbox1 = login.driver
-						.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]")).isSelected();
+						.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding::input[1]")).isSelected();
 				if (checkbox1 == true) {
 					WebElement check = CommonFunctionality.getElementByXpath(login.driver,
-							"//*[contains(text(),'" + arg1 + "')]//preceding::span[1]", 4);
+							"//*[text()='" + arg1 + "']//preceding::span[1]", 4);
 					new Actions(login.driver).moveToElement(check).click().build().perform();
 				}
 				tooltips_uncheckbox = login.driver
-						.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]")).isSelected();
+						.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding::input[1]")).isSelected();
 			}
 		} else if (arg2.equalsIgnoreCase("UnCheck")) {
-			boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+			boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
 					.isSelected();
 			if (checkbox == true) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4)
+				CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following::span[1]", 4)
 						.click();
 			} else {
 				System.out.println("Already unchecked");
 			}
 		} else if (arg2.equalsIgnoreCase("UnChecked")) {
-			boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+			boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
 					.isSelected();
 			if (checkbox == true) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4)
+				CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following::span[1]", 4)
 						.click();
 			}
-			uncheck_checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+			uncheck_checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
 					.isSelected();
 		} else {
 			if (arg2.equalsIgnoreCase("Check")) {
-				boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+				boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
 						.isSelected();
 				if (checkbox == false) {
-					new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4)).click().build().perform();
+					CommonFunctionality
+							.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following::span[1]", 4)
+							.click();
 				}
 			} else if (arg2.equalsIgnoreCase("UnCheck")) {
-				boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+				boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
 						.isSelected();
 				if (checkbox == true) {
 					CommonFunctionality
-							.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4)
+							.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']//following::span[1]", 4)
 							.click();
 				} else {
 					System.out.println("Already unchecked");
 				}
 			}
 			checkbox_visual_border = login.driver
-					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
+					.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]")).isSelected();
 		}
 	}
 
@@ -1695,33 +1663,33 @@ public class ChartVisual {
 	
 	@And("^\"([^\"]*)\" checkbox is clicked$")
 	public void checkbox_is_clicked(String arg1) throws Throwable {
-	 WebElement common1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4); 
+	 WebElement common1 = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg1+"']", 4); 
 	 if(common1.isDisplayed()) {
 		 login.Log4j.info(arg1+ " is displayed and verified successfully");  
 	   } else {
 		   fail("Not displayed");
 	   }
-	  boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding::input[1]")).isSelected();
+	  boolean checkbox = login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding::input[1]")).isSelected();
 	  if(checkbox == false) {
-		  new Actions(login.driver).moveToElement(login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding::span[1]"))).click().build().perform();
+		  new Actions(login.driver).moveToElement(login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding::span[1]"))).click().build().perform();
 	  }
-	  legend_checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding::input[1]")).isSelected();
+	  legend_checkbox = login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding::input[1]")).isSelected();
 	  cv.clicking_option("Save");
 	}
 	
 	@And("^\"([^\"]*)\" checkbox is unchecked$")
 	public void checkbox_is_unchecked(String arg1) throws Throwable {
-	 WebElement common1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4); 
+	 WebElement common1 = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg1+"']", 4); 
 	 if(common1.isDisplayed()) {
 		 login.Log4j.info(arg1+ " is displayed and verified successfully");  
 	   } else {
 		   fail("Not displayed");
 	   }
-	  boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding::input[1]")).isSelected();
+	  boolean checkbox = login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding::input[1]")).isSelected();
 	  if(checkbox == true) {
-		  new Actions(login.driver).moveToElement(login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding::span[1]"))).click().build().perform();
+		  new Actions(login.driver).moveToElement(login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding::span[1]"))).click().build().perform();
 	  }
-	  legend_checkbox_uncheck = login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding::input[1]")).isSelected();
+	  legend_checkbox_uncheck = login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding::input[1]")).isSelected();
 	  cv.clicking_option("Save");
 	}
 
@@ -1735,22 +1703,22 @@ public class ChartVisual {
 	public void click_on_the_checkbox_to_be(String arg1, String arg2) throws Throwable {
 		if (arg2.equalsIgnoreCase("Checked")) {
 			boolean checkbox = login.driver.findElement(By
-					.xpath("//*[contains(@class,'dropdown-menu')]//*[contains(text(),'" + arg1 + "')]//preceding-sibling::input"))
+					.xpath("//*[contains(@class,'dropdown-menu')]//*[text()='" + arg1 + "']//preceding-sibling::input"))
 					.isSelected();
 			if (checkbox == false) {
 				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(@class,'dropdown-menu')]//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span", 4)
+						"//*[contains(@class,'dropdown-menu')]//*[text()='" + arg1 + "']//preceding-sibling::span", 4)
 						.click();
 			} else {
 				System.out.println("Already checked");
 			}
 		} else if (arg2.equalsIgnoreCase("UnChecked")) {
 			boolean checkbox = login.driver.findElement(By
-					.xpath("//*[contains(@class,'dropdown-menu')]//*[contains(text(),'" + arg1 + "')]//preceding-sibling::input"))
+					.xpath("//*[contains(@class,'dropdown-menu')]//*[text()='" + arg1 + "']//preceding-sibling::input"))
 					.isSelected();
 			if (checkbox == true) {
 				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(@class,'dropdown-menu')]//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span", 4)
+						"//*[contains(@class,'dropdown-menu')]//*[text()='" + arg1 + "']//preceding-sibling::span", 4)
 						.click();
 			} else {
 				System.out.println("Already unchecked");
@@ -1758,7 +1726,7 @@ public class ChartVisual {
 		}
 		checkbox2 = login.driver
 				.findElement(By.xpath(
-						"//*[contains(@class,'dropdown-menu')]//*[contains(text(),'" + arg1 + "')]//preceding-sibling::input"))
+						"//*[contains(@class,'dropdown-menu')]//*[text()='" + arg1 + "']//preceding-sibling::input"))
 				.isSelected();
 	}
 
@@ -1978,14 +1946,14 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Check the checkbox for \"([^\"]*)\" section$")
 	public void check_the_checkbox_for_section(String arg1) throws Throwable {
-		boolean checkbox = login.driver.findElement(By.xpath("//*[@class='popover--wrapper']//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+		boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
 				.isSelected();
 		if (checkbox == false) {
 			WebElement click = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='popover--wrapper']//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4);
+					"//*[text()='" + arg1 + "']//following::span[1]", 4);
 			new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 		}
-		values_axis_checkboxes = login.driver.findElement(By.xpath("//*[@class='popover--wrapper']//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+		values_axis_checkboxes = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
 				.isSelected();
 	}
 	
@@ -2005,66 +1973,72 @@ public class ChartVisual {
 	@And("^Check the checkbox for \"([^\"]*)\" sections$")
 	public void check_the_checkbox_for_sections(String arg1) throws Throwable {
 		time_axis_label_text = arg1;
-		boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
+		boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
 				.isSelected();
 		if (checkbox == false) {
 			WebElement click = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span", 4);
+					"//*[text()='" + arg1 + "']//preceding-sibling::span", 4);
 			new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 		}
-		time_axis_checkboxes = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
+		time_axis_checkboxes = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
 				.isSelected();
 	}
 	
 	@SuppressWarnings("deprecation")
 	@And("^Check the checkbox for \"([^\"]*)\" sections of Right Axis$")
 	public void check_the_checkbox_for_sections_of_Right_Axis(String arg1) throws Throwable {
-		boolean checkbox = login.driver.findElement(By.xpath("(//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input)[2]"))
+		boolean checkbox = login.driver.findElement(By.xpath("(//*[text()='" + arg1 + "']/preceding-sibling::input)[2]"))
 				.isSelected();
 		if (checkbox == false) {
-			WebElement click = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span)[2]", 4);
+			WebElement click = CommonFunctionality.getElementByXpath(login.driver,"(//*[text()='" + arg1 + "']//preceding-sibling::span)[2]", 4);
 			new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 		}
-		axis_checkboxes_right = login.driver.findElement(By.xpath("(//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input)[2]")).isSelected();
+		axis_checkboxes_right = login.driver.findElement(By.xpath("(//*[text()='" + arg1 + "']/preceding-sibling::input)[2]")).isSelected();
 	}
 	
 	@SuppressWarnings("deprecation")
 	@And("^Uncheck the checkbox for \"([^\"]*)\" sections$")
 	public void uncheck_the_checkbox_for_sections(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
-		boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
+		boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
 				.isSelected();
 		if (checkbox == true) {
 			WebElement click = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span", 4);
+					"//*[text()='" + arg1 + "']//preceding-sibling::span", 4);
 			new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 		}
-		axis_setup_checkboxes_uncheck = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input"))
+		axis_setup_checkboxes_uncheck = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input"))
 				.isSelected();
 	}
 	
 	@SuppressWarnings("deprecation")
 	@And("^Uncheck the checkbox for \"([^\"]*)\" sections of Right Axis$")
 	public void uncheck_the_checkbox_for_sections_of_Right_Axis(String arg1) throws Throwable {
-		boolean checkbox = login.driver.findElement(By.xpath("(//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input)[2]")).isSelected();
+		boolean checkbox = login.driver.findElement(By.xpath("(//*[text()='" + arg1 + "']/preceding-sibling::input)[2]")).isSelected();
 		if (checkbox == true) {
-			WebElement click = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span)[2]", 4);
+			WebElement click = CommonFunctionality.getElementByXpath(login.driver,"(//*[text()='" + arg1 + "']//preceding-sibling::span)[2]", 4);
 			new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 		}
-		axis_setup_checkboxes_uncheck_right = login.driver.findElement(By.xpath("(//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input)[2]")).isSelected();
+		axis_setup_checkboxes_uncheck_right = login.driver.findElement(By.xpath("(//*[text()='" + arg1 + "']/preceding-sibling::input)[2]")).isSelected();
 	}
 
 	@SuppressWarnings("deprecation")
 	@And("^Check the timeframe checkbox for \"([^\"]*)\" section$")
 	public void check_the_timeframe_checkbox_for_section(String arg1) throws Throwable {
 		timeframe_label_text = arg1;
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[contains(@class,'header-picker_header-module__calendar_icon')]", 4)).pause(500).click().build().perform();
-		boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding-sibling::input")).isSelected();
+		boolean checkbox = login.driver
+				.findElement(
+						By.xpath("//*[@class='popover--wrapper']//*[text()='" + arg1 + "']//preceding-sibling::input"))
+				.isSelected();
 		if (checkbox == false) {
-			WebElement click = CommonFunctionality.getElementByXpath(login.driver,"//*[text()='" + arg1 + "']//preceding-sibling::span", 4);
+			WebElement click = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='popover--wrapper']//*[text()='" + arg1 + "']//preceding-sibling::span", 4);
 			new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 		}
-		timeframe_checkboxes = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding-sibling::input")).isSelected();
+		timeframe_checkboxes = login.driver
+				.findElement(
+						By.xpath("//*[@class='popover--wrapper']//*[text()='" + arg1 + "']//preceding-sibling::input"))
+				.isSelected();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -2190,25 +2164,22 @@ public class ChartVisual {
 	@And("^Uncheck the checkbox for \"([^\"]*)\" section$")
 	public void uncheck_the_checkbox_for_section(String arg1) throws Throwable {
 		if(arg1.equalsIgnoreCase("Show copyright")) {
-			boolean checkbox = login.driver.findElement(By.xpath("//*[@class='popover-content']//*[contains(text(),'" + arg1 + "')]//preceding-sibling::input")).isSelected();
+			boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding-sibling::input")).isSelected();
 			if (checkbox == true) {
-				WebElement click = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='popover-content']//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span", 4);
+				WebElement click = CommonFunctionality.getElementByXpath(login.driver,"//*[text()='" + arg1 + "']//preceding-sibling::span", 4);
 				new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 			}
-		  copyright_checkbox_unchecked = login.driver.findElement(By.xpath("//*[@class='popover-content']//*[contains(text(),'" + arg1 + "')]//preceding-sibling::input")).isSelected();
+		  copyright_checkbox_unchecked = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding-sibling::input")).isSelected();
 		} else {
-			boolean checkbox;
-		try {
-	        checkbox = login.driver.findElement(By.xpath("//*[@class='popover--wrapper']//*[contains(text(),'"+arg1+"')]/following::input[1]")).isSelected();
-		} catch (Exception e) {
-			checkbox = login.driver.findElement(By.xpath("(//*[@class='popover-content']//*[contains(text(),'" + arg1 + "')]//following::input[1])[2]")).isSelected();
-		}if (checkbox == true) {
+		boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]"))
+				.isSelected();
+		if (checkbox == true) {
 			WebElement click = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='popover--wrapper']//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4);
+					"//*[text()='" + arg1 + "']//following::span[1]", 4);
 			new Actions(login.driver).moveToElement(click).pause(1000).click().build().perform();
 		}
 		values_axis_checkboxes_uncheck = login.driver
-				.findElement(By.xpath("//*[@class='popover-content']//*[contains(text(),'"+arg1+"')]//following::input[1]")).isSelected();
+				.findElement(By.xpath("//*[text()='" + arg1 + "']//following::input[1]")).isSelected();
 	}
 	}
 
@@ -2327,7 +2298,7 @@ public class ChartVisual {
 			fail("Verification Failed");
 		}
 		} if (arg1.equalsIgnoreCase("Copyright Text")) {
-		WebElement text = CommonFunctionality.getElementByXpath(login.driver, "//div[@ui='$ui_config_block']", 4);
+		WebElement text = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='credits_text']/parent::div", 4);
 		if (text.getAttribute("class").contains("disabled") && copyright_checkbox_unchecked == false) {
 			cv.clicking_option("Save");
 			List<WebElement> hide_list = login.driver.findElements(By.xpath("//*[contains(@class,'visual-item-wrapper--text')]/ancestor::*[2]"));
@@ -2340,7 +2311,7 @@ public class ChartVisual {
 			fail("Verification Failed");	
 		}
 		} if (arg1.equalsIgnoreCase("Copyright Text link")) {
-		WebElement link = CommonFunctionality.getElementByXpath(login.driver, "//div[@ui='$ui_config_block']", 4);
+		WebElement link = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='credits_link']/ancestor::div[2]", 4);
 		if (link.getAttribute("class").contains("disabled") && copyright_checkbox_unchecked == false) {
 			cv.clicking_option("Save");
 			List<WebElement> hide_list = login.driver.findElements(By.xpath("//*[contains(@class,'visual-item-wrapper--text')]/ancestor::*[2]"));
@@ -2353,7 +2324,7 @@ public class ChartVisual {
 			fail("Verification Failed");	
 		}
 		} if (arg1.equalsIgnoreCase("Copyright font size")) {
-		WebElement size = CommonFunctionality.getElementByXpath(login.driver, "//div[@ui='$ui_config_block']", 4);
+		WebElement size = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='credits_font_size']/ancestor::div[2]", 4);
 		if (size.getAttribute("class").contains("disabled") && copyright_checkbox_unchecked == false) {
 			cv.clicking_option("Save");
 			List<WebElement> hide_list = login.driver.findElements(By.xpath("//*[contains(@class,'visual-item-wrapper--text')]/ancestor::*[2]"));
@@ -2366,7 +2337,7 @@ public class ChartVisual {
 			fail("Verification Failed");	
 		}
 		} if (arg1.equalsIgnoreCase("Copyright align")) {
-			WebElement size = CommonFunctionality.getElementByXpath(login.driver, "//div[@ui='$ui_config_block']", 4);
+			WebElement size = CommonFunctionality.getElementByXpath(login.driver, "//button[@name='credits_align']/ancestor::div[3]", 4);
 			if (size.getAttribute("class").contains("disabled") && copyright_checkbox_unchecked == false) {
 				cv.clicking_option("Save");
 				List<WebElement> hide_list = login.driver.findElements(By.xpath("//*[@class='visual-item-wrapper--credits-image']/ancestor::*[1]"));
@@ -2379,7 +2350,7 @@ public class ChartVisual {
 				fail("Verification Failed");	
 			}
 			} if (arg1.equalsIgnoreCase("Copyright font style")) {
-		WebElement style = CommonFunctionality.getElementByXpath(login.driver, "//div[@ui='$ui_config_block']", 4);
+		WebElement style = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='credits_font_style']/ancestor::div[3]", 4);
 		if (style.getAttribute("class").contains("disabled") && copyright_checkbox_unchecked == false) {
 			cv.clicking_option("Save");
 			List<WebElement> hide_list = login.driver.findElements(By.xpath("//*[contains(@class,'visual-item-wrapper--text')]/ancestor::*[2]"));
@@ -2392,7 +2363,7 @@ public class ChartVisual {
 			fail("Verification Failed");	
 		}
 		} if (arg1.equalsIgnoreCase("Copyright color")) {
-		WebElement color = CommonFunctionality.getElementByXpath(login.driver, "//div[@ui='$ui_config_block']", 4);
+		WebElement color = CommonFunctionality.getElementByXpath(login.driver, "//input[@name='credits_color']/ancestor::div[3]", 4);
 		if (color.getAttribute("class").contains("disabled") && copyright_checkbox_unchecked == false) {
 			cv.clicking_option("Save");
 			List<WebElement> hide_list = login.driver.findElements(By.xpath("//*[contains(@class,'visual-item-wrapper--text')]/ancestor::*[2]"));
@@ -2404,21 +2375,13 @@ public class ChartVisual {
 		} else {
 			fail("Verification Failed");	
 		}
-		} if (arg1.equalsIgnoreCase("Copyright logo")) {
-			WebElement image = CommonFunctionality.getElementByXpath(login.driver, "//div[@ui='$ui_config_block']", 4);
-			if (image.getAttribute("class").contains("disabled") && copyright_checkbox_unchecked == false) {
-				cv.clicking_option("Save");
-				List<WebElement> hide_list = login.driver.findElements(By.xpath("//*[contains(@class,'visual-item-wrapper--logo')]/ancestor::div[2]"));
-				for(WebElement hide:hide_list) {
-				if(!(hide.getAttribute("class").contains("hidden"))) {
-					fail("Verification Failed");
-				} 
-				}
-			} else {
-				fail("Verification Failed");	
-			}
 		}
 		login.Log4j.info("The " + arg1 + " field is disabled and has been verified successfully");
+		/*
+		 * if (login.driver.findElements(By.className("popover--wrapper")).size() > 0) {
+		 * CommonFunctionality.getElementByClassName(login.driver, "popover--close",
+		 * 4).click(); } close_the_chart_visual();
+		 */
 		CommonFunctionality.Views_list();
 	}
 
@@ -2427,11 +2390,9 @@ public class ChartVisual {
 		position = Integer.parseInt(CDMNextSprintCases.separator_value);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@And("^Select data label \"([^\"]*)\" from the list$")
 	public void select_data_label_from_the_list(String arg1) throws Throwable {
-		CommonFunctionality.wait(1000);
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@name='data_labels_"+arg1+"']//following::div[1]", 4)).pause(500).click().build().perform();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@name='data_labels_"+arg1+"']//following::div[1]", 4).click();
 	}
 	
 	@And("^Observe the value order \"([^\"]*)\" selecting \"([^\"]*)\" for \"([^\"]*)\"$")
@@ -2547,22 +2508,13 @@ public class ChartVisual {
 			   if(text.contains("1,000,00")) {
 				  String text_replace = text.replaceAll("1,000,00", "1000,00"); 
 				  text1 = text_replace.split("\\,");
-			   } else if(text.contains("1,000.00")) {
-				   String text_replace = text.replaceAll("1,000.00", "1000.00"); 
-				   text1 = text_replace.split("\\.");
 			   } else {
 				   text1 = text.split("\\,");  
-			   } if(text.contains(".")) { 
-				   text1 = text.split("\\."); 
-				   if(text.contains("1,000")) {
-					  String text_replace = text.replaceAll("1,000", "1000.00"); 
-					  text1 = text_replace.split("\\.");
-				   }
 			   }
-				BigInteger integer = new BigInteger(text1[0]);
-				list3.add(integer);   
-		    } 
-		    boolean sorted = Ordering.natural().isOrdered(list3);
+			   BigInteger integer = new BigInteger(text1[0]);
+			   list3.add(integer);
+		   }
+			boolean sorted = Ordering.natural().isOrdered(list3);
 			if(sorted == true) {
 		    login.Log4j.info("The text are displaying in Ascending order");
 			} else {
@@ -2573,14 +2525,14 @@ public class ChartVisual {
 			String second = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[2]",4).getText();
 			String third = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[1]",4).getText();
 			String first_element[] = null;
-			if(first.contains("1,000.00")) {
-			  String text_replace = first.replaceAll("1,000.00", "1000.00"); 
-			  first_element = text_replace.split("\\.");
+			if(first.contains("1,000,00")) {
+			  String text_replace = first.replaceAll("1,000,00", "1000,00"); 
+			  first_element = text_replace.split("\\,");
 			} else {
-			   first_element = first.split("\\.");  
+			   first_element = first.split("\\,");  
 			}
-			String second_element[] = second.split("\\.");
-			String third_element[] = third.split("\\.");
+			String second_element[] = second.split("\\,");
+			String third_element[] = third.split("\\,");
 			Integer first_element_int = Integer.parseInt(first_element[0]);
 			list4.add(first_element_int);
 			Integer second_element_int = Integer.parseInt(second_element[0]);
@@ -2727,7 +2679,7 @@ public class ChartVisual {
 	
 	@And("^Click on the Currency button$")
 	public void click_on_the_Currency_button() throws Throwable {
-	    CommonFunctionality.getElementBycssSelector(login.driver, "div.preview-container--series.bottom_panel > div > div > div > div:nth-child(9) > div.table--cell.table--body-cell.visual-series-list--series-row > div > div > div.insight-action-panel--btn-title", 4).click();
+	    CommonFunctionality.getElementBycssSelector(login.driver, "div.preview-container--series.bottom_panel > div > div > div > div:nth-child(8) > div.table--cell.table--body-cell.visual-series-list--series-row > div > div > div.insight-action-panel--btn-title", 4).click();
 	}
 	
 	@And("^Enter the function$")
@@ -2846,7 +2798,7 @@ public class ChartVisual {
 		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Views']", 4).click();
 		} else {
-		   fail("Verify failed");
+			fail("Download popup is not displayed");
 		}
 		if(login.driver.findElements(By.xpath("//div[contains(@class,'download-views__list')]//div[@data-id='all_items']")).size()>0) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[contains(@class,'button__download-btn')]", 4).click();
@@ -2877,9 +2829,11 @@ public class ChartVisual {
 	
 	@And("^Get the updated Chart visual value$")
 	public void get_the_updated_Chart_visual_value() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='3Y']", 4).click();
-		CommonFunctionality.wait(1000);
-		chart_axis_multipler_value_numberformat = CommonFunctionality.getElementByProperty(login.driver, "chart_axis_multipler_value_number_format", 4).getText();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[text()='3y']", 4)
+				.click();
+		CommonFunctionality.wait(3000);
+		chart_axis_multipler_value_numberformat = CommonFunctionality
+				.getElementByProperty(login.driver, "chart_axis_multipler_value_number_format", 4).getText();
 	}
 
 	@And("^Click on \"([^\"]*)\" align in Title section$")
@@ -2938,9 +2892,9 @@ public class ChartVisual {
 	@And("^Click on the \"([^\"]*)\" checkbox in copyright$")
 	public void click_on_the_checkbox_in_copyright(String arg1) throws Throwable {
 	  copyright_checkbox_text = arg1;
-	  boolean checked = login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding-sibling::input")).isSelected();
+	  boolean checked = login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding-sibling::input")).isSelected();
 	  if(checked == false) {
-		  new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]/preceding-sibling::span", 4)).click().build().perform();
+		  new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg1+"']/preceding-sibling::span", 4)).click().build().perform();
 	  }
 	  CommonFunctionality.wait(1000);
 	}
@@ -3001,7 +2955,7 @@ public class ChartVisual {
 	@And("^Select \"([^\"]*)\" option from line chart$")
 	public void select_option_from_line_chart(String arg1) throws Throwable {
 		WebElement line = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4);
+				"//*[text()='" + arg1 + "']/preceding-sibling::span", 4);
 		new Actions(login.driver).moveToElement(line).click().build().perform();
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='Change the chart type']");
@@ -3033,24 +2987,24 @@ public class ChartVisual {
 	public void enter_title_for_chart_visual(String arg1, String arg2) throws Throwable {
 		if (arg2.equalsIgnoreCase("New chart")) {
 			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::input[@name='title']", 8)
+					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::input[@name='title']", 8)
 					.clear();
 			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::input[@name='title']", 8)
+					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::input[@name='title']", 8)
 					.sendKeys(arg2);
 		} else if (arg1.equalsIgnoreCase("Sub title")) {
 			chart_subtitle_text = arg2;
 			WebElement subtitle = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg1 + "')]/following::*[@name='sub_title']", 8);
+					"//*[text()='" + arg1 + "']/following::*[@name='sub_title']", 8);
 			subtitle.sendKeys(Keys.chord(Keys.CONTROL, "a"), chart_subtitle_text);
 			CommonFunctionality.wait(500);
 		} else {
 			chart_title_text = arg2;
 			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::input[@name='title']", 8)
+					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::input[@name='title']", 8)
 					.clear();
 			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/following::input[@name='title']", 8)
+					.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::input[@name='title']", 8)
 					.sendKeys(chart_title_text);
 		}
 	}
@@ -3200,7 +3154,7 @@ public class ChartVisual {
 	    List<WebElement> elements = login.driver.findElements(By.xpath("//*[@class='items-wrapper']/li/span[not(contains(@class,'dropdown-submenu-icon'))]"));
 	    for(WebElement element:elements) {
 	    	String rightclick_text = element.getAttribute("title");
-	    	CommonFunctionality.wait(500);
+	    	CommonFunctionality.wait(2000);
 	    	rightclick_element.add(rightclick_text);
 	     } 
 	 }
@@ -3213,7 +3167,7 @@ public class ChartVisual {
 	    	List<WebElement> sub = login.driver.findElements(By.xpath("//*[@title='"+a+"']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 	    	for(int i=1; i<=sub.size();i++) {
 			WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+a+"']", 4);
-	    	new Actions(login.driver).moveToElement(hover).pause(500).build().perform();
+	    	new Actions(login.driver).moveToElement(hover).pause(2000).build().perform();
 	    	String subdropdown_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+a+"']//following-sibling::ul[@class='dropdown-menu']/li["+i+"]/span", 4).getAttribute("title");
 	    	insert_visual_list.add(subdropdown_text);
 	    	}
@@ -3224,7 +3178,7 @@ public class ChartVisual {
 	    	List<WebElement> sub = login.driver.findElements(By.xpath("//*[@title='"+b+"']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 	    	for(int j=1; j<=sub.size();j++) {
 			WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+b+"']", 4);
-	    	new Actions(login.driver).moveToElement(hover).pause(500).build().perform();
+	    	new Actions(login.driver).moveToElement(hover).pause(2000).build().perform();
 	    	String subdropdown_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+b+"']//following-sibling::ul[@class='dropdown-menu']/li["+j+"]/span", 4).getAttribute("title");
 	    	view_as.add(subdropdown_text);
 	    	}
@@ -3424,21 +3378,19 @@ public class ChartVisual {
 		if (login.driver.findElements(By.xpath("//*[text()='Confirmation']//following::*[contains(text(),'Proceed with 20 series?')]")).size()>0) {
 			login.Log4j.info("Validation message appears to create chart with only " + arg1 + " series");
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
-			CommonFunctionality.wait(3000);
-			if(login.driver.findElements(By.xpath("//*[contains(@class,'growl-message')]//*[text()='Ok']")).size() > 0) {
-				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'growl-message')]//*[text()='Ok']", 4).click();
-			}
-			CommonFunctionality.wait(1000);
 			if(login.driver.findElements(By.xpath("//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]")).size() > 0) {
 				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'movable-modal--window')]//*[contains(text(),'Apply')]", 4).click();
 			}
+			/*if(login.driver.findElements(By.xpath("//*[contains(@class,'growl-message')]//*[text()='Ok']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'growl-message')]//*[text()='Ok']", 4).click();
+			}*/
 		} else {
 			fail("Chart is created with more than " + arg1 + " series and hence failed");
 			CommonFunctionality.UnselectMethod();
 			CommonFunctionality.Views_list();
 			
 		}
-		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("insight-page-view-tab--title")));
+		CommonFunctionality.wait(3000);
 		CommonFunctionality.Views_list();
 	}
 
@@ -3505,19 +3457,26 @@ public class ChartVisual {
 
 	@Then("^Entered title appears in Views panel for title display \"([^\"]*)\"$")
 	public void entered_title_appears_in_Views_panel_for_title_display(String arg1) throws Throwable {
-		if(arg1.equalsIgnoreCase("ON")) {
-			String chart_title = CommonFunctionality.getElementByXpath(login.driver, "//span[@data-name='title']/parent::div", 4).getAttribute("style");
-			String split[] = chart_title.split("\\;");
-			String chart_text = CommonFunctionality.getElementByXpath(login.driver, "//span[@data-name='title']", 4).getText();
-			assertEquals(chart_text, chart_title_text);
-			assertEquals(split[0], "display: flex");
-		    login.Log4j.info("The entered title appears in Views panel");
-			CommonFunctionality.Views_list();
-		} if(arg1.equalsIgnoreCase("OFF")) {
-			List<WebElement> element = login.driver.findElements(By.xpath("//span[@data-name='title']"));
-			assertEquals(element.size(), 0);
-			login.Log4j.info("The entered title not appears in Views panel");
-			CommonFunctionality.Views_list();
+		if (arg1.equalsIgnoreCase("ON")) {
+			String chart_title = CommonFunctionality
+					.getElementBycssSelector(login.driver, "span[data-name='title']", 4).getText();
+			if (chart_title.equalsIgnoreCase(chart_title_text) && login.driver
+					.findElements(
+							By.cssSelector("span[data-name='title']"))
+					.size() == 1) {
+				login.Log4j.info("The entered title appears in Views panel and the title is: " + chart_title);
+				CommonFunctionality.Views_list();
+			} else {
+				fail("Title Verification failed");
+			}
+		}
+		if (arg1.equalsIgnoreCase("OFF")) {
+			if (!(login.driver.findElement(By.cssSelector("span[data-name='title']")).isDisplayed())) {
+				login.Log4j.info("The entered title not appears in Views panel");
+				CommonFunctionality.Views_list();
+			} else {
+				fail("Title Verification failed");
+			}
 		}
 	}
 
@@ -3570,7 +3529,7 @@ public class ChartVisual {
 	@Then("^The Uploaded image should reflect in the chart visual legand$")
 	public void the_Uploaded_image_should_reflect_in_the_chart_visual_legand() throws Throwable {
 		cv.click_button("Save");
-		CommonFunctionality.wait(200);
+		CommonFunctionality.wait(2000);
     	String image = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-item-wrapper--logo", 4).getAttribute("src");
     	if(!image.contains("credits_image")) {
     		fail("Verification Failed");
@@ -3582,7 +3541,7 @@ public class ChartVisual {
 		popup_should_appear("Copyright");
 		CommonFunctionality.getElementBycssSelector(login.driver, ".copyright-config--remove-icon", 4).click();
 		cv.click_button("Save");
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.Views_list();
 	}
 
@@ -3735,34 +3694,53 @@ public class ChartVisual {
 	@Then("^The Visual area should align to \"([^\"]*)\"$")
 	public void the_Visual_area_should_align_to(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Left")) {
-			String left = login.driver.findElement(By.xpath("//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-container']")).getAttribute("style").split(";")[0];
-			if(left.equals("width:80%") || left.equals("width: 80%")) {
-			login.Log4j.info("The Visual area is aligned to " + arg1);
+			if (visual_align.getAttribute("class").contains("alignment-control--box__selected")) {
+				String left = login.driver.findElement(By.xpath(
+						"//*[@class='preview-container']//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-wrapper']"))
+						.getAttribute("style");
+				if (!(left.contains("margin"))) {
+					login.Log4j.info("The Visual area is aligned to " + arg1);
+				} else {
+					fail("Verification Failed");
+				}
 			} else {
-				fail("Verification Failed");
-			}
-		}if (arg1.equalsIgnoreCase("Center")) {
-			String center = login.driver.findElement(By.xpath("//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-container']")).getAttribute("style").split(";")[1];
-			if(center.equals(" margin: 0px auto")) {
-				login.Log4j.info("The Visual area is aligned to " + arg1);
-			} else {
-				fail("Verification Failed");
-			}	
-		}if (arg1.equalsIgnoreCase("Right")) {
-			String right = login.driver.findElement(By.xpath("//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-container']")).getAttribute("style").split(";")[1];
-			if(right.equals(" margin-left: auto")) {
-				login.Log4j.info("The Visual area is aligned to " + arg1);
-			} else {
-				fail("Verification Failed");
+				fail("Chart Visual alignment verification failed");
 			}
 		}
-		CommonFunctionality.Views_list();
+		if (arg1.equalsIgnoreCase("Center")) {
+			if (visual_align.getAttribute("class").contains("alignment-control--box__selected")) {
+				String center = login.driver.findElement(By.xpath(
+						"//*[@class='preview-container']//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-wrapper']"))
+						.getAttribute("style").split(";")[1];
+				if (center.equalsIgnoreCase(" margin: 0px auto")) {
+					login.Log4j.info("The Visual area is aligned to " + arg1);
+				} else {
+					fail("Verification Failed");
+				}
+			} else {
+				fail("Chart Visual alignment verification failed");
+			}
+		}
+		if (arg1.equalsIgnoreCase("Right")) {
+			if (visual_align.getAttribute("class").contains("alignment-control--box__selected")) {
+				String right = login.driver.findElement(By.xpath(
+						"//*[@class='preview-container']//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-wrapper']"))
+						.getAttribute("style").split(";")[1];
+				if (right.equalsIgnoreCase(" margin-left: auto")) {
+					login.Log4j.info("The Visual area is aligned to " + arg1);
+				} else {
+					fail("Verification Failed");
+				}
+			} else {
+				fail("Chart Visual alignment verification failed");
+			}
+		}
 	}
 
 	@Then("^The Image Size should reduce to (\\d+)% horizontally$")
 	public void the_Image_Size_should_reduce_to_horizontally(int arg1) throws Throwable {
 		String width = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-container']",
+				"//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-wrapper']",
 				4).getAttribute("style");
 		String width_substring = width.substring(7, 9);
 		int updated_width = Integer.parseInt(width_substring);
@@ -3964,12 +3942,11 @@ public class ChartVisual {
 			if (chart_axis_multipler_value_numberformat.contains(CDMNextSprintCases.grouping_seperator)) {
 				login.Log4j.info(arg3 + " value has been updated and has been verified successfully");
 			} else {
-				fail("Verification Failed");	
-				
+				fail("Verification Failed");
 			}
 		}
 		login.Log4j.info("The " + arg1 + ", " + arg2 + ", " + arg3 + " has been verified successfully");
-		CommonFunctionality.Views_list();
+		close_the_chart_visual();
 	}
 
 	@Then("^\"([^\"]*)\" should reflect on the chart$")
@@ -4544,7 +4521,7 @@ public class ChartVisual {
 		login.Log4j.info("The Selected "+arg1+" has been updated in chart visual timepoints and it's verified successfully");
 		} if(arg1.equalsIgnoreCase("Color and Highlight color")) {
 		List<WebElement> color = login.driver.findElements(By.cssSelector(".highcharts-data-labels.highcharts-series-0.highcharts-line-series > g > text"));
-		List<WebElement> highlight_color = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-data-label-box') and not(@width='35')]"));
+		List<WebElement> highlight_color = login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-data-label-box')]"));
 		for (int i = 1; i <= color.size(); i++) {
 			String color_text = login.driver.findElement(By.cssSelector(".highcharts-data-labels.highcharts-series-0.highcharts-line-series > g > text")).getCssValue("fill");
 	        CommonFunctionality.wait(2000);
@@ -4552,7 +4529,7 @@ public class ChartVisual {
 			assertEquals(actual, data_label_color);	
 		} 
 		for (int i = 1; i <= highlight_color.size(); i++) {
-			String highlight_color1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'highcharts-data-label-box') and not(@width='35')]", 4).getAttribute("fill");
+			String highlight_color1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'highcharts-data-label-box')]", 4).getAttribute("fill");
 	        CommonFunctionality.wait(2000);
 			String highlight_color_text = Color.fromString(highlight_color1).asHex();
 			assertEquals(highlight_color_text, data_label_highlight_color);	
@@ -4667,14 +4644,14 @@ public class ChartVisual {
 	
 	@Then("^\"([^\"]*)\" and \"([^\"]*)\" is displayed and by default Show Legend is checked$")
 	public void and_is_displayed_and_by_default_Show_Legend_is_checked(String arg1, String arg2) throws Throwable {
-	   WebElement common1 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4);
-	   WebElement common2 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg2+"')]", 4);
+	   WebElement common1 = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg1+"']", 4);
+	   WebElement common2 = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg2+"']", 4);
 	   if(common1.isDisplayed() && common2.isDisplayed()) {
 		 login.Log4j.info(arg1+ " and "+arg2+" is displayed and verified successfully");  
 	   } else {
 		   fail("Not displayed");
 	   }
-	   login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding::input[1]")).isSelected();
+	   login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding::input[1]")).isSelected();
 	   assertTrue(true, arg1+" is checked");
 	   cv.clicking_option("Save");
 	   closing_the_chart_visual();
@@ -4803,7 +4780,7 @@ public class ChartVisual {
 			popup_should_appear("Copyright");
 	    } if(arg1.equalsIgnoreCase("Copyright Image") && tooltips_checkbox == true) {
 	    	cv.clicking_option("Save");
-	    	if(login.driver.findElements(By.cssSelector("img[class='visual-item-wrapper--logo']")).size()>0 && copyright_checkbox_text.equalsIgnoreCase("Image")) {
+	    	if(login.driver.findElements(By.cssSelector("img[class='visual-item-wrapper--logo ']")).size()>0 && copyright_checkbox_text.equalsIgnoreCase("Image")) {
 	    		login.Log4j.info("The selected "+arg1+" is reflecting in chart visual");
 	    	} else {
 	    		fail("Verification Failed");
@@ -4828,7 +4805,7 @@ public class ChartVisual {
 			popup_should_appear("Copyright");
 	    } if(arg1.equalsIgnoreCase("Copyright Image link") && tooltips_checkbox == true && copyright_checkbox_text.equalsIgnoreCase("Image")) {
 	    	cv.clicking_option("Save");
-	    	CommonFunctionality.getElementBycssSelector(login.driver, "img[class='visual-item-wrapper--logo']", 4).click();
+	    	CommonFunctionality.getElementBycssSelector(login.driver, "img[class='visual-item-wrapper--logo ']", 4).click();
 	    	ArrayList<String> browserTabs = new ArrayList<String>(login.driver.getWindowHandles());
 			login.driver.switchTo().window(browserTabs.get(1));
 			String URL = login.driver.getCurrentUrl();
@@ -4854,7 +4831,7 @@ public class ChartVisual {
 			popup_should_appear("Copyright");
 	    } if(arg1.equalsIgnoreCase("Copyright font style") && tooltips_checkbox == true) {
 	    	cv.clicking_option("Save");
-	    	WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-item-wrapper--text ']/parent::a", 4);
+	    	WebElement title = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-item-wrapper--text", 4);
 			String font_bold = title.getCssValue("font-weight");
 			String font_italic = title.getCssValue("font-style");
 			String font_underline = title.getCssValue("text-decoration");
@@ -4928,7 +4905,7 @@ public class ChartVisual {
 	@Then("^Verify the top panel should change to \"([^\"]*)\"$")
 	public void verify_the_top_panel_should_change_to(String arg1) throws Throwable {
 	    CommonFunctionality.wait(3000);
-		visual_name = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-top-panel--left-controls .button__primary", 4).getText();
+		visual_name = CommonFunctionality.getElementBycssSelector(login.driver, ".button__special", 4).getText();
 	    assertEquals(visual_name, arg1);
 	    login.Log4j.info("The Chart visual is changed to "+arg1+ " successfully");
 	    CommonFunctionality.Views_list();
@@ -4956,15 +4933,9 @@ public class ChartVisual {
 	public void icons_should_appear(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
 	    List<WebElement> icons = login.driver.findElements(By.cssSelector(".vis-elem-menu--item"));
 	    System.out.println("The icons count is:" + icons.size());
-	    String text = null;
 	    for(WebElement icon:icons) {
 	    	String icon_text = icon.getAttribute("title");
-	    	if(icon_text.equals("")) {
-	    		text = CommonFunctionality.getElementBycssSelector(login.driver, ".download-button__icon", 4).getAttribute("title");
-	    		String split[] = text.split("\\. ");
-	    		assertEquals(split[0], arg3);
-	    	}
-	    	if(!(icon_text.equals(arg1) || icon_text.equals(arg2) || icon_text.equals(arg4) || icon_text.equals(arg5) || text.contains(arg3))) {
+	    	if(!(icon_text.equals(arg1) || icon_text.equals(arg2) || icon_text.contains(arg3) || icon_text.equals(arg4) || icon_text.equals(arg5))) {
 	    		fail(icon_text+" is not present");
 	    	}
 	    }
@@ -5102,21 +5073,22 @@ public class ChartVisual {
 		    }
 		   List<WebElement> sub = login.driver.findElements(By.xpath("//*[@title='"+arg1+"']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 		   for(int i=1; i<=sub.size();i++) {
-		   CommonFunctionality.wait(500);
+			   CommonFunctionality.wait(3000);
 		   right_Click_the_Add_to_Related_series();
-		   CommonFunctionality.wait(500);
+		   CommonFunctionality.wait(3000);
 	       WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+arg1+"']", 4);
-	       new Actions(login.driver).moveToElement(hover).pause(500).click().build().perform();
-	       String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+arg1+"']//following-sibling::ul/li["+i+"]/span",12).getAttribute("title");
-	       CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+arg1+"']//following-sibling::ul/li["+i+"]/span",4).click();
-	       CommonFunctionality.wait(1000);
+	       new Actions(login.driver).moveToElement(hover).pause(1000).click().build().perform();
+	       String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+arg1+"']//following-sibling::ul[@class='dropdown-menu']/li["+i+"]/span",12).getAttribute("title");
+	       CommonFunctionality.getElementByXpath(login.driver, "//*[@title='"+arg1+"']//following-sibling::ul[@class='dropdown-menu']/li["+i+"]/span",4).click();
+	       CommonFunctionality.wait(3000);
 	       if(text.equalsIgnoreCase("Histogram")) {
 	    	   CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 4).click();
 	    	   CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
 	       }
-	       String title_text = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-top-panel--left-controls .button__sm.button__primary", 12).getText();
-	       if(!title_text.contains(text)) {
-	    	   fail("Verification Failed");
+	       String title_text = CommonFunctionality.getElementBycssSelector(login.driver, ".button.button__sm.button__special , .visual-title--text.text-dots", 12).getText();
+	       CommonFunctionality.wait(2000);
+	       if(!(title_text.contains(text))) {
+	    	 fail("Verification failed");
 	       }
 		   }
 		   login.Log4j.info("The Options present inside "+arg1+" has been verified successfully");
@@ -5228,7 +5200,7 @@ public class ChartVisual {
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sheet1 = wb.getSheetAt(0);
-		String data = sheet1.getRow(21).getCell(1).getStringCellValue();
+		String data = sheet1.getRow(20).getCell(1).getStringCellValue();
 		if(data.contains(applied_function)) {
 			Files.deleteIfExists(Paths.get(path));
 			login.Log4j.info("The applied function has been displayed in chart and it has been verified successfully and the applied function is "+applied_function);
@@ -5399,8 +5371,7 @@ public class ChartVisual {
 		   cv.clicking_option("Save");
 		   if(login.driver.findElements(By.xpath("//*[@class='highcharts-navigator']")).size()>0) {
 			   login.Log4j.info("The Slider option has been "+arg1);
-		   } else {	
-			   
+		   } else {
 			   fail("Verification Failed");
 		   }
 	   } if(arg1.equalsIgnoreCase("Unchecked") && tooltips_uncheckbox == false) {

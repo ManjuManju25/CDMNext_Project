@@ -51,7 +51,7 @@ public class HTML_Report {
 		failCount = 0;
 	}
 
-	//@Before
+	@Before
 	public static void scenarioParameters(Scenario scenario) throws Throwable {
 		execRemarks = "";
 		strTCResult = "";
@@ -60,7 +60,7 @@ public class HTML_Report {
 
 	}
 
-	//@After
+	@After
 	public static void html_Body() throws Throwable {
 		try {
 

@@ -16,7 +16,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 import CDMNext.util.CommonFunctionality;
@@ -137,6 +136,11 @@ public class CrossSection {
 				}
 			}
 		} if(arg1.equals("204883202;202916302;292524004;77161701")) {
+			CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
+			CommonFunctionality.wait(2000);
+		    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[@class='dropdown--button']", 4)).pause(500).click().build().perform();
+		    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Unit']", 4)).pause(500).click().build().perform();
+			CommonFunctionality.wait(3000);
 		    for(int i = list.size(); i >= 1; i--) {
 			WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
@@ -161,7 +165,7 @@ public class CrossSection {
 				cv.click_on_more_actions_to_create("View as Chart");
 			}
 		} if(arg2.equalsIgnoreCase("Download")) {
-			new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".download-button.download-button__header .download-button--button.button__download-btn , .download-button.download-button__header.small-download-btn", 4)).pause(1000).click().build().perform();
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".download-button.download-button__header.small-download-btn", 4)).pause(1000).click().build().perform();
 		} if(arg2.equalsIgnoreCase("Heat map")) {
 			cv.click_on_more_actions();
 			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as ...')]", 4)).build().perform();
@@ -191,7 +195,7 @@ public class CrossSection {
     	new Actions(login.driver).moveToElement(name).pause(500).sendKeys("Crosssection"+arg1+"").build().perform();
     	new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Click to edit the Insight']", 4)).click().build().perform();
     	renamed_insight_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-breadcrumb--title__editable')]", 4).getText();
-    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	if(arg1.equals("11")) {
     	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//input[@name='observations']/following-sibling::span/child::span[text()='All']", 4)).pause(500).click().build().perform();
     	} else {
@@ -208,7 +212,7 @@ public class CrossSection {
     	new Actions(login.driver).moveToElement(name).pause(500).sendKeys("Crosssection"+arg1+"").build().perform();
     	new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Click to edit the Insight']", 4)).click().build().perform();
     	renamed_insight_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-breadcrumb--title__editable')]", 4).getText();
-    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	boolean reset = login.driver.findElement(By.xpath("//*[@class='sphere-modal-controls']//*[contains(text(),'Reset')]")).isEnabled();
     	if(reset == true) {
     	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[contains(text(),'Reset')]", 4).click();
@@ -224,7 +228,7 @@ public class CrossSection {
     	new Actions(login.driver).moveToElement(name).pause(500).sendKeys("Crosssection"+arg1+"").build().perform();
     	new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Click to edit the Insight']", 4)).click().build().perform();
     	renamed_insight_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-breadcrumb--title__editable')]", 4).getText();
-    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	boolean reset = login.driver.findElement(By.xpath("//*[@class='sphere-modal-controls']//*[contains(text(),'Reset')]")).isEnabled();
     	if(reset == true) {
     	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[contains(text(),'Reset')]", 4).click();
@@ -372,30 +376,17 @@ public class CrossSection {
 	@And("^Sort the series in left pane$")
 	public void sort_the_series_in_left_pane() throws Throwable {
 		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
-		CommonFunctionality.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker--loader")));
-		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='series-representation--sort']//*[contains(@class,'dropdown--icon')]")));
-	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[contains(@class,'dropdown--icon')]", 4)).pause(500).click().build().perform();
-	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'percentage change')]", 4)).pause(500).click().build().perform();
-	    CommonFunctionality.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker--loader")));
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[@class='dropdown--button']", 4)).pause(500).click().build().perform();
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='% Change']", 4)).pause(500).click().build().perform();
+	    CommonFunctionality.wait(1000);
 	}
 	
 	@SuppressWarnings("deprecation")
 	@And("^Sort the default series in left pane$")
 	public void sort_the_default_series_in_left_pane() throws Throwable {
 		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
-		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("custom-select-title--reset-icon")));
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[@class='dropdown--button']", 4)).pause(500).click().build().perform();
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "custom-select-title--reset-icon", 4)).pause(500).click().build().perform();
-	    CommonFunctionality.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker--loader")));
-	}
-	
-	@SuppressWarnings("deprecation")
-	@And("^Sort the series by unit in left pane$")
-	public void sort_the_series_bt_unit_in_left_pane() throws Throwable {
-		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
-		CommonFunctionality.wait(1000);
-		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='series-representation--sort']//*[contains(@class,'dropdown--icon')]")));
-	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-representation--sort']//*[contains(@class,'dropdown--icon')]", 4)).pause(500).click().build().perform();
-	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'unit')]", 4)).pause(500).click().build().perform();
 	    CommonFunctionality.wait(1000);
 	}
 	
@@ -430,17 +421,17 @@ public class CrossSection {
 		functions_checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
 	    } 
 	    if(arg1.equalsIgnoreCase("Replace selected series") && arg2.equalsIgnoreCase("Checked")) {
-		boolean replace =login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding-sibling::input")).isSelected();
+		boolean replace =login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding-sibling::input")).isSelected();
 		if(replace == false) {
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]/preceding-sibling::span", 4)).click().build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg1+"']/preceding-sibling::span", 4)).click().build().perform();
 		}
 		replace_checkbox = login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding-sibling::input")).isSelected();
 	    } if(arg1.equalsIgnoreCase("Replace selected series") && arg2.equalsIgnoreCase("Unchecked")) {
-		boolean replace =login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding-sibling::input")).isSelected();
+		boolean replace =login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding-sibling::input")).isSelected();
 		if(replace == true) {
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]/preceding-sibling::span", 4)).click().build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[text()='"+arg1+"']/preceding-sibling::span", 4)).click().build().perform();
 		}
-		replace_checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/preceding-sibling::input")).isSelected();
+		replace_checkbox = login.driver.findElement(By.xpath("//*[text()='"+arg1+"']/preceding-sibling::input")).isSelected();
 	    }
 	}
 			
@@ -836,7 +827,7 @@ public class CrossSection {
 		assertEquals(functions_item_id, first[0]);
         assertEquals(functions_item_id_last_series, second[0]);
     	renaming_insight(arg2);
-    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	if(arg2.equals("10")) {
     	Select_the_Start_Date_and_End_Date("2001-01-01", "2010-12-31");
     	} else {
@@ -944,7 +935,7 @@ public class CrossSection {
     	assertEquals(expected1[1], "No");
     	assertEquals(replace_checkbox, false);
     	renaming_insight("20");
-    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//input[@name='observations']/following-sibling::span/child::span[text()='All']", 4)).pause(500).click().build().perform();
     	//Select_the_Start_Date_and_End_Date("2001-01-01", "2010-12-31");
     	chart.uncheck_the_checkbox_for_sections("Data Refresh");
@@ -964,7 +955,7 @@ public class CrossSection {
     	assertEquals(functions_checkbox, false);
     	assertEquals(replace_checkbox, false);
     	renaming_insight("21");
-    	CommonFunctionality.getElementBycssSelector(login.driver, ".page-main-header--buttons .download-button__header .button__download-btn", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//input[@name='observations']/following-sibling::span/child::span[text()='All']", 4)).pause(500).click().build().perform();
     	//Select_the_Start_Date_and_End_Date("2001-01-01", "2010-12-31");
     	chart.uncheck_the_checkbox_for_sections("Data Refresh");
@@ -1011,7 +1002,7 @@ public class CrossSection {
 		assertEquals(functions_item_id, first[0]);
         assertEquals(functions_item_id_last_series, second[0]);
     	renaming_insight("10");
-    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	boolean reset = login.driver.findElement(By.xpath("//*[@class='sphere-modal-controls']//*[contains(text(),'Reset')]")).isEnabled();
     	if(reset == true) {
     	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[contains(text(),'Reset')]", 4).click();
@@ -1271,7 +1262,7 @@ public class CrossSection {
 		assertEquals(functions_item_id, first[0]);
         assertEquals(functions_item_id_last_series, second[0]);
     	renaming_insight(arg4);
-    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+    	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
     	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//input[@name='observations']/following-sibling::span/child::span[text()='All']", 4)).pause(500).click().build().perform();
     	//Select_the_Start_Date_and_End_Date("2001-01-01", "2010-12-31");
     	chart.uncheck_the_checkbox_for_sections("Data Refresh");
@@ -1318,7 +1309,7 @@ public class CrossSection {
 	assertEquals(functions_item_id, first[0]);
     assertEquals(functions_item_id_last_series, second[0]);
 	renaming_insight(arg5);
-	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//*[contains(@class,'small-download-btn')]", 4).click();
 	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//input[@name='observations']/following-sibling::span/child::span[text()='All']", 4)).pause(500).click().build().perform();
 	chart.uncheck_the_checkbox_for_sections("Data Refresh");
 	CommonFunctionality.wait(200);
@@ -1344,7 +1335,7 @@ public class CrossSection {
 	String expected = CommonFunctionality.getElementByClassName(login.driver, "series-functions--modal-title-label", 4).getText();
 	if(arg1.equalsIgnoreCase("Download button")) {
 	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__body')]//*[contains(@class,'button__download-btn')]", 4)).click().build().perform();
-	CommonFunctionality.wait(8000);
+	CommonFunctionality.wait(3000);
 	String path= System.getProperty("user.home") + "\\Downloads\\" +"Name your insight.xlsx";
 	File src = new File(path);
 	FileInputStream fis = new FileInputStream(src);

@@ -67,7 +67,10 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
+		//login.driver.navigate().refresh();
 		CommonFunctionality.ExpandRight();
+		//CommonFunctionality.TopMethod();
+		//CommonFunctionality.ResetMethod();
 		login.Log4j.info("searching with " + searchData);
 		CommonFunctionality.getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
 		
@@ -127,7 +130,7 @@ public class Filters {
 				frequencyarr = var.split(";");
 				for (String list : frequencyarr) {
 					login.Log4j.info("clicking on " + list);
-					Thread.sleep(3000);
+					Thread.sleep(1000);
 					login.driver.findElement(By.xpath("//*[@class='text-dots' and contains(text(),'" + list + "')]")).click();
 					
 				}
@@ -353,7 +356,7 @@ public class Filters {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		ul_element = null;
 		try {
-			CommonFunctionality.wait(3000);
+			CommonFunctionality.wait(2000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
@@ -606,7 +609,7 @@ public class Filters {
 												String[] frstDate = Tooltip.split(": ");
 												String first_obs_before = sdf.format(date);
 												if (sdf.parse(frstDate[1])
-														.before(sdf.parse(first_obs_before)) == true || (sdf.parse(frstDate[1]).equals(sdf.parse(first_obs_before)))) {
+														.before(sdf.parse(first_obs_before)) == true) {
 													login.Log4j.info(frstDate[1] + " is less than " + first_obs_before
 															+ "? " + sdf.parse(frstDate[1])
 																	.before(sdf.parse(first_obs_before)));
@@ -799,10 +802,10 @@ public class Filters {
 	public void user_get_the_topics_as(String arg1) throws Throwable {
 		topic = arg1;
 		login.Log4j.info("topic is " + topic);
-//		Thread.sleep(4000);
-//		login.Log4j.info("Clicking on Databases");
-//		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab")));
-//		db.click();
+		Thread.sleep(4000);
+		login.Log4j.info("Clicking on Databases");
+		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab")));
+		db.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 20).click();
 
 	}
@@ -813,15 +816,11 @@ public class Filters {
 		WebElement ele;
 		if (topic.equals("Aggregate: North American Free Trade Agreement (NAFTA)")) {
 			ele = login.driver.findElement(By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
-		} else if(topic.equals("Aggregate: 7 Major OECD Countries") || topic.equals("Foreign Trade")) {
-			ele = login.driver.findElement(
-					By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
-		}
-		else {
+		} else {
 //			ele = login.driver.findElement(
 //					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
 			ele = login.driver.findElement(
-					By.xpath("(//*[contains(@class,'full-expanded open')])[1]/*[2]/*[2]/*[1]/*[1]"));
+					By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
 		}
 		String Actual_Topic = ele.getText();
 		login.Log4j.info(Actual_Topic);

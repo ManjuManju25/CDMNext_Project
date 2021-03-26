@@ -1,7 +1,7 @@
 
 Feature: Table Visual Functionality
 
-  @TableVisual1
+  @TableVisual
   Scenario: TC_TV_01: Verify creating Table visual from View panel by drag and drop
     And create visual tab
     And drag and drop the table visual

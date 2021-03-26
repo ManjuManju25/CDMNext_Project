@@ -47,7 +47,7 @@ Feature: Verifying sprint cases functionality
 
   @Sprint
   Scenario: TC_15496_07: Improve Insights Summary popup
-    And User enters "400969087"
+    And User enters "282464801"
     And Create visual
     Then "Latest changes in your Insight" should be displayed in the summary popup
     And "Replacements" should be displayed in the summary popup

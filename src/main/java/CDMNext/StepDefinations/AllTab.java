@@ -930,11 +930,11 @@ public class AllTab {
 		VerifyDateColumn();
 	}
 
-	/*@And("^Click on View tab$")
+	@And("^Click on View tab$")
 	public void click_on_View_tab() throws Throwable {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@title='Create new View tab']")).click();
-	}*/
+	}
 
 	@And("^Observe the contents of the New Datasets section$")
 	public void observe_the_contents_of_the_New_Datasets_section() throws Throwable {

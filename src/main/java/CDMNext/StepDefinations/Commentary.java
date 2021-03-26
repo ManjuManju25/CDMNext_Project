@@ -1,10 +1,8 @@
 package CDMNext.StepDefinations;
 
-import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.event.KeyEvent;
 //import java.awt.image.BufferedImage;
 //import java.awt.image.RenderedImage;
 import java.io.File;
@@ -71,7 +69,7 @@ public class Commentary {
 
 	@And("^Go to View tab$")
 	public void go_to_View_tab() throws Throwable {
-		CommonFunctionality.CreateNewInsight();
+		//CommonFunctionality.CreateNewInsight();
 		CreateViewTab();
 	}
 
@@ -80,7 +78,7 @@ public class Commentary {
 		String commentary = null;
 		String ViewContainer = null;
 		CommonFunctionality.wait(1500);
-		commentary = "//*[contains(@title,'insert Commentary')]//*[@class='insight-action-panel--btn-icon']//div";
+		commentary = "//*[@title='Insert Commentary']//*[@class='insight-action-panel--btn-icon']//div";
 		ViewContainer = "//*[@class='view-components-over--visuals']//*[@class='view-components-over--visual'][1]";
 		DragAndDrop(commentary, ViewContainer);
 	}
@@ -93,16 +91,12 @@ public class Commentary {
 		} else {
 			Assert.fail("Commentary visual is not created");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Click on \"([^\"]*)\" option on visual header$")
 	public void click_on_option_on_visual_header(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Title")) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-popup='title']", 5).click();
-		} else if (arg1.equalsIgnoreCase("Visual")) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Visual')]", 5).click();
-		}
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 5).click();
 	}
 
 	@Then("^The \"([^\"]*)\" popup should be displayed$")
@@ -128,7 +122,7 @@ public class Commentary {
 			click_on_X_icon_to_close_the_popup();
 		} else if (arg1.equalsIgnoreCase("Table Properties")) {
 			Title_txt = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='mce-reset']//*[@class='mce-title']", 4).getText();
+					.getElementByXpath(login.driver, "(//*[contains(text(),'Table properties')])[2]", 4).getText();
 			if (Title_txt.equals(arg1)) {
 				login.Log4j.info(arg1 + " popup is displayed");
 			} else {
@@ -156,7 +150,7 @@ public class Commentary {
 				Assert.fail(arg1 + " popup is NOT displayed");
 			}
 		}
-		CommonFunctionality.Views_list();
+		//CommonFunctionality.Views_list();
 	}
 
 	@And("^Add some text in the description field$")
@@ -165,8 +159,7 @@ public class Commentary {
 		Description = "SampleText";
 		SwitchToFrame();
 		CommonFunctionality.wait(2000);
-		WebElement DescriptionTxt = CommonFunctionality.getElementByProperty(login.driver, "description", 10);
-		CommonFunctionality.wait(500);
+		WebElement DescriptionTxt = CommonFunctionality.getElementByProperty(login.driver, "description", 4);
 		DescriptionTxt.sendKeys(Keys.chord(Keys.CONTROL, "a"), Description);
 		// login.driver.switchTo().defaultContent();
 		CommonFunctionality.elementHighlight(login.driver, DescriptionTxt);
@@ -182,7 +175,7 @@ public class Commentary {
 
 	@And("^Click on visual title$")
 	public void click_on_visual_title() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-popup='title']", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Title')]", 20).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -241,7 +234,7 @@ public class Commentary {
 		String color = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='" + arg1 + "']", 20)
 				.getCssValue("color");
 		ColorValidation(color);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Choose highlight color is Orange$")
@@ -258,7 +251,7 @@ public class Commentary {
 		String backgroundColor = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@data-name='" + arg1 + "']", 20).getCssValue("background-color");
 		ColorValidation(backgroundColor);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Choose \"([^\"]*)\" from the drop-down for the font size$")
@@ -307,7 +300,7 @@ public class Commentary {
 	@Then("^The visual \"([^\"]*)\" should be in bold style$")
 	public void the_visual_should_be_in_bold_style(String title) throws Throwable {
 		BoldFormatVerification(title);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Click on Italic under style$")
@@ -327,7 +320,7 @@ public class Commentary {
 	@Then("^The visual \"([^\"]*)\" should be \"([^\"]*)\"$")
 	public void the_visual_should_be(String arg1, String format) throws Throwable {
 		StyleSelection(arg1,format);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 		
 	}
 
@@ -339,7 +332,7 @@ public class Commentary {
 			CommonFunctionality.wait(300);
 			alignment.get(i).click();
 			String alignmentValue = login.driver
-					.findElement(By.xpath("(//*[@class='visual-title visual-title--wrapper'])[1]"))
+					.findElement(By.xpath("(//*[@class='visual-title visual-select-area visual-title--wrapper'])[1]"))
 					.getAttribute("style");
 			ListOfalignmentValue.add(alignmentValue);
 		}
@@ -384,7 +377,7 @@ public class Commentary {
 		} else {
 			Assert.fail("Sub Title is displayed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Check the box and enter the sub-title name as \"([^\"]*)\"$")
@@ -392,8 +385,6 @@ public class Commentary {
 		ExpandSubTitle_CheckBox();
 		login.driver.findElement(By.xpath("//*[@name='sub_title']")).clear();
 		login.driver.findElement(By.xpath("//*[@name='sub_title']")).sendKeys(arg1);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 8)
-		.click();
 	}
 
 	@And("^Choose text color is blue for subtitle$")
@@ -401,10 +392,8 @@ public class Commentary {
 		ExpandSubTitle_CheckBox();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@name='sub_title_color']//following::div[1]", 4)
 				.click();
-
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
 				"(//*[contains(@class,'color-picker-selection')]//*[contains(@class,'sp-palette-row-0')]//*[@title='#2b60d0'])[3]");
-		CommonFunctionality.wait(500);
 		click_on_X_icon_to_close_the_popup();
 	}
 
@@ -412,11 +401,9 @@ public class Commentary {
 	public void choose_highlight_color_is_Orange_for_subtitle() throws Throwable {
 		ExpandSubTitle_CheckBox();
 		WebElement highlightEle = CommonFunctionality.getElementByProperty(login.driver, "SubTitle_highlightEle", 4);
-		CommonFunctionality.wait(200);
 		highlightEle.click();
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
 				"(//*[contains(@class,'color-picker-selection')]//*[contains(@class,'sp-palette-row-0')]//*[@title='#fda546'])[4]");
-		CommonFunctionality.wait(500);
 		click_on_X_icon_to_close_the_popup();
 	}
 
@@ -477,14 +464,12 @@ public class Commentary {
 	@And("^Click on left,center and right alignment for sub_title$")
 	public void click_on_left_center_and_right_alignment_for_sub_title() throws Throwable {
 		ExpandSubTitle_CheckBox();
-		CommonFunctionality.wait(500);
 		List<WebElement> alignment = login.driver.findElements(By.xpath("//*[@name='sub_title_align']"));
 
 		for (int i = 0; i < alignment.size(); i++) {
-			CommonFunctionality.wait(500);
 			alignment.get(i).click();
 			String alignmentValue = login.driver
-					.findElement(By.xpath("//*[@class='visual-title--container']/*[2]"))
+					.findElement(By.xpath("(//*[@class='visual-title visual-select-area visual-title--wrapper'])[2]"))
 					.getAttribute("style");
 			ListOfalignmentValue.add(alignmentValue);
 		}
@@ -493,7 +478,7 @@ public class Commentary {
 	@Then("^The sub_title should align to \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\" as user set$")
 	public void the_sub_title_should_align_to_and_as_user_set(String arg1, String arg2, String arg3) throws Throwable {
 		AlignmentValidation(arg1, arg2, arg3,ListOfalignmentValue);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Click on X icon to close the popup$")
@@ -506,10 +491,10 @@ public class Commentary {
 		if (arg1.equalsIgnoreCase("tooltip")) {
 			PopUp_validation(arg1);
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 10).click();
-			CommonFunctionality.Views_list();
+			//CommonFunctionality.Views_list();
 		} else if(arg1.equalsIgnoreCase("title")) {
 			PopUp_validation(arg1);
-			CommonFunctionality.DeleteVisual();
+			//CommonFunctionality.DeleteVisual();
 		}
 	}
 
@@ -578,12 +563,10 @@ public class Commentary {
 			visual_align = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='text-block-editor visual-select-area']", 20);
 		} catch(Exception e) {
-			
 			//Attachments visual align
 			visual_align = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='attachments-visual--container']", 20);
-			
-		} 
+		}
 		if (arg1.equalsIgnoreCase("Left")) {
 			String left = visual_align.getAttribute("x-align");
 			HorizontalAlign(left, arg1, visual_align);
@@ -600,7 +583,7 @@ public class Commentary {
 		if (arg1.equalsIgnoreCase("Right")) {
 			String right = visual_align.getAttribute("x-align");
 			HorizontalAlign(right, arg1, visual_align);
-			CommonFunctionality.DeleteVisual();
+			//CommonFunctionality.DeleteVisual();
 		}
 	}
 
@@ -620,7 +603,7 @@ public class Commentary {
 		} else {
 			Assert.fail("Verification is failed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Check for Background$")
@@ -643,11 +626,11 @@ public class Commentary {
 		} else {
 			Assert.fail("By default " + arg1 + " is not disabled");
 		}
-		CommonFunctionality.DeleteVisual();
-		CommonFunctionality.wait(5000);
-		login.driver.navigate().refresh();
-		CommonFunctionality.Create_New_Insight();
-		CommonFunctionality.ContinueSameInsight();
+//		CommonFunctionality.DeleteVisual();
+//		CommonFunctionality.wait(5000);
+//		login.driver.navigate().refresh();
+//		CommonFunctionality.Create_New_Insight();
+//		CommonFunctionality.ContinueSameInsight();
 	}
 
 	@And("^Enter some data to description field$")
@@ -669,7 +652,6 @@ public class Commentary {
 				"//*[@class='background-control--options']//*[@class='sp-replacer sp-light']", 20).click();
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
 				"(//*[@class='sp-palette-container']//*[@title='#fda546'])[2]");
-		UnselectVisual();
 		click_on_X_icon_to_close_the_popup();
 
 	}
@@ -678,10 +660,10 @@ public class Commentary {
 	public void selected_color_should_be_applied_to_the_visual_background() throws Throwable {
 		UnselectVisual();
 		String Background_color = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='text-block-editor']", 20)
+				.getElementByXpath(login.driver, "//*[@class='text-block-editor visual-select-area']", 20)
 				.getCssValue("background-color");
 		ColorValidation(Background_color);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -697,19 +679,18 @@ public class Commentary {
 
 	@Then("^Selected image should be uploaded and applied to the visual background$")
 	public void selected_image_should_be_uploaded_and_applied_to_the_visual_background() throws Throwable {
-		CommonFunctionality.wait(2000);
 		click_on_X_icon_to_close_the_popup();
 		UnselectVisual();
 		CommonFunctionality.wait(2000);
 		WebElement backGroundImage = login.driver
-				.findElement(By.xpath("//*[@class='text-block-editor']"));
+				.findElement(By.xpath("//*[@class='text-block-editor visual-select-area']"));
 	     backgroundImage(backGroundImage);
 
 	}
 
 	@And("^Click on remove icon for uploaded image$")
 	public void click_on_remove_icon_for_uploaded_image() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='background-image--remove icon--red-cross']", 30)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='background-image--remove icon--red-cross']", 20)
 				.click();
 	}
 
@@ -721,7 +702,7 @@ public class Commentary {
 		} else {
 			Assert.fail("Uploaded image is NOT removed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 		
 	}
 
@@ -737,7 +718,6 @@ public class Commentary {
 				"//*[@class='border-settings--container']/*[1]//*[@class='sp-replacer sp-light']", 20).click();
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
 				"(//*[@class='sp-palette-container']//*[@title='#2b60d0'])[1]");
-		UnselectVisual();
 		click_on_X_icon_to_close_the_popup();
 	}
 
@@ -745,22 +725,22 @@ public class Commentary {
 	public void the_visual_border_should_be_changed_as_per_the_selection() throws Throwable {
 		UnselectVisual();
 		String border_color = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='text-block-editor']", 20)
+				.getElementByXpath(login.driver, "//*[@class='text-block-editor visual-select-area']", 20)
 				.getCssValue("border-color");
 		ColorValidation(border_color);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Select border width (\\d+) for visual border$")
 	public void select_border_width_for_visual_border(int arg1) throws Throwable {
 		// Thread.sleep(1000);
 		BorderCheckbox();
-//		String BorderWidth = CommonFunctionality
-//				.getElementByXpath(login.driver, "//*[@name='visual_area_border_width']", 20)
-//				.getAttribute("aria-valuenow");
-//		int length = arg1 - Integer.parseInt(BorderWidth);
+		String BorderWidth = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@name='visual_area_border_width']", 20)
+				.getAttribute("aria-valuenow");
+		int length = arg1 - Integer.parseInt(BorderWidth);
 
-		for (int i = 1; i <= arg1; i++) {
+		for (int i = 1; i <= length; i++) {
 			Thread.sleep(500);
 			login.driver.findElement(By.xpath(
 					"(//*[@class='border-settings--container']//*[contains(@class,'ui-spinner')]//button[contains(@class,'ui-spinner-up')])[1]"))
@@ -778,20 +758,13 @@ public class Commentary {
 			try {
 			//border width for commentary visual
 			 ActualWidth = login.driver
-					.findElement(By.xpath("//*[@class='text-block-editor']"))
+					.findElement(By.xpath("//*[@class='text-block-editor visual-select-area']"))
 					.getCssValue("border-width");
 			} catch(Exception e) {
-				try {
 				//border width for attachment visual
 				ActualWidth = login.driver
 						.findElement(By.xpath("//*[@class='attachments-visual--container']"))
 						.getCssValue("border-width");
-				}catch(Exception e1) {
-					//border width for filter visual
-					ActualWidth = login.driver
-							.findElement(By.xpath("//*[@class='filter-template--multi-select']"))
-							.getCssValue("border-width");
-				}
 			}
 			login.Log4j.info(ActualWidth);
 			FontSizeValidation(ActualWidth, arg2);
@@ -800,25 +773,18 @@ public class Commentary {
 			try {
 				//Radius for commentary visual
 			 ActualRadius = login.driver
-					.findElement(By.xpath("//*[@class='text-block-editor']"))
+					.findElement(By.xpath("//*[@class='text-block-editor visual-select-area']"))
 					.getCssValue("border-radius");
 			} catch(Exception e) {
-				try {
 				//Radius for Attachment visual
 				ActualRadius = login.driver
 						.findElement(By.xpath("//*[@class='attachments-visual--container']"))
 						.getCssValue("border-radius");
-				}catch(Exception e1) {
-					//Radius for filter visual
-					ActualRadius = login.driver
-							.findElement(By.xpath("//*[@class='filter-template--multi-select']"))
-							.getCssValue("border-radius");
-				}
 			}
 			login.Log4j.info("Actual value is :" + ActualRadius);
 			FontSizeValidation(ActualRadius, arg2);
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Tick checkbox for border and choose radius as (\\d+)$")
@@ -837,29 +803,20 @@ public class Commentary {
 
 	@Then("^The \"([^\"]*)\" border should be applied to the visual$")
 	public void the_border_should_be_applied_to_the_visual(String arg1) throws Throwable {
-		UnselectVisual();
 		click_on_X_icon_to_close_the_popup();
 		UnselectVisual();
 		String BorderStyle;
 		try {
 			//Select border style for commentary visual
-		 BorderStyle = login.driver.findElement(By.xpath("//*[@class='text-block-editor']"))
+		 BorderStyle = login.driver.findElement(By.xpath("//*[@class='text-block-editor visual-select-area']"))
 				.getCssValue("border-style");
 		} catch(Exception e) {
-			try {
-				//Select border style for attachments visual
-				BorderStyle = login.driver.findElement(By.xpath("//*[@class='attachments-visual--container']"))
-						.getCssValue("border-style");
-			} catch(Exception e1) {
-				//Select border style for filter visual
-				BorderStyle = login.driver.findElement(By.xpath("//*[@class='filter-template--multi-select']"))
-						.getCssValue("border-style");
-			}
-			
+			BorderStyle = login.driver.findElement(By.xpath("//*[@class='attachments-visual--container']"))
+					.getCssValue("border-style");
 		}
 		login.Log4j.info("Actual value is " + BorderStyle);
 		FontSizeValidation(BorderStyle, arg1);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 
 	}
 
@@ -873,14 +830,13 @@ public class Commentary {
 
 	@And("^Click on Copy icon$")
 	public void click_on_Copy_icon() throws Throwable {
-		
+		login.driver.switchTo().defaultContent();
 		try {
-			login.driver.switchTo().defaultContent();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Copy']", 12).click();
 		} catch (Exception e) {
-			//click on copy icon in expanded image visual window
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='vis-elem-menu vis-elem-menu__modal']//*[@title='Copy']", 12).click();
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal__close']", 12).click();
+			CommonFunctionality.DeleteVisual();
+			Assert.fail("Copy icon is not displayed ");
+			
 		}
 	}
 
@@ -897,22 +853,9 @@ public class Commentary {
 	@Then("^The visual should be pasted in the insight$")
 	public void the_visual_should_be_pasted_in_the_insight() throws Throwable {
 		CommonFunctionality.wait(1000);
-		try {
-			//paste commentary visual 
-			String ExpectedDiscription = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='text-block-editor']/*", 20)
-					.getText();
-			DiscriptionValidation(ExpectedDiscription);
-		} catch (Exception e) {
-			//paste Histogram visual
-			String ActualText = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 15)
-					.getText();
-			if (ActualText.equals(Histogram.Visual_Title_txt)) {
-				login.Log4j.info("Histogram visual is created in the same insiaght");
-			} else {
-				Assert.fail("Histogram visual is not created in the same insight");
-			}
-		}
+		String ExpectedDiscription = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@class='text-block-editor visual-select-area']/*", 20).getText();
+		DiscriptionValidation(ExpectedDiscription);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -944,20 +887,20 @@ public class Commentary {
 	public void paste_in_word_and_the_text_should_be_pasted_in_word_file() throws Throwable {
 		WriteToWord(Description);
 		readDocFile(Description);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^Paste in ppt and the text should be pasted PPT$")
 	public void paste_in_ppt_and_the_text_should_be_pasted_PPT() throws Throwable {
 		WriteToPPT(Description);
 		ReadPPT(Description);
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Click on Download icon$")
 	public void click_on_Download_icon() throws Throwable {
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.getElementByProperty(login.driver, "DownloadIcon_var", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "DownloadIcon", 20).click();
 	}
 
 	@Then("^Download popup should be appeared$")
@@ -991,7 +934,7 @@ public class Commentary {
 		CommonFunctionality.getTheNewestFile(format);
 		ReadExcel.getTheData(arg1);
 		File_delete.delete();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^Commentary should be downloaded in \"([^\"]*)\" format$")
@@ -1001,7 +944,7 @@ public class Commentary {
 		CommonFunctionality.getTheNewestFile(format);
 		ReadFormatData(Description);
 		File_delete.delete();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^Drop down should be opened with \"([^\"]*)\" and \"([^\"]*)\"$")
@@ -1018,7 +961,7 @@ public class Commentary {
 				Assert.fail(ele + " does not exist");
 			}
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The Visual should be created in new tab on current insight$")
@@ -1032,12 +975,12 @@ public class Commentary {
 		} else {
 			Assert.fail("Commentary Visual is not created for Add option");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^\"([^\"]*)\" and \"([^\"]*)\" confirmation message should be displayed$")
 	public void and_confirmation_message_should_be_displayed(String arg1, String arg2) throws Throwable {
-		CommonFunctionality.wait(300);
+		CommonFunctionality.wait(500);
 		String growlText = CommonFunctionality.getElementByProperty(login.driver, "confirm_popup", 10).getText();
 		 login.Log4j.info(growlText);
 		if (growlText.contains(arg1) && growlText.contains(arg2)) {
@@ -1046,8 +989,8 @@ public class Commentary {
 		} else {
 			Assert.fail(growlText + " is not displayed");
 		}
-//		CommonFunctionality.wait(7000);
-//		CommonFunctionality.DeleteVisual();
+		CommonFunctionality.wait(7000);
+		//CommonFunctionality.DeleteVisual();
 		
 	}
 
@@ -1056,24 +999,12 @@ public class Commentary {
 		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(tabs2.get(1));
 		CommonFunctionality.getElementByXpath(login.driver, "//a[@title='View 1']", 10).click();
-		try {
-			String ActualText = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='text-block-editor']//p", 15)
-					.getText();
-			if (ActualText.equals(Description)) {
-				login.Log4j.info("Commentary visual is created in new insiaght");
-			} else {
-				Assert.fail("Commentary visual is not created ");
-			}
-		} catch (Exception e) {
-			String ActualText = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 15)
-					.getText();
-			if (ActualText.equals(Histogram.Visual_Title_txt)) {
-				login.Log4j.info("Histogram visual is created in new insiaght");
-			} else {
-				Assert.fail("Histogram visual is not created in new insight");
-			}
-
+		String ActualText = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@class='text-block-editor visual-select-area']//p", 15).getText();
+		if (ActualText.equals(Description)) {
+			login.Log4j.info("Commentary visual is created in new insiaght");
+		} else {
+			Assert.fail("Commentary visual is not created ");
 		}
 		CommonFunctionality.DeleteVisual();
 		login.driver.close();
@@ -1105,7 +1036,7 @@ public class Commentary {
 				Assert.fail(arg1 + " is not displayed");
 			}
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	/*@And("^Select visual$")
@@ -1156,14 +1087,14 @@ public class Commentary {
 				break;
 			}
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@SuppressWarnings("deprecation")
 	@And("^Create table$")
 	public void create_table() throws Throwable {
 		WebElement ele = null;
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-container-body mce-stack-layout']/*[1]//*[contains(text(),'Table')]", 15).click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'Table')])[4]", 15).click();
 		List<WebElement> listOfRows = login.driver.findElements(By.xpath("//table//td"));
 		// List<WebElement> listOfRows =
 		// login.driver.findElements(By.xpath("//table//tr"));
@@ -1189,7 +1120,7 @@ public class Commentary {
 			Assert.fail("Table is not created");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Set \"([^\"]*)\" for table \"([^\"]*)\"$")
@@ -1216,14 +1147,11 @@ public class Commentary {
 					.sendKeys(arg2);
 		} else if (arg1.equalsIgnoreCase("cell padding")) {
 			CommonFunctionality
-			.getElementByXpath(login.driver,
-					"(//*[@class='mce-container mce-abs-layout-item mce-formitem'])[3]/*[1]/input", 15).clear();
-			CommonFunctionality
 					.getElementByXpath(login.driver,
 							"(//*[@class='mce-container mce-abs-layout-item mce-formitem'])[3]/*[1]/input", 15)
 					.sendKeys(arg2);
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-container-body mce-abs-layout']//*[contains(text(),'Ok')]", 15).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok')]", 15).click();
 	}
 
 	@Then("^The table \"([^\"]*)\" should be displayed as \"([^\"]*)\"$")
@@ -1250,18 +1178,17 @@ public class Commentary {
 
 		} else if (arg1.equalsIgnoreCase("cell spacing")) {
 			String Actual_Value = login.driver.findElement(By.xpath("//table[@class='table-default mce-item-table']"))
-					.getAttribute("style");
-			String[] border_space = Actual_Value.split("border-spacing:");
+					.getAttribute("cellspacing");
 
-			if (border_space[1].trim().contains(ExpectedValue)) {
-				login.Log4j.info("The table " + arg1 + " is " + border_space[1].trim());
+			if (Actual_Value.equals(ExpectedValue)) {
+				login.Log4j.info("The table " + arg1 + " is " + arg2);
 
 			} else {
 				Assert.fail("The table " + arg1 + " is not matched");
 			}
 		} else if (arg1.equalsIgnoreCase("cell padding")) {
 			String Actual_Value = login.driver.findElement(By.xpath("//table[@class='table-default mce-item-table']"))
-					.getAttribute("data-mce-cell-padding");
+					.getAttribute("cellpadding");
 
 			if (Actual_Value.equals(ExpectedValue)) {
 				login.Log4j.info("The table " + arg1 + " is " + arg2);
@@ -1272,7 +1199,7 @@ public class Commentary {
 		}
 
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Click on Open icon$")
@@ -1282,14 +1209,14 @@ public class Commentary {
 
 	@Then("^The visual should be displayed in maximized window$")
 	public void the_visual_should_be_displayed_in_maximized_window() throws Throwable {
-		if (CommonFunctionality.getElementByXpath(login.driver, "//*[@class='modal-window modal-window__full-screen modal-window__active']", 4)
+		if (CommonFunctionality.getElementByXpath(login.driver, "//*[@class='modal-dialog sphere-modal-dialog ']", 4)
 				.isDisplayed()) {
-			login.Log4j.info("The visual is displayed in maximized window");
+			login.Log4j.info("Ihe visual is displayed in maximized window");
 			CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 15).click();
 		} else {
 			Assert.fail("Fail");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Click on x icon to close$")
@@ -1305,7 +1232,7 @@ public class Commentary {
 		} else {
 			Assert.fail("Fail");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1314,7 +1241,7 @@ public class Commentary {
 		WebElement CaptioncheckBox = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='mce-ico mce-i-checkbox']", 4);
 		new Actions(login.driver).pause(300).moveToElement(CaptioncheckBox).click().build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-container-body mce-abs-layout']//*[contains(text(),'Ok')]", 15).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok')]", 15).click();
 	}
 
 	@Then("^Caption should be added to the table$")
@@ -1327,7 +1254,7 @@ public class Commentary {
 			Assert.fail("Caption is not added");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Uncheck caption for table$")
@@ -1356,7 +1283,7 @@ public class Commentary {
 			Assert.fail("Caption is not removed");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The table properties popup should be closed$")
@@ -1368,7 +1295,7 @@ public class Commentary {
 			Assert.fail("The table properties popup is not closed");
 		}
 
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The table should be deleted from the visual$")
@@ -1380,7 +1307,7 @@ public class Commentary {
 			Assert.fail("The table is not deleted");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The Cell properties popup should be displayed$")
@@ -1393,7 +1320,7 @@ public class Commentary {
 		} else {
 			Assert.fail("Cell properties popup is not displayed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Select cells to merge$")
@@ -1418,7 +1345,7 @@ public class Commentary {
 			Assert.fail("Selected cells not merged");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The cell should be split the cell$")
@@ -1433,7 +1360,7 @@ public class Commentary {
 			Assert.fail("The cell is not splited");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The row should be insertd before the selected table$")
@@ -1448,7 +1375,7 @@ public class Commentary {
 			Assert.fail("The row is not inserted");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 
 	}
 
@@ -1476,7 +1403,7 @@ public class Commentary {
 			Assert.fail("The row is not deleted");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Enter text in a cell$")
@@ -1546,7 +1473,7 @@ public class Commentary {
 			}
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The selected row should be cut$")
@@ -1575,7 +1502,7 @@ public class Commentary {
 			Assert.fail("The Column is not inserted");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The column should be inserted after selected column$")
@@ -1595,7 +1522,7 @@ public class Commentary {
 			Assert.fail("The Column is not deleted");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Choose font size as \"([^\"]*)\"$")
@@ -1617,7 +1544,7 @@ public class Commentary {
 			Assert.fail("The text size is not matched with the " + arg1);
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Choose text color as \"([^\"]*)\"$")
@@ -1645,7 +1572,7 @@ public class Commentary {
 			Assert.fail("The text color is not matched with " + arg1);
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 
 	}
 
@@ -1673,7 +1600,7 @@ public class Commentary {
 		}
 		login.driver.switchTo().defaultContent();
 		if (arg1.equalsIgnoreCase("center")) {
-			CommonFunctionality.DeleteVisual();
+			//CommonFunctionality.DeleteVisual();
 		}
 
 	}
@@ -1703,7 +1630,7 @@ public class Commentary {
 			Assert.fail("Selected list is not displayed");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 
 	}
 
@@ -1720,7 +1647,7 @@ public class Commentary {
 			Assert.fail("Verification failed");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The text should be changed to \"([^\"]*)\"$")
@@ -1736,7 +1663,7 @@ public class Commentary {
 			Assert.fail("The text is not displayed in " + arg1 + " format");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Select image$")
@@ -1760,7 +1687,7 @@ public class Commentary {
 			Assert.fail("Selected image is NOT uploaded");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 	@And("^Get the text from the description field$")
 	public void get_the_text_from_the_description_field() throws Throwable {
@@ -1768,17 +1695,11 @@ public class Commentary {
 		DiscriptionTxt = CommonFunctionality.getElementByProperty(login.driver, "description", 15).getText();
 		login.Log4j.info(DiscriptionTxt);
 		login.driver.switchTo().defaultContent();
-		if(!DiscriptionTxt.isEmpty()) {
-			login.Log4j.info("It allows the comments in description field");
-		} else {
-			Assert.fail("It doesn't allow the comments in description field");
-		}
 	}
 
 	@SuppressWarnings("deprecation")
 	@And("^Right click on visual header$")
 	public void right_click_on_visual_header() throws Throwable {
-		CommonFunctionality.wait(1000);
 		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 6);
 		new Actions(login.driver).pause(500).contextClick(title).build().perform();
 	}
@@ -1793,7 +1714,6 @@ public class Commentary {
 			CommonFunctionality.DeleteVisual();
 			Assert.fail(arg1 + " option is disabled");
 		}
-		
 	}
 
 	@Then("^Commentary should be copied to clipboard$")
@@ -1813,12 +1733,11 @@ public class Commentary {
 				Assert.fail("Verification failed");
 			}
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Paste in insight$")
 	public void paste_in_insight() throws Throwable {
-		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Create new View tab']", 15).click();
 		WebElement Ele = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(@class,'insight-page-view-tab__active')]//a", 10);
@@ -1829,13 +1748,13 @@ public class Commentary {
 	@Then("^Commentary visual should be pasted$")
 	public void commentary_visual_should_be_pasted() throws Throwable {
 		String ExpectedText = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='text-block-editor']//p", 10).getText();
+				.getElementByXpath(login.driver, "//*[@class='text-block-editor visual-select-area']//p", 10).getText();
 		if (DiscriptionTxt.equals(ExpectedText)) {
 			login.Log4j.info("Commentary visual is pasted");
 		} else {
 			Assert.fail("Commentary visual is not pasted");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^Commentary should be cut$")
@@ -1847,24 +1766,18 @@ public class Commentary {
 		} else {
 			Assert.fail("Growl popup is not displayed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^Commentary should be deleted$")
 	public void commentary_should_be_deleted() throws Throwable {
-		try {
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='sphere-modal-controls--right']//*[contains(text(),'Ok')]", 10).click();
-		} catch (Exception e) {
-
-		}
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok')]", 10).click();
 		if (login.driver.findElements(By.xpath("//*[@data-name='title']")).size() == 0) {
-			login.Log4j.info("visual is deleted");
+			login.Log4j.info("Commentary visual is deleted");
 		} else {
-			Assert.fail("visual is not deleted");
+			Assert.fail("Commentary visual is not deleted");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Choose Insert visual as \"([^\"]*)\"$")
@@ -1875,9 +1788,9 @@ public class Commentary {
 
 	@Then("^\"([^\"]*)\" visual should be created in the same view tab$")
 	public void visual_should_be_created_in_the_same_view_tab(String arg1) throws Throwable {
-		CommonFunctionality.wait(4000);
+		CommonFunctionality.wait(2000);
 		if (arg1.equals("Attachments") || arg1.equals("Image") || arg1.equals("Filter") || arg1.equals("Commentary")) {
-			WebElement VisualTitle = login.driver.findElement(By.xpath("//*[@class='view-components']//*[contains(text(),'" + arg1 + "')]"));
+			WebElement VisualTitle = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]"));
 			if (VisualTitle.isDisplayed()) {
 				login.Log4j.info(arg1 + " visual is created");
 			} else {
@@ -1885,21 +1798,21 @@ public class Commentary {
 			}
 		} else {
 			WebElement EditVisual = login.driver
-					.findElement(By.xpath("//*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1]"));
+					.findElement(By.xpath("//*[@class='visual-top-panel--left-controls']//button[1]"));
 			if (EditVisual.getText().contains(arg1)) {
 				login.Log4j.info(arg1 + " visual is created");
 			} else {
 				Assert.fail(arg1 + " visual is not created");
 			}
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^The commentary visual should be created in the same view tab$")
 	public void the_commentary_visual_should_be_created_in_the_same_view_tab() throws Throwable {
 
 		CommonFunctionality.wait(2000);
-		List<WebElement> CommentaryTitle = login.driver.findElements(By.xpath("//*[@class='visual-item-template text-template']//*[@data-name='title']"));
+		List<WebElement> CommentaryTitle = login.driver.findElements(By.xpath("//*[@data-name='title']"));
 		for (int i = 0; i < CommentaryTitle.size(); i++) {
 			if (CommentaryTitle.get(i).getText().contains("Commentary")) {
 				login.Log4j.info("Commentary visual is created");
@@ -1907,7 +1820,7 @@ public class Commentary {
 				Assert.fail("Commentary visual is not created");
 			}
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Again Right click on visual header$")
@@ -1934,7 +1847,7 @@ public class Commentary {
 			Assert.fail("All the contents has not been removed");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@Then("^\"([^\"]*)\" options should be displayed$")
@@ -1950,13 +1863,13 @@ public class Commentary {
 				Assert.fail(ExpectedStr + " is not displayed");
 			}
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Choose Download as \"([^\"]*)\"$")
 	public void choose_Download_as(String arg1) throws Throwable {
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[contains(text(),'Download')]", 20)
+				.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[contains(text(),'Download')]", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"(//ul[@class='dropdown-menu'])[2]//li//span//*[contains(text(),'" + arg1 + "')]", 10).click();
@@ -1964,7 +1877,7 @@ public class Commentary {
 
 	@Then("^Download popup should be appeared with \"([^\"]*)\" tab selection$")
 	public void download_popup_should_be_appeared_with_tab_selection(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(1000);
 		String ViewTab = login.driver.findElement(By.xpath("//*[@class='tabs__tab-item active']")).getText();
 		if (ViewTab.equals(arg1)) {
 			login.Log4j.info("Download popup is appeared");
@@ -1972,7 +1885,7 @@ public class Commentary {
 		} else {
 			Assert.fail("Download popup is not appeared");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1981,19 +1894,20 @@ public class Commentary {
 		//CommonFunctionality.CreateNewInsight();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.linkText("My insights")).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-tab='my']", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-tab='shared']", 10).click();
 		CommonFunctionality.wait(5000);
 		WebElement InsightName = login.driver.findElement(By.xpath("//*[text()='Automation testdata (File options)']/following::a[contains(text(),'Customize')][1]"));
 		//jse.executeScript("arguments[0].scrollIntoView(true);", InsightName);
 		new Actions(login.driver).moveToElement(InsightName).pause(1000).build().perform();
 		InsightName.click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 30).click();
+//		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 10).click();
 
 	}
 
 	@And("^Perform \"([^\"]*)\"$")
 	public void perform(String arg1) throws Throwable {
 		ActualInsight_Name = "Automation_Insight";
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='items-wrapper']//li//span[contains(text(),'" + arg1 + "')]", 30).click();
 		CommonFunctionality
@@ -2019,14 +1933,6 @@ public class Commentary {
 
 	@And("^Delete the created insight with all visuals$")
 	public void delete_the_created_insight_with_all_visuals() throws Throwable {
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.linkText("My insights")).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-tab='my']", 10).click();
-		CommonFunctionality.wait(5000);
-		WebElement InsightName = login.driver.findElement(By.xpath("//*[text()='Automation_Insight']/following::a[contains(text(),'Customize')][1]"));
-		//jse.executeScript("arguments[0].scrollIntoView(true);", InsightName);
-		new Actions(login.driver).moveToElement(InsightName).pause(1000).build().perform();
-		InsightName.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='items-wrapper']//li//span[contains(text(),'Delete')]", 20)
@@ -2047,11 +1953,14 @@ public class Commentary {
 
 	@And("^Perform Share$")
 	public void perform_Share() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 30).click();
-		CommonFunctionality.wait(5000);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='items-wrapper']//li//span[contains(text(),'Shared')]", 20)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 10).click();
+		try {
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='items-wrapper']//li//span[contains(text(),'Share')]", 10).click();
+		} catch (Exception e) {
+			Assert.fail("Share option is not displayed ");
+		}
+		
 	}
 
 	@Then("^Share popup should be opened$")
@@ -2088,18 +1997,17 @@ public class Commentary {
 			// login.Log4j.info(Visuals_list);
 
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='items-wrapper']//li//span[contains(text(),'Download')]", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Views')]", 20).click();
+				"//*[@class='items-wrapper']//li//span[contains(text(),'Download')]", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Views')]", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='sphere-modal-controls--right']//*[contains(text(),'Download')]", 20).click();
-
+				"//*[@class='sphere-modal-controls--right']//*[contains(text(),'Download')]", 10).click();
 	}
 
 	@Then("^All visuals should be downloaded successfully$")
 	public void all_visuals_should_be_downloaded_successfully() throws Throwable {
-		CommonFunctionality.wait(30000);
+		CommonFunctionality.wait(10000);
 		format = "xlsx";
 		CommonFunctionality.getTheNewestFile(format);
 		ReadExcelAndValidate();
@@ -2109,22 +2017,22 @@ public class Commentary {
 	@Then("^The visual should be deleted$")
 	public void the_visual_should_be_deleted() throws Throwable {
 		CommonFunctionality.wait(1500);
-		if(login.driver.findElements(By.xpath("//*[@class='insight-visual insight-visual__can-hover insight-visual__selected']")).size() == 0) {
-			login.Log4j.info("The visual is deleted");
+		if(login.driver.findElements(By.xpath("//*[@class='visual-item-template text-template']")).size() == 0) {
+			login.Log4j.info("The commentary visual is deleted");
 		} else {
-			 Assert.fail("The visual is not deleted");
+			 Assert.fail("The commentary visual is not deleted");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 	@Then("^The popup should be closed and delete visual process should be declined$")
 	public void the_popup_should_be_closed_and_delete_visual_process_should_be_declined() throws Throwable {
 		CommonFunctionality.wait(1500);
-		if(login.driver.findElement(By.xpath("//*[@class='insight-visual insight-visual__can-hover insight-visual__selected']")).isDisplayed()) {
-			login.Log4j.info("The visual is not deleted");
+		if(login.driver.findElement(By.xpath("//*[@class='visual-item-template text-template']")).isDisplayed()) {
+			login.Log4j.info("The commentary visual is not deleted");
 		} else {
-			 Assert.fail("The visual is deleted");
+			 Assert.fail("The commentary visual is deleted");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	void CreateViewTab() {
@@ -2143,12 +2051,9 @@ public class Commentary {
 		String style = null;
 		if (Text_format.equals("italic")) {
 			if (arg1.equalsIgnoreCase("Copyright")) {
-				/*style = CommonFunctionality
-						.getElementByXpath(login.driver, "//*[@class='visual-item-wrapper--text ']", 10)
-						.getCssValue("font-style");*/
 				style = CommonFunctionality
-						.getElementByXpath(login.driver, "//*[@class='visual-item-wrapper--credits-text']/*", 10)
-						.getAttribute("style");
+						.getElementByXpath(login.driver, "//*[@class='visual-item-wrapper--text ']", 10)
+						.getCssValue("font-style");
 			} else {
 				style = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='" + arg1 + "']", 15)
 						.getCssValue("font-style");
@@ -2156,8 +2061,8 @@ public class Commentary {
 		} else if (Text_format.equals("underline")) {
 			if (arg1.equalsIgnoreCase("Copyright")) {
 				style = CommonFunctionality
-						.getElementByXpath(login.driver, "//*[@class='visual-item-wrapper--credits-text']/*", 10)
-						.getAttribute("style");
+						.getElementByXpath(login.driver, "//*[@class='visual-item-wrapper--text ']", 10)
+						.getCssValue("text-decoration");
 			} else {
 				style = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='" + arg1 + "']", 15)
 						.getCssValue("text-decoration");
@@ -2168,9 +2073,9 @@ public class Commentary {
 	void formatVerification(String format, String arg2) throws Exception {
 		login.Log4j.info("Font style is " + format);
 		if (format.equals(arg2) || format.contains(arg2)) {
-			login.Log4j.info("The visual title is shown in " + arg2);
+			login.Log4j.info("The visual title is shown in " + format);
 		} else {
-			Assert.fail("The visual title is not shown in " + arg2);
+			Assert.fail("The visual title is not shown in " + format);
 		}
 		//CommonFunctionality.DeleteVisual();
 	}
@@ -2207,7 +2112,7 @@ void BoldFormatVerification(String arg1) throws Exception {
 		} else {
 			Assert.fail("The title/sub-title is NOT updated");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	void PopUp_validation(String arg1) {
@@ -2229,18 +2134,14 @@ void BoldFormatVerification(String arg1) throws Exception {
 	}
 
 	void AlignmentValidation(String arg1, String arg2, String arg3,List<String> ListOfalignmentValue) throws Exception {
-		arg1 = "flex-start";
+		arg1 = "start";
 		arg2 = "center";
-		arg3 = "flex-end";
+		arg3 = "end";
 
 		for (String ExpectedAlignment : ListOfalignmentValue) {
-			if (ExpectedAlignment.contains(arg1)) {
-				login.Log4j.info("The title is align to " + arg1);
-			} else if (ExpectedAlignment.contains(arg2)) {
-				login.Log4j.info("The title is align to " + arg2);
-			} else if (ExpectedAlignment.contains(arg3)) {
-				login.Log4j.info("The title is align to " + arg3);
-
+			if (ExpectedAlignment.contains(arg1) || ExpectedAlignment.contains(arg2)
+					|| ExpectedAlignment.contains(arg3)) {
+				login.Log4j.info("The title is align to " + arg1 + " OR " + arg2 + " OR " + arg3);
 			} else {
 				Assert.fail("Verification is failed");
 			}
@@ -2290,12 +2191,10 @@ void BoldFormatVerification(String arg1) throws Exception {
 			Assert.fail("Text is not added to description field");
 		}
 		login.driver.switchTo().defaultContent();
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
-	void PasteToExcel(String ExpectedDescription) throws Throwable 
-	{
-		CommonFunctionality.wait(5000);
+	void PasteToExcel(String ExpectedDescription) throws Throwable {
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		String Clipboard_data = (String) clipboard.getData(DataFlavor.stringFlavor);
 		login.Log4j.info(Clipboard_data);
@@ -2306,48 +2205,45 @@ void BoldFormatVerification(String arg1) throws Exception {
 
 		if (file.exists()) {
 			try {
-				file.delete();
-			login.Log4j.info(" Existing file is deleted");
-			 	wb = new XSSFWorkbook();
-				sheet = wb.createSheet("copy");
-
-				// wb = (XSSFWorkbook) WorkbookFactory.create(file);
+				wb = (XSSFWorkbook) WorkbookFactory.create(file);
 			} catch (Exception e) {
 				// e.printStackTrace();
 			}
-			// sheet = wb.createSheet("Copy");
+			sheet = wb.createSheet("Copy");
 		} else {
 			wb = new XSSFWorkbook();
-			sheet = wb.createSheet("copy");
+			sheet = wb.createSheet("sheet1");
 		}
 		sheet = wb.getSheetAt(0);
 		int rownum = 0;
 		int columnCount = 0;
 		Row row = sheet.createRow(rownum);
 		Cell cell = row.createCell(columnCount);
-		
-		sheet.getRow(0).getCell(0);
-		//sheet.getRow(0).getCell(0).setCellValue("Nadiya");
+
+		// sheet.getRow(0).getCell(0);
 		CommonFunctionality.wait(2000);
-		Action seriesOfActions = action.keyDown(Keys.CONTROL).sendKeys(Keys.chord(Keys.CONTROL,Clipboard_data)).keyUp(Keys.CONTROL).build();
+		Action seriesOfActions = action.keyDown(Keys.CONTROL).sendKeys(Clipboard_data).keyUp(Keys.CONTROL).build();
 		seriesOfActions.perform();
-		//action.sendKeys(Keys.chord(Keys.CONTROL,"v",Clipboard_data)).build().perform();
 		// action.keyDown(Keys.CONTROL).sendKeys(Clipboard_data).keyUp(Keys.CONTROL).build().perform();
-						
-		int rowcount = sheet.getLastRowNum();
-
-		for (int i = 0; i <= rowcount; i++) {
-			String ActualDes = sheet.getRow(i).getCell(0).getStringCellValue();
-			if (ExpectedDescription.equalsIgnoreCase(ActualDes)) {
-				login.Log4j.info(ExpectedDescription + " copied to Excel");
-			} else {
-				Assert.fail("Selected series are not copied to Excel");
-			}
-		}
-
+		// sheet.getRow(0).getCell(0);
+		// cell.getCellStyle();
+		// cell.getRow();
+		/*
+		 * robot.keyPress(KeyEvent.VK_CONTROL); robot.keyPress(KeyEvent.VK_V);
+		 * CommonFunctionality.wait(1000); robot.keyRelease(KeyEvent.VK_V);
+		 * robot.keyRelease(KeyEvent.VK_CONTROL); CommonFunctionality.wait(1000);
+		 * robot.keyPress(KeyEvent.VK_ENTER); robot.keyRelease(KeyEvent.VK_ENTER);
+		 */
+		// int rowcount = sheet.getLastRowNum();
+		/*
+		 * for (int i = 0; i <= rowcount; i++) { String ActualDes =
+		 * sheet.getRow(i).getCell(0).getStringCellValue(); if
+		 * (ExpectedDescription.equalsIgnoreCase(ActualDes)) {
+		 * login.Log4j.info(ExpectedDescription + " copied to Excel"); } else {
+		 * Assert.fail("Selected series are not copied to Excel"); } }
+		 */
 		wb.write(fileOut);
 		fileOut.close();
-		
 	}
 
 	void WriteToWord(String ExpectedDescription) throws IOException {
@@ -2387,7 +2283,14 @@ void BoldFormatVerification(String arg1) throws Exception {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		/*
+		 * XWPFDocument docx1 = null; try { docx1 = new XWPFDocument(new
+		 * FileInputStream("Commentary.docx")); } catch (FileNotFoundException e) { //
+		 * TODO Auto-generated catch block e.printStackTrace(); } catch (IOException e)
+		 * { // TODO Auto-generated catch block e.printStackTrace(); } //using
+		 * XWPFWordExtractor Class XWPFWordExtractor we = new XWPFWordExtractor(docx1);
+		 * System.out.println(we.getText());
+		 */
 	}
 
 	void WriteToPPT(String ExpectedDescription) throws IOException {
@@ -2508,7 +2411,7 @@ void BoldFormatVerification(String arg1) throws Exception {
 		} else {
 			Assert.fail("Verification is failed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 	void TitleOFF() throws InterruptedException {
 		if (UnCheck == true) {
@@ -2516,7 +2419,7 @@ void BoldFormatVerification(String arg1) throws Exception {
 		} else {
 			Assert.fail("Title is displayed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 	void SubtitleCheck(String arg1) throws InterruptedException {
 		String sub_title = CommonFunctionality.getElementByProperty(login.driver, "subTitle", 20).getText();
@@ -2525,7 +2428,7 @@ void BoldFormatVerification(String arg1) throws Exception {
 		} else {
 			Assert.fail(sub_title + " is NOT displayed");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 	void backgroundImage(WebElement backGroundImage) throws InterruptedException {
 		CommonFunctionality.wait(2000);
@@ -2536,22 +2439,21 @@ void BoldFormatVerification(String arg1) throws Exception {
 		} else {
 			Assert.fail("Selected image is NOT uploaded");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 	void Radius(int arg1) throws InterruptedException {
 		Thread.sleep(500);
-//		String radius = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='visual_area_border_radius']", 10)
-//				.getAttribute("aria-valuenow");
-//		login.Log4j.info(radius);
-//		int length = arg1 - Integer.parseInt(radius);
+		String radius = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='visual_area_border_radius']", 10)
+				.getAttribute("aria-valuenow");
+		login.Log4j.info(radius);
+		int length = arg1 - Integer.parseInt(radius);
 
-		for (int i = 1; i <= arg1; i++) {
-			Thread.sleep(400);
+		for (int i = 1; i <= length; i++) {
+			Thread.sleep(300);
 			login.driver.findElement(By.xpath("//*[@class='spinner-control'][2]//button[contains(@class,'ui-spinner-up')]")).click();
 //			login.driver.findElement(By.xpath(
 //					"(//*[@class='spinner-control']//button[contains(@class,'ui-spinner-up')])[3]"))
 //					.click();
 		}
-		Thread.sleep(2000);
 	}
 }

@@ -133,7 +133,6 @@ Scenario: TC_Cvision_15335: Check for possibility to hover over smart series too
    
 @SprintCases
 Scenario: TC_Cvision_15662_01: Verify date picker in timeframe for yearly frequency
-   And Setting the date format values in preferences
    And User selects "Frequency" as "Yearly" 
    And User has selected "Yearly" frequency unit
 	 And User has clicked on "Apply filter" 
@@ -212,7 +211,7 @@ Scenario: TC_Cvision_15662_08: Verify date picker in timeframe for mixed frequen
    And Check the display day-unit date picker
    Then Verify that the date picker should display month and yr
    
-@SprintCases	
+@SprintCases
 Scenario: TC_Cvision_15242_02: Verify stroke option for non-line charts
    And Search for the series "360937287"
    And  Click on more actions to create "View as Chart" 
@@ -239,9 +238,9 @@ Scenario: TC_Cvision_15242_04: Verify move to left for per-series
 
 @SprintCases
 Scenario: TC_Cvision_15262_01: Check if the Chart Time within option is synced with timeframe period
-   And Search for the series "1053401"
+   And Search for the series "360937287"
    And  Click on more actions to create "View as Chart" 
-   And In Chart tab click on timeframe date field and change date
+   And Set the range as "2020-01-12" to "2020-01-18"
    And Click "Save period" button
    And Click on "Edit" visual
    And Check Time axis> Time within period
@@ -251,11 +250,11 @@ Scenario: TC_Cvision_15262_01: Check if the Chart Time within option is synced w
 Scenario: TC_Cvision_15262_02: Check if the Chart within option is synced with zoom period
    And Search for the series "360937287"
    And  Click on more actions to create "View as Chart" 
-   And Select "1Y" tab 
+   And Select "1y" tab 
    And Click "Save period" button
    And Get date from chart
    And Click on "Edit" visual
-   #And Check Time axis> Time within period
+   And Check Time axis> Time within period
    Then Time within period should sync with chart "zoom" period
 
 @SprintCases
@@ -404,7 +403,7 @@ Scenario: TC_Cvision_14824: Verify label default in edit visual
    And Choose "labels" > "advanced settings" > "Labels" > "Specific" >
    Then  "Last observations" be selected by default
    
-@SprintCasesre
+@SprintCases
 Scenario: TC_Cvision_15126: Verify validation if no observations are found within requested range in Date
    And Search for the series "408925837" 
    And Select a series on right
@@ -779,14 +778,14 @@ Scenario: TC_13924_02: Cogwheel - Verify Rename
    And Click "Rename" text from cogwheel
    Then  "Rename" option should display
    
-@CDMNextsprintcases3.1re
+@CDMNextsprintcases3.1
 Scenario: TC_13924_03: Cogwheel - Verify Frequency
    And Select few series
    And  Click on more actions to create "View as Table"
    And Click on "Edit Table" visual
    And Check the legend icon at visual and edit visual
    And Click "Frequency" text from cogwheel
-   And Click "Weekly (Distribute)" from the drop down
+   And Click "Monthly (Distribute)" from the drop down
    Then The selected "Frequency" is applied to the table
    
 @CDMNextsprintcases3.1
@@ -860,7 +859,7 @@ Scenario: TC_13671_01: Verify tooltip for 'Contents' icon on footnotes
 @CDMNextsprintcases3.1
 Scenario: TC_13651_01: Verify upload popup behaviour when the upload is completed
    And Click to create an empty visual
-   And Click "insert Image" option from empty list
+   And Click "Insert Image" option from empty list
    And Click "Upload image" button to upload images
    Then Verify the uploaded image comes under iframe
    
@@ -872,7 +871,7 @@ Scenario: TC_16290_01: Verify shadow for notification panel
 @CDMNextsprintcases3.1
 Scenario: TC_14907_01: Verify message for non data visual copy
    And Click to create an empty visual
-   And Click "insert Image" option from empty list
+   And Click "Insert Image" option from empty list
    And Click "Upload image" button to upload images
    And Click "Copy" button in images wizard
    Then  "Image copied" message for non data visual should be displayed
@@ -910,7 +909,7 @@ Scenario: TC_15336_01: Verify mouse hover tooltip when only move the mouse on se
 Scenario: TC_14781_01: Verify creating non data visuals with series
    And Select few series
    And Click to create an empty visual
-   And Click "insert Image" option from empty list
+   And Click "Insert Image" option from empty list
    And Click "Upload image" button to upload images
    And Select my series tab
    Then The non data visuals should not create with series
@@ -1141,40 +1140,40 @@ Scenario: TC_16310_21: Validate language selection - English
    Then The UI should contains "Datasets" for language "English" 
    
 @Preferences
-Scenario: TC_16310_22: Validate language selection - ??
+Scenario: TC_16310_22: Validate language selection - 中文
    And Open preference dropdown
-   And Select "??" as language
+   And Select "中文" as language
    And Open preference dropdown
    And Capture the Selected language
    And Open preference dropdown
-   Then The UI should contains "???" for language "??" 
+   Then The UI should contains "数据集" for language "中文" 
    
 @Preferences
-Scenario: TC_16310_23: Validate language selection - ???
+Scenario: TC_16310_23: Validate language selection - 日本語
    And Open preference dropdown
-   And Select "???" as language
+   And Select "日本語" as language
    And Open preference dropdown
    And Capture the Selected language
    And Open preference dropdown
-   Then The UI should contains "??????" for language "???" 
+   Then The UI should contains "データセット" for language "日本語" 
    
 @Preferences
-Scenario: TC_16310_24: Validate language selection - ???
+Scenario: TC_16310_24: Validate language selection - 한국어
    And Open preference dropdown
-   And Select "???" as language
+   And Select "한국어" as language
    And Open preference dropdown
    And Capture the Selected language
    And Open preference dropdown
-   Then The UI should contains "??? ??" for language "???" 
+   Then The UI should contains "데이터 세트" for language "한국어" 
    
 @Preferences
-Scenario: TC_16310_25: Validate language selection - ???????
+Scenario: TC_16310_25: Validate language selection - Русский
    And Open preference dropdown
-   And Select "???????" as language
+   And Select "Русский" as language
    And Open preference dropdown
    And Capture the Selected language
    And Open preference dropdown
-   Then The UI should contains "??????? ??????" for language "???????" 
+   Then The UI should contains "Массивы данных" for language "Русский" 
    
 @Preferences
 Scenario: TC_16310_26: Validate language selection - Bahasa
@@ -1231,14 +1230,14 @@ Scenario: TC_16310_30: Verify saving with empty date format
 Scenario: TC_16310_31: Verify Number format - Decimal Places
    And Open preference dropdown
    And Clicking on "Number format" option in preference
-   And Click on "Decimal places" in format and enter value as 2
+   And Click on "Decimal places" in format and enter value as 4
    And Refresh page
    And Open preference dropdown
    And Clicking on "Number format" option in preference
    And Get Value of "Decimal separator" in Preference
    And Get Text on "Decimal places" in format
    And Refresh page
-   And Search for the series "5823601"
+   And Select few series
    And Open SSP for the selected series
    And Click on "Data" tab
    And Capture the Timepoint value inside "Data" tab

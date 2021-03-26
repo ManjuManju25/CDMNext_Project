@@ -494,7 +494,6 @@ Feature: Filters
     Given User enters "Construction"
     And Click on "More" filter
     And User selected "Database" as "World Trend Plus"
-    And User has clicked on "Apply filter"
     Then User verify the search results
 
   @FilterSearch
@@ -1078,9 +1077,7 @@ Feature: Filters
     And User selects "Subscribed series only"
     And User has clicked on "Apply filter"
     And User selects "Frequency" as "Quarterly"
-    And User has clicked on "Apply filter"
     And User selects "Source" as "International Monetary Fund - World Economic Outlook"
-    And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selects "Unit" as "MUR"
     And User selected "Database" as "Global Database"
@@ -1092,12 +1089,9 @@ Feature: Filters
     Given User enters "money"
     And Click on "More" filter
     And User selects "Name only"
-    And User has clicked on "Apply filter"
     And User selects "Frequency" as "Quarterly"
-     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selects "Unit" as "MUR"
-     And User has clicked on "Apply filter"
     And User selects "Source" as "International Monetary Fund - World Economic Outlook"
     And User has clicked on "Apply filter"
     And Click on "More" filter

@@ -9,7 +9,6 @@ import java.net.URL;
 //import java.net.URL;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 //import java.util.logging.Level;
@@ -17,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
 //import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -105,13 +103,12 @@ public class login {
 		Invoke_browser();
 		SearchTest.user_has_successful_logged_in();
 		Hooks.before_run();
-		//Hooks.Handle_BrowserNotification_popup();
 	}
 	
 	@After
 	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);
-		//Hooks.after_run();
+		Hooks.after_run();
 		//System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
 		// driver.quit();
 
@@ -295,30 +292,22 @@ public class login {
 					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
 			//disable chrome logs
 			System.setProperty("webdriver.chrome.silentOutput","true");
-//			ChromeOptions options = new ChromeOptions();
-//			options.addArguments("--incognito");
-//			driver = new ChromeDriver(options);
-			HashMap<String, Object> prefs = new HashMap<String, Object>();
-			String download = System.getProperty("user.home") + "\\Downloads";
-			prefs.put("profile.default_content_settings.popups", 0);
-			prefs.put("download.default_directory", download);
-			prefs.put("profile.content_settings.exceptions.automatic_downloads.*.setting", 1);
-			prefs.put("profile.default_content_setting_values.notifications", 2);
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--incognito"); //open in incognito window
-    		options.addArguments("disable-geolocation"); // disable location settings
-    		options.addArguments("disable-infobars"); //disable any infobars
-			options.addArguments("--disable-popup-blocking");
-			options.addArguments("--disable-extensions"); //disable extensions if available
-			options.addArguments("--ignore-certificate-errors"); //ignoring certificate issues if there
-			options.setExperimentalOption("useAutomationExtension", false); // disable automation message
-			options.setExperimentalOption("prefs", prefs);
-			DesiredCapabilities capabilities = new DesiredCapabilities();	
-			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);	 // accept SSL certificates
-			capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true); // accept insecure certificates if any
-			capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT); // accept unexpected alerts if open
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options); //merging Chromeoptions with Desiredcapabilities 
-		    driver = new ChromeDriver(capabilities); // passing capabilities argument into driver constructor
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--incognito");
+			/*// Added this for downloading files into default project folder
+			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			chromePrefs.put("profile.default_content_settings.popups", 0);
+			chromePrefs.put("download.default_directory", System.getProperty("user.dir"));
+			// To disable save password dialog during runtime
+			chromePrefs.put("credentials_enable_service", false);
+			chromePrefs.put("profile.password_manager_enabled", false);
+			options.setExperimentalOption("prefs", chromePrefs);
+			// To disable infobars
+		
+			 options.setExperimentalOption("useAutomationExtension", false);
+			options.setExperimentalOption("excludeSwitches",Collections.singletonList("enable-automation"));*/
+			driver = new ChromeDriver(options);
+		
 		}
 		driver.manage().window().maximize();
 		long implicitWaitTime = Long.parseLong(CONFIG.getProperty("implicitwait"));

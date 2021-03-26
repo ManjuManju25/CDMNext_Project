@@ -14,7 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import CDMNext.util.CommonFunctionality;
-import CDMNext.util.Hooks;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -125,7 +124,6 @@ public class SprintCases {
 
 	@Then("^The modal window should get collapsed into row$")
 	public void the_modal_window_should_get_collapsed_into_row() throws Throwable {
-		CommonFunctionality.wait(1000);
 		String maximize = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Maximize']")))
 				.getAttribute("title");
 		if (minimize.equals(maximize) != true) {
@@ -233,7 +231,6 @@ public class SprintCases {
 	public void should_be_displayed_in_the_summary_popup(String arg1) throws Throwable {
 		Thread.sleep(2000);
 		login.driver.navigate().refresh();
-		Hooks.Handle_BrowserNotification_popup();
 		CommonFunctionality.ContinueSameInsight();
 		WebElement eleChanges = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg1 + "')]", 30);
@@ -286,8 +283,8 @@ public class SprintCases {
 	@Then("^The copied View and its contents should be pasted in the same insight$")
 	public void the_copied_View_and_its_contents_should_be_pasted_in_the_same_insight() throws Throwable {
 		CopyView_Sameinsight();
-		//CommonFunctionality.ContinueSameInsight();
-		//CommonFunctionality.Views_list();
+		CommonFunctionality.ContinueSameInsight();
+		CommonFunctionality.Views_list();
 	}
 
 	@Then("^The copied View and its contents should be pasted in other/new insight$")
@@ -338,8 +335,8 @@ public class SprintCases {
 
 	@And("^User enters series_id \"([^\"]*)\"$")
 	public void user_enters_series_id(String arg1) throws Throwable {
-//		login.driver.navigate().refresh();
-		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
+		login.driver.navigate().refresh();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		login.Log4j.info("searching with " + arg1);
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(arg1);
@@ -355,7 +352,6 @@ public class SprintCases {
 				.click();
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//*[@class='insight-page-menu-views-container--add']"))).click();
-		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-action='world']"))).click();
 	}
 
@@ -367,7 +363,7 @@ public class SprintCases {
 	@And("^Select Gradient$")
 	public void select_Gradient() throws Throwable {
 		Thread.sleep(2000);
-		WebElement Gradient = login.driver.findElement(By.xpath("//*[@class='color-axis-type-select']//*[contains(text(),'Gradient')]"));
+		WebElement Gradient = login.driver.findElement(By.xpath("//*[contains(text(),'Gradient')]"));
 		Gradient.click();
 
 	}
@@ -377,7 +373,7 @@ public class SprintCases {
 		CommonFunctionality.wait(2000);
 		WebElement ele = login.driver.findElement(By.xpath("//*[@name='steps']//*[contains(text(),'0')]"));
 		String GradientDefaultValue = ele.getText();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='gradient-axis--steps-select']", 20).click();
+
 		List<WebElement> range_of_steps = login.driver.findElements(By.xpath("//*[@name='steps']//*"));
 		login.Log4j.info(GradientDefaultValue);
 		login.Log4j.info(arg1);
@@ -525,7 +521,7 @@ public class SprintCases {
 			// ']/*//*[contains(@class,'highcharts-data-labels
 			// highcharts-series-2')]/*[1]/*[1]/*[@class='highcharts-text-outline']")).getText();
 			Taiwan_attribute = login.driver.findElement(By.xpath(
-					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]/*[2]"))
+					"//*[@class='highcharts-container ']/*//*[contains(@class,'highcharts-data-labels highcharts-series-2')]/*[1]/*[1]/*[2]"))
 					.getAttribute("innerHTML");
 			login.Log4j.info(Taiwan_attribute);
 			if (Taiwan_attribute.equals("Taiwan")) {
@@ -711,7 +707,7 @@ public class SprintCases {
 	}
 
 	void CopyView_Sameinsight() throws Exception {
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		String CopyView = login.driver
 				.findElement(By.xpath("//*[@class='insight-page-view-tab--link insight-page-view-tab--link__active']"))
 				.getAttribute("title");

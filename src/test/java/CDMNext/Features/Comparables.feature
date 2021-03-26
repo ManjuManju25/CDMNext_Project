@@ -12,7 +12,7 @@ Scenario: Tc_Comparables_02: Verify navigation to insight explorer window
   Then Should open Insight Explorer window in same tab
 
 #Tc_Comparables_03 & Tc_Comparables_04  
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_03: Verify tooltips available for sections in comparables
     And Clicking "Comparables" icon
     And Right Click "National Accounts" section from Comparables tab
@@ -73,7 +73,7 @@ Scenario: Tc_Comparables_11: Verify copy link in comparables
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Click on "More actions" option in series level
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series 
     Then The Series information popup should be opened for selected series
     
@@ -84,42 +84,42 @@ Scenario: Tc_Comparables_12: Verify opening footnotes in comparables
     And Click on "Open footnote" option in series level
     Then The Footnotes window tab should be opened
     
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_13: Verify right click options for section level's in comparables
     And Clicking "Comparables" icon
     And Right Click "National Accounts" section from Comparables tab
-    Then The "Copy selected links" and "Footnotes" option should present
+    Then The "Copy link(s)" and "Footnotes" option should present
     
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_14: Verify copy link on right click in comparables
     And Clicking "Comparables" icon
     And Right Click "National Accounts" section from Comparables tab
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series
     Then Copied URL should navigate to home page
     
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_15: Verify opening footnotes on right click in comparables
     And Clicking "Comparables" icon
     And Right Click "National Accounts" section from Comparables tab
     And Select the "Footnotes" option
     Then The Footnotes window should be opened
     
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_16: Verify copied link for section level in comparables
     And Clicking "Comparables" icon
     And Clicking "National Accounts" section from Comparables tab
     And Get href of "National Accounts" section from Comparables tab
     And Right Click "National Accounts" section from Comparables tab
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series
     Then Copied URL should paste in a new tab as respective section
     
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_17: Very message for copied link cogwheel popup
     And Clicking "Comparables" icon
     And Right Click "National Accounts" section from Comparables tab
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And Message should display
     Then The "1 URL link(s) copied." message should be popped up
     
@@ -201,7 +201,7 @@ Scenario: Tc_Comparables_32: Verify right click options in table level of compar
     And Click "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" to collapse
     And Get href of "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" section from Comparables tab
     And Right Click "Table: Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" section from Comparables tab
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series
     Then Copied URL should paste in a new tab as respective section
     
@@ -434,7 +434,7 @@ Scenario: Tc_Comparables_60: Verify more options for series in comparables
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Click on "More actions" option in series level
-    Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
+    Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy link(s)" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
     
 @Comparables
 Scenario: Tc_Comparables_61: Verify series selection when click on more options
@@ -443,7 +443,7 @@ Scenario: Tc_Comparables_61: Verify series selection when click on more options
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables  
     And The series should get selected by default       
-    Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
+    Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy link(s)" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
     
 @Comparables
 Scenario: Tc_Comparables_62: Verify add series in series level of comparables
@@ -603,10 +603,10 @@ Scenario: Tc_Comparables_78: Verify copy links in more option
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to series name without click
     And Click on "More actions" button in Comparables
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series 
     And Copy the data after clicking Copy button
-    Then The "Copy selected links" option is shown
+    Then The "Copy link(s)" option is shown
     
 @Comparables
 Scenario: Tc_Comparables_79: Verify series info for more option
@@ -644,23 +644,23 @@ Scenario: Tc_Comparables_82: Verify back button in dataset of more option
     And Select the "Show Dataset" option
     Then The "Back Button" option is shown
   
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_83: Verify right options for topic level's in comparables
     And Clicking "Comparables" icon
     And Click "National Accounts" to collapse
     And Right Click "Global Economic Monitor" section from Comparables tab
-    Then The "Copy selected links" and "Footnotes" option should present
+    Then The "Copy link(s)" and "Footnotes" option should present
     
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_84: Verify copy link(s) in right click for topic level
     And Clicking "Comparables" icon
     And Click "National Accounts" to collapse
     And Right Click "Global Economic Monitor" section from Comparables tab
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series
     Then Copied URL should navigate to home page
     
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_85: Verify footnotes in right click for topic level
     And Clicking "Comparables" icon
     And Click "National Accounts" to collapse
@@ -774,7 +774,7 @@ Scenario: Tc_Comparables_96: Verify copy links in table
     And Get href of "Table: Real GDP: Q-o-Q Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
     And Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" to collapse
     And Right Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series 
     And Copy the data after clicking Copy button
     Then Copied URL should paste in a new tab as respective section
@@ -822,7 +822,7 @@ Scenario: Tc_Comparables_103: Verify right click options for series in comparabl
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available 
+    Then The "Unselect all" , "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy link(s)" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available 
 
 @Comparables
 Scenario: Tc_Comparables_104: Verify unselect all for series level right click comparables
@@ -928,10 +928,10 @@ Scenario: Tc_Comparables_115: Verify copy links for series level right click com
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"  
     And Hovor on to series name without click
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Select the "Copy selected links" option
+    And Select the "Copy link(s)" option
     And URL should be generated for selected series 
     And Copy the data after clicking Copy button
-    Then The "Copy selected links" option is shown
+    Then The "Copy link(s)" option is shown
     
 @Comparables
 Scenario: Tc_Comparables_116: Verify series info for series level right click comparables
@@ -1115,7 +1115,7 @@ Scenario: Tc_Comparables_139: Verify sharing of non sharing related insight
     
 @Comparables
 Scenario: Tc_Comparables_140: Verify series added to new insight in comparables using growl popup
-    And Clicking "Comparables" icon
+     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"
     And Hovor on to i icon without click
     And Clicking + option from series
@@ -1224,8 +1224,8 @@ Scenario: TC_Comparables_155: Verify Add to Watchlist icon in series level
   And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"
   And Hovor on to i icon without click
   And Click on "Add to watchlist" option in series level
-  And Select "popup_notifications" option from watchlist 
-  And Select "email_notifications" option from watchlist
+  And Select "Pop-up notifications" option from watchlist 
+  And Select "Email notifications" option from watchlist
   And Select "Daily" option from watchlist
   And User has clicked on "Apply" 
   And Growl message as "Watchlist changes applied" should display
@@ -1237,8 +1237,8 @@ Scenario: TC_Comparables_156: Verify Add to Watchlist option in series level rig
   And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"
   And Right click the first series
   And Click on "Add to Watchlist" option in series level
-  And Select "popup_notifications" option from watchlist 
-  And Select "email_notifications" option from watchlist
+  And Select "Pop-up notifications" option from watchlist 
+  And Select "Email notifications" option from watchlist
   And Select "Weekly" option from watchlist
   And User has clicked on "Apply" 
   And Growl message as "Watchlist changes applied" should display
@@ -1251,23 +1251,9 @@ Scenario: TC_Comparables_157: Verify Add to Watchlist option in series level mor
   And Hovor on to i icon without click
   And Click on "More actions" option in series level
   And Click on "Add to Watchlist" option in series level
-  And Select "popup_notifications" option from watchlist 
-  And Select "email_notifications" option from watchlist
+  And Select "Pop-up notifications" option from watchlist 
+  And Select "Email notifications" option from watchlist
   And Select "Monthly" option from watchlist
-  And User has clicked on "Apply" 
-  And Growl message as "Watchlist changes applied" should display
-  Then The selected actions should reflect inside watchlist tab
-  
-@Comparables
-Scenario: TC_Comparables_158: Verify Add to Watchlist option in series level more actions
-  And Clicking "Comparables" icon
-  And Expand "National Accounts" > "Global Economic Monitor" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia" > "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia"
-  And Hovor on to i icon without click
-  And Click on "More actions" option in series level
-  And Click on "Add to Watchlist" option in series level
-  And Select "popup_notifications" option from watchlist 
-  And Select "email_notifications" option from watchlist
-  And Select "Hourly" option from watchlist
   And User has clicked on "Apply" 
   And Growl message as "Watchlist changes applied" should display
   Then The selected actions should reflect inside watchlist tab

@@ -36,7 +36,6 @@ public class SearchTest {
 	WebElement SeriesTab;
 	public String TooltipInfo;
 	String keyword,economic_zone;
-	static String SeriesInfo;
 	String[] listwords = null;
 	List<String> ExpectedKeyword = new ArrayList<>();
 	Boolean CreateInsight = false;
@@ -47,17 +46,17 @@ public class SearchTest {
 	@Given("^User has successful logged in$")
 	public static void user_has_successful_logged_in() throws Throwable {
 		if (login.logged_in = false) {
-			//login.Log4j.info("It is in If block");
+			login.Log4j.info("It is in If block");
 			login.Invoke_browser();
 			login.application_login();
 
 		} else if (login.logged_in = true && !SearchTest.logged) {
-			//login.Log4j.info("It is in else If block");
+			login.Log4j.info("It is in else If block");
 			login.application_login();
 			SearchTest.logged = true;
 
 		} else {
-			//login.Log4j.info("If User has already logged in pelase continue....");
+			login.Log4j.info("If User has already logged in pelase continue....");
 		}
 
 	}
@@ -147,11 +146,6 @@ public class SearchTest {
 								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
 								KeywordMatch = true;
 								break;
-							} else if(search_validation(SeriesInfo, keyword) == true){
-								login.Log4j.info(keyword + " is exists in the" + "\n" + SeriesInfo);
-								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
-								KeywordMatch = true;
-								break;
 							} else {
 								ExpectedKeyword.add(keyword);
 								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
@@ -163,7 +157,7 @@ public class SearchTest {
 						 //login.Log4j.info(ExpectedKeyword);
 						// CommonFunctionality.getElementByProperty(login.driver, "closeAction", 6).click();
 							AssertJUnit.fail(ExpectedKeyword + " keywords doesn't exists in the " + TooltipInfo
-									 + "\n\n" + Filters.showdata +"\n\n"+ SeriesInfo);
+									+ " AND " + "\n" + Filters.showdata);
 					 }
 					
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
@@ -469,7 +463,6 @@ public class SearchTest {
 	@Then("^Search for corresponding regions$")
 	public void search_for_corresponding_regions() throws Throwable {
 		String Content = "";
-		CommonFunctionality.wait(2000);
 		SeriesTab = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
@@ -584,10 +577,7 @@ public class SearchTest {
 		WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//*[@class='series-item--name']"));
 		Thread.sleep(1000);
 		ele.click();
-		List<WebElement> series_Info = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("seriesInfo")));
-		for (WebElement list : series_Info) {
-			SeriesInfo = list.getText();
-		}
+
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();

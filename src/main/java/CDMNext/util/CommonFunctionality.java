@@ -1,11 +1,9 @@
-	
-package	CDMNext.util;
+package CDMNext.util;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
-import java.awt.Image;	
-	
+import java.awt.Image;
 import java.awt.Robot;
 import java.io.File;
 import java.io.FileFilter;
@@ -27,8 +25,6 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
@@ -53,8 +49,6 @@ import org.testng.AssertJUnit;
 import org.testng.Reporter;
 
 import CDMNext.StepDefinations.login;
-
-import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 
 public class CommonFunctionality {
@@ -73,10 +67,9 @@ public class CommonFunctionality {
 	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
 	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	public static WebDriverWait wait = new WebDriverWait(login.driver, 1000);
+	public static WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	public static String manage_series_id;
 	public static File theNewestFile = null;
-	public static int width ;
 
 	public static void ClearSelection() throws InterruptedException {
 		Thread.sleep(2000);
@@ -138,7 +131,7 @@ public class CommonFunctionality {
 	public static void CollapseTreeMethod() throws InterruptedException {
 		wait(1000);
 		try {
-			WebElement collapseTree = login.driver.findElement(By.xpath("//*[@title='Collapse tree']"));
+			WebElement collapseTree = login.driver.findElement(By.xpath("//*[contains(text(),'Collapse all')]"));
 			if (collapseTree.isDisplayed()) {
 				collapseTree.click();
 				login.Log4j.info("Clicking on collapse all");
@@ -183,23 +176,19 @@ public class CommonFunctionality {
 		 * 
 		 * }
 		 */
-		try {
-			WebElement selected = getElementByXpath(login.driver,
-					"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",
-					4);
-			if (selected.getAttribute("class").contains("all-selected")) {
-				getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
-			} else if (selected.getAttribute("class").contains("without-data")) {
-				System.out.println("No Series is added in myseries list to delete");
-			} else {
-				WebElement ele = getElementByXpath(login.driver,
-						"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
-				action.moveToElement(ele).pause(1000).click().build().perform();
-				WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
-				new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
-			}
-		} catch (Exception e) {
-
+		WebElement selected = getElementByXpath(login.driver,
+				"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",
+				4);
+		if (selected.getAttribute("class").contains("all-selected")) {
+			getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+		} else if (selected.getAttribute("class").contains("without-data")) {
+			System.out.println("No Series is added in myseries list to delete");
+		} else {
+			WebElement ele = getElementByXpath(login.driver,
+					"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
+			action.moveToElement(ele).pause(1000).click().build().perform();
+			WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
+			new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
 		}
 	}
 
@@ -273,10 +262,10 @@ public class CommonFunctionality {
 
 	public static void AlertPopup() {
 		try {
-			wait(5000);
+			wait(2000);
 			Alert alert = login.driver.switchTo().alert();
 			String alertText = alert.getText();
-		    System.out.println("Alert data: " + alertText);
+			System.out.println("Alert data: " + alertText);
 			alert.dismiss();
 		} catch (Exception e) {
 
@@ -442,8 +431,8 @@ public class CommonFunctionality {
 					wait(1000);
 					new Actions(login.driver).contextClick(view).build().perform();
 					getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 30).click();
-					if (login.driver.findElements(By.xpath("//*[@class='modal-window modal-window__active']//button[contains(text(),'Ok')]")).size() > 0) {
-						getElementByXpath(login.driver, "//*[@class='modal-window modal-window__active']//button[contains(text(),'Ok')]", 10).click();
+					if (login.driver.findElements(By.xpath("//button[contains(text(),'Ok')]")).size() > 0) {
+						getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 10).click();
 					}
 				}
 			}
@@ -511,15 +500,9 @@ public class CommonFunctionality {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
-		wait(500);
 		WebElement element = login.driver.findElement(By.xpath(locator));
 		elementHighlight(login.driver, element);
 		return element;
-	}
-	public static List<WebElement> getElementsByXpath(WebDriver driver, String locator) throws Exception {
-		wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath(locator))));
-		wait.until(ExpectedConditions.elementToBeClickable((By.xpath(locator))));
-		return driver.findElements(By.xpath(locator));
 	}
 
 	public static WebElement getElementBycssSelector(WebDriver driver, String locator, int time)
@@ -657,14 +640,13 @@ public class CommonFunctionality {
 			if (x != 0) {
 				ActualColor = element.getAttribute("title");
 				login.Log4j.info(ActualColor);
-				wait(200);
 				element.click();
 				break;
 			}
 		}
 		return elements;
 	}
-	
+
 	public static void CompareImage(WebDriver driver, String Image1, String Image2) throws Exception {
 		String file1 = Image1;
 		String file2 = Image2;
@@ -753,16 +735,14 @@ public class CommonFunctionality {
 
 	/* Get the newest file for a specific extension */
 
-	public static void getTheNewestFile(String ext)  {
-		wait(15000);
+	public static void getTheNewestFile(String ext) {
+
 		File dir = new File(System.getProperty("user.home") + "\\Downloads");
-		
 		FileFilter fileFilter = new WildcardFileFilter("*." + ext);
 
 		File[] files = dir.listFiles(fileFilter);
-		
-		System.out.println(files.length);
-		if (files.length > 0 || files.length == 0) {
+
+		if (files.length > 0) {
 			/** The newest file comes first **/
 			// System.out.println("^^^^^^^^^^^^Entered");
 			Arrays.sort(files, LastModifiedFileComparator.LASTMODIFIED_REVERSE);
@@ -770,42 +750,22 @@ public class CommonFunctionality {
 			System.out.println("The Successfully downloaded file is " + theNewestFile);
 			String E = getFileExtension(theNewestFile);
 			System.out.println("The Successfully extension file is " + E);
-			String fileSize = getFileSizeKiloBytes(theNewestFile);
-			System.out.println("The file size is " + fileSize);
-			String[] file_size = fileSize.split("kb");
-			Double d = Double.parseDouble(file_size[0]);
-			int Downloaded_FileSize = (int) Math.round(d);
-			System.out.println("The file size is " + Downloaded_FileSize);
 			// return theNewestFile;
-			if (E.equalsIgnoreCase(ext) && Downloaded_FileSize > 10) {
+			if (E.equalsIgnoreCase(ext)) {
 				System.out.println("Downloaded File Format Matched Successfully." + "'" + E + "' <> '" + ext + "'");
-				if (E.equalsIgnoreCase("jpeg")) {
-					// Check JPG format size for Histogram
-					BufferedImage bimg = null;
-					try {
-						bimg = ImageIO.read(files[0]);
-						width = bimg.getWidth();
-						login.Log4j.info(width);
-
-					} catch (IOException e) {
-
-					}
-				} else if(E.equals("pdf")) {
-					
-					if(files[0].getName().contains("Image") || files[0].getName().contains("Name your insight")){
-						System.out.println(theNewestFile + " visual is downloaded in "+ E + " format");
-					}
-				}
-				
+				/*
+				 * String sourceFile = null; try { sourceFile =
+				 * FileUtils.readFileToString(theNewestFile);
+				 * MovingDownloadedFileToTargetLocation(sourceFile,E); } catch (IOException e) {
+				 * // TODO Auto-generated catch block e.printStackTrace(); }
+				 */
 			} else {
 
 				Assert.fail("Downloaded File Format is NOT Matched." + "'" + E + "' <> '" + ext + "'");
 			}
 		}
 	}
-	private static String getFileSizeKiloBytes(File file) {
-		return (double) file.length() / 1024 + "  kb";
-	}
+
 	public static void MovingDownloadedFileToTargetLocation(String sourceFile, String E) throws IOException {
 		// move file from Downloads
 		// File Targetdir = new File(System.getProperty("user.home") + "\\downloads\\" +
@@ -875,23 +835,15 @@ public class CommonFunctionality {
 		driver.findElement(By.cssSelector(arg3)).click();
 	}
 
-	@SuppressWarnings("deprecation")
-	public static void login_as_internal_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4,String arg5)
+	public static void login_as_internal_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)
 			throws Throwable {
 		URL url = new URL(driver.getCurrentUrl());
 		driver.get(url.getProtocol() + "://" + url.getHost() + "/login");
 		driver.findElement(By.cssSelector(arg1)).clear();
-		driver.findElement(By.cssSelector(arg1)).sendKeys(arg4);
+		driver.findElement(By.cssSelector(arg1)).sendKeys("speriyasamy@isimarkets.com");
 		driver.findElement(By.cssSelector(arg2)).clear();
-		driver.findElement(By.cssSelector(arg2)).sendKeys(arg5);
+		driver.findElement(By.cssSelector(arg2)).sendKeys(arg4);
 		driver.findElement(By.cssSelector(arg3)).click();
-		if(login.driver.findElements(By.xpath("//div[@class='movable-modal--header']//div[text()='FocusEconomics Consensus Forecasts']")).size()>0) {
-			boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'show again')]/preceding-sibling::input")).isSelected();
-			if(checkbox == false) {
-				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'show again')]/preceding-sibling::span", 4)).pause(500).click().build().perform();
-			}
-			CommonFunctionality.getElementByXpath(login.driver, "//button[contains(@class,'button__text_purple') and text()='No, take me to CDMNext']", 4).click();
-		}
 	}
 
 	public static void login_as_ceic_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)
@@ -923,7 +875,7 @@ public class CommonFunctionality {
 		ResetMethod();
 		Views_list();
 	}
-	
+
 	public static void Crosssection_Excelverify(WebDriver driver, String Excel1, String Excel2) throws Throwable {
 		String path1 = System.getProperty("user.dir") + "\\Testdata\\" + Excel1 + ".xlsx";
 		String path2 = System.getProperty("user.home") + "\\Downloads\\" + Excel2 + ".xlsx";

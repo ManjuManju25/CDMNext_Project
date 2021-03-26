@@ -133,3 +133,25 @@ Inside setup
 2021-03-26 16:19:55 INFO  Log4j:244 - 
 Inside setup
 2021-03-26 16:19:55 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:23:21 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:23:25 INFO  Log4j:2169 - Font style is italic
+2021-03-26 16:23:25 INFO  Log4j:2171 - The visual title is shown in italic
+2021-03-26 16:23:31 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:23:31 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:23:31 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:26:57 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:27:02 INFO  Log4j:2169 - Font style is underline solid rgb(0, 0, 0)
+2021-03-26 16:27:02 INFO  Log4j:2171 - The visual title is shown in underline
+2021-03-26 16:27:08 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:27:08 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:27:08 INFO  Log4j:247 - Reusing same driver..
+2021-03-26 16:30:33 INFO  Log4j:42 - Image visual is created
+2021-03-26 16:30:36 INFO  Log4j:2238 - The title is align to flex-start
+2021-03-26 16:30:36 INFO  Log4j:2240 - The title is align to center
+2021-03-26 16:30:36 INFO  Log4j:2242 - The title is align to flex-end
+2021-03-26 16:30:36 INFO  Log4j:243 - Logger initialized and writing using logger
+2021-03-26 16:30:36 INFO  Log4j:244 - 
+Inside setup
+2021-03-26 16:30:36 INFO  Log4j:247 - Reusing same driver..

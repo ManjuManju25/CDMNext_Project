@@ -1,7 +1,8 @@
-Feature: Comparing Data in Two Exel sheet
 
-  @UI
-  Scenario: TC_01:Verifying Date drop down for available options
+Feature: Comparing Data in Two Exel sheet 
+   
+@UI
+Scenario: TC_01:Verifying Date drop down for available options
     And User Select Series ID  as "310902301"
     And Select Download button
     And Select Date drop down
@@ -861,7 +862,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download Button
     Then Tabel download should be Sucess
 
-  @FormatVerification1
+  @FormatVerification
   Scenario: TC_116: Verify the Download table visual to PDF Format.
     And User Select  Multiple Series ID  as "310901701;310901801;310902601"
     And Create a Table
