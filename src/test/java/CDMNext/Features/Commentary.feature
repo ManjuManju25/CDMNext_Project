@@ -315,7 +315,7 @@ Feature: Verifying Commentary Visual functionality
     And Paste within the insight
     Then "Data pasted from clipboard" message should be displayed
 
-  @Commentary
+  @Commentary1
   Scenario: TC_Commentary_46:Validate copied visual by pasting to excel
     And Add some text in the description field
     And Click on Copy icon

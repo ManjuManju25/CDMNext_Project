@@ -26,14 +26,14 @@ public class Attachments {
 	@And("^Click on Insert Attachments$")
 	public void click_on_Insert_Attachments() throws Throwable {
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Insert Attachments']", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='attachments']", 20).click();
 		try {
 			Boolean AttachmentTitle = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
 			if (AttachmentTitle == true) {
 				login.Log4j.info("Attachments visual is created");
 			}
 		} catch (Exception e) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Insert Attachments']", 20).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='attachments']", 20).click();
 		}
 	}
 
@@ -54,7 +54,7 @@ public class Attachments {
 		String Attachment = null;
 		String ViewContainer = null;
 		CommonFunctionality.wait(1500);
-		Attachment = "//*[@title='Insert Attachments']//*[@class='insight-action-panel--btn-icon']//div";
+		Attachment = "//*[@data-instance='attachments']//*[@class='insight-action-panel--btn-icon']//div";
 		ViewContainer = "//*[@class='view-components-over--visuals']//*[@class='view-components-over--visual'][1]";
 		commentary.DragAndDrop(Attachment, ViewContainer);
 	}
@@ -139,6 +139,7 @@ public class Attachments {
 
 	@Then("^Set \"([^\"]*)\" to (\\d+) in visual header$")
 	public void set_to_in_visual_header(String arg1, int arg2) throws Throwable {
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Visual')]", 10).click();
 		String Proportiovalue = Integer.toString(arg2);
 		WebElement proportion = CommonFunctionality.getElementByXpath(login.driver,
@@ -256,7 +257,7 @@ public class Attachments {
 	@Then("^The popup should be closed and delete attachments visual process should be declined$")
 	public void the_popup_should_be_closed_and_delete_attachments_visual_process_should_be_declined() throws Throwable {
 		CommonFunctionality.wait(1500);
-		if (login.driver.findElement(By.xpath("//*[contains(@class,'visual-item-template attachments-visual')]"))
+		if (login.driver.findElement(By.xpath("//*[@class='insight-visuals-row--list']"))
 				.isDisplayed()) {
 			login.Log4j.info("The attachments visual is not deleted");
 		} else {
@@ -353,7 +354,7 @@ public class Attachments {
 
 	@Then("^Click on Ok$")
 	public void click_on_Ok() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok')]", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='links-tab--editor']//*[contains(text(),'Ok')]", 8).click();
 	}
 
 	@And("^Click on delete icon for the link$")
@@ -366,9 +367,9 @@ public class Attachments {
 	@Then("^The link should be deleted$")
 	public void the_link_should_be_deleted() throws Throwable {
 		CommonFunctionality.wait(1200);
-		Boolean empty_visual = login.driver.findElement(By.xpath("//*[@class='empty-visual-overlay--content']"))
-				.isDisplayed();
-		if (empty_visual == true) {
+//		Boolean empty_visual = login.driver.findElement(By.xpath("//*[@class='links-tab--list']//*[@class='attachments-item-link--row']"))
+//				.isDisplayed();
+		if (login.driver.findElements(By.xpath("//*[@class='links-tab--list']//*[@class='attachments-item-link--row']")).size() == 0) {
 			login.Log4j.info("The link is deleted");
 		} else {
 			Assert.fail("The link is not deleted");

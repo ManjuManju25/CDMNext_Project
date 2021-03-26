@@ -13,6 +13,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -39,11 +40,9 @@ public class ReleasesTab {
 	    	for(int i=1; i<=timeframes.size();i++) {
 	    		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'time-frame-button')]["+i+"]", 4)).click().build().perform();
 	    		CommonFunctionality.wait(4000);
-	    		if(login.driver.findElements(By.cssSelector(".tree-node.release-scheduler-tree-node")).size()>0) {
-	    			System.out.println("Timeframe buttons are clickable");
-	    		} else {
-	    			sa.fail("Timeframe buttons are not clickable");
-	    		}
+	    		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='nodes-list--tree']")));
+	    		List<WebElement> timeframes1 = login.driver.findElements(By.xpath("//*[@class='nodes-list--tree']"));
+	    		assertEquals(timeframes1.size(), 1);
 	    	}
 	    	login.Log4j.info("The "+arg1+" has been present and verified successfully");
 	    } else {
@@ -56,18 +55,18 @@ public class ReleasesTab {
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		CommonFunctionality.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker-loader")));
+		if(arg1.equalsIgnoreCase("5724301")) {
+			select_timeframe_button("-1Y");
+		}
 	}
 	
 	@SuppressWarnings("deprecation")
 	@And("^Select \"([^\"]*)\" timeframe button$")
 	public void select_timeframe_button(String arg1) throws Throwable {
-		CommonFunctionality.wait(4000);
-		try {
+		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class,'time-frame-button') and contains(text(),'"+arg1+"')]")));
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'time-frame-button') and contains(text(),'"+arg1+"')]", 4)).pause(1000).click().build().perform();
-		} catch (Exception e) {
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'time-frame-button') and contains(text(),'"+arg1+"')]", 4)).pause(1000).click().build().perform();
-		}
-		CommonFunctionality.wait(4000);
+		CommonFunctionality.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker-loader")));
 	}
 
 	@And("^Hovor on to the \"([^\"]*)\" option$")
@@ -147,9 +146,9 @@ public class ReleasesTab {
 	@SuppressWarnings("deprecation")
 	@And("^Expand first Dataset$")
 	public void expand_first_dataset() throws Throwable {
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='release-scheduler-tree-node--title'])[1]/preceding::*[@class='toggle']")));
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='release-scheduler-tree-node--title'])[1]/preceding::*[@class='toggle']", 4)).pause(1000).click().build().perform();
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='release-scheduler-tree-node--title'])[1]/ancestor::div[contains(@class,'full-expanded')]")));
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -244,11 +243,18 @@ public class ReleasesTab {
 	@SuppressWarnings("deprecation")
 	@And("^Select \"([^\"]*)\" option from watchlist$")
 	public void select_option_from_watchlist(String arg1) throws Throwable {
-		CommonFunctionality.wait(1500);
+		CommonFunctionality.wait(1000);
 	    watchlist_dropdown_text.add(arg1);
-	    boolean checkbox = login.driver.findElement(By.xpath("//*[@class='items-wrapper']//*[contains(text(),'"+arg1+"')]/preceding-sibling::input")).isSelected();
+	    if(arg1.equalsIgnoreCase("Daily") || arg1.equalsIgnoreCase("Weekly") || arg1.equalsIgnoreCase("Monthly") || arg1.equalsIgnoreCase("Hourly")) {
+	    boolean frequency = login.driver.findElement(By.xpath("//*[@class='items-wrapper']//*[contains(text(),'"+arg1+"')]/preceding-sibling::input")).isSelected();
+	    if(frequency == false) {
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[contains(text(),'"+arg1+"')]/preceding-sibling::span", 4)).pause(1000).click().build().perform();
+	    }
+	    } else {
+	    boolean checkbox = login.driver.findElement(By.xpath("//*[@class='items-wrapper']//*[@name='"+arg1+"']")).isSelected();
 	    if(checkbox == false) {
-	      new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[contains(text(),'"+arg1+"')]/preceding-sibling::span", 4)).pause(1000).click().build().perform();
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[@name='"+arg1+"']//following-sibling::span[1]", 4)).pause(1000).click().build().perform();
+	    }
 	    }
      }
 	
@@ -276,6 +282,7 @@ public class ReleasesTab {
 	    login.Log4j.info("No release status is selected and has been verified successfully");
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Then("^Verify the \"([^\"]*)\" dataset$")
 	public void verify_the_dataset(String arg1) throws Throwable {
 	    if(arg1.equalsIgnoreCase("expanded")) {
@@ -285,7 +292,9 @@ public class ReleasesTab {
 	    		assertEquals(country_name, country_inside_dataset);
 	    	}
 	    } if(arg1.equalsIgnoreCase("collapsed")) {
-	    	expand_first_dataset();
+	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='release-scheduler-tree-node--title'])[1]/preceding::*[@class='toggle']", 4)).pause(1000).click().build().perform();
+			CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='toggle'])[1]/parent::div")));
+			CommonFunctionality.wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='toggle'])[1]/parent::div")));
 	    	WebElement collapse = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='toggle'])[1]/parent::div", 4);
 	    	if(collapse.getAttribute("class").contains("full-expanded")) {
 	    		fail("Tree is not collapsed");
@@ -380,24 +389,18 @@ public class ReleasesTab {
 		
 	@Then("^Check the download button and search box$")
 	public void check_the_download_button_and_search_box() throws Throwable {
-		WebElement download = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='page-main-header--buttons']//*[contains(@title,'Download')]", 4);
-		if(download.getAttribute("class").contains("download-button__unavailable")) {
-	    	login.Log4j.info("Download button is disabled");
-	    } else {
-	    	sa.fail("Download button is not disabled");
-	    }
-	    String text = CommonFunctionality.getElementByClassName(login.driver,"search-input--selected-count", 4).getAttribute("innerHTML");
-	    int count = Integer.parseInt(text);
-	    if(count == 0) {
-	    	WebElement series_count = CommonFunctionality.getElementBycssSelector(login.driver, "span[title='Edit your result selection']", 4);
-	    	if(!series_count.isDisplayed()) {
-	    		login.Log4j.info("The Series count is not displaying in search box");
-	    	} else {
-	    		sa.fail("Series count is displaying");
-	    	}
-	    } else {
-	    	sa.fail("Count is equal to 0");
-	    }
+		WebElement download = login.driver.findElement(By.xpath("//*[contains(@class,'download-button__header')]//*[contains(@class,'button__download-btn')][1]"));
+		if(download.getAttribute("class").contains("button__disabled")) {
+			login.Log4j.info("Download button is disabled");
+		} else {
+			fail("Download button is not disabled");
+		}
+    	boolean series_count = login.driver.findElement(By.cssSelector("span[title='Edit your result selection']")).isDisplayed();
+    	if(series_count == false) {
+    		login.Log4j.info("The Series count is not displaying in search box");
+    	} else {
+    		sa.fail("Series count is displaying");
+    	}
 	}
 	
 	@Then("^The Dataset level series are added into my series panel$")
@@ -433,7 +436,7 @@ public class ReleasesTab {
 	 	   for(int i=1;i<=footnotes.size();i++) {
 	 		String footnotes_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Footnotes']//following-sibling::ul[@class='dropdown-menu']/li["+i+"]/span/span/b", 4).getText();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Footnotes']//following-sibling::ul[@class='dropdown-menu']/li["+i+"]", 4).click();
-			CommonFunctionality.wait(2000);
+			CommonFunctionality.wait(3000);
 			String breadcrumb = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='footnotes-bread-crumb--title'])[1]", 4).getText();
 			CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 			assertEquals(footnotes_text, breadcrumb);
@@ -537,7 +540,7 @@ public class ReleasesTab {
  		   int actual = Comparables.series_count_inside_first_table;
  		   int expected = chart_series.size();
  		   assertEquals(actual, expected);
- 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+ 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
  		   sa.assertEquals(text, arg1);
 		}
 		}if(arg1.equalsIgnoreCase("Edit Map")) {
@@ -545,7 +548,7 @@ public class ReleasesTab {
   		   int actual = Comparables.series_count_inside_first_table;
   		   int expected = map_series.size();
   		   sa.assertEquals(actual, expected);
-  		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+  		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
   		   assertEquals(text, arg1);
 		}if(arg1.equalsIgnoreCase("Edit Table")) {
 		if (login.driver.findElements(By.xpath("//*[text()='Confirmation']//following::*[contains(text(),'Proceed with')]")).size()>0) {
@@ -558,7 +561,7 @@ public class ReleasesTab {
  		   int actual = Comparables.series_count_inside_first_table;
  		   int expected = table_series.size();
  		   sa.assertEquals(actual, expected);
- 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+ 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
  		   sa.assertEquals(text, arg1);
 		}
 		}if(arg1.equalsIgnoreCase("Edit Pie")) {
@@ -572,7 +575,7 @@ public class ReleasesTab {
  		   int actual = Comparables.series_count_inside_first_table;
  		   int expected = pie_series.size();
  		   sa.assertEquals(actual, expected);
- 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+ 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
  		   sa.assertEquals(text, arg1);
 		}
 		}if(arg1.equalsIgnoreCase("Edit Heat map")) {
@@ -586,7 +589,7 @@ public class ReleasesTab {
  		   int actual = Comparables.series_count_inside_first_table;
  		   int expected = heatmap_series.size();
  		   sa.assertEquals(actual, expected);
- 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+ 		   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
  		   sa.assertEquals(text, arg1);
 		}
 		} if(arg1.equalsIgnoreCase("Edit Histogram")) {
@@ -594,7 +597,7 @@ public class ReleasesTab {
   		   int actual = Comparables.series_count_inside_first_table;
   		   int expected = histogram_series.size();
   		   if(actual != expected || actual == 1) {
-  			 String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')]",4).getText();
+  			 String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",4).getText();
   			 sa.assertEquals(arg1, text);
   		   }
 		}
@@ -637,64 +640,75 @@ public class ReleasesTab {
 	@SuppressWarnings("deprecation")
 	@And("^The date \"([^\"]*)\" difference in timeframe buttons should match$")
 	public void the_date_difference_in_timeframe_buttons_should_match(String arg1) throws Throwable {
-		    CommonFunctionality.wait(500);
-	    	String timeframe_date = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4).getText();
-	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4)).pause(1000).click().build().perform();
-	    	CommonFunctionality.wait(2000);
-	    	if(!timeframe_date.equals("TODAY")) {
-	    	String date = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4).getAttribute("title");
-	    	String start[] = date.split(" - ");
-	    	String stDate = start[0];
-	    	String enDate = start[1];
-	    	Date startDate=new SimpleDateFormat("MM/dd/yyyy").parse(stDate);
-	    	Date endDate=new SimpleDateFormat("MM/dd/yyyy").parse(enDate);
-	    	Calendar sDate = Calendar.getInstance();
-	    	Calendar eDate = Calendar.getInstance();
-	    	sDate.setTime(startDate);
-		    eDate.setTime(endDate);	
-	    	if(timeframe_date.equals("-1Y")) {
-	    		int diff = sDate.get(Calendar.YEAR) - eDate.get(Calendar.YEAR);
-	    		String SubString = timeframe_date.substring(0, 2);
-	    		String actual = String.valueOf(diff);
-	    		sa.assertEquals(actual, SubString);
-    		} if(timeframe_date.equals("-1M") || timeframe_date.equals("-3M")) {
-    			int diff = sDate.get(Calendar.MONTH) - eDate.get(Calendar.MONTH);
-    			String SubString = timeframe_date.substring(0, 2);
-    			String actual = String.valueOf(diff);
-    			sa.assertEquals(actual, SubString);
-    		} if(timeframe_date.equals("-1W")) {
-    			int diff = sDate.get(Calendar.WEEK_OF_YEAR) - eDate.get(Calendar.WEEK_OF_YEAR);
-    			String SubString = timeframe_date.substring(0, 2);
-    			String actual = String.valueOf(diff);
-    			sa.assertEquals(actual, SubString);
-    		} if(timeframe_date.equals("-1D")) {
-    			int diff = sDate.get(Calendar.DAY_OF_MONTH) - eDate.get(Calendar.DAY_OF_MONTH);
-    			String SubString = timeframe_date.substring(0, 2);
-    			String actual = String.valueOf(diff);
-    			sa.assertEquals(actual, SubString);
-    		}  if(timeframe_date.equals("+1Y")) {
-    			int diff = eDate.get(Calendar.YEAR) - sDate.get(Calendar.YEAR);
-    			String SubString = timeframe_date.substring(1, 2);
-    			String actual = String.valueOf(diff);
-    			sa.assertEquals(actual, SubString);
-    		} if(timeframe_date.equals("+1M") || timeframe_date.equals("+3M")) {
-    			int diff = eDate.get(Calendar.MONTH) - sDate.get(Calendar.MONTH);
-    			String SubString = timeframe_date.substring(1, 2);
-    			String actual = String.valueOf(diff);
-    			sa.assertEquals(actual, SubString);
-    		} if(timeframe_date.equals("+1W")) {
-    			int diff = eDate.get(Calendar.WEEK_OF_YEAR) - sDate.get(Calendar.WEEK_OF_YEAR);
-    			String SubString = timeframe_date.substring(1, 2);
-    			String actual = String.valueOf(diff);
-    			sa.assertEquals(actual, SubString);
-    		} if(timeframe_date.equals("+1D")) {
-    			int diff = eDate.get(Calendar.DAY_OF_MONTH) - sDate.get(Calendar.DAY_OF_MONTH);
-    			String SubString = timeframe_date.substring(1, 2);
-    			String actual = String.valueOf(diff);
-    			sa.assertEquals(actual, SubString);
-    		}
-	    		login.Log4j.info("The "+timeframe_date+" has been verified successfully");
-	    	}
+		String timeframe_date = null;
+		if(arg1.equalsIgnoreCase("+1W") || arg1.equalsIgnoreCase("+1M") || arg1.equalsIgnoreCase("+1Y")) {
+	    CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[contains(text(),'"+arg1+"')])[2]")));
+	    timeframe_date = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'"+arg1+"')])[2]", 4).getText();	
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'"+arg1+"')])[2]", 4)).pause(1000).click().build().perform();
+	    } else {
+	    CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'"+arg1+"')]")));
+    	timeframe_date = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4).getText();	
+    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4)).pause(1000).click().build().perform();
+	    }
+    	if(!timeframe_date.equals("TODAY")) {
+    	String date = null;
+    	if(arg1.equalsIgnoreCase("+1W") || arg1.equalsIgnoreCase("+1M") || arg1.equalsIgnoreCase("+1Y")) {
+    	date = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'"+arg1+"')])[2]", 4).getAttribute("title");
+    	} else {
+    	date = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]", 4).getAttribute("title");
+    	}
+    	String start[] = date.split(" - ");
+    	String stDate = start[0];
+    	String enDate = start[1];
+    	Date startDate=new SimpleDateFormat("MM/dd/yyyy").parse(stDate);
+    	Date endDate=new SimpleDateFormat("MM/dd/yyyy").parse(enDate);
+    	Calendar sDate = Calendar.getInstance();
+    	Calendar eDate = Calendar.getInstance();
+    	sDate.setTime(startDate);
+	    eDate.setTime(endDate);	
+    	if(timeframe_date.equals("-1Y")) {
+    		int diff = sDate.get(Calendar.YEAR) - eDate.get(Calendar.YEAR);
+    		String SubString = timeframe_date.substring(0, 2);
+    		String actual = String.valueOf(diff);
+    		sa.assertEquals(actual, SubString);
+		} if(timeframe_date.equals("-1M") || timeframe_date.equals("-3M")) {
+			int diff = sDate.get(Calendar.MONTH) - eDate.get(Calendar.MONTH);
+			String SubString = timeframe_date.substring(0, 2);
+			String actual = String.valueOf(diff);
+			sa.assertEquals(actual, SubString);
+		} if(timeframe_date.equals("-1W")) {
+			int diff = sDate.get(Calendar.WEEK_OF_YEAR) - eDate.get(Calendar.WEEK_OF_YEAR);
+			String SubString = timeframe_date.substring(0, 2);
+			String actual = String.valueOf(diff);
+			sa.assertEquals(actual, SubString);
+		} if(timeframe_date.equals("-1D")) {
+			int diff = sDate.get(Calendar.DAY_OF_MONTH) - eDate.get(Calendar.DAY_OF_MONTH);
+			String SubString = timeframe_date.substring(0, 2);
+			String actual = String.valueOf(diff);
+			sa.assertEquals(actual, SubString);
+		}  if(timeframe_date.equals("+1Y")) {
+			int diff = eDate.get(Calendar.YEAR) - sDate.get(Calendar.YEAR);
+			String SubString = timeframe_date.substring(1, 2);
+			String actual = String.valueOf(diff);
+			sa.assertEquals(actual, SubString);
+		} if(timeframe_date.equals("+1M") || timeframe_date.equals("+3M")) {
+			int diff = eDate.get(Calendar.MONTH) - sDate.get(Calendar.MONTH);
+			String SubString = timeframe_date.substring(1, 2);
+			String actual = String.valueOf(diff);
+			sa.assertEquals(actual, SubString);
+		} if(timeframe_date.equals("+1W")) {
+			int diff = eDate.get(Calendar.WEEK_OF_YEAR) - sDate.get(Calendar.WEEK_OF_YEAR);
+			String SubString = timeframe_date.substring(1, 2);
+			String actual = String.valueOf(diff);
+			sa.assertEquals(actual, SubString);
+		} if(timeframe_date.equals("+1D")) {
+			int diff = eDate.get(Calendar.DAY_OF_MONTH) - sDate.get(Calendar.DAY_OF_MONTH);
+			String SubString = timeframe_date.substring(1, 2);
+			String actual = String.valueOf(diff);
+			sa.assertEquals(actual, SubString);
+		}
+    		login.Log4j.info("The "+timeframe_date+" has been verified successfully");
+    	}
 	}
 	
 	@Then("^The selected actions should reflect inside watchlist tab$")
@@ -739,7 +753,12 @@ public class ReleasesTab {
 	
 	@Then("^The \"([^\"]*)\" for series should present$")
 	public void the_for_series_should_present(String arg1) throws Throwable {
-	   String title = CommonFunctionality.getElementByXpath(login.driver, "//span[@title='"+arg1+"']", 4).getAttribute("title");
+		String title = null;
+	    try {
+		title = CommonFunctionality.getElementByXpath(login.driver, "//span[@title='"+arg1+"']", 4).getAttribute("title");
+	    } catch (Exception e) {
+		title = CommonFunctionality.getElementByXpath(login.driver, "(//span[@title='"+arg1+"'])[2]", 4).getAttribute("title");
+	    }
 	   sa.assertEquals(title, arg1);
 	   login.Log4j.info("The "+arg1+" icon is present and has been verified successfully");
 	}
