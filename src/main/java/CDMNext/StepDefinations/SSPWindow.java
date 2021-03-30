@@ -852,13 +852,9 @@ public class SSPWindow {
 	public void select_tab(String arg1) throws Throwable {
 		CommonFunctionality.wait(4000);
 		try {
-			login.driver
-					.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
-					.click();
+		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']")).click();
 		} catch (StaleElementReferenceException e) {
-			login.driver
-					.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
-					.click();
+		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']")).click();
 		}
 		CommonFunctionality.wait(3000);
 	}

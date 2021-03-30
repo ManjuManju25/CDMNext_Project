@@ -492,7 +492,8 @@ Feature: Synonym Search
     Then User verify keyword search results
 
   @SynonymSearch
-  Scenario: TC_SynonymSearch_99 : Search for an Acronym as "bdo"
+  Scenario: TC_SynonymSearch_99 : Search for an Acronym as "	
+  "
     Given User enters keyword "bdo"
     Then User verify keyword search results
 
@@ -1666,3 +1667,8 @@ Feature: Synonym Search
   #Scenario: TC_KeywordSearch_331 : Search for an Acronym as "粤港澳大湾区：大湾区"
     #Given User enters keyword "粤港澳大湾区：大湾区"
     #Then User verify keyword search results
+
+     @SynonymSearch
+  Scenario: TC_SynonymSearch_332 : Search for an Acronym as "FGV"
+    Given User enters keyword "FGV"
+    Then User verify keyword search results

@@ -43,7 +43,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_07: Verifying Copy link(s) for DB level
     Given Right click on any Database
-    And "Copy link(s)" option should be available
+    And Click on "Copy as URL"
     When Paste it in new tab
     Then The selected "DB" should be highlighted
 
@@ -61,14 +61,13 @@ Feature: Verifying Databases tab functionality
     And User has clicked on "Apply filter"
     And Click on x icon to remove DB
     Then Selected database shold be removed
-
-  #
-  #
+#
   #@DB
   #Scenario: TC_DB_10: Verify closing of insight explorer window
-  #	Given Click on "All insights" option
-  #	When Click on Close
-  #	Then The Insight Explorer popup should be closed
+    #Given Click on "All insights" option
+    #When Click on Close
+    #Then The Insight Explorer popup should be closed
+
   @DB
   Scenario: TC_DB_10: Verifying message if no results found for the search
     Given User enters "UN"
@@ -123,7 +122,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_18: Verifying right click options for Databases level
     Given Right click on any database
-    Then "Set language,Copy link(s),Footnotes" options should be available
+    Then "Set language,Copy selected links,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
 
   @DB
   Scenario Outline: <TCID>: Verifying DB language change in right click
@@ -149,6 +148,7 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_23: Verifying mouse hover options for Topic level
     And Mouse hover on any topic level of data
     Then "Copy link(s)" should be available
+    And Click on "Copy as URL"
     When Paste it in new tab
     Then The selected "topic" should be highlighted
 
@@ -162,12 +162,12 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_25: Verify right click options for Topic level
     And Right click on any topic level of data
-    Then "Copy link(s),Footnotes" options should be available
+    Then "Copy selected links,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
 
   @DB
   Scenario: TC_DB_26: Verifying Copy link(s) for Topic level
     And Right click on any topic level of data
-    And "Copy link(s)" option should be available
+    And Click on "Copy as URL"
     When Paste it in new tab
     Then The selected "topic" should be highlighted
 
@@ -182,6 +182,7 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_28: Verifying mouse hover options for Section level
     And Mouse hover on any Section level of data
     Then "Copy link(s)" should be available
+    And Click on "Copy as URL"
     When Paste it in new tab
     Then The selected "section" should be highlighted
 
@@ -195,12 +196,12 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_30: Verify right click options for section level
     And Right click on any section level of data
-    Then "Copy link(s),Footnotes" options should be available
+    Then "Copy selected links,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
 
   @DB
   Scenario: TC_DB_31: Verifying right click options for Section level
     And Right click on any section level of data
-    And "Copy link(s)" option should be available
+    And Click on "Copy as URL"
     When Paste it in new tab
     Then The selected "section" should be highlighted
 
@@ -215,18 +216,21 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_33: Verifying copy link(s) for table level
     And Mouse hover on any table level
     And "Copy link(s)" should be available
+    And Click on "Copy as URL"
     Then The link should be copied
 
   @DB
   Scenario: TC_DB_34: Verifying confirmation message for Copy link
     And Mouse hover on any table level
     And "Copy link(s)" should be available
-    Then "1 URL link(s) copied." message should be displayed
+    And Click on "Copy as URL"
+    Then "URL link copied." message should be displayed
 
   @DB
   Scenario: TC_DB_35:Validating copied link
     And Mouse hover on any table level
     And "Copy link(s)" should be available
+    And Click on "Copy as URL"
     When Paste it in new tab
     Then The selected "table" should be highlighted
 
@@ -234,12 +238,14 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_36:Verifying Copy link for multiple tables selected
     And Select multiple tables
     And Click on "Copy link(s)"
+    And Click on "Copy selected links"
     Then The links should be generated for selected tables
 
   @DB
   Scenario: TC_DB_37: Validating copied link for multiple tables selection.
     And Select multiple tables
     And Click on "Copy link(s)"
+    And Click on "Copy selected links"
     Then Multiple table's link should be copied to clipboard and open respective "table" should be highlighted when run links one by one in browser
 
   @DB
@@ -450,7 +456,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_61:Verifying Copy link(s) for table level
     And Right click on any table level
-    And Select "Copy link(s)"
+    And Click on "Copy selected links"
     When Paste it in new tab
     Then The selected "table" should be highlighted
 
@@ -661,14 +667,14 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_90:More actions - Verify Copy links for a series
     And Mouse hover on any series level
     And Click on More actions
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     Then URL should be generated for selected series
 
   @DB
   Scenario: TC_DB_91:More actions - Validate copied URL
     And Mouse hover on any series level
     And Click on More actions
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     When Paste it in new tab
     Then The Series information popup should be opened in untitled insight for selected series
 
@@ -676,14 +682,14 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_92:More actions - Verify Copy links for multiple series
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     Then URL should be generated for selected series
 
   @DB
   Scenario: TC_DB_93:More actions - Validate copied URL for multiple series
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     And Paste in clipboard and take url one by one
     Then The SSP window should be opened
 
@@ -940,27 +946,27 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_128:Right click - Verify Copy links for a series
     And Right click on any series
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     Then URL should be generated for selected series
 
   @DB
   Scenario: TC_DB_129:Right click - Validate copied URL
     And Right click on any of the series
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     When Paste it in new tab
     Then The Series information popup should be opened in untitled insight for selected series
 
   @DB
   Scenario: TC_DB_130:Right click - Verify Copy links for multiple series
     And Right click on any series level of data
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     Then URL should be generated for selected series
 
   @DB
   Scenario: TC_DB_131:Right click - Validate copied URL for multiple series
     And Create a "New" insight
     And Right click on any series level of data
-    And Select "Copy link(s)"
+    And Select "Copy selected links"
     And Paste in clipboard and take url one by one
     Then The SSP window should be opened
 

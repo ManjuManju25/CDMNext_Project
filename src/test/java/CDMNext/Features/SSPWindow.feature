@@ -170,23 +170,22 @@ Feature: Verifying SSP window Functionality
     And Open SSP for the series "72903202"
     Then Forecast timepoints should be highlighted in orange color
 
-  #@SSPWindow
-  #Scenario: TC_SSP_27: Verify indicator drop down
-  #And Close the popup
-  #And Add few series to myseries
-  #And hightlight any one series and click on  "i" icon .
-  #And Open SSP window
-  #And clicking indicator drop down
-  #Then Drop down should display indicators list and clicking on specific indicators should navigate to results page
-  #@SSPWindow
-  #Scenario: TC_SSP_28: Verify indicator selection from drop down
-  #And Close the popup
-  #And Resetting the filters
-  #And Add few series to myseries
-  #And hightlight any one series and click on  "i" icon .
-  #And Open SSP window
-  #And clicking indicator drop down
-  #Then Selecting indicator from indicator drop down should show search result in left for same indicator
+  @SSPWindow
+  Scenario: TC_SSP_27: Verify indicator drop down
+    And Add few series to myseries
+    And hightlight any one series and click on  "i" icon .
+    And Open SSP window
+    And clicking indicator drop down
+    Then Drop down should display indicators list and clicking on specific indicators should navigate to results page
+
+  @SSPWindow
+  Scenario: TC_SSP_28: Verify indicator selection from drop down
+    And Add few series to myseries
+    And hightlight any one series and click on  "i" icon .
+    And Open SSP window
+    And clicking indicator drop down
+    Then Selecting indicator from indicator drop down should show search result in left for same indicator
+
   @SSPWindow
   Scenario: TC_SSP_29: Verify source link
     And Add few series to myseries
@@ -241,7 +240,7 @@ Feature: Verifying SSP window Functionality
     And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on chart tab
-    And Select "1y" tab
+    And Select "1Y" tab
     Then Last 1 year data to be plotted in chart visual
 
   @SSPWindow
@@ -250,7 +249,7 @@ Feature: Verifying SSP window Functionality
     And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on chart tab
-    And Select "3y" tab
+    And Select "3Y" tab
     Then Last 3 year data to be plotted in chart visual
 
   @SSPWindow
@@ -259,7 +258,7 @@ Feature: Verifying SSP window Functionality
     And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on chart tab
-    And Select "5y" tab
+    And Select "5Y" tab
     Then Last 5 year data to be plotted in chart visual
 
   @SSPWindow
@@ -302,7 +301,7 @@ Feature: Verifying SSP window Functionality
     And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on chart tab
-    And Select "YTD" , "1y" , "3y" , "5y" , "All" tabs
+    And Select "YTD" , "1Y" , "3Y" , "5Y" , "All" tabs
     Then Last 1 year, 3 year, 5 year, "All" data to be plotted in chart visual
 
   @SSPWindow

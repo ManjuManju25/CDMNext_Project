@@ -105,12 +105,13 @@ public class login {
 		Invoke_browser();
 		SearchTest.user_has_successful_logged_in();
 		Hooks.before_run();
+		//Hooks.Handle_BrowserNotification_popup();
 	}
 	
 	@After
 	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);
-		Hooks.after_run();
+		//Hooks.after_run();
 		//System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
 		// driver.quit();
 
