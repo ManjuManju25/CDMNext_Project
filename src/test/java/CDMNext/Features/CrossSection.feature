@@ -2,7 +2,6 @@ Feature: Verify Cross section functionality
 
 @CrossSection
 Scenario: Tc_Cross Section_01: Verify cross section functionality for series
-   And Login back to internal user with user "speriyasamy@isimarkets.com" and password "Ceic@1234567890" 
    And Open preference dropdown
    And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check" 
    And Clicking on "Keyboard shortcuts" option under user preference be "ON" 
@@ -560,4 +559,3 @@ Scenario: Tc_Cross Section_66: Verify cancel applied function over search pane s
    And Select "series" tab in download popup and click on "fx" option and pass as "CROSSSEC" 
 	 Then The "Cancel button" in Download window has to be present   
 	 And Sort the default series in left pane
-	 And Login back to default execution login

@@ -391,7 +391,7 @@ Feature: Verifying Image visual functionality
     And Click on "Align left","Align center" and "Align right" alignment for image visual
     Then The image visual should align to "left" , "center" and "right" as user set
 
-  @ImageVisual1
+  @ImageVisual
   Scenario: Tc_ImageVisual_43 : Verify download window for image visual with other visuals
     And Go to View tab
     And Create a Chart visual
@@ -405,16 +405,16 @@ Feature: Verifying Image visual functionality
     And Select Data placement as "Rows"
     And Click on "Download"
     Then Image with visuals should be downloaded with selected timeframe and data placement
-    
-      @ImageVisual
+
+  @ImageVisual
   Scenario: Tc_ImageVisual_44 : Verify moving image visula inside the view tab
     And Go to View tab
     And Create a Chart visual
     And Add a series to the chart visual
     And Click on insert Image visual icon
     Then Visuals should be interchanged by drag and drop
-    
-    @ImageVisual
+
+  @ImageVisual
   Scenario: Tc_ImageVisual_45 : Verify image download as views (insight) pdf
     And Go to View tab
     And Create a Chart visual
