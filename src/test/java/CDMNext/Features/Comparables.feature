@@ -12,13 +12,13 @@ Scenario: Tc_Comparables_02: Verify navigation to insight explorer window
   Then Should open Insight Explorer window in same tab
 
 #Tc_Comparables_03 & Tc_Comparables_04  
-@Comparables12
+@Comparables
 Scenario: Tc_Comparables_03: Verify tooltips available for sections in comparables
     And Clicking "Comparables" icon
     And Right Click "National Accounts" section from Comparables tab
     Then The "Copy link(s)" and "Footnotes" option for section should present
   
-@Comparables1234567
+@Comparables
 Scenario: Tc_Comparables_05: Verify changing order of placing comparables with other tab
   And Count the number of texts in header
   And Drag and Drop the Comparables text
@@ -84,44 +84,44 @@ Scenario: Tc_Comparables_12: Verify opening footnotes in comparables
     And Click on "Open footnote" option in series level
     Then The Footnotes window tab should be opened
     
-@Comparables12
-Scenario: Tc_Comparables_13: Verify right click options for section level's in comparables
-    And Clicking "Comparables" icon
-    And Right Click "National Accounts" section from Comparables tab
-    Then The "Copy selected links" and "Footnotes" option should present
-    
-@Comparables12
-Scenario: Tc_Comparables_14: Verify copy link on right click in comparables
-    And Clicking "Comparables" icon
-    And Right Click "National Accounts" section from Comparables tab
-    And Select the "Copy selected links" option
-    And URL should be generated for selected series
-    Then Copied URL should navigate to home page
-    
-@Comparables12
-Scenario: Tc_Comparables_15: Verify opening footnotes on right click in comparables
-    And Clicking "Comparables" icon
-    And Right Click "National Accounts" section from Comparables tab
-    And Select the "Footnotes" option
-    Then The Footnotes window should be opened
-    
-@Comparables12
-Scenario: Tc_Comparables_16: Verify copied link for section level in comparables
-    And Clicking "Comparables" icon
-    And Clicking "National Accounts" section from Comparables tab
-    And Get href of "National Accounts" section from Comparables tab
-    And Right Click "National Accounts" section from Comparables tab
-    And Select the "Copy selected links" option
-    And URL should be generated for selected series
-    Then Copied URL should paste in a new tab as respective section
-    
-@Comparables12
-Scenario: Tc_Comparables_17: Very message for copied link cogwheel popup
-    And Clicking "Comparables" icon
-    And Right Click "National Accounts" section from Comparables tab
-    And Select the "Copy selected links" option
-    And Message should display
-    Then The "1 URL link(s) copied." message should be popped up
+#@Comparables
+#Scenario: Tc_Comparables_13: Verify right click options for section level's in comparables
+    #And Clicking "Comparables" icon
+    #And Right Click "National Accounts" section from Comparables tab
+    #Then The "Copy selected links" and "Footnotes" option should present
+    #
+#@Comparables12
+#Scenario: Tc_Comparables_14: Verify copy link on right click in comparables
+    #And Clicking "Comparables" icon
+    #And Right Click "National Accounts" section from Comparables tab
+    #And Select the "Copy selected links" option
+    #And URL should be generated for selected series
+    #Then Copied URL should navigate to home page
+    #
+#@Comparables12
+#Scenario: Tc_Comparables_15: Verify opening footnotes on right click in comparables
+    #And Clicking "Comparables" icon
+    #And Right Click "National Accounts" section from Comparables tab
+    #And Select the "Footnotes" option
+    #Then The Footnotes window should be opened
+    #
+#@Comparables12
+#Scenario: Tc_Comparables_16: Verify copied link for section level in comparables
+    #And Clicking "Comparables" icon
+    #And Clicking "National Accounts" section from Comparables tab
+    #And Get href of "National Accounts" section from Comparables tab
+    #And Right Click "National Accounts" section from Comparables tab
+    #And Select the "Copy selected links" option
+    #And URL should be generated for selected series
+    #Then Copied URL should paste in a new tab as respective section
+    #
+#@Comparables12
+#Scenario: Tc_Comparables_17: Very message for copied link cogwheel popup
+    #And Clicking "Comparables" icon
+    #And Right Click "National Accounts" section from Comparables tab
+    #And Select the "Copy selected links" option
+    #And Message should display
+    #Then The "1 URL link(s) copied." message should be popped up
     
 @Comparables
 Scenario: Tc_Comparables_18: Verify results for applying filters in comparables
@@ -644,29 +644,29 @@ Scenario: Tc_Comparables_82: Verify back button in dataset of more option
     And Select the "Show Dataset" option
     Then The "Back Button" option is shown
   
-@Comparables12
-Scenario: Tc_Comparables_83: Verify right options for topic level's in comparables
-    And Clicking "Comparables" icon
-    And Click "National Accounts" to collapse
-    And Right Click "Global Economic Monitor" section from Comparables tab
-    Then The "Copy selected links" and "Footnotes" option should present
-    
-@Comparables12
-Scenario: Tc_Comparables_84: Verify copy link(s) in right click for topic level
-    And Clicking "Comparables" icon
-    And Click "National Accounts" to collapse
-    And Right Click "Global Economic Monitor" section from Comparables tab
-    And Select the "Copy selected links" option
-    And URL should be generated for selected series
-    Then Copied URL should navigate to home page
-    
-@Comparables12
-Scenario: Tc_Comparables_85: Verify footnotes in right click for topic level
-    And Clicking "Comparables" icon
-    And Click "National Accounts" to collapse
-    And Right Click "Global Economic Monitor" section from Comparables tab
-    And Select the "Footnotes" option
-    Then The Footnotes window should be opened
+#@Comparables12
+#Scenario: Tc_Comparables_83: Verify right options for topic level's in comparables
+    #And Clicking "Comparables" icon
+    #And Click "National Accounts" to collapse
+    #And Right Click "Global Economic Monitor" section from Comparables tab
+    #Then The "Copy selected links" and "Footnotes" option should present
+    #
+#@Comparables12
+#Scenario: Tc_Comparables_84: Verify copy link(s) in right click for topic level
+    #And Clicking "Comparables" icon
+    #And Click "National Accounts" to collapse
+    #And Right Click "Global Economic Monitor" section from Comparables tab
+    #And Select the "Copy selected links" option
+    #And URL should be generated for selected series
+    #Then Copied URL should navigate to home page
+    #
+#@Comparables12
+#Scenario: Tc_Comparables_85: Verify footnotes in right click for topic level
+    #And Clicking "Comparables" icon
+    #And Click "National Accounts" to collapse
+    #And Right Click "Global Economic Monitor" section from Comparables tab
+    #And Select the "Footnotes" option
+    #Then The Footnotes window should be opened
 @Comparables
 Scenario: Tc_Comparables_86: Verify right click options for table level's in comparables
     And Clicking "Comparables" icon

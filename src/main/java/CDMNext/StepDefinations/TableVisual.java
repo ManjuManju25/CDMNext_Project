@@ -75,6 +75,7 @@ public class TableVisual {
 			Assert.fail("Table visual creating from View panel by drag and drop is Not working fine");
 		}
 		CommonFunctionality.Views_list();
+		 
 	}
 	
 	//TC_TV_02
@@ -998,7 +999,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	//TC_TV_41
 	@And("^Select more than one series to my series tab$")
 	public void select_more_than_one_series_to_my_series_tab() throws Throwable {
-		Thread.sleep(5000);
+		Thread.sleep(35000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 		for (int i = 1; i <= 3; i++) {
 			Thread.sleep(2000);
@@ -1790,7 +1791,17 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	@And("^verify Region selection$")
 	public void verify_Region_selection() throws Throwable {
 		CreateTable();
-		Thread.sleep(2000);
+		
+		try {
+		Thread.sleep(5000);
+		WebDriverWait wait = new WebDriverWait(login.driver, 10);
+		WebElement region = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='visual-table-container']/table/tbody/tr[2]/td")));
+		 Actions action = new Actions(login.driver);
+			WebElement we = login.driver.findElement(By.xpath("//div[@class='visual-table-container']/table/tbody/tr[2]/td"));
+			action.moveToElement(we).pause(5000).build().perform();
+		
+		
+		
 		String x =  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_Region"))).getText();
 		Thread.sleep(2000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
@@ -1814,14 +1825,58 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeriesClose"))).click();
 		 Thread.sleep(2000);
 		CommonFunctionality.Views_list();
+		
+		
+		
+	}
+		
+		
+		
+	catch(Exception E) {
+		 Actions action = new Actions(login.driver);
+			WebElement we = login.driver.findElement(By.xpath("//div[@class='visual-table-container']/table/thead/tr[2]/th[2]"));
+			action.moveToElement(we).pause(5000).build().perform();
+		
+		
+		
+		String x =  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_Region"))).getText();
+		Thread.sleep(2000);
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
+		 Thread.sleep(2000);
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Rename_Edit_series"))).click();
+		 Thread.sleep(1000);
+		 Thread.sleep(2000);
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_series_info_dropdown"))).click();
+		 Thread.sleep(2000);
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Rename_Region"))).click();
+		 String y= login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Rename_firstall_series"))).getAttribute("value");
+		 if(x.equalsIgnoreCase(y)) {
+			 System.out.println("Verified");
+		 }
+		 else {
+			 Assert.fail();
+		 }
+		 Thread.sleep(2000);
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close_window"))).click();
+		 Thread.sleep(2000);
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeriesClose"))).click();
+		 Thread.sleep(2000);
+		CommonFunctionality.Views_list();
+		
+	}
 	}
 		
 	//TC_TV_69
 	@And("^verify Editing series region$")
 	public void verify_Editing_series_region() throws Throwable {
 		CreateTable();
-		Thread.sleep(2000);
-		String x =  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_Region"))).getText();
+		Thread.sleep(5000);
+//		 Actions action = new Actions(login.driver);
+//			WebElement we = login.driver.findElement(By.xpath("//div[@class='visual-table-container']/table/thead/tr[2]/th[2]"));
+//			action.moveToElement(we).build().perform();
+//		
+//		
+//		String x =  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_Region"))).getText();
 		Thread.sleep(2000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("EditSeries"))).click();
 		 Thread.sleep(2000);
@@ -1840,7 +1895,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Rename_firstall_series"))).sendKeys(a);
 		 Thread.sleep(2000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("OKRename"))).click();
-		 Thread.sleep(2000);
+		 Thread.sleep(5000);
 		 
 		 String Y = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_series_rename"))).getText();
 		 String[] parts = Y.split(";");
@@ -1893,9 +1948,23 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		 Thread.sleep(2000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("OKRename"))).click();
 		 Thread.sleep(2000);
+		 
+//		 Actions action = new Actions(login.driver);
+//			WebElement we = login.driver.findElement(By.xpath("//div[@class='visual-table-container']/table/tbody/tr[1]/td"));
+//			action.moveToElement(we).pause(5000).build().perform();
+//		 
+		 
+		 
 		 String Y = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_series_rename"))).getText();
 		 String[] parts = Y.split(";");
 		 String part2 = parts[1].replaceAll("\\s+",""); 
+		 
+//		 Actions action1 = new Actions(login.driver);
+//			WebElement we1 = login.driver.findElement(By.xpath("//div[@class='visual-table-container']/table/thead/tr[2]/th[2]"));
+//			action1.moveToElement(we1).pause(5000).build().perform();
+//		 
+		 
+		 
 		 Thread.sleep(2000);
 		String table_region = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_Region"))).getText();
 		if(part2.equalsIgnoreCase(table_region)) {
@@ -3854,6 +3923,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				
 			}
 			  Thread.sleep(1000);
+			  
+			  CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'View as List')]", 10).click();
+			  Thread.sleep(1000);
 			  CommonFunctionality.Views_list();
 	}
 	
@@ -4034,6 +4106,8 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		 Thread.sleep(500); 
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_titlesetting_checkbox"))).click();
 		 Thread.sleep(500); 
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_titlesetting_close"))).click(); 
+		Thread.sleep(500); 
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_template_icon"))).click();
 		 Thread.sleep(500); 
 			Assert.assertTrue(
@@ -4157,7 +4231,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			 Thread.sleep(500);
 			boolean tabletitle = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).isDisplayed();
 			 System.out.println("tabletitle" + tabletitle);
-			 if(tabletitle==false) {
+			 if(tabletitle==true) {
 				 System.out.println("Verified");
 			 }
 			 else {
@@ -4254,7 +4328,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("DefaultTemplate"))).click();
 			 Thread.sleep(1500);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
-			 
+			 Thread.sleep(1500);
 			 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SkyTemplatemyseriestab"))).getCssValue("background-color");
 			  if(x.contains("rgba(133, 57, 142, 1)")){
 				 System.out.println("Verified");
@@ -4945,11 +5019,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_titlesetting_checkbox"))).click();
 				 Thread.sleep(2000);
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
-				 Thread.sleep(5000);
-				 
-				boolean x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).isDisplayed();
-				 
-				 if (x == false) 
+				 Thread.sleep(8000);
+				if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Tabletitlefornotitle"))).size() ==0)
+				
 					{
 						System.out.println("Verified");
 					} else 
@@ -5022,7 +5094,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			 Thread.sleep(2000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 			 Thread.sleep(5000); 
-			 String z = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).getText();
+			 String z = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Tabletitlefornotitle"))).getText();
 			 if(input.equalsIgnoreCase(z)) {
 				 System.out.println("Verified");
 			 }else {
@@ -5214,7 +5286,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			  Thread.sleep(2000);
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 				 Thread.sleep(2000);
-				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).getCssValue("background-color");
+				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Tabletitlefornotitle"))).getCssValue("background-color");
 				 System.out.println("Verified X as " + x);
 				 if(x.contains("rgba(253, 165, 70, 1)")){
 					 System.out.println("Verified");
@@ -5247,7 +5319,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	        Thread.sleep(2000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 			 Thread.sleep(3000); 
-			 String y = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).getCssValue("font-size");
+			 String y = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Tabletitlefornotitle"))).getCssValue("font-size");
 			 String wafter = y.replaceAll("\\D", "");
 			 int expectedwidth = Integer.parseInt(wafter);
 			 System.out.println("Border width" + expectedwidth);
@@ -5312,7 +5384,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			   Thread.sleep(2000);
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 				 Thread.sleep(2000);
-				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).getCssValue("font-style");
+				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Tabletitlefornotitle"))).getCssValue("font-style");
 				 System.out.println("Verified X as " + x);
 				 if(x.contains("italic")){
 					 System.out.println("Verified");
@@ -5340,7 +5412,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			   Thread.sleep(2000);
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 				 Thread.sleep(2000);
-				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).getCssValue("text-decoration");
+				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Tabletitlefornotitle"))).getCssValue("text-decoration");
 				 System.out.println("Verified X as " + x);
 				 if(x.contains("underline")){
 					 System.out.println("Verified");
@@ -5368,7 +5440,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 			   Thread.sleep(2000);
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 				 Thread.sleep(2000);
-				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_title"))).getCssValue("text-align");
+				 String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Tabletitlefornotitle"))).getCssValue("text-align");
 				 System.out.println("Verified X as " + x);
 				 if(x.contains("left")){
 					 System.out.println("Verified");
@@ -5833,8 +5905,8 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		        Thread.sleep(1000);
 		        String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_zebra_backround"))).getCssValue("background-color");
 		       
-		 
-		        if(y==true && x.contains("rgba(249, 246, 251, 1)")) {
+		        System.out.println("Verified "+x+y); 
+		        if(y==true && x.contains("rgba(168, 109, 175, 1)")) {
 		        	 System.out.println("Verified"); 
 		        }
 		        else {
@@ -5865,7 +5937,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	System.out.println("Verified x as" + x);
 	    	Thread.sleep(2000);
 
-	    	if(x.contains("rgba(255, 255, 255, 1)")){
+	    	if(x.contains("rgba(168, 109, 175, 1)")){
 	    		System.out.println("Verified");
 	    	}else { 
 	    		Assert.fail();
@@ -5895,7 +5967,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	System.out.println("Verified x as" + x);
 	    	Thread.sleep(2000);
 
-	    	if(x.contains("rgba(255, 91, 77, 1)")){
+	    	if(x.contains("rgba(168, 109, 175, 1)")){
 	    		System.out.println("Verified");
 	    	}else { 
 	    		Assert.fail();
@@ -5925,11 +5997,11 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	Thread.sleep(500); 
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();	
 	    	Thread.sleep(2000);
-	    	String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_zebra_backround"))).getCssValue("background-color");
+	    	String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_zebra_backroundalter"))).getCssValue("background-color");
 	    	System.out.println("Verified x as" + x);
 	    	Thread.sleep(2000);
 
-	    	if(x.contains("rgba(255, 255, 255, 1)")){
+	    	if(x.contains("(255, 255, 255, 1)")){
 	    		System.out.println("Verified");
 	    	}else { 
 	    		Assert.fail();
@@ -6465,7 +6537,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	 Thread.sleep(2000);
 		    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_close"))).click();
 		    	Thread.sleep(8000);
-	       boolean x =login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Edit_table_copyright_none"))).size()==0;
+	       boolean x =login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Edit_table_copyright_none"))).size()!=0;
 	       System.out.println("Verified x as" + x);
 	       if(x ==false && y == false) {
 		        	System.out.println("Verified");
@@ -6476,7 +6548,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		    	Thread.sleep(2000);
 		    	CommonFunctionality.Views_list();
 		    	Thread.sleep(2000);
-		    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
+		    	//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reset"))).click();
 	    
 	    }
 	    
@@ -7095,11 +7167,11 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_format"))).isDisplayed());
 	    	String x=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_format"))).getText();
 	    	
-	    	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY");
+	    	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/YYYY");
 	    	   LocalDateTime now = LocalDateTime.now();
 	    	  
-	    	   System.out.println(dtf.format(now));
-	    	  
+	    	   //System.out.println(dtf.format(now));
+	    	   System.out.println(dtf.format(now) + x);
 	    	   
 	    	   if( x.equalsIgnoreCase(dtf.format(now))){
 	    		   System.out.println("Verified");
@@ -7123,8 +7195,11 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	Thread.sleep(2000);  
-	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_dropdown"))).click();
+	    	Thread.sleep(5000);  
+	    	WebElement drop = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_dropdown")));
+	    	Actions act = new Actions(login.driver);
+	    		act.moveToElement(drop).click().build().perform();	
+	    	
 	    	Thread.sleep(2000);  
 	    	Assert.assertTrue(
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_list"))).isDisplayed());
@@ -7159,7 +7234,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	Thread.sleep(8000);
 	    	List<WebElement> Dates = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Edit_table_date_Ascending_dates")));
 	    	ArrayList<Integer> ar = new ArrayList<Integer>();
-	    	for(int i=0;i<Dates.size();i++) { 
+	    	for(int i=9;i<Dates.size();i++) { 
 	    		String GotDates = Dates.get(i).getText();
 	    	//	String[] x1 =GotDates.split("/");
 	    		int q = Integer.parseInt(GotDates);
@@ -7207,7 +7282,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	
 	    	try {
 	    	
-	    	for(int i=0;i<Dates.size();i++) { 
+	    	for(int i=9;i<Dates.size();i++) { 
 	    		String GotDates = Dates.get(i).getText();
 	    		//String[] x1 =GotDates.split("/");
 	    		int q = Integer.parseInt(GotDates);
@@ -7235,7 +7310,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	catch(StaleElementReferenceException e) {
 	    		
 	    		
-	    		for(int i=0;i<Dates.size();i++) 
+	    		for(int i=9;i<Dates.size();i++) 
 	    	{ 
 	    			
 		    		String GotDates = Dates.get(i).getText();
@@ -7271,9 +7346,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_dropdown"))).click();
 	    	Thread.sleep(2000);  
-	    	WebElement Edit_table_custom_radio = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_radio")));
-			 Actions border = new Actions(login.driver);
-					 border.moveToElement(Edit_table_custom_radio).pause(5000).click().build().perform();
+//	    	WebElement Edit_table_custom_radio = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_radio")));
+//			 Actions border = new Actions(login.driver);
+//					 border.moveToElement(Edit_table_custom_radio).pause(5000).click().build().perform();
 			 Thread.sleep(3000); 
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	    	Thread.sleep(8000);  
@@ -7303,9 +7378,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_dropdown"))).click();
 	    	Thread.sleep(2000);  
-	    	WebElement Edit_table_custom_radio = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_radio")));
-	    	Actions custom_radio = new Actions(login.driver);
-	    	custom_radio.moveToElement(Edit_table_custom_radio).pause(5000).click().build().perform();
+//	    	WebElement Edit_table_custom_radio = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_radio")));
+//	    	Actions custom_radio = new Actions(login.driver);
+//	    	custom_radio.moveToElement(Edit_table_custom_radio).pause(5000).click().build().perform();
 	    	Thread.sleep(3000); 
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_search"))).clear();
 	    	WebElement Edit_table_custom_search = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_search")));
@@ -7317,7 +7392,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	    	Thread.sleep(8000);  
 
-	    	String x=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_Ascending_dates"))).getText();
+	    	String x=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_search_dates"))).getText();
 	    	int sizedate =x.length();
 
 	    	if( sizedate == sizepattern){
@@ -7342,9 +7417,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_date_dropdown"))).click();
 	    	Thread.sleep(2000);  
-	    	WebElement Edit_table_custom_radio = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_radio")));
-	    	Actions custom_radio = new Actions(login.driver);
-	    	custom_radio.moveToElement(Edit_table_custom_radio).pause(5000).click().build().perform();
+//	    	WebElement Edit_table_custom_radio = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_radio")));
+//	    	Actions custom_radio = new Actions(login.driver);
+//	    	custom_radio.moveToElement(Edit_table_custom_radio).pause(5000).click().build().perform();
 	    	Thread.sleep(3000); 
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_search"))).clear();
 	    	WebElement Edit_table_custom_search = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_custom_search")));
@@ -7590,9 +7665,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    
 
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Value"))).click();
@@ -7600,7 +7673,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	Thread.sleep(2000);  
 
 	    	for(int i=0;i<=7;i++) {
-	    		String x =login.driver.findElement(By.xpath("(//input[@class='form--control form--control__xs ui-spinner-input'])[2]"))
+	    		String x =login.driver.findElement(By.xpath("(//input[@class='form--control form--control__xs ui-spinner-input'])[1]"))
 	    				.getAttribute("aria-valuenow");
 	    	    int y=Integer.parseInt(x);
 	    	    System.out.println("Verified y as in if" + y);
@@ -7728,9 +7801,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Value"))).click();
 	    	Thread.sleep(2000); 
@@ -7761,11 +7832,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    	
 	    	Thread.sleep(2000);
-	    	String x = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']")).getText();
+	    	String x = login.driver.findElement(By.xpath("//*[contains(text(),'Filter out blanks')]")).getText();
 	    	if(x.equalsIgnoreCase(arg1)) {
 	    		System.out.println("Verified");  
 	    	}else { 
@@ -7802,9 +7871,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    
 	    	Thread.sleep(2000);
 	    	
 	    	
@@ -7815,7 +7882,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	
 	    	Boolean lastnumber=true;
 	    	ArrayList<Integer> ar = new ArrayList<Integer>();
-	    	for(int i=0;i<Dates.size();i++) { 
+	    	for(int i=9;i<Dates.size();i++) { 
 	    		String GotDates = Dates.get(i).getText();
 	    		
 	    		int q = Integer.parseInt(GotDates);
@@ -7846,18 +7913,18 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    
 	    	Thread.sleep(2000);
-	    	login.driver.findElement(By.xpath("//*[text()='Filter out blanks']")).click();
+	    	login.driver.findElement(By.xpath("//*[contains(text(),'Filter out blanks')]")).click();
 	    	Thread.sleep(2000);
-	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_lastobservation_leaveasblank"))).click();
+	    	CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'Leave as blank')]", 10).click();
+	    	
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	    	
 	    	Thread.sleep(6000);
-	    	List<WebElement> Dates = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Edit_table_value_myseries")));
+	    	 
+	    	List<WebElement> Dates = login.driver.findElements(By.xpath("//div[@class='visual-table-container']/table/tbody/tr/td[2]"));
 	    	
 	    	Boolean lastnumber=false;
 	    	ArrayList<Integer> ar = new ArrayList<Integer>();
@@ -7891,18 +7958,16 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    
 	    	Thread.sleep(2000);
-	    	login.driver.findElement(By.xpath("//*[text()='Filter out blanks']")).click();
+	    	login.driver.findElement(By.xpath("//*[contains(text(),'Filter out blanks')]")).click();
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_lastobservation_FillwithN/A"))).click();
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	    	
 	    	Thread.sleep(6000);
-	    	List<WebElement> Dates = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Edit_table_value_myseries")));
+	    	List<WebElement> Dates = login.driver.findElements(By.xpath("//div[@class='visual-table-container']/table/tbody/tr/td[2]"));
 	    	Boolean lastnumber=false;
 	    	ArrayList<Integer> ar = new ArrayList<Integer>();
 	    	for(int i=0;i<Dates.size();i++) { 
@@ -7935,18 +8000,16 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    	
 	    	Thread.sleep(2000);
-	    	login.driver.findElement(By.xpath("//*[text()='Filter out blanks']")).click();
+	    	login.driver.findElement(By.xpath("//*[contains(text(),'Filter out blanks')]")).click();
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_lastobservation_Fillwithdot"))).click();
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	    	
 	    	Thread.sleep(6000);
-	    	List<WebElement> Dates = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Edit_table_value_myseries")));
+	    	List<WebElement> Dates = login.driver.findElements(By.xpath("//div[@class='visual-table-container']/table/tbody/tr/td[2]"));
 	    	Boolean lastnumber=false;
 	    	ArrayList<Integer> ar = new ArrayList<Integer>();
 	    	for(int i=0;i<Dates.size();i++) { 
@@ -7973,18 +8036,16 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	CreateTable();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-	    	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	    	WebElement element = login.driver.findElement(By.xpath("//*[text()='Filter out blanks']"));
-	    	jse.executeScript("arguments[0].scrollIntoView(true);", element);
+	    	
 	    	Thread.sleep(2000);
-	    	login.driver.findElement(By.xpath("//*[text()='Filter out blanks']")).click();
+	    	login.driver.findElement(By.xpath("//*[contains(text(),'Filter out blanks')]")).click();
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_lastobservation_Fillwithhyphen"))).click();
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	    	
 	    	Thread.sleep(6000);
-	    	List<WebElement> Dates = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Edit_table_value_myseries")));
+	    	List<WebElement> Dates = login.driver.findElements(By.xpath("//div[@class='visual-table-container']/table/tbody/tr/td[2]"));
 	    	Boolean lastnumber=false;
 	    	ArrayList<Integer> ar = new ArrayList<Integer>();
 	    	for(int i=0;i<Dates.size();i++) { 
@@ -8021,7 +8082,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	for(int i=0;i<=1;i++) {
 
 	    		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Numberformat_button"))).click();
-	    		String x =login.driver.findElement(By.xpath("(//input[@class='form--control form--control__xs ui-spinner-input'])[2]"))
+	    		String x =login.driver.findElement(By.xpath("(//input[@class='form--control form--control__xs ui-spinner-input'])[1]"))
 	    				.getAttribute("aria-valuenow");
 	    		y=Integer.parseInt(x);
 	    		System.out.println("Verified y as in if" + y);
@@ -8057,7 +8118,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Numberformat_dropdown"))).click();
 	    
-	    		String x =login.driver.findElement(By.xpath("(//input[@class='form--control form--control__xs ui-spinner-input'])[2]"))
+	    		String x =login.driver.findElement(By.xpath("(//input[@class='form--control form--control__xs ui-spinner-input'])[1]"))
 	    				.getAttribute("value");
 	    		Thread.sleep(2000);
 	    		if(x.equalsIgnoreCase(arg1)) {
@@ -8080,14 +8141,16 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Numberformat_dropdown"))).click();
+	    	//CommonFunctionality.getElementByXpath(login.driver, "//button[@class='ui-spinner-button ui-spinner-down']", 10).click();
 	    	Thread.sleep(2000);  
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Numberformat_decimal_comma"))).click();
 	    	Thread.sleep(2000);
 	    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	    	Thread.sleep(8000);
-	    	String x =login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_firstvalue_myseries"))).getText();
-	    	char comma = x.charAt(5);
+	    	String x =login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_firstvalue_myseriescomma"))).getText();
+	    	char comma = x.charAt(6);
 	    	String s = String.valueOf(comma);
+	    	System.out.println("Verified" + s);
 	    	if(s.contains(",")) {
 	    		System.out.println("Verified");
 	    	}
@@ -8112,13 +8175,14 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
 		    	Thread.sleep(2000);  
 		    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Numberformat_dropdown"))).click();
+		    	CommonFunctionality.getElementByXpath(login.driver, "//input[@class='form--control form--control__xs ui-spinner-input']", 10).sendKeys("2");
 		    	Thread.sleep(2000); 
 		    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Numberformat_decimal_grouping"))).click();
 		    	Thread.sleep(2000);
 		    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 		    	Thread.sleep(8000);
-		    	String x =login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_firstvalue_myseries"))).getText();
-		    	char comma = x.charAt(1);
+		    	String x =login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_firstvalue_myseriescomma"))).getText();
+		    	char comma = x.charAt(2);
 		    	String s = String.valueOf(comma);
 		    	if(s.contains("-")) {
 		    		System.out.println("Verified");
@@ -8300,7 +8364,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		    	Actions action = new Actions(login.driver);
 				WebElement Sereiesnameintable =login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_Name_attribute_inside")));
 				action.moveToElement(Sereiesnameintable).build().perform();
-		    	Thread.sleep(2000);  
+		    	Thread.sleep(1000);  
 		    	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_Name_remove_attribute"))).click();
 		    
 		    	Thread.sleep(6000);
@@ -8419,7 +8483,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				Actions action = new Actions(login.driver);
 				WebDriverWait wait = new WebDriverWait(login.driver,30);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='series-edit--title'])[2]")));
-				WebElement Sereiesnameintable =login.driver.findElement(By.xpath("(//span[@class='series-edit--title'])[2]"));
+				WebElement Sereiesnameintable =login.driver.findElement(By.xpath("(//span[@class='series-edit--title'])[2]/following::span[2]"));
 				action.moveToElement(Sereiesnameintable).build().perform();
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_cogwheel_inside"))).click();
@@ -8464,7 +8528,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				Actions action = new Actions(login.driver);
 				WebDriverWait wait = new WebDriverWait(login.driver,30);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='series-edit--title'])[2]")));
-				WebElement Sereiesnameintable =login.driver.findElement(By.xpath("(//span[@class='series-edit--title'])[2]"));
+				WebElement Sereiesnameintable =login.driver.findElement(By.xpath("(//span[@class='series-edit--title'])[2]/following::span[2]"));
 				action.moveToElement(Sereiesnameintable).build().perform();
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_cogwheel_inside"))).click();
@@ -8511,7 +8575,7 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 				Actions action = new Actions(login.driver);
 				WebDriverWait wait = new WebDriverWait(login.driver,30);
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='series-edit--title'])[2]")));
-				WebElement Sereiesnameintable =login.driver.findElement(By.xpath("(//span[@class='series-edit--title'])[2]"));
+				WebElement Sereiesnameintable =login.driver.findElement(By.xpath("(//span[@class='series-edit--title'])[2]/following::span[2]"));
 				action.moveToElement(Sereiesnameintable).build().perform();
 				Thread.sleep(2000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_cogwheel_inside"))).click();
@@ -11026,6 +11090,9 @@ public void verify_removing_attributes_by_clicking_x_icon() throws Throwable {
 		Robot r = new Robot();
 		r.keyPress(KeyEvent.VK_T);
 		r.keyRelease(KeyEvent.VK_T);
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'5Y')]")).click();
+		
 	}
 	
 	

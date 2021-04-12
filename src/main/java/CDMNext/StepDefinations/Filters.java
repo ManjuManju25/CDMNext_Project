@@ -814,13 +814,13 @@ public class Filters {
 	public void user_verify_the_results() throws Throwable {
 		Thread.sleep(2000);
 		WebElement ele;
-		if (topic.equals("Aggregate: North American Free Trade Agreement (NAFTA)")) {
+		if (topic.equals("Aggregate: North American Free Trade Agreement (NAFTA)") || topic.equals("Lending Rates")) {
 			ele = login.driver.findElement(By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
 		} else {
 //			ele = login.driver.findElement(
 //					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
 			ele = login.driver.findElement(
-					By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
+					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
 		}
 		String Actual_Topic = ele.getText();
 		login.Log4j.info(Actual_Topic);

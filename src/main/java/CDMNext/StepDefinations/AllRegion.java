@@ -45,7 +45,7 @@ public class AllRegion {
 	public void read_the_Geography_data_from_excel_file_and_sheet(String arg1, String arg2) throws Throwable {
 
 		// Create an object of File class to open xlsx file
-		File src = new File(System.getProperty("user.dir") + "\\" + arg1);
+		File src = new File(System.getProperty("user.dir") + "\\Testdata\\" + arg1);
 		// Create an object of FileInputStream class to read excel file
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);

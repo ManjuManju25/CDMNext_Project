@@ -1,6 +1,9 @@
-
 Feature: Table Visual Functionality
 
+  Background: 
+    Given User has successful logged in
+
+  #And Check for prerequesties
   @TableVisual
   Scenario: TC_TV_01: Verify creating Table visual from View panel by drag and drop
     And create visual tab
@@ -13,7 +16,7 @@ Feature: Table Visual Functionality
     And select the table visual
     And verify the Table visual creating from View panel by clicking
 
-  @TableVisua
+  @TableVisual
   Scenario: TC_TV_03: Verify Table visual creating with function applied series
     And Select some series to my series tab
     And Applay function
@@ -61,7 +64,7 @@ Feature: Table Visual Functionality
     And create visual tab
     And verify Table tab when no series added for visual
 
-  @TableVisua
+  @TableVisual
   Scenario: TC_TV_11: Empty visual - Verify + Add from My Series option in edit series panel
     And Select some series to my series tab
     And create visual tab
@@ -509,7 +512,7 @@ Feature: Table Visual Functionality
     And Select some series to my series tab
     And verify Edit series FX more icon
 
-  @TableVisual2
+  @TableVisual
   Scenario: TC_TV_97:Edit series - Verify appling function by clicking on function icon
     And Select some series to my series tab
     And verify Edit series appling function by clicking on function icon
@@ -674,7 +677,7 @@ Feature: Table Visual Functionality
     And Select some series to my series tab
     And verify Edit Series search for functions
 
-  @TableVisual
+  @TableVisual1
   Scenario: TC_TV_127:Edit series - Verify removing applied functions
     And Select some series to my series tab
     And verify Edit Series removing applied functions
@@ -1171,6 +1174,7 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_225:Edit Table-Verify Copyright=UnCheck
+    And Select some series to my series tab
     And User Select Series ID  as "310902301"
     And verify Edit Table Copyright=UnCheck
 
@@ -1708,17 +1712,17 @@ Feature: Table Visual Functionality
     And Select some series to my series tab
     And verify Edit Table Submit button
 
-  @TableVisual
+  @TableVisual1
   Scenario: TC_TV_328:Edit Table-Verify growl message after Submit feedback
     And Select some series to my series tab
     And verify Edit growl message after Submit button
 
-  @TableVisual
+  @TableVisual1
   Scenario: TC_TV_329:Edit Table-Verify cancel/x button
     And Select some series to my series tab
     And verify Edit Table cancel/x button
 
-  @TableVisual
+  @TableVisual1
   Scenario: TC_TV_330:Edit Table-Verify save button
     And Select some series to my series tab
     And verify Edit Table save button
@@ -2016,11 +2020,11 @@ Feature: Table Visual Functionality
     And verify right click download sub dropdown
 
   @TableVisual
-  Scenario: TC_TV_386:Verify Right click -download > Table
+  Scenario: TC_TV_387:Verify Right click -download > Table
     And Select some series to my series tab
     And verify right click download > Table
 
   @TableVisual
-  Scenario: TC_TV_386:Verify Right click -download > View
+  Scenario: TC_TV_388:Verify Right click -download > View
     And Select some series to my series tab
     And verify right click download > View

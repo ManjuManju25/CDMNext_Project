@@ -82,12 +82,14 @@ public class Exceldatacompare {
 	@And("^User  Download button$")
 	public void user_Download_button() throws Throwable {
 		Thread.sleep(6000);
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[1]/div[3]/div[2]/button")).click();
+		//login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[1]/div[3]/div[2]/button")).click();
+		login.driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div/div[4]/div/button[1]")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Range')]")).click();
 		Thread.sleep(5000);
 		user_Select_Reset_button();
 		Thread.sleep(2000);
+		//login.driver.findElement(By.xpath("//div[@class='drop-down-button download-button download-button__header drop-down-button__small']/button[1]")).click();
 		login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
 	}
 	
@@ -96,13 +98,15 @@ public class Exceldatacompare {
 	@And("^Select Download button$")
 	public void select_Download_button() throws Throwable {
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//span[@class='download-button--text']")).click();
+		login.driver.findElement(By.xpath("//span[@class='download-button--text drop-down-button--label']")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Range')]")).click();
 		Thread.sleep(4000);
 		user_Select_Reset_button();
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
+		//login.driver.findElement(By.xpath("//div[@class='drop-down-button download-button download-button__header drop-down-button__small']/button[1]")).click();
+		
 	}
 	
 	@Given("^get the Series name$")
@@ -154,7 +158,7 @@ public class Exceldatacompare {
 		  List<WebElement> totalseries = login.driver.findElements(By.xpath("//div[@class='series-item--name']"));
 			 System.out.println("Total Size are- " + totalseries.size());
 			 
-			/* if(totalseries.size() == 1) {
+			 if(totalseries.size() == 1) {
 				
 				 System.out.println("Comparing Data of " + testcase_num +  " with Actual data" + Seriesname );
 					Thread.sleep(8000);
@@ -175,9 +179,9 @@ public class Exceldatacompare {
 				 System.out.println("Comparing Data of " + testcase_num +  " with Actual data" +  multipleseries);
 					Thread.sleep(8000);
 					multipleseriesExcelcompare();
-					Thread.sleep(8000);
+					Thread.sleep(18000);
 					
-					File file = new File(System.getProperty("user.home") + "\\Downloads\\"+multipleseries+".xlsx");
+					File file = new File(System.getProperty("user.home") + "\\Downloads\\Name your insight.xlsx");
 		    		
 		    		if(file.delete()){
 		    			System.out.println(file.getName() + " is deleted!");
@@ -187,7 +191,7 @@ public class Exceldatacompare {
 		    	   
 					Thread.sleep(8000);
 					user_signout();
-			 }*/
+			 }
 			 Thread.sleep(8000);
 				user_signout();
 	
@@ -304,7 +308,7 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath( "//ul[@class='custom-select--body']/li[1]")).click();
+		login.driver.findElement(By.xpath( "//div[@class='custom-select--body']/div[1]")).click();
 		
 	}
 
@@ -333,7 +337,7 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath( "//ul[@class='custom-select--body']/li[2]")).click();
+		login.driver.findElement(By.xpath( "//div[@class='custom-select--body']/div[2]")).click();
 	}
 	
 	@And("^Select All button$")
@@ -470,7 +474,7 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath( "//ul[@class='custom-select--body']/li[3]")).click();
+		login.driver.findElement(By.xpath( "//div[@class='custom-select--body']/div[3]")).click();
 	}
 	@Given("^Deselect last observation date and time$")
 	public void Deselect_last_observation_date_and_time() throws Throwable {
@@ -703,7 +707,7 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		boolean element = login.driver.findElement(By.xpath("//div[@class='insight-download-formats']/div[3]/div[2]/label/input")).isSelected();
 		Thread.sleep(2000);
-		if(element==true){
+		if(element==false){
 			System.out.println("Data Refresh is checked"+  element);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			user_signout();
@@ -824,7 +828,13 @@ public class Exceldatacompare {
 	@And("^Select Download Button$")
 	public void select_Download_Button() throws Throwable {
 		Thread.sleep(10000);
-		login.driver.findElement(By.xpath("//span[@class='download-button--text']")).click();
+		//login.driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div/div[4]/div/button[1]")).click();
+		
+		WebElement DownloadFV =  CommonFunctionality.getElementByXpath(login.driver, "//div[@class='page-main-header--buttons']/div/button[1]/span[2]", 10);
+		Actions action =new Actions(login.driver);
+		action.moveToElement(DownloadFV).click().build().perform();
+		
+		
 	}
 	
 	@Then("^Tabel download should be Sucess$")
@@ -1129,7 +1139,7 @@ public class Exceldatacompare {
 	public void user_verify_state_of_download_button_when_there_are_no_series_in_myseries_no_views() throws Throwable {
 		
 		Thread.sleep(1000);
-		if(login.driver.findElements(By.xpath("//div[@class='download-button download-button__header small-download-btn download-button__unavailable']")).size() != 0){
+		if(login.driver.findElements(By.xpath("//button[@class='download-button--button button button__download-btn button__disabled']")).size() != 0){
 			System.out.println("Download Button is disabled.");
 			}else{
 				 Assert.fail( "Download Button is Enabled. Series or Views may Present.");
@@ -1434,7 +1444,7 @@ public class Exceldatacompare {
 	        	//Exceldatacompare obj= new Exceldatacompare();
 	        	 String x=Exceldatacompare.testcase_num;
 	        	 //String y=Exceldatacompare.r;
-	        multipleseries ="Name your insight";
+	             multipleseries ="Name your insight.xlsx";
 	        	System.out.println(x);
 	        	System.out.println(multipleseries);
 	            FileInputStream excellFile1 = new FileInputStream(
@@ -1444,7 +1454,8 @@ public class Exceldatacompare {
 	            FileInputStream excellFile2 = new FileInputStream(
 	           // FileInputStream excellFile2 = new FileInputStream(
 	                   // "C:\\Users\\Admin\\Downloads\\Untitled insight.xlsx");
-	            		System.getProperty("user.home") + "\\Downloads\\"+"Name your insight.xlsx");
+	            		System.getProperty("user.home") + "\\Downloads\\Name your insight.xlsx");
+	                                                                   
 	            // Create Workbook instance holding reference to .xlsx file
 	            XSSFWorkbook TestData = new XSSFWorkbook(excellFile1);
 	            XSSFWorkbook ActualData = new XSSFWorkbook(excellFile2);

@@ -170,7 +170,7 @@ public class Mnemonics {
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 4).click();
 		WebElement ul_element = null;
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
 			List<WebElement> li_All = ul_element.findElements(By.xpath("//li//div[@class='series-item--name']"));
@@ -198,7 +198,8 @@ public class Mnemonics {
 							Assert.fail(mnemonictxt + "  does not exists in " + "\n" + TooltipInfo);
 						} else {
 							Assert.fail(series_id[0] + "  does not exists in " + "\n" + TooltipInfo);
-						}
+						}	
+						
 					}
 
 				} else if (li_All.size() == 2) {

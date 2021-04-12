@@ -1,6 +1,6 @@
 Feature: Verifying Insight Share functionality
   
-@CollabarationSharing12
+@CollabarationSharing
 Scenario: TC_Delete_Insight: Verify Delete Insight
    And Deleting insights as prerequesties
     
@@ -496,7 +496,7 @@ Scenario Outline: TC_Share_43:Verify selecting user/account/company with permiss
    | "External users/accounts/companies"    | "cvision-suresh"                |
    | "External users/accounts/companies"    | "CEIC Development – CDMNext 2"  |
    
-@CollabarationSharing123
+@CollabarationSharing
 Scenario: TC_Share_43:Verify selecting user with permission pre-set for manage permission
    And Click "File" > "New" 
    And Click "Create insight" to create a new insight
@@ -518,46 +518,46 @@ Scenario: TC_Share_07: Verify 'Share' option for Guest users.
 
 # ------------------------------------------------- Growl message ----------------------------------------------------------------------------
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_08: Verify 'Multiple insights' sharing.
    And Logout from current user
    And Login back to default execution login
    And Enter mail for "Multiple insights sharing" with action as "shared" an insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_47: Verify notification for shared insight.
    And Enter mail for "Notification for shared insight" with action as "shared" an insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_48: Verify growl message for shared insight.
    And Enter mail for "Growl message for shared insight" with action as "shared" an insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_49: Verify clicking on insight title in growl message
    And Enter mail for "Clicking Insight title for shared insight" with action as "shared" an insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_50: Verify closing of growl popup.
    And Enter mail for "Closing growl popup" with action as "shared" an insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_54: Verify growl message for stoping shared insight.
    And Enter mail for "Growl popup for stopped sharing" with action as "stopped sharing" an insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_55: Verify growl message for insight stopped sharing.
    And Enter mail for "Notification for stopped sharing" with action as "stopped sharing" an insight
    
 #TC_Share_59 - TC_Share-61   
-@CollabarationSharing1
+@CollabarationSharing
 Scenario: TC_Share_59: Verify notification for changes in shared insight
    And Enter mail for "Notification for changes in shared insight" with action as "sharing" an insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario:Tc_Share_72: Verify Notifications when turn OFF notification under Profile dropdown
    And Enter mail for "Notification growl" with action as "Turn OFF notifications" the insight
    
-@CollabarationSharing1
+@CollabarationSharing
 Scenario:Tc_Share_73: Verify Notifications when turn ON notification under Profile dropdown
    And Enter mail for "Notification growl" with action as "Turn ON notifications" the insight
    And Login back to default execution login

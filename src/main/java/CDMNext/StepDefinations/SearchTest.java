@@ -66,7 +66,7 @@ public class SearchTest {
 	public void user_enters_keyword(String keyword) throws Throwable {
 		currentKeyword = keyword;
 		//login.driver.navigate().refresh();
-		//CommonFunctionality.ResetMethod();
+		CommonFunctionality.ResetMethod();
 		login.Log4j.info("Searching with " + currentKeyword);
 		CommonFunctionality.getElementByProperty(login.driver,"Search",10).sendKeys(currentKeyword);
 	}

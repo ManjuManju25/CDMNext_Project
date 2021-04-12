@@ -45,7 +45,7 @@ public class ChinaFilter {
 	@And("^Read the Excel file \"([^\"]*)\"$")
 	public void read_the_Excel_file(String arg1) throws Throwable {
 		// Create an object of File class to open xlsx file
-		File src = new File(System.getProperty("user.dir") + "\\" + arg1);
+		File src = new File(System.getProperty("user.dir") + "\\Testdata\\" + arg1);
 		// Create an object of FileInputStream class to read excel file
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
@@ -103,7 +103,7 @@ public class ChinaFilter {
 				}
 			}
 			provinceTD.put(provinceTxt.getStringCellValue(), prefetureTD);
-			// Log4j.info("Province data : " + provinceTD.toString());
+			 login.Log4j.info("Province/state data : " + provinceTD.toString());
 
 		}
 		fis.close();
@@ -305,14 +305,15 @@ public class ChinaFilter {
 					// Log4j.error("We don't see " + provinceName + " on site");
 
 				}
-				try {
+				// unselect province
+				if (login.driver.findElements(By.xpath(
+						"(//*[contains(@class,'subnational--section__third')]//*[contains(@class,'tree-filter-item__open')])[1]/*[1]//*[@class='tree-filter-item--close-icon']"))
+						.size() == 1) {
 					CommonFunctionality.getElementByXpath(login.driver,
 							"(//*[contains(@class,'subnational--section__third')]//*[contains(@class,'tree-filter-item__open')])[1]/*[1]//*[@class='tree-filter-item--close-icon']",
 							20).click();
-
-				} catch (Exception e) {
-
 				}
+
 				break;
 			}
 		}
@@ -367,7 +368,7 @@ public class ChinaFilter {
 
 		for (String str : ListOfWebElements) {
 			if (ListElementsTD.contains(str)) {
-				//login.Log4j.info("Web element " + str + " Found in Excel");
+				// login.Log4j.info("Web element " + str + " Found in Excel");
 			} else {
 				login.Log4j.error("ERROR : We don't find " + str + " in Excel");
 			}
@@ -375,7 +376,7 @@ public class ChinaFilter {
 
 		for (String str : ListElementsTD) {
 			if (ListOfWebElements.contains(str)) {
-				//login.Log4j.info("Excel item " + str + " found on site");
+				// login.Log4j.info("Excel item " + str + " found on site");
 			} else {
 				login.Log4j.error("ERROR : We don't find " + str + " is on Site");
 			}

@@ -195,7 +195,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Visual" option on visual header
     Then The "Visual" popup should be displayed
 
-  @Commentary
+  @Commentary1
   Scenario: TC_Commentary_30:Verify alignment
     And Create Commentary visual
     And Click on "Visual" option on visual header
@@ -315,11 +315,11 @@ Feature: Verifying Commentary Visual functionality
     And Paste within the insight
     Then "Data pasted from clipboard" message should be displayed
 
-  @Commentary1
-  Scenario: TC_Commentary_46:Validate copied visual by pasting to excel
-    And Add some text in the description field
-    And Click on Copy icon
-    Then Paste in Excel and the text should be pasted to excel
+  #@Commentary1
+  #Scenario: TC_Commentary_46:Validate copied visual by pasting to excel
+    #And Add some text in the description field
+    #And Click on Copy icon
+    #Then Paste in Excel and the text should be pasted to excel
 
   @Commentary
   Scenario: TC_Commentary_47:Validate copied visual by pasting to word
