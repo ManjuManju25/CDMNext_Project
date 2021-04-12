@@ -1,8 +1,10 @@
+Feature: Comparing Data in Two Exel sheet
 
-Feature: Comparing Data in Two Exel sheet 
-   
-@UI
-Scenario: TC_01:Verifying Date drop down for available options
+  #Background:
+  #Given User has successful logged in
+  @UI
+  Scenario: TC_01:Verifying Date drop down for available options
+    And Check for prerequesties
     And User Select Series ID  as "310902301"
     And Select Download button
     And Select Date drop down
@@ -870,7 +872,7 @@ Scenario: TC_01:Verifying Date drop down for available options
     And select the "pdf" format
     Then Tabel download should be Sucess
 
-  @UI
+  @UI12
   Scenario: TC_124: Verify whether Data referesh option is checked by deault.
     And User Select Series ID  as "310911001"
     And Select Download Button

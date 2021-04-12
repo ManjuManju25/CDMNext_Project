@@ -33,6 +33,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.ITestResult;
 
+import CDMNext.runner.TestRunner;
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.ErrorScreenshot;
 import CDMNext.util.Hooks;
@@ -94,7 +95,7 @@ public class login {
 	public static String data;
 	public static String object;
 	public static String parameters;
-
+	TestRunner testRunner = new TestRunner();
 	@Before
 	public void setUp() throws Throwable {
 		//driver.manage().deleteAllCookies();
@@ -102,10 +103,16 @@ public class login {
 		logged_in = false;
 		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger("org.apache.http");
 	    root.setLevel(ch.qos.logback.classic.Level.INFO);
-		Invoke_browser();
-		SearchTest.user_has_successful_logged_in();
-		Hooks.before_run();
-		//Hooks.Handle_BrowserNotification_popup();
+		Invoke_browser();	
+		
+		SearchTest.user_has_successful_logged_in();	
+		
+//		if(testRunner.cucumberFeature.getCucumberFeature().equals("FilterSearch")) {
+			//Hooks.Handle_BrowserNotification_popup();
+//		} else {
+			Hooks.before_run();
+		//}
+		
 	}
 	
 	@After

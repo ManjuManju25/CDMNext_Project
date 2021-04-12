@@ -508,9 +508,9 @@ public class CommonFunctionality {
 	}
 
 	public static WebElement getElementByXpath(WebDriver driver, String locator, int time) throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
 		wait(500);
 		WebElement element = login.driver.findElement(By.xpath(locator));
 		elementHighlight(login.driver, element);

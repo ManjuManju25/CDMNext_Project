@@ -576,7 +576,7 @@ public class Commentary {
 		try {
 			// commentary visual align
 			visual_align = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='text-block-editor visual-select-area']", 20);
+				"//*[@class='visual-item-template visual-select-area text-template']", 20);
 		} catch(Exception e) {
 			
 			//Attachments visual align
@@ -643,11 +643,11 @@ public class Commentary {
 		} else {
 			Assert.fail("By default " + arg1 + " is not disabled");
 		}
-		CommonFunctionality.DeleteVisual();
-		CommonFunctionality.wait(5000);
-		login.driver.navigate().refresh();
-		CommonFunctionality.Create_New_Insight();
-		CommonFunctionality.ContinueSameInsight();
+//		CommonFunctionality.DeleteVisual();
+//		CommonFunctionality.wait(5000);
+//		login.driver.navigate().refresh();
+//		CommonFunctionality.Create_New_Insight();
+//		CommonFunctionality.ContinueSameInsight();
 	}
 
 	@And("^Enter some data to description field$")

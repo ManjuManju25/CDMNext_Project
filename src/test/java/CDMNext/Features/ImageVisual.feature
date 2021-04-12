@@ -292,7 +292,7 @@ Feature: Verifying Image visual functionality
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
 
-  @ImageVisual
+  @ImageVisual1
   Scenario: Tc_ImageVisual_33 : Verify visual download to PNG format
     And Go to View tab
     And Click on insert Image visual icon
@@ -427,3 +427,14 @@ Feature: Verifying Image visual functionality
     And Select "pdf" format
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
+    
+      @ImageVisual1
+  Scenario: Tc_ImageVisual_46 : Verify visual download to JPG format
+    And Go to View tab
+    And Click on insert Image visual icon
+    And Select "Upload image" icon
+    And Upload any image
+    And Click on Download icon
+    And Select "jpeg" format
+    And Click on "Download"
+    Then Image should be downloaded in "JPG" format
