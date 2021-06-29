@@ -71,43 +71,52 @@ public class SSPWindow {
 	@And("^Add few series to myseries$")
 	public void add_few_series_to_myseries() throws Throwable {
 		String id = "279629203";
-		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		WebElement my_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab")));
-		new Actions(login.driver).moveToElement(my_series).pause(500).click().build().perform();
-		CommonFunctionality.wait(500);
-		WebElement series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new")));
-		new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.wait(1000);
+		// WebElement series =
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new")));
+		// new
+		// Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
+		// CommonFunctionality.getElementByClassName(login.driver, "search-input-text",
+		// 4).clear();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(id);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+		WebElement SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
+		SeriesTab.click();
+		Thread.sleep(500);
 		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		new Actions(login.driver).moveToElement(series_cb).pause(2000).click().build().perform();
 		WebElement series_add = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_myseries")));
 		new Actions(login.driver).moveToElement(series_add).pause(2000).click().build().perform();
-	}
-
-	@SuppressWarnings("deprecation")
-	@And("^Search for the series \"([^\"]*)\"$")
-	public void search_for_the_series(String arg1) throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
-		Thread.sleep(500);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new"))).click();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
-		new Actions(login.driver).moveToElement(series_cb).pause(2000).click().build().perform();
-		WebElement series_add = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_myseries")));
-		new Actions(login.driver).moveToElement(series_add).pause(2000).click().build().perform();
-	}
-
-	@SuppressWarnings("deprecation")
-	@And("^hightlight any one series and click on  \"([^\"]*)\" icon \\.$")
-	public void hightlight_any_one_series_and_click_on_icon(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
-		try {
+		}
+	
+		@SuppressWarnings("deprecation")
+		@And("^Search for the series \"([^\"]*)\"$")
+		public void search_for_the_series(String arg1) throws Throwable {
+	//		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
+	//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+			Thread.sleep(1000);
+			//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_new"))).click();
+			//CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+			CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
+			CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+			Thread.sleep(2000);
+			WebElement SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
+			SeriesTab.click();
+			Thread.sleep(500);
+			CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
+			WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
+			new Actions(login.driver).moveToElement(series_cb).pause(2000).click().build().perform();
+			WebElement series_add = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_to_myseries")));
+			new Actions(login.driver).moveToElement(series_add).pause(2000).click().build().perform();
+		}
+	
+		@SuppressWarnings("deprecation")
+		@And("^hightlight any one series and click on  \"([^\"]*)\" icon \\.$")
+		public void hightlight_any_one_series_and_click_on_icon(String arg1) throws Throwable {
+			CommonFunctionality.wait(2000);
+			try {
 		WebElement one_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
 		new Actions(login.driver).moveToElement(one_series).pause(3000).click(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Show_series_info")))).build().perform();
 		} catch (StaleElementReferenceException e) {
@@ -824,25 +833,25 @@ public class SSPWindow {
 		login.driver.findElement(By.xpath("//*[@class='tabs__tabs-box']//*[text()='Chart']")).click();
 		}
 		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][1]")).click();
-		WebElement from_date = login.driver.findElement(By.xpath("//*[@class='datepicker-input-wrapper'][1]/input"));
-		from_date.click();
+		login.driver.findElement(By.xpath("//*[@class='date-picker']")).click();
+		WebElement from_date = login.driver.findElement(By.xpath("//*[contains(@class,'input-daterange')]/*[1]/*[1]"));
+		//from_date.click();
 		from_date.clear();
 		from_date.sendKeys("2010");
 		from_date.sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(2000);
-		datefrom = login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][1]/*[2]"))
+		datefrom = login.driver.findElement(By.xpath("//*[contains(@class,'input-daterange')]/*[1]/*[1]"))
 				.getText();
 		System.out.println("Chart values are updated based on " + datefrom + " as start date");
 		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][2]")).click();
-		WebElement to_date = login.driver.findElement(By.xpath("//*[@class='datepicker-input-wrapper']/input"));
+		//login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][2]")).click();
+		WebElement to_date = login.driver.findElement(By.xpath("//*[contains(@class,'input-daterange')]/*[2]/*[1]"));
 		to_date.click();
 		to_date.clear();
 		to_date.sendKeys("2012");
 		to_date.sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(2000);
-		dateto = login.driver.findElement(By.xpath("//*[@class='highcharts-label highcharts-range-input'][2]/*[2]"))
+		dateto = login.driver.findElement(By.xpath("//*[contains(@class,'input-daterange')]/*[2]/*[1]"))
 				.getText();
 		System.out.println("Chart values are updated based on " + dateto + " as end date");
 		CommonFunctionality.wait(500);
@@ -852,9 +861,9 @@ public class SSPWindow {
 	public void select_tab(String arg1) throws Throwable {
 		CommonFunctionality.wait(4000);
 		try {
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']")).click();
+		login.driver.findElement(By.xpath("//button//*[contains(text(),'" + arg1 +"')]")).click();
 		} catch (StaleElementReferenceException e) {
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']")).click();
+		login.driver.findElement(By.xpath("//button//*[contains(text(),'" + arg1 +"')]")).click();
 		}
 		CommonFunctionality.wait(3000);
 	}
@@ -862,7 +871,7 @@ public class SSPWindow {
 	@And("^Select \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" tabs$")
 	public void select_tabs(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
 		CommonFunctionality.wait(3000);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg1 + "']"))
+		login.driver.findElement(By.xpath("//button//*[contains(text(),'" + arg1 + "')]"))
 				.click();
 		CommonFunctionality.wait(3000);
 		String ytd_start = login.driver
@@ -871,7 +880,7 @@ public class SSPWindow {
 				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
 		start_ytd = ytd_start.substring(6, 10);
 		end_ytd = ytd_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg2 + "']"))
+		login.driver.findElement(By.xpath("//button//*[contains(text(),'" + arg2 + "')]"))
 				.click();
 		CommonFunctionality.wait(5000);
 		String y1_start = login.driver
@@ -880,7 +889,7 @@ public class SSPWindow {
 				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
 		start_1y = y1_start.substring(6, 10);
 		end_1y = y1_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg3 + "']"))
+		login.driver.findElement(By.xpath("//button//*[contains(text(),'" + arg3 + "')]"))
 				.click();
 		CommonFunctionality.wait(5000);
 		String y3_start = login.driver
@@ -889,7 +898,7 @@ public class SSPWindow {
 				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
 		start_3y = y3_start.substring(6, 10);
 		end_3y = y3_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg4 + "']"))
+		login.driver.findElement(By.xpath("//button//*[contains(text(),'" + arg4 + "')]"))
 				.click();
 		CommonFunctionality.wait(5000);
 		String y5_start = login.driver
@@ -898,7 +907,7 @@ public class SSPWindow {
 				.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
 		start_5y = y5_start.substring(6, 10);
 		end_5y = y5_end.substring(6, 10);
-		login.driver.findElement(By.xpath("//*[@class='highcharts-range-selector-buttons']//*[text()='" + arg5 + "']"))
+		login.driver.findElement(By.xpath("//button//*[contains(text(),'" + arg5 + "')]"))
 				.click();
 		CommonFunctionality.wait(5000);
 		String All_start = login.driver
@@ -1251,6 +1260,7 @@ public class SSPWindow {
 	@And("^clicking indicator drop down$")
 	public void clicking_indicator_drop_down() throws Throwable {
 		CommonFunctionality.webDriverwait_keyvalue("indicator_dropdown");
+		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("indicator_dropdown"))).click();
 		CommonFunctionality.wait(500);
 	}
@@ -1267,6 +1277,9 @@ public class SSPWindow {
 
 	@And("^Click on \"([^\"]*)\" button$")
 	public void click_on_button(String arg1) throws Throwable {
+		if(arg1.equalsIgnoreCase("Cancel") || arg1.equalsIgnoreCase("Save")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//button[text()='" + arg1 + "']", 4).click();
+		} else {
 		CommonFunctionality.webDriverwait_locator(
 				"//*[contains(@title,'" + arg1 + "') and @class='series-with-suggestions-preview--open-visual']",
 				"xpath");
@@ -1274,6 +1287,7 @@ public class SSPWindow {
 				"//*[contains(@title,'" + arg1 + "') and @class='series-with-suggestions-preview--open-visual']"));
 		new Actions(login.driver).moveToElement(preview).click(preview).build().perform();
 		new Actions(login.driver).moveToElement(preview).click(preview).build().perform();
+		}
 	}
 
 	@And("^click on \"([^\"]*)\" link in SSP window$")
@@ -1290,7 +1304,7 @@ public class SSPWindow {
 	@And("^Click on Ask Question link in SSP window$")
 	public void click_on_Ask_Question_link_in_SSP_window() throws Throwable {
 		CommonFunctionality.wait(1000);
-		login.driver.findElement(By.xpath("//*[contains(@class,'main-series-information--ask')]")).click();
+		login.driver.findElement(By.xpath("//*[contains(text(),'Ask question')]")).click();
 	}
 
 	@And("^Click on \"([^\"]*)\" tab$")
@@ -1464,13 +1478,14 @@ public class SSPWindow {
 
 	@Then("^Footnotes window should be displayed with related details$")
 	public void footnotes_window_should_be_displayed_with_related_details() throws Throwable {
+		//CommonFunctionality.wait(500);
 		CommonFunctionality.webDriverwait_keyvalue("footnotes_title_text");
 		String a = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_title_text"))).getText();
 		String b = "Footnotes";
 		String c = login.driver.findElement(By.xpath("//*[@class='footnotes-modal--name']/*")).getText();
 		String d = login.driver.findElement(By.className("series-preview-modal-header--link")).getText();
 		if (a.contains(b)) {
-			login.driver.findElement(By.xpath("//*[@class='footnotes-modal']/following::*[@title='Close']")).click();
+			login.driver.findElement(By.xpath("//*[@class='movable-modal movable-modal__draggable movable-modal__active']//*[@class='movable-modal--close']")).click();
 		}
 		if (c.contains(d)) {
 			login.Log4j.info("Footnotes window is displayed with related details and it has been verified");

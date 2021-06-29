@@ -292,7 +292,7 @@ Feature: Verifying Image visual functionality
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
 
-  @ImageVisual1
+  @ImageVisual
   Scenario: Tc_ImageVisual_33 : Verify visual download to PNG format
     And Go to View tab
     And Click on insert Image visual icon
@@ -342,7 +342,7 @@ Feature: Verifying Image visual functionality
     And Select "Insert/edit image" icon
     Then Below options should be available in General tab
       | Source      |
-      | Image title |
+      | Image Title |
       | Dimensions  |
 
   @ImageVisual
@@ -428,7 +428,7 @@ Feature: Verifying Image visual functionality
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
     
-      @ImageVisual1
+      @ImageVisual
   Scenario: Tc_ImageVisual_46 : Verify visual download to JPG format
     And Go to View tab
     And Click on insert Image visual icon

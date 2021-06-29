@@ -141,7 +141,6 @@ Scenario Outline: TC_Data_set_21: Verify adding series of a dataset into visual 
 @DatasetsTab
 Scenario: TC_Data_set_26: Verify load more option for dataset's tab
    And Clicking "Datasets" tab from menu
-   And Search for the "Datasets" with ID "368640317" 
    And Clicking Load more option
    Then Verify the Load more button
    
@@ -917,11 +916,11 @@ Examples:
    |  "Name"             |     2    |
    |  "Unit"             |     3    |
    |  "Frequency"        |     4    |
-   |  "First date"       |     5    |
-   |  "Last date"        |     6    |
+   |  "First obs. date"  |     5    |
+   |  "Last obs. date"   |     6    |
    |  "Observations"     |     7    |
    |  "Last value"       |     8    |
-   |  "Last updated"     |     9    |
+   |  "Last update time" |     9    |
    |  "Source"           |     10   |
    |  "Series id"        |     11   |
    |  "Mnemonic"         |     12   |

@@ -195,7 +195,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Visual" option on visual header
     Then The "Visual" popup should be displayed
 
-  @Commentary1
+  @Commentary
   Scenario: TC_Commentary_30:Verify alignment
     And Create Commentary visual
     And Click on "Visual" option on visual header

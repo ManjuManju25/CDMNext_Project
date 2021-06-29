@@ -68,9 +68,9 @@ public class Filters {
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
 		//login.driver.navigate().refresh();
-		CommonFunctionality.ExpandRight();
+		//CommonFunctionality.ExpandRight();
 		//CommonFunctionality.TopMethod();
-		//CommonFunctionality.ResetMethod();
+		CommonFunctionality.ResetMethod();
 		login.Log4j.info("searching with " + searchData);
 		CommonFunctionality.getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
 		
@@ -728,7 +728,7 @@ public class Filters {
 									action.moveToElement(list).click().build().perform();
 									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
 											.isDisplayed()) {
-										Thread.sleep(2000);
+										Thread.sleep(3000);
 										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 												.click();
 										login.Log4j.info(var + " series exists");
@@ -796,6 +796,7 @@ public class Filters {
 
 			Assert.fail("WebElement is null " + e.getMessage());
 		}
+	
 	}
 
 	@When("^User get the topics as \"([^\"]*)\"$")
@@ -812,16 +813,22 @@ public class Filters {
 
 	@Then("^User verify the results$")
 	public void user_verify_the_results() throws Throwable {
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		WebElement ele;
-		if (topic.equals("Aggregate: North American Free Trade Agreement (NAFTA)") || topic.equals("Lending Rates")) {
+		try {
+		ele = login.driver.findElement(By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
+		}catch(NoSuchElementException e) {
+			ele = login.driver.findElement(
+					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
+		}
+		/*if (topic.equals("Aggregate: North American Free Trade Agreement (NAFTA)") || topic.equals("Lending Rates") ||topic.equals("Foreign Trade") || topic.equals("Energy Sector")) {
 			ele = login.driver.findElement(By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
 		} else {
 //			ele = login.driver.findElement(
 //					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
 			ele = login.driver.findElement(
 					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
-		}
+		}*/
 		String Actual_Topic = ele.getText();
 		login.Log4j.info(Actual_Topic);
 		Assert.assertEquals(Actual_Topic, topic);

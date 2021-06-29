@@ -153,6 +153,9 @@ public class Attachments {
 	public void enter_in_the_link_field(String arg1) throws Throwable {
 		ExpectedLink = arg1;
 		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
+		
+		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='links-tab--editor']/*[1]//input[@type='text']", 5)
 				.sendKeys(arg1);
 		// CommonFunctionality.getElementByXpath(driver, "//*[contains(text(),'Ok')]",
@@ -193,6 +196,8 @@ public class Attachments {
 
 	@Then("^The attachment visual should be created in new tab on current insight$")
 	public void the_attachment_visual_should_be_created_in_new_tab_on_current_insight() throws Throwable {
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
 		CommonFunctionality.wait(2000);
 		String ActualLink = login.driver.findElement(By.xpath("(//*[@class='attachments-item-link--row']//a)[2]"))
 				.getText();
@@ -299,6 +304,9 @@ public class Attachments {
 	@And("^Type any name in the title field$")
 	public void type_any_name_in_the_title_field() throws Throwable {
 		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
+		
+		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='links-tab--editor']/*[2]//input[@type='text']", 5)
 				.sendKeys("Title");
 	}
@@ -317,6 +325,9 @@ public class Attachments {
 
 	@Then("^The OK and cancel buttons should be disabled$")
 	public void the_OK_and_cancel_buttons_should_be_disabled() throws Throwable {
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
+		
 		Boolean button_ok = login.driver
 				.findElement(By.xpath("//*[@class='links-tab--buttons']//*[contains(text(),'Ok')]")).isEnabled();
 		Boolean button_cancel = login.driver

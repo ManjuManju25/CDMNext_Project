@@ -203,6 +203,11 @@ public class Mnemonics {
 					}
 
 				} else if (li_All.size() == 2) {
+					
+					new Actions(login.driver).pause(400).moveToElement(li_All.get(i)).perform();
+					CommonFunctionality.wait(800);
+					WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					TooltipInfo = tooltip.getText();
 
 					if ((series_id.length) == 2 && TooltipInfo.contains(mnemonictxt) == true
 

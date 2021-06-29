@@ -42,7 +42,7 @@ Feature: Verifying View tab functionality
     And Select the "Bar" dropdown
     Then Verify different types of Bar charts
 
-  @EmptyView
+  @EmptyView1
   Scenario: Tc_EmptyView_08 : Verify creating Pie chart in a view
     And Click on View tab
     And Click on "Pie" in the menu bar

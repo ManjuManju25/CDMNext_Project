@@ -1,4 +1,4 @@
-@tag
+
 Feature: Verifying Country Filter functionality
 
   Background: 
@@ -226,14 +226,14 @@ Feature: Verifying Country Filter functionality
     And Click on "Reset country filter"
     Then filter visual should get reset with "All countries" name present in all visuals in view
 
-  @FilterVisual
+  @FilterVisual1
   Scenario: Tc_FilterVisual_35:Verify country filter 'move' option
     And Create histogram visual with series
     And Create filter visual
     And Hover the cursor on the title and try to move with in the view
     Then Country filter visual should move
 
-  @FilterVisual
+  @FilterVisual1
   Scenario: Tc_FilterVisual_36:Verify crossmark for all country selected
     And Click on crossmark when all countries are selected
     Then Should unselect all countries

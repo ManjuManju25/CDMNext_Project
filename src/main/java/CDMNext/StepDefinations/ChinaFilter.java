@@ -33,7 +33,7 @@ public class ChinaFilter {
 	Actions action = new Actions(login.driver);
 	static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	Map<String, Object> provinceTD = new LinkedHashMap<>();
-	Map<String, Object> prefetureTD = null;
+	 Map<String, Object> prefetureTD = null;
 	List<String> countiesTD = null;
 	String ProvinceTxtEle;
 	String PrefectureTxt = null;
@@ -65,6 +65,7 @@ public class ChinaFilter {
 			// style.setFillForegroundColor(IndexedColors.RED.getIndex());
 			// style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			// provinceTxt.setCellStyle(style);
+		
 			prefetureTD = (Map<String, Object>) provinceTD.get(provinceTxt.getStringCellValue());
 			if (prefetureTD == null) {
 				// prefetureList = new ArrayList<>();
@@ -103,10 +104,12 @@ public class ChinaFilter {
 				}
 			}
 			provinceTD.put(provinceTxt.getStringCellValue(), prefetureTD);
-			 login.Log4j.info("Province/state data : " + provinceTD.toString());
+			// login.Log4j.info("Province/state data : " + provinceTD.toString());
 
 		}
+		//login.Log4j.info("Province/state data : " + provinceTD.toString());
 		fis.close();
+		
 
 	}
 
@@ -127,8 +130,10 @@ public class ChinaFilter {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Then("^Compare the provinces , prefectures and counties with test data$")
-	public void compare_the_provinces_prefectures_and_counties_with_test_data() throws Throwable {
+//	@Then("^Compare the provinces , prefectures and counties with test data$")
+//	public void compare_the_provinces_prefectures_and_counties_with_test_data() throws Throwable {
+	@Then("^Compare the \"([^\"]*)\" , \"([^\"]*)\" and \"([^\"]*)\" with test data$")
+	public void compare_the_and_with_test_data(String arg1, String arg2, String arg3) throws Throwable {
 		int provinceVar = 0;
 		String ActiveEleXpath;
 		List<WebElement> GridActiveElements;
@@ -144,31 +149,84 @@ public class ChinaFilter {
 					.elementToBeClickable(By.xpath("//*[@class='subnational']//*[contains(text(),'Collapse all')]")))
 					.click();
 		}
-		login.Log4j.info("Province size is: " + ProvinceCountTD);
+		login.Log4j.info(arg1 + " size is: " + ProvinceCountTD);
+		/*if(arg1.equalsIgnoreCase("state")){
+			List<WebElement> GridElements = login.driver.findElements(By.xpath(ProvinceXpath));
+			login.Log4j.info("WebElements size is on site: " + GridElements.size());
+
+			for (int i = 0; i < GridElements.size(); i++) {
+				for (String provinceName : provinceKeys) {
+				// Log4j.info("WebElement is : " + GridElements.get(i).getText());
+				CommonFunctionality.wait(1000);
+				prefetureTD = (Map<String, Object>) provinceTD.get(provinceName);
+				Set<String> prefetureTDKeys = prefetureTD.keySet();
+				int PrefectureCountTD = prefetureTDKeys.size();
+				login.Log4j.info(arg1 + " in Excel is: " + provinceName);
+				login.Log4j.info(arg2 + " Count in Excel is: " + PrefectureCountTD);
+				// CommonFunctionality.wait(1000);
+				ActiveEleXpath = "//*[contains(@class,'subnational--section__second')]//*[contains(@class,'open-icon')]";
+				GridActiveElements = login.driver.findElements(By.xpath(ActiveEleXpath));
+				for (int j = provinceVar; j < GridActiveElements.size();) {
+					login.Log4j.info(j);
+					// CommonFunctionality.wait(500);
+					GridActiveElements.get(i).click();
+					String PrefectureXpath = "//*[contains(@class,'subnational--section__second')]//*[contains(@class,'tree-filter-item__open')]//*[@class='tree-filter-list']//*[@class='filter-item--body'][1]//following-sibling::*[@class='text-dots']";
+					ValidationMethod(prefetureTDKeys, PrefectureXpath);
+					if(provinceName.equals("Dadra and Nagar Haveli and Daman and Diu")) {
+						//do nothing
+					} else {
+						provinceVar = j + 1;
+					}
+					break;
+				}
+				// unselect province
+				wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+						"//*[contains(@class,'subnational--section__second')]//*[contains(@class,'tree-filter-item__open')]//*[contains(@class,'close-icon')]")))
+						.click();
+				// break;
+			}
+		}
+
+		}*/
 		for (String provinceName : provinceKeys) {
 			CommonFunctionality.wait(1000);
+			//if(!provinceName.equals("(DC)Crimean Federal District")) {
+		
 			prefetureTD = (Map<String, Object>) provinceTD.get(provinceName);
+			if(prefetureTD != null) {
 			Set<String> prefetureTDKeys = prefetureTD.keySet();
 			int PrefectureCountTD = prefetureTDKeys.size();
-			login.Log4j.info("Province in Excel is: " + provinceName);
-			login.Log4j.info("Prefecture Count in Excel is: " + PrefectureCountTD);
+			login.Log4j.info(arg1 + " in Excel is: " + provinceName);
+			login.Log4j.info(arg2 + " Count in Excel is: " + PrefectureCountTD);
+			login.Log4j.info(arg2 + " list : " + prefetureTDKeys);
 			// CommonFunctionality.wait(1000);
 			ActiveEleXpath = "//*[contains(@class,'subnational--section__second')]//*[contains(@class,'open-icon')]";
 			GridActiveElements = login.driver.findElements(By.xpath(ActiveEleXpath));
 			for (int i = provinceVar; i < GridActiveElements.size();) {
 				login.Log4j.info(i);
 				// CommonFunctionality.wait(500);
+				if(provinceName.equals("Dadra and Nagar Haveli and Daman and Diu")) {
 				GridActiveElements.get(i).click();
 				String PrefectureXpath = "//*[contains(@class,'subnational--section__second')]//*[contains(@class,'tree-filter-item__open')]//*[@class='tree-filter-list']//*[@class='filter-item--body'][1]//following-sibling::*[@class='text-dots']";
 				ValidationMethod(prefetureTDKeys, PrefectureXpath);
 				provinceVar = i + 1;
-				break;
+				} else {
+					GridActiveElements.get(i).click();
+					String PrefectureXpath = "//*[contains(@class,'subnational--section__second')]//*[contains(@class,'tree-filter-item__open')]//*[@class='tree-filter-list']//*[@class='filter-item--body'][1]//following-sibling::*[@class='text-dots']";
+					ValidationMethod(prefetureTDKeys, PrefectureXpath);
+					
+						provinceVar = i + 1;
+					
+					break;
+				}
+				
 			}
 			// unselect province
 			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 					"//*[contains(@class,'subnational--section__second')]//*[contains(@class,'tree-filter-item__open')]//*[contains(@class,'close-icon')]")))
 					.click();
 			// break;
+		}
 		}
 		// CommonFunctionality.getElementByXpath(driver, "//*[@class='dropdown--body
 		// dropdown--body__open']//*[contains(text(),'Collapse all')]", 20).click();
@@ -223,6 +281,7 @@ public class ChinaFilter {
 		for (String provinceName : provinceKeys) {
 			int prefectureVar = 0;
 			prefetureTD = (Map<String, Object>) provinceTD.get(provinceName);
+			if(prefetureTD != null) {
 			Set<String> prefetureTDKeys = prefetureTD.keySet();
 			Thread.sleep(1000);
 			ActiveEleXpath = "//div[@class='subnational--section subnational--section__third']/div/div[2]/div/div[1]/div[1]/div[1]";
@@ -249,7 +308,7 @@ public class ChinaFilter {
 						// Thread.sleep(700);
 						int CountieList = 0;
 						countiesTD = (List<String>) prefetureTD.get(Prefecture);
-						login.Log4j.info("Countie list : " + countiesTD);
+						login.Log4j.info(arg3 + " list : " + countiesTD);
 						if (countiesTD != null) {
 							// Convert List to Set
 							CountieListTD = new HashSet<String>(countiesTD);
@@ -278,8 +337,8 @@ public class ChinaFilter {
 								// String CountieXpath = "//*[contains(@class,'tree-filter-item__select-all
 								// tree-filter-item__open')]/*[2]//*[@class='filter-item--body'][1]//following-sibling::*[@class='text-dots']";
 								String CountieXpath = "(//*[contains(@class,'subnational--section__third')]//*[@class='tree-filter-list']//*[contains(@class,'tree-filter-item__open')])[2]//*[@class='tree-filter-item--children']//*[@class='tree-filter-list']//*[@class='tree-filter-item--title']//following-sibling::*[@class='text-dots']";
-								login.Log4j.info("Province in Excel is: " + provinceName);
-								login.Log4j.info("Prefecture in Excel is: " + Prefecture);
+								login.Log4j.info(arg1 + " in Excel is: " + provinceName);
+								login.Log4j.info(arg2 + " in Excel is: " + Prefecture);
 								ValidationMethod(CountieListTD, CountieXpath);
 								prefectureVar = k + 1;
 							} else {
@@ -289,15 +348,17 @@ public class ChinaFilter {
 
 							break;
 						}
-						try {
-							// unselect prefecture
+
+						// unselect prefecture
+						if (login.driver.findElements(By.xpath(
+								"//div[@class='tree-filter-item--children']//div[@class='tree-filter-item tree-filter-item__open']/*[1]/*[1]"))
+								.size() == 1) {
+
 							CommonFunctionality.getElementByXpath(login.driver,
 									"//div[@class='tree-filter-item--children']//div[@class='tree-filter-item tree-filter-item__open']/*[1]/*[1]",
 									20).click();
 							// *[@class='subnational--section
 							// subnational--section__third']/*[1]/*[2]/*[1]/*[2]/*[1]/*[2]/*[1]/*[1]
-						} catch (NoSuchElementException e) {
-
 						}
 					}
 					provinceVar = i + 1;
@@ -315,6 +376,7 @@ public class ChinaFilter {
 				}
 
 				break;
+			}
 			}
 		}
 	}

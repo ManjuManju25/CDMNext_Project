@@ -203,7 +203,7 @@ public class ImageVisual {
 
 	@Then("^Image should be downloaded in \"([^\"]*)\" format$")
 	public void image_should_be_downloaded_in_format(String arg1) throws Throwable {
-		CommonFunctionality.getTheNewestFile(arg1);
+		CommonFunctionality.getTheNewestFile(Commentary.format);
 		File_delete.delete();
 	}
 
@@ -238,12 +238,15 @@ public class ImageVisual {
 		List<WebElement> generalTab_options = login.driver.findElements(By.xpath(
 				"//*[@class='mce-container mce-form mce-abs-layout-item mce-first']//*[@class='mce-widget mce-label mce-abs-layout-item mce-first']"));
 		int j = 0;
-		for (int i = 0; i <= generalTab_options.size();) {
-			login.Log4j.info(generalTab_options.get(i).getText().trim());
-			for (String arg : list) {
-				if (generalTab_options.get(i).getText().trim().equals(arg.trim())) {
+
+		for (String arg : list) {
+			//login.Log4j.info(arg.trim());
+			for (int i = j; i <= generalTab_options.size();) {
+				//CommonFunctionality.wait(500);
+				//login.Log4j.info(generalTab_options.get(j).getText().trim());
+				if (generalTab_options.get(j).getText().trim().equalsIgnoreCase(arg.trim())) {
 					login.Log4j.info(arg + " is displayed");
-					i = j + 1;
+					j = j + 1;
 					break;
 				} else {
 					Assert.fail("Verification failed");
@@ -329,14 +332,16 @@ public class ImageVisual {
 	public void enter_Dimensions_as_and(int arg1, int arg2) throws Throwable {
 		dimension1 = Integer.toString(arg1);
 		dimension2 = Integer.toString(arg2);
-		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//*[@class='mce-container mce-abs-layout-item mce-last mce-formitem']/*[1]/*[3]/*[1]/*[2]", 30)
-				.sendKeys(dimension1);
-		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//*[@class='mce-container mce-abs-layout-item mce-last mce-formitem']/*[1]/*[3]/*[1]/*[4]", 30)
-				.sendKeys(dimension2);
+		WebElement ele1 = CommonFunctionality
+		.getElementByXpath(login.driver,
+				"//*[@class='mce-container mce-abs-layout-item mce-last mce-formitem']/*[1]/*[3]/*[1]/*[2]", 30);
+		ele1.clear();
+		ele1.sendKeys(dimension1);
+		WebElement ele2 = CommonFunctionality
+		.getElementByXpath(login.driver,
+				"//*[@class='mce-container mce-abs-layout-item mce-last mce-formitem']/*[1]/*[3]/*[1]/*[4]", 30);
+		ele2.clear();
+		ele2.sendKeys(dimension2);
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='mce-container mce-panel mce-foot']//*[contains(text(),'Ok')]", 30).click();
 	}

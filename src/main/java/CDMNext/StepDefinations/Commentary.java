@@ -576,7 +576,7 @@ public class Commentary {
 		try {
 			// commentary visual align
 			visual_align = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='visual-item-template visual-select-area text-template']", 20);
+				"//*[@class='text-block-editor']", 20);
 		} catch(Exception e) {
 			
 			//Attachments visual align
@@ -678,7 +678,7 @@ public class Commentary {
 	public void selected_color_should_be_applied_to_the_visual_background() throws Throwable {
 		UnselectVisual();
 		String Background_color = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='text-block-editor']", 20)
+				.getElementByXpath(login.driver, "//*[@class='visual-item-template visual-select-area text-template']", 20)
 				.getCssValue("background-color");
 		ColorValidation(Background_color);
 		CommonFunctionality.DeleteVisual();
@@ -702,7 +702,7 @@ public class Commentary {
 		UnselectVisual();
 		CommonFunctionality.wait(2000);
 		WebElement backGroundImage = login.driver
-				.findElement(By.xpath("//*[@class='text-block-editor']"));
+				.findElement(By.xpath("//*[@class='visual-item-template visual-select-area text-template']"));
 	     backgroundImage(backGroundImage);
 
 	}
@@ -745,7 +745,7 @@ public class Commentary {
 	public void the_visual_border_should_be_changed_as_per_the_selection() throws Throwable {
 		UnselectVisual();
 		String border_color = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='text-block-editor']", 20)
+				.getElementByXpath(login.driver, "//*[@class='visual-item-template visual-select-area text-template']", 20)
 				.getCssValue("border-color");
 		ColorValidation(border_color);
 		CommonFunctionality.DeleteVisual();
@@ -778,7 +778,7 @@ public class Commentary {
 			try {
 			//border width for commentary visual
 			 ActualWidth = login.driver
-					.findElement(By.xpath("//*[@class='text-block-editor']"))
+					.findElement(By.xpath("//*[@class='visual-item-template visual-select-area text-template']"))
 					.getCssValue("border-width");
 			} catch(Exception e) {
 				try {
@@ -800,7 +800,7 @@ public class Commentary {
 			try {
 				//Radius for commentary visual
 			 ActualRadius = login.driver
-					.findElement(By.xpath("//*[@class='text-block-editor']"))
+					.findElement(By.xpath("//*[@class='visual-item-template visual-select-area text-template']"))
 					.getCssValue("border-radius");
 			} catch(Exception e) {
 				try {
@@ -843,7 +843,7 @@ public class Commentary {
 		String BorderStyle;
 		try {
 			//Select border style for commentary visual
-		 BorderStyle = login.driver.findElement(By.xpath("//*[@class='text-block-editor']"))
+		 BorderStyle = login.driver.findElement(By.xpath("//*[@class='visual-item-template visual-select-area text-template']"))
 				.getCssValue("border-style");
 		} catch(Exception e) {
 			try {
@@ -1294,7 +1294,11 @@ public class Commentary {
 
 	@And("^Click on x icon to close$")
 	public void click_on_x_icon_to_close() throws Throwable {
+		try {
 		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 15).click();
+		}catch(Exception e) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 4).click();
+		}
 	}
 
 	@Then("^The modal window should be closed$")
@@ -2050,7 +2054,7 @@ public class Commentary {
 		//CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 30).click();
 		CommonFunctionality.wait(5000);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='items-wrapper']//li//span[contains(text(),'Shared')]", 20)
+				.getElementByXpath(login.driver, "//*[@class='items-wrapper']//li//span[contains(text(),'Share')]", 20)
 				.click();
 	}
 

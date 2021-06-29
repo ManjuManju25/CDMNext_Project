@@ -1735,6 +1735,13 @@ public class DatabasesTab {
 		} if(arg1.equalsIgnoreCase("Rename view") || arg1.equalsIgnoreCase("Duplicate view") || arg1.equalsIgnoreCase("Clear view") || arg1.equalsIgnoreCase("Delete view") || arg1.equalsIgnoreCase("Delete all views") || arg1.equalsIgnoreCase("Copy view") || arg1.equalsIgnoreCase("Delete all views") || arg1.equalsIgnoreCase("Paste visual")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']/li/span[@title='" + arg1 + "']", 20).click();
 		}
+		if(arg1.equals("State Administrative")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 6).click();
+		}
+		if(arg1.equalsIgnoreCase("Add Forecasts") || arg1.equalsIgnoreCase("Replace the current series") || arg1.equalsIgnoreCase("Calculate series"))  {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 6).click();
+		}
+		
 	}
 
 	@Then("^\"([^\"]*)\" should be created with series in views panel$")
@@ -1987,11 +1994,11 @@ public class DatabasesTab {
 	public void click_on_series_name() throws Throwable {
 		Thread.sleep(2000);
 		try {
-			ele = login.driver.findElement(By.xpath("//div[@class='series-item--name']"));
-			ele.click();
+			CommonFunctionality.getElementByXpath(login.driver,"//div[@class='series-item--name']",6).click();
+			
 		} catch(Exception e) {
 			//Clicking on series name in rename popup for histogram visual
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-name--title']", 6).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
 			
 		}
 	}

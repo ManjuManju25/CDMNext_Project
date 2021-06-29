@@ -43,14 +43,14 @@ public class replacement {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("related_series"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("replace_window"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("replacement_tab"))).click();
-		Thread.sleep(1000);
+		Thread.sleep(4000);
 	}
 	public void Open_replacement_window_single_series() throws Exception {
 		
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("related_series"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("replace_window"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("replacement_tab"))).click();
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 	}
 	public void verifypopupWindow() {
 		try {
@@ -65,6 +65,7 @@ public void addSeries() throws Exception {
 	
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).clear();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).sendKeys("253736802");
+		Thread.sleep(7000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
 		Actions action = new Actions(login.driver);
 		
@@ -109,15 +110,15 @@ public void verify_window() throws Throwable {
 	//TC_RS_02
 	@Given("^Add rebased series to My series \"([^\"]*)\"$")
 	public void add_rebased_series_to_My_series(String arg1) throws Throwable {
-		
+			Thread.sleep(4000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_tab"))).click();
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).click();
-			Thread.sleep(2000);
+			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).clear();;
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).sendKeys(arg1);
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			List<WebElement> multiple_series = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("select_multiple_series")));
 			System.out.println(multiple_series.size());
 			for (int i = 1; i <= multiple_series.size(); i++) {
@@ -193,7 +194,7 @@ public void verify_window() throws Throwable {
 			Actions act=new Actions(login.driver);
 			Thread.sleep(2000);
 			act.moveToElement(series).build().perform();
-			Thread.sleep(1000);
+			//Thread.sleep(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("i_icon"))).click();
 			
 			String seriesA="Active";
@@ -310,7 +311,7 @@ public void verify_window() throws Throwable {
 	   Open_replacement_window();
 	   Actions icon=new Actions(login.driver);
 		WebElement series_hover = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("rel_series_win")));
-		icon.moveToElement(series_hover).build().perform();
+		icon.moveToElement(series_hover).pause(2000).build().perform();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("rel_series_win"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("sspwin"))));

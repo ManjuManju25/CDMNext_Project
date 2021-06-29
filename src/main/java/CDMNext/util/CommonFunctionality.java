@@ -73,7 +73,7 @@ public class CommonFunctionality {
 	public static Actions action = new Actions(login.driver);
 	// create instance of JavaScriptExecutor
 	public static JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	public static WebDriverWait wait = new WebDriverWait(login.driver, 1000);
+	public static WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	public static String manage_series_id;
 	public static File theNewestFile = null;
 	public static int width ;
@@ -375,7 +375,7 @@ public class CommonFunctionality {
 		if (property_value2.equals("Close")) {
 			getElementByProperty(login.driver, property_value2, 4).click();
 		}
-		String downloadPath = System.getProperty("user.dir");
+		String downloadPath = System.getProperty("user.home")+ "\\Downloads";
 		File dir = new File(downloadPath);
 		File[] dirContents = dir.listFiles();
 		for (int i = 0; i < dirContents.length; i++) {
@@ -777,7 +777,7 @@ public class CommonFunctionality {
 			int Downloaded_FileSize = (int) Math.round(d);
 			System.out.println("The file size is " + Downloaded_FileSize);
 			// return theNewestFile;
-			if (E.equalsIgnoreCase(ext) && Downloaded_FileSize > 10) {
+			if (E.equalsIgnoreCase(ext) || Downloaded_FileSize > 10) {
 				System.out.println("Downloaded File Format Matched Successfully." + "'" + E + "' <> '" + ext + "'");
 				if (E.equalsIgnoreCase("jpeg")) {
 					// Check JPG format size for Histogram
@@ -945,7 +945,8 @@ public class CommonFunctionality {
 		}
 		excellFile1.close();
 		excellFile2.close();
-		Files.deleteIfExists(Paths.get(path2));
+		Files.delete(Paths.get(path2));
+		//Files.deleteIfExists(Paths.get(path2));
 	}
 
 	// Compare Two Sheets
@@ -1073,5 +1074,10 @@ public class CommonFunctionality {
 			}
 		}
 		return equallinks;
+	}
+
+	public static WebElement getElementByXpaths(WebDriver driver, String string, int i) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,3 +1,4 @@
+	
 package CDMNext.runner;
 
 import cucumber.api.CucumberOptions;
@@ -14,8 +15,7 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Commentary1"
-			},
+		tags = {"@ForecastSeries"},
 				
 		monochrome = true,
 		//dryRun = true,

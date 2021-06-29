@@ -121,7 +121,8 @@ public class CrossSection {
 		CommonFunctionality.wait(3000);
 		List<WebElement> list = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
 		if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || arg1.equals("310901701") || arg1.equals("205424302")) {
-			for(int i = 1; i <= list.size(); i++) {
+			//for(int i = 1; i <= list.size(); i++) {
+			for(int i = list.size(); i >= 1; i--) {
 				WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
 				WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
 				if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
@@ -129,7 +130,8 @@ public class CrossSection {
 				}
 			}
 		} if(arg1.equals("310901701;310901801") || arg1.equals("9380901;9385301")) {
-			for(int i = list.size(); i >= 1; i--) {
+			//for(int i = list.size(); i >= 1; i--) {
+			for(int i = 1; i <=  list.size() ; i++) {
 				WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]", 4);
 				WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/li["+i+"]/div/a/div[2]/span/*", 4);
 				if(!series_unselected.getAttribute("class").contains("series-list-item__selected")) {

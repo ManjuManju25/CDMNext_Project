@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -26,7 +28,7 @@ import cucumber.api.java.en.Then;
 public class DatasetsTab {
 	
 	JavascriptExecutor js = (JavascriptExecutor)login.driver;
-	static String before_load_button;
+	List<WebElement> before_load_button;
 	static String footnotes_dataset_title;
 	static String series_name_in_dataset;
 	static int series_inside_one_dataset;
@@ -41,7 +43,8 @@ public class DatasetsTab {
 	@And("^Clicking \"([^\"]*)\" tab from menu$")
 	public void clicking_tab_from_menu(String arg1) throws Throwable {	
 		//CommonFunctionality.webDriverwait_keyvalue("//*[contains(@class,'toggler-control__sm')]//*[@title='"+arg1+"']");
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'toggler-control__sm')]//*[@title='"+arg1+"']", 4)).pause(500).click().build().perform();
+		CommonFunctionality.wait(1000);
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'toggler-control__light_purple')]//*[@title='"+arg1+"']", 4)).pause(500).click().build().perform();
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -256,6 +259,7 @@ public class DatasetsTab {
 	@SuppressWarnings("deprecation")
 	@And("^Search for the \"([^\"]*)\" with ID \"([^\"]*)\" and click on \"([^\"]*)\" option$")
 	public void search_for_the_with_ID_and_click_on_option(String arg1, String arg2, String arg3) throws Throwable {
+		  CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='"+arg1+"']", 4).click();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg2);
@@ -273,12 +277,13 @@ public class DatasetsTab {
 	@SuppressWarnings("deprecation")
 	@And("^Search for \"([^\"]*)\" with ID \"([^\"]*)\" and click on \"([^\"]*)\" option$")
 	public void search_for_with_ID_and_click_on_option(String arg1, String arg2, String arg3) throws Throwable {
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='"+arg1+"']", 4).click();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg2);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'data-set-node')][1]//div[@class='toggle']", 4)).pause(500).click().build().perform();
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'series-list-item__matched')]//span[contains(@class,'series-list-item--checkbox')]", 4)).pause(500).click().build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'series-list-item')]//span[contains(@class,'series-list-item--checkbox')]", 4)).pause(500).click().build().perform();
 		if(arg3.equalsIgnoreCase("C")) {
 			new Actions(login.driver).sendKeys("c").pause(1000).build().perform(); 
 		} if(arg3.equalsIgnoreCase("T")) {
@@ -302,8 +307,8 @@ public class DatasetsTab {
 		if(login.driver.findElements(By.cssSelector(".nodes-list--footer .nodes-list--more-button")).size()>0) {
 	    WebElement load = CommonFunctionality.getElementBycssSelector(login.driver, ".nodes-list--footer .nodes-list--more-button", 4);
 	    js.executeScript("arguments[0].scrollIntoView(true);",load);
-	    before_load_button = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'nodes-list--more-button')]/preceding::*[@class='series-data-set--table-name'][1]",4).getText();
-	    new Actions(login.driver).moveToElement(load).click().build().perform();
+	    before_load_button = login.driver.findElements(By.xpath("//*[@class='title']"));
+	    new Actions(login.driver).moveToElement(load).pause(500).click().build().perform();
 	} else {
 		fail("Load more button not present");
 	}
@@ -323,15 +328,20 @@ public class DatasetsTab {
 	String title = CommonFunctionality.getElementByXpath(login.driver, "//span[@class='footnotes-modal--name']//span", 4).getText();
 	String footnotes = title.substring(1, title.length()-1);
 	String footnotes_title[] = footnotes.split("\\: ",2);
-	assertEquals(footnotes_dataset_title, footnotes_title[1]);
+//	assertEquals(footnotes_dataset_title, footnotes_title[1]);
+	if(footnotes_title[1].contains(footnotes_dataset_title)) {
 	login.Log4j.info("The footnotes window has been verified successfully");
 	CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+	} else {
+		fail("Verification failed");
+	}
 	}
 
 	@Then("^Verify the Load more button$")
 	public void verify_the_Load_more_button() throws Throwable {
-	   String after_load = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-data-set--table-name']", 4).getText();
-	   assertEquals(before_load_button, after_load);
+		CommonFunctionality.wait(500);
+	   List<WebElement> after_load = login.driver.findElements(By.xpath("//*[@class='title']"));
+	   assertNotEquals(before_load_button.size(), after_load.size());
 	   login.Log4j.info("The load more button has been verified successfully");
 	   
 	}
@@ -374,7 +384,7 @@ public class DatasetsTab {
 	@Then("^Verify the \"([^\"]*)\" for series and validate \"([^\"]*)\" option$")
 	public void verify_the_for_series_and_validate_option(String arg1, String arg2) throws Throwable {
 		CommonFunctionality.wait(1500);
-		String text_left = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'series-list-item__matched')]//div[@class='series-item--name']", 4).getText();
+		String text_left = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'series-list-item')]//div[@class='series-item--name']", 4).getText();
 		String text_right = CommonFunctionality.getElementBycssSelector(login.driver, "span[data-name='title']", 4).getText();
 		if(arg1.equalsIgnoreCase("Chart")) {
 			String actual = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-top-panel--left-controls .button__primary", 4).getText();
@@ -415,8 +425,12 @@ public class DatasetsTab {
        String right = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name-wrapper']//span[@class='group-name'][1]", 4).getText();
        String name_right[] = right.split(": ",2);
        assertEquals(left_count, right_count);
-       assertEquals(name_left, name_right[1]);
-       login.Log4j.info("The dataset is successfully added to right pane and verified");
+       //assertEquals(name_left, name_right[1]);
+       if(name_right[1].contains(name_left)) {
+    	   login.Log4j.info("The dataset is successfully added to right pane and verified"); 
+       } else {
+    	  Assert.fail("The dataset is not added  successfully to the right pane"); 
+       }
        CommonFunctionality.DeleteSeries();
 	}
 	
@@ -567,7 +581,8 @@ public class DatasetsTab {
 		if(!(open.getAttribute("class").contains("dropdown__open"))) {
 			CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='data-sets--right']//span[contains(@class,'icon--filter-arrow')]")));
 			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[@class='data-sets--right']//span[contains(@class,'icon--filter-arrow')]", 4)).pause(1000).click().build().perform();
-		} else {
+		} else {	
+			
 			fail("Already dropdown is opened and hence failed");
 		}
 		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='custom-select--body']//div["+arg2+"]/div")));
@@ -599,11 +614,12 @@ public class DatasetsTab {
 	@SuppressWarnings("deprecation")
 	@Then("^The series in dataset getting unselected$")
 	public void the_series_in_dataset_getting_unselected() throws Throwable {
+		CommonFunctionality.wait(1000);
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]", 4)).pause(1000).contextClick().pause(1000).build().perform();
 	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".dropdown-menu.context-menu span[title='Unselect all']", 4)).pause(2000).click().build().perform();
-		List<WebElement> selected = login.driver.findElements(By.xpath("//ul[contains(@class,'search-series-list')]//li[not(contains(@class,'series-list-item__matched'))]"));
+		List<WebElement> selected = login.driver.findElements(By.xpath("//*[@class='series-related-table']//ul[contains(@class,'search-series-list')]//li[not(contains(@class,'series-list-item__matched'))]"));
 	    for(int i=1; i<=selected.size(); i++) {
-	    WebElement checked = CommonFunctionality.getElementByXpath(login.driver, "//ul[contains(@class,'search-series-list')]//li["+i+"][not(contains(@class,'series-list-item__matched'))]", 4);
+	    WebElement checked = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-related-table']//ul[contains(@class,'search-series-list')]//li["+i+"][not(contains(@class,'series-list-item__matched'))]", 4);
 	    if(checked.getAttribute("class").contains("series-list-item__selected")) {
 	    	fail("Verification Failed");   	
 	    }
@@ -676,7 +692,7 @@ public class DatasetsTab {
 	    		fail("Not opened");
 	    	}
 	    } if(arg1.equalsIgnoreCase("Expand") && arg2.equalsIgnoreCase("With")) {
-	       	CommonFunctionality.getElementBycssSelector(login.driver, ".nodes-list--more-button", 4).click();
+	       //	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='button button__sm button__text_purple button__block nodes-list--more-button']", 4).click();
 	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+Comparables.section_name+"')]/preceding::div[2]", 4)).pause(500).perform();
 	    	(new Actions(login.driver)).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".nodes-list--tree-wrapper .svg-checkbox", 4)).pause(500).click().pause(500).sendKeys(Keys.chord(Keys.ARROW_RIGHT)).build().perform();
 	    	if(expand.getAttribute("class").contains("open")) {
@@ -695,7 +711,7 @@ public class DatasetsTab {
 	    		fail("Not closed");
 	    	}
 	    } if(arg1.equalsIgnoreCase("Collapse") && arg2.equalsIgnoreCase("With")) {
-	    	CommonFunctionality.getElementBycssSelector(login.driver, ".nodes-list--more-button", 4).click();
+	    	//CommonFunctionality.getElementBycssSelector(login.driver, ".nodes-list--more-button", 4).click();
 	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+Comparables.section_name+"')]/preceding::div[2]", 4)).pause(500).click().build().perform();
 	    	(new Actions(login.driver)).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".series-list-item--checkbox", 4)).pause(500).click().pause(500).sendKeys(Keys.chord(Keys.ARROW_LEFT)).build().perform();
 	    	if(expand.getAttribute("class").contains("open")) {
@@ -724,8 +740,11 @@ public class DatasetsTab {
 		login.driver.switchTo().window(newTab.get(1)).close();
 		login.driver.switchTo().window(newTab.get(0));
 		assertEquals(left_count, right_count);
-	    assertEquals(name_left, name_right[1]);
+	    if(name_right[1].contains(name_left)) {
 		System.out.println("New insight with the added series is opened and has been verified successfully");
+	    }else {
+	    	fail("Verification failed");
+	    }
    }
 	
 	@Then("^The Footnotes window for Dataset should be open$")

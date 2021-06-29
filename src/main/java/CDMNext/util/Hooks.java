@@ -2,19 +2,26 @@ package CDMNext.util;
 
  import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 //import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import CDMNext.StepDefinations.login;
+import cucumber.api.Scenario;
 
 public class Hooks {
 
 	public static void before_run() throws Throwable {
+		//CommonFunctionality.wait(1000);
 		URL url = new URL(login.CONFIG.getProperty("testsiteURL"));
 		login.driver.get(url.getProtocol() + "://" + url.getHost() + "/Untitled-insight/myseries");
 		Handle_BrowserNotification_popup();
@@ -38,6 +45,13 @@ public class Hooks {
 
 	@SuppressWarnings("deprecation")
 	public static void unhandled_popup() throws Throwable {
+		try {
+			if (login.driver.findElements(By.xpath("//*[@class='popover--close']")).size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 15).click();
+			}
+		} catch (NoSuchElementException e) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok']", 15).click();
+		}
 		List<WebElement> popup = login.driver.findElements(By.xpath("//div[@class='sphere-modal__close'] | //div[@class='movable-modal--close']"));
 		for (int i = 1; i <= popup.size(); i++) {
 			CommonFunctionality.Hidden_Webelements(login.driver,"//div[@class='sphere-modal__close'] | //div[@class='movable-modal--close']");
@@ -46,11 +60,12 @@ public class Hooks {
 			}
 		}
 		CommonFunctionality.Views_list();
-		WebElement reset = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'searches-manager--reset-button')]/ancestor::div[2]", 4);
+		CommonFunctionality.ResetMethod();
+		/*WebElement reset = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'searches-manager--reset-button')]/ancestor::div[2]", 4);
 		if (!reset.getAttribute("class").contains("searches-manager__empty-filters")) {
 			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 							"//*[contains(@class,'searches-manager--reset-button')]", 4)).pause(500).click().build().perform();
-		}
+		}*/
 		WebElement data_tab = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='search-presentation-tabs--visible']//*[contains(@class,'ui-sortable-handle')])[1]", 4);
 		if (!data_tab.getAttribute("class").contains("series-tab__hidden")) {
 			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
@@ -60,10 +75,26 @@ public class Hooks {
 	}
 	public static void Handle_BrowserNotification_popup() throws Throwable {
 		Robot r = new Robot();
-		r.delay(3000);
+		r.delay(5000);
 		r.keyPress(KeyEvent.VK_TAB);
 		r.keyPress(KeyEvent.VK_ENTER);
 		r.keyRelease(KeyEvent.VK_ENTER);
+	}
+	public static void copyingOldReports() throws IOException {
+		CommonFunctionality.wait(2000);
+		String srcFile = System.getProperty("user.dir") + "/target/surefire-reports/html/report.html";
+		File src = new File(srcFile);
+		String destFile = System.getProperty("user.dir") + "/Reports/" + src.getName();
+		File dest = new File(destFile);
+		// Copy files to specific location
+		FileUtils.copyFile(src, dest);
+	}
+	public static String getFeatureFileNameFromScenarioId(Scenario scenario) {
+	    String featureName = "Feature ";
+	    String rawFeatureName = scenario.getId().split(";")[0].replace("-"," ");
+	    featureName = featureName + rawFeatureName.substring(0, 1).toUpperCase() + rawFeatureName.substring(1);
+	    login.Log4j.info(featureName);
+	    return featureName;
 	}
 
 }

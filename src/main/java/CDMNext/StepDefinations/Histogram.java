@@ -98,6 +98,7 @@ public class Histogram {
 
 	@And("^Create a Histogram visual without selecting series$")
 	public void create_a_Histogram_visual_without_selecting_series() throws Throwable {
+		CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("210698402");
 		commentary.CreateViewTab();
 		click_on_histogram_visual_icon();
@@ -167,6 +168,7 @@ public class Histogram {
 
 	@And("^Add some series to my series$")
 	public void add_some_series_to_my_series() throws Throwable {
+		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 5).click();
 		CommonFunctionality.wait(2000);
 		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -381,16 +383,18 @@ public void create_a_new_histogram_visual() throws Throwable {
 	@And("^Search for the series you want to rename$")
 	public void search_for_the_series_you_want_to_rename() throws Throwable {
 		SearchKeyword = "Gross";
+		CommonFunctionality.wait(200);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='find-and-replace--panel-search-box']//input", 6)
+				.getElementByXpath(login.driver, "//*[@class='find-and-replace--panel-search-box']/*[1]", 6)
 				.sendKeys(SearchKeyword);
 	}
 
 @And("^Search with invalid series name$")
 public void search_with_invalid_series_name() throws Throwable {
 	SearchKeyword = "XYZ";
+	CommonFunctionality.wait(200);
 	CommonFunctionality
-			.getElementByXpath(login.driver, "//*[@class='find-and-replace--panel-search-box']//input", 6)
+			.getElementByXpath(login.driver, "//*[@class='find-and-replace--panel-search-box']/*[1]", 6)
 			.sendKeys(SearchKeyword);
 }
 
@@ -1451,9 +1455,9 @@ public void click_on_template_dropdown() throws Throwable {
 @And("^Check the box for \"([^\"]*)\"$")
 public void check_the_box_for(String arg1) throws Throwable {
 	WebElement set = CommonFunctionality.getElementByXpath(login.driver,
-			"//*[text()='" + arg1 + "']/preceding-sibling::span", 6);
+			"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 6);
 	Boolean select = CommonFunctionality
-			.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/preceding-sibling::span", 4)
+			.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4)
 			.isSelected();
 	if (select != true) {
 		new Actions(login.driver).moveToElement(set).pause(2000).click().build().perform();
@@ -1471,13 +1475,13 @@ public void the_Histogram_should_be_created_with_the_format_of_previous_template
 @And("^Check the box for \"([^\"]*)\" should be unchecked$")
 public void check_the_box_for_should_be_unchecked(String arg1) throws Throwable {
 	WebElement set = CommonFunctionality.getElementByXpath(login.driver,
-			"//*[text()='" + arg1 + "']/preceding-sibling::span", 6);
+			"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 6);
 //	boolean select = CommonFunctionality
 //			.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/preceding-sibling::span", 4)
 //			.isSelected();
 //	WebElement set = CommonFunctionality.getElementByXpath(login.driver,
 //			"//*[@class='favorite-template-checkbox']//*[@class='input-control input-control__sm']//input[@type='checkbox']", 6);
-	boolean select = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']/preceding-sibling::input")).isSelected();
+	boolean select = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/preceding-sibling::input")).isSelected();
 	if (select == true) {
 		new Actions(login.driver).moveToElement(set).pause(1000).click().build().perform();
 	
@@ -2192,8 +2196,8 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 	@Then("^The title of the visual should be removed from the visual$")
 	public void the_title_of_the_visual_should_be_removed_from_the_visual() throws Throwable {
 		CommonFunctionality.wait(1000);
-		Boolean VisualTitle = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
-		if (VisualTitle == false) {
+		//boolean VisualTitle = login.driver.findElement(By.xpath("//*[@data-name='title']")).isEnabled();
+		if (login.driver.findElements(By.xpath("//*[@data-name='title']")).size() == 0) {
 			login.Log4j.info("The title of the visual is removed");
 		} else {
 			Assert.fail("The title of the visual is not removed");
@@ -2659,7 +2663,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 		CommonFunctionality.wait(1500);
 		String alignment = login.driver
 				.findElement(
-						By.xpath("//*[@data-entity='histogram']//*[@class='visual-title visual-select-area visual-title--wrapper'][1]"))
+						By.xpath("//*[@data-entity='histogram']//*[@class='visual-title visual-title--wrapper'][1]"))
 				.getAttribute("style");
 		if (arg1.equalsIgnoreCase("Left")) {
 
@@ -2695,7 +2699,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	CommonFunctionality.wait(1500);
 	String alignment = login.driver
 			.findElement(
-					By.xpath("//*[@data-entity='histogram']//*[@class='visual-title visual-select-area visual-title--wrapper'][2]"))
+					By.xpath("//*[@data-entity='histogram']//*[@class='visual-title visual-title--wrapper'][2]"))
 			.getAttribute("style");
 	if (arg1.equalsIgnoreCase("Left")) {
 
@@ -3255,6 +3259,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	@And("^Create a histogram visual with series id \"([^\"]*)\"$")
 	public void create_a_histogram_visual_with_series_id(String arg1) throws Throwable {
 		create_a_Histogram_visual_without_selecting_series();
+		CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 5).sendKeys(arg1);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1000);
@@ -3275,7 +3280,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	@SuppressWarnings({ "deprecation", "unused" })
 	@Then("^Selected attributes should be displayed in tooltip when mouse hover on visual data$")
 	public void selected_attributes_should_be_displayed_in_tooltip_when_mouse_hover_on_visual_data() throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
 		List<WebElement> timepoints = login.driver.findElements(
 				By.xpath("//*[contains(@class,'highcharts-markers highcharts-series-0 highcharts-scatter-series')]/*"));
 		for (int i = 0; i <= timepoints.size(); i++) {
@@ -3361,11 +3366,12 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 		for (int i = 0; i < Items_list.size(); i++) {
 			CommonFunctionality.wait(200);
 			CommonFunctionality
-			.getElementByXpath(login.driver,
-					"//*[@class='select2-results']//li//*[contains(text(),'" + Items_list.get(i) + "')]", 8)
-			.click();
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-item-attribute btn']", 20).click();
-			
+					.getElementByXpath(login.driver,
+							"//*[@class='select2-results']//li//*[contains(text(),'" + Items_list.get(i) + "')]", 8)
+					.click();
+			if (i != 2) {
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-item-attribute btn']", 20).click();
+			}
 
 		}
 
@@ -3665,7 +3671,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 			try {
 				//Close Edit Histogram window
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 8).click();
-				CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 6).click();
+				//CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 6).click();
 			} catch(Exception e) {
 			 CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 8).click();
 				
@@ -4099,13 +4105,12 @@ public void the_changes_should_be_applied_to_only_visual_and_its_series_in_edit_
 
 @Then("^The Histogram visual should be created in vew tab on current insight$")
 public void the_Histogram_visual_should_be_created_in_vew_tab_on_current_insight() throws Throwable {
-   
-	List<WebElement> views = login.driver.findElements(
+		List<WebElement> views = login.driver.findElements(
 			By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
 	if(views.size() > 1) {
-		CommonFunctionality.wait(1200);
+		CommonFunctionality.wait(1000);
 		String titileTxt = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='main-page--insight-active-page']//*[@class='visual-title visual-select-area visual-title--wrapper'][1]//*[@data-name='title']", 15)
+				.getElementByXpath(login.driver, "//*[@class='main-page--insight-active-page']//*[@class='visual-title visual-title--wrapper'][1]//*[@data-name='title']", 15)
 				.getText();
 		if(Visual_Title_txt.equalsIgnoreCase(titileTxt)) {
 			login.Log4j.info("The Histogram visual is created in view tab");

@@ -105,41 +105,41 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Rename" option
     Then Number of selected series count should be shown on the rename popup header
 
-  @Histogram
-  Scenario: TC_Histogram_17:Rename - verify find field
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Rename" option
-    And Search for the series you want to rename
-    Then Result should be loaded for searched keyword
-
-  @Histogram
-  Scenario: TC_Histogram_18:Rename -  verify number of searched result
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Rename" option
-    And Search for the series you want to rename
-    Then The total number of matches result should be displayed in below the find field
-
-  @Histogram
-  Scenario: TC_Histogram_19:Rename - verify 'Replace' button
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Rename" option
-    And Search for the series you want to rename
-    And Enter keyword you want to replace with
-    And Click on Replace
-    Then The keyword should be replaced for selected series
-
-  @Histogram
-  Scenario: TC_Histogram_20:Rename - verify 'Replace All' button
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Rename" option
-    And Search for the series you want to rename
-    And Enter keyword you want to replace with
-    And Click on "Replace All"
-    Then All the available series should be replaced with the keyword
+  #@Histogram
+  #Scenario: TC_Histogram_17:Rename - verify find field
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #Then Result should be loaded for searched keyword
+#
+  #@Histogram
+  #Scenario: TC_Histogram_18:Rename -  verify number of searched result
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #Then The total number of matches result should be displayed in below the find field
+#
+  #@Histogram
+  #Scenario: TC_Histogram_19:Rename - verify 'Replace' button
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #And Enter keyword you want to replace with
+    #And Click on Replace
+    #Then The keyword should be replaced for selected series
+#
+  #@Histogram
+  #Scenario: TC_Histogram_20:Rename - verify 'Replace All' button
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #And Enter keyword you want to replace with
+    #And Click on "Replace All"
+    #Then All the available series should be replaced with the keyword
 
   @Histogram
   Scenario: TC_Histogram_21:Rename - Verify default selection for 'Edit series info' dropdown
@@ -1166,7 +1166,6 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
-    #And Check "sub-title"
     And Select size for visual "Sub title" as "20"
     When Click on "Save"
     Then The "sub_title" font size should be changed as "20"
@@ -1176,7 +1175,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
-    #And Check "sub-title"
+    And Check "sub-title"
     And Click on B under style for sub-title
     When Click on "Save"
     Then The "sub_title" should be displayed in Bold format
@@ -1211,8 +1210,7 @@ Feature: Verifying Histogram Visual functionality
     Then The subtitle should align to "center"
     And Select alignment of sub title to "right"
     Then The subtitle should align to "right"
-
-  
+#
   #And Select alignment for "Sub title" and Save
   #| left   |
   #| center |
@@ -1246,7 +1244,6 @@ Feature: Verifying Histogram Visual functionality
     And Click on Horizontal align of visual to "Right"
     Then The Visual area should align to "Right"
 
-  
   #And Select alignment for "Horizontal align" and Save
   #| left   |
   #| center |
@@ -1292,7 +1289,7 @@ Feature: Verifying Histogram Visual functionality
   #| center |
   #| right  |
   #Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
-  
+ 
   @Histogram
   Scenario: TC_Histogram_147:Edit Histogram - Copyright - Verify advance settings
     And Create histogram visual with series
@@ -1415,7 +1412,7 @@ Feature: Verifying Histogram Visual functionality
   #| center |
   #| right  |
   #Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
-  
+ 
   @Histogram
   Scenario: TC_Histogram_158:Edit Histogram - Copyright - Verify closing copyright popup
     And Create histogram visual with series
@@ -2291,13 +2288,13 @@ Feature: Verifying Histogram Visual functionality
     And Unhighlight the visual
     Then The visual options should be hidden
 
-  @Histogram
-  Scenario: TC_Histogram_263:Rename - verify for invalid search
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Rename" option
-    And Search with invalid series name
-    Then "No matches found" should be displayed under the find field
+  #@Histogram
+  #Scenario: TC_Histogram_263:Rename - verify for invalid search
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search with invalid series name
+    #Then "No matches found" should be displayed under the find field
 
   @Histogram
   Scenario: TC_Histogram_264:Edit series - Verify adding series from my series
@@ -2312,7 +2309,7 @@ Feature: Verifying Histogram Visual functionality
   @Histogram
   Scenario: TC_Histogram_265:Rename - Verify 'Edit series info' dropdown
     And Create histogram visual with series
-	  And Click on Edit series option
+    And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
     Then Below options should be displayed

@@ -508,12 +508,12 @@ Feature: Verifying Attachments Visual functionality
     Then Should allow to upload multiple files to the visual
 
   @Attachments
-  Scenario: TC_Attachments_68:Uploads - Verify multiple files upload
+  Scenario: TC_Attachments_68:Uploads - Verify default tab for attachments visual
     And Create a Attachments visual
-    And Click on Uploads tab
-    And Unselect the visual
-    And Now select the visual
-    Then The default tab for attachement is "Links"
+    #And Click on Uploads tab
+    #And Unselect the visual
+    #And Now select the visual
+    Then The default tab for attachement is "Uploads"
 
   @Attachments
   Scenario: TC_Attachments_69:Right click - Verify Copy Attachments

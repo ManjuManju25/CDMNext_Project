@@ -191,7 +191,7 @@ Scenario: TC_Chart_19: Verify style - 'bold, italic, underline'
    And Select the "Style" for "title" 
    Then The chart should update the "Style" selected for "title" 
    
-@ChartVisual123
+@ChartVisual23
 Scenario: TC_Chart_20: Verify style - 'horizontal alignment' (left, right, center)
    And Search for the series with SID "181804102;116315408"
    And  Click on more actions to create "View as Chart" 
@@ -322,18 +322,18 @@ Scenario: TC_Chart_30: Check for Image proportion percentage change horizontally
    And Click on "Proportion:" option in Edit visual to 100
    And Resetting back the width to original
    
-#@ChartVisual
-#Scenario: TC_Chart_32: Verify chart area background color
-   #And Search for the series with SID "1355101;353749717"
-   #And  Click on more actions to create "View as Chart" 
-   #And Click on "Edit" visual
-   #And Click on the Visual "Border:" Container
-   #And Click on the "Chart" checkbox to be "Checked"
-   #And Select any "color" for chart visual
-   #And Select "#2b60d0" color from list
-   #Then The color of background should be updated
+@ChartVisual
+Scenario: TC_Chart_32: Verify chart area background color
+   And Search for the series with SID "1355101;353749717"
+   And  Click on more actions to create "View as Chart" 
+   And Click on "Edit" visual
+   And Click on the Visual "Border:" Container
+   And Click on the "Chart" checkbox to be "Checked"
+   And Select any "color" for chart visual
+   And Select "#2b60d0" color from list
+   Then The color of background should be updated
    
-@ChartVisual123
+@ChartVisual
 Scenario: TC_Chart_33: Verify chart area background image
    And Search for the series with SID "1355101;353749717"
    And Click on chart option from hover 
@@ -398,17 +398,17 @@ Scenario: TC_Chart_37: Verify chart area border radius
    And Click on "Chart radius" option in Edit visual to 0
    And Resetting back the width to original
    
-#@ChartVisual1
-#Scenario: TC_Chart_38: Verify chart area border type
-   #And Search for the series with SID "1355101;353749717"
-   #And  Click on more actions to create "View as Chart" 
-   #And Click on "Edit" visual
-   #And Click on the Visual "Border:" Container 
-   #And Click on "Chart position" option in Edit visual
-   #And Click on the "Visual border" checkbox to "Check" 
-   #And Select Visual "Border Type" from dropdown
+@ChartVisual
+Scenario: TC_Chart_38: Verify chart area border type
+   And Search for the series with SID "1355101;353749717"
+   And  Click on more actions to create "View as Chart" 
+   And Click on "Edit" visual
+   And Click on the Visual "Border:" Container 
+   And Click on "Chart position" option in Edit visual
+   And Click on the "Visual border" checkbox to "Check" 
+   And Select Visual "Border Type" from dropdown
    
-@ChartVisualScreenshot
+@ChartVisual
 Scenario: TC_Chart_39: Verify different line charts
    And Search for the series with SID "230795002;230795102"
    And Click on chart option from hover
@@ -432,7 +432,7 @@ Scenario: TC_Chart_39: Verify different line charts
    Then The Chart should update the selected "Dotted line" type
    And Resetting back the width to original
    
-@ChartVisualScreenshot
+@ChartVisual
 Scenario: TC_Chart_40: Verify different column type charts
    And Search for the series with SID "9380901;9380801"
    And  Click on more actions to create "View as Chart" 
@@ -448,7 +448,7 @@ Scenario: TC_Chart_40: Verify different column type charts
    Then The Chart should update the selected "Stacked column" type
    And Resetting back the width to original
    
-@ChartVisualScreenshot
+@ChartVisual
 Scenario: TC_Chart_41: Verify different Bar type charts
    And Search for the series with SID "9380901;9380801"
    And  Click on more actions to create "View as Chart" 
@@ -464,7 +464,7 @@ Scenario: TC_Chart_41: Verify different Bar type charts
    Then The Chart should update the selected "Stacked bar" type
    And Resetting back the width to original
    
-@ChartVisualScreenshot
+@ChartVisual
 Scenario: TC_Chart_42: Verify different Area type charts
    And Search for the series with SID "9380901;9380801"
    And  Click on more actions to create "View as Chart" 
@@ -480,7 +480,7 @@ Scenario: TC_Chart_42: Verify different Area type charts
    Then The Chart should update the selected "Stacked area" type
    And Resetting back the width to original
    
-@ChartVisual123
+@ChartVisual
 Scenario: TC_Chart_43: Check if the default axis is 'left'
    And Search for the series with SID "230795002;230795102"
    And  Click on more actions to create "View as Chart" 
@@ -582,7 +582,7 @@ Scenario: TC_Chart_47: Verify title name, color, hightlight, size in left axis
    And Select "Y axis font size" for chart visual to 18
    Then Verify the changes are reflecting in Chart visual for "Left Axis" 
    
-@ChartVisual1
+@ChartVisual
 Scenario: TC_Chart_48: Verify title name, color, hightlight, size in right axis
    And Search for the series with SID "51287302;383440717"
    And Click on chart option from hover
@@ -782,7 +782,7 @@ Scenario: TC_Chart_58: Verify Values line - color
    And Uncheck the checkbox for "Lines" section
    And Verify the "color" field is disabled
    
-@Chart
+@ChartVisual
 Scenario: TC_Chart_59: Verify Values line - width
    And Search for the series with SID "230795002;230795102"
    And Click on chart option from hover 
@@ -801,7 +801,7 @@ Scenario: TC_Chart_59: Verify Values line - width
    And Uncheck the checkbox for "Lines" section
    And Verify the "width" field is disabled
    
-@ChartVisual12
+@ChartVisual
 Scenario: TC_Chart_60: Values line - Opacity
    And Search for the series with SID "230795002;230795102"
    And Click on chart option from hover
@@ -858,7 +858,7 @@ Scenario: TC_Chart_64: Verify Time - Title style
    And Clicking "Save" option
    Then  "Style" should reflect on the chart visual
    
-@ChartVisual123
+@ChartVisual
 Scenario: TC_Chart_66: Verify Time - Timeframe last x observations
    And Search for the series with SID "360937287"
    And Click on chart option from hover 
@@ -874,12 +874,12 @@ Scenario: TC_Chart_66: Verify Time - Timeframe last x observations
    And Clicking "Save" option
    And  "Correct Observations" should displayed
    
-@ChartVisual123
+@ChartVisual
 Scenario: TC_Chart_67: Verify Time - Timeframe range
    And Search for the series with SID "360937287"
    And Click on chart option from hover 
    And Click on "Edit" visual 
-   And Get the series "First date" and "Last date" 
+   And Get the series "First obs. date" and "Last obs. date" 
    And Click on the "Time axis" checkbox to "Check" 
    And Expand "Timeframe" section from "Time Axis" popup
    And Check the timeframe checkbox for "Within" section
@@ -887,12 +887,12 @@ Scenario: TC_Chart_67: Verify Time - Timeframe range
    And Clicking "Save" option
    Then Entered timeframe date should update in chart
    
-@ChartVisual123
+@ChartVisual
 Scenario: TC_Chart_68: Verify Time - Timeframe All observations
    And Search for the series with SID "360937287"
    And Click on chart option from hover 
    And Click on "Edit" visual
-   And Get the series "First date" and "Last date" 
+   And Get the series "First obs. date" and "Last obs. date" 
    And Click on the "Time axis" checkbox to "Check" 
    And Expand "Timeframe" section from "Time Axis" popup
    And Check the timeframe checkbox for "All observations" section
@@ -904,7 +904,7 @@ Scenario: TC_Chart_69: Verify Time - Axis setup
    And Search for the series with SID "360937287"
    And Click on chart option from hover 
    And Click on "Edit" visual
-   And Get the series "First date" and "Last date" 
+   And Get the series "First obs. date" and "Last obs. date" 
    And Click on the "Time axis" checkbox to "Check" 
    And Check the checkbox for "Reversed direction" sections
    And Clicking "Save" option
@@ -1426,7 +1426,7 @@ Scenario: TC_Chart_104: Verify Legend - Show Legend option
    And  "Show legend" checkbox is clicked
    Then  "Legend" is displayed at bottom of the chart
    
-@ChartVisual123
+@ChartVisual
 Scenario: TC_Chart_105: Verify Legend - Float on plot area option
    And Search for the series with SID "357534787" 
    And  Click on more actions to create "View as Chart" 
@@ -1702,7 +1702,7 @@ Scenario: TC_Chart_129_5: Verify Source Copyright Image
    Then The Uploaded image should reflect in the chart visual legand
    And Enable the Chat bubble
    
-@ChartVisual123
+@ChartVisual
 Scenario: TC_Chart_130: Verify Show controls of Zoom - Check/Uncheck
    And Search for the series with SID "357534787" 
    And Click on chart option from hover

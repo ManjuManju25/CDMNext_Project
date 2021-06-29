@@ -138,7 +138,7 @@ public class KeyboardShortcuts {
 			actions.keyUp(Keys.SHIFT);
 			actions.build().perform();
 			break;
-		case "Shift+AA":
+		case "Shift+A":
 			CommonFunctionality.wait(500);
 			actions.keyDown(Keys.SHIFT);
 			actions.sendKeys("A");
@@ -199,7 +199,7 @@ public class KeyboardShortcuts {
 		login.Log4j.info(GrowlText);
 		CommonFunctionality.wait(1000);
 		List<WebElement> listOfSeries = login.driver.findElements(By.xpath("//*[@class='series-name-wrapper ']"));
-		if (GrowlText.equals("Data pasted from clipboard") && listOfSeries.size() == 2) {
+		if (GrowlText.equals("Data pasted from clipboard") && listOfSeries.size() == 1) {
 			login.Log4j.info(GrowlText);
 		} else {
 			Assert.fail("The seclected series is pasted");
@@ -498,8 +498,8 @@ public class KeyboardShortcuts {
 
 	@Then("^New visual should be created$")
 	public void new_visual_should_be_created() throws Throwable {
-		Boolean visual = login.driver.findElement(By.xpath("//*[@data-name='title']")).getText().contains("Chart");
-		if (visual == true) {
+		String visual = login.driver.findElement(By.xpath("//*[@data-name='title']")).getText();
+		if (!visual.isEmpty()) {
 			login.Log4j.info("New visual is crated");
 		} else {
 			Assert.fail("Visual is not created");

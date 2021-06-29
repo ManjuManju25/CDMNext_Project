@@ -436,12 +436,13 @@ public class UnitManipulation {
 		cross.enter_the_Testdata_as(arg2);
 	}
 	
+
 	@Then("^The function should not apply for selected series$")
 	public void the_function_should_not_apply_for_selected_series() throws Throwable {
 		cv.click_button("Insert function");
 		cv.click_button("Apply");
 		CommonFunctionality.wait(1000);
-		if(login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal-dialog')]//*[contains(text(),'The function cannot be applied to all selected series')]")).size() == 1) {
+		if(login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal-dialog')]//*[contains(text(),'The function cannot be applied to selected series')]")).size() == 1) {
 		login.Log4j.info("The function is not applied for selected series and has been verified successfully");
 		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		} else {

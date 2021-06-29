@@ -79,16 +79,16 @@ Feature: SeriesTab
     Then User can able to see "Footnotes" option from dropdown menu
 
   @SeriesTab
-  Scenario: TC_SeriesTab_13:Verifying "Copy link(s)" option for series level
+  Scenario: TC_SeriesTab_13:Verifying "Add to Watchlist" option for series level
     Given User enters seriesID "3640701"
     When User right click on any series
-    Then User can able to see "Copy link(s)" option from dropdown menu
+    Then User can able to see "Add to Watchlist" option from dropdown menu
 
   @SeriesTab
-  Scenario: TC_SeriesTab_14:Verifying "Copy link(s)" option for series level
+  Scenario: TC_SeriesTab_14:Verifying "Copy selected links" option for series level
     Given User enters seriesID "322968702;213834902"
     When User right click on any series
-    Then User can able to see "Copy link(s)" option from dropdown menu
+    Then User can able to see "Copy selected links" option from dropdown menu
 
   @SeriesTab
   Scenario: TC_SeriesTab_15:Verifying "Show Dataset" option for series level

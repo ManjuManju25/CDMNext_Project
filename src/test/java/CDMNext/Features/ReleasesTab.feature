@@ -1197,7 +1197,7 @@ Feature: Verify ReleasesTab functionality
     And Growl message as "Watchlist changes applied" should display
     Then The selected actions should reflect inside watchlist tab
 
-  @ReleasesTab123
+  @ReleasesTab
   Scenario: Tc_Releases_149: Verify series added to new insight in Dataset
     And Clicking "Releases" icon
     And Search for the series "384123687" in ReleasesTab
@@ -1209,7 +1209,7 @@ Feature: Verify ReleasesTab functionality
     And Series has been added to new insight message should display
     Then Clicking on go to the insight name should open the new insight with the added series
 
-  @ReleasesTab123
+  @ReleasesTab
   Scenario: Tc_Comparables_150: Verify adding series into existing insight with existing insight shown in growl msg popup
     And Clicking "Releases" icon
     And Search for the series "384123687" in ReleasesTab

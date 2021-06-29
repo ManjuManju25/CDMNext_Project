@@ -350,13 +350,10 @@ public class SprintCases {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//li[1]//*[@class='series-list-item--checkbox-wrapper']")))
+		CommonFunctionality.getElementByXpath(login.driver, "//li[1]//*[@class='series-list-item--checkbox-wrapper']",4)
 				.click();
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//*[@class='insight-page-menu-views-container--add']"))).click();
-		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@data-action='world']"))).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='insight-page-menu-views-container--add']",4).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[@data-action='world']",4).click();
 	}
 
 	@And("^Click on Edit Map$")

@@ -44,9 +44,9 @@ Feature: Verifying sprint cases functionality
     And Hover the mouse over series in Search panel or in My series tab
     Then Series info tooltip should only be displayed when mouse hovered on the series name and not on the series row
 
-  @Sprint
+  @Sprint1
   Scenario: TC_15496_07: Improve Insights Summary popup
-    And User enters "400969087"
+    And User enters "383438937"
     And Create visual
     Then "Latest changes in your Insight" should be displayed in the summary popup
     And "Replacements" should be displayed in the summary popup
@@ -147,4 +147,4 @@ Feature: Verifying sprint cases functionality
   #@Sprint
   #Scenario: flex details
     #And Enter "366672387"
-    #And Verify the time points
+    And Verify the time points

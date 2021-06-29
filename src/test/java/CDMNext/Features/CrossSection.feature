@@ -53,7 +53,7 @@ Scenario: Tc_Cross Section_06: Verify replace base series with its base series
 	 And Click "By function" tab and enter "CROSSSEC" in search field
 	 Then The output series has to be present inbetween the base series and should be able to move up or down 
 	 
-@CrossSection123456789
+@CrossSection23456789
 Scenario: Tc_Cross Section_07: Verify sorting output series with sort by options dropdown
    And Search for the series with SID "310901701;310901801" and click on "A" option
    And Select all series from myseries and click on "Open function editor" option
@@ -142,7 +142,7 @@ Scenario: Tc_Cross Section_17: Verify crosssec function with sum method in funct
    And Click "Replace selected series" text and "Unchecked" the checkbox
    Then The Crosssec functions for "Sum" can validate and rename as "17" and verify the testdata as "TC_Crosssection_17" 
 	 
-@CrossSection1
+@CrossSection
 Scenario: Tc_Cross Section_19: Verify crosssec func with sum method in functions wizard
    And Search for the series with SID "310902301;310902401" and click on "A" option
    And Count the series in myseries
@@ -189,7 +189,7 @@ Scenario: Tc_Cross Section_22: Verify crosssec func with Median method in func w
    And Click "Replace selected series" text and "Unchecked" the checkbox
    Then The Crosssec functions for "Median" can validate and rename as "22" and verify the testdata as "TC_Crosssection_22" 
    
-@CrossSection1
+@CrossSection
 Scenario: Tc_Cross Section_24: Verify crosssec func with Median method in func wizard
    And Search for the series with SID "310902301;310902401" and click on "A" option
    And Count the series in myseries

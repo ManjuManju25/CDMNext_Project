@@ -33,6 +33,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.ITestResult;
 
+
 import CDMNext.runner.TestRunner;
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.ErrorScreenshot;
@@ -97,33 +98,41 @@ public class login {
 	public static String parameters;
 	TestRunner testRunner = new TestRunner();
 	@Before
-	public void setUp() throws Throwable {
+	public void setUp(Scenario scenario) throws Throwable {
 		//driver.manage().deleteAllCookies();
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
 		logged_in = false;
 		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger("org.apache.http");
 	    root.setLevel(ch.qos.logback.classic.Level.INFO);
 		Invoke_browser();	
-		
 		SearchTest.user_has_successful_logged_in();	
-		
-//		if(testRunner.cucumberFeature.getCucumberFeature().equals("FilterSearch")) {
-			//Hooks.Handle_BrowserNotification_popup();
-//		} else {
+		//Hooks.Handle_BrowserNotification_popup();
+		Hooks.before_run();
+		//Hooks.getFeatureFileNameFromScenarioId(scenario);
+		/*if (testRunner.cucumberFeature.getCucumberFeature().equals("FilterSearch")) {
+			// Hooks.Handle_BrowserNotification_popup();
+		} else {
 			Hooks.before_run();
-		//}
+		}*/
 		
 	}
 	
 	@After
 	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);
-		//Hooks.after_run();
+		Hooks.after_run();
+		
 		//System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
 		// driver.quit();
 
-	}
+	}	
 	
+	//@After
+	public void tearDownClass() throws Exception {
+		//	 System.out.println("\nInside Cucumber > @After in Login.java. Tearing
+		// down.");
+		Hooks.copyingOldReports();
+	}
 	@Given("^User navigates to the CDMNext appliction$")
 	public void user_navigates_to_the_CDMNext_appliction() throws Throwable {
 		// Thread.sleep(3000);
@@ -161,7 +170,9 @@ public class login {
 			break;
 		case "download":
 			break;
-		}
+		}	
+			
+		
 
 	}
 
@@ -285,6 +296,7 @@ public class login {
 			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 
 			// Method and Description - void setCapability(java.lang.String capabilityName,
+			
 			// boolean value)
 			capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
@@ -332,11 +344,13 @@ public class login {
 		driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);
 		// driver.manage().timeouts().pageLoadTimeout(implicitWaitTime,
 		// TimeUnit.SECONDS);
-		login.driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+		login.driver.manage().timeouts().pageLoadTimeout(10	
+				, TimeUnit.SECONDS);
 		//driver.manage().timeouts().setScriptTimeout(implicitWaitTime, TimeUnit.SECONDS);
 		
 			
-	}
+	}	
+	
 	//Method for disabling ChromeDriverService loggers
 	public static void disableSeleniumLogs() {    
 	    System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");

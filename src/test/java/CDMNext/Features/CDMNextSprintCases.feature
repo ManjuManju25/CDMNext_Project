@@ -1527,7 +1527,7 @@ Scenario: TC_16310_64: CEIC API Access - Verify 'Copy' button
    And Click on Copy button from CEIC API access
    Then Copied message should display
    
-@Preferences1
+@Preferences
 Scenario: TC_16310_65: CEIC API Access - Validate copied token
    And Open preference dropdown
    And Clicking on "CEIC API Access" option under user preference

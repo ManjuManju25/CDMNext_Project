@@ -382,15 +382,15 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Disable the Chat bubble$")
 	public void disable_the_Chat_bubble() throws Throwable {
-	 if(login.driver.findElements(By.id("live-chat-bubble")).size()>0) {
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='data-manager']//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
+	 if(login.driver.findElements(By.xpath("//*[@id='live-chat-bubble']")).size()>0) {
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='help-title']/*", 8)).pause(2000).click().build().perform();
 	    WebElement chat = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Live chat']/following::div[2]", 4);
 	    if(chat.getAttribute("class").contains("bootstrap-switch-on")) {
 	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='bootstrap-switch-label']", 4)).pause(500).click().build().perform();
 	    } else {
 	    	System.out.println("Live Chat is already off");
 	    }
-	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'data-manager')]//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='help-title']/*", 8)).pause(2000).click().build().perform();
 	 }
 	 CommonFunctionality.wait(4000);
 	}
@@ -398,15 +398,15 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Enable the Chat bubble$")
 	public void enable_the_Chat_bubble() throws Throwable {
-	 if(login.driver.findElements(By.id("live-chat-bubble")).size()==0) {
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='data-manager']//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
+	 if(login.driver.findElements(By.xpath("//*[@id='live-chat-bubble']")).size()==0) {
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='help-title']/*", 8)).pause(2000).click().build().perform();
 	    WebElement chat = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Live chat']/following::div[2]", 4);
 	    if(chat.getAttribute("class").contains("bootstrap-switch-off")) {
 	    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='bootstrap-switch-label']", 4)).pause(500).click().build().perform();
 	    } else {
 	    	System.out.println("Live Chat is already on");
 	    }
-	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'data-manager')]//*[contains(@class,'data-manager--title')]", 8)).pause(2000).click().build().perform();
+	    new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='help-title']/*", 8)).pause(2000).click().build().perform();
 	 }
 	 CommonFunctionality.wait(4000);
 	}
@@ -947,14 +947,21 @@ public class ChartVisual {
 	public void select_the_title_axis_color_from_list(String arg1) throws Throwable {
 		time_axis_color = arg1;
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + time_axis_color + "']");
-		CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_color_field", 4).click();
+		//CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_color_field", 4).click();
+		try {
+			//select title bar
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@name='x_axis_font_underline']", 4).click();
+		}catch(Exception e) {
+			
+		}
 	}
 	
 	@And("^Select the \"([^\"]*)\" y axis color from list$")
 	public void select_the_y_axis_color_from_list(String arg1) throws Throwable {
-		y_axis_color = arg1;
-		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + y_axis_color + "']");
-		CommonFunctionality.getElementByProperty(login.driver, "axis_color_field", 4).click();
+	y_axis_color = arg1;
+	//	CommonFunctionality.getElementByProperty(login.driver, "axis_color_field", 4).click();
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[contains(@class,'sp-container sp-light sp-buttons-disabled')]//*[@title='" + y_axis_color + "']");
+		
 	}
 	
 	@And("^Select the \"([^\"]*)\" y axis right color from list$")
@@ -969,7 +976,8 @@ public class ChartVisual {
 		time_axis_label_color = arg1;
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
 				"//*[@title='" + time_axis_label_color + "']");
-		CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_label_color_field", 4).click();
+			
+		//CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_label_color_field", 4).click();
 	}
 
 	@And("^Select the \"([^\"]*)\" title axis bgcolor from list$")
@@ -984,7 +992,7 @@ public class ChartVisual {
 	@And("^Select the \"([^\"]*)\" y axis bgcolor from list$")
 	public void select_the_y_axis_bgcolor_from_list(String arg1) throws Throwable {
 		y_axis_bgcolor = arg1;
-		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + y_axis_bgcolor + "']");
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "(//*[contains(@class,'sp-container sp-light sp-buttons-disabled')])[2]//*[@title='" + y_axis_bgcolor + "']");
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[text()='Labels']", 4)).click().build().perform();
 		//CommonFunctionality.getElementByProperty(login.driver, "axis_highlight_color_field", 4).click();
 	}
@@ -1150,6 +1158,7 @@ public class ChartVisual {
 	    cv.clicking_on_option_in_preference("Date format");
 	    cv.click_format_date_option("Custom");
 	    cv.enter_custom_date("Valid");
+	    cv.open_preference_dropdown();
 	    cv.clicking_on_option_in_preference("Number format");
 	    CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Grouping separator')]//following::*[contains(text(),\",\")][1]", 4).click();
 	    CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Decimal separator')]//following::*[contains(text(),\".\")][1]", 4).click();
@@ -1240,7 +1249,7 @@ public class ChartVisual {
 					"//*[@class='border-control']//*[contains(text(),'Chart')]//following::*[@class='spinner-control'][2]//input",
 					4);
 		} else if (arg1.equalsIgnoreCase("Title_value")) {
-			proportion = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Size')]//preceding::input[1]",
+			proportion = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='accordion-config']//*[contains(text(),'Size')]//preceding::input[1]",
 					4);
 		} else if (arg1.equalsIgnoreCase("Title_Label_value")) {
 			proportion = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='x_axis_label_font_size']", 4);
@@ -3010,6 +3019,7 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Click on \"([^\"]*)\" option from layout$")
 	public void click_on_option_from_layout(String arg1) throws Throwable {
+		login.driver.navigate().refresh();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']", 4).click();
 		CommonFunctionality.wait(2000);
 		WebElement title_name = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'bottom-panel-title') and @title='"+insight+"_"+formatter.format(date)+"']", 4);
@@ -3735,21 +3745,21 @@ public class ChartVisual {
 	@Then("^The Visual area should align to \"([^\"]*)\"$")
 	public void the_Visual_area_should_align_to(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Left")) {
-			String left = login.driver.findElement(By.xpath("//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-container']")).getAttribute("style").split(";")[0];
+			String left = login.driver.findElement(By.xpath("//*[@class='visual-item-container']")).getAttribute("style").split(";")[0];
 			if(left.equals("width:80%") || left.equals("width: 80%")) {
 			login.Log4j.info("The Visual area is aligned to " + arg1);
 			} else {
 				fail("Verification Failed");
 			}
 		}if (arg1.equalsIgnoreCase("Center")) {
-			String center = login.driver.findElement(By.xpath("//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-container']")).getAttribute("style").split(";")[1];
+			String center = login.driver.findElement(By.xpath("//*[@class='visual-item-container']")).getAttribute("style").split(";")[1];
 			if(center.equals(" margin: 0px auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
 			} else {
 				fail("Verification Failed");
 			}	
 		}if (arg1.equalsIgnoreCase("Right")) {
-			String right = login.driver.findElement(By.xpath("//*[contains(@class,'without-subscription-overlay')]//following::*[@class='visual-item-container']")).getAttribute("style").split(";")[1];
+			String right = login.driver.findElement(By.xpath("//*[@class='visual-item-container']")).getAttribute("style").split(";")[1];
 			if(right.equals(" margin-left: auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
 			} else {
@@ -3873,7 +3883,7 @@ public class ChartVisual {
 			login.Log4j.info("The " + arg1 + " changes are reflecting on the Chart Visual");
 		} else if (arg1.equalsIgnoreCase("Time axis rotation")) {
 			CommonFunctionality.wait(4000);
-			String rotation = login.driver.findElement(By.xpath("//*[contains(@class,'highcharts-xaxis-labels')][1]/*[1]")).getAttribute("transform");
+			String rotation = login.driver.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getAttribute("transform");
 			String font_rotation = rotation.substring(rotation.indexOf(' ') + 8);
 			if (font_rotation.contains(" ")) {
 				font_rotation = font_rotation.substring(0, font_rotation.indexOf(' '));
@@ -3983,7 +3993,7 @@ public class ChartVisual {
 			login.Log4j.info("The " + arg1 + " has been updated and verified successfully");
 		} if (arg1.equalsIgnoreCase("Time Axis color")) {
 			CommonFunctionality.wait(2000);
-			String axis_color_new = login.driver.findElement(By.cssSelector(".highcharts-container > svg > g:nth-child(6) > path:first-child"))
+			String axis_color_new = login.driver.findElement(By.xpath("//*[@class='highcharts-grid highcharts-xaxis-grid']/*[2]"))
 					.getAttribute("stroke");
 			String actual = Color.fromString(axis_color_new).asHex();
 			assertEquals(actual, time_line_color);
@@ -3997,7 +4007,7 @@ public class ChartVisual {
 		} if (arg1.equalsIgnoreCase("Time Axis Lines width")) {
 			CommonFunctionality.wait(2000);
 			String axis_width = login.driver
-					.findElement(By.cssSelector(".highcharts-container > svg > g:nth-child(6) > path:first-child"))
+					.findElement(By.xpath("//*[@class='highcharts-grid highcharts-xaxis-grid']/*[2]"))
 					.getAttribute("stroke-width");
 			assertEquals(axis_width, width_x_axis);
 			login.Log4j.info("The " + arg1 + " has been updated and verified successfully");
@@ -4050,7 +4060,7 @@ public class ChartVisual {
 				fail("Verification Failed");
 			}
 		} else if (arg1.equalsIgnoreCase("Time Axis Title Label font size")) {
-			String title_axis_font_size = login.driver.findElement(By.xpath("//*[contains(@class,'highcharts-xaxis-labels')][1]/*[1]")).getCssValue("font-size");
+			String title_axis_font_size = login.driver.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getCssValue("font-size");
 			String[] title_axis_size = title_axis_font_size.split("px");
 			Integer title_font = Integer.parseInt(title_axis_size[0]);
 			if (title_font == Value) {
@@ -4139,7 +4149,7 @@ public class ChartVisual {
 			}
 		} else if (arg1.equalsIgnoreCase("Time Axis")) {
 			if (time_axis_label_text.equalsIgnoreCase("Reversed direction") && time_axis_checkboxes == true) {
-				String timepoints_end = login.driver.findElement(By.xpath("//*[contains(@class,'highcharts-xaxis-labels')][1]/*[5]")).getText();
+				String timepoints_end = login.driver.findElement(By.xpath("//*[@class='highcharts-axis-labels highcharts-xaxis-labels']/*[1]")).getText();
 				timepoints_end_date = new SimpleDateFormat("MM/dd/yyyy").parse(timepoints_end);
 				timepoints_start_date_ssp = new SimpleDateFormat("MM/dd/yyyy").parse(timepoints_first_date);
 				if (timepoints_end_date.equals(timepoints_start_date_ssp)) {

@@ -910,7 +910,7 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@And("^Open preference dropdown$")
 	public void open_preference_dropdown() throws Throwable {
-		CommonFunctionality.wait(12000);
+		CommonFunctionality.wait(2000);
 		WebElement preferences;
 		try {
 			preferences = CommonFunctionality.getElementByXpath(login.driver,
@@ -1751,6 +1751,7 @@ public class CDMNextSprintCases {
 
 	@And("^Click on \"([^\"]*)\" visual$")
 	public void click_on_visual(String arg1) throws Throwable {
+		CommonFunctionality.wait(500);
 		if (arg1.equalsIgnoreCase("Add related series") || arg1.equalsIgnoreCase("Edit Series")) {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'left-controls')]//button[text()='" + arg1 + "']", 4).click();
@@ -4545,14 +4546,14 @@ public class CDMNextSprintCases {
 	@Then("^The description should be \"([^\"]*)\"$")
 	public void the_description_should_be(String arg1) throws Throwable {
 		String description_text = CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[contains(@class,'sphere-modal__body')])[2]", 4).getText();
+				.getElementByXpath(login.driver, "(//*[contains(@class,'sphere-modal__body')])//label", 4).getText();
 		if (description_text.contains(arg1)) {
 			login.Log4j.info("The description is " + arg1);
 			// CommonFunctionality.getElementByClassName(login.driver,
 			// "sphere-modal__close", 4).click();
-			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='sphere-modal__close'])[2]", 4).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal__close']", 4).click();
 		} else {
-			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='sphere-modal__close'])[2]", 4).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal__close']", 4).click();
 			fail("Verification Failed");
 		}
 	}
@@ -5189,11 +5190,17 @@ public class CDMNextSprintCases {
 
 	@Then("^The \"([^\"]*)\" message should be displayed$")
 	public void the_message_should_be_displayed(String arg1) throws Throwable {
+		if(arg1.equalsIgnoreCase("API key copied to clipboard")) {
 		String expected = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='growl-messages-container']//*[@class='growl-message-text']", 4).getText();
 		login.Log4j.info("The " + arg1 + " information is displaying after coping the new API key");
 		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		assertEquals(arg1, expected);
+		} else {
+			String expected = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='visual-series-panel--empty-message']", 4).getText();
+			assertEquals(arg1, expected);
+		}
 	}
 
 	@Then("^The description of CEIC API access popup should be \"([^\"]*)\"$")
