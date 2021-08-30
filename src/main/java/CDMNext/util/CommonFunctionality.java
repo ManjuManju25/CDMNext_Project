@@ -1076,8 +1076,5 @@ public class CommonFunctionality {
 		return equallinks;
 	}
 
-	public static WebElement getElementByXpaths(WebDriver driver, String string, int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

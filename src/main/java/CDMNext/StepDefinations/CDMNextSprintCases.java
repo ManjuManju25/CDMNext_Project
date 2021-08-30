@@ -419,12 +419,12 @@ public class CDMNextSprintCases {
 						.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]/span/*"));
 				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
 			}
-		} if (arg1.equalsIgnoreCase("9380901;9380801")) {
+		} if (arg1.equalsIgnoreCase("9380901;9380801") || arg1.equalsIgnoreCase("1692001;7873401")) {
 			List<WebElement> list2 = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
 			for (int i = 1; i <= list2.size(); i++) {
 				WebElement series = login.driver
 						.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+				new Actions(login.driver).moveToElement(series).pause(1000).click().build().perform();
 			}
 		} if (arg1.equalsIgnoreCase("398155157;398155397")) {
 			List<WebElement> list3 = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/li"));
@@ -454,12 +454,12 @@ public class CDMNextSprintCases {
 						.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]/span"));
 				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
 			}
-		} else {
-			if(!arg1.equals("315926001")) {
+		} 
+			/*if(!arg1.equals("315926001")) {
 			WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 			new Actions(login.driver).moveToElement(series_cb).pause(4000).click().build().perform();
-			}
-		}
+			} */
+		
 	}
 	
 	@And("^Enter \"([^\"]*)\" values$")
@@ -1636,8 +1636,7 @@ public class CDMNextSprintCases {
 		new Actions(login.driver).moveToElement(one_series).pause(5000).build().perform();
 		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='series-representation--list']/div/ul/li[1]/div/a/div[3]/div[2]/span[contains(@title,'More actions')] | //*[contains(@class,'tree-series-list')]/ul/li[1]/div/a/div[3]/div[2]/span[contains(@title,'More actions')]",
-				4).click();
+				"//*[@class='series-representation--list']/div/ul/*[1]//span[@title='More actions']",4).click();
 	}
 
 	@SuppressWarnings("deprecation")

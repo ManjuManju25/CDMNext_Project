@@ -5,7 +5,7 @@ import java.awt.Robot;
 
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
-import java.net.URL;
+//import java.net.URL;
 //import java.net.URL;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -31,10 +31,10 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 //import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
+//import org.testng.ITestResult;
 
 
-import CDMNext.runner.TestRunner;
+//import CDMNext.runner.TestRunner;
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.ErrorScreenshot;
 import CDMNext.util.Hooks;
@@ -96,7 +96,8 @@ public class login {
 	public static String data;
 	public static String object;
 	public static String parameters;
-	TestRunner testRunner = new TestRunner();
+	//TestRunner testRunner = new TestRunner();
+	
 	@Before
 	public void setUp(Scenario scenario) throws Throwable {
 		//driver.manage().deleteAllCookies();

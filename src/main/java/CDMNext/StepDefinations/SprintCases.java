@@ -538,7 +538,12 @@ public class SprintCases {
 
 	@And("^Uncheck the \"([^\"]*)\" option$")
 	public void uncheck_the_option(String arg1) throws Throwable {
-		UncheckORCheckLegendOption(arg1);
+		if(arg1.equalsIgnoreCase("Group")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='indented-tree-control indented-tree-control__visible indented-tree-control__selected']//*[contains(text(),'" + arg1 + "')]", 10).click();
+		} else {
+			UncheckORCheckLegendOption(arg1);
+		}
+		
 
 	}
 

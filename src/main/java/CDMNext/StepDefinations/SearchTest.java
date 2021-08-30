@@ -66,7 +66,7 @@ public class SearchTest {
 	public void user_enters_keyword(String keyword) throws Throwable {
 		currentKeyword = keyword;
 		//login.driver.navigate().refresh();
-		CommonFunctionality.ResetMethod();
+		//CommonFunctionality.ResetMethod();
 		login.Log4j.info("Searching with " + currentKeyword);
 		CommonFunctionality.getElementByProperty(login.driver,"Search",10).sendKeys(currentKeyword);
 	}
@@ -114,15 +114,15 @@ public class SearchTest {
 			CommonFunctionality.wait(2000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			login.Log4j.info("List size is :" + li_All.size());
-			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
+//			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+//			login.Log4j.info("List size is :" + li_All.size());
+			List<WebElement> sName = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
 			// List<WebElement> checkBox = login.driver
 			// .findElements(By.xpath("//li//div[@class='series-list-item--checkbox-wrapper']"));
-			if (li_All.size() > 0) {
-				for (int i = 0; i < li_All.size(); i++) {
+			if (sName.size() > 0) {
+				for (int i = 0; i < sName.size(); i++) {
 					login.Log4j.info(i);
-					login.Log4j.info(li_All.size());
+					login.Log4j.info(sName.size());
 					//Thread.sleep(500);
 					int j = i + 1;
 					// action.moveToElement(checkBox.get(i)).click().build().perform();

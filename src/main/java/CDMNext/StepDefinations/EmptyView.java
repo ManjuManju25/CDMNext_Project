@@ -26,6 +26,7 @@ public class EmptyView {
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	int max_of_visuals_created;
 	public String region1,region2;
+	
 	@And("^Click on View tab$")
 	public void click_on_View_tab() throws Throwable {
 		Thread.sleep(2000);

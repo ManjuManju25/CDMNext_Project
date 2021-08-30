@@ -4,8 +4,7 @@ Feature: Verifying sprint cases functionality
   #Given User has successful logged in
   @Sprint
   Scenario: TC_12744_01: Clear All filters button to clear all filters set
-    #	And Check for prerequesties
-    And User enters keyword "Banglore"
+   And User enters keyword "Banglore"
     And Click on "More" filter
     And User selects "Date" as "Last observation after"
     And User has clicked on "Apply filter"
@@ -44,7 +43,7 @@ Feature: Verifying sprint cases functionality
     And Hover the mouse over series in Search panel or in My series tab
     Then Series info tooltip should only be displayed when mouse hovered on the series name and not on the series row
 
-  @Sprint1
+  @Sprint
   Scenario: TC_15496_07: Improve Insights Summary popup
     And User enters "383438937"
     And Create visual

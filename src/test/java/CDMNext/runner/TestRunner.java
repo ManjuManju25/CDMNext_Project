@@ -1,4 +1,5 @@
-	
+		
+
 package CDMNext.runner;
 
 import cucumber.api.CucumberOptions;
@@ -7,7 +8,6 @@ import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
 
 import org.testng.annotations.*;
-//import CDMNext.StepDefinations.HTML_Report;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
@@ -15,7 +15,7 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@ForecastSeries"},
+		tags = {"@Attachments"},
 				
 		monochrome = true,
 		//dryRun = true,
@@ -33,9 +33,7 @@ public class TestRunner {
 	public void setUpClass() throws Throwable {
 		login.Log4j.info("\nInside TestNG > @BeforeSuite");
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
-		//HTML_Report.openHTMLReport();
-		//HTML_Report.html_Header();
-
+		
 	}
 	
 	/*@AfterMethod
@@ -69,9 +67,7 @@ public class TestRunner {
 			login.driver.manage().deleteAllCookies();
 			login.driver.quit();
 			login.driver = null;
-			//HTML_Report.html_Footer();
-			//HTML_Report.bw.close();
-		//	login.Log4j.info("\n ****Inside Email*****");
+			//	login.Log4j.info("\n ****Inside Email*****");
 			 //SendmailWithAttachment.report();
 		}
 	}

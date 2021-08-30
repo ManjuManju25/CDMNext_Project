@@ -162,7 +162,7 @@ Feature: Verifying Histogram Visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select Histogram visual
+    And Select "Histogram" visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -183,7 +183,7 @@ Feature: Verifying Histogram Visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select Histogram visual
+    And Select "Histogram" visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -197,7 +197,7 @@ Feature: Verifying Histogram Visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select Histogram visual
+    And Select "Histogram" visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -211,7 +211,7 @@ Feature: Verifying Histogram Visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select Histogram visual
+    And Select "Histogram" visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -225,7 +225,7 @@ Feature: Verifying Histogram Visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select Histogram visual
+    And Select "Histogram" visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -239,7 +239,7 @@ Feature: Verifying Histogram Visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select Histogram visual
+    And Select "Histogram" visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -662,7 +662,7 @@ Feature: Verifying Histogram Visual functionality
     Then The applied function should be displayed on the toolbar
 
   @Histogram
-  Scenario: TC_Histogram_77:Edit series - Verify appling invalid function for series
+  Scenario: TC_Histogram_77:Edit series - Verify applying invalid function for series
     And Create a histogram visual with series
     And Click on Edit series option
     And Click on "Type a function" field in series level
@@ -745,7 +745,7 @@ Feature: Verifying Histogram Visual functionality
       | My Styles   |
 
   @Histogram
-  Scenario: TC_Histogram_89:Edit Histogram - Verify delete template icon
+  Scenario: TC_Histogram_89:Edit Histogram - Verify description for confirmation popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And UnCheck Show Series
@@ -756,7 +756,7 @@ Feature: Verifying Histogram Visual functionality
     Then The description should be "Are you sure you want to delete this style template?" diaplayed
 
   @Histogram
-  Scenario: T1C_Histogram_90:Edit Histogram - Verify cancel/x icon on confirmation popup
+  Scenario: TC_Histogram_90:Edit Histogram - Verify cancel/x icon on confirmation popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And UnCheck Show Series
@@ -785,8 +785,8 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on Border drop down
     And Check Histogram for "Border"
-    And Select color for Histogram
-    Then Border should be displayed for histogram with selected color
+    And Select color 
+    Then Border should be displayed for "histogram" with selected color
 
   @Histogram
   Scenario: TC_Histogram_93:Edit Histogram - Border - Verify histogram width
@@ -1832,7 +1832,7 @@ Feature: Verifying Histogram Visual functionality
     Then List of functions dropdown should be opened
 
   @Histogram
-  Scenario: TC_Histogram_202:Edit Histogram - Edit series -  Verify appling function in series level
+  Scenario: TC_Histogram_202:Edit Histogram - Edit series -  Verify applying function in series level
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on type a function field in series level
@@ -2432,7 +2432,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check Show Series
-    And Mouse hover on existing visual templates
+    And  Mouse hover on existing visual templates
     And Click on template dropdown
     And Check the box for "Set as default for future Histogram visual" should be unchecked
     And Click on "Save"
@@ -2551,3 +2551,27 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Right click on visual header
     Then Verify View as sub dropdown options for histogram visual
+    
+    @Histogram
+  Scenario: TC_Histogram_291:Edit series - Verify hiding function toolbar
+     And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Hide the function bar"
+    Then The function toolbar should be hidden
+    
+     @Histogram
+  Scenario: TC_Histogram_292:Edit series - Verify showing the function toolbar
+     And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Hide the function bar"
+    And Click on "Show the function bar"
+    Then The function toolbar should be shown
+    
+     @Histogram
+  Scenario: TC_Histogram_293:Edit series - Verify 'Type a function' field
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on type a function field
+    And Select any function
+    And Click on "Apply"
+    Then The selected function should be displayed

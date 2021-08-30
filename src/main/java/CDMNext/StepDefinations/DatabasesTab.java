@@ -1723,13 +1723,17 @@ public class DatabasesTab {
 			Change = arg1;
 			CommonFunctionality.getElementByXpath(login.driver, "//ul//li//*[contains(text(),'" + arg1 + "')]", 6).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//ul//li//*[@title='% Year-over-Year (%YoY)']", 6).click();
+		} if(arg1.equals("Color")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//ul//li//*[contains(text(),'" + arg1 + "')]", 6).click();
+			CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+					"(//*[@class='sp-palette-container']//*[@title='#fda546'])[1]");
 		}
 		if(arg1.equals("Currency")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//ul//li//*[contains(text(),'" + arg1 + "')]", 6).click();
 			Applied_currency = CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='dropdown-menu']//li//*[@title='RMB']", 6).getText();
 			CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='dropdown-menu']//li//*[@title='RMB']", 6).click();
 		} 
-		if(arg1.equals("Matches only") || arg1.equals("Select All")) {
+		if(arg1.equals("Matches only") || arg1.equals("Select All") || arg1.equalsIgnoreCase("Keep different frequencies")) {
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 10).click();
 		} if(arg1.equalsIgnoreCase("Rename view") || arg1.equalsIgnoreCase("Duplicate view") || arg1.equalsIgnoreCase("Clear view") || arg1.equalsIgnoreCase("Delete view") || arg1.equalsIgnoreCase("Delete all views") || arg1.equalsIgnoreCase("Copy view") || arg1.equalsIgnoreCase("Delete all views") || arg1.equalsIgnoreCase("Paste visual")) {
@@ -1738,8 +1742,11 @@ public class DatabasesTab {
 		if(arg1.equals("State Administrative")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 6).click();
 		}
-		if(arg1.equalsIgnoreCase("Add Forecasts") || arg1.equalsIgnoreCase("Replace the current series") || arg1.equalsIgnoreCase("Calculate series"))  {
+		if(arg1.equalsIgnoreCase("Add Forecasts") || arg1.equalsIgnoreCase("Replace the current series") || arg1.equalsIgnoreCase("Calculate series") || arg1.equalsIgnoreCase("General Election") )  {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 6).click();
+		}
+		if(arg1.equalsIgnoreCase("State Administrative")){
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title=' " + arg1 + "']", 6).click();
 		}
 		
 	}
@@ -1997,10 +2004,17 @@ public class DatabasesTab {
 			CommonFunctionality.getElementByXpath(login.driver,"//div[@class='series-item--name']",6).click();
 			
 		} catch(Exception e) {
-			//Clicking on series name in rename popup for histogram visual
+			//Clicking on series name in edit series window for histogram & pie visual
+			try {
+				//close rename popup if it is opened
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 20).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
-			
+			}catch(Exception e1) {
+			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
+			}
 		}
+			
+		
 	}
 
 	@Then("^Series information popup should be opened$")

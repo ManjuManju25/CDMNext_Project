@@ -2706,8 +2706,19 @@ public class ChartVisual {
 	
 	@And("^Click on the \"([^\"]*)\" option$")
 	public void click_on_the_option(String arg1) throws Throwable {
+		if(arg1.equalsIgnoreCase("Group")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='indented-tree-control indented-tree-control__visible']//*[contains(text(),'" + arg1 + "')]", 4).click();
+		} else if(arg1.equalsIgnoreCase("Unselect all") || arg1.equalsIgnoreCase("Drilldown")){
+			 WebElement unselect_all = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 8);
+			  unselect_all.click();
+		}else if(arg1.equalsIgnoreCase("Back")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='breakdown-preview--back']",8).click();
+		}
+		else {
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[@class=' highcharts-button-box'] | //*[@class='visual-series-list']", 4)).perform();
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='visual-series-list']//*[@title='"+arg1+"'])[1]", 4).click();		
+	
+		}
 	}
 	
 	@And("^Click on the \"([^\"]*)\" option for delete$")
