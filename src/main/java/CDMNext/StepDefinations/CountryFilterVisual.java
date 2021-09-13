@@ -269,18 +269,21 @@ public class CountryFilterVisual {
 	@And("^Create one visual with countryfilter$")
 	public void create_one_visual_with_countryfilter() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		commentary.CreateViewTab();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
-		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		List<WebElement> li_All =  login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
+		login.Log4j.info("List size is :" + li_All.size());
 		List<WebElement> checkBox = login.driver
-				.findElements(By.xpath("//li//div[@class='series-list-item--checkbox-wrapper']"));
+				.findElements(By.xpath("//ul[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//li[2]//*[@class='add-to-data-selection--icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
@@ -376,14 +379,15 @@ public class CountryFilterVisual {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
-		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		List<WebElement> li_All =  login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
 		List<WebElement> checkBox = login.driver
-				.findElements(By.xpath("//li//div[@class='series-list-item--checkbox-wrapper']"));
+				.findElements(By.xpath("//ul[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//li[2]//*[@class='add-to-data-selection--icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
@@ -401,10 +405,7 @@ public class CountryFilterVisual {
 
 	@Then("^Should unselect all countries$")
 	public void should_unselect_all_countries() throws Throwable {
-		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//*[@class='filter-template--content']//*[@class='custom-select-title--reset-icon']", 8)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='filter-template--content']//*[@class='custom-select-title--reset-icon']", 8).click();
 		filter_visual_should_get_reset_with_name_present_in_all_visuals_in_view("All countries");
 
 	}
