@@ -71,7 +71,7 @@ public class Breakdown {
 	@And("^Click on \"([^\"]*)\" option for the first group$")
 	public void click_on_option_for_the_first_group(String arg1) throws Throwable {
 		WebElement countryName_firstGroup = CommonFunctionality.getElementByXpath(login.driver,
-				"//ul[@class='search-series-list scrollable']//li[1]//*[@class='series-item--country country-information']",
+				"//ul[@class='search-series-list scrollable']/*[1]//*[@class='series-item--country country-information']",
 				8);
 		new Actions(login.driver).pause(200).moveToElement(countryName_firstGroup).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 8).click();
@@ -102,7 +102,7 @@ public class Breakdown {
 	@And("^Add first series into right pane$")
 	public void add_first_series_into_right_pane() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'full-expanded open')]/*[3]/*[1]//ul//li[1]//*[@class='add-to-data-selection--icon']",
+				"//*[contains(@class,'full-expanded open')]/*[3]/*[1]//ul/*[1]//*[@class='add-to-data-selection--icon']",
 				20).click();
 	}
 
@@ -112,12 +112,12 @@ public class Breakdown {
 		.getElementByXpath(login.driver, "//*[contains(text(),'Breakdowns')]", 20)
 		.click();
 		
-		List<WebElement> listOfElements = login.driver.findElements(By.xpath("(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//li//span[contains(@class,'svg-checkbox')]"));
+		List<WebElement> listOfElements = login.driver.findElements(By.xpath("(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//ul//div//span[contains(@class,'svg-checkbox')]"));
 		for(int i = 0; i < listOfElements.size(); i++) {
 			int j = i + 1;
 			listOfElements.get(i).click();
 			WebElement ele = CommonFunctionality
-					.getElementByXpath(login.driver, "(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//li[ " + j + "]//*[@class='series-item--name']", 20);
+					.getElementByXpath(login.driver, "(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//ul/*[" + j + "]//*[@class='series-item--name']", 20);
 			new Actions(login.driver).pause(200).moveToElement(ele).build().perform();
 			String tooltipText = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text"))).getText();
 			String[]  lines = tooltipText.split("\n");
@@ -140,6 +140,7 @@ public class Breakdown {
 
 	@Then("^Selected series should be added into my series$")
 	public void selected_series_should_be_added_into_my_series() throws Throwable {
+		CommonFunctionality.wait(1000);
 		List<WebElement> listOfElements = login.driver
 				.findElements(By.xpath("//*[@class='webix_cell new-series-item']//*[@class='series-name-field']"));
 		for (int i = 0; i < listOfElements.size(); i++) {
@@ -174,9 +175,9 @@ public class Breakdown {
 	@And("^Open Breakdown tab and select a series and click on chart icon$")
 	public void open_Breakdown_tab_and_select_a_series_and_click_on_chart_icon() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Breakdowns')]", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//li[1]//span[contains(@class,'svg-checkbox')]",6).click();
+		CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//ul/*[1]//span[contains(@class,'svg-checkbox')]",6).click();
 		WebElement ele = CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//li[1]//*[@class='series-item--name']", 20);
+				.getElementByXpath(login.driver, "(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//ul/*[1]//*[@class='series-item--name']", 20);
 		new Actions(login.driver).pause(200).moveToElement(ele).build().perform();
 		String tooltipText = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text"))).getText();
 		String[]  lines = tooltipText.split("\n");
@@ -192,7 +193,7 @@ public class Breakdown {
 		//Clicking Chart icon
 		CommonFunctionality.wait(200);
 		WebElement ele1 = CommonFunctionality
-				.getElementByXpath(login.driver,"(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//li[1]//*[@class='view-chart-icon menu-icon']",8);
+				.getElementByXpath(login.driver,"(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//ul/*[1]//*[@class='view-chart-icon menu-icon']",8);
 		new Actions(login.driver).pause(200).moveToElement(ele1).click().build().perform();
 	
 		
@@ -216,9 +217,9 @@ public class Breakdown {
 
 	@Then("^Respective series has to be drilled down$")
 	public void respective_series_has_to_be_drilled_down() throws Throwable {
-		CommonFunctionality.wait(200);
+		CommonFunctionality.wait(400);
 	   boolean backButton = login.driver.findElement(By.xpath("//*[@class='breakdown-preview--back']")).isDisplayed();
-	   CommonFunctionality.wait(200);
+	   CommonFunctionality.wait(400);
 	   boolean Drilldown_link = login.driver.findElement(By.xpath("//*[@class='legend-drilldown--link']")).isDisplayed();
 	   if(backButton == true && Drilldown_link == true) {
 		   login.Log4j.info("Respective series has been drilled down");
@@ -229,9 +230,9 @@ public class Breakdown {
 	}
 	@Then("^Drilled down series should reset back to original series$")
 	public void drilled_down_series_should_reset_back_to_original_series() throws Throwable {
-		CommonFunctionality.wait(200);
+		CommonFunctionality.wait(400);
 		   boolean backButton = login.driver.findElement(By.xpath("//*[@class='breakdown-preview--back']")).isDisplayed();
-		   CommonFunctionality.wait(200);
+		   CommonFunctionality.wait(300);
 		   if(login.driver.findElements(By.xpath("//*[@class='legend-drilldown--link']")).size() == 0 && !backButton == true){
 		   	   login.Log4j.info("Drilled down series back to original series");
 		   } else {
@@ -247,7 +248,7 @@ public class Breakdown {
 				.click();
 	}
 	void SelectAllSeries() throws Exception {
-		List<WebElement> listOfElements = login.driver.findElements(By.xpath("(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//li//*[@class='series-item--name']"));
+		List<WebElement> listOfElements = login.driver.findElements(By.xpath("(//*[@class='breakdown-container breakdown-container__breakdown-visible'])[2]//ul/*//*[@class='series-item--name']"));
 		for(int i = 0; i < listOfElements.size(); i++) {
 			//int j = i + 1;
 			CommonFunctionality.wait(200);
