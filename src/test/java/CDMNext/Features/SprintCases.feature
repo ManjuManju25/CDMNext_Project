@@ -143,7 +143,8 @@ Feature: Verifying sprint cases functionality
     And Create new insight
     And Paste in the View section for new insight
     Then The copied View and its contents should be pasted in other/new insight
+    
   #@Sprint
   #Scenario: flex details
     #And Enter "366672387"
-    And Verify the time points
+    #And Verify the time points

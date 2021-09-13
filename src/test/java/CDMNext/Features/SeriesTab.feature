@@ -66,70 +66,70 @@ Feature: SeriesTab
     When User right click on any series
     Then User can able to see "View as Table" option from dropdown menu
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_11:Verifying "Download" option for series level
     Given User enters seriesID "268193601;69326701"
     When User right click on any series
     Then User can able to see "Download" option from dropdown menu
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_12:Verifying "Footnotes" option for series level
     Given User enters seriesID "354673701;354674001"
     When User right click on any series
     Then User can able to see "Footnotes" option from dropdown menu
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_13:Verifying "Add to Watchlist" option for series level
     Given User enters seriesID "3640701"
     When User right click on any series
     Then User can able to see "Add to Watchlist" option from dropdown menu
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_14:Verifying "Copy selected links" option for series level
     Given User enters seriesID "322968702;213834902"
     When User right click on any series
     Then User can able to see "Copy selected links" option from dropdown menu
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_15:Verifying "Show Dataset" option for series level
     Given User enters seriesID "258074801;406097377"
     When User right click on any series
     Then User can able to see "Show Dataset" option from dropdown menu
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_16:Verifying "Show Database" option for series level
     Given User enters seriesID "5823601;5793201(CIUA)"
     When User right click on any series
     Then User can able to see "Show Database" option from dropdown menu
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_17:Verifying SSP for series
     Given User enters "GDP"
     When Click on Show Series Info icon
     Then SSP window should be displayed
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_18:Verifying "key only" filter for series tab
     Given User enters "GCF"
     And User has selects "More" as "Key only"
     When Click on "Apply filter"
     Then "Key series" should be displayed
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_19:Verifying "with release schedule" filter for series tab
     Given User enters "FDI"
     And User has selects "More" as "With release schedule"
     When Click on "Apply filter"
     Then User verify corresponding results for selected filter
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_20:Verifying "with suggestions for rebased/discontinued series " filter for series tab
     Given User enters "PSI"
     And User has selects "More" as "With suggestions for rebased/discontinued series"
     When Click on "Apply filter"
     Then User verify corresponding results for selected filter
 
-  @SeriesTab
+   @SeriesTab
   Scenario: TC_SeriesTab_21:Verifying "Forecast" filter for series tab
     Given Open "Series" tab
     And User has selects "More" as "Forecast"
@@ -274,7 +274,7 @@ Feature: SeriesTab
     And Click on drop down icon next to +
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The series should be added to selected insight
 
   @SeriesTab
@@ -350,6 +350,7 @@ Feature: SeriesTab
   #And Enter keyword "GDP"
   #And Click on x Matched Insights hyperlink
   #Then Insights explorer modal window should open with x number of insights listed
+  
   @SeriesTab
   Scenario: TC_SeriesTab_51:Verifying "View as Pie" option for series level
     Given User enters seriesID "7872901;7874601"
@@ -519,21 +520,21 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_75:Verify selected Region results
-    And Clear search input
+    #And Clear search input
     And User selects "All Regions" as "Albania;Japan"
     When Click on "Apply filter"
     Then User verify the search results
 
   @SeriesTab
   Scenario: TC_SeriesTab_76:Verify selected frequency results
-    And Clear search input
+    #And Clear search input
     And User selects "Frequency" as "Monthly;Semiannually"
     When Click on "Apply filter"
     Then User verify the search results
 
   @SeriesTab
   Scenario: TC_SeriesTab_77:Verify selected unit results
-    And Clear search input
+    #And Clear search input
     And Click on "More" filter
     And User selects "Unit" as "IDR;kg"
     When Click on "Apply filter"
@@ -541,7 +542,7 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_78:Verify selected First obs before and Last ob after results
-    And Clear search input
+    #And Clear search input
     And Click on "More" filter
     And User selects "Date" as "First observation before;Last observation after"
     And User has clicked on "Apply filter"
@@ -549,14 +550,14 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_79:Verify selected status results
-    And Clear search input
+    #And Clear search input
     And User selects "Status" as "Rebased"
     When Click on "Apply filter"
     Then Should display the rebased series
 
   @SeriesTab
   Scenario: TC_SeriesTab_80: Verify keyword search
-    And Clear search input
+    #And Clear search input
     Given User enters keyword "gdp"
     Then User verify keyword search results
 
