@@ -119,7 +119,7 @@ Feature: Verifying KBS functionality
     And Press "A" on KB
     Then The selected series should be added to Data tab
 
-  @KBS1
+  @KBS
   Scenario: TC_KBS_20 : Verify KBS for 'Add and replace series'
     And Go to View tab
     And Create a Chart visual

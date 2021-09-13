@@ -310,7 +310,7 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select "xlsx" format
     And Click on "Download"
     Then Image should be downloaded in "xlsx" format
@@ -322,7 +322,7 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select "pdf" format
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
@@ -400,7 +400,7 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select timeframe as "Sample"
     And Select Data placement as "Rows"
     And Click on "Download"
@@ -423,7 +423,7 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select "pdf" format
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
