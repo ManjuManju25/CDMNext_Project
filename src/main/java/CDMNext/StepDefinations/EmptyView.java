@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -158,6 +159,7 @@ public class EmptyView {
 	public void add_the_series_to_the_visual() throws Throwable {
 		// CommonFunctionality.getElementByProperty(login.driver, "Search",
 		// 5).sendKeys("210698402");
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 10).click();
@@ -212,7 +214,9 @@ public class EmptyView {
 	@And("^Create Histogram and Map visuals$")
 	public void create_Histogram_and_Map_visuals() throws Throwable {
 		click_on_View_tab();
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("210698402");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		// create histogram visual
 		hs.click_on_histogram_visual_icon();
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
@@ -226,6 +230,7 @@ public class EmptyView {
 				.click().perform();
 		CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("5958801");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(3000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
@@ -557,7 +562,7 @@ public class EmptyView {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		CommonFunctionality.wait(1000);
 		WebElement checkBox = login.driver
-				.findElement(By.xpath("//li//div[@class='series-list-item--checkbox-wrapper']/*"));
+				.findElement(By.xpath("//ul[@class='search-series-list']/*[1]//div[@class='series-list-item--checkbox-wrapper']/*"));
 		Robot robot = new Robot();
 		for (String visual : list) {
 			if (visual.equalsIgnoreCase("Map")) {
