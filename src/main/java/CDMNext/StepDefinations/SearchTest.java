@@ -14,6 +14,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 
 import org.openqa.selenium.WebElement;
@@ -65,10 +66,12 @@ public class SearchTest {
 	@Given("^User enters keyword \"([^\"]*)\"$")
 	public void user_enters_keyword(String keyword) throws Throwable {
 		currentKeyword = keyword;
-		//login.driver.navigate().refresh();
-		//CommonFunctionality.ResetMethod();
+//		login.driver.navigate().refresh();
+//		CommonFunctionality.ResetMethod();
 		login.Log4j.info("Searching with " + currentKeyword);
 		CommonFunctionality.getElementByProperty(login.driver,"Search",10).sendKeys(currentKeyword);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -142,6 +145,7 @@ public class SearchTest {
 							break;
 						} else if (KeywordMatch == false) {
 							sspValidation(j);
+							
 							if (search_validation(Filters.showdata, keyword) == true) {
 								login.Log4j.info(keyword + " is exists in the" + "\n" + Filters.showdata);
 								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
@@ -198,14 +202,14 @@ public class SearchTest {
 			CommonFunctionality.wait(2000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			login.Log4j.info("List size is :" + li_All.size());
-			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
-			if (li_All.size() > 0) {
-				for (int i = 0; i < li_All.size(); i++) {
+//			List<WebElement> li_All = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
+//			login.Log4j.info("List size is :" + li_All.size());
+			List<WebElement> sName = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
+			if (sName.size() > 0) {
+				for (int i = 0; i < sName.size(); i++) {
 					int j = i + 1;
 					login.Log4j.info(i);
-					login.Log4j.info(li_All.size());
+					login.Log4j.info(sName.size());
 					Thread.sleep(600);
 					// checkbox = login.driver.findElement(By.xpath("//li[" + j +
 					// "]//div[@class='series-list-item--checkbox-wrapper']"));
@@ -499,11 +503,10 @@ public class SearchTest {
 			CommonFunctionality.wait(2000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			login.Log4j.info("List size is :" + li_All.size());
-			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
-
-			for (int i = 0; i < li_All.size(); i++) {
+			List<WebElement> sName = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
+			login.Log4j.info("List size is :" + sName.size());
+			
+			for (int i = 0; i < sName.size(); i++) {
 				login.Log4j.info(i);
 				action.pause(700).moveToElement(sName.get(i)).build().perform();
 				CommonFunctionality.wait(800);
@@ -553,8 +556,10 @@ public class SearchTest {
 		try {
 			CommonFunctionality.wait(2000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			List<WebElement> li_All = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
 			login.Log4j.info("List size is :" + li_All.size());
+			//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			//login.Log4j.info("List size is :" + li_All.size());
 			
 			if (li_All.size() == 1) {
 				WebElement sName = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='series-item--name']" , 4);
@@ -581,7 +586,7 @@ public class SearchTest {
 		}
 	}
 	public static void sspValidation(int j) throws InterruptedException {
-		WebElement ele = login.driver.findElement(By.xpath("//li[" + j + "]//*[@class='series-item--name']"));
+		WebElement ele = login.driver.findElement(By.xpath("//ul[@class='search-series-list']/*[" + j + "]//*[@class='series-item--name']"));
 		Thread.sleep(1000);
 		ele.click();
 		List<WebElement> series_Info = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("seriesInfo")));

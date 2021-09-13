@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.SessionId;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import CDMNext.util.CommonFunctionality;
@@ -38,7 +39,7 @@ public class KeyboardShortcuts {
 
 	@And("^Press \"([^\"]*)\" on KB$")
 	public void press_on_KB(String arg1) throws Throwable {
-
+		CommonFunctionality.wait(1000);
 		switch (arg1) {
 		case "Delete":
 			DeleteSeries();
@@ -161,7 +162,11 @@ public class KeyboardShortcuts {
 
 	@And("^Select Visual$")
 	public void select_Visual() throws Throwable {
-		hs.create_histogram_visual_with_series();
+		hs.create_a_Histogram_visual_without_selecting_series();
+		login.Log4j.info("Clicking on  Series tab ");
+		CommonFunctionality.wait(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
 
 	@Then("^The selected series should be cut$")
@@ -259,13 +264,14 @@ public class KeyboardShortcuts {
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		List<WebElement> li_All = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size();) {
 			Thread.sleep(1500);
 			int j = i + 1;
 			WebElement checkbox = login.driver
-					.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					.findElement(By.xpath("//ul[@class='search-series-list']/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 			checkbox.click();
 			break;
 		}
@@ -353,18 +359,19 @@ public class KeyboardShortcuts {
 		login.Log4j.info("Clicking on  Series tab ");
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+//		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		List<WebElement> li_All = login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			Thread.sleep(800);
 			int j = i + 1;
 			WebElement checkbox = login.driver
-					.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					.findElement(By.xpath("//ul[@class='search-series-list']/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 			checkbox.click();
 			if (j == 5) {
 				CommonFunctionality.wait(500);
 				WebElement addIcon = login.driver
-						.findElement(By.xpath("//li[" + j + "]//div[@class='add-to-data-selection--icon']"));
+						.findElement(By.xpath("//ul[@class='search-series-list']/*[" + j + "]//div[@class='add-to-data-selection--icon']"));
 				Thread.sleep(500);
 				addIcon.click();
 				break;

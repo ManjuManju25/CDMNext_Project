@@ -214,17 +214,17 @@ public class SprintCases {
 	@And("^Create visual$")
 	public void create_visual() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))))
-				.click();
+		Thread.sleep(1000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		Thread.sleep(2000);
-		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
+		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//ul/*//*[@class='series-item--name']"));
 		for (int i = 0; i < ListOfSeries.size(); i++) {
 			int j = i + 1;
 			Thread.sleep(1000);
 			WebElement seriesName = ListOfSeries.get(i);
 			CommonFunctionality.action.pause(1000).moveToElement(seriesName).build().perform();
 			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("//li[" + j + "]//*[@class='view-chart-icon menu-icon']")))
+					.visibilityOfElementLocated(By.xpath("//ul/*[" + j + "]//*[@class='view-chart-icon menu-icon']")))
 					.click();
 		}
 	}
@@ -343,6 +343,8 @@ public class SprintCases {
 		login.Log4j.info("searching with " + arg1);
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		
 	}
 
 	@And("^Create a map visual$")
@@ -350,7 +352,7 @@ public class SprintCases {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//li[1]//*[@class='series-list-item--checkbox-wrapper']",4)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-list-item--checkbox-wrapper']",4)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='insight-page-menu-views-container--add']",4).click();
 		CommonFunctionality.getElementByXpath(login.driver,"//*[@data-action='world']",4).click();
@@ -498,17 +500,19 @@ public class SprintCases {
 
 	@And("^Create map with taiwan series$")
 	public void create_map_with_taiwan_series() throws Throwable {
+		CommonFunctionality.wait(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='Create new View tab']"))).click();
 		login.Log4j.info("Clicking on  Series tab ");
+		CommonFunctionality.wait(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//li[1]//*[@class='series-list-item--checkbox svg-checkbox']")).click();
+		login.driver.findElement(By.xpath("//*[@class='series-list-item--checkbox svg-checkbox']")).click();
 		// CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Create new
 		// View tab']", 20).click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 				"//*[@data-type='world']//*[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")))
 				.click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li//*[@data-action='china']"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-action='china']"))).click();
 
 	}
 
