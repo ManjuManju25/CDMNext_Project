@@ -61,13 +61,13 @@ Feature: Verifying Databases tab functionality
     And User has clicked on "Apply filter"
     And Click on x icon to remove DB
     Then Selected database shold be removed
-#
+
+  #
   #@DB
   #Scenario: TC_DB_10: Verify closing of insight explorer window
-    #Given Click on "All insights" option
-    #When Click on Close
-    #Then The Insight Explorer popup should be closed
-
+  #Given Click on "All insights" option
+  #When Click on Close
+  #Then The Insight Explorer popup should be closed
   @DB
   Scenario: TC_DB_10: Verifying message if no results found for the search
     Given User enters "UN"
@@ -315,7 +315,7 @@ Feature: Verifying Databases tab functionality
     And Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The "Selected series added to insights:" popup should be appeared
 
   @DB
@@ -324,7 +324,7 @@ Feature: Verifying Databases tab functionality
     And Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The data should be added to My series for selected insight
 
   #
@@ -722,13 +722,13 @@ Feature: Verifying Databases tab functionality
     And Click on More actions
     Then The dropdown should be closed
 
-  @DB
+ @DB
   Scenario: TC_DB_98:Verify + icon for series
     And Mouse hover on any series level
     And Click on + icon for a series
     Then The series should be added to my series
 
-  @DB
+ @DB
   Scenario: TC_DB_99:Verify + icon when user in view tab
     And Click on View tab on right side
     And Mouse hover on any series level
@@ -736,13 +736,13 @@ Feature: Verifying Databases tab functionality
     Then Chart should be created with the series
 
   #	Then Chart should be created with selected seires
-  @DB
+ @DB
   Scenario: TC_DB_100:Verify Add option under add dropdown
     And Mouse hover on any series level
     And Select "Add" option
     Then The series should be added to my series
 
-  @DB
+ @DB
   Scenario: TC_DB_101:Verify Add option when Views tab opened in right side panel
     And Click on View tab on right side
     And Mouse hover on any series level
@@ -750,7 +750,7 @@ Feature: Verifying Databases tab functionality
     Then Chart should be created with the series
 
   #	Then Chart should be created with selected seires
-  @DB
+ @DB
   Scenario: TC_DB_102:Verify Add and Replace
     And Create a visual and select visual
     And Select a series and Click on dropdown icon
@@ -786,7 +786,7 @@ Feature: Verifying Databases tab functionality
     And Select a series and Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The "Selected series added to insights:" popup should be appeared
 
   @DB
@@ -794,7 +794,7 @@ Feature: Verifying Databases tab functionality
     And Select a series and Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The series should be added to My series tab for selected insight
 
   #
@@ -843,20 +843,20 @@ Feature: Verifying Databases tab functionality
     And Click on 'A' on keyboard
     Then The series should be added to my series
 
-  @DB
+ @DB
   Scenario: TC_DB_112:Verify adding series by double click on series
     And Select some series
     And Just double click on series
     Then The selected series should be added to My series/visuals
 
-  @DB
+ @DB
   Scenario: TC_DB_113:Verify adding series to my series with expanded search panel
     And Expand search panel
     And Select series in any database
     And Click on My series
     Then The selected series should be added to My series/visuals
 
-  @DB
+ @DB
   Scenario: TC_DB_114:Verify creating visuals with selected series from expanded search panel
     And Expand search panel
     And Select series in any database
@@ -1072,6 +1072,7 @@ Feature: Verifying Databases tab functionality
   #	And Select any recent insight from the dropdown
   #And Click on "Apply"
   #	Then The series should be added to My series tab for selected insight
+  
   @DB
   Scenario: TC_DB_145:Series selection - Verify 'Create new insight' in dropdown
     And Select some series from series level
@@ -1213,5 +1214,5 @@ Feature: Verifying Databases tab functionality
     And Click on dropdown icon next to +
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The series should be added to My series tab for selected insight
