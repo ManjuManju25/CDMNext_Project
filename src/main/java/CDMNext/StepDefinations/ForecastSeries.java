@@ -24,10 +24,15 @@ public class ForecastSeries {
 	public String Applied_function;
 	String[] lines = null;
 
+	@And("^Add series to the right pane$")
+	public void add_series_to_the_right_pane() throws Throwable {
+		CommonFunctionality.wait(1500);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
+	}
+	
 	@Then("^\"([^\"]*)\" tab should be seen in series suggestion manager window$")
 	public void tab_should_be_seen_in_series_suggestion_manager_window(String arg1) throws Throwable {
-		String sugg_manager_tab_text = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='suggestions-manager']/*/*[1]/*[2]", 10).getText();
+		String sugg_manager_tab_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions-manager']/*/*[1]/*[2]", 10).getText();
 		if (sugg_manager_tab_text.equals(arg1)) {
 			login.Log4j.info(arg1 + " tab seen in series suggestion manager window");
 		} else {
@@ -80,16 +85,15 @@ public class ForecastSeries {
 
 	@And("^click on cross icon for any legends name$")
 	public void click_on_cross_icon_for_any_legends_name() throws Throwable {
-		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='legend-item'])[1]/*[1]", 15);
+		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]/*[1]", 15);
 		new Actions(login.driver).pause(200).moveToElement(legend_item).click().build().perform();
 
 	}
 
 	@Then("^Cross clicked legend of the chart in suggestion chart should be disabled$")
 	public void cross_clicked_legend_of_the_chart_in_suggestion_chart_should_be_disabled() throws Throwable {
-		CommonFunctionality.wait(200);
-		boolean is_disabled = login.driver
+		CommonFunctionality.wait(500);
+		Boolean is_disabled = login.driver
 				.findElement(By.xpath("//*[@class='highcharts-series highcharts-series-3 highcharts-line-series']"))
 				.getAttribute("visibility").contains("hidden");
 		if (is_disabled == true) {
@@ -235,13 +239,14 @@ public class ForecastSeries {
 				"//*[@class='compare-suggestions-visual--info']", 5);
 		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();
 		// Reading frequency for first basic series
+		CommonFunctionality.wait(500);
 		frequencyTxt_forBasicSeries = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='series-list-with-suggestions--wrapper']/*[1]/*[1]/*[1]//*[contains(@class,'series-item-information--frequency')]",
+				"//*[contains(@class,'series-list-item__select')]/*[1]/*[1]//*[@class='series-item-information--additional-info']/*[2]//*[contains(@class,'series-item-information--frequency')]",
 				5).getText();
 		CommonFunctionality.wait(500);
 		// Reading frequency for forecast series
 		frequencyTxt_beforeCheckFrequency = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'series-with-suggestions__open-suggestions series-list-item__selected')]//li//*[contains(@class,'series-item-information--frequency')]",
+				"//*[contains(@class,'series-list-item__select')]/*[1]/*[2]//*[@class='suggested-series-list--container']/*[2]//*[contains(@class,'series-item-information--frequency')]",
 				5).getText();
 	}
 
@@ -331,7 +336,7 @@ public class ForecastSeries {
 	@Then("^\"([^\"]*)\" icon in a box should be seen for suggestion series of forecast$")
 	public void icon_in_a_box_should_be_seen_for_suggestion_series_of_forecast(String arg1) throws Throwable {
 		List<WebElement> list_of_forecastSeries = login.driver.findElements(By.xpath(
-				"//*[@class='series-list-with-suggestions--wrapper']//*[@class='series-with-suggestions--replacements-list']//li//*[@class='status-icon status-icon__has-forecast']/*"));
+				"//*[@class='series-list-with-suggestions--wrapper']//*[@class='series-with-suggestions--replacements-list']//*[@class='status-icon status-icon__has-forecast']/*"));
 		for (int i = 0; i < list_of_forecastSeries.size(); i++) {
 			new Actions(login.driver).moveToElement(list_of_forecastSeries.get(i)).build().perform();
 			if (list_of_forecastSeries.get(i).getText().equalsIgnoreCase(arg1)) {

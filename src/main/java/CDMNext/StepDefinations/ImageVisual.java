@@ -413,7 +413,7 @@ public class ImageVisual {
 		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,
-				"//ul[@class='search-series-list']/li[1]", 8);
+				"//ul[@class='search-series-list']/*[1]", 8);
 		if (!(selected.getAttribute("class").contains("series-list-item__selected"))) {
 			new Actions(login.driver).moveToElement(series_cb).pause(4000).click().build().perform();
 		}

@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -67,12 +68,13 @@ public class Filters {
 	@Given("^User enters \"([^\"]*)\"$")
 	public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-		//login.driver.navigate().refresh();
-		//CommonFunctionality.ExpandRight();
-		//CommonFunctionality.TopMethod();
-		CommonFunctionality.ResetMethod();
+//		login.driver.navigate().refresh();
+//		CommonFunctionality.ExpandRight();
+//		CommonFunctionality.TopMethod();
+//		CommonFunctionality.ResetMethod();
 		login.Log4j.info("searching with " + searchData);
 		CommonFunctionality.getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		
 	}
 
@@ -368,8 +370,7 @@ public class Filters {
 					login.Log4j.info(sName.size());
 					Thread.sleep(1000);
 					j = i + 1;
-//					checkbox = login.driver
-//							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']//span"));
+					checkbox = ul_element.findElement(By.xpath("//ul/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']//span"));
 					// action.moveToElement(checkbox).click().build().perform();
 					// Thread.sleep(1000);
 					action.moveToElement(sName.get(i)).build().perform();
@@ -723,9 +724,9 @@ public class Filters {
 
 								if (var.equals("Active")) {
 									Thread.sleep(2000);
-									WebElement list = login.driver
-											.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
-									action.moveToElement(list).click().build().perform();
+//									WebElement list = login.driver
+//											.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
+									action.moveToElement(sName.get(i)).click().build().perform();
 									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
 											.isDisplayed()) {
 										Thread.sleep(3000);
@@ -816,7 +817,7 @@ public class Filters {
 		Thread.sleep(4000);
 		WebElement ele;
 		try {
-		ele = login.driver.findElement(By.xpath("//*[@class='tree-node open full-expanded']/*[2]/*[2]/*[1]/*[1]"));
+		ele = login.driver.findElement(By.xpath("//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node open full-expanded'))]/*[2]/*[2]/*[1]/*[1]"));
 		}catch(NoSuchElementException e) {
 			ele = login.driver.findElement(
 					By.xpath("//*[@class='database-node tree-node open full-expanded']/*[3]/*[1]/*[2]/*[2]/*[1]/*[1]"));
@@ -862,14 +863,14 @@ public class Filters {
 			ul_element = wait.until(
 					ExpectedConditions.visibilityOfElementLocated(By.cssSelector(login.LOCATORS.getProperty("UL"))));
 			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			login.Log4j.info("List size is :" + li_All.size());
-			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
-			if (li_All.size() > 0) {
-				for (int i = 0; i < li_All.size(); i++) {
+//			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+//			login.Log4j.info("List size is :" + li_All.size());
+			List<WebElement> sName = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
+			if (sName.size() > 0) {
+				for (int i = 0; i < sName.size(); i++) {
 
 					login.Log4j.info(i);
-					login.Log4j.info(li_All.size());
+					login.Log4j.info(sName.size());
 					Thread.sleep(500);
 					int j = i + 1;
 					// checkbox = login.driver.findElement(By.xpath("//li[" + j +
@@ -1123,7 +1124,7 @@ public class Filters {
 			 Thread.sleep(3000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			List<WebElement> li_All =  login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
 			login.Log4j.info("List size is :" + li_All.size());
 
 			if (li_All.size() > 0) {
@@ -1131,7 +1132,7 @@ public class Filters {
 					Thread.sleep(2000);
 					int j = i + 1;
 					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+							.findElement(By.xpath("//ul[@class='search-series-list']/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 					//CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 					if (checkbox.isDisplayed()) {
 						Thread.sleep(1000);
@@ -1159,8 +1160,8 @@ public class Filters {
 			ListOfPages.get(m).click();
 			CommonFunctionality.wait(3000);
 			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			List<WebElement> sName = login.driver.findElements(By.xpath("//li//*[@class='series-item--name']"));
+			//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			List<WebElement> sName = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
 			login.Log4j.info("List size is :" + sName.size());
 
 			for (int i = 0; i < sName.size(); i++) {
