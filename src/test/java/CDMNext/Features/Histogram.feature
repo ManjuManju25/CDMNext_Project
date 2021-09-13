@@ -74,7 +74,7 @@ Feature: Verifying Histogram Visual functionality
   @Histogram
   Scenario: TC_Histogram_12:Empty visual - Verify adding series to empty visual
     And Add series to the my series tab
-    And Create a Histogram visual without selecting series
+    And Create a empty visual 
     And Click on Edit series option
     And Choose series from  "+ Add from My Series"
     Then The series should be added to histogram with its data
@@ -1175,7 +1175,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
-    And Check "sub-title"
+    #And Check "sub-title"
     And Click on B under style for sub-title
     When Click on "Save"
     Then The "sub_title" should be displayed in Bold format
@@ -1210,7 +1210,7 @@ Feature: Verifying Histogram Visual functionality
     Then The subtitle should align to "center"
     And Select alignment of sub title to "right"
     Then The subtitle should align to "right"
-#
+
   #And Select alignment for "Sub title" and Save
   #| left   |
   #| center |
@@ -2288,7 +2288,7 @@ Feature: Verifying Histogram Visual functionality
     And Unhighlight the visual
     Then The visual options should be hidden
 
-  #@Histogram
+  #@Histogram1
   #Scenario: TC_Histogram_263:Rename - verify for invalid search
     #And Create histogram visual with series
     #And Click on Edit series option

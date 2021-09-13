@@ -3,21 +3,21 @@ Feature: Verifying the Forecast series functionality
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _01:Verify forecast tab in series suggestion tab
     Given User enters "32190101"
-    And Add series to the my series tab
+    And Add series to the right pane
     And Click on "Related Series"
     Then "Forecast" tab should be seen in series suggestion manager window
 
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _02:Verify series having forecast suggestions in search pane
-    Given User enters "32190101"
-    And Add series to the my series tab
+   Given User enters "32190101"
+    And Add series to the right pane
     And Open SSP window for the series
     Then "Forecasts" suggestions flag bar should be shown
 
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _03:Verify checkbox for series having suggestion in search pane
     Given User enters "32190101"
-    And Add series to the my series tab
+    And Add series to the right pane
     And Open SSP window for the series
     And Check the checkbox for forecast series
     Then Chart with forecast suggestions legends should be displayed
@@ -25,7 +25,7 @@ Feature: Verifying the Forecast series functionality
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _04:Verify deselecting legends in forecast suggestion dropdown
     Given User enters "32190101"
-    And Add series to the my series tab
+    And Add series to the right pane
     And Open SSP window for the series
     And Check the checkbox for forecast series
     And click on cross icon for any legends name
@@ -34,7 +34,7 @@ Feature: Verifying the Forecast series functionality
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _05:Verify opening ssp for more than suggestion of forecast in its chart suggestion dropdown
     Given User enters "32190101"
-    And Add series to the my series tab
+    And Add series to the right pane
     And Open SSP window for the series
     And Check the checkbox for forecast series
     And Click on suggested series of forecast
@@ -43,7 +43,7 @@ Feature: Verifying the Forecast series functionality
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _06:Verify collapsing available suggestion in forecast tab
     Given User enters "32190101"
-    And Add series to the my series tab
+    And Add series to the right pane
     And Click on "Related Series"
     And Click on minus sign checkbox
     Then All opened forecast suggestions are collapsed
@@ -51,7 +51,7 @@ Feature: Verifying the Forecast series functionality
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _07:Verify expanding collapsed suggestion in forecast tab
     Given User enters "32190101"
-    And Add series to the my series tab
+    And Add series to the right pane
     And Click on "Related Series"
     And Click on minus sign checkbox
     And click again on plus sign checkbox
@@ -178,7 +178,7 @@ Feature: Verifying the Forecast series functionality
     And Open forecast tab in series suggestion window
     And Hover on forecast series and click on "i" icon
     Then The SSP window should be opened
-#
+
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _21:Verify preserve names with add forecasts
     Given Enter series id's"103003407;103003507;103003607"
