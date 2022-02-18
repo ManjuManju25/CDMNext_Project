@@ -387,7 +387,7 @@ public void verify_window() throws Throwable {
 	public void verify_replace_inactive_series() throws Throwable {
 		Open_replacement_window();
 		
-		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace"))).click();
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace1"))).click();
 		 Thread.sleep(1000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ok_btn"))).click();
 
@@ -613,7 +613,7 @@ Thread.sleep(1000);
 	public void verify_apply_function_in_SS_window() throws Throwable {
 		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 		  Open_replacement_window_single_series();
-		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace"))).click();
+		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace1"))).click();
 			 Thread.sleep(1000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("apply_btn"))).click();
 			 Thread.sleep(1000);

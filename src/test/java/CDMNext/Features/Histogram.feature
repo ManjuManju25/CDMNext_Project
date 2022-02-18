@@ -97,14 +97,14 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Rename" option
     Then The "Rename" popup should be displayed
-
-  @Histogram
-  Scenario: TC_Histogram_16:Rename - verify number of selected series
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Rename" option
-    Then Number of selected series count should be shown on the rename popup header
-
+	
+#	 @Histogram
+  #Scenario: TC_Histogram_16:Rename - verify number of selected series
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #Then Number of selected series count should be shown on the rename popup header
+#
   #@Histogram
   #Scenario: TC_Histogram_17:Rename - verify find field
     #And Create histogram visual with series
@@ -1135,13 +1135,7 @@ Feature: Verifying Histogram Visual functionality
     And Select alignment of title to "right"
     Then The title should align to "right"
 
-  #And Select alignment for "title" and Save
-  #| left   |
-  #| center |
-  #| right  |
-  #Then The title should align to "left" , "center" and "right" as per the user selection
-  
-  @Histogram
+    @Histogram
   Scenario: TC_Histogram_133:Edit Histogram - Verify color for visual sub title
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1175,7 +1169,6 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on cogwheel icon for title
-    #And Check "sub-title"
     And Click on B under style for sub-title
     When Click on "Save"
     Then The "sub_title" should be displayed in Bold format
@@ -1211,12 +1204,6 @@ Feature: Verifying Histogram Visual functionality
     And Select alignment of sub title to "right"
     Then The subtitle should align to "right"
 
-  #And Select alignment for "Sub title" and Save
-  #| left   |
-  #| center |
-  #| right  |
-  #Then The title should align to "left" , "center" and "right" as per the user selection
-  
   @Histogram
   Scenario: TC_Histogram_140:Edit Histogram - Verify closing of Titles popup
     And Create histogram visual with series
@@ -1244,13 +1231,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Horizontal align of visual to "Right"
     Then The Visual area should align to "Right"
 
-  #And Select alignment for "Horizontal align" and Save
-  #| left   |
-  #| center |
-  #| right  |
-  #Then The visual should align to "left" , "center" and "right" as per the user selection
-  
-  @Histogram
+   @Histogram
   Scenario: TC_Histogram_143:Edit Histogram - Size - Verify Horizontal align by defaullt
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1284,13 +1265,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Horizontal align of visual to "Right"
     Then The copyright image should align to "Right"
 
-  #And Select alignment for "Horizontal align" and Save
-  #| left   |
-  #| center |
-  #| right  |
-  #Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
- 
-  @Histogram
+   @Histogram
   Scenario: TC_Histogram_147:Edit Histogram - Copyright - Verify advance settings
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1312,7 +1287,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
-    And Open drop down for "Copyright"
+    #And Open drop down for "Copyright"
     And Click on "Open advanced settings popup" icon
     And Select Text radio button from copyright popup and Save
     Then Copyright text "Source: CEIC Data" should be displayed on visual
@@ -1322,7 +1297,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
-    And Open drop down for "Copyright"
+    #And Open drop down for "Copyright"
     And Click on "Open advanced settings popup" icon
     And Select Text radio button and Edit the text as "CDMNext" and Save
     Then Updated copyright "CDMNext" should be displayed on visual
@@ -1342,7 +1317,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check "Copyright"
-    And Open drop down for "Copyright"
+    #And Open drop down for "Copyright"
     And Click on "Open advanced settings popup" icon
     And Select Text radio button
     And Select color for "Copyright"
@@ -1407,19 +1382,13 @@ Feature: Verifying Histogram Visual functionality
     And Select Horizontal alignment of copyright to "right"
     Then The copyright image should align to "Right"
 
-  #And Select alignment for "Copyright" and Save
-  #| left   |
-  #| center |
-  #| right  |
-  #Then The copyright should be dispalyed in "left" , "center" and "right" as per the user selection
- 
   @Histogram
   Scenario: TC_Histogram_158:Edit Histogram - Copyright - Verify closing copyright popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on "Open advanced settings popup" icon
     And Click on X icon to close the popup
-    Then The Title popup should be closed
+    Then The "Title" popup should be closed
 
   @Histogram
   Scenario: TC_Histogram_159:Edit Histogram - Verify tooltip=Check
@@ -1689,10 +1658,10 @@ Feature: Verifying Histogram Visual functionality
     Then The series should be removed from visual and edit series panel
 
   @Histogram
-  Scenario: TC_Histogram_184:Edit Histogram - Edit series - Verify delete series icon
+  Scenario: TC_Histogram_184:Edit Histogram - Edit series - Verify SSP by clicking on series name.
     And Create histogram visual with series
     And Click on "Edit Histogram"
-    And Click on Series name
+    And Click on Series
     Then SSP popup should be displayed
 
   @Histogram
@@ -1809,7 +1778,7 @@ Feature: Verifying Histogram Visual functionality
     Then List of frequenceies should be available
 
   @Histogram
-  Scenario: TC_Histogram_199:Edit Histogram - Edit series - Verify appling frequency in series level
+  Scenario: TC_Histogram_199:Edit Histogram - Edit series - Verify applying frequency in series level
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on frequency dropdown
@@ -1817,7 +1786,7 @@ Feature: Verifying Histogram Visual functionality
     Then Selected frequency should be displayed in the series
 
   @Histogram
-  Scenario: TC_Histogram_200:Edit Histogram - Edit series - Verify appling currency in series level
+  Scenario: TC_Histogram_200:Edit Histogram - Edit series - Verify applying currency in series level
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on currency dropdown
@@ -1843,7 +1812,7 @@ Feature: Verifying Histogram Visual functionality
   @Histogram
   Scenario: TC_Histogram_203:Edit Histogram - Edit series -  Verify cancel icon for selected function
     And Create histogram visual with series
-    And Click on "Edit Histogram"
+    And Click on "Edit Histogram"	
     And Click on type a function field in series level
     And Select a function
     And Click on cancel function icon
@@ -1939,14 +1908,14 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on + icon on header
     Then Below options should be displayed
-      | Add                |
+      | Add to new tab     |
       | Add to new insight |
 
   @Histogram
-  Scenario: TC_Histogram_215:Add to insight - Verify 'Add' option under Add to insight
+  Scenario: TC_Histogram_215:Add to insight - Verify 'Add to new tab' option under Add to insight
     And Create histogram visual with series
     And Click on + icon on header
-    And Click on "Add"
+    And Click on "Add to new tab"
     Then The Histogram visual should be created in vew tab on current insight
 
   @Histogram
@@ -2191,35 +2160,35 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Right click on visual header
     And Select View as > "Chart"
-    Then The Hisogram visual should be converted as "Chart" visual
+    Then The "Hisogram" visual should be converted as "Chart" visual
 
   @Histogram
   Scenario: TC_Histogram_250:Right click - View as - Verify Map
     And Create histogram visual with series
     And Right click on visual header
     And Select View as > "Map"
-    Then The Hisogram visual should be converted as "Map" visual
+    Then The "Hisogram" visual should be converted as "Map" visual
 
   @Histogram
   Scenario: TC_Histogram_251:Right click - View as - Verify Table
     And Create histogram visual with series
     And Right click on visual header
     And Select View as > "Table"
-    Then The Hisogram visual should be converted as "Table" visual
+    Then The "Hisogram" visual should be converted as "Table" visual
 
   @Histogram
   Scenario: TC_Histogram_252:Right click - View as - Verify Pie
     And Create histogram visual with series
     And Right click on visual header
     And Select View as > "Pie"
-    Then The Hisogram visual should be converted as "Pie" visual
+    Then The "Hisogram" visual should be converted as "Pie" visual
 
   @Histogram
   Scenario: TC_Histogram_253:Right click - View as - Verify Heat map
     And Create histogram visual with series
     And Right click on visual header
     And Select View as > "Heat map"
-    Then The Hisogram visual should be converted as "Heat map" visual
+    Then The "Hisogram" visual should be converted as "Heat map" visual
 
   @Histogram
   Scenario: TC_Histogram_254:Right click - Verify Calculated series sub dropdown
@@ -2227,14 +2196,14 @@ Feature: Verifying Histogram Visual functionality
     And Right click on visual header
     And Choose "Calculate series"
     And Select function "RMB"
-    Then The function should be applied for the series
+    Then The Selected function should be applied for the series
 
   @Histogram
   Scenario: TC_Histogram_255:Right click - Verify Edit series option
     And Create histogram visual with series
     And Right click on visual header
     And Choose "Edit series"
-    Then The edit series popup should be opened with Histogram tab
+    Then The edit series popup should be opened with "Histogram" tab
 
   @Histogram
   Scenario: TC_Histogram_256:Right click - Verify Clear contents
@@ -2288,7 +2257,7 @@ Feature: Verifying Histogram Visual functionality
     And Unhighlight the visual
     Then The visual options should be hidden
 
-  #@Histogram1
+  #@Histogram
   #Scenario: TC_Histogram_263:Rename - verify for invalid search
     #And Create histogram visual with series
     #And Click on Edit series option
@@ -2471,7 +2440,9 @@ Feature: Verifying Histogram Visual functionality
   @Histogram
   Scenario: TC_Histogram_281: Edit Histogram - Tooltip - Verify date format
     And Create histogram visual with series
-    And Create a histogram visual with series id "365384367"
+    And Open preference dropdown
+     And Clicking on "Date format" option in preference
+    And Click "Auto" format date option
     And Click on "Edit Histogram"
     And Check "Tooltips"
     And Click on Date format dropdown

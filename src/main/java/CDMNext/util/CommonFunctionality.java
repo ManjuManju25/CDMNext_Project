@@ -171,37 +171,29 @@ public class CommonFunctionality {
 
 	@SuppressWarnings("deprecation")
 	public static void DeleteSeries() throws InterruptedException {
-		/*
-		 * try { // getElementByProperty(login.driver, "Series_tab", 8).click(); //
-		 * Deleting series from My Series tab WebElement ele =
-		 * getElementByXpath(login.driver,
-		 * "//*[@class='check-all-series']//*[@class='input-control--indicator']", 20);
-		 * action.moveToElement(ele).pause(800).click().build().perform(); WebElement
-		 * delete = getElementByXpath(login.driver, "//*[@data-action='delete']", 10);
-		 * action.moveToElement(delete).pause(700).click().build().perform();
-		 * wait(3000); } catch (Exception e) {
-		 * 
-		 * }
-		 */
 		try {
-			WebElement selected = getElementByXpath(login.driver,
+		WebElement selected = getElementByXpath(login.driver,
 					"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",
 					4);
-			if (selected.getAttribute("class").contains("all-selected")) {
-				getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
-			} else if (selected.getAttribute("class").contains("without-data")) {
-				System.out.println("No Series is added in myseries list to delete");
-			} else {
-				WebElement ele = getElementByXpath(login.driver,
-						"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
-				action.moveToElement(ele).pause(1000).click().build().perform();
-				WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
-				new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
-			}
-		} catch (Exception e) {
-
+		if (selected.getAttribute("class").contains("all-selected")) {
+			getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+		} else if (selected.getAttribute("class").contains("without-data")) {
+			System.out.println("No Series is added in myseries list to delete");
+		}else {
+			WebElement ele = getElementByXpath(login.driver,
+					"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
+			action.moveToElement(ele).pause(1000).click().build().perform();
+			WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
+			new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
 		}
-	}
+		}catch(Exception e) {
+			WebElement Table_mode_selected_ = getElementByXpath(login.driver,
+					"//table//*[@class='table-container--checkbox svg-checkbox input-control__grey']/*[@class='icon']",	4);
+			action.moveToElement(Table_mode_selected_).pause(500).click().build().perform();
+			getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+		}
+			
+		}
 
 	public static void TopMethod() throws InterruptedException {
 		try {
@@ -219,17 +211,17 @@ public class CommonFunctionality {
 	@SuppressWarnings("deprecation")
 	public static void RightClickOnAnySeries() throws InterruptedException {
 		wait(2000);
-		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-		login.Log4j.info("List size is :" + li_All.size());
+		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		List<WebElement> li_All = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable']/*"));
+				login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			// int j = i + 1;
 			m = i + 1;
 			wait(1000);
 			WebElement checkbox = login.driver
-					.findElement(By.xpath("//li[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
 			checkbox.click();
-			WebElement ele = login.driver.findElement(By.xpath("//li[" + m + "]//div[@class='series-item--name']"));
+			WebElement ele = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[" + m + "]//div[@class='series-item--name']"));
 			// sname = ele.getText();
 			if (i == 4) {
 				// Thread.sleep(2000);
@@ -524,9 +516,10 @@ public class CommonFunctionality {
 
 	public static WebElement getElementBycssSelector(WebDriver driver, String locator, int time)
 			throws InterruptedException {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(locator)));
+		wait(1000);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+		//wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+		//wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(locator)));
 		WebElement element = login.driver.findElement(By.cssSelector(locator));
 		elementHighlight(login.driver, element);
 		return element;
@@ -657,7 +650,7 @@ public class CommonFunctionality {
 			if (x != 0) {
 				ActualColor = element.getAttribute("title");
 				login.Log4j.info(ActualColor);
-				wait(200);
+				wait(1000);
 				element.click();
 				break;
 			}
@@ -754,7 +747,7 @@ public class CommonFunctionality {
 	/* Get the newest file for a specific extension */
 
 	public static void getTheNewestFile(String ext)  {
-		wait(15000);
+		wait(20000);
 		File dir = new File(System.getProperty("user.home") + "\\Downloads");
 		
 		FileFilter fileFilter = new WildcardFileFilter("*." + ext);
@@ -873,6 +866,8 @@ public class CommonFunctionality {
 		driver.findElement(By.cssSelector(arg2)).clear();
 		driver.findElement(By.cssSelector(arg2)).sendKeys("Ceic@123");
 		driver.findElement(By.cssSelector(arg3)).click();
+		wait(2000);
+		driver.navigate().refresh();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -885,13 +880,15 @@ public class CommonFunctionality {
 		driver.findElement(By.cssSelector(arg2)).clear();
 		driver.findElement(By.cssSelector(arg2)).sendKeys(arg5);
 		driver.findElement(By.cssSelector(arg3)).click();
-		if(login.driver.findElements(By.xpath("//div[@class='movable-modal--header']//div[text()='FocusEconomics Consensus Forecasts']")).size()>0) {
+		wait(2000);
+		driver.navigate().refresh();
+		/*if(login.driver.findElements(By.xpath("//div[@class='movable-modal--header']//div[text()='FocusEconomics Consensus Forecasts']")).size()>0) {
 			boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'show again')]/preceding-sibling::input")).isSelected();
 			if(checkbox == false) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'show again')]/preceding-sibling::span", 4)).pause(500).click().build().perform();
 			}
 			CommonFunctionality.getElementByXpath(login.driver, "//button[contains(@class,'button__text_purple') and text()='No, take me to CDMNext']", 4).click();
-		}
+		}*/
 	}
 
 	public static void login_as_ceic_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)

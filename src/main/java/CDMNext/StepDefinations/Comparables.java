@@ -25,6 +25,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.asserts.SoftAssert;
 import CDMNext.util.CommonFunctionality;
@@ -144,12 +145,16 @@ public class Comparables {
 	@And("^Select (\\d+) series inside table$")
 	public void select_series_inside_table(int arg1) throws Throwable {
 		series_count_inside_table = arg1;
-		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		// WebElement ul_element =
+		// login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		List<WebElement> li_All = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable']/*"));
 		for (int i = 1; i <= li_All.size(); i++) {
+			CommonFunctionality.wait(300);
 			WebElement check = CommonFunctionality.getElementByXpath(login.driver,
-					"//li[" + i + "]//span[contains(@class,'series-list-item--checkbox')]", 4);
-			new Actions(login.driver).moveToElement(check).click().build().perform();
+					"//ul[@class='search-series-list scrollable']/*[" + i
+							+ "]//span[contains(@class,'series-list-item--checkbox')]",
+					4);
+			new Actions(login.driver).pause(200).moveToElement(check).click().build().perform();
 			if (i == series_count_inside_table) {
 				break;
 			}
@@ -201,10 +206,10 @@ public class Comparables {
 	public void clicking_option_from_Series_list(String arg1) throws Throwable {
 		hovor_on_to_i_icon_without_click();
 		WebElement hovor = CommonFunctionality.getElementByXpath(login.driver,
-				"//ul[contains(@class,'search-series-list')]//li[1]//*[@class='add-to-data-selection--title']", 4);
+				"//ul[contains(@class,'search-series-list')]/*[1]//*[@class='add-to-data-selection--title']", 4);
 		new Actions(login.driver).moveToElement(hovor).pause(1000).build().perform();
 		WebElement dropdown = CommonFunctionality.getElementByXpath(login.driver,
-				"//ul[contains(@class,'search-series-list')]//li[1]//*[@class='add-to-data-selection--title']//*[contains(@class,'"
+				"//ul[contains(@class,'search-series-list')]/*[1]//*[@class='add-to-data-selection--title']//*[contains(@class,'"
 						+ arg1 + "')]",
 				4);
 		new Actions(login.driver).moveToElement(dropdown).pause(1000).click().build().perform();
@@ -366,7 +371,7 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Hovor on to i icon without click$")
 	public void hovor_on_to_i_icon_without_click() throws Throwable {
-		WebElement first_series = login.driver.findElement(By.xpath(" //*[contains(@class,'country-information')]"));
+		WebElement first_series = login.driver.findElement(By.xpath("//*[contains(@class,'country-information')]"));
 		new Actions(login.driver).moveToElement(first_series).pause(2000).build().perform();
 		hovered_series_name = CommonFunctionality.getElementByClassName(login.driver, "series-item--name", 4).getText();
 	}
@@ -424,6 +429,7 @@ public class Comparables {
 	@And("^Get the name of series inside table$")
 	public void get_the_name_of_series_inside_table() throws Throwable {
 		for (int i = 1; i <= series_count_inside_first_table; i++) {
+			CommonFunctionality.wait(500);
 			String series_name_inside_table = login.driver
 					.findElement(By.xpath("(//*[@class='series-item--name'])[" + i + "]")).getText();
 			series_values_in_table.add(series_name_inside_table);
@@ -655,22 +661,22 @@ public class Comparables {
 	public void count_the_series_inside(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 		List<WebElement> series_inside_table;
-		if (arg1.equalsIgnoreCase("First Dataset")) {
-			series_inside_table = login.driver.findElements(
-					By.xpath("(//*[@class='release-scheduler-tree-node--title'])[1]/following::ul[1]/li"));
+		if (arg1.equalsIgnoreCase("first Dataset")) {
+			series_inside_table = login.driver
+					.findElements(By.xpath("(//*[@class='release-scheduler-tree-node--title'])[1]/following::ul[1]/*"));
 		} else if (arg1.equalsIgnoreCase("Selected Dataset")) {
 			series_inside_table = login.driver.findElements(
-					By.xpath("(//*[contains(@class,'tree-series-list list-view-component')])[1]//ul[1]/li"));
+					By.xpath("(//*[contains(@class,'tree-series-list list-view-component')])[1]//ul[1]/*"));
 		} else {
 			if (arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 				String series_count = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(text(),'Global Economic Monitor')]/following::span[@class='name-text'][1]", 4)
 						.getText();
 				series_inside_table = login.driver
-						.findElements(By.xpath("//*[contains(text(),'" + series_count + "')]//following::ul[1]/li"));
+						.findElements(By.xpath("//*[contains(text(),'" + series_count + "')]//following::ul[1]/*"));
 			} else {
 				series_inside_table = login.driver
-						.findElements(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::ul[1]/li"));
+						.findElements(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::ul[1]/*"));
 			}
 		}
 		series_count_inside_first_table = series_inside_table.size();
@@ -815,17 +821,28 @@ public class Comparables {
 		WebElement country = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(@class,'country-information')]", 4);
 		new Actions(login.driver).moveToElement(country).pause(1000).build().perform();
-		series_name = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--name']")).getText();
-		if (arg1.equals("Add to Watchlist")) {
+		series_name = login.driver
+				.findElement(
+						By.xpath("//ul[@class='search-series-list scrollable']/*[1]//div[@class='series-item--name']"))
+				.getText();
+		
+
+		if (arg1.equalsIgnoreCase("Add to Watchlist")) {
 			CommonFunctionality.wait(2000);
+
+//			CommonFunctionality
+//					.getElementByXpath(login.driver,
+//							"//ul[@class='search-series-list scrollable']/*[1]//span[@title='More actions']", 4)
+//					.click();
+
 			new Actions(login.driver)
 					.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 							"//div[@class='items-wrapper']//span[@title='" + arg1 + "']", 4))
 					.pause(3000).click().build().perform();
 		} else {
 			new Actions(login.driver)
-					.moveToElement(
-							CommonFunctionality.getElementByXpath(login.driver, "//li[1]//*[@title='" + arg1 + "']", 4))
+					.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+							"//ul[@class='search-series-list scrollable']/*[1]//*[@title='" + arg1 + "']", 4))
 					.pause(2000).click().build().perform();
 		}
 	}
@@ -834,7 +851,10 @@ public class Comparables {
 	@And("^Click on \"([^\"]*)\" option in series level of Dataset$")
 	public void click_on_option_in_series_level_of_Dataset(String arg1) throws Throwable {
 		dt.hovor_on_icon();
-		series_name = login.driver.findElement(By.xpath("//li[1]//div[@class='series-item--name']")).getText();
+		series_name = login.driver
+				.findElement(
+						By.xpath("//ul[contains(@class,'search-series-list')]/*[1]//div[@class='series-item--name']"))
+				.getText();
 		if (arg1.equals("Add to Watchlist")) {
 			CommonFunctionality.wait(2000);
 			new Actions(login.driver)
@@ -843,8 +863,8 @@ public class Comparables {
 					.pause(3000).click().build().perform();
 		} else {
 			new Actions(login.driver)
-					.moveToElement(
-							CommonFunctionality.getElementByXpath(login.driver, "//li[1]//*[@title='" + arg1 + "']", 4))
+					.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+							"//ul[contains(@class,'search-series-list')]/*[1]//*[@title='" + arg1 + "']", 4))
 					.pause(2000).click().build().perform();
 		}
 	}
@@ -859,7 +879,8 @@ public class Comparables {
 
 	@And("^Select the \"([^\"]*)\" option$")
 	public void select_the_option(String arg1) throws Throwable {
-		login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='" + arg1 + "']")).click();
+		CommonFunctionality.wait(500);
+		login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='" + arg1 + "']/*[2]")).click();
 		if (arg1.equalsIgnoreCase("Copy link(s)") || arg1.equalsIgnoreCase("Copy selected links")) {
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
 			Clipboard clipboard = toolkit.getSystemClipboard();
@@ -915,12 +936,16 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Drag and Drop the Comparables text$")
 	public void drag_and_Drop_the_Comparables_text() throws Throwable {
+		Actions builder = new Actions(login.driver);
 		WebElement source = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='search-presentation-tabs--visible']/span[3]", 4);
 		WebElement target = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='search-presentation-tabs--visible']/span[2]", 4);
-		new Actions(login.driver).moveToElement(source).pause(2000).clickAndHold(source).pause(4000)
-				.dragAndDrop(source, target).pause(4000).release(target).build().perform();
+		// new
+		// Actions(login.driver).moveToElement(source).pause(2000).clickAndHold(source).pause(4000)
+		// .dragAndDrop(source, target).pause(4000).release(target).build().perform();
+		Action dragAndDrop = builder.clickAndHold(source).moveToElement(target).pause(2000).release(target).build();
+		dragAndDrop.perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -942,14 +967,14 @@ public class Comparables {
 	@And("^Get the count of series inside table$")
 	public void get_the_count_of_series_inside_table() throws Throwable {
 		List<WebElement> series = login.driver.findElements(By.xpath(
-				"(//*[contains(@class,'tree-series-list list-view-component series-table-list__all-shown')])[1]//li"));
+				"(//*[contains(@class,'tree-series-list list-view-component series-table-list__all-shown')])[1]//*"));
 		series_count = series.size();
 	}
 
 	@And("^Get the count of series inside first table$")
 	public void get_the_count_of_series_inside_first_table() throws Throwable {
 		List<WebElement> series = login.driver
-				.findElements(By.xpath("//ul[@class='search-series-list scrollable'][1]/li"));
+				.findElements(By.xpath("//ul[@class='search-series-list scrollable'][1]/*"));
 		series_count_in_first_table = series.size();
 	}
 
@@ -985,7 +1010,7 @@ public class Comparables {
 				.click();
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(newTab.get(1));
-		String expected = CommonFunctionality.getElementByClassName(login.driver, "group-name", 4).getText();
+		String expected = CommonFunctionality.getElementByClassName(login.driver, "series-name-field--series-name", 4).getText();
 		CommonFunctionality.DeleteSeries();
 		login.driver.switchTo().window(newTab.get(1)).close();
 		Thread.sleep(1000);
@@ -1413,7 +1438,7 @@ public class Comparables {
 	public void the_series_should_gets_selected() throws Throwable {
 		for (int i = 1; i <= series_count_inside_table; i++) {
 			WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
-					"//ul[contains(@class,'search-series-list')]/li[" + i + "]", 4);
+					"//ul[contains(@class,'search-series-list')]/*[" + i + "]", 4);
 			if (!(ele.getAttribute("class").contains("series-list-item__selected"))) {
 				sa.fail("Verification Failed");
 			}
@@ -1425,7 +1450,7 @@ public class Comparables {
 	public void the_series_should_gets_deselected() throws Throwable {
 		for (int i = 1; i <= series_count_inside_table_deselect; i++) {
 			WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
-					"//ul[contains(@class,'search-series-list')]/li[" + i + "]", 4);
+					"//ul[contains(@class,'search-series-list')]/*[" + i + "]", 4);
 			if (ele.getAttribute("class").contains("series-list-item__selected")) {
 				sa.fail("Verification Failed");
 			}
@@ -1482,7 +1507,7 @@ public class Comparables {
 	@Then("^The Series selected should gets downloaded to excel$")
 	public void the_series_should_get_download_to_excel() throws Throwable {
 		CommonFunctionality.wait(1000);
-		String path = System.getProperty("user.home") + "\\Downloads\\Name your insight.xlsx";
+		String path = System.getProperty("user.home") + "\\Downloads\\Series.xlsx";
 		File src = new File(path);
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
@@ -1490,6 +1515,7 @@ public class Comparables {
 		for (int i = 1; i <= series_count_inside_table; i++) {
 			String data = sheet1.getRow(0).getCell(i).getStringCellValue();
 			excel_values.add(data);
+			login.Log4j.info(excel_values);
 		}
 		fis.close();
 		Files.deleteIfExists(Paths.get(path));
@@ -1521,7 +1547,8 @@ public class Comparables {
 		wb.write(fos);
 		String data1 = null;
 		for (int i = 1; i <= series_count_inside_table; i++) {
-			String data = sheet1.getRow(0).getCell(i).getStringCellValue();
+
+			String data = sheet1.getRow(0).getCell(0).getStringCellValue();
 			if (data.contains("\n")) {
 				String text[] = data.split("\n");
 				data1 = text[0];
@@ -1581,8 +1608,8 @@ public class Comparables {
 
 	@Then("^The \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" options should available$")
 	public void the_options_should_available(String arg1, String arg2, String arg3, String arg4, String arg5,
-			String arg6, String arg7, String arg8, String arg9, String arg10, String arg11, String arg12, String arg13)
-			throws Throwable {
+			String arg6, String arg7, String arg8, String arg9, String arg10, String arg11, String arg12, String arg13,
+			String arg14, String arg15, String arg16) throws Throwable {
 		List<WebElement> items = login.driver.findElements(By.xpath(
 				"//*[@class='items-wrapper']/li/span[not(contains(@class,'dropdown-submenu-icon')) and not(contains(@title,'View on Administrative Map'))]"));
 		for (WebElement item : items) {
@@ -1590,7 +1617,7 @@ public class Comparables {
 			if (value.equals(arg1) || value.equals(arg2) || value.equals(arg3) || value.equals(arg4)
 					|| value.equals(arg5) || value.equals(arg6) || value.equals(arg7) || value.equals(arg8)
 					|| value.equals(arg9) || value.equals(arg10) || value.equals(arg11) || value.equals(arg12)
-					|| value.equals(arg13)) {
+					|| value.equals(arg13) || value.equals(arg14) || value.equals(arg15) || value.equals(arg16)) {
 				login.Log4j.info(value + " option is present inside More actions");
 			} else {
 				fail(item + " not present");
@@ -1618,7 +1645,7 @@ public class Comparables {
 	@Then("^The series should get selected by default$")
 	public void the_series_should_get_selected_by_default() throws Throwable {
 		WebElement checkbox = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(text(),'" + hovered_series_name + "')]/ancestor::li", 4);
+				"//*[contains(text(),'" + hovered_series_name + "')]/ancestor::div", 4);
 		if (checkbox.getAttribute("class").contains("series-list-item__selected")) {
 			login.Log4j.info("The Series gets selected by default and has been verified successfully");
 		} else {
@@ -1639,6 +1666,7 @@ public class Comparables {
 
 	@Then("^The \"([^\"]*)\" option should present$")
 	public void the_option_should_present(String arg1) throws Throwable {
+		CommonFunctionality.wait(1000);
 		if (arg1.equalsIgnoreCase("Show Dataset")) {
 			List<WebElement> dataset_all = login.driver.findElements(By.className("series-item--name"));
 			for (WebElement dataset : dataset_all) {
@@ -1691,7 +1719,7 @@ public class Comparables {
 	public void selected_series_should_get_deselected() throws Throwable {
 		for (int i = 1; i <= series_count_inside_table; i++) {
 			WebElement checkbox = CommonFunctionality.getElementByXpath(login.driver,
-					"//ul[contains(@class,'search-series-list')]//li[" + i + "]", 4);
+					"//ul[contains(@class,'search-series-list')]/*[" + i + "]", 4);
 			CommonFunctionality.wait(2000);
 			if (checkbox.getAttribute("class").contains("series-list-item__selected")) {
 				sa.fail("Verification Failed");
@@ -1814,7 +1842,7 @@ public class Comparables {
 		if (arg1.equalsIgnoreCase("Show Dataset")) {
 			CommonFunctionality.wait(300);
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@class='series-item--name']/ancestor::li)[1]", 4);
+					"//div[@class='series-related-table']//ul[contains(@class,'search-series-list')]/*[1]", 4);
 			CommonFunctionality.wait(500);
 			if (series.getAttribute("class").contains("series-list-item__selected")
 					&& series.getAttribute("class").contains("series-list-item__highlighted")) {
@@ -1826,7 +1854,7 @@ public class Comparables {
 		}
 		if (arg1.equalsIgnoreCase("Back Button")) {
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[contains(text(),'" + hovered_series_name + "')]/ancestor::li)[1]", 4);
+					"(//*[contains(text(),'" + hovered_series_name + "')]/ancestor::div[@unselectable='on'])[1]", 4);
 			if (series.getAttribute("class").contains("series-list-item__selected")
 					&& series.getAttribute("class").contains("series-list-item__highlighted")) {
 				CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4)
@@ -1847,7 +1875,7 @@ public class Comparables {
 		if (arg1.equalsIgnoreCase("Back Button in Dataset")) {
 			CommonFunctionality.wait(500);
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[contains(text(),'" + hovered_series_name + "')]/ancestor::li)[1]", 4);
+					"(//*[contains(text(),'" + hovered_series_name + "')]/ancestor::div[@unselectable='on'])[1]", 4);
 			CommonFunctionality.wait(300);
 			if (series.getAttribute("class").contains("series-list-item__selected")
 					&& series.getAttribute("class").contains("series-list-item__highlighted")) {
@@ -1879,7 +1907,7 @@ public class Comparables {
 				CommonFunctionality.wait(2000);
 			}
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[contains(text(),'" + hovered_series_name + "')]/ancestor::li)[1]", 4);
+					"(//*[contains(text(),'" + hovered_series_name + "')]/ancestor::div[@unselectable='on'])[1]", 4);
 			js.executeScript("arguments[0].scrollIntoView(true);", series);
 			if (series.getAttribute("class").contains("series-list-item__selected")
 					&& series.getAttribute("class").contains("series-list-item__highlighted")) {
@@ -1893,13 +1921,13 @@ public class Comparables {
 			WebElement check = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + section_name + "')]/preceding::span[1]", 4);
 			List<WebElement> check1 = login.driver
-					.findElements(By.xpath("//*[contains(text(),'" + section_name + "')]//following::ul[1]/li"));
+					.findElements(By.xpath("//*[contains(text(),'" + section_name + "')]//following::ul[1]/*"));
 			if (check.getAttribute("class").contains("svg-checkbox__selected")) {
 				sa.fail("Verification Failed");
 			}
 			for (int i = 1; i <= check1.size(); i++) {
 				WebElement checking = login.driver.findElement(
-						By.xpath("//*[contains(text(),'" + section_name + "')]//following::ul[1]/li[" + i + "]"));
+						By.xpath("//*[contains(text(),'" + section_name + "')]//following::ul[1]/*[" + i + "]"));
 				CommonFunctionality.wait(1000);
 				if (checking.getAttribute("class").contains("series-list-item__selected")) {
 					sa.fail("Verification Failed");
@@ -2005,12 +2033,13 @@ public class Comparables {
 							"//*[contains(@class,'sphere-modal-controls--right')]//*[contains(text(),'Download')]", 4)
 					.click();
 			CommonFunctionality.wait(20000);
-			String path = System.getProperty("user.home") + "\\Downloads\\Name your insight.xlsx";
+			String path = System.getProperty("user.home") + "\\Downloads\\Series.xlsx";
 			File src = new File(path);
 			FileInputStream fis = new FileInputStream(src);
 			XSSFWorkbook wb = new XSSFWorkbook(fis);
 			XSSFSheet sheet1 = wb.getSheetAt(0);
 			for (int i = 1; i <= series_count_inside_first_table; i++) {
+				
 				String data = sheet1.getRow(0).getCell(i).getStringCellValue();
 				table_excel_values.add(data);
 			}

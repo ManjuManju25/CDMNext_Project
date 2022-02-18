@@ -26,28 +26,43 @@ import cucumber.api.java.en.Given;
 
 public class MyInsight {
 
+	
+	Actions action=new Actions(login.driver);
+	
+	
+	
 	//TC_MyInsights_01
 	@And("^Navigates to Myinsight page$")
 		public void navigates_to_Myinsight_page() throws Throwable {
 			//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Myinsights_button"))).click();
-			CommonFunctionality.getElementByXpath(login.driver, "//a[@class='insight-breadcrumb--title-link link' and contains(text(),'My insights')]", 10).click();
+			//CommonFunctionality.getElementByXpath(login.driver, "//a[@class='insight-breadcrumb--title-link link' and contains(text(),'My insights')]", 10).click();
+		
+	WebElement MyInsights=	login.driver.findElement(By.xpath("//a[@class='insight-breadcrumb--title-link link']"));
+		action.moveToElement(MyInsights).click().build().perform();
+		
+		
+		
 		}
 	
 	//TC_MyInsights_01
 		@And("^Verify the All four tabs in My Insights page$")
 		public void verify_the_All_four_tabs_in_My_Insights_page() throws Throwable {
 			Thread.sleep(2000);
+			
+			Assert.assertTrue(login.driver.findElement(By.xpath("//div[contains(text(),'Favorite')]")).isDisplayed());
+			Thread.sleep(2000);
+			
+			Assert.assertTrue(login.driver.findElement(By.xpath("//div[contains(text(),'Created')]")).isDisplayed());
+			Thread.sleep(2000);
+			
+			//Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Favorite_tab"))).isDisplayed());
+			
+			
 			Assert.assertTrue(
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Favorite_tab"))).isDisplayed());
+					login.driver.findElement(By.xpath("//div[contains(text(),'Shared')]")).isDisplayed());
 			Thread.sleep(2000);
 			Assert.assertTrue(
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Created_tab"))).isDisplayed());
-			Thread.sleep(2000);
-			Assert.assertTrue(
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Shared_tab"))).isDisplayed());
-			Thread.sleep(2000);
-			Assert.assertTrue(
-					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("All_Tab"))).isDisplayed());
+					login.driver.findElement(By.xpath("//div[@data-tab='all']")).isDisplayed());
 			System.out.println("verified all four Tabs");
 			 CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 		}
@@ -57,7 +72,7 @@ public class MyInsight {
 		@And("^Verify the Create insight button to create new insight$")
 		public void verify_the_Create_insight_button_to_create_new_insight() throws Throwable {
 			Thread.sleep(3000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("create_insight"))).click();
+			login.driver.findElement(By.xpath("//span[contains(text(),'Create insight')]")).click();
 			Thread.sleep(2000);
 			String beforeinsightname =  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Default_insightname"))).getAttribute("value");
 			Thread.sleep(2000);
@@ -736,6 +751,7 @@ public class MyInsight {
 			
 			List<WebElement> objLinks = login.driver.findElements(By.xpath("//ul[@class='select2-results']/li/following::div[3]"));
 				//for(int i=1;i<objLinks.size();i++)
+			
 				for(WebElement productdropdown:objLinks)
 				{
 					
@@ -863,16 +879,6 @@ public class MyInsight {
 					action.moveToElement(close).click().build().perform();
 				  CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();	
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -2737,37 +2743,6 @@ public class MyInsight {
 			}
 			
 			
-			
-			
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
 		public static void  delete_Nameyourinsight() throws InterruptedException{	
 			Thread.sleep(3000);
 			String Firstelement =  CommonFunctionality.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10).getText();

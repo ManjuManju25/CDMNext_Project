@@ -83,6 +83,7 @@ public class Attachments {
 
 	@Then("^The Attachments should update the \"([^\"]*)\" text color as blue$")
 	public void the_Attachments_should_update_the_text_color_as_blue(String arg1) throws Throwable {
+		CommonFunctionality.wait(500);
 		String color = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='" + arg1 + "']", 30)
 				.getCssValue("color");
 		commentary.ColorValidation(color);
@@ -476,7 +477,7 @@ public class Attachments {
 
 	@And("^Click on Remove file$")
 	public void click_on_Remove_file() throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
 		login.driver.findElement(By.linkText("Remove file")).click();
 	}
 
@@ -504,11 +505,13 @@ public class Attachments {
 		String format = "png";
 		CommonFunctionality.getTheNewestFile(format);
 		File file = CommonFunctionality.theNewestFile;
-		/*
-		 * if (file.delete()) { System.out.println(file.getName() + " is deleted!"); }
-		 * else { System.out.println("Delete operation is failed."); }
-		 */
-		//CommonFunctionality.DeleteVisual();
+		if (file.delete()) {
+			System.out.println(file.getName() + " is deleted!");
+		} else {
+			System.out.println("Delete operation is failed.");
+		}
+
+		// CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Try to upload multiple files in the same visual$")
@@ -526,7 +529,7 @@ public class Attachments {
 
 	@Then("^Should allow to upload multiple files to the visual$")
 	public void should_allow_to_upload_multiple_files_to_the_visual() throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(1000);
 		List<WebElement> list_files = login.driver
 				.findElements(By.xpath("//*[@class='uploader-tab--files-list']//div[@js-type='file']"));
 		if (list_files.size() > 1) {

@@ -11,18 +11,18 @@ import org.testng.annotations.*;
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
 
-
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Attachments"},
-				
+		tags = {"@HideSeries"},			
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
 			//	 "json:target/cucumber-reportsa/CucumberTestReport.json",
 				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
-				})
+				})	
+	
+
 public class TestRunner {
 
 	private TestNGCucumberRunner testNGCucumberRunner;

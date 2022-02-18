@@ -13,26 +13,26 @@ Feature: Mnemonic Search
 
     Examples: 
       | TCID   | SID       | Mnemonic                   |
-      #| TC_01  | 118270508 | AE.AP.NMVA.AED-TH-A        |
-      #| TC_02  | 118307308 | AE.APFISH.VO.A             |
-      #| TC_03  | 386599657 | AE.GDP.NM.AED-MN-A         |
-      #| TC_04  | 210462002 | AE.GDP.NM.USD-MN-A         |
-      #| TC_05  | 384162137 | AE.GDP.NMRT.YOY-A          |
-      #| TC_06  | 386600287 | AE.GDP.RL.AED-MN-A         |
-      #| TC_07  | 383862977 | AE.GDP.RL.AED-MN-Q         |
-      #| TC_08  | 396024767 | AE.GDP.RL.USD-MN-A         |
-      #| TC_09  | 210461702 | AE.GDP.RL.YOY-A            |
-      #| TC_10  | 396023917 | AE.GDP.RL-2014.AED-MN-A    |
-      #| TC_11  | 389489637 | AE.GDPDEF.FI.A             |
-      #| TC_12  | 210462102 | AE.GDPDEF.RT.YOY-A         |
-      #| TC_13  | 386599867 | AE.GDPFCE.NM.AED-MN-A      |
-      #| TC_14  | 386599987 | AE.GDPFCE.RL.AED-MN-A      |
-      #| TC_15  | 278980803 | AE.GDPGCF.NMRT.A           |
-      #| TC_16  | 117868108 | AE.GDPPC.NM.AED-TH-A       |
-      #| TC_17  | 210462202 | AE.GDPPC.NM.USD-A          |
-      #| TC_18  | 117868208 | AE.GDPPC.NM.USD-TH-A       |
-      #| TC_19  | 387137307 | AE.GNDI.NMGR.AED-MN-A      |
-      #| TC_20  | 278980603 | AE.GNDISAV.GRRT.A          |
+      | TC_01  | 118270508 | AE.AP.NMVA.AED-TH-A        |
+      | TC_02  | 118307308 | AE.APFISH.VO.A             |
+      | TC_03  | 386599657 | AE.GDP.NM.AED-MN-A         |
+      | TC_04  | 210462002 | AE.GDP.NM.USD-MN-A         |
+      | TC_05  | 384162137 | AE.GDP.NMRT.YOY-A          |
+      | TC_06  | 386600287 | AE.GDP.RL.AED-MN-A         |
+      | TC_07  | 383862977 | AE.GDP.RL.AED-MN-Q         |
+      | TC_08  | 396024767 | AE.GDP.RL.USD-MN-A         |
+      | TC_09  | 210461702 | AE.GDP.RL.YOY-A            |
+      | TC_10  | 396023917 | AE.GDP.RL-2014.AED-MN-A    |
+      | TC_11  | 389489637 | AE.GDPDEF.FI.A             |
+      | TC_12  | 210462102 | AE.GDPDEF.RT.YOY-A         |
+      | TC_13  | 386599867 | AE.GDPFCE.NM.AED-MN-A      |
+      | TC_14  | 386599987 | AE.GDPFCE.RL.AED-MN-A      |
+      | TC_15  | 278980803 | AE.GDPGCF.NMRT.A           |
+      | TC_16  | 117868108 | AE.GDPPC.NM.AED-TH-A       |
+      | TC_17  | 210462202 | AE.GDPPC.NM.USD-A          |
+      | TC_18  | 117868208 | AE.GDPPC.NM.USD-TH-A       |
+      | TC_19  | 387137307 | AE.GNDI.NMGR.AED-MN-A      |
+      | TC_20  | 278980603 | AE.GNDISAV.GRRT.A          |
       #| TC_21  | 387137317 | AE.GNDISAV.NMNE.AED-MN-A   |
       #| TC_22  | 387137287 | AE.GNI.NM.AED-MN-A         |
       #| TC_23  | 384678537 | AE.GNI.NM.USD-MN-A         |
@@ -356,7 +356,7 @@ Feature: Mnemonic Search
       #| TC_341  |           400866457 | BA.GDP.NM.BAM-MN-A             |
       #| TC_342  |           390377887 | BA.GDP.NM.BAM-TH-A             |
       #| TC_343  |           396056717 | BA.GDP.NM.BAM-TH-Q             |
-      | TC_344  | 375316227;387897697 | BA.GDP.NM.USD-MN-A             |
+      #| TC_344  | 375316227;387897697 | BA.GDP.NM.USD-MN-A             |
       #| TC_346  |           354541517 | BA.GDP.NM.USD-MN-Q             |
       #| TC_347  |           384161227 | BA.GDP.NM.YOY-A                |
       #| TC_348  |           384163607 | BA.GDP.NM.YOY-Q                |
@@ -385,7 +385,7 @@ Feature: Mnemonic Search
       #| TC_371  |           390833737 | BA.GDPNTAXP.NM.BAM-TH-Q        |
       #| TC_372  |           390834037 | BA.GDPNTAXP.RL.BAM-TH-Q        |
       #| TC_373  |           387897687 | BA.GDPPC.NM.BAM-A              |
-      | TC_374  | 387904557;387897707 | BA.GDPPC.NM.USD-A              |
+      #| TC_374  | 387904557;387897707 | BA.GDPPC.NM.USD-A              |
       #| TC_376  |           177157902 | BA.GNDI.NMGR.BAM-MN-A          |
       #| TC_377  |           281790104 | BA.GNDISAV.GRRT.A              |
       #| TC_378  |           387175507 | BA.GNDISAV.GRRT.Q              |
@@ -601,12 +601,12 @@ Feature: Mnemonic Search
       #| TC_588  |           247363401 | BN.GDPPC.NM.USD-A              |
       #| TC_589  |           374723937 | BN.GNDISAV.GRRT.A              |
       #| TC_590  |           350767901 | BN.GNDISAV.GRRT.Q              |
-      | TC_591  |           384038647 | BN.GNI.NM.USD-MN-A             |
+      #| TC_591  |           384038647 | BN.GNI.NM.USD-MN-A             |
       #| TC_592  |            61578902 | BN.IPMFGNM.VO.TH-A             |
       #| TC_593  |            61582102 | BN.NGELCSUMDOM.VO.A            |
       #| TC_594  |            61581802 | BN.NGELSUPG.VO.A               |
       #| TC_595  |           234319402 | BO.CAPU.RT.A                   |
-      | TC_596  |           234299502 | BO.ECONAI.FI.M                 |
+      #| TC_596  |           234299502 | BO.ECONAI.FI.M                 |
       #| TC_597  |           234297502 | BO.GDP.NM.BOB-TH-Q             |
       #| TC_598  |           374735707 | BO.GDP.NM.USD-MN-A             |
       #| TC_599  |           298257201 | BO.GDP.NM.USD-MN-Q             |
@@ -924,7 +924,7 @@ Feature: Mnemonic Search
       #| TC_911  |             3647201 | CN.IPHI.NMVA.RMB-MN-A          |
       #| TC_912  |             3647501 | CN.IPHIMFG.NMVA.RMB-MN-A       |
       #| TC_913  |             3647401 | CN.IPHIR.NMVA.RMB-MN-A         |
-      | TC_914  | 3640701;314953101   | CN.IPI.RLVA.YoY-M              |
+      #| TC_914  | 3640701;314953101   | CN.IPI.RLVA.YoY-M              |
       #| TC_916  |             3647101 | CN.IPLI.NMVA.RMB-MN-A          |
       #| TC_917  |             2181101 | CN.IPMFGCH.NMVA.RMB-MN-A       |
       #| TC_918  |             2182301 | CN.IPMFGEM.NMVA.RMB-MN-A       |
@@ -1333,13 +1333,13 @@ Feature: Mnemonic Search
       #| TC_1322 |            95239107 | EG.GDPPC.NM.EGP-A              |
       #| TC_1323 |           210468702 | EG.GDPPC.NM.USD-A              |
       #| TC_1324 |           279104503 | EG.GNDISAV.GRRT.A              |
-      | TC_1325 |            95238907 | EG.GNDISAV.NMGR.EGP-BN-A       |
-      | TC_1326 |           384682267 | EG.GNP.NM.USD-MN-A             |
-      | TC_1327 |           210467902 | EG.IPI.VO.YoY-M                |
-      | TC_1328 |           280487603 | EG.IPI.VOFI.M                  |
-      | TC_1329 |           101836507 | EG.IPMFGFD.VO.TH-A             |
-      | TC_1330 |           101836707 | EG.IPMFGT.VO.TH-A              |
-      | TC_1331 |           101806107 | EG.NGBSNGAS.VO.BN-A            |
+      #| TC_1325 |            95238907 | EG.GNDISAV.NMGR.EGP-BN-A       |
+      #| TC_1326 |           384682267 | EG.GNP.NM.USD-MN-A             |
+      #| TC_1327 |           210467902 | EG.IPI.VO.YoY-M                |
+      #| TC_1328 |           280487603 | EG.IPI.VOFI.M                  |
+      #| TC_1329 |           101836507 | EG.IPMFGFD.VO.TH-A             |
+      #| TC_1330 |           101836707 | EG.IPMFGT.VO.TH-A              |
+      #| TC_1331 |           101806107 | EG.NGBSNGAS.VO.BN-A            |
       #| TC_1332 |           101806007 | EG.NGBSOIL.VO.BN-A             |
       #| TC_1333 |           101805007 | EG.NGELCSUMDOM.VO.MN-M         |
       #| TC_1334 |           285665704 | EG.NGELSUPG.VO.M               |
@@ -1388,22 +1388,22 @@ Feature: Mnemonic Search
       #| TC_1377 |           359412697 | ES.GDPNTAXPI.NM.EUR-MN-Q       |
       #| TC_1378 |           359412847 | ES.GDPNTAXPI.NM.SA-EUR-MN-Q    |
       #| TC_1379 |           359412687 | ES.GDPOSMI.NM.EUR-MN-Q         |
-      | TC_1380 |           359412837 | ES.GDPOSMI.NM.SA-EUR-MN-Q      |
-      | TC_1381 |           360458797 | ES.GDPPC.NM.EUR-A              |
-      | TC_1382 |           238173903 | ES.GDPPC.NM.USD-A              |
-      | TC_1383 |           358719917 | ES.GNDI.NMGR.EUR-MN-Q          |
-      | TC_1384 |           375339977 | ES.GNDISAV.GRRT.A              |
-      | TC_1385 |           281795204 | ES.GNDISAV.GRRT.Q              |
-      | TC_1386 |           358719957 | ES.GNDISAV.NMGR.EUR-MN-Q       |
-      | TC_1387 |           358719897 | ES.GNI.NM.EUR-MN-Q             |
-      | TC_1388 |           384233297 | ES.GNI.NM.USD-MN-A             |
-      | TC_1389 |           384233287 | ES.GNI.NM.USD-MN-Q             |
-      | TC_1390 |           236821903 | ES.IPI.VO.SA-YoY-M             |
-      | TC_1391 |           401156947 | ES.IPI.VOFI.M                  |
-      | TC_1392 |           401168827 | ES.IPI.VOFI.SA-M               |
-      | TC_1393 |           401156957 | ES.IPICG.VOFI.M                |
-      | TC_1394 |           401168837 | ES.IPICG.VOFI.SA-M             |
-      | TC_1395 |           401156997 | ES.IPIINT.VOFI.M               |
+      #| TC_1380 |           359412837 | ES.GDPOSMI.NM.SA-EUR-MN-Q      |
+      #| TC_1381 |           360458797 | ES.GDPPC.NM.EUR-A              |
+      #| TC_1382 |           238173903 | ES.GDPPC.NM.USD-A              |
+      #| TC_1383 |           358719917 | ES.GNDI.NMGR.EUR-MN-Q          |
+      #| TC_1384 |           375339977 | ES.GNDISAV.GRRT.A              |
+      #| TC_1385 |           281795204 | ES.GNDISAV.GRRT.Q              |
+      #| TC_1386 |           358719957 | ES.GNDISAV.NMGR.EUR-MN-Q       |
+      #| TC_1387 |           358719897 | ES.GNI.NM.EUR-MN-Q             |
+      #| TC_1388 |           384233297 | ES.GNI.NM.USD-MN-A             |
+      #| TC_1389 |           384233287 | ES.GNI.NM.USD-MN-Q             |
+      #| TC_1390 |           236821903 | ES.IPI.VO.SA-YoY-M             |
+      #| TC_1391 |           401156947 | ES.IPI.VOFI.M                  |
+      #| TC_1392 |           401168827 | ES.IPI.VOFI.SA-M               |
+      #| TC_1393 |           401156957 | ES.IPICG.VOFI.M                |
+      #| TC_1394 |           401168837 | ES.IPICG.VOFI.SA-M             |
+      #| TC_1395 |           401156997 | ES.IPIINT.VOFI.M               |
       #| TC_1396 |           401168877 | ES.IPIINT.VOFI.SA-M            |
       #| TC_1397 |           401156987 | ES.IPIKG.VOFI.M                |
       #| TC_1398 |           401168867 | ES.IPIKG.VOFI.SA-M             |
@@ -1581,21 +1581,21 @@ Feature: Mnemonic Search
       #| TC_1570 |           377599427 | GB.GDPPC.NM.GBP-A              |
       #| TC_1571 |           357613337 | GB.GDPPC.NM.SA-GBP-A           |
       #| TC_1572 |           209932502 | GB.GDPPC.NM.USD-A              |
-      | TC_1573 |           377599287 | GB.GNDI.NMGR.GBP-MN-A          |
-      | TC_1574 |           374739007 | GB.GNDISAV.GRRT.A              |
-      | TC_1575 |           349646002 | GB.GNDISAV.GRRT.Q              |
-      | TC_1576 |           384678627 | GB.GNI.NM.USD-MN-A             |
-      | TC_1577 |           403632487 | GB.GNI.NM.USD-MN-Q             |
-      | TC_1578 |           209931802 | GB.IPI.VO.SA-YoY-M             |
-      | TC_1579 |            56364502 | GB.NGCSUMEXNGAS.VO.M           |
-      | TC_1580 |            56369402 | GB.NGELCSUM.VO.M               |
-      | TC_1581 |           286198004 | GB.NGELSUPG.VO.GWH-M           |
-      | TC_1582 |            56365502 | GB.NGELSUPG.VO.TWH-M           |
-      | TC_1583 |            56364602 | GB.NGSUPIMNGAS.VO.M            |
-      | TC_1584 |            56364402 | GB.NGSUPPNGAS.VO.M             |
-      | TC_1585 |            56362202 | GB.NGSUPPOIL.VO.TH-M           |
-      | TC_1586 |           176588602 | GE.AP.NMVA.GEL-MN-A            |
-      | TC_1587 |           237095603 | GE.GDP.NM.USD-MN-Q             |
+      #| TC_1573 |           377599287 | GB.GNDI.NMGR.GBP-MN-A          |
+      #| TC_1574 |           374739007 | GB.GNDISAV.GRRT.A              |
+      #| TC_1575 |           349646002 | GB.GNDISAV.GRRT.Q              |
+      #| TC_1576 |           384678627 | GB.GNI.NM.USD-MN-A             |
+      #| TC_1577 |           403632487 | GB.GNI.NM.USD-MN-Q             |
+      #| TC_1578 |           209931802 | GB.IPI.VO.SA-YoY-M             |
+      #| TC_1579 |            56364502 | GB.NGCSUMEXNGAS.VO.M           |
+      #| TC_1580 |            56369402 | GB.NGELCSUM.VO.M               |
+      #| TC_1581 |           286198004 | GB.NGELSUPG.VO.GWH-M           |
+      #| TC_1582 |            56365502 | GB.NGELSUPG.VO.TWH-M           |
+      #| TC_1583 |            56364602 | GB.NGSUPIMNGAS.VO.M            |
+      #| TC_1584 |            56364402 | GB.NGSUPPNGAS.VO.M             |
+      #| TC_1585 |            56362202 | GB.NGSUPPOIL.VO.TH-M           |
+      #| TC_1586 |           176588602 | GE.AP.NMVA.GEL-MN-A            |
+      #| TC_1587 |           237095603 | GE.GDP.NM.USD-MN-Q             |
       #| TC_1588 |           384163797 | GE.GDP.NM.YOY-Q                |
       #| TC_1589 |           396024827 | GE.GDP.RL.USD-MN-A             |
       #| TC_1590 |           396023067 | GE.GDP.RL.USD-MN-Q             |
@@ -1676,37 +1676,37 @@ Feature: Mnemonic Search
       #| TC_1665 |           358657537 | GR.GDPPC.NM.EUR-A              |
       #| TC_1666 |           238201203 | GR.GDPPC.NM.USD-A              |
       #| TC_1667 |           358895267 | GR.GNDI.NMGR.EUR-MN-Q          |
-      | TC_1668 |           375324067 | GR.GNDISAV.GRRT.A              |
-      | TC_1669 |           281789304 | GR.GNDISAV.GRRT.Q              |
-      | TC_1670 |           358895277 | GR.GNDISAV.NMGR.EUR-MN-Q       |
-      | TC_1671 |           358656207 | GR.GNI.NM.EUR-MN-A             |
-      | TC_1672 |           384098787 | GR.GNI.NM.USD-MN-A             |
-      | TC_1673 |           238199103 | GR.IPI.VO.WD-YoY-M             |
-      | TC_1674 |           357254497 | GR.IPI.VOFI.WD-M               |
-      | TC_1675 |           357254587 | GR.IPICGNDUR.VOFI.WD-M         |
-      | TC_1676 |           357254557 | GR.IPIINT.VOFI.WD-M            |
-      | TC_1677 |           357254567 | GR.IPIKG.VOFI.WD-M             |
-      | TC_1678 |           357254517 | GR.IPIMFG.VOFI.WD-M            |
-      | TC_1679 |           357254507 | GR.IPIMQ.VOFI.WD-M             |
-      | TC_1680 |           357254547 | GR.IPING.VOFI.WD-M             |
-      | TC_1681 |           357254527 | GR.IPISUPEH.VOFI.WD-M          |
-      | TC_1682 | 396027627;396027697 | GR.NGELSUPG.VO.M               |
-      | TC_1684 |  349227701          |  HK.GDP.NM.HKD-MN-A            |
-      | TC_1685 |  403399387          |  HK.GDP.NM.SA-HKD-MN-Q         |
-      | TC_1686 |           374727287 | HK.GDP.NM.USD-MN-A             |
-      | TC_1687 |           211244102 | HK.GDP.NM.USD-MN-Q             |
-      | TC_1688 |           384161457 | HK.GDP.NM.YOY-A                |
-      | TC_1689 |           384163827 | HK.GDP.NM.YOY-Q                |
-      | TC_1690 |           396023387 | HK.GDP.RL.HKD-MN-A             |
-      | TC_1691 |           396022467 | HK.GDP.RL.HKD-MN-Q             |
-      | TC_1692 |           211243902 | HK.GDP.RL.SA-YOY-Q             |
-      | TC_1693 |           396024237 | HK.GDP.RL.USD-MN-A             |
-      | TC_1694 |           396022827 | HK.GDP.RL.USD-MN-Q             |
-      | TC_1695 |           374727277 | HK.GDP.RL.YOY-A                |
-      | TC_1696 |           403398067 | HK.GDPDEF.FI.Q                 |
-      | TC_1697 |           211244402 | HK.GDPDEF.RLRT.YOY-Q           |
-      | TC_1698 |           374727297 | HK.GDPDEF.RT.YOY-A             |
-      | TC_1699 |           349229201 | HK.GDPDISC.NM.A                |
+      #| TC_1668 |           375324067 | GR.GNDISAV.GRRT.A              |
+      #| TC_1669 |           281789304 | GR.GNDISAV.GRRT.Q              |
+      #| TC_1670 |           358895277 | GR.GNDISAV.NMGR.EUR-MN-Q       |
+      #| TC_1671 |           358656207 | GR.GNI.NM.EUR-MN-A             |
+      #| TC_1672 |           384098787 | GR.GNI.NM.USD-MN-A             |
+      #| TC_1673 |           238199103 | GR.IPI.VO.WD-YoY-M             |
+      #| TC_1674 |           357254497 | GR.IPI.VOFI.WD-M               |
+      #| TC_1675 |           357254587 | GR.IPICGNDUR.VOFI.WD-M         |
+      #| TC_1676 |           357254557 | GR.IPIINT.VOFI.WD-M            |
+      #| TC_1677 |           357254567 | GR.IPIKG.VOFI.WD-M             |
+      #| TC_1678 |           357254517 | GR.IPIMFG.VOFI.WD-M            |
+      #| TC_1679 |           357254507 | GR.IPIMQ.VOFI.WD-M             |
+      #| TC_1680 |           357254547 | GR.IPING.VOFI.WD-M             |
+      #| TC_1681 |           357254527 | GR.IPISUPEH.VOFI.WD-M          |
+      #| TC_1682 | 396027627;396027697 | GR.NGELSUPG.VO.M               |
+      #| TC_1684 |  349227701          |  HK.GDP.NM.HKD-MN-A            |
+      #| TC_1685 |  403399387          |  HK.GDP.NM.SA-HKD-MN-Q         |
+      #| TC_1686 |           374727287 | HK.GDP.NM.USD-MN-A             |
+      #| TC_1687 |           211244102 | HK.GDP.NM.USD-MN-Q             |
+      #| TC_1688 |           384161457 | HK.GDP.NM.YOY-A                |
+      #| TC_1689 |           384163827 | HK.GDP.NM.YOY-Q                |
+      #| TC_1690 |           396023387 | HK.GDP.RL.HKD-MN-A             |
+      #| TC_1691 |           396022467 | HK.GDP.RL.HKD-MN-Q             |
+      #| TC_1692 |           211243902 | HK.GDP.RL.SA-YOY-Q             |
+      #| TC_1693 |           396024237 | HK.GDP.RL.USD-MN-A             |
+      #| TC_1694 |           396022827 | HK.GDP.RL.USD-MN-Q             |
+      #| TC_1695 |           374727277 | HK.GDP.RL.YOY-A                |
+      #| TC_1696 |           403398067 | HK.GDPDEF.FI.Q                 |
+      #| TC_1697 |           211244402 | HK.GDPDEF.RLRT.YOY-Q           |
+      #| TC_1698 |           374727297 | HK.GDPDEF.RT.YOY-A             |
+      #| TC_1699 |           349229201 | HK.GDPDISC.NM.A                |
       #| TC_1700 |           374727407 | HK.GDPGCF.NMRT.A               |
       #| TC_1701 |           351110801 | HK.GDPGCF.NMRT.Q               |
       #| TC_1702 |           349230401 | HK.GDPPC.NM.HKD-A              |
@@ -1955,7 +1955,7 @@ Feature: Mnemonic Search
       #| TC_1945 |           283654004 | IL.IPIMFG.VOFI.SA-M            |
       #| TC_1946 |           283650604 | IL.IPIMQ.VOFI.M                |
       #| TC_1947 |           283653804 | IL.IPIMQ.VOFI.SA-M             |
-      | TC_1948 | 285669804;278888503 | IL.NGELSUPG.VO.A               |
+      #| TC_1948 | 285669804;278888503 | IL.NGELSUPG.VO.A               |
       #| TC_1950 |           118586108 | IL.NNI.NM.ILS-MN-A             |
       #| TC_1951 |           360724877 | IN.GDP.NM.INR-MN-A             |
       #| TC_1952 |           365383817 | IN.GDP.NM.INR-MN-Q             |

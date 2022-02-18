@@ -20,6 +20,7 @@ public class Breakdown {
 	String[] ExpectedStr;
 	@And("^Expand Global database till \"([^\"]*)\"$")
 	public void expand_Global_database_till(String arg1) throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab",10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-node-model-id='GLOBAL']/*[1]", 20).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-node-model-id='GLOBAL']/*[3]/*[1]/*[1]", 20)
 				.click();
@@ -217,9 +218,9 @@ public class Breakdown {
 
 	@Then("^Respective series has to be drilled down$")
 	public void respective_series_has_to_be_drilled_down() throws Throwable {
-		CommonFunctionality.wait(400);
+		CommonFunctionality.wait(1000);
 	   boolean backButton = login.driver.findElement(By.xpath("//*[@class='breakdown-preview--back']")).isDisplayed();
-	   CommonFunctionality.wait(400);
+	   CommonFunctionality.wait(1000);
 	   boolean Drilldown_link = login.driver.findElement(By.xpath("//*[@class='legend-drilldown--link']")).isDisplayed();
 	   if(backButton == true && Drilldown_link == true) {
 		   login.Log4j.info("Respective series has been drilled down");
@@ -230,7 +231,7 @@ public class Breakdown {
 	}
 	@Then("^Drilled down series should reset back to original series$")
 	public void drilled_down_series_should_reset_back_to_original_series() throws Throwable {
-		CommonFunctionality.wait(400);
+		CommonFunctionality.wait(1000);
 		   boolean backButton = login.driver.findElement(By.xpath("//*[@class='breakdown-preview--back']")).isDisplayed();
 		   CommonFunctionality.wait(300);
 		   if(login.driver.findElements(By.xpath("//*[@class='legend-drilldown--link']")).size() == 0 && !backButton == true){

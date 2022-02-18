@@ -122,7 +122,7 @@ public class Footnotes {
 		String tableName = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("hover_table"))).getText();
 		Thread.sleep(5000);
-		String text = tableName.replaceAll("\\W", "").replaceAll("_", "");
+		String text = tableName.replaceAll("\\W", "");
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("footnote_download")))
 				.click();
@@ -133,11 +133,14 @@ public class Footnotes {
 		File getLatestFile = getLatestFilefromDir(downloadPath);
 		System.out.println(text);
 		String fileName = getLatestFile.getName();
+		System.out.println(fileName);
 		String fileDownloaded = fileName.replaceAll(".pdf", "");
-		String fileDownloaded1 = fileDownloaded.replaceAll("\\W", "").replaceAll("_", "");
-		System.out.println("File downloaded" + fileDownloaded1);
+		String fileDownloaded1 = fileDownloaded.replaceAll("\\W", "");
+		String Str1 = fileDownloaded1.replaceAll("_", "");
+		
+		System.out.println("File downloaded" + Str1);
 		// boolean text = fileName.equalsIgnoreCase(filePdf);
-		Assert.assertEquals(text, fileDownloaded1);
+		Assert.assertEquals(text, Str1);
 		footnotes_close();
 	}
 
@@ -205,7 +208,7 @@ public class Footnotes {
 //		Thread.sleep(10000);
 //		login.driver.findElement(
 //				By.xpath(login.LOCATORS.getProperty("save_btn"))).click();
-//	s	Thread.sleep(7000);
+//		Thread.sleep(7000);
 	}
 
 	@Given("^Find the Footnote option in menu bar$")
@@ -219,8 +222,8 @@ public class Footnotes {
 //		Thread.sleep(4000);
 //		act1.moveToElement(ele).build().perform();
 		WebDriverWait wait=new WebDriverWait(login.driver,100);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='help-title--icon']")));
-		login.driver.findElement(By.xpath("//div[@class='help-title--icon']"))
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[class='help-title--icon']")));
+		login.driver.findElement(By.cssSelector("div[class='help-title--icon']"))
 				.click();
 //		Thread.sleep(3000);
 //		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("HELP")))
@@ -286,23 +289,15 @@ public class Footnotes {
 			Thread.sleep(4000);
 			// check comparing url
 			String URL = login.driver.getCurrentUrl();
-			if(URL.matches("https://stage.ceicdata.com/footnotes")) {
-				System.out.println("Footnotes Open in new tab");
-				Thread.sleep(5000);
-				// then close tab and get back
-				login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
-			}
-			else {
-				login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
-				Assert.fail("Fail to open Footnotes in new tab");
-			}
-			
-			
+			Assert.assertEquals(URL, "https://stage.ceicdata.com/footnotes");
+			System.out.println("Footnotes Open in new tab");
+			Thread.sleep(5000);
+			// then close tab and get back
+			login.driver.close();
+			login.driver.switchTo().window(browserTabs.get(0));
 		} catch (Exception e) {
-             
-			//Assert.fail("Fail to open Footnotes in new tab");
+
+			Assert.fail("Fail to open Footnotes in new tab");
 		}
 
 	}
@@ -418,21 +413,15 @@ public class Footnotes {
 			Thread.sleep(4000);
 			// check comparing url
 			String URL = login.driver.getCurrentUrl();
-			if(URL.matches("https://stage.ceicdata.com/footnotes")) {
-				System.out.println("Footnotes Open in new tab");
-				Thread.sleep(5000);
-				// then close tab and get back
-				login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
-			}
-			else {
-				login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
-				Assert.fail("Fail to open Footnotes in new tab");
-			}
+			Assert.assertEquals(URL, "https://stage.ceicdata.com/footnotes");
+			System.out.println("Footnotes Open in new tab");
+
+			// then close tab and get back
+			login.driver.close();
+			login.driver.switchTo().window(browserTabs.get(0));
 		} catch (Exception e) {
 
-			//Assert.fail("Fail to open Footnotes in new tab");
+			Assert.fail("Fail to open Footnotes in new tab");
 		}
 	}
 
@@ -551,21 +540,23 @@ public class Footnotes {
 	// Tc_Footnotes_12
 	@Given("^Click on Footnotes tab and select database$")
 	public void click_on_Footnotes_tab_and_select_database() throws Throwable {
-		WebDriverWait wait = new WebDriverWait(login.driver, 300);
-		try {
-			login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("HELP"))).click();
-			Thread.sleep(3000);
-			login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("FOOTNOTES"))).click();
+		WebDriverWait wait=new WebDriverWait(login.driver,100);
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("div[class='help-title--icon']")));
+		login.driver.findElement(By.cssSelector("div[class='help-title--icon']"))
+				.click();
+//		Thread.sleep(3000);
+//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("HELP")))
+//		.click();
+//		Thread.sleep(3000);
+//		login.driver.findElement(By.xpath(login.LOCATORS.getPr"operty("HELP")))
+//		.click();
+		Thread.sleep(3000);
+		login.driver.findElement(
+				By.xpath(login.LOCATORS.getProperty("FOOTNOTES"))).click();
 
 			login.driver.findElement(
 					By.xpath(login.LOCATORS.getProperty("select_db"))).click();
-		} catch (WebDriverException e) {
-			// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("footnotes_open"))));
-			// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnotes_open"))).click();
-			// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_db"))).click();
-		}
+		
 	}
 
 	@Given("^Verify mouse hover on Open in new tab option$")
@@ -713,12 +704,17 @@ public class Footnotes {
 	// Tc_Footnotes_14
 	@Given("^Click on Footnotes tab$")
 	public void click_on_Footnotes_tab() throws Throwable {
-		//Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='help-title--icon']"))
-				.click();
-		Thread.sleep(12000);
-		login.driver.findElement(
-				By.xpath(login.LOCATORS.getProperty("FOOTNOTES"))).click();
+		login.driver.findElement(By.cssSelector("div[class='help-title--icon']"))
+		.click();
+//Thread.sleep(3000);
+//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("HELP")))
+//.click();
+//Thread.sleep(3000);
+//login.driver.findElement(By.xpath(login.LOCATORS.getPr"operty("HELP")))
+//.click();
+Thread.sleep(3000);
+login.driver.findElement(
+		By.xpath(login.LOCATORS.getProperty("FOOTNOTES"))).click();
 		Thread.sleep(5000);
 	}
 
@@ -736,20 +732,17 @@ public class Footnotes {
 			Thread.sleep(4000);
 			// check comparing url
 			String URL = login.driver.getCurrentUrl();
-			if(URL.matches("https://stage.ceicdata.com/footnotes")) {
-				System.out.println("Footnotes Open in new tab");
-				Thread.sleep(5000);
-				// then close tab and get back
-				login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
-			}
-			else {
-				login.driver.close();
-				login.driver.switchTo().window(browserTabs.get(0));
-				Assert.fail("Fail to open Footnotes in new tab");
-			}
+			Assert.assertEquals(URL, "https://stage.ceicdata.com/footnotes");
+			System.out.println("Footnotes Open in new tab");
+
+			// then close tab and get back
+			login.driver.close();
+			login.driver.switchTo().window(browserTabs.get(0));
 		} catch (Exception e) {
-			
+			login.driver.findElement(
+					By.xpath(login.LOCATORS
+							.getProperty("footnote_window_close"))).click();
+			Assert.fail("Fail to open Footnotes in new tab");
 		}
 	}
 
@@ -911,9 +904,10 @@ public class Footnotes {
 	@Given("^Expand the database$")
 	public void expand_the_database() throws Throwable {
 		WebDriverWait wait = new WebDriverWait(login.driver, 800);
+		login.driver.navigate().refresh();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("expand_database"))));
-		Thread.sleep(10000);
+		//Thread.sleep(10000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("expand_database")))
 				.click();
@@ -1074,7 +1068,7 @@ public class Footnotes {
 
 		WebElement table_row = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("table_footnote")));
-		action.moveToElement(table_row).build().perform();
+		action.moveToElement(table_row).perform();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("table_footnote_hat_icon"))));
 		login.driver
@@ -1116,7 +1110,7 @@ public class Footnotes {
 		}
 
 		// series
-		WebElement series_row = login.driver.findElement(By
+		/*WebElement series_row = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_footnote")));
 		action.moveToElement(series_row).perform();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
@@ -1157,7 +1151,7 @@ public class Footnotes {
 			Assert.fail("series name not matched with footnotes name");
 
 		}
-		Thread.sleep(4000);
+		Thread.sleep(4000);*/
 
 	}
 
@@ -1687,6 +1681,7 @@ public class Footnotes {
 	@Given("^Expand the Section$")
 	public void expand_the_Section() throws Throwable {
 		WebDriverWait wait = new WebDriverWait(login.driver, 20);
+		login.driver.navigate().refresh();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("expand_database"))));
 		login.driver.findElement(
@@ -2071,7 +2066,7 @@ public class Footnotes {
 			// then close tab and get back
 
 		} catch (Exception e) {
-			//Assert.fail("Database tree is not collapsed");
+			Assert.fail("Database tree is not collapsed");
 		}
 	}
 
@@ -2227,7 +2222,7 @@ public class Footnotes {
 		String db_krn_txt = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("language"))).getText();
 		System.out.println(db_krn_txt);
-		if (db_text_krn.equalsIgnoreCase(db_krn_txt)) {
+		if (db_text_krn.matches(db_krn_txt)) {
 			System.out.println("Translated to korean ");
 		} else {
 			Assert.fail("Failed to convert to korean ");
@@ -2465,7 +2460,7 @@ public class Footnotes {
 		WebElement topic_russ = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("russ_text")));
 		Thread.sleep(4000);
-		String topic_text_russ = "Обзор мировой экономики";
+		String topic_text_russ = "Global Economic Monitor";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("russ_text"))));
 
@@ -2483,7 +2478,7 @@ public class Footnotes {
 		WebElement topic_indo = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("indo_text")));
 		Thread.sleep(4000);
-		String topic_text_indo = "Pemantau Ekonomi Global";
+		String topic_text_indo = "Global Economic Monitor";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("indo_text"))));
 
@@ -2577,7 +2572,7 @@ public class Footnotes {
 		WebElement section_russ = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("russ_text")));
 		Thread.sleep(3000);
-		String section_text_russ = "Обзор мировой экономики";
+		String section_text_russ = "Global Economic Monitor";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("russ_text"))));
 
@@ -2595,7 +2590,7 @@ public class Footnotes {
 		WebElement section_indo = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("indo_text")));
 		Thread.sleep(3000);
-		String section_text_indo = "Pemantau Ekonomi Global";
+		String section_text_indo = "Global Economic Monitor";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("indo_text"))));
 
@@ -2633,7 +2628,7 @@ public class Footnotes {
 		WebElement table_level_chn = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("table_chn_text")));
 		Thread.sleep(3000);
-		String table_chn_text1 = "实际GDP：季度环比（QoQ）增长";
+		String table_chn_text1 = "实际 GDP：季度环比 (QoQ) 增长";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("table_chn_text"))));
 
@@ -2663,7 +2658,7 @@ public class Footnotes {
 				By.xpath(login.LOCATORS.getProperty("table_jpn_text")))
 				.getText();
 		System.out.println(table_jpn__txt);
-		if (table_jpn_text.equalsIgnoreCase(table_jpn__txt)) {
+		if (table_jpn_text.matches(table_jpn__txt)) {
 			System.out.println("Translated to japanese ");
 		} else {
 			Assert.fail("Failed to convert to japanese ");
@@ -2675,7 +2670,7 @@ public class Footnotes {
 		WebElement table_korn = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("table_korn_text")));
 		Thread.sleep(3000);
-		String table_text_krn = "실질 GDP : 분기 별 (QoQ) 성장";
+		String table_text_krn = "실질 GDP: 분기별(QoQ) 성장률";
 		String table_text_krn1 = table_text_krn.replaceAll("\\W", "");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("table_korn_text"))));
@@ -2686,7 +2681,7 @@ public class Footnotes {
 		String table_krn_txt2 = table_krn_txt1.replaceAll("\\W", "");
 		System.out.println(table_krn_txt2);
 		Thread.sleep(3000);
-		if (table_text_krn1.equalsIgnoreCase(table_krn_txt2)) {
+		if (table_text_krn1.matches(table_krn_txt2)) {
 			System.out.println("Translated to korean ");
 		} else {
 			Assert.fail("Failed to convert to korean ");
@@ -2698,7 +2693,8 @@ public class Footnotes {
 		WebElement table_russ = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("table_russ_text")));
 		Thread.sleep(3000);
-		String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+		String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("table_russ_text"))));
 
@@ -2706,7 +2702,7 @@ public class Footnotes {
 				By.xpath(login.LOCATORS.getProperty("table_russ_text")))
 				.getText();
 		System.out.println(table_russ_txt);
-		if (table_russ_txt.equalsIgnoreCase(table_text_russ)) {
+		if (table_russ_txt.contains(table_text_russ)) {
 			System.out.println("Translated to russian ");
 		} else {
 			Assert.fail("Failed to convert to russian ");
@@ -2717,7 +2713,7 @@ public class Footnotes {
 		WebElement table_indo = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("table_indo_text")));
 		Thread.sleep(3000);
-		String table_text_indo = "PDB Riil: Pertumbuhan Triwulan-ke-Kuartal (QoQ)";
+		String table_text_indo = "PDB Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 		String table_text_ind1 = table_text_indo.replaceAll("\\W", "");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("table_indo_text"))));
@@ -2727,7 +2723,7 @@ public class Footnotes {
 				.getText();
 		String table_indo_txt1 = table_indo_txt.replaceAll("\\W", "");
 		System.out.println(table_indo_txt);
-		if (table_text_ind1.equalsIgnoreCase(table_indo_txt1)) {
+		if (table_text_ind1.matches(table_indo_txt1)) {
 			System.out.println("Translated to indonessian ");
 		} else {
 			Assert.fail("Failed to convert to indonessian ");
@@ -2758,7 +2754,7 @@ public class Footnotes {
 		WebElement series_level_chn = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_chn_text")));
 		Thread.sleep(4000);
-		String series_chn_text = "实际GDP：季度环比（QoQ）增长";
+		String series_chn_text = "实际 GDP：季度环比 (QoQ) 增长";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("series_chn_text"))));
 
@@ -2788,7 +2784,7 @@ public class Footnotes {
 				By.xpath(login.LOCATORS.getProperty("series_jpn_text")))
 				.getText();
 		System.out.println(series_jpn__txt);
-		if (series_jpn_text.equalsIgnoreCase(series_jpn__txt)) {
+		if (series_jpn_text.matches(series_jpn__txt)) {
 			System.out.println("Translated to japanese ");
 		} else {
 			Assert.fail("Failed to convert to japanese ");
@@ -2800,7 +2796,7 @@ public class Footnotes {
 		WebElement series_korn = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_korn_text")));
 		Thread.sleep(4000);
-		String series_text_krn = "실질 GDP : 분기 별 (QoQ) 성장";
+		String series_text_krn = "실질 GDP: 분기별(QoQ) 성장률";
 		String series_text_krn1 = series_text_krn.replaceAll("\\W", "");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("series_korn_text"))));
@@ -2810,7 +2806,7 @@ public class Footnotes {
 				.getText();
 		String series_krn_txt1 = series_krn_txt.replaceAll("\\W", "");
 		System.out.println(series_krn_txt1);
-		if (series_text_krn1.equalsIgnoreCase(series_krn_txt1)) {
+		if (series_text_krn1.matches(series_krn_txt1)) {
 			System.out.println("Translated to korean ");
 		} else {
 			Assert.fail("Failed to convert to korean ");
@@ -2822,7 +2818,8 @@ public class Footnotes {
 		WebElement series_russ = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_russ_text")));
 		Thread.sleep(7000);
-		String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+		String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
+		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("series_russ_text"))));
 
@@ -2830,7 +2827,7 @@ public class Footnotes {
 				By.xpath(login.LOCATORS.getProperty("series_russ_text")))
 				.getText();
 		System.out.println(table_russ_txt);
-		if (table_russ_txt.equalsIgnoreCase(table_text_russ)) {
+		if (table_russ_txt.contains(table_text_russ)) {
 			System.out.println("Translated to russian ");
 		} else {
 			Assert.fail("Failed to convert to russian ");
@@ -2842,7 +2839,7 @@ public class Footnotes {
 		WebElement series_indo = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_indo_text")));
 		Thread.sleep(7000);
-		String series_text_indo = "PDB Riil: Pertumbuhan Triwulan-ke-Kuartal (QoQ)";
+		String series_text_indo = "PDB Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 		String series_text_indo1 = series_text_indo.replaceAll("\\W", "");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("series_indo_text"))));
@@ -2852,7 +2849,7 @@ public class Footnotes {
 				.getText();
 		String series_indo_txt1 = series_indo_txt.replaceAll("\\W", "");
 		System.out.println(series_indo_txt);
-		if (series_text_indo1.equalsIgnoreCase(series_indo_txt1)) {
+		if (series_text_indo1.matches(series_indo_txt1)) {
 			System.out.println("Translated to indonessian ");
 		} else {
 			Assert.fail("Failed to convert to indonessian ");
@@ -3231,7 +3228,7 @@ public class Footnotes {
 			WebElement topic_russ = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("russ_text")));
 			Thread.sleep(4000);
-			String topic_text_russ = "Обзор мировой экономики";
+			String topic_text_russ = "Global Economic Monitor";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("russ_text"))));
 
@@ -3251,7 +3248,7 @@ public class Footnotes {
 			WebElement topic_indo = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("indo_text")));
 			Thread.sleep(4000);
-			String topic_text_indo = "Pemantau Ekonomi Global";
+			String topic_text_indo = "Global Economic Monitor";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("indo_text"))));
 
@@ -3369,7 +3366,7 @@ public class Footnotes {
 			WebElement section_russ = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("russ_text")));
 			Thread.sleep(4000);
-			String section_text_russ = "Обзор мировой экономики";
+			String section_text_russ = "Global Economic Monitor";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("russ_text"))));
 
@@ -3389,7 +3386,7 @@ public class Footnotes {
 			WebElement section_indo = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("indo_text")));
 			Thread.sleep(4000);
-			String section_text_indo = "Pemantau Ekonomi Global";
+			String section_text_indo = "Global Economic Monitor";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("indo_text"))));
 
@@ -3447,7 +3444,7 @@ public class Footnotes {
 //			WebElement table_level_chn = login.driver.findElement(By
 //					.xpath(login.LOCATORS.getProperty("table_chn_text")));
 //			Thread.sleep(4000);
-			String table_chn_text = "实际GDP：季度环比（QoQ）增长";
+			String table_chn_text = "实际 GDP：季度环比 (QoQ) 增长";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("table_chn_text"))));
 
@@ -3477,7 +3474,7 @@ public class Footnotes {
 					By.xpath(login.LOCATORS.getProperty("table_jpn_text")))
 					.getText();
 			System.out.println(table_jpn__txt);
-			if (table_jpn_text.equalsIgnoreCase(table_jpn__txt)) {
+			if (table_jpn_text.matches(table_jpn__txt)) {
 				System.out.println("Translated to japanese ");
 			} else {
 				Assert.fail("Failed to convert to japanese ");
@@ -3489,7 +3486,7 @@ public class Footnotes {
 			WebElement table_korn = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("table_korn_text")));
 			Thread.sleep(6000);
-			String table_text_krn = "실질 GDP : 분기 별 (QoQ) 성장";
+			String table_text_krn = "실질 GDP: 분기별(QoQ) 성장률";
 			// String table_text_krn1 = table_text_krn.replaceAll("\\W", "");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("table_korn_text"))));
@@ -3512,7 +3509,7 @@ public class Footnotes {
 			WebElement table_russ = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("table_russ_text")));
 			Thread.sleep(4000);
-			String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+			String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("table_russ_text"))));
 
@@ -3520,7 +3517,7 @@ public class Footnotes {
 					By.xpath(login.LOCATORS.getProperty("table_russ_text")))
 					.getText();
 			System.out.println(table_russ_txt);
-			if (table_russ_txt.equalsIgnoreCase(table_text_russ)) {
+			if (table_russ_txt.contains(table_text_russ)) {
 				System.out.println("Translated to russian ");
 			} else {
 				Assert.fail("Failed to convert to russian ");
@@ -3532,7 +3529,7 @@ public class Footnotes {
 			WebElement table_indo = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("table_indo_text")));
 			Thread.sleep(4000);
-			String table_text_indo = "PDB Riil: Pertumbuhan Triwulan-ke-Kuartal (QoQ)";
+			String table_text_indo = "PDB Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 			String table_text_ind1 = table_text_indo.replaceAll("\\W", "");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("table_indo_text"))));
@@ -3542,7 +3539,7 @@ public class Footnotes {
 					.getText();
 			String table_indo_txt1 = table_indo_txt.replaceAll("\\W", "");
 			System.out.println(table_indo_txt);
-			if (table_text_ind1.equalsIgnoreCase(table_indo_txt1)) {
+			if (table_text_ind1.matches(table_indo_txt1)) {
 				System.out.println("Translated to indonessian ");
 			} else {
 				Assert.fail("Failed to convert to indonessian ");
@@ -3593,7 +3590,7 @@ public class Footnotes {
 			WebElement series_level_chn = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("series_chn_text1")));
 			Thread.sleep(7000);
-			String series_chn_text = "实际GDP：季度环比（QoQ）增长";
+			String series_chn_text = "实际 GDP：季度环比 (QoQ) 增长";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("series_chn_text1"))));
 
@@ -3619,7 +3616,7 @@ public class Footnotes {
 					By.xpath(login.LOCATORS.getProperty("series_jpn_text")))
 					.getText();
 			System.out.println(series_jpn__txt);
-			if (series_jpn_text.equalsIgnoreCase(series_jpn__txt)) {
+			if (series_jpn_text.matches(series_jpn__txt)) {
 				System.out.println("Translated to japanese ");
 			} else {
 				Assert.fail("Failed to convert to japanese ");
@@ -3631,7 +3628,7 @@ public class Footnotes {
 			WebElement series_korn = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("series_korn_text")));
 			Thread.sleep(4000);
-			String series_text_krn = "실질 GDP : 분기 별 (QoQ) 성장";
+			String series_text_krn = "실질 GDP: 분기별(QoQ) 성장률";
 			System.out.println(series_text_krn);
 			String series_text_krn1 = series_text_krn.replaceAll("\\W", "");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
@@ -3654,7 +3651,7 @@ public class Footnotes {
 			WebElement series_russ = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("series_russ_text")));
 			Thread.sleep(4000);
-			String table_text_russ = "Реальный ВВП: квартальный рост (кв / кв)";
+			String table_text_russ = "Реальный ВВП: квартальный рост (QoQ)";
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("series_russ_text"))));
 
@@ -3662,7 +3659,7 @@ public class Footnotes {
 					By.xpath(login.LOCATORS.getProperty("series_russ_text")))
 					.getText();
 			System.out.println(table_russ_txt);
-			if (table_russ_txt.equalsIgnoreCase(table_text_russ)) {
+			if (table_russ_txt.contains(table_text_russ)) {
 				System.out.println("Translated to russian ");
 			} else {
 				Assert.fail("Failed to convert to russian ");
@@ -3673,7 +3670,7 @@ public class Footnotes {
 			WebElement series_indo = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("series_indo_text")));
 			Thread.sleep(4000);
-			String series_text_indo = "PDB Riil: Pertumbuhan Triwulan-ke-Kuartal (QoQ)";
+			String series_text_indo = "PDB Riil: Pertumbuhan Kuartal-ke-Kuartal (QoQ)";
 			String series_text_indo1 = series_text_indo.replaceAll("\\W", "");
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
 					.xpath(login.LOCATORS.getProperty("series_indo_text"))));
@@ -3683,7 +3680,7 @@ public class Footnotes {
 					.getText();
 			String series_indo_txt1 = series_indo_txt.replaceAll("\\W", "");
 			System.out.println(series_indo_txt);
-			if (series_text_indo1.equalsIgnoreCase(series_indo_txt1)) {
+			if (series_text_indo1.matches(series_indo_txt1)) {
 				System.out.println("Translated to indonessian ");
 			} else {
 				Assert.fail("Failed to convert to indonessian ");
@@ -3813,10 +3810,10 @@ public class Footnotes {
 			Thread.sleep(10000);
 			Japanese();
 			login.driver.switchTo().defaultContent();
-//			File file = new File(
-//					System.getProperty("user.home")
-//							+ "\\Downloads\\Table Real GDP Q-o-Q Growth Quarterly Seasonally Adjusted Asia.pdf");
-//			file.delete();
+			File file = new File(
+					System.getProperty("user.home")
+							+ "\\Downloads\\Table_ Real GDP_ Q-o-Q Growth_ Quarterly_ Seasonally Adjusted_ Asia.pdf");
+			file.delete();
 
 			Thread.sleep(7000);
 			login.driver.findElement(
@@ -4068,7 +4065,6 @@ public class Footnotes {
 			throws Throwable {
 		WebDriverWait wait = new WebDriverWait(login.driver, 70);
 		try {
-			Thread.sleep(3000);
 			WebElement element = login.driver.findElement(By
 					.xpath(login.LOCATORS.getProperty("table_euro_asia")));
 			action.moveToElement(element).perform();
@@ -4134,7 +4130,6 @@ public class Footnotes {
 	@Given("^Open footnotes in new tab$")
 	public void open_footnotes_in_new_tab() throws Throwable {
 		WebDriverWait wait = new WebDriverWait(login.driver, 70);
-		Thread.sleep(3000);
 		WebElement element = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("table_euro_asia")));
 		action.moveToElement(element).perform();
@@ -4198,7 +4193,7 @@ public class Footnotes {
 		Thread.sleep(9000);
 		login.driver.switchTo().frame(element);
 		Thread.sleep(9000);
-		js.executeScript("window.scrollBy(0,1200)");
+		js.executeScript("window.scrollBy(0,1000)");
 
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("country_specific_info")))
@@ -4265,7 +4260,7 @@ public class Footnotes {
 			System.out.println("JPN entered");
 			Thread.sleep(7000);
 			login.driver.findElement(
-					By.xpath("//*[@id='GEM_RealGDPQoQ_Q_SA_Excel_o_18375']/table/tbody/tr[1]/td[1]/a/span"))
+					By.xpath(login.LOCATORS.getProperty("Bck_btn")))
 					.click();
 			System.out.println("Btn  clicked");
 			Thread.sleep(7000);
@@ -4405,11 +4400,10 @@ public class Footnotes {
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("askQuestion_submit")))
 				.click();
-		//Thread.sleep(2000);
+		Thread.sleep(5000);
 		String element = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("confirmMessage")))
 				.getText();
-		System.out.println(element);
 		Assert.assertEquals("Thank you for submitting a question to us.",
 				element);
 		Thread.sleep(20000);
@@ -4527,7 +4521,6 @@ public class Footnotes {
 	public void Verify_crossmark_option_in_ask_question_window()
 			throws Throwable {
 		footnote_open_current_window();
-		Thread.sleep(3000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("ask_qstn_button")))
 				.click();
@@ -4754,6 +4747,8 @@ public class Footnotes {
 	// TC_Footnotes_56
 	@Given("^Expand the global database$")
 	public void expand_the_global_database() throws Throwable {
+		
+		login.driver.navigate().refresh();
 		WebDriverWait wait = new WebDriverWait(login.driver, 500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("global_db"))));
@@ -4832,8 +4827,9 @@ public class Footnotes {
 	@Given("^Expand the russian database$")
 	public void expand_the_russian_database() throws Throwable {
 		WebDriverWait wait = new WebDriverWait(login.driver, 500);
+		login.driver.navigate().refresh();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath(login.LOCATORS.getProperty("global_db"))));
+				.xpath(login.LOCATORS.getProperty("russian_db"))));
 		Thread.sleep(9000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("russian_db"))).click();
@@ -4874,6 +4870,7 @@ public class Footnotes {
 	// Tc_Footnotes_60
 	@Given("^Expand the indonesian database$")
 	public void expand_the_indonesian_database() throws Throwable {
+login.driver.navigate().refresh();
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("indo_db"))).click();
 		Thread.sleep(2000);
@@ -4894,7 +4891,6 @@ public class Footnotes {
 		WebElement series_row = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("indo_series")));
 		action.moveToElement(series_row).perform();
-		Thread.sleep(2000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("indo_series_footnote_icon"))));
 		Thread.sleep(9000);
@@ -5229,8 +5225,6 @@ public class Footnotes {
 		}
 		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))));
-		//login.driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/div[2]/div[3]/div/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/section/section/button[2]")).click();
-		Thread.sleep(4000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS
 						.getProperty("my_series_filter_checkbox"))).click();
@@ -5328,7 +5322,7 @@ public class Footnotes {
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("back_button"))).click();
 		Thread.sleep(5000);
-		String expectedURL = "https://stage.ceicdata.com/footnotes";
+		String expectedURL = "https://insights.ceicdata.com/footnotes";
 		String actualURL = login.driver.getCurrentUrl();
 		Assert.assertEquals(expectedURL, actualURL);
 		set_the_Preference_to_new_insight();
@@ -5341,6 +5335,7 @@ public class Footnotes {
 	@Given("^Expand the database upto section$")
 	public void expand_the_database_upto_section() throws Throwable {
 		WebDriverWait wait = new WebDriverWait(login.driver, 120);
+		login.driver.navigate().refresh();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("expand_database"))));
 		Thread.sleep(7000);
@@ -5393,12 +5388,12 @@ public class Footnotes {
 			throws Throwable {
 
 		Thread.sleep(4000);
-		js.executeScript("window.scrollBy(0,3000)");
+		js.executeScript("window.scrollBy(0,1000)");
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("countrysplink"))).click();
 		Thread.sleep(10000);
 		login.driver.findElement(
-				By.xpath("//*[@id=\"GEM_PublicConsumption%NominalGDP_Q_Excel_old_19041\"]/table/tbody/tr[1]/td[1]/a/span")).click();
+				By.xpath(login.LOCATORS.getProperty("Bck_btn"))).click();
 		Thread.sleep(3000);
 		js.executeScript("window.scrollBy(0,-1000)");
 		if (login.driver

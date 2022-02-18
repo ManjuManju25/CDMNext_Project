@@ -108,6 +108,7 @@ public class login {
 		Invoke_browser();	
 		SearchTest.user_has_successful_logged_in();	
 		//Hooks.Handle_BrowserNotification_popup();
+		
 		Hooks.before_run();
 		//Hooks.getFeatureFileNameFromScenarioId(scenario);
 		/*if (testRunner.cucumberFeature.getCucumberFeature().equals("FilterSearch")) {
@@ -146,17 +147,21 @@ public class login {
 	public void enters_username(String username) throws Throwable {
 		Thread.sleep(3000);
 		driver.findElement(By.name("user-id")).clear();
+//		driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).clear();
 		Log4j.info("Trying to login with Username:" + username);
 		driver.findElement(By.name("user_id")).sendKeys(username);
-
+		//driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).sendKeys(username);
 	}
 
 	@And("^Enters password \"([^\"]*)\"$")
 	public void enters_password(String password) throws Throwable {
-		Thread.sleep(1000);
-		driver.findElement(By.name("password")).clear();
+		Thread.sleep(3000);
+		//driver.findElement(By.name("password")).clear();
+		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).clear();
 		Log4j.info("Trying to login with Password:" + password);
-		driver.findElement(By.name("password")).sendKeys(password);
+		//driver.findElement(By.name("password")).sendKeys(password);
+		Thread.sleep(1000);
+		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).sendKeys(password);
 
 	}
 

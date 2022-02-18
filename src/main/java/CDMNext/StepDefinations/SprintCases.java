@@ -39,6 +39,7 @@ public class SprintCases {
 	@And("^Create India map with indian cities supporting subnational attribute$")
 	public void create_India_map_with_indian_cities_supporting_subnational_attribute() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 20).click();
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 20).click();
 		// Expand 1st db till series level
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='database-node tree-node'])[1]/*[1]", 200)
@@ -70,7 +71,7 @@ public class SprintCases {
 		String subnational_attribute = null;
 		try {
 			subnational_attribute = login.driver
-					.findElement(By.xpath("//*[contains(@class,'highcharts-data-label ')]/*/*[2]")).getText();
+					.findElement(By.xpath("//*[contains(@class,'highcharts-map-series highcharts-color-0 highcharts-tracker')]/*[1]//*[@class='highcharts-text-outline']")).getText();
 			login.Log4j.info("Subnational attribute is " + subnational_attribute);
 			if (subnational_attribute.equals(SearchTest.currentKeyword)) {
 				CommonFunctionality.Views_list();
@@ -111,6 +112,7 @@ public class SprintCases {
 	@And("^Open ssp window$")
 	public void open_ssp_window() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
+		Thread.sleep(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 20).click();
 		Thread.sleep(2000);
@@ -143,7 +145,7 @@ public class SprintCases {
 	@And("^Select \"([^\"]*)\" filter$")
 	public void select_filter(String arg1) throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 20).click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(10000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + arg1 + "')]")))
 				.click();
 	}
@@ -214,18 +216,16 @@ public class SprintCases {
 	@And("^Create visual$")
 	public void create_visual() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		Thread.sleep(2000);
-		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//ul/*//*[@class='series-item--name']"));
+		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
 		for (int i = 0; i < ListOfSeries.size(); i++) {
 			int j = i + 1;
 			Thread.sleep(1000);
 			WebElement seriesName = ListOfSeries.get(i);
 			CommonFunctionality.action.pause(1000).moveToElement(seriesName).build().perform();
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("//ul/*[" + j + "]//*[@class='view-chart-icon menu-icon']")))
-					.click();
+			CommonFunctionality.getElementByXpath(login.driver,"//*[@class='search-series-list']/*[" + j + "]//*[@class='view-chart-icon menu-icon']",6).click();
 		}
 	}
 
@@ -350,8 +350,9 @@ public class SprintCases {
 	@And("^Create a map visual$")
 	public void create_a_map_visual() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-list-item--checkbox-wrapper']",4)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='insight-page-menu-views-container--add']",4).click();
@@ -503,7 +504,7 @@ public class SprintCases {
 		CommonFunctionality.wait(1000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='Create new View tab']"))).click();
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(5000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//*[@class='series-list-item--checkbox svg-checkbox']")).click();
@@ -544,10 +545,12 @@ public class SprintCases {
 	public void uncheck_the_option(String arg1) throws Throwable {
 		if(arg1.equalsIgnoreCase("Group")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='indented-tree-control indented-tree-control__visible indented-tree-control__selected']//*[contains(text(),'" + arg1 + "')]", 10).click();
-		} else {
+		} else if(arg1.equalsIgnoreCase("Show")){
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'Attributes.')]/*[1]/*[1]/*", 10).click();
+		}
+		else {
 			UncheckORCheckLegendOption(arg1);
 		}
-		
 
 	}
 

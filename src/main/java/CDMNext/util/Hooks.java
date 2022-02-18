@@ -47,18 +47,13 @@ public class Hooks {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	public static void unhandled_popup() throws Throwable {
+		//if Some changes have not been saved. popup appears then close the popup
 		try {
-			if (login.driver.findElements(By.xpath("//*[@class='popover--close']")).size() > 0) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 15).click();
-			}
-		} catch (NoSuchElementException e) {
-			try {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Ok']", 15).click();
-			} catch (Exception e1) {
-
-			}
+			CommonFunctionality.getElementByXpath(login.driver,"//*[@class='modal-window modal-window__active']//*[contains(text(),'Ok')]",8).click();
+		}catch(Exception e) {
+			
 		}
 		List<WebElement> popup = login.driver
 				.findElements(By.xpath("//div[@class='sphere-modal__close'] | //div[@class='movable-modal--close']"));
@@ -70,20 +65,22 @@ public class Hooks {
 			if(login.driver.findElements(By.xpath("//div[@class='sphere-modal__close'] | //div[@class='movable-modal--close']")).size() > 0) {
 				CommonFunctionality.wait(300);
 				CommonFunctionality.getElementByXpath(login.driver,"//div[@class='sphere-modal__close'] | //div[@class='movable-modal--close']", 4).click();
+				
 			}
 
 			if (login.driver
 					.findElements(
-							By.cssSelector(".sphere-modal__content  .sphere-modal-control.button.button__primary"))
+							By.cssSelector(".button.button__primary"))	
+					
 					.size() > 0) {
 				CommonFunctionality.getElementBycssSelector(login.driver,
-						".sphere-modal__content  .sphere-modal-control.button.button__primary", 4).click();
+						".button.button__primary", 4).click();
 			}
 		}
 
 		CommonFunctionality.Views_list();
 		CommonFunctionality.ResetMethod();
-		WebElement data_tab = CommonFunctionality.getElementByXpath(login.driver,
+		/*WebElement data_tab = CommonFunctionality.getElementByXpath(login.driver,
 				"(//*[@class='search-presentation-tabs--visible']//*[contains(@class,'ui-sortable-handle')])[1]", 4);
 		if (!data_tab.getAttribute("class").contains("series-tab__hidden")) {
 			new Actions(login.driver)
@@ -93,7 +90,7 @@ public class Hooks {
 		}
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 				"(//*[contains(@class,'toggler-control__light_purple')]//*[contains(@class,'toggler-control-item')])[1]",
-				4)).pause(100).click().build().perform();
+				4)).pause(100).click().build().perform();*/
 	}
 
 	public static void Handle_BrowserNotification_popup() throws Throwable {

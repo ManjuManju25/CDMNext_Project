@@ -23,7 +23,7 @@ Feature: Title of your featureVerify Breakdown functionality
     And Click on "Select All" option for the first group
     And Click on "Add"
     Then All selected series should add to right pane-my series
-
+    
   @Breakdown
   Scenario: TC_Breakdown_04:Verify if de-select all works with grouped option is  for Global database> South African table
     And Expand Global database till "South Africa"

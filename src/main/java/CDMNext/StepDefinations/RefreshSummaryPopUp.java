@@ -57,7 +57,7 @@ public class RefreshSummaryPopUp {
 	public void logout_by_saving_insight() throws Throwable {
 		Thread.sleep(2000);
 		login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+		login.driver.findElement(By.xpath("//div[@class='account-avatar account-avatar__small']")).click();
 Thread.sleep(1000);
 		WebElement SighOut = login.driver.findElement(By.xpath("//span[contains(text(),'Sign out')]"));
 		js.executeScript("arguments[0].scrollIntoView(true)", SighOut);
@@ -79,7 +79,6 @@ Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//button[@class='btn']")).click();
 
 	}
-
 	// TC_01
 	@Then("^click on Myinsights$")
 	public void click_on_Myinsights() throws Throwable {
@@ -169,7 +168,9 @@ Thread.sleep(1000);
 	    
 	    for(int i=1;i<=4;i++)
 	    {
-	    	login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li["+i+"]/div[1]/a[1]/div[2]/span[1]")).click();
+	    
+	    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
+	    	System.out.println("Enter into if condition: "+i);
 	    }
 	    Thread.sleep(1000);
 	    login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
@@ -187,7 +188,7 @@ Thread.sleep(1000);
 	    		    
 	    		    for(int i=1;i<=4;i++)
 	    		    {
-	    		    	login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li["+i+"]/div[1]/a[1]/div[2]/span[1]")).click();
+	    		    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 	    		    }
 	    		    Thread.sleep(1000);
 	    		    login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
@@ -256,7 +257,7 @@ Thread.sleep(1000);
 		    
 		    for(int i=1;i<=4;i++)
 		    {
-		    	login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li["+i+"]/div[1]/a[1]/div[2]/span[1]")).click();
+		    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 		    }
 		
 		    Thread.sleep(1000);
@@ -275,7 +276,7 @@ Thread.sleep(1000);
 			    
 			    for(int i=1;i<=4;i++)
 			    {
-			    	login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li["+i+"]/div[1]/a[1]/div[2]/span[1]")).click();
+			    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 			    }
 			
 			    Thread.sleep(1000);
@@ -311,7 +312,7 @@ Thread.sleep(1000);
 	//TC_06
 	@Then("^Manage All checkbox checked$")
 	public void manage_All_checkbox_checked() throws Throwable {
-	   Thread.sleep(2000);
+	   Thread.sleep(3000);
 	   
 	   login.driver.findElement(By.xpath("//div[@class='suggestions-panel--checker-all']")).click();
 	   
@@ -335,7 +336,7 @@ Thread.sleep(1000);
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='suggestions-apply-button'])[2]")).click();
 		Thread.sleep(500);
-		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
+		//login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();	
 		
 	 
 	}
@@ -375,7 +376,7 @@ Thread.sleep(1000);
 		Thread.sleep(500);
 		//login.driver.findElement(By.xpath("//div[contains(text(),'Ok')]")).click();
 		Thread.sleep(500);
-		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
+		//login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 		
 		
 		
@@ -429,7 +430,7 @@ Thread.sleep(1000);
 	public void click_on_signout() throws Throwable {
 	   Thread.sleep(2000);
 		login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+		login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 		WebElement SighOut = login.driver.findElement(By.xpath("//span[contains(text(),'Sign out')]"));
 		js.executeScript("arguments[0].scrollIntoView(true)", SighOut);
 		SighOut.click();
@@ -459,11 +460,11 @@ Thread.sleep(1000);
 	   
 		 Thread.sleep(2000);
 			login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+			login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 		
 			login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
 			
-			login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+			login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 			CommonFunctionality.DeleteSeries();
 			System.out.println("=============>TC_08==============>");
 	}
@@ -476,7 +477,7 @@ Thread.sleep(1000);
 	public void click_on_profile_dropdown() throws Throwable {
 	   Thread.sleep(2000);
 	   
-	   login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+	   login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 		
 		
 	   
@@ -490,7 +491,7 @@ Thread.sleep(1000);
 		Thread.sleep(2000);
 login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
 		
-		login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+		login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 		
 	}
 	//TC_09
@@ -661,7 +662,7 @@ login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes i
 		  Assert.fail("Test case fail");
 	  }
 	  
-	  login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+	  login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 	  CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_15==============>");
 	   
@@ -733,7 +734,7 @@ login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes i
 		Thread.sleep(2000);
 		
 			login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
-			login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();	
+			login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();	
 	}
 	
 
@@ -745,7 +746,7 @@ login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes i
 		login.driver.navigate().refresh();
 		
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
+		//login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 		
 	}
 	
@@ -765,26 +766,27 @@ login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes i
 	    Thread.sleep(2000);
 	    System.out.println("RSP pop not showing");
 	    login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	    if(login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).isDisplayed())
+	    if(login.driver.findElements(By.xpath("//div[contains(text(),'×')]")).size()==1)
 	    {
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
-		login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+		login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 		login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
 		
-		login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+		login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 		CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_18==============>");
 	    }
 	    
 	    else {
-	    	Thread.sleep(1000);
+	    	//Thread.sleep(1000);
 
 			Thread.sleep(1000);
-	    	login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
-	    	
+	    	login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
+	    	Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
 			
-			login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+			login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
+			
 			CommonFunctionality.DeleteSeries();
 			System.out.println("=============>TC_18==============>");
 	    }
@@ -810,7 +812,15 @@ login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes i
 	@Then("^RSP should be closed$")
 	public void rsp_should_be_closed() throws Throwable {
 	   Thread.sleep(2000);
-	   login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
+	   
+	   if(login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).isDisplayed())
+	   {
+		   login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
+	   }
+	   else {
+		  
+	   }
+	  // login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 	   CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_19==============>");
 	}
@@ -866,7 +876,7 @@ login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes i
 	@Then("^show latest changes in my insight upon opening option should be checked only$")
 	public void show_latest_changes_in_my_insight_upon_opening_option_should_be_checked_only() throws Throwable {
 	    Thread.sleep(2000);
-	   login.driver.findElement(By.xpath("//div[@class='account-avatar--container']")).click();
+	   login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
 	   CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_23==============>");
 	}

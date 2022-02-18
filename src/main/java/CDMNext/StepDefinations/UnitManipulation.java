@@ -1,26 +1,42 @@
 package CDMNext.StepDefinations;
 
-import static org.junit.Assert.assertNotEquals;
+
+import static org.testng.Assert.assertNotEquals;
+import org.testng.Assert;
+import org.testng.AssertJUnit;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 @SuppressWarnings("deprecation")
@@ -32,6 +48,7 @@ public class UnitManipulation {
 	ChartVisual chart = new ChartVisual();
 	Comparables cmp = new Comparables();
 	CrossSection cross = new CrossSection();
+	Excel1 j=new Excel1();
 	public static String functions_second_item_id;
 	public static String unit_manipulation_checkbox;
 	public static String unit_manipulation_checkbox_text;
@@ -43,24 +60,40 @@ public class UnitManipulation {
 	ArrayList<Integer> new_series_id = new ArrayList<Integer>();
 	ArrayList<String> functions_list = new ArrayList<String>();
 	ArrayList<String> myseries_list = new ArrayList<String>();
+	Actions action = new Actions(login.driver);
+	
+	WebDriverWait wait = new WebDriverWait(login.driver, 100);
+	
+	
+	
+	
+	
+	
 	
 	public void myseries_series_list_without_functions(String arg1) throws Throwable {
 	   List<WebElement> series_functions_list = login.driver.findElements(By.className("series-functions-title"));
 	   for(int i=1; i<=series_functions_list.size(); i++) {
 	   new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='More']", 4)).perform();
-   	   WebElement my_series = CommonFunctionality.getElementByXpath(login.driver, "(//span[@class='series-functions-title'])["+i+"]/preceding::*[@class='series-name-field-title'][1]", 4);
+   	   WebElement my_series = CommonFunctionality.getElementByXpath(login.driver, "(//span[@class='series-functions-title'])["+i+"]/parent::span", 4);
    	   new Actions(login.driver).moveToElement(my_series).pause(1000).build().perform();
-   	   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Series id:')]/following-sibling::*", 4).getText();
-	   if(text.contains("(")) {
-		  String split[] = text.split("\\(");
-		  String myseries = split[0];
-		  myseries_id = Integer.parseInt(myseries);
-		} else {
+   	   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Series id:')]/following-sibling::*", 4).getText().toString();
+	  
 		  String myseries = text;
+		  System.out.println(myseries);
+		  if(text.contains("(") && text.contains(")"))
+				  {
+			  String split[] = text.split("\\(");
+			         System.out.println(split[0]);
+			       
+			         myseries_id=Integer.parseInt(split[0]);
+			         series_id.add(myseries_id);
+				  }
+		  else {
 		  myseries_id = Integer.parseInt(myseries);
-		}
-		series_id.add(myseries_id);
-   	    }
+		  System.out.println(myseries_id);
+				series_id.add(myseries_id);
+				  	    }
+	   }
 	}
 	
 	public void myseries_new_series_list_with_functions() throws Throwable {
@@ -69,31 +102,28 @@ public class UnitManipulation {
 	   new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='More']", 4)).perform();
    	   WebElement my_series = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'new-series-item')]//span[contains(@class,'input-control__grey')]/following::span[@class='series-functions-title'])["+i+"]", 4);
    	   new Actions(login.driver).moveToElement(my_series).pause(1000).build().perform();
-   	   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Series id:')]/following-sibling::*", 4).getText();
-	   if(text.contains("(")) {
-		  String split[] = text.split("\\(");
-		  String myseries = split[0];
-		  myseries_id = Integer.parseInt(myseries);
-		} else {
+   	   String text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Series id:')]/following-sibling::*", 4).getText().toString();
+	  
 		  String myseries = text;
 		  myseries_id = Integer.parseInt(myseries);
-		}
-		new_series_id.add(myseries_id);
+		  System.out.println(myseries_id);
+				new_series_id.add(myseries_id);
+				
    	    }
 		}
 	   
    public void myseries_series_list_with_functions(String arg1,String arg2, String arg3) throws Throwable {
 	   List<WebElement> expected_list =login.driver.findElements(By.xpath("//*[@class='series-functions-title']"));
    	   for(WebElement expected: expected_list) {
-   	   String expected_text = expected.getText();
+   	   String expected_text = expected.getText().toString();
    	   if(arg2.equalsIgnoreCase("Function wizard")) {
    	   String functions_text = expected_text.substring(1, expected_text.length()-1);
-   	   assertEquals(functions_text, CrossSection.applied_function_in_fx);
+   	   AssertJUnit.assertEquals(functions_text, CrossSection.applied_function_in_fx);
    	   login.Log4j.info("The applied function is present in the series and has been verified successfully");
    	   } if(arg2.equalsIgnoreCase("Output Multiplier")) {
    	   String part[] = expected_text.split("\\(");
    	   String part1[] = part[1].split("\\;");
-   	   assertEquals(CrossSection.method_name, part1[0]);
+   	   AssertJUnit.assertEquals(CrossSection.method_name, part1[0]);
    	   }
    	   new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='More']", 4)).perform();
    	   new Actions(login.driver).moveToElement(expected).pause(1000).build().perform();
@@ -110,39 +140,128 @@ public class UnitManipulation {
    	    }
     }
    
+   
+   @Given("^Search for the series with ID \"([^\"]*)\" and click on \"([^\"]*)\" option$")
+   public void search_for_the_series_with_ID_and_click_on_option(String arg1, String arg2) throws Throwable {
+       
+	   Thread.sleep(2000);
+	 
+	   
+	   
+	//  Myseries.delete_series();
+	  Thread.sleep(2000);
+	   CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View results as List']", 4).click();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+	   
+		//Myseries.delete_series();
+		 WebElement Series=login.driver.findElement(By.xpath("(//span[contains(text(),'Series')])[1]"));
+		 Thread.sleep(2000);
+		 
+	   try {
+		    
+			
+		     Thread.sleep(2000);
+			List<WebElement> series=login.driver.findElements(By.xpath("//div[@class='series-list-item--checkbox-wrapper']//span"));
+			
+			for(WebElement seri:series)
+			{
+				seri.click();
+				
+			
+			}
+			
+			Thread.sleep(2000);
+			
+			action.sendKeys((Keys.chord("a"))).build().perform();
+			
+			
+		}
+		catch(StaleElementReferenceException e)
+		{
+			
+		  
+		
+		Thread.sleep(2000);
+		List<WebElement> series=login.driver.findElements(By.xpath("//div[@class='series-list-item--checkbox-wrapper']//span"));
+		
+		for(WebElement seri:series)
+		{
+			seri.click();
+			
+		}
+		Thread.sleep(2000);
+		
+		action.sendKeys((Keys.chord("a"))).build().perform();
+		
+
+
+		}
+   
+   
+   
+   
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   
    @And("^Check the checkbox for Unit manipulation as \"([^\"]*)\"$")
    public void check_the_checkbox_for_Unit_manipulation_as(String arg1) throws Throwable {
 	   unit_manipulation_checkbox_text = arg1;
 	   if(!arg1.equals("")) {
-       boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'"+unit_manipulation_checkbox_text+"')]/preceding-sibling::input")).isSelected();
+       boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/parent::label//span[@class='input-control--indicator']")).isSelected();
+      
        if(checkbox == false) {
-       WebElement check = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+unit_manipulation_checkbox_text+"')]/preceding-sibling::span", 4);
-       js.executeScript("arguments[0].scrollIntoView(true);",check);
-	   new Actions(login.driver).moveToElement(check).pause(500).click().build().perform();
+    	   new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]/parent::label//span[@class='input-control--indicator']", 4)).click().build().perform();
        }
-	   } else { 
-	    unit_manipulation_checkbox_text = "Convert all multipliers"; 
-	   }  
+	   
+	   }
    }
    
     public void unit_manipulation_method_checkbox() throws Throwable {
     	List<WebElement> all_functions = login.driver.findElements(By.className("series-functions-title"));
     	for(WebElement functions: all_functions) {
-    		String functions_text = functions.getText();
+    		String functions_text = functions.getText().toString();
     		String split[] = functions_text.split("\\; ");
     		String split1[] = split[1].split("\\)");
-    		assertEquals(split1[0],unit_manipulation_checkbox_text);
-    		assertEquals(split1[0], unit_manipulation_checkbox);	
+    		AssertJUnit.assertEquals(split1[0],unit_manipulation_checkbox_text);
+    		AssertJUnit.assertEquals(split1[0], unit_manipulation_checkbox);	
     	}
     }
           
     @And("^Copy the visual title$")
     public void copy_the_visual_title() throws Throwable {
-    	String title = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-title--text.text-dots", 4).getText();
+    	
+    	Thread.sleep(2000);
+    	
+    	
+		WebElement mouseover=login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']"));
+	
+		String title=login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']")).getText().toString();
+		System.out.println(title);
+		action.moveToElement(mouseover).pause(3000).contextClick().build().perform();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	if(title.contains("(") && title.contains(")")) {
     		String visualtitle = title.replace("(", "");
     	    String v_title = visualtitle.replace(")", "");
-    	    visual_tle = v_title.replaceAll(":", "");
+    	     visual_tle = v_title.replaceAll(":", "");
+    	    
     	} else {
     		visual_tle = title;
     	}
@@ -159,7 +278,7 @@ public class UnitManipulation {
 	   	new Actions(login.driver).moveToElement(name).pause(500).sendKeys("UnitManipulation"+arg1+"").build().perform();
 	   	new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Click to edit the Insight']", 4)).click().build().perform();
 	   	CrossSection.renamed_insight_name = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-breadcrumb--title__editable')]", 4).getText();
-	   	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//button[contains(@class,'button__download-btn')]", 4).click();
+	   	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--buttons']//span[contains(text(),'Download')]", 4).click();
 	   	CrossSection.Select_the_Start_Date_and_End_Date("2001-01-01", "2010-12-31");
 	   	chart.uncheck_the_checkbox_for_sections("Data Refresh");
 	   	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sphere-modal-controls']//*[contains(text(),'Download')]", 4).click();
@@ -190,13 +309,13 @@ public class UnitManipulation {
 		login.Log4j.info("Series Comparision is: " +result);
 		assertEquals(series_id.toArray(),series_id_with_function.toArray());
 		login.Log4j.info("Both the series id are same and has been verified successfully");
-		cross.enter_the_Testdata_as(arg6);
+	     j.enter_the_Testdata_as(arg6,cross.renamed_insight_name);
 	}
 	
 	@Then("^Apply \"([^\"]*)\" on transformed series with renaming to \"([^\"]*)\" able to apply unit manipualtion function with base series and transformed series present in \"([^\"]*)\" with \"([^\"]*)\" and \"([^\"]*)\" and the checkbox \"([^\"]*)\" and then verify \"([^\"]*)\"$")
 	public void apply_on_transformed_series_with_renaming_to_able_to_apply_unit_manipualtion_function_with_base_series_and_transformed_series_present_in_with_and_and_the_checkbox_and_then_verify(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6, String arg7) throws Throwable {
 		cv.click_button("Insert function");
-		String function = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'ui-resizable ui-draggable')]//*[@class='series-function-item--body']", 4).getText();
+		String function = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'ui-resizable ui-draggable')]//*[@class='series-function-item--body']", 4).getText().toString();
     	CrossSection.applied_function_in_fx = function.replaceAll("\n", "");
     	cv.click_button("Apply");
     	CommonFunctionality.wait(2000);
@@ -208,7 +327,7 @@ public class UnitManipulation {
     	CommonFunctionality.getElementByClassName(login.driver, "function-editor-window--icon", 4).click();
     	cross.click_tab_and_enter_in_search_field("By function", "UNIT");
     	cv.click_button("Insert function");
-		String function1 = CommonFunctionality.getElementByClassName(login.driver, "functions-input-container", 4).getText();
+		String function1 = CommonFunctionality.getElementByClassName(login.driver, "functions-input-container", 4).getText().toString();
     	CrossSection.applied_function_in_fx = function1.replaceAll("\n", "");
     	cv.click_button("Apply");
     	CommonFunctionality.wait(2000);
@@ -235,22 +354,22 @@ public class UnitManipulation {
     	CommonFunctionality.wait(1000);
     	}
     	myseries_new_series_list_with_functions();
-    	String new_series = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'new-series-item')]//span[contains(@class,'input-control__grey')]/following::span[@class='series-functions-title']", 4).getText();
+    	String new_series = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'new-series-item')]//span[contains(@class,'input-control__grey')]/following::span[@class='series-functions-title']", 4).getText().toString();
     	String split[]=new_series.split("\\> ");
     	String split1[] = split[1].split("\\(");
-    	assertEquals(arg1, split1[0]);
+    	AssertJUnit.assertEquals(arg1, split1[0]);
     	rename_the_Insight_to(arg2);
     	CommonFunctionality.wait(3000);
         CrossSection.Deleting_series();	
         boolean result = Arrays.equals(series_id.toArray(), series_id_with_function.toArray());
 		login.Log4j.info("Series Comparision is: " +result);
-		assertEquals(series_id.toArray(),series_id_with_function.toArray());
+		AssertJUnit.assertEquals(series_id,series_id_with_function);
 		login.Log4j.info("Both the series id are same and has been verified successfully");
 		boolean result1 = Arrays.equals(series_id.toArray(), new_series_id.toArray());
 		login.Log4j.info("Series Comparision is: " +result1);
-		assertEquals(series_id.toArray(),new_series_id.toArray());
+		AssertJUnit.assertEquals(series_id,new_series_id);
 		login.Log4j.info("Both the series id are same and has been verified successfully");
-		cross.enter_the_Testdata_as(arg7);
+		j.enter_the_Testdata_as(arg7,cross.renamed_insight_name);
 	}
 	
 	@Then("^The transformed series is replaced and applied functions are present in new series$")
@@ -264,7 +383,7 @@ public class UnitManipulation {
 			functions_list.add(replaced_text);
 		}
 		List<WebElement> series1 = login.driver.findElements(By.className("series-functions-title"));
-		assertEquals(series1.size(), 1);
+		AssertJUnit.assertEquals(series1.size(), 1);
 		for(int i=1; i<=series1.size(); i++) {
 			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='series-name-field--series-name'])["+i+"]", 4)).pause(500).perform();
 			String functions = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Functions:')]/following-sibling::*", 4).getText();
@@ -273,7 +392,7 @@ public class UnitManipulation {
 				if(!functions_text.equals(split[0]) || !functions_text.equals(split[1])) {
 					login.Log4j.info("The Transformed series has been replaced successfully and it has been verified");
 			      } else {
-			    	fail("Verification Failed");
+			    	Assert.fail("Verification Failed");
 			      }
 		     }
 		}
@@ -286,19 +405,19 @@ public class UnitManipulation {
 	    	String help_title = CommonFunctionality.getElementBycssSelector(login.driver, ".function-data--help .function-data--subtitle", 4).getText();
 	    	String help_data_id = CommonFunctionality.getElementBycssSelector(login.driver, ".function-data--help .function-data--subtitle", 4).getAttribute("data-id");
 	    	CommonFunctionality.getElementBycssSelector(login.driver, ".function-data--help .function-data--subtitle", 4).click();
-	    	assertEquals(help_title, "Help on this function".toUpperCase());
-	    	assertEquals(arg1, help_data_id);
+	    	AssertJUnit.assertEquals(help_title, "Help on this function".toUpperCase());
+	    	AssertJUnit.assertEquals(arg1, help_data_id);
 	    	if(CommonFunctionality.getElementByClassName(login.driver, "function-help", 4).isDisplayed()) {
 	    	String help_description = CommonFunctionality.getElementByClassName(login.driver, "function-help", 8).getText();
 	    	CommonFunctionality.wait(1000);
 	    	if(!help_description.contains("100 (Hundreds), TH (Thousands), MN (Millions), BN (Billions), TN (Trillions)")) {
-	    		fail("Help function is placed mismatch");
+	    		Assert.fail("Help function is placed mismatch");
 	    	}
 	    } else {
-	    	fail("Verification Failed");
+	    	Assert.fail("Verification Failed");
 	    }
 	    } else {
-	    	fail("Verification Failed");
+	    	Assert.fail("Verification Failed");
 	    }
 	    CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
 	    CrossSection.Deleting_series();
@@ -331,9 +450,9 @@ public class UnitManipulation {
 		}
 		String func = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Functions:')]/following-sibling::*", 4).getText(); 
 		if(arg1.equalsIgnoreCase("Heat map")) {
-		assertEquals(func, ChartVisual.applied_function);
+		AssertJUnit.assertEquals(func, ChartVisual.applied_function);
 		} else {
-		assertEquals(func, CrossSection.applied_function_in_fx);
+		AssertJUnit.assertEquals(func, CrossSection.applied_function_in_fx);
 		}
 		login.Log4j.info("The functions are applied to the series and has been verified successfully");
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "span[data-name='title']", 4)).perform();	
@@ -356,25 +475,58 @@ public class UnitManipulation {
 	}
 	int expected_series = Integer.parseInt(number);
 	assertNotEquals(CrossSection.actual_series, expected_series);
-	String expected = CommonFunctionality.getElementByClassName(login.driver, "series-functions--modal-title-label", 4).getText();
+	String expected = CommonFunctionality.getElementByClassName(login.driver, "series-functions--modal-title-label", 4).getText().toString();
+	System.out.println(expected);
 	if(arg1.equalsIgnoreCase("Download button")) {
 	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'sphere-modal__body')]//*[contains(@class,'button__download-btn')]", 4)).click().build().perform();
-	CommonFunctionality.wait(6000);
-	String path= System.getProperty("user.home") + "\\Downloads\\" +visual_tle+".xlsx";
-	File src = new File(path);
-	FileInputStream fis = new FileInputStream(src);
+	CommonFunctionality.wait(10000);
+	System.out.println(visual_tle);
+	String path= System.getProperty("user.home") + "\\Downloads\\"+visual_tle+".xlsx";
+	Thread.sleep(20000);
+	/*FileInputStream fis = new FileInputStream(path);
+
+	System.out.println(path);
 	XSSFWorkbook wb = new XSSFWorkbook(fis);
-	XSSFSheet sheet1 = wb.getSheetAt(0);
-	String data = sheet1.getRow(10).getCell(2).getStringCellValue();
+	fis.read();
+	Thread.sleep(4000);
+	 String str=wb.getSheetName(0);
+	 System.out.println(str);
+	 XSSFSheet sheet1=wb.getSheetAt(0);
+	String data = sheet1.getRow(10).getCell(1).getStringCellValue();
+	System.out.println(data);*/
+	
+	FileInputStream fis=new FileInputStream(path); //initialize Workbook null  
+
+
+	XSSFWorkbook wb=new XSSFWorkbook(fis);  
+	 
+	
+
+	
+	
+	wb.setActiveSheet(0);
+	Sheet sheet=wb.getSheetAt(0); 
+	 String str=wb.getSheetName(0);
+	 System.out.println(str);
+	
+       
+
+
+    	System.out.println(sheet.getFirstRowNum()+","+sheet.getLastRowNum());
+    	System.out.println(sheet.getRow(10).getCell(2).getStringCellValue().toString());
+	        String value= sheet.getRow(10).getCell(2).getStringCellValue().toString() ;
+	  
+	
+	
 	Files.deleteIfExists(Paths.get(path));
-	assertEquals(data, expected);
-	fis.close();
+	AssertJUnit.assertEquals(value, expected);
+	
 	}if(arg1.equalsIgnoreCase("Views button")) {
 	 String text = CommonFunctionality.getElementBycssSelector(login.driver, ".download-area-selector__description.text-dots", 4).getText();
 	 String view = text.substring(0, 4);
 	 String arg = arg1.substring(0, 4);
-	 assertEquals(expected, CrossSection.applied_function_in_fx);
-	 assertEquals(view, arg);
+	 AssertJUnit.assertEquals(expected, CrossSection.applied_function_in_fx);
+	 AssertJUnit.assertEquals(view, arg);
 	 CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 	}
 	login.Log4j.info("The "+arg1+" in Download window is present and has been verified Successfully");
@@ -401,14 +553,14 @@ public class UnitManipulation {
 	   	new Actions(login.driver).moveToElement(my_series).pause(1000).build().perform();
 	   	String text = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Functions:')]/following-sibling::*", 4).getText();
 		String part[] = text.split("\\> ");
-	   	assertEquals(part[1], CrossSection.applied_function_in_fx);
+	   	AssertJUnit.assertEquals(part[1], CrossSection.applied_function_in_fx);
 	   	rename_the_Insight_to(arg1);
         CrossSection.Deleting_series();	
         boolean result = Arrays.equals(series_id.toArray(), new_series_id.toArray());
 		login.Log4j.info("Series Comparision is: " +result);
-		assertEquals(series_id.toArray(),new_series_id.toArray());
+		AssertJUnit.assertEquals(series_id.toArray(),new_series_id.toArray());
 		login.Log4j.info("Both the series id are same and has been verified successfully");
-		cross.enter_the_Testdata_as(arg2);
+		j.enter_the_Testdata_as(arg2,cross.renamed_insight_name);
 	}
 	
 	@Then("^Apply function and rename series as \"([^\"]*)\" then validate the Testdata as \"([^\"]*)\"$")
@@ -425,30 +577,31 @@ public class UnitManipulation {
 		for(int i=1; i<=series_functions_list.size(); i++) {
 	   	String text = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='series-functions-title'])["+i+"]", 4).getText();
 	   	String actual = text.substring(1, text.length()-1);
-	   	assertEquals(actual, CrossSection.applied_function_in_fx);
+	   	AssertJUnit.assertEquals(actual, CrossSection.applied_function_in_fx);
 		}
 	   	rename_the_Insight_to(arg1);
         CrossSection.Deleting_series();	
         boolean result = Arrays.equals(series_id.toArray(), new_series_id.toArray());
 		login.Log4j.info("Series Comparision is: " +result);
-		assertEquals(series_id.toArray(),new_series_id.toArray());
+		AssertJUnit.assertEquals(series_id.toArray(),new_series_id.toArray());
 		login.Log4j.info("Both the series id are same and has been verified successfully");
-		cross.enter_the_Testdata_as(arg2);
+		j.enter_the_Testdata_as(arg2,cross.renamed_insight_name);
 	}
 	
-
 	@Then("^The function should not apply for selected series$")
 	public void the_function_should_not_apply_for_selected_series() throws Throwable {
+		Thread.sleep(2000);
 		cv.click_button("Insert function");
 		cv.click_button("Apply");
 		CommonFunctionality.wait(1000);
-		if(login.driver.findElements(By.xpath("//*[contains(@class,'sphere-modal-dialog')]//*[contains(text(),'The function cannot be applied to selected series')]")).size() == 1) {
+		if(login.driver.findElements(By.xpath("//*[contains(text(),'The function cannot be applied to selected series')]")).size() == 1) {
 		login.Log4j.info("The function is not applied for selected series and has been verified successfully");
 		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
 		} else {
-			fail("Verification Failed");
+			Assert.fail("Verification Failed");
 		}
 		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 		CrossSection.Deleting_series();
 	}
+	
 }

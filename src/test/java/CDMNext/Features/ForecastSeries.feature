@@ -9,7 +9,7 @@ Feature: Verifying the Forecast series functionality
 
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _02:Verify series having forecast suggestions in search pane
-   Given User enters "32190101"
+    Given User enters "32190101"
     And Add series to the right pane
     And Open SSP window for the series
     Then "Forecasts" suggestions flag bar should be shown
@@ -22,15 +22,14 @@ Feature: Verifying the Forecast series functionality
     And Check the checkbox for forecast series
     Then Chart with forecast suggestions legends should be displayed
 
-  @ForecastSeries
-  Scenario: Tc_Forecast Series Sugg _04:Verify deselecting legends in forecast suggestion dropdown
-    Given User enters "32190101"
-    And Add series to the right pane
-    And Open SSP window for the series
-    And Check the checkbox for forecast series
-    And click on cross icon for any legends name
-    Then Cross clicked legend of the chart in suggestion chart should be disabled
-
+  #@ForecastSeries
+  #Scenario: Tc_Forecast Series Sugg _04:Verify deselecting legends in forecast suggestion dropdown
+  #Given User enters "32190101"
+  #And Add series to the right pane
+  #And Open SSP window for the series
+  #And Check the checkbox for forecast series
+  #And click on cross icon for any legends name
+  #Then Cross clicked legend of the chart in suggestion chart should be disabled
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _05:Verify opening ssp for more than suggestion of forecast in its chart suggestion dropdown
     Given User enters "32190101"
@@ -305,7 +304,7 @@ Feature: Verifying the Forecast series functionality
     Then Function should be able to apply
 
   @ForecastSeries
-  Scenario: Tc_Forecast Series Sugg _32:Verify applying func over forecast suggestion series visual
+  Scenario: Tc_For1ecast Series Sugg _32:Verify applying func over forecast suggestion series visual
     Given Enter series id's"103003407;103003507;103003607"
     And Add some series to my series
     And Click on "Related Series"
@@ -315,7 +314,7 @@ Feature: Verifying the Forecast series functionality
     And Click on "Apply"
     And Click on "Ok"
     And Select forecast suggestion series
-    And Create table visual
+    And Create TableVisual
     And Right click on visual
     And Select "Calculate series"
     And Click on "All functions"
@@ -359,13 +358,11 @@ Feature: Verifying the Forecast series functionality
     And Click on Manage All dropdown
     And Select "Replace the current series"
     Then Verify preserve formula with replace the current series in my series tab
-    
-    @ForecastSeries
-  Scenario: Tc_Forecast Series Sugg _36:Verify forecast suggested chart in forecast tab of series suggestion manager window
-    Given Enter series id's"103003407;103003507;103003607"
-    And Add some series to my series
-    And Click on "Related Series"
-    And Open forecast tab in series suggestion window
-    Then Series legends should disable when mouse hover/clicking on the cross mark on the series
-    
-    
+
+  #@ForecastSeries2...locators
+  #Scenario: Tc_Forecast Series Sugg _36:Verify forecast suggested chart in forecast tab of series suggestion manager window
+    #Given Enter series id's"103003407;103003507;103003607"
+    #And Add some series to my series
+    #And Click on "Related Series"
+    #And Open forecast tab in series suggestion window
+    #Then Series legends should disable when mouse hover/clicking on the cross mark on the series

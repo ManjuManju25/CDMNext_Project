@@ -39,6 +39,7 @@ public class DatabasesTab {
 	List<String> ExpectedTableName = new ArrayList<>();
 	public String Db,ExpectedResult;
 	String db_name;
+	public static String series_name;
 	public static String Change,Applied_currency;
 	Boolean database = false;
 	public WebElement footnote;
@@ -85,12 +86,14 @@ public class DatabasesTab {
 	SoftAssert s_assert = new SoftAssert();
 	List<String> listOne = new ArrayList<String>();
 	List<String> listTwo = new ArrayList<String>();
+	Filters filter = new Filters();
 	Actions action = new Actions(login.driver);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	SeriesTab st = new SeriesTab();
 	int selected_table_size;
 	public int i;
+	String copied_link;
 	
 	 @Given("^Click on More filter$")
 	 public void click_on_More_filter() throws Throwable {
@@ -151,6 +154,8 @@ public class DatabasesTab {
 //		CommonFunctionality.TopMethod();
 //		CommonFunctionality.ResetMethod();
 //		CommonFunctionality.CollapseTreeMethod();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Daily_db",10).click();
 		login.Log4j.info("Clicking on Database level");
 		database = true;
@@ -326,14 +331,16 @@ public class DatabasesTab {
 
 	@Given("^Right click on any Database$")
 	public void right_click_on_any_Database() throws Throwable {
+		
+		CommonFunctionality.getElementByProperty(login.driver,"Databases_Tab",5).click();
 		// Right clicking on Global Database
 		Thread.sleep(3000);
 		ele = login.driver
 				.findElement(By.xpath("//div[@class='child-container']//div[2]//div[2]//span[@class='name-text']"));
 		ExpectedResult = ele.getText();
-		rightClickElement = login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[2]"));
+		//rightClickElement = login.driver.findElement(By.xpath("//div[@class='child-container']//div[2]//div[2]//span[@class='name-text']"));
 		// contextClick() method to do right click on the element
-		action.contextClick(rightClickElement).build().perform();
+		action.contextClick(ele).build().perform();
 	}
 
 	@When("^Paste it in new tab$")
@@ -369,13 +376,13 @@ public class DatabasesTab {
 
 	@Then("^The selected \"([^\"]*)\" should be highlighted$")
 	public void the_selected_should_be_highlighted(String arg1) throws Throwable {
-		
+		CommonFunctionality.wait(500);
 		try {
 			WebElement highlightdtext = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'full-expanded open highlight') or contains(@class,'last-open-node highlight')]",
 					20);
 			if (highlightdtext.isDisplayed()) {
-				
+				CommonFunctionality.wait(500);
 				String actualText = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(@class,'full-expanded open highlight') or contains(@class,'last-open-node highlight')]/*[2]//*[@class='name-text']",
 						20).getText();
@@ -510,8 +517,17 @@ public class DatabasesTab {
 		}else if(arg1.equalsIgnoreCase("Minimize") || arg1.equalsIgnoreCase("Maximize") || arg1.equalsIgnoreCase("Full-screen") || arg1.equalsIgnoreCase("Exit full-screen")){
 			MinimizeVar = MaximizeVar = FullScreenVar = Exit_fullScreen = arg1;
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--header']/*[2]//*[@class='movable-modal--action' and @title = '" + arg1 + "']", 6).click();
-		} 
-		else {
+		} else if(arg1.equalsIgnoreCase("Add to Watchlist")){
+			series_name = login.driver
+					.findElement(
+							By.xpath("//ul[@class='search-series-list scrollable']/*[1]//div[@class='series-item--name']"))
+					.getText();
+			new Actions(login.driver)
+			.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='items-wrapper']//span[@title='" + arg1 + "']", 4))
+			.pause(2000).click().build().perform();
+				
+		}else {
 			login.driver.switchTo().defaultContent();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 6).click();
 		}
@@ -884,22 +900,24 @@ public class DatabasesTab {
 
 	@And("^Right click on \"([^\"]*)\"$")
 	public void right_click_on(String arg1) throws Throwable {
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
 		dbase = arg1;
 		switch (arg1) {
 		case "World Trend Plus":
-			login.driver.navigate().refresh();
+			//login.driver.navigate().refresh();
 			Thread.sleep(5000);
 			rightClickElement = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
 			Before_set_lang = rightClickElement.getText();
 			break;
 		case "Russia Premium Database":
-			login.driver.navigate().refresh();
+			//login.driver.navigate().refresh();
 			Thread.sleep(5000);
 			rightClickElement = login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]"));
 			Before_set_lang = rightClickElement.getText();
 			break;
 		case "Indonesia Premium Database":
-			login.driver.navigate().refresh();
+			//login.driver.navigate().refresh();
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@data-node-model-id='INDONESIA']//div[@class='toggle']")).click();
 			Thread.sleep(2000);
@@ -924,6 +942,7 @@ public class DatabasesTab {
 		// contextClick() method to do right click on the element
 		action.contextClick(rightClickElement).build().perform();
 
+	
 	}
 
 	@SuppressWarnings("deprecation")
@@ -941,6 +960,8 @@ public class DatabasesTab {
 	@Then("^The Databases language should be changed to selected language$")
 	public void the_Databases_language_should_be_changed_to_selected_language() throws Throwable {
 //		Thread.sleep(3000);
+		CommonFunctionality.ResetMethod();
+		filter.user_enters("India");
 		WebElement dbele;
 
 		if (dbase.equalsIgnoreCase("World Trend Plus")) {
@@ -1114,7 +1135,8 @@ public class DatabasesTab {
 	@And("^Select multiple tables$")
 	public void select_multiple_tables() throws Throwable {
 		// mouse hover on China Premium Database for table level
-		CommonFunctionality.UnselectMethod();
+	//	CommonFunctionality.UnselectMethod();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
 		wait = new WebDriverWait(login.driver, 5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//div[@class='child-container']//div[@data-node-model-id='CN']//div[1]"))).click();
@@ -1424,7 +1446,7 @@ public class DatabasesTab {
 	public void the_insight_should_be_opened_and_added_series_should_be_available_in_My_series() throws Throwable {
 		Thread.sleep(300);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("confirm_popup_new_insight"))).click();
-		login.robot = new Robot();
+		robot = new Robot();
 		// Store all currently open tabs in tabs
 		 tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		// Navigate to New Tab
@@ -1485,6 +1507,7 @@ public class DatabasesTab {
 		//CommonFunctionality.ResetMethod();
 		// mouse hover on China Premium Database for table level
 		//CommonFunctionality.CollapseTreeMethod();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
 		login.Log4j.info("mouse hovering on table level");
 	
 		try {
@@ -1687,7 +1710,8 @@ public class DatabasesTab {
 			}
 		} if (arg1.equals("Pin to left")) {
 			Thread.sleep(500);
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 5).click();
+			WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 5);
+			new Actions(login.driver).doubleClick(ele).build().perform();
 
 		} 
 		if (arg1.equals("Total Usage")) {
@@ -1736,6 +1760,7 @@ public class DatabasesTab {
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 10).click();
 		} if(arg1.equalsIgnoreCase("Rename view") || arg1.equalsIgnoreCase("Duplicate view") || arg1.equalsIgnoreCase("Clear view") || arg1.equalsIgnoreCase("Delete view") || arg1.equalsIgnoreCase("Delete all views") || arg1.equalsIgnoreCase("Copy view") || arg1.equalsIgnoreCase("Delete all views") || arg1.equalsIgnoreCase("Paste visual")) {
+			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']/li/span[@title='" + arg1 + "']", 20).click();
 		}
 		if(arg1.equals("State Administrative")) {
@@ -2078,18 +2103,27 @@ public class DatabasesTab {
 					
 		} else if(arg1.equalsIgnoreCase("Open advanced settings popup")) {
 			CommonFunctionality
-			.getElementByXpath(login.driver, "//*[contains(@class,'histogram-config--column__settings')]/*[2]//*[@title='Open advanced settings popup']", 20)
+			.getElementByXpath(login.driver, "//*[contains(@title,'Source. Configure displaying of the source')]/*[3]/*[@title='" + arg1 + "']", 20)
 			.click();
 		} else if(arg1.equalsIgnoreCase("Rename series") || arg1.equalsIgnoreCase("Edit series")) {
 			WebElement Delete_series_icon = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'visual-series-list--remove-row')]", 20);
 			new Actions(login.driver).moveToElement(Delete_series_icon).perform();
+			CommonFunctionality.wait(500);
 			CommonFunctionality
-			.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20)
+			.getElementByXpath(login.driver, "//*[@class='visual-series-name']//*[@title='" + arg1 + "']", 20)
 			.click();
 		} else if(arg1.equalsIgnoreCase("Copy")) {
+			CommonFunctionality.wait(500);
 			CommonFunctionality
 			.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20)
 			.click();
+		}else if(arg1.equalsIgnoreCase("Copy link")){
+			CommonFunctionality.wait(2000);
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20).click();
+			CommonFunctionality.wait(1000);
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+			Clipboard clipboard = toolkit.getSystemClipboard();
+			copied_link = (String) clipboard.getData(DataFlavor.stringFlavor);
 		}
 
 	}
@@ -2421,7 +2455,7 @@ public class DatabasesTab {
 		Thread.sleep(2000);
 		if (login.driver.findElement(By.xpath("//button[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
 			login.Log4j.info("Selected visual is created ");
-			CommonFunctionality.Views_list();			
+			//CommonFunctionality.Views_list();			
 		} else {
 			AssertJUnit.fail("Selected visual is not created ");
 		}
@@ -2435,7 +2469,8 @@ public class DatabasesTab {
 		WebElement element = null;
 //		CommonFunctionality.CollapseTreeMethod();
 //		CommonFunctionality.TopMethod();
-		CommonFunctionality.UnselectMethod();
+	//	CommonFunctionality.UnselectMethod();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'Databases')]",4).click();
 		// expand_World_Trend_Plus_till_series_level();
 		login.driver.findElement(By.xpath("//div[@data-node-model-id='RUSSIA']//div[1]")).click();
 		Thread.sleep(2000);
@@ -2749,13 +2784,13 @@ public class DatabasesTab {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(4000);
 		WebElement checkBox = login.driver.findElement(By.xpath(
-				"//ul[@class='search-series-list']/*[1]//*[@class='series-list-item--checkbox-wrapper']"));
+				"//*[@class='search-series-list']/*[1]//*[@class='series-list-item--checkbox-wrapper']"));
 		checkBox.click();
-		ele = login.driver.findElement(By.xpath("//ul[@class='search-series-list']/*[1]//div[@class='series-item--name']"));
+		ele = login.driver.findElement(By.xpath("//*[@class='search-series-list']/*[1]//div[@class='series-item--name']"));
 		BeforeReplace = ele.getText();
 		login.Log4j.info(BeforeReplace);
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//ul[@class='search-series-list']/*[1]//span[@title='View as Chart. Type `c`']")).click();
+		login.driver.findElement(By.xpath("//*[@class='search-series-list']/*[1]//span[@title='View as Chart. Type `c`']")).click();
 
 	}
 
@@ -2765,7 +2800,7 @@ public class DatabasesTab {
 		login.driver.findElement(By.xpath("//*[contains(text(),'Databases')]")).click();
 		mouse_hover_on_any_series_level();
 		Thread.sleep(2000);
-		ele = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[1]//div[@class='add-to-data-selection--toggle']"));
+		ele = login.driver.findElement(By.xpath("//*[@class='search-series-list scrollable']/*[1]//div[@class='add-to-data-selection--toggle']"));
 		action.moveToElement(ele).click().perform();
 		
 
@@ -2801,7 +2836,7 @@ public class DatabasesTab {
 	public void the_new_insight_should_be_created_with_selected_series() throws Throwable {
 		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("confirm_popup_new_insight"))).click();
-		login.robot = new Robot();
+		robot = new Robot();
 		// Store all currently open tabs in tabs
 		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		// Navigate to New Tab
@@ -2981,6 +3016,8 @@ public class DatabasesTab {
 	@And("^Select some series$")
 	public void select_some_series() throws Throwable {
 		CommonFunctionality.UnselectMethod();
+		CommonFunctionality.getElementByProperty(login.driver,"Databases_Tab",5)
+		.click();
 		expand_World_Trend_Plus_till_series_level();
 		Thread.sleep(2000);
 	//	WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -3542,7 +3579,7 @@ public class DatabasesTab {
 	public void new_insight_should_be_created_with_selected_series_in_my_series() throws Throwable {
 		CommonFunctionality.wait(400);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("confirm_popup_new_insight"))).click();
-		login.robot = new Robot();
+		robot = new Robot();
 		// Store all currently open tabs in tabs
 		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		// Navigate to New Tab
@@ -3551,7 +3588,7 @@ public class DatabasesTab {
 		the_series_should_be_added_to_My_series_panel();
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
-		close_search_selection_window();
+		//close_search_selection_window();
 	}
 
 	@And("^Click on \"([^\"]*)\" icon on header$")
@@ -3836,7 +3873,7 @@ public class DatabasesTab {
 		Thread.sleep(3000);
 		String SearchTxt;
 		ele = login.driver
-				.findElement(By.xpath("//div[contains(@class,'toggler-control__light_purple')]//label[@title='View results as Tree']"));
+				.findElement(By.xpath("//div[contains(@class,'toggler-control__light_purple')]//*[@title='View results as Tree']"));
 		if(ele.isDisplayed()) {
 			SearchTxt = ele.getText();
 			login.Log4j.info(SearchTxt);
@@ -3926,6 +3963,8 @@ public class DatabasesTab {
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[2]")).click();
 	}
    static void BrazilPremiumDb() throws InterruptedException {
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
     	// Right clicking on Brazil Premium Database for table level
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]",20)
 				.click();

@@ -11,7 +11,7 @@ Feature: Verifying Pie Visual Functionality
 
   @PieVisual
   Scenario: TC_Pie_02: Verify creating Pie visual with random series present in a search pane of an insight
-    And Select different frequency series "399294877;399295497" and click on "Pie" icon
+    And Select different frequency series "3671601;403770597" and click on "Pie" icon
     Then Pie visual should be created with frequency conversion window popped up
 
   @PieVisual
@@ -89,11 +89,11 @@ Feature: Verifying Pie Visual Functionality
     And Create a Pie visual
     Then Verify the function applied in frequency conversion popup
 
-  @PieVisual2
-  Scenario: TC_Pie_14: Verify End dropdown for functions dropdown in frequency conversion popup
-    And Select series with different filter and units "226311002;16190501"
-    And Create a Pie visual
-    Then The number of days should able to select in a functions End dropdown
+  #@PieVisual
+  #Scenario: TC_Pie_14: Verify End dropdown for functions dropdown in frequency conversion popup
+    #And Select series with different filter and units "226311002;16190501"
+    #And Create a Pie visual
+    #Then The number of days should able to select in a functions End dropdown
 
   @PieVisual
   Scenario: TC_Pie_15: Verify series having negative timepoints in pie chart
@@ -321,16 +321,16 @@ Feature: Verifying Pie Visual Functionality
     And Create a Pie visual
     Then Verify viewing "Closing" of frequency conversion popup
 
-  @PieVisual
-  Scenario: TC_Pie_62: Verify pie with different frequency
-    And Select series with different filter and units "226311002;16190501"
-    And Create a Pie visual
-    And Select "Keep different frequencies"
-    Then Should create pie chart with different freq by disabling highest frequency
+  #@PieVisual1
+  #Scenario: TC_Pie_62: Verify pie with different frequency
+    #And Select series with different filter and units "226311002;16190501"
+    #And Create a Pie visual
+    #And Select "Keep different frequencies"
+    #Then Should create pie chart with different freq by disabling highest frequency
 
   @PieVisual
   Scenario: TC_Pie_63: Verify date field
-    And Create a pie visual with series id's "408940397;408929327"
+    And Create a pie visual with series id's "296237202;408940397"
     And Click on date field
     Then Date popup should be displayed
     And Select date as "2011"
@@ -1411,3 +1411,1652 @@ Feature: Verifying Pie Visual Functionality
     And Select color for "Sub title" background highlight
     When Click on "Save"
     Then Visual "sub_title" background should be displayed in selected color
+
+  @PieVisual
+  Scenario: TC_Pie_182:Edit Pie - Title - Verify font size for visual sub title
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon for title
+    And Select size for visual "Sub title" as "20"
+    When Click on "Save"
+    Then The "sub_title" font size should be changed as "20"
+
+  @PieVisual
+  Scenario: TC_Pie_183:Edit Pie - Title - Verify bold style for visual sub title
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon for title
+    And Click on B under style for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be displayed in Bold format
+
+  @PieVisual
+  Scenario: TC_Pie_184:Edit Pie - Title - Verify Italic style for visual sub title
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon for title
+    And Click on Italic under style for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be "italic"
+
+  @PieVisual
+  Scenario: TC_Pie_185:Edit Pie - Verify Underline style for visual sub title.
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon for title
+    And Click on Underline icon for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be "underline"
+
+  @PieVisual
+  Scenario: TC_Pie_186:Edit Pie - Title - Verify horizontal alignment (left, right, center)
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon for title
+    And Check "sub-title"
+    And Select alignment of sub title to "left"
+    Then The subtitle should align to "left"
+    And Select alignment of sub title to "center"
+    Then The subtitle should align to "center"
+    And Select alignment of sub title to "right"
+    Then The subtitle should align to "right"
+
+  @PieVisual
+  Scenario: TC_Pie_187:Edit Pie - Title - Verify expanding and collapsing the title and subtitle sections
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon for title
+    And Expand the Title section
+    Then The section should be expnaded
+    And Collapse the Title section
+    Then The section should be collapsed
+    And Expand the Sub-title section
+    Then The Sub-title section should be expnaded
+    And Collapse the Sub-title section
+    Then The Sub-title section should be collapsed
+
+  @PieVisual
+  Scenario: TC_Pie_188:Edit Pie - Title - Verify closing of Titles popup
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon for title
+    And Click on X icon to close the popup
+    Then The "Title" popup should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_189:Edit Pie - Verify Copyright=Check
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check Copyright and Save
+    Then The Copyright logo should be displayed for visual
+
+  @PieVisual
+  Scenario: TC_Pie_190:Edit Pie - Verify Copyright=Uncheck
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And UnCheck Copyright
+    Then The Copyright logo should be removed for visual
+
+  @PieVisual
+  Scenario: TC_Pie_191:Edit Pie - Copyright - Verify 'Vertical align
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    And Select vertical align as "top" and save
+    Then The copyright should be displayed in top
+    And Select vertical align as "bottom" and save
+    Then The copyright should be displayed in bottom
+
+  @PieVisual
+  Scenario: TC_Pie_192:Edit Pie -Copyright - Verify 'Vertical align' for middle
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    Then The middle align option should be disabled since cannot show in the middle of the table
+
+  @PieVisual
+  Scenario: TC_Pie_193:Edit pie - Copyright - Verify 'Horizontal align'
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    And Select Horizontal alignment of copyright to "left" and save
+    Then The copyright image should align to "Left"
+    And Select Horizontal alignment of copyright to "center" and save
+    Then The copyright image should align to "Center"
+    And Select Horizontal alignment of copyright to "right" and save
+    Then The copyright image should align to "Right"
+
+  @PieVisual
+  Scenario: TC_Pie_194:Edit pie - Copyright - Verify advance settings cogwheel
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    Then "Copyright" popup should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_195:Edit pie - Copyright - Verify text=check
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button from copyright popup and Save
+    Then Copyright text "Source: CEIC Data" should be displayed on visual
+
+  @PieVisual
+  Scenario: TC_Pie_196:Edit pie - Copyright - Verify text change for copyright
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button and Edit the text as "CDMNext" and Save
+    Then Updated copyright "CDMNext" should be displayed on visual
+
+  @PieVisual
+  Scenario: TC_Pie_197:Edit pie - Copyright - Verify link for copyright
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button from copyright popup and Save
+    And Click on the Copyright
+    Then The user should redirect to "https://www.ceicdata.com/en" link
+
+  @PieVisual
+  Scenario: TC_Pie_198:Edit pie - Copyright -Verify copyright color
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Select color for "Copyright"
+    When Click on "Save"
+    Then Visual "Copyright" should be displayed in selected color
+
+  @PieVisual
+  Scenario: TC_Pie_199:Edit pie - Copyright - Verify font size
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Select size for visual "Copyright" as "20"
+    When Click on "Save"
+    Then The "Copyright" font size should be changed as "20"
+
+  @PieVisual
+  Scenario: TC_Pie_200:Edit pie - Copyright - Verify bold style
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Click on Bold icon for "Copyright"
+    When Click on "Save"
+    Then The "Copyright" should be displayed in Bold format
+
+  @PieVisual
+  Scenario: TC_Pie_201:Edit pie - Copyright - Verify Italic style
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Click on Italic icon
+    When Click on "Save"
+    Then The "Copyright" should be "italic"
+
+  @PieVisual
+  Scenario: TC_Pie_202:Edit pie - Copyright - Verify Underline style
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Click on Underline icon for "Copyright"
+    When Click on "Save"
+    Then The "Copyright" should be "underline"
+
+  @PieVisual
+  Scenario: TC_Pie_203:Edit pie - Copyright - Verify horizontal alignment (left, right, center)
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Select Horizontal alignment of copyright to "left" and save
+    Then The copyright image should align to "Left"
+    And Select Horizontal alignment of copyright to "center" and save
+    Then The copyright image should align to "Center"
+    And Select Horizontal alignment of copyright to "right" and save
+    Then The copyright image should align to "Right"
+
+  @PieVisual
+  Scenario: TC_Pie_204:Edit Table - Copyright - Verify vertical alignment (Top and bottom).
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select vertical align as "top" and save
+    Then The copyright should be displayed in top
+    And Select vertical align as "bottom" and save
+    Then The copyright should be displayed in bottom
+
+  @PieVisual
+  Scenario: TC_Pie_205:Edit pie - Copyright - Verify closing copyright popup
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Click on X icon to close the popup
+    Then The "Copyright" popup should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_206:Edit Pie - tooltips - Verify the list of date formats
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    Then The following list of dates format should be opened
+      | Date                 |
+      | Value                |
+      | Name                 |
+      | Region               |
+      | Frequency            |
+      | Function description |
+      | Percentage           |
+
+  @PieVisual
+  Scenario: TC_Pie_207:Edti pie - tooltip dropdown default display
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    Then "Date +1" value should be displayed as default
+
+  @PieVisual
+  Scenario Outline: <TCID>:Edit Pie - Name tooltip for pie visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Select "<ActualAttribute>" field
+    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "<ExpectedAttribute>" of series
+
+    Examples: 
+      | TCID       | ActualAttribute | ExpectedAttribute |
+      | TC_Pie_208 | Name            | Name              |
+      | TC_Pie_209 | Region          | Region            |
+      | TC_Pie_210 | Frequency       | Frequency         |
+      | TC_Pie_211 | Percentage      | Percentage        |
+
+  #@PieVisual
+  #Scenario: TC_Pie_209:Edit pie - Region tooltip for pie visual
+  #And Create a pie visual with series id's "16240301;16243001"
+  #And Click on "Edit Pie"
+  #And Check "Tooltips"
+  #And Open date dropdown
+  #And Select "Region" field
+  #Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Region" of series
+  #
+  #@PieVisual
+  #Scenario: TC_Pie_210:Edit pie - Frequency tooltip for pie visual
+  #And Create a pie visual with series id's "16240301;16243001"
+  #And Click on "Edit Pie"
+  #And Check "Tooltips"
+  #And Open date dropdown
+  #And Select "Frequency" field
+  #Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Frequency" of series
+  @PieVisual
+  Scenario: TC_Pie_212:Edit pie - Function description tooltip for pie visual
+    And Add series to the my series tab
+    And Apply function for a series
+    And Right click on series
+    And Select "Pie" visual
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Select "Function description" field
+    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Function description" of series
+
+  #@PieVisual
+  #Scenario: TC_Pie_212:Edit pie - percentage tooltip for pie visual
+  #And Create a pie visual with series id's "16240301;16243001"
+  #And Click on "Edit Pie"
+  #And Check "Tooltips"
+  #And Open date dropdown
+  #And Select "Percentage" field
+  #Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Percentage" of series
+  @PieVisual
+  Scenario: TC_Pie_213:Edit pie > tooltip dropdown > advanced settings
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    Then The following items should be available
+      | Common |
+      | Items  |
+      | Border |
+
+  @PieVisual
+  Scenario: TC_Pie_214:Edit pie > tooltip dropdown > advanced settings > Common
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    Then "Show tooltips" should be checked by default
+
+  @PieVisual
+  Scenario: TC_Pie_215:Edit pie > tooltip dropdown > advanced settings > Common
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And UnCheck "Show tooltips"
+    And Click on "Save"
+    And Tooltips for visual should not be shown
+
+  @PieVisual
+  Scenario: TC_Pie_216:Edit pie > tooltip dropdown > advanced settings > items
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    Then The following list of items should be opened
+      | Name                 |
+      | Region               |
+      | Frequency            |
+      | Function description |
+      | Percentage           |
+
+  @PieVisual
+  Scenario Outline: <TCID>:Edit pie > tooltip dropdown > advanced settings > items
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Select items as "<ActualItem>" from dropdown
+    And Click on "Save"
+    Then "<ExpectedItem>" attribute should get added in tooltips
+
+    Examples: 
+      | TCID       | ActualItem | ExpectedItem |
+      | TC_Pie_217 | Name       | Name         |
+      | TC_Pie_218 | Region     | Region       |
+      | TC_Pie_219 | Frequency  | Frequency    |
+      | TC_Pie_220 | Percentage | Percentage   |
+
+  @PieVisual
+  Scenario: TC_Pie_221:Edit pie > tooltip dropdown > advanced settings > items > Function description
+    And Add series to the my series tab
+    And Apply function for a series
+    And Right click on series
+    And Select "Pie" visual
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Select items as "Function description" from dropdown
+    And Click on "Save"
+    Then "Function description" attribute should get added in tooltips
+
+  @PieVisual
+  Scenario: TC_Pie_222:Edit pie > tooltip dropdown > advanced settings > items > Verify text color in tooltip
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Select color for "Items"
+    When Click on "Save"
+    Then "tooltip text" should be displayed in selected color
+
+  @PieVisual
+  Scenario: TC_Pie_223:Edit pie > tooltip dropdown > advanced settings > items > Verify font size
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Select font size as "18"
+    When Click on "Save"
+    Then Size of tooltips should get changed as "18"
+
+  @PieVisual
+  Scenario: TC_Pie_224:Edit pie > tooltip dropdown > advanced settings > items > Verify bold style
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on Bold icon for "Items"
+    When Click on "Save"
+    Then Tooltip text should turn into "Bold" format
+
+  @PieVisual
+  Scenario: TC_Pie_225:Edit pie > tooltip dropdown > advanced settings > items > Verify Italic style
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on "Italic" icon for items
+    When Click on "Save"
+    Then Tooltip text should turn into "Italic" format
+
+  @PieVisual
+  Scenario: TC_Pie_226:Edit pie > tooltip dropdown > advanced settings > items > Verify underline style
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on "Underline" icon for items
+    When Click on "Save"
+    Then Tooltip text should turn into "Underline" format
+
+  @PieVisual
+  Scenario: TC_Pie_227:Edit pie > tooltip dropdown > advanced settings > items > Verify unbold format
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on "Bold" icon for items
+    And Click on same
+    When Click on "Save"
+    Then Tooltip text should turn into "Unbold" format
+
+  @PieVisual
+  Scenario: TC_Pie_228:Edit pie > tooltip dropdown > advanced settings > items > Verify non Italic style
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on "Italic" icon for items
+    And Click on same
+    When Click on "Save"
+    Then Tooltip text should turn into "NonItalic" format
+
+  @PieVisual
+  Scenario: TC_Pie_229:Edit pie > tooltip dropdown > advanced settings > items > Verify non underlined style
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on "Underline" icon for items
+    And Click on same
+    When Click on "Save"
+    Then Tooltip text should turn into "NonUnderlined" format
+
+  @PieVisual
+  Scenario: TC_Pie_230:Edit pie - Tooltip - Verify color for tooltip border
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Border"
+    And Select color for "tooltip border"
+    And Click on "Save"
+    Then Border of tooltip should be applied with selected color
+
+  @PieVisual
+  Scenario: TC_Pie_231:Edit pie - Tooltip - Verify border width
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Click on "Advanced settings"
+    And Expand "Border"
+    And Select Width to 5
+    And Click on "Save"
+    Then The tooltp border width should be changed as "5"
+
+  @PieVisual
+  Scenario: TC_Pie_232:Edit pie > Verify size of visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    Then The default Edit Visual popup height and width should be "100%"
+
+  @PieVisual
+  Scenario: TC_Pie_233:Edit pie > Verify horizontal alignement for size
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Open Size dropdown
+    Then The "Horizontal align" should be disabled if proportion is "100%"
+
+  @PieVisual
+  Scenario: TC_Pie_234:Edit pie > Verify proportion for size
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Open Size dropdown
+    Then X axis should be set to "100" with enable state & Y axis should be set to "100" with disable state
+
+  @PieVisual
+  Scenario: TC_Pie_235:Edit pie > - Size - Verify Horizontal align for visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Open Size dropdown
+    And Reduce proportion to 80
+    And Click on Horizontal align of visual to "Left"
+    Then The Visual area should align to "Left"
+    And Click on Horizontal align of visual to "Center"
+    Then The Visual area should align to "Center"
+    And Click on Horizontal align of visual to "Right"
+    Then The Visual area should align to "Right"
+
+  @PieVisual
+  Scenario: TC_Pie_236:Edit pie > legend
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    Then "Legend" should be checked by default
+
+  @PieVisual
+  Scenario: TC_Pie_237:Edit pie > legend dropdown
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    Then The following legend options should be available
+      | Vertical align    |
+      | Horizontal align  |
+      | Advanced settings |
+
+  @PieVisual
+  Scenario: TC_Pie_238:Edit pie > legend > advanced settings under dropdown
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    Then The following options should be available
+      | Common     |
+      | Items      |
+      | Size       |
+      | Title      |
+      | Background |
+      | Border     |
+
+  @PieVisual
+  Scenario: TC_Pie_239:Edit pie > legend > advanced settings under dropdown > show legend
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    Then "Show legend" should be checked by default
+
+  @PieVisual
+  Scenario: TC_Pie_240:Edit pie > legend > advanced settings under dropdown > items color
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Items" section from Legand popup should expand
+    And Select any "legend_item_color" for chart visual
+    And Select "#2b60d0" legend color from list
+    And Clicking "Save" option
+    Then The Selected "Color" should reflect in the pie visual legand
+
+  @PieVisual
+  Scenario: TC_Pie_241:Edit pie > legend > advanced settings under dropdown > items size
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Select font size as "18"
+    When Click on "Save"
+    Then Size of legend should get changed as "18"
+
+  @PieVisual
+  Scenario: TC_Pie_242:Edit pie > legend > advanced settings under dropdown > items  > verify bold stayle
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on Bold icon for "Items"
+    When Click on "Save"
+    Then The "items" should be displayed in Bold format
+
+  @PieVisual
+  Scenario: TC_Pie_243:Edit pie > legend > advanced settings under dropdown > items > verify italic style
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on "Italic" icon for items
+    When Click on "Save"
+    Then Legend text should turn into "Italic" format
+
+  #@PieVisual.... skip as of now
+  #Scenario: TC_Pie_244:Edit pie > legend > advanced settings under dropdown > items > verify underline style
+  #And Create a pie visual with series id's "16240301"
+  #And Click on "Edit Pie"
+  #And Click on legend dropdown
+  #And Click on "Advanced settings"
+  #And Expand "Items"
+  #And Click on "Underline" icon for items
+  #When Click on "Save"
+  #Then Legend text should turn into "Underline" format
+  @PieVisual
+  Scenario: TC_Pie_244:Edit pie > legend > advanced settings under dropdown > Title
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Title"
+    Then By default title options are disabled
+    And Check legend "Title"
+    Then Should enable the legend options
+
+  @PieVisual
+  Scenario: TC_Pie_245:Edit pie > legend > advanced settings under dropdown > Title color
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Title"
+    And Check legend "Title"
+    And Enter the text "Shravas" for legend title
+    And Select color for "Legend"
+    When Click on "Save"
+    Then Legend "title" should be displayed in selected color
+
+  @PieVisual
+  Scenario: TC_Pie_246:Edit pie > legend > advanced settings under dropdown > Title-Font size
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Title"
+    And Check the checkbox for "Title" section
+    And Enter the text "Shravas" for legend title
+    And Select "Legend Title font size" for chart visual to 16
+    Then The Selected "Font size" should reflect in the chart visual legand
+
+  @PieVisual
+  Scenario: TC_Pie_247:Edit pie > legend > advanced settings under dropdown > Title-Font style
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Title"
+    And Check the checkbox for "Title" section
+    And Enter the text "Shravas" for legend title
+    And Select any "Legends Style" for chart visual
+    Then The Selected "Font style" should reflect in the chart visual legand
+
+  @PieVisual
+  Scenario: TC_Pie_248:Edit pie > legend > advanced settings under dropdown > Background color
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Background" section from Legand popup should expand
+    And Check the checkbox for "Background" section
+    And Select any "legend_background_color" for chart visual
+    And Select "#2b60d0" legend bgcolor from list
+    Then The Selected "Background color" should reflect in the chart visual legand
+
+  @PieVisual
+  Scenario: TC_Pie_249:Edit pie > legend > advanced settings under dropdown > Border color
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Border" section from Legand popup should expand
+    And Check the checkbox for "Border" section
+    And Select any "legend_border_color" for chart visual
+    And Select "#2b60d0" legend border color from list
+    Then The Selected "Border color" should reflect in the chart visual legand
+
+  @PieVisual
+  Scenario: TC_Pie_250:Edit pie > legend > advanced settings under dropdown > Border width
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Border" section from Legand popup should expand
+    And Check the checkbox for "Border" section
+    And Select "Legend Title Border Width" for chart visual to 3
+    Then The Selected "Border width" should reflect in the chart visual legand
+
+  @PieVisual
+  Scenario: TC_Pie_251:Edit pie > legend > advanced settings under dropdown > Border radius
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Border" section from Legand popup should expand
+    And Check the checkbox for "Border" section
+    And Select "Legend Title Border Radius" for chart visual to 8
+    Then The Selected "Border radius" should reflect in the chart visual legand
+
+  @PieVisual
+  Scenario: TC_Pie_252:Edit pie > legend > advanced settings icon
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon
+    Then Visual popup should be opened
+    Then The following options should be available
+      | Common     |
+      | Items      |
+      | Size       |
+      | Title      |
+      | Background |
+      | Border     |
+
+  @PieVisual
+  Scenario: TC_Pie_253:Edit pie > Data labels
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    Then "Data labels" should be checked by default
+
+  @PieVisual
+  Scenario: TC_Pie_254:Edit pie > Data labels > advanced settings > Show labels
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon for Data labels
+    Then "Show labels" should be checked by default
+
+  @PieVisual
+  Scenario: TC_Pie_255:Edit pie > Data labels > advanced settings > labels >attributes popup
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon for Data labels
+    And Expand "Labels" section from "Labels" popup
+    And Select attributes "Name" and "Percentage"
+    Then Selected attributes should be displayed along with percentage attribute for visual
+
+  @PieVisual
+  Scenario: TC_Pie_256:Edit pie > Data labels > advanced settings > labels > color
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon for Data labels
+    And Expand "Labels" section from "Labels" popup
+    And Select data label "color" from the list
+    And Select the "#2b60d0" data label color from list
+    And Clicking "Save" option
+    Then Selected color should be applied for visuals
+
+  @PieVisual
+  Scenario: TC_Pie_257:Edit pie > Data labels > advanced settings > labels > highlight
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon for Data labels
+    And Expand "Labels" section from "Labels" popup
+    And Select the "#2b60d0" data label color from list
+    And Select data label "highlight" from the list
+    And Select the "#fda546" data label highlight color from list
+    And Clicking "Save" option
+    Then Selected highlight color for labels should be shown
+
+  @PieVisual
+  Scenario: TC_Pie_258:Edit pie > Data labels > advanced settings > labels > size
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon for Data labels
+    And Expand "Labels" section from "Labels" popup
+    And Select "Data Labels font size" for chart visual to 18
+    And Clicking "Save" option
+    Then The Selected "Font size" should be applied
+
+  @PieVisual
+  Scenario: TC_Pie_259:Edit pie > Data labels > advanced settings > labels > styles
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon for Data labels
+    And Expand "Labels" section from "Labels" popup
+    And Select any "Data Labels Style" for chart visual
+    And Clicking "Save" option
+    Then The Selected "Font Style" should be updated
+
+  @PieVisual
+  Scenario: TC_Pie_260:Edit pie > Data labels > advanced settings > labels > position
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on Advanced settings icon for Data labels
+    And Expand "Labels" section from "Labels" popup
+    Then "Outside" should be default position
+    And Change its position to "Inside"
+    Then Position "Inside" should be displayed
+
+  @PieVisual
+  Scenario Outline: TC_Pie_261:Edit Pie - Tooltip - Verify grouping and decimal under number separators
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Click on Number format dropdown
+    And Select <decimal> and <group> separator from dropdown list
+    And Click on "Save"
+    Then The Selected Decimal seperator and Grouping seperator should be updated with selected input
+
+    Examples: 
+      | decimal | group   |
+      | ","     | "."     |
+      | ","     | "Space" |
+      | ","     | "'"     |
+      | ","     | "-"     |
+      | ","     | "None"  |
+      | "."     | ","     |
+      | "."     | "Space" |
+      | "."     | "'"     |
+      | "."     | "-"     |
+      | "."     | "None"  |
+
+  @PieVisual
+  Scenario: TC_Pie_262:Edit pie > number format dropdown > decimal places
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Click on Number format dropdown
+    And Select "4" separator from "Decimal places" dropdown
+    And Clicking "Save" option
+    Then The Selected "Decimal Places" should be updated with selected input
+
+  @PieVisual
+  Scenario: TC_Pie_263:Edit pie > position
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    Then "Outside" should be default position
+    And Change its position to "Inside"
+    Then Position "Inside" should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_264:Edit Pie - Verify the changes reflected in edit visual
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Uncheck copyright attribute
+    Then The copyright logo should be removed in the edit visual popup
+
+  @PieVisual
+  Scenario: TC_Pie_265:Edit Pie - Verify title icon on visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Mouse hover on visual title for Edit visual popup
+    And Click on edit icon for Edit visual popup
+    Then The "Titles" popup should be appeared
+
+  @PieVisual
+  Scenario: TC_Pie_266:Edit Pie -  Verify titles popup open by clicking on visual title
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Click on the visual title
+    Then The "Titles" popup should be appeared
+
+  @PieVisual
+  Scenario: TC_Pie_267: Edit Pie - Verify date field
+    And Create a pie visual with series id's "296237202;408940397"
+    And Click on "Edit Pie"
+    And Click on date filed in edit visual
+    Then Date popup should be displayed
+    And Select date as "2011" in edit visual popup
+    Then Selected date should be applied to the edit visual
+
+  @PieVisual
+  Scenario: TC_Pie_268: Edit Pie - Verify double clicking on timepoints
+    And Create a pie visual with series id's "408940397;408929327"
+    And Click on "Edit Pie"
+    And Double click on timepoints in the edit visual
+    Then The Labels popup should be displayed
+    And Choose highlight color is Orange
+    Then The label color should update as Orange in the edit visual
+
+  @PieVisual
+  Scenario: TC_Pie_269: Edit pie - Verify clicking on series name
+    And Create a pie visual with series id's "408940397"
+    And Click on "Edit Pie"
+    And Click on Series name
+    Then The SSP window should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_270:Edit pie - Verify Rename series icon
+    And Create a pie visual with series id's "408940397"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon
+    And Click on "Rename"
+    Then "Rename" popup should be displayed for selected series
+
+  @PieVisual
+  Scenario: TC_Pie_271:Edit pie - Verify Frequency option under edit series.
+    And Create a pie visual with series id's "408940397"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon
+    And Select "Frequency" as "Monthly (Replicate)"
+    Then Selected function should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_272:Edit pie - Verify Currency option under edit series.
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon
+    And Select "Currency" as "RMB"
+    Then Selected currency should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_273:Edit pie - Verify Change option under edit series.
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on cogwheel icon
+    And Select "Change" as "% Year-over-Year (%YoY)"
+    Then Selected change function should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_274:Edit pie - Verify Remove series icon.
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on Remove series
+    Then The series should be removed from the edit visual
+
+  @PieVisual
+  Scenario: TC_Pie_275:Edit pie - Verify selecting another visual from visual panel
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Select any visual from visual panel
+    And Click on "Save"
+    Then The visual should be converted as user selected
+
+  @PieVisual
+  Scenario: TC_Pie_276:Edit pie - Verify selecting another visual from visual panel
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on visual panel dropdown
+    And Select "Histogram" visual
+    And Click on "Save"
+    Then The visual should be converted as user selected
+
+  @PieVisual
+  Scenario: TC_Pie_277:Edit pie - Edit series - Verify delete series icon
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on x icon for a series
+    Then The series should be removed from visual and edit series panel
+
+  @PieVisual
+  Scenario: TC_Pie_278:Edit pie - Edit series - Verify SSP by clicking on series name.
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on Series
+    Then SSP popup should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_279:Edit pie - Edit series - Verify Rename series icon
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Rename series" icon
+    Then "Rename" popup should be displayed for selected series
+
+  @PieVisual
+  Scenario: TC_Pie_280:Edit pie - Edit series - Verify Rename option under settings icon.
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Edit series" icon
+    And Select "Rename"
+    Then "Rename" popup should be displayed for selected series
+
+  @PieVisual
+  Scenario: TC_Pie_281:Edit pie - Edit series - Verify Frequency option under edit series
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Edit series" icon
+    And Select "Frequency" as "Yearly (Sum)"
+    Then Selected function should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_282:Edit pie - Edit series - Verify Color option under edit series
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Edit series" icon
+    And Select "Color" as "#2b60d0"
+    Then Selected color should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_283:Edit pie - Edit series - Verify currency option under edit series
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Edit series" icon
+    And Select "Currency" as "RMB"
+    Then Selected currency should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_284:Edit pie - Edit series - Verify change option under edit series
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Edit series" icon
+    And Select "Change" as "% Year-over-Year (%YoY)"
+    Then Selected change function should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_285:Edit pie - Edit series -Verify clicking on frequency or dropdown
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    Then "Series Harmonization" popup should be opened
+
+  @PieVisual
+  Scenario: TC_Pie_286:Edit pie - Edit series - Series data conversion - Verify applying frequency
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    And Select "Frequency" as "Daily" from dropdown
+    And Click on "Apply"
+    Then The selected frequency should be applied to available series
+
+  @PieVisual
+  Scenario: TC_Pie_287:Edit pie - Edit series - Series data conversion - Verify applying Missing values method
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    And Select "Frequency" as "Daily" from dropdown
+    And Select "Missing values method" as "Next value" from dropdown
+    Then Missing values method should be applied with selected frequency
+
+  @PieVisual
+  Scenario: TC_Pie_288:Edit pie - Edit series - Series data conversion -Minimize option
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    And Click on "Minimize" option
+    Then The Series Hormonization popup should be minimized
+
+  @PieVisual
+  Scenario: TC_Pie_289:Edit pie - Edit series - Series data conversion -Verify maximize option
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    And Click on "Minimize" option
+    And Click on "Maximize" option
+    Then The Series Hormonization popup should be maximized
+
+  @PieVisual
+  Scenario: TC_Pie_290:Edit pie - Edit series - Series data conversion -verify full screen
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    And Click on "Full-screen" option
+    Then The Series Hormonization popup should be displayed in full screen
+
+  @PieVisual
+  Scenario: TC_Pie_291:Edit pie - Edit series - Series data conversion -verify exit full screen
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    And Click on "Full-screen" option
+    And Click on "Exit full-screen" option
+    Then The Series Hormonization popup should be displayed in normal screen
+
+  @PieVisual
+  Scenario: TC_Pie_292:Edit pie - Edit series - Series data conversion -Verify Cancel/x icon
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Frequency"
+    And Click on Cancel button
+    Then The Series Hormonization popup should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_293:Edit pie - Edit series - Verify dropdown for frequency in series level
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on frequency dropdown
+    Then List of frequenceies should be available
+
+  @PieVisual
+  Scenario: TC_Pie_294:Edit pie - Edit series - Verify applying frequency in series level
+    And Create a pie visual with series id's "272965603;273074003"
+    And Click on "Edit Pie"
+    And Click on frequency dropdown
+    And Select frequence as "Yearly (Sum)"
+    Then Selected frequency should be displayed in the series
+
+  @PieVisual
+  Scenario: TC_Pie_295:Edit pie - Edit series - Verify applying currency in series level
+    And Create a pie visual with series id's "272965603;273074003"
+    And Click on "Edit Pie"
+    And Click on currency dropdown
+    And Select currency as "USD"
+    Then Selected currency should be displayed in the series
+
+  @PieVisual
+  Scenario: TC_Pie_296:Edit pie - Edit series - Verify clicking on type a function field
+    And Create a pie visual with series id's "272965603;273074003"
+    And Click on "Edit Pie"
+    And Click on type a function field in series level
+    Then List of functions dropdown should be opened
+
+  @PieVisual
+  Scenario: TC_Pie_297:Edit pie - Edit series - Verify applying function in series level
+    And Create a pie visual with series id's "272965603;273074003"
+    And Click on "Edit Pie"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on "Apply function"
+    Then The selected function should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_298:Edit pie - Edit series - Verify cancel icon for selected function
+    And Create a pie visual with series id's "272965603;273074003"
+    And Click on "Edit Pie"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on cancel function icon
+    Then The selected function should be cancelled
+
+  @PieVisual
+  Scenario: TC_Pie_299:Edit Pie - Edit series - Verify multiple functions apply
+    And Create a pie visual with series id's "272965603;273074003"
+    And Click on "Edit Pie"
+    And Click on type a function field in series level
+    And Select multiple functions
+    And Click on "Apply function"
+    Then The selected functions should be applied to the series
+
+  @PieVisual
+  Scenario: TC_Pie_300:Edit Pie - Edit  series - Verify removing applied functions
+    And Create a pie visual with series id's "272965603;273074003"
+    And Click on "Edit Pie"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on "Apply function"
+    And Click on cancel function icon
+    Then The function should be removed from the series
+
+  @PieVisual
+  Scenario: TC_Pie_301:Edit Pie - Edit series - Verify applying invalid function for series
+    And Create a pie visual with series id's "210698402"
+    And Click on "Edit Pie"
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    Then "The function cannot be applied to selected series" popup should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_302:Edit Pie - Edit seires - Verify OK button on "The function cannot be applied to selected series" popup
+    And Create a pie visual with series id's "210698402"
+    And Click on "Edit Pie"
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    And Click on "Ok"
+    Then The function cannot be applied to selected series popup should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_303:Edit Pie - Edit series - Verify 'Type a function' field
+    And Create a pie visual with series id's "272965603"
+    And Click on Edit series option
+    And Click on type a function field
+    And Select any function
+    And Click on "Apply"
+    Then The selected function should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_304:Edit Pie - Edit series - Verify Region, Unit and Series ID fields
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    Then "Region", "Unit" and "Series id" fields should be available for respective series
+
+  @PieVisual
+  Scenario: TC_Pie_305:Edit Pie - Verify feedback option
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Feedback" option
+    Then "Still cannot find an answer?" popup should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_306:Edit Pie -  Feedback - Verify description for popup
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Feedback" option
+    Then The description should be "Do you need any additional features? Please send us your feedback for product enhancements."
+
+  @PieVisual
+  Scenario: TC_Pie_307:Edit Pie - Feedback - Verify Submit and cancel buttons when description field is empty
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Feedback" option
+    Then Submit and Cancel buttons should be disabled by default
+
+  @PieVisual
+  Scenario: TC_Pie_308:Edit Pie - Feedback - Verify cancel button
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Feedback" option
+    And Enter text in description field
+    And Click on cancel button
+    Then The feedback popup should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_309:Edit Pie - Feedback - Verify growl message after  Submit feedback
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Feedback" option
+    And Enter text in description field
+    And Click on submit button
+    Then "Thank you for submitting a question to us." message should be displayed in a growl popup
+
+  @PieVisual
+  Scenario: TC_Pie_310:Edit Pie - Verify cancel/x button
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Click on "Cancel" button
+    Then The edit visual popup should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_311:Edit Pie - Verify save button
+    And Create a pie visual with series id's "272965603"
+    And Click on "Edit Pie"
+    And Change title in edit visual window
+    And Click on "Save" button
+    Then The changes should be reflected to histogram visual and Edit visual popup should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_312:Verify add to insight option
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on + icon on header
+    Then Below options should be displayed
+      | Add to new tab     |
+      | Add to new insight |
+
+  @PieVisual
+  Scenario: TC_Pie_313:Add to insight - Verify 'Add to new tab' option under Add to insight
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on + icon on header
+    And Click on "Add to new tab"
+    Then The Pie visual should be created in vew tab on current insight
+
+  @PieVisual
+  Scenario: TC_Pie_314:Add to insight - Verify confirmation message for adding visual to new insight
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on + icon on header
+    And Click on "Add to new insight"
+    Then "New insight with the selected visual created" and "Go to new insight" confirmation message should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_315:Add to insight - Validate the added visual by opening new insight
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on + icon on header
+    And Click on "Add to new insight"
+    And Click on "Go to new insight"
+    Then The new insight should be opened and added visual should be available in My visual
+
+  @PieVisual
+  Scenario: TC_Pie_316:Copy - Verify confirmation message for copy visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Copy" icon
+    Then "Pie with series copied." and "More options" confirmation message should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_317:Copy - Validate copied visual by pasting with in the insight
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Copy" icon
+    And Paste within the insight
+    Then The visual should be pasted in the insight
+
+  @PieVisual
+  Scenario: TC_Pie_318:Copy - Validate copied visual by pasting to new insight
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Copy" icon
+    And Paste to new insight
+    Then The visual should be pasted to new insight
+
+  @PieVisual
+  Scenario: TC_Pie_319:Copy - Verify the confrimation message for pasting visual in insight
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Copy" icon
+    And Paste within the insight
+    Then "Data pasted from clipboard" message should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_320:Download - Verify Download option
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Download icon
+    Then Download popup should be appeared
+
+  @PieVisual
+  Scenario: TC_Pie_321:Download - Verify pie visual download with excel format
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Download icon
+    And Select "xlsx" format
+    And Click on "Download"
+    Then Pie visual and related series should be downloaded in excel
+
+  @PieVisual
+  Scenario: TC_Pie_322:Download - Verify pie visual download with PDF format
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Download icon
+    And Select "pdf" format
+    And Click on "Download"
+    Then Pie visual should be downloaded in PDF format
+
+  @PieVisual
+  Scenario: TC_Pie_323:Download - Verify pie visual download with PNG format
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Download icon
+    And Select "png" format
+    And Click on "Download"
+    Then Pie visual should be downloaded in PNG format
+
+  @PieVisual
+  Scenario: TC_Pie_324:Download - Verify pie visual download with JPG format
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Download icon
+    And Select "jpeg" format
+    And Click on "Download"
+    Then Pie visual should be downloaded in JPG format
+
+  @PieVisual
+  Scenario: TC_Pie_325:Download - Verify size for JPG/PNG download
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Download icon
+    And Select "jpeg" format
+    And Select width size "652"
+    And Click on "Download"
+    Then The visual should be downloaded with selected size
+
+  @PieVisual
+  Scenario: TC_Pie_326:Verify Open option.
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Open icon
+    Then The visual should be displayed in maximized window
+
+  @PieVisual
+  Scenario: TC_Pie_327:Verify closing of maximized window.
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on Open icon
+    And Click on x icon to close
+    Then The modal window should be closed
+
+  @PieVisual
+  Scenario: TC_Pie_328:Verify Delete pie
+  	And Open preference dropdown
+  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "delete"
+    Then "Confirmation" popup should be dispalyed
+
+  @PieVisual
+  Scenario: TC_Pie_329:Right click - Validate copied pie
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Copy pie chart"
+    And Paste in insight
+    Then Pie visual should be pasted
+
+  @PieVisual
+  Scenario: TC_Pie_330:Right click - Verify Cut pie
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Cut pie chart"
+    Then Pie chart should be cut
+
+  @PieVisual
+  Scenario: TC_Pie_331:Right click - Validate Cut pie
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Cut pie chart"
+    And Paste in insight
+    Then Pie visual should be pasted
+
+  @PieVisual
+  Scenario: TC_Pie_332:Right click - Verify Delete pie
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Delete pie"
+    Then Pie chart should be deleted
+
+  @PieVisual
+  Scenario: TC_Pie_333:Right click - Verify chart under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Chart"
+    Then "Chart" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_334:Right click - Verify Pie under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Pie"
+    Then "Pie" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_335:Right click - Verify table under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Table"
+    Then "Table" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_336:Right click - Verify map under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Map"
+    Then "Map" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_337:Right click - Verify Heat map under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Heat map"
+    Then "Heat map" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_338:Right click - Verify Histogram under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Histogram"
+    Then "Histogram" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_339:Right click - Verify commentary under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Commentary"
+    Then The commentary visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_340:Right click - Verify attachments under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Attachments"
+    Then "Attachments" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_341:Right click - Verify Image under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Image"
+    Then "Image" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_342:Right click - Verify Filter under insert visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Filter"
+    Then "Filter" visual should be created in the same view tab
+
+  @PieVisual
+  Scenario: TC_Pie_343:Right click - Verify Paste visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Copy pie chart"
+    And Again Right click on visual header
+    And Choose "Paste visual"
+    Then Copied visual should be pasted
+
+  @PieVisual
+  Scenario: TC_Pie_344:Right click - View as - Verify Chart
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Chart"
+    Then The "Pie" visual should be converted as "Chart" visual
+
+  @PieVisual
+  Scenario: TC_Pie_345:Right click - View as - Verify Map
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Map"
+    Then The "Pie" visual should be converted as "Map" visual
+
+  @PieVisual
+  Scenario: TC_Pie_346:Right click - View as - Verify Table
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Table"
+    Then The "Pie" visual should be converted as "Table" visual
+
+  @PieVisual
+  Scenario: TC_Pie_347:Right click - View as - Verify Pie
+    And Create a pie visual with series id's "16240301"
+    And Right click on visual header
+    And Select View as > "Histogram"
+    Then The "Pie" visual should be converted as "Histogram" visual
+
+  @PieVisual
+  Scenario: TC_Pie_348:Right click - View as - Verify Heat map
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Heat map"
+    Then The "Pie" visual should be converted as "Heat map" visual
+
+  @PieVisual
+  Scenario: TC_Pie_349:Right click - Verify Calculated series sub dropdown
+    And Create a pie visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Calculate series"
+    And Select function "RMB"
+    Then The function should be applied for the series
+
+  @PieVisual
+  Scenario: TC_Pie_350:Right click - Verify Edit series option
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Edit series"
+    Then The edit series popup should be opened with "Pie" tab
+
+  @PieVisualr
+  Scenario: TC_Pie_351:Right click - Verify Clear contents
+    And Create a pie visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Clear contents"
+    Then The content should be removed
+
+  @PieVisual
+  Scenario: TC_Pie_352:Right click - Verify reset format
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And UnCheck Copyright
+    Then The Copyright logo should be removed for visual
+    And Right click on visual header
+    And Choose "Reset format"
+    Then The Copyright logo should be displayed for visual
+
+  @PieVisual
+  Scenario: TC_Pie_353:Right click - Verify reset format option if have no changes in visual
+    And Create a pie visual with series id's "16240301"
+    And Right click on visual header
+    Then The Reset format option should be disabled
+
+  @PieVisual
+  Scenario: TC_Pie_354:Right click -  Verify download sub dropdown
+    And Create a pie visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Download"
+    Then "Pie" and "View" options should be displayed
+
+  @PieVisual
+  Scenario: TC_Pie_355:Right click -  Verify download > Pie
+    And Create a pie visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Download"
+    And Select Pie
+    Then Download popup should be displayed with Pie tab selection
+
+  @PieVisual
+  Scenario: TC_Pie_356:Right click -  Verify download > View
+    And Create a pie visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Download"
+    And Select View
+    Then Download popup should be displayed with views tab selection
+
+  @PieVisual
+  Scenario: TC_Pie_357:Verify the visual options if visual is not selected
+    And Create a pie visual with series id's "16240301"
+    And Unhighlight the visual
+    Then The visual options should be hidden
+
+  @PieVisual
+  Scenario: TC_Pie_358:Verify applying function under download window for series of pie
+    And Create a pie visual with series id's "16240301"
+    And Click on Download icon
+    And Select "series" tab
+    And Apply any function inside the download window
+    Then Applied functions should be shown in the header of download window
+
+    @PieVisual
+  Scenario: TC_Pie_359:Verify description for delete confirmation popup
+  	And Open preference dropdown
+  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "delete"
+    Then "Do you want to remove this visual?" popup should be dispalyed
+    
+    @PieVisual
+  Scenario: TC_Pie_360:Verify OK button in delete confirmation popup
+  	And Open preference dropdown
+  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "delete" 
+     And Click on "Ok"
+    Then The visual should be deleted
+    
+    @PieVisual
+  Scenario: TC_Pie_361:Verify Cancel/x icon in delete confirmation popup
+  	And Open preference dropdown
+  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a pie visual with series id's "16240301;16243001"
+     And Click on "delete"
+    And Click on "Cancel"
+    Then The popup should be closed and delete visual process should be declined
+    
+     @PieVisual
+  Scenario: TC_Pie_362:Verify 'Add related series' option
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Add related series"
+    Then The series suggestion manager popup should be displayed
+    
+     @PieVisual
+  Scenario: TC_Pie_363:Verify adding series from 'Series suggestion manager' popup
+    And Create a pie visual with series id's "5823501"
+    And Click on "Add related series"
+    And Select a region as "Albania"
+    Then The related series should be added to the visual
+    
+      @PieVisual
+  Scenario: TC_Pie_364:Verify applying function under download window for series of pie
+    And Create a pie visual with series id's "16240301"
+    And Click on Download icon
+    And Select "series" tab
+    And Apply any function inside the download window
+   	And Click on "Download"
+   	Then Applied functions with created pie chart should be downloaded
+    

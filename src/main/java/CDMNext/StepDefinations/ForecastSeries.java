@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -26,13 +27,16 @@ public class ForecastSeries {
 
 	@And("^Add series to the right pane$")
 	public void add_series_to_the_right_pane() throws Throwable {
-		CommonFunctionality.wait(1500);
+		CommonFunctionality.wait(6000);
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
-	
+
 	@Then("^\"([^\"]*)\" tab should be seen in series suggestion manager window$")
 	public void tab_should_be_seen_in_series_suggestion_manager_window(String arg1) throws Throwable {
-		String sugg_manager_tab_text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions-manager']/*/*[1]/*[2]", 10).getText();
+		String sugg_manager_tab_text = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@class='suggestions-manager']/*/*[1]/*[2]", 10).getText();
 		if (sugg_manager_tab_text.equals(arg1)) {
 			login.Log4j.info(arg1 + " tab seen in series suggestion manager window");
 		} else {
@@ -60,12 +64,12 @@ public class ForecastSeries {
 	@And("^Check the checkbox for forecast series$")
 	public void check_the_checkbox_for_forecast_series() throws Throwable {
 		boolean checkbox_forecast = login.driver.findElement(By.xpath(
-				"//*[@class='single-series-preview--operations-container']/*[1]/*[3]/*[2]/*[2]/*[1]/*[@type='checkbox']"))
+				"//*[@class='single-series-preview--operations-container']/*[1]/*[3]/*[2]/*[@class='checkbox-control']//*[@type='checkbox']"))
 				.isSelected();
 		if (!checkbox_forecast == true) {
 			new Actions(login.driver)
 					.moveToElement(login.driver.findElement(By.xpath(
-							"//*[@class='single-series-preview--operations-container']/*[1]/*[3]/*[2]/*[2]/*[1]/*[2]")))
+							"//*[@class='single-series-preview--operations-container']/*[1]/*[3]/*[2]/*[@class='checkbox-control']//*[@type='checkbox']")))
 					.pause(2000).click().build().perform();
 		}
 	}
@@ -74,7 +78,7 @@ public class ForecastSeries {
 	public void chart_with_forecast_suggestions_legends_should_be_displayed() throws Throwable {
 		CommonFunctionality.wait(1000);
 		boolean charts_legend = login.driver
-				.findElement(By.xpath("//*[@class='visual-item']/*[1]/*[1]//*[@class='highcharts-legend']"))
+				.findElement(By.xpath("//*[@class='visual-item']/*[1]/*[1]//*[@class='highcharts-legend highcharts-no-tooltip']"))
 				.isDisplayed();
 		if (charts_legend == true) {
 			login.Log4j.info("Chart with forecast suggestions legends is displayed");
@@ -85,7 +89,8 @@ public class ForecastSeries {
 
 	@And("^click on cross icon for any legends name$")
 	public void click_on_cross_icon_for_any_legends_name() throws Throwable {
-		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]/*[1]", 15);
+		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[@class='legend-item'])[1]/*[1]", 15);
 		new Actions(login.driver).pause(200).moveToElement(legend_item).click().build().perform();
 
 	}
@@ -165,6 +170,7 @@ public class ForecastSeries {
 	public void enter_series_id_s(String arg1) throws Throwable {
 		login.Log4j.info("searching with forecast series" + arg1);
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 8).sendKeys(arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(2000);
 	}
 
@@ -317,12 +323,12 @@ public class ForecastSeries {
 			}
 			List<WebElement> listOfButtons = login.driver.findElements(By.xpath(
 					"//*[@class='series-with-suggestions series-with-forecasts series-with-suggestions__open-suggestions']["
-							+ k + "]//li//button"));
+							+ k + "]//*[@unselectable='on']//button"));
 			for (int j = 0; j < listOfButtons.size(); j++) {
 				int l = j + 1;
 				WebElement Add = login.driver.findElement(By.xpath(
 						"//*[@class='series-with-suggestions series-with-forecasts series-with-suggestions__open-suggestions']["
-								+ k + "]//li[" + l + "]//button"));
+								+ k + "]//*[@unselectable='on'][" + l + "]//button"));
 				if (Add.getAttribute("class").contains("button__active")) {
 					login.Log4j.info("All suggestions get added with keep status");
 				} else {
@@ -331,6 +337,9 @@ public class ForecastSeries {
 			}
 			jse.executeScript("arguments[0].scrollIntoView(true);", list_of_suggestions.get(i));
 		}
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Close']", 6).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='modal-window modal-window__active']//*[contains(text(),'Ok')]", 6).click();
 	}
 
 	@Then("^\"([^\"]*)\" icon in a box should be seen for suggestion series of forecast$")
@@ -706,9 +715,20 @@ public class ForecastSeries {
 		if (login.driver.findElements(By.xpath("//*[@class='tabs__tab-item'][contains(text(),'Forecast')]"))
 				.size() == 0) {
 			login.Log4j.info("Series suggestion popup is closed");
+			try {
+				CommonFunctionality.getElementByXpath(login.driver,
+						"//*[contains(@class,'movable-modal__active')]//*[@title='Close']", 4).click();
+				CommonFunctionality
+						.getElementByXpath(login.driver,
+								"//*[@class='modal-window modal-window__active']//*[contains(text(),'Ok')]", 15)
+						.click();
+			} catch (Exception e) {
+				//
+			}
 		} else {
 			fail("Series popup is not closed");
 		}
+
 	}
 
 	@Then("^Apply button should be disabled$")
@@ -801,8 +821,8 @@ public class ForecastSeries {
 
 	}
 
-	@And("^Create table visual$")
-	public void create_table_visual() throws Throwable {
+	@And("^Create TableVisual$")
+	public void create_TableVisual() throws Throwable {
 
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'View as Table')]", 4).click();
 	}
@@ -897,9 +917,9 @@ public class ForecastSeries {
 
 	@And("^Right click on visual$")
 	public void right_click_on_visual() throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(1500);
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 4);
-		new Actions(login.driver).contextClick(ele).perform();
+		new Actions(login.driver).contextClick(ele).pause(200).perform();
 	}
 
 	@And("^Apply with any function$")
@@ -925,9 +945,11 @@ public class ForecastSeries {
 			fail("Function is not applied");
 		}
 	}
+
 	@Then("^Series legends should disable when mouse hover/clicking on the cross mark on the series$")
-	public void series_legends_should_disable_when_mouse_hover_clicking_on_the_cross_mark_on_the_series() throws Throwable {
-		//mouse hover on legend marker
+	public void series_legends_should_disable_when_mouse_hover_clicking_on_the_cross_mark_on_the_series()
+			throws Throwable {
+		// mouse hover on legend marker
 		WebElement legend_item1 = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='highcharts-legend']/*[1]/*[1]/*[1]//*[@class='legend-item']/*[1]", 4);
 		new Actions(login.driver).moveToElement(legend_item1).pause(200).build().perform();
@@ -942,12 +964,13 @@ public class ForecastSeries {
 		} else {
 			fail("Verification failed");
 		}
-		//clicking on cross icon of legend marker
+		// clicking on cross icon of legend marker
 		legend_item1.click();
 		WebElement Visual_info = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='compare-suggestions-visual--info']", 5);
 		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();
-		if(login.driver.findElement(By.xpath("(//*[@class='highcharts-legend'])[2]/*[1]/*[1]/*[1]")).getAttribute("class").contains("highcharts-legend-item-hidden")) {
+		if (login.driver.findElement(By.xpath("(//*[@class='highcharts-legend'])[2]/*[1]/*[1]/*[1]"))
+				.getAttribute("class").contains("highcharts-legend-item-hidden")) {
 			login.Log4j.info("Legend item is disabled");
 		} else {
 			fail("Legend item is not disabled");

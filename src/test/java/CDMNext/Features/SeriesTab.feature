@@ -7,7 +7,7 @@ Feature: SeriesTab
     When Click on "Apply filter"
     Then Result should be displayed as per selection
 
-  #@SeriesTab
+  #@SeriesTab...functionality has been removed
   #Scenario: TC_SeriesTab_02:Verify "All Insights" option
   #	When Click on "All insights"
   #	Then The "Insight Explorer" popup should be appeared
@@ -66,70 +66,70 @@ Feature: SeriesTab
     When User right click on any series
     Then User can able to see "View as Table" option from dropdown menu
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_11:Verifying "Download" option for series level
     Given User enters seriesID "268193601;69326701"
     When User right click on any series
     Then User can able to see "Download" option from dropdown menu
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_12:Verifying "Footnotes" option for series level
     Given User enters seriesID "354673701;354674001"
     When User right click on any series
     Then User can able to see "Footnotes" option from dropdown menu
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_13:Verifying "Add to Watchlist" option for series level
     Given User enters seriesID "3640701"
     When User right click on any series
     Then User can able to see "Add to Watchlist" option from dropdown menu
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_14:Verifying "Copy selected links" option for series level
     Given User enters seriesID "322968702;213834902"
     When User right click on any series
     Then User can able to see "Copy selected links" option from dropdown menu
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_15:Verifying "Show Dataset" option for series level
     Given User enters seriesID "258074801;406097377"
     When User right click on any series
     Then User can able to see "Show Dataset" option from dropdown menu
 
-   @SeriesTab
-  Scenario: TC_SeriesTab_16:Verifying "Show Database" option for series level
+  @SeriesTab
+  Scenario: TC_SeriesTab_16:Verifying "See in Database" option for series level
     Given User enters seriesID "5823601;5793201(CIUA)"
     When User right click on any series
-    Then User can able to see "Show Database" option from dropdown menu
+    Then User can able to see "See in Database" option from dropdown menu
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_17:Verifying SSP for series
     Given User enters "GDP"
     When Click on Show Series Info icon
     Then SSP window should be displayed
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_18:Verifying "key only" filter for series tab
     Given User enters "GCF"
     And User has selects "More" as "Key only"
     When Click on "Apply filter"
     Then "Key series" should be displayed
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_19:Verifying "with release schedule" filter for series tab
     Given User enters "FDI"
     And User has selects "More" as "With release schedule"
     When Click on "Apply filter"
     Then User verify corresponding results for selected filter
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_20:Verifying "with suggestions for rebased/discontinued series " filter for series tab
     Given User enters "PSI"
     And User has selects "More" as "With suggestions for rebased/discontinued series"
     When Click on "Apply filter"
     Then User verify corresponding results for selected filter
 
-   @SeriesTab
+  @SeriesTab
   Scenario: TC_SeriesTab_21:Verifying "Forecast" filter for series tab
     Given Open "Series" tab
     And User has selects "More" as "Forecast"
@@ -140,93 +140,91 @@ Feature: SeriesTab
   @SeriesTab
   Scenario: TC_SeriesTab_22:Verify 'Mouse over' icons for series level
     Given User enters "5724301"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "Global Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_23:Verify 'Mouse over' icons for series level
     Given User enters "262498601"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "Global Key Series Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_24:Verify 'Mouse over' icons for series level
     Given User enters "5190001"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "China Premium Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_25:Verify 'Mouse over' icons for series level
     Given User enters "5823501"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "Global Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_26:Verify 'Mouse over' icons for series level
     Given User enters "1025401"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "Daily Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_27:Verify 'Mouse over' icons for series level
     Given User enters "376239567"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "Brazil Premium Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_28:Verify 'Mouse over' icons for series level
     Given User enters "389489677"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "Russia Premium Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_29:Verify 'Mouse over' icons for series level
     Given User enters "360724907"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "India Premium Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_30:Verify 'Mouse over' icons for series level
     Given User enters "249445301"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can selects "Indonesia Premium Database"
     Then User can see the selected database in Databases tab
 
   @SeriesTab
   Scenario: TC_SeriesTab_31:Verify 'Mouse over' icons for series level
     Given User enters "400841827"
-    When User Mouse hover on "Show Database" icon
+    When User Mouse hover on "See in Database" icon
     Then User can see the selected database in Databases tab
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_32:Verify 'Mouse over' icons for series level
-    Given User enters "122834404"
-    When User Mouse hover on "Show Database" icon
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_33:Verify 'Mouse over' icons for series level
-    Given User enters "377030917"
-    When User Mouse hover on "Show Database" icon
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_34:Verify 'Mouse over' icons for series level
-    Given User enters "295755902"
-    When User Mouse hover on "Show Database" icon
-    Then User can see the selected database in Databases tab
-
+  #@SeriesTab....functionality has been removed
+  #Scenario: TC_SeriesTab_32:Verify 'Mouse over' icons for series level
+  #Given User enters "122834404"
+  #When User Mouse hover on "See in Database" icon
+  #Then User can see the selected database in Databases tab
+  #
+  #@SeriesTab... functionality has been removed
+  #Scenario: TC_SeriesTab_33:Verify 'Mouse over' icons for series level
+  #Given User enters "377030917"
+  #When User Mouse hover on "See in Database" icon
+  #Then User can see the selected database in Databases tab
+  #@SeriesTab....skipped as there is no OECD productivity db
+  #Scenario: TC_SeriesTab_34:Verify 'Mouse over' icons for series level
+  #Given User enters "5724301"
+  #When User Mouse hover on "See in Database" icon
+  #Then User can see the selected database in Databases tab
   @SeriesTab
   Scenario: TC_SeriesTab_35:Verify 'Mouse over' icons for series level
-    Given User enters seriesID "371376337"
+    Given User enters seriesID "5190101"
     When User Mouse hover on "View as Chart. Type `c`" icon
     Then User can see the Chart Visual in the right pannel
 
@@ -334,23 +332,22 @@ Feature: SeriesTab
     And Click on "Apply filter"
     Then Search results should include series only from world trend plus DB
 
-  #@SeriesTab
+  #@SeriesTab ...functionality has been removed
   #Scenario: TC_SeriesTab_52:Verify click of open icon of 'All insights'
   #And Open "Series" tab
   #And Click on open icon of All insight
   #Then The "Insight Explorer" popup should be appeared
   #
-  #@SeriesTab
+  #@SeriesTab...functionality has been removed
   #Scenario: TC_SeriesTab_53:Verify tabs to display
   #And Click on cogwheel
   #Then "Select tabs to display" popup should be display
   #
-  #@SeriesTab
+  #@SeriesTab....functionality has been removed
   #Scenario: TC_SeriesTab_54:Verify hyperlink of matched insights
   #And Enter keyword "GDP"
   #And Click on x Matched Insights hyperlink
   #Then Insights explorer modal window should open with x number of insights listed
-  
   @SeriesTab
   Scenario: TC_SeriesTab_51:Verifying "View as Pie" option for series level
     Given User enters seriesID "7872901;7874601"
@@ -462,10 +459,10 @@ Feature: SeriesTab
     Then Should redirect to database tab
 
   @SeriesTab
-  Scenario: TC_SeriesTab_67:Verify 'Show Database' option from More actions
+  Scenario: TC_SeriesTab_67:Verify 'See in Database' option from More actions
     Given User enters seriesID "1380601;245178303"
     And Select series and Click on More actions
-    And Select "Show Database"
+    And Select "See in Database"
     Then Navigate to the series from db tab
 
   @SeriesTab
@@ -520,21 +517,18 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_75:Verify selected Region results
-    #And Clear search input
     And User selects "All Regions" as "Albania;Japan"
     When Click on "Apply filter"
     Then User verify the search results
 
   @SeriesTab
   Scenario: TC_SeriesTab_76:Verify selected frequency results
-    #And Clear search input
     And User selects "Frequency" as "Monthly;Semiannually"
     When Click on "Apply filter"
     Then User verify the search results
 
   @SeriesTab
   Scenario: TC_SeriesTab_77:Verify selected unit results
-    #And Clear search input
     And Click on "More" filter
     And User selects "Unit" as "IDR;kg"
     When Click on "Apply filter"
@@ -542,7 +536,6 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_78:Verify selected First obs before and Last ob after results
-    #And Clear search input
     And Click on "More" filter
     And User selects "Date" as "First observation before;Last observation after"
     And User has clicked on "Apply filter"
@@ -550,14 +543,12 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_79:Verify selected status results
-    #And Clear search input
     And User selects "Status" as "Rebased"
     When Click on "Apply filter"
     Then Should display the rebased series
 
   @SeriesTab
   Scenario: TC_SeriesTab_80: Verify keyword search
-    #And Clear search input
     Given User enters keyword "gdp"
     Then User verify keyword search results
 

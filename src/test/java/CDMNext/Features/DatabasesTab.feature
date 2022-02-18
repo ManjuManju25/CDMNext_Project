@@ -281,12 +281,12 @@ Feature: Verifying Databases tab functionality
     And Click on "Add and replace"
     Then The selected table data should be replaced with existing data on the visual
 
-  @DB
-  Scenario: TC_DB_43:Verifying Add and Group for table level
-    And Mouse hover on any table level
-    And Click on dropdown icon
-    And Click on "Add and group"
-    Then Selected table should be added as group in My series
+  #@DB1...functionality has been changed
+  #Scenario: TC_DB_43:Verifying Add and Group for table level
+    #And Mouse hover on any table level
+    #And Click on dropdown icon
+    #And Click on "Add and group"
+    #Then Selected table should be added as group in My series
 
   @DB
   Scenario: TC_DB_44:Verifying Add to new insight for table level
@@ -722,13 +722,13 @@ Feature: Verifying Databases tab functionality
     And Click on More actions
     Then The dropdown should be closed
 
- @DB
+  @DB
   Scenario: TC_DB_98:Verify + icon for series
     And Mouse hover on any series level
     And Click on + icon for a series
     Then The series should be added to my series
 
- @DB
+  @DB
   Scenario: TC_DB_99:Verify + icon when user in view tab
     And Click on View tab on right side
     And Mouse hover on any series level
@@ -736,13 +736,13 @@ Feature: Verifying Databases tab functionality
     Then Chart should be created with the series
 
   #	Then Chart should be created with selected seires
- @DB
+  @DB
   Scenario: TC_DB_100:Verify Add option under add dropdown
     And Mouse hover on any series level
     And Select "Add" option
     Then The series should be added to my series
 
- @DB
+  @DB
   Scenario: TC_DB_101:Verify Add option when Views tab opened in right side panel
     And Click on View tab on right side
     And Mouse hover on any series level
@@ -750,18 +750,18 @@ Feature: Verifying Databases tab functionality
     Then Chart should be created with the series
 
   #	Then Chart should be created with selected seires
- @DB
+  @DB
   Scenario: TC_DB_102:Verify Add and Replace
     And Create a visual and select visual
     And Select a series and Click on dropdown icon
     And Click on "Add and replace"
     Then The selected series should be replaced with existing series on the visual
 
-  @DB
-  Scenario: TC_DB_103:Verify Add and Group
-    And Select a series and Click on dropdown icon
-    And Click on "Add and group"
-    Then Selected series should be added as group in My series
+  #@DB1...functionaly has been changed
+  #Scenario: TC_DB_103:Verify Add and Group
+   #And Select a series and Click on dropdown icon
+    #And Click on "Add and group"
+    #Then Selected series should be added as group in My series
 
   @DB
   Scenario: TC_DB_104:Verify Add to new insight
@@ -843,20 +843,20 @@ Feature: Verifying Databases tab functionality
     And Click on 'A' on keyboard
     Then The series should be added to my series
 
- @DB
+  @DB
   Scenario: TC_DB_112:Verify adding series by double click on series
     And Select some series
     And Just double click on series
     Then The selected series should be added to My series/visuals
 
- @DB
+  @DB
   Scenario: TC_DB_113:Verify adding series to my series with expanded search panel
     And Expand search panel
     And Select series in any database
     And Click on My series
     Then The selected series should be added to My series/visuals
 
- @DB
+  @DB
   Scenario: TC_DB_114:Verify creating visuals with selected series from expanded search panel
     And Expand search panel
     And Select series in any database
@@ -1072,7 +1072,6 @@ Feature: Verifying Databases tab functionality
   #	And Select any recent insight from the dropdown
   #And Click on "Apply"
   #	Then The series should be added to My series tab for selected insight
-  
   @DB
   Scenario: TC_DB_145:Series selection - Verify 'Create new insight' in dropdown
     And Select some series from series level
@@ -1092,7 +1091,6 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_147:Series selection - Verify CTC
     And Select some series from series level
-    And Click on selected series count
     And Click on "Copy to Clipboard" icon on header
     Then Download window should be appeared with selected series count
 

@@ -5,6 +5,7 @@ import static org.testng.Assert.fail;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,7 +32,9 @@ public class Dependency {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).click();
 		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
-		Thread.sleep(5000);
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
+		Thread.sleep(10000);
 	}
 
 	// TC_01
@@ -51,39 +54,43 @@ public class Dependency {
 	// TC_01
 	@Given("^add some of series into my series tab$")
 	public void add_some_of_series_into_my_series_tab() throws Throwable {
-
+Thread.sleep(3000);
 		for (int i = 1; i <= 2; i++) {
 			Thread.sleep(1000);
-			login.driver.findElement(By.xpath(
-					"//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div["
-							+ i + "]/div[1]/span[1]"))
-					.click();
+			login.driver.findElement(By.cssSelector(".tree-node:nth-child("+i+") .svg-checkbox")).click();
 
 		}
+		
 		// mouse over to '+'icon
-		WebElement mouseover = login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']"));
-		action.pause(500).moveToElement(mouseover).build().perform();
+		//WebElement mouseover = login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']"));
+		//action.pause(500).moveToElement(mouseover).build().perform();
 		// login.driver.findElement(By.xpath(
 		// "//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]"))
 		// .click();
 		Thread.sleep(1000);
 
 		// click on '+' icon
-		login.driver.findElement(By.xpath(
-				"//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]"))
-				.click();
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+		Thread.sleep(1000);
+		//select all series check box checked
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		
+		//Thread.sleep(1000);
+		//login.driver.findElement(By.xpath(
+				//"//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]"))
+				//.click();
 		Thread.sleep(2000);
 		// checked check box my series
-		login.driver.findElement(By.xpath(
-				"//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]"))
-				.click();
+	//	login.driver.findElement(By.xpath(
+			//	"//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/label[1]/span[1]"))
+				//.click();
 	}
 
 	// TC_01
 	@Given("^click on related series$")
 	public void click_on_related_series() throws Throwable {
 
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
 	}
 
@@ -111,7 +118,28 @@ public class Dependency {
 	@Then("^Chart of first dependencies only shown and all below are hidden$")
 	public void chart_of_first_dependencies_only_shown_and_all_below_are_hidden() throws Throwable {
 		Thread.sleep(8000);
-		WebElement scrolldown1 = login.driver
+		
+		
+		if(login.driver.findElements(By.xpath("//div[@class='series-with-suggestions-preview series-with-suggestions-preview__active']")).size()==1)
+		{
+			System.out.println("First dependencies chat shown");
+		}
+		else {
+			Assert.fail();
+		}
+		
+		
+		WebElement scrolldown = login.driver.findElement(By.xpath("//div[@class='series-with-suggestions-preview']"));
+		Thread.sleep(1000);
+		js.executeScript("arguments[0].scrollIntoView();", scrolldown);
+		
+		
+		
+		//login.driver.findElements(By.xpath("//div[@class='series-with-suggestions-preview']")).size()==2
+		
+		
+		
+	/*	WebElement scrolldown1 = login.driver
 				.findElement(By.xpath("//span[contains(text(),'FX Spot Rate: FRB: Finland Markkas')]"));
 		Thread.sleep(1000);
 		js.executeScript("arguments[0].scrollIntoView();", scrolldown1);
@@ -122,7 +150,7 @@ public class Dependency {
 		WebElement scrolldown = login.driver
 				.findElement(By.xpath("//div[contains(text(),'Gross DomesticProduct (GDP): 2015p: sa')]"));
 		Thread.sleep(1000);
-		js.executeScript("arguments[0].scrollIntoView();", scrolldown);
+		js.executeScript("arguments[0].scrollIntoView();", scrolldown);*/
 
 		System.out.println("Test case pass");
 		// CommonFunctionality.DeleteSeries();
@@ -175,10 +203,7 @@ public class Dependency {
 	public void add_button_should_get_colored_by_ticking_as_right_with_apply_button_enabled() throws Throwable {
 		Thread.sleep(3000);
 
-		if (login.driver.findElement(By.xpath(
-				"//body/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li[1]/div[1]/a[1]/div[4]/button[1]/span[1]"))
-				.isDisplayed())
-
+		if (login.driver.findElements(By.xpath("(//button[@class='button button__sm button__secondary_purple suggested-series-control--add button__active'])[1]")).size()==1)
 		{
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
@@ -283,9 +308,7 @@ public class Dependency {
 	public void click_on_any_of_the_series_add_button() throws Throwable {
 		Thread.sleep(4000);
 
-		login.driver.findElement(By.xpath(
-				"//body/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li[1]/div[1]/a[1]/div[4]/button[1]"))
-				.click();
+		login.driver.findElement(By.xpath("(//button[@class='button button__sm button__secondary_purple suggested-series-control--add'])[1]")).click();
 
 	}
 
@@ -358,13 +381,10 @@ public class Dependency {
 			throws Throwable {
 
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath(
-				"/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/div[1]/span[1]"))
-				.click();
+		login.driver.findElement(By.xpath("(//span[@class='series-edit--title series-edit--title__editable'])[1]")).click();
+		
 		Thread.sleep(2000);
-		String SSP = login.driver
-				.findElement(By.xpath("//body/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]"))
-				.getText();
+		String SSP = login.driver.findElement(By.xpath("//span[@class='series-preview-modal-header--link']")).getText().toString();
 		System.out.println("SSP popup should be open:" + SSP);
 		System.out.println("------------------------------------>10");
 	}
@@ -374,8 +394,7 @@ public class Dependency {
 	public void mouse_Hover_on_any_of_the_series_present_under_dependencies_tab() throws Throwable {
 		Thread.sleep(3000);
 
-		WebElement we = login.driver.findElement(By.xpath(
-				"/html[1]/body[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li[1]/div[1]/a[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]"));
+		WebElement we = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
 		action.moveToElement(we).build().perform();
 
 	}
@@ -384,7 +403,7 @@ public class Dependency {
 	@Then("^Should be shown with series tooltip$")
 	public void should_be_shown_with_series_tooltip() throws Throwable {
 		Thread.sleep(3000);
-		WebElement tooltip = login.driver.findElement(By.xpath("/html[1]/body[1]/div[8]"));
+		WebElement tooltip = login.driver.findElement(By.xpath("//body/div[8]"));
 		System.out.println("tooltip data:" + tooltip);
 		if (tooltip.isDisplayed()) {
 			System.out.println("Tooltip displayed");
@@ -404,9 +423,9 @@ public class Dependency {
 	public void click_on_any_of_the_series_under_dependencies_tab() throws Throwable {
 		Thread.sleep(2000);
 		String seriesname = login.driver
-				.findElement(By.xpath("//div[contains(text(),'FX Spot Rate: FRB: Finland Markkas')]")).getText();
+				.findElement(By.xpath("(//div[@class='suggested-series-item--title'])[1]")).getText();
 		System.out.println("series name:" + seriesname);
-		login.driver.findElement(By.xpath("//div[contains(text(),'FX Spot Rate: FRB: Finland Markkas')]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='suggested-series-item--title'])[1]")).click();
 		Thread.sleep(2000);
 
 	}
@@ -418,7 +437,7 @@ public class Dependency {
 		Thread.sleep(2000);
 		String Sname = login.driver
 				.findElement(
-						By.xpath("/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]"))
+						By.xpath("//span[@class='series-preview-modal-header--link']"))
 				.getText();
 		System.out.println("Sname:" + Sname);
 		System.out.println("series name:" + seriesname);
@@ -432,7 +451,7 @@ public class Dependency {
 	public void click_on_Add_button_for_dependencies_present() throws Throwable {
 		Thread.sleep(3000);
 
-		for (int i = 1; i <= 4; i++) {
+		for (int i = 1; i <=3; i++) {
 			// String
 			// series1=login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li[1]/div[1]/a[1]/div[3]/div[1]/div[2]/div[1]/div[1]")).getText();
 
@@ -440,10 +459,7 @@ public class Dependency {
 			/// seires1=login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li[1]/div[1]/a[1]/div[3]/div[1]/div[2]/div[1]/div[1]"));
 			// System.out.println("series name in dependencetab:"+series1 );
 
-			login.driver.findElement(By.xpath(
-					"//body/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li["
-							+ i + "]/div[1]/a[1]/div[4]/button[1]"))
-					.click();
+			login.driver.findElement(By.xpath("(//button[@class='button button__sm button__secondary_purple suggested-series-control--add'])["+i+"]")).click();
 
 		}
 
@@ -490,14 +506,10 @@ public class Dependency {
 	public void should_be_able_to_add_dependencies_for_selected_series_under_dependencies_tab() throws Throwable {
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath(
-				"//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]"))
-				.click();
+		login.driver.findElement(By.xpath("(//div[@class='webix_tree_close'])[1]")).click();
 
 		Thread.sleep(1000);
-		String seriesname = login.driver.findElement(By.xpath(
-				"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/div[3]/div[2]/div[1]/div[1]/span[1]/span[1]"))
-				.getText();
+		String seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field-title'])[2]")).getText();
 		System.out.println("my series series name:" + seriesname);
 		// System.out.println("series name in dependencetab:"+series1 );
 
@@ -577,8 +589,8 @@ public class Dependency {
 //TC_19
 	@Then("^click on the minimizing icon in SSP Window$")
 	public void click_on_the_minimizing_icon_in_SSP_Window() throws Throwable {
-		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[1]")).click();
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//div[@class='movable-modal single-series-preview--modal movable-modal__draggable movable-modal__active']//div[@title='Minimize']")).click();
 		System.out.println("minimizing the SSP window");
 
 		System.out.println("------------------------------------>19");
@@ -672,23 +684,31 @@ public class Dependency {
 	public void create_visuals_of_the_my_series_like_table() throws Throwable {
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath(
-				"//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]"))
-				.click();
+		
+		//select all series check box checked
+				login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+				
+				
+				//click on Right click
+				
+				WebElement rightbutton = login.driver.findElement(By.xpath("(//span[@class='group-name'])[1]"));
+				action.contextClick(rightbutton).perform();
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
+				Thread.sleep(2000);
 
-		// click on + icon
-		WebElement mouseover = login.driver
-				.findElement(By.xpath("//span[contains(text(),'FX Spot Rate: FRB: Finland Markkas')]"));
-		action.pause(500).moveToElement(mouseover).build().perform();
-
-		// Right button click
-		WebElement rightbutton = login.driver
-				.findElement(By.xpath("//span[contains(text(),'FX Spot Rate: FRB: Finland Markkas')]"));
-		action.contextClick(rightbutton).perform();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
-		Thread.sleep(2000);
-
+				
+				//series harmonization
+				if(login.driver.findElements(By.xpath("//button[contains(text(),'Apply')]")).size()==1)
+				{
+					login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+				}
+				
+				
+				
+		
+	
+		
 	}
 
 //TC_24
@@ -696,7 +716,7 @@ public class Dependency {
 	public void should_be_able_to_create_selectedvisuals() throws Throwable {
 		Thread.sleep(2000);
 
-		if (login.driver.findElement(By.xpath("//span[contains(text(),'YTD')]")).isDisplayed()) {
+		if (login.driver.findElement(By.xpath("//button[contains(text(),'Edit Table')]")).isDisplayed()) {
 			System.out.println("Should be able to create selectedvisuals");
 		}
 
@@ -725,15 +745,15 @@ public class Dependency {
 	public void click_on_series_name_in_dependencies_series() throws Throwable {
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("//div[contains(text(),'FX Spot Rate: FRB: Finland Markkas')]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='suggested-series-item--title'])[1]")).click();
 
 	}
 
 //TC_25
 	@Then("^SSP window for dependencies series should be opened$")
 	public void ssp_window_for_dependencies_series_should_be_opened() throws Throwable {
-
-		if (login.driver.findElement(By.xpath("//span[contains(text(),'United States')]")).isDisplayed()) {
+Thread.sleep(3000);
+		if (login.driver.findElements(By.xpath("//div[@class='main-series-information--series-id']")).size()==1) {
 			System.out.println("SSP window should be open");
 		}
 
@@ -750,7 +770,7 @@ public class Dependency {
 	public void closing_SSP_window_using_cross_mark() throws Throwable {
 
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[3]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='movable-modal--close'])[2]")).click();
 
 	}
 
@@ -758,7 +778,7 @@ public class Dependency {
 	@Then("^SSP window for dependencies series should be closed$")
 	public void ssp_window_for_dependencies_series_should_be_closed() throws Throwable {
 
-		if (login.driver.findElement(By.xpath("//div[@class='suggestions-panel--mode-manage']")).isDisplayed()) {
+		if (login.driver.findElements(By.xpath("(//div[@class='insight-action-panel--btn-title'])[1]")).size()==1) {
 			System.out.println("SSP window should be close");
 		}
 
@@ -780,10 +800,10 @@ public class Dependency {
 		js.executeScript("arguments[0].scrollIntoView();", scrolldown);
 		Thread.sleep(3000);
 		// css selector--> // div.highcharts-series-6 .legend-item--marker
-		login.driver.findElement(By.xpath(
-				"//*[@class='legend-item--marker legend-item--hide-series' and contains(@style,'color:#FDA546')]"))
-				.click();
-
+		//login.driver.findElement(By.xpath("//*[@class='legend-item--marker legend-item--hide-series' and contains(@style,'color:#FDA546')]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='legend-item--marker legend-item--hide-series'])[1]")).click();
+		
+		
 		Thread.sleep(2000);
 	}
 
@@ -837,7 +857,7 @@ public class Dependency {
 		Thread.sleep(3000);
 
 		WebElement hovermouse = login.driver
-				.findElement(By.xpath("//span[contains(text(),'Exchange Rate against USD: Period End: Monthly: Fi')]"));
+				.findElement(By.xpath("//div[contains(text(),'Gross DomesticProduct (GDP): 2015p: sa')]"));
 
 		action.pause(500).moveToElement(hovermouse).build().perform();
 		Thread.sleep(2000);
@@ -864,7 +884,7 @@ System.out.println("------------------------------------>30");
 	public void click_on_OK_button() throws Throwable {
 		Thread.sleep(2000);
 		login.driver
-				.findElement(By.xpath("//body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[2]/button[2]"))
+				.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']"))
 				.click();
 
 	}
@@ -876,7 +896,8 @@ System.out.println("------------------------------------>30");
 		Thread.sleep(3000);
 
 		if (login.driver.findElement(By.xpath(
-				"//body/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li[1]/div[1]/a[1]/div[4]/button[1]"))
+				"(//div[@class='suggested-series-item--title'])[1]"))
+			//"//body/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/li[1]/div[1]/a[1]/div[4]/button[1]"))
 				.isDisplayed()) {
 			System.out.println("Test case pass");
 			login.driver.findElement(By.xpath("//button[contains(text(),'Cancel')]")).click();
@@ -903,9 +924,16 @@ Thread.sleep(3000);
 	public void should_be_able_reflect_changes_made_on_dependency_series_but_should_not_close_add_related_series_window()
 			throws Throwable {
 
+		
+		
+		
+		
+		
+		
+		
 		// click on cancel button
 		login.driver
-				.findElement(By.xpath("//body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[2]/button[1]"))
+				.findElement(By.xpath("//button[@class='sphere-modal-control button button__text_purple']"))
 				.click();
 
 		if (login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).isDisplayed()) {

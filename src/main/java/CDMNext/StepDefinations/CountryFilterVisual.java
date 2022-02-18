@@ -276,14 +276,14 @@ public class CountryFilterVisual {
 		CommonFunctionality.wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-		List<WebElement> li_All =  login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
+		List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_All.size());
 		List<WebElement> checkBox = login.driver
-				.findElements(By.xpath("//ul[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
+				.findElements(By.xpath("//div[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
@@ -381,13 +381,13 @@ public class CountryFilterVisual {
 		CommonFunctionality.wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-		List<WebElement> li_All =  login.driver.findElements(By.xpath("//ul[@class='search-series-list']/*//*[@class='series-item--name']"));
+		List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
 		List<WebElement> checkBox = login.driver
-				.findElements(By.xpath("//ul[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
+				.findElements(By.xpath("//*[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//ul[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();

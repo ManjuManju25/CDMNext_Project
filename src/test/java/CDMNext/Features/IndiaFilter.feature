@@ -1,6 +1,6 @@
 Feature: Verifying India region filter functionality
 
-  @Indiafilter1
+  @Indiafilter
   Scenario: TC_IND_01: Verifying states , Districts and Cities/Towns in state administrative tab for India
     Given Read the Excel file "INP_administrative_map_PROD.xlsx"
     And Click on "All Regions" dropdown

@@ -48,6 +48,7 @@ public class ImageVisual {
 
 	@And("^Select \"([^\"]*)\" icon$")
 	public void select_icon(String arg1) throws Throwable {
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']/*", 20).click();
 	}
 
@@ -73,21 +74,21 @@ public class ImageVisual {
 
 	@Then("^Below optins should be available$")
 	public void below_optins_should_be_available(List<String> list) throws Throwable {
-
+		CommonFunctionality.wait(2000);
 		String arg1 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='mce-widget mce-btn mce-first']", 20)
+				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[1]/*[1]", 20)
 				.getAttribute("aria-label");
 		String arg2 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='mce-widget mce-btn mce-last']", 20)
+				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[1]/*[2]", 20)
 				.getAttribute("aria-label");
-		String arg3 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-txt']", 20).getText();
+		String arg3 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[2]/*[1]", 20).getText();
 		String arg4 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='mce-widget mce-btn mce-first']", 20)
+				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[3]/*[1]", 20)
 				.getAttribute("aria-label");
-		String arg5 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-widget mce-btn']", 20)
+		String arg5 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[3]/*[2]", 20)
 				.getAttribute("aria-label");
 		String arg6 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='mce-widget mce-btn mce-last']", 20)
+				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[3]/*[3]", 20)
 				.getAttribute("aria-label");
 
 		if (list.contains(arg1) && list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
@@ -236,7 +237,7 @@ public class ImageVisual {
 	public void below_options_should_be_available_in_General_tab(List<String> list) throws Throwable {
 		CommonFunctionality.wait(500);
 		List<WebElement> generalTab_options = login.driver.findElements(By.xpath(
-				"//*[@class='mce-container mce-form mce-abs-layout-item mce-first']//*[@class='mce-widget mce-label mce-abs-layout-item mce-first']"));
+				"//*[@role='tablist']/*"));
 		int j = 0;
 
 		for (String arg : list) {
@@ -254,21 +255,21 @@ public class ImageVisual {
 			}
 		}
 
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-close']", 30).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-icon']", 30).click();
 	}
 
 	@And("^select uplod tab$")
 	public void select_uplod_tab() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-tabs']/*[2]", 30).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Upload')]", 30).click();
 	}
 
 	@Then("^Below options should be available in Upload tab$")
 	public void below_options_should_be_available_in_Upload_tab(List<String> list) throws Throwable {
 		String arg1 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='mce-reset']/*[2]/*[2]/*[2]/*[3]//button//*", 20)
+				.getElementByXpath(login.driver, "//*[@class='tox-dropzone']/*[1]", 20)
 				.getText();
 		String arg2 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='mce-reset']/*[2]/*[2]/*[2]/*[3]/*[1]/*[3]/*", 20)
+				.getElementByXpath(login.driver, "//*[@class='tox-dropzone']/*[2]", 20)
 				.getText();
 		for (String str : list) {
 			if (str.equalsIgnoreCase(arg1)) {
@@ -279,7 +280,7 @@ public class ImageVisual {
 				Assert.fail("Verification failed");
 			}
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-close']", 30).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-icon']", 30).click();
 	}
 
 	@Then("^Image should be uploaded in view tab$")
@@ -300,12 +301,12 @@ public class ImageVisual {
 	@And("^click on cross mark button$")
 	public void click_on_cross_mark_button() throws Throwable {
 		// close insert/edit or upload image popup
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='mce-close']", 30).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-icon']", 30).click();
 	}
 
 	@Then("^Window should be closed$")
 	public void window_should_be_closed() throws Throwable {
-		if (login.driver.findElements(By.xpath("//*[@class='mce-close']")).size() == 0) {
+		if (login.driver.findElements(By.xpath("//*[@class='tox-icon']")).size() == 0) {
 			login.Log4j.info("Pass");
 		} else {
 			Assert.fail("Verification failed");
@@ -317,7 +318,7 @@ public class ImageVisual {
 		sourceUrl = arg1;
 		CommonFunctionality
 				.getElementByXpath(login.driver,
-						"//*[@class='mce-combobox mce-filepicker mce-abs-layout-item mce-last']//input", 30)
+						"//*[@class='tox-control-wrap']//input", 30)
 				.sendKeys(arg1);
 	}
 
@@ -325,7 +326,7 @@ public class ImageVisual {
 	public void enter_Image_Title_as(String arg1) throws Throwable {
 		title = arg1;
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='mce-container mce-abs-layout-item mce-formitem']//input", 30).sendKeys(arg1);
+				"//*[@class='tox-form']/*[2]//input", 30).sendKeys(arg1);
 	}
 
 	@And("^Enter Dimensions as (\\d+) and (\\d+)$")
@@ -334,16 +335,16 @@ public class ImageVisual {
 		dimension2 = Integer.toString(arg2);
 		WebElement ele1 = CommonFunctionality
 		.getElementByXpath(login.driver,
-				"//*[@class='mce-container mce-abs-layout-item mce-last mce-formitem']/*[1]/*[3]/*[1]/*[2]", 30);
+				"//*[@class='tox-form']/*[3]/*[1]/*[1]/*[2]", 30);
 		ele1.clear();
 		ele1.sendKeys(dimension1);
 		WebElement ele2 = CommonFunctionality
 		.getElementByXpath(login.driver,
-				"//*[@class='mce-container mce-abs-layout-item mce-last mce-formitem']/*[1]/*[3]/*[1]/*[4]", 30);
+				"//*[@class='tox-form']/*[3]/*[1]/*[2]/*[2]", 30);
 		ele2.clear();
 		ele2.sendKeys(dimension2);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='mce-container mce-panel mce-foot']//*[contains(text(),'Ok')]", 30).click();
+				"//*[@class='tox-dialog__footer-end']/*[2]", 30).click();
 	}
 
 	@Then("^Image should be uploaded in view tab with given details$")
@@ -413,7 +414,7 @@ public class ImageVisual {
 		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,
-				"//ul[@class='search-series-list']/*[1]", 8);
+				"//div[@class='search-series-list']/*[1]", 8);
 		if (!(selected.getAttribute("class").contains("series-list-item__selected"))) {
 			new Actions(login.driver).moveToElement(series_cb).pause(4000).click().build().perform();
 		}

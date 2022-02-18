@@ -1,8 +1,6 @@
 Feature: Verifying sprint cases functionality
 
-  #Background:
-  #Given User has successful logged in
-  @Sprint
+   @Sprint
   Scenario: TC_12744_01: Clear All filters button to clear all filters set
    And User enters keyword "Banglore"
     And Click on "More" filter
@@ -45,7 +43,7 @@ Feature: Verifying sprint cases functionality
 
   @Sprint
   Scenario: TC_15496_07: Improve Insights Summary popup
-    And User enters "383438937"
+    And User enters "91271701"
     And Create visual
     Then "Latest changes in your Insight" should be displayed in the summary popup
     And "Replacements" should be displayed in the summary popup

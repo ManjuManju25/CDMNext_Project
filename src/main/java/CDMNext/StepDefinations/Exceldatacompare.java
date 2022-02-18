@@ -63,29 +63,14 @@ public class Exceldatacompare {
 	//TC_01
 	@And("^User Select Series ID  as \"([^\"]*)\"$")
 	public void user_Select_Series_ID_as(String arg2) throws Throwable {
-		//System.out.println("==========================>first line Execution completed=====================================>");
-		Thread.sleep(2000);
-		//user_Refresh_the_page();	
-		//Thread.sleep(6000);
-		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).click();
-		Thread.sleep(2000);
-		//System.out.println("==========================>first line Execution completed=====================================>");
-		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).clear();
-		
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg2);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg2);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		Thread.sleep(5000);
-		//System.out.println("==========================>first line Execution completed=====================================>");
-		//login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
-		 WebElement mouse=login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/label[2]"));
-		//action.move
-		action.pause(500).moveToElement(mouse).build().perform();
-		Thread.sleep(2000);
-		
-		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/label[2]")).click();
-		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
-		Thread.sleep(5000);
+		CommonFunctionality.getElementByXpath(login.driver,"//span[contains(text(),'Series')]",8).click();
+		WebElement mouseover = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",10);
+		action.pause(500).moveToElement(mouseover).build().perform();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='add-to-data-selection--icon']",8).click();
 		get_the_Series_name();
 		System.out.println("==========================>first line Execution completed=====================================>");
 	}
@@ -128,8 +113,8 @@ public class Exceldatacompare {
 	
 	@Given("^get the Series name$")
 	public void get_the_Series_name() throws Throwable {
-		
-		Seriesname = login.driver.findElement(By.xpath("//div[@class='series-item--name']")).getText();
+		CommonFunctionality.wait(500);
+		Seriesname = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-item--name']",8).getText();
 		 r = Seriesname.replace(":","");
 		System.out.println(r);
 	}
