@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 //import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -27,7 +29,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 public class Mnemonics {
-	public String mnemonictxt;
+	public static String mnemonictxt;
 	public String[] series_id = null;
 	public String ssp;
 	WebDriverWait wait = new WebDriverWait(login.driver, 1000);
@@ -159,6 +161,7 @@ public class Mnemonics {
 		CommonFunctionality.ResetMethod();
 		login.Log4j.info("Searching with " + mnemonictxt);
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 4).sendKeys(mnemonictxt);
+		CommonFunctionality.getElementByProperty(login.driver, "Search", 4).sendKeys(Keys.ENTER);
 	}
 
 	@Then("^User should get Mnemonic Code and Series_id in SSI window$")
@@ -168,12 +171,12 @@ public class Mnemonics {
 		Boolean MnemonicSearch = false;
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 4).click();
-		WebElement ul_element = null;
+		//WebElement ul_element = null;
 		try {
 			Thread.sleep(5000);
-			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.xpath("//li//div[@class='series-item--name']"));
+//			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+//			AssertJUnit.assertNotNull(ul_element);
+			List<WebElement> li_All = login.driver.findElements(By.xpath("//div[@class='series-item--name']"));
 			login.Log4j.info("List size is :" + li_All.size());
 
 			for (int i = 0; i < li_All.size(); i++) {
@@ -203,6 +206,11 @@ public class Mnemonics {
 					}
 
 				} else if (li_All.size() == 2) {
+					
+					new Actions(login.driver).pause(400).moveToElement(li_All.get(i)).perform();
+					CommonFunctionality.wait(800);
+					WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					TooltipInfo = tooltip.getText();
 
 					if ((series_id.length) == 2 && TooltipInfo.contains(mnemonictxt) == true
 
@@ -361,3 +369,4 @@ public class Mnemonics {
 	}
 
 }
+

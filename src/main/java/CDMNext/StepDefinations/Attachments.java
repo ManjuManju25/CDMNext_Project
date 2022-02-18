@@ -83,6 +83,7 @@ public class Attachments {
 
 	@Then("^The Attachments should update the \"([^\"]*)\" text color as blue$")
 	public void the_Attachments_should_update_the_text_color_as_blue(String arg1) throws Throwable {
+		CommonFunctionality.wait(500);
 		String color = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='" + arg1 + "']", 30)
 				.getCssValue("color");
 		commentary.ColorValidation(color);
@@ -153,6 +154,9 @@ public class Attachments {
 	public void enter_in_the_link_field(String arg1) throws Throwable {
 		ExpectedLink = arg1;
 		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
+		
+		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='links-tab--editor']/*[1]//input[@type='text']", 5)
 				.sendKeys(arg1);
 		// CommonFunctionality.getElementByXpath(driver, "//*[contains(text(),'Ok')]",
@@ -193,6 +197,8 @@ public class Attachments {
 
 	@Then("^The attachment visual should be created in new tab on current insight$")
 	public void the_attachment_visual_should_be_created_in_new_tab_on_current_insight() throws Throwable {
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
 		CommonFunctionality.wait(2000);
 		String ActualLink = login.driver.findElement(By.xpath("(//*[@class='attachments-item-link--row']//a)[2]"))
 				.getText();
@@ -299,6 +305,9 @@ public class Attachments {
 	@And("^Type any name in the title field$")
 	public void type_any_name_in_the_title_field() throws Throwable {
 		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
+		
+		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='links-tab--editor']/*[2]//input[@type='text']", 5)
 				.sendKeys("Title");
 	}
@@ -317,6 +326,9 @@ public class Attachments {
 
 	@Then("^The OK and cancel buttons should be disabled$")
 	public void the_OK_and_cancel_buttons_should_be_disabled() throws Throwable {
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@data-tab='links']", 5).click();
+		
 		Boolean button_ok = login.driver
 				.findElement(By.xpath("//*[@class='links-tab--buttons']//*[contains(text(),'Ok')]")).isEnabled();
 		Boolean button_cancel = login.driver
@@ -465,7 +477,7 @@ public class Attachments {
 
 	@And("^Click on Remove file$")
 	public void click_on_Remove_file() throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
 		login.driver.findElement(By.linkText("Remove file")).click();
 	}
 
@@ -493,11 +505,13 @@ public class Attachments {
 		String format = "png";
 		CommonFunctionality.getTheNewestFile(format);
 		File file = CommonFunctionality.theNewestFile;
-		/*
-		 * if (file.delete()) { System.out.println(file.getName() + " is deleted!"); }
-		 * else { System.out.println("Delete operation is failed."); }
-		 */
-		//CommonFunctionality.DeleteVisual();
+		if (file.delete()) {
+			System.out.println(file.getName() + " is deleted!");
+		} else {
+			System.out.println("Delete operation is failed.");
+		}
+
+		// CommonFunctionality.DeleteVisual();
 	}
 
 	@And("^Try to upload multiple files in the same visual$")
@@ -515,7 +529,7 @@ public class Attachments {
 
 	@Then("^Should allow to upload multiple files to the visual$")
 	public void should_allow_to_upload_multiple_files_to_the_visual() throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(1000);
 		List<WebElement> list_files = login.driver
 				.findElements(By.xpath("//*[@class='uploader-tab--files-list']//div[@js-type='file']"));
 		if (list_files.size() > 1) {

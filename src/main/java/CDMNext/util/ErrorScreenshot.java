@@ -86,6 +86,7 @@ public class ErrorScreenshot {
 		
 		return date.format(currentDate);
 	}
+	
 	/*public static void takeScreenshotOnFailure1(ITestResult result) throws IOException {
 		// if test case is failing then only it will enter into if condition
 		if (ITestResult.FAILURE == result.getStatus()) {

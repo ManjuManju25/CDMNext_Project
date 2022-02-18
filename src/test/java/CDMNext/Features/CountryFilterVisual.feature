@@ -1,4 +1,4 @@
-@tag
+
 Feature: Verifying Country Filter functionality
 
   Background: 

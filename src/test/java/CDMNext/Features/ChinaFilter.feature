@@ -5,4 +5,5 @@ Feature: Verifying China filter functionality
     And Read the Excel file "Geo_Tag_Production.xlsx"
     And Click on "All Regions" dropdown
     And Select subnational as "China"
-    Then Compare the provinces , prefectures and counties with test data
+    #Then Compare the provinces , prefectures and counties with test data
+    Then Compare the "provinces" , "prefectures" and "counties" with test data

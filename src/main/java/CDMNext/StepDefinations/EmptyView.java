@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,8 +27,9 @@ public class EmptyView {
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	int max_of_visuals_created;
 	public String region1,region2;
+	
 	@And("^Click on View tab$")
-	public void click_on_View_tab() throws Throwable {
+	public static void click_on_View_tab() throws Throwable {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@title='Create new View tab']")).click();
 	}
@@ -157,6 +159,7 @@ public class EmptyView {
 	public void add_the_series_to_the_visual() throws Throwable {
 		// CommonFunctionality.getElementByProperty(login.driver, "Search",
 		// 5).sendKeys("210698402");
+		CommonFunctionality.wait(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 10).click();
@@ -211,9 +214,12 @@ public class EmptyView {
 	@And("^Create Histogram and Map visuals$")
 	public void create_Histogram_and_Map_visuals() throws Throwable {
 		click_on_View_tab();
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("210698402");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		// create histogram visual
 		hs.click_on_histogram_visual_icon();
+		CommonFunctionality.wait(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
 		region1 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--country country-information']", 10).getText();
@@ -225,6 +231,7 @@ public class EmptyView {
 				.click().perform();
 		CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("5958801");
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(3000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
@@ -238,7 +245,7 @@ public class EmptyView {
 		CommonFunctionality.wait(2000);
 		// Visuals position before drag and drop
 		WebElement sourecEle = login.driver.findElement(
-				By.xpath("(//*[contains(@class,'map-template')]//*[@class='visual-title--text text-dots'])[1]"));
+				By.xpath("(//*[@data-row-index='2']//*[@class='visual-title--text text-dots'])[1]"));
 		String Visual2_map_title_text = sourecEle.getText();
 		CommonFunctionality.wait(2000);
 		WebElement targetEle = login.driver.findElement(
@@ -282,7 +289,7 @@ public class EmptyView {
 
 	@Then("^Copied visual should be pasted without empty view$")
 	public void copied_visual_should_be_pasted_without_empty_view() throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(2500);
 		String ExpectedTitle = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 10)
 				.getText();
 		if (Histogram.Visual_Title_txt.equals(ExpectedTitle)) {
@@ -315,7 +322,7 @@ public class EmptyView {
 
 	@Then("^Visual should be converted into selected visual format$")
 	public void visual_should_be_converted_into_selected_visual_format() throws Throwable {
-		hs.the_Hisogram_visual_should_be_converted_as_visual("Chart");
+		hs.the_visual_should_be_converted_as_visual("visual", "Chart");
 	}
 
 	@Then("^Calculate series should be in disabled state$")
@@ -333,7 +340,12 @@ public class EmptyView {
 
 	@Then("^The edit series popup should be opened$")
 	public void the_edit_series_popup_should_be_opened() throws Throwable {
-		hs.the_edit_series_popup_should_be_opened_with_Histogram_tab();
+		CommonFunctionality.wait(2000);
+		if(login.driver.findElements(By.xpath("//*[@class='sidebar-panel sidebar-panel__opened']")).size() == 1) {
+			login.Log4j.info("The edit series popup is opened");
+		} else {
+			Assert.fail("The edit series popup is not opened");
+		}
 	}
 
 	@Then("^Clear contents option should be disabled$")
@@ -365,7 +377,8 @@ public class EmptyView {
 				"//*[@class='insight-view-rename']/input[@type='text']", 20);
 		rename.clear();
 		rename.sendKeys(ExpectedTxt);
-		CommonFunctionality.getElementByXpath(login.driver, "//button[@type='button']", 20).click();
+		//save the changes
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'insight-view-rename--icon__apply')]", 20).click();
 	}
 
 	@Then("^View name should be updated$")
@@ -502,47 +515,48 @@ public class EmptyView {
 			String visual = "Line";
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='line']", 10).click();
-				CommonFunctionality.wait(700);
+				CommonFunctionality.wait(1000);
 			}
 			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, visual);
 		} else if (arg1.equalsIgnoreCase("map")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-type='world']", 20).click();
-				CommonFunctionality.wait(700);
+				CommonFunctionality.wait(1000);
 			}
 
 			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("table")) {
 			for (int i = 0; i <= arg2; i++) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='table']", 10).click();
-				CommonFunctionality.wait(700);
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Table']", 10).click();
+				CommonFunctionality.wait(1000);
 			}
 			growl_text = login.driver.findElement(By.xpath("//*[@class='growl-message growl-info']")).isDisplayed();
 			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
+			CommonFunctionality.wait(1000);
 		} else if (arg1.equalsIgnoreCase("commentary")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Commentary']", 10).click();
-				CommonFunctionality.wait(700);
+				CommonFunctionality.wait(1000);
 			}
 			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("attachments")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='attachments']", 10).click();
-				CommonFunctionality.wait(700);
+				CommonFunctionality.wait(1000);
 			}
 
 			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("Filter")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='filter']", 10).click();
-				CommonFunctionality.wait(700);
+				CommonFunctionality.wait(1000);
 			}
 
 			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("Image")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='image']", 10).click();
-				CommonFunctionality.wait(700);
+				CommonFunctionality.wait(1000);
 			}
 
 			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
@@ -554,9 +568,9 @@ public class EmptyView {
 	public void create_below_visuals_using_keyboard_shortcuts(List<String> list) throws Throwable {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(2000);
 		WebElement checkBox = login.driver
-				.findElement(By.xpath("//li//div[@class='series-list-item--checkbox-wrapper']/*"));
+				.findElement(By.xpath("//div[@class='search-series-list']/*[1]//div[@class='series-list-item--checkbox-wrapper']/*"));
 		Robot robot = new Robot();
 		for (String visual : list) {
 			if (visual.equalsIgnoreCase("Map")) {
@@ -646,9 +660,9 @@ public class EmptyView {
 	@And("^Max of Table visuals can be created are (\\d+)$")
 	public void max_of_Table_visuals_can_be_created_are(int arg1) throws Throwable {
 		max_of_visuals_created = arg1;
-		for (int i = 0; i <= arg1; i++) {
-			CommonFunctionality.wait(500);
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='table']", 10).click();
+		for (int i = 0; i < arg1; i++) {
+			CommonFunctionality.wait(1000);
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Table']", 10).click();
 
 		}
 	}
@@ -657,7 +671,7 @@ public class EmptyView {
 	public void create_table_visual_in_view_tab() throws Throwable {
 		click_on_plus_icon();
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='table']", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Table']", 10).click();
 		hs.add_series_to_the_my_series_tab();
 	}
 

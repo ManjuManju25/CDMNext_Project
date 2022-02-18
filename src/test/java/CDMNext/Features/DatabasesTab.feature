@@ -61,13 +61,13 @@ Feature: Verifying Databases tab functionality
     And User has clicked on "Apply filter"
     And Click on x icon to remove DB
     Then Selected database shold be removed
-#
+
+  #
   #@DB
   #Scenario: TC_DB_10: Verify closing of insight explorer window
-    #Given Click on "All insights" option
-    #When Click on Close
-    #Then The Insight Explorer popup should be closed
-
+  #Given Click on "All insights" option
+  #When Click on Close
+  #Then The Insight Explorer popup should be closed
   @DB
   Scenario: TC_DB_10: Verifying message if no results found for the search
     Given User enters "UN"
@@ -281,12 +281,12 @@ Feature: Verifying Databases tab functionality
     And Click on "Add and replace"
     Then The selected table data should be replaced with existing data on the visual
 
-  @DB
-  Scenario: TC_DB_43:Verifying Add and Group for table level
-    And Mouse hover on any table level
-    And Click on dropdown icon
-    And Click on "Add and group"
-    Then Selected table should be added as group in My series
+  #@DB1...functionality has been changed
+  #Scenario: TC_DB_43:Verifying Add and Group for table level
+    #And Mouse hover on any table level
+    #And Click on dropdown icon
+    #And Click on "Add and group"
+    #Then Selected table should be added as group in My series
 
   @DB
   Scenario: TC_DB_44:Verifying Add to new insight for table level
@@ -315,7 +315,7 @@ Feature: Verifying Databases tab functionality
     And Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The "Selected series added to insights:" popup should be appeared
 
   @DB
@@ -324,7 +324,7 @@ Feature: Verifying Databases tab functionality
     And Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The data should be added to My series for selected insight
 
   #
@@ -757,11 +757,11 @@ Feature: Verifying Databases tab functionality
     And Click on "Add and replace"
     Then The selected series should be replaced with existing series on the visual
 
-  @DB
-  Scenario: TC_DB_103:Verify Add and Group
-    And Select a series and Click on dropdown icon
-    And Click on "Add and group"
-    Then Selected series should be added as group in My series
+  #@DB1...functionaly has been changed
+  #Scenario: TC_DB_103:Verify Add and Group
+   #And Select a series and Click on dropdown icon
+    #And Click on "Add and group"
+    #Then Selected series should be added as group in My series
 
   @DB
   Scenario: TC_DB_104:Verify Add to new insight
@@ -786,7 +786,7 @@ Feature: Verifying Databases tab functionality
     And Select a series and Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The "Selected series added to insights:" popup should be appeared
 
   @DB
@@ -794,7 +794,7 @@ Feature: Verifying Databases tab functionality
     And Select a series and Click on dropdown icon
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The series should be added to My series tab for selected insight
 
   #
@@ -1091,7 +1091,6 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_147:Series selection - Verify CTC
     And Select some series from series level
-    And Click on selected series count
     And Click on "Copy to Clipboard" icon on header
     Then Download window should be appeared with selected series count
 
@@ -1213,5 +1212,5 @@ Feature: Verifying Databases tab functionality
     And Click on dropdown icon next to +
     And Click on "Add to recent insight"
     And Select any recent insight from the dropdown
-    And Click on "Apply"
+    And Click on Apply
     Then The series should be added to My series tab for selected insight

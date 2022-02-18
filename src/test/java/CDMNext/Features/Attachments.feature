@@ -305,15 +305,15 @@ Feature: Verifying Attachments Visual functionality
   Scenario: TC_Attachments_41:Verify 'Add to insight' option
     And Create a Attachments visual
     And Click on "Add to insight" option
-    Then Drop down should be opened with "Add" and "Add to new insight"
+    Then Drop down should be opened with "Add to new tab" and "Add to new insight"
 
   @Attachments
-  Scenario: TC_Attachments_42:Verify 'Add' option under Add to insight
+  Scenario: TC_Attachments_42:Verify 'Add to new tab' option under Add to insight
     And Create a Attachments visual
     Then Enter "www.google.com" in the link field
     And Click on Ok
     And Click on "Add to insight" option
-    And Click on "Add"
+    And Click on "Add to new tab"
     Then The attachment visual should be created in new tab on current insight
 
   @Attachments
@@ -508,12 +508,12 @@ Feature: Verifying Attachments Visual functionality
     Then Should allow to upload multiple files to the visual
 
   @Attachments
-  Scenario: TC_Attachments_68:Uploads - Verify multiple files upload
+  Scenario: TC_Attachments_68:Uploads - Verify default tab for attachments visual
     And Create a Attachments visual
-    And Click on Uploads tab
-    And Unselect the visual
-    And Now select the visual
-    Then The default tab for attachement is "Links"
+    #And Click on Uploads tab
+    #And Unselect the visual
+    #And Now select the visual
+    Then The default tab for attachement is "Uploads"
 
   @Attachments
   Scenario: TC_Attachments_69:Right click - Verify Copy Attachments

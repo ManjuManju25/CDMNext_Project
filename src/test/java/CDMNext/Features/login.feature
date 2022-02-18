@@ -10,14 +10,14 @@ Feature: Login to the application under test
 
     Examples: 
       | username                     | password        | status          |
-      | "nadiya.maduru@shravas.com"  | "Thulasi@1988"  | successful      |
+      | "ceicsuresh@gmail.com"  		 | "Ceic@123"      | successful      |
       | "nadiyap@shravas.com"        | "thulasi1988"   | unsuccessful-WS |
-      | "nadiya.maduru@shravas.com"  | "thulasi1988"   | unsuccessful-WS |
-      | "nadiyap@shravas.com"        | "Thulasi@1988"  | unsuccessful-WS |
-      | " nadiya.maduru@shravas.com" | "Thulasi@1988"  | successful      |
-      | "nadiya.maduru@shravas.com " | "Thulasi@1988"  | successful      |
-      | "nadiya.maduru@shravas.com"  | " Thulasi@1988" | unsuccessful-WS |
-      | "nadiya.maduru@shravas.com"  | "Thulasi@1988 " | unsuccessful-WS |
+      | "ceicsuresh@gmail.com"  		 | "ceic123"       | unsuccessful-WS |
+      | "ceicsuresh1@gmail.com"      | "Ceic@123"      | unsuccessful-WS |
+      | " ceicsuresh@gmail.com"      | "Ceic@123"      | successful      |
+      | "ceicsuresh@gmail.com "      | "Ceic@123"      | successful      |
+      | "ceicsuresh@gmail.com"  		 | " Ceic@123"     | unsuccessful-WS |
+      | "ceicsuresh@gmail.com"  		 | "Ceic@123 "     | unsuccessful-WS |
       | ""                           | ""              | unsuccessful-UI |
-      | ""                           | "Thulasi@1988"  | unsuccessful-UI |
-      | "nadiya.maduru@shravas.com"  | ""              | unsuccessful-UI |
+      | ""                           | "Ceic@123"      | unsuccessful-UI |
+      | "ceicsuresh@gmail.com"       | ""              | unsuccessful-UI |

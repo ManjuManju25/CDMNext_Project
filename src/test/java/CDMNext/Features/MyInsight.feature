@@ -1,8 +1,6 @@
+
 Feature: MyInsight Functionality
 
-  #Background:
-  #	Given User has successful logged in
-  #And Check for prerequesties chrome://version/
   @MyInsights
   Scenario: TC_MyInsights_01: Verify All tabs in My Insights
     And Navigates to Myinsight page
@@ -533,3 +531,4 @@ Feature: MyInsight Functionality
   Scenario: TC_MyInsights_108:Verify insight which is added to folder
     And Navigates to Myinsight page
     And Verify insight which is added to folder
+

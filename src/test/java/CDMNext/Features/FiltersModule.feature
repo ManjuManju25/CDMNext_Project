@@ -40,7 +40,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_05
     Given User enters "BRJLA"
-    And User selects "Source" as "Central Bank of Brazil"
+    And User selects "Source" as "Ministry of Development, Industry and Trade"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "Brazil Premium Database"
@@ -1007,7 +1007,7 @@ Feature: Filters
     And User selected "Database" as "China Premium Database"
     And User has clicked on "Apply filter"
     Then User verify the search results
-
+#
   #@FilterSearch
   #Scenario: TC_Filters_Search_117
   #	Given User enters "1055401 (BAEAE)"
@@ -1061,6 +1061,7 @@ Feature: Filters
   #	Given User enters "230792902 (IAPAFABH)"
   #	And   User selects "All Regions" as "BRIC"
   #	Then  User should get the search results
+  
   @FilterSearch
   Scenario: TC_Filters_Search_117
     Given User enters "1380601"
@@ -1298,7 +1299,7 @@ Feature: Filters
     And User selects "New only"
     And User has clicked on "Apply filter"
     Then User verify the search results
-
+#
   ##
   ##@FilterSearch
   ##Scenario: TC_Filters_Search_158
@@ -1331,14 +1332,14 @@ Feature: Filters
   ##	Then  User verify the series count
   ##
   ##
-  @IndicatorSearch
-  Scenario: TC_IndicatorSearch_1
-    Given User enters "Tax  revenue: % of GDP"
-    And Click on "More" filter
-    And User selected "Database" as "Economic Monitor"
-    And User has clicked on "Apply filter"
-    And Select "Matches only"
-    And Click on "All Region"
-    And Select "Select All"
-    And User has clicked on "Apply filter"
-    Then Should get list of series
+  #@IndicatorSearch
+  #Scenario: TC_IndicatorSearch_1
+    #Given User enters "Tax  revenue: % of GDP"
+    #And Click on "More" filter
+    #And User selected "Database" as "Economic Monitor"
+    #And User has clicked on "Apply filter"
+    #And Select "Matches only"
+    #And Click on "All Region"
+    #And Select "Select All"
+    #And User has clicked on "Apply filter"
+    #Then Should get list of series

@@ -1,5 +1,8 @@
 Feature: verifying Footnote Functionality
 
+  Background: 
+    Given User has successful logged in
+
   @Footnote
   Scenario: Tc_Footnotes_03: Verify footnotes open in current tab
     And Find the Footnote option in menu bar
@@ -37,16 +40,6 @@ Feature: verifying Footnote Functionality
     And Click on cross arrow marks to verify footnotes exit full screen
 
   @Footnote
-  Scenario: Tc_Footnotes_10: Verify download option in footnotes when Db's are not selected
-    And Find the Footnote option in menu bar
-    And Verify the download option is disabled
-
-  @Footnote
-  Scenario: Tc_Footnotes_11: Verify download option in footnotes enabled when Db's are  selected
-    And Find the Footnote option in menu bar
-    And Verify the download option in footnotes is enabled
-
-  @Footnote
   Scenario: Tc_Footnotes_12: Verify tooltips for footnotes
     And Click on Footnotes tab and select database
     And Verify mouse hover on Open in new tab option
@@ -64,14 +57,14 @@ Feature: verifying Footnote Functionality
     And Click on Footnotes tab
     And Click on Open in new tab icon to verify footnotes open in new tab
 
-  @Footnote
+  @Footnote1
   Scenario: Tc_Footnotes_18: Verify footnotes open from database search tab
     And Create an insight
     And Goto Database Search tab
     And Expand the database
     And Verify the footnotes at each level from database search
 
-  @Footnote
+  @Footnote1
   Scenario: Tc_Footnotes_19: Verify footnotes open from comparables search tab
     And Create an insight
     And Goto comparables search tab
@@ -80,20 +73,17 @@ Feature: verifying Footnote Functionality
 
   @Footnote
   Scenario: Tc_Footnotes_20:Verify 'Translate' option in footnotes
-    And Click on Data
     And Goto Database Search tab
     And Expand the database
     And right click , select Footnotes
     And Verify 'Translate' option in footnotes
 
-  @Footnote1
+  @Footnote
   Scenario: Tc_Footnotes_21:Verify Translate dropdown options
-    And Goto Database Search tab
-    And Expand the database
     And right click , select Footnotes
     And click on Translate dropdown, verify the options
 
-  @Footnote1
+  @Footnote
   Scenario: Tc_Footnotes_22:Verify Country > geo_province > geo_city > geo_county fluctuations in footnotes
     And Goto Database Search tab
     And Expand the database
@@ -110,7 +100,7 @@ Feature: verifying Footnote Functionality
     And Expand the Section
     And Verify redirection to Country specific information
 
-  @Footnote
+  @Footnote1
   Scenario: Tc_Footnotes_26:Verify open footnotes from SSP window
     And Goto Series Search tab
     And Add series to My series
@@ -123,6 +113,17 @@ Feature: verifying Footnote Functionality
     And Expand the database
     And right click , select Footnotes
     And Click on Open button and verify refreshing footnotes in new tab
+
+  @Footnote1
+  Scenario: Tc_Footnotes_31:Verify translation for footnotes opened in window
+    And Goto Database Search tab
+    And Expand the database
+    And verify language translation db_level
+    And verify language translation Country_level
+    And verify language translation Topic_level
+    And verify language translation Section_level
+    And verify language translation Table_level
+    And verify language translation Series_level
 
   @Footnote
   Scenario: Tc_Footnotes_33:Verify show original option in footnotes
@@ -137,53 +138,33 @@ Feature: verifying Footnote Functionality
     And Click on  Show Original option
     And Verify the text changed to English
 
-  @Footnote1
+  @Footnote
   Scenario: Tc_Footnotes_35:Verify download option in translated footnotes
     And Goto Database Search tab
     And Expand the database
     And Select language Japanese and verify download option
 
-  @Footnote1
-  Scenario: Tc_Footnotes_37:Verify back button in footnotes in new tab
-    And Set the Preference to insight explorer
-    And Click on CEIC logo
-    And Goto Footnotes menu bar , click Open new tab
-    And verify Back button
-
-  @Footnote1
-  Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
-    And Click on Footnotes tab Open new tab
-    And Expand the tree change the language ,verify the Back button
-    And Set the Preference to new insight
-
-  @Footnote1
-  Scenario: Tc_Footnotes_39:Verify click on back in the table opened footnote
-    And Set the Preference to new insight
-    And Goto Database Search tab
-    And Expand the Section
-    And Check the navigation onclick Back button
-
-  @Footnote1
+  @Footnote
   Scenario: Tc_Footnotes_40:Verify click on back in table opened translated footnote
     And Goto Database Search tab
     And Expand the Section
     And check the page navigates to translated footnote page
 
-  @Footnote1
+  @Footnote
   Scenario: Tc_Footnotes_41:Verify country specific information  in new window of footnotes opened
     And Goto Database Search tab
     And Expand the Section
     And Open footnotes in new tab
     And check the country specific information
 
-  @Footnote1
+  @Footnote
   Scenario: Tc_Footnotes_42:Verify Back button  in new window of footnotes opened
     And Goto Database Search tab
     And Expand the Section
     And Open footnotes in new tab
     And check the Back button navigates to Footnotes page
 
-  @Footnote1
+  @Footnote
   Scenario: Tc_Footnotes_43:Verify Back button  in new window of translated footnotes opened
     And Goto Database Search tab
     And Expand the Section
@@ -198,10 +179,10 @@ Feature: verifying Footnote Functionality
 
   @Footnote
   Scenario: Tc_Footnotes_45:Verify 'Ask Question' in footnotes new tab
+    And Goto Database Search tab
+    And Expand the database
+    And verify Ask Question option in new tab
 
-  #		  And Goto Database Search tab
-  #		  And Expand the database
-  #		  And verify Ask Question option in new tab
   @Footnote
   Scenario: Tc_Footnotes_46:Verify ask question window for submitting the message/question in window tab
     And Goto Database Search tab
@@ -272,14 +253,6 @@ Feature: verifying Footnote Functionality
     And Verify footnotes for transformed series
 
   @Footnote
-  Scenario: Tc_Footnotes_71:Check footnotes access for Investment Table in World trend plus DB
-    And Goto Database Search tab
-    And Expand the database upto section
-    And Goto table Table:Investment: % of Nominal GDP: Asia open footnotes
-    And Translate to Japanese
-    And Verify translated page should appear once after the click on 'Back'
-
-  @Footnote
   Scenario: Tc_Footnotes_72:Translated Footnotes should retain the selected language when opened in new tab
     And Goto Database Search tab
     And Expand the database
@@ -288,10 +261,7 @@ Feature: verifying Footnote Functionality
     And Click on Open icon to open footnotes in new tab
     And Verify footnotes opened in new tab retain the japanese language
 
-  #
-  #
   #..........................Issue with download cases...................................
-  #
   @Footnote
   Scenario: Tc_Footnotes_56:Verify chinese translated footnotes for any of the global db table
     And Goto Database Search tab
@@ -299,7 +269,7 @@ Feature: verifying Footnote Functionality
     And Open footnotes for table level
     And Download chinese language footnote file
 
-  @Footnote
+  @Footnote123
   Scenario: Tc_Footnotes_57:Verify Korean translated footnotes for any of the global series
     And Goto Database Search tab
     And Expand the global database
@@ -327,15 +297,6 @@ Feature: verifying Footnote Functionality
     And Open footnotes for indonesian series level
     And Download Indonesian language footnote file
 
-  @Footnote1
-  Scenario: Tc_Footnotes_65:Footnotes:Verify if Footnotes in minimized state displays tooltip while downloading
-    And Goto Db Search tab
-    And Expand the global database
-    And Open footnotes for table level
-    And Select '-' icon to minimize
-    And Click on Download button
-    And Verify footnote download message
-
   @Footnote
   Scenario: Tc_Footnotes_63:Footnotes: Verify Shortcut 'd' for footnotes download
     And Goto Database Search tab
@@ -349,17 +310,6 @@ Feature: verifying Footnote Functionality
     And Expand the global database
     And Open footnotes for table level
     And Verify footnote download message
-
-  @Footnote1
-  Scenario: Tc_Footnotes_31:Verify translation for footnotes opened in window
-    And Goto Database Search tab
-    And Expand the database
-    And verify language translation db_level
-    And verify language translation Country_level
-    And verify language translation Topic_level
-    And verify language translation Section_level
-    And verify language translation Table_level
-    And verify language translation Series_level
 
   @Footnote1
   Scenario: Tc_Footnotes_32:Verify translation for footnotes opened in new tab
@@ -381,3 +331,44 @@ Feature: verifying Footnote Functionality
 #			And Goto Db Search tab 
 #		    And Expand the database
 #		    And Click on link - our support team,verify
+#@Footnote1
+#Scenario: Tc_Footnotes_10: Verify download option in footnotes when Db's are not selected
+          #And Find the Footnote option in menu bar 
+          #And Verify the download option is disabled    
+#@Footnote1
+#Scenario: Tc_Footnotes_11: Verify download option in footnotes enabled when Db's are  selected
+#			 And Find the Footnote option in menu bar 
+            #And Verify the download option in footnotes is enabled 
+#@Footnote1
+#Scenario: Tc_Footnotes_37:Verify back button in footnotes in new tab
+#		   And Set the Preference to insight explorer
+#		   And Click on CEIC logo
+#		   And Goto Footnotes menu bar , click Open new tab
+          #And verify Back button
+#@Footnote1
+#Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
+#		     And Click on Footnotes tab Open new tab
+            #And Expand the tree change the language ,verify the Back button
+            #And Set the Preference to new insight 
+#				
+#@Footnote1
+#Scenario: Tc_Footnotes_39:Verify click on back in the table opened footnote
+#		   And Set the Preference to new insight 
+#		   And Goto Database Search tab
+#		   And Expand the Section
+          #And Check the navigation onclick Back button
+#@Footnote1
+#Scenario: Tc_Footnotes_65:Footnotes:Verify if Footnotes in minimized state displays tooltip while downloading
+#			And Goto Db Search tab 
+#			And Expand the global database
+#			And Open footnotes for table level
+#			And Select '-' icon to minimize   
+#			And Click on Download button
+#			And Verify footnote download message	   
+#@Footnote
+#Scenario: Tc_Footnotes_71:Check footnotes access for Investment Table in World trend plus DB 		
+#			And Goto Database Search tab 
+#			And Expand the database upto section
+#			And Goto table Table:Investment: % of Nominal GDP: Asia open footnotes
+#			And Translate to Japanese
+#			And Verify translated page should appear once after the click on 'Back'       

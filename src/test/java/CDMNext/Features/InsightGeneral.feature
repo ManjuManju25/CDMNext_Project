@@ -219,11 +219,11 @@ Feature: Verifying Insight general Functionality
     And Click "Open Recent" option from the title
     And List of recent opened insights should be displayed
 
-  @InsightGeneral
-  Scenario: Tc_InsightGeneral_29:Verify number of insights limit for recent dropdown
-    And Click on File menu
-    And Click "Open Recent" option from the title
-    And List of 10 recent opened insights should be displayed
+  #@InsightGeneral... skip as of now
+  #Scenario: Tc_InsightGeneral_29:Verify number of insights limit for recent dropdown
+    #And Click on File menu
+    #And Click "Open Recent" option from the title
+    #And List of 10 recent opened insights should be displayed
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_30:Try to open recent insight
@@ -542,7 +542,7 @@ Feature: Verifying Insight general Functionality
   #----------------------------------------------------------Internal login --------------------------------------------------------
   @InsightGeneral
   Scenario: Tc_InsightGeneral_101:Verify Subscription tabs description.
-    And Login back to internal user with user "nmaduru" and password "Selenium@123$"
+    And Login back to internal user with user "nmaduru" and password "Automation123$$"
     And Creating new insight
     And Click on File menu
     And Click on Settings
@@ -658,7 +658,7 @@ Feature: Verifying Insight general Functionality
     And Verify keywords for the insights.
     And Delete Insight
 
-  @InsightGeneral12345
+  @InsightGeneral2345
   Scenario: Tc_InsightGeneral_114:Verify the insight for added keywords in insight explorer.
     And Creating new insight
     And Click on File menu
@@ -765,7 +765,7 @@ Feature: Verifying Insight general Functionality
     And Click on Share icon for untitled insight
     And Verify insight url updated after insight title changed
 
-  @InsightGeneral12345
+  @InsightGeneral2345
   Scenario: Tc_InsightGeneral_129:Verify 'Copy' permanent link' option.
     And Click on File menu
     And Click on Share icon
@@ -815,19 +815,18 @@ Feature: Verifying Insight general Functionality
     And Login back to default execution login
 
   @InsightGeneral
-  Scenario Outline: Tc_InsightGeneral_137:Verify Protect option for untitled insight.
+  Scenario Outline: Tc_InsightGeneral_137:Verify clicking on notification icon.
     And Click on Notifications icon
     And Get text of <datatab> available for <notifications>
-
-    Examples: 
+	    Examples: 
       | datatab           | notifications     |
       | "ceic_insiders"   | "What's new"      |
-      | "recommendations" | "Recommendations" |
+      | "insights"        | "Insights"        |
       | "notifications"   | "Notifications"   |
 
   @InsightGeneral
-  Scenario: Tc_InsightGeneral_138:Verify Latest insights from our experts under what's new
-    And Click "Notifications" -> "What's new"
+  Scenario: Tc_InsightGeneral_138:Verify Latest insights from our experts under Insights
+    And Click "Notifications" -> "Insights"
     Then The latest 10 insights should be displayed
 
   @InsightGeneral
@@ -836,11 +835,11 @@ Feature: Verifying Insight general Functionality
     Then The announcement popup should be displayed
 
   @InsightGeneral
-  Scenario: Tc_InsightGeneral_149:Verify Recent insights under Recommendations tab
+  Scenario: Tc_InsightGeneral_149:Verify Recent insights under Insights tab
     Then The "Recent Insights" should open in preview mode with limit 5
 
   @InsightGeneral
-  Scenario: Tc_InsightGeneral_151:Verify Latest insights from our experts under Recommendations tab
+  Scenario: Tc_InsightGeneral_151:Verify Latest insights from our experts under Insights tabdat
     Then The "Latest insights from our experts" should open in preview mode with limit 10
 
   @InsightGeneral
@@ -873,8 +872,8 @@ Feature: Verifying Insight general Functionality
       | "CEIC Help"     | "Email us"            |
       | "CEIC Help"     | "Diagnostics"         |
       | "CEIC Help"     | "Report a problem"    |
-      | "Applications"  | "Excel Add-in"        |
-      | "Applications"  | "WPS Add-in"          |
+      | "Applications"  | "Excel Addin"         |
+      | "Applications"  | "WPS Addin"           |
       | "Applications"  | "API"                 |
       | "Applications"  | "R"                   |
       | "Applications"  | "PyCEIC"              |
@@ -1092,59 +1091,59 @@ Feature: Verifying Insight general Functionality
     And Verify Cancel/x buttons for report a problem under HElp dropdown.
 
   @InsightGeneral
-  Scenario: Tc_InsightGeneral_215:Verify Excel add-in
+  Scenario: Tc_InsightGeneral_215:Verify Excel addin
     And Click on Help
-    And Click on Application Excel Add-in
-    And Verify Excel Add-in tab is open
+    And Click on Application Excel Addin
+    And Verify Excel Addin tab is open
 
   @InsightGeneral
-  Scenario: Tc_InsightGeneral_216:Verify Excel add-in version on popup.
+  Scenario: Tc_InsightGeneral_216:Verify Excel addin version on popup.
     And Click on Help
-    And Click on Application Excel Add-in
+    And Click on Application Excel Addin
     And Verify Excel add-in version in popup
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_217:Verify 'OS and MS Office' selection on popup.
     And Click on Help
-    And Click on Application Excel Add-in
+    And Click on Application Excel Addin
     And Verify 'OS and MS Office' selection on popup.
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_218:Verify 'Download' CDMNext add-in.
     And Click on Help
-    And Click on Application Excel Add-in
+    And Click on Application Excel Addin
     And Verify 'Download' CDMNext add-in navigate to new tab
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_219:Verify available 'Documents' in add-in popup.
     And Click on Help
-    And Click on Application Excel Add-in
+    And Click on Application Excel Addin
     And Click on Document link
     And Verify available 'Documents' in add-in popup
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_220:Verify 'Open' the popup with new tab.
     And Click on Help
-    And Click on Application Excel Add-in
+    And Click on Application Excel Addin
     And Verify 'Open' the popup with new tab
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_221:Verify Popup dismiss(x) option.
     And Click on Help
-    And Click on Application Excel Add-in
+    And Click on Application Excel Addin
     And Verify Popup dismiss option
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_222:Verify the 'next tabs' in the popup.
     And Click on Help
-    And Click on Application Excel Add-in
+    And Click on Application Excel Addin
     And Click on API tab and Verify
     And Click on R tab and Verify
     And Click on Eviews tab and Verify
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_223:Verify the WPS addin
-    And Click on "Help" -> "WPS Add-in"
+    And Click on "Help" -> "WPS Addin"
     And Verify the WPS addin
 
   @InsightGeneral

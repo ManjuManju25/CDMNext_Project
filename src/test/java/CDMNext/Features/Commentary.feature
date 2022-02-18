@@ -1,3 +1,4 @@
+
 Feature: Verifying Commentary Visual functionality
 
   @Commentary
@@ -195,7 +196,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Visual" option on visual header
     Then The "Visual" popup should be displayed
 
-  @Commentary1
+  @Commentary
   Scenario: TC_Commentary_30:Verify alignment
     And Create Commentary visual
     And Click on "Visual" option on visual header
@@ -315,12 +316,11 @@ Feature: Verifying Commentary Visual functionality
     And Paste within the insight
     Then "Data pasted from clipboard" message should be displayed
 
-  #@Commentary1
+  #@Commentary
   #Scenario: TC_Commentary_46:Validate copied visual by pasting to excel
-    #And Add some text in the description field
-    #And Click on Copy icon
-    #Then Paste in Excel and the text should be pasted to excel
-
+  #And Add some text in the description field
+  #And Click on Copy icon
+  #Then Paste in Excel and the text should be pasted to excel
   @Commentary
   Scenario: TC_Commentary_47:Validate copied visual by pasting to word
     And Add some text in the description field
@@ -359,13 +359,13 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_52:Verify 'Add to insight' option
     And Add some text in the description field
     And Click on "Add to insight" option
-    Then Drop down should be opened with "Add" and "Add to new insight"
+    Then Drop down should be opened with "Add to new tab" and "Add to new insight"
 
   @Commentary
   Scenario: TC_Commentary_53:Verify 'Add' option under Add to insight
     And Add some text in the description field
     And Click on "Add to insight" option
-    And Click on "Add"
+    And Click on "Add to new tab"
     Then The Visual should be created in new tab on current insight
 
   @Commentary
@@ -586,7 +586,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Click on "Row"
     And Select "Row properties"
-    Then "Row properties" should be displayed
+    Then "Row Properties" should be displayed
     And Apply "Row type" as "Footer"
     And Apply "Alignment" as "Right"
     And Apply "Height" as "50px"
@@ -604,7 +604,7 @@ Feature: Verifying Commentary Visual functionality
     Then The selected row should be cut
 
   @Commentary
-  Scenario: TC_Commentary_79:Table - Row - Verify Paste row before
+  Scenario: TC_1Commentary_79:Table - Row - Verify Paste row before
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
@@ -667,7 +667,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_84:Verify 'font size'
     And Add some text in the description field
-    And Click on "Font Sizes" drop down
+    And Click on "Font sizes" drop down
     And Choose font size as "12px"
     Then Text should be changed to "12px" size
 
@@ -683,7 +683,7 @@ Feature: Verifying Commentary Visual functionality
     And Add some text in the description field
     And Click on "Background color" drop down
     And Choose background color as "Red"
-    Then The Text should be changed to "Red"
+    Then The background of text should be changed to "Red"
 
   @Commentary
   Scenario: TC_Commentary_87:Verify Horizontal alignment (left, right, center)
@@ -934,3 +934,4 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_119:Verify 'Delete' insight having all type of visuals
     And Delete the created insight with all visuals
     Then The insight should be deleted successfully
+

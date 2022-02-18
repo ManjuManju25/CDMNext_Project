@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
@@ -5,7 +6,7 @@ import java.awt.Robot;
 
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
-import java.net.URL;
+//import java.net.URL;
 //import java.net.URL;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -31,9 +32,10 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 //import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.ITestResult;
+//import org.testng.ITestResult;
 
-import CDMNext.runner.TestRunner;
+
+//import CDMNext.runner.TestRunner;
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.ErrorScreenshot;
 import CDMNext.util.Hooks;
@@ -95,35 +97,45 @@ public class login {
 	public static String data;
 	public static String object;
 	public static String parameters;
-	TestRunner testRunner = new TestRunner();
+	//TestRunner testRunner = new TestRunner();
+	
 	@Before
-	public void setUp() throws Throwable {
+	public void setUp(Scenario scenario) throws Throwable {
 		//driver.manage().deleteAllCookies();
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
 		logged_in = false;
 		ch.qos.logback.classic.Logger root = (ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger("org.apache.http");
 	    root.setLevel(ch.qos.logback.classic.Level.INFO);
 		Invoke_browser();	
-		
 		SearchTest.user_has_successful_logged_in();	
+		//Hooks.Handle_BrowserNotification_popup();
 		
-//		if(testRunner.cucumberFeature.getCucumberFeature().equals("FilterSearch")) {
-			//Hooks.Handle_BrowserNotification_popup();
-//		} else {
+		Hooks.before_run();
+		//Hooks.getFeatureFileNameFromScenarioId(scenario);
+		/*if (testRunner.cucumberFeature.getCucumberFeature().equals("FilterSearch")) {
+			// Hooks.Handle_BrowserNotification_popup();
+		} else {
 			Hooks.before_run();
-		//}
+		}*/
 		
 	}
 	
 	@After
 	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);
-		//Hooks.after_run();
+		Hooks.after_run();
+		
 		//System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
 		// driver.quit();
 
-	}
+	}	
 	
+	//@After
+	public void tearDownClass() throws Exception {
+		//	 System.out.println("\nInside Cucumber > @After in Login.java. Tearing
+		// down.");
+		Hooks.copyingOldReports();
+	}
 	@Given("^User navigates to the CDMNext appliction$")
 	public void user_navigates_to_the_CDMNext_appliction() throws Throwable {
 		// Thread.sleep(3000);
@@ -136,17 +148,21 @@ public class login {
 	public void enters_username(String username) throws Throwable {
 		Thread.sleep(3000);
 		driver.findElement(By.name("user-id")).clear();
+//		driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).clear();
 		Log4j.info("Trying to login with Username:" + username);
 		driver.findElement(By.name("user_id")).sendKeys(username);
-
+		//driver.findElement(By.xpath(LOCATORS.getProperty("input_username"))).sendKeys(username);
 	}
 
 	@And("^Enters password \"([^\"]*)\"$")
 	public void enters_password(String password) throws Throwable {
-		Thread.sleep(1000);
-		driver.findElement(By.name("password")).clear();
+		Thread.sleep(3000);
+		//driver.findElement(By.name("password")).clear();
+		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).clear();
 		Log4j.info("Trying to login with Password:" + password);
-		driver.findElement(By.name("password")).sendKeys(password);
+		//driver.findElement(By.name("password")).sendKeys(password);
+		Thread.sleep(1000);
+		driver.findElement(By.xpath(LOCATORS.getProperty("input_password"))).sendKeys(password);
 
 	}
 
@@ -161,7 +177,9 @@ public class login {
 			break;
 		case "download":
 			break;
-		}
+		}	
+			
+		
 
 	}
 
@@ -285,6 +303,7 @@ public class login {
 			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 
 			// Method and Description - void setCapability(java.lang.String capabilityName,
+			
 			// boolean value)
 			capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
@@ -332,11 +351,13 @@ public class login {
 		driver.manage().timeouts().implicitlyWait(implicitWaitTime, TimeUnit.SECONDS);
 		// driver.manage().timeouts().pageLoadTimeout(implicitWaitTime,
 		// TimeUnit.SECONDS);
-		login.driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+		login.driver.manage().timeouts().pageLoadTimeout(10	
+				, TimeUnit.SECONDS);
 		//driver.manage().timeouts().setScriptTimeout(implicitWaitTime, TimeUnit.SECONDS);
 		
 			
-	}
+	}	
+	
 	//Method for disabling ChromeDriverService loggers
 	public static void disableSeleniumLogs() {    
 	    System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
@@ -366,3 +387,4 @@ public class login {
 		logged_in = true;
 	}
 }
+

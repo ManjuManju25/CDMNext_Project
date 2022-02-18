@@ -218,7 +218,7 @@ Scenario: Tc_Unit Manipulation_24: Verify applying unit multiplier func on other
    And Click "By function" tab and enter "AGGREGATE" in search field
    Then Apply both function and rename series as "24" then validate the Testdata as "TC_Unit Manipulation_24" 
    
-@UnitManipulation123
+@UnitManipulation
 Scenario: Tc_Unit Manipulation_25: Verify applying unit multiplier for visuals in view mode
    And Search for the series with SID "202916302" and click on "C" option
    And Search for the series with SID "202916302" and click on "Download" option

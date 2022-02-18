@@ -1,4 +1,4 @@
-@tag
+
 Feature: Verifying Image visual functionality
 
   @ImageVisual
@@ -38,19 +38,19 @@ Feature: Verifying Image visual functionality
     Then Below optins should be available
       | Upload image      |
       | Insert/edit image |
-      | Original size     |
+      | Fit to width      |
       | Align left        |
       | Align center      |
       | Align right       |
 
   @ImageVisual
-  Scenario: Tc_ImageVisual_5 : Add to insight - Verify 'Add' option under Add to insight
+  Scenario: Tc_ImageVisual_5 : Add to insight - Verify 'Add to new tab' option under Add to insight
     And Go to View tab
     And Click on insert Image visual icon
     And Select "Upload image" icon
     And Upload any image
     And Click on + icon on header
-    And Click on "Add"
+    And Click on "Add to new tab"
     Then The image visual should be pasted in vew tab on current insight
 
   @ImageVisual
@@ -292,7 +292,7 @@ Feature: Verifying Image visual functionality
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
 
-  @ImageVisual1
+  @ImageVisual
   Scenario: Tc_ImageVisual_33 : Verify visual download to PNG format
     And Go to View tab
     And Click on insert Image visual icon
@@ -310,7 +310,7 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select "xlsx" format
     And Click on "Download"
     Then Image should be downloaded in "xlsx" format
@@ -322,7 +322,7 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select "pdf" format
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
@@ -335,15 +335,15 @@ Feature: Verifying Image visual functionality
     And Try to Upload multiple images
     Then Should allow to add multiple images
 
-  @ImageVisual
-  Scenario: Tc_ImageVisual_37 : Verify edit/insert image popup for general tab
-    And Go to View tab
-    And Click on insert Image visual icon
-    And Select "Insert/edit image" icon
-    Then Below options should be available in General tab
-      | Source      |
-      | Image title |
-      | Dimensions  |
+  #@ImageVisual1
+  #Scenario: Tc_ImageVisual_37 : Verify edit/insert image popup for general tab
+    #And Go to View tab
+    #And Click on insert Image visual icon
+    #And Select "Insert/edit image" icon
+    #Then Below options should be available in General tab
+      #| Source      |
+      #| Image Title |
+      #| Dimensions  |
 
   @ImageVisual
   Scenario: Tc_ImageVisual_38 : Verify edit/insert image popup for upload tab
@@ -400,7 +400,7 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select timeframe as "Sample"
     And Select Data placement as "Rows"
     And Click on "Download"
@@ -423,12 +423,12 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     And Click on Download icon
-    And Select "views" tab
+    And Select "Views" tab
     And Select "pdf" format
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
     
-      @ImageVisual1
+      @ImageVisual
   Scenario: Tc_ImageVisual_46 : Verify visual download to JPG format
     And Go to View tab
     And Click on insert Image visual icon
@@ -438,3 +438,4 @@ Feature: Verifying Image visual functionality
     And Select "jpeg" format
     And Click on "Download"
     Then Image should be downloaded in "JPG" format
+

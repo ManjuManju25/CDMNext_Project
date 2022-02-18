@@ -1,11 +1,8 @@
 Feature: Verifying sprint cases functionality
 
-  #Background:
-  #Given User has successful logged in
-  @Sprint
+   @Sprint
   Scenario: TC_12744_01: Clear All filters button to clear all filters set
-    #	And Check for prerequesties
-    And User enters keyword "Banglore"
+   And User enters keyword "Banglore"
     And Click on "More" filter
     And User selects "Date" as "Last observation after"
     And User has clicked on "Apply filter"
@@ -46,7 +43,7 @@ Feature: Verifying sprint cases functionality
 
   @Sprint
   Scenario: TC_15496_07: Improve Insights Summary popup
-    And User enters "400969087"
+    And User enters "91271701"
     And Create visual
     Then "Latest changes in your Insight" should be displayed in the summary popup
     And "Replacements" should be displayed in the summary popup
@@ -144,6 +141,7 @@ Feature: Verifying sprint cases functionality
     And Create new insight
     And Paste in the View section for new insight
     Then The copied View and its contents should be pasted in other/new insight
+    
   #@Sprint
   #Scenario: flex details
     #And Enter "366672387"

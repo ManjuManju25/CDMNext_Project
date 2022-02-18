@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
@@ -31,7 +32,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
 public class Exceldatacompare {
-	
+	Actions action = new Actions(login.driver);
 	private static Boolean logged = false;
 	public static String testcase_num;
 	public static String Seriesname;
@@ -60,58 +61,61 @@ public class Exceldatacompare {
 		login.application_login();
 	}*/
 
-	
+	//TC_01
 	@And("^User Select Series ID  as \"([^\"]*)\"$")
 	public void user_Select_Series_ID_as(String arg2) throws Throwable {
-		Thread.sleep(2000);
-		user_Refresh_the_page();
-		Thread.sleep(6000);
-		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).clear();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg2);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg2);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
-		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
-		Thread.sleep(5000);
+		CommonFunctionality.getElementByXpath(login.driver,"//span[contains(text(),'Series')]",8).click();
+		WebElement mouseover = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",10);
+		action.pause(500).moveToElement(mouseover).build().perform();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='add-to-data-selection--icon']",8).click();
 		get_the_Series_name();
+		System.out.println("==========================>first line Execution completed=====================================>");
 	}
 	
 	@And("^User  Download button$")
 	public void user_Download_button() throws Throwable {
 		Thread.sleep(6000);
-		//login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[1]/div[3]/div[2]/button")).click();
-		login.driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div/div[4]/div/button[1]")).click();
+		login.driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div/div[4]/div/button[1]/span[2]")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Range')]")).click();
 		Thread.sleep(5000);
 		user_Select_Reset_button();
 		Thread.sleep(2000);
-		//login.driver.findElement(By.xpath("//div[@class='drop-down-button download-button download-button__header drop-down-button__small']/button[1]")).click();
-		login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
+		//login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
 	}
 	
 	 
-	
+	//TC_01
 	@And("^Select Download button$")
 	public void select_Download_button() throws Throwable {
 		Thread.sleep(5000);
+		
 		login.driver.findElement(By.xpath("//span[@class='download-button--text drop-down-button--label']")).click();
+		//span[@class='download-button--text drop-down-button--label']
 		Thread.sleep(2000);
+		
+		//if(login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).isDisplayed())
+		//{
+		//	login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+		//}
+		Thread.sleep(2000);
+		
+		
 		login.driver.findElement(By.xpath("//span[contains(text(),'Range')]")).click();
 		Thread.sleep(4000);
 		user_Select_Reset_button();
-		Thread.sleep(4000);
-		login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
-		//login.driver.findElement(By.xpath("//div[@class='drop-down-button download-button download-button__header drop-down-button__small']/button[1]")).click();
-		
+		//Thread.sleep(4000);
+		//login.driver.findElement(By.xpath("//div[@class='download-fast-settings--section-content download-fast-settings--section-content__checkbox']/label/span[1]")).click();
 	}
 	
 	@Given("^get the Series name$")
 	public void get_the_Series_name() throws Throwable {
-		Seriesname = login.driver.findElement(By.xpath("//div[@class='series-item--name']")).getText();
+		CommonFunctionality.wait(500);
+		Seriesname = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-item--name']",8).getText();
 		 r = Seriesname.replace(":","");
 		System.out.println(r);
 	}
@@ -160,7 +164,7 @@ public class Exceldatacompare {
 			 
 			 if(totalseries.size() == 1) {
 				
-				 System.out.println("Comparing Data of " + testcase_num +  " with Actual data" + Seriesname );
+				/* System.out.println("Comparing Data of " + testcase_num +  " with Actual data" + Seriesname );
 					Thread.sleep(8000);
 					CompareExcel.Excel();
 					Thread.sleep(18000);
@@ -169,15 +173,15 @@ public class Exceldatacompare {
 		    			System.out.println(file.getName() + " is deleted!");
 		    		}else{
 		    			//System.out.println("Delete operation is failed.");
-		    		}
-					Thread.sleep(8000);
-					user_signout();
+		    		}*/
+					//Thread.sleep(8000);
+					//user_signout();
 			 }
 		
 			 else {
 				 
 				 System.out.println("Comparing Data of " + testcase_num +  " with Actual data" +  multipleseries);
-					Thread.sleep(8000);
+					/*Thread.sleep(8000);
 					multipleseriesExcelcompare();
 					Thread.sleep(18000);
 					
@@ -188,9 +192,9 @@ public class Exceldatacompare {
 		    		}else{
 		    			//System.out.println("Delete operation is failed.");
 		    		}
-		    	   
-					Thread.sleep(8000);
-					user_signout();
+		    	   */
+					//Thread.sleep(8000);
+					//user_signout();
 			 }
 			 Thread.sleep(8000);
 				user_signout();
@@ -308,14 +312,15 @@ public class Exceldatacompare {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath( "//div[@class='custom-select--body']/div[1]")).click();
-		
+		//login.driver.findElement(By.xpath( "//div[@class='custom-select--body']/div[1]")).click();
+		login.driver.findElement(By.xpath("//div[@class='custom-select-title custom-select-title__no-max-width']/div/span[2]")).click();
+		Thread.sleep(2000);
 	}
 
 	@And("^Select the Selected Attributes$")
 	public void Select_the_Selected_Attributes() throws Throwable {
 		
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//div[@class='choosable-selected-item choosable-selected-item--small-purple']")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='choosable-list']/div[1]/span[1]")).click();
@@ -371,13 +376,40 @@ public class Exceldatacompare {
 		Thread.sleep(10000);
 		login.driver.findElement(By.xpath("//div[@class='cool-multi-select--select-all-btn']")).click();
 	}
-	@And("^Select the Function as \"([^\"]*)\"$")
-	public void Select_the_Function_as(String arg2) throws Throwable {
+	
+
+	
+	@And("^Select the Function as YTD$")
+	public void select_the_Function_as_YTD() throws Throwable {
+	  
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='download-data-transformation']/div/div[5]/div/div[2]")).click();
+		//System.out.println("==================>Select function as=================>"+arg2);
+		login.driver.findElement(By.xpath("//div[@class='download-data-transformation']/div//div[4]")).click();
+		                                   //div[@class='download-data-transformation']/div/div[4]/div//div[2]
+		                           //div[@class='download-data-transformation']/div/div[4]/div//div[2]
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//*[contains(text(),'All functions')]")).click();
 		Thread.sleep(5000);
+		//System.out.println("===========>Select function as=================>"+arg2);
+		login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).sendKeys("YTD");
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//div[@class='function-item']")).click();
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//button[contains (text(),'Insert function')]")).click();
+	}
+
+	
+	@And("^Select the Function as \"([^\"]*)\"$")
+	public void Select_the_Function_as(String arg2) throws Throwable {
+		Thread.sleep(5000);
+		System.out.println("==================>Select function as=================>"+arg2);
+		login.driver.findElement(By.xpath("//div[@class='download-data-transformation']/div//div[5]")).click();
+		                                   //div[@class='download-data-transformation']/div/div[4]/div//div[2]
+		                           //div[@class='download-data-transformation']/div/div[4]/div//div[2]
+		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//*[contains(text(),'All functions')]")).click();
+		Thread.sleep(5000);
+		System.out.println("===========>Select function as=================>"+arg2);
 		login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).sendKeys(arg2);
 		Thread.sleep(5000);
 		login.driver.findElement(By.xpath("//div[@class='function-item']")).click();
@@ -430,6 +462,7 @@ public class Exceldatacompare {
 	
 	@And("^Select the Parameters$")
 	public void Select_the_Parameters() throws Throwable {
+		System.out.println("=============>Enter into Select the parameters=========================>");
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[@class='function-data--description function-data--parameters']/div[1]//a/span/b")).click();
 		Thread.sleep(1000);
@@ -514,18 +547,20 @@ public class Exceldatacompare {
 		
 	}
 	
+	//TC_01
 	@And("^Select Date drop down$")
 	public void select_Date_drop_down() throws Throwable {
-		Thread.sleep(2500);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//div[@class='insight-download-advanced-settings']/div[1]/div[5]/div[2]/div/div[1]/div[2]")).click();
 		
 	}
 
+	//TC_01
 	@Then("^Automatic and Custom Date drop down should be available$")
 	public void automatic_and_Custom_Date_drop_down_should_be_available() throws Throwable {
+		Thread.sleep(3000);
 		WebElement Dateformatdropdown = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dateformatdropdown")));
 		  Assert.assertEquals(true,Dateformatdropdown.isDisplayed());
-		
 			Thread.sleep(5000);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			  user_signout();
@@ -702,12 +737,13 @@ public class Exceldatacompare {
 		user_signout();
 	}
 	
+	
 	@And("^Verify Data referesh option is checked by deault$")
 	public void verify_Data_referesh_option_is_checked_by_deault() throws Throwable {
 		Thread.sleep(2000);
 		boolean element = login.driver.findElement(By.xpath("//div[@class='insight-download-formats']/div[3]/div[2]/label/input")).isSelected();
 		Thread.sleep(2000);
-		if(element==false){
+		if(element==true){
 			System.out.println("Data Refresh is checked"+  element);
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 			user_signout();
@@ -769,7 +805,7 @@ public class Exceldatacompare {
 	
 	@And("^Add to Right panel$")
 	public void add_to_Right_panel() throws Throwable {
-		
+		Thread.sleep(2000);
 		
 		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container']"));
 		
@@ -811,9 +847,9 @@ public class Exceldatacompare {
 
 	@And("^Create a Table$")
 	public void create_a_Table() throws Throwable {
-		
+		Thread.sleep(3000);
 		List<WebElement> objLinks = login.driver.findElements(By.xpath("//a[@class='series-list-item--container']"));
-		System.out.println("Total Size are- " + objLinks.size());
+		System.out.println("Total Size are--> " + objLinks.size());
 		
 		for(int i=1;i<=objLinks.size();i++){
 			Thread.sleep(2000);
@@ -828,13 +864,7 @@ public class Exceldatacompare {
 	@And("^Select Download Button$")
 	public void select_Download_Button() throws Throwable {
 		Thread.sleep(10000);
-		//login.driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div/div[4]/div/button[1]")).click();
-		
-		WebElement DownloadFV =  CommonFunctionality.getElementByXpath(login.driver, "//div[@class='page-main-header--buttons']/div/button[1]/span[2]", 10);
-		Actions action =new Actions(login.driver);
-		action.moveToElement(DownloadFV).click().build().perform();
-		
-		
+		login.driver.findElement(By.xpath("//span[@class='download-button--text drop-down-button--label']")).click();
 	}
 	
 	@Then("^Tabel download should be Sucess$")
@@ -934,20 +964,28 @@ public class Exceldatacompare {
 	@And("^select the \"([^\"]*)\" format$")
 	public void select_the_format(String arg1) throws Throwable {
 		format=arg1;
+		System.out.println("==================>Formate type==============>"+arg1);
+		Thread.sleep(2000);
 		 switch (arg1) {
 		   case "png":
+			   Thread.sleep(3000);
 			login.driver.findElement(By.xpath("//label[@title='Download visual to PNG image']")).click();
 		    break;
+		    
 		   case "jpeg":
+			   Thread.sleep(3000);
 			   login.driver.findElement(By.xpath("//label[@title='Download visual to JPG image']")).click();
 			   break;
 		   case "csv":
+			   Thread.sleep(2000);
 			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CSV_Format"))).click();
 			   break;
 		   case "xlsx":
+			   Thread.sleep(2000);
 			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("XLS_Format"))).click();
 			   break;
 		   case "pdf":
+			   Thread.sleep(2000);
 			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("PDF_Format"))).click();
 			   break;
 	}
@@ -1139,7 +1177,7 @@ public class Exceldatacompare {
 	public void user_verify_state_of_download_button_when_there_are_no_series_in_myseries_no_views() throws Throwable {
 		
 		Thread.sleep(1000);
-		if(login.driver.findElements(By.xpath("//button[@class='download-button--button button button__download-btn button__disabled']")).size() != 0){
+		if(login.driver.findElements(By.xpath("//div[@class='drop-down-button download-button download-button__header drop-down-button__small']")).size() != 0){
 			System.out.println("Download Button is disabled.");
 			}else{
 				 Assert.fail( "Download Button is Enabled. Series or Views may Present.");
@@ -1203,8 +1241,8 @@ public class Exceldatacompare {
 	@And("^verify the formats available for views download$")
 	public void verify_the_formats_available_for_views_download() throws Throwable {
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='tabs__tabs-box']/div[3]")).click();
-		Thread.sleep(1000);
+		//login.driver.findElement(By.xpath("//div[@class='tabs__tabs-box']/div[3]")).click();
+		//Thread.sleep(1000);
 		WebElement XLS_Format = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("XLS_Format")));
 		Assert.assertEquals(true,XLS_Format.isDisplayed());
 		Thread.sleep(1000);
@@ -1222,13 +1260,44 @@ public class Exceldatacompare {
 	@And("^Expand the database tree$")
 	public void expand_the_database_tree() throws Throwable {
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
-		Thread.sleep(5000);
+		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]")).click();
+		Thread.sleep(2000);
 		
+		//WebElement seriesname=login.driver.findElement(By.xpath("//div[contains(text(),'Agriculture Output Value: Other Crops: Misc: Assam')]"));
+		
+		//action.pause(500).moveToElement(seriesname).build().perform();
+		//Thread.sleep(2000);
+		//WebElement elementLocator11 = login.driver.findElement(By.xpath(""));
+		//action.contextClick(elementLocator11).perform();
+		Thread.sleep(1000);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/*login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
+		Thread.sleep(5000);
 		Actions action = new Actions(login.driver);
-		action.moveToElement
-		(login.driver.findElement(By.xpath("//div[@class='search-presentation--header series-panel']/div[1]/div/div/span[4]/span"))).doubleClick().build().perform();
-	
+		action.moveToElement(login.driver.findElement(By.xpath("//div[@class='search-presentation--header series-panel']/div[1]/div/div/span[4]/span"))).doubleClick().build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='child-container']/div/div/div/div/div/div[3]/div/div[1]")).click();
 		Thread.sleep(2000);
@@ -1247,7 +1316,7 @@ public class Exceldatacompare {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'Ungroup')]")).click();
 			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();*/
 	}
 	
 	@And("^User Search for Series ID  as \"([^\"]*)\"$")
@@ -1319,7 +1388,7 @@ public class Exceldatacompare {
 	@Then("^Download option from Footnotes window should be Sucess$")
 	public void Download_option_from_Footnotes_window_should_be_Sucess() throws Throwable {
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[@class='download-button download-button__modal']")).click();
+		login.driver.findElement(By.xpath("//header/div[2]/div[3]/button[1]/span[1]")).click();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
 		Thread.sleep(3000);
@@ -1414,16 +1483,55 @@ public class Exceldatacompare {
 		login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs ui-sortable']/div/span[2]/span")).click();
 	}
 
-	@And("^Create a table$")
-	public void create_a_table() throws Throwable {
+	
+	
+	@And("^Create a Table(\\d+)$")
+	public void create_a_Table(int arg1) throws Throwable {
+	
 		Thread.sleep(5000);
 		//login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a/div[2]")).click();
-		login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[1]/div/div[1]/div/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[2]/div[1]/ul/li/a/div[2]/span")).click();
+		//login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[1]/div/div[1]/div/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[2]/div[1]/ul/li/a/div[2]/span")).click();
+		//login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[1]/div[1]/a[1]/div[2]/span[1]")).click();
+		
+		
+		WebElement series3 = login.driver.findElement(By.xpath("//div[contains(text(),'Retail Sales of Consumer Goods: YoY Change')]"));
+		action.pause(500).moveToElement(series3).build().perform();
+		
+		//Right click
+		WebElement elementLocator = login.driver.findElement(By.xpath("//div[contains(text(),'Retail Sales of Consumer Goods: YoY Change')]"));
+		action.contextClick(elementLocator).perform();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
 		Thread.sleep(2000);
-		Robot r = new Robot();
-		 r.keyPress(KeyEvent.VK_T);
-		 r.keyRelease(KeyEvent.VK_T);
+		
+		
 	}
+	
+	
+	
+	
+	
+	
+//	@And("^Create a table$")
+//	public void create_a_table() throws Throwable {
+//		Thread.sleep(5000);
+//		//login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/li[1]/div/a/div[2]")).click();
+//		//login.driver.findElement(By.xpath("/html/body/div[1]/div/div[1]/div/div/div[2]/div[1]/div/div[1]/div/div/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div[2]/div[1]/ul/li/a/div[2]/span")).click();
+//		//login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[1]/div[1]/a[1]/div[2]/span[1]")).click();
+//		
+//		//Right click
+//		WebElement elementLocator = login.driver.findElement(By.xpath(
+//				"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[5]/div[1]/a[1]/div[2]/span[1]"));
+//		action.contextClick(elementLocator).perform();
+//		Thread.sleep(1000);
+//		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
+//		
+//		
+//		Thread.sleep(2000);
+//		//Robot r = new Robot();
+//		// r.keyPress(KeyEvent.VK_T);
+//		// r.keyRelease(KeyEvent.VK_T);
+//	}
 
 	
 
@@ -1661,6 +1769,7 @@ public class Exceldatacompare {
 
 
 //}
+
 
 
 

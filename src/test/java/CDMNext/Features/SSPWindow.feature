@@ -131,7 +131,7 @@ Feature: Verifying SSP window Functionality
     And Checking the "Unit:" of the series
     Then Verify the "Unit:" of the series should be "2012=100"
 
-  @SSPWindow12
+  @SSPWindow
   Scenario: TC_SSP_20: Verify the update request information in SSP Window
     And Open SSP for the series "7874601"
     And Click on releases tab
