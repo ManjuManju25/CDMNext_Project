@@ -161,12 +161,11 @@ public class Histogram {
 					.getText();
 			if (arg1.equals(StrExpected)) {
 				login.Log4j.info("By default user is redirect to " + arg1);
-				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 5)
-						.click();
-			} else {
-				Assert.fail("User is not redirect to " + arg1);
-			}
-			CommonFunctionality.DeleteVisual();
+//				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 5)
+//						.click();
+			} 
+		} else {
+			Assert.fail("User is not redirect to " + arg1);
 		}
 	}
 
@@ -251,7 +250,7 @@ public class Histogram {
 		CommonFunctionality.wait(3000);
 		SName = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10).getText();
 		SeriesCount = login.driver.findElement(By.xpath("//*[@class='series-series-count--number']"));
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
 	@And("^Click on Series name$")
@@ -324,16 +323,17 @@ public class Histogram {
 				"//*[@class='check-all-series']//*[@class='input-control--indicator']", 6).click();
 	}
 
-	@Then("^The series should be added to histogram with its data$")
-	public void the_series_should_be_added_to_histogram_with_its_data() throws Throwable {
-		CommonFunctionality.wait(1000);
+
+@Then("^The series should be added to \"([^\"]*)\" with its data$")
+public void the_series_should_be_added_to_with_its_data(String arg1) throws Throwable {
+		CommonFunctionality.wait(3000);
 		Visual_Title_txt = login.driver.findElement(By.xpath("//*[@data-name='title']")).getText();
 		if (Expected_sname.equals(Visual_Title_txt)) {
-			login.Log4j.info("The selected series added to histogram visual from Add from My Series tab");
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 5).click();
+			login.Log4j.info("The selected series added to " + arg1 + "  visual from Add from My Series tab");
+			//CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 5).click();
 		//	CommonFunctionality.Views_list();
 		} else {
-			Assert.fail("The selected series not added to histogram visual");
+			Assert.fail("The selected series not added to "+ arg1 + " visual");
 		}
 	}
 
@@ -357,7 +357,7 @@ public void create_a_new_histogram_visual() throws Throwable {
 	@Then("^Edit series panel should be opened with \"([^\"]*)\" tab$")
 	public void edit_series_panel_should_be_opened_with_tab(String arg1) throws Throwable {
 
-		CommonFunctionality.wait(700);
+		CommonFunctionality.wait(2000);
 		String ExpectedTxt = login.driver
 				.findElement(By.xpath("//*[@class='sidebar-panel--tab sidebar-panel--tab__active']")).getText();
 		if (arg1.equals(ExpectedTxt)) {
@@ -1319,7 +1319,7 @@ public void verify_right_click_options_for_histogram_visual() throws Throwable {
 public void verify_insert_visual_sub_dropdown_options_for_histogram_visual() throws Throwable {
 	CommonFunctionality.getElementByProperty(login.driver, "Table_rightclick_insertvisual",8).click();
 	String[] exp = { "Chart", "Pie", "Table", "Map", "Heat map",
-			"Histogram", "Commentary", "Attachments", "Image", "Filter"};
+			"Histogram", "Scatter", "Commentary", "Attachments", "Image", "Filter"};
 	List<WebElement> insertvisualoptions = login.driver
 			.findElements(By.xpath("//li[@class='dropdown-submenu active-menu-item']/ul/li/span"));
 	DropdownOptions(exp,insertvisualoptions);
@@ -3660,8 +3660,13 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	
 	@And("^Click on the visual title$")
 	public void click_on_the_visual_title() throws Throwable {
+		try {
 		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "(//*[@data-name='title'])[2]", 8);
 		title.click();
+		}catch(NoSuchElementException e) {
+			WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 8);
+			title.click();
+		}
 	}
 	@And("^Select any visual from visual panel$")
 	public void select_any_visual_from_visual_panel() throws Throwable {

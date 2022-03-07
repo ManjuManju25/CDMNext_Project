@@ -12,7 +12,7 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@HideSeries"},			
+		tags = {"@Sprintcases5.0"},			
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
@@ -24,7 +24,7 @@ import CDMNext.StepDefinations.login;
 public class TestRunner {
 
 	private TestNGCucumberRunner testNGCucumberRunner;
-	//CommonFunctionality commonUtilities = new CommonFunctionality();
+		
 	public CucumberFeatureWrapper cucumberFeature;
 	
 	@BeforeSuite

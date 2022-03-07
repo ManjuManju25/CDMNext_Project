@@ -321,12 +321,12 @@ Feature: Verifying Pie Visual Functionality
     And Create a Pie visual
     Then Verify viewing "Closing" of frequency conversion popup
 
-  #@PieVisual1
-  #Scenario: TC_Pie_62: Verify pie with different frequency
-    #And Select series with different filter and units "226311002;16190501"
-    #And Create a Pie visual
-    #And Select "Keep different frequencies"
-    #Then Should create pie chart with different freq by disabling highest frequency
+  @PieVisual
+  Scenario: TC_Pie_62: Verify pie with different frequency
+    And Select series with different filter and units "226311002;16190501"
+    And Create a Pie visual
+    And Select "Keep different frequencies"
+    Then Should create pie chart with different freq by disabling highest frequency
 
   @PieVisual
   Scenario: TC_Pie_63: Verify date field

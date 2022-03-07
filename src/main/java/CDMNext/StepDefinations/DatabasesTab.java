@@ -900,6 +900,11 @@ public class DatabasesTab {
 
 	@And("^Right click on \"([^\"]*)\"$")
 	public void right_click_on(String arg1) throws Throwable {
+		try {
+		CommonFunctionality.getElementByProperty(login.driver, "collapse_databriefings", 10).click();
+		}catch(Exception e) {
+			
+		}
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
 		dbase = arg1;
@@ -938,9 +943,9 @@ public class DatabasesTab {
 			AssertJUnit.fail("Doesn't exist in given databse list");
 		}
 		login.Log4j.info("Before_set_lang is " + Before_set_lang);
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		// contextClick() method to do right click on the element
-		action.contextClick(rightClickElement).build().perform();
+		action.pause(200).contextClick(rightClickElement).build().perform();
 
 	
 	}
@@ -959,11 +964,11 @@ public class DatabasesTab {
 	@SuppressWarnings("deprecation")
 	@Then("^The Databases language should be changed to selected language$")
 	public void the_Databases_language_should_be_changed_to_selected_language() throws Throwable {
-//		Thread.sleep(3000);
+
 		CommonFunctionality.ResetMethod();
 		filter.user_enters("India");
 		WebElement dbele;
-
+		CommonFunctionality.wait(1000);
 		if (dbase.equalsIgnoreCase("World Trend Plus")) {
 			dbele = login.driver.findElement(By.xpath(
 					"//div[@class='child-container']//div[@data-node-model-id='WORLD']//span[@class='name-text']"));
@@ -991,14 +996,17 @@ public class DatabasesTab {
 			action.pause(1500).contextClick(rightClickElement).build().perform();
 
 		} else {
+			login.driver.findElement(By.xpath("//div[@data-node-model-id='INDONESIA']//div[@class='toggle']")).click();
 			dbele = login.driver.findElement(By.xpath(
 					"//div[@data-node-model-id='INDONESIA']//div[@class='child-container']//div[1]//span[@class='name-text']"));
 			After_set_lang = dbele.getText();
 			login.Log4j.info("After_set_lang is " + After_set_lang);
 			database = true;
 			// After validation changing set language as English
-			Thread.sleep(2000);
-			action.pause(1000).contextClick(rightClickElement).build().perform();
+			CommonFunctionality.wait(2000);
+			WebElement rightClickEle = login.driver.findElement(
+					By.xpath("//div[@data-node-model-id='INDONESIA']//span[contains(text(),'Indonesia Premium Database')]"));
+			action.pause(2000).contextClick(rightClickEle).build().perform();
 		}
 		SetLangugeEnglish();
 		if (database == true && !Before_set_lang.equals(After_set_lang) == true) {
@@ -3403,12 +3411,12 @@ public class DatabasesTab {
 	@Then("^\"([^\"]*)\" panel should be opened$")
 	public void panel_should_be_opened(String arg1) throws Throwable {
 		if (arg1.equals("Add from My Series")) {
-			CommonFunctionality.wait(700);
+			CommonFunctionality.wait(3000);
 			String ExpectedTxt = login.driver.findElement(By.xpath("//*[@class='sidebar-panel--tab sidebar-panel--tab__active']")).getText();
 			if(arg1.equals(ExpectedTxt)) {
 				login.Log4j.info(arg1 + " panel is opened");
-				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 5).click();
-				CommonFunctionality.Views_list();
+//				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='sidebar-panel--header-close']", 5).click();
+//				CommonFunctionality.Views_list();
 			} else {
 				Assert.fail(arg1 + " panel is not opened");
 			}

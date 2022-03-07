@@ -107,8 +107,8 @@ public class CrossSection {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@And("^Search for the series with SID \"([^\"]*)\" and click on \"([^\"]*)\" option$")
-	public void search_for_the_series_with_SID_and_click_on_option(String arg1, String arg2) throws Throwable {
+
+public void search_for_the_series_with_SID_and_click_on_option(String arg1, String arg2) throws Throwable {
 		CommonFunctionality.getElementBycssSelector(login.driver, "a[data-id='myseries']", 4).click();
 		WebElement data = CommonFunctionality.getElementBycssSelector(login.driver, "span[data-id='DATA']", 4);
 		if(!data.getAttribute("class").contains("series-tab__hidden")) {
@@ -374,8 +374,8 @@ public class CrossSection {
 	}
 	
 	@SuppressWarnings("deprecation")
-	@And("^Sort the series in left pane$")
-	public void sort_the_series_in_left_pane() throws Throwable {
+
+public void sort_the_series_in_left_pane() throws Throwable {
 		CommonFunctionality.getElementBycssSelector(login.driver, "label[title='View results as List']", 4).click();
 		CommonFunctionality.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker--loader")));
 		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='series-representation--sort']//*[contains(@class,'dropdown--icon')]")));

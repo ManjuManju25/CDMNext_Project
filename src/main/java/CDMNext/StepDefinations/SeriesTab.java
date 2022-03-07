@@ -755,6 +755,7 @@ public class SeriesTab {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='link']", 6).click();
 			break;
 		case "Add from My Series":
+			CommonFunctionality.wait(500);
 			CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Add from My Series']", 5).click();
 			break;
 		case "Replace All":
@@ -854,7 +855,7 @@ public class SeriesTab {
 			CommonFunctionality.wait(8000);
 			break;
 		case "Related Series":
-
+			CommonFunctionality.wait(500);
 			WebElement ele1 = CommonFunctionality.getElementByXpath(login.driver,
 					"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
 			action.moveToElement(ele1).pause(1000).click().build().perform();
@@ -877,6 +878,7 @@ public class SeriesTab {
 			CommonFunctionality.wait(500);
 			WebElement ele2 = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 10);
 			jse.executeScript("arguments[0].scrollIntoView(true);", ele2);
+			CommonFunctionality.wait(500);
 			ele2.click();
 			break;
 		case "Add to watchlist":
@@ -1122,6 +1124,7 @@ public class SeriesTab {
 	public void user_has_selects_as(String arg1, String arg2) throws Throwable {
 		filter = arg2;
 		login.Log4j.info("clicking on " + arg1);
+		CommonFunctionality.wait(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(
 				By.xpath("//*[@class='dropdown-search-filter']//*[contains(text(),'" + arg1 + "')]"))).click();
 		login.Log4j.info("Selecting " + arg2 + " filter");

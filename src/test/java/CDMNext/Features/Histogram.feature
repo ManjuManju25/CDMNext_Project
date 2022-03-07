@@ -77,7 +77,7 @@ Feature: Verifying Histogram Visual functionality
     And Create a empty visual
     And Click on Edit series option
     And Choose series from  "+ Add from My Series"
-    Then The series should be added to histogram with its data
+    Then The series should be added to "histogram" with its data
 
   @Histogram
   Scenario: TC_Histogram_13:Edit series - Verify Edit series option for histogram visual

@@ -111,6 +111,7 @@ public class SSPWindow {
 	@SuppressWarnings("deprecation")
 	@And("^Search for the series \"([^\"]*)\"$")
 	public void search_for_the_series(String arg1) throws Throwable {
+		SprintCases5_0.close_Data_briefings_panel();
 		Thread.sleep(4000);
 		// Myseries.delete_series();
 		try {
@@ -347,11 +348,8 @@ public class SSPWindow {
 
 	@And("^Open SSP window$")
 	public void open_SSP_window_and_clicking_on_Add_icon() throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("SSP_Window");
-		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Window"))).isDisplayed()) {
-			CommonFunctionality.wait(1000);
-			System.out.println("SSP window is opened and displayed");
-		}
+		 CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='series-name-field--text']", 4).click();
 	}
 
 	@SuppressWarnings("deprecation")

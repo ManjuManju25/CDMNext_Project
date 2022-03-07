@@ -921,7 +921,8 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Click on chart option from hover$")
 	public void click_on_chart_option_from_hover() throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.ExpandLeft();
+		CommonFunctionality.wait(2000);
 		/*List<WebElement> total_count = login.driver
 				.findElements(By.xpath("//*[contains(@class,'search-series-list')]/*"));
 		for (int i = 1; i <= total_count.size(); i++) {
