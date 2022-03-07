@@ -1,3 +1,4 @@
+@SearchRelatedCases
 Feature: Verifying All Search related cases
 
   @AdvanceSearch

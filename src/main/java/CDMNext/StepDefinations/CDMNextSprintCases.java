@@ -1770,7 +1770,7 @@ public class CDMNextSprintCases {
 		new Actions(login.driver).moveToElement(one_series).pause(500).build().perform();
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[contains(@class,'tree-series-list')]/ul/*[1]/div/a/div[3]/div[2]/span[contains(@title,'More actions')]",
+				"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']/*[3]//ul/*[1]//*[@title='More actions']",
 				4).click();
 		CommonFunctionality.wait(500);
 		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
@@ -2794,8 +2794,8 @@ public class CDMNextSprintCases {
 				4);
 	}
 
-	@And("^Expand \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\"$")
-	public void expand(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
+	@And("^Expand \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\"$")
+	public void expand(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		// CommonFunctionality.UnselectMethod();
 		// CommonFunctionality.CollapseTreeMethod();
 		CommonFunctionality.wait(1000);
@@ -2805,10 +2805,10 @@ public class CDMNextSprintCases {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg2 + "')]//preceding::div[@class='toggle'][1]", 4).click();
 		CommonFunctionality.wait(1000);
-		if (arg3.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+		if (arg3.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg2 + "')]//following::div[@class='toggle'][1]", 4).click();
+					"//*[contains(text(),'" + arg3 + "')]//following::div[@class='toggle'][1]", 4).click();
 		} else {
 			WebElement table = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg3 + "')]/preceding::div[@class='toggle'][1]", 4);
@@ -2816,18 +2816,18 @@ public class CDMNextSprintCases {
 			js.executeScript("arguments[0].click();", table);
 		}
 		CommonFunctionality.wait(1000);
-		if (arg4.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+		/*if (arg4.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg2 + "')]//following::div[@class='toggle'][1]", 4).click();
 		} else {
-			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg4 + "')]/preceding::div[@class='toggle'][1]", 4);
+			WebElement series = CommonFunctionality.getElementByProperty(login.driver,
+					"Series_item_name", 4);
 			//js.executeScript("arguments[0].scrollIntoView(true);", series);
-			js.executeScript("arguments[0].click();", series);
-		}
-		CommonFunctionality.wait(1000);
-		if (arg5.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+			//js.executeScript("arguments[0].click();", series);
+		}*/
+		//CommonFunctionality.wait(1000);
+/*		if (arg5.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg2 + "')]//following::div[@class='toggle'][1]", 4).click();
@@ -2842,7 +2842,7 @@ public class CDMNextSprintCases {
 						.click();
 			}
 			CommonFunctionality.wait(1000);
-		}
+		}*/
 	}
 
 	@And("^Clicking the database \"([^\"]*)\"$")

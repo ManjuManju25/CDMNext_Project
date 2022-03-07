@@ -37,7 +37,6 @@ Feature: Verifying sprintcases 5.0
   @Sprintcases5.0
   Scenario: TC_12501_01:Verify keyboard shortcut info for visuals under SSP
     And Add few series to myseries
-    And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on "View as" tab
     Then The keyboard shortcut info should be displayed for Chart "(C)", Map "(M)" and Table "(T)"
@@ -56,6 +55,7 @@ Feature: Verifying sprintcases 5.0
   #And Open insight in preview mode
   #And Select visual and use Ctrl + C to copy the visual
   #Then The visual should be copied
+  
   @Sprintcases5.0
   Scenario: TC_19489_02:Verify Data Briefings panel from next login after once closed
     #And Login to CDMNext
@@ -262,7 +262,7 @@ Feature: Verifying sprintcases 5.0
 
   @Sprintcases5.0
   Scenario: TC_19912_01:Verify 'See in databases'in Data Briefings
-    And Click on any Data Briefings
+    And Click on second Data Briefings
     And Click on "See in Database"
     Then The related series should be focused in the Database and the Data Briefings popup should auto closed
 
@@ -276,7 +276,7 @@ Feature: Verifying sprintcases 5.0
 
   @Sprintcases5.0
   Scenario: TC_19831_01: Verify content shown in remarks field under the FAQ(i) option on the SSP window
-    And Search for the series "210337202"
+    Given User enters "210337202"
     And Click on chart option from hover
     And Select "1Y"int the timeframe
     And Switch to a different tab and create a visual
@@ -350,14 +350,7 @@ Feature: Verifying sprintcases 5.0
     And Group any of 2 series from right click options
     And Try to group another series from right click option
     Then Group rename popup should not displayed
-     Then Should be able to crate group
-
-  @Sprintcases5.0
-  Scenario: TC_15829_04 :User issue: Products: Content of China premium DB insights in Chinese UI displayed incorrect
-    And Change UI to chinese
-    And Click on notifications bell icon
-    And Click on "India Premium Database" database
-    Then Data must be matched with header shown
+    Then Should be able to crate group
 
   @Sprintcases5.0
   Scenario: TC_4542_06 :Pie: ArimaX13: Unable to recognize series to which arima cannot be applied
@@ -373,8 +366,8 @@ Feature: Verifying sprintcases 5.0
     And Create a country filter in the same view
     And Select the filter with "South Korea"
     Then Date picker dropdown should not be available which does not have korea country series
-    
-    @Sprintcases5.01
+
+  @Sprintcases5.0
   Scenario Outline: <TCID>: Verifying DB language change in right click
     And Right click on "<database>"
     And "Set language" as "<language>"
@@ -382,6 +375,21 @@ Feature: Verifying sprintcases 5.0
 
     Examples: 
       | TCID        | database                   | language |
-      | TC_10425_08 | World Trend Plus           | 中文      |
+      | TC_10425_08 | World Trend Plus           | 中文       |
       | TC_10425_08 | Russia Premium Database    | Русский  |
       | TC_10425_08 | Indonesia Premium Database | Bahasa   |
+
+  @Sprintcases5.0
+  Scenario: TC_15829_04 :User issue: Products: Content of China premium DB insights in Chinese UI displayed incorrect
+    And Change UI to chinese
+    And Click on notifications bell icon
+    And Click on "India Premium Database" database
+    Then Data must be matched with header shown
+
+  @Sprintcases5.0
+  Scenario: TC_18392_01:Verify keyboard shortcut for Ctrl+C to copy visual in insight preview mode
+    And Create an insight
+    And Create a pie visual with series id's "16240301;16243001"
+    And Open insight in preview mode
+    And Select visual and use Ctrl + C to copy the visual
+    Then The visual should be copied

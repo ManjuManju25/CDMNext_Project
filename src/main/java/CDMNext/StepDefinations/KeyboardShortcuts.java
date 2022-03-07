@@ -410,9 +410,9 @@ public class KeyboardShortcuts {
 
 	@And("^Select any series from Data tab$")
 	public void select_any_series_from_Data_tab() throws Throwable {
-		Thread.sleep(1000);
+		CommonFunctionality.wait(1000);
 		checkbox = login.driver.findElement(By.xpath(
-				"//*[@class='webix_column list-series-name webix_last']/*[1]//*[@class='series-name-wrapper ']/*[1]"));
+				"//*[contains(@class,'webix_column list-series-name webix_first')]/*[1]//*[@class='series-name-wrapper ']/*[1]"));
 		checkbox.click();
 
 	}

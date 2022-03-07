@@ -208,6 +208,7 @@ public class Commentary {
 			WebElement checkbox1 = CommonFunctionality.getElementByProperty(login.driver, "unchecked", 4);
 			new Actions(login.driver).pause(500).moveToElement(checkbox1).click().build().perform();
 			UnCheck = true;
+		
 		}
 	}
 

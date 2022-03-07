@@ -939,9 +939,9 @@ public class ReleasesTab {
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Watchlist')]", 4))
 				.click().build().perform();
-		String actual;
+		String actual = "Real GDP: YoY: sa";
 		
-		try {
+		/*try {
 			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 				actual = "Real GDP: YoY: sa";
 			} else {
@@ -953,9 +953,29 @@ public class ReleasesTab {
 			actual = CommonFunctionality
 					.getElementByXpath(login.driver, "//*[contains(text(),'" + DatabasesTab.series_name + "')]", 4)
 					.getText();
-		}
+		}*/
 		String text;
 		try {
+			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+				text = CommonFunctionality.getElementByXpath(login.driver,
+						"(//*[@class='series-item-information--additional-text'])[1]",
+						4).getText();
+			} else {
+				text = CommonFunctionality
+						.getElementByXpath(login.driver,
+								"(//*[@class='series-item-information--additional-text'])[1]",
+								4)
+						.getText();
+			}
+		} catch(Exception e) {
+			text = CommonFunctionality
+					.getElementByXpath(login.driver,
+							"//*[contains(text(),'" + DatabasesTab.series_name
+									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
+							4)
+					.getText();
+		}
+		/*try {
 			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 				text = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(text(),'Real GDP: YoY: sa')]/following::*[@class='series-item-information--additional-text'][1]",
@@ -975,7 +995,7 @@ public class ReleasesTab {
 									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
 							4)
 					.getText();
-		}
+		}*/
 		String split[] = text.split("\\,");
 		String replace = split[0];
 		String expected;
@@ -990,14 +1010,15 @@ public class ReleasesTab {
 		String expected13 = text1.substring(2, text1.length());
 		String expected1 = expected12 + expected13;
 		try {
-		if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 			sa.assertEquals("Real GDP: YoY: sa", actual);
-		} else {
+			} else {
 			sa.assertEquals(Comparables.series_name, actual);
-		}
+			}
 		}catch(Exception e) {
 			sa.assertEquals(DatabasesTab.series_name, actual);
 		}
+		
 		if (watchlist_dropdown_text.contains(expected) && watchlist_dropdown_text.contains(expected1)) {
 			login.Log4j.info("The Watchlist functionality has been verified successfully");
 		} else {

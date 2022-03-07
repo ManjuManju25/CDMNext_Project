@@ -34,6 +34,7 @@ public class SearchRelatedCases {
 	public void all_of_the_words_should_display_in_the_result_pane() throws Throwable {
 		method_commonSteps();
 		String[] keywords = AllWords.split(";");
+		CommonFunctionality.wait(5000);
 		List<WebElement> country_list = login.driver
 				.findElements(By.xpath("//*[@class='series-item--country country-information']"));
 		for (int i = 0; i < country_list.size(); i++) {
@@ -60,7 +61,7 @@ public class SearchRelatedCases {
 	public void any_of_the_words_should_display_in_the_result_pane() throws Throwable {
 		method_commonSteps();
 		String[] listwords = AnyWords.split(";");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(5000);
 		List<WebElement> sName = login.driver
 				.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
 		for (int i = 0; i < sName.size(); i++) {
@@ -233,6 +234,7 @@ public void enter_Any_of_these_series_IDs_as(String arg1) throws Throwable {
 
 	void method_commonSteps() throws InterruptedException {
 		login.Log4j.info("Clicking on Series tab ");
+		CommonFunctionality.wait(5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		CommonFunctionality.wait(5000);

@@ -293,6 +293,7 @@ public class CountryFilterVisual {
 	@And("^click on filter and modify visual with specific countries$")
 	public void click_on_filter_and_modify_visual_with_specific_countries() throws Throwable {
 		click_inside_filter_visual();
+		CommonFunctionality.wait(5000);
 		List<WebElement> list_of_countries = login.driver
 				.findElements(By.xpath("//*[@class='custom-select--body']//*[@class='custom-select-item']/*"));
 		for (int i = 0; i < list_of_countries.size();) {

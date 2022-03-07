@@ -31,6 +31,7 @@ public class Dependency {
 		CommonFunctionality.DeleteSeries();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).click();
+		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).clear();
 		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
@@ -54,10 +55,10 @@ public class Dependency {
 	// TC_01
 	@Given("^add some of series into my series tab$")
 	public void add_some_of_series_into_my_series_tab() throws Throwable {
-Thread.sleep(3000);
+      Thread.sleep(3000);
 		for (int i = 1; i <= 2; i++) {
-			Thread.sleep(1000);
-			login.driver.findElement(By.cssSelector(".tree-node:nth-child("+i+") .svg-checkbox")).click();
+		
+			login.driver.findElement(By.xpath("(//div[@class='title']/span[@class='svg-checkbox'])["+i+"]")).click();
 
 		}
 		
@@ -71,9 +72,9 @@ Thread.sleep(3000);
 
 		// click on '+' icon
 		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		//select all series check box checked
-		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[1]")).click();
 		
 		//Thread.sleep(1000);
 		//login.driver.findElement(By.xpath(
@@ -403,7 +404,7 @@ Thread.sleep(3000);
 	@Then("^Should be shown with series tooltip$")
 	public void should_be_shown_with_series_tooltip() throws Throwable {
 		Thread.sleep(3000);
-		WebElement tooltip = login.driver.findElement(By.xpath("//body/div[8]"));
+		WebElement tooltip = login.driver.findElement(By.xpath("//body/div[@class='tooltip tooltip__visible']"));
 		System.out.println("tooltip data:" + tooltip);
 		if (tooltip.isDisplayed()) {
 			System.out.println("Tooltip displayed");
@@ -497,7 +498,7 @@ Thread.sleep(3000);
 	public void click_on_apply_and_ok_button() throws Throwable {
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
 	}
 

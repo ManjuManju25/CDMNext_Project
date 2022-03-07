@@ -18,6 +18,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.itextpdf.text.log.SysoCounter;
@@ -46,15 +47,14 @@ public class Sprint_5_2 extends CommonFunctionality {
 	@Given("^User enters \"([^\"]*)\" in the search panel and save the search and click on the share icon$")
 	public void user_enters_in_the_search_panel_and_save_the_search_and_click_on_the_share_icon(String arg1)
 			throws Throwable {
-
 		Thread.sleep(5000);
-
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches"))).isDisplayed()) {
-			login.Log4j.info("My Search folder avilable in Page");
+			login.Log4j.info("My Search folder available in Page");
 			CommonFunctionality.wait(5000);
-			// webDriverwait_locator(login.LOCATORS.getProperty("My_Searches"), "xpath");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches"))).click();
 			login.Log4j.info("Clicked on My Search folder.");
+			CommonFunctionality.wait(2000);	
+			
 			WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches1")));
 			CommonFunctionality.action.moveToElement(ele).pause(5).build().perform();
 			Thread.sleep(2000);
@@ -77,7 +77,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.Log4j.info("Text india Entered in Saved searched Text Box");
 		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Save_New"))).click();
-		login.Log4j.info("Clicked on Sqave new Search");
+		login.Log4j.info("Clicked on Save new Search");
 		CommonFunctionality.wait(1000);
 		String Save = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Save_Message"))).getText();
 		Assert.assertEquals(Save, "Search saved!");
@@ -96,8 +96,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 	public void select_a_user_and_share() throws Throwable {
 
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Share"))).click();
-		login.Log4j.info("Clicked on Share icon");
-
+		login.Log4j.info("Clicked on Share icon");	
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Place_click"))).click();
 
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Place_click"))).sendKeys("ceicsuresh@gmail.com");
@@ -111,7 +110,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("save_button"))).click();
 		login.Log4j.info("Clicked on save button for Specific user ");
 		String Message = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Shared_Message"))).getText();
-		System.out.println("=====================" + Message);
 		Assert.assertEquals(Message, "Selected search was successfully shared.");
 		login.Log4j.info("Selected search was successfully shared.");
 
@@ -128,14 +126,12 @@ public class Sprint_5_2 extends CommonFunctionality {
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		robot.keyRelease(KeyEvent.VK_SHIFT);
 		robot.keyRelease(KeyEvent.VK_N);
-		//CommonFunctionality.wait(5000);
 		ArrayList<String> incog = new ArrayList<String>(login.driver.getWindowHandles());
 		Thread.sleep(5000);
 		login.driver.switchTo().window(incog.get(1));
 		Thread.sleep(10000);	
 		
 		login.driver.navigate().to("https://stage.ceicdata.com/login");
-		System.out.println("====Title====" + login.driver.getTitle());
 		login.Log4j.info("successfully Private window Opened");
 	}
 
@@ -223,7 +219,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_list"))).click();
 
 				String India = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("India_Region"))).getText();
-				System.out.println("==============" + India);
 				Assert.assertEquals(India, "India");
 				CommonFunctionality.wait(5000);
 
@@ -256,14 +251,8 @@ public class Sprint_5_2 extends CommonFunctionality {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_list"))).click();
 
 				String India = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("India_Region"))).getText();
-				System.out.println("==============" + India);
 				Assert.assertEquals(India, "India");
 				CommonFunctionality.wait(5000);
-
-				/*
-				 * newTab = new ArrayList<String>(login.driver.getWindowHandles());
-				 * login.driver.switchTo().window(newTab.get(0));
-				 */
 
 			}
 
@@ -271,7 +260,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 			fail("Failed");
 		}
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
-		// login.driver.switchTo().window(newTab.get(1)).close();
 		Thread.sleep(1000);
 		login.driver.switchTo().window(newTab.get(0));
 
@@ -326,10 +314,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 
 	@Then("^Click on Copy Icon\\.$")
 	public void click_on_Copy_Icon() throws Throwable {
-		// CommonFunctionality.wait(3000);
-		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches"))).click();
-		// CommonFunctionality.wait(3000);
-
 		CommonFunctionality.wait(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches"))).click();
 		WebElement ele = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches1")));
@@ -337,11 +321,10 @@ public class Sprint_5_2 extends CommonFunctionality {
 		CommonFunctionality.action.moveToElement(ele).pause(5).build().perform();
 
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Copy_url"))).click();
+		login.Log4j.info("URL link copied");
 		CommonFunctionality.wait(3000);
 		String Copy_url = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Copy_Message"))).getText();
-		System.out.println("=====================" + Copy_url);
 		Assert.assertEquals(Copy_url, "URL link copied.");
-
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(newTab.get(1)).close();
 		Thread.sleep(1000);
@@ -360,7 +343,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Copy_url"))).click();
 		CommonFunctionality.wait(3000);
 		String Copy_url = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Copy_Message"))).getText();
-		System.out.println("=====================" + Copy_url);
 		Assert.assertEquals(Copy_url, "URL link copied.");
 
 	}
@@ -369,6 +351,13 @@ public class Sprint_5_2 extends CommonFunctionality {
 	public void run_URL_in_the_browser() throws Throwable {
 		CommonFunctionality.wait(3000);
 		CommonFunctionality.jse.executeScript("window.open('newpage.html','_blank');");
+		if (CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("India_Details"), 500)
+				.isDisplayed()) {
+
+			login.Log4j.info("India results are displayed in new browser");
+		} else {
+			login.Log4j.info("India results are not displayed in new browser");
+		}
 
 	}
 
@@ -376,8 +365,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 	public void run_in_the_browserand_copy_the_URL_in_the_new_Tab() throws Throwable {
 
 		CommonFunctionality.wait(3000);
-		// action.keyDown(Keys.CONTROL).sendKeys("t").keyUp(Keys.CONTROL).build().perform();
-
 		CommonFunctionality.jse.executeScript("window.open('newpage.html','_blank');");
 		CommonFunctionality.wait(3000);
 		if (CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("India_Details"), 500)
@@ -388,7 +375,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 			login.Log4j.info("India results are not displayed in new browser");
 		}
 
-		System.out.println("===enetered===");
 
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(newTab.get(2)).close();
@@ -409,10 +395,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 		action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
 		CommonFunctionality.wait(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("save_button"))).click();
-		// CommonFunctionality.wait(1000);
-
 		String Message = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Shared_Message"))).getText();
-		System.out.println("=====================" + Message);
 		Assert.assertEquals(Message, "Selected search was successfully shared.");
 
 	}
@@ -437,67 +420,12 @@ public class Sprint_5_2 extends CommonFunctionality {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("save_button"))).click();
 			Thread.sleep(5000);
 
-			/*
-			 * newTab = new ArrayList<String>(login.driver.getWindowHandles());
-			 * login.driver.switchTo().window(newTab.get(1));
-			 * login.driver.navigate().refresh(); Thread.sleep(5000);
-			 * if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches"
-			 * ))).isDisplayed() ){
-			 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches")))
-			 * .click(); if (!CommonFunctionality. getElementByXpath(login.driver,
-			 * login.LOCATORS.getProperty("Shared_To"), 500) .isDisplayed()) {
-			 * 
-			 * 
-			 * 
-			 * List<WebElement> MySearch =
-			 * login.driver.findElements(By.xpath(login.LOCATORS.getProperty("My_Searches"))
-			 * );
-			 * 
-			 * for (int i = 0; i < MySearch.size(); i++) { // String value =
-			 * WhatsNew.get(i).getText(); //
-			 * System.out.println("============================================"+value); //
-			 * String replaceLine = value.replaceAll(",", ""); if
-			 * (!MySearch.get(i).getText().contains("My searches")) {
-			 * 
-			 * Assert.assertTrue(true); login.Log4j.info("search has been stopped by user");
-			 * 
-			 * 
-			 * } else {
-			 * 
-			 * Assert.assertTrue(false); login.Log4j.info("India is Displayed");
-			 * 
-			 * 
-			 * }
-			 * 
-			 * } else { login.Log4j.info("My searches folder is not displayed");
-			 * 
-			 * }
-			 */ }
+ }
 
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(newTab.get(1));
 
-		/*
-		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches")))
-		 * .click(); CommonFunctionality.wait(3000);
-		 * 
-		 * 
-		 * 
-		 * WebElement ele
-		 * =login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches1")
-		 * )); CommonFunctionality.action.moveToElement(ele).pause(5).build().perform();
-		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty("remove"))).
-		 * click(); CommonFunctionality.wait(10000);
-		 */
-
 	}
-
-	@When("^Login to Shared User account$")
-
-	public void login_to_Shared_User_account() throws Throwable {
-
-	}
-
 	@When("^Check for Shared Search$")
 	public void check_for_Shared_Search() throws Throwable {
 		login.driver.navigate().refresh();
@@ -507,7 +435,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 			if (!CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("Shared_To"), 500)
 					.isDisplayed()) {
 
-								login.Log4j.info("--->search has been stopped by user<--------");
+				login.Log4j.info("search has been stopped by user");
 
 			} else {
 				login.Log4j.info("India is Displayed");
@@ -533,8 +461,10 @@ public class Sprint_5_2 extends CommonFunctionality {
 	@Given("^User enters \"([^\"]*)\" in the search panel and save the search$")
 	public void user_enters_in_the_search_panel_and_save_the_search(String arg1) throws Throwable {
 		CommonFunctionality.wait(3000);
-		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("My_Searches"))).size() == 1) {
-			CommonFunctionality.wait(1000);
+		login.driver.navigate().refresh();
+	//	if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("My_Searches"))).size() == 1) {
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches"))).isDisplayed()) {
+			CommonFunctionality.wait(3000);
 
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Searches"))).click();
 			CommonFunctionality.wait(3000);
@@ -543,6 +473,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 			CommonFunctionality.action.moveToElement(ele).pause(5).build().perform();
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("remove"))).click();
 			CommonFunctionality.wait(10000);
+			System.out.println("=======done");
 
 		}
 
@@ -605,29 +536,19 @@ public class Sprint_5_2 extends CommonFunctionality {
 		Robot robot = new Robot();
 
 		robot.keyPress(KeyEvent.VK_CONTROL);
-
+			
 		robot.keyPress(KeyEvent.VK_SHIFT);
-
 		robot.keyPress(KeyEvent.VK_N);
-
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-
 		robot.keyRelease(KeyEvent.VK_SHIFT);
-
 		robot.keyRelease(KeyEvent.VK_N);
 
 		Thread.sleep(10000);
-
-		ArrayList<String> incog = new ArrayList<String>(login.driver.getWindowHandles());
-		System.out.println("=================" + incog);
-		login.driver.switchTo().window(incog.get(1));
-
-		
+		login.driver.navigate().to("https://stage.ceicdata.com/login");
 		CommonFunctionality.wait(3000);
 
-		login.driver.navigate().to("https://stage.ceicdata.com/login");
-		
-
+		ArrayList<String> incog = new ArrayList<String>(login.driver.getWindowHandles());
+		login.driver.switchTo().window(incog.get(1));
 		CommonFunctionality.wait(3000);
 		// login.driver.switchTo().window(newTab.get(1));
 		System.out.println("====Title====" + login.driver.getTitle());
@@ -650,8 +571,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 		} catch (Exception e) {
 
 			CommonFunctionality.wait(500);
-			WebElement Serieslist = login.driver.findElement(
-					By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+				WebElement Serieslist = login.driver.findElement(By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
 			new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
 			WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
 			CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
@@ -711,9 +631,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 	@Then("^Move the mouse on saved style and click on share icon\\.$")
 	public void move_the_mouse_on_saved_style_and_click_on_share_icon() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath(
-				"//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']"))
-				.click();
+		login.driver.findElement(By.xpath("//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']")).click();
 		CommonFunctionality.wait(2000);
 
 		WebElement Share = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Share_mouse")));
@@ -721,10 +639,8 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.Log4j.info("hovered on  style  template");
 		if (Share.isDisplayed()) {
 
-			login.driver
-					.findElement(
-							By.xpath("//div[@class='style-templates-item--icon-base style-templates-item--share']"))
-					.click();
+			login.driver.findElement(By.xpath("//div[@class='style-templates-item--icon-base style-templates-item--share']")).click();
+			login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__text_purple']")).click();
 			login.Log4j.info("Share Popup is displayed");
 
 		} else {
@@ -774,8 +690,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 	public void shared_visual_style_should_be_available_under_Shared_to_me() throws Throwable {
 
 		CommonFunctionality.wait(2000);
-		WebElement Serieslist = login.driver.findElement(
-				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+		WebElement Serieslist = login.driver.findElement(By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
 		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
 		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
 		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
@@ -783,13 +698,12 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("table5"))).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edittable"))).click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(2000);	
+		
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Statistics_checkbox"))).click();
 
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath(
-				"//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']"))
-				.click();
+		login.driver.findElement(By.xpath("//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']")).click();
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ShareTo_Me"))).isDisplayed()) {
 			login.Log4j.info("Shared Style is Available under shared with me");
 
@@ -807,8 +721,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 	public void select_shared_style() throws Throwable {
 		try {
 			CommonFunctionality.wait(2000);
-			WebElement Serieslist = login.driver.findElement(
-					By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+			WebElement Serieslist = login.driver.findElement(By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
 			new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
 			WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
 			CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
@@ -820,9 +733,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Statistics_checkbox"))).click();
 
 			CommonFunctionality.wait(2000);
-			login.driver.findElement(By.xpath(
-					"//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']"))
-					.click();
+			login.driver.findElement(By.xpath("//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']")).click();
 			if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ShareTo_Me"))).isDisplayed()) {
 				CommonFunctionality.wait(2000);
 				Thread.sleep(5000);
@@ -922,9 +833,9 @@ public class Sprint_5_2 extends CommonFunctionality {
 	@When("^check for shared style\\.$")
 	public void check_for_shared_style() throws Throwable {
 		login.driver.navigate().refresh();
+		login.driver.findElement(By.xpath("//button[text()='Start new']")).click();
 		CommonFunctionality.wait(2000);
-		WebElement Serieslist = login.driver.findElement(
-				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+		WebElement Serieslist = login.driver.findElement(By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
 		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
 		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
 		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
@@ -941,7 +852,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 				"//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']"))
 				.click();
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ShareTo_Me"))).isDisplayed()) {
-						login.Log4j.info("Shared Style is Available under shared with me");
+			 login.Log4j.info("Shared Style is Available under shared with me");
 
 		} else {
 			login.Log4j.info("Shared Style is not Available under shared with me");
@@ -956,46 +867,235 @@ public class Sprint_5_2 extends CommonFunctionality {
 	@When("^stop sharing saved Style\\.$")
 	public void stop_sharing_saved_Style() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath(
-				"//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']"))
-				.click();
+		login.driver.findElement(By.xpath("//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']")).click();
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("My_Styles"))).isDisplayed()) {
 			CommonFunctionality.wait(2000);
 
 			WebElement Share = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Share_mouse")));
 			CommonFunctionality.action.moveToElement(Share).pause(2).build().perform();
 			login.Log4j.info("hovered on  style  template");
-			login.driver
-					.findElement(
-							By.xpath("//div[@class='style-templates-item--icon-base style-templates-item--share']"))
-					.click();
+			login.driver.findElement(By.xpath("//div[@class='style-templates-item--icon-base style-templates-item--share']")).click();
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("User_remove"))).click();
 			CommonFunctionality.wait(1000);
 
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("save_button"))).click();
-			Thread.sleep(5000);
+			String Unshared_style = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Style_unshared"))).getText();
+			Assert.assertEquals(Unshared_style, "Selected style was successfully unshared.");
+			CommonFunctionality.wait(5000);
 
 		}
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(newTab.get(1));
 
 	}
+	
+	
+	@Given("^user clicks on New insight->open pie dropdown->click on donut$")
+	public void user_clicks_on_New_insight_open_pie_dropdown_click_on_donut() throws Throwable {
+		login.driver.findElement(By.xpath("//div[@title='Create new View tab']")).click();
+		login.Log4j.info("Created view tab in insights");
+		login.driver.findElement(By.xpath("//div[@title='Click or drag-and-drop to insert Pie']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
+		CommonFunctionality.wait(500);
+		login.Log4j.info("clicked on Pie dropdown");
+		login.driver.findElement(By.xpath("//span[@title='Donut']")).click();
+		CommonFunctionality.wait(2000);
+		login.Log4j.info("clicked on Donut");
+		
+		
+	   
+	}
+
+	@And("^try to open edit Visual for donut\\.$")
+	public void try_to_open_edit_Visual_for_donut() throws Throwable {
+		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+		login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//button[text()='Edit Pie']")).click();
+		login.Log4j.info("clicked on Edit Pie");
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Donut_chart"))).isDisplayed()) {
+			login.Log4j.info("Donut chart is displayed");	
+		}
+		else {
+			login.Log4j.info("Donut chart is not displayed");
+		}	    
+	}
+	
+
+	@Given("^user Filter out search with continuous under More dropdown\\.$")
+	public void user_Filter_out_search_with_continuous_under_More_dropdown() throws Throwable {
+		CommonFunctionality.wait(5000);
+		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
+		
+		
+		
+		if (CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("More"), 500)
+				.isDisplayed()) {
+
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More"))).click();
+			login.Log4j.info("Successfully More button Clicked ");
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuous"))).click();
+			login.Log4j.info("Successfully Continuous  button Clicked ");
+		} else {
+			fail("Failed");
+		}
+		   
+	}
+	
+	
+	
+	@And("^check for orange series\\.$")
+	public void check_for_orange_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Orange_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Internal_tooltip")));
+		new Actions(login.driver).pause(500).moveToElement(Orange_series).build().perform();
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Orange_dot"))).isDisplayed()) {
+
+			login.Log4j.info("Series for internal tooltip is present");
+
+		} 
+		else {
+			login.Log4j.info("Series for internal tooltip is not  present");
+			
+		}
+	    
+	}
+
+	@Given("^expand release tab for green series\\.$")
+	public void expand_release_tab_for_green_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@value='TREE']")).click();
+		WebElement Green_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Green_tooltip")));
+		new Actions(login.driver).pause(500).moveToElement(Green_series).build().perform();
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Green_dot"))).isDisplayed()) {
+
+			login.Log4j.info("Green dot contains series that match your search is present");
+
+		} 
+		else {
+			login.Log4j.info("Green dot contains series that match your search is not present");
+			
+		}				   
+	}
+
+	@Given("^Open database for purple series\\.$")
+	public void open_database_for_purple_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
+		
+		WebElement Serieslist = login.driver.findElement(
+				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
+        CommonFunctionality.wait(2000);
+        WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("See_Database")));
+		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@title='China Premium Database: Table CN.OC: Fixed Asset Investment: Industry']")).click();
+		WebElement Purple_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Purple_mouseover")));
+		new Actions(login.driver).pause(500).moveToElement(Purple_series).build().perform();
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Purple_dot"))).isDisplayed()) {
+			CommonFunctionality.wait(2000);
+			login.Log4j.info("Purple dot contains series that match your search is present");
+
+		} 
+		else {
+			login.Log4j.info("Purple dot contains series that match your search is not present");
+			
+		}	
+		
+	}
+	
+	
+	
+	@Given("^user selects S from More Actions\\.$")
+	public void user_selects_S_from_More_Actions() throws Throwable {
+		CommonFunctionality.wait(5000);
+		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
+		
+		
+		
+		if (CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("More"), 500)
+				.isDisplayed()) {
+
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More"))).click();
+			login.Log4j.info("Successfully More button Clicked ");
+			CommonFunctionality.wait(2000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replacement_series"))).click();
+			login.Log4j.info("Successfully Replacement series  button Clicked ");
+		} else {
+			fail("Failed");
+		}   
+	}
+
+	@Given("^Replacement series should be shown\\.$")
+	public void replacement_series_should_be_shown() throws Throwable {
+		CommonFunctionality.wait(2000);			
+		List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='series-item--status-icons']"));
+		CommonFunctionality.wait(2000);
+		
+		if(list.size()>1) {
+			login.Log4j.info("Replacement series are shown");
+			
+		}
+		else {
+			login.Log4j.info("Replacement series are not  shown");
+		}
+			   
+	}
+
+	@Given("^selects C from More Actions\\.$")
+	public void selects_C_from_More_Actions() throws Throwable {
+		CommonFunctionality.wait(5000);
+		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();	
+		if (CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("More"), 500)
+				.isDisplayed()) {
+
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More"))).click();
+			login.Log4j.info("Successfully More button Clicked ");
+			CommonFunctionality.wait(2000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replacement_series"))).click();
+			CommonFunctionality.wait(2000);
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuous"))).click();
+			login.Log4j.info("Successfully Continuos series  button Clicked ");
+		} else {
+			fail("Failed");
+		}
+		
+	   
+	}
+
+	@Given("^Continuos series should be shown\\.$")
+	public void continuos_series_should_be_shown() throws Throwable {
+      CommonFunctionality.wait(2000);	
+		
+		List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='status-icon status-icon__key']"));
+		CommonFunctionality.wait(2000);
+		if(list.size()>1) {
+			login.Log4j.info("continuos  series are shown");
+			
+		}
+		else {
+			login.Log4j.info("continuos  series are not shown");
+		}  
+	}
+
 
 	@Then("^check for Shared style under shared with me\\.$")
 	public void check_for_Shared_style_under_shared_with_me() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.navigate().refresh();
+		login.driver.findElement(By.xpath("//button[@class='button button__text_purple']")).click();
+		login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']")).click();
+		CommonFunctionality.wait(2000);	
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edittable"))).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']")).click();
 		
-		login.driver.findElement(By.xpath(
-				"//div[@class='context-menu-control context-menu-control__clean context-menu-control__icon']//div[@class='context-menu-control--icon']"))
-				.click();
 
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ShareTo_Me"))).isDisplayed()) {
 
-			System.out.println("Test case failed");
+			System.out.println("Shared style is visible");
 
 		} else {
-			System.out.println("Test case pass");
+			System.out.println("Shared style is not visible");
 
 		}
 		ArrayList<String> newTab = new ArrayList<String>(login.driver.getWindowHandles());
@@ -1010,94 +1110,84 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath("//span[normalize-space()='Save']")).click();
 		
 		login.driver.findElement(By.xpath("//input[@class='insight-search-input--search-field']")).sendKeys(arg1);
-		login.driver.findElement(By.xpath("//span[@class='save-search--save-new']")).click();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		login.driver.findElement(By.xpath("//span[@class='save-search--save-new']")).click();		    
+	}
+
+	@Given("^user enters five saved searches and scroll bar should be displayed\\.$")
+	public void user_enters_five_saved_searches_and_scroll_bar_should_be_displayed() throws Throwable {
+      CommonFunctionality.wait(2000);	   
+      login.Log4j.info("My search not available in web page");
+  	String Searches="raj,guru,test2,test,mahesh,shankar";
+  	String[] myArray=Searches.split(",");
+  	for(String search: myArray) {
+  		login.driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(search,Keys.ENTER);
+  		login.driver.findElement(By.xpath("//span[normalize-space()='Save']")).click();
+  		CommonFunctionality.wait(2000);
+  		login.driver.findElement(By.xpath("//input[@class='insight-search-input--search-field']")).sendKeys(search);
+  		CommonFunctionality.wait(2000);
+  		login.driver.findElement(By.xpath("//span[@class='save-search--save-new']")).click();
+  		String Save = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Save_Message"))).getText();
+  		Assert.assertEquals(Save, "Search saved!");
+  		login.Log4j.info("Succesfully Search saved!");
+  		Thread.sleep(2000);
+  		login.driver.findElement(By.xpath("//input[@placeholder='Search']")).clear();   
+  		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Mysearch_folder"))).click();
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Mysearch_folder"))).isDisplayed()){
+			WebElement element = login.driver.findElement(By.xpath("//span[@class='searches-item--title'][normalize-space()='raj']"));
+			((JavascriptExecutor) login.driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		}				login.Log4j.info("Scroll bar is displayed and Border is applied");	  
+      
+}			
+		}
+	
+	
+	
+	
+	@Given("^user selects Goto sources dropdown in search pane\\.$")
+	public void user_selects_Goto_sources_dropdown_in_search_pane() throws Throwable {
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Source_dp"))).click();
 		
 	    
 	}
 
-	
-	
-	
+	@Given("^enter \"([^\"]*)\" in search feild\\.$")
+	public void enter_in_search_feild(String arg1) throws Throwable {
+		
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg1);
+		CommonFunctionality.wait(2000);
+		WebElement Source = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Data")));
+		new Actions(login.driver).pause(500).moveToElement(Source).build().perform();
+		
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("CEIC_Data"))).isDisplayed()){
+			login.Log4j.info("CEIC Data is displayed");	
+		}
+		else {
+			login.Log4j.info("CEIC Data is not displayed");
+		}
+	    
+	}
 
-	@Given("^user enters  searches \"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\",\"([^\"]*)\"\\.$")
-	public void user_enters_searches(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6)
-			throws Throwable {
-		
-			
-			
-		
-		
-		
-		
-		
-		CommonFunctionality.wait(2000);	
-		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Mysearch_folder"))).isDisplayed()){
-			
+	@Given("^Delete the saved searches\\.$")
+	public void delete_the_saved_searches() throws Throwable {		
+		login.driver.navigate().refresh();
+		CommonFunctionality.wait(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Mysearch_folder"))).click();
-			login.Log4j.info("Clicked on My Search folder.");
-		
-		
-			
-
+		 
+		     login.Log4j.info("Clicked on My Search folder.");	
+		     CommonFunctionality.wait(2000);
+				List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='searches-item--title']"));
+				CommonFunctionality.wait(2000);
 				
-				WebElement element = login.driver.findElement(By.xpath("//span[@class='searches-item--title'][normalize-space()='"+arg6+"']"));
-				((JavascriptExecutor) login.driver).executeScript("arguments[0].scrollIntoView(true);", element);
-				
-				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Mysearch_border"))).isDisplayed()) {
-					List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='searches-item--title']"));
+				for (int i=0; i<list.size(); i++) {					
+					String searches =login.driver.findElement(By.xpath("//span[@class='searches-item--title']")).getText();				
+					WebElement ele=login.driver.findElement(By.xpath("//span[text()='"+searches+"']"));				
+					CommonFunctionality.action.moveToElement(ele).pause(5).build().perform();
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("remove"))).click();				
 					Thread.sleep(2000);
-					
-					for (int i=0; i<list.size(); i++) {				
-						
-						String ss =login.driver.findElement(By.xpath("//span[@class='searches-item--title']")).getText();
-						
-						
-						
-						
-						WebElement ele=login.driver.findElement(By.xpath("//span[text()='"+ss+"']"));				
-						CommonFunctionality.action.moveToElement(ele).pause(5).build().perform();
-						login.driver.findElement(By.xpath(login.LOCATORS.getProperty("remove"))).click();
-						
-						Thread.sleep(2000);
-					
-				}
-					
-				}					
 				
-		}
-		
-		login.Log4j.info("My search not available in web page");
-		String Searches="raj,guru1,test2,test,mahesh,shankar";
-		String[] myArray=Searches.split(";");
-		List<String> mySearches=new ArrayList<>();
-		for(String search: myArray) {
-			mySearches.add(search);
-			
-		}
-	}
-		
-	@Given("^save the search\\.$")
-	public void save_the_search() throws Throwable {
-
-	}
-
-	@Then("^scroll bar should be displayed and border should be applied for the popup after (\\d+) saved searchs created\\.$")
-	public void scroll_bar_should_be_displayed_and_border_should_be_applied_for_the_popup_after_saved_searchs_created(
-			int arg1) throws Throwable {
-
-	}
+			}					
+			}
+	
 	
 	@Given("^user Logout from current user$")
 	public void user_Logout_from_current_user() throws Throwable {
@@ -1116,19 +1206,11 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath("//input[@placeholder='Email Address']")).sendKeys(arg1);
 		login.driver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys(arg2);
 		login.driver.findElement(By.xpath("//button[@type='submit']")).click();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//*[text()='No, take me to CDMNext']")).click();
-		login.Log4j.info("Clicked on No, take me to CDMNext Alert");
 		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
+		CommonFunctionality.wait(2000);
 		WebElement watchlist = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Watchlist_hovered")));
 		CommonFunctionality.action.moveToElement(watchlist).pause(2).build().perform();
 		login.driver.findElement(By.xpath("//span[@title='Add to watchlist'] ")).click();
-		
-		
-		
-		
-		
-		
 
 	}
 
@@ -1160,22 +1242,14 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath("//span[@title='Histogram']")).click();
 		login.driver.findElement(By.xpath("//div[@class='visual-top-panel--left-controls']//button[text()='Edit Histogram']")).click();
 		//login.driver.findElement(By.xpath("//div[@data-view-item-id='view3207']//div[@class='context-menu-control--icon']"));
-		login.driver.findElement(By.xpath("//*[text()='Title:']//parent::div//following-sibling::div[@class='context-menu-control--icon']")).click();
-		
-		
-		
-	    
+		login.driver.findElement(By.xpath("//*[text()='Title:']//parent::div//following-sibling::div[@class='context-menu-control--icon']")).click();    
 	}
 	@And("^clicks on edit Histogram and enter title as \"([^\"]*)\"\\.$")
 	public void clicks_on_edit_Histogram_and_enter_title_as(String arg1) throws Throwable {
 		//login.driver.findElement(By.xpath("//input[@placeholder='auto']")).clear();
 		login.driver.findElement(By.xpath("//input[@placeholder='auto']")).sendKeys(arg1);
 		if(login.driver.findElement(By.xpath("//span[text()='"+arg1+"']")).isDisplayed()){
-			login.Log4j.info("Shankar is displayed");
-			
-		
-			
-			
+			login.Log4j.info("Shankar is displayed");	
 		}
 		else{
 			login.Log4j.info("Shankar is not displayed");
@@ -1192,61 +1266,21 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath("//*[text()='Title:']//parent::div//following-sibling::div[@class='context-menu-control--icon']")).click();
 		login.driver.findElement(By.xpath("//input[@placeholder='auto']")).clear();
 		if (!login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Title_checkbox"))).isSelected()) {
-			System.out.println("====enter===");
 			CommonFunctionality.wait(3000);
 			String auto=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Auto_text"))).getText();
-			System.out.println("=============="+auto);
 			if(auto.contains("GDP Index: PY=100")) {
 				login.Log4j.info("Auto series name is  displayed");
 			}
 			else {
 				login.Log4j.info("Auto series name is not displayed");
 				
-			}
-			
-			
-			
-			
+			}			
 		}
 		else {
 			login.Log4j.info("Auto series name is not displayed");
-		}
-
-		
-
-		
-	    
+		}    
 	}
 	
-	@Given("^user clicks onOpen download window > Any tab$")
-	public void user_clicks_onOpen_download_window_Any_tab() throws Throwable {
-		
-	    
-	}
-
-	@Given("^Move mouse on fx option\\.$")
-	public void move_mouse_on_fx_option() throws Throwable {
-	    
-	}
-
-	
-	
-	
-	
-	@Then("^Title > Add your title for the visual > displayed on visual$")
-	public void title_Add_your_title_for_the_visual_displayed_on_visual() throws Throwable {
-	   
-	}
-
-	@Then("^Removes the title\\.$")
-	public void removes_the_title() throws Throwable {
-	    
-	}
-
-	
-	
-	
-
 	@Given("^user clicks on (\\d+) dots in datatab header$")
 	public void user_clicks_on_dots_in_datatab_header(int arg1) throws Throwable {
 		login.driver.findElement(By.xpath("//div[@class='search-presentation-tabs--drop-down-title']")).click();
@@ -1255,13 +1289,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 
 	@Given("^observe the checkbox for Datatab\\.$")
 	public void observe_the_checkbox_for_Datatab() throws Throwable {
-		CommonFunctionality.wait(2000);
-		
-		
-		
-		CommonFunctionality.wait(2000);
-		
-		
 		CommonFunctionality.wait(2000);
 		if (!login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Datatab_checkbox"))).isSelected()) {
 			
@@ -1272,21 +1299,565 @@ public class Sprint_5_2 extends CommonFunctionality {
 		}
 	}
 
-	
+	@Given("^user Search with sources: \"([^\"]*)\"$")
+	public void user_Search_with_sources(String arg1) throws Throwable {
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='series-tab ui-sortable-handle']//span[@class='series-tab--text'][normalize-space()='Comparables']", 20).click();
+		login.driver.findElement(By.xpath("//div[@class='search-section']//div[3]//div[1]//div[1]//div[1]//span[1]//span[2]")).click();
+		login.Log4j.info("clicked on source filter");
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg1,Keys.ENTER);
+		login.Log4j.info("Search with Central bureau of statistics");
+		
+		
+		
+		
+	    
+	}
 
+	@Given("^Verify comparables$")
+	public void verify_comparables() throws Throwable {
+if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Comparables"))).size() == 0) {
+			
+			login.Log4j.info("Central bureau of statistics is not present in the list");
+		
+	    
+	}
+
+else {
+	login.Log4j.info("Central bureau of statistics is  present in the list");
+}
+	}	
+	
+	@Given("^user selects some series into my series tab$")
+	public void user_selects_some_series_into_my_series_tab() throws Throwable {	
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))).click();
+	System.out.println("clicked on series tab");
+		Thread.sleep(5000);
+		List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		CommonFunctionality.wait(2000);
+		
+		
+		for (int i=0; i<list.size()-37; i++) {
+			CommonFunctionality.wait(2000);
+			list.get(i).click();
+			CommonFunctionality.wait(2000);	
+		}
+		
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("add_to_myseries_icon"))).click();	
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		
+		}	
+	@Given("^click on refresh Insight\\.$")
+	public void click_on_refresh_Insight() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@title='Open File menu']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@title='Refresh']")).click();
+		
+		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Insight_popup"))).size()==1) {
+			login.driver.findElement(By.xpath("//button[text()='Start new']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))).click();
+			System.out.println("clicked on series tab");
+				CommonFunctionality.wait(2000);
+				List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+				CommonFunctionality.wait(2000);
+				
+				for (int i=0; i<list.size()-37; i++) {
+					list.get(i).click();	
+				}
+				
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("add_to_myseries_icon"))).click();	
+				login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+				CommonFunctionality.wait(2000);
+				login.driver.findElement(By.xpath("//div[@title='Open File menu']")).click();
+				CommonFunctionality.wait(2000);
+				login.driver.findElement(By.xpath("//span[@title='Refresh']")).click();
+				
+			
+		}
+			
+		
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuos_tab"))).isDisplayed()) {
+			login.Log4j.info("series with continuos are shown in continuos tab only");
+		}
+		else {
+			login.Log4j.info("series with continuos are not shown in continuos tab only");
+		}
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Manage_All"))).isDisplayed()) {
+		
+		login.driver.findElement(By.xpath("//div[@class='suggestions-panel--arrow icon--filter-arrow']")).click();
+		login.Log4j.info("Add continuous series, Add contributed series, Replace the current series and Delete the current series are displayed");
+		
+		}
+		else {
+			login.Log4j.info("Add continuous series, Add contributed series, Replace the current series and Delete the current series are not displayed");
+			
+		}
+		
+	    
+	}
+		
+	@Given("^Select all series->look for move down or move up icons$")
+	public void select_all_series_look_for_move_down_or_move_up_icons() throws Throwable {		
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Disabled_btn"))).isDisplayed()) {
+			login.Log4j.info("Move up Arrow is Disabled");	
+		}
+		else {
+			login.Log4j.info("Move up Arrow is not Disabled");	
+		}
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Disabled_btndown"))).isDisplayed()) {
+			login.Log4j.info("Down Arrow is Disabled");	
+			
+		}
+		else {
+			login.Log4j.info("Down Arrow is not  Disabled");
+		}
+		
+	   
+	}	
+	   
+	@Given("^user creates a Map Visual\\.$")
+	public void user_creates_a_Map_Visual() throws Throwable {
+		WebDriverWait wait = new WebDriverWait(login.driver, 2000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))));
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))).click();
+		WebElement Serieslist = login.driver.findElement(
+				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
+        CommonFunctionality.wait(2000);
+		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
+		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
+		CommonFunctionality.wait(2000);
+		WebElement View_map=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("View_map")));
+		CommonFunctionality.action.moveToElement(View_map).pause(2).build().perform();
+		login.driver.findElement(By.xpath("//span[contains(text(),'World')]")).click();	
+		
+				
+	    
+	}
+
+	@Given("^Oberve the legend which will be present in the bottom of the map visual\\.$")
+	public void oberve_the_legend_which_will_be_present_in_the_bottom_of_the_map_visual() throws Throwable {
+		login.driver.findElement(By.xpath("//button[text()='Edit Map']")).click();
+		CommonFunctionality.wait(2000);
+		jse.executeScript("window.scrollBy(0,-50)");
+		CommonFunctionality.wait(5000);
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Legend_value"))).isDisplayed()) {
+			String Map_value = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Legend_value"))).getText();
+			Assert.assertEquals(Map_value, "104.00");
+			login.Log4j.info("Legends present in the map are fully visible");
+			
+		}
+		else {
+			login.Log4j.info("Legends present in the map are not visible");
+		}
+		
+		
+	
+	    
+	}
+	@Given("^user searches with series Id : \"([^\"]*)\"\\.$")
+	public void user_searches_with_series_Id(String arg1) throws Throwable {
+		login.driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(arg1,Keys.ENTER);
+		login.driver.findElement(By.xpath("//div[@title='Create new View tab']")).click();	   
+	}
+
+	@Given("^try to create a Pie with negative value\\.$")
+	public void try_to_create_a_Pie_with_negative_value() throws Throwable {
+		
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@title='Click or drag-and-drop to insert Pie']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@title='Pie']")).click();
+		CommonFunctionality.wait(2000);
+		List<WebElement> Series_checkboxes = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		CommonFunctionality.wait(2000);
+		for (int i=0; i<Series_checkboxes.size(); i++) {				
+			Series_checkboxes.get(i).click();	
+			CommonFunctionality.wait(2000);
+		}
+		login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
+		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
+		CommonFunctionality.wait(2000);
+			
+		login.driver.findElement(By.xpath("//input[@class='period-config--input form--control']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//th[@class='prev']//span[@class='prev-arrow'])[2]")).click();
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Year"))).isDisplayed()) {
+			login.driver.findElement(By.xpath("//*[text()='Q2']")).click();
+			login.driver.findElement(By.xpath("//button[text()='Edit Pie']")).click();
+			login.driver.findElement(By.xpath("(//input[@class='period-config--input form--control'])[2]")).click();
+			CommonFunctionality.wait(2000);
+			login.driver.findElement(By.xpath("(//th[@class='prev']//span[@class='prev-arrow'])[2]")).click();
+			login.driver.findElement(By.xpath("//*[text()='Q2']")).click();
+			CommonFunctionality.wait(2000);	
+		}
+		
+	}
+
+	@Given("^Edit visual check for absolute value\\.$")
+	public void edit_visual_check_for_absolute_value() throws Throwable {
+		CommonFunctionality.wait(2000);
+		
+		if(!login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Absolute_checkbox"))).isSelected()) {
+			
+			login.Log4j.info("Pie is plotted in negative time period");
+		}
+		else {	
+			login.Log4j.info("Pie is plotted in positive time period");
+		}
+				
+			}
+			
+	
+	@Given("^user selects any series and creates a Map Visual$")
+	public void user_selects_any_series_and_creates_a_Map_Visual() throws Throwable {
+		CommonFunctionality.wait(500);
+		WebElement Serieslist = login.driver.findElement(
+				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
+        CommonFunctionality.wait(2000);
+		WebElement more = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
+		CommonFunctionality.action.moveToElement(more).pause(2).click().build().perform();
+		CommonFunctionality.wait(2000);
+		WebElement view=	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("View_map")));
+		CommonFunctionality.action.moveToElement(view).pause(2).click().build().perform();
+		login.driver.findElement(By.xpath("//span[@class='name-li'][normalize-space()='World']")).click(); 
+	}
+
+	@And("^click on Click on  Map\\+Table icon next to world Map$")
+	public void click_on_Click_on_Map_Table_icon_next_to_world_Map() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Map_Table"))).click();
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Region_china"))).isDisplayed()) {
+			login.Log4j.info("Map with table along with the specified region is displayed");
+			
+		}
+		else {
+			login.Log4j.info("Map with table along with the specified region is not  displayed");
+			
+		}
+		
+	   
+	}	
+	@Given("^user selects Search pane->Open All regions dropdown\\.$")
+	public void user_selects_Search_pane_Open_All_regions_dropdown() throws Throwable {
+		login.driver.findElement(By.xpath("//div[@class='search-input--regions']//span[@class='icon--filter-arrow dropdown--icon']")).click();
+		
+	    
+	}
+
+	@And("^Group of countries list under All regions should be loaded\\.$")
+	public void group_of_countries_list_under_All_regions_should_be_loaded() throws Throwable {
+		CommonFunctionality.wait(2000);
+		
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("All_regions"))).size()>0) {
+			login.Log4j.info("Group of countries listed under all regions are displayed");	
+			
+			
+		}
+		else {
+			login.Log4j.info("Group of countries listed under all regions are not displayed");
+			
+		}
+	   
+	}
+	
+	@Given("^user clicks on source filter\\.$")
+	public void user_clicks_on_source_filter() throws Throwable {
+		login.driver.navigate().refresh();
+		CommonFunctionality.wait(500);
+		login.driver.findElement(By.xpath("//div[@class='search-section']//div[3]//div[1]//div[1]//div[1]//span[1]//span[2]")).click();
+		
+	   
+	}
+
+	@Given("^apply some filters by abbreviation : \"([^\"]*)\" and \"([^\"]*)\"\\.$")
+	public void apply_some_filters_by_abbreviation_and(String arg1, String arg2) throws Throwable {
+		CommonFunctionality.wait(2000);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Search...']"))).sendKeys(arg2);
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg2);
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='filter-item--checker checkbox-control']//span[@class='input-control--indicator']")).click();
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Abiplast"))).isDisplayed()) {
+			login.Log4j.info("Abiplast is displayed");
+			
+		}
+		else {
+			login.Log4j.info("Abiplast is not displayed");
+			
+		}
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).clear();
+		login.driver.findElement(By.xpath("//div[@class='filters-search-item--remove']")).click();
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg1);
+		login.driver.findElement(By.xpath("//div[@class='top-matches--column']//div[1]//div[1]//div[1]//label[1]//span[1]")).click();
+		
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("MOF"))).isDisplayed()) {
+			login.Log4j.info("MOF is displayed");	
+		}
+		else {
+			login.Log4j.info("MOF is not displayed");	
+		}    
+	}
+	
+	@And("^by default top matches option is displayed\\.$")
+	public void by_default_top_matches_option_is_displayed() throws Throwable {
+		
+		
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Top_Matches"))).click();
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Top_Matches"))).isDisplayed()) {
+			login.Log4j.info("Top Matches is displayed by default");
+		}
+		else {
+			login.Log4j.info("Top Matches is not displayed by default");
+		}
+	}
+
+	@Given("^user logins with external account$")
+	public void user_logins_with_external_account() throws Throwable {
+		login.driver.findElement(By.xpath("//span[@value='TREE']")).click();
+		login.driver.findElement(By.xpath("//div[@data-node-model-id='GLOBAL']//div[@class='toggle']")).click();
+		login.driver.findElement(By.xpath("//div[@data-node-model-id='GLOBAL&&ALL']//div[@class='toggle']")).click();
+		
+	   
+	}
+
+	@And("^access comparables tab\\.$")
+	public void access_comparables_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Z_internal"))).size() == 0) {
+			
+			login.Log4j.info("Test topics are invisible to external user");
+			
+		}
+		else {
+			login.Log4j.info("Test topics are not invisible to external user");
+		}
+		
+		
+  if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Z_Testing"))).size() == 0) {
+			
+			login.Log4j.info("Test topics are invisible to external user");
+			
+		}
+		else {
+			login.Log4j.info("Test topics are not invisible to external user");
+		}
+  
+  
+  if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Z_Testing1"))).size() == 0) {
+		
+		login.Log4j.info("Test topics are invisible to external user");
+		
+	}
+	else {
+		login.Log4j.info("Test topics are not invisible to external user");
+	}
+ 
+	   
+	}
+	
+	
+	@And("^apply some filters in search bar like : \"([^\"]*)\" and \"([^\"]*)\"\\.$")
+	public void apply_some_filters_in_search_bar_like_and(String arg1, String arg2) throws Throwable {
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//div[@class='search-section']//div[3]//div[1]//div[1]//div[1]//span[1]//span[2]")).click();
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg2);
+		CommonFunctionality.wait(2000);
+		login.Log4j.info("ABIPLAST is entered in search bar");	
+		login.driver.findElement(By.xpath("//div[@class='filter-item--checker checkbox-control']//span[@class='input-control--indicator']")).click();
+		//login.driver.findElement(By.xpath("//label[@class='input-control input-control__sm']//span[@class='input-control--indicator']")).click();
+		login.driver.findElement(By.xpath("//span[normalize-space(text())='Exclude values']/preceding-sibling::span")).click();
+		
+		//span[normalize-space(text())='Exclude values']/preceding-sibling::span
+		CommonFunctionality.wait(500);
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ABIPLAST_Excluded"))).isDisplayed()) {
+			
+			login.Log4j.info("ABIPLAST is excluded in search");	
+		}
+		
+		else {
+			login.Log4j.info("ABIPLAST is included in search");	
+		}
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).clear();
+		login.driver.findElement(By.xpath("//div[@class='filters-search-item--remove']")).click();
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg1);
+		login.Log4j.info("MOF is entered in search bar");	
+		login.driver.findElement(By.xpath("//div[@class='top-matches--column']//div[1]//div[1]//div[1]//label[1]//span[1]")).click();
+    if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("MOF_Excluded"))).isDisplayed()) {
+			
+			login.Log4j.info("MOF is excluded in search");	
+		}
+	  else {
+			login.Log4j.info("MOF is included in search");	
+		}
+	    
+	}
+	
+	
+	@And("^apply some source filters as \"([^\"]*)\" , \"([^\"]*)\" and checkbox should be uncheck\\.$")
+	public void apply_some_source_filters_as_and_checkbox_should_be_uncheck(String arg1, String arg2) throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg2);
+		CommonFunctionality.wait(2000);
+		login.Log4j.info("ABIPLAST is entered in search bar");
+		login.driver.findElement(By.xpath("//div[@class='filter-item--checker checkbox-control']//span[@class='input-control--indicator']")).click();
+		//login.driver.findElement(By.xpath("//label[@class='input-control input-control__sm']//span[@class='input-control--indicator']")).click();
+        if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ABIPLAST_included"))).isDisplayed()) {
+			
+			login.Log4j.info("ABIPLAST is included and displayed in search");	
+		}
+		
+		else {
+			login.Log4j.info("ABIPLAST is excluded and displayed in search");	
+		}
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).clear();
+		login.driver.findElement(By.xpath("//div[@class='filters-search-item--remove']")).click();
+		login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys(arg1);
+		login.Log4j.info("MOF is entered in search bar");
+		login.driver.findElement(By.xpath("//div[@class='top-matches--column']//div[1]//div[1]//div[1]//label[1]//span[1]")).click();
+		//login.driver.findElement(By.xpath("//label[@class='input-control input-control__sm']//span[@class='input-control--indicator']")).click();
+    if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("MOF_Excluded"))).isDisplayed()) {
+			
+			login.Log4j.info("MOF is included and displayed in search");	
+		}
+	  else {
+			login.Log4j.info("MOF is excluded and displayed in search");	
+		}
+	    
+	}
+	@Given("^user selects some series$")
+	public void user_selects_some_series() throws Throwable {
+		WebDriverWait wait = new WebDriverWait(login.driver, 50);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))).click();
+		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("add_to_myseries_icon"))).click();
+		login.Log4j.info("Added series to my series tab");
+	    CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();   
+	}
+
+	@And("^Open function wizard for any series to apply with function$")
+	public void open_function_wizard_for_any_series_to_apply_with_function() throws Throwable {
+		
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@title='Open function editor (F). Investigate all available functions in the function editor window.']")).click();
+		
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Remove_select"))).size() == 0) {
+		
+			login.Log4j.info("Select series for all series bar is removed");
+			
+		}
+		else {
+			login.Log4j.info("Select series for all series bar is not  removed");
+		}
+		
+		
+	}
+	
+	@Given("^click on download button\\.$")
+	public void click_on_download_button() throws Throwable {
+     login.driver.findElement(By.xpath("//span[@class='download-button--text drop-down-button--label']")).click();
+		   
+	}
+	
+	@Given("^user clicks on any Apply filter in the application$")
+	public void user_clicks_on_any_Apply_filter_in_the_application() throws Throwable {
+		CommonFunctionality.webDriverwait_keyvalue("Status_dropdown");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Status_dropdown"))).click();
+		login.Log4j.info("Clicked on status dropdown");	
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='filter-list']//div[1]//div[1]//div[1]//label[1]//span[1]")).click();
+		login.Log4j.info("Clicked on Active checkbox");
+		login.driver.findElement(By.xpath("//div[@class='button__primary button button__primary']")).click();
+		login.Log4j.info("Clicked on Apply filter");	
+			    
+	}
+
+	@And("^clicks on Copy as URL$")
+	public void clicks_on_Copy_as_URL() throws Throwable {
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Copy_list"))).click();	
+		login.Log4j.info("Clicked on copy Icon");	
+		login.driver.findElement(By.xpath("//span[text()='Copy as URL']")).click();
+		login.Log4j.info("URL link copied");	
+	}
+
+	@And("^Paste the copied URL in the search bar\\.$")
+	public void paste_the_copied_URL_in_the_search_bar() throws Throwable {
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.jse.executeScript("window.open('newpage.html','_blank');");
+		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Status_active"))).isDisplayed()) {
+			login.Log4j.info("copied URL results are copied into search pane");
+			
+		}
+		else {
+			login.Log4j.info("copied URL results are not copied into search pane");
+			
+		}
+		
+		
+	}
+	
+	@Then("^open dropdown for Output Series Details$")
+	public void open_dropdown_for_Output_Series_Details() throws Throwable {
+		 login.driver.findElement(By.xpath("(//div[@class='context-menu-control']//div[@class='context-menu-control--icon'])[2]")).click();
+		 login.driver.findElement(By.xpath("//span[text()='Fill with 0']")).click();
+		 CommonFunctionality.wait(2000);
+		 login.driver.findElement(By.xpath("(//div[@class='context-menu-control']//div[@class='context-menu-control--icon'])[2]")).click();
+		 login.driver.findElement(By.xpath("//span[normalize-space()='Custom text']")).click();
+		   
+	}
+
+	@Given("^user selects series into my series tab$")
+	public void user_selects_series_into_my_series_tab() throws Throwable {
+		WebDriverWait wait = new WebDriverWait(login.driver, 2000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))));
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))).click();
+		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("add_to_myseries_icon"))).click();
+		login.Log4j.info("Added series to my series tab");
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		
+		}
+
+	@Given("^Try to apply cross section or sum over single series from functions wizard\\.$")
+	public void try_to_apply_cross_section_or_sum_over_single_series_from_functions_wizard() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@title='Open function editor (F). Investigate all available functions in the function editor window.']")).click();
+		login.Log4j.info("clicked on function wizard");
+		login.driver.findElement(By.xpath("//div[@class='function-mode-switcher--button function-mode-switcher--button__active']")).click();
+		login.Log4j.info("clicked on By Function");
+		login.driver.findElement(By.xpath("//span[normalize-space()='(method, extend to longest, ignore missed)']")).click();
+		login.Log4j.info("clicked on Cross section Function");
+		login.driver.findElement(By.xpath("//button[normalize-space()='Insert function']")).click();
+		login.Log4j.info("clicked on Insert Button");
+		login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
+		login.Log4j.info("clicked on Apply Button");
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Function_message"))).isDisplayed()) {
+			login.Log4j.info("Function can only be applied over a selection of multiple series message should display.");
+			
+		}
+		
+		else {
+			login.Log4j.info("Function is applied.");
+		}
+		
+	   
+	}
+
+	
 	@Given("^user clicks on Database section\\.$")
 	public void user_clicks_on_Database_section() throws Throwable {
-		login.driver
-				.findElement(By.xpath(
-						"//div[@class='toggler-control-item toggler-control-item__selected']/span[text()='Databases']"))
-				.click();
+		CommonFunctionality.wait(500);
+		login.driver.findElement(By.xpath("//div[@title='View results as Tree']")).click();
 
 	}
 
 	@Given("^expand the database till table level\\.$")
 	public void expand_the_database_till_table_level() throws Throwable {
 		login.driver.findElement(By.xpath("//div[@data-node-model-id='GLOBAL']//div[@class='toggle']")).click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(2000);	
 		login.driver.findElement(By.xpath("//div[@data-node-model-id='GLOBAL&&ALL']//div[@class='toggle']")).click();
 		login.driver.findElement(By.xpath("//div[@data-node-model-id='TP2560837']/div[1]")).click();
 		login.driver.findElement(By.xpath("//div[@class='child-container']/div[@data-node-model-id='SC2576097']/div[1]")).click();
@@ -1309,7 +1880,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 		
 		login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--toggle']")).click();	
 	WebElement ele=	login.driver.findElement(By.xpath("//span[@title='Add and group series in My Series (G)']"));
-	System.out.println("*********************************"+ele.getAttribute("class"));
 	if(ele.getAttribute("class").contains("disabled")) {
 		 login.Log4j.info("Add and group option is greyed out ");
 			
@@ -1321,32 +1891,11 @@ public class Sprint_5_2 extends CommonFunctionality {
 		
 		
 	}
-
-	@Given("^user creates a table visual with (\\d+) series\\.$")
-	public void user_creates_a_table_visual_with_series(int arg1) throws Throwable {
-		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
-		List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
-		Thread.sleep(2000);
-		
-		for (int i=0; i<list.size(); i++) {	
-			
-		}
-		
-		
-
-	}
-
-	@Given("^scroll horizontal and verify the date column\\.$")
-	public void scroll_horizontal_and_verify_the_date_column() throws Throwable {
-
-	}
-
-	
 	@Given("^Search \"([^\"]*)\" in the search field\\.$")
 	public void search_in_the_search_field(String arg1) throws Throwable {
-		
-		//span[@value='TREE']
 		login.driver.findElement(By.xpath("//span[@value='TREE']")).click();
+		
+		login.driver.findElement(By.xpath("//input[@placeholder='Search']")).clear();
 		login.driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(arg1,Keys.ENTER);
 		
 	}
@@ -1354,10 +1903,6 @@ public class Sprint_5_2 extends CommonFunctionality {
 	@Given("^select ShowAll filter\\.$")
 	public void select_ShowAll_filter() throws Throwable {
 		login.driver.findElement(By.xpath("//span[@value='ALL_NODES']")).click();
-		
-		
-		
-
 	}
 	
 	@And("^Logins with internal account with username : \"([^\"]*)\" and Password : \"([^\"]*)\"$")
@@ -1372,7 +1917,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 		login.driver.findElement(By.xpath("//div[@class='database-node tree-node matched']//div[@class='toggle']")).click();
 		login.driver.findElement(By.xpath("//div[@class='tree-node matched']//div[@class='toggle']")).click();
 		login.driver.findElement(By.xpath("//div[@class='tree-node matched']//div[@class='toggle']")).click();
-		
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("internal_series"))).click();
 								
 
 	}
@@ -1401,7 +1946,16 @@ public class Sprint_5_2 extends CommonFunctionality {
 	@Then("^Orange and Green dots should display to indicate Orange as internal series and Green as Matched series\\.$")
 	public void orange_and_Green_dots_should_display_to_indicate_Orange_as_internal_series_and_Green_as_Matched_series()
 			throws Throwable {
-
+		CommonFunctionality.wait(2000);
+		
+		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Orange_green"))).isDisplayed()) {
+			login.Log4j.info("Orange and green dots are displayed together");		
+		}
+		
+		else {
+			login.Log4j.info("Orange and green dots are not displayed together");
+			
+		}
 	}
 	
 	
@@ -1431,24 +1985,9 @@ public class Sprint_5_2 extends CommonFunctionality {
 	    WebElement logout = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Sign out')]", 4);
 	   js.executeScript("arguments[0].scrollIntoView(true);", logout);
 	   js.executeScript("arguments[0].click();", logout);
-	   cv.the_application_should_be_logged_out();
-			
-			
-			
-			
-			
-			
-			
-			
-			
+	   cv.the_application_should_be_logged_out();	
 		}
-		
-		
-		
-		
-		
-		
-	    
+		    
 	}
 	@Given("^Login to shared user account\\.$")
 	public void login_to_shared_user_account() throws Throwable {
@@ -1456,13 +1995,8 @@ public class Sprint_5_2 extends CommonFunctionality {
 		CommonFunctionality.login_as_ceic_user(login.driver, "input[name='user_id']", "input[name='password']",
 				"button[type='submit']", "shankar.test@gmail.com");
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//*[text()='No, take me to CDMNext']")).click();
-		login.Log4j.info("Clicked on No, take me to CDMNext Alert");
 		
-		
-		
-		
-	    
+    
 	}
 
 	@Then("^Notification > check for the shared user name\\.$")
@@ -1491,6 +2025,8 @@ public class Sprint_5_2 extends CommonFunctionality {
 	public void user_clicks_on_Download_window() throws Throwable {
 		
 		CommonFunctionality.wait(500);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))).click();
+		
 		WebElement Series = login.driver.findElement(
 				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
 		new Actions(login.driver).moveToElement(Series).pause(3000).build().perform();
@@ -1527,11 +2063,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 
 	@Given("^user clicks on view and edit profile information\\.$")
 	public void user_clicks_on_view_and_edit_profile_information() throws Throwable {
-		login.driver.findElement(By.xpath("//span[@class='account-avatar--letters']")).click();
-		
-		
-
-	
+		login.driver.findElement(By.xpath("//span[@class='account-avatar--letters']")).click();	
 	}
 
 	@Given("^click on change for copyright\\.$")
@@ -1573,19 +2105,13 @@ public class Sprint_5_2 extends CommonFunctionality {
 		action.sendKeys(Keys.ENTER).build().perform();
 		
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Observation_series"))).isDisplayed()) {
-			login.Log4j.info("0 Observation series are visible to external user");
-			login.driver.findElement(By.xpath("//span[@class='account-avatar--letters']")).click();
-			login.driver.findElement(By.xpath("//div[@class='account-popup--item account-popup--item__bold']//a[contains(@class,'account-popup--link')]")).click();
-			
-			
+			login.Log4j.info("0 Observation series are visible to external user");					
 		}
 		else {
 			login.Log4j.info("0 Observation series are not visible to external user");
 			
 		}
-		
-		
-		
+				
 	   
 	}
 
@@ -1617,6 +2143,8 @@ public class Sprint_5_2 extends CommonFunctionality {
 		
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Delete_iconupload"))).isDisplayed()) {
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Delete_iconupload"))).click();
+			 login.driver.findElement(By.xpath("//button[@class='report-problem-s--button button button__text_purple']")).click();
+			
 			 login.Log4j.info("Delete icon is removed");
 			
 		}
@@ -1731,7 +2259,7 @@ public class Sprint_5_2 extends CommonFunctionality {
 		
 		login.driver.findElement(By.xpath("//div[@class='insight-context-menu--menu-icon']")).click();
 		login.driver.findElement(By.xpath("//span[contains(text(),'Delete')]")).click();
-		
+	
 
 		
 	}

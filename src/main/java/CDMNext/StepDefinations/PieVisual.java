@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+//import java.util.NoSuchElementException;
 import java.util.regex.Pattern;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -47,6 +47,7 @@ public class PieVisual {
 	List<WebElement> Series_list_pieVisual;
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+	Map map = new Map();
 
 	@SuppressWarnings("deprecation")
 	@And("^Select different frequency series \"([^\"]*)\" and click on \"([^\"]*)\" icon$")
@@ -83,6 +84,11 @@ public class PieVisual {
 					.moveToElement(
 							CommonFunctionality.getElementBycssSelector(login.driver, "span[title='" + arg2 + "']", 4))
 					.pause(1000).click().build().perform();
+		} else if(arg2.equals("Map")) {
+			EmptyView.click_on_View_tab();
+			CommonFunctionality.wait(500);
+			map.click_on_Map_visual_icon();
+			CommonFunctionality.wait(500);
 		}
 	}
 

@@ -332,9 +332,9 @@ Feature: Verifying SSP window Functionality
     And Click on "Related Insights" tab
     And Check contents inside Related insight
     And Click on "Related Insights" tab
-
   #And Click on "Related Data" tab
   #Then Should display related keyword of that series and have "Datasets" and "Insights" details
+  
   @SSPWindow
   Scenario: TC_SSP_46: Click on each links under datasets and verify
     And Add few series to myseries

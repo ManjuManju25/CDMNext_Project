@@ -36,7 +36,6 @@ public class SprintCases5_0 {
 	WebElement source_insight;
 	String source_text, visual_title_text, beforeClick_nextbutton_databriefing_title;
 	static String beforeClick_previousbutton_databriefing_title, series_text_inPriviewmode;
-	Actions actions = new Actions(login.driver);
 	CDMNextSprintCases cdmnext = new CDMNextSprintCases();
 	login lgn = new login();
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
@@ -215,10 +214,10 @@ public class SprintCases5_0 {
 	public void select_visual_and_use_Ctrl_C_to_copy_the_visual() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "select_the_visual", 10).click();
 		CommonFunctionality.wait(500);
-		actions.keyDown(Keys.CONTROL);
-		actions.sendKeys("c");
-		actions.keyUp(Keys.CONTROL);
-		actions.build().perform();
+		action.keyDown(Keys.CONTROL);
+		action.sendKeys("c");
+		action.keyUp(Keys.CONTROL);
+		action.build().perform();
 	}
 
 	@Then("^The visual should be copied$")
@@ -231,7 +230,7 @@ public class SprintCases5_0 {
 		} else {
 			fail("The growl popup not displayed with series copied");
 		}
-		CommonFunctionality.getElementByProperty(login.driver, "preivew_mode_close", 10).click();
+		//CommonFunctionality.getElementByProperty(login.driver, "preivew_mode_close", 10).click();
 	}
 
 	@And("^Login to CDMNext$")
@@ -275,7 +274,7 @@ public class SprintCases5_0 {
 	}
 
 	@And("^Close Data briefings panel$")
-	public void close_Data_briefings_panel() throws Throwable {
+	public static void close_Data_briefings_panel() throws Throwable {
 		try {
 			CommonFunctionality.wait(1500);
 			CommonFunctionality.getElementByProperty(login.driver, "collapse_databriefings", 10).click();
@@ -293,7 +292,7 @@ public class SprintCases5_0 {
 	public void the_DB_panel_should_be_in_closed_state() throws Throwable {
 		CommonFunctionality.wait(2000);
 		boolean DB_panel_closed = login.driver
-				.findElement(By.xpath(login.LOCATORS.getProperty("collapse_databriefings"))).isDisplayed();
+				.findElement(By.xpath(login.LOCATORS.getProperty("expand_databriefings"))).isDisplayed();
 		if (DB_panel_closed == true) {
 			login.Log4j.info("The DB panel is in closed state");
 		} else {
@@ -624,6 +623,12 @@ public class SprintCases5_0 {
 
 	@And("^Add the series to my series tab and create a new insight$")
 	public void add_the_series_to_my_series_tab_and_create_a_new_insight() throws Throwable {
+		try {
+			//close sort by option if it is selected
+			CommonFunctionality.getElementByProperty(login.driver, "CrossIcon_SortBy", 10).click();
+		}catch(Exception e) {
+			
+		}
 		CommonFunctionality.getElementByProperty(login.driver, "FileMenu", 20).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Newinsight_file", 20).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Create_insight", 20).click();
@@ -642,6 +647,7 @@ public class SprintCases5_0 {
 
 	@Then("^Your insight should be listed under related insight section$")
 	public void your_insight_should_be_listed_under_related_insight_section() throws Throwable {
+		CommonFunctionality.wait(500);
 		WebElement related_insight = CommonFunctionality.getElementByProperty(login.driver, "RelatedInsights", 20);
 		jse.executeScript("arguments[0].scrollIntoView(true);", related_insight);
 		CommonFunctionality.wait(500);
@@ -695,13 +701,14 @@ public class SprintCases5_0 {
 
 	@And("^Search for a Data briefings title$")
 	public void search_for_a_Data_briefings_title() throws Throwable {
-		databriefing_title = CommonFunctionality.getElementByProperty(login.driver, "First_databriefing_title", 10)
+		databriefing_title = CommonFunctionality.getElementByProperty(login.driver, "Third_databriefings_title", 10)
 				.getText();
 		filter.user_enters(databriefing_title);
 	}
 
 	@Then("^The Data briefings title should displayed$")
 	public void the_Data_briefings_title_should_displayed() throws Throwable {
+		CommonFunctionality.wait(1000);
 		String Expected_databriefingTitle = CommonFunctionality
 				.getElementByProperty(login.driver, "First_databriefing_title", 10).getText();
 		if (Expected_databriefingTitle.equals(databriefing_title)) {
@@ -731,10 +738,15 @@ public class SprintCases5_0 {
 	public void select_option_from_dropdown(String arg1, String arg2) throws Throwable {
 		open_Data_Briefings_panel();
 		Applied_SortBy_filter = arg1;
+		try {
+			CommonFunctionality.getElementByProperty(login.driver, "CrossIcon_SortBy", 10).click();
+		} catch(Exception e) {
+			
+		}
 		CommonFunctionality.wait(1000);
 		List<WebElement> databriefings_list = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("databriefings_list")));
-		for (int i = 0; i < 2; i++) {
+		for (int i = 1; i <= 3; i++) {
 			CommonFunctionality.wait(200);
 			String databriefingsTitle = databriefings_list.get(i).getText();
 			Beforeapply_SortBy_databriefingsList.add(databriefingsTitle);
@@ -750,7 +762,7 @@ public class SprintCases5_0 {
 		CommonFunctionality.wait(1000);
 		List<WebElement> After_applying_SortByTopRelease_databriefings_list = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("databriefings_list")));
-		for (int i = 0; i < 2; i++) {
+		for (int i = 1; i <= 3; i++) {
 			CommonFunctionality.wait(200);
 			String databriefingsTitle = After_applying_SortByTopRelease_databriefings_list.get(i).getText();
 			Afterapply_SortBy_databriefingsList.add(databriefingsTitle);
@@ -782,10 +794,12 @@ public class SprintCases5_0 {
 		}
 		if (Beforeapply_SortBy_databriefingsList.equals(Afterapply_SortBy_databriefingsList)) {
 			login.Log4j.info("The Data Briefings displayed as per the selection");
+			CommonFunctionality.getElementByProperty(login.driver, "CrossIcon_SortBy", 10).click();
 		} else {
+			CommonFunctionality.getElementByProperty(login.driver, "CrossIcon_SortBy", 10).click();
 			fail("Verification failed");
 		}
-		CommonFunctionality.getElementByProperty(login.driver, "CrossIcon_SortBy", 10).click();
+		
 	}
 
 	@And("^Switch from Data tab to Releases tab$")
@@ -904,6 +918,7 @@ public class SprintCases5_0 {
 
 	@And("^Count the insights under related insight$")
 	public void count_the_insights_under_related_insight() throws Throwable {
+		CommonFunctionality.wait(1000);
 		WebElement related_insight = CommonFunctionality.getElementByProperty(login.driver, "RelatedInsights", 20);
 		jse.executeScript("arguments[0].scrollIntoView(true);", related_insight);
 		CommonFunctionality.wait(1000);
@@ -992,8 +1007,8 @@ public class SprintCases5_0 {
 	@And("^Mouse hover on the series name$")
 	public void mouse_hover_on_the_series_name() throws Throwable {
 		CommonFunctionality.ExpandLeft();
-		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		CommonFunctionality.webDriverwait_keyvalue("Series");
+	 CommonFunctionality.getElementByProperty(login.driver, "Series",10).click();
 		Thread.sleep(500);
 		expected_sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10)
 				.getText();
@@ -1029,9 +1044,10 @@ public class SprintCases5_0 {
 
 	@And("^Add the series to my series tab$")
 	public void add_the_series_to_my_series_tab() throws Throwable {
+		CommonFunctionality.ExpandLeft();
 		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
-		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		CommonFunctionality.webDriverwait_keyvalue("Series");
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		for (int i = 0; i < 2; i++) {
 			int j = i + 1;
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -1046,6 +1062,7 @@ public class SprintCases5_0 {
 
 	@And("^Select the series from my series tab$")
 	public void select_the_series_from_my_series_tab() throws Throwable {
+		CommonFunctionality.wait(200);
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
 		action.moveToElement(ele).pause(1000).click().build().perform();
@@ -1053,8 +1070,9 @@ public class SprintCases5_0 {
 
 	@And("^Select the currency conversion function$")
 	public void select_the_currency_conversion_function() throws Throwable {
+		CommonFunctionality.wait(200);
 		expected_sname = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='webix_column list-series-name webix_last']/*[1]//*[@class='series-name-field--text']", 20)
+				"//*[@class='webix_column list-series-name webix_first webix_last']/*[1]//*[@class='series-name-field--text']", 20)
 				.getText();
 		CommonFunctionality.getElementByProperty(login.driver, "Type_A_Function", 20).click();
 		CommonFunctionality.getElementByProperty(login.driver, "CURRCONV", 20).click();
@@ -1198,7 +1216,7 @@ public class SprintCases5_0 {
 		WebElement SeriesTab = wait
 				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(5000);
 		List<WebElement> checkBox = login.driver
 				.findElements(By.xpath("//div[@class='series-list-item--checkbox-wrapper']"));
 
@@ -1298,7 +1316,7 @@ public class SprintCases5_0 {
 
 	@And("^Click on \"([^\"]*)\" database$")
 	public void click_on_database(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//table//*[contains(text(),'" + arg1 + "')]", 10).click();
 	}
 
 	@Then("^Data must be matched with header shown$")
@@ -1358,7 +1376,7 @@ public class SprintCases5_0 {
 		CommonFunctionality.wait(1000);
 	    //Right click on pie visual title
 		WebElement visual_title = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 10);
-		action.contextClick(visual_title).build().perform();
+		action.pause(500).contextClick(visual_title).build().perform();
 		//Select calculate series
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Calculate series')]", 10).click();
 		//select All functions
@@ -1438,6 +1456,7 @@ public class SprintCases5_0 {
 	   } else {
 		   fail("Date picker dropdown is available");
 	   }
+	   
 	   
 	}
 
