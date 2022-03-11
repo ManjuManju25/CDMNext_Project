@@ -589,7 +589,7 @@ public class DatabasesTab {
 				.click();
 		Thread.sleep(1500);
 		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_sname = ul_element.findElements(By.xpath("//li//div[@class='series-item--name']"));
+		List<WebElement> li_sname = ul_element.findElements(By.xpath("//div[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_sname.size());
 		for (int i = 0; i < li_sname.size(); i++) {
 			Thread.sleep(2000);
@@ -1682,11 +1682,11 @@ public class DatabasesTab {
 			login.driver.findElement(By.xpath("//span[@title='" + arg1 + "']")).click();
 		} else if (arg1.equals("Copy selected links") || arg1.equals("Footnotes") || arg1.equals("Show Dataset")
 				|| arg1.equals("Copy") || arg1.equals("Copy data") || arg1.equals("Series Info")
-				|| arg1.equals("Show Database")) {
+				|| arg1.equals("See in Database")) {
 			// Thread.sleep(2000);
 			// action.contextClick(ele).build().perform();
 			Thread.sleep(300);
-			if (arg1.equals("Show Database")) {
+			if (arg1.equals("See in Database")) {
 				ele = login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='" + arg1 + "']"));
 				action.moveToElement(ele).build().perform();
 				login.Log4j.info("Clicking on " + arg1);

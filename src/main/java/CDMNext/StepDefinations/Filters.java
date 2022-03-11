@@ -65,11 +65,11 @@ public class Filters {
 	 JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	 WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	 
-	@Given("^User enters \"([^\"]*)\"$")
-	public void user_enters(String arg1) throws Throwable {
+	 @Given("^User enters \"([^\"]*)\"$")
+		public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
 //		login.driver.navigate().refresh();
-		CommonFunctionality.ExpandRight();
+	//	CommonFunctionality.ExpandRight();
 //		CommonFunctionality.TopMethod();
 //		CommonFunctionality.ResetMethod();
 		login.Log4j.info("searching with " + searchData);

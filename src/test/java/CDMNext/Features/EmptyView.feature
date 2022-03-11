@@ -171,7 +171,7 @@ Feature: Verifying View tab functionality
     And Change to "Test View" and Save
     Then View name should be updated
 
-  @EmptyView1
+  @EmptyView
   Scenario: Tc_EmptyView_28 : Verify creating duplicate view
     And Create any of the visual
     And Right click on view tab

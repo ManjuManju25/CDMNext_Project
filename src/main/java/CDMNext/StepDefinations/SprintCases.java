@@ -526,11 +526,14 @@ public class SprintCases {
 			// .findElement(By.xpath("//*[@class='highcharts-container
 			// ']/*//*[contains(@class,'highcharts-data-labels
 			// highcharts-series-2')]/*[1]/*[1]/*[@class='highcharts-text-outline']")).getText();
+			/*Taiwan_attribute = login.driver.findElement(By.xpath(
+					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]"))
+					.getAttribute("innerHTML");*/
 			Taiwan_attribute = login.driver.findElement(By.xpath(
-					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]/*[2]"))
+					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]"))
 					.getAttribute("innerHTML");
 			login.Log4j.info(Taiwan_attribute);
-			if (Taiwan_attribute.equals("Taiwan")) {
+			if (Taiwan_attribute.contains("Taiwan")) {
 				login.Log4j.info("Taiwan is included in China map");
 				CommonFunctionality.Views_list();
 			}
@@ -605,7 +608,7 @@ public class SprintCases {
 	@Then("^Selected template should be highlighted in the template Menu$")
 	public void selected_template_should_be_highlighted_in_the_template_Menu() throws Throwable {
 		String arg1 = "Delete template";
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(3000);
 		String style = login.driver.findElement(By
 				.xpath("//*[@class='style-templates-menu--items']//*[contains(@class,'style-templates-item__active')]"))
 				.getAttribute("title");

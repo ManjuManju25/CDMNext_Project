@@ -2106,12 +2106,13 @@ public class CDMNextSprintCases {
 	public void clicking_on_the_hiding_template_from_the_style_template_dropdown() throws Throwable {
 		WebElement dropdown = CommonFunctionality.getElementByProperty(login.driver, "Style_template_arrow_icon", 4);
 		new Actions(login.driver).moveToElement(dropdown).pause(1000).click().build().perform();
+		CommonFunctionality.wait(2000);
 		title_text = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 4)
 				.getAttribute("title");
+		CommonFunctionality.wait(2000);
 		WebElement ceic = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 4);
-		new Actions(login.driver).moveToElement(ceic).click().build().perform();
-		CommonFunctionality.wait(1000);
-		new Actions(login.driver).moveToElement(dropdown).pause(1000).click().build().perform();
+		new Actions(login.driver).pause(1000).moveToElement(ceic).click().build().perform();
+		new Actions(login.driver).pause(1000).moveToElement(dropdown).click().build().perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -5637,7 +5638,18 @@ public class CDMNextSprintCases {
 			} else {
 				fail("Verification Failed");
 			}
-		} else {
+		} else if(arg1.equalsIgnoreCase("Legend")) {
+			String title_text = CommonFunctionality
+					.getElementByXpath(login.driver, "//*[@class='popover--title']", 30)
+					.getText();
+			if (title_text.equalsIgnoreCase(arg1)) {
+				login.Log4j.info("Legend popUp is displayed");
+				
+			} else {
+				fail("Legend popUp is not displayed");
+			}
+		}
+		else {
 			fail("Verification Failed");
 		}
 	}

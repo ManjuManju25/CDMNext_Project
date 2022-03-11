@@ -754,6 +754,16 @@ public class Commentary {
 			Assert.fail("Uploaded image is NOT removed");
 		}
 		//CommonFunctionality.DeleteVisual();
+		//after refresh the page deleted visuals are displaying so throwing technical error for 35 & 36 tc's
+		// Delete the insight
+		login.driver.navigate().refresh();
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[@title='Open File menu']", 30).click();
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[contains(text(),'Delete')]", 30).click();
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//*[contains(text(),'Delete forever')]", 30).click();
+		CommonFunctionality.DeleteVisual();
 
 	}
 
@@ -1843,7 +1853,7 @@ public void the_background_of_text_should_be_changed_to(String arg1) throws Thro
 	@SuppressWarnings("deprecation")
 	@And("^Right click on visual header$")
 	public void right_click_on_visual_header() throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(2000);
 		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 6);
 		new Actions(login.driver).pause(500).contextClick(title).build().perform();
 	}
@@ -2168,7 +2178,7 @@ public void the_background_of_text_should_be_changed_to(String arg1) throws Thro
 
 	@And("^Perform download to excel with all views$")
 	public void perform_download_to_excel_with_all_views() throws Throwable {
-		CommonFunctionality.ExpandLeft();
+		//CommonFunctionality.ExpandLeft();
 		CommonFunctionality.wait(4000);
 		List<WebElement> Views_list = login.driver
 				.findElements(By.xpath("//*[@data-id='myseries'] | //*[@class='insight-page-view-tab--title']"));
@@ -2188,7 +2198,7 @@ public void the_background_of_text_should_be_changed_to(String arg1) throws Thro
 			// login.Log4j.info(Visuals_list);
 
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
+		//CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open File menu']", 20).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='items-wrapper']//li//span[contains(text(),'Download')]", 20).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Views')]", 20).click();
@@ -2658,7 +2668,7 @@ public void the_background_of_text_should_be_changed_to(String arg1) throws Thro
 		} else {
 			Assert.fail("Selected image is NOT uploaded");
 		}
-		CommonFunctionality.DeleteVisual();
+		//CommonFunctionality.DeleteVisual();
 	}
 
 	void Radius(int arg1) throws InterruptedException {

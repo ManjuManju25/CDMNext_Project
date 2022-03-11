@@ -237,7 +237,7 @@ public class ImageVisual {
 	public void below_options_should_be_available_in_General_tab(List<String> list) throws Throwable {
 		CommonFunctionality.wait(500);
 		List<WebElement> generalTab_options = login.driver.findElements(By.xpath(
-				"//*[@role='tablist']/*"));
+				"//label[@class='tox-label']"));
 		int j = 0;
 
 		for (String arg : list) {

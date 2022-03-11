@@ -14,7 +14,7 @@ Feature: Verifying Pie Visual Functionality
     And Select different frequency series "3671601;403770597" and click on "Pie" icon
     Then Pie visual should be created with frequency conversion window popped up
 
-  @PieVisual
+   @PieVisual 	
   Scenario: TC_Pie_03: Verify Drag and drop of Pie option
     And Click to create an empty visual
     And Hovor on Insert Pie
@@ -89,11 +89,11 @@ Feature: Verifying Pie Visual Functionality
     And Create a Pie visual
     Then Verify the function applied in frequency conversion popup
 
-  #@PieVisual
-  #Scenario: TC_Pie_14: Verify End dropdown for functions dropdown in frequency conversion popup
-    #And Select series with different filter and units "226311002;16190501"
-    #And Create a Pie visual
-    #Then The number of days should able to select in a functions End dropdown
+  @PieVisual
+  Scenario: TC_Pie_14: Verify End dropdown for functions dropdown in frequency conversion popup
+    And Select series with different filter and units "226311002;16190501"
+    And Create a Pie visual
+    Then The number of days should able to select in a functions End dropdown
 
   @PieVisual
   Scenario: TC_Pie_15: Verify series having negative timepoints in pie chart
@@ -1692,23 +1692,24 @@ Feature: Verifying Pie Visual Functionality
       | TC_Pie_210 | Frequency       | Frequency         |
       | TC_Pie_211 | Percentage      | Percentage        |
 
-  #@PieVisual
-  #Scenario: TC_Pie_209:Edit pie - Region tooltip for pie visual
-  #And Create a pie visual with series id's "16240301;16243001"
-  #And Click on "Edit Pie"
-  #And Check "Tooltips"
-  #And Open date dropdown
-  #And Select "Region" field
-  #Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Region" of series
-  #
-  #@PieVisual
-  #Scenario: TC_Pie_210:Edit pie - Frequency tooltip for pie visual
-  #And Create a pie visual with series id's "16240301;16243001"
-  #And Click on "Edit Pie"
-  #And Check "Tooltips"
-  #And Open date dropdown
-  #And Select "Frequency" field
-  #Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Frequency" of series
+  @PieVisual
+  Scenario: TC_Pie_209:Edit pie - Region tooltip for pie visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Select "Region" field
+    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Region" of series
+
+  @PieVisual
+  Scenario: TC_Pie_210:Edit pie - Frequency tooltip for pie visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Select "Frequency" field
+    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Frequency" of series
+
   @PieVisual
   Scenario: TC_Pie_212:Edit pie - Function description tooltip for pie visual
     And Add series to the my series tab
@@ -1721,14 +1722,15 @@ Feature: Verifying Pie Visual Functionality
     And Select "Function description" field
     Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Function description" of series
 
-  #@PieVisual
-  #Scenario: TC_Pie_212:Edit pie - percentage tooltip for pie visual
-  #And Create a pie visual with series id's "16240301;16243001"
-  #And Click on "Edit Pie"
-  #And Check "Tooltips"
-  #And Open date dropdown
-  #And Select "Percentage" field
-  #Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Percentage" of series
+  @PieVisual
+  Scenario: TC_Pie_212:Edit pie - percentage tooltip for pie visual
+    And Create a pie visual with series id's "16240301;16243001"
+    And Click on "Edit Pie"
+    And Check "Tooltips"
+    And Open date dropdown
+    And Select "Percentage" field
+    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Percentage" of series
+
   @PieVisual
   Scenario: TC_Pie_213:Edit pie > tooltip dropdown > advanced settings
     And Create a pie visual with series id's "16240301;16243001"
@@ -2049,16 +2051,17 @@ Feature: Verifying Pie Visual Functionality
     When Click on "Save"
     Then Legend text should turn into "Italic" format
 
-  #@PieVisual.... skip as of now
-  #Scenario: TC_Pie_244:Edit pie > legend > advanced settings under dropdown > items > verify underline style
-  #And Create a pie visual with series id's "16240301"
-  #And Click on "Edit Pie"
-  #And Click on legend dropdown
-  #And Click on "Advanced settings"
-  #And Expand "Items"
-  #And Click on "Underline" icon for items
-  #When Click on "Save"
-  #Then Legend text should turn into "Underline" format
+  @PieVisual
+  Scenario: TC_Pie_244:Edit pie > legend > advanced settings under dropdown > items > verify underline style
+    And Create a pie visual with series id's "16240301"
+    And Click on "Edit Pie"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Items"
+    And Click on "Underline" icon for items
+    When Click on "Save"
+    Then Legend text should turn into "Underline" format
+
   @PieVisual
   Scenario: TC_Pie_244:Edit pie > legend > advanced settings under dropdown > Title
     And Create a pie visual with series id's "16240301"
@@ -2787,8 +2790,8 @@ Feature: Verifying Pie Visual Functionality
 
   @PieVisual
   Scenario: TC_Pie_328:Verify Delete pie
-  	And Open preference dropdown
-  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
     And Create a pie visual with series id's "16240301;16243001"
     And Click on "delete"
     Then "Confirmation" popup should be dispalyed
@@ -3012,51 +3015,50 @@ Feature: Verifying Pie Visual Functionality
     And Apply any function inside the download window
     Then Applied functions should be shown in the header of download window
 
-    @PieVisual
+  @PieVisual
   Scenario: TC_Pie_359:Verify description for delete confirmation popup
-  	And Open preference dropdown
-  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
     And Create a pie visual with series id's "16240301;16243001"
     And Click on "delete"
     Then "Do you want to remove this visual?" popup should be dispalyed
-    
-    @PieVisual
+
+  @PieVisual
   Scenario: TC_Pie_360:Verify OK button in delete confirmation popup
-  	And Open preference dropdown
-  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
     And Create a pie visual with series id's "16240301;16243001"
-    And Click on "delete" 
-     And Click on "Ok"
+    And Click on "delete"
+    And Click on "Ok"
     Then The visual should be deleted
-    
-    @PieVisual
+
+  @PieVisual
   Scenario: TC_Pie_361:Verify Cancel/x icon in delete confirmation popup
-  	And Open preference dropdown
-  	And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
     And Create a pie visual with series id's "16240301;16243001"
-     And Click on "delete"
+    And Click on "delete"
     And Click on "Cancel"
     Then The popup should be closed and delete visual process should be declined
-    
-     @PieVisual
+
+  @PieVisual
   Scenario: TC_Pie_362:Verify 'Add related series' option
     And Create a pie visual with series id's "16240301;16243001"
     And Click on "Add related series"
     Then The series suggestion manager popup should be displayed
-    
-     @PieVisual
+
+  @PieVisual
   Scenario: TC_Pie_363:Verify adding series from 'Series suggestion manager' popup
     And Create a pie visual with series id's "5823501"
     And Click on "Add related series"
     And Select a region as "Albania"
     Then The related series should be added to the visual
-    
-      @PieVisual
+
+  @PieVisual
   Scenario: TC_Pie_364:Verify applying function under download window for series of pie
     And Create a pie visual with series id's "16240301"
     And Click on Download icon
     And Select "series" tab
     And Apply any function inside the download window
-   	And Click on "Download"
-   	Then Applied functions with created pie chart should be downloaded
-    
+    And Click on "Download"
+    Then Applied functions with created pie chart should be downloaded

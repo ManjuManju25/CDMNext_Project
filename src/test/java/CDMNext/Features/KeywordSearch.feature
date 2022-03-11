@@ -1658,15 +1658,15 @@ Feature: Synonym Search
     And User has clicked on "Apply filter"
     Then Search for corresponding regions
 
-  #@ChineseKeywordSearch
-  #Scenario: TC_KeywordSearch_330 : Search for an Acronym as "环渤海：环渤海经济圈"
-    #Given User enters keyword "环渤海：环渤海经济圈"
-    #Then User verify keyword search results
-#
-  #@ChineseKeywordSearch
-  #Scenario: TC_KeywordSearch_331 : Search for an Acronym as "粤港澳大湾区：大湾区"
-    #Given User enters keyword "粤港澳大湾区：大湾区"
-    #Then User verify keyword search results
+  @ChineseKeywordSearch
+  Scenario: TC_KeywordSearch_330 : Search for an Acronym as "环渤海：环渤海经济圈"
+    Given User enters keyword "环渤海：环渤海经济圈"
+    Then User verify keyword search results
+
+  @ChineseKeywordSearch
+  Scenario: TC_KeywordSearch_331 : Search for an Acronym as "粤港澳大湾区：大湾区"
+    Given User enters keyword "粤港澳大湾区：大湾区"
+    Then User verify keyword search results
 
      @SynonymSearch
   Scenario: TC_SynonymSearch_332 : Search for an Acronym as "FGV"

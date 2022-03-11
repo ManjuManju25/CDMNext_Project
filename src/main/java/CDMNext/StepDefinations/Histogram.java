@@ -342,7 +342,7 @@ public void the_series_should_be_added_to_with_its_data(String arg1) throws Thro
 		commentary.CreateViewTab();
 		click_on_histogram_visual_icon();
 		add_series_to_the_my_series_tab();
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(6000);
 		Visual_Title_txt = login.driver.findElement(By.xpath("//*[@data-name='title']")).getText();
 
 	}
@@ -385,7 +385,9 @@ public void create_a_new_histogram_visual() throws Throwable {
 		CommonFunctionality.wait(1300);
 		WebElement str = login.driver.findElement(By.xpath("//*[@class='find-and-replace--modal-title-info']"));
 		login.Log4j.info(str.getText());
-		login.Log4j.info(SeriesCount.getText());
+		
+		try {
+			login.Log4j.info(SeriesCount.getText());
 		if (str.getText().contains(SeriesCount.getText())) {
 			login.Log4j.info("Number of selected series count is shown on the rename popup header");
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 6).click();
@@ -393,11 +395,21 @@ public void create_a_new_histogram_visual() throws Throwable {
 		} else {
 			Assert.fail("Number of selected series count is not shown on the rename popup header");
 		}
+		}catch(Exception e) {
+			login.Log4j.info(Map.SeriesCount.getText());
+			if (str.getText().contains(Map.SeriesCount.getText())) {
+				login.Log4j.info("Number of selected series count is shown on the rename popup header");
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 6).click();
+				//CommonFunctionality.Views_list();
+			} else {
+				Assert.fail("Number of selected series count is not shown on the rename popup header");
+			}
+		}
 	}
 
 	@And("^Search for the series you want to rename$")
 	public void search_for_the_series_you_want_to_rename() throws Throwable {
-		SearchKeyword = "Gross";
+		SearchKeyword = "GDP";
 		CommonFunctionality.wait(200);
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='find-and-replace--panel-search-box']/*[1]", 6)

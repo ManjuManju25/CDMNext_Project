@@ -130,11 +130,12 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify tooltip for series
 
-  #@TableVisual...skip as of now
-  #Scenario: TC_TV_24:Verify scroll down till end of timepoints
-  #And User Select Series ID  as "310902301"
-  #And Select some series to my series tab
-  #And verify scroll down till end of timepoints
+  @TableVisual
+  Scenario: TC_TV_24:Verify scroll down till end of timepoints
+  And User Select Series ID  as "310902301"
+  And Select some series to my series tab
+  And verify scroll down till end of timepoints
+  
   @TableVisual
   Scenario: TC_TV_25:Verify Name field when scroll down
     And User Select Series ID  as "46224501"
@@ -749,14 +750,16 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Table dropdown for template
 
-  #@TableVisual1
-  #Scenario: TC_TV_147:Edit Table-Verify Set as default for future Table visual is checked
-  #And Select some series to my series tab
-  #And verify Edit Table Set as default for future Table visual is checked
-  #@TableVisual
-  #Scenario: TC_TV_148:Edit Table-Verify Set as default for future Table visual is Unchecked
-  #And Select some series to my series tab
-  #And verify Edit Table Set as default for future Table visual is Unchecked
+  @TableVisual
+  Scenario: TC_TV_147:Edit Table-Verify Set as default for future Table visual is checked
+  And Select some series to my series tab
+  And verify Edit Table Set as default for future Table visual is checked
+  
+  @TableVisual
+  Scenario: TC_TV_148:Edit Table-Verify Set as default for future Table visual is Unchecked
+  And Select some series to my series tab
+  And verify Edit Table Set as default for future Table visual is Unchecked
+  
   @TableVisual
   Scenario: TC_TV_149:Edit Table-Verify delete template icon
     And Create a table visual
@@ -967,10 +970,11 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Table Underline style for visual title
 
-  #@TableVisual1
-  #Scenario: TC_TV_191:Edit Table-Title- Verify horizontal alignment (left, right, center)
-  #And Select some series to my series tab
-  #And verify Edit Table horizontal alignment (left, right, center)
+  @TableVisual
+  Scenario: TC_TV_191:Edit Table-Title- Verify horizontal alignment (left, right, center)
+  And Select some series to my series tab
+  And verify Edit Table horizontal alignment (left, right, center)
+  
   @TableVisual
   Scenario: TC_TV_192:Edit Table-Title- Verify color for visual sub title
     And Create a table visual
@@ -1001,10 +1005,11 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Table Underline style for visual sub title
 
-  #@TableVisual
-  #Scenario: TC_TV_197:Edit Table-Title-Verify horizontal alignment (left, right, center) of sub title
-  #And Select some series to my series tab
-  #And verify Edit Table horizontal alignment (left, right, center) of sub title
+  @TableVisual
+  Scenario: TC_TV_197:Edit Table-Title-Verify horizontal alignment (left, right, center) of sub title
+  And Select some series to my series tab
+  And verify Edit Table horizontal alignment (left, right, center) of sub title
+  
   @TableVisual
   Scenario: TC_TV_198:Edit Table-Title-Verify expanding and collapsing the title and subtitle sections
     And Create a table visual
@@ -1375,10 +1380,11 @@ Feature: Table Visual Functionality
     And User Select Series ID  as "7012201"
     And verify Edit Table Number default Decimal Grouping separator
 
-  #@TableVisual1
-  #Scenario: TC_TV_272:Edit Table-Verify horizontal scroll bar for settings sections
-  #And Select some series to my series tab
-  #And verify Edit Table horizontal scroll bar for settings sections
+  @TableVisual
+  Scenario: TC_TV_272:Edit Table-Verify horizontal scroll bar for settings sections
+  And Select some series to my series tab
+  And verify Edit Table horizontal scroll bar for settings sections
+  
   @TableVisual
   Scenario: TC_TV_273:Edit Table-Verify the changes reflected in edit visual-inside Edit tabel popup
     And Create a table visual
@@ -1520,11 +1526,12 @@ Feature: Table Visual Functionality
     And Select series to my series tab
     And verify Edit Table clicking on frequency or dropdown inside Edit tabel popup
 
-  #@TableVisual1
-  #Scenario: TC_TV_301:Edit Table- Edit series -Verify Series data conversion -Applay -inside Edit tabel popup
-  #And User Select Series ID  as "236397903;236274103"
-  #And Select series to my series tab
-  #And verify Edit Table Series data conversion -Applay inside Edit tabel popup
+  @TableVisual
+  Scenario: TC_TV_301:Edit Table- Edit series -Verify Series data conversion -Applay -inside Edit tabel popup
+  And User Select Series ID  as "236397903;236274103"
+  And Select series to my series tab
+  And verify Edit Table Series data conversion -Applay inside Edit tabel popup
+  
   @TableVisual
   Scenario: TC_TV_302:Edit Table- Edit series -Verify Series data conversion applying Missing values method -inside Edit tabel popup
     And Select series to my series tab
@@ -1534,11 +1541,12 @@ Feature: Table Visual Functionality
     And Select "Missing values method" as "Next value" from dropdown
     Then Missing values method should be applied with selected frequency
 
-  #@TableVisual
-  #Scenario: TC_TV_303:Edit Table- Edit series -Verify Series data conversion Apply button -inside Edit tabel popup
-  #And User Select Series ID  as "236397903;236274103"
-  #And Select series to my series tab
-  #And verify Edit Table Series data conversion Apply button inside Edit tabel popup
+  @TableVisual
+  Scenario: TC_TV_303:Edit Table- Edit series -Verify Series data conversion Apply button -inside Edit tabel popup
+  And User Select Series ID  as "236397903;236274103"
+  And Select series to my series tab
+  And verify Edit Table Series data conversion Apply button inside Edit tabel popup
+  
   @TableVisual
   Scenario: TC_TV_304:Edit Table- Edit series -Verify Series data conversion Minimize option -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"

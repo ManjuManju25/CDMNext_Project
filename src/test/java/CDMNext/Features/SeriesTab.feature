@@ -1,9 +1,9 @@
-Feature: SeriesTab
+Feature: Verifying SeriesTab functionality
 
   @SeriesTab
   Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
-    And Select indicator "Transport" as "Freight Traffic"
-    And Select indicator "Tourism" as "Tourism Statistics"
+    And Select indicator "Production" as "Steel Production"
+    And Select indicator "Tourism" as "Tourism Revenue"
     When Click on "Apply filter"
     Then Result should be displayed as per selection
 
@@ -31,7 +31,7 @@ Feature: SeriesTab
     Then Series count should be matched with displayed result
 
   @SeriesTab
-  Scenario: TC_SeriesTab_05:Verifying "Copy" option for series level
+    Scenario: TC_SeriesTab_05:Verifying "Copy" option for series level
     Given User enters seriesID "1380601;245178303"
     When User right click on any series
     Then User can able to see "Copy" option from dropdown menu
@@ -102,11 +102,11 @@ Feature: SeriesTab
     When User right click on any series
     Then User can able to see "See in Database" option from dropdown menu
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_17:Verifying SSP for series
-    Given User enters "GDP"
-    When Click on Show Series Info icon
-    Then SSP window should be displayed
+  #@SeriesTab....functionality has been removed
+  #Scenario: TC_SeriesTab_17:Verifying SSP for series
+    #Given User enters "GDP"
+    #When Click on Show Series Info icon
+    #Then SSP window should be displayed
 
   @SeriesTab
   Scenario: TC_SeriesTab_18:Verifying "key only" filter for series tab
@@ -267,7 +267,7 @@ Feature: SeriesTab
     Then The series should be added to Data tab
 
   @SeriesTab
-  Scenario: TC_SeriesTab_42:Verify 'add to exist insight' in dropdown
+  Scenario: TC_SeriesTab_42:Verify 'Add to recent insight' in dropdown
     Given User enters seriesID "368921927;371376337"
     And Click on drop down icon next to +
     And Click on "Add to recent insight"
