@@ -22,11 +22,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
+//import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 //import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.AssertJUnit;
+//import org.testng.AssertJUnit;
 
 import CDMNext.util.CommonFunctionality;
 import Javaxlxs.File_delete;
@@ -261,7 +261,7 @@ public class Histogram {
 	@And("^Apply function for a series$")
 	public void apply_function_for_a_series() throws Throwable {
 		String change_function = "%CHANGE()";
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(3000);
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='check-all-series']//*[@class='input-control--indicator']", 5);
 		new Actions(login.driver).moveToElement(ele).pause(500).click().build().perform();
@@ -282,9 +282,9 @@ public class Histogram {
 	@SuppressWarnings("deprecation")
 	@And("^Right click on series$")
 	public void right_click_on_series() throws Throwable {
-		CommonFunctionality.wait(1000);
-		WebElement sname = login.driver.findElement(By.xpath("(//*[@class='series-name-field--series-name'])[1]"));
-		new Actions(login.driver).contextClick(sname).pause(1000).click().build().perform();
+		CommonFunctionality.wait(2000);
+		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='series-name-field--series-name'])[1]",10);
+		new Actions(login.driver).pause(1000).contextClick(sname).click().build().perform();
 	}
 
 	@And("^Select Histogram visual$")
@@ -409,7 +409,7 @@ public void create_a_new_histogram_visual() throws Throwable {
 
 	@And("^Search for the series you want to rename$")
 	public void search_for_the_series_you_want_to_rename() throws Throwable {
-		SearchKeyword = "GDP";
+		SearchKeyword = "GROSS";
 		CommonFunctionality.wait(200);
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='find-and-replace--panel-search-box']/*[1]", 6)
@@ -447,7 +447,7 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 		WebElement SearchResult = login.driver
 				.findElement(By.xpath("//*[@class='find-and-replace-item--name']//input"));
 		if (SearchResult.isDisplayed()) {
-			if (SearchResult.getAttribute("value").contains(SearchKeyword)) {
+			if (SearchResult.getAttribute("value").toUpperCase().contains(SearchKeyword)) {
 				login.Log4j.info("Result is loaded for searched keyword");
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 4).click();
 				//CommonFunctionality.Views_list();
@@ -493,9 +493,9 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 		login.Log4j.info(ReplacedSeries);
 		if (ReplacedSeries.contains(ReplaceKeyword)) {
 			login.Log4j.info("PASS");
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 4).click();
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='sphere-modal-controls']//button[contains(text(),'Ok')]", 5).click();
+//			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 4).click();
+//			CommonFunctionality.getElementByXpath(login.driver,
+//					"//*[@class='sphere-modal-controls']//button[contains(text(),'Ok')]", 5).click();
 			//CommonFunctionality.Views_list();
 		} else {
 			Assert.fail("Verification is failed");
@@ -948,6 +948,7 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 				8).click();
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Select a series from My series tab$")
 	public void select_a_series_from_My_series_tab() throws Throwable {
 	    CommonFunctionality.wait(2000);
@@ -1481,6 +1482,7 @@ public void should_disable_only_legend(String arg1) throws Throwable {
     	}
     }
 }
+@SuppressWarnings("deprecation")
 @And("^Mouse hover on existing visual templates$")
 public void mouse_hover_on_existing_visual_templates() throws Throwable {
 	 arg = "NewTemplate";
@@ -1529,6 +1531,7 @@ public void click_on_template_dropdown() throws Throwable {
 	
 }
 
+@SuppressWarnings("deprecation")
 @And("^Check the box for \"([^\"]*)\"$")
 public void check_the_box_for(String arg1) throws Throwable {
 	WebElement set = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 6);
@@ -1548,6 +1551,7 @@ public void the_Histogram_should_be_created_with_the_format_of_previous_template
 	//if show series checkbox off
 	data_of_series_should_be_removed_from_the_visual();
 }
+@SuppressWarnings("deprecation")
 @And("^Check the box for \"([^\"]*)\" should be unchecked$")
 public void check_the_box_for_should_be_unchecked(String arg1) throws Throwable {
 	WebElement set = CommonFunctionality.getElementByXpath(login.driver,
@@ -3091,6 +3095,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='copyright-config']/*[5]/*[1]/*[2]/*[1]/*[2]//*[@class='input-control--indicator']", 40)
 				.click();
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-configuration']//button[contains(text(),'Save')]", 40).click();
 	}
 
@@ -3137,6 +3142,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	public void click_on_Date_format_dropdown() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='config-panel']/*[1]/*[2]/*[4]//*[@class='context-menu-control--icon']", 20).click();
 	}
+	@SuppressWarnings("deprecation")
 	@And("^Select custom Date format  as \"([^\"]*)\"$")
 	public void select_custom_Date_format_as(String arg1) throws Throwable {
 		CommonFunctionality.wait(500);
@@ -3394,9 +3400,9 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 			String text = tooltip.getText();
 			login.Log4j.info(text);
 			String[] Tooltip_txt = text.split(";");
-			// login.Log4j.info(SName);
-			// login.Log4j.info(SRegion);
-			// login.Log4j.info(Sfrequency[1]);
+			 login.Log4j.info(SName);
+			 login.Log4j.info(SRegion);
+			 login.Log4j.info(Sfrequency[1]);
 			if (SName.equals(Tooltip_txt[1].trim()) && SRegion.equals(Tooltip_txt[2].trim())
 					&& Sfrequency[1].trim().equals(Tooltip_txt[3].trim())) {
 				login.Log4j.info("Selected attributes is displayed when mouse hover on visual data");
@@ -3717,6 +3723,9 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 				
 			}
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20).click();
+		} else if(arg1.equals("View as Map")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='world']", 5).click();
 		}
 		
 	}
@@ -4305,7 +4314,7 @@ public void the_changes_should_be_applied_to_only_visual_and_its_series_in_edit_
 	//Save changes
 	CommonFunctionality.getElementByXpath(login.driver,"//*[@class='find-and-replace--footer']//button[contains(text(),'OK')]",6).click();
 	//verify rename popup should be closed
-	CommonFunctionality.wait(300);
+	CommonFunctionality.wait(2000);
 	if(login.driver.findElements(By.xpath("//*[@class='movable-modal--window ui-resizable ui-draggable']")).size() == 0) {
 		login.Log4j.info("Rename popup is closed");
 	} else {
@@ -4462,7 +4471,7 @@ public void the_function_should_be_applied_for_the_series() throws Throwable {
 		CommonFunctionality.wait(3000);
 		List<WebElement> timepoints = login.driver.findElements(
 				By.xpath("(//*[contains(@class,'highcharts-pie-series highcharts-tracker')])[1]"));
-		for (int i = 0; i <= timepoints.size(); i++) {
+		for (int i = 0; i <= timepoints.size(); ) {
 			new Actions(login.driver).moveToElement(timepoints.get(i)).pause(50).build().perform();
 			WebElement element = login.driver.findElement(
 					By.xpath("//*[@class='table-tooltip']/*[2]"));

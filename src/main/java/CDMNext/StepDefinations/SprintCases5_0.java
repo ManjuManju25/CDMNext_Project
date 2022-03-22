@@ -786,7 +786,7 @@ public class SprintCases5_0 {
 		CommonFunctionality.wait(1000);
 		List<WebElement> After_applying_SortByTopRelease_databriefings_list = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("databriefings_list")));
-		for (int i = 0; i < 2; i++) {
+		for (int i = 1; i <= 3; i++) {
 			CommonFunctionality.wait(200);
 			String databriefingsTitle = After_applying_SortByTopRelease_databriefings_list.get(i).getText();
 			Afterapply_SortBy_databriefingsList.add(databriefingsTitle);
@@ -1102,6 +1102,7 @@ public class SprintCases5_0 {
 
 	@Then("^Compare the results in database tab and comparables tab$")
 	public void compare_the_results_in_database_tab_and_comparables_tab() throws Throwable {
+		close_Data_briefings_panel();
 		// verifying in databases tab
 		login.Log4j.info("Clicking on  Databases tab ");
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))))
@@ -1190,6 +1191,7 @@ public class SprintCases5_0 {
 
 	@Then("^\"([^\"]*)\" icon for series should not be shows for global key series$")
 	public void icon_for_series_should_not_be_shows_for_global_key_series(String arg1) throws Throwable {
+		CommonFunctionality.wait(500);
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10);
 		new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
 		login.Log4j.info("Clicking on show database icon");
@@ -1458,6 +1460,59 @@ public class SprintCases5_0 {
 	   }
 	   
 	   
+	}
+	@Then("^The Databases language should be changed to as per the selected language$")
+	public void the_Databases_language_should_be_changed_to_as_per_the_selected_language() throws Throwable {
+		CommonFunctionality.ResetMethod();
+		filter.user_enters("India");
+		WebElement dbele;
+		CommonFunctionality.wait(1000);
+		if (db.dbase.equalsIgnoreCase("World Trend Plus")) {
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='WORLD']//span[@class='name-text']"));
+			db.After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + db.After_set_lang);
+			db.database = true;
+			// After validation changing set language as English
+			action.pause(2000).contextClick(dbele).build().perform();
+
+		} else if (db.dbase.equalsIgnoreCase("Russia Premium Database")) {
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@class='child-container']//div[@data-node-model-id='RUSSIA']//span[@class='name-text']"));
+			db.After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + db.After_set_lang);
+			db.database = true;
+			// After validation changing set language as English
+			action.pause(1500).contextClick(dbele).build().perform();
+
+		} else if (db.dbase.equalsIgnoreCase("Global Database")) {
+			dbele = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[1]//div[@class='series-item--name']"));
+			db.After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + db.After_set_lang);
+			db.database = true;
+			// After validation changing set language as English
+			action.pause(1500).contextClick(db.rightClickElement).build().perform();
+
+		} else {
+			login.driver.findElement(By.xpath("//div[@data-node-model-id='INDONESIA']//div[@class='toggle']")).click();
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@data-node-model-id='INDONESIA']//div[@class='child-container']//div[1]//span[@class='name-text']"));
+			db.After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + db.After_set_lang);
+			db.database = true;
+			// After validation changing set language as English
+			CommonFunctionality.wait(2000);
+			WebElement rightClickEle = login.driver.findElement(
+					By.xpath("//div[@data-node-model-id='INDONESIA']//span[contains(text(),'Indonesia Premium Database')]"));
+			action.pause(2000).contextClick(rightClickEle).build().perform();
+		}
+		db.SetLangugeEnglish();
+		if (db.database == true && !db.Before_set_lang.equals(db.After_set_lang) == true) {
+			login.Log4j.info(db.Before_set_lang + " is changed as " +db. After_set_lang);
+		} else {
+			AssertJUnit.fail("The Databases language is not changed to selected language");
+		}
+		//CommonFunctionality.CollapseTreeMethod();
 	}
 
 	void AddSeriesToSevenInsight() throws Exception {

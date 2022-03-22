@@ -80,6 +80,7 @@ public class SearchTest {
 		String Content = "";
 		Boolean SynomymSearch = false;
 		login.Log4j.info("Clicking on  Series tab ");
+		
 		SeriesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
 		// text file location where it contains synonyms
@@ -132,8 +133,8 @@ public class SearchTest {
 					int j = i + 1;
 					// action.moveToElement(checkBox.get(i)).click().build().perform();
 					action.pause(700).moveToElement(sName.get(i)).build().perform();
-					CommonFunctionality.wait(800);
-					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					CommonFunctionality.wait(3000);
+					tooltip = CommonFunctionality.getElementByProperty(login.driver, "tooltip_text" ,10);
 					TooltipInfo = tooltip.getText();
 					login.Log4j.info("Title information is \n" + TooltipInfo);
 					// Until the element is not visible keep scrolling

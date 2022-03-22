@@ -88,14 +88,14 @@ public class Filters {
 		switch(arg1){
 		case "All Regions":
 			regionarr = var.split(";");
-			Thread.sleep(1500);
+			CommonFunctionality.wait(2000);
 			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
 			try {
 						
 				if(regionarr.length == 1 && regionarr[0].equals(arg2) == true) {
-					Thread.sleep(1500);
+					CommonFunctionality.wait(2000);
 					login.driver.findElement(By.className("filters-search--search-field")).sendKeys(arg2);
-					Thread.sleep(1000);
+					CommonFunctionality.wait(2000);
 					login.driver.findElement(By.xpath("//span[contains(text(),'" + arg2 + "')]")).click();
 					break;
 				}
@@ -376,10 +376,7 @@ public class Filters {
 		//ul_element = null;
 		try {
 			CommonFunctionality.wait(2000);
-			//ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-			//AssertJUnit.assertNotNull(ul_element);
-			//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-			//login.Log4j.info("List size is :" + li_All.size());
+
 			List<WebElement> sName = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
 			if (sName.size() > 0) {
 				for (int i = 0; i < sName.size(); i++) {
@@ -392,9 +389,19 @@ public class Filters {
 					// Thread.sleep(1000);
 					action.moveToElement(sName.get(i)).build().perform();
 					Thread.sleep(700);
+					List<WebElement> tr_list = login.driver.findElements(By.xpath("//div[@class='tooltip tooltip__visible']//table//tr"));
+					for(int m = 0; m < tr_list.size() ; m++) {
+						List<WebElement> td_list = tr_list.get(i).findElements(By.tagName("td"));
+						int list_size = td_list.size();
+						for(int n = 0 ; n < list_size ; n++) {
+							String str = td_list.get(n).getText();
+							
+							login.Log4j.info("Title information is \n" + str);
+						}
+					}
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					text = tooltip.getText();
-					// login.Log4j.info("Title information is \n" + text);
+					 login.Log4j.info("Title information is \n" + text);
 					// Until the element is not visible keep scrolling
 					//CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
 					lines = text.split("\n");

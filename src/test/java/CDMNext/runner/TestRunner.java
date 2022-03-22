@@ -14,7 +14,7 @@ import CDMNext.StepDefinations.login;
 @CucumberOptions(// features="classpath:",
 		strict = true, features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@SeriesTab1"},			
+		tags = {"@Map1"},			
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",

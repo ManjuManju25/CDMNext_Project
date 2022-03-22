@@ -1726,8 +1726,8 @@ public class SeriesTab {
 		}else {
 		CommonFunctionality.ExpandRight();
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.wait(3000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		CommonFunctionality.wait(6000);
+		CommonFunctionality.getElementByProperty(login.driver,"Series",8).click();
 		}
 	}
 

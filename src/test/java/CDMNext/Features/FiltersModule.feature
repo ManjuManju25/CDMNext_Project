@@ -107,45 +107,45 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
-  Scenario: TC_Filters_Search_12
-    Given User enters "278655402"
-    And User selects "Source" as "International Organisation for Economic Co-operation and Development"
-    And User has clicked on "Apply filter"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Main Economic Indicators"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_13
-    Given User enters "277207202"
-    And User selects "Source" as "International Organisation for Economic Co-operation and Development"
-    And User has clicked on "Apply filter"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Economic Outlook"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_14
-    Given User enters "298772102"
-    And User selects "Source" as "International Organisation for Economic Co-operation and Development"
-    And User has clicked on "Apply filter"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - National Accounts"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_15
-    Given User enters "293654602"
-    And User selects "Source" as "International Organisation for Economic Co-operation and Development"
-    And User has clicked on "Apply filter"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Productivity"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_12
+    #Given User enters "278655402"
+    #And User selects "Source" as "International Organisation for Economic Co-operation and Development"
+    #And User has clicked on "Apply filter"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Main Economic Indicators"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_13
+    #Given User enters "277207202"
+    #And User selects "Source" as "International Organisation for Economic Co-operation and Development"
+    #And User has clicked on "Apply filter"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Economic Outlook"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_14
+    #Given User enters "298772102"
+    #And User selects "Source" as "International Organisation for Economic Co-operation and Development"
+    #And User has clicked on "Apply filter"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - National Accounts"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_15
+    #Given User enters "293654602"
+    #And User selects "Source" as "International Organisation for Economic Co-operation and Development"
+    #And User has clicked on "Apply filter"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Productivity"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
 
   @FilterSearch
   Scenario: TC_Filters_Search_16
@@ -328,38 +328,38 @@ Feature: Filters
     And User selected "Database" as "World Trend Plus"
     And User has clicked on "Apply filter"
     Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_37
-    Given User enters "280621302"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Main Economic Indicators"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_38
-    Given User enters "291714302;277061402"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Economic Outlook"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_39
-    Given User enters "294769102;295423302"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - National Accounts"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_40
-    Given User enters "293611402;293607802"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Productivity"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_37
+    #Given User enters "280621302"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Main Economic Indicators"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_38
+    #Given User enters "291714302;277061402"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Economic Outlook"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_39
+    #Given User enters "294769102;295423302"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - National Accounts"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_40
+    #Given User enters "293611402;293607802"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Productivity"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
 
   @FilterSearch
   Scenario: TC_Filters_Search_41
@@ -506,29 +506,29 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
-  Scenario: TC_Filters_Search_59
-    Given User enters "Changes"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Main Economic Indicators"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_60
-    Given User enters "formation"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Economic Outlook"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_61
-    Given User enters "Reference;employment"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - National Accounts"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_59
+    #Given User enters "Changes"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Main Economic Indicators"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_60
+    #Given User enters "formation"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Economic Outlook"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_61
+    #Given User enters "Reference;employment"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - National Accounts"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
 
   @FilterSearch
   Scenario: TC_Filters_Search_62
@@ -682,41 +682,41 @@ Feature: Filters
     When User get the topics as "Financial Market"
     Then User verify the results
 
-  @FilterSearch
-  Scenario: TC_Filters_Search_79
-    Given User enters "279238002"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Main Economic Indicators"
-    And User has clicked on "Apply filter"
-    When User get the topics as "Aggregate: 7 Major OECD Countries"
-    Then User verify the results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_80
-    Given User enters "277061402"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Economic Outlook"
-    And User has clicked on "Apply filter"
-    When User get the topics as "Aggregate: Non-OECD Countries"
-    Then User verify the results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_81
-    Given User enters "295423302"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - National Accounts"
-    And User has clicked on "Apply filter"
-    When User get the topics as "Aggregate: North American Free Trade Agreement (NAFTA)"
-    Then User verify the results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_82
-    Given User enters "293607802"
-    And Click on "More" filter
-    And User selected "Database" as "OECD - Productivity"
-    And User has clicked on "Apply filter"
-    When User get the topics as "OECD Members: Austria"
-    Then User verify the results
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_79
+    #Given User enters "279238002"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Main Economic Indicators"
+    #And User has clicked on "Apply filter"
+    #When User get the topics as "Aggregate: 7 Major OECD Countries"
+    #Then User verify the results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_80
+    #Given User enters "277061402"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Economic Outlook"
+    #And User has clicked on "Apply filter"
+    #When User get the topics as "Aggregate: Non-OECD Countries"
+    #Then User verify the results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_81
+    #Given User enters "295423302"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - National Accounts"
+    #And User has clicked on "Apply filter"
+    #When User get the topics as "Aggregate: North American Free Trade Agreement (NAFTA)"
+    #Then User verify the results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_82
+    #Given User enters "293607802"
+    #And Click on "More" filter
+    #And User selected "Database" as "OECD - Productivity"
+    #And User has clicked on "Apply filter"
+    #When User get the topics as "OECD Members: Austria"
+    #Then User verify the results
 
   @FilterSearch
   Scenario: TC_Filters_Search_83
@@ -817,41 +817,41 @@ Feature: Filters
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  @FilterSearch
-  Scenario: TC_Filters_Search_94
-    Given User enters "279238002"
-    And Click on "More" filter
-    And User selects "Unit" as "2005=100"
-    And User selected "Database" as "OECD - Main Economic Indicators"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_95
-    Given User enters "277061402"
-    And Click on "More" filter
-    And User selects "Unit" as "USD"
-    And User selected "Database" as "OECD - Economic Outlook"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_96
-    Given User enters "295423302"
-    And Click on "More" filter
-    And User selects "Unit" as "USD"
-    And User selected "Database" as "OECD - National Accounts"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @FilterSearch
-  Scenario: TC_Filters_Search_97
-    Given User enters "293607802"
-    And Click on "More" filter
-    And User selects "Unit" as "ATS"
-    And User selected "Database" as "OECD - Productivity"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_94
+    #Given User enters "279238002"
+    #And Click on "More" filter
+    #And User selects "Unit" as "2005=100"
+    #And User selected "Database" as "OECD - Main Economic Indicators"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_95
+    #Given User enters "277061402"
+    #And Click on "More" filter
+    #And User selects "Unit" as "USD"
+    #And User selected "Database" as "OECD - Economic Outlook"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_96
+    #Given User enters "295423302"
+    #And Click on "More" filter
+    #And User selects "Unit" as "USD"
+    #And User selected "Database" as "OECD - National Accounts"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@FilterSearch
+  #Scenario: TC_Filters_Search_97
+    #Given User enters "293607802"
+    #And Click on "More" filter
+    #And User selects "Unit" as "ATS"
+    #And User selected "Database" as "OECD - Productivity"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
 
   @FilterSearch
   Scenario: TC_Filters_Search_98

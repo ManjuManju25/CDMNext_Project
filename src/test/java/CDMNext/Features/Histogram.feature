@@ -1310,7 +1310,8 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Open advanced settings popup" icon
     And Select Text radio button from copyright popup and Save
     And Click on the Copyright
-    Then The user should redirect to "https://www.ceicdata.com/en" link
+    Then "Copyright" popup should be displayed
+    #Then The user should redirect to "https://www.ceicdata.com/en" link
 
   @Histogram
   Scenario: TC_Histogram_152:Edit Histogram - Copyright - Verify copyright color

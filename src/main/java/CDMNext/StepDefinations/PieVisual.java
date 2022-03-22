@@ -429,7 +429,7 @@ public class PieVisual {
 
 	@And("^Create a Pie visual$")
 	public void create_a_Pie_visual() throws Throwable {
-		EV.click_on_View_tab();
+		EmptyView.click_on_View_tab();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Pie']", 4).click();
 		CommonFunctionality.wait(500);
 	}
@@ -793,7 +793,7 @@ public class PieVisual {
 
 	@And("^Select frequency as \"([^\"]*)\"$")
 	public void select_frequency_as(String arg1) throws Throwable {
-		CommonFunctionality.wait(300);
+		CommonFunctionality.wait(3000);
 		Select select = new Select(
 				CommonFunctionality.getElementByXpath(login.driver, "//select[@name='frequency']", 4));
 		select.selectByValue("D");
@@ -2463,7 +2463,7 @@ public class PieVisual {
 
 	}
 
-	void SelectSeries(String sid) throws Exception {
+	static void SelectSeries(String sid) throws Exception {
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(sid);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(6000);

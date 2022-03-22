@@ -262,3 +262,345 @@ Feature: Verifying map visual functionality
     And Click on "Rename" option
     And Search for the series you want to rename
     Then Result should be loaded for searched keyword
+
+  @Map
+  Scenario: TC_Map_39: Rename -  Verify number of searched result
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Search for the series you want to rename
+    Then The total number of matches result should be displayed in below the find field
+
+  @Map
+  Scenario: TC_Map_40: Rename - Verify 'Replace' button
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Search for the series you want to rename
+    And Enter keyword you want to replace with
+    And Click on Replace
+    Then The keyword should be replaced for selected series
+
+  @Map
+  Scenario: TC_Map_41: Rename - Verify 'Replace All' button
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Enter the keyword you want to rename
+    And Enter the keyword you want to replace with
+    And Click on "Replace All"
+    Then All the available series should be replaced with the keyword
+
+  @Map
+  Scenario: TC_Map_42: Rename - Verify for invalid search
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Search with invalid series name
+    Then "No matches found" should be displayed under the find field
+
+  @Map
+  Scenario: TC_Map_43: Rename - Verify 'Edit series info' dropdown
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    Then Below options should be displayed
+      | Name                 |
+      | Function description |
+      | Region               |
+      | Unit                 |
+      | Frequency            |
+
+  @Map
+  Scenario: TC_Map_44: Rename - Verify default selection for 'Edit series info' dropdown
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    Then By default "Name" should be selected in Edit series info dropdown
+
+  @Map
+  Scenario: TC_Map_45: Rename - Verify 'Name' selection
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    Then Series should be displayed by name
+
+  @Map
+  Scenario: TC_Map_46: Rename - Verify 'Function description' selection
+    And Add series to the my series tab
+    And Apply function for a series
+    And Right click on series
+    And Select "View as Map" visual
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Function description"
+    Then The series should be displayed by function description
+
+  @Map
+  Scenario: TC_Map_47:Rename - verify function description selection without function apply
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Function description"
+    Then Empty row should be dispalyed
+
+  @Map
+  Scenario: TC_Map_48:Rename - Verify editing function description
+    And Add series to the my series tab
+    And Apply function for a series
+    And Right click on series
+    And Select "View as Map" visual
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Function description"
+    And Edit function description
+    And Click on "Apply"
+    Then Should allowed to edit function discription and should be updated in edit series panel
+
+  @Map
+  Scenario: TC_Map_49:Rename - Verify adding function description
+    And Add series to the my series tab
+    And Apply function for a series
+    And Right click on series
+    And Select "View as Map" visual
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Function description"
+    And Add function description
+    And Click on "Apply"
+    Then Should allowed to add function discription and should be updated in edit series panel
+
+  @Map
+  Scenario: TC_Map_50:Rename - Function discription -Verify Apply original title icon behavior
+    And Add series to the my series tab
+    And Apply function for a series
+    And Right click on series
+    And Select "View as Map" visual
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Function description"
+    And Add function description
+    And Click on '>' icon
+    Then The changes should be revert to original series "function"
+
+  @Map
+  Scenario: TC_Map_51:Rename - Function discription - Verify'Apply original title for all series' icon
+    And Add series to the my series tab and Apply function
+    And Right click on series
+    And Select "View as Map" visual
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Function description"
+    And Add function description
+    And Click on '>' icon for original titles to all series
+    Then All the changes should be revert back with original "function"
+
+  @Map
+  Scenario: TC_Map_52:Rename - Function discription - Verify clicking on series name
+    And Add series to the my series tab
+    And Apply function for a series
+    And Right click on series
+    And Select "View as Map" visual
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Function description"
+    And Click on series name
+    Then The SSP window should be displayed
+
+  @Map
+  Scenario: TC_Map_53:Rename - Name - verify Editing series name
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Name"
+    And Edit series title
+    And Click on "Apply"
+    Then Should able to edit the insight title and updated in visual series
+
+  @Map
+  Scenario: TC_Map_54:Rename - Name - Verify Apply original title icon
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Name"
+    And Edit series title
+    And Click on '>' icon
+    Then The changes should be revert to original series "name"
+
+  @Map
+  Scenario: TC_Map_55:Rename - Name - Verify "Apply original title for all series" icon
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Name"
+    And Edit series title
+    And Click on '>' icon for original titles to all series
+    Then All the changes should be revert back with original "name"
+
+  @Map
+  Scenario: TC_Map_56:Rename - Verify Region selection
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Region"
+    Then Series should be displayed by Region
+
+  @Map
+  Scenario: TC_Map_57:Rename - Rename region
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Region"
+    And Edit series region
+    Then The region should be renamed for the series
+
+  @Map
+  Scenario: TC_Map_58:Rename - Region - Verify Apply original region icon
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Region"
+    And Edit series region
+    And Click on '>' icon
+    Then The changes should be revert to original series "region"
+
+  @Map
+  Scenario: TC_Map_59:Rename - Region - Verify "Apply original region for all series" icon
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Region"
+    And Edit series region
+    And Click on '>' icon for original titles to all series
+    Then All the changes should be revert back with original "region"
+
+  @Map
+  Scenario: TC_Map_60:Rename - unit - verify Editing series unit
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Unit"
+    And Edit series unit
+    And Click on "Apply"
+    Then Should able to edit series unit and updated in visual series as per the changes
+
+  @Map
+  Scenario: TC_Map_61:Rename - unit - Verify Apply original unit icon
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Unit"
+    And Edit series unit
+    And Click on '>' icon
+    Then The changes should be revert to original series "unit"
+
+  @Map
+  Scenario: TC_Map_62:Rename - unit - Verify "Apply original unit for all series" icon
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Unit"
+    And Edit series unit
+    And Click on '>' icon for original titles to all series
+    Then All the changes should be revert back with original "unit"
+
+  @Map
+  Scenario: TC_Map_63:Rename - frequency - verify Editing series frequency
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Frequency"
+    And Edit series frequency
+    And Click on "Apply"
+    Then Should able to edit series frequency and updated in visual series as per the changes
+
+  @Map
+  Scenario: TC_Map_64:Rename - frequency - Verify Apply original frequency icon
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Frequency"
+    And Edit series frequency
+    And Click on '>' icon
+    Then The changes should be revert to original series "frequency"
+
+  @Map
+  Scenario: TC_Map_65:Rename - frequency - Verify "Apply original frequency for all series" icon
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Frequency"
+    And Edit series frequency
+    And Click on '>' icon for original titles to all series
+    Then All the changes should be revert back with original "frequency"
+
+  @Map
+  Scenario: TC_Map_66:Rename - Verify Auto name check box
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    Then Check box should be checked by default for auto name
+
+  @Map
+  Scenario: TC_Map_67:Rename - verify attributes dropdown
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Open dropdown for auto name
+    Then Below options should be available
+      | Name                 |
+      | Function description |
+      | Region               |
+      | Unit                 |
+      | Frequency            |
+
+  @Map
+  Scenario: TC_Map_68:Rename - verify selecting multiple attributes for series name
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Select multiple attributes
+    And Click on "Apply"
+    Then Selected attributes should be displayed as series name
+
+  @Map
+  Scenario: TC_Map_69:Rename - Veriy series in My series after visual series renamed
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Name"
+    And Edit series title
+    Then The changes should be applied to only visual and its series in edit series panel NOT for my series
+
+  @Map
+  Scenario: TC_Map_70:Rename - Verify 'Apply' button
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Edit series info dropdown
+    And Select "Name"
+    And Edit series title
+    And Click on "Apply"
+    Then The changes should be saved and rename popup remains displayed

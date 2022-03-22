@@ -122,7 +122,7 @@ Feature: Verifying Pie Visual Functionality
 
   @PieVisual
   Scenario Outline: <TCID>: Verify changing data into <Currency> in currency conversion popup with keep as reported
-    And Select series with same filter and different units "226311002;405159937"
+    And Select series with same filter and different units "365384457;414249197"
     And Create a Pie visual
     And Select Currency conversion as "<Currency>" and with "<Unit>"
     Then "<Currency>" currency should get converted as "<Unit>" in visual pie

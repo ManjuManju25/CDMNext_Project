@@ -478,42 +478,42 @@ Feature: Verifying SeriesTab functionality
     And Scroll down and set showing results as "50" per page
     Then "50" results should display in a page
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_70:Verify show related data dropdown
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    Then "Active,Read More" and "DATASETS" should be available
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_71:Check if the status is correctly displayed
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    Then Status has to be "Active"
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_72:Check if the 'Read more' is correctly displayed
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    And Click on "Read More"
-    Then Read more should open footnotes of the respective series
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_73:Check if the data sets are correctly displayed
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    Then Respective dataset to be opened when click on each datasets link
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_74:Verify hide related data
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    And Click on "Hide related data"
-    Then The related data dropdown should be collapsed
+  #@SeriesTab...Removed from execution
+  #Scenario: TC_SeriesTab_70:Verify show related data dropdown
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #Then "Active,Read More" and "DATASETS" should be available
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_71:Check if the status is correctly displayed
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #Then Status has to be "Active"
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_72:Check if the 'Read more' is correctly displayed
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #And Click on "Read More"
+    #Then Read more should open footnotes of the respective series
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_73:Check if the data sets are correctly displayed
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #Then Respective dataset to be opened when click on each datasets link
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_74:Verify hide related data
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #And Click on "Hide related data"
+    #Then The related data dropdown should be collapsed
 
   @SeriesTab
   Scenario: TC_SeriesTab_75:Verify selected Region results
@@ -521,7 +521,7 @@ Feature: Verifying SeriesTab functionality
     When Click on "Apply filter"
     Then User verify the search results
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_76:Verify selected frequency results
     And User selects "Frequency" as "Monthly;Semiannually"
     When Click on "Apply filter"

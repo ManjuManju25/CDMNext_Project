@@ -97,7 +97,7 @@ Feature: Verifying Databases tab functionality
     And Click on "our help desk team"
     Then User should redirect to "https://support.ceicdata.com/support/tickets/new"
 
-  @DB
+  @DB2
   Scenario: TC_DB_15: Verifying Filters for DB tab
     And User selects "All Regions" as "Japan"
     And User has clicked on "Apply filter"
@@ -281,7 +281,7 @@ Feature: Verifying Databases tab functionality
     And Click on "Add and replace"
     Then The selected table data should be replaced with existing data on the visual
 
-  #@DB1...functionality has been changed
+  #@DB....removed for table level
   #Scenario: TC_DB_43:Verifying Add and Group for table level
     #And Mouse hover on any table level
     #And Click on dropdown icon
@@ -493,65 +493,65 @@ Feature: Verifying Databases tab functionality
     And Drag and drop to my series/visual
     Then The entire table should be added to my series
 
-  @DB
-  Scenario: TC_DB_67:Verifying related data
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on "Show related data" icon
-    Then Related data should be displayed under the dropdown
-
-  @DB
-  Scenario: TC_DB_68:Verify Related data > Remarks
-    And Expand World Trend Plus till series level
-    And Click on Show related data icon
-    Then "Remarks:" should be displayed if available for the series
-
-  @DB
-  Scenario: TC_DB_69:Verify 'Read more' for Remarks under Related data
-    And Expand World Trend Plus till series level
-    And Click on Show related data icon
-    And Click on "Read More"
-    Then Should open related footnotes
-
-  @DB
-  Scenario: TC_DB_70:Verify clicking Datasets
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on datalinks under datasets
-    Then Should redirect to respective datasets
-
-  @DB
-  Scenario: TC_DB_71:Verify related insights
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on any insights under insights section
-    Then Insights should be opened in preview mode
-
-  @DB
-  Scenario: TC_DB_72:Verify share icon for insight
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on share under insights section
-    Then Share popup should be opened if have permission to share
-
-  @DB
-  Scenario: TC_DB_73:Verify add to favorite icon
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on add to favourite under insights section
-    Then The insights should be added to favorite list
-
-  @DB
-  Scenario: TC_DB_74:Verify hide related data
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on "Show related data"
-    And Click on "Hide related data"
-    Then The related data dropdown should be collapsed
+  #@DB....show related data dropdown functionality has been removed for series level
+  #Scenario: TC_DB_67:Verifying related data
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on "Show related data" icon
+    #Then Related data should be displayed under the dropdown
+#
+  #@DB
+  #Scenario: TC_DB_68:Verify Related data > Remarks
+    #And Expand World Trend Plus till series level
+    #And Click on Show related data icon
+    #Then "Remarks:" should be displayed if available for the series
+#
+  #@DB
+  #Scenario: TC_DB_69:Verify 'Read more' for Remarks under Related data
+    #And Expand World Trend Plus till series level
+    #And Click on Show related data icon
+    #And Click on "Read More"
+    #Then Should open related footnotes
+#
+  #@DB
+  #Scenario: TC_DB_70:Verify clicking Datasets
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on datalinks under datasets
+    #Then Should redirect to respective datasets
+#
+  #@DB
+  #Scenario: TC_DB_71:Verify related insights
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on any insights under insights section
+    #Then Insights should be opened in preview mode
+#
+  #@DB
+  #Scenario: TC_DB_72:Verify share icon for insight
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on share under insights section
+    #Then Share popup should be opened if have permission to share
+#
+  #@DB
+  #Scenario: TC_DB_73:Verify add to favorite icon
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on add to favourite under insights section
+    #Then The insights should be added to favorite list
+#
+  #@DB
+  #Scenario: TC_DB_74:Verify hide related data
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on "Show related data"
+    #And Click on "Hide related data"
+    #Then The related data dropdown should be collapsed
 
   @DB
   Scenario: TC_DB_75: Verifying 'View as chart'
@@ -757,11 +757,11 @@ Feature: Verifying Databases tab functionality
     And Click on "Add and replace"
     Then The selected series should be replaced with existing series on the visual
 
-  #@DB1...functionaly has been changed
-  #Scenario: TC_DB_103:Verify Add and Group
-   #And Select a series and Click on dropdown icon
-    #And Click on "Add and group"
-    #Then Selected series should be added as group in My series
+  @DB
+  Scenario: TC_DB_103:Verify Add and Group
+   And Select a series and Click on dropdown icon
+    And Click on "Add and group"
+    Then Selected series should be added as group in My series
 
   @DB
   Scenario: TC_DB_104:Verify Add to new insight
@@ -1091,6 +1091,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_147:Series selection - Verify CTC
     And Select some series from series level
+    And Click on selected series count
     And Click on "Copy to Clipboard" icon on header
     Then Download window should be appeared with selected series count
 

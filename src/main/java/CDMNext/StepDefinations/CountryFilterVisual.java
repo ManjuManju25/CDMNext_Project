@@ -14,7 +14,7 @@ import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
-public class CountryFilterVisual {
+public class CountryFilterVisual extends CommonFunctionality {
 	Histogram hs = new Histogram();
 	EmptyView emptyView = new EmptyView();
 	Commentary commentary = new Commentary();
@@ -25,20 +25,20 @@ public class CountryFilterVisual {
 
 	@And("^Click on insert Filter visual icon$")
 	public void click_on_insert_Filter_visual_icon() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='filter']", 20).click();
+		getElementByXpath(login.driver, "//*[@data-instance='filter']", 20).click();
 		try {
 			Boolean Filtervisual = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
 			if (Filtervisual == true) {
 				login.Log4j.info("Filter visual is created");
 			}
 		} catch (Exception e) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='filter']", 20).click();
+			getElementByXpath(login.driver, "//*[@data-instance='filter']", 20).click();
 		}
 	}
 
 	@Then("^\"([^\"]*)\" visual should be created$")
 	public void visual_should_be_created(String arg1) throws Throwable {
-		String Visuale_Title = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 20)
+		String Visuale_Title = getElementByXpath(login.driver, "//*[@data-name='title']", 20)
 				.getText();
 		if (Visuale_Title.equals(arg1)) {
 			login.Log4j.info(arg1 + " visual is created");
@@ -50,24 +50,23 @@ public class CountryFilterVisual {
 	@Then("^Below optins should be displayed$")
 	public void below_optins_should_be_displayed(List<String> list) throws Throwable {
 		String arg2, arg6 = null;
-		String arg1 = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-popup='title']/span", 20)
+		String arg1 = getElementByXpath(login.driver, "//*[@data-popup='title']/span", 20)
 				.getText();
 		try {
 			// filter visual
-			arg2 = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-popup='visual']/span", 20).getText();
+			arg2 = getElementByXpath(login.driver, "//*[@data-popup='visual']/span", 20).getText();
 		} catch (Exception e) {
 			// image visual
-			arg2 = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='add-to-insight']", 20)
+			arg2 = getElementByXpath(login.driver, "//*[@data-action='add-to-insight']", 20)
 					.getAttribute("title");
-			arg6 = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='copy-elem']", 20)
+			arg6 = getElementByXpath(login.driver, "//*[@data-action='copy-elem']", 20)
 					.getAttribute("title");
 		}
-		String arg3 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'download-button__icon')]", 20)
+		String arg3 =getElementByXpath(login.driver, "//*[contains(@class,'download-button__icon')]", 20)
 				.getAttribute("title");
-		String arg4 = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='open-visual']", 20)
+		String arg4 =getElementByXpath(login.driver, "//*[@data-action='open-visual']", 20)
 				.getAttribute("title");
-		String arg5 = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='delete']", 20)
+		String arg5 = getElementByXpath(login.driver, "//*[@data-action='delete']", 20)
 				.getAttribute("title");
 		if (list.size() == 5) {
 			if (list.contains(arg1) && list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
@@ -92,17 +91,17 @@ public class CountryFilterVisual {
 	@And("^Edit the name of the title$")
 	public void edit_the_name_of_the_title() throws Throwable {
 		chnge_title = "Nadiya";
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='title-config']//input[@name='title']", 30)
+		getElementByXpath(login.driver, "//*[@class='title-config']//input[@name='title']", 30)
 				.clear();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='title-config']//input[@name='title']", 30)
+		getElementByXpath(login.driver, "//*[@class='title-config']//input[@name='title']", 30)
 				.sendKeys(chnge_title);
-		CommonFunctionality.wait(2000);
+		wait(2000);
 	}
 
 	@Then("^The changes should be reflected to filter visual$")
 	public void the_changes_should_be_reflected_to_filter_visual() throws Throwable {
-		CommonFunctionality.wait(2000);
-		String visualTxt = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 30).getText();
+		wait(2000);
+		String visualTxt =getElementByXpath(login.driver, "//*[@data-name='title']", 30).getText();
 		if (visualTxt.equalsIgnoreCase(chnge_title)) {
 			login.Log4j.info("Verification pass");
 		} else {
@@ -112,7 +111,7 @@ public class CountryFilterVisual {
 
 	@And("^Click on title dropdown of the filter visual$")
 	public void click_on_title_dropdown_of_the_filter_visual() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-popup='title']", 30).click();
+		getElementByXpath(login.driver, "//*[@data-popup='title']", 30).click();
 	}
 
 	@Then("^The filter visual should update the \"([^\"]*)\" name to \"([^\"]*)\"$")
@@ -139,7 +138,7 @@ public class CountryFilterVisual {
 	public void select_Proportion_value_to(int arg1) throws Throwable {
 		commentary.click_on_option_on_visual_header("Visual");
 		String Proportiovalue = Integer.toString(arg1);
-		WebElement proportion = CommonFunctionality.getElementByXpath(login.driver,
+		WebElement proportion = getElementByXpath(login.driver,
 				"//*[text()='Proportion:']//following::input[1]", 4);
 		proportion.sendKeys(Keys.chord(Keys.CONTROL, "a"), Proportiovalue);
 		proportion.sendKeys(Keys.TAB);
@@ -150,7 +149,7 @@ public class CountryFilterVisual {
 		WebElement visual_align = null;
 
 		// Filter visual align
-		visual_align = CommonFunctionality.getElementByXpath(login.driver,
+		visual_align = getElementByXpath(login.driver,
 				"//*[@class='filter-template--content']", 20);
 
 		if (arg1.equalsIgnoreCase("flex-start")) {
@@ -164,7 +163,7 @@ public class CountryFilterVisual {
 			// highlighting visual
 			visual_align.click();
 			// click on visual header
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Visual')]", 20).click();
+			getElementByXpath(login.driver, "//*[contains(text(),'Visual')]", 20).click();
 
 		}
 		if (arg1.equalsIgnoreCase("Center")) {
@@ -178,7 +177,7 @@ public class CountryFilterVisual {
 			// highlighting visual
 			visual_align.click();
 			// click on visual header
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Visual')]", 20).click();
+			getElementByXpath(login.driver, "//*[contains(text(),'Visual')]", 20).click();
 		}
 		if (arg1.equalsIgnoreCase("flex-end")) {
 			String right = visual_align.getAttribute("style");
@@ -196,22 +195,21 @@ public class CountryFilterVisual {
 
 	@And("^Check for Filter Border$")
 	public void check_for_Filter_Border() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//div[contains(text(),'Filter border')]", 30).click();
+		getElementByXpath(login.driver, "//div[contains(text(),'Filter border')]", 30).click();
 	}
 
 	@Then("^The Filter border should be changed as per the selection$")
 	public void the_Filter_border_should_be_changed_as_per_the_selection() throws Throwable {
 		commentary.UnselectVisual();
-		String border_color = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='filter-template--multi-select']", 20)
+		String border_color = getElementByXpath(login.driver, "//*[@class='filter-template--multi-select']", 20)
 				.getCssValue("border-color");
 		commentary.ColorValidation(border_color);
-		CommonFunctionality.DeleteVisual();
+		DeleteVisual();
 	}
 
 	@Then("^Popup should be opened with editing options$")
 	public void popup_should_be_opened_with_editing_options() throws Throwable {
-		CommonFunctionality.wait(2000);
+		wait(2000);
 		boolean popup = login.driver.findElement(By.xpath("//*[@class='dropdown-menu context-menu ']/*[3]"))
 				.isDisplayed();
 		if (popup == true) {
@@ -242,12 +240,12 @@ public class CountryFilterVisual {
 
 	@And("^Create filter visual$")
 	public void create_filter_visual() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='icon--filter']", 20).click();
+		getElementByXpath(login.driver, "//*[@class='icon--filter']", 20).click();
 	}
 
 	@And("^Click inside filter visual$")
 	public void click_inside_filter_visual() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'All countries')]", 20).click();
+		getElementByXpath(login.driver, "//*[contains(text(),'All countries')]", 20).click();
 	}
 
 	@Then("^Countries name which are included in the other all visual should be listed and displayed$")
@@ -268,12 +266,12 @@ public class CountryFilterVisual {
 
 	@And("^Create one visual with countryfilter$")
 	public void create_one_visual_with_countryfilter() throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
+		getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		commentary.CreateViewTab();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
-		CommonFunctionality.wait(1500);
+		getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
+		getElementByProperty(login.driver, "Series", 20).click();
+		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
@@ -283,17 +281,17 @@ public class CountryFilterVisual {
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
+		getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
 				.click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
+		getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='icon--filter']", 20).click();
+		getElementByXpath(login.driver, "//*[@class='icon--filter']", 20).click();
 	}
 
 	@And("^click on filter and modify visual with specific countries$")
 	public void click_on_filter_and_modify_visual_with_specific_countries() throws Throwable {
 		click_inside_filter_visual();
-		CommonFunctionality.wait(5000);
+		wait(5000);
 		List<WebElement> list_of_countries = login.driver
 				.findElements(By.xpath("//*[@class='custom-select--body']//*[@class='custom-select-item']/*"));
 		for (int i = 0; i < list_of_countries.size();) {
@@ -310,12 +308,12 @@ public class CountryFilterVisual {
 				.moveToElement(
 						login.driver.findElement(By.xpath("//*[@data-action='world']//*[@class='icon--map-world']")))
 				.click().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Add from My Series')]", 20).click();
-		CommonFunctionality.wait(500);
-		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
+		getElementByXpath(login.driver, "//*[contains(text(),'Add from My Series')]", 20).click();
+		wait(500);
+		WebElement ele =getElementByXpath(login.driver,
 				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
 		new Actions(login.driver).moveToElement(ele).pause(1000).click().build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
+		getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
 
 	}
@@ -344,17 +342,17 @@ public class CountryFilterVisual {
 
 	@And("^Hover the cursor on the title and try to move with in the view$")
 	public void hover_the_cursor_on_the_title_and_try_to_move_with_in_the_view() throws Throwable {
-		CommonFunctionality.wait(2000);
+		wait(2000);
 		// Visuals position before drag and drop
 		WebElement sourecEle = login.driver.findElement(
 				By.xpath("(//*[contains(@class,'filter-template')]//*[@class='visual-title--text text-dots'])[1]"));
 		Visual2_filter_title_text = sourecEle.getText();
-		CommonFunctionality.wait(2000);
+		wait(2000);
 		WebElement targetEle = login.driver.findElement(
 				By.xpath("(//*[contains(@class,'histogram-visual')]//*[@class='visual-title--text text-dots'])[1]"));
-		CommonFunctionality.wait(500);
+		wait(500);
 		Visual1_hs_title_text = targetEle.getText();
-		CommonFunctionality.wait(1000);
+		wait(1000);
 		jse.executeScript("arguments[0].scrollIntoView(true);", targetEle);
 		new Actions(login.driver).pause(2000).dragAndDrop(sourecEle, targetEle).perform();
 
@@ -363,7 +361,7 @@ public class CountryFilterVisual {
 	@Then("^Country filter visual should move$")
 	public void country_filter_visual_should_move() throws Throwable {
 		// Visuals after drag and drop
-		CommonFunctionality.wait(1000);
+		wait(1000);
 		String visual1_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[1]")).getText();
 		String visual2_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[2]")).getText();
 		if (!visual1_text.equals(Visual1_hs_title_text) && !visual2_text.equals(Visual2_filter_title_text)) {
@@ -375,11 +373,11 @@ public class CountryFilterVisual {
 
 	@And("^Click on crossmark when all countries are selected$")
 	public void click_on_crossmark_when_all_countries_are_selected() throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
+		getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
 		commentary.CreateViewTab();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
-		CommonFunctionality.wait(1500);
+		getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
+		getElementByProperty(login.driver, "Series", 20).click();
+		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
@@ -388,9 +386,9 @@ public class CountryFilterVisual {
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
+		getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
 				.click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
+		getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
 		create_filter_visual();
 		click_inside_filter_visual();
@@ -406,7 +404,7 @@ public class CountryFilterVisual {
 
 	@Then("^Should unselect all countries$")
 	public void should_unselect_all_countries() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='filter-template--content']//*[@class='custom-select-title--reset-icon']", 8).click();
+		getElementByXpath(login.driver,"//*[@class='filter-template--content']//*[@class='custom-select-title--reset-icon']", 8).click();
 		filter_visual_should_get_reset_with_name_present_in_all_visuals_in_view("All countries");
 
 	}

@@ -89,17 +89,21 @@ public class ForecastSeries {
 
 	@And("^click on cross icon for any legends name$")
 	public void click_on_cross_icon_for_any_legends_name() throws Throwable {
-		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,
+		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,
 				"(//*[@class='legend-item'])[1]/*[1]", 15);
-		new Actions(login.driver).pause(200).moveToElement(legend_item).click().build().perform();
+		new Actions(login.driver).pause(200).moveToElement(first_legend_item).click().build().perform();
 
 	}
 
 	@Then("^Cross clicked legend of the chart in suggestion chart should be disabled$")
 	public void cross_clicked_legend_of_the_chart_in_suggestion_chart_should_be_disabled() throws Throwable {
+		//mouse hover on watch element for enabling remain chart lines which is not deselected
+		WebElement watch_ele = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='movable-modal--body']//*[contains(text(),'Watch')]", 15);
+		new Actions(login.driver).pause(200).moveToElement(watch_ele).build().perform();
 		CommonFunctionality.wait(500);
 		Boolean is_disabled = login.driver
-				.findElement(By.xpath("//*[@class='highcharts-series highcharts-series-3 highcharts-line-series']"))
+				.findElement(By.xpath("//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker']"))
 				.getAttribute("visibility").contains("hidden");
 		if (is_disabled == true) {
 			login.Log4j.info("Cross clicked legend of the chart in suggestion chart is disabled");
@@ -241,9 +245,13 @@ public class ForecastSeries {
 			break;
 		}
 		CommonFunctionality.wait(500);
-		WebElement Visual_info = CommonFunctionality.getElementByXpath(login.driver,
+		WebElement forecast_tab = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']//*[contains(text(),'Forecast')]", 15);
+		new Actions(login.driver).moveToElement(forecast_tab).pause(200).build().perform();
+		
+		/*WebElement Visual_info = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='compare-suggestions-visual--info']", 5);
-		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();
+		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();*/
 		// Reading frequency for first basic series
 		CommonFunctionality.wait(500);
 		frequencyTxt_forBasicSeries = CommonFunctionality.getElementByXpath(login.driver,
@@ -360,7 +368,7 @@ public class ForecastSeries {
 	@And("^Chart should be displayed for suggestion series by default$")
 	public void chart_should_be_displayed_for_suggestion_series_by_default() throws Throwable {
 		boolean chart = login.driver.findElement(By.xpath(
-				"//*[@class='compare-suggestions-visual compare-suggestions-visual__open-compare-visual compare-suggestions-visual__invalid']"))
+				"//*[@class='compare-suggestions-visual compare-suggestions-visual__open-compare-visual']"))
 				.isDisplayed();
 		if (chart == true) {
 			login.Log4j.info("Chart is displayed");
@@ -379,7 +387,7 @@ public class ForecastSeries {
 	@Then("^Chart displayed should be hidden$")
 	public void chart_displayed_should_be_hidden() throws Throwable {
 		if (login.driver
-				.findElements(By.xpath("//*[@class='compare-suggestions-visual compare-suggestions-visual__invalid']"))
+				.findElements(By.xpath("//*[@class='compare-suggestions-visual']"))
 				.size() == 1) {
 			login.Log4j.info("Chart doesn't displayed by selecting chart icon");
 		} else {
@@ -461,6 +469,7 @@ public class ForecastSeries {
 				.getText();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Apply')]", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 4).click();
+		CommonFunctionality.wait(1000);
 		List<WebElement> listOfSeries = login.driver
 				.findElements(By.xpath("//*[@class='series-name-field--series-name']"));
 		for (int i = 0; i < listOfSeries.size(); i++) {
@@ -469,10 +478,10 @@ public class ForecastSeries {
 			if (expected.contains(" " + listOfSeries.get(i).getText())) {
 
 				login.Log4j.info(
-						login.driver.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[ "
+						login.driver.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[ "
 								+ j + "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]")).getText());
 				if (login.driver
-						.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+						.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 								+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 						.getText().equalsIgnoreCase("F")) {
 					login.Log4j.info("Forecast series added to the my series tab");
@@ -492,7 +501,7 @@ public class ForecastSeries {
 	public void verify_preserve_frequency_in_my_series_tab() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Apply')]", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 4).click();
-		CommonFunctionality.wait(200);
+		CommonFunctionality.wait(500);
 		List<WebElement> listOfSeries = login.driver
 				.findElements(By.xpath("//*[@class='series-name-field--series-name']"));
 		boolean matched = false;
@@ -500,12 +509,12 @@ public class ForecastSeries {
 			int j = i + 1;
 			CommonFunctionality.wait(200);
 			if (login.driver
-					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 							+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 					.getText().equalsIgnoreCase("F")) {
 
 				String ActualFrequency_forecastSeries = login.driver
-						.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+						.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 								+ "]//*[@class='series-description-field']//*[@class='additional-info-item frequency']"))
 						.getText();
 				if (!ActualFrequency_forecastSeries.equals(frequencyTxt_beforeCheckFrequency)
@@ -544,11 +553,11 @@ public class ForecastSeries {
 
 					login.Log4j
 							.info(login.driver
-									.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[ "
+									.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[ "
 											+ j + "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 									.getText());
 					if (login.driver
-							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 									+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 							.getText().equalsIgnoreCase("F")) {
 						login.Log4j.info("Selected suggestion is replaced with current series");
@@ -580,6 +589,7 @@ public class ForecastSeries {
 				4).getAttribute("class").contains("series-with-suggestions-mode--button__inactive")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Apply')]", 4).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 4).click();
+			CommonFunctionality.wait(500);
 			List<WebElement> listOfSeries = login.driver
 					.findElements(By.xpath("//*[@class='series-name-field--series-name']"));
 			for (int i = 0; i < listOfSeries.size(); i++) {
@@ -589,15 +599,15 @@ public class ForecastSeries {
 
 					login.Log4j
 							.info(login.driver
-									.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[ "
+									.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[ "
 											+ j + "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 									.getText());
 					if (login.driver
-							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 									+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 							.getText().equalsIgnoreCase("F")) {
 						String ActualFrequency_forecastSeries = login.driver
-								.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+								.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 										+ "]//*[@class='series-description-field']//*[@class='additional-info-item frequency']"))
 								.getText();
 						if (!ActualFrequency_forecastSeries.equals(frequencyTxt_beforeCheckFrequency)
@@ -624,7 +634,7 @@ public class ForecastSeries {
 	public void apply_any_function_to_any_of_the_added_series() throws Throwable {
 		// Select the first series
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='webix_column list-series-name webix_last']/*[1]//*[@class='series-name-wrapper ']/*[1]", 4)
+				"//*[@class='webix_column list-series-name webix_first webix_last']/*[1]//*[@class='series-name-wrapper ']/*[1]", 4)
 				.click();
 
 		try_to_apply_any_of_the_function_through_function_toolbar();
@@ -643,12 +653,12 @@ public class ForecastSeries {
 			int j = i + 1;
 			CommonFunctionality.wait(200);
 			if (login.driver
-					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 							+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 					.getText().equalsIgnoreCase("F")) {
 
 				String ActualFunction_forecastSeries = login.driver
-						.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+						.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 								+ "]//*[@class='series-functions-title']"))
 						.getText();
 				if (ActualFunction_forecastSeries.contains(Applied_function)) {
@@ -685,11 +695,11 @@ public class ForecastSeries {
 				if (expected.contains(listOfSeries.get(i).getText())) {
 
 					if (login.driver
-							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 									+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 							.getText().equalsIgnoreCase("F")) {
 						String ActualFunction_forecastSeries = login.driver
-								.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+								.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 										+ "]//*[@class='series-functions-title']"))
 								.getText();
 						if (ActualFunction_forecastSeries.contains(Applied_function)) {
@@ -776,11 +786,11 @@ public class ForecastSeries {
 
 					login.Log4j
 							.info(login.driver
-									.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[ "
+									.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[ "
 											+ j + "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 									.getText());
 					if (login.driver
-							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+							.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 									+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 							.getText().equalsIgnoreCase("F")) {
 						login.Log4j.info(i + " suggestion is replaced with current series");
@@ -805,7 +815,7 @@ public class ForecastSeries {
 			int j = i + 1;
 
 			if (login.driver
-					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 							+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 					.getText().equalsIgnoreCase("F")) {
 				new Actions(login.driver).moveToElement(listOfSeries.get(i)).pause(500).contextClick().perform();
@@ -837,11 +847,11 @@ public class ForecastSeries {
 			int j = i + 1;
 
 			if (login.driver
-					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_last']/*[" + j
+					.findElement(By.xpath("//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 							+ "]//*[@class='series-name-wrapper ']/*[2]/*[1]/*[2]/*[1]"))
 					.getText().equalsIgnoreCase("F")) {
 				CommonFunctionality
-						.getElementByXpath(login.driver, "//*[@class='webix_column list-series-name webix_last']/*[" + j
+						.getElementByXpath(login.driver, "//*[@class='webix_column list-series-name webix_first webix_last']/*[" + j
 								+ "]//*[@class='series-name-wrapper ']/*[1]", 4)
 						.click();
 				matched = true;
@@ -873,35 +883,28 @@ public class ForecastSeries {
 		WebElement Applied_function_series;
 		try {
 			Applied_function_series = login.driver.findElement(By.xpath(
-					"//*[@class='webix_column list-series-name webix_last']//*[@class='webix_cell webix_row_select new-series-item']//*[@class='series-name-field']/*[1]"));
+					"//*[@class='webix_column list-series-name webix_first webix_last']//*[@class='webix_cell webix_row_select new-series-item']//*[@class='series-functions-title']"));
 		} catch (Exception e) {
 			Applied_function_series = login.driver.findElement(By.xpath(
-					"//*[@class='webix_column list-series-name webix_last']//*[@class='webix_cell webix_row_select']/*[1]/*[2]/*[1]/*[1]"));
+					"//*[@class='webix_column list-series-name webix_first webix_last']//*[@class='webix_cell webix_row_select']/*[1]/*[2]/*[1]/*[1]"));
 		}
-		new Actions(login.driver).moveToElement(Applied_function_series).build().perform();
+	/*	new Actions(login.driver).moveToElement(Applied_function_series).build().perform();
 		Thread.sleep(300);
 		WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
-		String tooltip_text = tooltip.getText();
+		String tooltip_text = tooltip.getText();*/
+		
 		// login.Log4j.info("Title information is \n" + text);
 		// Until the element is not visible keep scrolling
 		// CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);",
 		// element);
-		lines = tooltip_text.split("\n");
-		String function;
-		for (String Tooltip : lines) {
-			// String str=null;
-			if (Tooltip.contains("Functions")) {
-				function = Tooltip;
-				login.Log4j.info(function);
-				if (function.contains(Applied_function)) {
-					login.Log4j.info("Function is applied for forecast series");
-				} else {
+		
+		if (Applied_function_series.getText().contains(Applied_function)) {
+			login.Log4j.info("Function is applied for forecast series");
+		} else {
 
-					fail("Function is not applied for forcast series");
-				}
-				break;
-			}
+			fail("Function is not applied for forcast series");
 		}
+				
 	}
 
 	@And("^try to apply any of the function through function toolbar$")
@@ -949,27 +952,26 @@ public class ForecastSeries {
 	@Then("^Series legends should disable when mouse hover/clicking on the cross mark on the series$")
 	public void series_legends_should_disable_when_mouse_hover_clicking_on_the_cross_mark_on_the_series()
 			throws Throwable {
+		CommonFunctionality.wait(1000);
 		// mouse hover on legend marker
 		WebElement legend_item1 = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='highcharts-legend']/*[1]/*[1]/*[1]//*[@class='legend-item']/*[1]", 4);
-		new Actions(login.driver).moveToElement(legend_item1).pause(200).build().perform();
+				"(//*[@class='legend-item']/*[1])[1]", 4);
+		new Actions(login.driver).pause(200).moveToElement(legend_item1).build().perform();
 		if (login.driver.findElements(By.xpath(
-				"//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker highcharts-series-inactive']"))
+				"//*[@class='highcharts-series highcharts-series-1 highcharts-line-series highcharts-series-inactive']"))
 				.size() == 1) {
-			if (login.driver.findElements(By.xpath(
-					"//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-series-hover']"))
-					.size() == 1) {
+			
 				login.Log4j.info("Corresponding series is enabled and other series is disabled on the chart");
-			}
+			
 		} else {
 			fail("Verification failed");
 		}
 		// clicking on cross icon of legend marker
 		legend_item1.click();
-		WebElement Visual_info = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='compare-suggestions-visual--info']", 5);
-		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();
-		if (login.driver.findElement(By.xpath("(//*[@class='highcharts-legend'])[2]/*[1]/*[1]/*[1]"))
+//		WebElement Visual_info = CommonFunctionality.getElementByXpath(login.driver,
+//				"//*[@class='compare-suggestions-visual--info']", 5);
+//		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();
+		if (login.driver.findElement(By.xpath("(//*[@class='highcharts-legend highcharts-no-tooltip'])[2]/*[1]/*[1]/*[1]"))
 				.getAttribute("class").contains("highcharts-legend-item-hidden")) {
 			login.Log4j.info("Legend item is disabled");
 		} else {

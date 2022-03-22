@@ -366,7 +366,7 @@ public class SprintCases {
 
 	@And("^Select Gradient$")
 	public void select_Gradient() throws Throwable {
-		Thread.sleep(2000);
+		CommonFunctionality.wait(4000);
 		WebElement Gradient = login.driver.findElement(By.xpath("//*[@class='color-axis-type-select']//*[contains(text(),'Gradient')]"));
 		Gradient.click();
 

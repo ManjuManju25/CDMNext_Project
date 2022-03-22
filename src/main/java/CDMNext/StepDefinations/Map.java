@@ -21,6 +21,8 @@ public class Map extends CommonFunctionality {
 	Histogram hs = new Histogram();
 	static WebElement SeriesCount;
 ArrayList<String> list_of_series = new ArrayList<>();
+EmptyView EV = new EmptyView();
+String Visual_Title_txt;
 
 	@SuppressWarnings("deprecation")
 	@And("^Right click on the series$")
@@ -49,6 +51,7 @@ ArrayList<String> list_of_series = new ArrayList<>();
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Drag and drop the series to view$")
 	public void drag_and_drop_the_series_to_view() throws Throwable {
 		EmptyView.click_on_View_tab();
@@ -77,6 +80,7 @@ ArrayList<String> list_of_series = new ArrayList<>();
 
 	@And("^Click on Map visual icon$")
 	public void click_on_Map_visual_icon() throws Throwable {
+		wait(1000);
 		getElementByXpath(login.driver, "//*[@data-type='world']//*[@class='icon--map-world']", 6).click();
 	}
 
@@ -94,6 +98,7 @@ ArrayList<String> list_of_series = new ArrayList<>();
 	@SuppressWarnings("deprecation")
 	@And("^Select series and Press \"([^\"]*)\" on KB$")
 	public void select_series_and_Press_on_KB(String arg1) throws Throwable {
+		wait(3000);
 		WebElement ele = getElementByXpath(login.driver,
 				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
 		action.moveToElement(ele).pause(1000).click().build().perform();
@@ -124,10 +129,11 @@ ArrayList<String> list_of_series = new ArrayList<>();
 		getElementByXpath(login.driver, "//*[@title='Ctrl+click to create a new series']", 4).click();
 	}
 
+	@SuppressWarnings("deprecation")
 	@And("^Select series and Create Map$")
 	public void select_series_and_Create_Map() throws Throwable {
 		// Right click on series
-		wait(1000);
+		wait(3000);
 		WebElement rightClickEle = getElementByXpath(login.driver, "//*[@class='series-name-field--text']", 4);
 		action.pause(500).contextClick(rightClickEle).build().perform();
 		// create map visual
@@ -155,7 +161,7 @@ ArrayList<String> list_of_series = new ArrayList<>();
 
 	@And("^Select \"([^\"]*)\" from Missing value method dropdown$")
 	public void select_from_Missing_value_method_dropdown(String arg1) throws Throwable {
-		wait(2000);
+		wait(4000);
 		Select select = new Select(login.driver.findElement(By.name("missing_values")));
 		select.selectByVisibleText(arg1);
 	}
@@ -236,7 +242,7 @@ ArrayList<String> list_of_series = new ArrayList<>();
 
 	@Then("^The \"([^\"]*)\" and \"([^\"]*)\" button should be displayed for empty visual$")
 	public void the_and_button_should_be_displayed_for_empty_visual(String arg1, String arg2) throws Throwable {
-		CommonFunctionality.wait(1500);
+		wait(1500);
 		String str1 = login.driver.findElement(By.xpath("//*[@class ='data-selection-series-overlay--title']"))
 				.getText();
 		String str2 = login.driver
@@ -260,7 +266,7 @@ ArrayList<String> list_of_series = new ArrayList<>();
 		SeriesTab.click();
 		EmptyView.click_on_View_tab();
 		click_on_Map_visual_icon();
-		wait(2000);
+		wait(4000);
 		List<WebElement> checkBox = login.driver
 				.findElements(By.xpath("//div[@class='series-list-item--checkbox-wrapper']"));
 		List<WebElement> sName = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
@@ -273,7 +279,7 @@ ArrayList<String> list_of_series = new ArrayList<>();
 		}
 		SeriesCount = login.driver.findElement(By.xpath("//*[@class='search-input--selected-count']"));
 		// click on '+'icon
-		CommonFunctionality.wait(500);
+		wait(2000);
 		getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8).click();
 		//close if series harmonization popup opened
 		try {
@@ -303,10 +309,27 @@ ArrayList<String> list_of_series = new ArrayList<>();
 	    }
 	}
 
+@SuppressWarnings("deprecation")
 @And("^Click on visual legend$")
 public void click_on_visual_legend() throws Throwable {
 	WebElement legend = getElementByXpath(login.driver, "//*[@class='highcharts-legend-item highcharts-undefined-series highcharts-color-undefined']/*[1]",10);
 	action.pause(300).doubleClick(legend).build().perform();
+}
+@And("^Create a map visual with series id's \"([^\"]*)\"$")
+public void create_a_map_visual_with_series_id_s(String arg1) throws Throwable {
+	PieVisual.SelectSeries(arg1);
+	wait(1500);
+	if (arg1.equalsIgnoreCase("16240301")) {
+		sname = getElementByXpath(login.driver, "//*[@class='series-item--name']", 10)
+				.getText();
+	}
+	SeriesCount = login.driver.findElement(By.xpath("//*[@class='series-series-count--number']"));
+	login.Log4j.info(SeriesCount.getText());
+	EmptyView.click_on_View_tab();
+	wait(2000);
+	getElementByXpath(login.driver, "//*[@data-action='world']", 4).click();
+	wait(2000);
+	Visual_Title_txt = login.driver.findElement(By.xpath("//*[@data-name='title']")).getText();
 }
 
 }

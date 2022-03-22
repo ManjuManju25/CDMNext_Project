@@ -2178,7 +2178,7 @@ public void the_background_of_text_should_be_changed_to(String arg1) throws Thro
 
 	@And("^Perform download to excel with all views$")
 	public void perform_download_to_excel_with_all_views() throws Throwable {
-		//CommonFunctionality.ExpandLeft();
+		CommonFunctionality.ExpandLeft();
 		CommonFunctionality.wait(4000);
 		List<WebElement> Views_list = login.driver
 				.findElements(By.xpath("//*[@data-id='myseries'] | //*[@class='insight-page-view-tab--title']"));

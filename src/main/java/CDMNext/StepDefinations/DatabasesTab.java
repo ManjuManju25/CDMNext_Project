@@ -248,23 +248,19 @@ public class DatabasesTab {
 	public void select_any_number_of_series() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.getElementByProperty(login.driver,"Series",8).click();
-		WebElement ul_element = null;
+	
 		try {
 			Thread.sleep(3000);
-			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+			List<WebElement> li_All = login.driver.findElements(By.xpath("//div[@class='series-list-item--checkbox-wrapper']"));
 			login.Log4j.info("List size is :" + li_All.size());
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
-					Thread.sleep(2000);
-					int j = i + 1;
-					checkbox = login.driver
-							.findElement(By.xpath("//li[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
-					checkbox.click();
+					li_All.get(i).click();
 					// Until the element is not visible keep scrolling
 					//jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 				}
+			} else {
+				Assert.fail("list size is zero");
 			}
 		} catch (NoSuchElementException e) {
 			Assert.fail(e.getMessage());
@@ -396,14 +392,12 @@ public class DatabasesTab {
 			}
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
-			//CommonFunctionality.CollapseTreeMethod();
+			
 
 		} catch (Exception e) {
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
-			//CommonFunctionality.TopMethod();
-			//CommonFunctionality.CollapseTreeMethod();
-			AssertJUnit.fail(e.getMessage());
+				AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -574,10 +568,11 @@ public class DatabasesTab {
 
 	@Then("^Result should be displayed as per the filters applied$")
 	public void result_should_be_displayed_as_per_the_filters_applied() throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver,"Databases_Tab",4)
+		.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 4).click();
 		//WebElement element = null;
-		CommonFunctionality.getElementByProperty(login.driver,"Databases_Tab",4)
-				.click();
+		
 		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='database-node tree-node']/div[@class='toggle']",4)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver,"//*[@data-node-model-id='GLOBAL&&AA']/*[3]/*[1]/*[1]",10)
@@ -588,7 +583,7 @@ public class DatabasesTab {
 				"//*[@data-node-model-id='GLOBAL&&AA']/*[3]/*[1]/*[3]/*[1]/*[3]/*[1]/*[1]",10)
 				.click();
 		Thread.sleep(1500);
-		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		WebElement ul_element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
 		List<WebElement> li_sname = ul_element.findElements(By.xpath("//div[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_sname.size());
 		for (int i = 0; i < li_sname.size(); i++) {
@@ -605,7 +600,7 @@ public class DatabasesTab {
 
 			} finally {
 				WebElement region = login.driver.findElement(By.xpath(
-						"//div[@class='main-series-information--field']//div[@class='main-series-information--field-value']//div[1]//div[1]"));
+						"//div[@class='main-series-information--field-value']//div[1]//div[1]"));
 				String rgnstr = region.getText();
 				login.Log4j.info(Filters.var);
 				login.Log4j.info(rgnstr);
@@ -748,7 +743,7 @@ public class DatabasesTab {
 				// WebElement region = null;
 
 				WebElement region = login.driver.findElement(By.xpath(
-						"//div[@class='main-series-information--field']//div[@class='main-series-information--field-value']//div[1]//div[1]"));
+						"//div[@class='main-series-information--field-value']//div[1]//div[1]"));
 				String rgnstr = region.getText();
 				login.Log4j.info(dbarr[0]);
 				login.Log4j.info(rgnstr);
@@ -933,7 +928,7 @@ public class DatabasesTab {
 					By.xpath("//div[@data-node-model-id='INDONESIA']//span[contains(text(),'" + arg1 + "')]"));
 			break;
 		case "Global Database":
-			Thread.sleep(2000);
+			CommonFunctionality.wait(2000);
 			WebElement obj = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[1]//div[@class='series-item--name']"));
 			Before_set_lang = obj.getText();
 			rightClickElement = login.driver.findElement(
@@ -943,7 +938,7 @@ public class DatabasesTab {
 			AssertJUnit.fail("Doesn't exist in given databse list");
 		}
 		login.Log4j.info("Before_set_lang is " + Before_set_lang);
-		Thread.sleep(2000);
+		CommonFunctionality.wait(2000);
 		// contextClick() method to do right click on the element
 		action.pause(200).contextClick(rightClickElement).build().perform();
 
@@ -965,8 +960,7 @@ public class DatabasesTab {
 	@Then("^The Databases language should be changed to selected language$")
 	public void the_Databases_language_should_be_changed_to_selected_language() throws Throwable {
 
-		CommonFunctionality.ResetMethod();
-		filter.user_enters("India");
+		//CommonFunctionality.ResetMethod();
 		WebElement dbele;
 		CommonFunctionality.wait(1000);
 		if (dbase.equalsIgnoreCase("World Trend Plus")) {
@@ -1970,23 +1964,21 @@ public class DatabasesTab {
 			}
 		}
 		Thread.sleep(2000);
-		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		WebElement ul_element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
+		List<WebElement> li_All = ul_element.findElements(By.xpath("//div[@unselectable='on']//span[@class='status-icon--sign']"));
 		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			Thread.sleep(3000);
 			login.Log4j.info(i);
 			login.Log4j.info(li_All.size());
-			int j = i + 1;
+			//int j = i + 1;
 			try {
-				ele = login.driver
-						.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__new']"));
+				ele = li_All.get(i);
 
 			} catch (NoSuchElementException e) {
 				login.Log4j.error("Series name is null");
-				j = j + 1;
-				ele = login.driver
-						.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__new']"));
+				int j = i + 1;
+				ele = li_All.get(j);
 
 			} finally {
 				// Until the element is not visible keep scrolling
@@ -3749,28 +3741,26 @@ public class DatabasesTab {
 				"//*[@data-node-model-id='GLOBAL']/*[3]/*[1]/*[3]/*[1]/*[3]/*[1]/*[3]/*[1]/*[1]"))
 				.click();
 		Thread.sleep(2000);
-		WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> ListOfSeries = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
+		WebElement ul_element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
+		List<WebElement> ListOfSeries = ul_element.findElements(By.xpath("//div[@unselectable='on']//span[@class='status-icon--sign']"));
 		login.Log4j.info("List size is :" + ListOfSeries.size());
 
 		for (int i = 0; i < ListOfSeries.size(); i++) {
 			
 			login.Log4j.info(i);
 			// login.Log4j.info(ListOfSeries.size());
-			int j = i + 1;
+			//int j = i + 1;
 			Thread.sleep(2000);
 			if (arg1.equals("NEW")) {
 				try {
-					ele = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__new']"));
-				action.moveToElement(ele).build().perform();
+					ele = ListOfSeries.get(i);
+				//action.moveToElement(ele).build().perform();
 					
 				} catch (NoSuchElementException e) {
 					login.Log4j.error("Series name is null");
-					j = j + 1;
-					ele = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__new']"));
-					action.moveToElement(ele).build().perform();
+					int j = i + 1;
+					ele = ListOfSeries.get(j);
+					//action.moveToElement(ele).build().perform();
 					
 				} finally {
 					// Until the element is not visible keep scrolling
@@ -3789,16 +3779,14 @@ public class DatabasesTab {
 				}
 			} else if (arg1.equals("k")) {
 				try {
-					ele = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__key']"));
-					action.moveToElement(ele).build().perform();
+					ele = ListOfSeries.get(i);
+					//action.moveToElement(ele).build().perform();
 
 				} catch (NoSuchElementException e) {
 					login.Log4j.error("Series name is null");
-					j = j + 1;
-					ele = login.driver
-							.findElement(By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__key']"));
-					action.moveToElement(ele).build().perform();
+					int j = i + 1;
+					ele = ListOfSeries.get(j);
+					//action.moveToElement(ele).build().perform();
 
 				} finally {
 					// Until the element is not visible keep scrolling
@@ -3816,16 +3804,14 @@ public class DatabasesTab {
 				}
 			} else if (arg1.equals("f")) {
 				try {
-					ele = login.driver.findElement(
-							By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__has-forecast']"));
-					action.moveToElement(ele).build().perform();
+					ele = ListOfSeries.get(i);
+					//action.moveToElement(ele).build().perform();
 
 				} catch (NoSuchElementException e) {
 					login.Log4j.error("Series name is null");
-					j = j + 1;
-					ele = login.driver.findElement(
-							By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__has-forecast']"));
-					action.moveToElement(ele).build().perform();
+					int j = i + 1;
+					ele = ListOfSeries.get(j);
+					//action.moveToElement(ele).build().perform();
 
 				} finally {
 					// Until the element is not visible keep scrolling
@@ -3843,16 +3829,14 @@ public class DatabasesTab {
 				}
 			} else if (arg1.equals("s")) {
 				try {
-					ele = login.driver.findElement(
-							By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__has-replacements']"));
-					action.moveToElement(ele).build().perform();
+					ele = ListOfSeries.get(i);
+					//action.moveToElement(ele).build().perform();
 
 				} catch (NoSuchElementException e) {
 					login.Log4j.error("Series name is null");
-					j = j + 1;
-					ele = login.driver.findElement(
-							By.xpath("//li[" + j + "]//span[@class='status-icon status-icon__has-replacements']"));
-					action.moveToElement(ele).build().perform();
+					int j = i + 1;
+					ele = ListOfSeries.get(j);
+					//action.moveToElement(ele).build().perform();
 
 				} finally {
 					// Until the element is not visible keep scrolling
@@ -3964,22 +3948,22 @@ public class DatabasesTab {
 	}
 
 	void SetLangugeEnglish() throws InterruptedException {
-		Thread.sleep(2000);
+		CommonFunctionality.wait(2000);
 		ele = login.driver.findElement(By.xpath("//span[contains(text(),'Set language')]"));
 		CommonFunctionality.action.moveToElement(ele).click().build().perform();
-		Thread.sleep(2000);
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[2]")).click();
 	}
    static void BrazilPremiumDb() throws InterruptedException {
-		Thread.sleep(2000);
+	   CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
     	// Right clicking on Brazil Premium Database for table level
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]",20)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[@class='toggle']",30).click();
-		Thread.sleep(4000);
+		CommonFunctionality.wait(4000);
 		login.driver.findElement(By.xpath("//div[@class='child-container']//div[@data-node-model-id='BRAZIL']//div[1]//div[1]//div[@class='toggle']")).click();
-		Thread.sleep(2000);
+		CommonFunctionality.wait(2000);
  }
    void PopularSeriesMethod() throws InterruptedException {
 

@@ -121,6 +121,7 @@ public class Breakdown extends CommonFunctionality {
 			new Actions(login.driver).pause(200).moveToElement(ele).build().perform();
 			String tooltipText = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")))
 					.getText();
+			login.Log4j.info("Tooltip text is " + tooltipText);
 			String[] lines = tooltipText.split("\n");
 			String seriesName = null;
 			for (String Tooltip : lines) {
@@ -162,7 +163,7 @@ public class Breakdown extends CommonFunctionality {
 		getElementByXpath(login.driver, "//*[contains(text(),'Breakdowns')]", 20).click();
 		wait(500);
 		WebElement ele = getElementByXpath(login.driver,
-				"(//*[contains(@class,'indented-series__with-breakdown')])[2]/*[1]/*[1]/*[2]//*[@class='series-item--name']",
+				"(//*[contains(@class,'indented-series__with-breakdown')])[2]/*[1]/*[1]//*[@class='series-item--name']",
 				8);
 		new Actions(login.driver).pause(200).moveToElement(ele).build().perform();
 		wait(200);
