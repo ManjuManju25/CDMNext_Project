@@ -3,9 +3,10 @@ Feature: Verifying SeriesTab functionality
   @SeriesTab
   Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
     And Select indicator "Production" as "Steel Production"
-    And Select indicator "Tourism" as "Tourism Revenue"
+    And Select indicator "Tourism Sector" as "Tourism Revenue"
     When Click on "Apply filter"
     Then Result should be displayed as per selection
+ 
 
   #@SeriesTab...functionality has been removed
   #Scenario: TC_SeriesTab_02:Verify "All Insights" option
@@ -195,7 +196,7 @@ Feature: Verifying SeriesTab functionality
 
   @SeriesTab
   Scenario: TC_SeriesTab_30:Verify 'Mouse over' icons for series level
-    Given User enters "249445301"
+    Given User enters "324350701"
     When User Mouse hover on "See in Database" icon
     Then User can selects "Indonesia Premium Database"
     Then User can see the selected database in Databases tab
@@ -521,7 +522,7 @@ Feature: Verifying SeriesTab functionality
     When Click on "Apply filter"
     Then User verify the search results
 
-  @SeriesTab1
+  @SeriesTab
   Scenario: TC_SeriesTab_76:Verify selected frequency results
     And User selects "Frequency" as "Monthly;Semiannually"
     When Click on "Apply filter"

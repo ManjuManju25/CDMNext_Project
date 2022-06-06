@@ -48,8 +48,11 @@ public class ImageVisual {
 
 	@And("^Select \"([^\"]*)\" icon$")
 	public void select_icon(String arg1) throws Throwable {
-		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']/*", 20).click();
+		CommonFunctionality.wait(2000);
+		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 20);
+		CommonFunctionality.wait(500);
+		//ele.click();
+		new Actions(login.driver).doubleClick(ele).build().perform();
 	}
 
 	@And("^Upload any image$")
@@ -404,6 +407,7 @@ public class ImageVisual {
 
 	@And("^Create a Chart visual$")
 	public void create_a_Chart_visual() throws Throwable {
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='line']", 4).click();
 	}
 
@@ -414,7 +418,7 @@ public class ImageVisual {
 		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='search-series-list']/*[1]", 8);
+				"(//div[@class='series-representation--list']//*[@unselectable='on'])[1]", 8);
 		if (!(selected.getAttribute("class").contains("series-list-item__selected"))) {
 			new Actions(login.driver).moveToElement(series_cb).pause(4000).click().build().perform();
 		}
@@ -532,7 +536,8 @@ public class ImageVisual {
 
 	}
 	void Alignvisual(String align) throws InterruptedException {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + align + "']", 20).click();
+		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + align + "']", 20);
+		new Actions(login.driver).doubleClick(ele).build().perform();
 		CommonFunctionality.wait(1200);
 		WebElement element = login.driver.findElement(By.tagName("iframe"));
 		login.driver.switchTo().frame(element);

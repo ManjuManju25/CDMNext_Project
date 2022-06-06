@@ -342,8 +342,8 @@ Feature: Verifying Image visual functionality
     Then Below options should be available in General tab
       | Source      |
       | Image Title |
-      | Width  |
-      | Height |
+      | Width       |
+      | Height      |
 
   @ImageVisual
   Scenario: Tc_ImageVisual_38 : Verify edit/insert image popup for upload tab
@@ -427,8 +427,8 @@ Feature: Verifying Image visual functionality
     And Select "pdf" format
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
-    
-      @ImageVisual
+
+  @ImageVisual
   Scenario: Tc_ImageVisual_46 : Verify visual download to JPG format
     And Go to View tab
     And Click on insert Image visual icon

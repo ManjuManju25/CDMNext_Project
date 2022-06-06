@@ -81,7 +81,7 @@ Feature: Verifying sprint cases functionality
     And Select Gradient
     Then Default value should be "0" and the steps range should be from "0,1,2,3,4 5"
     And Select Solid color
-    Then Default value should be "5" and the colors range should be from "2,3,4,5,6,7,8,9,10"
+    Then Default value should be "3" and the colors range should be from "2,3,4,5,6,7,8,9,10"
 
   @Sprint
   Scenario: TC_6603_12:Verify the changes inEdit Visual modal

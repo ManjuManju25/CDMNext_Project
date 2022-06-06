@@ -1,4 +1,4 @@
-Feature: Filters
+Feature: FilterSearch
 
   @FilterSearch
   Scenario: TC_Filters_Search_01
@@ -10,7 +10,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_02
     Given User enters "228912101"
-    And User selects "Source" as "International Monetary Fund - World Economic Outlook"
+    And User selects "Source" as "International Monetary Fund"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "Global Database"
@@ -20,7 +20,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_03
     Given User enters "Agar"
-    And User selects "Source" as "Ministry of Commerce and Industry"
+    And User selects "Source" as "Ministry of Commerce and Industry, India"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "India Premium Database"
@@ -40,7 +40,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_05
     Given User enters "BRJLA"
-    And User selects "Source" as "Ministry of Development, Industry and Trade"
+    And User selects "Source" as "Special Secretariat for Foreign Trade and International Affairs"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "Brazil Premium Database"
@@ -48,9 +48,9 @@ Feature: Filters
     Then User verify the search results
 
   @FilterSearch
-  Scenario: TC_Filters_Search_06
+   Scenario: TC_Filters_Search_06
     Given User enters "19289601"
-    And User selects "Source" as "Bombay Stock Exchange Limited"
+    And User selects "Source" as "BSE Limited"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "Daily Database"
@@ -60,7 +60,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_07
     Given User enters "1380601"
-    And User selects "Source" as "Ministry of Development, Industry and Trade"
+    And User selects "Source" as "Special Secretariat for Foreign Trade and International Affairs"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "Brazil Premium Database"
@@ -70,7 +70,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_08
     Given User enters "245178303"
-    And User selects "Source" as "The Central Bank of the Russian Federation"
+    And User selects "Source" as "Bank of Russia"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "Russia Premium Database"
@@ -180,7 +180,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_19
     Given User enters "IDIAAAG"
-    And User selects "Source" as "Bombay Stock Exchange Limited"
+    And User selects "Source" as "BSE Limited"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "India Premium Database"
@@ -220,7 +220,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_23
     Given User enters "IDIAB"
-    And User selects "Source" as "Bombay Stock Exchange Limited"
+    And User selects "Source" as "BSE Limited"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "India Premium Database"
@@ -230,7 +230,7 @@ Feature: Filters
   @FilterSearch
   Scenario: TC_Filters_Search_24
     Given User enters "261975301"
-    And User selects "Source" as "International Monetary Fund - World Economic Outlook"
+    And User selects "Source" as "International Monetary Fund"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "World Trend Plus"
@@ -562,7 +562,7 @@ Feature: Filters
 
   @FilterSearch
   Scenario: TC_Filters_Search_66
-    Given User enters "297756101"
+    Given User enters "2126801"
     And Click on "More" filter
     And User selects "Subscribed series only"
     And User has clicked on "Apply filter"
@@ -570,7 +570,7 @@ Feature: Filters
 
   @FilterSearch
   Scenario: TC_Filters_Search_67
-    Given User enters "293847801"
+    Given User enters "2126801"
     And User selects "Status" as "Active"
     And User has clicked on "Apply filter"
     And Click on "More" filter
@@ -1080,7 +1080,7 @@ Feature: Filters
     And User has clicked on "Apply filter"
     And User selects "Frequency" as "Quarterly"
     And User has clicked on "Apply filter"
-    And User selects "Source" as "International Monetary Fund - World Economic Outlook"
+    And User selects "Source" as "International Monetary Fund"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selects "Unit" as "MUR"
@@ -1099,7 +1099,7 @@ Feature: Filters
     And Click on "More" filter
     And User selects "Unit" as "MUR"
     And User has clicked on "Apply filter"
-    And User selects "Source" as "International Monetary Fund - World Economic Outlook"
+    And User selects "Source" as "International Monetary Fund"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "Global Database"

@@ -1,7 +1,7 @@
 @Search
 Feature: Synonym Search
 
-  @SynonymSearch1
+  @SynonymSearch
   Scenario: TC_SynonymSearch_01 : Search for an Acronym as "gdp"
     Given User enters keyword "gdp"
     Then User verify keyword search results

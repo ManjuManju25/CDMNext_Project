@@ -24,13 +24,13 @@ Feature: Verifying the Forecast series functionality
 
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _04:Verify deselecting legends in forecast suggestion dropdown
-  Given User enters "32190101"
-  And Add series to the right pane
-  And Open SSP window for the series
-  And Check the checkbox for forecast series
-  And click on cross icon for any legends name
-  Then Cross clicked legend of the chart in suggestion chart should be disabled
-  
+    Given User enters "32190101"
+    And Add series to the right pane
+    And Open SSP window for the series
+    And Check the checkbox for forecast series
+    And click on cross icon for any legends name
+    Then Cross clicked legend of the chart in suggestion chart should be disabled
+
   @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _05:Verify opening ssp for more than suggestion of forecast in its chart suggestion dropdown
     Given User enters "32190101"

@@ -270,9 +270,9 @@ Feature: Verify Comparables feature
   Scenario: Tc_Comparables_40: Verify multiple above icons to be present in series level
     And Verify Subscribed series only filter under filters
     And Select "new" checkbox from more section
-    And User has clicked on "Apply filter"
-    And Verify Subscribed series only filter under filters
-    And Select "Key" checkbox from more section
+    #And User has clicked on "Apply filter"
+    #And Verify Subscribed series only filter under filters
+    And Select "key" checkbox from more section
     And User has clicked on "Apply filter"
     And Clicking "Comparables" icon
     And Expand the tree for key icons
@@ -730,7 +730,7 @@ Feature: Verify Comparables feature
   #And Choose "View as ..." > "Pie"
   #Then The "Table - Edit Pie" option is shown
   #
-  #@Comparables1
+  #@Comparables
   #Scenario: Tc_Comparables_93: Verify view as Heatmap in table level
   #And Clicking "Comparables" icon
   #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
@@ -1214,12 +1214,12 @@ Feature: Verify Comparables feature
     #And The "Related Insights" option in series should present
     #Then The Modified time tooltip should present
 
-  @Comparables
+  @Comparables1
   Scenario: TC_Comparables_155: Verify Add to Watchlist icon in series level
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
-    And Click on "More actions" option in series level
+    #And Click on "More actions" option in series level
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
@@ -1232,7 +1232,7 @@ Feature: Verify Comparables feature
   Scenario: TC_Comparables_156: Verify Add to Watchlist option in series level right click
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Right click the first series
+    #And Right click the first series
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
@@ -1246,7 +1246,7 @@ Feature: Verify Comparables feature
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
-    And Click on "More actions" option in series level
+    #And Click on "More actions" option in series level
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
@@ -1260,7 +1260,7 @@ Feature: Verify Comparables feature
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
-    And Click on "More actions" option in series level
+    #And Click on "More actions" option in series level
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist

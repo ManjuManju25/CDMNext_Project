@@ -1,0 +1,3332 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='utf-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css' />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports-java/b4a58fcfd1e137bd9287244035a7c80d3d73b3af/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>ExtentReports</title>
+
+	<style type='text/css'>
+	</style>
+</head>
+
+	<body class='extent standard default hide-overflow bdd-report'>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' view='category-view' onclick="configureView(1)"><i class='material-icons'>label_outline</i></a></li>
+			<li class='waves-effect'><a href='#!' view='exception-view' onclick="configureView(2)"><i class='material-icons'>bug_report</i></a></li>
+			<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'>ExtentReports</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>May 2, 2022 10:01:25 PM</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>3.1.5</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+						<li status='skip'><a href='#!'>Skip <i class='material-icons cyan-text'>redo</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button category-toggle' data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>local_offer</i> Category
+				</a>
+				<ul id='category-toggle' class='dropdown-content'>
+					<li><a href='#'>@Commentary1</a></li>
+					<li class='divider'></li>
+					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
+				</ul>
+			</div>
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m4 l4 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Features</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> feature(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> feature(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m4 l4 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Scenarios</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='78.049%'><span class='strong'>32</span> scenario(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='21.951%'>9</span> scenario(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m4 l4 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='95.089%'><span class='strong'>213</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='4.018%'>9</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0.893%'>2</span> others
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Features</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active has-leaf fail' status='fail' bdd='true' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>Verifying Commentary Visual functionality</span>
+						<span class='test-time'>May 2, 2022 10:01:25 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='scenario node' test-id='2' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 11s+524ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_01:Verify 'Insert Commentary' under View tab</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='3' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Go to View tab</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='4' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on "Insert Commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='5' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Commentary should be inserted</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='6' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 55s+353ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_02:Verify 'Insert Commentary' creating by drag and drop</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='7' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Go to View tab</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='8' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Drag and drop commentary visual to the page</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='9' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Commentary should be inserted</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='10' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 41s+670ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_06:Verify 'Title' display OFF</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='11' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='12' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='13' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Uncheck the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='14' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then No title name should display for the Commentary</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='15' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 51s+680ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_07:Verify visual title field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='16' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='17' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='18' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box and enter the title name as "New commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='19' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The commentary should update the "title" name to "New commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='20' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 50s+136ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_08:Verify text color</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='21' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='22' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='23' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose text color is blue</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='24' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The commentary should update the "title" text color as blue</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='25' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 50s+144ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_09:Verify highlight color</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='26' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='27' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='28' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose highlight color is Orange</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='29' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The commentary should update the "title" highlight color as Orange</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='30' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 57s+356ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_10:Verify 'font size'</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='31' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='32' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='33' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "20" from the drop-down for the font size</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='34' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The commentary should update the "title" font as "20"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='35' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 47s+152ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_12:Verify title in Italic style</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='36' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='37' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='38' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on Italic under style</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='39' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The visual "title" should be "italic"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='40' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 47s+245ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_13:Verify title as underlined</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='41' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='42' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='43' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on Underline icon for "title"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='44' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The visual "title" should be "underline"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='45' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 52s+339ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_14:Verify horizontal alignment (left, right, center)</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='46' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='47' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='48' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on left,center and right alignment for title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='49' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The title should align to "left" , "center" and "right" as user set</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='50' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 50s+306ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_27:Verify opening title popup by double click</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='51' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='52' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Double click on the visual title/subtitle</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='53' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The title popup should be appeared</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='54' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 0m 49s+965ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_28:Verify edit commentary icon</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='55' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='56' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on edit commentary icon</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='57' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The title popup should be appeared</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='58' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 5s+738ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_33:Verify backgroud color for visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='59' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enter some data to description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='60' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on "Visual" option on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='61' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check for Background</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='62' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Select color for visual background</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='63' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Selected color should be applied to the visual background</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='64' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 44s+152ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_35:Visual - Verify remove icon for uploaded image</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='65' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enter some data to description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='66' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check for Background</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='67' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on browse > Select image for visual background</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='68' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on remove icon for uploaded image</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='69' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The uploaded image should be removed</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='70' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 2m 31s+314ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_36:Verify border by default</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='71' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='72' class='node and fail' status='fail'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check for Border</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element located by: By.xpath: ( //*[@class='accordion-config collapsed']//*[@class='icon-collapse'])[2] (tried for 100 second(s) with 500 MILLISECONDS interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:471)
+	at CDMNext.StepDefinations.Commentary.check_for_Border(Commentary.java:757)
+	at ✽.And Check for Border(Commentary.feature:250)
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.xpath: ( //*[@class='accordion-config collapsed']//*[@class='icon-collapse'])[2]
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: driver.version: unknown
+	at org.openqa.selenium.support.ui.ExpectedConditions.lambda$findElement$0(ExpectedConditions.java:883)
+	at java.util.Optional.orElseThrow(Optional.java:290)
+	at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:882)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:44)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:183)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:180)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:209)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:471)
+	at CDMNext.StepDefinations.Commentary.check_for_Border(Commentary.java:757)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at cucumber.runtime.Utils$1.call(Utils.java:40)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.Utils.invoke(Utils.java:34)
+	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+	at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)
+	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:63)
+	at CDMNext.runner.TestRunner.feature(TestRunner.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:774)
+	at org.testng.TestRunner.run(TestRunner.java:624)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1191)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.run(TestNG.java:1024)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></div>
+			
+		</li>
+		<li test-id='73' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then By default "Border" should be disabled</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='74' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 4s+949ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_37:Verify border color</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='75' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enter some data to description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='76' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check for Border</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='77' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Select color for visual border</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='78' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The visual border should be changed as per the selection</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='79' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 11s+815ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_38:Verify border width</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='80' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enter some data to description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='81' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check for Border</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='82' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Select border width 5 for visual border</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='83' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Width" should be updated to "5"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='84' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 3s+196ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_40:Verify visual border type</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='85' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enter some data to description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='86' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check for Border</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='87' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Tick checkbox for border and choose different border as "Dotted"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='88' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The "dotted" border should be applied to the visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='89' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 11s+78ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_42:Verify confirmation message for copy visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='90' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create Commentary visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='91' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='92' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on Copy icon</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='93' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Commentary copied." message should be displayed</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='94' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 18s+555ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_45:Verify the confrimation message for pasting visual in insight</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='95' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='96' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on Copy icon</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='97' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Paste within the insight</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='98' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Data pasted from clipboard" message should be displayed</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='99' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 18s+487ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_93:Right click - Verify Copy commentary</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='100' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='101' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='102' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='103' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='104' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='105' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Copy commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='106' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Commentary should be copied to clipboard</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='107' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 18s+261ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_94:Right click - Validate copied commentary</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='108' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='109' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='110' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='111' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='112' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='113' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Copy commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='114' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Paste in insight</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='115' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Commentary visual should be pasted</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='116' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 11s+365ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_95:Right click - Verify Cut commentary</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='117' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='118' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='119' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='120' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='121' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='122' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Cut commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='123' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Commentary should be cut</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='124' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 18s+430ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_96:Right click - Validate Cut commentary</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='125' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='126' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='127' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='128' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='129' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='130' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Cut commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='131' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Paste in insight</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='132' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Commentary visual should be pasted</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='133' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 33s+0ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_97:Right click - Verify Delete commentary</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='134' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='135' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='136' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='137' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='138' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='139' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Delete commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='140' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Commentary should be deleted</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='141' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 3m 2s+575ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_98:Right click - Verify chart under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='142' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='143' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='144' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='145' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='146' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='147' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Chart"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='148' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Chart" visual should be created in the same view tab</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Chart" visual should be created in the same view tab(Commentary.feature:789)
+</pre></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='149' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 2m 53s+308ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_99:Right click - Verify map under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='150' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='151' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='152' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='153' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='154' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='155' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Map"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='156' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Map" visual should be created in the same view tab</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Map" visual should be created in the same view tab(Commentary.feature:799)
+</pre></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='157' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 2m 53s+179ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_100:Right click - Verify table under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='158' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='159' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='160' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='161' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='162' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='163' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Table"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='164' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Table" visual should be created in the same view tab</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Table" visual should be created in the same view tab(Commentary.feature:809)
+</pre></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='165' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 2m 53s+453ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_101:Right click - Verify pie under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='166' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='167' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='168' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='169' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='170' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='171' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Pie"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='172' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Pie" visual should be created in the same view tab</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Pie" visual should be created in the same view tab(Commentary.feature:819)
+</pre></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='173' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 2m 53s+581ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_102:Right click - Verify Heat map under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='174' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='175' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='176' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='177' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='178' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='179' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Heat map"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='180' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Heat map" visual should be created in the same view tab</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Heat map" visual should be created in the same view tab(Commentary.feature:829)
+</pre></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='181' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 2m 53s+468ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_103:Right click - Verify Histogram under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='182' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='183' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='184' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='185' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='186' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='187' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Histogram"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='188' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Histogram" visual should be created in the same view tab</span>
+				<div class='pre'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Histogram" visual should be created in the same view tab(Commentary.feature:839)
+</pre></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='189' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 13s+74ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_104:Right click - Verify Attachments under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='190' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='191' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='192' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='193' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='194' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='195' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Attachments"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='196' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Attachments" visual should be created in the same view tab</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='197' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 11s+34ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_105:Right click - Verify Commentary under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='198' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='199' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='200' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='201' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='202' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='203' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='204' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The commentary visual should be created in the same view tab</span>
+				<div class='pre'><pre>java.lang.AssertionError: Commentary visual is not created
+	at org.testng.Assert.fail(Assert.java:94)
+	at CDMNext.StepDefinations.Commentary.the_commentary_visual_should_be_created_in_the_same_view_tab(Commentary.java:1919)
+	at ✽.Then The commentary visual should be created in the same view tab(Commentary.feature:859)
+</pre></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='205' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 13s+157ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_106:Right click - Verify image under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='206' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='207' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='208' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='209' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='210' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='211' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Image"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='212' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Image" visual should be created in the same view tab</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='213' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 13s+14ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_107:Right click - Verify Filter under insert visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='214' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='215' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='216' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='217' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='218' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='219' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Insert visual as "Filter"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='220' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Filter" visual should be created in the same view tab</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='221' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 14s+618ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_108:Right click - Verify Paste visual</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='222' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='223' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='224' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='225' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='226' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='227' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Copy commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='228' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Again Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='229' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Paste visual"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='230' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Copied visual should be pasted</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='231' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 17s+197ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_109:Right click - Verify 'Clear contents'</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='232' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='233' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='234' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='235' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='236' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='237' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Clear contents"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='238' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then All the contents should be removed from the visual</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='239' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 8s+13ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_110:Right click - Verify Download subdropdown</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='240' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='241' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='242' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='243' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='244' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='245' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose "Download"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='246' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then "Commentary , View" options should be displayed</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='247' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 11s+506ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_111:Right click - Download - Verify commentary</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='248' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='249' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='250' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='251' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='252' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='253' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Download as "Commentary"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='254' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Download popup should be appeared with "Commentary" tab selection</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='255' status='pass'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 11s+441ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_112:Right click - Download - Verify View</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='256' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Add some text in the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='257' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Get the text from the description field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='258' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click on visual title</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='259' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Check the box for the title name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='260' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Right click on visual header</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='261' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Choose Download as "View"</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='262' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Download popup should be appeared with "Views" tab selection</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='263' status='fail'>
+	<div class='category-list'>
+		<span class='category label white-text'>@Commentary1</span>
+	</div>
+	<span class='duration right label'>0h 1m 12s+756ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">TC_Commentary_117:Verify Download insight having all type of visuals</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='264' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Create all visuals in an insight</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='265' class='node and fail' status='fail'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Perform download to excel with all views</span>
+				<div class='pre'><textarea>org.openqa.selenium.WebDriverException: element click intercepted: Element <button class="button button__sm button__text_green" style="">...</button> is not clickable at point (1321, 95). Other element would receive the click: <div class="modal-dialog sphere-modal-dialog " js-modal="">...</div>
+  (Session info: chrome=100.0.4896.127)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:150)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:115)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:45)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:164)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:82)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:637)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:272)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:82)
+	at CDMNext.StepDefinations.Commentary.perform_download_to_excel_with_all_views(Commentary.java:2126)
+	at ✽.And Perform download to excel with all views(Commentary.feature:962)
+</textarea></div>
+			
+		</li>
+		<li test-id='266' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then All visuals should be downloaded successfully</span>
+				<div class='pre'>skipped</div>
+			
+		</li>
+	</ul>
+</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<div id='category-view' class='view hide'>
+
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+				
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Categories</h3>
+			<ul id='category-collection' class='category-collection'>
+				
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@Commentary1</span>
+						<span class='category-status right'>
+							<span class='label pass'>32</span>
+							<span class='label fail'>9</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 32</span>
+							<span class='label red lighten-1 white-text'>Failed: 9</span>
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>May 2, 2022 10:01:25 PM</td>
+										<td class='linked' test-id='2'>Verifying Commentary Visual functionality.TC_Commentary_01:Verify 'Insert Commentary' under View tab</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:02:47 PM</td>
+										<td class='linked' test-id='6'>Verifying Commentary Visual functionality.TC_Commentary_02:Verify 'Insert Commentary' creating by drag and drop</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:03:52 PM</td>
+										<td class='linked' test-id='10'>Verifying Commentary Visual functionality.TC_Commentary_06:Verify 'Title' display OFF</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:04:44 PM</td>
+										<td class='linked' test-id='15'>Verifying Commentary Visual functionality.TC_Commentary_07:Verify visual title field</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:05:46 PM</td>
+										<td class='linked' test-id='20'>Verifying Commentary Visual functionality.TC_Commentary_08:Verify text color</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:06:46 PM</td>
+										<td class='linked' test-id='25'>Verifying Commentary Visual functionality.TC_Commentary_09:Verify highlight color</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:07:46 PM</td>
+										<td class='linked' test-id='30'>Verifying Commentary Visual functionality.TC_Commentary_10:Verify 'font size'</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:08:54 PM</td>
+										<td class='linked' test-id='35'>Verifying Commentary Visual functionality.TC_Commentary_12:Verify title in Italic style</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:09:51 PM</td>
+										<td class='linked' test-id='40'>Verifying Commentary Visual functionality.TC_Commentary_13:Verify title as underlined</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:10:48 PM</td>
+										<td class='linked' test-id='45'>Verifying Commentary Visual functionality.TC_Commentary_14:Verify horizontal alignment (left, right, center)</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:11:51 PM</td>
+										<td class='linked' test-id='50'>Verifying Commentary Visual functionality.TC_Commentary_27:Verify opening title popup by double click</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:12:51 PM</td>
+										<td class='linked' test-id='54'>Verifying Commentary Visual functionality.TC_Commentary_28:Verify edit commentary icon</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:13:51 PM</td>
+										<td class='linked' test-id='58'>Verifying Commentary Visual functionality.TC_Commentary_33:Verify backgroud color for visual</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:15:07 PM</td>
+										<td class='linked' test-id='64'>Verifying Commentary Visual functionality.TC_Commentary_35:Visual - Verify remove icon for uploaded image</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:17:01 PM</td>
+										<td class='linked' test-id='70'>Verifying Commentary Visual functionality.TC_Commentary_36:Verify border by default</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:19:43 PM</td>
+										<td class='linked' test-id='74'>Verifying Commentary Visual functionality.TC_Commentary_37:Verify border color</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:20:58 PM</td>
+										<td class='linked' test-id='79'>Verifying Commentary Visual functionality.TC_Commentary_38:Verify border width</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:22:20 PM</td>
+										<td class='linked' test-id='84'>Verifying Commentary Visual functionality.TC_Commentary_40:Verify visual border type</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:23:33 PM</td>
+										<td class='linked' test-id='89'>Verifying Commentary Visual functionality.TC_Commentary_42:Verify confirmation message for copy visual</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:24:54 PM</td>
+										<td class='linked' test-id='94'>Verifying Commentary Visual functionality.TC_Commentary_45:Verify the confrimation message for pasting visual in insight</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:26:23 PM</td>
+										<td class='linked' test-id='99'>Verifying Commentary Visual functionality.TC_Commentary_93:Right click - Verify Copy commentary</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:27:51 PM</td>
+										<td class='linked' test-id='107'>Verifying Commentary Visual functionality.TC_Commentary_94:Right click - Validate copied commentary</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:29:20 PM</td>
+										<td class='linked' test-id='116'>Verifying Commentary Visual functionality.TC_Commentary_95:Right click - Verify Cut commentary</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:30:41 PM</td>
+										<td class='linked' test-id='124'>Verifying Commentary Visual functionality.TC_Commentary_96:Right click - Validate Cut commentary</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:32:10 PM</td>
+										<td class='linked' test-id='133'>Verifying Commentary Visual functionality.TC_Commentary_97:Right click - Verify Delete commentary</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:33:53 PM</td>
+										<td class='linked' test-id='141'>Verifying Commentary Visual functionality.TC_Commentary_98:Right click - Verify chart under insert visual</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:37:05 PM</td>
+										<td class='linked' test-id='149'>Verifying Commentary Visual functionality.TC_Commentary_99:Right click - Verify map under insert visual</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:40:09 PM</td>
+										<td class='linked' test-id='157'>Verifying Commentary Visual functionality.TC_Commentary_100:Right click - Verify table under insert visual</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:43:12 PM</td>
+										<td class='linked' test-id='165'>Verifying Commentary Visual functionality.TC_Commentary_101:Right click - Verify pie under insert visual</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:46:16 PM</td>
+										<td class='linked' test-id='173'>Verifying Commentary Visual functionality.TC_Commentary_102:Right click - Verify Heat map under insert visual</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:49:20 PM</td>
+										<td class='linked' test-id='181'>Verifying Commentary Visual functionality.TC_Commentary_103:Right click - Verify Histogram under insert visual</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:52:24 PM</td>
+										<td class='linked' test-id='189'>Verifying Commentary Visual functionality.TC_Commentary_104:Right click - Verify Attachments under insert visual</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:53:47 PM</td>
+										<td class='linked' test-id='197'>Verifying Commentary Visual functionality.TC_Commentary_105:Right click - Verify Commentary under insert visual</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:55:08 PM</td>
+										<td class='linked' test-id='205'>Verifying Commentary Visual functionality.TC_Commentary_106:Right click - Verify image under insert visual</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:56:31 PM</td>
+										<td class='linked' test-id='213'>Verifying Commentary Visual functionality.TC_Commentary_107:Right click - Verify Filter under insert visual</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:57:54 PM</td>
+										<td class='linked' test-id='221'>Verifying Commentary Visual functionality.TC_Commentary_108:Right click - Verify Paste visual</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 10:59:19 PM</td>
+										<td class='linked' test-id='231'>Verifying Commentary Visual functionality.TC_Commentary_109:Right click - Verify 'Clear contents'</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 11:00:46 PM</td>
+										<td class='linked' test-id='239'>Verifying Commentary Visual functionality.TC_Commentary_110:Right click - Verify Download subdropdown</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 11:02:04 PM</td>
+										<td class='linked' test-id='247'>Verifying Commentary Visual functionality.TC_Commentary_111:Right click - Download - Verify commentary</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 11:03:26 PM</td>
+										<td class='linked' test-id='255'>Verifying Commentary Visual functionality.TC_Commentary_112:Right click - Download - Verify View</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 2, 2022 11:04:48 PM</td>
+										<td class='linked' test-id='263'>Verifying Commentary Visual functionality.TC_Commentary_117:Verify Download insight having all type of visuals</td>
+										<td><span class='test-status fail'>fail</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='category-name'></h5>
+		</div>
+	</div>
+</div>
+<!-- category view -->
+<div id='exception-view' class='view hide'>
+
+    <section id='controls'>
+        <div class='controls grey lighten-4'>
+            <!-- search -->
+            <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                <a href="#" class='search-div'>
+                    <i class='material-icons'>search</i> Search
+                </a>
+
+                <div class='input-field left hide'>
+                    <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+                </div>
+
+            </div>
+            <!-- search -->
+        </div>
+    </section>
+
+    <div class='subview-left left'>
+
+        <div class='view-summary'>
+            <h5>Exceptions</h3>
+                <ul id='exception-collection' class='exception-collection'>
+
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>org.openqa.selenium.TimeoutException</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>7</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:17:47 PM</td>
+                                                        <td class='linked' test-id='72'>Verifying Commentary Visual functionality.TC_Commentary_36:Verify border by default.And Check for Border</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for presence of element located by: By.xpath: ( //*[@class='accordion-config collapsed']//*[@class='icon-collapse'])[2] (tried for 100 second(s) with 500 MILLISECONDS interval)
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:471)
+	at CDMNext.StepDefinations.Commentary.check_for_Border(Commentary.java:757)
+	at ✽.And Check for Border(Commentary.feature:250)
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.xpath: ( //*[@class='accordion-config collapsed']//*[@class='icon-collapse'])[2]
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: driver.version: unknown
+	at org.openqa.selenium.support.ui.ExpectedConditions.lambda$findElement$0(ExpectedConditions.java:883)
+	at java.util.Optional.orElseThrow(Optional.java:290)
+	at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:882)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$000(ExpectedConditions.java:44)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:183)
+	at org.openqa.selenium.support.ui.ExpectedConditions$6.apply(ExpectedConditions.java:180)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:209)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:471)
+	at CDMNext.StepDefinations.Commentary.check_for_Border(Commentary.java:757)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at cucumber.runtime.Utils$1.call(Utils.java:40)
+	at cucumber.runtime.Timeout.timeout(Timeout.java:16)
+	at cucumber.runtime.Utils.invoke(Utils.java:34)
+	at cucumber.runtime.java.JavaStepDefinition.execute(JavaStepDefinition.java:38)
+	at cucumber.runtime.StepDefinitionMatch.runStep(StepDefinitionMatch.java:37)
+	at cucumber.runtime.Runtime.runStep(Runtime.java:300)
+	at cucumber.runtime.model.StepContainer.runStep(StepContainer.java:44)
+	at cucumber.runtime.model.StepContainer.runSteps(StepContainer.java:39)
+	at cucumber.runtime.model.CucumberScenario.run(CucumberScenario.java:44)
+	at cucumber.runtime.model.CucumberFeature.run(CucumberFeature.java:165)
+	at cucumber.api.testng.TestNGCucumberRunner.runCucumber(TestNGCucumberRunner.java:63)
+	at CDMNext.runner.TestRunner.feature(TestRunner.java:53)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:639)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:816)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1124)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:108)
+	at org.testng.TestRunner.privateRun(TestRunner.java:774)
+	at org.testng.TestRunner.run(TestRunner.java:624)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1191)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1116)
+	at org.testng.TestNG.run(TestNG.java:1024)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:35:11 PM</td>
+                                                        <td class='linked' test-id='148'>Verifying Commentary Visual functionality.TC_Commentary_98:Right click - Verify chart under insert visual.Then "Chart" visual should be created in the same view tab</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Chart" visual should be created in the same view tab(Commentary.feature:789)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:38:14 PM</td>
+                                                        <td class='linked' test-id='156'>Verifying Commentary Visual functionality.TC_Commentary_99:Right click - Verify map under insert visual.Then "Map" visual should be created in the same view tab</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Map" visual should be created in the same view tab(Commentary.feature:799)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:41:18 PM</td>
+                                                        <td class='linked' test-id='164'>Verifying Commentary Visual functionality.TC_Commentary_100:Right click - Verify table under insert visual.Then "Table" visual should be created in the same view tab</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Table" visual should be created in the same view tab(Commentary.feature:809)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:44:21 PM</td>
+                                                        <td class='linked' test-id='172'>Verifying Commentary Visual functionality.TC_Commentary_101:Right click - Verify pie under insert visual.Then "Pie" visual should be created in the same view tab</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Pie" visual should be created in the same view tab(Commentary.feature:819)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:47:25 PM</td>
+                                                        <td class='linked' test-id='180'>Verifying Commentary Visual functionality.TC_Commentary_102:Right click - Verify Heat map under insert visual.Then "Heat map" visual should be created in the same view tab</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Heat map" visual should be created in the same view tab(Commentary.feature:829)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:50:29 PM</td>
+                                                        <td class='linked' test-id='188'>Verifying Commentary Visual functionality.TC_Commentary_103:Right click - Verify Histogram under insert visual.Then "Histogram" visual should be created in the same view tab</td>
+                                                        <td><pre><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //*[contains(@class,'insight-visual__selected')]//*[@class='visual-top-panel--left-controls']//button[1] (tried for 100 second(s) with 500 MILLISECONDS interval)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:232)
+	at CDMNext.util.CommonFunctionality.getElementByProperty(CommonFunctionality.java:473)
+	at CDMNext.StepDefinations.Commentary.visual_should_be_created_in_the_same_view_tab(Commentary.java:1894)
+	at ✽.Then "Histogram" visual should be created in the same view tab(Commentary.feature:839)
+</pre></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>java.lang.AssertionError</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>1</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 2, 2022 10:54:56 PM</td>
+                                                        <td class='linked' test-id='204'>Verifying Commentary Visual functionality.TC_Commentary_105:Right click - Verify Commentary under insert visual.Then The commentary visual should be created in the same view tab</td>
+                                                        <td><pre><pre>java.lang.AssertionError: Commentary visual is not created
+	at org.testng.Assert.fail(Assert.java:94)
+	at CDMNext.StepDefinations.Commentary.the_commentary_visual_should_be_created_in_the_same_view_tab(Commentary.java:1919)
+	at ✽.Then The commentary visual should be created in the same view tab(Commentary.feature:859)
+</pre></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>org.openqa.selenium.WebDriverException</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>1</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 2, 2022 11:05:46 PM</td>
+                                                        <td class='linked' test-id='265'>Verifying Commentary Visual functionality.TC_Commentary_117:Verify Download insight having all type of visuals.And Perform download to excel with all views</td>
+                                                        <td><pre><textarea>org.openqa.selenium.WebDriverException: element click intercepted: Element <button class="button button__sm button__text_green" style="">...</button> is not clickable at point (1321, 95). Other element would receive the click: <div class="modal-dialog sphere-modal-dialog " js-modal="">...</div>
+  (Session info: chrome=100.0.4896.127)
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'IN-BLR-L008', ip: '192.168.56.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{networkConnectionEnabled=false, chrome={chromedriverVersion=100.0.4896.20 (f9d71f93d32a6487809d6f35a9670c879fe97dfe-refs/branch-heads/4896@{#203}), userDataDir=C:\Users\nmaduru\AppData\Local\Temp\scoped_dir5256_1495024161}, timeouts={implicit=0.0, pageLoad=300000.0, script=30000.0}, pageLoadStrategy=normal, unhandledPromptBehavior=dismiss and notify, strictFileInteractability=false, platform=ANY, proxy=Proxy(), goog:chromeOptions={debuggerAddress=localhost:55196}, webauthn:extension:credBlob=true, acceptInsecureCerts=true, browserVersion=100.0.4896.127, browserName=chrome, javascriptEnabled=true, platformName=windows, setWindowRect=true, webauthn:extension:largeBlob=true, webauthn:virtualAuthenticators=true}]
+Session ID: 48e4bb607550199aba97f43252ce6a74
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:150)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:115)
+	at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:45)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:164)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:82)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:637)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:272)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:82)
+	at CDMNext.StepDefinations.Commentary.perform_download_to_excel_with_all_views(Commentary.java:2126)
+	at ✽.And Perform download to excel with all views(Commentary.feature:962)
+</textarea></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
+        </div>
+    </div>
+
+    <div class='subview-right left'>
+        <div class='view-summary'>
+            <h5 class='exception-name'></h5>
+        </div>
+    </div>
+</div>
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Features
+					<div class='panel-lead'>1</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Scenarios
+					<div class='panel-lead'>41</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>224</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>May 2, 2022 10:01:25 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>May 2, 2022 11:06:11 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>1h 4m 45s+731ms</div>
+				</div>
+			</div>
+			<div class='col s6'>
+				<div class='card-panel dashboard-categories'>
+					<span class='right label cyan white-text'>Categories</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Passed</th>
+							<th>Failed</th>
+							<th>Others</th>
+							<th>Passed %</th>
+						</tr>
+						<tr>
+							<td>@Commentary1</td>
+							<td>32</td>
+							<td>9</td>
+							<td>0</td>
+							<td>
+									78.049%
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 0,
+				failParent: 1,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 0,
+				exceptionsParent: 1,
+				
+				passChild: 32,
+				failChild: 9,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 0,
+				exceptionsChild: 9,
+				
+				passGrandChild: 213,
+				failGrandChild: 9,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 2,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 11,
+			};
+		</script>
+		
+			<script src='https://cdn.rawgit.com/anshooarora/extentreports-java/fca20fb7653aade98810546ab96a2a4360e3e712/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+ 		<script type='text/javascript'>
+ 		</script>
+	</body>
+	
+</html>

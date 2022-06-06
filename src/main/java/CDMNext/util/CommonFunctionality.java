@@ -172,28 +172,33 @@ public class CommonFunctionality {
 	@SuppressWarnings("deprecation")
 	public static void DeleteSeries() throws InterruptedException {
 		try {
-		WebElement selected = getElementByXpath(login.driver,
+			WebElement selected = getElementByXpath(login.driver,
 					"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",
 					4);
-		if (selected.getAttribute("class").contains("all-selected")) {
-			getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
-		} else if (selected.getAttribute("class").contains("without-data")) {
-			System.out.println("No Series is added in myseries list to delete");
-		}else {
-			WebElement ele = getElementByXpath(login.driver,
-					"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
-			action.moveToElement(ele).pause(1000).click().build().perform();
-			WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
-			new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
+			if (selected.getAttribute("class").contains("all-selected")) {
+				getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+			} else if (selected.getAttribute("class").contains("without-data")) {
+				System.out.println("No Series is added in myseries list to delete");
+			} else {
+				WebElement ele = getElementByXpath(login.driver,
+						"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
+				action.moveToElement(ele).pause(1000).click().build().perform();
+				WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
+				new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
+			}
+		} catch (Exception e) {
+			try {
+				WebElement Table_mode_selected_ = getElementByXpath(login.driver,
+						"//table//*[@class='table-container--checkbox svg-checkbox input-control__grey']/*[@class='icon']",
+						4);
+				action.moveToElement(Table_mode_selected_).pause(500).click().build().perform();
+				getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+			} catch (Exception e1) {
+
+			}
 		}
-		}catch(Exception e) {
-			WebElement Table_mode_selected_ = getElementByXpath(login.driver,
-					"//table//*[@class='table-container--checkbox svg-checkbox input-control__grey']/*[@class='icon']",	4);
-			action.moveToElement(Table_mode_selected_).pause(500).click().build().perform();
-			getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
-		}
-			
-		}
+
+	}
 
 	public static void TopMethod() throws InterruptedException {
 		try {
@@ -212,16 +217,16 @@ public class CommonFunctionality {
 	public static void RightClickOnAnySeries() throws InterruptedException {
 		wait(2000);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable']/*"));
+		List<WebElement> li_All = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("ListOfSeries_DatabasesTab")));
 				login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			// int j = i + 1;
 			m = i + 1;
 			wait(1000);
 			WebElement checkbox = login.driver
-					.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					.findElement(By.xpath("(//*[@class='database-representation--tree']//div[@class='series-list-item--checkbox-wrapper'])[ " + m + "]"));
 			checkbox.click();
-			WebElement ele = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[" + m + "]//div[@class='series-item--name']"));
+			WebElement ele = li_All.get(i);
 			// sname = ele.getText();
 			if (i == 4) {
 				// Thread.sleep(2000);
@@ -468,9 +473,10 @@ public class CommonFunctionality {
 	}
 
 	public static WebElement getElementByProperty(WebDriver driver, String property_value, int time) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
+		wait(1000);
+//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
 		WebElement element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty(property_value)));
 		elementHighlight(login.driver, element);
 		try {
@@ -641,14 +647,20 @@ public class CommonFunctionality {
 	public static List<WebElement> Hidden_Webelements_handling(WebDriver driver, String locatorType, String value) {
 		List<WebElement> elements = null;
 		if (locatorType.equalsIgnoreCase("xpath")) {
+			try {
 			elements = driver.findElements(By.xpath(value));
+			}catch(Exception e) {
+				elements = driver.findElements(By.xpath(login.LOCATORS.getProperty(value)));
+			}
 		} else if (locatorType.equalsIgnoreCase("className")) {
 			elements = driver.findElements(By.className(value));
 		}
 		for (WebElement element : elements) {
 			int x = element.getLocation().getX();
 			if (x != 0) {
-				ActualColor = element.getAttribute("title");
+				
+				//ActualColor = element.getAttribute("title");
+				ActualColor = element.getCssValue("background-color");
 				login.Log4j.info(ActualColor);
 				wait(1000);
 				element.click();

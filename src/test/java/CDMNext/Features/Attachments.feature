@@ -655,7 +655,6 @@ Feature: Verifying Attachments Visual functionality
 
   @Attachments
   Scenario: TC_Attachments_87:Right click - Download - Verify Attachments
-    #And Create Commentary visual
     And Add some text in the description field
     And Get the text from the description field
     And Create attachments visual

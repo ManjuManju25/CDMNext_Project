@@ -1,5 +1,75 @@
 Feature: Verifying map visual functionality
 
+  #.......................Created by Teju.............#
+  @CMap
+  Scenario: Creation of map
+    And selectSeries "10"
+    Then keyBoardmap
+
+  @CMap
+  Scenario: Creation a china map
+    And click_On_Dropdown "All Regions"
+    And select_subnational_as_region "China"
+    And select_Subregion "Beijing,Gansu,Guangxi"
+    And selectSeries "100"
+    And view_As_map "View on China Map"
+    And click_on_EditMap
+    And selectColor "#FFD620" "#54B582"
+    And checkForTitleBorderBackground "Border"
+    And borderDropDown "Map"
+    And widthSelectionOfMap 5
+    And radiusOfMap 10
+    And styleOfMap "Dotted"
+    And sizeSelection 45,"Right"
+    And dateFormat "Custom","MM/D/YY"
+    And numberFormat 5,".","Space"
+    And markerType "Filled"
+    And legend "Vertical","Bottom"
+    And copyRight "Horizontal","Left"
+    And dataLabels "Value"
+    And highLightFilter "#000000","1000"
+    And colorDivision "Gradient",4,5,"#ddcf34"
+    Then Save
+
+  @CMap
+  Scenario: Creation a India map
+    And click_On_Dropdown "All Regions"
+    And select_subnational_as_region "India"
+    And select_Subregion " Bihar,Gujarat,Karnataka"
+    And selectSeries "100"
+    And view_As_map "View on India Map"
+    And click_on_EditMap
+    And selectColor "#FFD620" "#54B582"
+    And checkForTitleBorderBackground "Border"
+    And borderDropDown "Visual"
+    And colorSelectionOfMap "#000000"
+    And sizeSelection 45,"Right"
+    And show "Zoom"
+    And dateFormat "Custom","M/D/YY"
+    And numberFormat 4,",","-"
+    And markerType "Bubble"
+    And legend "Vertical","Top"
+    And copyRight "Horizontal","Right"
+    And dataLabels "Region,Value"
+    And highLightFilter "#000000","500"
+    And colorDivision "Solid color",4,5,"#3425af"
+    And titleSettings "sub_title","Highlight","#3425af",28,"underline","left"
+    And backGroundSettings "Visual background","visual",20,"",0,0,"",0,""
+    And legendSettings "Border","",0,"","","",0,"#000000","Dotted",6,17,"",0
+    And copyrightSettings "Text","","","facebbok.com","left","ceic data","#54b582",30,"italic"
+    And dataLabelsSettings "Labels","Region,Value","Color,Outline","#3425af,#3425af",35,"italic"
+    And colorAxes "Color axes","",0,"","","",0,"#34224a","Dotted",6,17,"Solid color",4
+    Then Save
+
+  @CMap
+  Scenario: Creation a Russian Federation map
+    And click_On_Dropdown "All Regions"
+    And select_subnational_as_region "Russian Federation"
+    And select_Subregion_federal "Bryansk Region,Tula Region,Moscow Region"
+    And selectSeries "100"
+    And view_As_map "View on Russian Federation Map"
+
+  #.............................End ........................#
   @Map
   Scenario: TC_Map_01:Verify creating Map visual from Chart menu
     And Select some series
@@ -249,7 +319,7 @@ Feature: Verifying map visual functionality
 
   @Map
   Scenario: TC_Map_37:Rename - Verify number of selected series.
-    And Create a map visual with series
+    And Create a map visual with series id's "408940397;408929327"
     And Click on Edit series option
     And Click on "Rename" option
     And Search for the series you want to rename
@@ -257,7 +327,7 @@ Feature: Verifying map visual functionality
 
   @Map
   Scenario: TC_Map_38:Rename - Verify find field.
-    And Create a map visual with series
+    And Create a map visual with series id's "408940397;408929327"
     And Click on Edit series option
     And Click on "Rename" option
     And Search for the series you want to rename
@@ -582,6 +652,7 @@ Feature: Verifying map visual functionality
     And Click on "Rename" option
     And Select multiple attributes
     And Click on "Apply"
+     And Click on "OK"
     Then Selected attributes should be displayed as series name
 
   @Map
@@ -604,3 +675,1229 @@ Feature: Verifying map visual functionality
     And Edit series title
     And Click on "Apply"
     Then The changes should be saved and rename popup remains displayed
+
+  @Map
+  Scenario: TC_Map_71:Rename - Minimize option
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on "Minimize" option
+    Then The Popup should be minimized
+
+  @Map
+  Scenario: TC_Map_72:Rename - Verify maximiz option
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on "Minimize" option
+    And Click on "Maximize" option
+    Then The popup should be maximized
+
+  @Map
+  Scenario: TC_Map_73:Rename - verify full screen
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on "Full-screen" option
+    Then The popup should be displayed in full screen
+
+  @Map
+  Scenario: TC_Map_74:Rename - verify exit full screen
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on "Full-screen" option
+    And Click on "Exit full-screen" option
+    Then The popup should be displayed in normal screen
+
+  @Map
+  Scenario: TC_Map_75:Rename - Verify Cancel/x icon
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Click on "Rename" option
+    And Click on Cancel button
+    Then The rename popup should be closed
+
+  @Map
+  Scenario: TC_Map_76:Rename - Verify opening rename popup by keyboard shortcut
+    And Create a map visual with series id's "408940397;408929327"
+    And Click on Edit series option
+    And Press Ctrl+H on keyboard
+    Then Rename popup should be displayed
+
+  @Map
+  Scenario: TC_Map_77:Edit series - Verify applying 'Currency conversation' function
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Choose any function from Currency conversation
+    Then Selected currency should be applied to all series
+
+  @Map
+  Scenario: TC_Map_78:Edit series - Verify applying 'Calculate change' function
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Choose any function from Calculate change
+    Then Selected function should be applied to all series
+
+  @Map
+  Scenario: TC_Map_79:Edit series - Verify 'Aggregate' function apply
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Click on Aggregate and choose any option
+    Then Selected function should be applied to all series
+
+  @Map
+  Scenario: TC_Map_80:Edit series - Verify 'Accumulate' function apply
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Click on Accumulate and choose any option
+    Then Selected function should be applied to all series
+
+  @Map
+  Scenario: TC_Map_81:Edit series - Verify 'FX more' drop down
+    And Create a map visual with series id's "239796903"
+    And Click on Edit series option
+    And Click on FX More dropdown and Choose any function
+    Then Selected function should display in series
+
+  @Map
+  Scenario: TC_Map_82:Edit series - Verify FX icon.
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on FX icon
+    Then The "Apply functions to visual series" popup should be opened
+
+  @Map
+  Scenario: TC_Map_83:Edit series - Verify applying function by clicking on function icon
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Click on FX icon
+    And Click on type a function field
+    And Select any function
+    And Click on "Apply"
+    Then The selected function should be displayed
+
+  @Map
+  Scenario: TC_Map_84:Edit series - Verify hiding function toolbar
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Hide the function bar"
+    Then The function toolbar should be hidden
+
+  @Map
+  Scenario: TC_Map_85:Edit series - Verify showing the function toolbar
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on "Hide the function bar"
+    And Click on "Show the function bar"
+    Then The function toolbar should be shown
+
+  @Map
+  Scenario: TC_Map_86:Edit series - Verify 'Type a function' field
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Click on type a function field
+    And Select any function
+    And Click on "Apply"
+    Then The selected function should be displayed
+
+  @Map
+  Scenario: TC_Map_87:Edit series - Verify delete series icon
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on x icon for a series
+    Then The series should be removed from the visual and edit series panel
+
+  @Map
+  Scenario: TC_Map_88:Edit series - Verify delete all series icon
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Click on x icon before Name attribute
+    Then All series should be removed from the visual and edit series panel
+
+  @Map
+  Scenario: TC_Map_89:Edit series - Verify SSP by clicking on series name
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on series name
+    Then SSP popup should be displayed
+
+  @Map
+  Scenario: TC_Map_90:Edit series - Verify Rename series icon
+    And Create a map visual with series id's "408940397"
+    And Click on Edit series option
+    And Click on rename series icon
+    Then Rename popup should be displayed for selected series
+
+  @Map
+  Scenario: TC_Map_91:Edit series - Verify edit series icon
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on edit series icon
+    Then Below options should be available
+      | Rename    |
+      | Frequency |
+      | Currency  |
+      | Change    |
+
+  @Map
+  Scenario: TC_Map_92:Edit series - Verify Rename option under edit series
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on edit series icon
+    And Select "Rename"
+    Then Rename popup should be displayed for selected series
+
+  @Map
+  Scenario: TC_Map_93:Edit Histogram - Edit series - Verify Currency option under edit series
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on edit series icon
+    And Select "Currency"
+    Then Selected currency function should be applied to the series
+
+  @Map
+  Scenario: TC_Map_94:Edit series - Verify Change option under edit series
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on edit series icon
+    And Select "Change"
+    Then Selected change function should be applied to the series
+
+  @Map
+  Scenario: TC_Map_95:Edit series - Verify Frequency option under edit series.
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on edit series icon
+    And Select "Frequency"
+    Then Selected function should be applied to the series
+
+  @Map
+  Scenario: TC_Map_96:Edit series - Verify clicking on frequency or dropdown
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on frequency
+    Then "Series Harmonization" popup should be opened
+
+  @Map
+  Scenario: TC_Map_97:Edit series - Series data conversion - Verify applying frequency.
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on frequency
+    And Select frequency as "Daily"
+    Then The selected "Daily" frequency should be applied to available series
+
+  @Map
+  Scenario: TC_Map_98:Edit series - Series data conversion - Verify applying Missing values method.
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on frequency
+    And Select "Frequency" as "Daily" from dropdown
+    And Select "Missing values method" as "Next value" from dropdown
+    Then Missing values method should be applied with selected frequency
+
+  @Map
+  Scenario: TC_Map_99:Edit series - Series data conversion -Verify maximize option
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on frequency
+    And Click on "Minimize" option
+    And Click on "Maximize" option
+    Then The Series Hormonization popup should be maximized
+
+  @Map
+  Scenario: TC_Map_100:Edit series - Series data conversion -verify exit full screen
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on frequency
+    And Click on "Full-screen" option
+    And Click on "Exit full-screen" option
+    Then The Series Hormonization popup should be displayed in normal screen
+
+  @Map
+  Scenario: TC_Map_101:Edit series - Verify applying frequency in series level
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Click on frequency dropdown in series level
+    And Select "Yearly (Sum)" from frequency dropdown
+    Then Selected frequency should be applied to ONLY selected series
+
+  @Map
+  Scenario: TC_Map_102:Edit series - Verify applying currency in series level
+    And Create a map visual with series id's "226311002;405159937"
+    And Click on Edit series option
+    And Click on currency dropdown in series level
+    And Select "RMB" from currency dropdown
+    Then Selected currency should be applied to ONLY selected series
+
+   @Map
+  Scenario: TC_Map_103:Edit series - Verify applying function in series level
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on "Type a function" field in series level
+    And Select "ACCUMULATE" function
+    And Click on "Apply function"
+    Then Selected function should applied to the series
+
+   @Map
+  Scenario: TC_Map_104:Edit series - Verify multiple functions apply
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on "Type a function" field in series level
+    And Select multiple functions "ACCUMULATE"  and "LOG"
+    And Click on "Apply function"
+    Then The Selected functions should applied to the series
+
+   @Map
+  Scenario: TC_Map_105:Edit series -  Verify cancel icon for selected function
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on type a function field in series level
+    And Select a function
+    And Click on cancel function icon
+    Then The selected function should be cancelled
+
+   @Map
+  Scenario: TC_Map_106:Edit series - Verify search for functions
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on type a function field in series level
+    And Search with function "YTD"
+    Then Searched functions should be displayed
+
+   @Map
+  Scenario: TC_Map_107:Edit series - Verify removing applied functions
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on "Type a function" field in series level
+    And Select "ACCUMULATE" function
+    And Click on "Apply function"
+    And Click on x icon to remove the function
+    Then The function should be removed from the series
+
+   @Map
+  Scenario: TC_Map_108:Edit series - Verify applied funtion in function toolbar
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on "Type a function" field in series level
+    And Select "ACCUMULATE" function
+    And Click on "Apply function"
+    Then The applied function should be displayed on the toolbar
+
+   @Map
+  Scenario: TC_Map_109:Edit series - Verify applying invalid function for series
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on "Type a function" field in series level
+    And Select an invalid function for the series
+    Then "The function cannot be applied to selected series" popup should be displayed
+
+  @Map
+  Scenario: TC_Map_110:Edit seires - Verify OK button on "The function cannot be applied to selected series" popup
+    And Create a map visual with series id's "369703417"
+    And Click on Edit series option
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    And Click on "Ok"
+    Then The function cannot be applied to selected series popup should be closed
+
+  @Map
+  Scenario: TC_Map_111:Edit series - Verify Region, Unit and Series ID fields
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on Edit series option
+    Then "Region", "Unit" and "Series id" fields should be available for respective series
+
+  @Map
+  Scenario: TC_Map_112:Edit series - Verify "+Add from my series" option
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on Edit series option
+    And Click on "+ Add more from My Series" option
+    Then User should redirect to "+Add from My Series" tab
+
+  @Map
+  Scenario: TC_Map_113:Edit series - Verify adding series from my series
+    And Add series to the my series tab
+    And Create a empty Map visual
+    And Click on Edit series option
+    And Redirect to MySeries tab > Select a series in edit series panel
+    Then The selected series should be displayed in Map tab
+
+  @Map
+  Scenario: TC_Map_114:Edit series - Verify max series for Map visual
+    And Select more than 300 series and try to create Map visual
+    Then Map should allow max 300 series
+
+  @Map
+  Scenario: TC_Map_115:Edit series - Verify message for selecting more than 300 series
+    And Select more than 300 series and try to create Map visual
+    Then "You cannot create a map with more than 300 series. Proceed with 300 series?" growl message should be displayed
+
+  @Map
+  Scenario: TC_Map_116:Edit series - Verify default sort by in add from my series tab
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on Edit series option
+    And Click on "Add from My Series"
+    Then By default checked sort by should be applied
+
+  @Map
+  Scenario: TC_Map_117:Edit seires - Verify Edit series option on visual if edit series panle is opened.
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on Edit series option
+    Then The "Edit Series" option should be disabled if already opened
+
+  @Map
+  Scenario: TC_Map_118:Edit series - Verify edit series panel close
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on Edit series option
+    And Click on x icon to close the edit seires panel
+    Then The edit series panel should be closed
+
+  @Map
+  Scenario: TC_Map_119:Verify Edit Map for the visual created
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    Then The "Edit visual" popup should be displayed
+
+  @Map
+  Scenario: TC_Map_120:Edit Pie - Verify template creating
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Make any changes in edit visual
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
+    Then New template should be created with the name of "Shravas"
+
+  @Map
+  Scenario: TC_Map_121:Edit Map -  Verify auto naming for template.
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Make any changes in edit visual
+    And Click on create template icon
+    And Click on green tick mark
+    Then Auto name should be available as "My template 1"
+
+  @Map
+  Scenario: TC_Map_122:Edit Map - Verify Cancel icon for template popup
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Make any changes in edit visual
+    And Click on create template icon
+    And Click on x icon in the template popup
+    Then The template popup should closed
+
+  @Map
+  Scenario: TC_Map_123:Edit Map - Verify dropdown for template
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Make any changes in edit visual
+    And Click on create template icon
+    And Click on green tick mark
+    And Click on dropdown for template
+    Then The following templates should be available
+      | CEIC Styles |
+      | My Styles   |
+
+  @Map
+  Scenario: TC_Map_124:Edit Map - Verify 'Set as default for future Map visual' is checked
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Mouse move on existing visual templates
+    And Click on template dropdown
+    And Check the box for "Set as default for future Map visual"
+    And Click on "Save"
+    And Create a new map visual
+    Then The Map should be created with the format of previous template selection
+
+  @Map
+  Scenario: TC_Map_125:Edit Map - Verify 'Set as default for future Map visual' is Unchecked
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Mouse move on existing visual templates
+    And Click on template dropdown
+    And Check the box for "Set as default for future Map visual" should be unchecked
+    And Click on "Save"
+    And Create a new map visual
+    Then The map should be created with default format template
+
+  @Map
+  Scenario: TC_Map_126:Edit Map - Verify delete template icon
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And UnCheck Legend option
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
+    And Click on "Delete template" icon
+    Then "Confirmation" popup should be diaplayed
+
+  @Map
+  Scenario: TC_Map_127:Edit Map - Verify description for confirmation popup
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And UnCheck Legend option
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
+    And Click on "Delete template" icon
+    Then The description should be "Are you sure you want to delete this style template?" diaplayed
+
+  @Map
+  Scenario: TC_Map_128:Edit Map - Verify OK button on confirmation popup
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And UnCheck Legend option
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
+    And Click on "Delete template" icon
+    And Click on "Ok"
+    Then The template should be deleted from the list
+
+  @Map
+  Scenario: TC_Map_129:Edit Map - Verify cancel/x icon on confirmation popup
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And UnCheck Legend option
+    And Click on create template icon
+    And Enter new template name as "Shravas"
+    And Click on green tick mark
+    And Click on "Delete template" icon
+    And Click on "Cancel"
+    Then The confirmation popup should be closed
+
+  @Map
+  Scenario: TC_Map_130:Edit Map - Title - Verify Title=Yes
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And Check Title and Save
+    Then The title of the visual should be displayed
+
+  @Map
+  Scenario: TC_Map_131:Edit Map - Title - Verify Title=No
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And UnCheck Title and Save
+    Then The title of the visual should be removed from the visual
+
+  @Map
+  Scenario: TC_Map_132:Edit MAp -  Title - Verify default selection for title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    Then The title should be selected by default
+
+  @Map
+  Scenario: TC_Map_133:Edit Map -  Title - Verify Auto title
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And Check title with empty title field and Save
+    Then Auto title should be displayed as series name
+
+  @Map
+  Scenario: TC_Map_134:Edit Map - Title - Verify renaming title
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And Enter visual name and Save
+    Then The visual name should be changed
+
+  @Map
+  Scenario: TC_Map_135:Edit Map - Title - Verify sub title by default
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    Then The sub title check box should be unchecked by default
+
+  @Map
+  Scenario: TC_Map_136:Edit Map - Title - Verify sub title=Check
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And Check Subtitle and Save
+    Then Sub title should be displayed for the visual
+
+  @Map
+  Scenario: TC_Map_137:Edit Map -  Title - Verify sub title=Uncheck
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And UnCheck Subtitle and Save
+    Then Sub title should not be displayed for the visual
+
+  @Map
+  Scenario: TC_Map_138:Edit Map - Title - Verify default title for sub title
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And Check Subtitle and Save
+    Then Default sub title should be "Sub title"
+
+  @Map
+  Scenario: TC_Map_139:Edit Map - Title - Verify advance settings
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on Title drop down
+    And Click on "Advanced settings"
+    Then Titles popup should be displayed
+
+  @Map
+  Scenario: TC_Map_140:Edit Map - Verify advance settings cogwheel icon
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    Then Titles popup should be displayed
+
+  @Map
+  Scenario: TC_Map_141:Edit Map - Title - Verify color for visual title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select color for "Title"
+    When Click on "Save"
+    Then Visual "title" should be displayed in selected color
+
+  @Map
+  Scenario: TC_Map_142:Edit Map - Title - Verify color for visual title background
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select color for "title" background highlight
+    When Click on "Save"
+    Then Visual "title" background should be displayed in selected color
+
+  @Map
+  Scenario: TC_Map_143:Edit Map - Title - Verify font size for visual title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select size for visual "title" as "20"
+    When Click on "Save"
+    Then The "title" font size should be changed as "20"
+
+  @Map
+  Scenario: TC_Map_144:Edit Map - Title - Verify bold style for visual title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Click on Bold icon for "title"
+    When Click on "Save"
+    Then The "title" should be displayed in Bold format
+
+  @Map
+  Scenario: TC_Map_145:Edit Map - Title - Verify bold style default selection
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    Then The bold icon should be selected by default
+
+  @Map
+  Scenario: TC_Map_146:Edit Map - Title - Verify Italic style for visual title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Click on Italic under style
+    When Click on "Save"
+    Then The "title" should be "italic"
+
+  @Map
+  Scenario: TC_Map_147:Edit Map - Title - Verify Underline style for visual title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Click on Underline icon for "title"
+    When Click on "Save"
+    Then The "title" should be "underline"
+
+  @Map
+  Scenario: TC_Map_148:Edit Map - Title - Verify horizontal alignment (left, right, center)
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select alignment of title to "left"
+    Then The title should align to "left"
+    And Select alignment of title to "center"
+    Then The title should align to "center"
+    And Select alignment of title to "right"
+    Then The title should align to "right"
+
+  @Map
+  Scenario: TC_Map_149:Edit Map - Title - Verify color for visual sub title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "sub-title"
+    And Select color for "Sub title"
+    When Click on "Save"
+    Then Visual "sub_title" should be displayed in selected color
+
+  @Map
+  Scenario: TC_Map_150:Edit Map - Verify color for visual sub title background
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "sub-title"
+    And Select color for "Sub title" background highlight
+    When Click on "Save"
+    Then Visual "sub_title" background should be displayed in selected color
+
+  @Map
+  Scenario: TC_Map_151:Edit Map - Title - Verify font size for visual sub title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Select size for visual "Sub title" as "20"
+    When Click on "Save"
+    Then The "sub_title" font size should be changed as "20"
+
+  @Map
+  Scenario: TC_Map_152:Edit Map - Title - Verify bold style for visual sub title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Click on B under style for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be displayed in Bold format
+
+  @Map
+  Scenario: TC_Map_153:Edit Map - Title - Verify Italic style for visual sub title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Click on Italic under style for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be "italic"
+
+  @Map
+  Scenario: TC_Map_154:Edit Map - Verify Underline style for visual sub title.
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Click on Underline icon for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be "underline"
+
+  @Map
+  Scenario: TC_Map_155:Edit Map - Title - Verify horizontal alignment (left, right, center)
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Check "sub-title"
+    And Select alignment of sub title to "left"
+    Then The subtitle should align to "left"
+    And Select alignment of sub title to "center"
+    Then The subtitle should align to "center"
+    And Select alignment of sub title to "right"
+    Then The subtitle should align to "right"
+
+  @Map
+  Scenario: TC_Map_156:Edit Map - Title - Verify expanding and collapsing the title and subtitle sections
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Expand the Title section
+    Then The section should be expnaded
+    And Collapse the Title section
+    Then The section should be collapsed
+    And Expand the Sub-title section
+    Then The Sub-title section should be expnaded
+    And Collapse the Sub-title section
+    Then The Sub-title section should be collapsed
+
+  @Map
+  Scenario: TC_Map_157:Edit Map - Title - Verify closing of Titles popup
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on cogwheel icon for title
+    And Click on X icon to close the popup
+    Then The "Title" popup should be closed
+
+  @Map
+  Scenario: TC_Map_158:Edit Map - Border - Verify Map color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Check Map for "Border"
+    And Select color
+    Then Border should be displayed for "map visual" with selected color
+
+  @Map
+  Scenario: TC_Map_159:Edit Map - Border - Verify map width
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Check Map for "Border"
+    And Select Width to 5
+    Then The map border "Width" should be updated to "5"
+
+  @Map
+  Scenario: TC_Map_160:Edit Map - Border - Verify map Radius
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Check Map for "Border"
+    And Select Radius as 10
+    Then Radius should be updated to 10 on map
+
+  @Map
+  Scenario: TC_Map_161:Edit Map - Border - Verify visual color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Check Visual check box
+    And Select color for Visual
+    Then Border should be displayed for visual with selected color
+
+  @Map
+  Scenario: TC_Map_162:Edit Map - Border - Verify visual width
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Check Visual check box
+    And Select Width to 5
+    Then The visual border "Width" should be updated to "5"
+
+  @Map
+  Scenario: TC_Map_163:Edit Map - Border - Verify visual Radius
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Check Visual check box
+    And Select Radius to 10
+    Then The visual border "Radius" should be updated to "10"
+
+  @Map
+  Scenario: TC_Map_164:Edit Map - Border - Verify visual style
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Check Visual check box
+    And Select below Styles for visual border
+      | Solid  |
+      | Dashed |
+      | Dotted |
+    Then The selected border should be applied to the visual
+
+  @Map
+  Scenario: TC_Map_165:Edit Map - Border - Verify advance settings
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Click on "Advanced settings"
+    Then Visual popup should be opened
+
+  @Map
+  Scenario: TC_Map_166:Edit Map - Border - Verify advance settings cogwheel
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Border drop down
+    And Click on "Open advanced settings popup"
+    Then Visual popup should be opened
+
+  @Map
+  Scenario: TC_Map_167:Edit Map - Verify Background=NO
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Uncheck "Map" and Visual
+    Then Background should not be seen for "map" and visual
+
+  @Map
+  Scenario: TC_Map_168:Edit Map - Verify Background=YES
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Check "Map" and Visual
+    Then Background should be displayed for "map" and visual
+
+  @Map
+  Scenario: TC_Map_169:Edit Map - Background - Verify map color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Check Map for "Background"
+    And Select background color
+    Then Background should be displayed for "map" with selected color
+
+  @Map
+  Scenario: TC_Map_170:Edit Map - Background - Verify map background image
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Check Map for "Background"
+    And click on Browse > upload image
+    Then Uploaded image should be displayed in "map" background
+
+  @Map
+  Scenario: TC_Map_171:Edit Map - Background - Verify message for map background image when selcetd more than maximum size
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Check Map for "Background"
+    And Select image more than 1 MB
+    Then "The selected file is too large. The maximum size of file is: 1.00 Mb" growl message is displayed and auto closed
+
+  @Map
+  Scenario: TC_Map_172:Edit Map - Background - Verify visual color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Check Visual check box
+    And Select color for Visual
+    Then Background should be displayed for visual with selected color
+
+  @Map
+  Scenario: TC_Map_173:Edit Map - Background - Verify image upload for visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Check Visual check box
+    And click on Browse > upload image
+    Then Uploaded image should be displayed in visual background
+
+  @Map
+  Scenario: TC_Map_174:Edit Map - Background - Verify message for visual background image when selcetd more than maximum size
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Check Visual check box
+    And Select image more than 1 MB
+    Then "The selected file is too large. The maximum size of file is: 1.00 Mb" growl message is displayed and auto closed
+
+  @Map
+  Scenario: TC_Map_175:Edit Map - Background - Verify advance settings
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Click on "Advanced settings"
+    Then Visual popup should be opened
+
+  @Map
+  Scenario: TC_Map_176:Edit Map - Background - Verify advance settings cogwheel
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Click on "Open advanced settings popup"
+    Then Visual popup should be opened
+
+  @Map
+  Scenario: TC_Map_177:Edit Map - Background - Verify closing of visual popup
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on Background drop down
+    And Click on "Open advanced settings popup"
+    And Click on X icon
+    Then The visual popup should be closed
+
+  @Map
+  Scenario: TC_Map_178:Edit Map > Verify size of visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    Then The default Edit Visual popup height and width should be "100%"
+
+  @Map
+  Scenario: TC_Map_179:Edit Map > Verify horizontal alignement for size
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Open Size dropdown
+    Then The "Horizontal align" should be disabled if proportion is "100%"
+
+  @Map
+  Scenario: TC_Map_180:Edit Map > Verify proportion for size
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Open Size dropdown
+    Then X axis should be set to "100" with enable state & Y axis should be set to "100" with disable state
+
+  @Map
+  Scenario: TC_Map_181:Edit Map - Size - Dropdown settings  - Map position
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Open Size dropdown
+    Then "Horizontal align:" and "Proportion:" should be shown
+
+  @Map
+  Scenario: TC_Map_182:Edit Map - Verify Show of the visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    Then "Zoom" and "Play" options should be available
+
+  @Map
+  Scenario: TC_Map_183:Edit Map - Show- Verify Zoom control = check
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check zoom control checkbox
+    Then Zooming options will be displayed for the map visual
+
+  @Map
+  Scenario: TC_Map_184:Edit Map - Show- Verify Zoom control = uncheck
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And UnCheck zoom control checkbox
+    Then Zooming options will not be displayed for the map visual
+
+  @Map
+  Scenario: TC_Map_185:Edit Map - Show- Verify date selection = check
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check play control  checkbox
+    Then Date selection checkbox will be visible below map visual
+
+  @Map
+  Scenario: TC_Map_186:Edit Map - Show- Verify Date selection = uncheck
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And UnCheck play control checkbox
+    Then Date selection checkbox will be not be visible below map visual
+
+  @Map
+  Scenario: TC_Map_187:Edit Map - Number format - Verify default Decimal places
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Open "Number format" dropdown
+    Then 2 decimals should be selected by default
+
+  @Map
+  Scenario: TC_Map_188:Edit Map - Number format - Verify Decimal separator
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Open "Number format" dropdown
+    And Select decimal separator as ","
+    And Click on "Save"
+    Then The selected decimal separator "," should be displayed on Map value
+
+  @Map
+  Scenario: TC_Map_189:Edit Map - legend
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    Then Legend option should be checked by default
+    Then "Bottom Center" option should be displayed
+
+  @Map
+  Scenario: TC_Map_190:Edit Map - legend - advanced settings under dropdown - show legend
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    Then Show legend option should be checked by default
+
+  @Map
+  Scenario: TC_Map_191:Edit Map > legend dropdown
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    Then The following legend options should be available
+      | Vertical align    |
+      | Horizontal align  |
+      | Advanced settings |
+
+  @Map
+  Scenario: TC_Map_192:Edit Map > legend > advanced settings under dropdown > Title
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Title"
+    Then By default title options are disabled
+    And Check legend "Title"
+    Then Should enable the legend options
+
+  @Map
+  Scenario: TC_Map_193:Edit Map > legend > advanced settings under dropdown > Title color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Title"
+    And Check legend "Title"
+    And Enter the text "Shravas" for legend title
+    And Select color for "Legend"
+    When Click on "Save"
+    Then Legend "title" should be displayed in selected color
+
+  @Map
+  Scenario: TC_Map_194:Edit Map > legend > advanced settings under dropdown > Title-Font style
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And Expand "Title"
+    And Check the checkbox for "Title" section
+    And Enter the text "Shravas" for legend title
+    And Select any "Legends Style" for chart visual
+    Then The Selected "Font style" should reflect in the chart visual legand
+
+  @Map
+  Scenario: TC_Map_195:Edit Map > legend > advanced settings under dropdown > Background color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Background" section from Legand popup should expand
+    And Check the checkbox for "Background" section
+    And Select background color for legend
+    When Click on "Save"
+    Then The Selected "Background color" should reflect in the visual legand
+
+  @Map
+  Scenario: TC_Map_196:Edit Map > legend > advanced settings under dropdown > Border color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Border" section from Legand popup should expand
+    And Check the checkbox for "Border" section
+    And Select border color for legend
+    When Click on "Save"
+    Then The Selected "Border color" should reflect in the pie visual legand
+
+  @Map
+  Scenario: TC_Map_197:Edit Map > legend > advanced settings under dropdown > Border width
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Border" section from Legand popup should expand
+    And Check the checkbox for "Border" section
+    And Select "Legend Title Border Width" for chart visual to 3
+    Then The Selected "Border width" should reflect in the chart visual legand
+
+  @Map
+  Scenario: TC_Map_198:Edit map > legend > advanced settings under dropdown > Border radius
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on legend dropdown
+    And Click on "Advanced settings"
+    And "Border" section from Legand popup should expand
+    And Check the checkbox for "Border" section
+    And Select "Legend Title Border Radius" for chart visual to 8
+    Then The Selected "Border radius" should reflect in the chart visual legand
+
+  @Map
+  Scenario: TC_Map_199:Edit Map - Verify Copyright=Check
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Check Copyright and Save
+    Then The Copyright logo should be displayed for visual
+
+  @Map
+  Scenario: TC_Map_200:Edit Map - Verify Copyright=Uncheck
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And UnCheck Copyright
+    Then The Copyright logo should be removed for visual
+
+  @Map
+  Scenario: TC_Map_201:Edit Map - Copyright - Verify 'Vertical align'
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    And Select vertical align as "top" and save
+    Then The copyright should be displayed in top
+    And Select vertical align as "bottom" and save
+    Then The copyright should be displayed in bottom
+
+  @Map
+  Scenario: TC_Map_202:Edit Map -Copyright - Verify 'Vertical align' for middle
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    Then The middle align option should be disabled since cannot show in the middle of the table
+
+  @Map
+  Scenario: TC_Map_203:Edit Map - Copyright - Verify 'Horizontal align'
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    And Select Horizontal alignment of copyright to "left" and save
+    Then The copyright image should align to "Left"
+    And Select Horizontal alignment of copyright to "center" and save
+    Then The copyright image should align to "Center"
+    And Select Horizontal alignment of copyright to "right" and save
+    Then The copyright image should align to "Right"
+
+  @Map
+  Scenario: TC_Map_204:Edit Map - Copyright - Verify advance settings.
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    And Click on Advanced settings
+    Then "Copyright" popup should be displayed
+
+  @Map
+  Scenario: TC_Map_205:Edit Map - Copyright - Verify advance settings cogwheel.
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Open drop down for "Copyright"
+    And Click on "Open advanced settings popup" icon
+    Then "Copyright" popup should be displayed
+
+  @Map
+  Scenario: TC_Map_206:Edit Map - Copyright - Verify text=check.
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button from copyright popup
+    Then The default text should be "Source: CEIC Data"
+    When Click on "Save"
+    Then Copyright text "Source: CEIC Data" should be displayed on visual
+
+  @Map
+  Scenario: TC_Map_207:Edit Map - Copyright - Verify text change for copyright
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button and Edit the text as "CDMNext" and Save
+    Then Updated copyright "CDMNext" should be displayed on visual
+
+  @Map
+  Scenario: TC_Map_208:Edit Map - Copyright - Verify link for copyright
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button from copyright popup and Save
+    And Click on the Copyright
+    Then "Copyright" popup should be displayed
+
+  @Map
+  Scenario: TC_Map_209:Edit Map - Copyright -Verify copyright color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Select color for "Copyright"
+    When Click on "Save"
+    Then Visual "Copyright" should be displayed in selected color
+
+  @Map
+  Scenario: TC_Map_210:Edit Map - Copyright - Verify font size
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Select size for visual "Copyright" as "20"
+    When Click on "Save"
+    Then The "Copyright" font size should be changed as "20"

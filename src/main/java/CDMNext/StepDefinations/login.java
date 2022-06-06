@@ -6,7 +6,6 @@ import java.awt.Robot;
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
 //import java.net.URL;
-//import java.net.URL;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -34,7 +33,7 @@ import org.testng.Assert;
 //import org.testng.ITestResult;
 
 
-//import CDMNext.runner.TestRunner;
+
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.ErrorScreenshot;
 import CDMNext.util.Hooks;
@@ -45,6 +44,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 
 public class login {
 	public static WebDriver driver;
@@ -98,6 +98,7 @@ public class login {
 	public static String parameters;
 	//TestRunner testRunner = new TestRunner();
 	
+	
 	@Before
 	public void setUp(Scenario scenario) throws Throwable {
 		//driver.manage().deleteAllCookies();
@@ -107,23 +108,28 @@ public class login {
 	    root.setLevel(ch.qos.logback.classic.Level.INFO);
 		Invoke_browser();	
 		SearchTest.user_has_successful_logged_in();	
-		//Hooks.Handle_BrowserNotification_popup();
-		
-		Hooks.before_run();
-		//Hooks.getFeatureFileNameFromScenarioId(scenario);
-		/*if (testRunner.cucumberFeature.getCucumberFeature().equals("FilterSearch")) {
-			// Hooks.Handle_BrowserNotification_popup();
+			
+		String feature_file = Hooks.getFeatureFileNameFromScenarioId(scenario);
+		if (feature_file.toLowerCase().contains("filtersearch") || feature_file.toLowerCase().contains("synonym search")) {
+			Hooks.CloseAnnouncementPopUp();
+			Hooks.Handle_BrowserNotification_popup();
+			login.driver.navigate().refresh();
+			CommonFunctionality.ResetMethod();
 		} else {
 			Hooks.before_run();
-		}*/
+		}
 		
 	}
 	
 	@After
 	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);
-		Hooks.after_run();
+		String feature_file = Hooks.getFeatureFileNameFromScenarioId(scenario);
+		if (!feature_file.toLowerCase().contains("filtersearch") || !feature_file.toLowerCase().contains("synonym search")) {
+			Hooks.after_run();
+		} 
 		
+		//Hooks.copyingOldReports();
 		//System.out.println("\nInside Cucumber > @After in Login.java.  Tearing down.");
 		// driver.quit();
 
@@ -252,6 +258,7 @@ public class login {
 	}
 
 	public static void Invoke_browser() throws Throwable {
+		
 
 		LOCATORS = new Properties();
 
@@ -311,18 +318,18 @@ public class login {
 			driver = new InternetExplorerDriver(capabilities);
 
 		} else if (CONFIG.getProperty("browserType").equalsIgnoreCase("CHROME")) {
+			
 			//disableSeleniumLogs();
 			// Killing the running chromedriver instances
+			
 			WindowsUtils.killByName("chromedriver.exe");
-			 //setup the chromedriver using WebDriverManager
-		//	WebDriverManager.chromedriver().version("83").setup();
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\Resources\\chromedriver.exe");
 			//disable chrome logs
 			System.setProperty("webdriver.chrome.silentOutput","true");
-//			ChromeOptions options = new ChromeOptions();
-//			options.addArguments("--incognito");
-//			driver = new ChromeDriver(options);
+			/*ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
+			driver = new ChromeDriver(options);*/
 			HashMap<String, Object> prefs = new HashMap<String, Object>();
 			String download = System.getProperty("user.home") + "\\Downloads";
 			prefs.put("profile.default_content_settings.popups", 0);

@@ -940,32 +940,18 @@ public class ReleasesTab {
 						"//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Watchlist')]", 4))
 				.click().build().perform();
 		String actual = "Real GDP: YoY: sa";
-		
-		/*try {
-			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
-				actual = "Real GDP: YoY: sa";
-			} else {
-				actual = CommonFunctionality
-						.getElementByXpath(login.driver, "//*[contains(text(),'" + Comparables.series_name + "')]", 4)
-						.getText();
-			}
-		} catch(Exception e	) {
-			actual = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[contains(text(),'" + DatabasesTab.series_name + "')]", 4)
-					.getText();
-		}*/
+	
 		String text;
+		WebElement expectedStr = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='watchlist--list']//*[contains(@class,'series-list-item__selected')]//*[@class='series-item--name']",
+				4);
 		try {
-			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+			if (!Comparables.series_name.isEmpty()) {
 				text = CommonFunctionality.getElementByXpath(login.driver,
 						"(//*[@class='series-item-information--additional-text'])[1]",
 						4).getText();
 			} else {
-				text = CommonFunctionality
-						.getElementByXpath(login.driver,
-								"(//*[@class='series-item-information--additional-text'])[1]",
-								4)
-						.getText();
+				text = expectedStr.getText();
 			}
 		} catch(Exception e) {
 			text = CommonFunctionality
@@ -996,9 +982,12 @@ public class ReleasesTab {
 							4)
 					.getText();
 		}*/
+		String expected = null;
+		String expected1 = null;
+		try {
 		String split[] = text.split("\\,");
 		String replace = split[0];
-		String expected;
+		
 		if (replace.contains("Popup")) {
 			expected = replace.replaceAll("Popup", "popup_notifications");
 		} else {
@@ -1008,9 +997,9 @@ public class ReleasesTab {
 		String text1 = split1[0];
 		String expected12 = text1.substring(1, 2).toUpperCase();
 		String expected13 = text1.substring(2, text1.length());
-		String expected1 = expected12 + expected13;
-		try {
-			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+		expected1 = expected12 + expected13;
+	
+			if (Comparables.series_name.equalsIgnoreCase(text)) {
 			sa.assertEquals("Real GDP: YoY: sa", actual);
 			} else {
 			sa.assertEquals(Comparables.series_name, actual);

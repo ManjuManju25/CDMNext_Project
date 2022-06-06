@@ -694,6 +694,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Rename" option
     And Select multiple attributes
     And Click on "Apply"
+     And Click on "OK"
     Then Selected attributes should be displayed as series name
 
   @PieVisual
@@ -1563,7 +1564,8 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Open advanced settings popup" icon
     And Select Text radio button from copyright popup and Save
     And Click on the Copyright
-    Then The user should redirect to "https://www.ceicdata.com/en" link
+    Then "Copyright" popup should be displayed
+    #Then The user should redirect to "https://www.ceicdata.com/en" link
 
   @PieVisual
   Scenario: TC_Pie_198:Edit pie - Copyright -Verify copyright color
@@ -1677,7 +1679,7 @@ Feature: Verifying Pie Visual Functionality
     Then "Date +1" value should be displayed as default
 
   @PieVisual
-  Scenario Outline: <TCID>:Edit Pie - Name tooltip for pie visual
+  Scenario Outline: <TCID>:Edit Pie - <ActualAttribute> tooltip for pie visual
     And Create a pie visual with series id's "16240301;16243001"
     And Click on "Edit Pie"
     And Check "Tooltips"
@@ -1691,7 +1693,8 @@ Feature: Verifying Pie Visual Functionality
       | TC_Pie_209 | Region          | Region            |
       | TC_Pie_210 | Frequency       | Frequency         |
       | TC_Pie_211 | Percentage      | Percentage        |
-
+      | TC_Pie_212 | Function description      | Function description        |
+      
   @PieVisual
   Scenario: TC_Pie_209:Edit pie - Region tooltip for pie visual
     And Create a pie visual with series id's "16240301;16243001"
@@ -1741,7 +1744,7 @@ Feature: Verifying Pie Visual Functionality
     Then The following items should be available
       | Common |
       | Items  |
-      | Border |
+      #| Border |
 
   @PieVisual
   Scenario: TC_Pie_214:Edit pie > tooltip dropdown > advanced settings > Common
@@ -1836,104 +1839,104 @@ Feature: Verifying Pie Visual Functionality
     When Click on "Save"
     Then Size of tooltips should get changed as "18"
 
-  @PieVisual
-  Scenario: TC_Pie_224:Edit pie > tooltip dropdown > advanced settings > items > Verify bold style
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Items"
-    And Click on Bold icon for "Items"
-    When Click on "Save"
-    Then Tooltip text should turn into "Bold" format
-
-  @PieVisual
-  Scenario: TC_Pie_225:Edit pie > tooltip dropdown > advanced settings > items > Verify Italic style
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Items"
-    And Click on "Italic" icon for items
-    When Click on "Save"
-    Then Tooltip text should turn into "Italic" format
-
-  @PieVisual
-  Scenario: TC_Pie_226:Edit pie > tooltip dropdown > advanced settings > items > Verify underline style
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Items"
-    And Click on "Underline" icon for items
-    When Click on "Save"
-    Then Tooltip text should turn into "Underline" format
-
-  @PieVisual
-  Scenario: TC_Pie_227:Edit pie > tooltip dropdown > advanced settings > items > Verify unbold format
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Items"
-    And Click on "Bold" icon for items
-    And Click on same
-    When Click on "Save"
-    Then Tooltip text should turn into "Unbold" format
-
-  @PieVisual
-  Scenario: TC_Pie_228:Edit pie > tooltip dropdown > advanced settings > items > Verify non Italic style
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Items"
-    And Click on "Italic" icon for items
-    And Click on same
-    When Click on "Save"
-    Then Tooltip text should turn into "NonItalic" format
-
-  @PieVisual
-  Scenario: TC_Pie_229:Edit pie > tooltip dropdown > advanced settings > items > Verify non underlined style
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Items"
-    And Click on "Underline" icon for items
-    And Click on same
-    When Click on "Save"
-    Then Tooltip text should turn into "NonUnderlined" format
-
-  @PieVisual
-  Scenario: TC_Pie_230:Edit pie - Tooltip - Verify color for tooltip border
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Border"
-    And Select color for "tooltip border"
-    And Click on "Save"
-    Then Border of tooltip should be applied with selected color
-
-  @PieVisual
-  Scenario: TC_Pie_231:Edit pie - Tooltip - Verify border width
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Click on "Advanced settings"
-    And Expand "Border"
-    And Select Width to 5
-    And Click on "Save"
-    Then The tooltp border width should be changed as "5"
+  #@PieVisual(https://securities.jira.com/browse/CVISION-20015)
+  #Scenario: TC_Pie_224:Edit pie > tooltip dropdown > advanced settings > items > Verify bold style
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Items"
+    #And Click on Bold icon for "Items"
+    #When Click on "Save"
+    #Then Tooltip text should turn into "Bold" format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_225:Edit pie > tooltip dropdown > advanced settings > items > Verify Italic style
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Items"
+    #And Click on "Italic" icon for items
+    #When Click on "Save"
+    #Then Tooltip text should turn into "Italic" format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_226:Edit pie > tooltip dropdown > advanced settings > items > Verify underline style
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Items"
+    #And Click on "Underline" icon for items
+    #When Click on "Save"
+    #Then Tooltip text should turn into "Underline" format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_227:Edit pie > tooltip dropdown > advanced settings > items > Verify unbold format
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Items"
+    #And Click on "Bold" icon for items
+    #And Click on same
+    #When Click on "Save"
+    #Then Tooltip text should turn into "Unbold" format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_228:Edit pie > tooltip dropdown > advanced settings > items > Verify non Italic style
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Items"
+    #And Click on "Italic" icon for items
+    #And Click on same
+    #When Click on "Save"
+    #Then Tooltip text should turn into "NonItalic" format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_229:Edit pie > tooltip dropdown > advanced settings > items > Verify non underlined style
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Items"
+    #And Click on "Underline" icon for items
+    #And Click on same
+    #When Click on "Save"
+    #Then Tooltip text should turn into "NonUnderlined" format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_230:Edit pie - Tooltip - Verify color for tooltip border
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Border"
+    #And Select color for "tooltip border"
+    #And Click on "Save"
+    #Then Border of tooltip should be applied with selected color
+#
+  #@PieVisual
+  #Scenario: TC_Pie_231:Edit pie - Tooltip - Verify border width
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Check "Tooltips"
+    #And Open date dropdown
+    #And Click on "Advanced settings"
+    #And Expand "Border"
+    #And Select Width to 5
+    #And Click on "Save"
+    #Then The tooltp border width should be changed as "5"
 
   @PieVisual
   Scenario: TC_Pie_232:Edit pie > Verify size of visual
@@ -2013,9 +2016,9 @@ Feature: Verifying Pie Visual Functionality
     And Click on legend dropdown
     And Click on "Advanced settings"
     And "Items" section from Legand popup should expand
-    And Select any "legend_item_color" for chart visual
-    And Select "#2b60d0" legend color from list
-    And Clicking "Save" option
+   And Select color for "Items"
+    #And Select "#2b60d0" legend color from list
+    When Click on "Save"
     Then The Selected "Color" should reflect in the pie visual legand
 
   @PieVisual
@@ -2118,9 +2121,9 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Advanced settings"
     And "Background" section from Legand popup should expand
     And Check the checkbox for "Background" section
-    And Select any "legend_background_color" for chart visual
-    And Select "#2b60d0" legend bgcolor from list
-    Then The Selected "Background color" should reflect in the chart visual legand
+    And Select background color for legend
+    When Click on "Save"
+    Then The Selected "Background color" should reflect in the visual legand
 
   @PieVisual
   Scenario: TC_Pie_249:Edit pie > legend > advanced settings under dropdown > Border color
@@ -2130,9 +2133,9 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Advanced settings"
     And "Border" section from Legand popup should expand
     And Check the checkbox for "Border" section
-    And Select any "legend_border_color" for chart visual
-    And Select "#2b60d0" legend border color from list
-    Then The Selected "Border color" should reflect in the chart visual legand
+    And Select border color for legend
+    When Click on "Save"
+    Then The Selected "Border color" should reflect in the pie visual legand
 
   @PieVisual
   Scenario: TC_Pie_250:Edit pie > legend > advanced settings under dropdown > Border width
@@ -2199,7 +2202,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on Advanced settings icon for Data labels
     And Expand "Labels" section from "Labels" popup
     And Select data label "color" from the list
-    And Select the "#2b60d0" data label color from list
+    And Select the color for Labels
     And Clicking "Save" option
     Then Selected color should be applied for visuals
 
@@ -2209,9 +2212,8 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Edit Pie"
     And Click on Advanced settings icon for Data labels
     And Expand "Labels" section from "Labels" popup
-    And Select the "#2b60d0" data label color from list
     And Select data label "highlight" from the list
-    And Select the "#fda546" data label highlight color from list
+    And Select the Highlight color for label
     And Clicking "Save" option
     Then Selected highlight color for labels should be shown
 
@@ -2430,7 +2432,7 @@ Feature: Verifying Pie Visual Functionality
     And Create a pie visual with series id's "272965603"
     And Click on "Edit Pie"
     And Click on "Edit series" icon
-    And Select "Color" as "#2b60d0"
+    And Select "Color" as "Orange"
     Then Selected color should be applied to the series
 
   @PieVisual

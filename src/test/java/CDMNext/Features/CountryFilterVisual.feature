@@ -210,7 +210,7 @@ Feature: Verifying Country Filter functionality
     And Choose "Insert visual"
     Then Verify insert visual sub dropdown options for filter visual
 
-  @FilterVisual
+  @FilterVisual1
   Scenario: Tc_FilterVisual_33:Verify creating filter visual with other visuals
     And Create any other visuals in a view
     And Create filter visual

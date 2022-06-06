@@ -128,7 +128,7 @@ public class SprintCases {
 	@Then("^The modal window should get collapsed into row$")
 	public void the_modal_window_should_get_collapsed_into_row() throws Throwable {
 		CommonFunctionality.wait(1000);
-		String maximize = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Maximize']")))
+		String maximize = CommonFunctionality.getElementByXpath(login.driver,"//*[@title='Maximize']",8)
 				.getAttribute("title");
 		if (minimize.equals(maximize) != true) {
 			login.Log4j.info("SSP window is minimized");
@@ -146,7 +146,7 @@ public class SprintCases {
 	public void select_filter(String arg1) throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 20).click();
 		CommonFunctionality.wait(10000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + arg1 + "')]")))
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]",8)
 				.click();
 	}
 
@@ -155,7 +155,7 @@ public class SprintCases {
 			int arg1) throws Throwable {
 		Thread.sleep(5000);
 		List<WebElement> seriesLevel_ULele = login.driver
-				.findElements(By.xpath("//*[contains(@class,'search-series-list')]"));
+				.findElements(By.xpath("//*[contains(@class,'series-search-list-item')]"));
 		login.Log4j.info("size : " + seriesLevel_ULele.size());
 		if (seriesLevel_ULele.size() == 1 || seriesLevel_ULele.size() > 1) {
 			login.Log4j.info("Series level is displayed for less than " + arg1 + " search results");
@@ -219,13 +219,13 @@ public class SprintCases {
 		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		Thread.sleep(2000);
-		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
+		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//*[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		for (int i = 0; i < ListOfSeries.size(); i++) {
 			int j = i + 1;
 			Thread.sleep(1000);
 			WebElement seriesName = ListOfSeries.get(i);
 			CommonFunctionality.action.pause(1000).moveToElement(seriesName).build().perform();
-			CommonFunctionality.getElementByXpath(login.driver,"//*[@class='search-series-list']/*[" + j + "]//*[@class='view-chart-icon menu-icon']",6).click();
+			CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='series-representation--list']//*[@class='view-chart-icon menu-icon'])[" + j + "]",6).click();
 		}
 	}
 
@@ -457,7 +457,7 @@ public class SprintCases {
 			Assert.fail("Color picker is not displayed");
 		}
 		WebElement color_picker = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-				"//*[@class='sp-container sp-light sp-buttons-disabled sp-palette-buttons-disabled sp-initial-disabled color-picker-selection']")));
+				"//*[contains(@class,'index-module_dropdown')]")));
 		if (color_picker.isDisplayed() == true) {
 			login.Log4j.info("Color picker is displayed");
 		} else {
