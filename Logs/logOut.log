@@ -26342,3 +26342,17 @@ Inside setup
 Inside TestNG > @AfterSuite
 2022-08-08 15:31:35 INFO  Log4j:71 - 
  CLOSING THE BROWSER WE YOU GO
+2022-08-11 12:38:39 INFO  Log4j:39 - 
+Inside TestNG > @BeforeSuite
+2022-08-11 12:38:40 INFO  Log4j:61 - 
+Inside TestNG > @DataProvider
+2022-08-11 12:38:41 INFO  Log4j:53 - 
+Inside TestNG > @Test
+2022-08-11 12:38:41 INFO  Log4j:282 - Logger initialized and writing using logger
+2022-08-11 12:38:41 INFO  Log4j:283 - 
+Inside setup
+2022-08-11 12:38:55 INFO  Log4j:54 - It is in else If block
+2022-08-11 12:39:00 INFO  Log4j:245 - Launching site .. 
+2022-08-11 12:39:00 INFO  Log4j:247 - Trying to login with Username:
+2022-08-11 12:39:02 INFO  Log4j:251 - Trying to login with Password:
+2022-08-11 12:39:03 INFO  Log4j:254 - Clicking on login button 
