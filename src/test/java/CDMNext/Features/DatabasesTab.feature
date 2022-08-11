@@ -122,7 +122,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_18: Verifying right click options for Databases level
     Given Right click on any database
-    Then "Set language,Copy selected links,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
+    Then "Set language,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
 
   @DB
   Scenario Outline: <TCID>: Verifying DB language change in right click
@@ -162,7 +162,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_25: Verify right click options for Topic level
     And Right click on any topic level of data
-    Then "Copy selected links,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
+    Then "Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
 
   @DB
   Scenario: TC_DB_26: Verifying Copy link(s) for Topic level
@@ -196,7 +196,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_30: Verify right click options for section level
     And Right click on any section level of data
-    Then "Copy selected links,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
+    Then "Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
 
   @DB
   Scenario: TC_DB_31: Verifying right click options for Section level
@@ -281,7 +281,7 @@ Feature: Verifying Databases tab functionality
     And Click on "Add and replace"
     Then The selected table data should be replaced with existing data on the visual
 
-  #@DB1...functionality has been changed
+  #@DB....removed for table level
   #Scenario: TC_DB_43:Verifying Add and Group for table level
     #And Mouse hover on any table level
     #And Click on dropdown icon
@@ -432,7 +432,7 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_57:Verify confirmation window for more than max series selection for visual creation
     And Right click on any table level and select more than max series
     And Select "View as Chart"
-    Then Confirmation window should display with "You cannot create a chart with more than 20 series. Proceed with 20 series?"
+    Then Confirmation window should display with "You cannot create a chart with more than 30 series. Proceed with 30 series?"
 
   @DB
   Scenario: TC_DB_58:Verifying cancel/x button for confrimation popup
@@ -493,65 +493,65 @@ Feature: Verifying Databases tab functionality
     And Drag and drop to my series/visual
     Then The entire table should be added to my series
 
-  @DB
-  Scenario: TC_DB_67:Verifying related data
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on "Show related data" icon
-    Then Related data should be displayed under the dropdown
-
-  @DB
-  Scenario: TC_DB_68:Verify Related data > Remarks
-    And Expand World Trend Plus till series level
-    And Click on Show related data icon
-    Then "Remarks:" should be displayed if available for the series
-
-  @DB
-  Scenario: TC_DB_69:Verify 'Read more' for Remarks under Related data
-    And Expand World Trend Plus till series level
-    And Click on Show related data icon
-    And Click on "Read More"
-    Then Should open related footnotes
-
-  @DB
-  Scenario: TC_DB_70:Verify clicking Datasets
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on datalinks under datasets
-    Then Should redirect to respective datasets
-
-  @DB
-  Scenario: TC_DB_71:Verify related insights
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on any insights under insights section
-    Then Insights should be opened in preview mode
-
-  @DB
-  Scenario: TC_DB_72:Verify share icon for insight
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on share under insights section
-    Then Share popup should be opened if have permission to share
-
-  @DB
-  Scenario: TC_DB_73:Verify add to favorite icon
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on Show related data icon
-    And Click on add to favourite under insights section
-    Then The insights should be added to favorite list
-
-  @DB
-  Scenario: TC_DB_74:Verify hide related data
-    And Select database as Daily Database
-    And Expand till series level
-    And Click on "Show related data"
-    And Click on "Hide related data"
-    Then The related data dropdown should be collapsed
+  #@DB....show related data dropdown functionality has been removed for series level
+  #Scenario: TC_DB_67:Verifying related data
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on "Show related data" icon
+    #Then Related data should be displayed under the dropdown
+#
+  #@DB
+  #Scenario: TC_DB_68:Verify Related data > Remarks
+    #And Expand World Trend Plus till series level
+    #And Click on Show related data icon
+    #Then "Remarks:" should be displayed if available for the series
+#
+  #@DB
+  #Scenario: TC_DB_69:Verify 'Read more' for Remarks under Related data
+    #And Expand World Trend Plus till series level
+    #And Click on Show related data icon
+    #And Click on "Read More"
+    #Then Should open related footnotes
+#
+  #@DB
+  #Scenario: TC_DB_70:Verify clicking Datasets
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on datalinks under datasets
+    #Then Should redirect to respective datasets
+#
+  #@DB
+  #Scenario: TC_DB_71:Verify related insights
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on any insights under insights section
+    #Then Insights should be opened in preview mode
+#
+  #@DB
+  #Scenario: TC_DB_72:Verify share icon for insight
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on share under insights section
+    #Then Share popup should be opened if have permission to share
+#
+  #@DB
+  #Scenario: TC_DB_73:Verify add to favorite icon
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on add to favourite under insights section
+    #Then The insights should be added to favorite list
+#
+  #@DB
+  #Scenario: TC_DB_74:Verify hide related data
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on "Show related data"
+    #And Click on "Hide related data"
+    #Then The related data dropdown should be collapsed
 
   @DB
   Scenario: TC_DB_75: Verifying 'View as chart'
@@ -616,7 +616,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_83:More actions - Verify View as Histogram for series level
     And Mouse hover on any series level
-    And Click on More actions
+    And Click on "More actions"
     And Select "Histogram"
     Then Visual should be created with "Edit Histogram"
 
@@ -739,14 +739,14 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_100:Verify Add option under add dropdown
     And Mouse hover on any series level
-    And Select "Add" option
+    And Select "Add" option at series level
     Then The series should be added to my series
 
   @DB
   Scenario: TC_DB_101:Verify Add option when Views tab opened in right side panel
     And Click on View tab on right side
     And Mouse hover on any series level
-    And Select "Add" option
+    And Select "Add" option at series level
     Then Chart should be created with the series
 
   #	Then Chart should be created with selected seires
@@ -754,14 +754,14 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_102:Verify Add and Replace
     And Create a visual and select visual
     And Select a series and Click on dropdown icon
-    And Click on "Add and replace"
+    And Click on "Add and replace" 
     Then The selected series should be replaced with existing series on the visual
 
-  #@DB1...functionaly has been changed
-  #Scenario: TC_DB_103:Verify Add and Group
-   #And Select a series and Click on dropdown icon
-    #And Click on "Add and group"
-    #Then Selected series should be added as group in My series
+  @DB
+  Scenario: TC_DB_103:Verify Add and Group
+   And Select a series and Click on dropdown icon
+    And Click on "Add and group"
+    Then Selected series should be added as group in My series
 
   @DB
   Scenario: TC_DB_104:Verify Add to new insight
@@ -945,7 +945,8 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_128:Right click - Verify Copy links for a series
-    And Right click on any series
+    #And Right click on any series
+     And Right click on any series level of data
     And Select "Copy selected links"
     Then URL should be generated for selected series
 
@@ -972,28 +973,30 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_132:Right click - Verify 'Series info' option for series
-    And Right click on any series
+    #And Right click on any series
+     And Right click on any series level of data
     And Select "Series Info"
     Then The SSP window should be opened
 
   @DB
   Scenario: TC_DB_133:Right click - Verify 'Footnotes' option for series
     And Right click on any series
-    And Select "Footnotes"
+     And Select "Footnotes"
     Then Footnotes should be opened for related "series"
 
   @DB
   Scenario: TC_DB_134:Right click - Verify back button
-    And Right click on any series
+    #And Right click on any series
+     And Right click on any series level of data
     And Select "Show Dataset"
     And Click on Back button
     Then Should redirect to database tab
 
-  @DB
-  Scenario: TC_DB_135:Verify adding separators with series
-    And Select series with separators
-    And Add to my series
-    Then Selected series and separators should be added to my series
+  #@DB ..... need to check locators and logic
+  #Scenario: TC_DB_135:Verify adding separators with series
+    #And Select series with separators
+    #And Add to my series
+    #Then Selected series and separators should be added to my series
 
   @DB
   Scenario: TC_DB_136:Verify series order when table data added
@@ -1091,6 +1094,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_147:Series selection - Verify CTC
     And Select some series from series level
+    And Click on selected series count
     And Click on "Copy to Clipboard" icon on header
     Then Download window should be appeared with selected series count
 

@@ -400,6 +400,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Rename" option
     And Select multiple attributes
     And Click on "Apply"
+      And Click on "OK"
     Then Selected attributes should be displayed as series name
 
   @Histogram
@@ -881,16 +882,16 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on Background drop down
-    And Uncheck Histogram and Visual
-    Then Background should not be seen for histogram and visual
+    And Uncheck "Histogram" and Visual
+    Then Background should not be seen for "histogram" and visual
 
   @Histogram
   Scenario: TC_Histogram_104:Edit Histogram - Verify Background=YES
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on Background drop down
-    And Check Histogram and Visual
-    Then Background should be displayed for histogram and visual
+    And Check "Histogram" and Visual
+    Then Background should be displayed for "histogram" and visual
 
   @Histogram
   Scenario: TC_Histogram_105:Edit Histogram - Background - Verify histogram color
@@ -899,7 +900,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Background drop down
     And Check Histogram for "Background"
     And Select background color
-    Then Background should be displayed for histogram with selected color
+    Then Background should be displayed for "histogram" with selected color
 
   @Histogram
   Scenario: TC_Histogram_106:Edit Histogram - Background - Verify image upload for histogram
@@ -908,7 +909,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Background drop down
     And Check Histogram for "Background"
     And click on Browse > upload image
-    Then Uploaded image should be displayed in histogram background
+    Then Uploaded image should be displayed in "histogram" background
 
   @Histogram
   Scenario: TC_Histogram_107:Edit Histogram - Background - Verify uploading different format of file for histogram
@@ -1309,7 +1310,8 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Open advanced settings popup" icon
     And Select Text radio button from copyright popup and Save
     And Click on the Copyright
-    Then The user should redirect to "https://www.ceicdata.com/en" link
+    Then "Copyright" popup should be displayed
+    #Then The user should redirect to "https://www.ceicdata.com/en" link
 
   @Histogram
   Scenario: TC_Histogram_152:Edit Histogram - Copyright - Verify copyright color
@@ -1473,6 +1475,7 @@ Feature: Verifying Histogram Visual functionality
     And Create a histogram visual
     And Add a series to the visual
     And Click on "Edit Histogram"
+     And Check Show Series
     And Check "Tooltips"
     And Click on cogwheel for advance settings
     And Expand "Items"
@@ -1507,47 +1510,48 @@ Feature: Verifying Histogram Visual functionality
     When Click on "Save"
     Then The font size in tooltip should be changed as "15"
 
-  @Histogram
-  Scenario: TC_Histogram_170:Edit Histogram - Tooltip - Verify bold style
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Check "Tooltips"
-    And Click on cogwheel for advance settings
-    And Expand "Items"
-    And Select items as "Region" from dropdown
-    And Click on Bold icon for "Items"
-    When Click on "Save"
-    Then The text in tooltip should be displayed in "Bold" format
+  #@Histogram..... font styles has been removed(https://securities.jira.com/browse/CVISION-20015)
+  #Scenario: TC_Histogram_170:Edit Histogram - Tooltip - Verify bold style
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Check "Tooltips"
+    #And Click on cogwheel for advance settings
+    #And Expand "Items"
+    #And Select items as "Region" from dropdown
+    #And Click on Bold icon for "Items"
+    #When Click on "Save"
+    #Then The text in tooltip should be displayed in "Bold" format
 
-  @Histogram
-  Scenario: TC_Histogram_171:Edit Histogram - Tooltip - Verify Italic style
-    And Create a histogram visual
-    And Add a series to the visual
-    And Click on "Edit Histogram"
-    And Check "Tooltips"
-    And Click on cogwheel for advance settings
-    And Expand "Items"
-    And Select items as "Region" from dropdown
-    And Click on "Italic" icon for items
-    When Click on "Save"
-    Then The text in tooltip should be displayed in "Italic" format
-
-  @Histogram
-  Scenario: TC_Histogram_172:Edit Histogram - Tooltip - Verify underline style
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Check "Tooltips"
-    And Click on cogwheel for advance settings
-    And Expand "Items"
-    And Select items as "Region" from dropdown
-    And Click on "Underline" icon for items
-    When Click on "Save"
-    Then The text in tooltip should be displayed in "Underline" format
+  #@Histogram
+  #Scenario: TC_Histogram_171:Edit Histogram - Tooltip - Verify Italic style
+    #And Create a histogram visual
+    #And Add a series to the visual
+    #And Click on "Edit Histogram"
+    #And Check "Tooltips"
+    #And Click on cogwheel for advance settings
+    #And Expand "Items"
+    #And Select items as "Region" from dropdown
+    #And Click on "Italic" icon for items
+    #When Click on "Save"
+    #Then The text in tooltip should be displayed in "Italic" format
+#
+  #@Histogram
+  #Scenario: TC_Histogram_172:Edit Histogram - Tooltip - Verify underline style
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Check "Tooltips"
+    #And Click on cogwheel for advance settings
+    #And Expand "Items"
+    #And Select items as "Region" from dropdown
+    #And Click on "Underline" icon for items
+    #When Click on "Save"
+    #Then The text in tooltip should be displayed in "Underline" format
 
   @Histogram
   Scenario Outline: TC_Histogram_173: Edit Histogram - Tooltip - Verify grouping and decimal under number separators.
     And Create histogram visual with series
     And Click on "Edit Histogram"
+     And Check Show Series
     And Check "Tooltips"
     And Click on Number format dropdown
     And Select <decimal> and <group> separator from dropdown list
@@ -1586,27 +1590,27 @@ Feature: Verifying Histogram Visual functionality
     And Click on X icon to close the popup
     Then The "tooltip" popup should be closed
 
-  @Histogram
-  Scenario: TC_Histogram_176:Edit Histogram - Tooltip - Verify color for tooltip border
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Check "Tooltips"
-    And Click on cogwheel for advance settings
-    And Expand "Border"
-    And Select color for "tooltip border"
-    And Click on "Save"
-    Then Tooltip border should be displayed with selected color
-
-  @Histogram
-  Scenario: TC_Histogram_177:Edit Histogram - Tooltip - Verify border width
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Check "Tooltips"
-    And Click on cogwheel for advance settings
-    And Expand "Border"
-    And Select Width to 5
-    And Click on "Save"
-    Then The tooltp border width should be updated to "5"
+  #@Histogram(https://securities.jira.com/browse/CVISION-20015)
+  #Scenario: TC_Histogram_176:Edit Histogram - Tooltip - Verify color for tooltip border
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Check "Tooltips"
+    #And Click on cogwheel for advance settings
+    #And Expand "Border"
+    #And Select color for "tooltip border"
+    #And Click on "Save"
+    #Then Tooltip border should be displayed with selected color
+#
+  #@Histogram
+  #Scenario: TC_Histogram_177:Edit Histogram - Tooltip - Verify border width
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Check "Tooltips"
+    #And Click on cogwheel for advance settings
+    #And Expand "Border"
+    #And Select Width to 5
+    #And Click on "Save"
+    #Then The tooltp border width should be updated to "5"
 
   @Histogram
   Scenario: TC_Histogram_178:Edit Histogram - Verify the changes reflected in edit visual
@@ -2469,7 +2473,7 @@ Feature: Verifying Histogram Visual functionality
       | Tooltip_expand | Tooltip_collapse |
       | "Common"       | "Common"         |
       | "Items"        | "Items"          |
-      | "Border"       | "Border"         |
+      #| "Border"       | "Border"         |
 
   @Histogram
   Scenario: TC_Histogram_284:Edit Histogram - Edit series - Verify edit series icon

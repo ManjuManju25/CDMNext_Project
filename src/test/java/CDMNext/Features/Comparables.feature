@@ -71,7 +71,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_11: Verify copy link in comparables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Click on "More actions" option in series level
     And Select the "Copy selected links" option
     And URL should be generated for selected series
@@ -80,7 +80,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_12: Verify opening footnotes in comparables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Click on "Open footnote" option in series level
     Then The Footnotes window tab should be opened
 
@@ -183,14 +183,14 @@ Feature: Verify Comparables feature
     And Clicking Collapse tree
     Then Should be able to collapse section levels results
 
-  @Comparables
-  Scenario: Tc_Comparables_31: Verify options for table level's in comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Click "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" to collapse
-    And Clicking "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
-    And Clicking "add-to-data-selection--toggle" option from Table
-    Then "Add" , "Add and replace" , "Add and group" , "Add to new insight" , "Add to recent insight" Options should present
+  #@Comparables....removed for table level
+  #Scenario: Tc_Comparables_31: Verify options for table level's in comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Click "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" to collapse
+    #And Clicking "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
+    #And Clicking "add-to-data-selection--toggle" option from Table
+    #Then "Add" , "Add and replace" , "Add and group" , "Add to new insight" , "Add to recent insight" Options should present
 
   #@Comparables.. right click options has been removed
   #Scenario: Tc_Comparables_32: Verify right click options in table level of comparables
@@ -257,6 +257,7 @@ Feature: Verify Comparables feature
   #And Clicking "Add to recent insight" from dropdown list
   #Then Any insight could be selected for the table to add
   #And Closing the chart visual
+  
   @Comparables
   Scenario: Tc_Comparables_39: Verify new/replace/forescast/key icon's infront of series name in comparables
     And Verify Subscribed series only filter under filters
@@ -271,9 +272,9 @@ Feature: Verify Comparables feature
   Scenario: Tc_Comparables_40: Verify multiple above icons to be present in series level
     And Verify Subscribed series only filter under filters
     And Select "new" checkbox from more section
-    And User has clicked on "Apply filter"
-    And Verify Subscribed series only filter under filters
-    And Select "Key" checkbox from more section
+    #And User has clicked on "Apply filter"
+    #And Verify Subscribed series only filter under filters
+    And Select "key" checkbox from more section
     And User has clicked on "Apply filter"
     And Clicking "Comparables" icon
     And Expand the tree for key icons
@@ -283,7 +284,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_41: Verify SSP window for series level
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Click on series name
     Then Verify SSP window
 
@@ -325,14 +326,14 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_48: Verify opening SSP when click on series name
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to series name
     Then SSP window for specific series should be opened
 
   @Comparables
   Scenario: Tc_Comparables_49: Verify drag and drop for comparable series
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Select 1 series inside table
     And Get the name of series
     And Perform Drag and Drop operation
@@ -341,7 +342,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_50: Verify drag and drop for multiple comparable series
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Select 3 series inside table
     And Get the name of series
     And Perform Drag and Drop operation
@@ -350,13 +351,13 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_51: Verify downloading series selected in comparables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Select 2 series inside table
     And Get the name of series
     And Clicking "Download" button from Header portion
     Then The Series selected should gets downloaded to excel
 
-  @Comparables2
+  @Comparables
   Scenario: Tc_Comparables_52: Verify CTC of series in comparables
     And Clicking "Comparables" icon
     And Search for "249416501"
@@ -366,23 +367,23 @@ Feature: Verify Comparables feature
     And Clicking "Copy to Clipboard" button from Header portion
     And Copy the data after clicking Copy button
     Then The Series selected should gets copied to excel
-
-  @Comparables
-  Scenario: Tc_Comparables_53: Verify opening dropdown for series in comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    Then The "Show related data" Option for the series should present
-
-  @Comparables
-  Scenario: Tc_Comparables_54: Verify closing dropdown for series in comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And Click "Hide related data" option in series
-    Then The "Hide related data" Option for the series should present
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_53: Verify opening dropdown for series in comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #Then The "Show related data" Option for the series should present
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_54: Verify closing dropdown for series in comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And Click "Hide related data" option in series
+    #Then The "Hide related data" Option for the series should present
 
   @Comparables
   Scenario: Tc_Comparables_55: Verify collapse all for series in comparables without any filter's
@@ -394,7 +395,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_56: Verify creating chart for selected series
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Select 1 series inside table
     And Get the name of series
     And Click on more actions to create "View as Chart"
@@ -404,7 +405,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_57: Verify creating chart for unselected series
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
     And Click on more actions to create "View as Chart"
     And Copy the insight title
@@ -413,7 +414,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_58: Verify creating chart for multiple series
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Select 2 series inside table
     And Hovor on to i icon without click
     And Click on more actions to create "View as Chart"
@@ -430,7 +431,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_60: Verify more options for series in comparables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Click on "More actions" option in series level
     Then The "Unselect all" , "Add", "Add to new insight", "Add to recent insight", "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
 
@@ -526,7 +527,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_71: Verify view as... in more options
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
     And Click on "View as ..." button in Comparables
@@ -597,7 +598,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_78: Verify copy links in more option
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to series name without click
     And Click on "More actions" button in Comparables
     And Select the "Copy selected links" option
@@ -608,7 +609,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_79: Verify series info for more option
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to series name without click
     And Click on "More actions" button in Comparables
     And Select the "Series Info" option
@@ -731,7 +732,7 @@ Feature: Verify Comparables feature
   #And Choose "View as ..." > "Pie"
   #Then The "Table - Edit Pie" option is shown
   #
-  #@Comparables1
+  #@Comparables
   #Scenario: Tc_Comparables_93: Verify view as Heatmap in table level
   #And Clicking "Comparables" icon
   #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
@@ -857,7 +858,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_108: Verify view as... for series level right click comparables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
     And Click on "View as ..." button in Comparables
     Then The "Pie" , "Heat map" , "Histogram" options are present
@@ -922,7 +923,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_115: Verify copy links for series level right click comparables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to series name without click
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
     And Select the "Copy selected links" option
@@ -992,128 +993,128 @@ Feature: Verify Comparables feature
     And Click "Expand views" option from top
     Then The Comparables tab is "Minimized"
 
-  @Comparables
-  Scenario: Tc_Comparables_127: Verify Read more for series in comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Read More" option for series should present
-    Then The Footnotes window should be open
-
-  @Comparables
-  Scenario: Tc_Comparables_128: Verify contents in dropdown beside series name
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    Then The "Read More" option in series should present
-    Then The "Datasets" option in series should present
-    And The "Related Insights" option in series should present
-    Then The "related-series-data--remarks" option in series should be present
-    And Click "Hide related data" option in series
-
-  @Comparables
-  Scenario: Tc_Comparables_129: Verify data sets for related series
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "series-data-set--table-name" option for series should present
-    Then The link is navigating to "Single Series"
-    And Click "Hide related data" option in series
-
-  @Comparables
-  Scenario: Tc_Comparables_130: Verify data sets for Multiple related series
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    Then The link is navigating to "Multiple Series"
-    And Click "Hide related data" option in series
-
-  @Comparables
-  Scenario: Tc_Comparables_131: Verify navigating to database for related series in series level
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And Click on "database" for related series
-    Then The related "Database" for the series should shown
-
-  @Comparables
-  Scenario: Tc_Comparables_132: Verify navigating to topic for related series in series level
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And Click on "topic" for related series
-    Then The related "Topic" for the series should shown
-
-  @Comparables
-  Scenario: Tc_Comparables_133: Verify navigating to section for related series in series level
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And Click on "section" for related series
-    Then The related "Section" for the series should shown
-
-  @Comparables
-  Scenario: Tc_Comparables_134: Verify related insights for comparables in series level
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    Then The "Related Insights" option in series should present
-    And Click "Hide related data" option in series
-
-  @Comparables
-  Scenario: Tc_Comparables_136: Verify opening any of related insights in comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Related Insights" option in series should present
-    And Check the data of first insight
-    And Click "Hide related data" option in series
-
-  @Comparables
-  Scenario: Tc_Comparables_137: Verify favoriting related insight in comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Related Insights" option in series should present
-    And The "First" Insight should present
-    And Clicking favorite icon of related insight
-    And Click on "My insights" option in insights page
-    Then The Related insights should be added to favourite list in insight explorer window of favorite tab
-
-  @Comparables
-  Scenario: Tc_Comparables_138: Verify sharing of related insight in comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Related Insights" option in series should present
-    Then The Sharing insight window should be opened
-
-  @Comparables2
-  Scenario: Tc_Comparables_139: Verify sharing of non sharing related insight
-    And Clicking "Comparables" icon
-    And Search for "249416501"
-    And Expand "Production" > "Global Economic Monitor" > "Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" > "Industrial Production Index: YoY: Monthly: sa: Japan"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Insights" option in series should present
-    And The "Non shareable Insight" Insight should present
-    Then The Share icon should not present for non sharing related insight
+  #@Comparables
+  #Scenario: Tc_Comparables_127: Verify Read more for series in comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Read More" option for series should present
+    #Then The Footnotes window should be open
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_128: Verify contents in dropdown beside series name
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #Then The "Read More" option in series should present
+    #Then The "Datasets" option in series should present
+    #And The "Related Insights" option in series should present
+    #Then The "related-series-data--remarks" option in series should be present
+    #And Click "Hide related data" option in series
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_129: Verify data sets for related series
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "series-data-set--table-name" option for series should present
+    #Then The link is navigating to "Single Series"
+    #And Click "Hide related data" option in series
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_130: Verify data sets for Multiple related series
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #Then The link is navigating to "Multiple Series"
+    #And Click "Hide related data" option in series
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_131: Verify navigating to database for related series in series level
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And Click on "database" for related series
+    #Then The related "Database" for the series should shown
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_132: Verify navigating to topic for related series in series level
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And Click on "topic" for related series
+    #Then The related "Topic" for the series should shown
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_133: Verify navigating to section for related series in series level
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And Click on "section" for related series
+    #Then The related "Section" for the series should shown
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_134: Verify related insights for comparables in series level
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #Then The "Related Insights" option in series should present
+    #And Click "Hide related data" option in series
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_136: Verify opening any of related insights in comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Related Insights" option in series should present
+    #And Check the data of first insight
+    #And Click "Hide related data" option in series
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_137: Verify favoriting related insight in comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Related Insights" option in series should present
+    #And The "First" Insight should present
+    #And Clicking favorite icon of related insight
+    #And Click on "My insights" option in insights page
+    #Then The Related insights should be added to favourite list in insight explorer window of favorite tab
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_138: Verify sharing of related insight in comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Related Insights" option in series should present
+    #Then The Sharing insight window should be opened
+#
+  #@Comparables2
+  #Scenario: Tc_Comparables_139: Verify sharing of non sharing related insight
+    #And Clicking "Comparables" icon
+    #And Search for "249416501"
+    #And Expand "Production" > "Global Economic Monitor" > "Industrial Production Index: Y-o-Y Growth: Monthly: Seasonally Adjusted: Asia" > "Industrial Production Index: YoY: Monthly: sa: Japan"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Insights" option in series should present
+    #And The "Non shareable Insight" Insight should present
+    #Then The Share icon should not present for non sharing related insight
 
   @Comparables
   Scenario: Tc_Comparables_140: Verify series added to new insight in comparables using growl popup
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
     And Clicking + option from series
     And Clicking "Add to new insight" from dropdown list
@@ -1123,7 +1124,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_141: Verify opening insight explorer window for series added to existing insight in comprables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
     And Clicking + option from series
     And Clicking "Add to recent insight" from dropdown list
@@ -1143,7 +1144,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_145: Verify adding series into existing insight with existing insight shown in growl msg popup
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
     And Clicking + option from series
     And Clicking "Add to recent insight" from dropdown list
@@ -1153,7 +1154,7 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: Tc_Comparables_147: Verify series tooltip for series in comparables
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor only series name
     Then The options should present inside tooltip
 
@@ -1178,49 +1179,49 @@ Feature: Verify Comparables feature
     And Hovor on to i icon without click
     Then The "Add to watchlist" , "View as Chart. Type `c`" , "Open footnote" and "More actions" option for series should present
 
-  @Comparables
-  Scenario: Tc_Comparables_151: Verify deselecting series when series dropdown opened
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Select 1 series inside table
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And Unselect 1 series inside table
-    Then The opened dropdown should not close
-
-  @Comparables
-  Scenario: Tc_Comparables_152: Verify presence of related insights in series level of comprables tab
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Related Insights" option in series should present
-    Then The tooltip as "Name" and "Number of series" should present
-
-  @Comparables
-  Scenario: Tc_Comparables_153: Verify creator of related insight present in series level comparables tab
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Related Insights" option in series should present
-    Then The creator tooltip should present
-
-  @Comparables
-  Scenario: Tc_Comparables_154: Verify time period of related insight present in series level comparables tab
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Hovor on to i icon without click
-    And Click "Show related data" option in series
-    And The "Related Insights" option in series should present
-    Then The Modified time tooltip should present
+  #@Comparables
+  #Scenario: Tc_Comparables_151: Verify deselecting series when series dropdown opened
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Select 1 series inside table
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And Unselect 1 series inside table
+    #Then The opened dropdown should not close
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_152: Verify presence of related insights in series level of comprables tab
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Related Insights" option in series should present
+    #Then The tooltip as "Name" and "Number of series" should present
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_153: Verify creator of related insight present in series level comparables tab
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Related Insights" option in series should present
+    #Then The creator tooltip should present
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_154: Verify time period of related insight present in series level comparables tab
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Hovor on to i icon without click
+    #And Click "Show related data" option in series
+    #And The "Related Insights" option in series should present
+    #Then The Modified time tooltip should present
 
   @Comparables
   Scenario: TC_Comparables_155: Verify Add to Watchlist icon in series level
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+	    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
-    And Click on "More actions" option in series level
+    #And Click on "More actions" option in series level
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
@@ -1232,8 +1233,8 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: TC_Comparables_156: Verify Add to Watchlist option in series level right click
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Right click the first series
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
+    #And Right click the first series
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
@@ -1245,9 +1246,9 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: TC_Comparables_157: Verify Add to Watchlist option in series level more actions
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
-    And Click on "More actions" option in series level
+    #And Click on "More actions" option in series level
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
@@ -1259,9 +1260,9 @@ Feature: Verify Comparables feature
   @Comparables
   Scenario: TC_Comparables_158: Verify Add to Watchlist option in series level more actions
     And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to i icon without click
-    And Click on "More actions" option in series level
+    #And Click on "More actions" option in series level
     And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist

@@ -34,6 +34,8 @@ public class SprintCases5_0 {
 	WebDriverWait wait = new WebDriverWait(login.driver, 120);
 	Actions action = new Actions(login.driver);
 	WebElement source_insight;
+	Boolean database = false;
+	String After_set_lang;
 	String source_text, visual_title_text, beforeClick_nextbutton_databriefing_title;
 	static String beforeClick_previousbutton_databriefing_title, series_text_inPriviewmode;
 	CDMNextSprintCases cdmnext = new CDMNextSprintCases();
@@ -230,7 +232,7 @@ public class SprintCases5_0 {
 		} else {
 			fail("The growl popup not displayed with series copied");
 		}
-		//CommonFunctionality.getElementByProperty(login.driver, "preivew_mode_close", 10).click();
+		CommonFunctionality.getElementByProperty(login.driver, "preivew_mode_close", 10).click();
 	}
 
 	@And("^Login to CDMNext$")
@@ -238,11 +240,11 @@ public class SprintCases5_0 {
 		share.logout_from_current_user();
 		CommonFunctionality.wait(500);
 		CommonFunctionality.login_as_internal_user(login.driver, "input[name='user_id']", "input[name='password']",
-				"button[type='submit']", "autotest@cdmnext.com", "India@123");
+				"button[type='submit']", "nmaduru@gmail.com", "Ceic@123");
 		// CommonFunctionality.wait(500);
 		// CommonFunctionality.login_as_internal_user(login.driver,
 		// "input[name='user_id']", "input[name='password']",
-		// "button[type='submit']", "autotest@cdmnext.com", "India@123");
+		// "button[type='submit']", "nmaduru@gmail.com", "Ceic@123");
 		/*
 		 * URL url = new URL(login.driver.getCurrentUrl());
 		 * login.driver.get(url.getProtocol() + "://" + url.getHost() + "/login");
@@ -285,7 +287,7 @@ public class SprintCases5_0 {
 
 	@And("^Logout and relogin$")
 	public void logout_and_relogin() throws Throwable {
-		share.login_back_to_internal_user("autotest@cdmnext.com", "India@123");
+		share.login_back_to_internal_user("nmaduru@gmail.com", "Ceic@123");
 	}
 
 	@Then("^The DB panel should be in closed state$")
@@ -587,7 +589,7 @@ public class SprintCases5_0 {
 	public void mouse_hover_on_Download_icon() throws Throwable {
 		WebElement downloadIcon = CommonFunctionality.getElementByProperty(login.driver,
 				"Databriefing_previewMode_downloadIcon", 10);
-		action.moveToElement(downloadIcon).pause(500).perform();
+		action.pause(500).moveToElement(downloadIcon).build().perform();
 		TooltipText = downloadIcon.getAttribute("title");
 	}
 
@@ -604,7 +606,7 @@ public class SprintCases5_0 {
 	public void mouse_hover_on_Copylink_icon() throws Throwable {
 		WebElement Copy_icon = CommonFunctionality.getElementByProperty(login.driver,
 				"Databriefing_previewMode_copyIcon", 10);
-		action.moveToElement(Copy_icon).pause(500).perform();
+		action.pause(500).moveToElement(Copy_icon).build().perform();
 		TooltipText = Copy_icon.getAttribute("title");
 	}
 
@@ -647,14 +649,20 @@ public class SprintCases5_0 {
 
 	@Then("^Your insight should be listed under related insight section$")
 	public void your_insight_should_be_listed_under_related_insight_section() throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(5000);
 		WebElement related_insight = CommonFunctionality.getElementByProperty(login.driver, "RelatedInsights", 20);
 		jse.executeScript("arguments[0].scrollIntoView(true);", related_insight);
-		CommonFunctionality.wait(500);
-		String ActualInsightName = CommonFunctionality
-				.getElementByProperty(login.driver, "insightName_underRelatedInsights", 20).getText();
-		if (ActualInsightName.equalsIgnoreCase(insightName)) {
+		CommonFunctionality.wait(2000);
+		List<WebElement> listOfInsights = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("insightName_underRelatedInsights")));
+		ArrayList<String> ActualInsights = new ArrayList<>();
+		for(int i = 0 ; i < listOfInsights.size(); i++) {
+			String str = listOfInsights.get(i).getText();
+			ActualInsights.add(str);
+			
+		}
+		if (ActualInsights.contains(insightName)) {
 			login.Log4j.info("Insight is listed under related insight section");
+			
 		} else {
 			fail("Verification failed");
 		}
@@ -662,7 +670,7 @@ public class SprintCases5_0 {
 
 	@Then("^The \"([^\"]*)\" panel should be displayed$")
 	public void the_panel_should_be_displayed(String arg1) throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(5000);
 		String Expected_databriefings_text = CommonFunctionality
 				.getElementByProperty(login.driver, "databriefings_panel_text", 20).getText();
 		if (Expected_databriefings_text.contains(arg1)) {
@@ -786,7 +794,7 @@ public class SprintCases5_0 {
 		CommonFunctionality.wait(1000);
 		List<WebElement> After_applying_SortByTopRelease_databriefings_list = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("databriefings_list")));
-		for (int i = 0; i < 2; i++) {
+		for (int i = 1; i <= 3; i++) {
 			CommonFunctionality.wait(200);
 			String databriefingsTitle = After_applying_SortByTopRelease_databriefings_list.get(i).getText();
 			Afterapply_SortBy_databriefingsList.add(databriefingsTitle);
@@ -809,7 +817,7 @@ public class SprintCases5_0 {
 
 	@Then("^The sort by filter should be retained$")
 	public void the_sort_by_filter_should_be_retained() throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(2000);
 		String expected_sortBy_filter = CommonFunctionality.getElementByProperty(login.driver, "sortby_filterText", 10)
 				.getText();
 		if (expected_sortBy_filter.equalsIgnoreCase(Applied_SortBy_filter)) {
@@ -817,7 +825,7 @@ public class SprintCases5_0 {
 		} else {
 			fail("Verification failed");
 		}
-		CommonFunctionality.getElementByProperty(login.driver, "CrossIcon_SortBy", 10).click();
+		CommonFunctionality.getElementByProperty(login.driver, "RemoveSortBy", 10).click();
 	}
 
 	@And("^Relogin to CDMNext application$")
@@ -825,7 +833,7 @@ public class SprintCases5_0 {
 		share.logout_from_current_user();
 		CommonFunctionality.wait(500);
 		CommonFunctionality.login_as_internal_user(login.driver, "input[name='user_id']", "input[name='password']",
-				"button[type='submit']", "autotest@cdmnext.com", "India@123");
+				"button[type='submit']", "nmaduru@gmail.com", "Ceic@123");
 	}
 
 	@Then("^The last applied sorting should be saved per user$")
@@ -893,8 +901,8 @@ public class SprintCases5_0 {
 	public void add_this_series_to_insights(int arg1) throws Throwable {
 		CommonFunctionality.wait(1000);
 		CommonFunctionality.ExpandLeft();
-		login.Log4j.info("Clicking on Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver, "Series", 8).click();
+//		login.Log4j.info("Clicking on Series tab ");
+//		CommonFunctionality.getElementByProperty(login.driver, "Series", 8).click();
 		// creating 1st insight
 		AddSeriesToSevenInsight();
 		// creating 2nd insight
@@ -1006,7 +1014,7 @@ public class SprintCases5_0 {
 
 	@And("^Mouse hover on the series name$")
 	public void mouse_hover_on_the_series_name() throws Throwable {
-		CommonFunctionality.ExpandLeft();
+	
 		CommonFunctionality.webDriverwait_keyvalue("Series");
 	 CommonFunctionality.getElementByProperty(login.driver, "Series",10).click();
 		Thread.sleep(500);
@@ -1032,7 +1040,8 @@ public class SprintCases5_0 {
 			fail(arg1 + " is not displayed");
 		}
 		CommonFunctionality.getElementByProperty(login.driver, "watchlist_tab", 20).click();
-		String Actual_sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10)
+		CommonFunctionality.wait(4000);
+		String Actual_sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='watchlist-series-item']//*[@class='series-item--name']", 10)
 				.getText();
 		if (expected_sname.equals(Actual_sname)) {
 			login.Log4j.info("The series added to the watchlist");
@@ -1044,9 +1053,10 @@ public class SprintCases5_0 {
 
 	@And("^Add the series to my series tab$")
 	public void add_the_series_to_my_series_tab() throws Throwable {
-		CommonFunctionality.ExpandLeft();
+//		CommonFunctionality.ExpandLeft();
 		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
 		CommonFunctionality.webDriverwait_keyvalue("Series");
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		for (int i = 0; i < 2; i++) {
 			int j = i + 1;
@@ -1102,6 +1112,7 @@ public class SprintCases5_0 {
 
 	@Then("^Compare the results in database tab and comparables tab$")
 	public void compare_the_results_in_database_tab_and_comparables_tab() throws Throwable {
+		close_Data_briefings_panel();
 		// verifying in databases tab
 		login.Log4j.info("Clicking on  Databases tab ");
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))))
@@ -1114,11 +1125,11 @@ public class SprintCases5_0 {
 		comp.clicking_icon("Comparables");
 		// verifying comparables tab
 		// Expand 1st one till series level
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='child-container']/*[1]/*[1]", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='child-container']/*[1]/*[3]/*[1]/*[1]", 20)
+		CommonFunctionality.getElementByProperty(login.driver, "Expand2ndLevel", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Expand3rdLevel", 20)
 				.click();
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='child-container']/*[1]/*[3]/*[1]/*[3]/*[1]/*[1]", 20)
+				.getElementByProperty(login.driver, "Expand4thLevel", 20)
 				.click();
 		Verify_Database_Comparables_tab();
 
@@ -1166,18 +1177,20 @@ public class SprintCases5_0 {
 				.click();
 		CommonFunctionality.wait(500);
 		// Expand 1st one till table level
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='child-container']/*[1]/*[1]", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='child-container']/*[1]/*[3]/*[1]/*[1]", 20)
-				.click();
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='child-container']/*[1]/*[3]/*[1]/*[3]/*[1]/*[1]", 20)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='database-node tree-node'])[1]/*[1]", 20).click();
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-node-model-id='GLOBAL&&ALL']/*[1]", 20)
 				.click();
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='child-container']/*[1]/*[3]/*[1]/*[3]/*[1]/*[3]/*[1]/*[1]", 20).click();
+		CommonFunctionality
+				.getElementByProperty(login.driver, "Expand3rdLevel", 20)
+				.click();
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByProperty(login.driver,
+				"Expand4thLevel", 20).click();
 		CommonFunctionality.wait(500);
 		List<WebElement> list_of_tables = login.driver.findElements(By.xpath(
-				"//*[@class='tree-node full-expanded open last-open-node']//*[@class='child-container']//*[@class='name-text']"));
+				"//*[@class='tree-node open last-open-node']/following::*//*[@class='name-text']"));
 		for (int i = 0; i < list_of_tables.size(); i++) {
 			if (list_of_tables.get(i).getText().contains(arg1)) {
 				login.Log4j.info(arg1 + " is displayed");
@@ -1190,6 +1203,7 @@ public class SprintCases5_0 {
 
 	@Then("^\"([^\"]*)\" icon for series should not be shows for global key series$")
 	public void icon_for_series_should_not_be_shows_for_global_key_series(String arg1) throws Throwable {
+		CommonFunctionality.wait(500);
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10);
 		new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
 		login.Log4j.info("Clicking on show database icon");
@@ -1197,7 +1211,7 @@ public class SprintCases5_0 {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='series-list-item--action-icons']//span[@title='See in Database']", 4).click();
 		st.user_can_selects("Global Key Series Database");
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(5000);
 		String highlitedEle = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(@class,'series-list-item__selected series-list-item__highlighted')]//*[@class='series-item--status-icons']",
 				4).getText();
@@ -1316,6 +1330,9 @@ public class SprintCases5_0 {
 
 	@And("^Click on \"([^\"]*)\" database$")
 	public void click_on_database(String arg1) throws Throwable {
+		//select 1st tab
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']/*[1]", 10).click();
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//table//*[contains(text(),'" + arg1 + "')]", 10).click();
 	}
 
@@ -1323,6 +1340,7 @@ public class SprintCases5_0 {
 	public void data_must_be_matched_with_header_shown() throws Throwable {
 		CommonFunctionality.wait(15000);
 		String preview_header_text = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='insight-preview--header']/*[@class='insight-preview--title text-dots'])[1]", 10).getText();
+		CommonFunctionality.wait(5000);
 		String visual_template_text = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='insight-preview--views']//*[@class='visual-item-template visual-select-area text-template']//*[@data-name='title'])[1]", 10).getText();
 		String EXpectedStr = preview_header_text.replace("-", " ");
 		login.Log4j.info(EXpectedStr);
@@ -1336,14 +1354,20 @@ public class SprintCases5_0 {
 		
 		if(EXpectedStr.equals(visual_template_text)) {
 			login.Log4j.info("Visual template text matched with header shown");
+			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='insight-preview--close'])[1]", 10).click();
+			//Click on profile icon
+					CommonFunctionality.getElementByXpath(login.driver, "//*[@class='dropdown--button account-menu--button']", 10).click();
+			//select db as english
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-language='en']", 10).click();
 		} else {
+			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='insight-preview--close'])[1]", 10).click();
+			//Click on profile icon
+					CommonFunctionality.getElementByXpath(login.driver, "//*[@class='dropdown--button account-menu--button']", 10).click();
+			//select db as english
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-language='en']", 10).click();
 			fail("Visual template text not matched with header shown");
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='insight-preview--close'])[1]", 10).click();
-		//Click on profile icon
-				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='dropdown--button account-menu--button']", 10).click();
-		//select db as english
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-language='en']", 10).click();
+		
 	}
 
 	@And("^Select the series and create a pie visual$")
@@ -1459,6 +1483,59 @@ public class SprintCases5_0 {
 	   
 	   
 	}
+	@Then("^The Databases language should be changed to as per the selected language$")
+	public void the_Databases_language_should_be_changed_to_as_per_the_selected_language() throws Throwable {
+		//CommonFunctionality.ResetMethod();
+		filter.user_enters("India");
+		WebElement dbele;
+		CommonFunctionality.wait(3000);
+		if (DatabasesTab.dbase.equalsIgnoreCase("World Trend Plus")) {
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@data-node-model-id='WORLD']//span[@class='name-text']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			action.pause(2000).contextClick(dbele).build().perform();
+
+		} else if (DatabasesTab.dbase.equalsIgnoreCase("Russia Premium Database")) {
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@data-node-model-id='RUSSIA']//span[@class='name-text']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			action.pause(1500).contextClick(dbele).build().perform();
+
+		} else if (DatabasesTab.dbase.equalsIgnoreCase("Global Database")) {
+			dbele = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[1]//div[@class='series-item--name']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			action.pause(1500).contextClick(db.rightClickElement).build().perform();
+
+		} else {
+			login.driver.findElement(By.xpath("//div[@data-node-model-id='INDONESIA']//div[@class='toggle']")).click();
+			dbele = login.driver.findElement(By.xpath(
+					"//div[@data-node-model-id='INDONESIA']//span[@class='name-text']"));
+			After_set_lang = dbele.getText();
+			login.Log4j.info("After_set_lang is " + After_set_lang);
+			database = true;
+			// After validation changing set language as English
+			CommonFunctionality.wait(2000);
+			WebElement rightClickEle = login.driver.findElement(
+					By.xpath("//div[@data-node-model-id='INDONESIA']//span[contains(text(),'Indonesia Premium Database')]"));
+			action.pause(2000).contextClick(rightClickEle).build().perform();
+		}
+		db.SetLangugeEnglish();
+		if (database == true && !DatabasesTab.Before_set_lang.equals(After_set_lang) == true) {
+			login.Log4j.info(DatabasesTab.Before_set_lang + " is changed as " + After_set_lang);
+		} else {
+			AssertJUnit.fail("The Databases language is not changed to selected language");
+		}
+		//CommonFunctionality.CollapseTreeMethod();
+	}
 
 	void AddSeriesToSevenInsight() throws Exception {
 		CommonFunctionality.getElementByProperty(login.driver, "FileMenu", 20).click();
@@ -1473,14 +1550,14 @@ public class SprintCases5_0 {
 	}
 
 	void Verify_Database_Comparables_tab() throws Exception {
-		WebElement ul_element = null;
+		//WebElement ul_element = null;
 		try {
 			CommonFunctionality.wait(2000);
-			ul_element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
-			List<WebElement> li_All = ul_element.findElements(By.xpath("//div[@unselectable='on']"));
+//			ul_element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
+			List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='data-representation']//div[@unselectable='on']"));
 			login.Log4j.info("List size is :" + li_All.size());
 			List<WebElement> sName = login.driver
-					.findElements(By.xpath("//div[@unselectable='on']//*[@class='series-item--name']"));
+					.findElements(By.xpath("//*[@unselectable='on']//*[@class='series-item--name']"));
 			WebElement tooltip = null;
 			if (sName.size() > 0) {
 				for (int i = 0; i < sName.size(); i++) {
@@ -1501,10 +1578,10 @@ public class SprintCases5_0 {
 					String TooltipInfo = tooltip.getText();
 					login.Log4j.info("Title information is \n" + TooltipInfo);
 					Boolean KeywordMatch = false;
-					if (TooltipInfo.toLowerCase().contains("automobile")
+					if (TooltipInfo.toLowerCase().contains("auto") || TooltipInfo.toLowerCase().contains("automobile")
 							|| TooltipInfo.toLowerCase().contains("vehicle")
 							|| TooltipInfo.toLowerCase().contains("car")) {
-						login.Log4j.info("Auotomobile OR Vehicle OR Car exists in tooltip");
+						login.Log4j.info("Auto OR Auotomobile OR Vehicle OR Car exists in tooltip");
 						KeywordMatch = true;
 					} else if (KeywordMatch == false) {
 						sName.get(i).click();
@@ -1512,7 +1589,7 @@ public class SprintCases5_0 {
 								.findElements(By.xpath(login.LOCATORS.getProperty("seriesInfo")));
 						for (WebElement list : series_Info) {
 							String SeriesInfo = list.getText();
-							if (SeriesInfo.toLowerCase().contains("automobile")
+							if (SeriesInfo.toLowerCase().contains("auto") || SeriesInfo.toLowerCase().contains("automobile")
 									|| SeriesInfo.toLowerCase().contains("car")
 									|| SeriesInfo.toLowerCase().contains("vehicle")) {
 								login.Log4j.info("Auotomobile OR Vehicle OR Car exists in ssp");
@@ -1520,17 +1597,64 @@ public class SprintCases5_0 {
 
 							} else {
 								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
-								fail("Auotomobile OR Vehicle OR Car doesn't exists in ssp");
+								fail("Auto OR Auotomobile OR Vehicle OR Car doesn't exists in ssp");
 							}
 						}
 					} else {
-						fail("Auotomobile OR Vehicle OR Car doesn't exists in tooltip");
+						fail("Auto OR Auotomobile OR Vehicle OR Car doesn't exists in tooltip");
 					}
 
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 				}
 			} else {
-				Assert.fail("Sorry,No results were found ");
+				List<WebElement> listOfName = login.driver
+						.findElements(By.xpath("(//*[@class='tree-node full-expanded open'])[3]/following::*[@unselectable='on']//*[@class='series-item--name']"));
+				for (int i = 0; i < sName.size(); i++) {
+					login.Log4j.info(i);
+					login.Log4j.info(sName.size());
+					try {
+						action.pause(700).moveToElement(sName.get(i)).build().perform();
+						CommonFunctionality.wait(700);
+						tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					} catch (Exception e) {
+						action.pause(1000).moveToElement(sName.get(i)).build().perform();
+						CommonFunctionality.wait(700);
+						tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+						CommonFunctionality.wait(300);
+
+					}
+
+					String TooltipInfo = tooltip.getText();
+					login.Log4j.info("Title information is \n" + TooltipInfo);
+					Boolean KeywordMatch = false;
+					if (TooltipInfo.toLowerCase().contains("auto") || TooltipInfo.toLowerCase().contains("automobile")
+							|| TooltipInfo.toLowerCase().contains("vehicle")
+							|| TooltipInfo.toLowerCase().contains("car")) {
+						login.Log4j.info("Auto OR Auotomobile OR Vehicle OR Car exists in tooltip");
+						KeywordMatch = true;
+					} else if (KeywordMatch == false) {
+						sName.get(i).click();
+						List<WebElement> series_Info = login.driver
+								.findElements(By.xpath(login.LOCATORS.getProperty("seriesInfo")));
+						for (WebElement list : series_Info) {
+							String SeriesInfo = list.getText();
+							if (SeriesInfo.toLowerCase().contains("auto") || SeriesInfo.toLowerCase().contains("automobile")
+									|| SeriesInfo.toLowerCase().contains("car")
+									|| SeriesInfo.toLowerCase().contains("vehicle")) {
+								login.Log4j.info("Auotomobile OR Vehicle OR Car exists in ssp");
+								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
+
+							} else {
+								CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
+								fail("Auto OR Auotomobile OR Vehicle OR Car doesn't exists in ssp");
+							}
+						}
+					} else {
+						fail("Auto OR Auotomobile OR Vehicle OR Car doesn't exists in tooltip");
+					}
+
+					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
+				}
 			}
 
 		} catch (NoSuchElementException e) {

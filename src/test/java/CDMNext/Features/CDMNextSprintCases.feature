@@ -419,13 +419,13 @@ Feature: Verifying Sprintcases
     And Choose "Labels" > "advanced settings" > "Labels" > "Specific" >
     Then "Last observations" be selected by default
 
-  #@SprintCases
-  #Scenario: TC_Cvision_15126: Verify validation if no observations are found within requested range in Date
-    #And Search for the series "408925837"
-    #And Select a series on right
-    #And Perform "Download" operation
-    #And Perform download with timeframe "Range": "2000-12-31" to "2001-12-31"
-    #Then The Message "No observations are found within requested range" should be displayed
+  @SprintCases
+  Scenario: TC_Cvision_15126: Verify validation if no observations are found within requested range in Date
+    And Search for the series "408925837"
+    And Select a series on right
+    And Perform "Download" operation
+    And Perform download with timeframe "Range": "2000-12-31" to "2001-12-31"
+    Then The Message "No observations are found within requested range" should be displayed
 
   @SprintCases
   Scenario: TC_Cvision_14392_01: Verify if series positions changes for 'Bring to front' selection
@@ -599,11 +599,11 @@ Feature: Verifying Sprintcases
     And Hover the "series-preview-modal-header--link"
     Then Smart tooltip should popup
 
-  #@SprintCases1...need to check
-  #Scenario: TC_Cvision_16243: Verify for minimize and full screen controls on the video tutorials window
-    #And Click "Help" > "Video tutorials"
-    #And Check for "Fullscreen" and "Exit Fullscreen" controls
-    #Then Both should be available
+  @SprintCases
+  Scenario: TC_Cvision_16243: Verify for minimize and full screen controls on the video tutorials window
+    And Click "Help" > "Video tutorials"
+    And Check for "Fullscreen" and "Exit Fullscreen" controls
+    Then Both should be available
 
   @SprintCases
   Scenario: TC_Cvision_15749: Verify title bar actions for breakdown series
@@ -731,10 +731,10 @@ Feature: Verifying Sprintcases
     And Clicking "Save" option
     Then Ascending and descending icon should not displayed for "Recently Updated"
 
-  #@CDMNextsprintcases3.11
-  #Scenario: TC_14142_01: Verify downloading CNA packages
-    #And Click "Help" > "Excel Addin"
-    #Then User should download the builds
+  @CDMNextsprintcases3.1
+  Scenario: TC_14142_01: Verify downloading CNA packages
+    And Click "Help" > "Excel Addin"
+    Then User should download the builds
 
   @CDMNextsprintcases3.1
   Scenario: TC_14668_01: Verify zebra selection under Edit table
@@ -843,13 +843,14 @@ Feature: Verifying Sprintcases
     And Observe the "Add related series" button
     Then "Add related series" should not be available for empty visual
 
-  #@Cvision1
-  #Scenario: TC_14173_01: Verify Unit in histogram tooltip
-  #And Right click on any series level of data from series
-  #And Click on more actions
-  #And Choose "View as ..." > "Histogram"
-  #And Capture the "Unit:" tooltip indicator value
-  #Then  "Unit" should be shown on tooltip
+  @Cvision
+  Scenario: TC_14173_01: Verify Unit in histogram tooltip
+  And Right click on any series level of data from series
+  And Click on more actions
+  And Choose "View as ..." > "Histogram"
+  And Capture the "Unit:" tooltip indicator value
+  Then  "Unit" should be shown on tooltip
+  
   @CDMNextsprintcases3.1
   Scenario: TC_15656_01: Verify Histogram methodology
     And Right click on any series level of data from series
@@ -882,10 +883,11 @@ Feature: Verifying Sprintcases
     And Click "Upload image" button to upload images
     Then Verify the uploaded image comes under iframe
 
-  #@Cvision1... not executing
-  #Scenario: TC_16290_01: Verify shadow for notification panel
-  #And Open notification panel
-  #Then Shadow should be applied to notification panel
+  @Cvision
+  Scenario: TC_16290_01: Verify shadow for notification panel
+  And Open notification panel
+  Then Shadow should be applied to notification panel
+  
   @CDMNextsprintcases3.1
   Scenario: TC_14907_01: Verify message for non data visual copy
     And Click to create an empty visual
@@ -1421,15 +1423,15 @@ Feature: Verifying Sprintcases
     And Select few series
     And Perform Download operation
     Then The Series "has" removed in search panel after done actions
-#
-  #@Cvision123
-  #Scenario: TC_16310_45: Preference - Verify 'Always preserve the order of selection when adding/downloading series= Checked'
-    #And Open preference dropdown
-    #And Clicking on "Preserve the order of selection when adding/downloading series" option under user preference to be "Check"
-    #And Reset the values in "Series" tab
-    #And Select few series
-    #And Perform Download operation
-    #Then The Series "has" removed in search panel after done actions
+
+  @Cvision
+  Scenario: TC_16310_45: Preference - Verify 'Always preserve the order of selection when adding/downloading series= Checked'
+    And Open preference dropdown
+    And Clicking on "Preserve the order of selection when adding/downloading series" option under user preference to be "Check"
+    And Reset the values in "Series" tab
+    And Select few series
+    And Perform Download operation
+    Then The Series "has" removed in search panel after done actions
 
   @Preferences
   Scenario: TC_16310_47: Preference - 'Show search result without pagination= Uncheck'

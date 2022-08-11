@@ -1,11 +1,12 @@
-Feature: SeriesTab
+Feature: Verifying SeriesTab functionality
 
   @SeriesTab
   Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
-    And Select indicator "Transport" as "Freight Traffic"
-    And Select indicator "Tourism" as "Tourism Statistics"
+    And Select indicator "Production" as "Steel Production"
+    And Select indicator "Tourism Sector" as "Tourism Revenue"
     When Click on "Apply filter"
     Then Result should be displayed as per selection
+ 
 
   #@SeriesTab...functionality has been removed
   #Scenario: TC_SeriesTab_02:Verify "All Insights" option
@@ -31,7 +32,7 @@ Feature: SeriesTab
     Then Series count should be matched with displayed result
 
   @SeriesTab
-  Scenario: TC_SeriesTab_05:Verifying "Copy" option for series level
+    Scenario: TC_SeriesTab_05:Verifying "Copy" option for series level
     Given User enters seriesID "1380601;245178303"
     When User right click on any series
     Then User can able to see "Copy" option from dropdown menu
@@ -102,11 +103,11 @@ Feature: SeriesTab
     When User right click on any series
     Then User can able to see "See in Database" option from dropdown menu
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_17:Verifying SSP for series
-    Given User enters "GDP"
-    When Click on Show Series Info icon
-    Then SSP window should be displayed
+  #@SeriesTab....functionality has been removed
+  #Scenario: TC_SeriesTab_17:Verifying SSP for series
+    #Given User enters "GDP"
+    #When Click on Show Series Info icon
+    #Then SSP window should be displayed
 
   @SeriesTab
   Scenario: TC_SeriesTab_18:Verifying "key only" filter for series tab
@@ -195,7 +196,7 @@ Feature: SeriesTab
 
   @SeriesTab
   Scenario: TC_SeriesTab_30:Verify 'Mouse over' icons for series level
-    Given User enters "249445301"
+    Given User enters "324350701"
     When User Mouse hover on "See in Database" icon
     Then User can selects "Indonesia Premium Database"
     Then User can see the selected database in Databases tab
@@ -267,7 +268,7 @@ Feature: SeriesTab
     Then The series should be added to Data tab
 
   @SeriesTab
-  Scenario: TC_SeriesTab_42:Verify 'add to exist insight' in dropdown
+  Scenario: TC_SeriesTab_42:Verify 'Add to recent insight' in dropdown
     Given User enters seriesID "368921927;371376337"
     And Click on drop down icon next to +
     And Click on "Add to recent insight"
@@ -478,42 +479,42 @@ Feature: SeriesTab
     And Scroll down and set showing results as "50" per page
     Then "50" results should display in a page
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_70:Verify show related data dropdown
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    Then "Active,Read More" and "DATASETS" should be available
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_71:Check if the status is correctly displayed
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    Then Status has to be "Active"
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_72:Check if the 'Read more' is correctly displayed
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    And Click on "Read More"
-    Then Read more should open footnotes of the respective series
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_73:Check if the data sets are correctly displayed
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    Then Respective dataset to be opened when click on each datasets link
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_74:Verify hide related data
-    And User enters seriesID "5958801"
-    And Click on Series tab
-    And Click on "Show related data"
-    And Click on "Hide related data"
-    Then The related data dropdown should be collapsed
+  #@SeriesTab...Removed from execution
+  #Scenario: TC_SeriesTab_70:Verify show related data dropdown
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #Then "Active,Read More" and "DATASETS" should be available
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_71:Check if the status is correctly displayed
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #Then Status has to be "Active"
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_72:Check if the 'Read more' is correctly displayed
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #And Click on "Read More"
+    #Then Read more should open footnotes of the respective series
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_73:Check if the data sets are correctly displayed
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #Then Respective dataset to be opened when click on each datasets link
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_74:Verify hide related data
+    #And User enters seriesID "5958801"
+    #And Click on Series tab
+    #And Click on "Show related data"
+    #And Click on "Hide related data"
+    #Then The related data dropdown should be collapsed
 
   @SeriesTab
   Scenario: TC_SeriesTab_75:Verify selected Region results

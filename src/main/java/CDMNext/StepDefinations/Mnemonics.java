@@ -186,6 +186,7 @@ public class Mnemonics {
 					new Actions(login.driver).pause(400).moveToElement(li_All.get(i)).perform();
 					CommonFunctionality.wait(800);
 					WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					CommonFunctionality.wait(500);
 					TooltipInfo = tooltip.getText();
 					//login.Log4j.info("Title information is \n" + TooltipInfo);
 

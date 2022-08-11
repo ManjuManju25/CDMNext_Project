@@ -1,43 +1,43 @@
 
 Feature: verifying My Series Tab Functionality
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_01: Verify Expand view
     And Select the Expand Icon
     And Verify View panel which should be Expanded
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_02: Verify series options if "NO" series under "My series" tab
     And Verify for "NO" series functionality under "My series" tab
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_03: Verify Related series option
     And Select some series to my series tab
     And Select all series
     And select the Related series option
     And Verify the Series suggestion manager popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_04: Verify Rename option
     And Select some series to my series tab
     And Select all series
     And select the Rename series option
     And Verify the Rename popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_05: Verify Rename option if no series selected
     And Select some series to my series tab
     And select the Rename series option
     And Verify the Rename option if no series selected
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_07: Verify Rename series order in Rename popup
     And Select some series to my series tab
     And get the series name
     And select the Rename series option
     And Verify the series order in Rename popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_08:Verify Rename option if series selected
     And Select some series to my series tab
     And get the series name
@@ -45,27 +45,27 @@ Feature: verifying My Series Tab Functionality
     And select the Rename series option
     And Verify the Rename option if series selected
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_09:verify Rename option for number of available itmes
     And Select some series to my series tab
     And Select all series
     And select the Rename series option
     And Verify the Rename option for number of available itmes
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_10:verify Rename find field
     And Select random series to my series tab
     And get the series name
     And select the Rename series option
     And Verify the Rename find field
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_11:verify number of searched result in rename
     And Select random series to my series tab
     And select the Rename series option
     And Verify the number of searched result
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_13:verify Replace field in rename
     And Select random series to my series tab
     And get the series name
@@ -73,7 +73,7 @@ Feature: verifying My Series Tab Functionality
     And select the series to be replace
     And Verify the Replace field
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_14:verify Replace All field in rename
     And Select random series to my series tab
     And get the series name
@@ -81,7 +81,7 @@ Feature: verifying My Series Tab Functionality
     And select the series to be replace
     And Verify the Replace All field
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_15:verify Replace for selected series
     And Select random series to my series tab
     And get the series name
@@ -89,7 +89,7 @@ Feature: verifying My Series Tab Functionality
     And select the series to be replace
     And Verify the Replace for selected series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_16:verify Rename Find next button
     And Select random series to my series tab
     And get the series name
@@ -97,7 +97,7 @@ Feature: verifying My Series Tab Functionality
     And rename the series name as "TEST"
     And Verify Rename Find next button
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_17:Verify Rename for find next button if search result is only one
     And Select some series to my series tab
     And get the series name
@@ -105,40 +105,40 @@ Feature: verifying My Series Tab Functionality
     And send series name to find and replace field
     And Verify Rename Find next button is disable
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_18:Verify Rename- Replace, Replace All and Find next buttons by default
     And Select some series to my series tab
     And select the Rename series option
     And Verify Rename- Replace, Replace All and Find next buttons
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_19:Verify Rename- for invalid search
     And Select some series to my series tab
     And select the Rename series option
     And Send invalid keyword
     And Verify Rename- for invalid search
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_20:Verify Rename- Edit series info dropdown.
     And Select some series to my series tab
     And select the Rename series option
     And select edit series dropdown
     And Verify edit series dropdown
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_21:Verify Rename -default selection for Edit series info dropdown.
     And Select some series to my series tab
     And select the Rename series option
     And Verify default selection for Edit series info dropdown
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_22:Verify  Rename-Name selection.
     And Select random series to my series tab
     And get the series name
     And select the Rename series option
     And Verify  Rename-Name selection
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_23:Verify Function Description-Name selection.
     And Select some series to my series tab
     And Applay Function as "Change"
@@ -146,20 +146,20 @@ Feature: verifying My Series Tab Functionality
     And select the Rename series option
     And Verify  Function Description-Name selection
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_24: Verify Rename function description selection without function apply.
     And Select some series to my series tab
     And select the Rename series option
     And Verify Function Description selection without function apply
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_25: Verify Rename Function description if series applied functions in My series.
     And Select some series to my series tab
     And select any series to applay function
     And select the Rename series option
     And Verify Function description if series applied functions in My series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_26: Verify Rename - editing function description.
     And Select some series to my series tab
     And select any series to applay function
@@ -167,145 +167,143 @@ Feature: verifying My Series Tab Functionality
     And rename the function applied series "TEST"
     And Verify Function description editing
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_28: Verify Rename - Function discription - apply original title icon.
     And Select some series to my series tab
     And select any series to applay function
     And select the Rename series option
     And Verify Function description apply original title icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_30: Verify Rename - Function discription - apply original title icon for more than one series.
     And Select random series to my series tab
     And Applay Function as "Change"
     And select the Rename series option
     And Verify Function description apply original title icon for more than one series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_31: Verify Rename - Function discription -clicking on series name
     And Select some series to my series tab
     And select any series to applay function
     And select the Rename series option
     And Verify Rename Function discription clicking on series name
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_32: Verify Rename - Name- Editing series name
     And Select some series to my series tab
     And select the Rename series option
     And Change the series name as "TESTINGSERIES"
     And Verify Rename Name Editing series name
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_33: Verify Rename - Name - Series -Apply original title icon
     And Select some series to my series tab
     And select the Rename series option
     And Change the series name
     And Name Series apply original title icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_34: Verify Rename - Name - Series for more than one -Apply original title icon
     And Select random series to my series tab
     And select the Rename series option
     And Change the series name
     And Name Series apply original title icon  for more than one series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_35: Verify icon if no changes in series name and description
     And Select random series to my series tab
     And select the Rename series option
     And Verify > icon if no changes in series name and description
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_36: Verify Rename scroll bar if have more series in the popup
     And Select Maximum series to my series tab
     And select the Rename series option
     And Verify Rename scroll bar for more series in the popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_37: Verify Rename - Apply button
     And Select some series to my series tab
     And select the Rename series option
     And Change the series name
     And Verify Rename Apply button
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_38: Verify Rename - OK button
     And Select some series to my series tab
     And select the Rename series option
     And Change the series name
     And Verify Rename OK button
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_39: Verify Rename - Maximize option
     And Select some series to my series tab
     And select the Rename series option
     And select the Maximize option
     And Verify the Maximize option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_40: Verify Rename - Minimize option
     And Select some series to my series tab
     And select the Rename series option
     And select the Minimize option
     And Verify the Minimize option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_41: Verify Rename - Fullscreen option
     And Select some series to my series tab
     And select the Rename series option
     And select the Fullscreen option
     And Verify the Fullscreen option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_42: Verify Rename - Exit Fullscreen option
     And Select some series to my series tab
     And select the Rename series option
     And select the ExitFullscreen option
     And Verify the ExitFullscreen option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_43: Verify Rename - Cancel option
     And Select some series to my series tab
     And select the Rename series option
     And select the Cancel option
     And Verify the Cancel option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_44: Verify Preview series
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview pop up
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_45: Verify Preview-chart tab
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview-chart tab
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_46: Verify Preview-chart chart legend
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview chart legend
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_48: Verify Preview - hiding all series from chart
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview hiding all series from chart
 
-  
   #@abc (functionality remove)
   #Scenario: TC_MS_49: Verify Preview -chart - Source
   #	And Select some series to my series tab
   #	And Select all series
   #	And select the preview option
   #	And Verify the Preview chart Source
-  	
   @MySeries
   Scenario: TC_MS_50: Verify Preview -Table tab
     And Select some series to my series tab
@@ -313,36 +311,33 @@ Feature: verifying My Series Tab Functionality
     And select the preview option
     And Verify the Preview -Table tab
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_51: Verify Preview -Table tab-clicking on series name
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview -Table tab on clicking series name
 
-  
   #@abc(functionality remove)
   #Scenario: TC_MS_52: Verify Preview table - Source
-   #And search for the Series ID  as "310902301"
+  #And search for the Series ID  as "310902301"
   #	And Select all series
   #	And select the preview option
   #	And Verify the Preview table Source
-  	
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_53: Verify Preview table - Statistics tab
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview Statistics tab
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_54: Verify Preview - Series statistics -clicking on series name
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview Statistics tab clicking on series name
 
-  
   #@abc(functionality remove)
   #Scenario: TC_MS_55: Verify Preview - Series statistics -Source
   #	# And search for the Series ID  as "310902301"
@@ -350,8 +345,7 @@ Feature: verifying My Series Tab Functionality
   #	And Select all series
   #	And select the preview option
   #	And Verify the Preview Statistics tab Source
-  	
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_56: Verify Preview - Refresh
     And Select some series to my series tab
     And Select all series
@@ -359,120 +353,120 @@ Feature: verifying My Series Tab Functionality
     And Add some series
     And Verify the Preview refresh icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_57: Verify Preview - Close icon
     And Select some series to my series tab
     And Select all series
     And select the preview option
     And Verify the Preview Close icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_58: Verify Preview option is disable for "21" series
     And Select "21" series to my series tab
     And Verify 'Preview option' is disable for "21" series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_59: Verify "20" Maximum series for 'Preview'
     And Select 20 series to my series tab
     And Verify for "20" Maximum series for 'Preview option'
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_60: Verify Validation message for more than "20" series added to preview window
     And Select "21" series to my series tab
     And Select preview option
     And Verify Validation message for more than 20 series added to preview window.
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_72: Verify "Delete confirmation" message having Series
     And Select some series to my series tab
     And Select the Delete option
     And Verify Delete option functionality for Series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_73: Verify Delete button if no series selected
     And Verify Delete option functionality for Series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_74: Verify "Delete confirmation" for pop head title message having Visuals
     And Create visuals as Chart
     And Select to myseries button and select the delete option
     And Verify Delete option functionality having pop head title
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_75: Verify "Delete confirmation" for ok button in Visuals
     And Create visuals as Chart
     And Select to myseries button and select the delete option
     And Verify Delete option functionality having ok button
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_76: Verify "Delete confirmation" associated visuals after deleted series
     And Create visuals as Chart
     And Select to myseries button and select the delete option
     And Verify Delete option associated visuals after deleted series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_77: Verify Delete Cancel/x icon for the popup
     And Create visuals as Chart
     And Select to myseries button and select the delete option
     And Verify Delete Cancel/x icon for the popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_78: Verify "Grouping" Functionality
     And Select some series to my series tab
     And Select the grouping function
     And Verify "Grouping" functionality for Series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_79: Verify dropdown for grouping
     And Select some series to my series tab
     And Select the grouping dropdown
     And Verify Grouping dropdown
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_80: Verify grouping Functionality by selecting icon
     And Select some series to my series tab
     And Select the grouping icon
     And Verify "Grouping" functionality for Series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_81:Verify Group rename popup
     And Select some series to my series tab
     And Select the grouping icon
     And Verify Group rename popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_82: Verify "Group Rename POP Up" Functionality
     And Select some series to my series tab
     And Select the grouping icon
     And Verify "Group" Rename functionality for Series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_83:Verify Cancel icon for group rename popup
     And Select some series to my series tab
     And Select the grouping icon
     And Verify Cancel icon for group rename popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_84: Verify "Ungroup" Functionality
     And Select some series to my series tab
     And Select the grouping icon
     And Select the UnGroup option
     And Verify UnGroup functionality for Series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_85: Verify Ungroup option disabled status
     And Select some series to my series tab
     And Select all series
     And Verify UnGroup functionality disabled status when their is no Group
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_86: Verify Seperator Functionality
     And Select random series to my series tab
     And Select all series
     And Select the Seperator option
     And Verify Seperator functionality for Series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_87: Verify Move Up option
     And Select random series to my series tab
     And Select all series
@@ -481,7 +475,7 @@ Feature: verifying My Series Tab Functionality
     And get the text of the next first series
     And Verify Move Up option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_88: Verify Move down option
     And Select random series to my series tab
     And Select all series
@@ -490,7 +484,7 @@ Feature: verifying My Series Tab Functionality
     And get the text of the next first series
     And Verify Move down option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_89: Verify Move top option
     And Select random series to my series tab
     And Select a series in bottom
@@ -499,7 +493,7 @@ Feature: verifying My Series Tab Functionality
     And get the text of the next first series
     And Verify Move top option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_90: Verify Move bottom option
     And Select random series to my series tab
     And Select a series in top
@@ -508,13 +502,13 @@ Feature: verifying My Series Tab Functionality
     And get the text of the next first series
     And Verify Move bottom option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_91: Verify Cut Option
     And Select some series to my series tab
     And Select Cut option
     And verify the Cut option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_92: Validate Cut series by pasting
     And Select some series to my series tab
     And get the text of the first series
@@ -523,13 +517,13 @@ Feature: verifying My Series Tab Functionality
     And Select paste option
     And verify the paste option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_93: Verify the confirmation message for Cut action
     And Select some series to my series tab
     And Select Cut option
     And verify the confirmation message for Cut action
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_94: Verify the confirmation message for paste action
     And Select some series to my series tab
     And Select Cut option
@@ -537,96 +531,96 @@ Feature: verifying My Series Tab Functionality
     And Select paste option
     And verify the confirmation message for paste action
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_95: Verify closing of growl popup
     And Select some series to my series tab
     And Select Cut option
     And verify the closing of growl popup
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_96: Verify Copy option
     And Select some series to my series tab
     And Select Copy option
     And verify the Copy option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_97: Verify the confirmation message for Copy action
     And Select some series to my series tab
     And Select Copy option
     And verify the confirmation message for Copy action
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_98: Verify Paste option
     And Select some series to my series tab
     And Select Copy option
     And Select Paste option
     And verify the Paste option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_99: Verify Currency Conversion
     And User Select Series ID  as "402529207"
     And Select Currency Conversion
     And verify the Currency Conversion is applied for a series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_100: Verify Calculate Change
     And User Select Series ID  as "402529207"
     And Select Calculate Change
     And verify the Calculate Change is applied for a series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_101: Verify Aggregate
     And User Select Series ID  as "402529207"
     And Select Aggregate
     And verify the Aggregate is applied for a series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_102: Verify Accumulate
     And User Select Series ID  as "402529207"
     And Select Accumulate
     And verify the Accumulate is applied for a series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_103: Verify FX drop down
     And User Select Series ID  as "402529207"
     And Select FX drop down
     And verify the Function applied in FX drop down
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_104: Verify FX Icon
     And Select some series to my series tab
     And Select FX Icon
     And verify the FX Icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_105: Verify appling function by clicking on function icon
     And Select some series to my series tab
     And Select FX Icon
     And Applay "Change" function
     And verify appling function by clicking on function icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_106: Verify hiding function toolbar
     And Select some series to my series tab
     And Select all series
     And Select hiding toolbar
     And verify hiding function toolbar
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_107: Verify Expanding the fuction toolbar
     And Select some series to my series tab
     And Select all series
     And Select Expanding toolbar
     And verify Expanding function toolbar
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_108: Verify function field
     And Select some series to my series tab
     And Select all series
     And Select function field
     And verify function field
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_109: Verify Checkbox for select all/unselect all
     And Select some series to my series tab
     And Select all series
@@ -634,37 +628,37 @@ Feature: verifying My Series Tab Functionality
     And UnSelect all series
     And verify Checkbox for unselect all
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_110: Verify total number of series in my series
     And Select random series to my series tab
     And get the count of the series in my series panel
     And verify total number of series in my series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_111: Verify number of selected series
     And Select random series to my series tab
     And Select all series
     And verify the number of selected series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_112: Verify remove icon for selected series
     And Select random series to my series tab
     And Select all series
     And Select the X icon
     And verify remove icon for selected series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_113: Verify Search field in my series panel
     And Select random series to my series tab
     And search for the serie as "Population Projection"
     And verify serie "Population Projection" appeared
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_115: Verify Addition highlight in My series
     And Select some series to my series tab
     And verify Addition highlight in My series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_116:Verify List/Table mode
     And Select random series to my series tab
     And Select the List mode
@@ -672,43 +666,42 @@ Feature: verifying My Series Tab Functionality
     And Select the Table mode
     And verify the Table mode
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_117:Verify Customize your selection option
     And Select random series to my series tab
     And Select the Customize option
     And verify the Customize option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_118:Customize- Verify show selection in -> Table mode
     And Select random series to my series tab
     And Select the Customize option
     And Select the Table mode in Customize window
     And Verify show selection in Table mode
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_119:Customize- Verify show selection in -> List mode
     And Select random series to my series tab
     And Select the Customize option
     And Select the List mode in Customize window
     And Verify show selection in List mode
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_120:Customize - Verify show selection in -> Table mode selection
     And Select random series to my series tab
     And Select the Customize option
     And Select the Table mode in Customize window for show in
     And Verify hidden show selection in Table mode
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_121:Customize - Verify show selection in -> List mode -> 2 row
     And Select random series to my series tab
     And Select the Customize option
     And Select the List mode in Customize window for show in
     And select the required attribute
     And Verify show selection in List mode of 2 row
-	
-	
-  @MySeries
+
+  @MySeries1
   Scenario: TC_MS_122:Customize - Verify Show series in list -> 1 row
     And Select random series to my series tab
     And Select the Customize option
@@ -716,7 +709,7 @@ Feature: verifying My Series Tab Functionality
     And select the Show series in list as 1 row
     And Verify show selection in List mode of one row
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_125:Customize - Verify Table columns for table mode
     And Select random series to my series tab
     And Select the Customize option
@@ -724,7 +717,7 @@ Feature: verifying My Series Tab Functionality
     And select the required attribute for table mode
     And Verify Table columns for table mode
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_126:Customize - Verify Sort series by
     And Select random series to my series tab
     And Select the second series
@@ -732,7 +725,7 @@ Feature: verifying My Series Tab Functionality
     And select the Sort series by option
     And Verify the Sort series by option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_127:Customize - Verify Reset option
     And Select random series to my series tab
     And Select the Customize option
@@ -740,7 +733,7 @@ Feature: verifying My Series Tab Functionality
     And select the required attribute for table mode
     And Verify the Reset option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_128:Customize - Verify Save option
     And Select random series to my series tab
     And Select the Customize option
@@ -748,21 +741,21 @@ Feature: verifying My Series Tab Functionality
     And select the required attribute for table mode
     And Verify Save option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_129:Customize - Verify Cancel/X
     And Select random series to my series tab
     And Select the Customize option
     And Select the Cancel/X option
     And Verify the Cancel/X option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_131:Verify suggested indicator
     And Select series to my series tab of different country
     And Select all series
     And select the Related series option
     And Verify suggested indicator
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_133:Verify Suggested indicators -(i) icon
     And Select random series to my series tab
     And Select all series
@@ -770,7 +763,7 @@ Feature: verifying My Series Tab Functionality
     And select the (i) icon
     And Verify Suggested indicators (i) icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_134:Verify Suggested indicators -(i) icon tootltip
     And Select random series to my series tab
     And Select all series
@@ -778,21 +771,21 @@ Feature: verifying My Series Tab Functionality
     And mover the (i) icon
     And Verify Suggested indicators tooltip for (i) icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_135:Verify Suggested indicators -contries tab
     And Select random series to my series tab
     And Select all series
     And select the Related series option
     And Verify contries tab under suggested indicator
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_136:Verify Suggested indicators -max contires display
     And Select random six different series to my series tab
     And Select all series
     And select the Related series option
     And Verify max contires display
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_137:Verify Suggested indicators -click on indicators
     And Select random series to my series tab
     And Select all series
@@ -800,14 +793,14 @@ Feature: verifying My Series Tab Functionality
     And select any one of the indicators
     And Verify Suggested indicators on clicking indicators
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_138:Verify Suggested indicators -greyed out indicators
     And Select random series to my series tab
     And Select all series
     And select the Related series option
     And Verify Suggested indicators greyed out indicators
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_139:Verify Suggested indicators -+ icon click
     And Select random series to my series tab
     And Select all series
@@ -815,7 +808,7 @@ Feature: verifying My Series Tab Functionality
     And select the + icon option
     And Verify Suggested indicators + icon
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_140:Verify Suggested indicators -Select a countries dropdown
     And Select random series to my series tab
     And Select all series
@@ -823,7 +816,7 @@ Feature: verifying My Series Tab Functionality
     And select the countries dropdown
     And Verify Suggested indicators countries dropdown
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_141:Verify Suggested indicators - Select a Region
     And Select random series to my series tab
     And Select all series
@@ -832,7 +825,7 @@ Feature: verifying My Series Tab Functionality
     And select any one country
     And Verify Suggested indicators Select a Region
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_142:Verify Suggested indicators -search for a Region
     And Select random series to my series tab
     And Select all series
@@ -841,7 +834,7 @@ Feature: verifying My Series Tab Functionality
     And search for a Region
     And Verify Suggested indicators search for a Region
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_143:Verify Suggested indicators- minimize and maximizeoption
     And Select random series to my series tab
     And Select all series
@@ -849,7 +842,7 @@ Feature: verifying My Series Tab Functionality
     And select the minimize option
     And Verify Suggested indicators min and max option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_145:Verify Suggested indicators - resize window
     And Select random series to my series tab
     And Select all series
@@ -857,14 +850,15 @@ Feature: verifying My Series Tab Functionality
     And select the expand option
     And Verify Suggested indicators expand option
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_146:Verify Suggested indicators - window move
-  And Select random series to my series tab
-  And Select all series
-  And select the Related series option
-  And try to drag window
-  And Verify Suggested indicators window move
-  @MySeries
+    And Select random series to my series tab
+    And Select all series
+    And select the Related series option
+    And try to drag window
+    And Verify Suggested indicators window move
+
+  @MySeries1
   Scenario: TC_MS_147:Verify Suggested indicators - close button(x)
     And Select random series to my series tab
     And Select all series
@@ -872,14 +866,14 @@ Feature: verifying My Series Tab Functionality
     And select close button
     And Verify Suggested indicators close button
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_148:Verify sort by dropdown
     And Select random series to my series tab
     And Select all series
     And select the sort by dropdown
     And Verify sort by dropdown
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_149:Verify sort by dropdown-checked
     And Select random series to my series tab
     And check any one of the series
@@ -887,48 +881,49 @@ Feature: verifying My Series Tab Functionality
     And select Sort by checked series option
     And Verify sort by dropdown checked
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_150:Verify sort by dropdown- Recently updated
     And Select random series to my series tab
     And select the sort by dropdown
     And select Sort by last modified date of a series (among active series only) option
     And Verify sort by Recently updated
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_151:Verify sort by dropdown- % Change
     And search for the Series ID  as "205545302;51297401;282464801"
     And select the sort by dropdown
     And select Sort by series percentage change option
     And Verify sort by % Change
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_152:Verify sort by dropdown- Last value
-  And search for the Series ID  as "205428302;51297401;282464801"
-  And select the sort by dropdown
-  And select Last Value option
-  And Verify sort by Last Value
-  @MySeries
+    And search for the Series ID  as "205428302;51297401;282464801"
+    And select the sort by dropdown
+    And select Last Value option
+    And Verify sort by Last Value
+
+  @MySeries1
   Scenario: TC_MS_153:Verify sort by dropdown-  Status
     And search for the Series ID  as "205424302;369827607;282464801"
     And select the sort by dropdown
     And select Status option
     And Verify sort by Status
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_154:Verify sort by dropdown-  Name
     And search for the Series ID  as "205545302;51297401;282464801"
     And select the sort by dropdown
     And select Name option
     And Verify sort by Name
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_155:Verify sort by dropdown-  Region
     And search for the Series ID  as "205545302;51297401;282464801"
     And select the sort by dropdown
     And select Region option
     And Verify sort by Region
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_156:Verify sort by dropdown-  Subnational
     And search for the Series ID  as "241551701;241551801;241551901"
     And select subnational option in customize setting
@@ -936,21 +931,21 @@ Feature: verifying My Series Tab Functionality
     And select Subnational option
     And Verify sort by Subnational
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_157:Verify sort by dropdown-  Frequency
     And search for the Series ID  as "96258607;241551901;282464801"
     And select the sort by dropdown
     And select Frequency option
     And Verify sort by Frequency
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_158:Verify sort by dropdown-  Unit
     And search for the Series ID  as "213168202;241551901;282464801"
     And select the sort by dropdown
     And select Unit option
     And Verify sort by Unit
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_159:Verify sort by dropdown-  Source
     And search for the Series ID  as "327841302;389679387;282464801"
     And select Source option in customize setting
@@ -958,7 +953,7 @@ Feature: verifying My Series Tab Functionality
     And select Source option
     And Verify sort by Source
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_160:Verify sort by dropdown-  Mnemonics
     And search for the Series ID  as "384162137;383779087;237938503"
     And select Mnemonic option in customize setting
@@ -966,7 +961,7 @@ Feature: verifying My Series Tab Functionality
     And select Mnemonic option
     And Verify sort by Mnemonic
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_161:Verify sort by dropdown - Function Descreption
     And search for the Series ID  as "205424302;237938503;292514601"
     And applay function for the series
@@ -974,7 +969,7 @@ Feature: verifying My Series Tab Functionality
     And select Function Description option
     And Verify sort by Function Description
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_162:Verify sort by dropdown - Obs. Number
     And search for the Series ID  as "205424302;237938503;292514601"
     And select  Observation option in customize setting
@@ -982,51 +977,51 @@ Feature: verifying My Series Tab Functionality
     And select Obs. Number option
     And Verify sort by Obs. Number
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_163:Verify sort by dropdown -  First date
     And search for the Series ID  as 292514601
     And select the sort by dropdown
     And select First Date option
     And Verify sort by First date
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_164:Verify sort by dropdown - Last date
     And search for the Series ID  as 292514601
     And select the sort by dropdown
     And select Last Date option
     And Verify sort by Last date
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_165:Verify series selection by using Shift key
     And Select random series to my series tab
     And Select the first series
     And Select shift key and select last series
     And Verify series selection by using Shift key
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_166:Verify placing series by drag and drop
     And Select series and darg and drop
     And Verify placing series by drag and drop
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_167:Verify Mouse hover icons on series
-     And Select some series to my series tab
+    And Select some series to my series tab
     And Mouse hover the first series
     And Verify Mouse hover icons on series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_168:Verify Show Series info (i)
     And Select some series to my series tab
     And Mouse hover the first series
     And Select Show Series info
     And Verify Show Series info
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_169:Verify series tooltip in my series
     And Select some series to my series tab
     And Verify series tooltip in my series
 
-  @MySeries
+  @MySeries1
   Scenario: TC_MS_170:Verify Edit series option
     And Select some series to my series tab
     And Mouse hover the first series
@@ -2042,7 +2037,7 @@ Feature: verifying My Series Tab Functionality
     And Select random series to my series tab
     And Select the Table mode
     And verify Edit series in table mode
-    
+
   @MySeries
   Scenario: TC_MS_301: Verify Edit series-Rename-table mode
     And Select random series to my series tab
@@ -2243,11 +2238,11 @@ Feature: verifying My Series Tab Functionality
 
   @MySeries
   Scenario: TC_MS_322: Verify Right click copy link behavior for single series-in table mode
-     And User Select Series ID  as "402529207"
+    And User Select Series ID  as "402529207"
     And Select all series
     And Select the Table mode
-    #And Mouse hover the first series in table mode	
-      And Right click on the first series in table mode
+    #And Mouse hover the first series in table mode
+    And Right click on the first series in table mode
     #And Select the "Copy link(s)" option
     And Select the Copy selected links option
     And Verify Right click Copy link behavior for single series in table mode
@@ -2259,7 +2254,7 @@ Feature: verifying My Series Tab Functionality
     And Select the Table mode
     #And Mouse hover the first series in table mode
     And Right click on the first series in table mode
-      And Select the Copy selected links option
+    And Select the Copy selected links option
     And Verify Right click Copy link confirmation message in table mode
 
   @MySeries
@@ -2267,8 +2262,8 @@ Feature: verifying My Series Tab Functionality
     And Select some series to my series tab
     And Select all series
     And Select the Table mode
-     And Right click on the first series in table mode
-     And Verify Right click insert copied option if not data in clipboard in table mode
+    And Right click on the first series in table mode
+    And Verify Right click insert copied option if not data in clipboard in table mode
 
   @MySeries
   Scenario: TC_MS_325:  Verify Right click insert copied option-in table mode
@@ -2447,5 +2442,8 @@ Feature: verifying My Series Tab Functionality
     And Select undo option
     And Select redo option
     And Verify redo option for making changes in my series tab
+<<<<<<< HEAD
 
  
+=======
+>>>>>>> Dev

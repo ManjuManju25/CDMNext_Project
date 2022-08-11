@@ -335,15 +335,16 @@ Feature: Verifying Image visual functionality
     And Try to Upload multiple images
     Then Should allow to add multiple images
 
-  #@ImageVisual1
-  #Scenario: Tc_ImageVisual_37 : Verify edit/insert image popup for general tab
-    #And Go to View tab
-    #And Click on insert Image visual icon
-    #And Select "Insert/edit image" icon
-    #Then Below options should be available in General tab
-      #| Source      |
-      #| Image Title |
-      #| Dimensions  |
+  @ImageVisual
+  Scenario: Tc_ImageVisual_37 : Verify edit/insert image popup for general tab
+    And Go to View tab
+    And Click on insert Image visual icon
+    And Select "Insert/edit image" icon
+    Then Below options should be available in General tab
+      | Source      |
+      | Image Title |
+      | Width       |
+      | Height      |
 
   @ImageVisual
   Scenario: Tc_ImageVisual_38 : Verify edit/insert image popup for upload tab
@@ -427,8 +428,8 @@ Feature: Verifying Image visual functionality
     And Select "pdf" format
     And Click on "Download"
     Then Image should be downloaded in "pdf" format
-    
-      @ImageVisual
+
+  @ImageVisual
   Scenario: Tc_ImageVisual_46 : Verify visual download to JPG format
     And Go to View tab
     And Click on insert Image visual icon

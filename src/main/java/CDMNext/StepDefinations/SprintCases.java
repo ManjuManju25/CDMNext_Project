@@ -46,18 +46,18 @@ public class SprintCases {
 				.click();
 		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.getElementByXpath(login.driver, "//*[@class='database-node tree-node full-expanded open last-open-node']/*[3]/following::*[1]/*[1]/*[1]", 300)
 				.click();
 		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.getElementByProperty(login.driver, "Expand3rdLevel", 300)
 				.click();
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'full-expanded open last-open-node')]/*[3]/*[1]/*[1]", 300).click();
+		CommonFunctionality.getElementByProperty(login.driver,
+				"Expand4thLevel", 300).click();
 		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.getElementByProperty(login.driver, "Expand5thLevel", 300)
 				.click();
 		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 100);
 		new Actions(login.driver).pause(500).contextClick(sname).perform();
@@ -114,6 +114,7 @@ public class SprintCases {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
+		CommonFunctionality.wait(7000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 20).click();
 		Thread.sleep(2000);
 		minimize = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Minimize']")))
@@ -128,7 +129,7 @@ public class SprintCases {
 	@Then("^The modal window should get collapsed into row$")
 	public void the_modal_window_should_get_collapsed_into_row() throws Throwable {
 		CommonFunctionality.wait(1000);
-		String maximize = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Maximize']")))
+		String maximize = CommonFunctionality.getElementByXpath(login.driver,"//*[@title='Maximize']",8)
 				.getAttribute("title");
 		if (minimize.equals(maximize) != true) {
 			login.Log4j.info("SSP window is minimized");
@@ -146,7 +147,7 @@ public class SprintCases {
 	public void select_filter(String arg1) throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 20).click();
 		CommonFunctionality.wait(10000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + arg1 + "')]")))
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]",8)
 				.click();
 	}
 
@@ -155,7 +156,7 @@ public class SprintCases {
 			int arg1) throws Throwable {
 		Thread.sleep(5000);
 		List<WebElement> seriesLevel_ULele = login.driver
-				.findElements(By.xpath("//*[contains(@class,'search-series-list')]"));
+				.findElements(By.xpath("//*[contains(@class,'series-search-list-item')]"));
 		login.Log4j.info("size : " + seriesLevel_ULele.size());
 		if (seriesLevel_ULele.size() == 1 || seriesLevel_ULele.size() > 1) {
 			login.Log4j.info("Series level is displayed for less than " + arg1 + " search results");
@@ -219,13 +220,13 @@ public class SprintCases {
 		Thread.sleep(5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		Thread.sleep(2000);
-		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
+		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//*[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		for (int i = 0; i < ListOfSeries.size(); i++) {
 			int j = i + 1;
 			Thread.sleep(1000);
 			WebElement seriesName = ListOfSeries.get(i);
 			CommonFunctionality.action.pause(1000).moveToElement(seriesName).build().perform();
-			CommonFunctionality.getElementByXpath(login.driver,"//*[@class='search-series-list']/*[" + j + "]//*[@class='view-chart-icon menu-icon']",6).click();
+			CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='series-representation--list']//*[@class='view-chart-icon menu-icon'])[" + j + "]",6).click();
 		}
 	}
 
@@ -366,7 +367,7 @@ public class SprintCases {
 
 	@And("^Select Gradient$")
 	public void select_Gradient() throws Throwable {
-		Thread.sleep(2000);
+		CommonFunctionality.wait(4000);
 		WebElement Gradient = login.driver.findElement(By.xpath("//*[@class='color-axis-type-select']//*[contains(text(),'Gradient')]"));
 		Gradient.click();
 
@@ -435,11 +436,15 @@ public class SprintCases {
 				Assert.fail("FAIL");
 			}
 		}
+		try {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//*[@title='Close']")).click();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-		CommonFunctionality.Views_list();
+		}catch(Exception e) {
+			
+		}
+		//CommonFunctionality.Views_list();
 	}
 
 	@Then("^Clicking on the color box will open the color picker$")
@@ -457,7 +462,7 @@ public class SprintCases {
 			Assert.fail("Color picker is not displayed");
 		}
 		WebElement color_picker = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-				"//*[@class='sp-container sp-light sp-buttons-disabled sp-palette-buttons-disabled sp-initial-disabled color-picker-selection']")));
+				"//*[contains(@class,'index-module_dropdown')]")));
 		if (color_picker.isDisplayed() == true) {
 			login.Log4j.info("Color picker is displayed");
 		} else {
@@ -526,11 +531,14 @@ public class SprintCases {
 			// .findElement(By.xpath("//*[@class='highcharts-container
 			// ']/*//*[contains(@class,'highcharts-data-labels
 			// highcharts-series-2')]/*[1]/*[1]/*[@class='highcharts-text-outline']")).getText();
+			/*Taiwan_attribute = login.driver.findElement(By.xpath(
+					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]"))
+					.getAttribute("innerHTML");*/
 			Taiwan_attribute = login.driver.findElement(By.xpath(
-					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]/*[2]"))
+					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]"))
 					.getAttribute("innerHTML");
 			login.Log4j.info(Taiwan_attribute);
-			if (Taiwan_attribute.equals("Taiwan")) {
+			if (Taiwan_attribute.contains("Taiwan")) {
 				login.Log4j.info("Taiwan is included in China map");
 				CommonFunctionality.Views_list();
 			}
@@ -605,7 +613,7 @@ public class SprintCases {
 	@Then("^Selected template should be highlighted in the template Menu$")
 	public void selected_template_should_be_highlighted_in_the_template_Menu() throws Throwable {
 		String arg1 = "Delete template";
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(3000);
 		String style = login.driver.findElement(By
 				.xpath("//*[@class='style-templates-menu--items']//*[contains(@class,'style-templates-item__active')]"))
 				.getAttribute("title");

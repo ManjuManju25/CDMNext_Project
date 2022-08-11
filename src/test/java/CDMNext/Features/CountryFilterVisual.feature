@@ -218,7 +218,7 @@ Feature: Verifying Country Filter functionality
     Then Countries name which are included in the other all visual should be listed and displayed
 
   @FilterVisual
-  Scenario: Tc_FilterVisual_34:Verify reset country filter notification message and click on reset country filter when notification popped up
+    Scenario: Tc_FilterVisual_34:Verify reset country filter notification message and click on reset country filter when notification popped up
     And Create one visual with countryfilter
     And click on filter and modify visual with specific countries
     And create another visual in the same view

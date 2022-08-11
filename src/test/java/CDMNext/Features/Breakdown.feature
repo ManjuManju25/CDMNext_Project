@@ -33,7 +33,7 @@ Feature: Title of your featureVerify Breakdown functionality
     And Click on the "Unselect all" option
     Then All selected series should get de-selected
 
-  @Breakdown1
+  @Breakdown
   Scenario: TC_Breakdown_05:Verify if adding few series can be possible from  breakdown tab
     And Expand Global database till "South Africa"
     And Expand "South Africa: National Accounts" till first table level

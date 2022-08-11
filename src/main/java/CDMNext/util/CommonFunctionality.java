@@ -1,12 +1,10 @@
 
-	
-package	CDMNext.util;
-
+package CDMNext.util;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
-import java.awt.Image;	
-	
+import java.awt.Image;
+
 import java.awt.Robot;
 import java.io.File;
 import java.io.FileFilter;
@@ -35,6 +33,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFComment;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -77,7 +76,7 @@ public class CommonFunctionality {
 	public static WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	public static String manage_series_id;
 	public static File theNewestFile = null;
-	public static int width ;
+	public static int width;
 
 	public static void ClearSelection() throws InterruptedException {
 		Thread.sleep(2000);
@@ -173,28 +172,33 @@ public class CommonFunctionality {
 	@SuppressWarnings("deprecation")
 	public static void DeleteSeries() throws InterruptedException {
 		try {
-		WebElement selected = getElementByXpath(login.driver,
+			WebElement selected = getElementByXpath(login.driver,
 					"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",
 					4);
-		if (selected.getAttribute("class").contains("all-selected")) {
-			getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
-		} else if (selected.getAttribute("class").contains("without-data")) {
-			System.out.println("No Series is added in myseries list to delete");
-		}else {
-			WebElement ele = getElementByXpath(login.driver,
-					"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
-			action.moveToElement(ele).pause(1000).click().build().perform();
-			WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
-			new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
+			if (selected.getAttribute("class").contains("all-selected")) {
+				getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+			} else if (selected.getAttribute("class").contains("without-data")) {
+				System.out.println("No Series is added in myseries list to delete");
+			} else {
+				WebElement ele = getElementByXpath(login.driver,
+						"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
+				action.moveToElement(ele).pause(1000).click().build().perform();
+				WebElement delete = getElementBycssSelector(login.driver, "div[data-action='delete']", 4);
+				new Actions(login.driver).moveToElement(delete).pause(50).click().build().perform();
+			}
+		} catch (Exception e) {
+			try {
+				WebElement Table_mode_selected_ = getElementByXpath(login.driver,
+						"//table//*[@class='table-container--checkbox svg-checkbox input-control__grey']/*[@class='icon']",
+						4);
+				action.moveToElement(Table_mode_selected_).pause(500).click().build().perform();
+				getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+			} catch (Exception e1) {
+
+			}
 		}
-		}catch(Exception e) {
-			WebElement Table_mode_selected_ = getElementByXpath(login.driver,
-					"//table//*[@class='table-container--checkbox svg-checkbox input-control__grey']/*[@class='icon']",	4);
-			action.moveToElement(Table_mode_selected_).pause(500).click().build().perform();
-			getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
-		}
-			
-		}
+
+	}
 
 	public static void TopMethod() throws InterruptedException {
 		try {
@@ -212,17 +216,20 @@ public class CommonFunctionality {
 	@SuppressWarnings("deprecation")
 	public static void RightClickOnAnySeries() throws InterruptedException {
 		wait(2000);
-		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
-		List<WebElement> li_All = login.driver.findElements(By.xpath("//ul[@class='search-series-list scrollable']/*"));
-				login.Log4j.info("List size is :" + li_All.size());
+		// WebElement ul_element =
+		// login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
+		List<WebElement> li_All = login.driver
+				.findElements(By.xpath(login.LOCATORS.getProperty("ListOfSeries_DatabasesTab")));
+		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			// int j = i + 1;
 			m = i + 1;
 			wait(1000);
-			WebElement checkbox = login.driver
-					.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+			WebElement checkbox = login.driver.findElement(By.xpath(
+					"(//*[@class='database-representation--tree']//div[@class='series-list-item--checkbox-wrapper'])[ "
+							+ m + "]"));
 			checkbox.click();
-			WebElement ele = login.driver.findElement(By.xpath("//ul[@class='search-series-list scrollable']/*[" + m + "]//div[@class='series-item--name']"));
+			WebElement ele = li_All.get(i);
 			// sname = ele.getText();
 			if (i == 4) {
 				// Thread.sleep(2000);
@@ -269,7 +276,7 @@ public class CommonFunctionality {
 			wait(5000);
 			Alert alert = login.driver.switchTo().alert();
 			String alertText = alert.getText();
-		    System.out.println("Alert data: " + alertText);
+			System.out.println("Alert data: " + alertText);
 			alert.dismiss();
 		} catch (Exception e) {
 
@@ -368,7 +375,7 @@ public class CommonFunctionality {
 		if (property_value2.equals("Close")) {
 			getElementByProperty(login.driver, property_value2, 4).click();
 		}
-		String downloadPath = System.getProperty("user.home")+ "\\Downloads";
+		String downloadPath = System.getProperty("user.home") + "\\Downloads";
 		File dir = new File(downloadPath);
 		File[] dirContents = dir.listFiles();
 		for (int i = 0; i < dirContents.length; i++) {
@@ -435,8 +442,13 @@ public class CommonFunctionality {
 					wait(1000);
 					new Actions(login.driver).contextClick(view).build().perform();
 					getElementByXpath(login.driver, "//span[contains(text(),'Delete view')]", 30).click();
-					if (login.driver.findElements(By.xpath("//*[@class='modal-window modal-window__active']//button[contains(text(),'Ok')]")).size() > 0) {
-						getElementByXpath(login.driver, "//*[@class='modal-window modal-window__active']//button[contains(text(),'Ok')]", 10).click();
+					if (login.driver
+							.findElements(By.xpath(
+									"//*[@class='modal-window modal-window__active']//button[contains(text(),'Ok')]"))
+							.size() > 0) {
+						getElementByXpath(login.driver,
+								"//*[@class='modal-window modal-window__active']//button[contains(text(),'Ok')]", 10)
+										.click();
 					}
 				}
 			}
@@ -469,9 +481,10 @@ public class CommonFunctionality {
 	}
 
 	public static WebElement getElementByProperty(WebDriver driver, String property_value, int time) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
+		wait(1000);
+		// wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty(property_value))));
+		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty(property_value))));
 		WebElement element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty(property_value)));
 		elementHighlight(login.driver, element);
 		try {
@@ -501,14 +514,15 @@ public class CommonFunctionality {
 	}
 
 	public static WebElement getElementByXpath(WebDriver driver, String locator, int time) throws InterruptedException {
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
-//		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
-//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+		// wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+		// wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
 		wait(500);
 		WebElement element = login.driver.findElement(By.xpath(locator));
 		elementHighlight(login.driver, element);
 		return element;
 	}
+
 	public static List<WebElement> getElementsByXpath(WebDriver driver, String locator) throws Exception {
 		wait.until(ExpectedConditions.visibilityOfElementLocated((By.xpath(locator))));
 		wait.until(ExpectedConditions.elementToBeClickable((By.xpath(locator))));
@@ -518,9 +532,9 @@ public class CommonFunctionality {
 	public static WebElement getElementBycssSelector(WebDriver driver, String locator, int time)
 			throws InterruptedException {
 		wait(1000);
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
-		//wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
-		//wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(locator)));
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+		// wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(locator)));
+		// wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(locator)));
 		WebElement element = login.driver.findElement(By.cssSelector(locator));
 		elementHighlight(login.driver, element);
 		return element;
@@ -642,14 +656,20 @@ public class CommonFunctionality {
 	public static List<WebElement> Hidden_Webelements_handling(WebDriver driver, String locatorType, String value) {
 		List<WebElement> elements = null;
 		if (locatorType.equalsIgnoreCase("xpath")) {
-			elements = driver.findElements(By.xpath(value));
+			try {
+				elements = driver.findElements(By.xpath(value));
+			} catch (Exception e) {
+				elements = driver.findElements(By.xpath(login.LOCATORS.getProperty(value)));
+			}
 		} else if (locatorType.equalsIgnoreCase("className")) {
 			elements = driver.findElements(By.className(value));
 		}
 		for (WebElement element : elements) {
 			int x = element.getLocation().getX();
 			if (x != 0) {
-				ActualColor = element.getAttribute("title");
+
+				// ActualColor = element.getAttribute("title");
+				ActualColor = element.getCssValue("background-color");
 				login.Log4j.info(ActualColor);
 				wait(1000);
 				element.click();
@@ -658,7 +678,7 @@ public class CommonFunctionality {
 		}
 		return elements;
 	}
-	
+
 	public static void CompareImage(WebDriver driver, String Image1, String Image2) throws Exception {
 		String file1 = Image1;
 		String file2 = Image2;
@@ -747,14 +767,14 @@ public class CommonFunctionality {
 
 	/* Get the newest file for a specific extension */
 
-	public static void getTheNewestFile(String ext)  {
+	public static void getTheNewestFile(String ext) {
 		wait(20000);
 		File dir = new File(System.getProperty("user.home") + "\\Downloads");
-		
+
 		FileFilter fileFilter = new WildcardFileFilter("*." + ext);
 
 		File[] files = dir.listFiles(fileFilter);
-		
+
 		System.out.println(files.length);
 		if (files.length > 0 || files.length == 0) {
 			/** The newest file comes first **/
@@ -784,22 +804,24 @@ public class CommonFunctionality {
 					} catch (IOException e) {
 
 					}
-				} else if(E.equals("pdf")) {
-					
-					if(files[0].getName().contains("Image") || files[0].getName().contains("Name your insight")){
-						System.out.println(theNewestFile + " visual is downloaded in "+ E + " format");
+				} else if (E.equals("pdf")) {
+
+					if (files[0].getName().contains("Image") || files[0].getName().contains("Name your insight")) {
+						System.out.println(theNewestFile + " visual is downloaded in " + E + " format");
 					}
 				}
-				
+
 			} else {
 
 				Assert.fail("Downloaded File Format is NOT Matched." + "'" + E + "' <> '" + ext + "'");
 			}
 		}
 	}
+
 	private static String getFileSizeKiloBytes(File file) {
 		return (double) file.length() / 1024 + "  kb";
 	}
+
 	public static void MovingDownloadedFileToTargetLocation(String sourceFile, String E) throws IOException {
 		// move file from Downloads
 		// File Targetdir = new File(System.getProperty("user.home") + "\\downloads\\" +
@@ -872,8 +894,8 @@ public class CommonFunctionality {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static void login_as_internal_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4,String arg5)
-			throws Throwable {
+	public static void login_as_internal_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4,
+			String arg5) throws Throwable {
 		URL url = new URL(driver.getCurrentUrl());
 		driver.get(url.getProtocol() + "://" + url.getHost() + "/login");
 		driver.findElement(By.cssSelector(arg1)).clear();
@@ -883,13 +905,19 @@ public class CommonFunctionality {
 		driver.findElement(By.cssSelector(arg3)).click();
 		wait(2000);
 		driver.navigate().refresh();
-		/*if(login.driver.findElements(By.xpath("//div[@class='movable-modal--header']//div[text()='FocusEconomics Consensus Forecasts']")).size()>0) {
-			boolean checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'show again')]/preceding-sibling::input")).isSelected();
-			if(checkbox == false) {
-				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'show again')]/preceding-sibling::span", 4)).pause(500).click().build().perform();
-			}
-			CommonFunctionality.getElementByXpath(login.driver, "//button[contains(@class,'button__text_purple') and text()='No, take me to CDMNext']", 4).click();
-		}*/
+		/*
+		 * if(login.driver.findElements(By.
+		 * xpath("//div[@class='movable-modal--header']//div[text()='FocusEconomics Consensus Forecasts']"
+		 * )).size()>0) { boolean checkbox = login.driver.findElement(By.
+		 * xpath("//*[contains(text(),'show again')]/preceding-sibling::input")).
+		 * isSelected(); if(checkbox == false) { new
+		 * Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(
+		 * login.driver, "//*[contains(text(),'show again')]/preceding-sibling::span",
+		 * 4)).pause(500).click().build().perform(); }
+		 * CommonFunctionality.getElementByXpath(login.driver,
+		 * "//button[contains(@class,'button__text_purple') and text()='No, take me to CDMNext']"
+		 * , 4).click(); }
+		 */
 	}
 
 	public static void login_as_ceic_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4)
@@ -921,21 +949,50 @@ public class CommonFunctionality {
 		ResetMethod();
 		Views_list();
 	}
-	
+
 	public static void Crosssection_Excelverify(WebDriver driver, String Excel1, String Excel2) throws Throwable {
 		String path1 = System.getProperty("user.dir") + "\\Testdata\\" + Excel1 + ".xlsx";
+		System.out.println("path1" + path1);
+
 		String path2 = System.getProperty("user.home") + "\\Downloads\\" + Excel2 + ".xlsx";
+		System.out.println("path2" + path2);
+
 		File src1 = new File(path1);
 		File src2 = new File(path2);
 		FileInputStream excellFile1 = new FileInputStream(src1);
 		FileInputStream excellFile2 = new FileInputStream(src2);
+
+		File file = new File(System.getProperty("user.home") + "\\Downloads\\" + Excel2 + ".xlsx");
+
+		// Create a FileInputStream object
+		// for getting the information of the file
+		FileInputStream fip = new FileInputStream(file);
+
+		// Getting the workbook instance for XLSX file
+		XSSFWorkbook workbook = new XSSFWorkbook(fip);
+
+		// Ensure if file exist or not
+		if (file.isFile() && file.exists()) {
+			System.out.println("Geeks.xlsx open");
+		} else {
+			System.out.println("Geeks.xlsx either not exist" + " or can't open");
+		}
+		FileOutputStream out = new FileOutputStream(
+				System.getProperty("user.home") + "\\Downloads\\" + Excel2 + ".xlsx");
+		workbook.write(out);
+		out.close();
 		XSSFWorkbook TestData = new XSSFWorkbook(excellFile1);
 		XSSFWorkbook ActualData = new XSSFWorkbook(excellFile2);
 		XSSFSheet Testdatasheet1 = TestData.getSheetAt(0);
 		XSSFSheet ActualDatasheet1 = ActualData.getSheetAt(0);
 		XSSFRow Testdatarows = Testdatasheet1.getRow(0);
 		XSSFRow Actualdatarows = ActualDatasheet1.getRow(0);
-		CompareComments(Testdatarows, Actualdatarows);
+		System.out.println("Testdatasheet" + Testdatasheet1);
+		System.out.println("Actually sheet" + ActualDatasheet1);
+
+		// System.out.println("Testdatarows"+Testdatarows);
+		// System.out.println("Actualdatarows"+Actualdatarows);
+		// CompareComments(Testdatarows, Actualdatarows);
 		if (compareTwoSheets(Testdatasheet1, ActualDatasheet1)) {
 			login.Log4j.info("The two excel sheets are Equal");
 		} else {
@@ -943,8 +1000,7 @@ public class CommonFunctionality {
 		}
 		excellFile1.close();
 		excellFile2.close();
-		Files.delete(Paths.get(path2));
-		//Files.deleteIfExists(Paths.get(path2));
+		Files.deleteIfExists(Paths.get(path2));
 	}
 
 	// Compare Two Sheets
@@ -959,6 +1015,7 @@ public class CommonFunctionality {
 			XSSFRow Actualdatarows = ActualDatasheet1.getRow(i);
 			if (!compareTwoRows(Testdatarows, Actualdatarows)) {
 				equalSheets = false;
+				System.out.println("compare two sheets");
 				System.err.println("Row " + i + " - Not Equal");
 				break;
 			} else {
@@ -975,20 +1032,66 @@ public class CommonFunctionality {
 		} else if ((Testdatarows == null) || (Actualdatarows == null)) {
 			return false;
 		}
-		int firstCell1 = Testdatarows.getFirstCellNum();
+		int firstCell1 = Testdatarows.getFirstCellNum() + 1;
 		int lastCell1 = Testdatarows.getLastCellNum();
 		boolean equalRows = true;
 		// Compare all cells in a row
 		for (int i = firstCell1; i < lastCell1; i++) {
 			XSSFCell cell1 = Testdatarows.getCell(i);
 			XSSFCell cell2 = Actualdatarows.getCell(i);
-			if (!compareTwoCells(cell1, cell2)) {
-				equalRows = false;
-				System.err.println("Cell " + i + " - Not Equal" + "; Value of Testdata_cell is \"" + cell1
-						+ "\" - Value of Actual_cell is \"" + cell2 + "\"");
-			} else {
-				System.out.println("Cell " + i + " - Equal" + "; Value of Testdata_cell is \"" + cell1
-						+ "\" - Value of Actual_cell is \"" + cell2 + "\"");
+
+			try {
+
+				DataFormatter dataFormatter = new DataFormatter();
+				String formattedCellStr1 = dataFormatter.formatCellValue(cell1);
+				String formattedCellStr2 = dataFormatter.formatCellValue(cell2);
+
+				System.out.println("cell1:" + formattedCellStr1);
+				System.out.println("cell2:" + formattedCellStr1);
+
+				// if(cell1.toString().equalsIgnoreCase(cell2.toString())) {
+
+				if (!(formattedCellStr1.equalsIgnoreCase(formattedCellStr2))) {
+					equalRows = false;
+					System.err.println("Cell " + i + " - Not Equal" + "; Value of Testdata_cell is \""
+							+ formattedCellStr1 + "\" - Value of Actual_cell is \"" + formattedCellStr2 + "\"");
+				} else {
+					System.out.println("Cell " + i + " - Equal" + "; Value of Testdata_cell is \"" + formattedCellStr1
+							+ "\" - Value of Actual_cell is \"" + formattedCellStr2 + "\"");
+				}
+
+				// System.out.println("cell1:"+cell1.getStringCellValue());
+				// System.out.println("cell2:"+cell2.getStringCellValue());
+
+				// if(cell1.toString().equalsIgnoreCase(cell2.toString())) {
+
+				/*
+				 * if
+				 * (!(cell1.getStringCellValue().equalsIgnoreCase(cell2.getStringCellValue())))
+				 * { equalRows = false; System.err.println("Cell " + i + " - Not Equal" +
+				 * "; Value of Testdata_cell is \"" + cell1+ "\" - Value of Actual_cell is \"" +
+				 * cell2 + "\""); } else { System.out.println("Cell " + i + " - Equal" +
+				 * "; Value of Testdata_cell is \"" + cell1+ "\" - Value of Actual_cell is \"" +
+				 * cell2 + "\""); }
+				 */
+			} catch (IllegalStateException e) {
+				DataFormatter dataFormatter = new DataFormatter();
+				String formattedCellStr1 = dataFormatter.formatCellValue(cell1);
+				String formattedCellStr2 = dataFormatter.formatCellValue(cell2);
+
+				System.out.println("cell1:" + formattedCellStr1);
+				System.out.println("cell2:" + formattedCellStr1);
+
+				// if(cell1.toString().equalsIgnoreCase(cell2.toString())) {
+
+				if (!(formattedCellStr1.equalsIgnoreCase(formattedCellStr2))) {
+					equalRows = false;
+					System.err.println("Cell " + i + " - Not Equal" + "; Value of Testdata_cell is \""
+							+ formattedCellStr1 + "\" - Value of Actual_cell is \"" + formattedCellStr2 + "\"");
+				} else {
+					System.out.println("Cell " + i + " - Equal" + "; Value of Testdata_cell is \"" + formattedCellStr1
+							+ "\" - Value of Actual_cell is \"" + formattedCellStr2 + "\"");
+				}
 			}
 		}
 		return equalRows;
@@ -1074,6 +1177,5 @@ public class CommonFunctionality {
 		return equallinks;
 	}
 
-	
 }
 

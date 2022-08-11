@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.io.File;
@@ -28,10 +29,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 //import junit.framework.Assert;
 
-public class AllRegion {
+
+public class AllRegion extends CommonFunctionality{
 	SoftAssert softAssert = new SoftAssert();
-	Actions action = new Actions(login.driver);
-	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	Map<String, Object> RegionTD = new LinkedHashMap<>();
 	Map<String, Object> Sub_regionTD = null;
 	List<String> countryNameTD = null;
@@ -147,8 +147,8 @@ public class AllRegion {
 
 	@And("^Select \"([^\"]*)\" tab from filter dropdown$")
 	public void select_tab_from_filter_dropdown(String allTab) throws Throwable {
-		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-tab='" + allTab + "']", 20).click();
+		wait(5000);
+		getElementByXpath(login.driver, "//*[@data-tab='" + allTab + "']", 20).click();
 		login.Log4j.info("clicking on All regions tab");
 	}
 
@@ -164,25 +164,23 @@ public class AllRegion {
 		//int regionCountTD = regionKeys.size();
 		Set<String> CountryListTD = null;
 		String regionXpath = null;
-		CommonFunctionality.wait(1000);
+		wait(1000);
 		try {
 			// if Region is expanded
-			if (CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[1]", 20)
+			if (getElementByProperty(login.driver, "RegionVar", 20)
 					.getAttribute("class").contains("tree-filter-item__open")) {
 				regionXpath = "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[1]/*[2]//*[@class='text-dots']";
 			}
 			// if Economic group is expanded then collapse
-			if (CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[2]", 20)
+			if (getElementByProperty(login.driver, "EconomicGroup", 20)
 					.getAttribute("class").contains("tree-filter-item__open")) {
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[2]/*[1]/*[1]", 20).click();
+				getElementByProperty(login.driver,
+						"Collapse_EconomicGroup", 20).click();
 			}
 		} catch (Exception e) {
 			// if Region is not expanded
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[1]/*[1]/*[1]/*[1]", 20).click();
+			getElementByProperty(login.driver,
+					"Expand_Region", 20).click();
 			regionXpath = "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[1]/*[2]//*[@class='text-dots']";
 		}
 
@@ -192,7 +190,7 @@ public class AllRegion {
 			int sub_regionVar = 0;
 			Sub_regionTD = (Map<String, Object>) RegionTD.get(regionName);
 			Set<String> sub_regionTDKeys = Sub_regionTD.keySet();
-			Thread.sleep(1000);
+			wait(1000);
 			ActiveEleXpath = "(//*[contains(text(),'Region')]/following::*[@class='tree-filter-item--children'])[1]/*[1]/*/*[1]/*[2]/*";
 			GridActiveElements = login.driver.findElements(By.xpath(ActiveEleXpath));
 			login.Log4j.info("Region is: " + regionName);
@@ -201,22 +199,18 @@ public class AllRegion {
 				login.Log4j.info(i);
 				String regionTxt = GridActiveElements.get(i).getText();
 				if (regionName.equals(regionTxt)) {
-					Thread.sleep(200);
-					CommonFunctionality
-							.getElementByXpath(
+					wait(200);
+					getElementByXpath(
 									login.driver, "(//*[contains(text(),'Region')]/following::*[contains(text(),'"
 											+ regionName + "')])[1]/preceding::*[@class='tree-filter-item--toggle'][1]",
 									30)
 							.click();
-					Thread.sleep(700);
+					wait(700);
 					try {
 						// if sub region has open/toggle icon then expand
-						if (login.driver.findElements(By.xpath(
-								"//*[@class='tree-filter-item--children']//*[@class='tree-filter-item tree-filter-item__open']/*[2]//*[@class='tree-filter-item']//*[@class='tree-filter-item--open-icon']"))
+						if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Sub_sahranAfrica")))
 								.size() == 1) {
-							login.driver.findElement(By.xpath(
-									"//*[@class='tree-filter-item--children']//*[@class='tree-filter-item tree-filter-item__open']/*[2]//*[@class='tree-filter-item']//*[@class='tree-filter-item--open-icon']"))
-									.click();
+							getElementByProperty(login.driver, "Sub_sahranAfrica", 6).click();
 
 						}
 					} catch (Exception e) {
@@ -243,12 +237,11 @@ public class AllRegion {
 									|| sub_region.equals("Central America and the Caribbean")) {
 								sub_regionVar = j + 1;
 							} else if (sub_region.equalsIgnoreCase(subregionTxt)) {
-								CommonFunctionality.wait(200);
+								wait(200);
 								Sub_regionElements.get(j).click();
-								CommonFunctionality.wait(1000);
-								WebElement CountryListGrid = login.driver
-										.findElement(By.xpath("//*[@class='regions-filter-list-container']//*[@class='filter-list regions-filter-list']"));
-								CommonFunctionality.wait(500);
+								wait(1000);
+								WebElement CountryListGrid = getElementByProperty(login.driver, "AllRegions_gridElement",8);
+								wait(500);
 								String CounntryNameXpath = "//*[@class='filter-list regions-filter-list']/*//*[@class='text-dots']";
 //								login.Log4j.info("Region is: " + regionName);
 //								login.Log4j.info("Sub region is: " + sub_region);
@@ -265,9 +258,7 @@ public class AllRegion {
 					}
 					try {
 						// unselect subregion
-						login.driver.findElement(By.xpath(
-								"//*[@class='tree-filter-item--children']//*[@class='tree-filter-item tree-filter-item__open']/*[1]/*[1]/*[2]"))
-								.click();
+						getElementByProperty(login.driver, "Unselect_subRegion",8).click();
 
 					} catch (NoSuchElementException e) {
 
@@ -297,24 +288,21 @@ public class AllRegion {
 		//int economicCountTD = EconomicKeys.size();
 		Set<String> CountryListTD = null;
 		String EcoXpath = null;
-		CommonFunctionality.wait(2000);
-		String EcoGroupVar = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[2]", 20)
+		wait(2000);
+		String EcoGroupVar = getElementByProperty(login.driver, "EconomicGroup", 20)
 				.getAttribute("class");
-		CommonFunctionality.wait(2000);
+		wait(2000);
 		try {
 			// if Region is expanded
-			if (CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[1]", 20)
+			if (getElementByProperty(login.driver, "RegionVar", 20)
 					.getAttribute("class").contains("tree-filter-item__open")) {
-				CommonFunctionality
-						.getElementByXpath(login.driver, "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[1]/*[1]/*[1]", 20)
+				getElementByProperty(login.driver, "Collapse_Region", 20)
 						.click();
 			}
 			// if Economic group is not expanded
 			if (!EcoGroupVar.contains("tree-filter-item__open")) {
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[2]/*[1]/*[1]/*[1]", 20).click();
+			getElementByProperty(login.driver,
+						"Expand_Economicgroup", 20).click();
 				EcoXpath = "//*[@class='all-regions-tab']/*[1]/*[2]/*[1]/*[2]/*[2]//*[@class='text-dots']";
 			} else {
 				// if Eco group is expanded
@@ -344,9 +332,8 @@ public class AllRegion {
 						CountryList = CountryListTD.size();
 					}
 					jse.executeScript("arguments[0].scrollIntoView(true);", EconomicElements.get(i));
-					CommonFunctionality.wait(2000);
-					WebElement CountryListGrid = login.driver
-							.findElement(By.xpath("//*[@class='regions-filter-list-container']//*[@class='filter-list regions-filter-list']"));
+					wait(2000);
+					WebElement CountryListGrid = getElementByProperty(login.driver, "AllRegions_gridElement",8);
 					String countryName = "//*[@class='filter-list regions-filter-list']/*//*[@class='text-dots']";
 					ChinaFilter.ScrollToBottom(CountryListGrid, countryName, CountryList);
 					ValidationMethod(CountryListTD, countryName);
@@ -413,7 +400,7 @@ public class AllRegion {
 			for (int i = 0; i < GridElements.size(); i++) {
 				// String WebEle = GridElements.get(i).getText();
 				// Log4j.info("WebElement is : " + GridElements.get(i).getText());
-				CommonFunctionality.wait(200);
+				wait(200);
 				ListOfWebElements.add(GridElements.get(i).getText());
 				jse.executeScript("arguments[0].scrollIntoView(true);", GridElements.get(i));
 				
@@ -470,7 +457,6 @@ public class AllRegion {
 				}*/
 
 			}
-
-			}
+}
 
 

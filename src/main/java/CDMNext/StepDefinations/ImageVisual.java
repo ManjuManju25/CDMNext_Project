@@ -1,10 +1,13 @@
 package CDMNext.StepDefinations;
 
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.PictureData;
@@ -20,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 import CDMNext.util.CommonFunctionality;
+import CDMNext.util.Hooks;
 import Javaxlxs.File_delete;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -35,30 +39,37 @@ public class ImageVisual {
 
 	@And("^Click on insert Image visual icon$")
 	public void click_on_insert_Image_visual_icon() throws Throwable {
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='image']", 20).click();
-		try {
+		/*try {
 			Boolean ImageTitle = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
 			if (ImageTitle == true) {
 				login.Log4j.info("Image visual is created");
 			}
 		} catch (Exception e) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='image']", 20).click();
-		}
+		}*/
 	}
 
 	@And("^Select \"([^\"]*)\" icon$")
 	public void select_icon(String arg1) throws Throwable {
-		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']/*", 20).click();
+		CommonFunctionality.wait(2000);
+		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 20);
+		CommonFunctionality.wait(500);
+		//ele.click();
+		new Actions(login.driver).doubleClick(ele).build().perform();
 	}
 
 	@And("^Upload any image$")
 	public void upload_any_image() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\UploadFile.exe",
+				System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
 				System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
-		CommonFunctionality.wait(8000);
+		CommonFunctionality.wait(2000);
+		Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\CloseButton.exe");
+		
+	
 	}
 
 	@Then("^The image visual should be pasted to new insight$")
@@ -212,13 +223,17 @@ public class ImageVisual {
 	public void try_to_Upload_multiple_images() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\UploadFile.exe",
+				System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
 				System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+		CommonFunctionality.wait(4000);
+		Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\CloseButton.exe");
 		select_icon("Upload image");
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\UploadFile.exe",
+				System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
 				System.getProperty("user.dir") + "\\AutoIT\\Screenshot.png");
+		CommonFunctionality.wait(8000);
+		Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\CloseButton.exe");
 		CommonFunctionality.wait(8000);
 	}
 
@@ -237,7 +252,7 @@ public class ImageVisual {
 	public void below_options_should_be_available_in_General_tab(List<String> list) throws Throwable {
 		CommonFunctionality.wait(500);
 		List<WebElement> generalTab_options = login.driver.findElements(By.xpath(
-				"//*[@role='tablist']/*"));
+				"//label[@class='tox-label']"));
 		int j = 0;
 
 		for (String arg : list) {
@@ -404,6 +419,7 @@ public class ImageVisual {
 
 	@And("^Create a Chart visual$")
 	public void create_a_Chart_visual() throws Throwable {
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='line']", 4).click();
 	}
 
@@ -414,7 +430,7 @@ public class ImageVisual {
 		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='search-series-list']/*[1]", 8);
+				"(//div[@class='series-representation--list']//*[@unselectable='on'])[1]", 8);
 		if (!(selected.getAttribute("class").contains("series-list-item__selected"))) {
 			new Actions(login.driver).moveToElement(series_cb).pause(4000).click().build().perform();
 		}
@@ -532,11 +548,12 @@ public class ImageVisual {
 
 	}
 	void Alignvisual(String align) throws InterruptedException {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + align + "']", 20).click();
+		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + align + "']", 20);
+		new Actions(login.driver).doubleClick(ele).build().perform();
 		CommonFunctionality.wait(1200);
 		WebElement element = login.driver.findElement(By.tagName("iframe"));
 		login.driver.switchTo().frame(element);
-		String align_str = login.driver.findElement(By.xpath("//html//body[@class='mce-content-body ']//p"))
+		String align_str = login.driver.findElement(By.xpath("(//html//body[@class='mce-content-body ']//p)[1]"))
 				.getAttribute("style");
 		ListOfalignmentValue.add(align_str);
 		login.driver.switchTo().defaultContent();

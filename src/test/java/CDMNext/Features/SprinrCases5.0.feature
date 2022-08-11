@@ -48,17 +48,8 @@ Feature: Verifying sprintcases 5.0
     And Click on "Add to new insight"
     Then "New insight with the selected visual created" and "Go to new insight" confirmation message should be displayed
 
-  #@Sprintcases5.0
-  #Scenario: TC_18392_01:Verify keyboard shortcut for Ctrl+C to copy visual in insight preview mode
-  #And Create an insight
-  #And Create a pie visual with series id's "16240301;16243001"
-  #And Open insight in preview mode
-  #And Select visual and use Ctrl + C to copy the visual
-  #Then The visual should be copied
-  
   @Sprintcases5.0
   Scenario: TC_19489_02:Verify Data Briefings panel from next login after once closed
-    #And Login to CDMNext
     And Open Data Briefings panel
     And Close Data briefings panel
     And Logout and relogin
@@ -371,7 +362,7 @@ Feature: Verifying sprintcases 5.0
   Scenario Outline: <TCID>: Verifying DB language change in right click
     And Right click on "<database>"
     And "Set language" as "<language>"
-    Then The Databases language should be changed to selected language
+    Then The Databases language should be changed to as per the selected language
 
     Examples: 
       | TCID        | database                   | language |
@@ -393,3 +384,5 @@ Feature: Verifying sprintcases 5.0
     And Open insight in preview mode
     And Select visual and use Ctrl + C to copy the visual
     Then The visual should be copied
+    
+   
