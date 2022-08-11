@@ -232,7 +232,7 @@ public class Breakdown extends CommonFunctionality {
 
 	@And("^Open Breakdown tab and select a series and click on chart icon$")
 	public void open_Breakdown_tab_and_select_a_series_and_click_on_chart_icon() throws Throwable {
-		getElementByXpath(login.driver, "//*[contains(text(),'Breakdowns')]", 20).click();
+		getElementByProperty(login.driver, "BreakdownsTab", 20).click();
 		WebElement ele1 = getElementByProperty(login.driver,
 				"selectFirstSeries_breaksdownTab",
 				6);

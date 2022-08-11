@@ -1542,19 +1542,19 @@ Feature: Synonym Search
     Given User enters keyword "среднегодовым"
     Then User verify keyword search results
 
-  @ChineseKeywordSearch
-  Scenario: TC_KeywordSearch_309
-    Given User enters "摩托车"
-    And User selects "Source" as "China Association of Automobile Manufacturers"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
-
-  @RussianKeywordSearch
-  Scenario: TC_KeywordSearch_311
-    Given User enters "среднегодовым"
-    And User selects "Source" as "Federal State Statistics Service"
-    And User has clicked on "Apply filter"
-    Then User verify the search results
+  #@ChineseKeywordSearch
+  #Scenario: TC_KeywordSearch_309
+    #Given User enters "摩托车"
+    #And User selects "Source" as "China Association of Automobile Manufacturers"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
+#
+  #@RussianKeywordSearch
+  #Scenario: TC_KeywordSearch_311
+    #Given User enters "среднегодовым"
+    #And User selects "Source" as "Federal State Statistics Service"
+    #And User has clicked on "Apply filter"
+    #Then User verify the search results
 
   @SynonymSearch
   Scenario: TC_SynonymSearch_312 : Search for an Acronym as "Allahabad"

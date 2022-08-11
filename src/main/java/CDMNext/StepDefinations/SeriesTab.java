@@ -778,15 +778,16 @@ public class SeriesTab {
 				
 			break;
 		case "Frequency":
+			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='visual-series-list']//*[contains(text(),'" + arg1 + "')]", 8).click();
 			break;
 		case "Apply function":
-			CommonFunctionality.wait(1000);
+			CommonFunctionality.wait(2000);
 			try {
 				ele = login.driver.findElement(By.xpath(
 						"//*[@class='series-functions series-functions__has-functions-to-apply']//*[@class='series-functions-panel--icon series-functions-panel--icon__apply']"));
-				CommonFunctionality.wait(500);
+				CommonFunctionality.wait(1000);
 				jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 				ele.click();
 			} catch (Exception e) {
@@ -845,6 +846,8 @@ public class SeriesTab {
 					System.getProperty("user.dir") + "\\AutoIT\\UploadFile.exe",
 					System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 			CommonFunctionality.wait(8000);
+			Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\CloseButton.exe");
+			CommonFunctionality.wait(4000);
 			break;
 		case "Related Series":
 			CommonFunctionality.wait(500);

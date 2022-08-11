@@ -163,19 +163,19 @@ public class DatabasesTab {
 	public void expand_till_series_level() throws Throwable {
 
 		if (database == true) {
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//div[@data-node-model-id='DAILY']//div[3]//div[1]//div[@class='toggle']", 4).click();
+			CommonFunctionality.getElementByProperty(login.driver,
+					"Expand2ndLevel", 4).click();
 			login.Log4j.info("Clicking on Topic level");
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//div[@data-node-model-id='DAILY']//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']", 4)
+			CommonFunctionality.getElementByProperty(login.driver,
+					"Expand3rdLevel", 4)
 					.click();
 			login.Log4j.info("Clicking on Section level");
 			Thread.sleep(1200);
 			ele = login.driver.findElement(By.xpath(
-					"//div[@class='tree-node open']//div[@class='child-container']//div[1][@class='tree-node']//span[@class='name-text']"));
+					"(//div[@class='tree-node'])[1]//*[@class='name-text']"));
 			tableName = ele.getText();
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//div[@class='tree-node open']//div[@class='child-container']//div[1]//div[@class='tree-node']//div[@class='toggle']",
+			CommonFunctionality.getElementByProperty(login.driver,
+					"Expand4thLevel",
 					4).click();
 			login.Log4j.info("Clicking on Table level");
 
@@ -207,7 +207,7 @@ public class DatabasesTab {
 	public void should_able_to_expand_all_the_DB_Topic_section_table_under_Databases_tab() throws Throwable {
 		Thread.sleep(2000);
 		checkbox = login.driver.findElement(By.xpath(
-				"//div[@class='child-container']//div[1]//ul//a//div[@class='series-list-item--checkbox-wrapper']//span"));
+				"//div[contains(@class,'series-list-item series-list-item__found-by-search')]//*[@class='series-list-item--checkbox-wrapper']/*"));
 		if (checkbox.isDisplayed()) {
 			checkbox.click();
 			login.Log4j.info("DB/Topic/section/table level under Databases tab is expanded");
@@ -2070,7 +2070,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 	public void click_on_series_name() throws Throwable {
 		Thread.sleep(2000);
 		try {
-			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-item--name']", 6).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
 
 		} catch (Exception e) {
 			// Clicking on series name in edit series window for histogram & pie visual
@@ -2079,7 +2079,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 20).click();
 				CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
 			} catch (Exception e1) {
-				CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
+				CommonFunctionality.getElementByProperty(login.driver, "Series_item_name", 6).click();
 			}
 		}
 
@@ -3164,7 +3164,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 
 	@And("^Select series in any database$")
 	public void select_series_in_any_database() throws Throwable {
-		CommonFunctionality.UnselectMethod();
+		//CommonFunctionality.UnselectMethod();
 		expand_World_Trend_Plus_till_series_level();
 		Thread.sleep(2000);
 		// WebElement ul_element =

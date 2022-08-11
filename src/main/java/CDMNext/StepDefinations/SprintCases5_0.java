@@ -240,11 +240,11 @@ public class SprintCases5_0 {
 		share.logout_from_current_user();
 		CommonFunctionality.wait(500);
 		CommonFunctionality.login_as_internal_user(login.driver, "input[name='user_id']", "input[name='password']",
-				"button[type='submit']", "autotest@cdmnext.com", "India@123");
+				"button[type='submit']", "nmaduru@gmail.com", "Ceic@123");
 		// CommonFunctionality.wait(500);
 		// CommonFunctionality.login_as_internal_user(login.driver,
 		// "input[name='user_id']", "input[name='password']",
-		// "button[type='submit']", "autotest@cdmnext.com", "India@123");
+		// "button[type='submit']", "nmaduru@gmail.com", "Ceic@123");
 		/*
 		 * URL url = new URL(login.driver.getCurrentUrl());
 		 * login.driver.get(url.getProtocol() + "://" + url.getHost() + "/login");
@@ -287,7 +287,7 @@ public class SprintCases5_0 {
 
 	@And("^Logout and relogin$")
 	public void logout_and_relogin() throws Throwable {
-		share.login_back_to_internal_user("autotest@cdmnext.com", "India@123");
+		share.login_back_to_internal_user("nmaduru@gmail.com", "Ceic@123");
 	}
 
 	@Then("^The DB panel should be in closed state$")
@@ -833,7 +833,7 @@ public class SprintCases5_0 {
 		share.logout_from_current_user();
 		CommonFunctionality.wait(500);
 		CommonFunctionality.login_as_internal_user(login.driver, "input[name='user_id']", "input[name='password']",
-				"button[type='submit']", "autotest@cdmnext.com", "India@123");
+				"button[type='submit']", "nmaduru@gmail.com", "Ceic@123");
 	}
 
 	@Then("^The last applied sorting should be saved per user$")
@@ -1332,6 +1332,7 @@ public class SprintCases5_0 {
 	public void click_on_database(String arg1) throws Throwable {
 		//select 1st tab
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']/*[1]", 10).click();
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//table//*[contains(text(),'" + arg1 + "')]", 10).click();
 	}
 

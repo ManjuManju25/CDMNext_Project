@@ -62,7 +62,7 @@ Thread.sleep(1000);
 		WebElement SighOut = login.driver.findElement(By.xpath("//span[contains(text(),'Sign out')]"));
 		js.executeScript("arguments[0].scrollIntoView(true)", SighOut);
 		SighOut.click();
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//button[contains(text(),'Save and sign out')]")).click();
 		
 		Thread.sleep(1000);
@@ -157,42 +157,25 @@ Thread.sleep(1000);
 	public void new_insight_search_with_given_data_as(String arg1) throws Throwable {
 	    Thread.sleep(2000);
 	   
-	    	  try{
 	    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
 	    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
-	    Thread.sleep(10000);
+	    Thread.sleep(1000);
 	    
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='toggler-control-item--label'])[2]")));
-	    Thread.sleep(10000);
+	    Thread.sleep(1000);
 		login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
-	    
+	    Thread.sleep(1000);
 	    for(int i=1;i<=4;i++)
 	    {
-	    
+	    Thread.sleep(1000);
 	    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 	    	System.out.println("Enter into if condition: "+i);
 	    }
 	    Thread.sleep(1000);
 	    login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
-	    	  }
+	    	 
 	    	  
-	    	  catch(org.openqa.selenium.StaleElementReferenceException ex){
-
-	    		  login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
-	    		    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
-	    		    Thread.sleep(10000);
-	    		    
-	    		    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='toggler-control-item--label'])[2]")));
-	    		    Thread.sleep(10000);
-	    			login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
-	    		    
-	    		    for(int i=1;i<=4;i++)
-	    		    {
-	    		    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
-	    		    }
-	    		    Thread.sleep(1000);
-	    		    login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
-	    		    	  }
+	    	 
 
 	    		  }
 
@@ -205,7 +188,7 @@ Thread.sleep(1000);
 	   Thread.sleep(2000);
 	   
 	   login.driver.findElement(By.xpath("//div[contains(text(),'Forecast')]")).isDisplayed();
-	   login.driver.findElement(By.xpath("//div[contains(text(),'Replacements')]")).isDisplayed();
+	   login.driver.findElement(By.xpath("//div[contains(text(),'Continuous')]")).isDisplayed();
 	   login.driver.findElement(By.xpath("//div[contains(text(),'Breakdowns')]")).isDisplayed();
 	   login.driver.findElement(By.xpath("//div[contains(text(),'Dependencies')]")).isDisplayed();
 	   
@@ -221,9 +204,11 @@ Thread.sleep(1000);
 	@Then("^Only replacement tab should be shown in RSP$")
 	public void only_replacement_tab_should_be_shown_in_RSP() throws Throwable {
 		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']/following::span[@class='input-control--indicator']")).click();
+		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
+		login.driver.switchTo().activeElement();
 		
-		
-		 if(login.driver.findElement(By.xpath("//div[contains(text(),'Replacements')]")).isDisplayed())
+		 if(login.driver.findElement(By.xpath("//div[contains(text(),'Continuous')]")).isDisplayed())
 		 {
 			 login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 			 CommonFunctionality.DeleteSeries();
@@ -246,51 +231,34 @@ Thread.sleep(1000);
 	public void new_insight_search_series_ids_as(String arg1) throws Throwable {
 	   
 		Thread.sleep(2000);
-		try{
-		 login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
-		    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
-		    Thread.sleep(10000);
-		
-		    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='toggler-control-item--label'])[2]")));
-		    Thread.sleep(5000);
-			login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
-		    
-		    for(int i=1;i<=4;i++)
-		    {
-		    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
-		    }
-		
-		    Thread.sleep(1000);
-		  //  login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
-		
-		}
-		 catch(org.openqa.selenium.StaleElementReferenceException ex){
-		
-			 login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
-			    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
-			    Thread.sleep(10000);
-			
-			    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='toggler-control-item--label'])[2]")));
-			    Thread.sleep(5000);
-				login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
-			    
-			    for(int i=1;i<=4;i++)
-			    {
-			    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
-			    }
-			
-			    Thread.sleep(1000);
-			   // login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
-		 }
+		   
+  login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
+  login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
+  Thread.sleep(1000);
+  
+  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='toggler-control-item--label'])[2]")));
+  Thread.sleep(1000);
+	login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
+  Thread.sleep(1000);
+  for(int i=1;i<=4;i++)
+  {
+  Thread.sleep(3000);
+  	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
+  	System.out.println("Enter into if condition: "+i);
+  }
+  Thread.sleep(1000);
+ // login.driver.findElement(By.xpath("(/9/div[@class='add-to-data-selection--icon'])[1]")).click();
+  	 
+
 	}
 	//TC_04
 	@Given("^add series into visuals$")
 	public void add_series_into_visuals() throws Throwable {
 	    Thread.sleep(2000);
-	    login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+	   // login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
 		Thread.sleep(2000);
-		WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
-		actions.contextClick(elementLocator).perform();
+		//WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
+		actions.contextClick().build().perform();
 		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
 		Thread.sleep(3000);
 		
@@ -325,7 +293,7 @@ Thread.sleep(1000);
 		Thread.sleep(2000);
 		 login.driver.findElement(By.xpath("//div[@class='suggestions-panel--arrow icon--filter-arrow']")).click();
 		 Thread.sleep(500);
-		 login.driver.findElement(By.xpath("//span[contains(text(),'Replace Inactive Series')]")).click();
+		 login.driver.findElement(By.xpath("//span[contains(text(),'Replace')]")).click();
 		Thread.sleep(2000);
 		
 	   
@@ -358,7 +326,7 @@ Thread.sleep(1000);
 			System.out.println("Replacement of series should be showed in myseries");
 		}
 		
-		CommonFunctionality.DeleteSeries();
+		//CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_06==============>");
 		
 		
@@ -394,7 +362,7 @@ Thread.sleep(1000);
 			System.out.println("Replacement of series should be showed in myseries");
 		
 		
-		CommonFunctionality.DeleteSeries();
+		//CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_07==============>");
 	}
 	
@@ -465,7 +433,7 @@ Thread.sleep(1000);
 			login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
 			
 			login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
-			CommonFunctionality.DeleteSeries();
+			//CommonFunctionality.DeleteSeries();
 			System.out.println("=============>TC_08==============>");
 	}
 
@@ -877,7 +845,7 @@ login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes i
 	public void show_latest_changes_in_my_insight_upon_opening_option_should_be_checked_only() throws Throwable {
 	    Thread.sleep(2000);
 	   login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
-	   CommonFunctionality.DeleteSeries();
+	   //CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_23==============>");
 	}
 	

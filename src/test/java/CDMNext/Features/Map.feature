@@ -652,7 +652,7 @@ Feature: Verifying map visual functionality
     And Click on "Rename" option
     And Select multiple attributes
     And Click on "Apply"
-     And Click on "OK"
+    And Click on "OK"
     Then Selected attributes should be displayed as series name
 
   @Map
@@ -930,7 +930,7 @@ Feature: Verifying map visual functionality
     And Select "RMB" from currency dropdown
     Then Selected currency should be applied to ONLY selected series
 
-   @Map
+  @Map
   Scenario: TC_Map_103:Edit series - Verify applying function in series level
     And Create a map visual with series id's "369703417"
     And Click on Edit series option
@@ -939,7 +939,7 @@ Feature: Verifying map visual functionality
     And Click on "Apply function"
     Then Selected function should applied to the series
 
-   @Map
+  @Map
   Scenario: TC_Map_104:Edit series - Verify multiple functions apply
     And Create a map visual with series id's "369703417"
     And Click on Edit series option
@@ -948,7 +948,7 @@ Feature: Verifying map visual functionality
     And Click on "Apply function"
     Then The Selected functions should applied to the series
 
-   @Map
+  @Map
   Scenario: TC_Map_105:Edit series -  Verify cancel icon for selected function
     And Create a map visual with series id's "369703417"
     And Click on Edit series option
@@ -957,7 +957,7 @@ Feature: Verifying map visual functionality
     And Click on cancel function icon
     Then The selected function should be cancelled
 
-   @Map
+  @Map
   Scenario: TC_Map_106:Edit series - Verify search for functions
     And Create a map visual with series id's "369703417"
     And Click on Edit series option
@@ -965,7 +965,7 @@ Feature: Verifying map visual functionality
     And Search with function "YTD"
     Then Searched functions should be displayed
 
-   @Map
+  @Map
   Scenario: TC_Map_107:Edit series - Verify removing applied functions
     And Create a map visual with series id's "369703417"
     And Click on Edit series option
@@ -975,7 +975,7 @@ Feature: Verifying map visual functionality
     And Click on x icon to remove the function
     Then The function should be removed from the series
 
-   @Map
+  @Map
   Scenario: TC_Map_108:Edit series - Verify applied funtion in function toolbar
     And Create a map visual with series id's "369703417"
     And Click on Edit series option
@@ -984,7 +984,7 @@ Feature: Verifying map visual functionality
     And Click on "Apply function"
     Then The applied function should be displayed on the toolbar
 
-   @Map
+  @Map
   Scenario: TC_Map_109:Edit series - Verify applying invalid function for series
     And Create a map visual with series id's "369703417"
     And Click on Edit series option
@@ -1901,3 +1901,924 @@ Feature: Verifying map visual functionality
     And Select size for visual "Copyright" as "20"
     When Click on "Save"
     Then The "Copyright" font size should be changed as "20"
+
+  @Map
+  Scenario: TC_Map_211:Edit Map - Copyright - Verify bold style
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Click on Bold icon for "Copyright"
+    When Click on "Save"
+    Then The "Copyright" should be displayed in Bold format
+
+  @Map
+  Scenario: TC_Map_212:Edit Map - Copyright - Verify Italic style
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Click on Italic icon
+    When Click on "Save"
+    Then The "Copyright" should be "italic"
+
+  @Map
+  Scenario: TC_Map_213:Edit Map - Copyright - Verify Underline style
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Click on Underline icon for "Copyright"
+    When Click on "Save"
+    Then The "Copyright" should be "underline"
+
+  @Map
+  Scenario: TC_Map_214:Edit Map - Copyright - Verify horizontal alignment (left, right, center)
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select Text radio button
+    And Select Horizontal alignment of copyright to "left" and save
+    Then The copyright image should align to "Left"
+    And Select Horizontal alignment of copyright to "center" and save
+    Then The copyright image should align to "Center"
+    And Select Horizontal alignment of copyright to "right" and save
+    Then The copyright image should align to "Right"
+
+  @Map
+  Scenario: TC_Map_215:Edit Map - Copyright - Verify vertical alignment (Top and bottom).
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Select vertical align as "top" and save
+    Then The copyright should be displayed in top
+    And Select vertical align as "bottom" and save
+    Then The copyright should be displayed in bottom
+
+  @Map
+  Scenario: TC_Map_216:Edit Map - Copyright - Verify closing copyright popup
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Check "Copyright"
+    And Click on "Open advanced settings popup" icon
+    And Click on X icon to close the popup
+    Then The "Copyright" popup should be closed
+
+  @Map
+  Scenario: TC_Map_217:Edit Map - Data labels
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    Then "Data labels" should be checked by default
+
+  @Map
+  Scenario: TC_Map_218:Edit Map - Data labels - advanced settings cogwheel- labels - color
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on the "Data labels" checkbox to "Check"
+    And Click on the "Data labels" Container
+    And Expand "Labels" section from "Labels" popup
+    And Click on the "Labels" checkbox to "Check"
+    And Select data label "color" from the list
+    And Choose Data label color is blue
+    When Click on "Save"
+    Then Should be able to display with selected "color"
+
+  @Map
+  Scenario: TC_Map_219:Edit Map - Data labels - advanced settings cogwheel - labels - Outline
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on the "Data labels" checkbox to "Check"
+    And Click on the "Data labels" Container
+    And Expand "Labels" section from "Labels" popup
+    And Click on the "Labels" checkbox to "Check"
+    And Choose highlight color is Orange
+    When Click on "Save"
+    Then Should be able to display with selected "Outline color"
+
+  @Map
+  Scenario: TC_Map_220:Edit Map - Data labels - advanced settings cogwheel - labels - Size
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    And Click on the "Data labels" checkbox to "Check"
+    And Click on the "Data labels" Container
+    And Expand "Labels" section from "Labels" popup
+    And Click on the "Labels" checkbox to "Check"
+    Then Default size should be "11"
+    And Select "Data Labels font size" for chart visual to 18
+    When Click on "Save"
+    Then The Selected font size should update with selected input
+
+  @Map
+  Scenario: TC_Map_221:Edit Map - Data labels - advanced settings cogwheel - labels - Size
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    And Click on the "Data labels" checkbox to "Check"
+    And Click on the "Data labels" Container
+    And Expand "Labels" section from "Labels" popup
+    And Click on the "Labels" checkbox to "Check"
+    And Select any "Data Labels Style" for chart visual
+    When Click on "Save"
+    Then The Selected font Styles should update with selected input
+
+  @Map
+  Scenario: TC_Map_222:Edit Map - Verify Highlight Filter displaying in the map
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    Then By Default Highlight filter will grayed out
+
+  @Map
+  Scenario: TC_Map_223:Edit Map - Verify Highlight Filter when checked
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    When Check "Highlight filter"
+    Then Highlight Filter will be displayed with value 0
+    Then Highlight Filter will be displayed with color Red
+
+  @Map
+  Scenario: TC_Map_224:Edit Map - Verify Solid Color button - Advanced settings cogwheel - Common
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    And Select "Solid color" button
+    And Click on "Open advanced settings popup" cogwheel
+    When Expand "Common" section
+    Then "Show legend" should be checked by default
+
+  @Map
+  Scenario: TC_Map_225:Edit Map - Verify Solid Color button - Advanced settings cogwheel - Position
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    And Select "Solid color" button
+    And Click on "Open advanced settings popup" cogwheel
+    When Expand "Position" section
+    Then "Position" section from Legand popup should expand
+
+  @Map
+  Scenario: TC_Map_226:Edit Map - Verify title icon on visual
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    And Mouse hover on visual title for Edit visual popup
+    And Click on edit icon for Edit visual popup
+    Then The "Titles" popup should be appeared
+
+  @Map
+  Scenario: TC_Map_227:Edit Map - Verify titles popup open by double click on visual title.
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Edit Map"
+    And Click on the visual title
+    Then The "Titles" popup should be appeared
+
+  @Map
+  Scenario: TC_Map_228:Edit Map - Verify clicking on series name.
+    And Create a map visual with series id's "5724301"
+    And Click on "Edit Map"
+    And Click on Series name on map visual
+    Then The SSP window should be displayed
+
+  @Map
+  Scenario: TC_Map_229:Verify 'Add related series' option.
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Add related series"
+    Then The series suggestion manager popup should be displayed
+
+  @Map
+  Scenario: TC_Map_230:Verify 'Add related series' option when the visual is empty
+    And Create a empty map visual
+    Then The Add related series option should be hidden if have no series associated with the visual
+
+  @Map
+  Scenario: TC_Map_231:Verify adding series from 'Series suggestion manager' popup
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Add related series"
+    And Select a region as "Albania"
+    Then The related series should be added to the map visual
+
+  @Map
+  Scenario: TC_Map_232:Verify add to insight option
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on + icon on header
+    Then Below options should be displayed
+      | Add to new tab     |
+      | Add to new insight |
+
+  @Map
+  Scenario: TC_Map_233:Verify Map Visuals Type under World Dropdown
+    And Click on View tab
+    When Click on world drop down button
+    Then Below options should be available
+      | World                 |
+      | Africa                |
+      | Asia                  |
+      | Europe                |
+      | Europe without Russia |
+      | EU                    |
+      | Middle East           |
+      | N America             |
+      | Oceania               |
+      | S America             |
+      | China                 |
+      | Russia                |
+      | India                 |
+
+  @Map
+  Scenario Outline: TC_Map_234:Verify each Country/continent for Map Visual
+    And Select some series
+    And Click on View tab
+    When Click on world drop down button
+    And Select "<TypesOfMaps>" map
+    Then Respective map should be created
+
+    Examples: 
+      | TypesOfMaps           |
+      | World                 |
+      | Africa                |
+      | Asia                  |
+      | Europe                |
+      | Europe without Russia |
+      | EU                    |
+      | Middle East           |
+      | N America             |
+      | Oceania               |
+      | S America             |
+      | China                 |
+      | Russia                |
+      | India                 |
+
+  @Map
+  Scenario: TC_Map_235:Add to insight - Verify 'Add to new tab' option under Add to insight
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on + icon on header
+    And Click on "Add to new tab"
+    Then The Map visual should be created in vew tab on current insight
+
+  @Map
+  Scenario: TC_Map_236:Add to insight - Verify confirmation message for adding visual to new insight
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on + icon on header
+    And Click on "Add to new insight"
+    Then "New insight with the selected visual created" and "Go to new insight" confirmation message should be displayed
+
+  @Map
+  Scenario: TC_Map_237:Add to insight - Validate the added visual by opening new insight
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on + icon on header
+    And Click on "Add to new insight"
+    And Click on "Go to new insight"
+    Then The new insight should be opened and added map visual should be available in My visual
+
+  @Map
+  Scenario: TC_Map_238:Copy - Verify confirmation message for copy visual
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Copy" icon
+    Then "Map with series copied." and "More options" confirmation message should be displayed
+
+  @Map
+  Scenario: TC_Map_239:Copy - Validate copied visual by pasting with in the insight
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Copy" icon
+    And Paste within the insight
+    Then The map visual should be pasted in the insight
+
+  @Map
+  Scenario: TC_Map_240:Copy - Validate copied visual by pasting to new insight
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Copy" icon
+    And Paste to new insight
+    Then The map visual should be pasted to new insight
+
+  @Map
+  Scenario: TC_Map_241:Copy - Verify the confrimation message for pasting visual in insight
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Copy" icon
+    And Paste within the insight
+    Then "Data pasted from clipboard" message should be displayed
+
+  @Map
+  Scenario: TC_Map_242:Copy - Validate by clicking on more options
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on "Copy" icon
+    And Click on More options
+    Then Download window is displayed
+
+  @Map
+  Scenario: TC_Map_243:Download - Verify Download option
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Download icon
+    Then Download popup should be appeared
+
+  @Map
+  Scenario: TC_Map_244:Download - Verify Map visual download with excel format
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Download icon
+    And Select "xlsx" format
+    And Click on "Download"
+    Then Map visual and related series should be downloaded in excel
+
+  @Map
+  Scenario: TC_Map_245:Download - Verify map visual download with PDF format
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Download icon
+    And Select "pdf" format
+    And Click on "Download"
+    Then Map visual should be downloaded in PDF format
+
+  @Map
+  Scenario: TC_Map_246:Download - Verify Map visual download with PNG format
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Download icon
+    And Select "png" format
+    And Click on "Download"
+    Then Pie visual should be downloaded in PNG format
+
+  @Map
+  Scenario: TC_Map_247:Download - Verify Map visual download with JPG format.
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Download icon
+    And Select "jpeg" format
+    And Click on "Download"
+    Then Pie visual should be downloaded in JPG format
+
+  @Map
+  Scenario: TC_Map_248:Download - Verify size for JPG/PNG download.
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Download icon
+    And Select "jpeg" format
+    And Select width size "652"
+    And Click on "Download"
+    Then The visual should be downloaded with selected size
+
+  @Map
+  Scenario: TC_Map_249:Verify Open option.
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Open icon
+    Then The visual should be displayed in maximized window
+
+  @Map
+  Scenario: TC_Map_250:Verify closing of maximized window.
+    And Create a map visual with series id's "5724301;5823501"
+    And Click on Open icon
+    And Click on x icon to close
+    Then The modal window should be closed
+
+  @Map
+  Scenario: TC_Map_251:Verify Delete map
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "delete"
+    Then "Confirmation" popup should be dispalyed
+
+  @Map
+  Scenario: TC_Map_252:Verify description for delete confirmation popup
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "delete"
+    Then "Do you want to remove this visual?" popup should be dispalyed
+
+  @Map
+  Scenario: TC_Map_253:Verify OK button in delete confirmation popup
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "delete"
+    And Click on "Ok"
+    Then The visual should be deleted
+
+  @Map
+  Scenario: TC_Map_254:Verify Cancel/x icon in delete confirmation popup
+    And Open preference dropdown
+    And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Check"
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "delete"
+    And Click on "Cancel"
+    Then The popup should be closed and delete visual process should be declined
+
+  @Map
+  Scenario: TC_Map_255:Right click - Validate copied Map
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Copy map"
+    And Paste in insight
+    Then Map visual should be pasted
+
+  @Map
+  Scenario: TC_Map_256:Right click - Verify Cut map
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Cut map"
+    Then Map chart should be cut
+
+  @Map
+  Scenario: TC_Map_257:Right click - Validate Cut map
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Cut map"
+    And Paste in insight
+    Then Map visual should be pasted
+
+  @Map
+  Scenario: TC_Map_258:Right click - Verify Delete map
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Delete map"
+    Then Map chart should be deleted
+
+  @Map
+  Scenario: TC_Map_259:Right click - Verify chart under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Chart"
+    Then "Chart" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_260:Right click - Verify Pie under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Pie"
+    Then "Pie" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_261:Right click - Verify table under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Table"
+    Then "Table" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_262:Right click - Verify map under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Map"
+    Then "Map" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_263:Right click - Verify Heat map under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Heat map"
+    Then "Heat map" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_264:Right click - Verify Histogram under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Histogram"
+    Then "Histogram" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_265:Right click - Verify commentary under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Commentary"
+    Then The commentary visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_266:Right click - Verify attachments under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Attachments"
+    Then "Attachments" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_267:Right click - Verify Image under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Image"
+    Then "Image" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_268:Right click - Verify Filter under insert visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose Insert visual as "Filter"
+    Then "Filter" visual should be created in the same view tab
+
+  @Map
+  Scenario: TC_Map_269:Right click - Verify Paste visual
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Copy map"
+    And Again Right click on visual header
+    And Choose "Paste visual"
+    Then Copied visual should be pasted
+
+  @Map
+  Scenario: TC_Map_270:Right click - View as - Verify Chart
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Chart"
+    Then The "Map" visual should be converted as "Chart" visual
+
+  @Map
+  Scenario: TC_Map_271:Right click - View as - Verify Table
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Table"
+    Then The "Map" visual should be converted as "Table" visual
+
+  @Map
+  Scenario: TC_Map_272:Right click - View as - Verify Pie
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Pie"
+    Then The "Map" visual should be converted as "Pie" visual
+
+  @Map
+  Scenario: TC_Map_273:Right click - View as - Verify Histogram
+    And Create a map visual with series id's "16240301"
+    And Right click on visual header
+    And Select View as > "Histogram"
+    Then The "Map" visual should be converted as "Histogram" visual
+
+  @Map
+  Scenario: TC_Map_274:Right click - View as - Verify Heat map
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Select View as > "Heat map"
+    Then The "Map" visual should be converted as "Heat map" visual
+
+  @Map
+  Scenario: TC_Map_275:Right click - Verify Calculated series sub dropdown
+    And Create a map visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Calculate series"
+    And Select function "RMB"
+    And Click on My Series tab
+    Then The applied function should be applied to the series
+
+  @Map
+  Scenario: TC_Map_276:Right click - Verify Edit series option
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Edit series"
+    Then The edit series popup should be opened with "Map" tab
+
+  @Map
+  Scenario: TC_Map_277:Right click - Verify Clear contents
+    And Create a map visual with series id's "16240301;16243001"
+    And Right click on visual header
+    And Choose "Clear contents"
+    Then The content should be removed
+
+  @Map
+  Scenario: TC_Map_278:Right click - Verify reset format
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And UnCheck Copyright
+    Then The Copyright logo should be removed for visual
+    And Right click on visual header
+    And Choose "Reset format"
+    Then The Copyright logo should be displayed for visual
+
+  @Map
+  Scenario: TC_Map_279:Right click - Verify reset format option if have no changes in visual
+    And Create a map visual with series id's "16240301"
+    And Right click on visual header
+    Then The Reset format option should be disabled
+
+  @Map
+  Scenario: TC_Map_280:Right click -  Verify download sub dropdown
+    And Create a map visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Download"
+    Then "Map" and "View" options should be displayed
+
+  @Map
+  Scenario: TC_Map_281:Right click -  Verify download > Map
+    And Create a map visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Download"
+    And Select Map
+    Then Download popup should be displayed with Map tab selection
+
+  @Map
+  Scenario: TC_Map_282:Right click -  Verify download > View
+    And Create a map visual with series id's "16240301"
+    And Right click on visual header
+    And Choose "Download"
+    And Select View
+    Then Download popup should be displayed with views tab selection
+
+  @Map
+  Scenario: TC_Map_283:Verify the visual options if visual is not selected
+    And Create a map visual with series id's "16240301"
+    And Unhighlight the visual
+    Then The visual options should be hidden
+
+  @Map
+  Scenario: TC_Map_284: Edit Map - Verify clicking on series name
+    And Create a map visual with series id's "408940397"
+    And Click on "Edit Map"
+    And Click on Series name
+    Then The SSP window should be displayed
+
+  @Map
+  Scenario: TC_Map_285:Edit Map - Verify Rename series icon
+    And Create a map visual with series id's "408940397"
+    And Click on "Edit Map"
+    And Click on cogwheel icon on series level
+    And Click on "Rename"
+    Then "Rename" popup should be displayed for selected series
+
+  @Map
+  Scenario: TC_Map_286:Edit Map - Verify Frequency option under edit series.
+    And Create a map visual with series id's "408940397"
+    And Click on "Edit Map"
+    And Click on cogwheel icon on series level
+    And Select "Frequency" as "Monthly (Replicate)"
+    Then Selected function should be applied to the series
+
+  @Map
+  Scenario: TC_Map_287:Edit Map - Verify Currency option under edit series.
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on cogwheel icon on series level
+    And Select "Currency" as "RMB"
+    Then Selected currency should be applied to the series
+
+  @Map
+  Scenario: TC_Map_288:Edit Map - Verify Change option under edit series.
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on cogwheel icon on series level
+    And Select "Change" as "% Year-over-Year (%YoY)"
+    Then Selected change function should be applied to the series
+
+  @Map
+  Scenario: TC_Map_289:Edit Map - Verify selecting another visual from visual panel
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select any visual from visual panel
+    And Click on "Save"
+    Then The visual should be converted as user selected
+
+  @Map
+  Scenario: TC_Map_290:Edit Map - Verify selecting another visual from visual panel
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on visual panel dropdown
+    And Select "Histogram" visual
+    And Click on "Save"
+    Then The visual should be converted as user selected
+
+  @Map
+  Scenario: TC_Map_291:Edit Map - Edit series - Verify delete series icon
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on x icon for a series
+    Then The series should be removed from visual and edit series panel
+
+  @Map
+  Scenario: TC_Map_292:Edit Map - Edit series - Verify delete all series icon.
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on x icon before Name attribute
+    Then All series should be removed from the visual and edit series panel
+
+  @Map
+  Scenario: TC_Map_293:Edit Map - Edit series - Verify Rename series icon
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Rename series" icon
+    Then "Rename" popup should be displayed for selected series
+
+  @Map
+  Scenario: TC_Map_294:Edit Map - Edit series -Verify clicking on frequency or dropdown
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    Then "Series Harmonization" popup should be opened
+
+  @Map
+  Scenario: TC_Map_295:Edit Map - Edit series - Series data conversion - Verify applying frequency
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    And Select "Frequency" as "Daily" from dropdown
+    And Click on "Apply"
+    Then The selected frequency should be applied to available series
+
+  @Map
+  Scenario: TC_Map_296:Edit Map - Edit series - Series data conversion - Verify applying Missing values method
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    And Select "Frequency" as "Daily" from dropdown
+    And Select "Missing values method" as "Next value" from dropdown
+    Then Missing values method should be applied with selected frequency
+
+  @Map
+  Scenario: TC_Map_297:Edit Map - Edit series - Series data conversion -Minimize option
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    And Click on "Minimize" option
+    Then The Series Hormonization popup should be minimized
+
+  @Map
+  Scenario: TC_Map_298:Edit Map - Edit series - Series data conversion -Verify maximize option
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    And Click on "Minimize" option
+    And Click on "Maximize" option
+    Then The Series Hormonization popup should be maximized
+
+  @Map
+  Scenario: TC_Map_299:Edit map - Edit series - Series data conversion -verify full screen
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    And Click on "Full-screen" option
+    Then The Series Hormonization popup should be displayed in full screen
+
+  @Map
+  Scenario: TC_Map_300:Edit map - Edit series - Series data conversion -verify exit full screen
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    And Click on "Full-screen" option
+    And Click on "Exit full-screen" option
+    Then The Series Hormonization popup should be displayed in normal screen
+
+  @Map
+  Scenario: TC_Map_301:Edit map - Edit series - Series data conversion -Verify Cancel/x icon
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Frequency"
+    And Click on Cancel button
+    Then The Series Hormonization popup should be closed
+
+  @Map
+  Scenario: TC_Map_302:Edit map - Edit series - Verify dropdown for frequency in series level
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on frequency dropdown
+    Then List of frequenceies should be available
+
+  @Map
+  Scenario: TC_Map_303:Edit map - Edit series - Verify applying frequency in series level
+    And Create a map visual with series id's "16240301;16243001"
+    And Click on "Edit Map"
+    And Click on frequency dropdown
+    And Select frequence as "Yearly (Sum)"
+    Then Selected frequency should be displayed in the series
+
+  @Map
+  Scenario: TC_Map_304:Edit map - Edit series - Verify applying currency in series level
+    And Create a map visual with series id's "16240301;5958801"
+    And Click on "Edit Map"
+    And Click on currency dropdown
+    And Select currency as "USD"
+    Then Selected currency should be displayed in the series
+
+  @Map
+  Scenario: TC_Map_305:Edit map - Edit series - Verify clicking on type a function field
+    And Create a map visual with series id's "16240301;447233267"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    Then List of functions dropdown should be opened
+
+  @Map
+  Scenario: TC_Map_306:Edit map - Edit series - Verify applying function in series level
+    And Create a map visual with series id's "272965603;273074003"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on "Apply function"
+    Then The selected function should be applied to the series
+
+  @Map
+  Scenario: TC_Map_307:Edit map - Edit series - Verify cancel icon for selected function
+    And Create a map visual with series id's "16240301;447233267"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on cancel function icon
+    Then The selected function should be cancelled
+
+  @Map
+  Scenario: TC_Map_308:Edit map - Edit series - Verify multiple functions apply
+    And Create a map visual with series id's "272965603;273074003"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    And Select multiple functions
+    And Click on "Apply function"
+    Then The selected functions should be applied to the series
+
+  @Map
+  Scenario: TC_Map_309:Edit series - Verify search for functions
+    And Create a map visual with series id's "16240301"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    And Search with function "YTD"
+    Then Searched functions should be displayed
+
+  @Map
+  Scenario: TC_Map_310:Edit map - Edit  series - Verify removing applied functions
+    And Create a map visual with series id's "272965603;273074003"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on "Apply function"
+    And Click on cancel function icon
+    Then The function should be removed from the series
+
+  @Map
+  Scenario: TC_Map_311:Edit Map - Edit series - Verify applying invalid function for series
+    And Create a map visual with series id's "210698402"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    Then "The function cannot be applied to selected series" popup should be displayed
+
+  @Map
+  Scenario: TC_Map_312:Edit Map - Edit seires - Verify OK button on "The function cannot be applied to selected series" popup
+    And Create a map visual with series id's "210698402"
+    And Click on "Edit Map"
+    And Click on type a function field in series level
+    And Select an invalid function
+    And Click on "Apply function"
+    And Click on "Ok"
+    Then The function cannot be applied to selected series popup should be closed
+
+  @Map
+  Scenario: TC_Map_313:Edit Map - Edit series - Verify Region, Unit and Series ID fields
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    Then "Region", "Unit" and "Series id" fields should be available for respective series
+
+  @Map
+  Scenario: TC_Map_314:Edit Map - Verify feedback option
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Feedback" option
+    Then "Still cannot find an answer?" popup should be displayed
+
+  @Map
+  Scenario: TC_Map_315:Edit Map -  Feedback - Verify description for popup
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Feedback" option
+    Then The description should be "Do you need any additional features? Please send us your feedback for product enhancements."
+
+  @Map
+  Scenario: TC_Map_316:Edit Map - Feedback - Verify Submit and cancel buttons when description field is empty
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Feedback" option
+    Then Submit and Cancel buttons should be disabled by default
+
+  @Map
+  Scenario: TC_Map_317:Edit Map - Feedback - Verify cancel button
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Feedback" option
+    And Enter text in description field
+    And Click on cancel button
+    Then The feedback popup should be closed
+
+  @Map
+  Scenario: TC_Map_318:Edit Map - Feedback - Verify growl message after  Submit feedback
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Feedback" option
+    And Enter text in description field
+    And Click on submit button
+    Then "Thank you for submitting a question to us." message should be displayed in a growl popup
+
+  @Map
+  Scenario: TC_Map_319:Edit Map - Verify cancel/x button
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Click on "Cancel" button
+    Then The edit visual popup should be closed
+
+  @Map
+  Scenario: TC_Map_320:Edit Map - Verify save button
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Change title in edit visual window
+    And Click on "Save" button
+    Then The changes should be reflected to histogram visual and Edit visual popup should be closed
+
+  @Map
+  Scenario: TC_Map_321:Edit Map - Verify Solid Color button - Color Steps Dropdown
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select Solid color
+    Then Default value should be "3" and the colors range should be from "2,3,4,5,6,7"
+
+  @Map1
+  Scenario: TC_Map_322:Edit Map - Verify Solid Color button - Color Steps
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select Solid color
+    And Click on color steps dropdown
+    Then Selected color steps will be created as per the selection

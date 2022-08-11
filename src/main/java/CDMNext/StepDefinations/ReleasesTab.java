@@ -932,7 +932,6 @@ public class ReleasesTab {
 			login.Log4j.info("The " + timeframe_date + " has been verified successfully");
 		}
 	}
-
 	@Then("^The selected actions should reflect inside watchlist tab$")
 	public void the_selected_actions_should_reflect_inside_watchlist_tab() throws Throwable {
 		new Actions(login.driver)
@@ -940,18 +939,32 @@ public class ReleasesTab {
 						"//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Watchlist')]", 4))
 				.click().build().perform();
 		String actual = "Real GDP: YoY: sa";
-	
+		
+		/*try {
+			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+				actual = "Real GDP: YoY: sa";
+			} else {
+				actual = CommonFunctionality
+						.getElementByXpath(login.driver, "//*[contains(text(),'" + Comparables.series_name + "')]", 4)
+						.getText();
+			}
+		} catch(Exception e	) {
+			actual = CommonFunctionality
+					.getElementByXpath(login.driver, "//*[contains(text(),'" + DatabasesTab.series_name + "')]", 4)
+					.getText();
+		}*/
 		String text;
-		WebElement expectedStr = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='watchlist--list']//*[contains(@class,'series-list-item__selected')]//*[@class='series-item--name']",
-				4);
 		try {
-			if (!Comparables.series_name.isEmpty()) {
+			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Albania")) {
 				text = CommonFunctionality.getElementByXpath(login.driver,
-						"(//*[@class='series-item-information--additional-text'])[1]",
+						"(//*[contains(@class,'series-list-item series-list-item__selected')]//*[@class='series-item-information--additional-text'])[1]",
 						4).getText();
 			} else {
-				text = expectedStr.getText();
+				text = CommonFunctionality
+						.getElementByXpath(login.driver,
+								"(//*[@class='series-item-information--additional-text'])[1]",
+								4)
+						.getText();
 			}
 		} catch(Exception e) {
 			text = CommonFunctionality
@@ -982,6 +995,86 @@ public class ReleasesTab {
 							4)
 					.getText();
 		}*/
+		String split[] = text.split("\\,");
+		String replace = split[0];
+		String expected;
+		if (replace.contains("Popup")) {
+			expected = replace.replaceAll("Popup", "popup_notifications");
+		} else {
+			expected = replace;
+		}
+		String split1[] = split[1].split("\\ email");
+		String text1 = split1[0];
+		String expected12 = text1.substring(1, 2).toUpperCase();
+		String expected13 = text1.substring(2, text1.length());
+		String expected1 = expected12 + expected13;
+		try {
+			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Albania")) {
+			sa.assertEquals("Real GDP: YoY: sa", actual);
+			} else {
+			sa.assertEquals(Comparables.series_name, actual);
+			}
+		}catch(Exception e) {
+			sa.assertEquals(DatabasesTab.series_name, actual);
+		}
+		
+		if (watchlist_dropdown_text.contains(expected) && watchlist_dropdown_text.contains(expected1)) {
+			login.Log4j.info("The Watchlist functionality has been verified successfully");
+		} else {
+			sa.fail("Watchlist verification failed");
+		}
+	}
+
+	/*@Then("^The selected actions should reflect inside watchlist tab$")
+	public void the_selected_actions_should_reflect_inside_watchlist_tab() throws Throwable {
+		new Actions(login.driver)
+				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+						"//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Watchlist')]", 4))
+				.click().build().perform();
+		String actual = "Real GDP: YoY: sa";
+	
+		
+		try {
+			String text;
+			WebElement expectedStr = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='watchlist--list']//*[contains(@class,'series-list-item__selected')]//*[@class='series-item--name']",
+					4);
+			if (!Comparables.series_name.isEmpty()) {
+				text = CommonFunctionality.getElementByXpath(login.driver,
+						"(//*[@class='series-item-information--additional-text'])[1]",
+						4).getText();
+			} else {
+				text = expectedStr.getText();
+			}
+		} catch(Exception e) {
+			text = CommonFunctionality
+					.getElementByXpath(login.driver,
+							"//*[contains(text(),'" + DatabasesTab.series_name
+									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
+							4)
+					.getText();
+		}
+		try {
+			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+				text = CommonFunctionality.getElementByXpath(login.driver,
+						"//*[contains(text(),'Real GDP: YoY: sa')]/following::*[@class='series-item-information--additional-text'][1]",
+						4).getText();
+			} else {
+				text = CommonFunctionality
+						.getElementByXpath(login.driver,
+								"//*[contains(text(),'" + Comparables.series_name
+										+ "')]/following::*[@class='series-item-information--additional-text'][1]",
+								4)
+						.getText();
+			}
+		} catch(Exception e) {
+			text = CommonFunctionality
+					.getElementByXpath(login.driver,
+							"//*[contains(text(),'" + DatabasesTab.series_name
+									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
+							4)
+					.getText();
+		}
 		String expected = null;
 		String expected1 = null;
 		try {
@@ -1013,7 +1106,7 @@ public class ReleasesTab {
 		} else {
 			sa.fail("Watchlist verification failed");
 		}
-	}
+	}*/
 
 	@Then("^The \"([^\"]*)\" for series should present$")
 	public void the_for_series_should_present(String arg1) throws Throwable {

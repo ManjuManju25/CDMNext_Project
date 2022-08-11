@@ -634,7 +634,7 @@ public class EmptyView {
 		CommonFunctionality.wait(1000);
 	WebElement titleEle = 	CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 15);
 	new Actions(login.driver).pause(500).contextClick(titleEle).build().perform();
-	CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Copy table')]", 15).click();
+	CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Copy table')] | //*[contains(text(),'Copy histogram')]", 15).click();
 	}
 
 	@And("^Paste it onto the another view tab$")

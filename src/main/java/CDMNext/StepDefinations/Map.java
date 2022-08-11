@@ -1,5 +1,7 @@
 package CDMNext.StepDefinations;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import java.awt.AWTException;
@@ -18,11 +20,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import CDMNext.util.CommonFunctionality;
+import Javaxlxs.File_delete;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -35,10 +39,11 @@ public class Map extends CommonFunctionality {
 	static WebElement SeriesCount;
 	ArrayList<String> list_of_series = new ArrayList<>();
 	EmptyView EV = new EmptyView();
-	String Visual_Title_txt, ExpectedSname;
+	String Visual_Title_txt, ExpectedSname,expectedMap_type;
 	List<WebElement> Series_list_EditSeriesPanel;
 	CDMNextSprintCases cdmnextsprint = new CDMNextSprintCases();
 	Commentary commentary = new Commentary();
+	WebElement Dropdown_ele;
 
 	@SuppressWarnings("deprecation")
 	@And("^Right click on the series$")
@@ -328,7 +333,7 @@ public class Map extends CommonFunctionality {
 		}
 		SeriesCount = getElementByProperty(login.driver, "SelectedSeriesCount", 6);
 		login.Log4j.info(SeriesCount.getText());
-		EmptyView.click_on_View_tab();
+		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
 		wait(2000);
 		getElementByProperty(login.driver, "map_world", 4).click();
 		wait(2000);
@@ -744,15 +749,14 @@ public class Map extends CommonFunctionality {
 	public void date_selection_checkbox_will_be_not_be_visible_below_map_visual() throws Throwable {
 		wait(2000);
 
-		List<WebElement> date_selection = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("date_selection")));
+		List<WebElement> date_selection = login.driver
+				.findElements(By.xpath(login.LOCATORS.getProperty("date_selection")));
 		if (date_selection.size() == 0) {
 			login.Log4j.info("Map Date selection is not dispalyed below map visual");
 		} else {
 			fail("Verification failed");
 		}
 	}
-
-	
 
 	@And("^Open \"([^\"]*)\" dropdown$")
 	public void open_dropdown(String arg1) throws Throwable {
@@ -785,47 +789,53 @@ public class Map extends CommonFunctionality {
 		wait(500);
 		String tooltipText = getElementByProperty(login.driver, "Map_tooltipText", 8).getText();
 		login.Log4j.info(tooltipText);
-		if(tooltipText.contains(arg1)) {
+		if (tooltipText.contains(arg1)) {
 			login.Log4j.info("The selected decimal separator is displayed on map value");
 		} else {
 			fail("The selected decimal separator is not displayed");
 		}
 
 	}
+
 	@Then("^Legend option should be checked by default$")
 	public void legend_option_should_be_checked_by_default() throws Throwable {
-	   wait(2000);
-	   Boolean legend_checkBox = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("legend_checkbox"))).isSelected();
-	   if(legend_checkBox == true) {
-		   login.Log4j.info("Legend option is checked by default");
-	   }else{
-		   fail("Legend option is not checked by default");
-	   }
+		wait(2000);
+		Boolean legend_checkBox = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("legend_checkbox")))
+				.isSelected();
+		if (legend_checkBox == true) {
+			login.Log4j.info("Legend option is checked by default");
+		} else {
+			fail("Legend option is not checked by default");
+		}
 	}
+
 	@Then("^\"([^\"]*)\" option should be displayed$")
 	public void option_should_be_displayed(String arg1) throws Throwable {
-	    String ExpectedVar = getElementByProperty(login.driver, "BottomText", 8).getText();
-	    if(ExpectedVar.equalsIgnoreCase(arg1)) {
-	    	login.Log4j.info(arg1+ " option is displayed");
-	    } else {
-	    	fail(arg1 + " option is not displayed");
-	    }
+		String ExpectedVar = getElementByProperty(login.driver, "BottomText", 8).getText();
+		if (ExpectedVar.equalsIgnoreCase(arg1)) {
+			login.Log4j.info(arg1 + " option is displayed");
+		} else {
+			fail(arg1 + " option is not displayed");
+		}
 	}
+
 	@And("^Click on Advanced settings$")
 	public void click_on_Advanced_settings() throws Throwable {
-		 getElementByProperty(login.driver, "AdvancedSettings", 8).click();
+		getElementByProperty(login.driver, "AdvancedSettings", 8).click();
 	}
 
 	@Then("^Show legend option should be checked by default$")
 	public void show_legend_option_should_be_checked_by_default() throws Throwable {
-		 wait(2000);
-		   Boolean Showlegend_checkBox = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("showLegend_checkbox"))).isSelected();
-		   if(Showlegend_checkBox == true) {
-			   login.Log4j.info("Show Legend option is checked by default");
-		   }else{
-			   fail("Show Legend option is not checked by default");
-		   }
+		wait(2000);
+		Boolean Showlegend_checkBox = login.driver
+				.findElement(By.xpath(login.LOCATORS.getProperty("showLegend_checkbox"))).isSelected();
+		if (Showlegend_checkBox == true) {
+			login.Log4j.info("Show Legend option is checked by default");
+		} else {
+			fail("Show Legend option is not checked by default");
+		}
 	}
+
 	@And("^Select Text radio button from copyright popup$")
 	public void select_Text_radio_button_from_copyright_popup() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver,
@@ -835,15 +845,401 @@ public class Map extends CommonFunctionality {
 
 	@Then("^The default text should be \"([^\"]*)\"$")
 	public void the_default_text_should_be(String arg1) throws Throwable {
-	  String defaultText = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='copyright-config--text']/*", 10).getAttribute("value");
-	  if(defaultText.equals(arg1)) {
-		  login.Log4j.info("The default text is " + arg1);
-	  } else {
-		  fail("Verification failed");
-	  }
+		String defaultText = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@class='copyright-config--text']/*", 10).getAttribute("value");
+		if (defaultText.equals(arg1)) {
+			login.Log4j.info("The default text is " + arg1);
+		} else {
+			fail("Verification failed");
+		}
 	}
 
-	//........................Implemented By Teju ....................//
+	@And("^Choose Data label color is blue$")
+	public void choose_Data_label_color_is_blue() throws Throwable {
+		WebElement element = CommonFunctionality.getElementByProperty(login.driver, "BlueColor", 20);
+		ActualColor = element.getCssValue("background-color");
+		login.Log4j.info("Actual color is " + ActualColor);
+		element.click();
+		CommonFunctionality.wait(200);
+	}
+
+	@Then("^Should be able to display with selected \"([^\"]*)\"$")
+	public void should_be_able_to_display_with_selected(String arg1) throws Throwable {
+		if (arg1.equalsIgnoreCase("Color")) {
+			List<WebElement> color = login.driver.findElements(By.cssSelector(
+					"#highcharts-zcvptxg-2443 > svg > g.highcharts-data-labels.highcharts-series-0.highcharts-map-series.highcharts-color-0.highcharts-tracker > g:nth-child(1) > text"));
+			if (color.size() > 0) {
+				for (int i = 1; i <= color.size(); i++) {
+					String color_text = color.get(i).getCssValue("fill");
+					CommonFunctionality.wait(2000);
+					String actual = Color.fromString(color_text).asHex();
+					assertEquals(actual, ActualColor);
+				}
+
+				login.Log4j.info("The Selected " + arg1
+						+ " has been updated in map visual timepoints and it's verified successfully");
+
+			} else {
+				Assert.fail("List size is zero");
+			}
+		} else if (arg1.equalsIgnoreCase("Outline color")) {
+			List<WebElement> color = login.driver.findElements(By.cssSelector(
+					".highcharts-data-labels.highcharts-series-0.highcharts-map-series.highcharts-color-0.highcharts-tracker > g:nth-child(1) > text > tspan"));
+			if (color.size() > 0) {
+				for (int i = 0; i < color.size(); i++) {
+					String color_text = color.get(i).getCssValue("fill");
+					CommonFunctionality.wait(2000);
+					String actual = Color.fromString(color_text).asHex();
+					login.Log4j.info(actual);
+					String expected = Color.fromString(Commentary.ActualColor).asHex();
+					login.Log4j.info(expected);
+					assertEquals(actual, expected);
+				}
+
+				login.Log4j.info("The Selected " + arg1
+						+ " has been updated in map visual timepoints and it's verified successfully");
+
+			} else {
+				Assert.fail("List size is zero");
+			}
+		}
+	}
+
+	@Then("^Default size should be \"([^\"]*)\"$")
+	public void default_size_should_be(String arg1) throws Throwable {
+		String defaultSize = CommonFunctionality.getElementByProperty(login.driver, "Labels_default_size", 8)
+				.getAttribute("value");
+		if (defaultSize.equals(arg1)) {
+			login.Log4j.info("Default size is " + arg1);
+		} else {
+			Assert.fail("Verification failed");
+		}
+	}
+
+	@Then("^The Selected font size should update with selected input$")
+	public void the_Selected_font_size_should_update_with_selected_input() throws Throwable {
+		CommonFunctionality.wait(500);
+		List<WebElement> font_size = login.driver.findElements(By.cssSelector(
+				".highcharts-data-labels.highcharts-series-0.highcharts-map-series.highcharts-color-0.highcharts-tracker > g:nth-child(1) > text"));
+		if (font_size.size() > 0) {
+			for (int i = 0; i < font_size.size(); i++) {
+				String fontsize = font_size.get(i).getCssValue("font-size");
+				String font_size_text[] = fontsize.split("px");
+				Integer expected = Integer.valueOf(font_size_text[0]);
+				Integer actual = Integer.valueOf(ChartVisual.data_labels_font_size);
+				assertEquals(actual, expected);
+				login.Log4j.info(
+						"The Selected font size has been updated in map visual timepoints and it's verified successfully");
+			}
+		} else {
+			Assert.fail("List size is zero");
+		}
+
+	}
+
+	@Then("^The Selected font Styles should update with selected input$")
+	public void the_Selected_font_Styles_should_update_with_selected_input() throws Throwable {
+		CommonFunctionality.wait(1000);
+		List<WebElement> font_style = login.driver.findElements(By.cssSelector(
+				".highcharts-data-labels.highcharts-series-0.highcharts-map-series.highcharts-color-0.highcharts-tracker > g:nth-child(1) > text"));
+		if (font_style.size() > 0) {
+			for (int i = 0; i < font_style.size(); i++) {
+				WebElement fontstyle = font_style.get(i);
+				String font_bold = fontstyle.getCssValue("font-weight");
+				String font_italic = fontstyle.getCssValue("font-style");
+				String font_underline = fontstyle.getCssValue("text-decoration");
+				assertTrue(font_bold.equals("bold") || font_bold.equals("700"));
+				assertTrue(font_italic.equals("italic"));
+				assertTrue(font_underline.contains("underline"));
+				login.Log4j
+						.info("The Selected font styles has been updated in map visual and it's verified successfully");
+
+			}
+		} else {
+			Assert.fail("List size is zero");
+
+		}
+	}
+
+	@Then("^By Default Highlight filter will grayed out$")
+	public void by_Default_Highlight_filter_will_grayed_out() throws Throwable {
+		WebElement HighlightFilter = CommonFunctionality.getElementByProperty(login.driver, "highlight_filter", 8);
+		if (HighlightFilter.getAttribute("class").contains("disabled")) {
+			login.Log4j.info("By Default Highlight filter is grayed out");
+		} else {
+			Assert.fail("By Default Highlight filter is not grayed out");
+		}
+	}
+
+	@Then("^Highlight Filter will be displayed with value (\\d+)$")
+	public void highlight_Filter_will_be_displayed_with_value(int arg1) throws Throwable {
+		String defaultValue = CommonFunctionality.getElementByProperty(login.driver, "filterValue", 8)
+				.getAttribute("value");
+		int ExpectedValue = Integer.parseInt(defaultValue);
+		if (ExpectedValue == arg1) {
+			login.Log4j.info("Highlight Filter default value is 0");
+		} else {
+			Assert.fail("Verification failed");
+		}
+	}
+
+	@Then("^Highlight Filter will be displayed with color Red$")
+	public void highlight_Filter_will_be_displayed_with_color_Red() throws Throwable {
+		String ExpectedColor = "rgb(239, 83, 80)";
+		String Red = Color.fromString(ExpectedColor).asHex();
+		String highlight_filter_color = CommonFunctionality
+				.getElementByProperty(login.driver, "highlightFilterColor", 8).getCssValue("background-color");
+		String actualColor = Color.fromString(highlight_filter_color).asHex();
+		Assert.assertEquals(actualColor, Red);
+		login.Log4j.info("Default color is Red");
+
+	}
+	@And("^Select \"([^\"]*)\" button$")
+	public void select_button(String arg1) throws Throwable {
+		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']", 8).click();
+	}
+
+	@And("^Click on \"([^\"]*)\" cogwheel$")
+	public void click_on_cogwheel(String arg1) throws Throwable {
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='color-axis--row']//*[@title='" + arg1 + "']", 8).click();
+	}
+
+	/*@And("^Expand common section$")
+	public void expand_common_section() throws Throwable {
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='icon-collapse']",8).click();
+	   
+	}*/
+	@When("^Expand \"([^\"]*)\" section$")
+	public void expand_section(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver,"//*[text()='" + arg1 + "']/following::*[2]",8).click();
+	}
+	@And("^Click on Series name on map visual$")
+	public void click_on_Series_name_on_map_visual() throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "sname_on_mapVisual", 8).click();
+	}
+
+
+@And("^Create a empty map visual$")
+public void create_a_empty_map_visual() throws Throwable {
+	EmptyView.click_on_View_tab();
+	click_on_Map_visual_icon();
+}
+
+@Then("^The Add related series option should be hidden if have no series associated with the visual$")
+public void the_Add_related_series_option_should_be_hidden_if_have_no_series_associated_with_the_visual() throws Throwable {
+	CommonFunctionality.wait(500);
+	WebElement add_related_series_button = login.driver.findElement(By.xpath("//*[@class='visual-top-panel--left-controls']/*[3]"));
+	   if(!add_related_series_button.isEnabled()) {
+		   login.Log4j.info("PASS");
+	   } else {
+		   Assert.fail("Verification failed");
+	   }
+}
+@Then("^The related series should be added to the map visual$")
+public void the_related_series_should_be_added_to_the_map_visual() throws Throwable {
+	WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
+			"//*[@class='visual-indicators--category visual-indicators--category__macro']/*[2]//*[@class='visual-indicator--title']",
+			10);
+	String indicator_title_text = ele.getText();
+	new Actions(login.driver).pause(500).moveToElement(ele).perform();
+	CommonFunctionality
+			.getElementByXpath(login.driver,
+					"//*[@class='visual-indicators--category visual-indicators--category__macro']/*[2]/*[2]", 10)
+			.click();
+	CommonFunctionality.getElementByXpath(login.driver,
+			"//*[contains(@class,'movable-modal__active')]//*[@class='movable-modal--close']", 10).click();
+	CommonFunctionality.wait(500);
+	St.click_on("Edit Map");
+	ArrayList<String> listOfLegendItems = new ArrayList<>();
+	List<WebElement> list = login.driver
+			.findElements(By.xpath("//*[@class='series-name--title']"));
+	for (int i = 0; i < list.size(); i++) {
+		listOfLegendItems.add(list.get(i).getText());
+	}
+	if (listOfLegendItems.contains(indicator_title_text)
+			|| listOfLegendItems.contains("Consumer Price Index: YoY: Monthly: Albania")) {
+		login.Log4j.info("The related series is displayed in the visual");
+	} else {
+		fail("The relatedd series not displayed in the visual");
+	}
+}
+@When("^Click on world drop down button$")
+public void click_on_world_drop_down_button() throws Throwable {
+	CommonFunctionality.wait(500);
+	CommonFunctionality.getElementByProperty(login.driver,"world_dropdown", 10).click();
+}
+
+@When("^Select \"([^\"]*)\" map$")
+public void select_map(String arg1) throws Throwable {
+	expectedMap_type = arg1;
+	CommonFunctionality.wait(500);
+	CommonFunctionality.getElementByXpath(login.driver,"//*[@title='" + arg1 + "']", 10).click();
+}
+
+@Then("^Respective map should be created$")
+public void respective_map_should_be_created() throws Throwable {
+   WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
+			"//*[@class='custom-select-title--name text-dots']", 10);
+   String mapType = ele.getText();
+   if(expectedMap_type.equalsIgnoreCase(mapType)) {
+	   login.Log4j.info(expectedMap_type + " map is created");
+   } else {
+	   Assert.fail(expectedMap_type + " map is not cretaed");
+   }
+}
+@Then("^The Map visual should be created in vew tab on current insight$")
+public void the_Map_visual_should_be_created_in_vew_tab_on_current_insight() throws Throwable {
+	List<WebElement> views = login.driver
+			.findElements(By.xpath("//*[contains(@class,'insight-page-view-tab') and contains(text(),'View')]"));
+	if (views.size() > 1) {
+		CommonFunctionality.wait(1000);
+		String titileTxt = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='main-page--insight-active-page']//*[@class='visual-title visual-title--wrapper'][1]//*[@data-name='title']",
+				15).getText();
+		if (Visual_Title_txt.equalsIgnoreCase(titileTxt)) {
+			login.Log4j.info("The Map visual is created in view tab");
+		} else {
+			Assert.fail("The Map visual is not created in view tab");
+		}
+	}
+}
+@Then("^The new insight should be opened and added map visual should be available in My visual$")
+public void the_new_insight_should_be_opened_and_added_map_visual_should_be_available_in_My_visual() throws Throwable {
+	PieVisual.createdVisualInNewTab(Visual_Title_txt);
+}
+@Then("^The map visual should be pasted in the insight$")
+public void the_map_visual_should_be_pasted_in_the_insight() throws Throwable {
+	CommonFunctionality.wait(1000);
+			String ActualText = CommonFunctionality.getElementByProperty(login.driver, "VisualTitle", 15)
+				.getText();
+		if (ActualText.equals(Visual_Title_txt) ) {
+			login.Log4j.info("Mapvisual is created in the same insiaght");
+		} else {
+			Assert.fail("Map visual is not created in the same insight");
+		}
+	
+}
+@Then("^The map visual should be pasted to new insight$")
+public void the_map_visual_should_be_pasted_to_new_insight() throws Throwable {
+	the_map_visual_should_be_pasted_in_the_insight();
+}
+@And("^Click on More options$")
+public void click_on_More_options() throws Throwable {
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='growl-message-nav--button']/*", 15)
+	.click();
+}
+
+@Then("^Download window is displayed$")
+public void download_window_is_displayed() throws Throwable {
+	CommonFunctionality.wait(500);
+   WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "downloadPopup", 15);
+   if(ele.getText().contains("Copy")) {
+	   login.Log4j.info("Download window is displayed");
+   } else {
+	   Assert.fail("Download window is not displayed");
+   }
+			
+}
+@Then("^Map visual and related series should be downloaded in excel$")
+public void map_visual_and_related_series_should_be_downloaded_in_excel() throws Throwable {
+	CommonFunctionality.getTheNewestFile(Commentary.format);
+	File_delete.delete();
+}
+
+@Then("^Map visual should be downloaded in PDF format$")
+public void map_visual_should_be_downloaded_in_PDF_format() throws Throwable {
+	CommonFunctionality.getTheNewestFile(Commentary.format);
+	File_delete.delete();
+}
+@Then("^Map visual should be pasted$")
+public void map_visual_should_be_pasted() throws Throwable {
+	String ExpectedTitle = CommonFunctionality.getElementByProperty(login.driver, "VisualTitle", 10)
+			.getText();
+	if (Visual_Title_txt.equals(ExpectedTitle)) {
+		login.Log4j.info("Map visual is pasted");
+	} else {
+		Assert.fail("Map visual is not pasted");
+	}
+}
+@Then("^Map chart should be cut$")
+public void map_chart_should_be_cut() throws Throwable {
+	commentary.commentary_should_be_cut();
+}
+@Then("^Map chart should be deleted$")
+public void map_chart_should_be_deleted() throws Throwable {
+	commentary.commentary_should_be_deleted();
+}
+@And("^Click on My Series tab$")
+public void click_on_My_Series_tab() throws Throwable {
+	CommonFunctionality.getElementByProperty(login.driver, "Myseries", 10).click();
+	
+}
+@Then("^The applied function should be applied to the series$")
+public void the_applied_function_should_be_applied_to_the_series() throws Throwable {
+	CommonFunctionality.wait(500);
+	String Actualfunction = CommonFunctionality
+			.getElementByXpath(login.driver, "//*[@class='series-functions-title']", 5)
+			.getText();
+
+	if (Actualfunction.contains("RMB")) {
+		login.Log4j.info(Actualfunction + " is displayed in seres name");
+		
+	} else {
+		Assert.fail(Actualfunction + " is not displayed in series name");
+	}
+}
+@And("^Select Map$")
+public void select_Map() throws Throwable {
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='download_visual']/*[1]", 30).click();
+}
+
+@Then("^Download popup should be displayed with Map tab selection$")
+public void download_popup_should_be_displayed_with_Map_tab_selection() throws Throwable {
+	CommonFunctionality.wait(2000);
+	if (login.driver
+			.findElement(By.xpath(
+					"//*[@class='modal-window insight-download modal-window__active']//*[@data-tab='visual']"))
+			.getText().contains("Map")) {
+		login.Log4j.info("Verification is pass");
+	} else {
+		Assert.fail("Download popup not displayed with map tab selection");
+	}
+}
+@And("^Click on cogwheel icon on series level$")
+public void click_on_cogwheel_icon_on_series_level() throws Throwable {
+	WebElement editseries = CommonFunctionality.getElementByProperty(login.driver, "EditSeriesIcon", 30);
+	action.moveToElement(editseries).build().perform();
+	editseries.click();
+	
+}
+@And("^Click on color steps dropdown$")
+public void click_on_color_steps_dropdown() throws Throwable {
+	CommonFunctionality.wait(2000);
+  Dropdown_ele = login.driver.findElement(By.name("steps"));
+
+}
+
+@Then("^Selected color steps will be created as per the selection$")
+public void selected_color_steps_will_be_created_as_per_the_selection() throws Throwable {
+  Select select = new Select(Dropdown_ele);
+ List<WebElement> dropdown_list = select.getOptions();
+ for(WebElement dropdownValue: dropdown_list) {
+	 dropdownValue.click();
+	String str =  dropdownValue.getAttribute("value");
+	 List<WebElement> steps = login.driver.findElements(By.xpath("//*[@class='solid-colors--container']//*[@class='predefined-color']//button"));
+	 if(Integer.parseInt(str) == steps.size()) {
+		 login.Log4j.info("Selected color steps: "+ Integer.parseInt(str) + " is displayed");
+	 } else {
+		 Assert.fail("Selected color steps not displayed");
+	 }
+ }
+  
+}
+
+
+	// ........................Implemented By Teju ....................//
 
 	@And("^click_On_Dropdown \"([^\"]*)\"$")
 	public void click_On_Dropdown(String arg1) throws Throwable {
@@ -2175,7 +2571,7 @@ public class Map extends CommonFunctionality {
 				if (count > seriescount) {
 					break;
 				}
-			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+			}
 		} catch (WebDriverException e) {
 
 			Series.click();

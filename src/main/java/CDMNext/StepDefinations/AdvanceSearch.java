@@ -25,6 +25,7 @@ public class AdvanceSearch extends CommonFunctionality{
 	public void enter_All_of_these_words_as(String arg1) throws Throwable {
 		AllWords = arg1;
 		getElementByProperty(login.driver, "AllWords", 10).sendKeys(arg1);
+		
 	}
 
 

@@ -2812,6 +2812,7 @@ public class CDMNextSprintCases {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg3 + "')]//following::div[@class='toggle'][1]", 4).click();
 		} else {
+			CommonFunctionality.wait(1000);
 			WebElement table = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg3 + "')]/preceding::div[@class='toggle'][1]", 4);
 			js.executeScript("arguments[0].scrollIntoView(true);", table);

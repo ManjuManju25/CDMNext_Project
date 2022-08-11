@@ -308,22 +308,24 @@ public class KeyboardShortcuts {
 				"//*[text()='Databases']", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Daily_db", 10).click();
 		login.Log4j.info("Clicking on Database level");
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@data-node-model-id='DAILY']//div[3]//div[1]//div[@class='toggle']", 4).click();
+				"//div[@data-node-model-id='DAILY']/following::*[@class='toggle'][1]", 4).click();
+		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@data-node-model-id='DAILY']//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']", 4)
+				.getElementByProperty(login.driver,
+						"Expand3rdLevel", 4)
 				.click();
-		Thread.sleep(1200);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='tree-node open']//div[@class='child-container']//div[1]//div[@class='tree-node']//div[@class='toggle']",
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByProperty(login.driver,
+				"Expand4thLevel",
 				4).click();
 	}
 
 	@Then("^Press left arrow key on KB$")
 	public void press_left_arrow_key_on_KB() throws Throwable {
-		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@data-node-model-id='DAILY']/*[3]/*[1]/*[2]", 10);
+		WebElement ele = CommonFunctionality.getElementByProperty(login.driver,
+				"Deposit_rates", 10);
 		ele.click();
 		actions.sendKeys(ele, Keys.ARROW_LEFT).build().perform();
 

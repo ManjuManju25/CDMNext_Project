@@ -49,7 +49,8 @@ public class Histogram {
 	String SearchKeyword, BeforeAddingFunction, BeforeEditingFunction;
 	String ReplaceKeyword, SeriesName, EditSeriesName;
 	String EditRegion, EditUnit, EditFrequency,arg;
-	String AddFunction, function, function1;
+	public String AddFunction, function1;
+	public String function = null;
 	String ChangeFunction, AggregateFunction, AccumulateFunction;
 	List<String> BeforeEditSeries = new ArrayList<>();
 	List<String> styles = new ArrayList<>();
@@ -248,6 +249,7 @@ public class Histogram {
 	@And("^Add series to the my series tab$")
 	public void add_series_to_the_my_series_tab() throws Throwable {
 //		CommonFunctionality.ResetMethod();
+		CommonFunctionality.wait(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("210698402");
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 8).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(10000);
@@ -261,7 +263,11 @@ public class Histogram {
 	}
 	@And("^Click on Series name$")
 	public void click_on_Series_name() throws Throwable {
+		try {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[@class='series-edit--title series-edit--title__editable']", 30).click();
+		}catch(Exception e) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']//*[@class='series-name--title']", 30).click();
+		}
 	}
 	@SuppressWarnings("deprecation")
 	@And("^Apply function for a series$")
@@ -2601,6 +2607,15 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 						.findElement(By.xpath("//*[@class='tooltip-config']//span[@class='input-control--indicator']"))
 						.click();
 			}
+		} else if(arg1.equalsIgnoreCase("Highlight filter")) {
+			CommonFunctionality.wait(1000);
+			Boolean isChecked = login.driver.findElement(By.xpath("//*[contains(@title,'Highlight filter')]/*[1]/*[1]/*//*[@type='checkbox']"))
+					.isSelected();
+			if (isChecked == false) {
+				login.driver
+						.findElement(By.xpath("//*[contains(@title,'Highlight filter')]/*[1]/*[1]"))
+						.click();
+			}
 		}
 	}
 
@@ -3134,7 +3149,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 		CommonFunctionality.wait(1500);
 		String alignment = login.driver
 				.findElement(
-						By.xpath("//*[@class='preview-container']//*[@class='visual-item-wrapper--credits-container']"))
+						By.xpath("//*[@class='visual-item-wrapper--credits-container']"))
 				.getAttribute("style");
 		if (arg1.equalsIgnoreCase("Left")) {
 
@@ -3769,10 +3784,12 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	public void click_on_the_visual_title() throws Throwable {
 		try {
 		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "(//*[@data-name='title'])[2]", 8);
-		title.click();
+		//title.click();
+		action.doubleClick(title).build().perform();
 		}catch(NoSuchElementException e) {
 			WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 8);
-			title.click();
+			//title.click();
+			action.doubleClick(title).build().perform();
 		}
 	}
 	@And("^Select any visual from visual panel$")
@@ -3827,7 +3844,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	    	Assert.fail("Series not removed from edit series panel");
 	    }
 	    CommonFunctionality.wait(1000);
-	    if(login.driver.findElements(By.xpath("//*[@class='highcharts-container ']")).size() == 0) {
+	    if(login.driver.findElements(By.xpath("//*[@class='visual-series-name']")).size() == 0) {
 	    	login.Log4j.info("Series removed from the visual");
 	    	
 	    } else {
@@ -4031,7 +4048,7 @@ public void selected_frequency_should_be_displayed_in_the_series() throws Throwa
 	public void click_on_currency_dropdown() throws Throwable {
 		try {
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='table']/*/*[2]/*[6]//*[contains(@class,'icon--context-menu-arrow')]", 30)
+					"//*[@class='table']/*/*[2]/*[7]//*[contains(@class,'icon--context-menu-arrow')]", 30)
 					.click();
 		} catch (NoSuchElementException e) {
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -4189,6 +4206,7 @@ public void the_selected_functions_should_be_applied_to_the_series() throws Thro
 }
 @And("^Select an invalid function$")
 public void select_an_invalid_function() throws Throwable {
+	CommonFunctionality.wait(1000);
 	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='YTD']", 30).click();
 	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='sum']", 30).click();
 	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='1']", 30).click();
@@ -4581,11 +4599,11 @@ public void the_function_should_be_applied_for_the_series() throws Throwable {
 }
 @Then("^The edit series popup should be opened with \"([^\"]*)\" tab$")
 public void the_edit_series_popup_should_be_opened_with_tab(String arg1) throws Throwable {
-   	CommonFunctionality.wait(2000);
+   	CommonFunctionality.wait(3000);
 	if(login.driver.findElement(By.xpath("//*[@class='sidebar-panel--tab sidebar-panel--tab__active']/*[2]/*[1]")).getText().contains(arg1)) {
-		login.Log4j.info("The edit series popup is opened with "+ arg1 + "tab");
+		login.Log4j.info("The edit series popup is opened with "+ arg1 + " tab");
 	} else {
-		Assert.fail("The edit series popup is not opened with "+ arg1 + "tab");
+		Assert.fail("The edit series popup is not opened with "+ arg1 + " tab");
 	}
 }
 @Then("^The content should be removed$")

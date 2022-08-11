@@ -41,6 +41,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_07:Verify visual title field
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Check the box and enter the title name as "New commentary"
     Then The commentary should update the "title" name to "New commentary"
 
@@ -48,6 +49,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_08:Verify text color
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Choose text color is blue
     Then The commentary should update the "title" text color as blue
 
@@ -55,6 +57,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_09:Verify highlight color
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Choose highlight color is Orange
     Then The commentary should update the "title" highlight color as Orange
 
@@ -62,6 +65,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_10:Verify 'font size'
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Choose "20" from the drop-down for the font size
     Then The commentary should update the "title" font as "20"
 
@@ -69,6 +73,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_11:Verify title in bold style
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Click on Bold icon for "title"
     Then The visual "title" should be in bold style
 
@@ -76,6 +81,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_12:Verify title in Italic style
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Click on Italic under style
     Then The visual "title" should be "italic"
 
@@ -83,6 +89,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_13:Verify title as underlined
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Click on Underline icon for "title"
     Then The visual "title" should be "underline"
 
@@ -247,7 +254,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_36:Verify border by default
     And Create Commentary visual
-      And Click on "Visual" option on visual header
+    And Click on "Visual" option on visual header
     And Check for Border
     Then By default "Border" should be disabled
 
@@ -405,7 +412,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_59:Verify 'Table' drop down
     And Create Commentary visual
     And Click on "Table" drop down
-    Then "Table,Table properties,Delete Table,Cell,Row,Column" table options should be available
+    Then "Table,Cell,Row,Column,Table properties,Delete Table" table options should be available
 
   @Commentary
   Scenario: TC_Commentary_60:Table - Verify insert table
@@ -419,7 +426,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     Then The "Table properties" popup should be displayed
 
@@ -428,7 +435,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "width" for table "50px"
     Then The table "width" should be displayed as "50px"
@@ -438,7 +445,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "height" for table "50px"
     Then The table "height" should be displayed as "50px"
@@ -448,7 +455,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "cell spacing" for table "30"
     Then The table "cell spacing" should be displayed as "30"
@@ -458,7 +465,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "cell padding" for table "40"
     Then The table "cell padding" should be displayed as "40"
@@ -468,7 +475,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Check Caption for table
     Then Caption should be added to the table
@@ -478,7 +485,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Uncheck caption for table
     Then Caption shoud be removed
@@ -488,7 +495,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Click on Cancel
     Then The table properties popup should be closed
@@ -498,7 +505,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Delete table"
     Then The table should be deleted from the visual
 
@@ -507,7 +514,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Cell properties"
     Then The Cell properties popup should be displayed
@@ -518,7 +525,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Select cells to merge
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Merge cells"
     Then The selected cells should be merged
@@ -529,10 +536,10 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Select cells to merge
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Merge cells"
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Split cell"
     Then The cell should be split the cell
@@ -543,7 +550,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Insert row before"
     Then The row should be insertd before the selected table
@@ -554,7 +561,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Insert row after"
     Then The row should be insertd after selected the table
@@ -565,7 +572,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Delete row"
     Then The selected row should be deleted
@@ -576,7 +583,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Enter text in a cell
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Row properties"
     Then "Row Properties" should be displayed
@@ -591,7 +598,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Cut row"
     Then The selected row should be cut
@@ -602,10 +609,10 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Copy row"
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Paste row before"
     Then The row should be insertd before the selected table
@@ -616,10 +623,10 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Copy row"
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Paste row before"
     Then The row should be insertd after selected the table
@@ -630,7 +637,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify column count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Column"
     And Select "Insert column before"
     Then The column should be inserted before selected column
@@ -641,7 +648,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify column count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Column"
     And Select "Insert column after"
     Then The column should be inserted after selected column
@@ -652,7 +659,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify column count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Column"
     And Select "Delete column"
     Then The column should be deleted

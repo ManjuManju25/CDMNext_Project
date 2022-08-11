@@ -23,9 +23,10 @@ public class RecentDownloads {
 		sname = sname.replaceAll(":", "");
 		System.out.println(sname);
 		login.driver.switchTo().activeElement();
-		login.driver.findElement(By.xpath(
-				"//button[@class='sphere-modal-control button insight-download__modal-button button button__download-btn']"))
-				.click();
+		//login.driver.findElement(By.xpath(
+			//	"//span[@class='download-button--text drop-down-button--label']"))
+				//.click();
+		login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button insight-download__modal-button button button__download-btn']")).click();
 		click_on_history_download_button1(sname);
 
 	}

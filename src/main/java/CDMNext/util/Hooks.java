@@ -34,9 +34,9 @@ public class Hooks {
 		// CommonFunctionality.wait(1000);
 		URL url = new URL(login.CONFIG.getProperty("testsiteURL"));
 		login.driver.get(url.getProtocol() + "://" + url.getHost() + "/Untitled-insight/myseries");
-		CloseHelpBubble();
+		//CloseHelpBubble();
 		Handle_BrowserNotification_popup();
-		CloseAnnouncementPopUp();
+		//CloseAnnouncementPopUp();
 		unhandled_popup();
 	}
 

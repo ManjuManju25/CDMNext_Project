@@ -26,19 +26,19 @@ public class Attachments {
 	@And("^Click on Insert Attachments$")
 	public void click_on_Insert_Attachments() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Attachments_icon", 20).click();
-		try {
-			Boolean AttachmentTitle = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Visual_Title_Name"))).isDisplayed();
+		/*try {
+			Boolean AttachmentTitle = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("VisualTitle"))).isDisplayed();
 			if (AttachmentTitle == true) {
 				login.Log4j.info("Attachments visual is created");
 			}
 		} catch (Exception e) {
 			CommonFunctionality.getElementByProperty(login.driver, "Attachments_icon", 20).click();
-		}
+		}*/
 	}
 
 	@Then("^Attachments should be inserted$")
 	public void attachments_should_be_inserted() throws Throwable {
-		String AttachmentTitle = CommonFunctionality.getElementByProperty(login.driver,"Visual_Title_Name",8).getText();
+		String AttachmentTitle = CommonFunctionality.getElementByProperty(login.driver,"VisualTitle",8).getText();
 		if (AttachmentTitle.contains("Attachments")) {
 			login.Log4j.info("Attachments visual is created");
 		} else {
@@ -593,7 +593,7 @@ public class Attachments {
 	@Then("^Attachments should be deleted$")
 	public void attachments_should_be_deleted() throws Throwable {
 
-		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Visual_Title_Name"))).size() == 0) {
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("VisualTitle"))).size() == 0) {
 			login.Log4j.info("Attachments visual is deleted");
 		} else {
 			Assert.fail("Attachments visual is not deleted");
@@ -604,7 +604,7 @@ public class Attachments {
 	@Then("^Attachments visual should be created in the same view tab$")
 	public void attachments_visual_should_be_created_in_the_same_view_tab() throws Throwable {
 		CommonFunctionality.wait(2000);
-		List<WebElement> AttachmentsTitle = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Visual_Title_Name")));
+		List<WebElement> AttachmentsTitle = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("VisualTitle")));
 		for (int i = 0; i < AttachmentsTitle.size(); i++) {
 			if (AttachmentsTitle.get(i).getText().contains("Attachments")) {
 				login.Log4j.info("Attachments visual is created");

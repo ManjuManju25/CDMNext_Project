@@ -17,7 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
+//import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.Color;
@@ -53,6 +53,7 @@ public class PieVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Select different frequency series \"([^\"]*)\" and click on \"([^\"]*)\" icon$")
 	public void select_different_frequency_series_and_click_on_icon(String arg1, String arg2) throws Throwable {
+	
 		// CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
 		CommonFunctionality.webDriverwait_keyvalue("Series_new");
@@ -447,8 +448,9 @@ public class PieVisual {
 
 	@And("^Create a Pie visual$")
 	public void create_a_Pie_visual() throws Throwable {
-		EmptyView.click_on_View_tab();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Pie']", 4).click();
+		//EmptyView.click_on_View_tab();
+		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
+		CommonFunctionality.getElementByProperty(login.driver, "PieIcon", 4).click();
 		CommonFunctionality.wait(500);
 	}
 
@@ -469,6 +471,7 @@ public class PieVisual {
 		Select select = new Select(
 				CommonFunctionality.getElementByXpath(login.driver, "//select[@name='currency']", 4));
 		Select select1 = new Select(CommonFunctionality.getElementByXpath(login.driver, "//select[@name='unit']", 4));
+		
 		// select currency
 		if (arg1.equalsIgnoreCase("US Dolllars")) {
 			select.selectByValue("USD");
@@ -1655,7 +1658,7 @@ public class PieVisual {
 
 	@Then("^\"([^\"]*)\" should be checked by default$")
 	public void should_be_checked_by_default(String arg1) throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(1500);
 		if (arg1.equalsIgnoreCase("Show tooltips")) {
 			boolean show_tooltip_checkbox = login.driver
 					.findElement(By.xpath("//*[@class='chart-tooltip-config']/*[1]/*[3]//*[@type='checkbox']"))
@@ -1682,7 +1685,7 @@ public class PieVisual {
 			}
 		} else if (arg1.equalsIgnoreCase("Show legend")) {
 			boolean show_legend_checkbox = login.driver
-					.findElement(By.xpath("//*[@class='chart-legend-config']/*[1]/*[3]/*[1]//input[@type='checkbox']"))
+					.findElement(By.xpath("//*[contains(@class,'legend-config')]/*[1]/*[3]/*[1]//input[@type='checkbox']"))
 					.isSelected();
 			if (show_legend_checkbox == true) {
 				login.Log4j.info(arg1 + " is checked by default");
@@ -2396,21 +2399,7 @@ public class PieVisual {
 
 	@Then("^The new insight should be opened and added visual should be available in My visual$")
 	public void the_new_insight_should_be_opened_and_added_visual_should_be_available_in_My_visual() throws Throwable {
-		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
-		login.driver.switchTo().window(tabs2.get(1));
-		CommonFunctionality.getElementByXpath(login.driver, "//a[@title='View 1']", 10).click();
-
-		String ActualText = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 15)
-				.getText();
-		if (ActualText.equals(Visual_Title_txt)) {
-			login.Log4j.info("Pie visual is created in new insiaght");
-		} else {
-			Assert.fail("Pie visual is not created in new insight");
-		}
-
-		CommonFunctionality.DeleteVisual();
-		login.driver.close();
-		login.driver.switchTo().window(tabs2.get(0));
+		createdVisualInNewTab(Visual_Title_txt);
 	}
 
 	@Then("^Pie visual and related series should be downloaded in excel$")
@@ -2469,7 +2458,7 @@ public class PieVisual {
 		if (login.driver
 				.findElement(By.xpath(
 						"//*[@class='modal-window insight-download modal-window__active']//*[@data-tab='visual']"))
-				.getAttribute("class").contains("active")) {
+				.getText().contains("Pie")) {
 			login.Log4j.info("Verification is pass");
 		} else {
 			Assert.fail("Download popup not displayed with pie tab selection");
@@ -2567,5 +2556,22 @@ public class PieVisual {
 			
 			new Actions(login.driver).moveToElement(list2.get(i)).pause(500).click().build().perform();
 		}
+	}
+	static void createdVisualInNewTab(String ExpectedText) throws Exception {
+		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
+		login.driver.switchTo().window(tabs2.get(1));
+		CommonFunctionality.getElementByXpath(login.driver, "//a[@title='View 1']", 10).click();
+
+		String ActualText = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 15)
+				.getText();
+		if (ActualText.equals(ExpectedText)) {
+			login.Log4j.info(ExpectedText +" visual is created in new insiaght");
+		} else {
+			Assert.fail(ExpectedText + " visual is not created in new insight");
+		}
+
+		CommonFunctionality.DeleteVisual();
+		login.driver.close();
+		login.driver.switchTo().window(tabs2.get(0));
 	}
 }

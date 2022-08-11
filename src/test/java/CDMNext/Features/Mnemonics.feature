@@ -33,36 +33,36 @@ Feature: Mnemonic Search
       | TC_18  | 117868208 | AE.GDPPC.NM.USD-TH-A       |
       | TC_19  | 387137307 | AE.GNDI.NMGR.AED-MN-A      |
       | TC_20  | 278980603 | AE.GNDISAV.GRRT.A          |
-      #| TC_21  | 387137317 | AE.GNDISAV.NMNE.AED-MN-A   |
-      #| TC_22  | 387137287 | AE.GNI.NM.AED-MN-A         |
-      #| TC_23  | 384678537 | AE.GNI.NM.USD-MN-A         |
-      #| TC_24  | 258011203 | AE.IPIOIL.VO.YoY-M         |
-      #| TC_25  | 398245417 | AE.NGBSNGAS.VO.BN-A        |
-      #| TC_26  | 398245377 | AE.NGBSOIL.VO.TH-A         |
-      #| TC_27  | 398245397 | AE.NGCSUMEXNGAS.VO.MN-A    |
-      #| TC_28  | 118117208 | AE.NGCSUMEXOIL.RT.A        |
-      #| TC_29  | 118117708 | AE.NGCSUMEXOIL.RT-AFRI.A   |
-      #| TC_30  | 118117808 | AE.NGCSUMEXOIL.RT-APAC.A   |
-      #| TC_31  | 118117308 | AE.NGCSUMEXOIL.RT-NOAM.A   |
-      #| TC_32  | 398245367 | AE.NGCSUMEXOIL.VO.TH-A     |
-      #| TC_33  | 247032403 | AE.NGELCSUMDOM.VO.A        |
-      #| TC_34  | 285163404 | AE.NGELSUPG.VO.A           |
-      #| TC_35  | 398245387 | AE.NGSUPIMNGAS.VO.MN-A     |
-      #| TC_36  |  45305203 | AE.NGSUPPNGAS.VO.FT3-MN-A  |
-      #| TC_37  | 118119308 | AE.NGSUPPNGAS.VO.M3-MN-A   |
-      #| TC_38  | 245304803 | AE.NGSUPPOIL.VO.BBL-TH-A   |
-      #| TC_39  | 398245357 | AE.NGSUPPOIL.VO.T-TH-A     |
-      #| TC_40  | 387137297 | AE.NNI.NM.AED-MN-A         |
-      #| TC_41  | 400807907 | AL.GDP.NM.ALL-MN-A         |
-      #| TC_42  | 368921927 | AL.GDP.NM.ALL-MN-Q         |
-      #| TC_43  | 400807927 | AL.GDP.NM.EUR-BN-A         |
-      #| TC_44  | 368922597 | AL.GDP.NM.SA-ALL-MN-Q      |
-      #| TC_45  | 371376337 | AL.GDP.NM.SA-USD-MN-Q      |
-      #| TC_46  | 384163507 | AL.GDP.NM.SA-YOY-Q         |
-      #| TC_47  | 400807917 | AL.GDP.NM.USD-BN-A         |
-      #| TC_48  | 375314307 | AL.GDP.NM.USD-MN-A         |
-      #| TC_49  | 384161107 | AL.GDP.NM.YOY-A            |
-      #| TC_50  | 396023137 | AL.GDP.RL.ALL-MN-A         |
+      | TC_21  | 387137317 | AE.GNDISAV.NMNE.AED-MN-A   |
+      | TC_22  | 387137287 | AE.GNI.NM.AED-MN-A         |
+      | TC_23  | 384678537 | AE.GNI.NM.USD-MN-A         |
+      | TC_24  | 258011203 | AE.IPIOIL.VO.YoY-M         |
+      | TC_25  | 398245417 | AE.NGBSNGAS.VO.BN-A        |
+      | TC_26  | 398245377 | AE.NGBSOIL.VO.TH-A         |
+      | TC_27  | 398245397 | AE.NGCSUMEXNGAS.VO.MN-A    |
+      | TC_28  | 118117208 | AE.NGCSUMEXOIL.RT.A        |
+      | TC_29  | 118117708 | AE.NGCSUMEXOIL.RT-AFRI.A   |
+      | TC_30  | 118117808 | AE.NGCSUMEXOIL.RT-APAC.A   |
+      | TC_31  | 118117308 | AE.NGCSUMEXOIL.RT-NOAM.A   |
+      | TC_32  | 398245367 | AE.NGCSUMEXOIL.VO.TH-A     |
+      | TC_33  | 247032403 | AE.NGELCSUMDOM.VO.A        |
+      | TC_34  | 285163404 | AE.NGELSUPG.VO.A           |
+      | TC_35  | 398245387 | AE.NGSUPIMNGAS.VO.MN-A     |
+      | TC_36  |  45305203 | AE.NGSUPPNGAS.VO.FT3-MN-A  |
+      | TC_37  | 118119308 | AE.NGSUPPNGAS.VO.M3-MN-A   |
+      | TC_38  | 245304803 | AE.NGSUPPOIL.VO.BBL-TH-A   |
+      | TC_39  | 398245357 | AE.NGSUPPOIL.VO.T-TH-A     |
+      | TC_40  | 387137297 | AE.NNI.NM.AED-MN-A         |
+      | TC_41  | 400807907 | AL.GDP.NM.ALL-MN-A         |
+      | TC_42  | 368921927 | AL.GDP.NM.ALL-MN-Q         |
+      | TC_43  | 400807927 | AL.GDP.NM.EUR-BN-A         |
+      | TC_44  | 368922597 | AL.GDP.NM.SA-ALL-MN-Q      |
+      | TC_45  | 371376337 | AL.GDP.NM.SA-USD-MN-Q      |
+      | TC_46  | 384163507 | AL.GDP.NM.SA-YOY-Q         |
+      | TC_47  | 400807917 | AL.GDP.NM.USD-BN-A         |
+      | TC_48  | 375314307 | AL.GDP.NM.USD-MN-A         |
+      | TC_49  | 384161107 | AL.GDP.NM.YOY-A            |
+      | TC_50  | 396023137 | AL.GDP.RL.ALL-MN-A         |
       #| TC_51  | 368922227 | AL.GDP.RL.ALL-MN-Q         |
       #| TC_52  | 368922447 | AL.GDP.RL.SA-ALL-MN-Q      |
       #| TC_53  | 396021957 | AL.GDP.RL.SA-USD-MN-Q      |

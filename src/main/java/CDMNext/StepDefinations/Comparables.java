@@ -27,6 +27,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
@@ -221,9 +222,7 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Clicking \"([^\"]*)\" option from Table$")
 	public void clicking_option_from_Table(String arg1) throws Throwable {
-		new Actions(login.driver)
-				.moveToElement(
-						CommonFunctionality.getElementByClassName(login.driver, "add-to-data-selection--title", 4))
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByClassName(login.driver, "add-to-data-selection--title", 4))
 				.pause(500).build().perform();
 		WebElement icon = CommonFunctionality.getElementByClassName(login.driver, "" + arg1 + "", 4);
 		new Actions(login.driver).moveToElement(icon).pause(1000).click().build().perform();
@@ -374,9 +373,9 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Hovor on to i icon without click$")
 	public void hovor_on_to_i_icon_without_click() throws Throwable {
-		WebElement first_series = login.driver.findElement(By.xpath("//*[contains(@class,'country-information')]"));
+		WebElement first_series = login.driver.findElement(By.xpath("//*[@class='tree-node full-expanded open']/following::*[@class='series-item--country country-information'][1]"));
 		new Actions(login.driver).moveToElement(first_series).pause(2000).build().perform();
-		hovered_series_name = CommonFunctionality.getElementByClassName(login.driver, "series-item--name", 4).getText();
+		hovered_series_name = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tree-node full-expanded open']/following::*[@class='series-item--name'][1]", 4).getText();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -404,11 +403,13 @@ public class Comparables {
 		new Actions(login.driver).moveToElement(series).pause(2000).build().perform();
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@And("^Hovor on to series name$")
 	public void hovor_on_to_series_name() throws Throwable {
-		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",8);
+		CommonFunctionality.wait(300);
+		WebElement series = CommonFunctionality.getElementByProperty(login.driver, "Series_item_name",8);
 		ExpectedSName = series.getText();
+		CommonFunctionality.wait(300);
 		series.click();
 		/*new Actions(login.driver).moveToElement(series).pause(2000).build().perform();
 		String text = CommonFunctionality
@@ -513,22 +514,23 @@ public class Comparables {
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='comparables']//div[@class='tree-node'])[1]//*[@class='toggle']", 4))
 				.pause(1000).click().build().perform();
+		CommonFunctionality.wait(500);
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='comparables']//div[@class='tree-node'])[1]//*[@class='toggle']", 4))
 				.pause(1000).click().build().perform();
-		try {
+		/*try {
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='tree-node'])[1]/*[1]", 4))
 				.pause(1000).click().build().perform();
 		}catch(Exception e1) {
 			
-		}
+		}*/
 	}
 
 	@SuppressWarnings("deprecation")
 	@And("^Hovor on the series from table$")
 	public void hovor_on_the_series_from_table() throws Throwable {
-		WebElement hovor = CommonFunctionality.getElementBycssSelector(login.driver, ".series-item--name", 4);
+		WebElement hovor = CommonFunctionality.getElementByProperty(login.driver, "Series_item_name", 4);
 		new Actions(login.driver).moveToElement(hovor).pause(1000).build().perform();
 	}
 
@@ -864,6 +866,7 @@ public class Comparables {
 					.pause(3000).click().build().perform();
 		} else {
 			//new Actions(login.driver).pause(500).moveToElement(country).build().perform();
+			country.click();
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
 							"//*[contains(@class,'series-list-item__selected')]//*[@title='" + arg1 + "']", 4).click();
@@ -1322,6 +1325,7 @@ public class Comparables {
 		int actual = Integer.parseInt(selected_series_id);
 		assertEquals(actual, series_id);
 		login.Log4j.info("The related results are shown in comparables tab and it has been verified successfully");*/
+		CommonFunctionality.wait(500);
 		WebElement series = CommonFunctionality.getElementByProperty(login.driver, "Series_item_name", 4);
 		series.click();
 		String id = CommonFunctionality
@@ -1430,23 +1434,31 @@ public class Comparables {
 //		String actual = CommonFunctionality
 //				.getElementByXpath(login.driver, "//*[contains(text(),'More:')]/following-sibling::*", 4).getText();
 //		
-		CommonFunctionality.wait(1000);
-		String actual = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='series-item--status-icons']", 4).getText();
-		if (arg1.equalsIgnoreCase("Single")) {
-			if (actual.toLowerCase().contains(filter_text)) {
+		CommonFunctionality.wait(2000);
+		List<WebElement> actual = login.driver.findElements(By.xpath("//*[@class='tree-node full-expanded open']/following::*[@class='series-item--status-icons']"));
+	if(actual.size() > 0) {
+		for(int i = 0 ; i < actual.size(); i++) {
+			String str = actual.get(i).getText();
+		
+			if (arg1.equalsIgnoreCase("Single")) {
+					
+			if (str.toLowerCase().contains(filter_text)) {
 				login.Log4j.info("The Applied " + arg1 + " filter is displaying under Comparables");
 			} else {
 				sa.fail("Verification Failed");
 			}
 		}
 		if (arg1.equalsIgnoreCase("Multiple")) {
-			if (actual.toLowerCase().contains(filter_text) && actual.toLowerCase().contains("k")) {
+			if (str.toLowerCase().contains(filter_text) && str.toLowerCase().contains("k")) {
 				login.Log4j.info("The Applied " + arg1 + " filter is displaying under Comparables");
 			} else {
 				sa.fail("Verification Failed");
 			}
 		}
+		}
+	}else {
+		Assert.fail("webelements size is zero");
+	}
 	}
 
 	@Then("^The series present inside the Table should gets selected$")

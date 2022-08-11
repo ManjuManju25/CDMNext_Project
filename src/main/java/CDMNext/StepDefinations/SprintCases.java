@@ -46,18 +46,18 @@ public class SprintCases {
 				.click();
 		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.getElementByXpath(login.driver, "//*[@class='database-node tree-node full-expanded open last-open-node']/*[3]/following::*[1]/*[1]/*[1]", 300)
 				.click();
 		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.getElementByProperty(login.driver, "Expand3rdLevel", 300)
 				.click();
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'full-expanded open last-open-node')]/*[3]/*[1]/*[1]", 300).click();
+		CommonFunctionality.getElementByProperty(login.driver,
+				"Expand4thLevel", 300).click();
 		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'open last-open-node')]/*[3]/*[1]/*[1]", 300)
+				.getElementByProperty(login.driver, "Expand5thLevel", 300)
 				.click();
 		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 100);
 		new Actions(login.driver).pause(500).contextClick(sname).perform();
@@ -114,6 +114,7 @@ public class SprintCases {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
+		CommonFunctionality.wait(7000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 20).click();
 		Thread.sleep(2000);
 		minimize = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@title='Minimize']")))
@@ -435,11 +436,15 @@ public class SprintCases {
 				Assert.fail("FAIL");
 			}
 		}
+		try {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//*[@title='Close']")).click();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-		CommonFunctionality.Views_list();
+		}catch(Exception e) {
+			
+		}
+		//CommonFunctionality.Views_list();
 	}
 
 	@Then("^Clicking on the color box will open the color picker$")
