@@ -41,6 +41,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_07:Verify visual title field
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Check the box and enter the title name as "New commentary"
     Then The commentary should update the "title" name to "New commentary"
 
@@ -48,6 +49,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_08:Verify text color
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Choose text color is blue
     Then The commentary should update the "title" text color as blue
 
@@ -55,6 +57,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_09:Verify highlight color
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Choose highlight color is Orange
     Then The commentary should update the "title" highlight color as Orange
 
@@ -62,6 +65,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_10:Verify 'font size'
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Choose "20" from the drop-down for the font size
     Then The commentary should update the "title" font as "20"
 
@@ -69,6 +73,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_11:Verify title in bold style
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Click on Bold icon for "title"
     Then The visual "title" should be in bold style
 
@@ -76,6 +81,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_12:Verify title in Italic style
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Click on Italic under style
     Then The visual "title" should be "italic"
 
@@ -83,6 +89,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_13:Verify title as underlined
     And Create Commentary visual
     And Click on visual title
+    And Check the box for the title name
     And Click on Underline icon for "title"
     Then The visual "title" should be "underline"
 
@@ -223,9 +230,8 @@ Feature: Verifying Commentary Visual functionality
 
   @Commentary
   Scenario: TC_Commentary_33:Verify backgroud color for visual
-    And Create Commentary visual
-    And Click on "Visual" option on visual header
     And Enter some data to description field
+    And Click on "Visual" option on visual header
     And Check for Background
     And Select color for visual background
     Then Selected color should be applied to the visual background
@@ -315,7 +321,7 @@ Feature: Verifying Commentary Visual functionality
     And Paste within the insight
     Then "Data pasted from clipboard" message should be displayed
 
-   @Commentary
+  @Commentary
   Scenario: TC_Commentary_46:Validate copied visual by pasting to word
     And Add some text in the description field
     And Click on Copy icon
@@ -406,7 +412,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_59:Verify 'Table' drop down
     And Create Commentary visual
     And Click on "Table" drop down
-    Then "Table,Table properties,Delete Table,Cell,Row,Column" table options should be available
+    Then "Table,Cell,Row,Column,Table properties,Delete Table" table options should be available
 
   @Commentary
   Scenario: TC_Commentary_60:Table - Verify insert table
@@ -420,7 +426,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     Then The "Table properties" popup should be displayed
 
@@ -429,7 +435,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "width" for table "50px"
     Then The table "width" should be displayed as "50px"
@@ -439,7 +445,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "height" for table "50px"
     Then The table "height" should be displayed as "50px"
@@ -449,7 +455,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "cell spacing" for table "30"
     Then The table "cell spacing" should be displayed as "30"
@@ -459,7 +465,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Set "cell padding" for table "40"
     Then The table "cell padding" should be displayed as "40"
@@ -469,7 +475,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Check Caption for table
     Then Caption should be added to the table
@@ -479,7 +485,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Uncheck caption for table
     Then Caption shoud be removed
@@ -489,7 +495,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Table properties"
     And Click on Cancel
     Then The table properties popup should be closed
@@ -499,7 +505,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Delete table"
     Then The table should be deleted from the visual
 
@@ -508,7 +514,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Click on "Table" drop down
     And Create table
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Cell properties"
     Then The Cell properties popup should be displayed
@@ -519,7 +525,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Select cells to merge
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Merge cells"
     Then The selected cells should be merged
@@ -530,10 +536,10 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Select cells to merge
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Merge cells"
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Cell"
     And Click on "Split cell"
     Then The cell should be split the cell
@@ -544,7 +550,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Insert row before"
     Then The row should be insertd before the selected table
@@ -555,7 +561,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Insert row after"
     Then The row should be insertd after selected the table
@@ -566,7 +572,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Delete row"
     Then The selected row should be deleted
@@ -577,7 +583,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Enter text in a cell
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Row properties"
     Then "Row Properties" should be displayed
@@ -592,7 +598,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Cut row"
     Then The selected row should be cut
@@ -603,10 +609,10 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Copy row"
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Paste row before"
     Then The row should be insertd before the selected table
@@ -617,10 +623,10 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify row count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Copy row"
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Row"
     And Select "Paste row before"
     Then The row should be insertd after selected the table
@@ -631,7 +637,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify column count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Column"
     And Select "Insert column before"
     Then The column should be inserted before selected column
@@ -642,7 +648,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify column count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Column"
     And Select "Insert column after"
     Then The column should be inserted after selected column
@@ -653,7 +659,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Table" drop down
     And Create table
     And Verify column count
-    And Click on "Table" drop down
+    And Click on "Table" drop down from More dropdown
     And Click on "Column"
     And Select "Delete column"
     Then The column should be deleted
@@ -732,6 +738,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_93:Right click - Verify Copy commentary
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Copy commentary"
     Then Commentary should be copied to clipboard
@@ -740,6 +748,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_94:Right click - Validate copied commentary
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Copy commentary"
     And Paste in insight
@@ -749,6 +759,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_95:Right click - Verify Cut commentary
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Cut commentary"
     Then Commentary should be cut
@@ -757,6 +769,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_96:Right click - Validate Cut commentary
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Cut commentary"
     And Paste in insight
@@ -766,6 +780,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_97:Right click - Verify Delete commentary
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Delete commentary"
     Then Commentary should be deleted
@@ -774,6 +790,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_98:Right click - Verify chart under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Chart"
     Then "Chart" visual should be created in the same view tab
@@ -782,6 +800,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_99:Right click - Verify map under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Map"
     Then "Map" visual should be created in the same view tab
@@ -790,6 +810,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_100:Right click - Verify table under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Table"
     Then "Table" visual should be created in the same view tab
@@ -798,6 +820,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_101:Right click - Verify pie under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Pie"
     Then "Pie" visual should be created in the same view tab
@@ -806,6 +830,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_102:Right click - Verify Heat map under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Heat map"
     Then "Heat map" visual should be created in the same view tab
@@ -814,6 +840,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_103:Right click - Verify Histogram under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Histogram"
     Then "Histogram" visual should be created in the same view tab
@@ -822,6 +850,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_104:Right click - Verify Attachments under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Attachments"
     Then "Attachments" visual should be created in the same view tab
@@ -830,6 +860,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_105:Right click - Verify Commentary under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Commentary"
     Then The commentary visual should be created in the same view tab
@@ -838,6 +870,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_106:Right click - Verify image under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Image"
     Then "Image" visual should be created in the same view tab
@@ -846,6 +880,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_107:Right click - Verify Filter under insert visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Insert visual as "Filter"
     Then "Filter" visual should be created in the same view tab
@@ -854,6 +890,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_108:Right click - Verify Paste visual
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Copy commentary"
     And Again Right click on visual header
@@ -864,6 +902,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_109:Right click - Verify 'Clear contents'
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Clear contents"
     Then All the contents should be removed from the visual
@@ -872,6 +912,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_110:Right click - Verify Download subdropdown
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose "Download"
     Then "Commentary , View" options should be displayed
@@ -880,6 +922,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_111:Right click - Download - Verify commentary
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Download as "Commentary"
     Then Download popup should be appeared with "Commentary" tab selection
@@ -888,6 +932,8 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_112:Right click - Download - Verify View
     And Add some text in the description field
     And Get the text from the description field
+    And Click on visual title
+    And Check the box for the title name
     And Right click on visual header
     And Choose Download as "View"
     Then Download popup should be appeared with "Views" tab selection

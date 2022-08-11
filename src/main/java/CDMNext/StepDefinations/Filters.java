@@ -24,7 +24,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class Filters {
+public class Filters extends CommonFunctionality{
 
 	public static String var;
 	// public String fltrStatus;
@@ -61,20 +61,18 @@ public class Filters {
 	String Morefilter;
 	WebElement SeriesTab;
 	static String Alldb_db;
-	 Actions action = new Actions(login.driver);
-	 JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	 WebDriverWait wait = new WebDriverWait(login.driver, 2000);
+	
 	 
 	 @Given("^User enters \"([^\"]*)\"$")
 		public void user_enters(String arg1) throws Throwable {
 		searchData = arg1;
-//		login.driver.navigate().refresh();
+		//login.driver.navigate().refresh();
 	//	CommonFunctionality.ExpandRight();
 //		CommonFunctionality.TopMethod();
-//		CommonFunctionality.ResetMethod();
+		//ResetMethod();
 		login.Log4j.info("searching with " + searchData);
-		CommonFunctionality.getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
+	getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		
 	}
 
@@ -111,13 +109,13 @@ public class Filters {
 				else if (regionarr.length == 2) {
 					for (String Regionlist : regionarr) {
 						login.Log4j.info(Regionlist);
-						Thread.sleep(2000);
+						CommonFunctionality.wait(2000);
 						if (Regionlist.equals("Japan")) {
 							login.driver.findElement(By.className("filters-search--search-field")).sendKeys(Regionlist);
-							Thread.sleep(2000);
+							CommonFunctionality.wait(2000);
 							login.driver.findElement(By.xpath("//*[@class= 'text-dots' and contains(text(),'" + Regionlist + "')]")).click();
 						} else {
-							Thread.sleep(1000);
+							CommonFunctionality.wait(1000);
 							login.driver.findElement(By.xpath("//*[contains(text(),'" + Regionlist + "')]")).click();
 						}
 					}
@@ -128,12 +126,12 @@ public class Filters {
 			}
 			break;
 		case "Frequency":
-			Thread.sleep(1500);
+			CommonFunctionality.wait(1500);
 			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
 				frequencyarr = var.split(";");
 				for (String list : frequencyarr) {
 					login.Log4j.info("clicking on " + list);
-					Thread.sleep(2000);
+					CommonFunctionality.wait(2000);
 					login.driver.findElement(By.xpath("//*[@class='text-dots' and contains(text(),'" + list + "')]")).click();
 					
 				}
@@ -143,18 +141,18 @@ public class Filters {
 			List<WebElement> unitFilterList;
 			for (String list : unitarr) {
 				login.Log4j.info("clicking on " + list);
-				Thread.sleep(2000);
+				CommonFunctionality.wait(2000);
 				login.driver.findElement(By.className("filters-search--search-field")).sendKeys(list);
 				try {
 				  unitFilterList = login.driver.findElements(By.xpath("//*[contains(@class,'units-filter-container')]//*[@class='text-dots']"));
 				  for(int i = 0 ; i < unitFilterList.size(); i++ ) {
-					Thread.sleep(500);
+					  CommonFunctionality.wait(500);
 					element = unitFilterList.get(i);
 					String SearchTxt = element.getText();
 					login.Log4j.info(list);
 					login.Log4j.info(SearchTxt);
 					if(list.equalsIgnoreCase(SearchTxt) == true) {
-						Thread.sleep(500);
+						CommonFunctionality.wait(500);
 						element.click();
 						login.driver.findElement(By.className("filters-search--search-field")).clear();
 						break;
@@ -170,24 +168,24 @@ public class Filters {
 			Datearr = var.split(";");
 			for (String list : Datearr) {
 				login.Log4j.info("clicking on " + list);
-				Thread.sleep(1000);
+				CommonFunctionality.wait(1000);
 				login.driver.findElement(By.xpath("//*[contains(text(),'" + list + "')]")).click();
 				
 			}
 			break;
 		case "Status":
-			Thread.sleep(2000);
+			CommonFunctionality.wait(2000);
 			login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
 			login.Log4j.info("clicking on " + arg2);
-		    CommonFunctionality.getElementByXpath(login.driver,"//*[@class='dropdown-search-filter-wrapper']//*[contains(text(),'" + arg2 + "')]",10).click();
+		    getElementByXpath(login.driver,"//*[@class='dropdown-search-filter-wrapper']//*[contains(text(),'" + arg2 + "')]",10).click();
 			break;
 		case "Source":
 			Sourcearr = var.split(";");
-			Thread.sleep(1000);
+			CommonFunctionality.wait(1000);
 			login.driver.findElement(By.xpath("//*[@class='dropdown--title']//*[contains(text(),'" + arg1 + "')]")).click();
 			for (String list : Sourcearr) {
 				login.Log4j.info("clicking on " + list);
-				Thread.sleep(1000);
+				CommonFunctionality.wait(1000);
 				login.driver.findElement(By.xpath("//*[@class='dropdown-search-filter-wrapper--body']//*[contains(text(),'" + list + "')]")).click();
 				
 			}
@@ -196,9 +194,9 @@ public class Filters {
 			regionarr = var.split(";");
 			for (String Regionlist : regionarr) {
 				login.Log4j.info(Regionlist);
-				Thread.sleep(2000);
+				CommonFunctionality.wait(2000);
 				login.driver.findElement(By.className("filters-search--search-field")).sendKeys(Regionlist);
-				Thread.sleep(1000);
+				CommonFunctionality.wait(1000);
 				login.driver.findElement(By.xpath("//span[contains(text(),'" + Regionlist + "')]")).click();
 				login.driver.findElement(By.className("filters-search--search-field")).clear();
 			}
@@ -328,7 +326,7 @@ public class Filters {
 	@And("^User has clicked on \"([^\"]*)\"$")
 	public void user_has_clicked_on(String arg1) throws Throwable {
 		login.Log4j.info("Clicking on " + arg1);
-		Thread.sleep(1000);
+		wait(1000);
 		try {
 			login.driver.findElement(By.xpath("//*[@class='watchlist-control--footer']//*[contains(text(),'" + arg1 + "')]")).click();
 		} catch(Exception e) {
@@ -339,8 +337,8 @@ public class Filters {
 	@And("^User selects \"([^\"]*)\"$")
 	public void user_selects(String arg1) throws Throwable {
 		advancedfltr = arg1;
-		CommonFunctionality.wait(1000);
-		List<WebElement> ele = login.driver.findElements(By.xpath("//*[@class='more-filter-content--left']//*[contains(@class,'section__other')]//*[@class='filter-item']//span[@class='text-dots']"));
+		wait(1000);
+		List<WebElement> ele = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("MoreFilter_OtherOptions")));
 		for(int i = 0; i < ele.size(); i++) {
 			String fltrTxt = ele.get(i).getText();
 			if(fltrTxt.contains(arg1)) {
@@ -354,7 +352,7 @@ public class Filters {
 		Alldb_db = arg2;
 		String[] database = arg2.split(",");
 		for (String dblist : database) {
-			Thread.sleep(2000);
+			CommonFunctionality.wait(2000);
 			login.Log4j.info("Selecting " + dblist);
 			List<WebElement> checkbox = login.driver.findElements(By.xpath("//*[@class='more-filter-content']/div[2]/div[1]//span[@class='text-dots' and contains(text(),'" + dblist + "')]"));
 			
@@ -375,22 +373,24 @@ public class Filters {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		//ul_element = null;
 		try {
-			CommonFunctionality.wait(2000);
+			wait(5000);
 
 			List<WebElement> sName = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
+			List<WebElement> checkbox = login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//div[@class='series-list-item--checkbox-wrapper']//span"));
 			if (sName.size() > 0) {
 				for (int i = 0; i < sName.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(sName.size());
-					Thread.sleep(1000);
 					j = i + 1;
-					checkbox = login.driver.findElement(By.xpath("//*[@class='search-series-list']/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']//span"));
+					CommonFunctionality.wait(300);
+					
 					// action.moveToElement(checkbox).click().build().perform();
-					// Thread.sleep(1000);
-					action.moveToElement(sName.get(i)).build().perform();
-					Thread.sleep(700);
-					List<WebElement> tr_list = login.driver.findElements(By.xpath("//div[@class='tooltip tooltip__visible']//table//tr"));
+					action.pause(700).moveToElement(sName.get(i)).build().perform();
+				//	CommonFunctionality.wait(3000);
+				/*List<WebElement> tr_list = login.driver.findElements(By.xpath("//div[@class='tooltip tooltip__visible']//table//tr"));
 					for(int m = 0; m < tr_list.size() ; m++) {
+						tr_list.get(i).getText();
+						login.Log4j.info("Title information is \n" + tr_list.get(i).getText());
 						List<WebElement> td_list = tr_list.get(i).findElements(By.tagName("td"));
 						int list_size = td_list.size();
 						for(int n = 0 ; n < list_size ; n++) {
@@ -398,13 +398,13 @@ public class Filters {
 							
 							login.Log4j.info("Title information is \n" + str);
 						}
-					}
-					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+					}*/
+					tooltip = getElementByProperty(login.driver, "tooltip_text",8);
 					text = tooltip.getText();
 					 login.Log4j.info("Title information is \n" + text);
 					// Until the element is not visible keep scrolling
-					//CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", element);
-					lines = text.split("\n");
+					//CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
+					/*lines = text.split("\n");
 					login.Log4j.info("filter is " + filters);
 					for (String Tooltip : lines) {
 						// String str=null;
@@ -419,7 +419,7 @@ public class Filters {
 						} else if (Tooltip.contains("Region")) {
 							region = Tooltip;
 						}
-					}
+					}*/
 
 					if (filters.isEmpty()) {
 						sid = searchData.split(";");
@@ -429,10 +429,10 @@ public class Filters {
 							login.Log4j.info(advancedfltr);
 							if (advancedfltr != null) {
 								if (advancedfltr.equals("Subscribed series only")
-										&& seriesId.contains(sid[0]) == true) {
-									if (!checkbox.isSelected()) {
-										Thread.sleep(500);
-										checkbox.click();
+										&& text.contains(sid[0]) == true) {
+									if (!checkbox.get(i).isSelected()) {
+										CommonFunctionality.wait(500);
+										checkbox.get(i).click();
 										login.Log4j.info("Element is clickable");
 									} else {
 										Assert.fail("Element is not clickable");
@@ -456,14 +456,14 @@ public class Filters {
 								} else {
 
 									if (advancedfltr.equals("Name only")
-											&& seriesName.toUpperCase().contains(sid[0].toUpperCase()) == true) {
-										login.Log4j.info(sid[0] + " is exists in  : " + seriesName);
+											&& text.toUpperCase().contains(sid[0].toUpperCase()) == true) {
+										login.Log4j.info(sid[0] + " is exists in  : " + text);
 									} else {
-										Assert.fail(sid[0] + " doesn't exists in  : " + seriesName);
+										Assert.fail(sid[0] + " doesn't exists in  : " + text);
 
 									}
 								}
-							} else if (seriesId.contains(sid[0]) == true) {
+							} else if (text.contains(sid[0]) == true) {
 								login.Log4j.info(sid[0] + " is exists in " + "\n" + seriesId);
 							} else {
 								if (validation(text,sid[0]) == true || text.contains("Gross Domestic Product") == true) {
@@ -472,12 +472,12 @@ public class Filters {
 									SearchTest.sspValidation(j);
 									if (showdata.toUpperCase().contains(sid[0].toUpperCase()) == true) {
 										login.Log4j.info(sid[0] + " is exists in the" + "\n" + showdata);
-										Thread.sleep(1000);
+										CommonFunctionality.wait(1000);
 										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 												.click();
 
 									} else {
-										Thread.sleep(1000);
+										CommonFunctionality.wait(1000);
 										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 												.click();
 										Assert.fail(sid[0] + " doesn't exists in the" + "\n" + showdata);
@@ -487,9 +487,10 @@ public class Filters {
 
 							break;
 						case 2:
-							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true) {
+							/*if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " is exists in the" + "\n" + seriesId);
-							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+							} else */
+								if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " is exists in the" + "\n" + text);
 							} else {
@@ -501,12 +502,13 @@ public class Filters {
 							break;
 
 						case 3:
-							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+							/*if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
 									|| seriesId.contains(sid[2]) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " is exists in the" + "\n"
 										+ seriesId);
 
-							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+							} else*/
+								if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true) {
 								login.Log4j.info(
@@ -517,11 +519,12 @@ public class Filters {
 							}
 							break;
 						case 4:
-							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+							/*if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
 									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3]
 										+ " exists in the" + "\n" + seriesId);
-							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+							} else */
+								if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true) {
@@ -533,12 +536,13 @@ public class Filters {
 							}
 							break;
 						case 5:
-							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+						/*	if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
 									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true
 									|| seriesId.contains(sid[4]) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
 										+ sid[4] + " exists in the" + "\n" + seriesId);
-							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+							} else */
+								if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
@@ -551,12 +555,13 @@ public class Filters {
 							}
 							break;
 						case 6:
-							if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
+						/*	if (seriesId.contains(sid[0]) == true || seriesId.contains(sid[1]) == true
 									|| seriesId.contains(sid[2]) == true || seriesId.contains(sid[3]) == true
 									|| seriesId.contains(sid[4]) == true || seriesId.contains(sid[5]) == true) {
 								login.Log4j.info(sid[0] + " OR " + sid[1] + " OR " + sid[2] + " OR " + sid[3] + " OR "
 										+ sid[4] + " exists in the" + "\n" + seriesId);
-							} else if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
+							} else*/
+								if (text.toUpperCase().contains(sid[0].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[1].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[2].toUpperCase()) == true
 									|| text.toUpperCase().contains(sid[3].toUpperCase()) == true
@@ -582,17 +587,17 @@ public class Filters {
 								login.Log4j.info(Sourcearr[0]);
 								// String source = lines[10];
 								// login.Log4j.info(source);
-								if ((Sourcearr.length == 1) && text
-										.contains("Organisation for Economic Co-operation and Development") == true) {
+								if((Sourcearr.length == 1) && Sourcearr[0].contains(",") == true) {
+									String[] source = Sourcearr[0].split(", ");
+									if(text.contains(source[0]) && text.contains(source[1])  == true) {
+										login.Log4j.info(source[0] + " AND " + source[1] + " is exists in the" + "\n" + text);
+									}
+								} else if ((Sourcearr.length == 1) && text
+										.contains(Sourcearr[0]) == true) {
 									login.Log4j.info(Sourcearr[0]
-											+ " does exists as Organisation for Economic Co-operation and Development in \n"
+											+ " does exists in \n"
 											+ text);
-								}  else if((Sourcearr.length == 1) && text.contains("International Monetary Fund") == true) {
-									login.Log4j.info(Sourcearr[0]
-											+ " does exists as Internationa Monetary Fund in \n"
-											+ text);
-								}
-								else if((Sourcearr.length == 1)
+								} else if((Sourcearr.length == 1)
 										&& text.contains("Федеральная служба государственной статистики") == true) {
 									login.Log4j.info(Sourcearr[0] + " is exists in the" + "\n" + text);
 							    } else if ((Sourcearr.length == 1) && text.contains("AIA Group Limited") == true) {
@@ -674,37 +679,37 @@ public class Filters {
 								String str1 = "Annual";
 								if ((frequencyarr.length == 1)) {
 									if (frequencyarr[0].equals("Semiannually")) {
-										if (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
-												|| frequency.toUpperCase().contains(str.toUpperCase()) == true) {
+										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| text.toUpperCase().contains(str.toUpperCase()) == true) {
 											login.Log4j.info(frequencyarr[0] + " OR " + str + " is exists in the" + "\n"
-													+ frequency);
+													+ text);
 										}
 									} else {
-										if (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
-												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true) {
+										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| text.toUpperCase().contains(str1.toUpperCase()) == true) {
 											login.Log4j.info(frequencyarr[0] + " OR " + str1 + " is exists in the" + "\n"
-													+ frequency);
+													+ text);
 										}
 									}
 
 								} else if ((frequencyarr.length == 2)
-										&& (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
-												|| frequency.toUpperCase().contains(frequencyarr[1].toUpperCase()) == true
-												|| frequency.toUpperCase().contains(str1.toUpperCase()) == true)) {
+										&& (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| text.toUpperCase().contains(frequencyarr[1].toUpperCase()) == true
+												|| text.toUpperCase().contains(str1.toUpperCase()) == true)) {
 									login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1] + " is exists in the" + "\n"
-											+ frequency);
+											+ text);
 								} else if ((frequencyarr.length == 2)
-										&& (frequency.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
-												|| frequency.toUpperCase().contains(frequencyarr[1].toUpperCase()) == true
-												|| frequency.toUpperCase().contains(str.toUpperCase()) == true)) {
+										&& (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| text.toUpperCase().contains(frequencyarr[1].toUpperCase()) == true
+												|| text.toUpperCase().contains(str.toUpperCase()) == true)) {
 									login.Log4j.info(frequencyarr[0] + " OR " + frequencyarr[1] + str + " is exists in the"
-											+ "\n" + frequency);
+											+ "\n" + text);
 								} else {
 									if (frequencyarr.length == 1) {
-										Assert.fail(frequencyarr[0] + " doesn't exist in " + frequency);
+										Assert.fail(frequencyarr[0] + " doesn't exist in " + text);
 									} else {
 										Assert.fail(frequencyarr[0] + " OR " +frequencyarr[1] + " doesn't exist in "
-												+ frequency);
+												+ text);
 									}
 
 								}
@@ -712,16 +717,16 @@ public class Filters {
 
 							if (filters.get(k).equals("Status")) {
 								login.Log4j.info(advancedfltr);
-								Thread.sleep(2000);
+								CommonFunctionality.wait(2000);
 								try {
 									sid = searchData.split(";");
 									if (advancedfltr != null) {
 
 										if (advancedfltr.equals("Subscribed series only")) {
-											Thread.sleep(1000);
-											if (checkbox.isDisplayed()) {
-												Thread.sleep(1000);
-												action.moveToElement(checkbox).click().build()
+											CommonFunctionality.wait(1000);
+											if (checkbox.get(i).isDisplayed()) {
+												CommonFunctionality.wait(1000);
+												action.moveToElement(checkbox.get(i)).click().build()
 														.perform();
 												login.Log4j.info("Subscribed series are clickable");
 											} else {
@@ -747,13 +752,13 @@ public class Filters {
 								}
 
 								if (var.equals("Active")) {
-									Thread.sleep(2000);
+									CommonFunctionality.wait(2000);
 //									WebElement list = login.driver
 //											.findElement(By.xpath("//li[" + j + "]//div[@class='series-item--name']"));
 									action.moveToElement(sName.get(i)).click().build().perform();
 									if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Active")))
 											.isDisplayed()) {
-										Thread.sleep(3000);
+										CommonFunctionality.wait(3000);
 										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 												.click();
 										login.Log4j.info(var + " series exists");
@@ -765,11 +770,11 @@ public class Filters {
 									login.Log4j.info(var);
 									//Thread.sleep(2000);
 									//element.click();
-									CommonFunctionality.getElementByXpath(login.driver,"//*[" + j + "]//div[@class='series-item--name']",5).click();
+									getElementByXpath(login.driver,"//*[" + j + "]//div[@class='series-item--name']",5).click();
 									if (login.driver.findElement(By.xpath(
 											"//div[@class='series-changes-time-line--status series-changes-time-line--status__rebased']"))
 											.isDisplayed()) {
-										Thread.sleep(2000);
+										CommonFunctionality.wait(2000);
 										login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction")))
 												.click();
 										login.Log4j.info(var + " series exists");
@@ -781,35 +786,37 @@ public class Filters {
 							if (filters.get(k).equals("Unit")) {
 								login.Log4j.info("filter is : " + filters.get(k));
 								if (unitarr.length == 1) {
-										if (unit.contains(unitarr[0]) == true) {
-											login.Log4j.info(unitarr[0] + " is exists in the" + "\n" + unit);
+										if (text.contains(unitarr[0]) == true) {
+											login.Log4j.info(unitarr[0] + " is exists in the" + "\n" + text);
 										} else {
-											Assert.fail(unitarr[0] + " doesn't exist in " + unit);
+											Assert.fail(unitarr[0] + " doesn't exist in " + text);
 
 										}
 
 								} else if (unitarr.length == 2) {
-									if (unit.contains(unitarr[0]) == true || unit.contains(unitarr[1]) == true) {
+									if (text.contains(unitarr[0]) == true || text.contains(unitarr[1]) == true) {
 										login.Log4j.info(
-												unitarr[0] + " OR " + unitarr[1] + " is exists in the" + "\n" + unit);
+												unitarr[0] + " OR " + unitarr[1] + " is exists in the" + "\n" + text);
 									} else {
-										Assert.fail(unitarr[0] + " OR " + unitarr[1] + " doesn't exist in " + unit);
+										Assert.fail(unitarr[0] + " OR " + unitarr[1] + " doesn't exist in " + text);
 									}
 								}
 							}
 							if (filters.get(k).equals("Region")) {
 								login.Log4j.info("filter  is : " + filters.get(k));
 
-								if (region.contains(regionarr[0]) == true || region.contains(regionarr[1]) == true) {
+								if (text.contains(regionarr[0]) == true || text.contains(regionarr[1]) == true) {
 									login.Log4j.info(
-											regionarr[0] + " OR " + regionarr[1] + " is exists in the" + "\n" + region);
+											regionarr[0] + " OR " + regionarr[1] + " is exists in the" + "\n" + text);
 								} else {
-									Assert.fail(regionarr[0] + " OR " + regionarr[1] + " doesn't exist in " + region);
+									Assert.fail(regionarr[0] + " OR " + regionarr[1] + " doesn't exist in " + text);
 								}
 							}
 						}
 					}
 					// Until the element is not visible keep scrolling
+					WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
+					action.pause(50).moveToElement(comparables).build().perform();
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 				}
 				
@@ -828,22 +835,22 @@ public class Filters {
 	public void user_get_the_topics_as(String arg1) throws Throwable {
 		topic = arg1;
 		login.Log4j.info("topic is " + topic);
-		Thread.sleep(4000);
+		CommonFunctionality.wait(4000);
 		login.Log4j.info("Clicking on Databases");
 		WebElement db = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab")));
 		db.click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 20).click();
+		getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 20).click();
 
 	}
 
 	@Then("^User verify the results$")
 	public void user_verify_the_results() throws Throwable {
-		Thread.sleep(4000);
+		CommonFunctionality.wait(4000);
 		WebElement ele;
 		try {
 			if (topic.equals("Foreign Trade") || topic.equals("Monetary") || topic.equalsIgnoreCase("Albania") || topic.equalsIgnoreCase("Aggregate: World")) {
 				ele = login.driver.findElement(By.xpath(
-						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[1]/*[2]/*[2]/*[1]/*[1]"));
+						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[1]/*[2]/*[2]/*[1]/*[2]"));
 			} 
 			else {
 				ele = login.driver.findElement(By.xpath(
@@ -872,7 +879,7 @@ public class Filters {
 	public void user_should_get_the_search_results() throws Throwable {
 		login.Log4j.info(var);
 		if (login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).isDisplayed()) {
-			Thread.sleep(2000);
+			CommonFunctionality.wait(2000);
 			login.driver.findElement(By.xpath("//tr[@title='" + var + "']")).click();
 			login.Log4j.info(var + " is exists");
 		} else {
@@ -884,13 +891,13 @@ public class Filters {
 	@Then("^User verifies Filter search results$")
 	public void user_verifies_Filter_search_results() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		Thread.sleep(5000);
+		CommonFunctionality.wait(5000);
 		SeriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series")));
 		SeriesTab.click();
 
 		ul_element = null;
 		try {
-			Thread.sleep(5000);
+			CommonFunctionality.wait(5000);
 			//ul_element = wait.until(
 					//ExpectedConditions.visibilityOfElementLocated(By.cssSelector(login.LOCATORS.getProperty("UL"))));
 			//AssertJUnit.assertNotNull(ul_element);
@@ -902,14 +909,14 @@ public class Filters {
 
 					login.Log4j.info(i);
 					login.Log4j.info(sName.size());
-					Thread.sleep(500);
+					CommonFunctionality.wait(500);
 					int j = i + 1;
 					// checkbox = login.driver.findElement(By.xpath("//li[" + j +
 					// "]//div[@class='series-list-item--checkbox-wrapper']"));
 					// CommonFunctionality.action.moveToElement(checkbox).click().build().perform();
 					// Thread.sleep(1000);
 					action.moveToElement(sName.get(i)).build().perform();
-					Thread.sleep(700);
+					CommonFunctionality.wait(700);
 					tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 					text = tooltip.getText();
 					// login.Log4j.info(text);
@@ -920,7 +927,7 @@ public class Filters {
 						String[] keyword1 = searchData.split(" AND ");
 						for (String result : keyword1) {
 							login.Log4j.info(result);
-							Thread.sleep(1000);
+							CommonFunctionality.wait(1000);
 							if (text.toUpperCase().contains(result.toUpperCase()) == true) {
 								login.Log4j.info(result + " exists in " + text);
 							} else {
@@ -1049,11 +1056,11 @@ public class Filters {
 		case 1:
 			if (showdata.toUpperCase().contains(strarr[0].toUpperCase()) == true) {
 				login.Log4j.info(strarr[0] + " is exists in the" + "\n" + showdata);
-				Thread.sleep(1000);
+				CommonFunctionality.wait(1000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 				status = true;
 			} else {
-				Thread.sleep(1000);
+				CommonFunctionality.wait(1000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 				status = false;
 			}
@@ -1064,11 +1071,11 @@ public class Filters {
 			if (showdata.toUpperCase().contains(strarr[0].toUpperCase()) == true
 					|| showdata.toUpperCase().contains(strarr[1].toUpperCase()) == true) {
 				login.Log4j.info(strarr[0] + " OR" + strarr[1] + " is exists in the" + "\n" + showdata);
-				Thread.sleep(1000);
+				CommonFunctionality.wait(1000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 				status = true;
 			} else {
-				Thread.sleep(1000);
+				CommonFunctionality.wait(1000);
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("closeAction"))).click();
 				status = false;
 			}
@@ -1092,20 +1099,20 @@ public class Filters {
 	@And("^Select \"([^\"]*)\" from \"([^\"]*)\" filter$")
 	public void select_from_filter(String arg1, String arg2) throws Throwable {
 		Morefilter = arg1;
-		Thread.sleep(2000);
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).clear();
 		// CommonFunctionality.TopMethod();
-		CommonFunctionality.ResetMethod();
-		Thread.sleep(2000);
+		ResetMethod();
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//*[contains(text(),'" + arg2 + "')]")).click();
 		login.Log4j.info("Clicking on " + arg2);
 		WebElement SeriesCount = null;
 		try {
-			Thread.sleep(3000);
+			CommonFunctionality.wait(3000);
 			SeriesCount = login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']//td[2]"));
 			String filter_count = SeriesCount.getText();
 			login.Log4j.info(arg1 + " filter count is: " + filter_count);
-			Thread.sleep(1000);
+			CommonFunctionality.wait(1000);
 			login.driver.findElement(By.xpath("//tr[@title='" + arg1 + "']")).click();
 			String replace = null;
 			if (filter_count.contains(",")) {
@@ -1128,7 +1135,7 @@ public class Filters {
 
 	@Then("^User verify the series count$")
 	public void user_verify_the_series_count() throws Throwable {
-		Thread.sleep(5000);
+		CommonFunctionality.wait(5000);
 		DatabasesTab.AfterMethod();
 		login.Log4j.info("After apply the filter count is: " + DatabasesTab.afterFilter);
 		if (finalCount == DatabasesTab.afterFilter) {
@@ -1138,9 +1145,9 @@ public class Filters {
 		}
 
 		if (Morefilter.equalsIgnoreCase("With suggestions for rebased/discontinued series")) {
-			Thread.sleep(3000);
-			CommonFunctionality.ResetMethod();
-			Thread.sleep(3000);
+			CommonFunctionality.wait(3000);
+			ResetMethod();
+			CommonFunctionality.wait(3000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_left"))).click();
 		}
 	}
@@ -1148,25 +1155,25 @@ public class Filters {
 	@Then("^User check for the scubscribed series$")
 	public void user_check_for_the_scubscribed_series() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		 Thread.sleep(1000);
+		CommonFunctionality.wait(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		ul_element = null;
 		try {
-			 Thread.sleep(3000);
+			CommonFunctionality.wait(3000);
 //			ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 //			AssertJUnit.assertNotNull(ul_element);
-			List<WebElement> li_All =  login.driver.findElements(By.xpath("//div[@class='search-series-list']/*//*[@class='series-item--name']"));
+			List<WebElement> li_All =  login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
 			login.Log4j.info("List size is :" + li_All.size());
 
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
-					Thread.sleep(2000);
+					CommonFunctionality.wait(2000);
 					int j = i + 1;
 					checkbox = login.driver
-							.findElement(By.xpath("//div[@class='search-series-list']/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+							.findElement(By.xpath("(//div[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper'])[" + j + "]"));
 					//CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", checkbox);
 					if (checkbox.isDisplayed()) {
-						Thread.sleep(1000);
+						CommonFunctionality.wait(1000);
 						action.moveToElement(checkbox).click().build().perform();
 						login.Log4j.info("Subscribed series are clickable");
 					} else {
@@ -1181,9 +1188,9 @@ public class Filters {
 	}
 	@Then("^Should get list of series$")
 	public void should_get_list_of_series() throws Throwable {
-		Thread.sleep(1000);
+		CommonFunctionality.wait(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		Thread.sleep(3000);
+		CommonFunctionality.wait(3000);
 		List<WebElement> ListOfPages = login.driver
 				.findElements(By.xpath("//*[@class='search-series-pagination-pages-wrapper']//span"));
 		for (int m = 0; m < ListOfPages.size(); m++) {

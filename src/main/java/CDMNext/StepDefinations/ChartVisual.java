@@ -57,6 +57,7 @@ public class ChartVisual {
 	WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	SoftAssert sa = new SoftAssert();
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
+	
 	public int m;
 	public static String first_series_title;
 	public static String chart_visual_title;
@@ -663,9 +664,9 @@ public class ChartVisual {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[text()='Decimal separator']//following::*[contains(text(),\"" + data_format_separator + "\")][1]",
 				4).click();
+		Histogram.click_on_Number_format_dropdown();
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[text()='Grouping separator']//following::*[contains(text(),\""
-						+ data_format_grouping_separator + "\")][1]", 4)
+				.getElementByXpath(login.driver, "//*[text()='Grouping separator']//following::*[contains(text(),\"" + data_format_grouping_separator + "\")][1]", 4)
 				.click();
 	}
 
@@ -913,6 +914,7 @@ public class ChartVisual {
 				"//*[@class='popover--wrapper']//*[contains(text(),'" + arg1 + "')]/ancestor::div[2]", 4);
 		if (section.getAttribute("class").contains("collapsed")) {
 			section.click();
+			login.Log4j.info(arg1 + " section  is expanded");
 		} else {
 			System.out.println("Already expanded");
 		}
@@ -921,7 +923,7 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Click on chart option from hover$")
 	public void click_on_chart_option_from_hover() throws Throwable {
-		CommonFunctionality.ExpandLeft();
+		//CommonFunctionality.ExpandLeft();
 		CommonFunctionality.wait(2000);
 		/*List<WebElement> total_count = login.driver
 				.findElements(By.xpath("//*[contains(@class,'search-series-list')]/*"));
@@ -1229,7 +1231,7 @@ public class ChartVisual {
 
 	@And("^Click on the \"([^\"]*)\" Container$")
 	public void click_on_the_Container(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Tooltips:") || arg1.equalsIgnoreCase("Data labels:")
+		if (arg1.equalsIgnoreCase("Tooltips:") || arg1.equalsIgnoreCase("Data labels")
 				|| arg1.equalsIgnoreCase("Legend:") || arg1.equalsIgnoreCase("Copyright:")) {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg1 + "')]//following::*[@class='base-config--row-settings'][1]", 4)
@@ -1801,7 +1803,7 @@ public class ChartVisual {
 			copyright_checkbox = login.driver
 					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
 		} else if (arg1.equalsIgnoreCase("Show tooltips") || arg1.equalsIgnoreCase("Display for all series at once")
-				|| arg1.equalsIgnoreCase("Data labels:") || arg1.equalsIgnoreCase("Legend:")
+				|| arg1.equalsIgnoreCase("Data labels") || arg1.equalsIgnoreCase("Legend:")
 				|| arg1.equalsIgnoreCase("Copyright:") || arg1.equalsIgnoreCase("Slider")) {
 			boolean checkbox = login.driver
 					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]")).isSelected();
@@ -2794,10 +2796,17 @@ public class ChartVisual {
 	@And("^Select data label \"([^\"]*)\" from the list$")
 	public void select_data_label_from_the_list(String arg1) throws Throwable {
 		CommonFunctionality.wait(1000);
+		if(arg1.equals("Outline")) {
+			new Actions(login.driver)
+			.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@name='data_regions_outline']//following::div[1]/*", 4))
+			.pause(500).click().build().perform();
+		} else {
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@name='data_labels_" + arg1 + "']//following::div[1]", 4))
 				.pause(500).click().build().perform();
+		}
 	}
 
 	@And("^Observe the value order \"([^\"]*)\" selecting \"([^\"]*)\" for \"([^\"]*)\"$")
@@ -5225,6 +5234,7 @@ public class ChartVisual {
 		if (arg1.equalsIgnoreCase("Font size")) {
 			List<WebElement> font_size = login.driver.findElements(
 					By.cssSelector(".highcharts-data-labels.highcharts-series-0.highcharts-line-series > g > text"));
+			
 			for (int i = 1; i <= font_size.size(); i++) {
 				String fontsize = login.driver
 						.findElement(By.cssSelector(
@@ -5234,9 +5244,10 @@ public class ChartVisual {
 				Integer expected = Integer.valueOf(font_size_text[0]);
 				Integer actual = Integer.valueOf(data_labels_font_size);
 				assertEquals(actual, expected);
+				login.Log4j.info("The Selected " + arg1
+						+ " has been updated in chart visual timepoints and it's verified successfully");
 			}
-			login.Log4j.info("The Selected " + arg1
-					+ " has been updated in chart visual timepoints and it's verified successfully");
+			
 		}
 		if (arg1.equalsIgnoreCase("Font Style")) {
 			List<WebElement> font_style = login.driver.findElements(
@@ -5418,7 +5429,7 @@ public class ChartVisual {
 		}
 		if (arg1.equalsIgnoreCase("Title") && values_axis_checkboxes == true) {
 			String title = CommonFunctionality
-					.getElementBycssSelector(login.driver, "div.highcharts-legend-title > span", 4).getText();
+					.getElementByXpath(login.driver, "//*[@class='highcharts-label highcharts-legend-title']/*", 4).getText();
 			assertEquals(title, legend_title);
 			login.Log4j.info("The selected " + arg1 + " is reflecting in chart visual");
 			CommonFunctionality.Views_list();
@@ -5441,8 +5452,8 @@ public class ChartVisual {
 		}
 		if (arg1.equalsIgnoreCase("Font style") && values_axis_checkboxes == true) {
 			cv.clicking_option("Save");
-			WebElement title = CommonFunctionality.getElementBycssSelector(login.driver,
-					"div.highcharts-legend-title > span", 4);
+			WebElement title = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='highcharts-label highcharts-legend-title']/*", 4);
 			String font_bold = title.getCssValue("font-weight");
 			String font_italic = title.getCssValue("font-style");
 			String font_underline = title.getCssValue("text-decoration");

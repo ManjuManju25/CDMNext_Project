@@ -195,16 +195,16 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Check for Filter Border$")
 	public void check_for_Filter_Border() throws Throwable {
-		getElementByXpath(login.driver, "//div[contains(text(),'Filter border')]", 30).click();
+		getElementByProperty(login.driver, "ExpandFilterBorder", 30).click();
 	}
 
 	@Then("^The Filter border should be changed as per the selection$")
 	public void the_Filter_border_should_be_changed_as_per_the_selection() throws Throwable {
-		commentary.UnselectVisual();
-		String border_color = getElementByXpath(login.driver, "//*[@class='filter-template--multi-select']", 20)
+		//commentary.UnselectVisual();
+		String border_color = getElementByProperty(login.driver, "BorderColor", 20)
 				.getCssValue("border-color");
-		commentary.ColorValidation(border_color);
-		DeleteVisual();
+		Commentary.ColorValidation(border_color,Commentary.ActualColor);
+		//DeleteVisual();
 	}
 
 	@Then("^Popup should be opened with editing options$")
@@ -245,7 +245,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Click inside filter visual$")
 	public void click_inside_filter_visual() throws Throwable {
-		getElementByXpath(login.driver, "//*[contains(text(),'All countries')]", 20).click();
+		getElementByProperty(login.driver, "AllCountries", 20).click();
 	}
 
 	@Then("^Countries name which are included in the other all visual should be listed and displayed$")
@@ -274,17 +274,21 @@ public class CountryFilterVisual extends CommonFunctionality {
 		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-		List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
+		List<WebElement> li_All =  login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_All.size());
 		List<WebElement> checkBox = login.driver
-				.findElements(By.xpath("//div[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
+				.findElements(By.xpath("//div[@class='series-representation--list']/*//div[@class='series-list-item--checkbox-wrapper']"));
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
+		getElementByXpath(login.driver, "(//div[@class='series-representation--list']//*[@class='add-to-data-selection--icon'])[2]", 10)
 				.click();
+		try {
 		getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
+		}catch(Exception e) {
+			
+		}
 		getElementByXpath(login.driver, "//*[@class='icon--filter']", 20).click();
 	}
 
@@ -309,12 +313,16 @@ public class CountryFilterVisual extends CommonFunctionality {
 						login.driver.findElement(By.xpath("//*[@data-action='world']//*[@class='icon--map-world']")))
 				.click().perform();
 		getElementByXpath(login.driver, "//*[contains(text(),'Add from My Series')]", 20).click();
-		wait(500);
+		wait(1000);
 		WebElement ele =getElementByXpath(login.driver,
 				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
-		new Actions(login.driver).moveToElement(ele).pause(1000).click().build().perform();
+		new Actions(login.driver).pause(1000).moveToElement(ele).click().build().perform();
+		try {
 		getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
+		}catch(Exception e) {
+			
+		}
 
 	}
 
@@ -380,16 +388,20 @@ public class CountryFilterVisual extends CommonFunctionality {
 		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 		//List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-		List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
+		List<WebElement> li_All =  login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		List<WebElement> checkBox = login.driver
-				.findElements(By.xpath("//*[@class='search-series-list']/*//div[@class='series-list-item--checkbox-wrapper']"));
+				.findElements(By.xpath("//div[@class='series-representation--list']/*//div[@class='series-list-item--checkbox-wrapper']"));
 		for (int i = 0; i < li_All.size(); i++) {
 			new Actions(login.driver).moveToElement(checkBox.get(i)).click().build().perform();
 		}
-		getElementByXpath(login.driver, "//*[@class='search-series-list']/*[2]//*[@class='add-to-data-selection--icon']", 10)
+		getElementByXpath(login.driver, "(//div[@class='series-representation--list']//*[@class='add-to-data-selection--icon'])[2]", 10)
 				.click();
+		try {
 		getElementByXpath(login.driver, "//*[contains(text(),'Keep different frequencies')]", 8)
 				.click();
+		}catch(Exception e) {
+			
+		}
 		create_filter_visual();
 		click_inside_filter_visual();
 		List<WebElement> list_of_countries = login.driver

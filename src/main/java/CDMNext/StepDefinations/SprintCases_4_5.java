@@ -38,8 +38,7 @@ import cucumber.api.java.en.*;
 import test.ant.AntSystemPropertySet;
 
 public class SprintCases_4_5 {
-
-	public String NotificationText;
+	/*public String NotificationText;
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
 	Actions action = new Actions(login.driver);
 	WebDriverWait wait = new WebDriverWait(login.driver, 30);
@@ -53,176 +52,9 @@ public class SprintCases_4_5 {
 	public static String format;
 	public String a;
 
-	// TC_4.5_18478_01
-	@And("^Turn 'OFF' Notification under profile dropdow$")
-	public void turn_OFF_Notification_under_profile_dropdow() throws Throwable {
-
-		Thread.sleep(4000);
-
-		String NotiSwitch = login.driver
-				.findElement(By.xpath("(//span[@class='bootstrap-switch-handle-on bootstrap-switch-primary'])[2]"))
-				.getText();
-
-		System.out.println("NotiSwitch:" + NotiSwitch);
-
-		login.driver.findElement(By.xpath("(//span[@class='bootstrap-switch-handle-on bootstrap-switch-primary'])[2]"))
-				.click();
-		Thread.sleep(2000);
-
-	}
-
-	// TC_4.5_18478_01
-	@And("^click on Watchlist$")
-	public void click_on_Watchlist() throws Throwable {
-
-		Thread.sleep(1000);
-
-		login.driver.findElement(By.xpath("(//*[contains(text(),'Watchlist')])[1]")).click();
-
-	}
-
-	// TC_4.5_18478_01
-	@Then("^verify Enable all button should be turn 'OFF' and notifcaiton should not displayed$")
-	public void verify_Enable_all_button_should_be_turn_OFF_and_notifcaiton_should_not_displayed() throws Throwable {
-
-		Thread.sleep(1000);
-
-		if (login.driver.findElements(By.xpath(
-				"//*[@class='bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-animate bootstrap-switch-on']"))
-				.size() == 0) {
-			System.out.println("Enable All button should be turn OFF");
-		}
-
-		else {
-			Assert.fail("Test case failed");
-		}
-
-	}
-
-	// TC_4.5_17675_02
-	@And("^Turn 'ON' Notification under profile dropdow$")
-	public void turn_ON_Notification_under_profile_dropdow() throws Throwable {
-
-		Thread.sleep(2000);
-
-		String NotiSwitch = login.driver
-				.findElement(By.xpath("(//*[@class='bootstrap-switch-handle-off bootstrap-switch-default'])[2]"))
-				.getText();
-
-		System.out.println("NotiSwitch:" + NotiSwitch);
-
-		login.driver.findElement(By.xpath("(//*[@class='bootstrap-switch-handle-off bootstrap-switch-default'])[2]"))
-				.click();
-		Thread.sleep(2000);
-
-	}
-
-	// TC_4.5_17675_02
-	@Then("^verify Enable all button should be turn 'ON' and notifcaiton should not displayed$")
-	public void verify_Enable_all_button_should_be_turn_ON_and_notifcaiton_should_not_displayed() throws Throwable {
-
-		Thread.sleep(1000);
-
-		if (login.driver.findElements(By.xpath(
-				"//*[@class='bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-mini bootstrap-switch-animate bootstrap-switch-off']"))
-				.size() == 0) {
-			System.out.println("Enable All button should be turn ON");
-		}
-
-		else {
-			Assert.fail("Test case failed");
-		}
-	}
-
-	// TC_4.5_17675_03
-	@And("^click on turn 'OFF' in enable all button$")
-	public void click_on_turn_OFF_in_enable_all_button() throws Throwable {
-		Thread.sleep(4000);
-		List<WebElement> on=login.driver.findElements(By.xpath("(//*[@class='bootstrap-switch-handle-off bootstrap-switch-default'])[2]"));
-		if (login.driver.findElements(By.xpath("//div[@class='account-popup']//div[@class='bootstrap-switch-container']//span[contains(text(),'ON')]")).size() >=1) {
-			for(WebElement On:on)
-			{
-				try {
-			On.click();
-
-		    }catch(Exception e)
-				{
-		    	On.click();
-				}
-			}
-		}
-
-		else {
-			Assert.fail("Test case failed");
-		}
-	}
-
-	// TC_4.5_17675_03
-	@And("^Check Notification 'ON' in the setting under profile dropdown$")
-	public void check_Notification_ON_in_the_setting_under_profile_dropdown() throws Throwable {
-
-		if (login.driver
-				.findElements(By.xpath("(//*[@class='bootstrap-switch-handle-off bootstrap-switch-default'])[2]"))
-				.size() == 1) {
-
-			System.out.println("verifyed");
-
-		}
-	}
-
-	// TC_4.5_17675_03
-	@Then("^verify notification turn 'ON' setting on watchlist should not sync with main notification under profile dropdown$")
-	public void verify_notification_turn_ON_setting_on_watchlist_should_not_sync_with_main_notification_under_profile_dropdown()
-			throws Throwable {
-		System.out.println(
-				"verify notification turn 'ON' setting on watchlist should not sync with main notification under profile dropdown");
-	}
-
+	
 	// TC_18788_01
-	@Given("^Click on notification icon$")
-	public void click_on_notification_icon() throws Throwable {
-		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[@class='user-notifications--icon']")).click();
-	}
-
-	// TC_18788_01
-	@Given("^Click on notification tab$")
-	public void click_on_notification_tab() throws Throwable {
-		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//div[contains(text(),'Notifications')]")).click();
-
-	}
-
-	// TC_18788_01
-	@Given("^Observe the text \"([^\"]*)\" on header of the notifications$")
-	public void observe_the_text_on_header_of_the_notifications(String arg1) throws Throwable {
-		Thread.sleep(1000);
-
-		NotificationText = login.driver
-				.findElement(By.xpath("//div[contains(text(),'Your notifications for the last 30 days')]")).getText();
-
-		System.out.println("NotificationText:" + NotificationText);
-
-		Assert.assertEquals(NotificationText, arg1);
-
-	}
-
-	// TC_18788_01
-	@Then("^\"([^\"]*)\" should be present$")
-	public void should_be_present(String NotificationData) throws Throwable {
-
-		System.out.println("NotificationData:" + NotificationData);
-		System.out.println("NotificationText:" + NotificationText);
-
-		if (NotificationData.equals(NotificationText)) {
-			System.out.println("Your notifications for the last 30 days should be present");
-
-		} else {
-			Assert.fail();
-
-		}
-	}
-
+	
 	// TC_16831_01
 	@Given("^click on frequency dropdown$")
 	public void click_on_frequency_dropdown() throws Throwable {
@@ -266,98 +98,10 @@ public class SprintCases_4_5 {
 	}
 
 	// TC_18782_01
-	@Given("^Create table visual$")
-	public void create_table_visual() throws Throwable {
-		Thread.sleep(3000);
+	
+	
 
-		// click on series tab
-		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
-
-		try {
-			// checked 1st series
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("(//*[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
-
-			// click on + icon Right side panel
-
-			login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-container--add']")).click();
-
-			// click on Table
-
-			login.driver.findElement(By.xpath("(//div[@class='view-components-over--visual-title'])[3]")).click();
-		} catch (org.openqa.selenium.StaleElementReferenceException ex) {
-
-			// checked 1st series
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath("(//*[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
-
-			// click on + icon Right side panel
-
-			login.driver.findElement(By.xpath("//div[@class='insight-page-menu-views-container--add']")).click();
-
-			// click on Table
-
-			login.driver.findElement(By.xpath("(//div[@class='view-components-over--visual-title'])[3]")).click();
-		}
-	}
-
-	// TC_18782_01
-	@Given("^Click on Edit table$")
-	public void click_on_Edit_table() throws Throwable {
-
-		Thread.sleep(2000);
-
-		login.driver.findElement(By.xpath("//button[contains(text(),'Edit Table')]")).click();
-	}
-
-	// TC_18782_01
-	@Given("^Uncheck the Invert and click on Save button$")
-	public void uncheck_the_Invert_and_click_on_Save_button() throws Throwable {
-
-		Thread.sleep(1000);
-
-		login.driver.findElement(By.xpath("//span[contains(text(),'Invert')]")).click();
-		// click on save button
-
-		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
-	}
-
-	// TC_18782_01
-	@Given("^Click on date stamp on header$")
-	public void click_on_date_stamp_on_header() throws Throwable {
-
-		Thread.sleep(1000);
-
-		login.driver.findElement(By.xpath("//span[contains(text(),'1Y')]")).click();
-	}
-
-	// TC_18782_01
-	@Given("^click on Save period button$")
-	public void click_on_Save_period_button() throws Throwable {
-		Thread.sleep(1000);
-
-		login.driver.findElement(By.xpath("//button[contains(text(),'Save period')]")).click();
-	}
-
-	// TC_18782_01
-	@Given("^Refresh the page$")
-	public void refresh_the_page() throws Throwable {
-
-		Thread.sleep(1000);
-		login.driver.navigate().refresh();
-	}
-
-	// TC_18782_01
-	@Then("^sorting should be saved for table visuals$")
-	public void sorting_should_be_saved_for_table_visuals() throws Throwable {
-		Thread.sleep(1000);
-
-		WebElement viewEle = login.driver.findElement(By.xpath("//thead/tr[1]/th[9]"));
-		Thread.sleep(1000);
-		js.executeScript("arguments[0].scrollIntoView(true);", viewEle);
-		System.out.println("======================>15");
-
-	}
+	
 
 	// TC_18868_01
 	@Then("^color of the icon should take the color of the labels in the header$")
@@ -491,34 +235,7 @@ public class SprintCases_4_5 {
 	}
 
 	// TC_18480_01
-	@Given("^Expand data table having more series$")
-	public void expand_data_table_having_more_series() throws Throwable {
-
-		Thread.sleep(1000);
-		login.driver.get("https://stage.ceicdata.com/node/GLOBAL__GLOBAL&&ALL__TP40775__SC55316__TB155383");
-		Thread.sleep(10000);
-		String seriesname = wait
-				.until(ExpectedConditions
-						.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Albania: Balance of Payments')]")))
-				.getText();
-		System.out.println("seriesName:" + seriesname);
-
-	}
-
-	// TC_18480_01
-	@Given("^Scroll down and verify auto loading series$")
-	public void scroll_down_and_verify_auto_loading_series() throws Throwable {
-		Thread.sleep(1000);
-
-		WebElement loadingicon = login.driver.findElement(By.xpath("//*[contains(text(),'loading')]"));
-		// js.executeScript("arguments[0].scrollIntoview(true);",loadingicon);
-		js.executeScript("arguments[0].scrollIntoView(true);", loadingicon);
-		Thread.sleep(2000);
-
-		System.out.println("The series should be auto-loaded when scroll down");
-
-	}
-
+	
 	// TC_18207_01
 	@Given("^click on Datasets tab$")
 	public void click_on_Datasets_tab() throws Throwable {
@@ -1699,67 +1416,9 @@ public class SprintCases_4_5 {
 	}
 
 	// TC_18480_01
-	@Given("^Share any insight to another user$")
-	public void share_any_insight_to_another_user() throws Throwable {
-		Thread.sleep(2000);
-		WebElement signout = login.driver.findElement(By.xpath("//span[contains(text(),'Sign out')]"));
-		js.executeScript("arguments[0].scrollIntoView(true);", signout);
-		Thread.sleep(1000);
-		signout.click();
-           Thread.sleep(2000);
-		// login.driver.findElement(By.xpath("//button[contains(text(),'Delete and sign out')]")).click();
-
-		Thread.sleep(1000);
-		login.driver.findElement(By.name("user_id")).sendKeys("sudh.suresh@gmail.com");
-		login.driver.findElement(By.name("password")).sendKeys("Ceic@123");
-		login.driver.findElement(By.xpath("//button[@class='btn']")).click();
-		Thread.sleep(2000);
-
-		login.driver.findElement(By.xpath("//a[contains(text(),'My insights')]")).click();
-		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Create insight')]")).click();
-		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//button[contains(text(),'Create insight')]")).click();
-
-		// click on cogwel icon
-		login.driver.findElement(By.xpath("//*[@class='insight-context-menu--menu-icon']")).click();
-
-		// click on share
-		login.driver.findElement(By.xpath("//span[contains(text(),'Share')]")).click();
-
-		// invite specfic
-		login.driver.findElement(By.xpath("//*[@class='share-specific-search-user--input form--control']")).click();
-		Thread.sleep(1000);
-		// Enter Email id
-
-		login.driver.findElement(By.xpath("//*[@class='share-specific-search-user--input form--control']"))
-				.sendKeys("venkat.test@gmail.com");
-		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//div[@class='choosable-list']/div")).click();
-
-		// click on save button
-		login.driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
-
-		// confirmation
-		login.driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
-
-	}
-
+	
 	// TC_18480_01
-	@Given("^delete insight$")
-	public void delete_insight() throws Throwable {
-		Thread.sleep(3000);
-
-		// click on cogwel icon
-		login.driver.findElement(By.xpath("//*[@class='insight-context-menu--menu-icon']")).click();
-
-		// click on delete button
-		login.driver.findElement(By.xpath("//span[contains(text(),'Delete')]")).click();
-
-		// delete forever
-		login.driver.findElement(By.xpath("//button[contains(text(),'Delete forever')]")).click();
-
-	}
+	
 
 	// TC_18480_01
 	@Given("^Login to User (\\d+) account and click on notification panel$")
@@ -1812,16 +1471,10 @@ public class SprintCases_4_5 {
 	}
 
 	// TC_18480_01
-	@Given("^Click on 'Customer service team'$")
-	public void click_on_Customer_service_team() throws Throwable {
-		Thread.sleep(2000);
-
-		login.driver.findElement(By.xpath("(//*[contains(text(),'customer service team')])[1]")).click();
-
-	}
+	
 
 	// TC_18480_01
-	@Then("^\"([^\"]*)\" should be loaded in new browser tab$")
+	/*@Then("^\"([^\"]*)\" should be loaded in new browser tab$")
 	public void should_be_loaded_in_new_browser_tab(String arg1) throws Throwable {
 
 		// It will return the parent window name as a String
@@ -1967,7 +1620,7 @@ public class SprintCases_4_5 {
 	}
 
 	// TC_18940_01
-	@Then("^forecast timepoints should be in orange color$")
+	@Then("^forecast timepoints should be in green color$")
 	public void forecast_timepoints_should_be_in_orange_color() throws Throwable {
 
 		Thread.sleep(2000);
@@ -2009,6 +1662,6 @@ public class SprintCases_4_5 {
 		Assert.assertEquals(excepted, actual);
 		login.driver.findElement(By.xpath("//*[@class='movable-modal--close']")).click();
 
-	}
+	}*/
 
 }

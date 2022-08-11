@@ -166,6 +166,7 @@ public class KeyboardShortcuts {
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(10000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
 
@@ -271,7 +272,7 @@ public class KeyboardShortcuts {
 			Thread.sleep(1500);
 			int j = i + 1;
 			WebElement checkbox = login.driver
-					.findElement(By.xpath("//div[@class='search-series-list']/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					.findElement(By.xpath("(//div[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper'])[" + j + "]"));
 			checkbox.click();
 			break;
 		}
@@ -307,22 +308,24 @@ public class KeyboardShortcuts {
 				"//*[text()='Databases']", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Daily_db", 10).click();
 		login.Log4j.info("Clicking on Database level");
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@data-node-model-id='DAILY']//div[3]//div[1]//div[@class='toggle']", 4).click();
+				"//div[@data-node-model-id='DAILY']/following::*[@class='toggle'][1]", 4).click();
+		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@data-node-model-id='DAILY']//div[3]//div[1]//div[3]//div[1]//div[@class='toggle']", 4)
+				.getElementByProperty(login.driver,
+						"Expand3rdLevel", 4)
 				.click();
-		Thread.sleep(1200);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='tree-node open']//div[@class='child-container']//div[1]//div[@class='tree-node']//div[@class='toggle']",
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByProperty(login.driver,
+				"Expand4thLevel",
 				4).click();
 	}
 
 	@Then("^Press left arrow key on KB$")
 	public void press_left_arrow_key_on_KB() throws Throwable {
-		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@data-node-model-id='DAILY']/*[3]/*[1]/*[2]", 10);
+		WebElement ele = CommonFunctionality.getElementByProperty(login.driver,
+				"Deposit_rates", 10);
 		ele.click();
 		actions.sendKeys(ele, Keys.ARROW_LEFT).build().perform();
 
@@ -365,18 +368,18 @@ public class KeyboardShortcuts {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 //		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
-		List<WebElement> li_All = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*//*[@class='series-item--name']"));
+		List<WebElement> li_All = login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			Thread.sleep(800);
 			int j = i + 1;
 			WebElement checkbox = login.driver
-					.findElement(By.xpath("//div[@class='search-series-list']/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
+					.findElement(By.xpath("//*[@class='series-representation--list']/*[1]/*[1]/*[1]/*[1]/*[1]/*[" + j + "]//div[@class='series-list-item--checkbox-wrapper']"));
 			checkbox.click();
 			if (j == 5) {
 				CommonFunctionality.wait(500);
 				WebElement addIcon = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + j + "]//div[@class='add-to-data-selection--icon']"));
+						.findElement(By.xpath("//*[@class='series-representation--list']/*[1]/*[1]/*[1]/*[1]/*[1]/*[" + j + "]//div[@class='add-to-data-selection--icon']"));
 				Thread.sleep(500);
 				addIcon.click();
 				break;
@@ -448,8 +451,8 @@ public class KeyboardShortcuts {
 		//CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 8).sendKeys("5190001");
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='search-series-list']/*//*[contains(@class,'svg-checkbox')]", 30).click();
+		CommonFunctionality.wait(5000);
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-representation--list']/*//*[contains(@class,'svg-checkbox')]", 30).click();
 	}
 
 	@Then("^The visual should be replaced the series with selected series$")

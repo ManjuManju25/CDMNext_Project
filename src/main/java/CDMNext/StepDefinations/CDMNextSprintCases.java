@@ -486,11 +486,12 @@ public class CDMNextSprintCases {
 			}
 		}
 		if (arg1.equalsIgnoreCase("385345667") || arg1.equals("389705827") || arg1.equalsIgnoreCase("32189801")
-				|| arg1.equalsIgnoreCase("253736802")) {
-			List<WebElement> list1 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
+				|| arg1.equalsIgnoreCase("253736802") || arg1.equalsIgnoreCase("16164001")) {
+			List<WebElement> list1 = login.driver.findElements(By.xpath("//*[@class='series-representation--list']//*[@unselectable='on']"));
 			for (int i = 1; i <= list1.size(); i++) {
+				
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
+						.findElement(By.xpath("(//*[@class='series-representation--list']//*[@unselectable='on']//*[@class='series-list-item--checkbox-wrapper']/*)[" + i + "]"));
 				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
 			}
 		}
@@ -1753,7 +1754,7 @@ public class CDMNextSprintCases {
 		new Actions(login.driver).moveToElement(one_series).pause(5000).build().perform();
 		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'search-series-list')]/*[1]//*[@title='More actions']", 4).click();
+				"(//*[@class='series-representation--list']//*[@title='More actions'])[1]", 4).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1770,7 +1771,7 @@ public class CDMNextSprintCases {
 		new Actions(login.driver).moveToElement(one_series).pause(500).build().perform();
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']/*[3]//ul/*[1]//*[@title='More actions']",
+				"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']//following::*[@title='More actions'][1]",
 				4).click();
 		CommonFunctionality.wait(500);
 		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
@@ -1896,7 +1897,7 @@ public class CDMNextSprintCases {
 			WebElement chart = CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(@class,'left-controls')]//button[text()='" + arg1
-									+ "'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Chart'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Pie']",
+									+ "'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Chart'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Pie'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Map']",
 							4);
 			new Actions(login.driver).moveToElement(chart).click().build().perform();
 			CommonFunctionality.wait(1000);
@@ -2811,6 +2812,7 @@ public class CDMNextSprintCases {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg3 + "')]//following::div[@class='toggle'][1]", 4).click();
 		} else {
+			CommonFunctionality.wait(1000);
 			WebElement table = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg3 + "')]/preceding::div[@class='toggle'][1]", 4);
 			js.executeScript("arguments[0].scrollIntoView(true);", table);

@@ -653,12 +653,11 @@ Feature: Verifying Attachments Visual functionality
     And Choose "Download"
     Then "Attachments , View" options should be displayed
 
-  @Attachments
-  Scenario: TC_Attachments_87:Right click - Download - Verify Attachments
-    #And Create Commentary visual
-    And Add some text in the description field
-    And Get the text from the description field
-    And Create attachments visual
-    And Right click on visual header
-    And Choose Download as "View"
-    Then Download popup should be appeared with "Views" tab selection
+  #@Attachments....removed from exe as per the CR(CVISION-12419)
+  #Scenario: TC_Attachments_87:Right click - Download - Verify Attachments
+    #And Add some text in the description field
+    #And Get the text from the description field
+    #And Create attachments visual
+    #And Right click on visual header
+    #And Choose Download as "View"
+    #Then Download popup should be appeared with "Views" tab selection

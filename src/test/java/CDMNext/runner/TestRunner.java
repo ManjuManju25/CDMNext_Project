@@ -8,11 +8,16 @@ import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
 
 import org.testng.annotations.*;
+
+
+
 import CDMNext.StepDefinations.login;
 //import CDMNext.util.SendmailWithAttachment;
+import CDMNext.util.Hooks;
 
 @CucumberOptions(// features="classpath:",
-		strict = true, features = "src/test/java/CDMNext/Features/",
+		strict = true,
+		features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
 		tags = {"@Map1"},			
 		monochrome = true,
@@ -27,7 +32,7 @@ public class TestRunner {
 
 	private TestNGCucumberRunner testNGCucumberRunner;
 		
-	public CucumberFeatureWrapper cucumberFeature;
+	public static CucumberFeatureWrapper cucumberFeature;
 	
 	@BeforeSuite
 	public void setUpClass() throws Throwable {
@@ -47,7 +52,7 @@ public class TestRunner {
 	public void feature(CucumberFeatureWrapper cucumberFeature) throws Throwable {
 		login.Log4j.info("\nInside TestNG > @Test");
 		testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
-		// .runScenario(eventwrapper.getPickleEvent());
+	
 
 	}
 	
@@ -67,6 +72,9 @@ public class TestRunner {
 			login.driver.manage().deleteAllCookies();
 			login.driver.quit();
 			login.driver = null;
+//			Hooks.copyingOldReports();
+			Hooks.createDateBasedDirectory(Hooks.ExecutionReports, Hooks.folderdateTime);
+			Hooks.CopytoCurrentdateTimeDir(Hooks.SourceReportPath, Hooks.ExecutionReports);
 			//	login.Log4j.info("\n ****Inside Email*****");
 			 //SendmailWithAttachment.report();
 		}

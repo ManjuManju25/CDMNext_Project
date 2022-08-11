@@ -358,7 +358,7 @@ Feature: Verifying sprintcases 5.0
     And Select the filter with "South Korea"
     Then Date picker dropdown should not be available which does not have korea country series
 
-  @Sprintcases5.01
+  @Sprintcases5.0
   Scenario Outline: <TCID>: Verifying DB language change in right click
     And Right click on "<database>"
     And "Set language" as "<language>"

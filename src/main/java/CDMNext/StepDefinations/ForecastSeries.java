@@ -29,7 +29,7 @@ public class ForecastSeries {
 	public void add_series_to_the_right_pane() throws Throwable {
 		CommonFunctionality.wait(6000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
 
@@ -46,6 +46,7 @@ public class ForecastSeries {
 
 	@And("^Open SSP window for the series$")
 	public void open_SSP_window_for_the_series() throws Throwable {
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-name-field-title']", 10).click();
 	}
 
@@ -419,7 +420,10 @@ public class ForecastSeries {
 		} else {
 			Assert.fail(arg1 + " is not selected " + arg2 + " by default");
 		}
-
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@title='Close']", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='modal-window modal-window__active']//*[contains(text(),'Ok')]", 4).click();
 	}
 
 	@And("^Hover on forecast series and click on \"([^\"]*)\" icon$")

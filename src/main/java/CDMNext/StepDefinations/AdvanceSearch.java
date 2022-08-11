@@ -16,27 +16,26 @@ import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
-public class AdvanceSearch {
-	WebDriverWait wait = new WebDriverWait(login.driver, 30);
-	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
+public class AdvanceSearch extends CommonFunctionality{
 	String AllWords, AnyWords, ExactKeyword,Any_of_the_sid;
 	String ExcludeKeyword;
-	Actions action = new Actions(login.driver);
 	SearchTest search = new SearchTest();
 
 	@And("^Enter All of these words as \"([^\"]*)\"$")
 	public void enter_All_of_these_words_as(String arg1) throws Throwable {
 		AllWords = arg1;
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@name='all_words']", 10).sendKeys(arg1);
+		getElementByProperty(login.driver, "AllWords", 10).sendKeys(arg1);
+		
 	}
+
 
 	@Then("^All of the words should display in the result pane$")
 	public void all_of_the_words_should_display_in_the_result_pane() throws Throwable {
 		method_commonSteps();
 		String[] keywords = AllWords.split(";");
-		CommonFunctionality.wait(5000);
+		wait(5000);
 		List<WebElement> country_list = login.driver
-				.findElements(By.xpath("//*[@class='series-item--country country-information']"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("ListOfCounties")));
 		for (int i = 0; i < country_list.size(); i++) {
 			if (country_list.get(i).getText().contains(keywords[0])
 					|| country_list.get(i).getText().contains(keywords[1])
@@ -53,23 +52,23 @@ public class AdvanceSearch {
 	@And("^Enter Any of these words as \"([^\"]*)\"$")
 	public void enter_Any_of_these_words_as(String arg1) throws Throwable {
 		AnyWords = arg1;
-		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@name='any_words']", 10).sendKeys(arg1);
+		wait(1000);
+		getElementByProperty(login.driver, "AnyWords", 10).sendKeys(arg1);
 	}
 
 	@Then("^Any of the words should display in the result pane$")
 	public void any_of_the_words_should_display_in_the_result_pane() throws Throwable {
 		method_commonSteps();
 		String[] listwords = AnyWords.split(";");
-		CommonFunctionality.wait(5000);
+		wait(5000);
 		List<WebElement> sName = login.driver
-				.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("Series_item_name")));
 		for (int i = 0; i < sName.size(); i++) {
 			login.Log4j.info(i);
 			login.Log4j.info(sName.size());
-			Thread.sleep(600);
+			wait(600);
 			action.moveToElement(sName.get(i)).build().perform();
-			Thread.sleep(800);
+			wait(800);
 			WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 			String TooltipInfo = tooltip.getText();
 
@@ -81,7 +80,7 @@ public class AdvanceSearch {
 			} else if (KeywordMatch == false) {
 				sName.get(i).click();
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
-					Thread.sleep(1000);
+					wait(1000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
 					List<WebElement> datasets = login.driver
 							.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info")));
@@ -93,11 +92,11 @@ public class AdvanceSearch {
 				if (Filters.showdata.contains(listwords[0]) || Filters.showdata.contains(listwords[1])) {
 					login.Log4j
 							.info(listwords[0] + " OR " + listwords[1] + " is exists in the" + "\n" + Filters.showdata);
-					CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
+					getElementByProperty(login.driver, "closeAction", 10).click();
 					KeywordMatch = true;
 
 				} else {
-					CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
+					getElementByProperty(login.driver, "closeAction", 10).click();
 					AssertJUnit.fail(listwords[0] + " OR " + listwords[1] + " keywords doesn't exists in the "
 							+ TooltipInfo + "\n\n" + Filters.showdata + "\n\n");
 				}
@@ -111,22 +110,22 @@ public class AdvanceSearch {
 	@And("^Enter Exact phrase as \"([^\"]*)\"$")
 	public void enter_Exact_phrase_as(String arg1) throws Throwable {
 		ExactKeyword = arg1;
-		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@name='exact_phrase']", 10).sendKeys(arg1);
+		wait(1000);
+		getElementByProperty(login.driver, "ExactPhrase", 10).sendKeys(arg1);
 	}
 
 	@Then("^Exact keyword should display in the result pane$")
 	public void exact_keyword_should_display_in_the_result_pane() throws Throwable {
 		method_commonSteps();
-		CommonFunctionality.wait(2000);
+		wait(5000);
 		List<WebElement> sName = login.driver
-				.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("Series_item_name")));
 		for (int i = 0; i < sName.size(); i++) {
 			login.Log4j.info(i);
 			login.Log4j.info(sName.size());
-			Thread.sleep(600);
+			wait(600);
 			action.moveToElement(sName.get(i)).build().perform();
-			Thread.sleep(800);
+			wait(800);
 			WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 			String TooltipInfo = tooltip.getText();
 
@@ -138,7 +137,7 @@ public class AdvanceSearch {
 			} else if (KeywordMatch == false) {
 				sName.get(i).click();
 				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
-					Thread.sleep(1000);
+					wait(1000);
 					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
 					List<WebElement> datasets = login.driver
 							.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info")));
@@ -149,11 +148,11 @@ public class AdvanceSearch {
 
 				if (Filters.showdata.contains(ExactKeyword)) {
 					login.Log4j.info(ExactKeyword + " is exists in the" + "\n" + Filters.showdata);
-					CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
+					getElementByProperty(login.driver, "closeAction", 10).click();
 					KeywordMatch = true;
 
 				} else {
-					CommonFunctionality.getElementByProperty(login.driver, "closeAction", 10).click();
+					getElementByProperty(login.driver, "closeAction", 10).click();
 					AssertJUnit.fail(ExactKeyword + " keywords doesn't exists in the " + TooltipInfo + "\n\n"
 							+ Filters.showdata + "\n\n");
 				}
@@ -166,7 +165,7 @@ public class AdvanceSearch {
 @And("^Enter Any of these series IDs as \"([^\"]*)\"$")
 public void enter_Any_of_these_series_IDs_as(String arg1) throws Throwable {
 	Any_of_the_sid = arg1;
-	CommonFunctionality.wait(1000);
+	wait(1000);
 	login.driver.findElement(By.name("series_ids")).sendKeys(arg1);
 	//CommonFunctionality.getElementByXpath(login.driver, "//*[@name='series_ids']", 10).sendKeys(arg1);
 }
@@ -174,15 +173,15 @@ public void enter_Any_of_these_series_IDs_as(String arg1) throws Throwable {
 	@Then("^Verify the Search results$")
 	public void verify_the_Search_results() throws Throwable {
 		String[] Expected_SID = Any_of_the_sid.split(";");
-		CommonFunctionality.wait(2000);
+		wait(2000);
 		List<WebElement> sName = login.driver
-				.findElements(By.xpath("//*[@class='search-series-list']/*//*[@class='series-item--name']"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("Series_item_name")));
 		for (int i = 0; i < sName.size(); i++) {
 			login.Log4j.info(i);
 			login.Log4j.info(sName.size());
-			Thread.sleep(600);
+			wait(600);
 			action.moveToElement(sName.get(i)).build().perform();
-			Thread.sleep(800);
+			wait(800);
 			WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 			String TooltipInfo = tooltip.getText();
 
@@ -200,23 +199,23 @@ public void enter_Any_of_these_series_IDs_as(String arg1) throws Throwable {
 	@And("^Enter Exclude words as \"([^\"]*)\"$")
 	public void enter_Exclude_words_as(String arg1) throws Throwable {
 		ExcludeKeyword = arg1;
-		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@name='exclude_words']", 10).sendKeys(arg1);
+		wait(1000);
+		getElementByProperty(login.driver, "ExcludeWords", 10).sendKeys(arg1);
 	}
 
 	@Then("^Search results should dispaly with out searching keywords$")
 	public void search_results_should_dispaly_with_out_searching_keywords() throws Throwable {
 		method_commonSteps();
 		String[] ExcludeWords = ExcludeKeyword.split(";");
-		CommonFunctionality.wait(5000);
+		wait(5000);
 		List<WebElement> sName = login.driver
-				.findElements(By.xpath("//*[@class='search-series-list']//*[@class='series-item--name']"));
+				.findElements(By.xpath(login.LOCATORS.getProperty("Series_item_name")));
 		for (int i = 0; i < sName.size(); i++) {
 			login.Log4j.info(i);
 			login.Log4j.info(sName.size());
-			Thread.sleep(600);
+			wait(600);
 			action.moveToElement(sName.get(i)).build().perform();
-			Thread.sleep(800);
+			wait(800);
 			WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
 			String TooltipInfo = tooltip.getText();
 
@@ -233,17 +232,19 @@ public void enter_Any_of_these_series_IDs_as(String arg1) throws Throwable {
 	}
 
 	void method_commonSteps() throws InterruptedException {
+			
+		
 		login.Log4j.info("Clicking on Series tab ");
-		CommonFunctionality.wait(5000);
+		wait(5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
-		CommonFunctionality.wait(5000);
-			WebElement search_page_ele = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='search-series-pagination-count']", 10);
+		wait(5000);
+			WebElement search_page_ele = getElementByProperty(login.driver,
+				"PaginationCount", 10);
 		jse.executeScript("arguments[0].scrollIntoView(true);", search_page_ele);
-		CommonFunctionality.getElementByXpath(login.driver, "//select//option[@value='100']", 10).click();
-		CommonFunctionality.TopMethod();
-		CommonFunctionality.wait(5000);
+		getElementByProperty(login.driver, "SearchCount_SetPerPage", 10).click();
+		TopMethod();
+		wait(5000);
 		
 	}
 }

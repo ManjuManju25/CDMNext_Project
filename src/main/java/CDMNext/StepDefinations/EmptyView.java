@@ -232,10 +232,11 @@ public class EmptyView {
 		CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("5958801");
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(5000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
 		region2 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--country country-information']", 10).getText();
+		CommonFunctionality.wait(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 20).click();
 	}
 
@@ -570,7 +571,7 @@ public class EmptyView {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		CommonFunctionality.wait(2000);
 		WebElement checkBox = login.driver
-				.findElement(By.xpath("//div[@class='search-series-list']/*[1]//div[@class='series-list-item--checkbox-wrapper']/*"));
+				.findElement(By.xpath("//div[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper']/*"));
 		Robot robot = new Robot();
 		for (String visual : list) {
 			if (visual.equalsIgnoreCase("Map")) {
@@ -630,15 +631,10 @@ public class EmptyView {
 
 	@And("^Copy the visual$")
 	public void copy_the_visual() throws Throwable {
-		Robot robot = new Robot();
-		Thread.sleep(2000);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(2000);
-		robot.keyPress(KeyEvent.VK_C);
-		Thread.sleep(2000);
-		robot.keyRelease(KeyEvent.VK_C);
-		Thread.sleep(2000);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
+		CommonFunctionality.wait(1000);
+	WebElement titleEle = 	CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 15);
+	new Actions(login.driver).pause(500).contextClick(titleEle).build().perform();
+	CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Copy table')] | //*[contains(text(),'Copy histogram')]", 15).click();
 	}
 
 	@And("^Paste it onto the another view tab$")
@@ -661,7 +657,7 @@ public class EmptyView {
 	public void max_of_Table_visuals_can_be_created_are(int arg1) throws Throwable {
 		max_of_visuals_created = arg1;
 		for (int i = 0; i < arg1; i++) {
-			CommonFunctionality.wait(1000);
+			CommonFunctionality.wait(3000);
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Table']", 10).click();
 
 		}
@@ -678,16 +674,11 @@ public class EmptyView {
 	@And("^Try to paste it onto the max number of table created view$")
 	public void try_to_paste_it_onto_the_max_number_of_table_created_view() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View 1']", 15).click();
-		Robot robot = new Robot();
-		Thread.sleep(2000);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(2000);
-		robot.keyPress(KeyEvent.VK_V);
-		Thread.sleep(2000);
-		robot.keyRelease(KeyEvent.VK_V);
-		Thread.sleep(2000);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(100);
+		CommonFunctionality.wait(1000);
+		WebElement firstTable = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='empty-visual-overlay--title'])[1]", 15);
+		//Right click on first table and select paste visual
+		new Actions(login.driver).pause(500).contextClick(firstTable).build().perform();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Paste visual')]", 15).click();
 	}
 
 	@Then("^Copy pasting of visual from other view should not be allowed$")
