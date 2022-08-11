@@ -57,8 +57,9 @@ Feature: profile feature
   Scenario: TC_08:Verify user first and last name under profile picture
     And Open preference dropdown
     And click on pencile button
-    And enter first name as "Testing"
+    And user enter first name as "Testing"
     And enter last name as "Automation"
+    And enter job title
     And click on save button
     And Open preference dropdown
     Then User changes should be reflected under profile picture after saved
@@ -216,8 +217,9 @@ Feature: profile feature
     And Open preference dropdown
     And Get Value of "Decimal separator" in Number format
     # And Refresh page
-    And click on series Tab
+    #And click on series Tab
     And search a series id as"238426803"
+    And click on series Tab
     And click on series name
     # And Open SSP for the selected series
     #And Click on "Data" tab
@@ -397,6 +399,8 @@ Feature: profile feature
     And click on 'customize'
     Then The Replacement popup should not be displayed to user
 
+  # And Open preference dropdown
+  #Then check the 'Show latest changes in my insights upon opening'
   @profile
   Scenario: TC_40:Verify Unchecking checkbox in replacement popup
     And Open preference dropdown
@@ -460,13 +464,13 @@ Feature: profile feature
 
   @profile
   Scenario: TC_47:Vierify 'Show system suggestion when working with visuals' - Checked
-    And delete series in myseries
+    #And delete series in myseries
     And Open preference dropdown
     And click on series Tab
     # And Remove series in myseries
     # And select some series
     And selected series added into my series
-    And click on "View as Chart"
+    # And click on "View as Chart"
     Then "Chart suggestion" popup should be appeared
 
   @profile
@@ -487,7 +491,7 @@ Feature: profile feature
     And click on series Tab
     And selected series added into my series
     # And selected series added into my insights
-    And click on "View as Chart"
+    #And click on "View as Chart"
     And checked checkbox 'Do not show again'
     And Open preference dropdown
     Then The 'Show system suggestion…' checkbox should be uncheck under profile
@@ -610,6 +614,7 @@ Feature: profile feature
   Scenario: TC_62:Copyright - Verify clicking on copyright on visuals
     And Open preference dropdown
     And click on Change style sheet
+    And click on Type "image" on radio button
     #And click on "Text" radio button
     # And select position for image copyright
     And click on series Tab
@@ -657,8 +662,8 @@ Feature: profile feature
   @profile
   Scenario: TC_67:Verify excel add-in
     And Open preference dropdown
-    And Clicking on "Excel Add-in" option under user preference
-    Then The "Applications Help" dialog box should open and "Excel Add-in" is default
+    And Clicking on "Excel Addin" option under user preference
+    Then The "Applications Help" dialog box should open and "Excel Addin" is default
 
   @profile
   Scenario: TC_68:Verify Ceic API access
@@ -782,10 +787,12 @@ Feature: profile feature
     And click on share
     And Enter a mail into invite textbox
     And click on save
+    And Open preference dropdown
     And click on Sign out button
 
   @profile
   Scenario: TC_82: Preference - Verify Sign out option
+    And Select some series to my series tab
     And delete series in myseries
     And Open preference dropdown
     And click on Sign out button

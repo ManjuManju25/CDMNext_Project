@@ -126,6 +126,7 @@ Thread.sleep(1000);
 	//TC_02
 	@Given("^create some visuals with more dropdown rebased filter$")
 	public void create_some_visuals_with_more_dropdown_rebased_filter() throws Throwable {
+		
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'More')]")).click();
 		Thread.sleep(2000);
@@ -144,7 +145,23 @@ Thread.sleep(1000);
 		Thread.sleep(2000);
 		WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
 		actions.contextClick(elementLocator).perform();
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
+		
+		
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(
+				"//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']"))
+				.click();
+		
+		
+		
+		
+		
+		
+		
+		
+		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
 		Thread.sleep(3000);
 		
 
@@ -165,7 +182,7 @@ Thread.sleep(1000);
 	    Thread.sleep(1000);
 		login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
 	    Thread.sleep(1000);
-	    for(int i=1;i<=4;i++)
+	    for(int i=1;i<=2;i++)
 	    {
 	    Thread.sleep(1000);
 	    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
@@ -204,11 +221,18 @@ Thread.sleep(1000);
 	@Then("^Only replacement tab should be shown in RSP$")
 	public void only_replacement_tab_should_be_shown_in_RSP() throws Throwable {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']/following::span[@class='input-control--indicator']")).click();
-		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
-		login.driver.switchTo().activeElement();
 		
-		 if(login.driver.findElement(By.xpath("//div[contains(text(),'Continuous')]")).isDisplayed())
+		
+		
+		
+		
+		
+		
+//		login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']/following::span[@class='input-control--indicator']")).click();
+//		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
+//		login.driver.switchTo().activeElement();
+		
+		 if(login.driver.findElement(By.xpath("//div[contains(text(),'Replacements (2)')]")).isDisplayed())
 		 {
 			 login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 			 CommonFunctionality.DeleteSeries();
@@ -258,11 +282,32 @@ Thread.sleep(1000);
 	   // login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
 		Thread.sleep(2000);
 		//WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
-		actions.contextClick().build().perform();
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
-		Thread.sleep(3000);
+		//actions.contextClick().build().perform();
+		
+		
+		
+		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
+		//Thread.sleep(3000);
+		
+		
+		
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath(
+				"//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']"))
+				.click();
+		
 		
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
 		
@@ -317,7 +362,7 @@ Thread.sleep(1000);
 		
 		String myseriesname=login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[1]")).getText();
 		
-		if(seriesname==myseriesname)
+		if(seriesname.equalsIgnoreCase(myseriesname))
 		{
 			System.out.println("Test case failed");
 		}
@@ -408,9 +453,6 @@ Thread.sleep(1000);
 	
 	
 	
-	
-	
-	
 	//TC_08
 	@Then("^RSP should not be shown$")
 	public void rsp_should_not_be_shown() throws Throwable {
@@ -418,7 +460,7 @@ Thread.sleep(1000);
 		
 		if(login.driver.findElement(By.xpath("//a[contains(text(),'My Series')]")).isDisplayed())
 		{
-			System.out.println("Test case pass");
+			System.out.println("RSP should not be shown");
 		}
 		
 		else {
@@ -457,9 +499,19 @@ Thread.sleep(1000);
 	@Then("^check for show latest changes for insights upon opening$")
 	public void check_for_show_latest_changes_for_insights_upon_opening() throws Throwable {
 		Thread.sleep(2000);
-login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
 		
-		login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
+		if(login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]/preceding-sibling::input[@name='changes_summary']")).isSelected())
+		{
+			login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
+		}
+		else {
+			
+			login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
+			login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
+		}
+
+		
+		
 		
 	}
 	//TC_09

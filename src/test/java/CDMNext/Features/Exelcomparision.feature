@@ -2,13 +2,6 @@ Feature: Comparing Data in Two Exel sheet
 
   #Background:
   #Given User has successful logged in
-  #@UI
-  #Scenario: TC_01:Verifying Date drop down for available options
-  # And Check for prerequesties
-  #And User Select Series ID as "310902302"
-  #And Select Download button
-  #And Select Date drop down
-  #Then Automatic and Custom Date drop down should be available
   @UI
   Scenario: TC_01:Verifying Date drop down for available options
     And User Select Series ID  as "310902302"
@@ -74,7 +67,7 @@ Feature: Comparing Data in Two Exel sheet
   ##@UI
   ##Scenario: TC_13:Verifying confirmation messge while downloading in progress
   ##    #And User Select Series ID  as "310902301"
-  ##     And User Add 3000 Series into Right panel
+  ##   And User Add 3000 Series into Right panel
   ##    And Select Download button
   ##    Then A pop message with message as The excel file is being generated.your download will start in a few seconds" should appear each time as default.
   @UI
@@ -396,7 +389,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select the Function as "Convertcur"
     And Select the Applay button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes
     And Compare "TC_54" exel sheet with Actual data
 
@@ -407,7 +400,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select the Function as "Disaggregate"
     And Select the Parameters
     And Select the Applay button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes
     And Compare "TC_55" exel sheet with Actual data
 
@@ -417,7 +410,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select the Function as "LOG"
     And Select the Applay button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes
     And Compare "TC_56" exel sheet with Actual data
 
@@ -428,7 +421,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select the Function as YTD
     And Select the Applay button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes
     And Compare "TC_57" exel sheet with Actual data
 
@@ -439,7 +432,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select the Function as "SUM"
     And Select the Applay button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes
     And Compare "TC_58" exel sheet with Actual data
 
@@ -447,7 +440,7 @@ Feature: Comparing Data in Two Exel sheet
   Scenario: TC_59: Verifying Download with no end date with Leave as Blank
     And User Select Series ID  as "2121401"
     And Select Download button
-    And Select the Start Date as "01-03-2000" and End Date "No end date"
+    And Select the Start Date as "2000-01-03" and End Date "No end date"
     And Select Leave as Blank
     And Select the Selected Attributes
     And Compare "TC_59" exel sheet with Actual data
@@ -465,7 +458,7 @@ Feature: Comparing Data in Two Exel sheet
   Scenario: TC_63:Verifying Download Series in Columns by Selecting only Series Name
     And User Select Series ID  as "5190101"
     And Select Download button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Series name
     And uncheck the Date column
     And Compare "TC_63" exel sheet with Actual data
@@ -504,7 +497,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Orientation as  Rows
     And Select the Function as "Accumulate"
     And Select the Applay button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And uncheck the Date column
     And Select the Selected Attributes
     And Compare "TC_67" exel sheet with Actual data
@@ -529,7 +522,7 @@ Feature: Comparing Data in Two Exel sheet
     And User Select Series ID  as "5190101"
     And Select Download button
     And Select the  Adjust columns as wrap text
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Series name
     And uncheck the Date column
     And Compare "TC_70" exel sheet with Actual data
@@ -539,7 +532,7 @@ Feature: Comparing Data in Two Exel sheet
     And User Select Series ID  as "5190101"
     And Select Download button
     And Select the  Adjust columns as wrap text
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Series name
     And Compare "TC_71" exel sheet with Actual data
 
@@ -549,7 +542,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select Orientation as  Rows
     And Select the  Adjust columns as wrap text
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And deSelect Series Attributes
     And uncheck the Date column
     And Compare "TC_72" exel sheet with Actual data
@@ -561,7 +554,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Orientation as  Rows
     And Select Data order as  Descending
     And Select the  Adjust columns as wrap text
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And deSelect Series Attributes
     And uncheck the Date column
     And Compare "TC_73" exel sheet with Actual data
@@ -572,7 +565,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select Orientation as  Rows
     And Select Data order as  Descending
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Series name
     And uncheck the Date column
     And Compare "TC_74" exel sheet with Actual data
@@ -583,7 +576,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select Orientation as  Rows
     And Select Data order as  Descending
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And deSelect Series Attributes
     And uncheck the Date column
     And Compare "TC_75" exel sheet with Actual data
@@ -594,7 +587,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Download button
     And Select Orientation as  Rows
     And Select Data order as  Descending
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select Fill with NA
     And deSelect Series Attributes
     And uncheck the Date column
@@ -605,7 +598,7 @@ Feature: Comparing Data in Two Exel sheet
     And User Select Series ID  as "5190101"
     And Select Download button
     And Select Orientation as  Rows
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select Fill with NA
     And Select Series Name and Series Statistics
     And uncheck the Date column
@@ -615,7 +608,7 @@ Feature: Comparing Data in Two Exel sheet
   Scenario: TC_78:Verifying Download by Selecting Selected Attributes
     And User Select Series ID  as "5190101"
     And Select Download button
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes along with Series Statistics
     And uncheck the Date column
     And Compare "TC_78" exel sheet with Actual data
@@ -743,7 +736,7 @@ Feature: Comparing Data in Two Exel sheet
     And User Select Series ID  as "5190101"
     And Select Download button
     And Select on Range
-    And Select the Start Date as "01-03-2003" and End Date "2011-03-01"
+    And Select the Start Date as "2003-01-03" and End Date "2011-03-01"
     And Compare "TC_93" exel sheet with Actual data
 
   @ExelDatacomparision
@@ -765,7 +758,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Orientation as  Rows
     And Select the  Adjust columns as wrap text
     And Select on Range
-    And Select the Start Date as "01-01-1997" and End Date "2006-12-31"
+    And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And uncheck the Date column
     And deSelect Series Attributes
     And Reset button should Successfully work

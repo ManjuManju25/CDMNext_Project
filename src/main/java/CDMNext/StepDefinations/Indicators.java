@@ -1,10 +1,13 @@
 package CDMNext.StepDefinations;
 
+import static org.testng.Assert.fail;
+
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
 import org.apache.poi.util.SystemOutLogger;
 import org.junit.Assert;
+import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -27,9 +30,8 @@ public class Indicators {
 	@And("^select all series check box checked$")
 	public void select_all_series_check_box_checked() throws Throwable {
 		Thread.sleep(3000);
-		//login.driver.findElement(By.xpath("//div[contains(text(),'Cancel')]")).click();
-		
-		
+		// login.driver.findElement(By.xpath("//div[contains(text(),'Cancel')]")).click();
+
 		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 
 	}
@@ -43,7 +45,7 @@ public class Indicators {
 
 			login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
 		} else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 	}
@@ -56,7 +58,8 @@ public class Indicators {
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Add related series')]")).isDisplayed()) {
 			System.out.println("Test case pass");
 		} else {
-			Assert.fail("Test case failed");
+
+			fail("Test case failed");
 		}
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
@@ -74,10 +77,12 @@ public class Indicators {
 
 		{
 			Assert.fail("Test case failed");
+			login.Log4j.info("related series tab in my series for opening indicator tab:FAIL");
+			// Assert.assertEquals(name, functionDesc);
 		}
 
 		else {
-			System.out.println("Test case pass");
+			login.Log4j.info("related series tab in my series for opening indicator tab:PASS:");
 		}
 
 	}
@@ -86,8 +91,7 @@ public class Indicators {
 	@Then("^Should not be enabled$")
 	public void should_not_be_enabled() throws Throwable {
 
-		System.out.println("related series button Should not be enabled");
-
+		login.Log4j.info("related series button Should not be enabled");
 		Thread.sleep(2000);
 		CommonFunctionality.DeleteSeries();
 		System.out.println("==================>TC_02======================>");
@@ -102,8 +106,9 @@ public class Indicators {
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).isEnabled()) {
 
 			login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
+
 		} else {
-			Assert.fail("Test case failed");
+			fail("click on selecting related series in my series");
 		}
 	}
 
@@ -116,7 +121,8 @@ public class Indicators {
 			System.out.println("related series button should be enabled");
 			login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 		} else {
-			Assert.fail("Test case failed");
+
+			fail("related series button should be enabled");
 		}
 		CommonFunctionality.DeleteSeries();
 		System.out.println("==================>TC_03======================>");
@@ -138,9 +144,12 @@ public class Indicators {
 		Thread.sleep(1000);
 
 		if (actualTooltip.equalsIgnoreCase(data)) {
-			System.out.println("Tooltip data should be displayed");
+			login.Log4j.info("Tooltip data should be displayed:PASS");
+
 		} else {
-			Assert.fail("Test case failed");
+			login.Log4j.info("Tooltip data should be displayed:FAIL");
+			Assert.assertEquals(actualTooltip, data);
+
 		}
 	}
 
@@ -166,7 +175,8 @@ public class Indicators {
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'Afghanistan')]")).click();
 		Thread.sleep(5000);
-		WebElement plusicon = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
+		WebElement plusicon = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
 		action.moveToElement(plusicon).perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='visual-indicator--icon'])[1]")).click();
@@ -177,7 +187,8 @@ public class Indicators {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'Albania')]")).click();
 		Thread.sleep(5000);
-		WebElement plusicon1 = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
+		WebElement plusicon1 = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
 		action.moveToElement(plusicon1).perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='visual-indicator--icon'])[2]")).click();
@@ -188,7 +199,8 @@ public class Indicators {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'Algeria')]")).click();
 		Thread.sleep(5000);
-		WebElement plusicon11 = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
+		WebElement plusicon11 = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
 		action.moveToElement(plusicon11).perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='visual-indicator--icon'])[1]")).click();
@@ -199,7 +211,8 @@ public class Indicators {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'Antigua and Barbuda')]")).click();
 		Thread.sleep(5000);
-		WebElement plusicon111 = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
+		WebElement plusicon111 = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
 		action.moveToElement(plusicon111).perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='visual-indicator--icon'])[1]")).click();
@@ -260,7 +273,7 @@ public class Indicators {
 		System.out.println(popup);
 		String s = "Footnotes";
 		Assert.assertEquals(s, popup);
-Thread.sleep(2000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='movable-modal--close'])[2]")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='movable-modal--close'])[1]")).click();
@@ -273,7 +286,8 @@ Thread.sleep(2000);
 	public void click_on_plus_icon_in_indicators_tab() throws Throwable {
 		Thread.sleep(2000);
 
-		WebElement plusicon = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
+		WebElement plusicon = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
 		action.moveToElement(plusicon).perform();
 		Thread.sleep(3000);
 
@@ -293,7 +307,7 @@ Thread.sleep(2000);
 				.isDisplayed()) {
 			System.out.println("Test case pass");
 		} else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		CommonFunctionality.DeleteSeries();
@@ -328,8 +342,9 @@ Thread.sleep(2000);
 	@And("^select any of the indicators for series being in visual selection pane$")
 	public void select_any_of_the_indicators_for_series_being_in_visual_selection_pane() throws Throwable {
 		Thread.sleep(2000);
-		WebElement plusicon = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
-		action.moveToElement(plusicon).perform();
+		WebElement plusicon = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
+		action.moveToElement(plusicon).build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='visual-indicator--icon'])[2]")).click();
 		Thread.sleep(3000);
@@ -341,8 +356,8 @@ Thread.sleep(2000);
 	public void indicators_tab_should_get_reflected_in_visual_selection_pane_as_related_series() throws Throwable {
 		Thread.sleep(2000);
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Apply')]")));
-		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(),'Apply')]")));
+		// login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 		Thread.sleep(5000);
 
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
@@ -351,7 +366,7 @@ Thread.sleep(2000);
 		}
 
 		else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		login.driver.findElement(By.xpath("//a[contains(text(),'My Series')]")).click();
@@ -374,33 +389,18 @@ Thread.sleep(2000);
 
 	@And("^select any of the indicators for series being in visual selection$")
 	public void select_any_of_the_indicators_for_series_being_in_visual_selection() throws Throwable {
-	   Thread.sleep(2000);
-	   
-	   
-	  // login.driver.findElement(By.xpath("//div[@class='visual-indicator']//*[contains(text(),'CPI')]")).click();
-	   
-	   WebElement plusicon = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//*[contains(text(),'CPI')]"));
+		Thread.sleep(2000);
+
+		// login.driver.findElement(By.xpath("//div[@class='visual-indicator']//*[contains(text(),'CPI')]")).click();
+
+		WebElement plusicon = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//*[contains(text(),'CPI')]"));
 		action.moveToElement(plusicon).perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='visual-indicator--icon'])[2]")).click();
-	 
-	   
-	   
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	// TC_10
 	@And("^adding indicators with different frequency/unit for visual selection pane$")
 	public void adding_indicators_with_different_frequency_unit_for_visual_selection_pane() throws Throwable {
@@ -430,7 +430,7 @@ Thread.sleep(2000);
 		}
 
 		else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		login.driver.findElement(By.xpath("//a[contains(text(),'My Series')]")).click();
@@ -463,7 +463,7 @@ Thread.sleep(2000);
 		}
 
 		else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		CommonFunctionality.DeleteSeries();
@@ -479,7 +479,8 @@ Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[@id='select2-chosen-2']")).click();
 		// select country
 		login.driver.findElement(By.xpath("//div[@id='select2-result-label-3']")).click();
-		WebElement plusicon = login.driver.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
+		WebElement plusicon = login.driver
+				.findElement(By.xpath("//div[@class='visual-indicator']//div[contains(text(),'CPI')]"));
 		action.moveToElement(plusicon).perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='visual-indicator--icon'])[1]")).click();
@@ -493,7 +494,7 @@ Thread.sleep(2000);
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Afghanistan')]")).isDisplayed()) {
 			System.out.println("Should be able to create regions tab for particular first level indicators");
 		} else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
@@ -530,7 +531,7 @@ Thread.sleep(2000);
 			System.out
 					.println("Should be able to create region's/country's tab for particular second level indicators");
 		} else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
@@ -553,11 +554,9 @@ Thread.sleep(2000);
 		Thread.sleep(2000);
 
 		login.driver.findElement(By.xpath("//div[contains(text(),'Brent Oil Price')]//following::div[1]")).click();
-		                                   
-		
-		
-		
-		//login.driver.findElement(By.xpath("//*[@class='visual-indicator visual-indicator__exists']//div[@class='visual-indicator--icon']")).click();
+
+		// login.driver.findElement(By.xpath("//*[@class='visual-indicator
+		// visual-indicator__exists']//div[@class='visual-indicator--icon']")).click();
 		Thread.sleep(5000);
 
 	}
@@ -567,17 +566,19 @@ Thread.sleep(2000);
 	public void should_be_able_to_create_region_tab_for_particular_third_level_indicators() throws Throwable {
 
 		Thread.sleep(2000);
-		String state=login.driver.findElement(By.xpath("//div[@class='visual-indicator-countries-tabs']")).getText();
-		//public static String goods = "//span[contains(text(),'xx')]//preceding::input[1]"
-		//public static String goods =//div[contains(text(),"xx")
-		
-		//WebElement clickGoods = driver.findElement(By.xpath(TestUtil.goods.replaceAll("xx", state)));
-		System.out.println("state:"+state);
-		
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'"+state+"')]")).isDisplayed()) {
+		String state = login.driver.findElement(By.xpath("//div[@class='visual-indicator-countries-tabs']")).getText();
+		// public static String goods =
+		// "//span[contains(text(),'xx')]//preceding::input[1]"
+		// public static String goods =//div[contains(text(),"xx")
+
+		// WebElement clickGoods =
+		// driver.findElement(By.xpath(TestUtil.goods.replaceAll("xx", state)));
+		System.out.println("state:" + state);
+
+		if (login.driver.findElement(By.xpath("//div[contains(text(),'" + state + "')]")).isDisplayed()) {
 			System.out.println("Should be able to create regions tab for particular first level indicators");
 		} else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
@@ -601,7 +602,7 @@ Thread.sleep(2000);
 		if (login.driver.findElement(By.xpath("//div[contains(text(),'Active')]")).isDisplayed()) {
 			System.out.println("Test case Pass");
 		} else {
-			Assert.fail("Test case failed");
+			fail("Test case failed");
 		}
 
 		System.out.println("=============>TC_15==============>");
@@ -679,18 +680,40 @@ Thread.sleep(2000);
 	}
 
 //TC_19
+	@Given("^User Select Series ID's as \"([^\"]*)\"$")
+	public void user_Select_Series_ID_s_as(String arg1) throws Throwable {
+
+		Thread.sleep(2000);
+
+		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).click();
+		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).clear();
+		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
+		Thread.sleep(10000);
+		// click on '+'icon
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
+				.click();
+		CommonFunctionality.wait(1000);
+		try {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View as List']", 10).click();
+		} catch (Exception e) {
+			CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 10).click();
+		}
+	}
+
+//TC_19
 	@And("^navigate from indicators to any other tab if present$")
 	public void navigate_from_indicators_to_any_other_tab_if_present() throws Throwable {
 		Thread.sleep(2000);
-		
-		if(login.driver.findElements(By.xpath("//div[contains(text(),'Replacements')]")).size()==1)
-		{
-			login.driver.findElement(By.xpath("//div[contains(text(),'Replacements')]")).click();
+
+		if (login.driver.findElements(By.xpath("//div[text()='Dependencies']")).size() == 1) {
+			login.driver.findElement(By.xpath("//div[text()='Dependencies']")).click();
+		} else {
+			fail("only indicators tab showed");
+
 		}
-		else {
-			System.out.println("only indicators tab showed");
-		}
-		
 
 	}
 

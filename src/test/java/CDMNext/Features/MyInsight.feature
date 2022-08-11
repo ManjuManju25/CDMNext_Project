@@ -1,7 +1,10 @@
 Feature: MyInsight Functionality
 
+  #Background:
+  #	Given User has successful logged in
+  #And Check for prerequesties chrome://version/
   @MyInsights
-  Scenario: TC_MyInsights_01: Verify All tabs in My Insights
+  Scenario: TC_MyInsights_01:Verify All tabs in My Insights
     And Navigates to Myinsight page
     And Verify the All four tabs in My Insights page
 
@@ -130,42 +133,42 @@ Feature: MyInsight Functionality
     And Navigates to Myinsight page
     And Verify CEIC logo
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_27:Verify Whats New
     And Navigates to Myinsight page
     And Verify Whats New
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_28:Verify Open documents under Whats new section
     And Navigates to Myinsight page
     And Verify Open documents under Whats new section
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_29:Verify Whats new by product dropdown
     And Navigates to Myinsight page
     And Verify Whats new by product dropdown
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_30:Verify default option for product dropdown
     And Navigates to Myinsight page
     And Verify default option for product dropdown
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_32:Verify insight permission for other users after add to CEIC Insider
     And Navigates to Myinsight page
     And Verify insight permission for other users after add to CEIC Insider
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_33:Verify the copy insight for CEIC Insider
     And Navigates to Myinsight page
     And Verify the copy insight for CEIC Insider
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_34:Verify Open option for Whats new popup
     And Navigates to Myinsight page
     And Verify Open option for Whats new popup
 
-  @MyInsights
+  @Functionalityremove
   Scenario: TC_MyInsights_35:Verify Close option for Whats new popup
     And Navigates to Myinsight page
     And Verify Close option for Whats new popup

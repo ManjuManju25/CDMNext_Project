@@ -1,9 +1,11 @@
 Feature: Verifying SSP window Functionality
 
+  #Background:
+  #Given User has successful logged in
   @SSPWindow
   Scenario: TC_SSP_01: Try to open SSP window from myseries
     And Open preference dropdown
-    And Clicking on "Date format" option in preference
+    And Clicking on "Date format" dropdown option in preference
     And Click "Custom" format date option
     And Enter "Valid" custom date
     And Open preference dropdown
@@ -66,13 +68,15 @@ Feature: Verifying SSP window Functionality
     And click on create chart option
     Then chart should be created in a view for series
 
-  #@SSPWindow123
-  #Scenario: TC_SSP_09: Verify copy to clipboard option from SSP
-  #   And Go to search
-  #   And  hightlight any one series from search list and click on  "i" icon .
-  #   And Open SSP window
-  #   And click on CTC button
-  #   Then Download settings window to be opened
+  @SSPWindow
+  Scenario: TC_SSP_09: Verify copy to clipboard option from SSP
+    And Go to search
+    And hightlight any one series from search list and click on  "i" icon .
+    And Open SSP window
+    And click on Download button
+    # And click on CTC button
+    Then Download settings window to be opened
+
   @SSPWindow
   Scenario: TC_SSP_11: Verify Download button option
     And Go to search
@@ -123,13 +127,13 @@ Feature: Verifying SSP window Functionality
   Scenario: TC_SSP_18: Verify frequency in SSP window
     And Open SSP for the series "385319507"
     And Checking the "Frequency:" of the series
-    Then Verify the "Frequency:" of the series should be "Monthly"
+    Then Verify the "Frequency:"of the series should be "Monthly"
 
   @SSPWindow
   Scenario: TC_SSP_19: Verify unit in SSP window
     And Open SSP for the series "385319507"
     And Checking the "Unit:" of the series
-    Then Verify the "Unit:" of the series should be "2012=100"
+    Then verify the "Unit:" of the series should be "2012=100"
 
   @SSPWindow
   Scenario: TC_SSP_20: Verify the update request information in SSP Window
@@ -170,28 +174,29 @@ Feature: Verifying SSP window Functionality
     And Open SSP for the series "72903202"
     Then Forecast timepoints should be highlighted in orange color
 
-  @SSPWindow
-  Scenario: TC_SSP_27: Verify indicator drop down
-    And Add few series to myseries
-    And hightlight any one series and click on  "i" icon .
-    And Open SSP window
-    And clicking indicator drop down
-    Then Drop down should display indicators list and clicking on specific indicators should navigate to results page
-
-  @SSPWindow
-  Scenario: TC_SSP_28: Verify indicator selection from drop down
-    And Add few series to myseries
-    And hightlight any one series and click on  "i" icon .
-    And Open SSP window
-    And clicking indicator drop down
-    Then Selecting indicator from indicator drop down should show search result in left for same indicator
-
+  #@SSPWindow
+  #Scenario: TC_SSP_27: Verify indicator drop down
+  #And Close the popup
+  #And Add few series to myseries
+  #And hightlight any one series and click on  "i" icon .
+  #And Open SSP window
+  #And clicking indicator drop down
+  #Then Drop down should display indicators list and clicking on specific indicators should navigate to results page
+  #@SSPWindow
+  #Scenario: TC_SSP_28: Verify indicator selection from drop down
+  #And Close the popup
+  #And Resetting the filters
+  #And Add few series to myseries
+  #And hightlight any one series and click on  "i" icon .
+  #And Open SSP window
+  #And clicking indicator drop down
+  #Then Selecting indicator from indicator drop down should show search result in left for same indicator
   @SSPWindow
   Scenario: TC_SSP_29: Verify source link
     And Add few series to myseries
     And hightlight any one series and click on  "i" icon .
     And Open SSP window
-    And Click on "Source" name
+    And Click on "Source:" name
     Then It should apply source filter in search pane to display it's result
 
   @SSPWindow
@@ -236,8 +241,9 @@ Feature: Verifying SSP window Functionality
 
   @SSPWindow
   Scenario: TC_SSP_35: Verify zoom=1y
-    And Add few series to myseries
-    And hightlight any one series and click on  "i" icon .
+    And Open SSP for the series "5724301"
+    #And Add few series to myseries
+    #And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on chart tab
     And Select "1Y" tab
@@ -245,8 +251,9 @@ Feature: Verifying SSP window Functionality
 
   @SSPWindow
   Scenario: TC_SSP_36: Verify zoom=3y
-    And Add few series to myseries
-    And hightlight any one series and click on  "i" icon .
+    And Open SSP for the series "5724301"
+    # And Add few series to myseries
+    # And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on chart tab
     And Select "3Y" tab
@@ -254,8 +261,9 @@ Feature: Verifying SSP window Functionality
 
   @SSPWindow
   Scenario: TC_SSP_37: Verify zoom=5y
-    And Add few series to myseries
-    And hightlight any one series and click on  "i" icon .
+    #And Add few series to myseries
+    And Open SSP for the series "5724301"
+    # And hightlight any one series and click on  "i" icon .
     And Open SSP window
     And Click on chart tab
     And Select "5Y" tab
@@ -300,7 +308,7 @@ Feature: Verifying SSP window Functionality
     And Search for the series "210337202"
     And hightlight any one series and click on  "i" icon .
     And Open SSP window
-    And Click on chart tab
+    #  And Click on chart tab
     And Select "YTD" , "1Y" , "3Y" , "5Y" , "All" tabs
     Then Last 1 year, 3 year, 5 year, "All" data to be plotted in chart visual
 
@@ -332,9 +340,9 @@ Feature: Verifying SSP window Functionality
     And Click on "Related Insights" tab
     And Check contents inside Related insight
     And Click on "Related Insights" tab
+
   #And Click on "Related Data" tab
   #Then Should display related keyword of that series and have "Datasets" and "Insights" details
-  
   @SSPWindow
   Scenario: TC_SSP_46: Click on each links under datasets and verify
     And Add few series to myseries
@@ -353,8 +361,8 @@ Feature: Verifying SSP window Functionality
     And Check the data of first insight
     And Click on "Related Insights" tab
     And Check the data available under "Insights" and it should open respective insights
-    And Check the data of second insight
 
+  #  And Check the data of second insight
   @SSPWindow
   Scenario: TC_SSP_48: Check for adding suggested series from SSP window
     And Search for the series "253736802"
@@ -365,7 +373,7 @@ Feature: Verifying SSP window Functionality
 
   @SSPWindow
   Scenario: TC_SSP_49: Check for adding suggested series from SSP window
-    And Search for the series "253736802"
+    And Search for the series "211171402"
     And hightlight any one series and click on  "i" icon .
     And click on "Manage" suggestions subscription link
     And Click on "Replace" , "Apply" and "Ok" buttons
@@ -373,7 +381,7 @@ Feature: Verifying SSP window Functionality
 
   @SSPWindow
   Scenario: TC_SSP_50: Verify the preview option for rebased series in SSP window
-    And Search for the series "253736802"
+    And Search for the series "211171402"
     And hightlight any one series and click on  "i" icon .
     And click on "Manage" suggestions subscription link
     And Click on "Preview" button
@@ -381,7 +389,7 @@ Feature: Verifying SSP window Functionality
 
   @SSPWindow
   Scenario: TC_SSP_51: Verify click on the replacement suggestion series
-    And Search for the series "1053401"
+    And Search for the series "211171402"
     And hightlight any one series and click on  "i" icon .
     And click on "Manage" suggestions subscription link
     And Click on replacement series name hyperlink
@@ -389,7 +397,7 @@ Feature: Verifying SSP window Functionality
 
   @SSPWindow
   Scenario: TC_SSP_52: Verify click on the replacement suggestion series dropdown
-    And Search for the series "1053401"
+    And Search for the series "211171402"
     And hightlight any one series and click on  "i" icon .
     And click on "Manage" suggestions subscription link
     Then Both inactive and suggestion should be viewed as chart
