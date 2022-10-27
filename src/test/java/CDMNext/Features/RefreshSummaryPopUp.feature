@@ -8,7 +8,8 @@ Feature: Refresh Summary PopUp feature
     And click on Myinsights
     And click on recent saved insights
     And click on open
-  Then Latest changes in your insights popup should be display
+    Then Latest changes in your insights popup should be display
+
   @RSP
   Scenario: TC_02:Verify RSP for 'visuals'
     And create some visuals with more dropdown rebased filter
@@ -17,8 +18,8 @@ Feature: Refresh Summary PopUp feature
     And click on Myinsights
     And click on recent saved insights
     And click on open
-  Then Latest changes in your insights popup should be display
-  
+    Then Latest changes in your insights popup should be display
+
   @RSP
   Scenario: TC_03: Verify RSP for replacement series when logged in freshly
     And New insight search with given data as "19525401;91271701"
@@ -31,7 +32,6 @@ Feature: Refresh Summary PopUp feature
     And click on recent saved insights
     And click on open
     Then Only replacement tab should be shown in RSP
-    
 
   @RSP
   Scenario: TC_04: Verify RSP for replacement series for visuals
@@ -45,9 +45,6 @@ Feature: Refresh Summary PopUp feature
     And click on recent saved insights
     And click on open
     Then Only replacement tab should be shown in RSP
-
-
-
 
   @RSP
   Scenario: TC_05: Verify RSP for different kind of updates

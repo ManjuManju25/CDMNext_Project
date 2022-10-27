@@ -1,13 +1,13 @@
 Feature: Verifying Commentary Visual functionality
 
   @Commentary
-  Scenario: TC_Commentary_01:Verify 'Insert Commentary' under View tab
+  Scenario: TC_Commentary_01:Verify 'Insert Text' under View tab
     And Go to View tab
-    And Click on "Insert Commentary"
+    And Click on "insert Text"
     Then Commentary should be inserted
 
   @Commentary
-  Scenario: TC_Commentary_02:Verify 'Insert Commentary' creating by drag and drop
+  Scenario: TC_Commentary_02:Verify 'Insert Text' creating by drag and drop
     And Go to View tab
     And Drag and drop commentary visual to the page
     Then Commentary should be inserted
@@ -298,7 +298,7 @@ Feature: Verifying Commentary Visual functionality
     And Create Commentary visual
     And Add some text in the description field
     And Click on Copy icon
-    Then "Commentary copied." message should be displayed
+    Then "Text copied." message should be displayed
 
   @Commentary
   Scenario: TC_Commentary_43:Validate copied visual by pasting with in the insight
@@ -345,7 +345,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on Download icon
     And Select "xlsx" format
     And Click on "Download"
-    Then The tab name should be "Commentary"
+    Then The tab name should be "Text"
 
   @Commentary
   Scenario: TC_Commentary_50:Download - Verify visual download to PNG format
@@ -793,7 +793,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on visual title
     And Check the box for the title name
     And Right click on visual header
-    And Choose Insert visual as "Chart"
+    And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @Commentary
@@ -803,7 +803,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on visual title
     And Check the box for the title name
     And Right click on visual header
-    And Choose Insert visual as "Map"
+    And Choose Add chart as "Map"
     Then "Map" visual should be created in the same view tab
 
   @Commentary
@@ -813,7 +813,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on visual title
     And Check the box for the title name
     And Right click on visual header
-    And Choose Insert visual as "Table"
+    And Choose Add chart as "Table"
     Then "Table" visual should be created in the same view tab
 
   @Commentary
@@ -823,7 +823,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on visual title
     And Check the box for the title name
     And Right click on visual header
-    And Choose Insert visual as "Pie"
+    And Choose Add chart as "Pie"
     Then "Pie" visual should be created in the same view tab
 
   @Commentary
@@ -833,7 +833,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on visual title
     And Check the box for the title name
     And Right click on visual header
-    And Choose Insert visual as "Heat map"
+    And Choose Add chart as "Heat map"
     Then "Heat map" visual should be created in the same view tab
 
   @Commentary
@@ -843,48 +843,48 @@ Feature: Verifying Commentary Visual functionality
     And Click on visual title
     And Check the box for the title name
     And Right click on visual header
-    And Choose Insert visual as "Histogram"
+    And Choose Add chart as "Histogram"
     Then "Histogram" visual should be created in the same view tab
 
-  @Commentary
-  Scenario: TC_Commentary_104:Right click - Verify Attachments under insert visual
-    And Add some text in the description field
-    And Get the text from the description field
-    And Click on visual title
-    And Check the box for the title name
-    And Right click on visual header
-    And Choose Insert visual as "Attachments"
-    Then "Attachments" visual should be created in the same view tab
-
-  @Commentary
-  Scenario: TC_Commentary_105:Right click - Verify Commentary under insert visual
-    And Add some text in the description field
-    And Get the text from the description field
-    And Click on visual title
-    And Check the box for the title name
-    And Right click on visual header
-    And Choose Insert visual as "Commentary"
-    Then The commentary visual should be created in the same view tab
-
-  @Commentary
-  Scenario: TC_Commentary_106:Right click - Verify image under insert visual
-    And Add some text in the description field
-    And Get the text from the description field
-    And Click on visual title
-    And Check the box for the title name
-    And Right click on visual header
-    And Choose Insert visual as "Image"
-    Then "Image" visual should be created in the same view tab
-
-  @Commentary
-  Scenario: TC_Commentary_107:Right click - Verify Filter under insert visual
-    And Add some text in the description field
-    And Get the text from the description field
-    And Click on visual title
-    And Check the box for the title name
-    And Right click on visual header
-    And Choose Insert visual as "Filter"
-    Then "Filter" visual should be created in the same view tab
+  #@Commentary
+  #Scenario: TC_Commentary_104:Right click - Verify Attachments under insert visual
+    #And Add some text in the description field
+    #And Get the text from the description field
+    #And Click on visual title
+    #And Check the box for the title name
+    #And Right click on visual header
+    #And Choose Insert visual as "Attachments"
+    #Then "Attachments" visual should be created in the same view tab
+#
+  #@Commentary
+  #Scenario: TC_Commentary_105:Right click - Verify Commentary under insert visual
+    #And Add some text in the description field
+    #And Get the text from the description field
+    #And Click on visual title
+    #And Check the box for the title name
+    #And Right click on visual header
+    #And Choose Insert visual as "Commentary"
+    #Then The commentary visual should be created in the same view tab
+#
+  #@Commentary
+  #Scenario: TC_Commentary_106:Right click - Verify image under insert visual
+    #And Add some text in the description field
+    #And Get the text from the description field
+    #And Click on visual title
+    #And Check the box for the title name
+    #And Right click on visual header
+    #And Choose Insert visual as "Image"
+    #Then "Image" visual should be created in the same view tab
+#
+  #@Commentary
+  #Scenario: TC_Commentary_107:Right click - Verify Filter under insert visual
+    #And Add some text in the description field
+    #And Get the text from the description field
+    #And Click on visual title
+    #And Check the box for the title name
+    #And Right click on visual header
+    #And Choose Insert visual as "Filter"
+    #Then "Filter" visual should be created in the same view tab
 
   @Commentary
   Scenario: TC_Commentary_108:Right click - Verify Paste visual
@@ -916,7 +916,7 @@ Feature: Verifying Commentary Visual functionality
     And Check the box for the title name
     And Right click on visual header
     And Choose "Download"
-    Then "Commentary , View" options should be displayed
+    Then "Text , View" options should be displayed
 
   @Commentary
   Scenario: TC_Commentary_111:Right click - Download - Verify commentary
@@ -925,8 +925,8 @@ Feature: Verifying Commentary Visual functionality
     And Click on visual title
     And Check the box for the title name
     And Right click on visual header
-    And Choose Download as "Commentary"
-    Then Download popup should be appeared with "Commentary" tab selection
+    And Choose Download as "Text"
+    Then Download popup should be appeared with "Text" tab selection
 
   @Commentary
   Scenario: TC_Commentary_112:Right click - Download - Verify View

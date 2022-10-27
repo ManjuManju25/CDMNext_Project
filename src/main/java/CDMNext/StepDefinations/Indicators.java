@@ -41,9 +41,9 @@ public class Indicators {
 	public void click_on_related_series_tab() throws Throwable {
 		Thread.sleep(2000);
 
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).isEnabled()) {
+		if (login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).isEnabled()) {
 
-			login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
+			login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
 		} else {
 			fail("Test case failed");
 		}
@@ -73,7 +73,7 @@ public class Indicators {
 	public void try_selecting_related_series_in_my_series() throws Throwable {
 		Thread.sleep(2000);
 
-		if (login.driver.findElements(By.xpath("//div[contains(text(),'Related Series')]")).size() == 2)
+		if (login.driver.findElements(By.xpath("//*[contains(text(),'Related Series')]")).size() == 2)
 
 		{
 			Assert.fail("Test case failed");
@@ -103,9 +103,9 @@ public class Indicators {
 	public void try_click_on_selecting_related_series_in_my_series() throws Throwable {
 		Thread.sleep(2000);
 
-		if (login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).isEnabled()) {
+		if (login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).isEnabled()) {
 
-			login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
+			login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
 
 		} else {
 			fail("click on selecting related series in my series");

@@ -4319,7 +4319,7 @@ public class ChartVisual {
 		if (arg1.equalsIgnoreCase("Left")) {
 			String left = login.driver
 					.findElement(
-							By.xpath("//*[@class='visual-preview base-preview']//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='visual-configuration--visual-preview']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[0];
 			if (left.equals("width:80%") || left.equals("width: 80%")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -4330,7 +4330,7 @@ public class ChartVisual {
 		if (arg1.equalsIgnoreCase("Center")) {
 			String center = login.driver
 					.findElement(
-							By.xpath("//*[@class='visual-preview base-preview']//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='visual-configuration--visual-preview']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[1];
 			if (center.equals(" margin: 0px auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -4341,7 +4341,7 @@ public class ChartVisual {
 		if (arg1.equalsIgnoreCase("Right")) {
 			String right = login.driver
 					.findElement(
-							By.xpath("//*[@class='visual-preview base-preview']//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='visual-configuration--visual-preview']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[1];
 			if (right.equals(" margin-left: auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);

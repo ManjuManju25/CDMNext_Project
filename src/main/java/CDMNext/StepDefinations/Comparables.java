@@ -231,8 +231,8 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Clicking \\+ option from series$")
 	public void clicking_option_from_series() throws Throwable {
-		WebElement hovor = CommonFunctionality.getElementBycssSelector(login.driver, ".series-item--country", 4);
-		new Actions(login.driver).moveToElement(hovor).pause(500).build().perform();
+	//	WebElement hovor = CommonFunctionality.getElementBycssSelector(login.driver, ".series-item--country", 4);
+		//new Actions(login.driver).moveToElement(hovor).pause(500).build().perform();
 		WebElement hovor1 = CommonFunctionality.getElementByXpath(login.driver,
 				"(//*[@class='database-representation--tree']//*[@unselectable='on'])[1]//*[@class='add-to-data-selection--toggle']", 4);
 		new Actions(login.driver).moveToElement(hovor1).click().build().perform();
@@ -381,7 +381,7 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Hovor on to series name without click$")
 	public void hovor_on_to_series_name_without_click() throws Throwable {
-		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",8);
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='database-representation--tree']//*[@class='series-item--name'])[1]",8);
 		hovered_series_name = series.getText();
 		new Actions(login.driver).moveToElement(series).pause(2000).build().perform();
 		/*String text = CommonFunctionality
@@ -399,7 +399,8 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Hovor only series name$")
 	public void hovor_only_series_name() throws Throwable {
-		WebElement series = login.driver.findElement(By.xpath("//*[@class='series-item--name']"));
+		WebElement series = login.driver.findElement(By.xpath("(//*[@class='database-representation--tree']//*[@class='series-item--name'])[1]	"
+				+ ""));
 		new Actions(login.driver).moveToElement(series).pause(2000).build().perform();
 	}
 
@@ -428,7 +429,7 @@ public class Comparables {
 	public void get_the_name_of_series() throws Throwable {
 		for (int i = 1; i <= series_count_inside_table; i++) {
 			String series_name_inside_table = login.driver
-					.findElement(By.xpath("(//*[@class='series-item--name'])[" + i + "]")).getText();
+					.findElement(By.xpath("(//*[contains(@class,'series-list-item__selected')]//*[@class='series-item--name'])[" + i + "]")).getText();
 			series_values.add(series_name_inside_table);
 		}
 	}
@@ -472,7 +473,8 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Perform Drag and Drop operation$")
 	public void perform_Drag_and_Drop_operation() throws Throwable {
-		WebElement source = CommonFunctionality.getElementByClassName(login.driver, "series-item--name", 4);
+		//WebElement source = CommonFunctionality.getElementByClassName(login.driver, "series-item--name", 4);
+		WebElement source = CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'series-list-item__selected')]//*[@class='series-item--name'])[1]", 4);
 		WebElement target = CommonFunctionality.getElementByClassName(login.driver,
 				"data-selection-series-overlay--content", 4);
 		new Actions(login.driver).moveToElement(source).pause(500).clickAndHold(source).pause(1000)
@@ -540,28 +542,28 @@ public class Comparables {
 		if (arg1.equalsIgnoreCase("new")) {
 			filter_text = arg1;
 			WebElement ele = login.driver.findElement(By.xpath(
-					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'n') and @class='status-icon--sign']"));
+					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'N') and @class='status-icon--sign']"));
 			js.executeScript("arguments[0].scrollIntoView(true);", ele);
 			boolean checked = login.driver.findElement(By.xpath(
-					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'n') and @class='status-icon--sign']/preceding::input[1]"))
+					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'N') and @class='status-icon--sign']/preceding::input[1]"))
 					.isSelected();
 			if (checked == false) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'n') and @class='status-icon--sign']/preceding::span[1]",
+						"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'N') and @class='status-icon--sign']/preceding::span[1]",
 						4)).click().build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("key")) {
 			filter_text1 = arg1;
 			WebElement ele = login.driver.findElement(By.xpath(
-					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'k') and @class='status-icon--sign']"));
+					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'K') and @class='status-icon--sign']"));
 			js.executeScript("arguments[0].scrollIntoView(true);", ele);
 			boolean checked = login.driver.findElement(By.xpath(
-					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'k') and @class='status-icon--sign']/preceding::input[1]"))
+					"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'K') and @class='status-icon--sign']/preceding::input[1]"))
 					.isSelected();
 			if (checked == false) {
 				new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'k') and @class='status-icon--sign']/preceding::span[1]",
+						"//*[@class='more-filter-content--left']//*[contains(@class,'more-filter-content--section__other')]//*[contains(text(),'K') and @class='status-icon--sign']/preceding::span[1]",
 						4)).click().build().perform();
 			}
 		}
@@ -852,7 +854,7 @@ public class Comparables {
 			country.click();
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
-							"//*[contains(@class,'series-list-item__selected')]//*[@title='More actions']", 4).click();
+							"(//*[@class='series-list-item--action-icons']//*[@title='More actions'])[1]", 4).click();
 			CommonFunctionality.wait(2000);
 
 //			CommonFunctionality
@@ -866,10 +868,9 @@ public class Comparables {
 					.pause(3000).click().build().perform();
 		} else {
 			//new Actions(login.driver).pause(500).moveToElement(country).build().perform();
-			country.click();
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
-							"//*[contains(@class,'series-list-item__selected')]//*[@title='" + arg1 + "']", 4).click();
+							"(//*[@class='series-list-item--action-icons']//*[@title='" + arg1 + "'])[1]", 4).click();
 		}
 	}
 
@@ -1311,7 +1312,7 @@ public class Comparables {
 				"The comparables count is matching to applied filter count and it has been verified successfully");
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@Then("^Related results should be shown in comparables$")
 	public void related_results_should_be_shown_in_comparables() throws Throwable {
 		
@@ -1678,16 +1679,30 @@ public class Comparables {
 		}
 	}
 
-	@Then("^The \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" options should available in table$")
-	public void the_options_should_available_in_table(String arg1, String arg2, String arg3, String arg4, String arg5,
-			String arg6, String arg7, String arg8, String arg9, String arg10) throws Throwable {
+	@Then("^The \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" options should available$")
+	public void the_options_should_available(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6, String arg7, String arg8, String arg9, String arg10, String arg11, String arg12) throws Throwable {
 		List<WebElement> items = login.driver.findElements(By.xpath(
 				"//*[@class='items-wrapper']/li/span[not(contains(@class,'dropdown-submenu-icon')) and not(contains(@title,'View on Administrative Map'))]"));
 		for (WebElement item : items) {
 			String value = item.getAttribute("title");
 			if (value.equals(arg1) || value.equals(arg2) || value.equals(arg3) || value.equals(arg4)
 					|| value.equals(arg5) || value.equals(arg6) || value.equals(arg7) || value.equals(arg8)
-					|| value.equals(arg9) || value.equals(arg10)) {
+					|| value.equals(arg9) || value.equals(arg10) || value.equals(arg11) || value.equals(arg12)) {
+				login.Log4j.info(value + " option is present inside Table");
+			} else {
+				sa.fail(item + " not present");
+			}
+		}
+	}
+	@Then("^The \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" options should available$")
+	public void the_options_should_available(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6, String arg7, String arg8, String arg9, String arg10, String arg11, String arg12, String arg13) throws Throwable {
+		List<WebElement> items = login.driver.findElements(By.xpath(
+				"//*[@class='items-wrapper']/li/span[not(contains(@class,'dropdown-submenu-icon')) and not(contains(@title,'View on Administrative Map'))]"));
+		for (WebElement item : items) {
+			String value = item.getAttribute("title");
+			if (value.equals(arg1) || value.equals(arg2) || value.equals(arg3) || value.equals(arg4)
+					|| value.equals(arg5) || value.equals(arg6) || value.equals(arg7) || value.equals(arg8)
+					|| value.equals(arg9) || value.equals(arg10) || value.equals(arg11) || value.equals(arg12) || value.equals(arg13)) {
 				login.Log4j.info(value + " option is present inside Table");
 			} else {
 				sa.fail(item + " not present");
@@ -2267,8 +2282,8 @@ public class Comparables {
 		String k = "Source";
 		String l = "Series id";
 		String m = "Mnemonic";
-		String n = "Classification";
-		String o = "Indicator";
+		String n = "Indicator";
+		String o = "Morecou";
 		CommonFunctionality.wait(2000);
 		List<WebElement> tooltips = login.driver
 				.findElements(By.xpath("//tr[@class='series-tooltip-table--row']//td[1]"));

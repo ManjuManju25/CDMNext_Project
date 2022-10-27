@@ -1,6 +1,6 @@
 Feature: Verify title for commentary visual by default.
 
-  #-----------------------1-50 shankatr -------------------------------------#
+  #-----------------------1-50 shankar -------------------------------------#
   @Sprint5_4
   Scenario: TC_20623_01 : Verify title for commentary visual by default.
     Given user creates a commentary visual.

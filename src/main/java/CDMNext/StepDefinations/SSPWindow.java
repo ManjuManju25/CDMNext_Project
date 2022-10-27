@@ -536,7 +536,7 @@ public class SSPWindow {
 		CommonFunctionality.wait(2000);
 		
 		
-		login.driver.findElement(By.xpath("//div[@class='growl-message-close']")).click();
+//		login.driver.findElement(By.xpath("//div[@class='growl-message-close']")).click();
 		CommonFunctionality.wait(2000);
 		
 		if(login.driver.findElements(By.xpath("//div[@class='movable-modal--close']")).size()>0) {
@@ -547,7 +547,7 @@ public class SSPWindow {
 			
 			//login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
 		}else {
-			fail();
+			//fail();
 		}
 		
 	}
@@ -985,10 +985,22 @@ public class SSPWindow {
 	@And("^Select \"([^\"]*)\" tab$")
 	public void select_tab(String arg1) throws Throwable {
 		CommonFunctionality.wait(4000);
-		try {
-		login.driver.findElement(By.xpath("//*[@class='zoom-button button button__sm']//*[contains(text(),'"+arg1+"')]")).click();
-		} catch (org.openqa.selenium.StaleElementReferenceException ex) {
-		login.driver.findElement(By.xpath("//*[@class='zoom-button button button__sm']//*[contains(text(),'"+arg1+"')]")).click();
+		if (arg1.equalsIgnoreCase("views")) {
+			login.driver.findElement(By.xpath("//*[@data-tab='views']")).click();
+		} else {
+			String tab = arg1.toLowerCase();
+			try {
+				login.driver
+				.findElement(By.xpath(
+						"//*[@data-tab='" + tab + "']"))
+				.click();
+			} catch (org.openqa.selenium.StaleElementReferenceException ex) {
+				
+				login.driver
+						.findElement(By.xpath(
+								"//*[@data-tab='" + tab + "']"))
+						.click();
+			}
 		}
 		CommonFunctionality.wait(3000);
 	}
@@ -1514,6 +1526,8 @@ login.driver.findElement(By.xpath("(//*[@class='preview-series-data']//*[@class=
 
 	@And("^Click on \"([^\"]*)\" button$")
 	public void click_on_button(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+		if(arg1.equalsIgnoreCase("Preview")) {
 		CommonFunctionality.webDriverwait_locator(
 				"//*[contains(@title,'" + arg1 + "') and @class='series-with-suggestions-preview--open-visual']",
 				"xpath");
@@ -1521,6 +1535,18 @@ login.driver.findElement(By.xpath("(//*[@class='preview-series-data']//*[@class=
 				"//*[contains(@title,'" + arg1 + "') and @class='series-with-suggestions-preview--open-visual']"));
 		new Actions(login.driver).moveToElement(preview).click(preview).build().perform();
 		new Actions(login.driver).moveToElement(preview).click(preview).build().perform();
+		} else if(arg1.equalsIgnoreCase("Search")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='modal-window modal-window__active']//*[contains(text(),'" + arg1 + "')]", 10).click();
+		} else if(arg1.equalsIgnoreCase("Cancel")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Close']", 10).click();
+		} else if(arg1.equalsIgnoreCase("Save")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 10).click();
+		} else if(arg1.equalsIgnoreCase("Next") || arg1.equalsIgnoreCase("Previous")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'" + arg1 + "')]", 10).click();
+		} else if(arg1.equalsIgnoreCase("Apply")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 10).click();
+			
+		}
 	}
 
 	@And("^click on \"([^\"]*)\" link in SSP window$")

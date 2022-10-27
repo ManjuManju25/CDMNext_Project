@@ -74,7 +74,7 @@ Feature: Verifying map visual functionality
   Scenario: TC_Map_01:Verify creating Map visual from Chart menu
     And Select some series
     And Right click on the series
-    And Select "View as Map" > "World"
+    And Select "Add chart" and create a map visual
     Then Map visual should be created
 
   @Map
@@ -83,12 +83,11 @@ Feature: Verifying map visual functionality
     And Drag and drop the series to view
     Then Map visual should be created
 
-  @Map
-  Scenario: TC_Map_03:Verify creating Map visual from View panel by drag and drop
-    And Click on View tab
-    And Drag and drop Map visual to view
-    Then Empty Map visual should be created
-
+  #@Map
+  #Scenario: TC_Map_03:Verify creating Map visual from View panel by drag and drop
+  #And Click on View tab
+  #And Drag and drop Map visual to view
+  #Then Empty Map visual should be created
   @Map
   Scenario: TC_Map_04:Verify creating Map visual from View panel by clicking on Map icon
     And Click on View tab
@@ -401,7 +400,7 @@ Feature: Verifying map visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select "View as Map" visual
+    And Select "Add chart" and create a map visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -422,7 +421,7 @@ Feature: Verifying map visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select "View as Map" visual
+    And Select "Add chart" and create a map visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -436,7 +435,7 @@ Feature: Verifying map visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select "View as Map" visual
+    And Select "Add chart" and create a map visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -450,7 +449,7 @@ Feature: Verifying map visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select "View as Map" visual
+    And Select "Add chart" and create a map visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -463,7 +462,7 @@ Feature: Verifying map visual functionality
   Scenario: TC_Map_51:Rename - Function discription - Verify'Apply original title for all series' icon
     And Add series to the my series tab and Apply function
     And Right click on series
-    And Select "View as Map" visual
+    And Select "Add chart" and create a map visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -477,7 +476,7 @@ Feature: Verifying map visual functionality
     And Add series to the my series tab
     And Apply function for a series
     And Right click on series
-    And Select "View as Map" visual
+    And Select "Add chart" and create a map visual
     And Click on Edit series option
     And Click on "Rename" option
     And Click on Edit series info dropdown
@@ -777,21 +776,20 @@ Feature: Verifying map visual functionality
     And Click on "Apply"
     Then The selected function should be displayed
 
-  @Map
-  Scenario: TC_Map_84:Edit series - Verify hiding function toolbar
-    And Create a map visual with series id's "408940397"
-    And Click on Edit series option
-    And Click on "Hide the function bar"
-    Then The function toolbar should be hidden
-
-  @Map
-  Scenario: TC_Map_85:Edit series - Verify showing the function toolbar
-    And Create a map visual with series id's "408940397"
-    And Click on Edit series option
-    And Click on "Hide the function bar"
-    And Click on "Show the function bar"
-    Then The function toolbar should be shown
-
+  #@Map
+  #Scenario: TC_Map_84:Edit series - Verify hiding function toolbar
+  #And Create a map visual with series id's "408940397"
+  #And Click on Edit series option
+  #And Click on "Hide the function bar"
+  #Then The function toolbar should be hidden
+  #
+  #@Map
+  #Scenario: TC_Map_85:Edit series - Verify showing the function toolbar
+  #And Create a map visual with series id's "408940397"
+  #And Click on Edit series option
+  #And Click on "Hide the function bar"
+  #And Click on "Show the function bar"
+  #Then The function toolbar should be shown
   @Map
   Scenario: TC_Map_86:Edit series - Verify 'Type a function' field
     And Create a map visual with series id's "226311002;405159937"
@@ -2105,49 +2103,48 @@ Feature: Verifying map visual functionality
       | Add to new tab     |
       | Add to new insight |
 
-  @Map
-  Scenario: TC_Map_233:Verify Map Visuals Type under World Dropdown
-    And Click on View tab
-    When Click on world drop down button
-    Then Below options should be available
-      | World                 |
-      | Africa                |
-      | Asia                  |
-      | Europe                |
-      | Europe without Russia |
-      | EU                    |
-      | Middle East           |
-      | N America             |
-      | Oceania               |
-      | S America             |
-      | China                 |
-      | Russia                |
-      | India                 |
-
-  @Map
-  Scenario Outline: TC_Map_234:Verify each Country/continent for Map Visual
-    And Select some series
-    And Click on View tab
-    When Click on world drop down button
-    And Select "<TypesOfMaps>" map
-    Then Respective map should be created
-
-    Examples: 
-      | TypesOfMaps           |
-      | World                 |
-      | Africa                |
-      | Asia                  |
-      | Europe                |
-      | Europe without Russia |
-      | EU                    |
-      | Middle East           |
-      | N America             |
-      | Oceania               |
-      | S America             |
-      | China                 |
-      | Russia                |
-      | India                 |
-
+  #@Map
+  #Scenario: TC_Map_233:Verify Map Visuals Type under World Dropdown
+  #And Click on View tab
+  #When Click on world drop down button
+  #Then Below options should be available
+  #| World                 |
+  #| Africa                |
+  #| Asia                  |
+  #| Europe                |
+  #| Europe without Russia |
+  #| EU                    |
+  #| Middle East           |
+  #| N America             |
+  #| Oceania               |
+  #| S America             |
+  #| China                 |
+  #| Russia                |
+  #| India                 |
+  #
+  #@Map
+  #Scenario Outline: TC_Map_234:Verify each Country/continent for Map Visual
+  #And Select some series
+  #And Click on View tab
+  #When Click on world drop down button
+  #And Select "<TypesOfMaps>" map
+  #Then Respective map should be created
+  #
+  #Examples:
+  #| TypesOfMaps           |
+  #| World                 |
+  #| Africa                |
+  #| Asia                  |
+  #| Europe                |
+  #| Europe without Russia |
+  #| EU                    |
+  #| Middle East           |
+  #| N America             |
+  #| Oceania               |
+  #| S America             |
+  #| China                 |
+  #| Russia                |
+  #| India                 |
   @Map
   Scenario: TC_Map_235:Add to insight - Verify 'Add to new tab' option under Add to insight
     And Create a map visual with series id's "5724301;5823501"
@@ -2247,7 +2244,7 @@ Feature: Verifying map visual functionality
     And Create a map visual with series id's "5724301;5823501"
     And Click on Download icon
     And Select "jpeg" format
-    And Select width size "652"
+    And Select width size "589"
     And Click on "Download"
     Then The visual should be downloaded with selected size
 
@@ -2332,72 +2329,71 @@ Feature: Verifying map visual functionality
   Scenario: TC_Map_259:Right click - Verify chart under insert visual
     And Create a map visual with series id's "16240301;16243001"
     And Right click on visual header
-    And Choose Insert visual as "Chart"
+    And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @Map
   Scenario: TC_Map_260:Right click - Verify Pie under insert visual
     And Create a map visual with series id's "16240301;16243001"
     And Right click on visual header
-    And Choose Insert visual as "Pie"
+    And Choose Add chart as "Pie"
     Then "Pie" visual should be created in the same view tab
 
   @Map
   Scenario: TC_Map_261:Right click - Verify table under insert visual
     And Create a map visual with series id's "16240301;16243001"
     And Right click on visual header
-    And Choose Insert visual as "Table"
+    And Choose Add chart as "Table"
     Then "Table" visual should be created in the same view tab
 
   @Map
   Scenario: TC_Map_262:Right click - Verify map under insert visual
     And Create a map visual with series id's "16240301;16243001"
     And Right click on visual header
-    And Choose Insert visual as "Map"
+    And Choose Add chart as "Map"
     Then "Map" visual should be created in the same view tab
 
   @Map
   Scenario: TC_Map_263:Right click - Verify Heat map under insert visual
     And Create a map visual with series id's "16240301;16243001"
     And Right click on visual header
-    And Choose Insert visual as "Heat map"
+    And Choose Add chart as "Heat map"
     Then "Heat map" visual should be created in the same view tab
 
   @Map
   Scenario: TC_Map_264:Right click - Verify Histogram under insert visual
     And Create a map visual with series id's "16240301;16243001"
     And Right click on visual header
-    And Choose Insert visual as "Histogram"
+    And Choose Add chart as "Histogram"
     Then "Histogram" visual should be created in the same view tab
 
-  @Map
-  Scenario: TC_Map_265:Right click - Verify commentary under insert visual
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Choose Insert visual as "Commentary"
-    Then The commentary visual should be created in the same view tab
-
-  @Map
-  Scenario: TC_Map_266:Right click - Verify attachments under insert visual
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Choose Insert visual as "Attachments"
-    Then "Attachments" visual should be created in the same view tab
-
-  @Map
-  Scenario: TC_Map_267:Right click - Verify Image under insert visual
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Choose Insert visual as "Image"
-    Then "Image" visual should be created in the same view tab
-
-  @Map
-  Scenario: TC_Map_268:Right click - Verify Filter under insert visual
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Choose Insert visual as "Filter"
-    Then "Filter" visual should be created in the same view tab
-
+  #@Map
+  #Scenario: TC_Map_265:Right click - Verify commentary under insert visual
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Choose Insert visual as "Commentary"
+  #Then The commentary visual should be created in the same view tab
+  #
+  #@Map
+  #Scenario: TC_Map_266:Right click - Verify attachments under insert visual
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Choose Insert visual as "Attachments"
+  #Then "Attachments" visual should be created in the same view tab
+  #
+  #@Map
+  #Scenario: TC_Map_267:Right click - Verify Image under insert visual
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Choose Insert visual as "Image"
+  #Then "Image" visual should be created in the same view tab
+  #
+  #@Map
+  #Scenario: TC_Map_268:Right click - Verify Filter under insert visual
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Choose Insert visual as "Filter"
+  #Then "Filter" visual should be created in the same view tab
   @Map
   Scenario: TC_Map_269:Right click - Verify Paste visual
     And Create a map visual with series id's "16240301;16243001"
@@ -2407,41 +2403,40 @@ Feature: Verifying map visual functionality
     And Choose "Paste visual"
     Then Copied visual should be pasted
 
-  @Map
-  Scenario: TC_Map_270:Right click - View as - Verify Chart
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Select View as > "Chart"
-    Then The "Map" visual should be converted as "Chart" visual
-
-  @Map
-  Scenario: TC_Map_271:Right click - View as - Verify Table
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Select View as > "Table"
-    Then The "Map" visual should be converted as "Table" visual
-
-  @Map
-  Scenario: TC_Map_272:Right click - View as - Verify Pie
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Select View as > "Pie"
-    Then The "Map" visual should be converted as "Pie" visual
-
-  @Map
-  Scenario: TC_Map_273:Right click - View as - Verify Histogram
-    And Create a map visual with series id's "16240301"
-    And Right click on visual header
-    And Select View as > "Histogram"
-    Then The "Map" visual should be converted as "Histogram" visual
-
-  @Map
-  Scenario: TC_Map_274:Right click - View as - Verify Heat map
-    And Create a map visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Select View as > "Heat map"
-    Then The "Map" visual should be converted as "Heat map" visual
-
+  #@Map
+  #Scenario: TC_Map_270:Right click - View as - Verify Chart
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Select View as > "Chart"
+  #Then The "Map" visual should be converted as "Chart" visual
+  #
+  #@Map
+  #Scenario: TC_Map_271:Right click - View as - Verify Table
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Select View as > "Table"
+  #Then The "Map" visual should be converted as "Table" visual
+  #
+  #@Map
+  #Scenario: TC_Map_272:Right click - View as - Verify Pie
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Select View as > "Pie"
+  #Then The "Map" visual should be converted as "Pie" visual
+  #
+  #@Map
+  #Scenario: TC_Map_273:Right click - View as - Verify Histogram
+  #And Create a map visual with series id's "16240301"
+  #And Right click on visual header
+  #And Select View as > "Histogram"
+  #Then The "Map" visual should be converted as "Histogram" visual
+  #
+  #@Map
+  #Scenario: TC_Map_274:Right click - View as - Verify Heat map
+  #And Create a map visual with series id's "16240301;16243001"
+  #And Right click on visual header
+  #And Select View as > "Heat map"
+  #Then The "Map" visual should be converted as "Heat map" visual
   @Map
   Scenario: TC_Map_275:Right click - Verify Calculated series sub dropdown
     And Create a map visual with series id's "16240301"
@@ -2815,10 +2810,55 @@ Feature: Verifying map visual functionality
     And Select Solid color
     Then Default value should be "3" and the colors range should be from "2,3,4,5,6,7"
 
-  @Map1
+  @Map
   Scenario: TC_Map_322:Edit Map - Verify Solid Color button - Color Steps
     And Create a map visual with series id's "272965603"
     And Click on "Edit Map"
     And Select Solid color
     And Click on color steps dropdown
     Then Selected color steps will be created as per the selection
+
+  @Map
+  Scenario: TC_Map_323:Edit Map - Verify Solid Color button - Color Steps - Smallest Value and Highest Value
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select Solid color
+    Then Smallest value for Map will be displayed in decimal points with respective color
+    Then Highest Value will be displayed in decimal points with respective color
+
+  @Map
+  Scenario: TC_Map_324:Edit Map - Verify Solid Color button - Color Steps - Smallest Value = Color
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select Solid color
+    And Click on the color button for the smallest value and change it to Red
+    Then Selected color will be changed accordingly
+
+  @Map
+  Scenario: TC_Map_325:Edit Map - Verify Solid Color button - Advanced settings cogwheel
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select Solid color
+    And Click on Advanced Setting popup cogwheel
+    Then The following list will be displayed
+      | Common     |
+      | Color axes |
+      | Position   |
+      | Title      |
+      | Background |
+      | Border     |
+
+  @Map
+  Scenario: TC_Map_326:Edit Map - Gradient color button - Steps Dropdown
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select Gradient
+    Then Steps from "0,1,2,3,4,5" will be available and By default 0 color step will be displayed
+
+  @Map
+  Scenario: TC_Map_327:Edit Map - Gradient color button - Steps change
+    And Create a map visual with series id's "272965603"
+    And Click on "Edit Map"
+    And Select Gradient
+    And Click on color steps dropdown
+    Then Selected steps will be created as per the selection

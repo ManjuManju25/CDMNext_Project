@@ -83,7 +83,7 @@ public class Commentary {
 		String commentary = null;
 		String ViewContainer = null;
 		CommonFunctionality.wait(1500);
-		commentary = "//*[contains(@title,'insert Commentary')]//*[@class='insight-action-panel--btn-icon']//div";
+		commentary = "//*[contains(@title,'insert Text')]//*[@class='insight-action-panel--btn-icon']//div";
 		ViewContainer = "//*[@class='view-components-over--visuals']//*[@class='view-components-over--visual'][1]";
 		DragAndDrop(commentary, ViewContainer);
 	}
@@ -309,7 +309,7 @@ public class Commentary {
 
 	@Then("^The commentary should update the \"([^\"]*)\" font as \"([^\"]*)\"$")
 	public void the_commentary_should_update_the_font_as(String arg1, String arg2) throws Throwable {
-		login.driver.navigate().refresh();
+//		login.driver.navigate().refresh();
 		CommonFunctionality.wait(2000);
 		String Txtfont = login.driver.findElement(By.xpath("//*[@data-name='" + arg1 + "']")).getCssValue("font-size");
 		login.Log4j.info(Txtfont);
@@ -431,7 +431,7 @@ public class Commentary {
 	public void choose_text_color_is_blue_for_subtitle() throws Throwable {
 		ExpandSubTitle_CheckBox();
 		CommonFunctionality.getElementByProperty(login.driver, "SubTitleColorPicker", 4).click();
-		WebElement colorEle = CommonFunctionality.getElementByProperty(login.driver, "OrangeColor", 20);
+		WebElement colorEle = CommonFunctionality.getElementByProperty(login.driver, "BlueColor", 20);
 		ActualColor = colorEle.getCssValue("background-color");
 		login.Log4j.info(ActualColor);
 		colorEle.click();
@@ -1243,7 +1243,7 @@ public class Commentary {
 		} else if (arg1.equalsIgnoreCase("height")) {
 			CommonFunctionality.getElementByProperty(login.driver, "Table_height", 15).sendKeys(arg2);
 		} else if (arg1.equalsIgnoreCase("cell spacing")) {
-			CommonFunctionality.getElementByProperty(login.driver, "Table_height", 15).sendKeys(arg2);
+			CommonFunctionality.getElementByProperty(login.driver, "Table_cellSpacing", 15).sendKeys(arg2);
 		} else if (arg1.equalsIgnoreCase("cell padding")) {
 			CommonFunctionality.getElementByProperty(login.driver, "Table_cellPadding", 15).clear();
 			CommonFunctionality.getElementByProperty(login.driver, "Table_cellPadding", 15).sendKeys(arg2);
@@ -1368,7 +1368,9 @@ public class Commentary {
 		WebElement caption = CommonFunctionality.getElementByProperty(login.driver, "TableCaption", 10);
 		if (caption.isDisplayed()) {
 			login.driver.switchTo().defaultContent();
-			click_on_drop_down(arg);
+			//click_on_drop_down(arg);
+			WebElement table_dropdown = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg + "']", 15);
+			table_dropdown.click();
 			st.click_on(arg1);
 			check_Caption_for_table();
 
@@ -1645,13 +1647,13 @@ public class Commentary {
 		// Actualcolor =
 		// login.driver.findElement(By.xpath("//table//tbody//tr[3]//td[1]//div"))
 		// .getCssValue("background-color");
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='" + arg1 + "']", 15).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='#FF0000']", 15).click();
 		CommonFunctionality.wait(1000);
 	}
 
 	@Then("^The Text should be changed to \"([^\"]*)\"$")
 	public void the_Text_should_be_changed_to(String arg1) throws Throwable {
-		String ExpectedColor = "#e03e2d";
+		String ExpectedColor = "#ff0000";
 		SwitchToFrame();
 		CommonFunctionality.wait(2000);
 		try {
@@ -1679,7 +1681,7 @@ public class Commentary {
 
 	@Then("^The background of text should be changed to \"([^\"]*)\"$")
 	public void the_background_of_text_should_be_changed_to(String arg1) throws Throwable {
-		String ExpectedColor = "#e03e2d";
+		String ExpectedColor = "#ff0000";
 		SwitchToFrame();
 		CommonFunctionality.wait(2000);
 		try {
@@ -1913,17 +1915,52 @@ public class Commentary {
 
 	}
 
-	@And("^Choose Insert visual as \"([^\"]*)\"$")
-	public void choose_Insert_visual_as(String arg1) throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "InsertVisual", 10).click();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"(//ul[@class='dropdown-menu']//li//*[contains(text(),'" + arg1 + "')])[1]", 8).click();
+	@And("^Choose Add chart as \"([^\"]*)\"$")
+	public void choose_Add_chart_as(String arg1) throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "Add_chart", 10).click();
+		switch(arg1) {
+		case "Chart" :
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='icon--chart-line_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
+			break;
+		
+		case "Map":
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='icon--map-filled_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
+			break;
+		case "Table":
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
+			break;
+		case "Heat map":
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='icon--heatmap_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
+			break;
+		case "Histogram":
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItemTitle'][normalize-space()='Histogram']", 8).click();
+			try {
+				//if confirmation popup is displayed
+				CommonFunctionality.getElementByXpath(login.driver,
+						"//*[contains(text(),'Ok')]", 8).click();
+			}catch(Exception e) {
+				
+			}
+			break;
+		case "Pie":
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='icon--pie_chart-pie_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
+			break;
+		default:
+				Assert.fail("failed due to xpath got changed");
+	}
+		
 	}
 
 	@Then("^\"([^\"]*)\" visual should be created in the same view tab$")
 	public void visual_should_be_created_in_the_same_view_tab(String arg1) throws Throwable {
 		
-		if (arg1.equals("Attachments") || arg1.equals("Image") || arg1.equals("Filter")) {
+		if (arg1.equals("Attachments") ||  arg1.equals("Filter")) {
 			CommonFunctionality.wait(4000);
 			WebElement VisualTitle = login.driver
 					.findElement(By.xpath("//*[@class='view-components']//*[contains(text(),'" + arg1 + "')]"));
@@ -1937,6 +1974,17 @@ public class Commentary {
 			WebElement VisualTitle = login.driver
 					.findElement(By.xpath("//*[@class='visual-item-template visual-select-area text-template']"));
 //			login.Log4j.info(VisualTitle.getText());
+			if (VisualTitle.isDisplayed()) {
+				login.Log4j.info(arg1 + " visual is created");
+			} else {
+				Assert.fail(arg1 + " visual is not created");
+			}
+		}
+		else if(arg1.equals("Image")){
+			CommonFunctionality.wait(4000);
+			WebElement VisualTitle = login.driver
+					.findElement(By.xpath("//*[contains(@class,'image-template')]"));
+
 			if (VisualTitle.isDisplayed()) {
 				login.Log4j.info(arg1 + " visual is created");
 			} else {

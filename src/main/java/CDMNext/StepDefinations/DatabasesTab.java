@@ -90,17 +90,21 @@ public class DatabasesTab {
 	Actions action = new Actions(login.driver);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
-	SeriesTab st = new SeriesTab();
+	 SeriesTab st = new SeriesTab();
 	int selected_table_size;
 	public int i;
 	String copied_link;
 	static String function;
+	
+	
 
 	@Given("^Click on More filter$")
 	public void click_on_More_filter() throws Throwable {
 		CommonFunctionality.wait(15000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("MoreFilter"))).click();
 		CommonFunctionality.wait(10000);
+		//db.st.sname="Nadiya";
+		
 	}
 
 	@And("^Select database as \"([^\"]*)\"$")
@@ -163,21 +167,24 @@ public class DatabasesTab {
 	public void expand_till_series_level() throws Throwable {
 
 		if (database == true) {
-			CommonFunctionality.getElementByProperty(login.driver,
-					"Expand2ndLevel", 4).click();
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@data-node-model-id='DAILY&&FMS']//div[@class='toggle']", 4).click();
 			login.Log4j.info("Clicking on Topic level");
 			CommonFunctionality.getElementByProperty(login.driver,
 					"Expand3rdLevel", 4)
 					.click();
 			login.Log4j.info("Clicking on Section level");
 			Thread.sleep(1200);
-			ele = login.driver.findElement(By.xpath(
-					"(//div[@class='tree-node'])[1]//*[@class='name-text']"));
-			tableName = ele.getText();
 			CommonFunctionality.getElementByProperty(login.driver,
 					"Expand4thLevel",
 					4).click();
+			ele = login.driver.findElement(By.xpath(
+					"(//div[@class='tree-node'])[1]//*[@class='name-text']"));
+			tableName = ele.getText();
 			login.Log4j.info("Clicking on Table level");
+			CommonFunctionality.getElementByProperty(login.driver,
+					"Expand5thLevel",4).click();
+			
 
 		} else {
 			CommonFunctionality.wait(2000);
@@ -206,10 +213,9 @@ public class DatabasesTab {
 	@Then("^Should able to expand all the DB/Topic/section/table under Databases tab$")
 	public void should_able_to_expand_all_the_DB_Topic_section_table_under_Databases_tab() throws Throwable {
 		Thread.sleep(2000);
-		checkbox = login.driver.findElement(By.xpath(
-				"//div[contains(@class,'series-list-item series-list-item__found-by-search')]//*[@class='series-list-item--checkbox-wrapper']/*"));
-		if (checkbox.isDisplayed()) {
-			checkbox.click();
+		List<WebElement> checkbox = login.driver.findElements(By.xpath(
+				"//*[@class='series-list-item--checkbox-wrapper']/*"));
+		if (checkbox.size() > 0) {
 			login.Log4j.info("DB/Topic/section/table level under Databases tab is expanded");
 		} else {
 			login.Log4j.info("DB/Topic/section/table level under Databases tab is not expanded");
@@ -218,7 +224,9 @@ public class DatabasesTab {
 
 	@And("^Select Global database$")
 	public void select_global_database() throws Throwable {
-		CommonFunctionality.CollapseTreeMethod();
+		//CommonFunctionality.CollapseTreeMethod();
+		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 10).click();
+		
 		try {
 			CommonFunctionality.getElementByProperty(login.driver, "MatchesOnly", 8).click();
 		} catch (Exception e) {
@@ -251,7 +259,7 @@ public class DatabasesTab {
 	@And("^Select any number of series$")
 	public void select_any_number_of_series() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver, "Series", 8).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 8).click();
 
 		try {
 			Thread.sleep(3000);
@@ -506,10 +514,13 @@ public class DatabasesTab {
 		 * "')]")).click(); login.Log4j.info("Clicking on " + arg1); } else {
 		 * AssertJUnit.fail(arg1 + " is not displayed"); }
 		 */
-		if (arg1.equals("Rename") || arg1.equalsIgnoreCase("Feedback") || arg1.equals("+ Add more from My Series")) {
+		if (arg1.equalsIgnoreCase("Feedback") || arg1.equals("+ Add more from My Series")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 5).click();
 
-		} else if (arg1.equalsIgnoreCase("Minimize") || arg1.equalsIgnoreCase("Maximize")
+		} else if(arg1.equals("Rename")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 5).click();
+		}
+		else if (arg1.equalsIgnoreCase("Minimize") || arg1.equalsIgnoreCase("Maximize")
 				|| arg1.equalsIgnoreCase("Full-screen") || arg1.equalsIgnoreCase("Exit full-screen")) {
 			MinimizeVar = MaximizeVar = FullScreenVar = Exit_fullScreen = arg1;
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -687,6 +698,7 @@ public class DatabasesTab {
 		robot = new Robot();
 		// Store all currently open tabs in tabs
 		tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
+		
 		// Navigate to New Tab
 		login.driver.switchTo().window(tabs2.get(1));
 		robot.keyPress(KeyEvent.VK_ENTER);
@@ -698,6 +710,7 @@ public class DatabasesTab {
 			Thread.sleep(1000);
 			login.driver.close();
 			login.driver.switchTo().window(tabs2.get(0));
+			
 		} else {
 			Thread.sleep(1000);
 			login.driver.close();
@@ -778,11 +791,11 @@ public class DatabasesTab {
 
 		if (arg1.equalsIgnoreCase("Sorry, no results were found here.")) {
 			login.Log4j.info("Clicking on  Series tab ");
-			CommonFunctionality.getElementByProperty(login.driver, "Series", 10).click();
+			CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 10).click();
 			CommonFunctionality.wait(5000);
-			ele = login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]"));
+			ele = login.driver.findElement(By.xpath("//*[@class='search-no-results--header']"));
 			String noResults = ele.getText();
-			if (ele.isDisplayed()) {
+			if (noResults.equals(arg1)) {
 				login.Log4j.info(noResults + "is displayed for invalid Keyword ");
 			} else {
 				AssertJUnit.fail(noResults + "is not displayed for invalid Keyword ");
@@ -831,20 +844,18 @@ public class DatabasesTab {
 		WebElement ul_element = CommonFunctionality.getElementBycssSelector(login.driver, ".context-menu", 8);
 		String rightClick_str = ul_element.getText();
 		login.Log4j.info(rightClick_str);
-		if (array.length == 7) {
+		if (array.length == 6) {
 			if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true
-					&& rightClick_str.contains(array[2]) == true && rightClick_str.contains(array[3]) == true && rightClick_str.contains(array[4]) == true && rightClick_str.contains(array[5]) == true && rightClick_str.contains(array[6]) == true ) {
-				login.Log4j.info(array[0] + " AND " + array[1] + " AND " + array[2]+ " AND " + array[3]+ " AND " + array[4]+ " AND " + array[5]+ " AND " + array[6]
-						+ " options available for right click option for DB level");
+					&& rightClick_str.contains(array[2]) == true && rightClick_str.contains(array[3]) == true && rightClick_str.contains(array[4]) == true && rightClick_str.contains(array[5]) == true ) {
+				login.Log4j.info(array[0] + " AND " + array[1] + " AND " + array[2]+ " AND " + array[3]+ " AND " + array[4]+ " AND " + array[5]+ " options available for right click option for DB level");
 
 			} else {
-				AssertJUnit.fail(array[0] + " AND" + array[1] + " AND" + array[2]+ " AND " + array[3]+ " AND " + array[4]+ " AND " + array[5]+ " AND " + array[6]
-						+ " options not available for right click option for DB level");
+				AssertJUnit.fail(array[0] + " AND" + array[1] + " AND" + array[2]+ " AND " + array[3]+ " AND " + array[4]+ " AND " + array[5]+ " options not available for right click option for DB level");
 			}
-		} else if (array.length == 6) {
-			if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true && rightClick_str.contains(array[2]) == true && rightClick_str.contains(array[3]) == true && rightClick_str.contains(array[4]) == true && rightClick_str.contains(array[5]) == true ) {
-				login.Log4j.info(array[0] + " AND " + array[1] + " AND " + array[2]+ " AND " + array[3]+ " AND " + array[4]+ " AND " + array[5]
-						+ " options available for right click option for DB level");
+		} else if (array.length == 5) {
+			if (rightClick_str.contains(array[0]) == true && rightClick_str.contains(array[1]) == true && rightClick_str.contains(array[2]) == true && rightClick_str.contains(array[3]) == true && rightClick_str.contains(array[4]) == true) {
+				login.Log4j.info(array[0] + " AND " + array[1] + " AND " + array[2]+ " AND " + array[3]+ " AND " + array[4] +
+						" options available for right click option for DB level");
 
 			} else {
 				AssertJUnit.fail(array[0] + " AND" + array[1] + " options not available for right click option ");
@@ -1648,12 +1659,14 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 			// Thread.sleep(2000);
 			// action.contextClick(ele).build().perform();
 			Thread.sleep(2000);
-			// Mouse Hovering on View As
-			WebElement viewAs = login.driver.findElement(By.xpath("//span[contains(text(),'View as ...')]"));
-			action.moveToElement(viewAs).build().perform();
+			// click on Add chart
+			WebElement Addchart = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dropdown_AddChart")));
+			action.moveToElement(Addchart).click().build().perform();
 			Thread.sleep(2000);
 			login.Log4j.info("Clicking on " + arg1);
-			login.driver.findElement(By.xpath("//span[contains(text(),'" + arg1 + "')]")).click();
+			
+			login.driver.findElement(By.xpath("(//*[@class='visuals-panel']//*[contains(text(),'" + arg1 + "')])[2]")).click();
+			
 			try {
 				if (arg1.equalsIgnoreCase("Histogram")) {
 					Thread.sleep(1000);
@@ -1820,7 +1833,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		Thread.sleep(2000);
 		if (arg1.equalsIgnoreCase("Table")) {
 			ele = login.driver.findElement(By
-					.xpath("//*[@class='visual-title visual-title--wrapper']//span[contains(text(),'" + arg1 + "')]"));
+					.xpath("//*[@class='visual-title--text text-dots']"));
 		} else if (arg1.equalsIgnoreCase("Histogram")) {
 			ele = login.driver.findElement(By.xpath("( //*[@class='visual-title--text text-dots'])[1]"));
 
@@ -2615,9 +2628,12 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 
 	@And("^Paste in application$")
 	public void paste_in_application() throws Throwable {
-
-		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//div[@data-action='paste']")).click();
+		 action.keyDown(Keys.CONTROL);
+	        action.sendKeys("v");
+	        action.keyUp(Keys.CONTROL);
+	        action.build().perform();
+//		Thread.sleep(3000);
+//		login.driver.findElement(By.xpath("//div[@data-action='paste']")).click();
 	}
 
 	@Then("^Copied series should be pasted$")
@@ -2847,7 +2863,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Search"))).sendKeys(Keys.ENTER);
 		Thread.sleep(2000);
 		login.Log4j.info("Clicking on  Series tab ");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
 		Thread.sleep(4000);
 		WebElement checkBox = login.driver.findElement(By.xpath(login.LOCATORS.getProperty(
 				"SelectFirstSeries")));
@@ -2935,6 +2951,12 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		login.driver.switchTo().window(tabs2.get(1));
 		Thread.sleep(2000);
 		CommonFunctionality.ContinueSameInsight();
+		//Close Latest changes popup if appears
+		if(login.driver.findElements(By.xpath("//div[@class='sphere-modal__close'] | //div[@class='movable-modal--close']")).size() > 0) {
+			CommonFunctionality.wait(300);
+			CommonFunctionality.getElementByXpath(login.driver,"//div[@class='sphere-modal__close'] | //div[@class='movable-modal--close']", 4).click();
+			
+		}
 		the_series_should_be_added_to_my_series();
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
@@ -3008,6 +3030,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 	@And("^Select a series$")
 	public void select_a_series() throws Throwable {
 		CommonFunctionality.UnselectMethod();
+		//Daily db changed as High frequency db on stage v.5.5.0_rc.5
 		select_database_as_Daily_Database();
 		expand_till_series_level();
 		CommonFunctionality.wait(1000);
@@ -3081,7 +3104,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 
 	@And("^Click on 'A' on keyboard$")
 	public void click_on_A_on_keyboard() throws Throwable {
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//div[@class='series-list-item--checkbox-wrapper']")).click();
 		Thread.sleep(1000);
 		robot = new Robot();
@@ -3205,6 +3228,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 	@And("^Right click on any series level of data$")
 	public void right_click_on_any_series_level_of_data() throws Throwable {
 		//CommonFunctionality.UnselectMethod();
+		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 8).click();
 		expand_World_Trend_Plus_till_series_level();
 		CommonFunctionality.RightClickOnAnySeries();
 

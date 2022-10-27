@@ -353,6 +353,7 @@ public class login {
 			options.addArguments("--ignore-certificate-errors"); //ignoring certificate issues if there
 			options.setExperimentalOption("useAutomationExtension", false); // disable automation message
 			options.setExperimentalOption("prefs", prefs);
+			
 			DesiredCapabilities capabilities = new DesiredCapabilities();	
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);	 // accept SSL certificates
 			capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true); // accept insecure certificates if any

@@ -79,7 +79,7 @@ public class SearchTest extends CommonFunctionality{
 		Boolean SynomymSearch = false;
 		login.Log4j.info("Clicking on  Series tab ");
 		
-		SeriesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
+		SeriesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
 		SeriesTab.click();
 		// text file location where it contains synonyms
 		FileReader file = new FileReader(
@@ -144,6 +144,8 @@ public class SearchTest extends CommonFunctionality{
 							KeywordMatch = true;
 							break;
 						} else if (KeywordMatch == false) {
+							WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
+							action.pause(50).moveToElement(comparables).build().perform();
 							sspValidation(j);
 
 							if (search_validation(Filters.showdata, keyword) == true) {
@@ -171,7 +173,6 @@ public class SearchTest extends CommonFunctionality{
 								+ Filters.showdata + "\n\n" + SeriesInfo);
 					}
 
-					
 					WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
 					action.pause(50).moveToElement(comparables).build().perform();
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
@@ -198,7 +199,7 @@ public class SearchTest extends CommonFunctionality{
 		login.Log4j.info("Clicking on  Series tab ");
 		// Thread.sleep(2000);
 		SeriesTab = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
 		SeriesTab.click();
 
 		ul_element = null;

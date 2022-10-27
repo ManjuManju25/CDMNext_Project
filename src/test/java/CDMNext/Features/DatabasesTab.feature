@@ -16,7 +16,8 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_03: Verifying Expand --> DB > Topic > Section > Table
-    And Select database as Daily Database
+    #And Select database as Daily Database
+    And Select Global database
     And Expand till series level
     Then Should able to expand all the DB/Topic/section/table under Databases tab
 
@@ -70,7 +71,7 @@ Feature: Verifying Databases tab functionality
   #Then The Insight Explorer popup should be closed
   @DB
   Scenario: TC_DB_10: Verifying message if no results found for the search
-    Given User enters "UN"
+    Given User enters "UNX"
     Then "Sorry, no results were found here." message should be displayed
 
   @DB
@@ -81,7 +82,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_12: Verifying 'See our search help'
-    Given User enters "X"
+    Given User enters "UNX"
     And Click on "See our Search help"
     Then The "Keyword search tips" popup should be opened
 
@@ -93,7 +94,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_14: Verifying 'our help desk team'
-    Given User enters "UN"
+    Given User enters "UNX"
     And Click on "our help desk team"
     Then User should redirect to "https://support.ceicdata.com/support/tickets/new"
 
@@ -108,7 +109,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_16: Verifying remove icon for filters.
-    And User selects "Frequency" as "Monthly"
+    And User selects "Frequency" as "MONTHLY"
     And User has clicked on "Apply filter"
     When Click on x icon
     Then The applied filters should be removed
@@ -122,7 +123,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_18: Verifying right click options for Databases level
     Given Right click on any database
-    Then "Set language,Footnotes,Copy as URL,Copy as R code,Copy as PyCEIC code,Copy as API call,Explore in API Portal" options should be available
+    Then "Set language,Footnotes,Copy as URL,Copy as API call,Explore in API Portal" options should be available
 
   @DB
   Scenario Outline: <TCID>: Verifying DB language change in right click
@@ -380,72 +381,73 @@ Feature: Verifying Databases tab functionality
   ##	And Click on "×"
   ##	Then The insight explorer popup should be closed
   ##
-  @DB
-  Scenario: TC_DB_49:Verifying 'Unselect all' for table level
-    And Right click on any table level
-    And Select "Unselect all"
-    Then The selected series should be unselected
+ 
+  #@DB
+  #Scenario: TC_DB_49:Verifying 'Unselect all' for table level
+    #And Right click on any table level
+    #And Select "Unselect all"
+    #Then The selected series should be unselected
 
   @DB
-  Scenario: TC_DB_50:Verifying "View as Chart" for table level
+  Scenario: TC_DB_50:Verifying Add chart > Chart for table level
     And Right click on any table level
-    And Select "View as Chart"
+    And Choose Add chart as "Chart"
     Then "Chart" should be created with series in views panel
 
   @DB
-  Scenario: TC_DB_51:Verifying "View as Map" for table level
+  Scenario: TC_DB_51:Verifying Add chart > Map for table level
     And Right click on any table level
-    And Select "View as Map" as "N America"
+    And Choose Add chart as "Map"
     Then "Map" should be created with series in views panel
 
   @DB
-  Scenario: TC_DB_52:Verifying "View as Table" for table level
+  Scenario: TC_DB_52:Verifying Add chart > Table for table level
     And Right click on any table level
-    And Select "View as Table"
+  	And Choose Add chart as "Table"
     Then "Table" should be created with series in views panel
 
   @DB
-  Scenario: TC_DB_53:Verifying "View as Pie" for table level
+  Scenario: TC_DB_53:Verifying Add chart > Pie for table level
     And Right click on any table level
-    And Select "Pie"
+   And Choose Add chart as "Pie"
     Then "Pie" should be created with series in views panel
 
   @DB
-  Scenario: TC_DB_54:Verifying "View as Heat map" for table level
+  Scenario: TC_DB_54:Verifying Add chart > Heat map for table level
     And Right click on any table level
-    And Select "Heat map"
+    And Choose Add chart as "Heat map"
     Then "Heat map" should be created with series in views panel
 
   @DB
   Scenario: TC_DB_55:Verifying "Histogram" for table level
     And Right click on any table level
-    And Select "Histogram"
+    And Choose Add chart as "Histogram"
     Then "Histogram" should be created with series in views panel
 
-  @DB
-  Scenario: TC_DB_56:Verify creating visual with more than max seires selection
-    And Right click on any table level and select more than max series
-    And Select "View as Chart"
-    Then "Confirmation" window should be displayed
-
-  @DB
-  Scenario: TC_DB_57:Verify confirmation window for more than max series selection for visual creation
-    And Right click on any table level and select more than max series
-    And Select "View as Chart"
-    Then Confirmation window should display with "You cannot create a chart with more than 30 series. Proceed with 30 series?"
-
-  @DB
-  Scenario: TC_DB_58:Verifying cancel/x button for confrimation popup
-    And Right click on any table level and select more than max series
-    And Select "View as Chart"
-    And Click on "Cancel"
-
-  @DB
-  Scenario: TC_DB_59:Verifying Ok button for confrimation popup
-    And Right click on any table level and select more than max series
-    And Select "View as Chart"
-    And Click on "Ok"
-    Then "Chart" visual should be created with max series
+  #@DB
+  #Scenario: TC_DB_56:Verify creating visual with more than max seires selection
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #Then "Confirmation" window should be displayed
+#
+  #@DB
+  #Scenario: TC_DB_57:Verify confirmation window for more than max series selection for visual creation
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #Then Confirmation window should display with "You cannot create a chart with more than 30 series. Proceed with 30 series?"
+#
+  #@DB
+  #Scenario: TC_DB_58:Verifying cancel/x button for confrimation popup
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #And Click on "Cancel"
+#
+  #@DB
+  #Scenario: TC_DB_59:Verifying Ok button for confrimation popup
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #And Click on "Ok"
+    #Then "Chart" visual should be created with max series
 
   @DB
   Scenario: TC_DB_60:Verifying Download option for table level
@@ -479,7 +481,7 @@ Feature: Verifying Databases tab functionality
     And User has clicked on "Apply filter"
     And Select Global database
     And Expand till table level
-    Then "NEW" icon should be displayed in table level
+    Then "new" icon should be displayed in table level
 
   @DB
   Scenario: TC_DB_65:Verifying adding table by keyboard shortcut
@@ -571,53 +573,53 @@ Feature: Verifying Databases tab functionality
     And Click on Footnote icon
     Then Footnotes should be opened for related "series"
 
-  @DB
-  Scenario: TC_DB_77:More actions - Verify Unselect all
-    And Mouse hover on any series level of data
-    And Click on "More actions"
-    And Click on "Unselect all"
-    Then The selected series should be unselected
+  #@DB
+  #Scenario: TC_DB_77:More actions - Verify Unselect all
+    #And Mouse hover on any series level of data
+    #And Click on "More actions"
+    #And Click on "Unselect all"
+    #Then The selected series should be unselected
 
   @DB
-  Scenario: TC_DB_78:More actions - Verify "View as Chart" for series level
+  Scenario: TC_DB_78:More actions - Verify Add chart > Chart for series level
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Select "View as Chart"
+    And Choose Add chart as "Chart"
     Then Visual should be created with "Edit Chart"
 
   @DB
-  Scenario: TC_DB_79:More actions - Verify "View as Map" for series level
+  Scenario: TC_DB_79:More actions - Verify Add chart > Map for series level
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Select "View as Map" as "World"
+      And Choose Add chart as "Map"
     Then Visual should be created with "Edit Map"
 
   @DB
-  Scenario: TC_DB_80:More actions - Verify "View as Table" for series level
+  Scenario: TC_DB_80:More actions - Verify Add chart > Table for series level
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Select "View as Table"
+    And Choose Add chart as "Table"
     Then Visual should be created with "Edit Table"
 
   @DB
   Scenario: TC_DB_81:More actions - Verify View as Pie for series level
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Select "Pie"
+    And Choose Add chart as "Pie"
     Then Visual should be created with "Edit Pie"
 
   @DB
   Scenario: TC_DB_82:More actions - Verify View as Heat map for series level
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Select "Heat map"
+     And Choose Add chart as "Heat map"
     Then Visual should be created with "Edit Heat map"
 
   @DB
   Scenario: TC_DB_83:More actions - Verify View as Histogram for series level
     And Mouse hover on any series level
     And Click on "More actions"
-    And Select "Histogram"
+    And Choose Add chart as "Histogram"
     Then Visual should be created with "Edit Histogram"
 
   @DB
@@ -627,12 +629,12 @@ Feature: Verifying Databases tab functionality
     And Select "Download"
     Then Download window should be appeared with selected series count
 
-  @DB
-  Scenario: TC_DB_85:More actions - Verify creating visual with more than max seires selection
-    And Mouse hover on any series level and select more than max series
-    And Select "View as Chart"
-    Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
-    Then "Chart" visual should be created with max series
+  #@DB
+  #Scenario: TC_DB_85:More actions - Verify creating visual with more than max seires selection
+    #And Mouse hover on any series level and select more than max series
+    #And Select "View as Chart"
+    #Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
+    #Then "Chart" visual should be created with max series
 
   @DB
   Scenario: TC_DB_86:More actions - Verify 'Copy' for series level
@@ -863,54 +865,54 @@ Feature: Verifying Databases tab functionality
     And Click on any visual type
     Then The selected series should be added to visuals
 
-  @DB
-  Scenario: TC_DB_115:Right click - Verify Unselect all
-    And Right click on any series level of data
-    And Select "Unselect all"
-    Then The selected series should be unselected
+  #@DB
+  #Scenario: TC_DB_115:Right click - Verify Unselect all
+    #And Right click on any series level of data
+    #And Select "Unselect all"
+    #Then The selected series should be unselected
 
   @DB
-  Scenario: TC_DB_116:Right click - Verify "View as Chart" for series level
+  Scenario: TC_DB_116:Right click - Verify Add chart > Chart for series level
     And Right click on any series level of data
-    And Select "View as Chart"
+    And Choose Add chart as "Chart"
     Then Visual should be created with "Edit Chart"
 
   @DB
-  Scenario: TC_DB_117:Right click - Verify "View as Map" for series level
+  Scenario: TC_DB_117:Right click - Verify Add chart > Map for series level
     And Right click on any series level of data
-    And Select "View as Map" as "World"
+     And Choose Add chart as "Map"
     Then Visual should be created with "Edit Map"
 
   @DB
-  Scenario: TC_DB_118:Right click - Verify "View as Table" for series level
+  Scenario: TC_DB_118:Right click - Verify Add chart > Table for series level
     And Right click on any series level of data
-    And Select "View as Table"
+     And Choose Add chart as "Table"
     Then Visual should be created with "Edit Table"
 
   @DB
-  Scenario: TC_DB_119:Right click - Verify "View as Pie" for series level
+  Scenario: TC_DB_119:Right click - Verify Add chart > Pie for series level
     And Right click on any series level of data
-    And Select "Pie"
+    And Choose Add chart as "Pie"
     Then Visual should be created with "Edit Pie"
 
   @DB
-  Scenario: TC_DB_120:Right click - Verify "View as Heat map" for series level
+  Scenario: TC_DB_120:Right click - Verify Add chart > Heat map for series level
     And Right click on any series level of data
-    And Select "Heat map"
+     And Choose Add chart as "Heat map"
     Then Visual should be created with "Edit Heat map"
 
   @DB
-  Scenario: TC_DB_121:Right click - Verify "View as Histogram" for series level
+  Scenario: TC_DB_121:Right click - Verify Add chart > Histogram for series level
     And Right click on any series level of data
-    And Select "Histogram"
+     And Choose Add chart as "Histogram"
     Then Visual should be created with "Edit Histogram"
 
-  @DB
-  Scenario: TC_DB_122:Right click - Verify creating visual with more than max seires selection
-    And Right click on any series level and select more than max series
-    And Select "View as Chart"
-    Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
-    Then "Chart" visual should be created with max series
+  #@DB
+  #Scenario: TC_DB_122:Right click - Verify creating visual with more than max seires selection
+    #And Right click on any series level and select more than max series
+    #And Select "View as Chart"
+    #Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
+    #Then "Chart" visual should be created with max series
 
   @DB
   Scenario: TC_DB_123:Right click - Verify download option for series

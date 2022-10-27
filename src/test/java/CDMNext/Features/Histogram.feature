@@ -1,10 +1,10 @@
 Feature: Verifying Histogram Visual functionality
 
-  @Histogram
-  Scenario: TC_Histogram_01:Verify creating Histogram visual from View panel by drag and drop
-    And Go to View tab
-    And Drag and drop histogram visual to the page
-    Then Histogram should be inserted
+  #@Histogram
+  #Scenario: TC_Histogram_01:Verify creating Histogram visual from View panel by drag and drop
+    #And Go to View tab
+    #And Drag and drop histogram visual to the page
+    #Then Histogram should be inserted
 
   @Histogram
   Scenario: TC_Histogram_02:Verify creating Histogram visual from View panel by clicking on histogram icon
@@ -401,7 +401,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Rename" option
     And Select multiple attributes
     And Click on "Apply"
-      And Click on "OK"
+    And Click on "OK"
     Then Selected attributes should be displayed as series name
 
   @Histogram
@@ -1409,7 +1409,7 @@ Feature: Verifying Histogram Visual functionality
     Then No Tooltip should be displayed when mouse hover on visual data
 
   @Histogram
-  Scenario: TC_Histogram_161:Edit Histogram - Tootip - Verify selecting attributes
+    Scenario: TC_Histogram_161:Edit Histogram - Tootip - Verify selecting attributes
     And Create a histogram visual
     And Add a series to the visual
     And Click on "Edit Histogram"
@@ -1938,10 +1938,10 @@ Feature: Verifying Histogram Visual functionality
     Then The insight should be opened and added visual should be available in My visual
 
   @Histogram
-  Scenario: TC_Histogram_218:Copy - Verify confirmation message for copy visual
+    Scenario: TC_Histogram_218:Copy - Verify confirmation message for copy visual
     And Create histogram visual with series
     And Click on "Copy" icon
-    Then "Histogram with series copied." and "More options" confirmation message should be displayed
+    Then "Histogram copied." confirmation message should be displayed
 
   @Histogram
   Scenario: TC_Histogram_219:Copy - Validate copied visual by pasting with in the insight
@@ -2007,7 +2007,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on Download icon
     And Select "jpeg" format
-    And Select width size "652"
+    And Select width size "589"
     And Click on "Download"
     Then The visual should be downloaded with selected size
 
@@ -2084,71 +2084,71 @@ Feature: Verifying Histogram Visual functionality
   Scenario: TC_Histogram_238:Right click - Verify chart under insert visual
     And Create histogram visual with series
     And Right click on visual header
-    And Choose Insert visual as "Chart"
+    And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @Histogram
   Scenario: TC_Histogram_239:Right click - Verify Pie under insert visual
     And Create histogram visual with series
     And Right click on visual header
-    And Choose Insert visual as "Pie"
+    And Choose Add chart as "Pie"
     Then "Pie" visual should be created in the same view tab
 
   @Histogram
   Scenario: TC_Histogram_240:Right click - Verify table under insert visual
     And Create histogram visual with series
     And Right click on visual header
-    And Choose Insert visual as "Table"
+    And Choose Add chart as "Table"
     Then "Table" visual should be created in the same view tab
 
   @Histogram
   Scenario: TC_Histogram_241:Right click - Verify map under insert visual
     And Create histogram visual with series
     And Right click on visual header
-    And Choose Insert visual as "Map"
+    And Choose Add chart as "Map"
     Then "Map" visual should be created in the same view tab
 
   @Histogram
   Scenario: TC_Histogram_242:Right click - Verify Heat map under insert visual
     And Create histogram visual with series
     And Right click on visual header
-    And Choose Insert visual as "Heat map"
+    And Choose Add chart as "Heat map"
     Then "Heat map" visual should be created in the same view tab
 
   @Histogram
   Scenario: TC_Histogram_243:Right click - Verify Histogram under insert visual
     And Create histogram visual with series
     And Right click on visual header
-    And Choose Insert visual as "Histogram"
+    And Choose Add chart as "Histogram"
     Then "Histogram" visual should be created in the same view tab
 
-  @Histogram
-  Scenario: TC_Histogram_244:Right click - Verify commentary under insert visual
-    And Create histogram visual with series
-    And Right click on visual header
-    And Choose Insert visual as "Commentary"
-    Then The commentary visual should be created in the same view tab
-
-  @Histogram
-  Scenario: TC_Histogram_245:Right click - Verify attachments under insert visual
-    And Create histogram visual with series
-    And Right click on visual header
-    And Choose Insert visual as "Attachments"
-    Then "Attachments" visual should be created in the same view tab
-
-  @Histogram
-  Scenario: TC_Histogram_246:Right click - Verify Image under insert visual
-    And Create histogram visual with series
-    And Right click on visual header
-    And Choose Insert visual as "Image"
-    Then "Image" visual should be created in the same view tab
-
-  @Histogram
-  Scenario: TC_Histogram_247:Right click - Verify Filter under insert visual
-    And Create histogram visual with series
-    And Right click on visual header
-    And Choose Insert visual as "Filter"
-    Then "Filter" visual should be created in the same view tab
+  #@Histogram
+  #Scenario: TC_Histogram_244:Right click - Verify commentary under insert visual
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Choose Insert visual as "Commentary"
+    #Then The commentary visual should be created in the same view tab
+#
+  #@Histogram
+  #Scenario: TC_Histogram_245:Right click - Verify attachments under insert visual
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Choose Insert visual as "Attachments"
+    #Then "Attachments" visual should be created in the same view tab
+#
+  #@Histogram
+  #Scenario: TC_Histogram_246:Right click - Verify Image under insert visual
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Choose Insert visual as "Image"
+    #Then "Image" visual should be created in the same view tab
+#
+  #@Histogram
+  #Scenario: TC_Histogram_247:Right click - Verify Filter under insert visual
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Choose Insert visual as "Filter"
+    #Then "Filter" visual should be created in the same view tab
 
   @Histogram
   Scenario: TC_Histogram_248:Right click - Verify Paste visual
@@ -2159,40 +2159,40 @@ Feature: Verifying Histogram Visual functionality
     And Choose "Paste visual"
     Then Copied visual should be pasted
 
-  @Histogram
-  Scenario: TC_Histogram_249:Right click - View as - Verify Chart
-    And Create histogram visual with series
-    And Right click on visual header
-    And Select View as > "Chart"
-    Then The "Hisogram" visual should be converted as "Chart" visual
-
-  @Histogram
-  Scenario: TC_Histogram_250:Right click - View as - Verify Map
-    And Create histogram visual with series
-    And Right click on visual header
-    And Select View as > "Map"
-    Then The "Hisogram" visual should be converted as "Map" visual
-
-  @Histogram
-  Scenario: TC_Histogram_251:Right click - View as - Verify Table
-    And Create histogram visual with series
-    And Right click on visual header
-    And Select View as > "Table"
-    Then The "Hisogram" visual should be converted as "Table" visual
-
-  @Histogram
-  Scenario: TC_Histogram_252:Right click - View as - Verify Pie
-    And Create histogram visual with series
-    And Right click on visual header
-    And Select View as > "Pie"
-    Then The "Hisogram" visual should be converted as "Pie" visual
-
-  @Histogram
-  Scenario: TC_Histogram_253:Right click - View as - Verify Heat map
-    And Create histogram visual with series
-    And Right click on visual header
-    And Select View as > "Heat map"
-    Then The "Hisogram" visual should be converted as "Heat map" visual
+  #@Histogram
+  #Scenario: TC_Histogram_249:Right click - View as - Verify Chart
+    #And Create histogram visual with series
+    #And Right click on visual header
+  #	And Choose Add chart as "Chart"
+    #Then The "Hisogram" visual should be converted as "Chart" visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_250:Right click - View as - Verify Map
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Select View as > "Map"
+    #Then The "Hisogram" visual should be converted as "Map" visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_251:Right click - View as - Verify Table
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Select View as > "Table"
+    #Then The "Hisogram" visual should be converted as "Table" visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_252:Right click - View as - Verify Pie
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Select View as > "Pie"
+    #Then The "Hisogram" visual should be converted as "Pie" visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_253:Right click - View as - Verify Heat map
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #And Select View as > "Heat map"
+    #Then The "Hisogram" visual should be converted as "Heat map" visual
 
   @Histogram
   Scenario: TC_Histogram_254:Right click - Verify Calculated series sub dropdown
@@ -2280,7 +2280,7 @@ Feature: Verifying Histogram Visual functionality
     Then The added series should be displayed in histogram tab
 
   @Histogram
-  Scenario: TC_Histogram_265:Rename - Verify 'Edit series info' dropdown
+    Scenario: TC_Histogram_265:Rename - Verify 'Edit series info' dropdown
     And Create histogram visual with series
     And Click on Edit series option
     And Click on "Rename" option
@@ -2377,7 +2377,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on "Apply function"
+    And Click on Apply function
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 
@@ -2429,17 +2429,17 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Save"
     Then The visual should change its size to selected size
 
-  @Histogram
-  Scenario: TC_Histogram_280:Edit Histogram - Copyright - Verify expanding and collapsing the copyright sections
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Check "Copyright"
-    And Open drop down for "Copyright"
-    And Click on "Advanced settings"
-    And Click on - icon in the copyright popup
-    Then The section should be collapsed
-    And Click on + icon in the copyright popup
-    Then The section should be expnaded
+  #@Histogram
+  #Scenario: TC_Histogram_280:Edit Histogram - Copyright - Verify expanding and collapsing the copyright sections
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Check "Copyright"
+    #And Open drop down for "Copyright"
+    #And Click on "Advanced settings"
+    #And Click on - icon in the copyright popup
+    #Then The section should be collapsed
+    #And Click on + icon in the copyright popup
+    #Then The section should be expnaded
 
   @Histogram
   Scenario: TC_Histogram_281: Edit Histogram - Tooltip - Verify date format
@@ -2515,32 +2515,32 @@ Feature: Verifying Histogram Visual functionality
     And Right click on visual header
     Then Verify right click options for histogram visual
 
-  @Histogram
-  Scenario: TC_Histogram_289:Right click - Verify insert visual sub dropdown
-    And Create histogram visual with series
-    And Right click on visual header
-    Then Verify insert visual sub dropdown options for histogram visual
-
-  @Histogram
-  Scenario: TC_Histogram_290:Right click - Verify View as sub dropdown.
-    And Create histogram visual with series
-    And Right click on visual header
-    Then Verify View as sub dropdown options for histogram visual
+  #@Histogram
+  #Scenario: TC_Histogram_289:Right click - Verify insert visual sub dropdown
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #Then Verify insert visual sub dropdown options for histogram visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_290:Right click - Verify View as sub dropdown.
+    #And Create histogram visual with series
+    #And Right click on visual header
+    #Then Verify View as sub dropdown options for histogram visual
     
-    @Histogram
-  Scenario: TC_Histogram_291:Edit series - Verify hiding function toolbar
-     And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Hide the function bar"
-    Then The function toolbar should be hidden
-    
-     @Histogram
-  Scenario: TC_Histogram_292:Edit series - Verify showing the function toolbar
-     And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Hide the function bar"
-    And Click on "Show the function bar"
-    Then The function toolbar should be shown
+    #@Histogram
+  #Scenario: TC_Histogram_291:Edit series - Verify hiding function toolbar
+     #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Hide the function bar"
+    #Then The function toolbar should be hidden
+    #
+     #@Histogram
+  #Scenario: TC_Histogram_292:Edit series - Verify showing the function toolbar
+     #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Hide the function bar"
+    #And Click on "Show the function bar"
+    #Then The function toolbar should be shown
     
      @Histogram
   Scenario: TC_Histogram_293:Edit series - Verify 'Type a function' field

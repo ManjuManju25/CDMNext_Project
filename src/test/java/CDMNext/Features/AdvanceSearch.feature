@@ -18,7 +18,7 @@ Feature: Verifying All Search related cases
     Then Any of the words should display in the result pane
 
   @AdvanceSearch
-  Scenario: TC_03 : Verifying Exact phrase
+  Scenario: TC_03 : Verifying Exact phrase	
     And Click on "More" filter
     And Click on "Advanced search"
     And Enter Exact phrase as "Retail Price"
@@ -46,8 +46,8 @@ Feature: Verifying All Search related cases
     And User has selects "More" as "With historical extension of continuous series"
     When Click on "Apply filter"
     Then User verify corresponding results for selected filter
-    
-     @HideSeries
+
+  @HideSeries
   Scenario: TC_07:Verifying "Hide series with 0 observations" filter for series tab
     And User has selects "More" as "Hide series with 0 observations"
     When Click on "Apply filter"

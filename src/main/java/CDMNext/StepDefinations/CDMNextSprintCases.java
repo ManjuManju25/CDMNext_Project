@@ -33,6 +33,7 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import CDMNext.util.CommonFunctionality;
+import ch.qos.logback.core.joran.action.Action;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -280,7 +281,7 @@ public class CDMNextSprintCases {
 	public void click_to_create_an_empty_visual() throws Throwable {
 		CommonFunctionality.wait(3000);
 		CommonFunctionality.getElementByProperty(login.driver, "Create_new_view", 8).click();
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(2000);
 	}
 
 	@And("^Navigating back and refresh button$")
@@ -1764,24 +1765,28 @@ public class CDMNextSprintCases {
 		WebElement one_series;
 		try {
 			one_series = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[contains(@class,'series-item--country')])[1]", 8);
+					"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']//following::*[@unselectable='on'][1]", 8);
 		} catch (Exception e) {
 			one_series = CommonFunctionality.getElementByProperty(login.driver, "Series_item_information_hover", 8);
 		}
 		new Actions(login.driver).moveToElement(one_series).pause(500).build().perform();
-		CommonFunctionality.wait(2000);
+		
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']//following::*[@title='More actions'][1]",
+				"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']//following::*[@unselectable='on'][1]//span[contains(@title,'More actions')]",
 				4).click();
 		CommonFunctionality.wait(500);
-		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
+		WebElement Addchart = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dropdown_AddChart")));
+		new Actions(login.driver).moveToElement(Addchart).click().build().perform();
+		
+		/*WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='search-series-list']/*[1]/div/a/div[3]/div[2]/span[contains(@title,'View as " + arg1
 						+ "')] | //span[contains(text(),'" + arg1 + "')]",
 				4);
-		new Actions(login.driver).moveToElement(visual).pause(5000).click().build().perform();
-		if (arg1.equalsIgnoreCase("View as Map")) {
-			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='dropdown-menu']//*[text()='World']", 4)).pause(500).click().build().perform();
+		new Actions(login.driver).moveToElement(visual).pause(5000).click().build().perform();*/
+		if (arg1.equalsIgnoreCase("Chart")) {
+			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='visuals-panel']//*[contains(text(),'Line')])[2]", 4).click();
+//			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+//					"//*[@class='dropdown-menu']//*[text()='World']", 4)).pause(500).click().build().perform();
 		}
 	}
 
