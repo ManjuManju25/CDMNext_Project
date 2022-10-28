@@ -1,4 +1,5 @@
-Feature: Verifying View tab functionality
+	
+	Feature: Verifying View tab functionality
 
   @EmptyView
   Scenario: Tc_EmptyView_01 : Verify creating any visuals in the visualisation panel
@@ -21,58 +22,58 @@ Feature: Verifying View tab functionality
   @EmptyView
   Scenario: Tc_EmptyView_04 : Verify displaying different line charts
     And Click on View tab
-    And Select the "Line" dropdown
+    And Select the "Add chart" dropdown
     Then Verify different types of Line charts
 
   @EmptyView
   Scenario: Tc_EmptyView_05 : Verify displaying different area charts
     And Click on View tab
-    And Select the "Area" dropdown
+    And Select the "Add chart" dropdown
     Then Verify different types of Area charts
 
   @EmptyView
   Scenario: Tc_EmptyView_06 : Verify displaying different column charts
     And Click on View tab
-    And Select the "Column" dropdown
+    And Select the "Add chart" dropdown
     Then Verify different types of Column charts
 
   @EmptyView
   Scenario: Tc_EmptyView_07 : Verify displaying different Bar charts
     And Click on View tab
-    And Select the "Bar" dropdown
+    And Select the "Add chart" dropdown
     Then Verify different types of Bar charts
 
   @EmptyView
   Scenario: Tc_EmptyView_08 : Verify creating Pie chart in a view
     And Click on View tab
-    And Click on "Pie" in the menu bar
+    And Click on "Pie" in the view tab
     And Add the series to the visual
     Then "Pie" visual should be created in the same view tab
 
   @EmptyView
   Scenario: Tc_EmptyView_09 : Verify creating Heat map
     And Click on View tab
-    And Click on "Heat map" in the menu bar
+    And Click on "Heat map" in the view tab
     And Add the series to the visual
     Then "Heat map" visual should be created in the same view tab
 
   @EmptyView
   Scenario: Tc_EmptyView_10 : Verify inserting Histogram into the view
     And Click on View tab
-    And Click on "Histogram" in the menu bar
+    And Select "Histogram" from "Add chart" dropdown
     And Add the series to the visual
     Then "Histogram" visual should be created in the same view tab
 
-  @EmptyView
-  Scenario: Tc_EmptyView_11 : Verify displaying different country selecting maps
-    And Click on View tab
-    And Select the "Map" dropdown
-    Then Verify different types of map options available
+  #@EmptyView
+  #Scenario: Tc_EmptyView_11 : Verify displaying different country selecting maps
+    #And Click on View tab
+    #And Select the "Map" dropdown
+    #Then Verify different types of map options available
 
   @EmptyView
   Scenario: Tc_EmptyView_12 : Verify creating 'Table' in view tab
     And Click on View tab
-    And Click on "Table" in the menu bar
+    And Click on "Table" in the view tab
     And Add the series to the visual
     Then "Table" visual should be created in the same view tab
 
@@ -134,14 +135,14 @@ Feature: Verifying View tab functionality
   Scenario: Tc_EmptyView_22 : Verify inserting visuals from right click on mouse
     And Create any of the visual
     And Right click on visual header
-    And Choose Insert visual as "Chart"
+    And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @EmptyView
-  Scenario: Tc_EmptyView_23 : Verify visuals 'view as' option from right clickon mouse
+  Scenario: Tc_EmptyView_23 : Verify visuals 'Change chart type' option from right clickon mouse
     And Create any empty visual
     And Right click on visual header
-    And Select View as > "Chart"
+    And Select Change chart type > "Chart"
     Then Visual should be converted into selected visual format
 
   @EmptyView
@@ -204,7 +205,7 @@ Feature: Verifying View tab functionality
   Scenario: Tc_EmptyView_32 : Verify insert visual option from right click on mouse
     And Click on View tab
     And Right click on view tab
-    And Choose Insert visual as "Chart"
+    And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @EmptyView

@@ -204,11 +204,11 @@ Feature: Verifying Country Filter functionality
     And Choose "Delete filter"
     Then Filter visual should be deleted
 
-  @FilterVisual
-  Scenario: Tc_FilterVisual_32:Verify insert visual for filter visual
-    And Right click on visual header
-    And Choose "Insert visual"
-    Then Verify insert visual sub dropdown options for filter visual
+  #@FilterVisual
+  #Scenario: Tc_FilterVisual_32:Verify insert visual for filter visual
+    #And Right click on visual header
+    #And Choose "Insert visual"
+    #Then Verify insert visual sub dropdown options for filter visual
 
   @FilterVisual
   Scenario: Tc_FilterVisual_33:Verify creating filter visual with other visuals

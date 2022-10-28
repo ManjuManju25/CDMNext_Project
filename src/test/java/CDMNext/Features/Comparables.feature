@@ -136,7 +136,7 @@ Feature: Verify Comparables feature
     And The Section level results for series should be present
     And User selects "Frequency" as "Monthly"
     And Count the series in selected Filter
-    And User has clicked on "Apply filter"
+    And User has clicked on "Apply filter"	
     And Resetting the filters
     Then The comparables count should match to actual count
 
@@ -324,7 +324,7 @@ Feature: Verify Comparables feature
     Then The series should gets deselected
 
   @Comparables
-  Scenario: Tc_Comparables_48: Verify opening SSP when click on series name
+  Scenario: Tc_Compaables_48: Verify opening SSP when click on series name
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Hovor on to series name
@@ -398,18 +398,18 @@ Feature: Verify Comparables feature
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Select 1 series inside table
     And Get the name of series
-    And Click on more actions to create "View as Chart"
+    And Click on more actions to create "Chart"
     And Copy the insight title
     Then The "Selected Series Chart" should create for the series
 
-  @Comparables
-  Scenario: Tc_Comparables_57: Verify creating chart for unselected series
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
-    And Hovor on to i icon without click
-    And Click on more actions to create "View as Chart"
-    And Copy the insight title
-    Then The "Unselected Series Chart" should create for the series
+  #@Comparables
+  #Scenario: Tc_Comparables_57: Verify creating chart for unselected series
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
+    #And Hovor on to i icon without click
+    #And Click on more actions to create "Chart"
+    #And Copy the insight title
+    #Then The "Unselected Series Chart" should create for the series
 
   @Comparables
   Scenario: Tc_Comparables_58: Verify creating chart for multiple series
@@ -417,7 +417,7 @@ Feature: Verify Comparables feature
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Select 2 series inside table
     And Hovor on to i icon without click
-    And Click on more actions to create "View as Chart"
+    And Click on more actions to create "Chart"
     Then The "Multiple Series Chart" should create for the series
 
   @Comparables
@@ -433,7 +433,7 @@ Feature: Verify Comparables feature
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
     And Click on "More actions" option in series level
-    Then The "Unselect all" , "Add", "Add to new insight", "Add to recent insight", "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
+    Then The "Add", "Add to new insight", "Add to recent insight", "Add chart" , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
 
   @Comparables
   Scenario: Tc_Comparables_61: Verify series selection when click on more options
@@ -486,16 +486,16 @@ Feature: Verify Comparables feature
     Then Any insight could be selected for the series to add
     And Closing the chart visual
 
-  @Comparables
-  Scenario: Tc_Comparables_67: Verify unselect all in more option
-    And Remove series from myseries pane
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Select 2 series inside table
-    And Hovor on to i icon without click
-    And Click on "More actions" button in Comparables
-    And Click on "Unselect all" button in Comparables
-    Then Selected series should get deselected
+  #@Comparables
+  #Scenario: Tc_Comparables_67: Verify unselect all in more option
+    #And Remove series from myseries pane
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Select 2 series inside table
+    #And Hovor on to i icon without click
+    #And Click on "More actions" button in Comparables
+    #And Click on "Unselect all" button in Comparables
+    #Then Selected series should get deselected
 
   @Comparables
   Scenario: Tc_Comparables_68: Verify view as chart in more options
@@ -503,7 +503,7 @@ Feature: Verify Comparables feature
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
-    And Click on "View as Chart" button in Comparables
+     And Choose Add chart as "Chart"
     Then The "Edit Chart" option is displayed
 
   @Comparables
@@ -512,7 +512,7 @@ Feature: Verify Comparables feature
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
-    And Click on "View as Map" button in Comparables
+    And Choose Add chart as "Map" 
     Then The "Edit Map" option is displayed
 
   @Comparables
@@ -521,43 +521,43 @@ Feature: Verify Comparables feature
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
-    And Click on "View as Table" button in Comparables
+    And Choose Add chart as "Table" 
     Then The "Edit Table" option is displayed
+#
+  #@Comparables
+  #Scenario: Tc_Comparables_71: Verify view as... in more options
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
+    #And Hovor on to i icon without click
+    #And Click on "More actions" button in Comparables
+    #And Click on "View as ..." button in Comparables
+    #Then The "Pie" , "Heat map" , "Histogram" options are present
 
   @Comparables
-  Scenario: Tc_Comparables_71: Verify view as... in more options
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
-    And Hovor on to i icon without click
-    And Click on "More actions" button in Comparables
-    And Click on "View as ..." button in Comparables
-    Then The "Pie" , "Heat map" , "Histogram" options are present
-
-  @Comparables
-  Scenario: Tc_Comparables_72: Verify view as Pie in more options
+  Scenario: Tc_Comparables_72: Verify Addchart > Pie in more options
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
-    And Choose "View as ..." > "Pie"
+    And Choose Add chart as "Pie"
     Then The "Edit Pie" option is displayed
 
   @Comparables
-  Scenario: Tc_Comparables_73: Verify view as Heatmap in more options
+  Scenario: Tc_Comparables_73: Verify Addchart > Heatmap in more options
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
-    And Choose "View as ..." > "Heat map"
+    And Choose Add chart as "Heat map"
     Then The "Edit Heat map" option is displayed
 
   @Comparables
-  Scenario: Tc_Comparables_74: Verify view as Histogram in more options
+  Scenario: Tc_Comparables_74: Verify Add chart >  Histogram in more options
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
-    And Choose "View as ..." > "Histogram"
+     And Choose Add chart as "Histogram"
     Then The "Edit Histogram" option is displayed
 
   @Comparables
@@ -599,7 +599,7 @@ Feature: Verify Comparables feature
   Scenario: Tc_Comparables_78: Verify copy links in more option
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
-    And Hovor on to series name without click
+    And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
     And Select the "Copy selected links" option
     And URL should be generated for selected series
@@ -610,7 +610,7 @@ Feature: Verify Comparables feature
   Scenario: Tc_Comparables_79: Verify series info for more option
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
-    And Hovor on to series name without click
+     And Hovor on to i icon without click
     And Click on "More actions" button in Comparables
     And Select the "Series Info" option
     Then The "Series Info" option is shown
@@ -815,28 +815,29 @@ Feature: Verify Comparables feature
   #And Right Click "Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" section from Comparables tab
   #And Select the "Show Dataset" option
   #Then The "Back button in Dataset" option should present
+  
   @Comparables
   Scenario: Tc_Comparables_103: Verify right click options for series in comparables
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    Then The "Unselect all" , "Add", "Add to new insight", "Add to recent insight", "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
+    Then The "Add", "Add to new insight", "Add to recent insight", "Add chart" , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset", "See in Database" options should available
 
-  @Comparables
-  Scenario: Tc_Comparables_104: Verify unselect all for series level right click comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
-    And Select 1 series inside table
-    And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Click on "Unselect all" button in Comparables
-    Then Selected series should get deselected
+  #@Comparables
+  #Scenario: Tc_Comparables_104: Verify unselect all for series level right click comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
+    #And Select 1 series inside table
+    #And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
+    #And Click on "Unselect all" button in Comparables
+    #Then Selected series should get deselected
 
   @Comparables
   Scenario: Tc_Comparables_105: Verify view as chart for series level right click comparables
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Click on "View as Chart" button in Comparables
+    And Choose Add chart as "Chart" 
     Then The "Edit Chart" option is displayed
 
   @Comparables
@@ -844,7 +845,7 @@ Feature: Verify Comparables feature
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Click on "View as Map" button in Comparables
+    And Choose Add chart as "Map" 
     Then The "Edit Map" option is displayed
 
   @Comparables
@@ -852,23 +853,23 @@ Feature: Verify Comparables feature
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Click on "View as Table" button in Comparables
+     And Choose Add chart as "Table"
     Then The "Edit Table" option is displayed
 
-  @Comparables
-  Scenario: Tc_Comparables_108: Verify view as... for series level right click comparables
-    And Clicking "Comparables" icon
-    And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
-    And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Click on "View as ..." button in Comparables
-    Then The "Pie" , "Heat map" , "Histogram" options are present
+  #@Comparables
+  #Scenario: Tc_Comparables_108: Verify view as... for series level right click comparables
+    #And Clicking "Comparables" icon
+    #And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Albania"
+    #And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
+    #And Click on "View as ..." button in Comparables
+    #Then The "Pie" , "Heat map" , "Histogram" options are present
 
   @Comparables
-  Scenario: Tc_Comparables_109: Verify view as Pie for series level right click comparables
+  Scenario: Tc_Comparables_109: Verify Add chart > Pie for series level right click comparables
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Choose "View as ..." > "Pie"
+    And Choose Add chart as "Pie"
     Then The "Edit Pie" option is displayed
 
   @Comparables
@@ -876,7 +877,7 @@ Feature: Verify Comparables feature
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Choose "View as ..." > "Heat map"
+     And Choose Add chart as "Heat map"
     Then The "Edit Heat map" option is displayed
 
   @Comparables
@@ -884,7 +885,7 @@ Feature: Verify Comparables feature
     And Clicking "Comparables" icon
     And Expand "National Accounts" > "Global Economic Monitor" > "Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia" > "Real GDP: YoY: Quarterly: sa: Australia"
     And Right Click "Real GDP: YoY: Quarterly: sa: Australia" section from Comparables tab
-    And Choose "View as ..." > "Histogram"
+     And Choose Add chart as "Histogram"
     Then The "Edit Histogram" option is displayed
 
   @Comparables

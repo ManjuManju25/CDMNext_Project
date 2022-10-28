@@ -89,7 +89,9 @@ Feature: Verifying KBS functionality
 
   @KBS
   Scenario: TC_KBS_15 : Verify KBS for 'Collpase tree node'
-    And Expand any databse
+    #And Expand any databse
+    And Select Global database
+    And Expand till series level
     Then "Collapse all" should be displayed
     And Press left arrow key on KB
     Then The data trees should be collapsed

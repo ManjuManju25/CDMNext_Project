@@ -7,7 +7,7 @@ Feature: Verifying Image visual functionality
     And Click on insert Image visual icon
     Then "Image" visual should be created
 
-  @ImageVisual
+  @ImageVisual1
   Scenario: Tc_ImageVisual_2 : Verify copy-paste of image visual
     And Go to View tab
     And Click on insert Image visual icon
@@ -146,6 +146,7 @@ Feature: Verifying Image visual functionality
     And Go to View tab
     And Click on insert Image visual icon
     And Click on title dropdown
+    And Check the box for the title name
     And Choose text color is blue
     Then The Image visual should update the "title" text color as blue
 
@@ -154,6 +155,7 @@ Feature: Verifying Image visual functionality
     And Go to View tab
     And Click on insert Image visual icon
     And Click on title dropdown
+    And Check the box for the title name
     And Choose highlight color is Orange
     Then The Image visual should update the "title" highlight color as Orange
 
@@ -162,6 +164,7 @@ Feature: Verifying Image visual functionality
     And Go to View tab
     And Click on insert Image visual icon
     And Click on title dropdown
+    And Check the box for the title name
     And Choose "20" from the drop-down for the font size
     Then The Image visual should update the "title" font as "20"
 
@@ -178,6 +181,7 @@ Feature: Verifying Image visual functionality
     And Go to View tab
     And Click on insert Image visual icon
     And Click on title dropdown
+    And Check the box for the title name
     And Click on Italic under style
     Then The visual "title" should be "italic"
 
@@ -186,6 +190,7 @@ Feature: Verifying Image visual functionality
     And Go to View tab
     And Click on insert Image visual icon
     And Click on title dropdown
+    And Check the box for the title name
     And Click on Underline icon for "title"
     Then The visual "title" should be "underline"
 
@@ -194,6 +199,7 @@ Feature: Verifying Image visual functionality
     And Go to View tab
     And Click on insert Image visual icon
     And Click on title dropdown
+    And Check the box for the title name
     And Click on left,center and right alignment for title
     Then The title should align to "left" , "center" and "right" as user set
 
@@ -413,6 +419,8 @@ Feature: Verifying Image visual functionality
     And Create a Chart visual
     And Add a series to the chart visual
     And Click on insert Image visual icon
+    And Click on title dropdown
+    And Check the box for the title name
     Then Visuals should be interchanged by drag and drop
 
   @ImageVisual

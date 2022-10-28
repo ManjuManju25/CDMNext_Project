@@ -6,7 +6,7 @@ Feature: Verifying Attachments Visual functionality
     And Click on Insert Attachments
     Then Attachments should be inserted
 
-  @Attachments
+  @Attachments1
   Scenario: TC_Attachments_02:Verify 'Insert Attachments' creating by drag and drop
     And Go to View tab
     And Drag and drop Attachments visual to the page
@@ -562,71 +562,71 @@ Feature: Verifying Attachments Visual functionality
   Scenario: TC_Attachments_74:Right click - Verify chart under insert visual
     And Create a Attachments visual
     And Right click on visual header
-    And Choose Insert visual as "Chart"
+    And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @Attachments
   Scenario: TC_Attachments_75:Right click - Verify Map under insert visual
     And Create a Attachments visual
     And Right click on visual header
-    And Choose Insert visual as "Map"
+    And Choose Add chart as "Map"
     Then "Map" visual should be created in the same view tab
 
   @Attachments
   Scenario: TC_Attachments_76:Right click - Verify Table under insert visual
     And Create a Attachments visual
     And Right click on visual header
-    And Choose Insert visual as "Table"
+    And Choose Add chart as "Table"
     Then "Table" visual should be created in the same view tab
 
   @Attachments
   Scenario: TC_Attachments_77:Right click - Verify Heat map under insert visual
     And Create a Attachments visual
     And Right click on visual header
-    And Choose Insert visual as "Heat map"
+    And Choose Add chart as "Heat map"
     Then "Heat map" visual should be created in the same view tab
 
   @Attachments
   Scenario: TC_Attachments_78:Right click - Verify Histogram under insert visual
     And Create a Attachments visual
     And Right click on visual header
-    And Choose Insert visual as "Histogram"
+    And Choose Add chart as "Histogram"
     Then "Histogram" visual should be created in the same view tab
 
   @Attachments
   Scenario: TC_Attachments_79:Right click - Verify Pie under insert visual
     And Create a Attachments visual
     And Right click on visual header
-    And Choose Insert visual as "Pie"
+    And Choose Add chart as "Pie"
     Then "Pie" visual should be created in the same view tab
 
-  @Attachments
-  Scenario: TC_Attachments_80:Right click - Verify commentary under insert visual
-    And Create a Attachments visual
-    And Right click on visual header
-    And Choose Insert visual as "Commentary"
-    Then "Commentary" visual should be created in the same view tab
+  #@Attachments
+  #Scenario: TC_Attachments_80:Right click - Verify commentary under insert visual
+    #And Create a Attachments visual
+    #And Right click on visual header
+    #And Choose Insert visual as "Commentary"
+    #Then "Commentary" visual should be created in the same view tab
 
-  @Attachments
-  Scenario: TC_Attachments_81:Right click - Verify attachments under insert visual
-    And Create a Attachments visual
-    And Right click on visual header
-    And Choose Insert visual as "Attachments"
-    Then Attachments visual should be created in the same view tab
+  #@Attachments
+  #Scenario: TC_Attachments_81:Right click - Verify attachments under insert visual
+    #And Create a Attachments visual
+    #And Right click on visual header
+    #And Choose Insert visual as "Attachments"
+    #Then Attachments visual should be created in the same view tab
 
-  @Attachments
-  Scenario: TC_Attachments_82:Right click - Verify image under insert visual
-    And Create a Attachments visual
-    And Right click on visual header
-    And Choose Insert visual as "Image"
-    Then "Image" visual should be created in the same view tab
-
-  @Attachments
-  Scenario: TC_Attachments_83:Right click - Verify Filter under insert visual
-    And Create a Attachments visual
-    And Right click on visual header
-    And Choose Insert visual as "Filter"
-    Then "Filter" visual should be created in the same view tab
+  #@Attachments
+  #Scenario: TC_Attachments_82:Right click - Verify image under insert visual
+    #And Create a Attachments visual
+    #And Right click on visual header
+    #And Choose Insert visual as "Image"
+    #Then "Image" visual should be created in the same view tab
+#
+  #@Attachments
+  #Scenario: TC_Attachments_83:Right click - Verify Filter under insert visual
+    #And Create a Attachments visual
+    #And Right click on visual header
+    #And Choose Insert visual as "Filter"
+    #Then "Filter" visual should be created in the same view tab
 
   @Attachments
   Scenario: TC_Attachments_84:Right click - Verify Paste visual

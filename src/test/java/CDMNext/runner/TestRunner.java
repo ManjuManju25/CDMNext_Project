@@ -17,13 +17,14 @@ import CDMNext.util.Hooks;
 		strict = true,
 		features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Map1"},			
+		tags = {"@Histogram1"},			
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
 			//	 "json:target/cucumber-reportsa/CucumberTestReport.json",
 				"com.cucumber.listener.ExtentCucumberFormatter:target/surefire-reports/html/report.html",
 				})	
+	
 	
 
 public class TestRunner {

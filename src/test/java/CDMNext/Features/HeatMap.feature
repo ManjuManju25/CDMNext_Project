@@ -246,7 +246,7 @@ Feature: Heat Map feature
     And click on Apply button
     Then Verify The series should be added to HeatMap with its data
 
-  @Heatmap
+  @Heatmap1
   Scenario: TC_HM_29: Verify default attributes for HeatMap visual
     And Navigate to series Tab
     And Select few Series
@@ -255,7 +255,7 @@ Feature: Heat Map feature
     Then HeatMap visual should be created
     And mouse hover on the series name and verify the Attributes
 
-  @Heatmap
+  @Heatmap1
   Scenario: TC_HM_30: Verify clicking on series
     And Navigate to series Tab
     And Select few Series
@@ -264,7 +264,7 @@ Feature: Heat Map feature
     Then HeatMap visual should be created
     Then Click on series on HeatMap visual and Verify the Series info popup (SSP) should be opened
 
-  @Heatmap
+  @Heatmap1
   Scenario: TC_HM_31: Verify Edit series on visual
     And Navigate to series Tab
     And Select few Series
@@ -1756,7 +1756,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The title name should be changed
 
-  @Heatmap
+  @Heatmap3
   Scenario: TC_HM_165: Edit HeatMap - Title - Verify sub title by default
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1766,7 +1766,7 @@ Feature: Heat Map feature
     Then verify the Series Harmonization window is displayed
     And click on Apply button
     And Click on 'Edit HeatMap'
-    And Click on title dropdown
+    And click on title dropdown
     Then Verify The sub title check box should be 'unchecked' by default
     And click on 'Save' button
 
@@ -1844,7 +1844,7 @@ Feature: Heat Map feature
     Then Verify the Titles popup should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_171: Edit HeatMap - Title - Verify color for visual title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1889,7 +1889,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The title font size should be changed as per the selection
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_174 and 175: Edit HeatMap - Title - Verify bold style default selection
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1904,7 +1904,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The title should be displayed in Bold format
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_176: Edit HeatMap - Title - Verify Italic style for visual title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1919,7 +1919,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The title should be displayed in 'Italic' format
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_177:Edit HeatMap - Title - Verify Underline style for visual title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1934,7 +1934,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The title should be 'underlined'
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_178:Edit HeatMap - Title - Verify horizontal alignment (left, right, center)
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1959,7 +1959,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Title should align to 'center'
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_179: Edit HeatMap - Title - Verify color for visual sub title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1971,11 +1971,11 @@ Feature: Heat Map feature
     And Click on 'Edit HeatMap'
     And Click on open Advanced settings popup(cogwheel icon)
     And Click on "Sub-title"icon and Checked 'Sub-title'
-    And Select color
+    And Select color in Edit visual
     And click on 'Save' button
-    Then Verify The Visual 'sub title' should be displayed in 'selected color'
+   Then Verify The Visual 'sub title' should be displayed in 'selected color'
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_180: Edit HeatMap - Verify color for visual sub title background
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -1991,7 +1991,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Visual sub title background should be displayed in selected color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_181: Edit HeatMap - Title - Verify font size for visual sub title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2007,7 +2007,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The sub title 'font size' should be changed as per the selection
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_182: Edit HeatMap - Title - Verify bold style for visual sub title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2023,7 +2023,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The sub title should be displayed in 'Bold' formate
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_183: Edit HeatMap - Title - Verify Italic style for visual sub title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2039,7 +2039,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The sub title should be displayed in 'Italic' format
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_184:Edit HeatMap - Verify Underline style for visual sub title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2055,7 +2055,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The sub title should be displayed in 'underlined'
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_185: Edit HeatMap - Title - Verify horizontal alignment (left, right, center)
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2083,7 +2083,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify the sub-title should be displayed in 'center'
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_186: Edit HeatMap - Title - Verify expanding and collapsing the title and subtitle sections
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2097,7 +2097,7 @@ Feature: Heat Map feature
     And Click on +/- icons in the popup to get the title and subtitle sections expand/collapse
     Then Verify The sections should be expnaded/collapsed
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_187: Edit HeatMap - Title - Verify closing of Titles popup
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2111,7 +2111,7 @@ Feature: Heat Map feature
     And Click on "×" icon on Titles popup
     Then Verify The Titles popup should be closed
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_188: Edit HeatMap - 'Border' - Verify HeatMap color
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2127,7 +2127,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The 'Border' should be displayed for HeatMap with selected color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_189: Edit HeatMap - Border - Verify HeatMap width
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2143,7 +2143,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The HeatMap 'border width' should be changed as per the selction
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_190: Edit HeatMap - Border - Verify HeatMap radius
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2159,7 +2159,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The selected 'border radius' should be applied to the HeatMap
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_192: Edit HeatMap - Verify Border=NO for visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2173,7 +2173,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Defaultly visual check box uncheck and Verify The Border should not be seen for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_193: Edit HeatMap - Verify Border=Yes for visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2188,7 +2188,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Border should be displayed for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_194: Edit HeatMap - Border - Verify visual color
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2204,7 +2204,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The 'Border' should be displayed for visual with selected color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_195: Edit HeatMap - Border - Verify visual width
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2220,7 +2220,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The visual border width should be changed as per the selction
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_196: Edit HeatMap - Border - Verify visual Radius
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2236,7 +2236,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Radius should be changed as per selection
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_198: Edit HeatMap - Border - Verify advance settings
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2251,7 +2251,7 @@ Feature: Heat Map feature
     Then Verify The Visual popup should be opened with "Heat map border" and "Visual background"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_199: Edit HeatMap - Border - Verify advance settings cogwheel
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2265,7 +2265,7 @@ Feature: Heat Map feature
     Then Verify The Visual popup should be opened with "Heat map border" and "Visual background"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_200: Edit HeatMap - Verify Background=NO for visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2280,7 +2280,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Background should not be seen for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_201: Edit HeatMap - Verify Background=Yes for visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2295,7 +2295,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Background should be displayed for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_202: Edit HeatMap - Background - Verify visual color
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2311,7 +2311,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Background should be displayed for visual with selected color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_203: Edit HeatMap - Background - Verify background image
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2327,7 +2327,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Selected image should be displayed as background of HeatMap visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_204: Edit HeatMap - Background - Verify visual Opacity
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2343,7 +2343,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Opacity should be updated on visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_205: Edit HeatMap - Background - Verify advance settings
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2358,7 +2358,7 @@ Feature: Heat Map feature
     Then Verify The Visual popup should be opened with "Heat map border" and "Visual background"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_206: Edit HeatMap - Background - Verify advance settings cogwheel
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2372,7 +2372,7 @@ Feature: Heat Map feature
     Then Verify The Visual popup should be opened with "Heat map border" and "Visual background"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_Hm_207: Edit HeatMap - Background - Verify closing of visual popup
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2387,7 +2387,7 @@ Feature: Heat Map feature
     Then Verify The popup should be closed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_208: Edit HeatMap - Verify size of visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2400,7 +2400,7 @@ Feature: Heat Map feature
     Then Verify The Default size "100% x 100%" should be displayed in visual dropdown
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_209: Edit HeatMap - Verify horizontal alignement for size
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2414,7 +2414,7 @@ Feature: Heat Map feature
     Then Verify The Horizontal allignment options should be 'disabled'
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_210: Edit HeatMap - Verify proportion for size
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2428,7 +2428,7 @@ Feature: Heat Map feature
     Then Verify The X-axis should be set to "100" with enable state & Y-axis should be set to "100" with disable state
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_211: Edit HeatMap - Verify enabling horizontal proportions for visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2443,7 +2443,7 @@ Feature: Heat Map feature
     Then verify The horizontal alignment options should be 'Enabled'
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_217: Edit HeatMap - Verify left alignment of visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2459,7 +2459,7 @@ Feature: Heat Map feature
     Then Verify The Visual should be seen at 'left side' of the edit visual pane
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_218: Edit HeatMap - Verify right alignment of visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2475,7 +2475,7 @@ Feature: Heat Map feature
     Then Verify The Visual should be seen at 'right' side of the edit visual pane
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_Hm_219: Edit HeatMap - Number format dropdown
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2489,7 +2489,7 @@ Feature: Heat Map feature
     Then Verify The "Decimal places", "Decimal separator", "Grouping separator" should be display
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_220: Edit HeatMap - Number format - Verify default Decimal places
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2503,7 +2503,7 @@ Feature: Heat Map feature
     Then Verify The "5" decimals should be selected by default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_221: Edit HeatMap - Number format - Verify Decimal separator
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2518,7 +2518,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The selected decimal separator(,) should be displayed on HeatMap value
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_223: Edit HeatMap - Date format
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2531,7 +2531,7 @@ Feature: Heat Map feature
     Then Verify The date format field Automatic as mm/yyyy should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_224: Edit HeatMap - date format dropdown
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2545,7 +2545,7 @@ Feature: Heat Map feature
     Then Verify The "Auto" & "Custom" options should be available
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_225: Edit HeatMap - date format dropdown -custom
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2560,7 +2560,7 @@ Feature: Heat Map feature
     Then Verify The Date format should be able to custom manually with help of tips
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_226: Edit HeatMap - Verify Gridlines = Check
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2574,7 +2574,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The 'Gridlines' should be applied to the 'Heat map' visual when checked
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_227: Edit HeatMap - Verify Gridlines = Uncheck
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2588,7 +2588,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Gridlines should be removed from the HeatMap visual when unchecked
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_228: Edit HeatMap - Verify Gridlines "advanced Settings popup" cogwheel
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2602,7 +2602,7 @@ Feature: Heat Map feature
     Then Verify The Visual window should be displayed by default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_229: Edit HeatMap - Verify Gridlines "advanced Settings popup" cogwheel - Lines = Check
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2617,7 +2617,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Gridlines should be displayed in visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_230: Edit HeatMap - Gridlines - Verify visual lines color
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2633,7 +2633,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Gridlines should be applied for visual with selected color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_231: Edit HeatMap - Gridlines - Verify visual lines width
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2649,7 +2649,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The gridline width should be changed as per the selction
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_232: Edit HeatMap - Gridlines - Verify visual lines radius
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2664,7 +2664,7 @@ Feature: Heat Map feature
     And Select radius to 10
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_233: Edit HeatMap - legend
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2677,7 +2677,7 @@ Feature: Heat Map feature
     Then Verify The Legend options should be "checked" by default and "Bottom center" options should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_234: Edit HeatMap - legend dropdown
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2691,7 +2691,7 @@ Feature: Heat Map feature
     Then Veirfy The "Vertical align:", "Horizontal align:", "Advanced settings" as hyperlink should be seen
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_241: Edit HeatMap - legend - advanced settings under dropdown
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2706,7 +2706,7 @@ Feature: Heat Map feature
     Then Verify The Legend window list "Common", "Color axes", "Position", "Background", "Border"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_242: Edit HeatMap - legend - advanced settings under dropdown - show legend
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2721,7 +2721,7 @@ Feature: Heat Map feature
     Then Verify The "Show Legend" check box Should be checked by default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_244: Edit HeatMap - legend - advanced settings under dropdown - items
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2737,7 +2737,7 @@ Feature: Heat Map feature
     Then Verify The "Gradient", "Solid color", "Step(s)", "Logarithmic", "Per series" should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_249: Edit HeatMap - legend - advanced settings under dropdown - position
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2753,7 +2753,7 @@ Feature: Heat Map feature
     Then Verify the Alignment options "Vertical align:", "Horizontal align:" should be available
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_257: Edit HeatMap - legend - advanced settings under dropdown - background
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2769,7 +2769,7 @@ Feature: Heat Map feature
     Then Verify The "Color", "Opacity(%)" options should be seen
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_258: Edit HeatMap - legend - advanced settings under dropdown - background color
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2786,7 +2786,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Selected color Should be displayed in background color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_259: Edit HeatMap - legend - advanced settings under dropdown - background opacity
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2804,7 +2804,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify the applyed opacity Should be displayed in background
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_260: Edit HeatMap - legend - advanced settings under dropdown - border
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2820,7 +2820,7 @@ Feature: Heat Map feature
     Then Verify The "Color", "Width", "Radius", "Style" should be shown
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_261: Edit HeatMap - legend - advanced settings under dropdown - border color
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2837,7 +2837,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The selected border Color should be shown
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_Hm_262: Edit HeatMap - legend - advanced settings under dropdown - border width
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2855,7 +2855,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Width should be shown as selected value
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_263: Edit HeatMap - legend - advanced settings under dropdown - border radius
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2873,7 +2873,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The 'radius' should be shown as selected value
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_288: Edit HeatMap - Verify Copyright=Check
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2887,7 +2887,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Copyright(Source:CEIC Data) should be displayed for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_289: Edit HeatMap - Verify Copyright=Uncheck
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2901,7 +2901,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The The Copyright(Source:CEIC Data) should be removed for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_290: Edit HeatMap - Copyright - Verify 'Vertical align'
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2920,7 +2920,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Copyright - vertical align as "top"
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_292: Edit HeatMap - Copyright - Verify 'Horizontal align'
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2943,7 +2943,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Copyright should be displayed in "Right"
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_293: Edit HeatMap - Copyright - Verify advance settings
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2959,7 +2959,7 @@ Feature: Heat Map feature
     Then Verify The Copyright popup should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_294: Edit HeatMap - Copyright - Verify advance settings cogwheel
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2974,7 +2974,7 @@ Feature: Heat Map feature
     Then Verify The Copyright popup should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_295: Edit HeatMap - Copyright - Verify text=check
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -2991,7 +2991,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Copyright(Source:CEIC Data) should be displayed for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_296: Edit HeatMap - Copyright - Verify default text for copyright
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3008,7 +3008,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Copyright(Source:CEIC Data) should be displayed for visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_297: Edit HeatMap - Copyright - Verify text change for copyright
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3026,7 +3026,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Updated copyright should be displayed on visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_299: Edit HeatMap - Copyright - Verify copyright color
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3045,7 +3045,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Visual copyright should be displayed in selected color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_300: Edit HeatMap - Copyright - Verify font size
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3064,7 +3064,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The copyright font size should be changed as per the selection
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_301: Edit HeatMap - Copyright - Verify bold style
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3083,7 +3083,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The copyright should be displayed in "bold" format
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_302: Edit HeatMap - Copyright - Verify Italic style
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3102,7 +3102,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The copyright should be displayed in "italic" format
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_303: Edit HeatMap - Copyright - Verify Underline style
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3121,7 +3121,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The copyright should be displayed in "underline" format
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_304: Edit HeatMap - Copyright - Verify horizontal alignment (left, right, center)
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3150,7 +3150,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The copyright align should be displayed in 'right'
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_305: Edit HeatMap - Copyright - Verify vertical alignment (Top and bottom)
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3174,7 +3174,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The copyright horizontal align should be display on 'bottom'
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_306: Edit HeatMap - Copyright - Verify closing copyright popup
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3189,7 +3189,7 @@ Feature: Heat Map feature
     And Click on copyright popup close (x) icon
     Then Verify The popup should be closed
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_308: Edit HeatMap - Data labels
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3202,7 +3202,7 @@ Feature: Heat Map feature
     Then Verify The "Data labels" Should be checked by default and advanced settings option should be present
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_309: Edit HeatMap - Data labels - advanced settings cogwheel
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3216,7 +3216,7 @@ Feature: Heat Map feature
     Then Verify The Label section should be seen and can be opened/collapsed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_310: Edit HeatMap - Data labels - advanced settings cogwheel- labels - color
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3232,7 +3232,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The labels color Should be display with selected color
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_311: Edit HeatMap - Data labels - advanced settings cogwheel - labels - Highlight
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3248,7 +3248,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify the labels highlight color Should be displayed with selected color in visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_312: Edit HeatMap - Data labels - advanced settings cogwheel - labels - Size
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3264,7 +3264,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Selected size should be displayed in visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_313: Edit HeatMap - Data labels - advanced settings Cogwheel- labels - styles
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3289,7 +3289,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The "underline" style should be displayed in labels
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_316: Edti HeatMap - Date and Value format
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3303,7 +3303,7 @@ Feature: Heat Map feature
     Then Verify The by default date and value checkbox shoud be checked
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_317: Edti HeatMap - tooltip dropdown default display
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3316,7 +3316,7 @@ Feature: Heat Map feature
     Then Verify The tooltip field "Date +2" value should be displayed as default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_319: Edit HeatMap - 'Region' tooltip for HeatMap visual
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3331,7 +3331,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The tooltips of visual should include with "Region:" of series
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_320: Edit HeatMap - 'Frequency' tooltip for HeatMap visual
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3346,7 +3346,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The tooltips of visual should include with "Frequency:" of series
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_321: Edit HeatMap - 'Function description' tooltip for HeatMap visual
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3363,7 +3363,7 @@ Feature: Heat Map feature
     And Apply the function in series and save
     Then Verify The tooltips of visual should include with "Functions:" of series
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_323: Edit HeatMap - tooltip dropdown - advanced settings
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3378,7 +3378,7 @@ Feature: Heat Map feature
     Then Verify The "Common","Items" should be available
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_324: Edit HeatMap - tooltip dropdown - advanced settings - Common
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3393,7 +3393,7 @@ Feature: Heat Map feature
     Then Verify The Tooltip "show tooltips" should be checked default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_325: Edit HeatMap - tooltip dropdown - advanced settings - Common
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3409,7 +3409,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The 'Tooltips' for visual should not be shown
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_326: Edit HeatMap - tooltip dropdown - advanced settings - items
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3425,7 +3425,7 @@ Feature: Heat Map feature
     And click on items - plus icon and Verify the dropdown data "Name", "Region", "Frequency", "Function description"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_328: Edit HeatMap - tooltip dropdown - advanced settings - items
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3442,7 +3442,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The "Region" attribute should be display in tooltips
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_329: Edit HeatMap - tooltip dropdown - advanced settings - items
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3459,7 +3459,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The "Frequency" attribute should be display in tooltips
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_330: Edit HeatMap - tooltip dropdown - advanced settings - items
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3478,7 +3478,7 @@ Feature: Heat Map feature
     And Apply the function in series and save
     Then Verify The tooltips of visual should include with "Functions:" of series
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_351: Edit HeatMap - Verify Solid Color button - Color Steps Dropdown
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3493,7 +3493,7 @@ Feature: Heat Map feature
     And Click on color steps dropdown and Verify the values 2 to 7
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_356: Edit HeatMap - Verify Solid Color button - Advanced settings cogwheel
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3508,7 +3508,7 @@ Feature: Heat Map feature
     Then Verify The Open advanced settings popup list
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_357: Edit HeatMap - Verify Solid Color button - Advanced settings cogwheel - Common
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3524,7 +3524,7 @@ Feature: Heat Map feature
     Then Verify The "Show legend" checkbox checked by default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_358: Edit HeatMap - Verify Solid Color button - Advanced settings cogwheel - Position
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3540,7 +3540,7 @@ Feature: Heat Map feature
     Then Verify The "Position" section is displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_359: Edit HeatMap - Verify Solid Color button - Advanced settings cogwheel - Background
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3556,7 +3556,7 @@ Feature: Heat Map feature
     Then Verify The "Opacity(%)" disabled default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_360: Edit HeatMap - Verify Solid Color button - Advanced settings cogwheel - Border
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3572,7 +3572,7 @@ Feature: Heat Map feature
     Then Verify The 'Radius' disabled default
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_361: Edit HeatMap - Gradient color button
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3586,7 +3586,7 @@ Feature: Heat Map feature
     Then Verify The list "Step(s)", "Logarithmic", "Per series", "Smallest Value", "Largest Value"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_362: Edit HeatMap - Gradient color button - Steps Dropdown
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3601,7 +3601,7 @@ Feature: Heat Map feature
     Then Verify The Steps dropdown from 0 to 5 will be available
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_363: Edit HeatMap - Gradient color button - Steps change
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3616,7 +3616,7 @@ Feature: Heat Map feature
     Then Verift The Selected color steps will be created with smallest and highest values
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_369: Edit HeatMap - Verify series axis chekbox = check
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3630,7 +3630,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Series names displayed in visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_370: Edit HeatMap - Verify series axis chekbox = uncheck
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3644,7 +3644,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Series names not displayed in visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_371: Edit HeatMap - Verify series axis chekbox advanced setting cogwheel
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3658,7 +3658,7 @@ Feature: Heat Map feature
     Then Verify The 'Label section' and opened/collapsed should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_372: Edit HeatMap - Verify series axis chekbox advanced setting cogwheel - Label = check
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3673,7 +3673,7 @@ Feature: Heat Map feature
     Then Verify The Label section should be enabled and "Color", "Size", "Style", "Rotation" should be seen
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_373: Edit HeatMap - Verify series axis chekbox advanced setting cogwheel - Label color
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3689,7 +3689,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Selected color should be applied and displayed
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_374: Edit HeatMap - Verify series axis chekbox advanced setting cogwheel - Label size
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3705,7 +3705,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify the 'Series size' should be applied and displayed
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_375:Edit HeatMap - Verify series axis chekbox advanced setting cogwheel - Label style - bold, italic, underline
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3733,7 +3733,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify the Selected style "underline" displayed in visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_376: Edit HeatMap - Verify series axis chekbox advanced setting cogwheel - Label rotation
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3749,7 +3749,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The Label rotation Selected series will be rotated clockwise
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_377: Edit HeatMap - Verify time axis chekbox = check
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3763,7 +3763,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The time will be added below HeatMap visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_378: Edit HeatMap - Verify time axis chekbox = uncheck
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3777,7 +3777,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The time will be removed from the heatmap visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_379: Edit HeatMap - Verify time axis chekbox advanced setting cogwheel
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3791,7 +3791,7 @@ Feature: Heat Map feature
     Then Verify The window "Axis setup", "Labels", "Date format"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_380: Edit HeatMap - Verify time axis chekbox advanced setting cogwheel - Label
     And Navigate to series Tab
     And Search for the series "369703817;414249197" with different frequencies
@@ -3806,7 +3806,7 @@ Feature: Heat Map feature
     Then Verify The 'Labels' section checkbox checked and "Color", "Axis color", "Size", "Style" should be seen
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_298:Edit HeatMap - Copyright - Verify link for copyright
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3825,7 +3825,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Click on the copyright and Verify The should redirect to mentioned link
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_212: Edit HeatMap - Size - Dropdown settings  - HeatMap position
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3839,7 +3839,7 @@ Feature: Heat Map feature
     Then Verify The "Horizontal align:" & "Proportion:" should be shown
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_386: Edit HeatMap - Verify the changes reflected in edit visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3854,7 +3854,7 @@ Feature: Heat Map feature
     Then Verify The changes in Edit visual popup only
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_387: Edit HeatMap - Verify title icon on visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3868,7 +3868,7 @@ Feature: Heat Map feature
     Then Verify The 'Titles' popup should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_388: Edit HeatMap - Verify titles popup open by double click on visual title
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3882,7 +3882,7 @@ Feature: Heat Map feature
     Then Verify The 'Titles' popup should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_390: Edit HeatMap - Verify double clicking on visuals
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3899,7 +3899,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The changes should apply to heatmap visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_391: Edit HeatMap - Verify double clicking on date field
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3915,7 +3915,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify the 'size' changes should be displayed on visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_392: Edit HeatMap - Verify double clicking on timepoints
     And Navigate to series Tab
     And Search for the series "1692001;414250207" with different frequencies
@@ -3931,7 +3931,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify the timepoints 'size'  changes should be displayed on visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_394: Edit HeatMap - Verify clicking on series name
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3945,7 +3945,7 @@ Feature: Heat Map feature
     Then Verify The Series info popup should be opened
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_395: Edit HeatMap - Verify Edit series on visual
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3959,7 +3959,7 @@ Feature: Heat Map feature
     Then Verify The dropdown values "Rename", "Frequency", "Currency", "Change"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_396: Edit HeatMap - Verify Rename option from cogwheel icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3973,7 +3973,7 @@ Feature: Heat Map feature
     Then Verify The Rename popup should be displayed with all series and series name should be updated as per the change
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_397: Edit HeatMap - Verify Frequency option from cogwheel icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -3988,7 +3988,7 @@ Feature: Heat Map feature
     Then Verify The Selected frequency "Yearly (Sum)" should be applied to the series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_398: Edit HeatMap - Verify Currency option from cogwheel icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4003,7 +4003,7 @@ Feature: Heat Map feature
     Then Verify The Selected Currency "USD" should be applied to the series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_399: Edit HeatMap - Verify Change option from cogwheel icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4018,7 +4018,7 @@ Feature: Heat Map feature
     Then Verify The Selected Change "CHANGE" should be applied to the series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_400: Edit HeatMap - Verify Remove series icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4032,7 +4032,7 @@ Feature: Heat Map feature
     Then Verify The "series" should be removed from the visual
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_401: Edit HeatMap - Verify tooltip for series
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4045,7 +4045,7 @@ Feature: Heat Map feature
     And Mouse hover on series name
     Then Verify The Series tooltip should be displayed with options
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_404: Edit HeatMap - Verify selecting another visual from visual panel
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4060,7 +4060,7 @@ Feature: Heat Map feature
     And click on Apply button
     Then Verify The visual should be converted as user selected "Chart"
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_405:Edit HeatMap - Verify selecting another visual from dropdown
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4075,7 +4075,7 @@ Feature: Heat Map feature
     And click on Apply button
     Then Verify The visual should be converted as user selected "Pie"
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_437: Edit HeatMap - Verify feedback option
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4090,7 +4090,7 @@ Feature: Heat Map feature
     And Click on close "×" icon
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_438: Edit HeatMap - Feedback - Verify description for popup
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4105,7 +4105,7 @@ Feature: Heat Map feature
     And Click on close "×" icon
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_439: Edit HeatMap - Feedback - Verify adding text in the field
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4121,7 +4121,7 @@ Feature: Heat Map feature
     And Click on close "×" icon
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_440: Edit HeatMap - Feedback - Verify Submit and cancel buttons when description field is empty
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4135,8 +4135,8 @@ Feature: Heat Map feature
     Then Verify The 'Submit' and 'Cancel' buttons should be disabled by default
     And Click on close "×" icon
     And click on 'Save' button
-
-  @Heatmap1
+	
+  @Heatmap
   Scenario: TC_HM_441: Edit HeatMap - Feedback - Verify cancel button
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4152,7 +4152,7 @@ Feature: Heat Map feature
     Then Verify The Feedback popup should be closed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_442: Edit HeatMap - Feedback - Verify Submit button
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4168,7 +4168,7 @@ Feature: Heat Map feature
     Then Verify The user feedback should be sent to FD and popup should be closed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_443: Edit HeatMap - Feedback - Verify growl message after  Submit feedback
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4184,7 +4184,7 @@ Feature: Heat Map feature
     Then Verify The "Thank you for submitting a question to us." message should be displayed in a growl popup
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_444: Edit HeatMap - Verify cancel/x button
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4197,7 +4197,7 @@ Feature: Heat Map feature
     And Click on Cancel/x button
     Then Verify The edit visual popup should be closed
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_406: Edit HeatMap - Edit series - Verify delete series icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4212,7 +4212,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The series should be removed from visual panel
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_407: Edit HeatMap - Edit series - Verify delete all series icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4227,7 +4227,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The All series should be removed from visual panel
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_408: Edit HeatMap - Edit series - Verify SSP by clicking on series name
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4241,7 +4241,7 @@ Feature: Heat Map feature
     Then Verify The SSP popup should be displayed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_409: Edit HeatMap - Edit series - Verify Rename series icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4255,7 +4255,7 @@ Feature: Heat Map feature
     Then Verify The "Rename" popup should be displayed for selected series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_410: Edit HeatMap - Edit series - Verify edit series icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4269,7 +4269,7 @@ Feature: Heat Map feature
     Then Verify The dropdown list "Rename", "Frequency", "Currency", "Change"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_411: Edit HeatMap - Edit series - Verify 'Rename' option under edit series
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4284,7 +4284,7 @@ Feature: Heat Map feature
     Then Verify The "Rename" popup should be displayed for selected series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_412: Edit HeatMap - Edit series - Verify 'Frequency' option under edit series
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4300,7 +4300,7 @@ Feature: Heat Map feature
     Then Verify the Selected function should be applied to the Edit visual
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_413: Edit HeatMap - Edit series - Verify 'Currency' option under edit series
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4315,7 +4315,7 @@ Feature: Heat Map feature
     Then Verify the Selected 'currency' function should be applied to the Edit visual
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_414: Edit HeatMap - Edit series - Verify Change option under edit series
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4330,7 +4330,7 @@ Feature: Heat Map feature
     Then Verify the Selected 'Change' function should be applied to the visual
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_415: Edit HeatMap - Edit series - Verify clicking on frequency or dropdown
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4344,7 +4344,7 @@ Feature: Heat Map feature
     Then Verify The "Series Harmonization" popup should be displayed
     And Click on "Apply" button on 'Series Harmonization' window
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_416: Edit HeatMap - Edit series - Series Harmonization - Verify applying frequency
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4360,7 +4360,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The selected frequency "Half-yearly" should be displayed on heat map visual
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_417: Edit HeatMap - Edit series - Series Harmonization - Verify applying Missing values method
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4376,7 +4376,7 @@ Feature: Heat Map feature
     And click on 'Save' button
     Then Verify The "Missing values method" should be applied with selected frequency "Calculate with linear extrapolate"
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_419: Edit HeatMap - Edit series - Series Harmonization -Minimize option
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4391,7 +4391,7 @@ Feature: Heat Map feature
     Then Verify The popup should be "Minimize"
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_420: Edit HeatMap - Edit series - Series Harmonization -Verify maximize option
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4409,7 +4409,7 @@ Feature: Heat Map feature
     And Click on "Apply" button on 'Series Harmonization' window
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_421: Edit HeatMap - Edit series - Series Harmonization -verify full screen
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4425,7 +4425,7 @@ Feature: Heat Map feature
     And Click on "Apply" button on 'Series Harmonization' window
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_422: Edit HeatMap - Edit series - Series Harmonization -verify exit full screen
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4442,7 +4442,7 @@ Feature: Heat Map feature
     And Click on "Apply" button on 'Series Harmonization' window
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_423: Edit HeatMap - Edit series - Series Harmonization -Verify Cancel/x icon
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4457,7 +4457,7 @@ Feature: Heat Map feature
     Then Verify The "Series Harmonization" popup should be closed
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_424: Edit HeatMap - Edit series - Verify dropdown for frequency in series level
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4471,7 +4471,7 @@ Feature: Heat Map feature
     Then Verify The frequencies should be available under the dropdown
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_425: Edit HeatMap - Edit series - Verify appling frequency in series level
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4486,7 +4486,7 @@ Feature: Heat Map feature
     Then Verify The Selected frequency "Weekly (Replicate)" should be displayed to ONLY selected series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_426: Edit HeatMap - Edit series - Verify appling currency in series level
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4501,7 +4501,7 @@ Feature: Heat Map feature
     Then Verify The Selected currency "USD" should be displayed to ONLY selected series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_427:Edit HeatMap - Edit series - Verify clicking on type a function field
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4515,7 +4515,7 @@ Feature: Heat Map feature
     And List of series dropdown should be opened
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_428: Edit HeatMap - Edit series -  Verify appling function in series level
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies
@@ -4530,7 +4530,7 @@ Feature: Heat Map feature
     Then Verify The Selected function "ROUND" should be displayed to ONLY selected series
     And click on 'Save' button
 
-  @Heatmap1
+  @Heatmap
   Scenario: TC_HM_431: Edit HeatMap - Edit series - Verify search for functions
     And Navigate to series Tab
     And Search for the series "7874301;249445301" with different frequencies

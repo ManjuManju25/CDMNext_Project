@@ -20,11 +20,11 @@ Feature: Verifying SeriesTab functionality
     When Click on "Reset"
     Then Selected options should be reset to default
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_03:Verifying "Unselect all" option for series level
-    Given User enters seriesID "146381801;1380601;245178303"
-    When User right click on any series
-    Then User can able to see "Unselect all" option from dropdown menu
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_03:Verifying "Unselect all" option for series level
+    #Given User enters seriesID "146381801;1380601;245178303"
+    #When User right click on any series
+    #Then User can able to see "Unselect all" option from dropdown menu
 
   @SeriesTab
   Scenario: TC_SeriesTab_04:Verify series count f or search
@@ -49,23 +49,23 @@ Feature: Verifying SeriesTab functionality
     When User right click on any series
     Then User can able to see "Series Info" option from dropdown menu
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_08:Verifying "View as Chart" option for series level
-    Given User enters seriesID "357567097;357567537"
-    When User right click on any series
-    Then User can able to see "View as Chart" option from dropdown menu
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_09:Verifying "View as Map" option for series level
-    Given User enters seriesID "7872901;7874601"
-    When User right click on any series
-    Then User can able to see "View as Map" option from dropdown menu
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_10:Verifying "View as Table" option for series level
-    Given User enters seriesID "7872901;7874601"
-    When User right click on any series
-    Then User can able to see "View as Table" option from dropdown menu
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_08:Verifying "View as Chart" option for series level
+    #Given User enters seriesID "357567097;357567537"
+    #When User right click on any series
+    #Then User can able to see "View as Chart" option from dropdown menu
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_09:Verifying "View as Map" option for series level
+    #Given User enters seriesID "7872901;7874601"
+    #When User right click on any series
+    #Then User can able to see "View as Map" option from dropdown menu
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_10:Verifying "View as Table" option for series level
+    #Given User enters seriesID "7872901;7874601"
+    #When User right click on any series
+    #Then User can able to see "View as Table" option from dropdown menu
 
   @SeriesTab
   Scenario: TC_SeriesTab_11:Verifying "Download" option for series level
@@ -132,80 +132,80 @@ Feature: Verifying SeriesTab functionality
 
   @SeriesTab
   Scenario: TC_SeriesTab_21:Verifying "Forecast" filter for series tab
-    Given Open "Series" tab
     And User has selects "More" as "Forecast"
     When Click on "Apply filter"
+    And Open "Series" tab
     And Choose "Popularity" under "Sort By" option
     Then User verify corresponding results for selected filter
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_22:Verify 'Mouse over' icons for series level
-    Given User enters "5724301"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "Global Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_23:Verify 'Mouse over' icons for series level
-    Given User enters "262498601"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "Global Key Series Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_24:Verify 'Mouse over' icons for series level
-    Given User enters "5190001"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "China Premium Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_25:Verify 'Mouse over' icons for series level
-    Given User enters "5823501"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "Global Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_26:Verify 'Mouse over' icons for series level
-    Given User enters "1025401"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "Daily Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_27:Verify 'Mouse over' icons for series level
-    Given User enters "376239567"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "Brazil Premium Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_28:Verify 'Mouse over' icons for series level
-    Given User enters "389489677"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "Russia Premium Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_29:Verify 'Mouse over' icons for series level
-    Given User enters "360724907"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "India Premium Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_30:Verify 'Mouse over' icons for series level
-    Given User enters "324350701"
-    When User Mouse hover on "See in Database" icon
-    Then User can selects "Indonesia Premium Database"
-    Then User can see the selected database in Databases tab
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_31:Verify 'Mouse over' icons for series level
-    Given User enters "400841827"
-    When User Mouse hover on "See in Database" icon
-    Then User can see the selected database in Databases tab
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_22:Verify 'Mouse over' icons for series level
+    #Given User enters "5724301"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "Global Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_23:Verify 'Mouse over' icons for series level
+    #Given User enters "262498601"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "Global Key Series Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_24:Verify 'Mouse over' icons for series level
+    #Given User enters "5190001"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "China Premium Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_25:Verify 'Mouse over' icons for series level
+    #Given User enters "5823501"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "Global Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_26:Verify 'Mouse over' icons for series level
+    #Given User enters "1025401"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "Daily Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_27:Verify 'Mouse over' icons for series level
+    #Given User enters "376239567"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "Brazil Premium Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_28:Verify 'Mouse over' icons for series level
+    #Given User enters "389489677"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "Russia Premium Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_29:Verify 'Mouse over' icons for series level
+    #Given User enters "360724907"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "India Premium Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_30:Verify 'Mouse over' icons for series level
+    #Given User enters "324350701"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can selects "Indonesia Premium Database"
+    #Then User can see the selected database in Databases tab
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_31:Verify 'Mouse over' icons for series level
+    #Given User enters "400841827"
+    #When User Mouse hover on "See in Database" icon
+    #Then User can see the selected database in Databases tab
 
   #@SeriesTab....functionality has been removed
   #Scenario: TC_SeriesTab_32:Verify 'Mouse over' icons for series level
@@ -223,6 +223,7 @@ Feature: Verifying SeriesTab functionality
   #Given User enters "5724301"
   #When User Mouse hover on "See in Database" icon
   #Then User can see the selected database in Databases tab
+  
   @SeriesTab
   Scenario: TC_SeriesTab_35:Verify 'Mouse over' icons for series level
     Given User enters seriesID "5190101"
@@ -231,8 +232,8 @@ Feature: Verifying SeriesTab functionality
 
   @SeriesTab
   Scenario: TC_SeriesTab_36:Verify 'Add and replace' from dropdown
-    Given User enters seriesID "5724301;5958801"
     And Create any visual
+    Given User enters seriesID "5724301;5958801"
     And Click on drop down icon next to +
     And Click on "Add and replace"
     Then Highlighted visual series should be replaced new series
@@ -349,23 +350,24 @@ Feature: Verifying SeriesTab functionality
   #And Enter keyword "GDP"
   #And Click on x Matched Insights hyperlink
   #Then Insights explorer modal window should open with x number of insights listed
-  @SeriesTab
-  Scenario: TC_SeriesTab_51:Verifying "View as Pie" option for series level
-    Given User enters seriesID "7872901;7874601"
-    When User right click on any series
-    Then User can able to see "View as Pie" option from dropdown menu
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_52:Verifying "View as Heat map" option for series level
-    Given User enters seriesID "230798301;7027801"
-    When User right click on any series
-    Then User can able to see "View as Heat map" option from dropdown menu
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_53:Verifying "View as Histogram" option for series level
-    Given User enters seriesID "230798301"
-    When User right click on any series
-    Then User can able to see "View as Histogram" option from dropdown menu
+  
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_51:Verifying "View as Pie" option for series level
+    #Given User enters seriesID "7872901;7874601"
+    #When User right click on any series
+    #Then User can able to see "View as Pie" option from dropdown menu
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_52:Verifying "View as Heat map" option for series level
+    #Given User enters seriesID "230798301;7027801"
+    #When User right click on any series
+    #Then User can able to see "View as Heat map" option from dropdown menu
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_53:Verifying "View as Histogram" option for series level
+    #Given User enters seriesID "230798301"
+    #When User right click on any series
+    #Then User can able to see "View as Histogram" option from dropdown menu
 
   @SeriesTab
   Scenario: TC_SeriesTab_54:Verifying "Download" option for selected series
@@ -374,26 +376,26 @@ Feature: Verifying SeriesTab functionality
     When Click on "Download"
     Then "Download" window should be appeared for selected series
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_55:Verify "View as Chart" from More actions
-    Given User enters seriesID "239796903;69851501"
-    And Select series and Click on More actions
-    And Select "View as Chart"
-    Then Visual should be created with "Edit Chart"
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_55:Verify "View as Chart" from More actions
+    #Given User enters seriesID "239796903;69851501"
+    #And Select series and Click on More actions
+    #And Select "View as Chart"
+    #Then Visual should be created with "Edit Chart"
+#
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_56:Verify "View as Map" from More actions
+    #Given User enters seriesID "7027801;292514701"
+    #And Select series and Click on More actions
+    #And Select "View as Map" as "China"
+    #Then Visual should be created with "Edit Map"
 
-  @SeriesTab
-  Scenario: TC_SeriesTab_56:Verify "View as Map" from More actions
-    Given User enters seriesID "7027801;292514701"
-    And Select series and Click on More actions
-    And Select "View as Map" as "China"
-    Then Visual should be created with "Edit Map"
-
-  @SeriesTab
-  Scenario: TC_SeriesTab_57:Verify "Unselect all" from More actions
-    Given User enters seriesID "356530077;2121301"
-    And Select series and Click on More actions
-    And Click on "Unselect all"
-    Then The selected series should be unselected
+  #@SeriesTab
+  #Scenario: TC_SeriesTab_57:Verify "Unselect all" from More actions
+    #Given User enters seriesID "356530077;2121301"
+    #And Select series and Click on More actions
+    #And Click on "Unselect all"
+    #Then The selected series should be unselected
 
   @SeriesTab
   Scenario: TC_SeriesTab_58:Verify Download option for selected series from More actions
@@ -410,21 +412,21 @@ Feature: Verifying SeriesTab functionality
     Then Footnotes should be opened for selected series
 
   @SeriesTab
-  Scenario: TC_SeriesTab_60:Verify "View as Pie" for series from More actions
+  Scenario: TC_SeriesTab_60:Verify "Add chart Pie" for series from More actions
     Given User enters seriesID "261975301;237211603"
     And Select series and Click on More actions
     And Select "Pie"
     Then Visual should be created with "Edit Pie"
 
   @SeriesTab
-  Scenario: TC_SeriesTab_61:Verify "View as Heat map" for series from More actions
+  Scenario: TC_SeriesTab_61:Verify "Add chart Heat map" for series from More actions
     Given User enters seriesID "108107001;213834902"
     And Select series and Click on More actions
     And Select "Heat map"
     Then Visual should be created with "Edit Heat map"
 
   @SeriesTab
-  Scenario: TC_SeriesTab_62:Verify "View as Histogram" for series from More actions
+  Scenario: TC_SeriesTab_62:Verify "Add chart Histogram" for series from More actions
     Given User enters seriesID "6249001"
     And Select series and Click on More actions
     And Select "Histogram"
@@ -438,10 +440,10 @@ Feature: Verifying SeriesTab functionality
     Then The download popup should be opened
 
   @SeriesTab
-  Scenario: TC_SeriesTab_64:Verify "View as Table" for series level from More actions
+  Scenario: TC_SeriesTab_64:Verify "Add chart Table" for series level from More actions
     Given User enters seriesID "239796903;69851501"
     And Select series and Click on More actions
-    And Select "View as Table"
+    And Select Add chart as "Table"
     Then Visual should be created with "Edit Table"
 
   @SeriesTab

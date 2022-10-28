@@ -34,13 +34,12 @@ Feature: Verifying sprintcases 5.0
     And Right click on visual header
     Then "Copy attachments", "Cut attachments" ,"Attachments", "View" options should be greyed out
 
-  @Sprintcases5.0
-  Scenario: TC_12501_01:Verify keyboard shortcut info for visuals under SSP
-    And Add few series to myseries
-    And Open SSP window
-    And Click on "View as" tab
-    Then The keyboard shortcut info should be displayed for Chart "(C)", Map "(M)" and Table "(T)"
-
+  #@Sprintcases5.0.... removed on 5.5.0_rc.5
+  #Scenario: TC_12501_01:Verify keyboard shortcut info for visuals under SSP
+  #And Add few series to myseries
+  #And Open SSP window
+  #And Click on "View as" tab
+  #Then The keyboard shortcut info should be displayed for Chart "(C)", Map "(M)" and Table "(T)"
   @Sprintcases5.0
   Scenario: TC_17399_01:Verify growl message when add visual to new insight
     And Create a pie visual with series id's "16240301;16243001"
@@ -330,7 +329,6 @@ Feature: Verifying sprintcases 5.0
   @Sprintcases5.0
   Scenario: TC_19072_01 :Remove (c) icon for continuous series in Global Key series DB
     Given User enters "386587787"
-    Given Open "Series" tab
     And User has selects "More" as "With historical extension of continuous series"
     And Click on "Apply filter"
     Then "c" icon for series should not be shows for global key series
@@ -384,5 +382,3 @@ Feature: Verifying sprintcases 5.0
     And Open insight in preview mode
     And Select visual and use Ctrl + C to copy the visual
     Then The visual should be copied
-    
-   
