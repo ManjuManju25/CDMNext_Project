@@ -85,13 +85,13 @@ public class SprintCases_4_10 {
 		
 
 	}
-	/*@And("^click on rename$")
+	@And("^click on rename$")
 	public void click_on_rename() throws Throwable {
 
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'Rename')]")).click();
 
-	}*/
+	}
 	@And("^Change name for Group and click on 'Ok' button$")
 	public void change_name_for_Group_and_click_on_Ok_button() throws Throwable {
 		Thread.sleep(2000);
@@ -329,7 +329,7 @@ public class SprintCases_4_10 {
 		}
 
 	}
-	/*@And("^attributes check on tables$")
+	@And("^attributes check on tables$")
 	public void attributes_check_on_tables() throws Throwable {
 		Thread.sleep(2000);
 		action.moveToElement(login.driver.findElement(By.xpath("//span[@class='series-edit--title']"))).build().perform();
@@ -346,7 +346,7 @@ public class SprintCases_4_10 {
 		LastUpdateTime = login.driver.findElement(By.xpath("//td[contains(text(),'Last update time')]")).getText();
 		System.out.println("LastUpdateTime:" + LastUpdateTime);
 
-	}*/
+	}
 
 	// TC_18708_01
 	@Then("^verify First Obs\\. Date, Last Obs\\. Date and Last Update time$")
@@ -536,6 +536,5 @@ public void click_on_Search_series()
 	}
 	
 }
-
 
 }

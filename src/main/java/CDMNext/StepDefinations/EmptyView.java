@@ -27,8 +27,6 @@ public class EmptyView {
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	int max_of_visuals_created;
 	public String region1,region2;
-	int chartCount = 0;
-	int mapCount = 0,TableCount = 0,CommentaryCount=0,AttachmentsCount=0,FilterCount=0;
 	
 	@And("^Click on View tab$")
 	public static void click_on_View_tab() throws Throwable {
@@ -102,7 +100,8 @@ public class EmptyView {
 		CommonFunctionality.wait(500);
 		CommonFunctionality
 				.getElementByXpath(login.driver,
-						"//*[contains(text(),'" + arg1 + "')]",
+						"//*[@data-title='" + arg1
+								+ "']//*[@class='insight-action-panel--btn-popup icon--context-menu-arrow']",
 						20)
 				.click();
 	}
@@ -110,26 +109,26 @@ public class EmptyView {
 	@Then("^Verify different types of Line charts$")
 	public void verify_different_types_of_Line_charts() throws Throwable {
 
-		String[] exp = { "Line", "Spline", "Step", "Dotted" };
+		String[] exp = { "Line", "Spline", "Step line", "Dotted line" };
 		List<WebElement> LineChart_options = login.driver
-				.findElements(By.xpath("//*[@class='items-wrapper']//*[@class='visuals-panel']/*/*[1]/*[1]/*[2]/*/*[1]"));
+				.findElements(By.xpath("//*[@class='items-wrapper']//li/span"));
 		Histogram.DropdownOptions(exp, LineChart_options);
 
 	}
 
 	@Then("^Verify different types of Area charts$")
 	public void verify_different_types_of_Area_charts() throws Throwable {
-		String[] exp = { "Area", "Stacked","100% Stacked" };
+		String[] exp = { "Area", "Stacked area" };
 		List<WebElement> AreaChart_options = login.driver
-				.findElements(By.xpath("//*[@class='items-wrapper']//*[@class='visuals-panel']/*/*[1]/*[2]/*[2]/*/*[1]"));
+				.findElements(By.xpath("//*[@class='items-wrapper']//li/span"));
 		Histogram.DropdownOptions(exp, AreaChart_options);
 	}
 
 	@Then("^Verify different types of Column charts$")
 	public void verify_different_types_of_Column_charts() throws Throwable {
-		String[] exp = { "Column", "Stacked","100% Stacked" };
+		String[] exp = { "Column", "Stacked column" };
 		List<WebElement> ColumnChart_options = login.driver
-				.findElements(By.xpath("//*[@class='items-wrapper']//*[@class='visuals-panel']/*/*[1]/*[3]/*[2]/*/*[1]"));
+				.findElements(By.xpath("//*[@class='items-wrapper']//li/span"));
 		Histogram.DropdownOptions(exp, ColumnChart_options);
 	}
 
@@ -144,24 +143,15 @@ public class EmptyView {
 
 	@Then("^Verify different types of Bar charts$")
 	public void verify_different_types_of_Bar_charts() throws Throwable {
-		String[] exp = { "Bar", "Stacked","100% Stacked" };
-		List<WebElement> BarChart_options = login.driver.findElements(By.xpath("//*[@class='items-wrapper']//*[@class='visuals-panel']/*/*[1]/*[4]/*[2]/*/*[1]"));
+		String[] exp = { "Bar", "Stacked bar" };
+		List<WebElement> BarChart_options = login.driver.findElements(By.xpath("//*[@class='items-wrapper']//li/span"));
 		Histogram.DropdownOptions(exp, BarChart_options);
 	}
 
-	@And("^Click on \"([^\"]*)\" in the view tab$")
-	public void click_on_in_the_view_tab(String arg1) throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "Search", 5).sendKeys("210698402");
-		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 20).click();
-	}
-	@And("^Select \"([^\"]*)\" from \"([^\"]*)\" dropdown$")
-	public void select_from_dropdown(String arg1, String arg2) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + "')]", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'icon--histogram_large')]", 20).click();
-	}
 	@And("^Click on \"([^\"]*)\" in the menu bar$")
 	public void click_on_in_the_menu_bar(String arg1) throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "Search", 5).sendKeys("210698402");
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='" + arg1 + "']", 20).click();
 	}
 
@@ -210,7 +200,7 @@ public class EmptyView {
 		// By.xpath("//*[@class='new-visual-panel
 		// insight-action-panel']/*[contains(@class,'insight-action-panel--btn
 		// ui-draggable ui-draggable-handle')]"));
-		for (int i = 1; i < list_visual_options.size(); i++) {
+		for (int i = 0; i < list_visual_options.size(); i++) {
 			new Actions(login.driver).moveToElement(list_visual_options.get(i)).pause(500).build().perform();
 			if (!list_visual_options.get(i).getAttribute("title").isEmpty()) {
 				login.Log4j.info("Tooltip is : " + list_visual_options.get(i).getAttribute("title"));
@@ -220,7 +210,7 @@ public class EmptyView {
 		}
 	}
 
-
+	@SuppressWarnings("deprecation")
 	@And("^Create Histogram and Map visuals$")
 	public void create_Histogram_and_Map_visuals() throws Throwable {
 		click_on_View_tab();
@@ -230,18 +220,20 @@ public class EmptyView {
 		// create histogram visual
 		hs.click_on_histogram_visual_icon();
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
 		region1 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--country country-information']", 10).getText();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 10).click();
 		// create map visual
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart_map", 6).click();
+		new Actions(login.driver).pause(2000)
+				.moveToElement(
+						login.driver.findElement(By.xpath("//*[@data-action='world']//*[@class='icon--map-world']")))
+				.click().perform();
 		CommonFunctionality.ResetMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("5958801");
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(1500);
 		region2 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--country country-information']", 10).getText();
 		CommonFunctionality.wait(1500);
@@ -516,67 +508,59 @@ public class EmptyView {
 
 	@And("^Max of \"([^\"]*)\" visuals can be created are (\\d+)$")
 	public void max_of_visuals_can_be_created_are(String arg1, int arg2) throws Throwable {
-		
+		Boolean growl_text = null;
 		List<WebElement> no_of_visuals = null;
 
 		CommonFunctionality.wait(2000);
 		if (arg1.equalsIgnoreCase("Chart")) {
 			String visual = "Line";
-		
 			for (int i = 0; i <= arg2; i++) {
-				CommonFunctionality.getElementByProperty(login.driver, "AddChart", 10).click();
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//div[contains(@class,'icon--chart-line_large')]", 8).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='line']", 10).click();
 				CommonFunctionality.wait(1000);
-				
 			}
-			visuals_verifucation(no_of_visuals, arg1, arg2, visual);
+			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, visual);
 		} else if (arg1.equalsIgnoreCase("map")) {
 			for (int i = 0; i <= arg2; i++) {
-				CommonFunctionality.getElementByProperty(login.driver, "AddChart", 10).click();
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//div[contains(@class,'icon--map-filled_large')]", 8).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-type='world']", 20).click();
 				CommonFunctionality.wait(1000);
 			}
 
-			visuals_verifucation(no_of_visuals, arg1, arg2, arg1);
+			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("table")) {
 			for (int i = 0; i <= arg2; i++) {
-				CommonFunctionality.getElementByProperty(login.driver, "AddChart", 10).click();
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//div[contains(@class,'icon--table-vertical_large')]", 8).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Table']", 10).click();
 				CommonFunctionality.wait(1000);
 			}
-			
-			visuals_verifucation(no_of_visuals, arg1, arg2, arg1);
+			growl_text = login.driver.findElement(By.xpath("//*[@class='growl-message growl-info']")).isDisplayed();
+			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 			CommonFunctionality.wait(1000);
 		} else if (arg1.equalsIgnoreCase("commentary")) {
 			for (int i = 0; i <= arg2; i++) {
-				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Text']", 10).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Commentary']", 10).click();
 				CommonFunctionality.wait(1000);
 			}
-			visuals_verifucation(no_of_visuals, arg1, arg2, arg1);
+			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("attachments")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='attachments']", 10).click();
 				CommonFunctionality.wait(1000);
 			}
 
-			visuals_verifucation(no_of_visuals, arg1, arg2, arg1);
+			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("Filter")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='filter']", 10).click();
 				CommonFunctionality.wait(1000);
 			}
 
-			visuals_verifucation(no_of_visuals, arg1, arg2, arg1);
+			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		} else if (arg1.equalsIgnoreCase("Image")) {
 			for (int i = 0; i <= arg2; i++) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='image']", 10).click();
 				CommonFunctionality.wait(1000);
 			}
 
-			visuals_verifucation(no_of_visuals, arg1, arg2, arg1);
+			visuals_verifucation(growl_text, no_of_visuals, arg1, arg2, arg1);
 		}
 
 	}
@@ -584,7 +568,7 @@ public class EmptyView {
 	@And("^Create below visuals using keyboard shortcuts$")
 	public void create_below_visuals_using_keyboard_shortcuts(List<String> list) throws Throwable {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		CommonFunctionality.wait(2000);
 		WebElement checkBox = login.driver
 				.findElement(By.xpath("//div[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper']/*"));
@@ -674,9 +658,7 @@ public class EmptyView {
 		max_of_visuals_created = arg1;
 		for (int i = 0; i < arg1; i++) {
 			CommonFunctionality.wait(3000);
-			CommonFunctionality.getElementByProperty(login.driver, "AddChart", 10).click();
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//div[contains(@class,'icon--table-vertical_large')]", 8).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Table']", 10).click();
 
 		}
 	}
@@ -685,9 +667,7 @@ public class EmptyView {
 	public void create_table_visual_in_view_tab() throws Throwable {
 		click_on_plus_icon();
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 10).click();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[contains(@class,'icon--table-vertical_large')]", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Table']", 10).click();
 		hs.add_series_to_the_my_series_tab();
 	}
 
@@ -733,20 +713,12 @@ public class EmptyView {
 		}
 	}
 
-	void visuals_verifucation(List<WebElement> no_of_visuals, String arg1, int arg2,
+	void visuals_verifucation(Boolean growl_text, List<WebElement> no_of_visuals, String arg1, int arg2,
 			String TypeOfvisual) {
-		//when hit maximum limit of the visuals it creates visuals in new view tab i.e view2
-		//Delete view 2 and count no.of visuals in view1
-		
-		WebElement view2 = login.driver.findElement(By.xpath("//*[@title='View 2']"));
-		if(view2.isDisplayed()) {
-			new Actions(login.driver).contextClick(view2).pause(1000).build().perform();
-			 login.driver.findElement(By.xpath("//*[contains(text(),'Delete view')]")).click();
-			 login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
-			
-		}
-		CommonFunctionality.wait(2000);
-		no_of_visuals = login.driver.findElements(By .xpath("//*[@class='view-components']/*[@class='insight-visuals-row text-content'] | //*[@class='view-components']/*[@class='insight-visuals-row--list'] | //*[@class='view-components']/*[@class='insight-visuals-row']"));
+		growl_text = login.driver.findElement(By.xpath("//*[@class='growl-message growl-info']")).isDisplayed();
+		String growl_info = login.driver.findElement(By.xpath("//*[@class='growl-message growl-info']")).getText();
+		login.Log4j.info(growl_info);
+		CommonFunctionality.wait(1000);
 		/*
 		 * if (arg1.equalsIgnoreCase("Commentary") || arg1.equalsIgnoreCase("Filter") ||
 		 * arg1.equalsIgnoreCase("Image")) { no_of_visuals =
@@ -755,68 +727,10 @@ public class EmptyView {
 		 * .xpath("//*[@class='empty-visual-overlay--content']//*[contains(text(),'" +
 		 * TypeOfvisual + "')]")); }
 		 */
-		
-		switch(arg1) {
-			case "Chart": 
-				if (no_of_visuals.size() == arg2) {
-					login.Log4j.info(arg1 + " visuals are created");
-					chartCount = arg2;
-				} else {
-					Assert.fail("max of " + arg1 + " visuals are not created");
-				}
-				break;
-			case "Map":
-				if (no_of_visuals.size() == arg2+chartCount) {
-					login.Log4j.info(arg1 + " visuals are created");
-					mapCount = arg2+chartCount;
-				} else {
-					Assert.fail("max of " + arg1 + " visuals are not created");
-				}
-				break;
-			case "Table":
-				if (no_of_visuals.size() == arg2+mapCount) {
-					login.Log4j.info(arg1 + " visuals are created");
-					TableCount = arg2+mapCount;
-				} else {
-					Assert.fail("max of " + arg1 + " visuals are not created");
-				}
-				break;
-			case "Commentary":
-				if (no_of_visuals.size() == arg2+TableCount) {
-					login.Log4j.info(arg1 + " visuals are created");
-					CommentaryCount = arg2+TableCount;
-				} else {
-					Assert.fail("max of " + arg1 + " visuals are not created");
-				}
-				break;
-			case "Attachments":
-				if (no_of_visuals.size() == arg2+CommentaryCount) {
-					login.Log4j.info(arg1 + " visuals are created");
-					AttachmentsCount = arg2+CommentaryCount;
-				} else {
-					Assert.fail("max of " + arg1 + " visuals are not created");
-				}
-				break;
-			case "Filter":
-				if (no_of_visuals.size() == arg2+AttachmentsCount) {
-					login.Log4j.info(arg1 + " visuals are created");
-					FilterCount = arg2+AttachmentsCount;
-				} else {
-					Assert.fail("max of " + arg1 + " visuals are not created");
-				}
-				break;
-			case "Image":
-				if (no_of_visuals.size() == arg2+FilterCount) {
-					login.Log4j.info(arg1 + " visuals are created");
-					
-				} else {
-					Assert.fail("max of " + arg1 + " visuals are not created");
-				}
-				break;
-			default: 
-				Assert.fail("max of " + arg1 + " visuals are not created");	
-				
+		if (growl_text == true && growl_info.contains(String.valueOf(arg2))) {
+			login.Log4j.info(arg1 + " visuals are created");
+		} else {
+			Assert.fail("max of " + arg1 + " visuals are not created");
 		}
-			
 	}
 }

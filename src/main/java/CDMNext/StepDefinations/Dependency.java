@@ -75,7 +75,7 @@ public class Dependency {
 	public void click_on_related_series() throws Throwable {
 
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
+		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
 	}
 
 	// TC_01

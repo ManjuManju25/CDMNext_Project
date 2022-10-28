@@ -87,9 +87,11 @@ public class HeatMap {
 	public static String selectedregion;
 	public static String Unitdata;
 	public static String Frequencydata;
+
 	public static ArrayList<String> dropValues;
 	public static ArrayList<String> list = new ArrayList<>();
 	public static String Name;
+
 	public static String Region;
 	public static String seriesreagion;
 	public static String seriesReagion;
@@ -110,6 +112,7 @@ public class HeatMap {
 	public static ArrayList<String> solidcolor;
 	ArrayList<String> drodpdownvalues = new ArrayList<>();
 	public static ArrayList<String> slodColorSteps = new ArrayList<>();
+
 	public static ArrayList<String> Legendropdown = new ArrayList<>();
 	public static String Label_size;
 	public static String Rotate;
@@ -132,6 +135,9 @@ public class HeatMap {
 	public void select_few_series_and_Add_to_My_series_tab() throws Throwable {
 
 		Thread.sleep(2000);
+
+		// login.driver.findElement(By.xpath("//span[@class='toggler-control-item--label'
+		// and text()='Series']")).click();
 		for (int i = 1; i <= 5; i++) {
 			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]"))
 					.click();
@@ -634,9 +640,9 @@ public class HeatMap {
 		login.driver.findElement(By.xpath("(//select[@class='series-data-conversion--param form--control'])[1]"))
 				.click();
 
-		/*String frequency = login.driver.findElement(By.xpath(
+		String frequency = login.driver.findElement(By.xpath(
 				"((//span[@class='series-data-conversion--parameters-list']//select[@class='series-data-conversion--param form--control'])[1]/option)[1]"))
-				.getText();*/
+				.getText();
 		login.driver.findElement(By.xpath(
 				"((//span[@class='series-data-conversion--parameters-list']//select[@class='series-data-conversion--param form--control'])[1]/option)[1]"))
 				.click();
@@ -1215,7 +1221,7 @@ public class HeatMap {
 
 		AttributeList = new ArrayList<>(
 				Arrays.asList("Region", "Name", "Functions", "Unit", "Frequency", "First obs. date", "Last obs. date",
-						"Observations", "Last value", "Last update time", "Source", "Series id","Mnemonic", "Indicator", "More"));
+						"Observations", "Last value", "Last update time", "Source", "Series id", "Indicator", "More"));
 
 		// there are removed in Classification and Functions
 
@@ -1256,8 +1262,6 @@ public class HeatMap {
 
 		if (sspwindow.isDisplayed()) {
 			login.Log4j.info("SSP Window displayed:PASS");
-			
-			login.driver.findElement(By.xpath("//*[@class='movable-modal--close']")).click();
 		}
 
 		else {
@@ -2135,7 +2139,7 @@ public class HeatMap {
 	}
 
 	// TC_57
-	/*@Then("^Search with invalid series name$")
+	@Then("^Search with invalid series name$")
 	public void search_with_invalid_series_name() throws Throwable {
 		CommonFunctionality.wait(2000);
 
@@ -2144,7 +2148,7 @@ public class HeatMap {
 						"//input[@class='form--control form--control__sm find-and-replace--panel-search-input']"))
 				.sendKeys("ZAQ!2WSX");
 
-	}*/
+	}
 
 	// TC_57
 	@Then("^Verify the \"([^\"]*)\" should be displayed under the find field$")
@@ -4829,28 +4833,8 @@ public class HeatMap {
 
 	}
 
-	
-	
-	//165
-		@Then("^click on title dropdown$")
-		public void click_on_title_dropdown() throws Throwable {
-			CommonFunctionality.wait(2000);
-
-			login.driver
-					.findElement(By.xpath("(//div[text()='Title:']//following::div[@class='toggle-context-control'])[1]"))
-					.click();
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// TC_165
-	/*@Then("^Click on title dropdown$")
+	@Then("^Click on title dropdown$")
 	public void click_on_title_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
 
@@ -4859,7 +4843,7 @@ public class HeatMap {
 				.click();
 
 	}
-*/
+
 	// TC_165
 	@Then("^Verify The sub title check box should be 'unchecked' by default$")
 	public void verify_The_sub_title_check_box_should_be_unchecked_by_default() throws Throwable {
@@ -5496,47 +5480,50 @@ public class HeatMap {
 	}
 
 	// TC_179
-	@Then("^Select color in Edit visual$")
-	public void select_color_in_Edit_visual() throws Throwable {
+	@Then("^Select color$")
+	public void select_color() throws Throwable {
+
 		CommonFunctionality.wait(2000);
 		login.driver
-				.findElement(By.xpath("(//*[@class='row']//*[@class='index-module_swatch_button_item_color__gAHg1'])[1]")).click();
-		                               
+				.findElement(By
+						.xpath("(//div[@class='row']//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]"))
+				.click();
+
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[2]")).click();
+		login.driver
+				.findElement(By.xpath(
+						"(//div[@class='index-module_wrapper__j2U4-']//div[@class='index-module_wrapper__Q-UYB'])[2]"))
+				.click();
 
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__x2Xse'])")).click();
-		
-		
-		
-		String Sub_title_color = login.driver.findElement(By.xpath("(//*[@class='index-module_text__GTkop'])[1]")).getAttribute("value");
+		String Sub_title_color = login.driver
+				.findElement(By.xpath(
+						"(//div[@class='index-module_wrapper__j2U4-']//div[@class='index-module_wrapper__Q-UYB'])[2]"))
+				.getAttribute("style");
 
-		subtitle = "#"+Sub_title_color;
+		subtitle = Sub_title_color.substring(18, 36);
 
 		System.out.println("subtitler:" + subtitle);
+
 	}
 
-	
-	/*@Then("^Select color$")
-	public void select_color() throws Throwable {
-	}
-*/
 	// TC_179
 	@Then("^Verify The Visual 'sub title' should be displayed in 'selected color'$")
 	public void verify_The_Visual_sub_title_should_be_displayed_in_selected_color() throws Throwable {
 
 		CommonFunctionality.wait(2000);
 
-		String sub_color = login.driver.findElement(By.xpath("//*[@class='visual-title--text text-dots']")).getAttribute("style");
-		//String subtitlecolor = sub_color.substring(24, 42);
-		System.out.println("subtitlecolor:" + sub_color);
-		if ("#792d82".contains("#792d82")) 
-		{
+		String sub_color = login.driver.findElement(By.xpath("//span[@data-name='sub_title']")).getAttribute("style");
+		String subtitlecolor = sub_color.substring(24, 42);
+
+		System.out.println("subtitlecolor:" + subtitlecolor);
+
+		if (subtitle.equalsIgnoreCase(subtitlecolor)) {
 			login.Log4j.info("The Visual 'sub title' should be displayed in 'selected color:PASS");
 		}
 
 		else {
+
 			fail("The Visual 'sub title' should be displayed in 'selected color:FAIL");
 		}
 
@@ -7081,15 +7068,15 @@ public class HeatMap {
 	}
 
 	// TC_234
-/*@Then("^Click on legend dropdown$")
-	 void click_on_legend_dropdown() throws Throwable {
+	@Then("^Click on legend dropdown$")
+	public void click_on_legend_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath(
 				"(((//div[@class='context-menu-control'])[7]//div[@class='alignment-context-title--type'])[1]//following::div)[1]"))
 				.click();
 
-	}*/
+	}
 
 	// TC_234
 	@Then("^Veirfy The \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" as hyperlink should be seen$")
@@ -8456,7 +8443,7 @@ public class HeatMap {
 	}
 
 	// TC_319
-	/*@Then("^Select \"([^\"]*)\" field$")
+	@Then("^Select \"([^\"]*)\" field$")
 	public void select_field(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 
@@ -8473,7 +8460,7 @@ public class HeatMap {
 
 		}
 
-	}*/
+	}
 
 	// TC_319
 	@Then("^Verify The tooltips of visual should include with \"([^\"]*)\" of series$")
@@ -9705,7 +9692,7 @@ public class HeatMap {
 	}
 
 //TC_392
-	/*@Then("^Double click on timepoints$")
+	@Then("^Double click on timepoints$")
 	public void double_click_on_timepoints() throws Throwable {
 		CommonFunctionality.wait(3000);
 
@@ -9714,7 +9701,7 @@ public class HeatMap {
 
 		action.doubleClick(mouse).build().perform();
 
-	}*/
+	}
 
 	// TC_392
 	@Then("^Verify The 'Labels' popup should be displayed$")
@@ -10173,12 +10160,12 @@ public class HeatMap {
 	}
 
 //TC_441
-	/*@Then("^Click on cancel button$")
+	@Then("^Click on cancel button$")
 	public void click_on_cancel_button() throws Throwable {
 		CommonFunctionality.wait(3000);
 
 		login.driver.findElement(By.xpath("//*[@class='modal-body sphere-modal__body']//*[text()='Cancel']")).click();
-	}*/
+	}
 
 //TC_441
 	@Then("^Verify The Feedback popup should be closed$")
@@ -10194,11 +10181,11 @@ public class HeatMap {
 	}
 
 //TC_442
-	/*@Then("^Click on submit button$")
+	@Then("^Click on submit button$")
 	public void click_on_submit_button() throws Throwable {
 		CommonFunctionality.wait(3000);
 		login.driver.findElement(By.xpath("//*[text()='Submit']")).click();
-	}*/
+	}
 
 //TC_442
 	@Then("^Verify The user feedback should be sent to FD and popup should be closed$")
@@ -10757,13 +10744,13 @@ public class HeatMap {
 	}
 
 //TC_427
-	/*@Then("^Click on type a function field in series level$")
+	@Then("^Click on type a function field in series level$")
 	public void click_on_type_a_function_field_in_series_level() throws Throwable {
 		CommonFunctionality.wait(3000);
 
 		login.driver.findElement(By.xpath("(//*[@placeholder='Type a function'])[1]")).click();
 
-	}*/
+	}
 
 //TC_427
 	@Then("^List of series dropdown should be opened$")

@@ -999,12 +999,12 @@ public class Profile {
 		// SSP pop up display and click on view as
 		login.driver.findElement(By.xpath("//span[contains(text(),'View as')]")).click();
 		// click on Table
-		login.driver.findElement(By.xpath("//div[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
+		login.driver.findElement(By.xpath("//span[@class='context-menu-item link']//span[text()='Table']")).click();
 
 		Thread.sleep(1000);
 		// click on cancel button
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
-		
+		// click on download button
 		Thread.sleep(2000);
 
 		Thread.sleep(1000);
@@ -1328,7 +1328,7 @@ public class Profile {
 	public void click_on_download_button() throws Throwable {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(
-				"//*[@class='download-button--icon drop-down-button--icon']//following::*[contains(text(),'Download')]"))
+				"//button[@class='sphere-modal-control button insight-download__modal-button button button__download-btn']"))
 				.click();
 		Thread.sleep(5000);
 	}

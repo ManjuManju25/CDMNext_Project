@@ -1,1 +1,0 @@
-ControlClick("Open","","Button2")

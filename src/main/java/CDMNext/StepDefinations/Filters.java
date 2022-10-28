@@ -73,7 +73,7 @@ public class Filters extends CommonFunctionality{
 		//ResetMethod();
 		login.Log4j.info("searching with " + searchData);
 		getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
-		getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+	getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		
 	}
 
@@ -370,8 +370,8 @@ public class Filters extends CommonFunctionality{
 
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(7000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab")))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		//ul_element = null;
 		try {
 			wait(5000);
@@ -631,11 +631,11 @@ public class Filters extends CommonFunctionality{
 									Date date = new Date();
 
 									if (Datearr[m].equalsIgnoreCase("First observation before")) {
-										Datearr[m] = "First obs. date";
+										Datearr[m] = "First date";
 									}
-									if (Datearr[m].equals("First obs. date")) {
+									if (Datearr[m].equals("First date")) {
 										for (String Tooltip : lines) {
-											if (Tooltip.contains("First obs. date")) {
+											if (Tooltip.contains("First date")) {
 												login.Log4j.info(Tooltip);
 												String[] frstDate = Tooltip.split(": ");
 												String first_obs_before = sdf.format(date);
@@ -652,11 +652,11 @@ public class Filters extends CommonFunctionality{
 									}
 
 									if (Datearr[m].equalsIgnoreCase("Last observation after")) {
-										Datearr[m] = "Last obs. date";
+										Datearr[m] = "Last date";
 									}
-									if (Datearr[m].equals("Last obs. date")) {
+									if (Datearr[m].equals("Last date")) {
 										for (String Tooltip : lines) {
-											if (Tooltip.contains("Last obs. date")) {
+											if (Tooltip.contains("Last date")) {
 												login.Log4j.info(Tooltip);
 												String[] lastDate = Tooltip.split(": ");
 												String last_obs_after = sdf.format(date);
@@ -672,14 +672,14 @@ public class Filters extends CommonFunctionality{
 									}
 								}
 							}
-							if (filters.get(k).equalsIgnoreCase("Frequency")) {
+							if (filters.get(k).equals("Frequency")) {
 								login.Log4j.info("filter  is : " + filters.get(k));
 								login.Log4j.info(frequencyarr.length);
 								login.Log4j.info(frequency);
 								String str = "Half-yearly";
 								String str1 = "Annual";
 								if ((frequencyarr.length == 1)) {
-									if (frequencyarr[0].equalsIgnoreCase("Semiannually")) {
+									if (frequencyarr[0].equals("Semiannually")) {
 										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
 												|| text.toUpperCase().contains(str.toUpperCase()) == true) {
 											login.Log4j.info(frequencyarr[0] + " OR " + str + " is exists in the" + "\n"

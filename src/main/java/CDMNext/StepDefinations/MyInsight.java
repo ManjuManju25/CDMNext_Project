@@ -3819,7 +3819,7 @@ public class MyInsight {
 
 	}
 
-/*	@And("^Verify CEIC logo$")
+	@And("^Verify CEIC logo$")
 	public void verify_CEIC_logo() throws Throwable {
 
 		Thread.sleep(3000);
@@ -3830,9 +3830,9 @@ public class MyInsight {
 			fail("CEIC logo not displayed:FAIL");
 		}
 
-	}*/
+	}
 
-	/*@And("^Verify insight title change$")
+	@And("^Verify insight title change$")
 	public void verify_insight_title_change() throws Throwable {
 		Thread.sleep(3000);
 
@@ -3856,5 +3856,5 @@ public class MyInsight {
 		Thread.sleep(3000);
 
 	}
-*/
+
 }

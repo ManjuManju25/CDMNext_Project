@@ -404,7 +404,7 @@ public class SprintCases {
 		SolidColor.click();
 	}
 
-		@Then("^Default value should be \"([^\"]*)\" and the colors range should be from \"([^\"]*)\"$")
+	@Then("^Default value should be \"([^\"]*)\" and the colors range should be from \"([^\"]*)\"$")
 	public void default_value_should_be_and_the_colors_range_should_be_from(String arg1, String arg2) throws Throwable {
 		String SolidColorDefaultValue = null;
 		CommonFunctionality.wait(2000);

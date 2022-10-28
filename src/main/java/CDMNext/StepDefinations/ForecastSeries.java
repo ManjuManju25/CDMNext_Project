@@ -28,7 +28,7 @@ public class ForecastSeries {
 	@And("^Add series to the right pane$")
 	public void add_series_to_the_right_pane() throws Throwable {
 		CommonFunctionality.wait(6000);
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
@@ -90,12 +90,9 @@ public class ForecastSeries {
 
 	@And("^click on cross icon for any legends name$")
 	public void click_on_cross_icon_for_any_legends_name() throws Throwable {
-		WebElement first_legend_series =  CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
-		new Actions(login.driver).pause(200).moveToElement(first_legend_series).build().perform();	
-		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]/*[1]", 15);
-		//new Actions(login.driver).pause(200).moveToElement(first_legend_item).click().build().perform();
-		jse.executeScript("arguments[0].click();", first_legend_item);
-
+		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[@class='legend-item'])[1]/*[1]", 15);
+		new Actions(login.driver).pause(200).moveToElement(first_legend_item).click().build().perform();
 
 	}
 
@@ -259,7 +256,7 @@ public class ForecastSeries {
 		// Reading frequency for first basic series
 		CommonFunctionality.wait(500);
 		frequencyTxt_forBasicSeries = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'series-list-item__select')]/*[1]/*[1]//*[@class='series-item-information--additional-info']/*[3]//*[contains(@class,'series-item-information--frequency')]",
+				"//*[contains(@class,'series-list-item__select')]/*[1]/*[1]//*[@class='series-item-information--additional-info']/*[2]//*[contains(@class,'series-item-information--frequency')]",
 				5).getText();
 		CommonFunctionality.wait(500);
 		// Reading frequency for forecast series
@@ -401,7 +398,6 @@ public class ForecastSeries {
 
 	@And("^Check \"([^\"]*)\" function$")
 	public void check_function(String arg1) throws Throwable {
-		CommonFunctionality.wait(50);
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='series-list-with-suggestions--wrapper']/*[1]//*[@class='splice-function-checker']//*[contains(text(),'"
 						+ arg1 + "')]",
@@ -424,14 +420,10 @@ public class ForecastSeries {
 		} else {
 			Assert.fail(arg1 + " is not selected " + arg2 + " by default");
 		}
-		try {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@title='Close']", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='modal-window modal-window__active']//*[contains(text(),'Ok')]", 4).click();
-		}catch(Exception e) {
-			
-		}
 	}
 
 	@And("^Hover on forecast series and click on \"([^\"]*)\" icon$")
@@ -845,11 +837,8 @@ public class ForecastSeries {
 
 	@And("^Create TableVisual$")
 	public void create_TableVisual() throws Throwable {
-		
-		CommonFunctionality.getElementByProperty(login.driver, "Dropdown_AddChart", 4).click();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
-		
+
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'View as Table')]", 4).click();
 	}
 
 	@And("^Select forecast suggestion series from my series pane$")
@@ -928,10 +917,9 @@ public class ForecastSeries {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='current-function-input']", 4).click();
 		// Applying Round() function
 		CommonFunctionality.getElementByXpath(login.driver, "//li[contains(text(),'ROUND')]", 4).click();
-		CommonFunctionality.wait(500);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4).click();
-
+				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4)
+				.click();
 	}
 
 	@And("^Right click on visual$")

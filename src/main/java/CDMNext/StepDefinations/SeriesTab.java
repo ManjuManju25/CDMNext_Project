@@ -21,7 +21,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -91,7 +90,7 @@ public class SeriesTab {
 		login.Log4j.info("Clicking on Series tab ");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		CommonFunctionality.wait(4000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		ul_element = null;
 		try {
 			CommonFunctionality.wait(4000);
@@ -433,15 +432,6 @@ public class SeriesTab {
 		CommonFunctionality.wait(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
 	}
-	@And("^Select Add chart as \"([^\"]*)\"$")
-	public void select_Add_chart_as(String arg1) throws Throwable {
-		// click on Add chart
-		WebElement Addchart = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dropdown_AddChart")));
-		action.moveToElement(Addchart).click().build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visuals-panel']//*[contains(text(),'Vertical')]", 4).click();
-		
-	}
-
 
 	@SuppressWarnings("deprecation")
 		@When("^Click on \"([^\"]*)\"$")
@@ -576,12 +566,12 @@ public class SeriesTab {
 						.click();
 			}
 			break;
-		case "Ok":
+		case "OK":
 			CommonFunctionality.wait(500);
 			try {
 				CommonFunctionality
 						.getElementByXpath(login.driver,
-								"//*[@class='modal-window modal-window__active']//button[contains(text(),'" + arg1 + "')]", 6)
+								"//button[contains(text(),'" + arg1 + "')]", 6)
 						.click();
 			} catch (Exception e) {
 				CommonFunctionality.getElementByXpath(login.driver,
@@ -734,14 +724,14 @@ public class SeriesTab {
 			action.clickAndHold(more5).pause(300).release().build().perform();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15).click();
 			break;
-		case "insert Text":
+		case "Insert Commentary":
 			CommonFunctionality.wait(1000);
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'" + arg1 + "')]", 20)
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'insert Commentary')]", 20)
 					.click();
 			try {
 				Boolean CommentaryTitle = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
 				if (CommentaryTitle == true) {
-					login.Log4j.info("Commentary visual is created");
+					login.Log4j.info("Attachments visual is created");
 				}
 			} catch (Exception e) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20).click();
@@ -795,17 +785,14 @@ public class SeriesTab {
 		case "Apply function":
 			CommonFunctionality.wait(2000);
 			try {
-				 ele = login.driver.findElement(By.xpath(
-					"//*[@class='series-functions series-functions__has-functions-to-apply']//*[@class='series-functions-panel--icon series-functions-panel--icon__apply']"));
-				
+				ele = login.driver.findElement(By.xpath(
+						"//*[@class='series-functions series-functions__has-functions-to-apply']//*[@class='series-functions-panel--icon series-functions-panel--icon__apply']"));
 				CommonFunctionality.wait(1000);
 				jse.executeScript("arguments[0].scrollIntoView(true);", ele);
-				
 				ele.click();
 			} catch (Exception e) {
-				//CommonFunctionality.getElementByXpath(login.driver, "//*[@contains(text(),'" + arg1 + "')]", 8).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@contains(text(),'" + arg1 + "')]", 8).click();
 			}
-
 			break;
 		case "Edit Histogram":
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 8).click();
@@ -1145,7 +1132,7 @@ public class SeriesTab {
 		if (arg1.equalsIgnoreCase("new series")) {
 			login.Log4j.info("Clicking on  Series tab ");
 			CommonFunctionality.wait(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 			ul_element = null;
 			try {
 				CommonFunctionality.wait(5000);
@@ -1213,7 +1200,7 @@ public class SeriesTab {
 	public void user_verify_corresponding_results_for_selected_filter() throws Throwable {
 		CommonFunctionality.wait(1500);
 		login.Log4j.info("Clicking on  Series tab ");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		//ul_element = null;
 		List<WebElement> statusIcon = null ;
 		try {
@@ -1334,7 +1321,7 @@ public class SeriesTab {
 		MousehoverIcon = arg1;
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(4000);
 		element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Title_of_the_series")));
 		stext = element.getText();
@@ -1457,7 +1444,7 @@ public class SeriesTab {
 	@And("^Create any visual$")
 	public void create_any_visual() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(5000);
 
 		List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper']"));
@@ -1473,10 +1460,7 @@ public class SeriesTab {
 
 		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-representation--list']//*[@class='series-item--name'])[1]"));
 		new Actions(login.driver).contextClick(ele).perform();
-		WebElement Addchart = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dropdown_AddChart")));
-		action.moveToElement(Addchart).click().build().perform();
-		login.driver.findElement(By.xpath("(//*[@class='visuals-panel']//*[contains(text(),'Line')])[2]")).click();
-		
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'View as Chart')]", 10).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1485,7 +1469,7 @@ public class SeriesTab {
 		WebElement addSeries_dropdown;
 		int j = 0;
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		try {
 			// highliting visual for add and replace function after refresh
 			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='visual-item-wrapper']", 10).click();
@@ -1798,7 +1782,7 @@ public class SeriesTab {
 		CommonFunctionality.ExpandRight();
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(6000);
-		CommonFunctionality.getElementByProperty(login.driver,"Series_Tab",8).click();
+		CommonFunctionality.getElementByProperty(login.driver,"Series",8).click();
 		}
 	}
 
@@ -1848,10 +1832,10 @@ public class SeriesTab {
 
 	@Then("^Search results should include series only from world trend plus DB$")
 	public void search_results_should_include_series_only_from_world_trend_plus_DB() throws Throwable {
-		//WebElement ele;
+		WebElement ele;
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(3000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 	
 		try {
 			List<WebElement> li_All =  login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
@@ -2000,7 +1984,7 @@ public class SeriesTab {
 	public void select_series_and_Click_on_More_actions() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(5000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		CommonFunctionality.wait(4000);
 	
 		List<WebElement> li_All = login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
@@ -2254,7 +2238,7 @@ public class SeriesTab {
 			// nothing to do...pls continue
 		} else {
 
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='data-representation--content']//*[contains(text(),'" + arg2 + "')]", 4).click();
+			CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'" + arg2 + "')])[2]", 4).click();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='custom-select--body']/*[1]/*", 4).click();
 		}
 	}
