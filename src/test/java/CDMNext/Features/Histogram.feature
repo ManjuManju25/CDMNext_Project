@@ -2540,34 +2540,7 @@ Feature: Verifying Histogram Visual functionality
     #And Click on "Show the function bar"
     #Then The function toolbar should be shown
 
-  @Histogram
-  Scenario: TC_Histogram_289:Right click - Verify insert visual sub dropdown
-    And Create histogram visual with series
-    And Right click on visual header
-    Then Verify insert visual sub dropdown options for histogram visual
-
-  @Histogram
-  Scenario: TC_Histogram_290:Right click - Verify View as sub dropdown.
-    And Create histogram visual with series
-    And Right click on visual header
-    Then Verify View as sub dropdown options for histogram visual
-
-  @Histogram
-  Scenario: TC_Histogram_291:Edit series - Verify hiding function toolbar
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Hide the function bar"
-    Then The function toolbar should be hidden
-
-  @Histogram
-  Scenario: TC_Histogram_292:Edit series - Verify showing the function toolbar
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Hide the function bar"
-    And Click on "Show the function bar"
-    Then The function toolbar should be shown
-
-  @Histogram
+   @Histogram
   Scenario: TC_Histogram_293:Edit series - Verify 'Type a function' field
     And Create histogram visual with series
     And Click on Edit series option
