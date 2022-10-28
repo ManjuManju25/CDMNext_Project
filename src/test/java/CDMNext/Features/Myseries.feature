@@ -2442,8 +2442,4 @@ Feature: verifying My Series Tab Functionality
     And Select undo option
     And Select redo option
     And Verify redo option for making changes in my series tab
-<<<<<<< HEAD
 
- 
-=======
->>>>>>> Dev
