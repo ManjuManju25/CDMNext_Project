@@ -48,7 +48,7 @@ public class PieVisual {
 	List<WebElement> Series_list_pieVisual;
 	WebDriverWait wait = new WebDriverWait(login.driver, 2000);
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
-	Map map = new Map();
+	//Map map = new Map();
 
 	@SuppressWarnings("deprecation")
 	@And("^Select different frequency series \"([^\"]*)\" and click on \"([^\"]*)\" icon$")
@@ -91,7 +91,7 @@ public class PieVisual {
 		} else if(arg2.equals("Map")) {
 			EmptyView.click_on_View_tab();
 			CommonFunctionality.wait(500);
-			map.click_on_Map_visual_icon();
+			//map.click_on_Map_visual_icon();
 			CommonFunctionality.wait(500);
 		}
 	}

@@ -1,3 +1,4 @@
+
 Feature: Verify Comparables feature
 
   @Comparables
@@ -1270,3 +1271,4 @@ Feature: Verify Comparables feature
     And User has clicked on "Apply"
     And Growl message as "Watchlist changes applied" should display
     Then The selected actions should reflect inside watchlist tab
+

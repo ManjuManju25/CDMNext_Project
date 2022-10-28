@@ -13,3 +13,4 @@ Feature: Verifying Allregions filter functionality
     And Click on "All Regions" dropdown
     And Select "ALL" tab from filter dropdown
     Then Compare the country names with test data for economic groups
+

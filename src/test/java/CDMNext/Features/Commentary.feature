@@ -1,3 +1,4 @@
+
 Feature: Verifying Commentary Visual functionality
 
   @Commentary
@@ -974,3 +975,4 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_118:Verify 'Delete' insight having all type of visuals
     And Delete the created insight with all visuals
     Then The insight should be deleted successfully
+

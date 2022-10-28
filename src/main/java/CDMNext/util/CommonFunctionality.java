@@ -1,6 +1,5 @@
 
 package CDMNext.util;
-
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
@@ -1178,3 +1177,4 @@ public class CommonFunctionality {
 	}
 
 }
+

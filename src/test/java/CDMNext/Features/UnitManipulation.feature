@@ -1,10 +1,16 @@
 Feature: Verify Unit Manipulation functionality
+<<<<<<< HEAD
+
+@UnitManipulation
+Scenario: Tc_Unit Manipulation_01: Verify applying unit manipulation for series 
+=======
  
 #Background:
   #Given User has successful logged in
 
 @UnitManipulation1
 Scenario: Tc_Unit Manipulation_01: Verify applying unit manipulation for series
+>>>>>>> Dev
    And Open preference dropdown
    #And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check" 
    And Clicking on "Keyboard shortcuts" option under user preference be "ON" 
@@ -244,5 +250,11 @@ Scenario: Tc_Unit Manipulation_27: Verify applying unit multiplier with %,2000=1
    And Search for the series with ID "203982302;198573502" and click on "A" option
    And Select all series from myseries and click on "Open function editor" option
    And Click "By function" tab and enter "UNIT" in search field
+<<<<<<< HEAD
+   Then Apply function and rename series as "26" then validate the Testdata as "TC_Unit Manipulation_26" 
+   And Sort the default series in left pane
+
+=======
    Then The function should not apply for selected series
    And Sort the default series in left pane
+>>>>>>> Dev

@@ -1,3 +1,4 @@
+
 Feature: Table Visual Functionality
 
   @TableVisual
@@ -1997,3 +1998,4 @@ Feature: Table Visual Functionality
   Scenario: TC_TV_388:Verify Right click -download > View
     And Create a table visual
     And verify right click download > View
+
