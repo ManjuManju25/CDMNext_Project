@@ -5,6 +5,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -1540,7 +1542,12 @@ login.driver.findElement(By.xpath("(//*[@class='preview-series-data']//*[@class=
 		} else if(arg1.equalsIgnoreCase("Cancel")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Close']", 10).click();
 		} else if(arg1.equalsIgnoreCase("Save")) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 10).click();
+			try {
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 10).click();
+			}catch(Exception e) {
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 10).click();
+				 CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 10).click();
+			}
 		} else if(arg1.equalsIgnoreCase("Next") || arg1.equalsIgnoreCase("Previous")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'" + arg1 + "')]", 10).click();
 		} else if(arg1.equalsIgnoreCase("Apply")) {
