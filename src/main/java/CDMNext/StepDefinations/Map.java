@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -52,12 +53,16 @@ public class Map extends CommonFunctionality {
 		sname = rightClickEle.getText();
 		action.pause(200).contextClick(rightClickEle).build().perform();
 	}
-
-	@And("^Select \"([^\"]*)\" > \"([^\"]*)\"$")
-	public void select(String arg1, String arg2) throws Throwable {
-		getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 6).click();
-		getElementByXpath(login.driver, "//ul[@class='dropdown-menu']//*[contains(text(),'" + arg2 + "')]", 6).click();
+	@And("^Select \"([^\"]*)\" and create a map visual$")
+	public void select_and_create_a_map_visual(String arg1) throws Throwable {
+		getElementByXpath(login.driver, "//*[@role='menu']//*[contains(text(),'" + arg1 + "')]", 6).click();
+		getElementByProperty(login.driver, "AddChart_map", 6).click();
 	}
+	/*@And("^Select \"([^\"]*)\" > \"([^\"]*)\"$")
+	public void select(String arg1, String arg2) throws Throwable {
+		getElementByXpath(login.driver, "//*[@role='menu']//*[contains(text(),'" + arg1 + "')]", 6).click();
+		getElementByProperty(login.driver, "AddChart_map", 6).click();
+	}*/
 
 	@Then("^Map visual should be created$")
 	public void map_visual_should_be_created() throws Throwable {
@@ -96,7 +101,8 @@ public class Map extends CommonFunctionality {
 	@And("^Click on Map visual icon$")
 	public void click_on_Map_visual_icon() throws Throwable {
 		wait(1000);
-		getElementByProperty(login.driver, "map_visual_icon", 6).click();
+		//CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
+		getElementByProperty(login.driver, "map_icon", 6).click();
 	}
 
 	@Then("^Empty Map visual should be created$")
@@ -149,7 +155,8 @@ public class Map extends CommonFunctionality {
 		WebElement rightClickEle = getElementByProperty(login.driver, "list_of_series", 4);
 		action.pause(500).contextClick(rightClickEle).build().perform();
 		// create map visual
-		select("View as Map", "World");
+		select_and_create_a_map_visual("Add chart");
+		//select("View as Map", "World");
 
 	}
 
@@ -268,7 +275,7 @@ public class Map extends CommonFunctionality {
 
 		login.Log4j.info("Clicking on  Series tab ");
 		WebElement SeriesTab = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("series_tab"))));
 		SeriesTab.click();
 		EmptyView.click_on_View_tab();
 		click_on_Map_visual_icon();
@@ -333,9 +340,11 @@ public class Map extends CommonFunctionality {
 		}
 		SeriesCount = getElementByProperty(login.driver, "SelectedSeriesCount", 6);
 		login.Log4j.info(SeriesCount.getText());
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
-		wait(2000);
-		getElementByProperty(login.driver, "map_world", 4).click();
+		EmptyView.click_on_View_tab();
+		click_on_Map_visual_icon();
+//		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
+//		wait(2000);
+//		getElementByProperty(login.driver, "map_world", 4).click();
 		wait(2000);
 		Visual_Title_txt = getElementByProperty(login.driver, "Map_visual_title", 8).getText();
 	}
@@ -865,15 +874,17 @@ public class Map extends CommonFunctionality {
 
 	@Then("^Should be able to display with selected \"([^\"]*)\"$")
 	public void should_be_able_to_display_with_selected(String arg1) throws Throwable {
+		CommonFunctionality.wait(1000);
 		if (arg1.equalsIgnoreCase("Color")) {
-			List<WebElement> color = login.driver.findElements(By.cssSelector(
-					"#highcharts-zcvptxg-2443 > svg > g.highcharts-data-labels.highcharts-series-0.highcharts-map-series.highcharts-color-0.highcharts-tracker > g:nth-child(1) > text"));
+			List<WebElement> color = login.driver.findElements(By.xpath(
+					"//*[@class='highcharts-container ']/*/*[13]/*[2]/*"));
 			if (color.size() > 0) {
-				for (int i = 1; i <= color.size(); i++) {
+				for (int i = 0; i < color.size(); i++) {
 					String color_text = color.get(i).getCssValue("fill");
 					CommonFunctionality.wait(2000);
 					String actual = Color.fromString(color_text).asHex();
-					assertEquals(actual, ActualColor);
+					String expected = Color.fromString(ActualColor).asHex();
+					assertEquals(actual, expected);
 				}
 
 				login.Log4j.info("The Selected " + arg1
@@ -883,8 +894,8 @@ public class Map extends CommonFunctionality {
 				Assert.fail("List size is zero");
 			}
 		} else if (arg1.equalsIgnoreCase("Outline color")) {
-			List<WebElement> color = login.driver.findElements(By.cssSelector(
-					".highcharts-data-labels.highcharts-series-0.highcharts-map-series.highcharts-color-0.highcharts-tracker > g:nth-child(1) > text > tspan"));
+			List<WebElement> color = login.driver.findElements(By.xpath(
+					"//*[@class='highcharts-container ']/*/*[13]/*[2]/*/*"));
 			if (color.size() > 0) {
 				for (int i = 0; i < color.size(); i++) {
 					String color_text = color.get(i).getCssValue("fill");
@@ -1059,7 +1070,7 @@ public void the_related_series_should_be_added_to_the_map_visual() throws Throwa
 		listOfLegendItems.add(list.get(i).getText());
 	}
 	if (listOfLegendItems.contains(indicator_title_text)
-			|| listOfLegendItems.contains("Consumer Price Index: YoY: Monthly: Albania")) {
+			|| listOfLegendItems.contains("Consumer Price Index")) {
 		login.Log4j.info("The related series is displayed in the visual");
 	} else {
 		fail("The relatedd series not displayed in the visual");
@@ -1096,7 +1107,7 @@ public void the_Map_visual_should_be_created_in_vew_tab_on_current_insight() thr
 	if (views.size() > 1) {
 		CommonFunctionality.wait(1000);
 		String titileTxt = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='main-page--insight-active-page']//*[@class='visual-title visual-title--wrapper'][1]//*[@data-name='title']",
+				"//*[@data-name='title']",
 				15).getText();
 		if (Visual_Title_txt.equalsIgnoreCase(titileTxt)) {
 			login.Log4j.info("The Map visual is created in view tab");
@@ -1234,10 +1245,230 @@ public void selected_color_steps_will_be_created_as_per_the_selection() throws T
 	 } else {
 		 Assert.fail("Selected color steps not displayed");
 	 }
+	
  }
   
 }
+@Then("^Selected steps will be created as per the selection$")
+public void selected_steps_will_be_created_as_per_the_selection() throws Throwable {
+	 Select select = new Select(Dropdown_ele);
+	 List<WebElement> dropdown_list = select.getOptions();
+	 for(WebElement dropdownValue: dropdown_list) {
+		 dropdownValue.click();
+		String str =  dropdownValue.getAttribute("value");
+		 List<WebElement> steps = login.driver.findElements(By.xpath("//*[@class='gradient-line']"));
+		 if(Integer.parseInt(str) < steps.size()) {
+			 login.Log4j.info("Selected steps: "+ Integer.parseInt(str) + " is displayed");
+		 } else {
+			 Assert.fail("Selected steps not displayed");
+		 }
+		
+	 }
+}
+	@Then("^Smallest value for Map will be displayed in decimal points with respective color$")
+	public void smallest_value_for_Map_will_be_displayed_in_decimal_points_with_respective_color() throws Throwable {
+		List<WebElement> valuesList = login.driver.findElements(
+				By.xpath("//*[@class='value-selection-container']//*/*[@class='value-selection--title']"));
+		ArrayList<Integer> ListOfValues = new ArrayList<Integer>();
+		for (int i = 0; i < valuesList.size(); i++) {
+			String Strvalue = valuesList.get(i).getText();
+			Integer IntValue = Integer.parseInt(Strvalue);
+			ListOfValues.add(IntValue);
 
+		}
+		Collections.sort(ListOfValues);
+		int Smallest_value = ListOfValues.get(0);
+		System.out.println("Smallest Value : " + Smallest_value);
+		WebElement ColorEle = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(text(),'" + Smallest_value
+						+ "')]/ancestor::*[@class='value-selection-container']/preceding-sibling::*[1]/*[1]/*/*/*[1]",
+				30);
+		String RespectiveColor_smallestValue = ColorEle.getCssValue("background-color");
+	
+
+		// Getting values and color from map visual to compare the results
+		List<WebElement> LegendItems = login.driver.findElements(By.xpath(
+				"//*[contains(@class,'movable-modal--window')]//*[@class='highcharts-legend highcharts-no-tooltip']/*[2]/*/*/*[1]"));
+		ArrayList<String> ListOfLegendItems = new ArrayList<String>();
+		for (int i = 0; i < LegendItems.size(); i++) {
+			String Strvalue = LegendItems.get(i).getText();
+			System.out.println(Strvalue);
+			ListOfLegendItems.add(Strvalue);
+
+		}
+		// split the legend values by using " - "
+		String[] list = null;
+		ArrayList<String> LegendList = new ArrayList<String>();
+		for (String value : ListOfLegendItems) {
+			list = value.toString().split(" - ");
+			for (String str : list) {
+				LegendList.add(str);
+			}
+			
+		}
+
+		if (LegendList.contains(String.valueOf(Smallest_value))) {
+
+			String RespectiveColor = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'movable-modal--window')]//*[@class='visual-item']//*[contains(text(),'"
+							+ Smallest_value + "')]/following-sibling::*",
+					30).getCssValue("fill");
+			System.out.println(RespectiveColor);
+			System.out.println(RespectiveColor_smallestValue);
+			String actual = Color.fromString(RespectiveColor).asHex();
+			String expected = Color.fromString(RespectiveColor_smallestValue).asHex();
+			//assertEquals(actual, expected);
+			if (actual.equals(expected)) {
+				login.Log4j.info("Smallest value is dispalyed in decimal points for map with respect color");
+			}
+
+		}
+
+		
+	}
+
+@Then("^Highest Value will be displayed in decimal points with respective color$")
+public void highest_Value_will_be_displayed_in_decimal_points_with_respective_color() throws Throwable {
+	List<WebElement> valuesList = login.driver.findElements(
+			By.xpath("//*[@class='value-selection-container']//*/*[@class='value-selection--title']"));
+	ArrayList<Integer> ListOfValues = new ArrayList<Integer>();
+	for (int i = 0; i < valuesList.size(); i++) {
+		String Strvalue = valuesList.get(i).getText();
+		Integer IntValue = Integer.parseInt(Strvalue);
+		ListOfValues.add(IntValue);
+
+	}
+	Collections.sort(ListOfValues);
+	int Largest_value = ListOfValues.get(valuesList.size() - 1);
+	int SecondLargest_value = ListOfValues.get(valuesList.size() - 2);
+	String Strappend = "> " + SecondLargest_value;
+	System.out.println("Largest Value : " + Largest_value);
+	System.out.println("Second Largest Value : " + Strappend);
+	WebElement ColorEle = CommonFunctionality.getElementByXpath(login.driver,
+			"//*[contains(text(),'" + Largest_value
+					+ "')]/ancestor::*[@class='value-selection-container']/preceding-sibling::*[1]/*[3]/*/*/*[1]",
+			30);
+	String RespectiveColor_largestValue = ColorEle.getCssValue("background-color");
+	
+	// Getting values and color from map visual to compare the results
+			List<WebElement> LegendItems = login.driver.findElements(By.xpath(
+					"//*[contains(@class,'movable-modal--window')]//*[@class='highcharts-legend highcharts-no-tooltip']/*[2]/*/*/*[1]"));
+			ArrayList<String> ListOfLegendItems = new ArrayList<String>();
+			for (int i = 0; i < LegendItems.size(); i++) {
+				String Strvalue = LegendItems.get(i).getText();
+				ListOfLegendItems.add(Strvalue);
+
+			}
+			// split the legend values by using " - "
+			String[] list = null;
+			ArrayList<String> LegendList = new ArrayList<String>();
+			for (String value : ListOfLegendItems) {
+				list = value.toString().split(" - ");
+				for (String str : list) {
+					LegendList.add(str);
+				}
+			}
+
+			if (LegendList.contains(String.valueOf(Largest_value))	|| LegendList.contains(String.valueOf(SecondLargest_value))) {
+				WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
+						"//*[contains(@class,'movable-modal--window')]//*[@class='visual-item']//*[contains(text(),'"
+								+ Largest_value + "')]/following-sibling::*  | //*[contains(@class,'movable-modal--window')]//*[@class='visual-item']//*[contains(text(),'"+ Strappend +"')]/following-sibling::*",30);
+				
+				String RespectiveColor= ele.getCssValue("fill");
+//				System.out.println(RespectiveColor_largestValue);
+//				System.out.println(RespectiveColor);
+				String actual = Color.fromString(RespectiveColor).asHex();
+				String expected = Color.fromString(RespectiveColor_largestValue).asHex();
+				System.out.println(actual);
+				System.out.println(expected);
+				if (actual.equals(expected)) {
+					login.Log4j.info("Largest value is dispalyed in decimal points for map with respect color");
+				}
+
+			}
+}
+@And("^Click on the color button for the smallest value and change it to Red$")
+public void click_on_the_color_button_for_the_smallest_value_and_change_it_to_Red() throws Throwable {
+	 CommonFunctionality.getElementByXpath(login.driver,"//*[@class='value-selection-container']/preceding-sibling::*[1]/*[1]/*/*/*[1]",30).click();
+	 WebElement element = CommonFunctionality.getElementByProperty(login.driver, "RedColor", 20);
+		ActualColor = element.getCssValue("background-color");
+		login.Log4j.info("Expected color is " + ActualColor);
+		element.click();
+		CommonFunctionality.wait(200);
+}
+
+	@Then("^Selected color will be changed accordingly$")
+	public void selected_color_will_be_changed_accordingly() throws Throwable {
+		WebElement color = login.driver.findElement(By.xpath(
+				"//*[contains(@class,'movable-modal--window')]//*[@class='visual-item']//*[@class='highcharts-legend highcharts-no-tooltip']//*[contains(@class,'highcharts-color-undefined highcharts-series-undefined')][1]/*[2]"));
+		String color_text = color.getCssValue("fill");
+		login.Log4j.info("Actual color is " + color_text);
+		CommonFunctionality.wait(2000);
+		String actual = Color.fromString(color_text).asHex();
+		String expected = Color.fromString(ActualColor).asHex();
+		assertEquals(actual, expected);
+
+		login.Log4j.info("The Selected color is shown in legend tooltip for map visual");
+
+	}
+	@And("^Click on Advanced Setting popup cogwheel$")
+	public void click_on_Advanced_Setting_popup_cogwheel() throws Throwable {
+		 CommonFunctionality.getElementByXpath(login.driver,"//div[@class='color-axis--row']//div[@title='Open advanced settings popup']",10).click();
+	}
+
+	@Then("^The following list will be displayed$")
+	public void the_following_list_will_be_displayed(List<String> DropdownOptions) throws Throwable {
+		CommonFunctionality.wait(1200);
+		List<WebElement> List_of_options = login.driver
+				.findElements(By.xpath("//div[@class='accordion-header']//*[@class='title']"));
+
+		for (int i = 0; i < List_of_options.size(); i++) {
+			String str = List_of_options.get(i).getText();
+			if (DropdownOptions.contains(str)) {
+				login.Log4j.info(str + " is displayed");
+			} else {
+				Assert.fail(str + " is not displayed");
+			}
+
+		}
+
+	}
+
+	@Then("^Steps from \"([^\"]*)\" will be available and By default (\\d+) color step will be displayed$")
+	public void steps_from_will_be_available_and_By_default_color_step_will_be_displayed(String arg1, int arg2) throws Throwable {	
+		
+	String GradientDefaultValue = null;
+	CommonFunctionality.wait(2000);
+	try {
+		WebElement ele = login.driver.findElement(By.xpath("//select[@class='gradient-axis--steps-select']"));
+		GradientDefaultValue = ele.getAttribute("value");
+	} catch (Exception e) {
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//*[@title='Close']")).click();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
+		CommonFunctionality.Views_list();
+		Assert.fail("Color steps not displayed for gradient color");
+	}
+	
+	
+	if (Integer.parseInt(GradientDefaultValue) == arg2) {
+		login.Log4j.info("Gradient default value is :" + GradientDefaultValue);
+	} else {
+		Assert.fail("Verification failed");
+	}
+	List<WebElement>  GradientDropdownValues = login.driver.findElements(By.xpath("//*[@class='gradient-axis--steps-select']/*"));
+	
+	for (int i = 0; i < GradientDropdownValues.size(); i++) {
+		String str = GradientDropdownValues.get(i).getAttribute("value");
+		if (arg1.contains(str) == true) {
+			login.Log4j.info(str);
+		} else {
+			Assert.fail("FAIL");
+		}
+	}
+	
+}
 
 	// ........................Implemented By Teju ....................//
 

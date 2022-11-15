@@ -195,6 +195,7 @@ public class ImageVisual {
 
 	@And("^Click on title dropdown$")
 	public void click_on_title_dropdown() throws Throwable {
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, " //*[@data-popup='title']/*[2]", 30).click();
 	}
 
@@ -420,7 +421,8 @@ public class ImageVisual {
 	@And("^Create a Chart visual$")
 	public void create_a_Chart_visual() throws Throwable {
 		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='line']", 4).click();
+		//CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='line']", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='view-components-over--visuals']//*[@class='icon--chart-line']", 4).click();
 	}
 
 	@And("^Add a series to the chart visual$")
@@ -549,7 +551,7 @@ public class ImageVisual {
 	}
 	void Alignvisual(String align) throws InterruptedException {
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + align + "']", 20);
-		new Actions(login.driver).doubleClick(ele).build().perform();
+		new Actions(login.driver).moveToElement(ele).click().build().perform();
 		CommonFunctionality.wait(1200);
 		WebElement element = login.driver.findElement(By.tagName("iframe"));
 		login.driver.switchTo().frame(element);

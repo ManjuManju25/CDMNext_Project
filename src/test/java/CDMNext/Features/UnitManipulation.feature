@@ -1,5 +1,5 @@
 Feature: Verify Unit Manipulation functionality
- 
+
   #Background:
   #Given User has successful logged in
   @UnitManipulation1
@@ -247,4 +247,3 @@ Feature: Verify Unit Manipulation functionality
     And Click "By function" tab and enter "UNIT" in search field
     Then The function should not apply for selected series
     And Sort the default series in left pane
-

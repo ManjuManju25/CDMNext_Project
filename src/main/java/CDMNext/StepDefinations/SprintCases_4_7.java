@@ -28,12 +28,12 @@ Map c=new Map();
 		login.driver.findElement(By.xpath("//span[contains(text(),'Datasets')]")).click();
 
 	}
-	@Given("^click on more button$")
+	/*@Given("^click on more button$")
 	public void click_on_more_button() throws Throwable {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'More')]")).click();
 		Thread.sleep(3000);
-	}
+	}*/
 	@And("^Create two visuals in single view1$")
 	public void create_two_visuals_in_single_view1() throws Throwable {
 	    

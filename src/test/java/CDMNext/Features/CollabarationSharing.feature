@@ -1,4 +1,3 @@
-
 Feature: Verifying Insight Share functionality
 
   @CollabarationSharing
@@ -565,4 +564,3 @@ Feature: Verifying Insight Share functionality
   Scenario: Tc_Share_73: Verify Notifications when turn ON notification under Profile dropdown
     And Enter mail for "Notification growl" with action as "Turn ON notifications" the insight
     And Login back to default execution login
-

@@ -1,4 +1,3 @@
-
 Feature: MyInsight Functionality
 
   #Background:
@@ -534,4 +533,3 @@ Feature: MyInsight Functionality
   Scenario: TC_MyInsights_108:Verify insight which is added to folder
     And Navigates to Myinsight page
     And Verify insight which is added to folder
-

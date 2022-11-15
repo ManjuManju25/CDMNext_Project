@@ -767,8 +767,7 @@ login.driver.findElement(
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("new_insight"))).click();
 		Thread.sleep(2000);
-		login.driver.findElement(
-				By.xpath(login.LOCATORS.getProperty("create_insight"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Create_insight"))).click();
 		login.driver.manage().timeouts().implicitlyWait(1200, TimeUnit.SECONDS);
 			}
 

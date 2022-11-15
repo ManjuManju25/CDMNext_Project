@@ -1,17 +1,16 @@
-
 Feature: Table Visual Functionality
 
-  @TableVisual
-  Scenario: TC_TV_01: Verify creating Table visual from View panel by drag and drop
-    And create visual tab
-    And drag and drop the table visual
-    And verify the Table visual creating from View panel by drag and drop
+  #@TableVisual
+  #Scenario: TC_TV_01: Verify creating Table visual from View panel by drag and drop
+    #And create visual tab
+    #And drag and drop the table visual
+    #And verify the Table visual creating from View panel by drag and drop
 
-  @TableVisual
-  Scenario: TC_TV_02: Verify creating Table visual from View panel by clicking on Table icon
-    And create visual tab
-    And select the table visual
-    And verify the Table visual creating from View panel by clicking
+  #@TableVisual
+  #Scenario: TC_TV_02: Verify creating Table visual from View panel by clicking on Table icon
+    #And create visual tab
+    #And select the table visual
+    #And verify the Table visual creating from View panel by clicking
 
   @TableVisual
   Scenario: TC_TV_03: Verify Table visual creating with function applied series
@@ -131,11 +130,11 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify tooltip for series
 
-  @TableVisual
-  Scenario: TC_TV_24:Verify scroll down till end of timepoints
-  And User Select Series ID  as "310902301"
-  And Select some series to my series tab
-  And verify scroll down till end of timepoints
+  #@TableVisual
+  #Scenario: TC_TV_24:Verify scroll down till end of timepoints
+  #And User Select Series ID  as "310902301"
+  #And Select some series to my series tab
+  #And verify scroll down till end of timepoints
   
   @TableVisual
   Scenario: TC_TV_25:Verify Name field when scroll down
@@ -443,7 +442,7 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_85:Rename - Verify  Minimize option
-    And Select some series to my series tab
+   And Create a table visual
     And verify Rename Minimize option
 
   @TableVisual
@@ -506,10 +505,10 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit series appling function by clicking on function icon
 
-  @TableVisual
-  Scenario: TC_TV_98:Edit series - Verify hiding/showing function toolbar
-    And Create a table visual
-    And verify Edit series ahiding/showing function toolbar
+  #@TableVisual
+  #Scenario: TC_TV_98:Edit series - Verify hiding/showing function toolbar
+    #And Create a table visual
+    #And verify Edit series ahiding/showing function toolbar
 
   @TableVisual
   Scenario: TC_TV_99:Edit series - Verify Type a function field
@@ -588,27 +587,27 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_114:Edit series - Series data Verify Minimize option
-    And Select series to my series tab
+   And Create a table visual
     And verify Series data Minimize
 
   @TableVisual
   Scenario: TC_TV_115:Edit series -Series data Verify maximize
-    And Select series to my series tab
+     And Create a table visual
     And verify ESeries data Maximize
 
   @TableVisual
   Scenario: TC_TV_116:Edit series - Series data Verify full screen option
-    And Select series to my series tab
+    And Create a table visual
     And verify Series data full screen
 
   @TableVisual
   Scenario: TC_TV_117:Edit series -Series data Verify exit full screen
-    And Select series to my series tab
+    And Create a table visual
     And verify Series data exit full screen
 
   @TableVisual
   Scenario: TC_TV_118:Edit series -Series data Verify Cancel/x icon
-    And Select series to my series tab
+    And Create a table visual
     And verify Series data Cancel/x icon
 
   @TableVisual
@@ -680,7 +679,7 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_132:Edit series -Verify horizontal scroll bar for series
-    And Select some series to my series tab
+    And Create a table visual
     And verify Edit Series Verify horizontal scroll bar for series
 
   @TableVisual
@@ -753,12 +752,12 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_147:Edit Table-Verify Set as default for future Table visual is checked
-  And Select some series to my series tab
+  And Create a table visual
   And verify Edit Table Set as default for future Table visual is checked
   
   @TableVisual
   Scenario: TC_TV_148:Edit Table-Verify Set as default for future Table visual is Unchecked
-  And Select some series to my series tab
+  And Create a table visual
   And verify Edit Table Set as default for future Table visual is Unchecked
   
   @TableVisual
@@ -973,7 +972,7 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_191:Edit Table-Title- Verify horizontal alignment (left, right, center)
-  And Select some series to my series tab
+  And Create a table visual
   And verify Edit Table horizontal alignment (left, right, center)
   
   @TableVisual
@@ -1236,10 +1235,10 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Table Copyright popup closing
 
-  @TableVisual
-  Scenario: TC_TV_243:Edit Table-Verify Copyright-popup-expanding and collapsing the copyright sections
-    And Create a table visual
-    And verify Edit Table Copyright popup expanding and collapsing the copyright sections
+  #@TableVisual
+  #Scenario: TC_TV_243:Edit Table-Verify Copyright-popup-expanding and collapsing the copyright sections
+    #And Create a table visual
+    #And verify Edit Table Copyright popup expanding and collapsing the copyright sections
 
   @TableVisual
   Scenario: TC_TV_244:Edit Table-Dates-Verify dates
@@ -1381,10 +1380,10 @@ Feature: Table Visual Functionality
     And User Select Series ID  as "7012201"
     And verify Edit Table Number default Decimal Grouping separator
 
-  @TableVisual
-  Scenario: TC_TV_272:Edit Table-Verify horizontal scroll bar for settings sections
-  And Select some series to my series tab
-  And verify Edit Table horizontal scroll bar for settings sections
+  #@TableVisual
+  #Scenario: TC_TV_272:Edit Table-Verify horizontal scroll bar for settings sections
+  #And Select some series to my series tab
+  #And verify Edit Table horizontal scroll bar for settings sections
   
   @TableVisual
   Scenario: TC_TV_273:Edit Table-Verify the changes reflected in edit visual-inside Edit tabel popup
@@ -1448,7 +1447,7 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_285:Edit Table- Verify Change option from cogwheel icon-inside Edit tabel popup
-    And User Select Series ID  as "46224501"
+    And Create a table visual
     And verify Edit Table Change option from cogwheel icon inside Edit tabel popup
 
   @TableVisual
@@ -1456,15 +1455,15 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Table tooltip for series inside Edit tabel popup
 
-  @TableVisual
-  Scenario: TC_TV_287:Edit Table- Verify scroll down till end of timepoints-inside Edit tabel popup
-    And User Select Series ID  as "46224501"
-    And verify Edit Table scroll down till end of timepoints inside Edit tabel popup
-
-  @TableVisual
-  Scenario: TC_TV_288:Edit Table-Verify horizontal scroll-inside Edit tabel popup
-    And User Select Series ID  as "46224501"
-    And verify Edit Table  horizontal scroll inside Edit tabel popup
+  #@TableVisual
+  #Scenario: TC_TV_287:Edit Table- Verify scroll down till end of timepoints-inside Edit tabel popup
+    #And User Select Series ID  as "46224501"
+    #And verify Edit Table scroll down till end of timepoints inside Edit tabel popup
+#
+  #@TableVisual
+  #Scenario: TC_TV_288:Edit Table-Verify horizontal scroll-inside Edit tabel popup
+    #And User Select Series ID  as "46224501"
+    #And verify Edit Table  horizontal scroll inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_289:Edit Table- Verify selecting another visual from visual panel-inside Edit tabel popup
@@ -1478,7 +1477,7 @@ Feature: Table Visual Functionality
 
   @TableVisual
   Scenario: TC_TV_291:Edit Table- Verify delete series icon-inside Edit tabel popup
-    And Create a table visual
+   And Select series to my series tab
     And verify Edit Table delete series icon inside Edit tabel popup
 
   @TableVisual
@@ -1524,13 +1523,12 @@ Feature: Table Visual Functionality
   @TableVisual
   Scenario: TC_TV_300:Edit Table- Edit series -Verify clicking on frequency or dropdown -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
     And verify Edit Table clicking on frequency or dropdown inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_301:Edit Table- Edit series -Verify Series data conversion -Applay -inside Edit tabel popup
   And User Select Series ID  as "236397903;236274103"
-  And Select series to my series tab
+  #And Select series to my series tab
   And verify Edit Table Series data conversion -Applay inside Edit tabel popup
   
   @TableVisual
@@ -1545,54 +1543,53 @@ Feature: Table Visual Functionality
   @TableVisual
   Scenario: TC_TV_303:Edit Table- Edit series -Verify Series data conversion Apply button -inside Edit tabel popup
   And User Select Series ID  as "236397903;236274103"
-  And Select series to my series tab
+  #And Select series to my series tab
   And verify Edit Table Series data conversion Apply button inside Edit tabel popup
   
   @TableVisual
   Scenario: TC_TV_304:Edit Table- Edit series -Verify Series data conversion Minimize option -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table Series data conversion Minimize option inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_305:Edit Table- Edit series -Verify Series data conversion maximize option -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table Series data conversion maximize option inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_306:Edit Table- Edit series -Verify Series data conversion full screen option -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table Series data conversion maximize full screen inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_307:Edit Table- Edit series -Verify Series data conversion exit full screen option -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table Series data conversion exit full screen option inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_308:Edit Table- Edit series -Verify Series data conversion Cancel/x icon option -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table Series data conversion Cancel/x icon option inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_309:Edit Table- Edit series -Verify dropdown for frequency in series level -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table dropdown for frequency in series level inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_310:Edit Table- Edit series -Verify appling frequency in series level -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table appling frequency in series level inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_311:Edit Table- Edit series -Verify appling currency in series level -inside Edit tabel popup
-    And User Select Series ID  as "236397903;236274103"
     And Select series to my series tab
     And Click on "Edit Table"
     And Click on currency dropdown
@@ -1602,7 +1599,7 @@ Feature: Table Visual Functionality
   @TableVisual
   Scenario: TC_TV_312:Edit Table- Edit series -Verify clicking on type a function field -inside Edit tabel popup
     And User Select Series ID  as "236397903;236274103"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table clicking on type a function field inside Edit tabel popup
 
   @TableVisual
@@ -1633,13 +1630,13 @@ Feature: Table Visual Functionality
   @TableVisual
   Scenario: TC_TV_318:Edit Table- Edit series -Verify appling invalid function for series -inside Edit tabel popup
     And User Select Series ID  as "394611277"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table appling invalid function for series inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_319:Edit Table- Edit series -Verify OK button on The function cannot be applied to selected series popup -inside Edit tabel popup
     And User Select Series ID  as "394611277"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Edit Table OK button on The function cannot be applied to selected series popup inside Edit tabel popup
 
   @TableVisual
@@ -1711,7 +1708,7 @@ Feature: Table Visual Functionality
   @TableVisual
   Scenario: TC_TV_333:Verify adding series from Series suggestion manager popup
     And User Select Series ID  as "394611277"
-    And Select series to my series tab
+    #And Select series to my series tab
     And Verify adding series from Series suggestion manager popup
 
   @TableVisual
@@ -1747,18 +1744,19 @@ Feature: Table Visual Functionality
   @TableVisual
   Scenario: TC_TV_339:Copy - Verify Copy option
     And User Select Series ID  as "394611277"
-    And Select series to my series tab
+    #And Select series to my series tab
     And verify Copy option
+     Then "Table with series copied." confirmation message should be displayed
 
   @TableVisual
   Scenario: TC_TV_340:Copy -Verify confirmation message for copy visual
     And Create a table visual
     And verify confirmation message for copy visual
 
-  @TableVisual
-  Scenario: TC_TV_341:Copy -Verify copy here in growl message
-    And Create a table visual
-    And verify copy here in growl message
+  #@TableVisual1
+  #Scenario: TC_TV_341:Copy -Verify copy here in growl message
+    #And Create a table visual
+    #And verify copy here in growl message
 
   @TableVisual
   Scenario: TC_TV_342:Copy-Validate copied visual by pasting with in the insight
@@ -1828,6 +1826,7 @@ Feature: Table Visual Functionality
   Scenario: TC_TV_354:Verify Delete OK button in delete confirmation popup
     And Create a table visual
     And verify Delete OK button in delete confirmation popup
+    Then The visual should be deleted
 
   @TableVisual
   Scenario: TC_TV_355:Verify Cancel/x icon in delete confirmation popup
@@ -1863,61 +1862,62 @@ Feature: Table Visual Functionality
   Scenario: TC_TV_361:Verify Right click -Delete Table
     And Create a table visual
     And verify right click  options Delete Table
+    Then The visual should be deleted
 
-  @TableVisual
-  Scenario: TC_TV_362:Verify Right click -insert visual sub dropdown
-    And Create a table visual
-    And verify right click  options insert visual sub dropdown
-
-  @TableVisual
-  Scenario: TC_TV_363:Verify Right click -chart under insert visual
-    And Create a table visual
-    And verify right click  chart under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_364:Verify Right click -Pie under insert visual
-    And Create a table visual
-    And verify right click  Pie under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_365:Verify Right click -table under insert visual
-    And Create a table visual
-    And verify right click  table under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_366:Verify Right click -map under insert visual
-    And Create a table visual
-    And verify right click  map under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_367:Verify Right click -Heatmap under insert visual
-    And Create a table visual
-    And verify right click  Heatmap under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_368:Verify Right click -Pyramid under insert visual
-    And Create a table visual
-    And verify right click  Pyramid under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_369:Verify Right click -Commentary under insert visual
-    And Create a table visual
-    And verify right click  Commentary under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_370:Verify Right click -Attachment under insert visual
-    And Create a table visual
-    And verify right click  Attachment under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_371:Verify Right click -image under insert visual
-    And Create a table visual
-    And verify right click  image under insert visual
-
-  @TableVisual
-  Scenario: TC_TV_372:Verify Right click -Filter under insert visual
-    And Create a table visual
-    And verify right click  Filter under insert visual
+  #@TableVisual
+  #Scenario: TC_TV_362:Verify Right click -insert visual sub dropdown
+    #And Create a table visual
+    #And verify right click  options insert visual sub dropdown
+#
+  #@TableVisual
+  #Scenario: TC_TV_363:Verify Right click -chart under insert visual
+    #And Create a table visual
+    #And verify right click  chart under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_364:Verify Right click -Pie under insert visual
+    #And Create a table visual
+    #And verify right click  Pie under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_365:Verify Right click -table under insert visual
+    #And Create a table visual
+    #And verify right click  table under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_366:Verify Right click -map under insert visual
+    #And Create a table visual
+    #And verify right click  map under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_367:Verify Right click -Heatmap under insert visual
+    #And Create a table visual
+    #And verify right click  Heatmap under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_368:Verify Right click -Pyramid under insert visual
+    #And Create a table visual
+    #And verify right click  Pyramid under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_369:Verify Right click -Commentary under insert visual
+    #And Create a table visual
+    #And verify right click  Commentary under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_370:Verify Right click -Attachment under insert visual
+    #And Create a table visual
+    #And verify right click  Attachment under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_371:Verify Right click -image under insert visual
+    #And Create a table visual
+    #And verify right click  image under insert visual
+#
+  #@TableVisual
+  #Scenario: TC_TV_372:Verify Right click -Filter under insert visual
+    #And Create a table visual
+    #And verify right click  Filter under insert visual
 
   @TableVisual
   Scenario: TC_TV_373:Verify Right click -Paste visual
@@ -1929,30 +1929,30 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify right click View as sub dropdown
 
-  @TableVisual
-  Scenario: TC_TV_375:Verify Right click -View as Chart
-    And Create a table visual
-    And verify right click View as Chart
-
-  @TableVisual
-  Scenario: TC_TV_376:Verify Right click -View as Map
-    And Create a table visual
-    And verify right click View as Map
-
-  @TableVisual
-  Scenario: TC_TV_377:Verify Right click -View as Histogram
-    And Create a table visual
-    And verify right click View as Histogram
-
-  @TableVisual
-  Scenario: TC_TV_378:Verify Right click -View as Pie
-    And Create a table visual
-    And verify right click View as Pie
-
-  @TableVisual
-  Scenario: TC_TV_379:Verify Right click -View as Heatmap
-    And Select some series to my series tab
-    And verify right click View as Heatmap
+  #@TableVisual
+  #Scenario: TC_TV_375:Verify Right click -View as Chart
+    #And Create a table visual
+    #And verify right click View as Chart
+#
+  #@TableVisual
+  #Scenario: TC_TV_376:Verify Right click -View as Map
+    #And Create a table visual
+    #And verify right click View as Map
+#
+  #@TableVisual
+  #Scenario: TC_TV_377:Verify Right click -View as Histogram
+    #And Create a table visual
+    #And verify right click View as Histogram
+#
+  #@TableVisual
+  #Scenario: TC_TV_378:Verify Right click -View as Pie
+    #And Create a table visual
+    #And verify right click View as Pie
+#
+  #@TableVisual
+  #Scenario: TC_TV_379:Verify Right click -View as Heatmap
+    #And Select some series to my series tab
+    #And verify right click View as Heatmap
 
   @TableVisual
   Scenario: TC_TV_380:Verify Right click -Calculated series sub dropdown
@@ -1998,4 +1998,3 @@ Feature: Table Visual Functionality
   Scenario: TC_TV_388:Verify Right click -download > View
     And Create a table visual
     And verify right click download > View
-

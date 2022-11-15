@@ -937,7 +937,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select "ACCUMULATE" function
-    And Click on "Apply function"
+    And Click on Apply function
     Then Selected function should applied to the series
 
  @PieVisual
@@ -946,7 +946,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select multiple functions "ACCUMULATE"  and "LOG"
-    And Click on "Apply function"
+    And Click on Apply function
     Then The Selected functions should applied to the series
 
   @PieVisual
@@ -999,7 +999,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on Edit series option
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on "Apply function"
+    And Click on Apply function
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 
@@ -1695,44 +1695,6 @@ Feature: Verifying Pie Visual Functionality
       | TC_Pie_211 | Percentage           | Percentage           |
       | TC_Pie_212 | Function description | Function description |
 
-  @PieVisual
-  Scenario: TC_Pie_209:Edit pie - Region tooltip for pie visual
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Select "Region" field
-    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Region" of series
-
-  @PieVisual
-  Scenario: TC_Pie_210:Edit pie - Frequency tooltip for pie visual
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Select "Frequency" field
-    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Frequency" of series
-
-  @PieVisual
-  Scenario: TC_Pie_212:Edit pie - Function description tooltip for pie visual
-    And Add series to the my series tab
-    And Apply function for a series
-    And Right click on series
-    And Select "Pie" visual
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Select "Function description" field
-    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Function description" of series
-
-  @PieVisual
-  Scenario: TC_Pie_212:Edit pie - percentage tooltip for pie visual
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Check "Tooltips"
-    And Open date dropdown
-    And Select "Percentage" field
-    Then The Tooltip default value should be changed to "Date +2" and tooltips of visual should include with "Percentage" of series
 
   @PieVisual
   Scenario: TC_Pie_213:Edit pie > tooltip dropdown > advanced settings
@@ -2339,7 +2301,8 @@ Feature: Verifying Pie Visual Functionality
     And Create a pie visual with series id's "408940397"
     And Click on "Edit Pie"
     And Click on cogwheel icon
-    And Click on "Rename"
+    And Select "Rename"
+    #And Click on "Rename"
     Then "Rename" popup should be displayed for selected series
 
   @PieVisual
@@ -2554,7 +2517,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Edit Pie"
     And Click on type a function field in series level
     And Select a function
-    And Click on "Apply function"
+    And Click on Apply function
     Then The selected function should be applied to the series
 
   @PieVisual
@@ -2572,7 +2535,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Edit Pie"
     And Click on type a function field in series level
     And Select multiple functions
-    And Click on "Apply function"
+    And Click on Apply function
     Then The selected functions should be applied to the series
 
   @PieVisual
@@ -2829,42 +2792,42 @@ Feature: Verifying Pie Visual Functionality
     Then Pie chart should be deleted
 
   @PieVisual
-  Scenario: TC_Pie_333:Right click - Verify chart under insert visual
+  Scenario: TC_Pie_333:Right click - Verify Add chart > Chart
     And Create a pie visual with series id's "16240301;16243001"
     And Right click on visual header
     And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @PieVisual
-  Scenario: TC_Pie_334:Right click - Verify Pie under insert visual
+  Scenario: TC_Pie_334:Right click - Verify Add chart > Pie
     And Create a pie visual with series id's "16240301;16243001"
     And Right click on visual header
     And Choose Add chart as "Pie"
     Then "Pie" visual should be created in the same view tab
 
   @PieVisual
-  Scenario: TC_Pie_335:Right click - Verify table under insert visual
+  Scenario: TC_Pie_335:Right click - Verify Add chart > Table
     And Create a pie visual with series id's "16240301;16243001"
     And Right click on visual header
     And Choose Add chart as "Table"
     Then "Table" visual should be created in the same view tab
 
   @PieVisual
-  Scenario: TC_Pie_336:Right click - Verify map under insert visual
+  Scenario: TC_Pie_336:Right click - Verify Add chart > Map
     And Create a pie visual with series id's "16240301;16243001"
     And Right click on visual header
     And Choose Add chart as "Map"
     Then "Map" visual should be created in the same view tab
 
   @PieVisual
-  Scenario: TC_Pie_337:Right click - Verify Heat map under insert visual
+  Scenario: TC_Pie_337:Right click - Verify Add chart > Heat Map
     And Create a pie visual with series id's "16240301;16243001"
     And Right click on visual header
     And Choose Add chart as "Heat map"
     Then "Heat map" visual should be created in the same view tab
 
   @PieVisual
-  Scenario: TC_Pie_338:Right click - Verify Histogram under insert visual
+  Scenario: TC_Pie_338:Right click - Verify Add chart > Histogram
     And Create a pie visual with series id's "16240301;16243001"
     And Right click on visual header
     And Choose Add chart as "Histogram"
@@ -2934,13 +2897,13 @@ Feature: Verifying Pie Visual Functionality
     #And Right click on visual header
     #And Select View as > "Histogram"
     #Then The "Pie" visual should be converted as "Histogram" visual
-
-  @PieVisual
-  Scenario: TC_Pie_348:Right click - View as - Verify Heat map
-    And Create a pie visual with series id's "16240301;16243001"
-    And Right click on visual header
-    And Select View as > "Heat map"
-    Then The "Pie" visual should be converted as "Heat map" visual
+#
+  #@PieVisual
+  #Scenario: TC_Pie_348:Right click - View as - Verify Heat map
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Right click on visual header
+    #And Select View as > "Heat map"
+    #Then The "Pie" visual should be converted as "Heat map" visual
 
   @PieVisual
   Scenario: TC_Pie_349:Right click - Verify Calculated series sub dropdown

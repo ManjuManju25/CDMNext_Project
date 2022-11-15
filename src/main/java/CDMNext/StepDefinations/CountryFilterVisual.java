@@ -38,12 +38,21 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@Then("^\"([^\"]*)\" visual should be created$")
 	public void visual_should_be_created(String arg1) throws Throwable {
-		String Visuale_Title = getElementByXpath(login.driver, "//*[@data-name='title']", 20)
-				.getText();
-		if (Visuale_Title.equals(arg1)) {
-			login.Log4j.info(arg1 + " visual is created");
+		if (arg1.equalsIgnoreCase("Image")) {
+			WebElement ImageVisual = CommonFunctionality.getElementByProperty(login.driver, "Image_Visual", 4);
+			if (ImageVisual.isDisplayed()) {
+				login.Log4j.info(arg1 + " visual is created");
+			} else {
+				Assert.fail(arg1 + " visual is not created");
+			}
+
 		} else {
-			Assert.fail(arg1 + " visual is not created");
+			String Visuale_Title = getElementByXpath(login.driver, "//*[@data-name='title']", 20).getText();
+			if (Visuale_Title.equals(arg1)) {
+				login.Log4j.info(arg1 + " visual is created");
+			} else {
+				Assert.fail(arg1 + " visual is not created");
+			}
 		}
 	}
 
@@ -269,7 +278,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 		getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
 		getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		commentary.CreateViewTab();
-		getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
+		getElementByClassName(login.driver, "icon--heatmap", 10).click();
 		getElementByProperty(login.driver, "Series", 20).click();
 		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -308,10 +317,12 @@ public class CountryFilterVisual extends CommonFunctionality {
 	@And("^create another visual in the same view$")
 	public void create_another_visual_in_the_same_view() throws Throwable {
 		// create map visual
-		new Actions(login.driver).pause(2000)
-				.moveToElement(
-						login.driver.findElement(By.xpath("//*[@data-action='world']//*[@class='icon--map-world']")))
-				.click().perform();
+		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
+		CommonFunctionality.getElementByProperty(login.driver, "AddChart_map", 6).click();
+//		new Actions(login.driver).pause(2000)
+//				.moveToElement(
+//						login.driver.findElement(By.xpath("//*[@class='view-components-over--visuals']//*[@class='icon--map-world']")))
+//				.click().perform();
 		getElementByXpath(login.driver, "//*[contains(text(),'Add from My Series')]", 20).click();
 		wait(1000);
 		WebElement ele =getElementByXpath(login.driver,
@@ -383,7 +394,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 	public void click_on_crossmark_when_all_countries_are_selected() throws Throwable {
 		getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
 		commentary.CreateViewTab();
-		getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
+		getElementByXpath(login.driver, "//*[@class='view-components-over--visual']//*[@class='icon--heatmap']", 10).click();
 		getElementByProperty(login.driver, "Series", 20).click();
 		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));

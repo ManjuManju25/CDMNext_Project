@@ -44,5 +44,3 @@ Feature: SprintCases_4.8 feature
     And Choose a series in  Database tree
     And Create footnote for the series
     Then Check the tabs in footnotes
-
-  
