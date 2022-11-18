@@ -2703,7 +2703,7 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Click on type a function field in series level
     And Select multiple functions
-    And Click on "Apply function"
+    And Click on Apply function
     Then The selected functions should be applied to the series
 
   @Map
@@ -2730,7 +2730,7 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on "Apply function"
+    And Click on Apply function
     Then "The function cannot be applied to selected series" popup should be displayed
 
   @Map
@@ -2739,7 +2739,7 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on "Apply function"
+    And Click on Apply function
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 

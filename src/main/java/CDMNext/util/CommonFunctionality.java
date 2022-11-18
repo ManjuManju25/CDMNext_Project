@@ -1,5 +1,6 @@
 
 package CDMNext.util;
+
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
@@ -893,7 +894,6 @@ public class CommonFunctionality {
 		driver.navigate().refresh();
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void login_as_internal_user(WebDriver driver, String arg1, String arg2, String arg3, String arg4,
 			String arg5) throws Throwable {
 		URL url = new URL(driver.getCurrentUrl());
@@ -1178,4 +1178,3 @@ public class CommonFunctionality {
 	}
 
 }
-

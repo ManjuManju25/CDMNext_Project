@@ -1026,8 +1026,9 @@ public class SprintCases5_0 {
 
 	@And("^Select any check box in that popup$")
 	public void select_any_check_box_in_that_popup() throws Throwable {
-		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByProperty(login.driver, "popup_notification_checkBox", 20).click();
+		//CommonFunctionality.wait(500);
+		//CommonFunctionality.getElementByProperty(login.driver, "popup_notification_checkBox", 20).click();
+		//when click on/select Add to watchlist icon , the first option(popup notification) will be selected by default so not selecting again
 	}
 
 	@Then("^Message \"([^\"]*)\" will be appears and series will be added to the watchlist$")
@@ -1204,19 +1205,15 @@ public class SprintCases5_0 {
 	@Then("^\"([^\"]*)\" icon for series should not be shows for global key series$")
 	public void icon_for_series_should_not_be_shows_for_global_key_series(String arg1) throws Throwable {
 		CommonFunctionality.wait(500);
-		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10);
-		new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
-		login.Log4j.info("Clicking on show database icon");
+		login.Log4j.info("Clicking on  Databases tab ");
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))))
+				.click();
 		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='series-list-item--action-icons']//span[@title='See in Database']", 4).click();
-		st.user_can_selects("Global Key Series Database");
-		CommonFunctionality.wait(5000);
-		String highlitedEle = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'series-list-item__selected series-list-item__highlighted')]//*[@class='series-item--status-icons']",
+		String statusIcon = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[contains(text(),'Global Key Series Database')]/following::*[@class='series-item--status-icons'])[1]",
 				4).getText();
-		login.Log4j.info(highlitedEle);
-		if (!arg1.equals(highlitedEle)) {
+		login.Log4j.info(statusIcon);
+		if (!arg1.equals(statusIcon)) {
 			login.Log4j.info(arg1 + " icon for series not shown for global key series");
 		} else {
 			fail(arg1 + " icon is displayed for global key series");
@@ -1228,7 +1225,7 @@ public class SprintCases5_0 {
 	public void add_some_series_to_my_series_tab() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		WebElement SeriesTab = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
 		SeriesTab.click();
 		CommonFunctionality.wait(5000);
 		List<WebElement> checkBox = login.driver
@@ -1431,8 +1428,8 @@ public class SprintCases5_0 {
 	public void create_a_chart_visual_with(String arg1) throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver,"Search",10).sendKeys(arg1);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
 		CommonFunctionality.wait(2000);
 		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10);
 		action.moveToElement(sname).pause(200).perform();
@@ -1442,8 +1439,9 @@ public class SprintCases5_0 {
 	@And("^Create a pie visual with \"([^\"]*)\"$")
 	public void create_a_pie_visual_with(String arg1) throws Throwable {
 		CommonFunctionality.ResetMethod();
-		pie.SelectSeries(arg1);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Pie']", 4).click();
+		PieVisual.SelectSeries(arg1);
+		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
+		CommonFunctionality.getElementByProperty(login.driver, "PieIcon", 4).click();
 		CommonFunctionality.wait(2000);
 		//if series harmonization popup opened
 		try {

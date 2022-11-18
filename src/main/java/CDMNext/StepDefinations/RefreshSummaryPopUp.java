@@ -58,13 +58,12 @@ public class RefreshSummaryPopUp {
 		Thread.sleep(2000);
 		login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		login.driver.findElement(By.xpath("//div[@class='account-avatar account-avatar__small']")).click();
-Thread.sleep(1000);
+        Thread.sleep(1000);
 		WebElement SighOut = login.driver.findElement(By.xpath("//span[contains(text(),'Sign out')]"));
 		js.executeScript("arguments[0].scrollIntoView(true)", SighOut);
 		SighOut.click();
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//button[contains(text(),'Save and sign out')]")).click();
-		
 		Thread.sleep(1000);
 		
 	}
@@ -317,7 +316,7 @@ Thread.sleep(1000);
 	public void click_on_add_related_series() throws Throwable {
 	   
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//button[contains(text(),'Add related series')]")).click();
+		login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
 	
 	}
 

@@ -74,7 +74,7 @@ Feature: Verifying Histogram Visual functionality
   @Histogram
   Scenario: TC_Histogram_12:Empty visual - Verify adding series to empty visual
     And Add series to the my series tab
-    And Create a empty visual
+    And Create a empty visual 
     And Click on Edit series option
     And Choose series from  "+ Add from My Series"
     Then The series should be added to "histogram" with its data
@@ -97,49 +97,50 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Rename" option
     Then The "Rename" popup should be displayed
-
-  #	 @Histogram
+	
+#	 @Histogram
   #Scenario: TC_Histogram_16:Rename - verify number of selected series
-  #And Create histogram visual with series
-  #And Click on Edit series option
-  #And Click on "Rename" option
-  #Then Number of selected series count should be shown on the rename popup header
-  #
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #Then Number of selected series count should be shown on the rename popup header
+#
   #@Histogram
   #Scenario: TC_Histogram_17:Rename - verify find field
-  #And Create histogram visual with series
-  #And Click on Edit series option
-  #And Click on "Rename" option
-  #And Search for the series you want to rename
-  #Then Result should be loaded for searched keyword
-  #
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #Then Result should be loaded for searched keyword
+#
   #@Histogram
   #Scenario: TC_Histogram_18:Rename -  verify number of searched result
-  #And Create histogram visual with series
-  #And Click on Edit series option
-  #And Click on "Rename" option
-  #And Search for the series you want to rename
-  #Then The total number of matches result should be displayed in below the find field
-  #
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #Then The total number of matches result should be displayed in below the find field
+#
   #@Histogram
   #Scenario: TC_Histogram_19:Rename - verify 'Replace' button
-  #And Create histogram visual with series
-  #And Click on Edit series option
-  #And Click on "Rename" option
-  #And Search for the series you want to rename
-  #And Enter keyword you want to replace with
-  #And Click on Replace
-  #Then The keyword should be replaced for selected series
-  #
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #And Enter keyword you want to replace with
+    #And Click on Replace
+    #Then The keyword should be replaced for selected series
+#
   #@Histogram
   #Scenario: TC_Histogram_20:Rename - verify 'Replace All' button
-  #And Create histogram visual with series
-  #And Click on Edit series option
-  #And Click on "Rename" option
-  #And Search for the series you want to rename
-  #And Enter keyword you want to replace with
-  #And Click on "Replace All"
-  #Then All the available series should be replaced with the keyword
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search for the series you want to rename
+    #And Enter keyword you want to replace with
+    #And Click on "Replace All"
+    #Then All the available series should be replaced with the keyword
+
   @Histogram
   Scenario: TC_Histogram_21:Rename - Verify default selection for 'Edit series info' dropdown
     And Create histogram visual with series
@@ -785,7 +786,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on Border drop down
     And Check Histogram for "Border"
-    And Select color
+    And Select color 
     Then Border should be displayed for "histogram" with selected color
 
   @Histogram
@@ -1135,7 +1136,7 @@ Feature: Verifying Histogram Visual functionality
     And Select alignment of title to "right"
     Then The title should align to "right"
 
-  @Histogram
+    @Histogram
   Scenario: TC_Histogram_133:Edit Histogram - Verify color for visual sub title
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1231,7 +1232,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Horizontal align of visual to "Right"
     Then The Visual area should align to "Right"
 
-  @Histogram
+   @Histogram
   Scenario: TC_Histogram_143:Edit Histogram - Size - Verify Horizontal align by defaullt
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1265,7 +1266,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Horizontal align of visual to "Right"
     Then The copyright image should align to "Right"
 
-  @Histogram
+   @Histogram
   Scenario: TC_Histogram_147:Edit Histogram - Copyright - Verify advance settings
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1815,7 +1816,7 @@ Feature: Verifying Histogram Visual functionality
   @Histogram
   Scenario: TC_Histogram_203:Edit Histogram - Edit series -  Verify cancel icon for selected function
     And Create histogram visual with series
-    And Click on "Edit Histogram"
+    And Click on "Edit Histogram"	
     And Click on type a function field in series level
     And Select a function
     And Click on cancel function icon
@@ -2262,11 +2263,12 @@ Feature: Verifying Histogram Visual functionality
 
   #@Histogram
   #Scenario: TC_Histogram_263:Rename - verify for invalid search
-  #And Create histogram visual with series
-  #And Click on Edit series option
-  #And Click on "Rename" option
-  #And Search with invalid series name
-  #Then "No matches found" should be displayed under the find field
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Rename" option
+    #And Search with invalid series name
+    #Then "No matches found" should be displayed under the find field
+
   @Histogram
   Scenario: TC_Histogram_264:Edit series - Verify adding series from my series
     And Select a series
@@ -2403,7 +2405,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check Show Series
-    And Mouse hover on existing visual templates
+    And  Mouse hover on existing visual templates
     And Click on template dropdown
     And Check the box for "Set as default for future Histogram visual" should be unchecked
     And Click on "Save"
@@ -2443,7 +2445,7 @@ Feature: Verifying Histogram Visual functionality
   Scenario: TC_Histogram_281: Edit Histogram - Tooltip - Verify date format
     And Create histogram visual with series
     And Open preference dropdown
-    And Clicking on "Date format" option in preference
+     And Clicking on "Date format" option in preference
     And Click "Auto" format date option
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -2539,8 +2541,8 @@ Feature: Verifying Histogram Visual functionality
     #And Click on "Hide the function bar"
     #And Click on "Show the function bar"
     #Then The function toolbar should be shown
-
-   @Histogram
+    
+     @Histogram
   Scenario: TC_Histogram_293:Edit series - Verify 'Type a function' field
     And Create histogram visual with series
     And Click on Edit series option

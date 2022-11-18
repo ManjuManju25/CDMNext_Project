@@ -248,4 +248,3 @@ Feature: Verify Unit Manipulation functionality
     Then The function should not apply for selected series
     And Sort the default series in left pane
 
-

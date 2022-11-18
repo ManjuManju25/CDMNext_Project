@@ -1,4 +1,3 @@
-
 Feature: Verifying Image visual functionality
 
   @ImageVisual
@@ -447,4 +446,3 @@ Feature: Verifying Image visual functionality
     And Select "jpeg" format
     And Click on "Download"
     Then Image should be downloaded in "JPG" format
-

@@ -31,6 +31,7 @@ public class AdvanceSearch extends CommonFunctionality{
 
 	@Then("^All of the words should display in the result pane$")
 	public void all_of_the_words_should_display_in_the_result_pane() throws Throwable {
+		wait(2000);
 		method_commonSteps();
 		String[] keywords = AllWords.split(";");
 		wait(5000);
@@ -41,7 +42,7 @@ public class AdvanceSearch extends CommonFunctionality{
 					|| country_list.get(i).getText().contains(keywords[1])
 					|| country_list.get(i).getText().contains(keywords[2])
 					|| country_list.get(i).getText().contains(keywords[3])) {
-				login.Log4j.info(country_list.get(i).getText());
+				login.Log4j.info(country_list.get(i).getText()+" keyword is displayed");
 			} else {
 				fail(country_list.get(i).getText() + " keyword not displayed");
 			}
@@ -124,6 +125,7 @@ public class AdvanceSearch extends CommonFunctionality{
 			login.Log4j.info(i);
 			login.Log4j.info(sName.size());
 			wait(600);
+			
 			action.moveToElement(sName.get(i)).build().perform();
 			wait(800);
 			WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
@@ -233,14 +235,12 @@ public void enter_Any_of_these_series_IDs_as(String arg1) throws Throwable {
 
 	void method_commonSteps() throws InterruptedException {
 			
-		
 		login.Log4j.info("Clicking on Series tab ");
 		wait(5000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		WebElement seriesTab = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
+		seriesTab.click();
 		wait(5000);
-			WebElement search_page_ele = getElementByProperty(login.driver,
-				"PaginationCount", 10);
+		WebElement search_page_ele = getElementByProperty(login.driver,	"PaginationCount", 10);
 		jse.executeScript("arguments[0].scrollIntoView(true);", search_page_ele);
 		getElementByProperty(login.driver, "SearchCount_SetPerPage", 10).click();
 		TopMethod();

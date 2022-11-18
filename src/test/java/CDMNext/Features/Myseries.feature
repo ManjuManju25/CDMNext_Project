@@ -1,4 +1,3 @@
-
 Feature: verifying My Series Tab Functionality
 
   @MySeries1
