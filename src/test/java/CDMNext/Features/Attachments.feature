@@ -6,7 +6,7 @@ Feature: Verifying Attachments Visual functionality
     And Click on Insert Attachments
     Then Attachments should be inserted
 
-  @Attachments1
+  @Attachments
   Scenario: TC_Attachments_02:Verify 'Insert Attachments' creating by drag and drop
     And Go to View tab
     And Drag and drop Attachments visual to the page
@@ -559,35 +559,35 @@ Feature: Verifying Attachments Visual functionality
     Then Attachments should be deleted
 
   @Attachments
-  Scenario: TC_Attachments_74:Right click - Verify chart under insert visual
+  Scenario: TC_Attachments_74:Right click - Verify chart under Add chart
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_75:Right click - Verify Map under insert visual
+  Scenario: TC_Attachments_75:Right click - Verify Map under Add chart
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Map"
     Then "Map" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_76:Right click - Verify Table under insert visual
+  Scenario: TC_Attachments_76:Right click - Verify Table under Add chart
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Table"
     Then "Table" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_77:Right click - Verify Heat map under insert visual
+  Scenario: TC_Attachments_77:Right click - Verify Heat map under Add chart
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Heat map"
     Then "Heat map" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_78:Right click - Verify Histogram under insert visual
+  Scenario: TC_Attachments_78:Right click - Verify Histogram under Add chart
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Histogram"

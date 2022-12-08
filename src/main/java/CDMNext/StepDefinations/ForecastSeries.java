@@ -848,7 +848,7 @@ public class ForecastSeries {
 		
 		CommonFunctionality.getElementByProperty(login.driver, "Dropdown_AddChart", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
+				"//div[contains(@class,'icon--table-vertical_large')]", 8).click();
 		
 	}
 
@@ -928,9 +928,9 @@ public class ForecastSeries {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='current-function-input']", 4).click();
 		// Applying Round() function
 		CommonFunctionality.getElementByXpath(login.driver, "//li[contains(text(),'ROUND')]", 4).click();
-		CommonFunctionality.wait(500);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4).click();
+//		CommonFunctionality.wait(500);
+//		CommonFunctionality
+//				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4).click();
 
 	}
 
@@ -948,8 +948,12 @@ public class ForecastSeries {
 				"//*[@class='function-editor-window']//*[@class='current-function-input']", 4).click();
 		// Applying Round() function
 		CommonFunctionality.getElementByXpath(login.driver, "//li[contains(text(),'ROUND')]", 4).click();
+		try {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='function-wizard--footer-buttons']//*[contains(text(),'Apply')]", 4).click();
+		}catch(Exception e){
+			
+		}
 	}
 
 	@Then("^Function should be applied to the visual$")

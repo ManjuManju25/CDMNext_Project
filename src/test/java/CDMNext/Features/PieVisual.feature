@@ -786,7 +786,7 @@ Feature: Verifying Pie Visual Functionality
     And Create a pie visual with series id's "226311002;405159937"
     And Click on Edit series option
     And Click on Aggregate and choose any option
-    Then Selected function should be applied to all series
+    Then Selected function should be applied to all the series
 
   @PieVisual
   Scenario: TC_Pie_110:Edit series - Verify 'Accumulate' function apply
@@ -949,14 +949,14 @@ Feature: Verifying Pie Visual Functionality
     And Click on Apply function
     Then The Selected functions should applied to the series
 
-  @PieVisual
-  Scenario: TC_Pie_130:Edit series -  Verify cancel icon for selected function
-    And Create a pie visual with series id's "408940397"
-    And Click on Edit series option
-    And Click on type a function field in series level
-    And Select a function
-    And Click on cancel function icon
-    Then The selected function should be cancelled
+  #@PieVisual
+  #Scenario: TC_Pie_130:Edit series -  Verify cancel icon for selected function
+    #And Create a pie visual with series id's "408940397"
+    #And Click on Edit series option
+    #And Click on type a function field in series level
+    #And Select a function
+    #And Click on cancel function icon
+    #Then The selected function should be cancelled
 
   @PieVisual
   Scenario: TC_Pie_131:Edit series - Verify search for functions
@@ -966,15 +966,15 @@ Feature: Verifying Pie Visual Functionality
     And Search with function "YTD"
     Then Searched functions should be displayed
 
- @PieVisual
-  Scenario: TC_Pie_132:Edit series - Verify removing applied functions
-    And Create a pie visual with series id's "408940397"
-    And Click on Edit series option
-    And Click on "Type a function" field in series level
-    And Select "ACCUMULATE" function
-    And Click on "Apply function"
-    And Click on x icon to remove the function
-    Then The function should be removed from the series
+ #@PieVisual
+  #Scenario: TC_Pie_132:Edit series - Verify removing applied functions
+    #And Create a pie visual with series id's "408940397"
+    #And Click on Edit series option
+    #And Click on "Type a function" field in series level
+    #And Select "ACCUMULATE" function
+    #And Click on "Apply function"
+    #And Click on x icon to remove the function
+    #Then The function should be removed from the series
 
  @PieVisual
   Scenario: TC_Pie_133:Edit series - Verify applied funtion in function toolbar
@@ -2634,7 +2634,7 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Edit Pie"
     And Change title in edit visual window
     And Click on "Save" button
-    Then The changes should be reflected to histogram visual and Edit visual popup should be closed
+    Then The changes should be reflected to "pie" visual and Edit visual popup should be closed
 
   @PieVisual
   Scenario: TC_Pie_312:Verify add to insight option

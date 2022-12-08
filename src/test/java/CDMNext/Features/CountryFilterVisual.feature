@@ -226,12 +226,12 @@ Feature: Verifying Country Filter functionality
     And Click on "Reset country filter"
     Then filter visual should get reset with "All countries" name present in all visuals in view
 
-  @FilterVisual
-  Scenario: Tc_FilterVisual_35:Verify country filter 'move' option
-    And Create histogram visual with series
-    And Create filter visual
-    And Hover the cursor on the title and try to move with in the view
-    Then Country filter visual should move
+  #@FilterVisual1...drag and drop is not possible for this tc on stage5.6.0-rc.3
+  #Scenario: Tc_FilterVisual_35:Verify country filter 'move' option
+    #And Create histogram visual with series
+    #And Create filter visual
+    #And Hover the cursor on the title and try to move with in the view
+    #Then Country filter visual should move
 
   @FilterVisual
   Scenario: Tc_FilterVisual_36:Verify crossmark for all country selected

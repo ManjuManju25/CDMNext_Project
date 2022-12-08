@@ -144,7 +144,8 @@ public class Map extends CommonFunctionality {
 		// Apply a function
 		getElementByProperty(login.driver, "Round", 4).click();
 		// Click on green tick mark for applying the function
-		getElementByProperty(login.driver, "Apply_function", 4).click();
+		//getElementByProperty(login.driver, "Apply_function", 4).click();
+		wait(1000);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -281,8 +282,9 @@ public class Map extends CommonFunctionality {
 		click_on_Map_visual_icon();
 		wait(4000);
 		List<WebElement> checkBox = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Checkbox")));
-		List<WebElement> sName = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Series_item_name")));
+		List<WebElement> sName = login.driver.findElements(By.xpath("//*[@class='series-item--name']"));
 		for (int i = 0; i < checkBox.size(); i++) {
+			wait(200);
 			action.moveToElement(checkBox.get(i)).click().build().perform();
 			list_of_series.add(sName.get(i).getText());
 			if (i == 2) {
@@ -1228,7 +1230,8 @@ public void click_on_cogwheel_icon_on_series_level() throws Throwable {
 @And("^Click on color steps dropdown$")
 public void click_on_color_steps_dropdown() throws Throwable {
 	CommonFunctionality.wait(2000);
-  Dropdown_ele = login.driver.findElement(By.name("steps"));
+	Dropdown_ele = login.driver.findElement(By.name("steps"));
+	
 
 }
 
@@ -1253,12 +1256,14 @@ public void selected_color_steps_will_be_created_as_per_the_selection() throws T
 public void selected_steps_will_be_created_as_per_the_selection() throws Throwable {
 	 Select select = new Select(Dropdown_ele);
 	 List<WebElement> dropdown_list = select.getOptions();
-	 for(WebElement dropdownValue: dropdown_list) {
-		 dropdownValue.click();
-		String str =  dropdownValue.getAttribute("value");
+	
+	 for(WebElement ele: dropdown_list) {
+		 ele.click();
+		 login.Log4j.info("options: " + ele.getText());
+		 CommonFunctionality.wait(500);
 		 List<WebElement> steps = login.driver.findElements(By.xpath("//*[@class='gradient-line']"));
-		 if(Integer.parseInt(str) < steps.size()) {
-			 login.Log4j.info("Selected steps: "+ Integer.parseInt(str) + " is displayed");
+		 if(Integer.parseInt(ele.getText()) < steps.size()) {
+			 login.Log4j.info("Selected steps: "+ Integer.parseInt(ele.getText()) + " is displayed");
 		 } else {
 			 Assert.fail("Selected steps not displayed");
 		 }

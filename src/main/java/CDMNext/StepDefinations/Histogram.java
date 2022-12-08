@@ -276,7 +276,7 @@ public class Histogram {
 	public void add_series_to_the_my_series_tab() throws Throwable {
 //		CommonFunctionality.ResetMethod();
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("5724301");
+		CommonFunctionality.getElementByProperty(login.driver, "Search", 20).sendKeys("5958801");
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 8).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(10000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
@@ -312,9 +312,9 @@ public class Histogram {
 		Applied_function = login.driver.findElement(By.xpath("//*[@class='series-function-item--body']")).getText();
 		// Applied_function = function.replaceAll("\n", "");
 		// login.Log4j.info(Applied_function);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 5)
-				.click();
+//		CommonFunctionality
+//				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 5)
+//				.click();
 
 	}
 
@@ -711,7 +711,7 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 
 	@And("^Edit series frequency$")
 	public void edit_series_frequency() throws Throwable {
-		EditFrequency = "Monthly";
+		EditFrequency = "Yearly";
 		BeforeEditSeriesInfo(EditFrequency);
 	}
 
@@ -761,10 +761,10 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 
 	@Then("^Selected attributes should be displayed as series name$")
 	public void selected_attributes_should_be_displayed_as_series_name() throws Throwable {
-		String RegionAttribute = CommonFunctionality.getElementByXpath(login.driver,"//div[@class='visual-series-panel--series']//div[@class='table']/*[1]/*[2]/*[4]/*", 6).getAttribute("title");
+		String RegionAttribute = CommonFunctionality.getElementByXpath(login.driver,"//div[@class='visual-series-panel--series']//div[@class='table']/*[1]/*[2]/*[3]/*", 6).getAttribute("title");
 		String UnitAttribute = CommonFunctionality
 				.getElementByXpath(login.driver,
-						"//div[@class='visual-series-panel--series']//div[@class='table']/*[1]/*[2]/*[7]/*[1]", 6)
+						"//div[@class='visual-series-panel--series']//div[@class='table']/*[1]/*[2]/*[6]/*[1]", 6)
 				.getAttribute("title");
 		
 		String Series = CommonFunctionality
@@ -915,16 +915,29 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 
 	@Then("^Selected function should be applied to all series$")
 	public void selected_function_should_be_applied_to_all_series() throws Throwable {
-		//FunctionVerification(Applied_function);
-		CommonFunctionality.wait(3000);
+		login.Log4j.info(Applied_function);
+		FunctionVerification(Applied_function);
+		
+		
+	}
+	@Then("^Selected function should be applied to all the series$")
+	public void selected_function_should_be_applied_to_all_the_series() throws Throwable {
+			CommonFunctionality.wait(3000);
 		List<WebElement> snames = login.driver
 				.findElements(By.xpath("//*[@class='visual-series-name']//*[@class='series-name--title']"));
 
 		for (int i = 0; i < snames.size(); i++) {
-			CommonFunctionality.wait(500);
+			CommonFunctionality.wait(1000);
 			String Series = snames.get(i).getText();
 			login.Log4j.info(Series);
-			if (!Series.contains(Applied_function)) {
+			String[] function = Applied_function.split("; ");
+			 login.Log4j.info(function[0]);
+			 login.Log4j.info(function[1]);
+			 login.Log4j.info(function[2]);
+			String[] function1 = function[0].split("\\(");
+			String[] function2 = function[2].split("\\)");
+			if (!Series.contains(function1[0]) && Series.contains(function1[1]) && Series.contains(function[1])
+					&& Series.contains(function2[0])) {
 				Assert.fail(Applied_function + " Series is not displayed in series name");
 
 			}
@@ -932,7 +945,6 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 
 		login.Log4j.info(Applied_function + " is displayed in all seres name");
 	}
-
 	@And("^Click on Aggregate and choose any option$")
 	public void click_on_Aggregate_and_choose_any_option() throws Throwable {
 		AggregateFunction = "AGGREGATE";
@@ -1363,11 +1375,12 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 			}catch(Exception e) {
 				
 			}
-		WebElement ApplyIcon = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='table']//*[@title='Apply function']",6);
-		CommonFunctionality.wait(500);
-				
-		ApplyIcon.click();
+		//Apply icon is removed on 5.6.0-rc.4
+//		WebElement ApplyIcon = CommonFunctionality.getElementByXpath(login.driver,
+//				"//*[@class='table']//*[@title='Apply function']",6);
+//		CommonFunctionality.wait(500);
+//				
+//		ApplyIcon.click();
 		
 	}
 
@@ -3219,7 +3232,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 		CommonFunctionality.wait(1500);
 		String alignment = login.driver
 				.findElement(
-						By.xpath("//*[contains(@class,'movable-modal__active')]//*[@class='visual-item-wrapper--credits-container']"))
+						By.xpath("//*[@class='movable-modal--body']//*[@class='visual-item-wrapper--credits-container']"))
 				.getAttribute("style");
 		if (arg1.equalsIgnoreCase("Left")) {
 
@@ -4132,7 +4145,7 @@ public void selected_frequency_should_be_displayed_in_the_series() throws Throwa
 					.click();
 		} catch (NoSuchElementException e) {
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='visual-series-list']/*/*/*[1]/*[5]//*[contains(@class,'icon--context-menu-arrow')]", 30)
+					"//*[@class='visual-series-list']/*/*/*[1]/*[7]//*[contains(@class,'icon--context-menu-arrow')]", 30)
 					.click();
 		}
 
@@ -4272,7 +4285,7 @@ public void click_on_cancel_function_icon() throws Throwable {
 public void select_multiple_functions() throws Throwable {
 	select_a_function();
 	click_on_type_a_function_field_in_series_level();
-	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[4]", 30).click();
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='ROUND']", 30).click();
 //	CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='table']//*[@class='current-function-input'])[1]", 30).click();
 //	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[1]", 30).click();
 //	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[1]", 30).click();
@@ -4300,9 +4313,9 @@ public void the_selected_functions_should_be_applied_to_the_series() throws Thro
 @And("^Select an invalid function$")
 public void select_an_invalid_function() throws Throwable {
 	CommonFunctionality.wait(1000);
-	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='YTD']", 30).click();
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='MTD']", 30).click();
 	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='sum']", 30).click();
-	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='1']", 30).click();
+	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='suggestions_list select-list']//li[@data-id='24']", 30).click();
 }
 
 @Then("^The function cannot be applied to selected series popup should be closed$")
@@ -4386,7 +4399,7 @@ public void change_title_in_edit_visual_window() throws Throwable {
 @Then("^\"([^\"]*)\" confirmation message should be displayed$")
 public void confirmation_message_should_be_displayed(String arg1) throws Throwable {
 	
-		CommonFunctionality.wait(300);
+		CommonFunctionality.wait(500);
 		String growlText = CommonFunctionality.getElementByProperty(login.driver, "confirm_popup", 10).getText();
 		login.Log4j.info(growlText);
 		if (growlText.contains(arg1)) {
@@ -4398,18 +4411,18 @@ public void confirmation_message_should_be_displayed(String arg1) throws Throwab
 		}
 }
 
-@Then("^The changes should be reflected to histogram visual and Edit visual popup should be closed$")
-public void the_changes_should_be_reflected_to_histogram_visual_and_Edit_visual_popup_should_be_closed() throws Throwable {
+
+@Then("^The changes should be reflected to \"([^\"]*)\" visual and Edit visual popup should be closed$")
+public void the_changes_should_be_reflected_to_visual_and_Edit_visual_popup_should_be_closed(String arg1) throws Throwable {
 	CommonFunctionality.wait(4000);
 	String visualTxt = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 30).getText();
 	if(visualTxt.equalsIgnoreCase(chnge_title)) {
 		login.Log4j.info("Verification pass");
 	} else {
-		Assert.fail("The tile name not reflected in Histogram visual");
+		Assert.fail("The tile name not reflected in " + arg1+" visual");
 	}
 	the_edit_visual_popup_should_be_closed();
 }
-
 	@And("^Click on \\+ icon on header$")
 	public void click_on_icon_on_header() throws Throwable {
 		try {
@@ -4686,7 +4699,7 @@ public void the_visual_should_be_converted_as_visual(String arg1, String arg2) t
 @And("^Select function \"([^\"]*)\"$")
 public void select_function1(String arg1) throws Throwable {
 	function = arg1;
-	CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popular-functions-context']//*[@data-id='" + arg1 + "']", 30).click();
+	CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'popular-functions-context')]//*[@data-id='" + arg1 + "']", 30).click();
 }
 @Then("^The Selected function should be applied for the series$")
 public void the_Selected_function_should_be_applied_for_the_series() throws Throwable {
@@ -4968,9 +4981,9 @@ void VisualSelection(String Selected_visual) throws Exception {
 		String function = login.driver.findElement(By.xpath("//*[@class='series-function-item--body']")).getText();
 		Applied_function = function.replaceAll("\n", "");
 		login.Log4j.info(Applied_function);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "(//*[contains(@class,'series-functions-panel--icon__apply')])[1]", 5)
-				.click();
+//		CommonFunctionality
+//				.getElementByXpath(login.driver, "(//*[contains(@class,'series-functions-panel--icon__apply')])[1]", 5)
+//				.click();
 	}
 
 	void FunctionVerification(String SelectedFunction) throws Exception {

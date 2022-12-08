@@ -495,7 +495,7 @@
 			String FunctionApplied = login.driver.findElement(By.xpath("//span[@class='series-edit--title']")).getText();
 			System.out.println(FunctionApplied);
 	
-			if (FunctionApplied.contains("%CHANGE(Over Period; 1; Yes)")) {
+			if (FunctionApplied.contains("%CHANGE(Over Period; 1; No)")) {
 				System.out.println("Verified Successfully");
 			} else {
 				Assert.fail();
@@ -2225,9 +2225,12 @@
 		}
 	
 		// TC_TV_91
+
+
 		@And("^verify Edit series appling Currency conversation function$")
 		public void verify_Edit_series_appling_Currency_conversation_function() throws Throwable {
-			CreateTable();
+//			CreateTable();
+			CommonFunctionality.wait(2000);
 			CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function", 10).click();
 			Thread.sleep(3000);
@@ -2250,7 +2253,7 @@
 		@And("^verify Edit series appling Calculate change function$")
 		public void verify_Edit_series_appling_Calculate_change_function() throws Throwable {
 	
-			CreateTable();
+			//CreateTable();
 			CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function", 10).click();
 			Thread.sleep(2000);
@@ -2272,7 +2275,7 @@
 		// TC_TV_93
 		@And("^verify Edit series appling Aggregate function$")
 		public void verify_Edit_series_appling_Aggregate_function() throws Throwable {
-			CreateTable();
+			//CreateTable();
 			CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function", 10).click();
 			Thread.sleep(2000);
@@ -2301,7 +2304,7 @@
 		// TC_TV_94
 		@And("^verify Edit series appling Accumulate function$")
 		public void verify_Edit_series_appling_Accumulate_function() throws Throwable {
-			CreateTable();
+			//CreateTable();
 			CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function", 10).click();
 			Thread.sleep(2000);
@@ -2350,11 +2353,13 @@
 			// CommonFunctionality.getElementByProperty(login.driver,"Editseries_function_link",10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "fx_icon", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Function_search_popup", 10).sendKeys("Change");
+			
 	
-			Actions functiondclick = new Actions(login.driver);
-			WebElement Fdoubleclick = CommonFunctionality.getElementByProperty(login.driver,
-					"Editseries_function_popup_Change", 10);
-			functiondclick.moveToElement(Fdoubleclick).doubleClick().build().perform();
+//			Actions functiondclick = new Actions(login.driver);
+//			WebElement Fdoubleclick = CommonFunctionality.getElementByProperty(login.driver,
+//					"Editseries_function_popup_Change", 10);
+//			functiondclick.moveToElement(Fdoubleclick).doubleClick().build().perform();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Insert function')]", 10).click();
 			Thread.sleep(1000);
 			String a = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_popup_Fname")))
 					.getText().replaceAll(" ", "");
@@ -2399,7 +2404,7 @@
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_input", 10).sendKeys("Change");
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
-			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 8).click();
+//			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 8).click();
 			Thread.sleep(2000);
 			String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_searchbar")))
 					.getText().replaceAll(" ", "");
@@ -2528,7 +2533,7 @@
 		// TC_TV_107
 		@And("^verify Edit Frequency option under edit series$")
 		public void verify_Edit_Frequency_option_under_edit_series() throws Throwable {
-			CreateTable();
+			//CreateTable();
 			Thread.sleep(2000);
 			CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 8).click();
 			WebElement we = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 8);
@@ -2586,7 +2591,7 @@
 		// TC_TV_109
 		@And("^verify Edit Change option under edit series$")
 		public void verify_Edit_Change_option_under_edit_series() throws Throwable {
-			CreateTable();
+			//CreateTable();
 			Thread.sleep(2000);
 			CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 8).click();
 			WebElement we = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 8);
@@ -2599,7 +2604,7 @@
 			action.moveToElement(we1).pause(1000).build().perform();
 	
 			WebElement we2 = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@title='% Period-over-Period Annualized (%PoP)']", 10);
+					"//*[@title='% Period-over-Period (%PoP)']", 10);
 			action.moveToElement(we2).pause(1000).click().build().perform();
 			Thread.sleep(500);
 			String y = CommonFunctionality.getElementByProperty(login.driver, "Sname_EditSeries", 10).getText();
@@ -2892,7 +2897,7 @@
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_input", 10).sendKeys("Change");
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
-			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
+//			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
 			Thread.sleep(2000);
 			String x = CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_searchbar", 10).getText()
 					.replaceAll(" ", "");
@@ -2988,7 +2993,7 @@
 		// TC_TV_127
 		@And("^verify Edit Series removing applied functions$")
 		public void verify_Edit_Series_removing_applied_functions() throws Throwable {
-			CreateTable();
+			//CreateTable();
 			Thread.sleep(2000);
 			CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 10).click();
 			Thread.sleep(2000);
@@ -3022,7 +3027,7 @@
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_input", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_input", 10).sendKeys("LOG");
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
-			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
+			//CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
 			Thread.sleep(2000);
 			String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_searchbar")))
 					.getText().replaceAll(" ", "");
@@ -3047,7 +3052,7 @@
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
-			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
+			//CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
 			Thread.sleep(2000);
 			Assert.assertTrue(login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_Invalidfunction_popup"))).isDisplayed());
@@ -3069,7 +3074,7 @@
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_bar_list_first", 10).click();
-			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
+//			CommonFunctionality.getElementByProperty(login.driver, "Editseries_function_Apply", 10).click();
 			Thread.sleep(2000);
 			Assert.assertTrue(login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Invalidfunction_popupClose_ok"))).isDisplayed());
@@ -4197,21 +4202,22 @@
 		public void verify_Edit_Table_sub_title_UnCheck() throws Throwable {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_tabel_subtitle_dropdown"))).click();
 	
 			boolean x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_tabel_subtitle_checkbox")))
 					.isSelected();
 			if (x == false) {
 				System.out.println("Verified that checkox is uncheck");
+			
 			} else {
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_tabel_subtitle_checkbox"))).click();
 			}
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	
-			boolean y = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("veiwtabel_subtitle"))).isDisplayed();
-			if (y == false) {
+			
+			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("veiwtabel_subtitle"))).size() == 0) {
 				System.out.println("Verified");
 			} else {
 				Assert.fail();
@@ -4327,10 +4333,11 @@
 		public void verify_Edit_Table_font_size_for_visual_title() throws Throwable {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			WebElement edittitlesetting = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_titlesetting")));
-			action.moveToElement(edittitlesetting).pause(2000).click().build().perform();
+			edittitlesetting.click();
+		//	action.moveToElement(edittitlesetting).pause(2000).click().build().perform();
 			Thread.sleep(2000);
 			String visualsize = "30";
 			int widthbefore = Integer.parseInt(visualsize);
@@ -4365,8 +4372,8 @@
 			Thread.sleep(1000);
 			WebElement edittitlesetting = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_titlesetting")));
-	
-			action.moveToElement(edittitlesetting).pause(2000).click().build().perform();
+			edittitlesetting.click();
+			//action.moveToElement(edittitlesetting).pause(2000).click().build().perform();
 			Thread.sleep(2000);
 			String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Visual_text_title_BOLD")))
 					.getAttribute("class");
@@ -4468,10 +4475,11 @@
 	
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			WebElement edittitlesetting = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_titlesetting")));
-			action.moveToElement(edittitlesetting).pause(5000).click().build().perform();
+			edittitlesetting.click();
+			//action.moveToElement(edittitlesetting).pause(5000).click().build().perform();
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_subtitle"))).click();
 			Thread.sleep(1000);
@@ -4479,7 +4487,7 @@
 			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("subtitle_colour_dropdown"))).click();
 	
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Visual_colour_title_red"))).click();
 			Thread.sleep(2000);
@@ -4487,7 +4495,7 @@
 //	
 //			login.driver.findElement(By.xpath("(//span[@title='#a2c96a'])[3]")).click();
 	
-			String color = login.driver.findElement(By.xpath("(//*[contains(@class,'index-module_popup')]//*[contains(@style,'rgb(255, 91, 77)')])[1]")).getCssValue("background-color");
+			String color = login.driver.findElement(By.xpath("(//*[contains(@class,'index-module_swatch_button')]//*[contains(@style,'rgb(255, 91, 77)')])[1]")).getCssValue("background-color");
 	
 			System.out.println("color:" + color);
 			Thread.sleep(2000);
@@ -5419,7 +5427,7 @@
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			boolean y = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_copyright_checkbox")))
 					.isSelected();
 			System.out.println("Verified y as" + y);
@@ -5540,6 +5548,7 @@
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='copyright-config']/*[5]/*[1]/*[2]/*[1]/*[2]//*[@class='input-control--indicator']", 40)
 					.click();
+			Thread.sleep(2000);
 			boolean x = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_copyright_source_myseries")))
 					.isDisplayed();
@@ -6884,6 +6893,7 @@
 	
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
+			Thread.sleep(500);
 			WebElement Sereiesnameintable = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_Name_attribute_inside")));
 			action.moveToElement(Sereiesnameintable).doubleClick().build().perform();
@@ -7350,10 +7360,9 @@
 		public void verify_Edit_Table_Rename_series_icon_inside_Edit_tabel_popup() throws Throwable {
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 	
-			WebElement Sereiesnameintable = login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteallseries")));
+			WebElement Sereiesnameintable = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteseries")));
 			action.moveToElement(Sereiesnameintable).build().perform();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_EditSeries_renameicon"))).click();
@@ -7363,7 +7372,6 @@
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_cogwheel_inside_renameclose")))
 					.click();
-			Thread.sleep(500);
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	
@@ -7377,8 +7385,7 @@
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
 			Thread.sleep(1000);
 	
-			WebElement Sereiesnameintable = login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteallseries")));
+			WebElement Sereiesnameintable = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteseries")));
 			action.moveToElement(Sereiesnameintable).build().perform();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_EditSeries_rename_cogwheelicon")))
@@ -7414,7 +7421,7 @@
 			Thread.sleep(1000);
 	
 			WebElement Sereiesnameintable = login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteallseries")));
+					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteseries")));
 			action.moveToElement(Sereiesnameintable).build().perform();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_EditSeries_rename_cogwheelicon")))
@@ -7434,13 +7441,13 @@
 		// TC_TV_297
 		@And("^verify Edit Table Frequency option under edit series  inside Edit tabel popup$")
 		public void verify_Edit_Table_Frequency_option_under_edit_series_inside_Edit_tabel_popup() throws Throwable {
-			CreateTable();
+			//CreateTable();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
 			Thread.sleep(1000);
 	
 			WebElement Sereiesnameintable = login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteallseries")));
+					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteseries")));
 			action.moveToElement(Sereiesnameintable).build().perform();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_EditSeries_rename_cogwheelicon")))
@@ -7464,21 +7471,21 @@
 			} else {
 				Assert.fail();
 			}
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
+//			Thread.sleep(2000);
+//			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	
 		}
 	
 		// TC_TV_298
 		@And("^verify Edit Table Currency option under edit series  inside Edit tabel popup$")
 		public void verify_Edit_Table_Currency_option_under_edit_series_inside_Edit_tabel_popup() throws Throwable {
-			CreateTable();
+			//CreateTable();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table"))).click();
 			Thread.sleep(1000);
 	
 			WebElement Sereiesnameintable = login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteallseries")));
+					By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_remove_inside_deleteseries")));
 			action.moveToElement(Sereiesnameintable).build().perform();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_EditSeries_rename_cogwheelicon")))
@@ -7502,8 +7509,8 @@
 			} else {
 				Assert.fail();
 			}
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
+//			Thread.sleep(2000);
+//			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	
 		}
 	
@@ -7830,8 +7837,8 @@
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply"))).click();
+//			Thread.sleep(2000);
+//			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply"))).click();
 			Thread.sleep(2000);
 			String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_searchbar")))
 					.getText().replaceAll(" ", "");
@@ -7911,13 +7918,16 @@
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_input"))).sendKeys("LOG");
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_input"))).click();
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
-			Thread.sleep(5000);
-			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
-	
-			action.moveToElement(tick).click().build().perform();
+			login.driver.findElement(By.xpath("//*[@data-id='ROUND']")).click();
+			
+//			Thread.sleep(2000);
+//			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
+//			Thread.sleep(5000);
+//			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
+//	
+//			action.moveToElement(tick).click().build().perform();
 			Thread.sleep(2000);
 			String x = login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_visual_SeriesName_attribute_inside")))
@@ -7925,14 +7935,14 @@
 			String[] parts1 = x.split(";");
 			String z = parts1[1];
 			System.out.println("Verified123" + z);
-			if (z.contains("CHANGE") && z.contains("LOG")) {
+			if (z.contains("CHANGE") && z.contains("ROUND()")) {
 	
 				System.out.println("Verified");
 			} else {
 				Assert.fail();
 			}
-			Thread.sleep(2000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
+//			Thread.sleep(2000);
+//			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_Table_save"))).click();
 	
 		}
 	
@@ -7951,10 +7961,10 @@
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
 	
-			Thread.sleep(5000);
-			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
-	
-			action.moveToElement(tick).click().build().perform();
+//			Thread.sleep(5000);
+//			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
+//	
+//			action.moveToElement(tick).click().build().perform();
 	
 			Thread.sleep(2000);
 			String x = login.driver
@@ -7986,18 +7996,18 @@
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_input"))).sendKeys("LOG");
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
-			Thread.sleep(5000);
-			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
-	
-			action.moveToElement(tick).click().build().perform();
+//			Thread.sleep(5000);
+//			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
+//	
+//			action.moveToElement(tick).click().build().perform();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_cancel_serieslevel")))
 					.click();
-			Thread.sleep(2000);
-			WebElement tick2 = login.driver
-					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Applyfunctioninside")));
-	
-			action.moveToElement(tick2).click().build().perform();
+//			Thread.sleep(2000);
+//			WebElement tick2 = login.driver
+//					.findElement(By.xpath(login.LOCATORS.getProperty("Edit_table_Applyfunctioninside")));
+//	
+//			action.moveToElement(tick2).click().build().perform();
 	
 			Thread.sleep(2000);
 			String y = login.driver
@@ -8033,10 +8043,10 @@
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
-			Thread.sleep(2000);
-			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
-	
-			action.moveToElement(tick).click().build().perform();
+//			Thread.sleep(2000);
+//			WebElement tick = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply")));
+//	
+//			action.moveToElement(tick).click().build().perform();
 			Thread.sleep(2000);
 			Assert.assertTrue(login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_Invalidfunction_popup"))).isDisplayed());
@@ -8082,9 +8092,9 @@
 			// us dollers
 	
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_bar_list_first"))).click();
-			Thread.sleep(2000);
-			// as report
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply"))).click();
+//			Thread.sleep(2000);
+//			// as report
+//			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Editseries_function_Apply"))).click();
 			Assert.assertTrue(login.driver
 					.findElement(By.xpath(login.LOCATORS.getProperty("Invalidfunction_popupClose_ok"))).isDisplayed());
 			Thread.sleep(2000);
@@ -9354,6 +9364,7 @@
 			//action.moveToElement(mouseover).pause(1000).contextClick().build().perform();
 			EmptyView.click_on_View_tab();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='view-components-over--visuals']//*[@class='icon--table']", 8).click();
+			CommonFunctionality.wait(2000);
 	
 		}
 	

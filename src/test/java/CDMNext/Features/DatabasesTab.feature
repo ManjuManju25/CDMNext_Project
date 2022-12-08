@@ -109,7 +109,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_16: Verifying remove icon for filters.
-    And User selects "Frequency" as "MONTHLY"
+    And User selects "Frequency" as "Monthly"
     And User has clicked on "Apply filter"
     When Click on x icon
     Then The applied filters should be removed
@@ -481,7 +481,7 @@ Feature: Verifying Databases tab functionality
     And User has clicked on "Apply filter"
     And Select Global database
     And Expand till table level
-    Then "new" icon should be displayed in table level
+    Then "New" icon should be displayed in table level
 
   @DB
   Scenario: TC_DB_65:Verifying adding table by keyboard shortcut
@@ -1213,7 +1213,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_162:Series selection - Verify 'Add to recent insight' in dropdown
-    And Select any series
+    And Expand BrazilPremium database till series level and select a series
     And Click on selected series count
     And Click on dropdown icon next to +
     And Click on "Add to recent insight"

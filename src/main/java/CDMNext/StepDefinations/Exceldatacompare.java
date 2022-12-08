@@ -81,6 +81,7 @@ public class Exceldatacompare {
 		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
 		Thread.sleep(3000);
 		EmptyView.click_on_View_tab();
+		Thread.sleep(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='view-components-over--visuals']//*[@class='icon--table']", 8).click();
 		// click on + icon
 		//login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();

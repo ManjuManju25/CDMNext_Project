@@ -158,7 +158,7 @@ public class DatabasesTab {
 		// CommonFunctionality.CollapseTreeMethod();
 		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 8).click();
 		CommonFunctionality.wait(3000);
-		CommonFunctionality.getElementByProperty(login.driver, "Daily_db", 10).click();
+		CommonFunctionality.getElementByProperty(login.driver, "HighFrequency_db", 10).click();
 		login.Log4j.info("Clicking on Database level");
 		database = true;
 	}
@@ -182,6 +182,7 @@ public class DatabasesTab {
 					"(//div[@class='tree-node'])[1]//*[@class='name-text']"));
 			tableName = ele.getText();
 			login.Log4j.info("Clicking on Table level");
+			CommonFunctionality.wait(500);
 			CommonFunctionality.getElementByProperty(login.driver,
 					"Expand5thLevel",4).click();
 			
@@ -582,6 +583,7 @@ public class DatabasesTab {
 
 	@Then("^Result should be displayed as per the filters applied$")
 	public void result_should_be_displayed_as_per_the_filters_applied() throws Throwable {
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Matches only')]", 4).click();
 		// WebElement element = null;
@@ -787,15 +789,15 @@ public class DatabasesTab {
 
 	@Then("^\"([^\"]*)\" message should be displayed$")
 	public void message_should_be_displayed(String arg1) throws Throwable {
-		// Thread.sleep(2000);
+		
 
 		if (arg1.equalsIgnoreCase("Sorry, no results were found here.")) {
 			login.Log4j.info("Clicking on  Series tab ");
 			CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 10).click();
 			CommonFunctionality.wait(5000);
-			ele = login.driver.findElement(By.xpath("//*[@class='search-no-results--header']"));
+			ele = login.driver.findElement(By.xpath("//*[@class='series-representation']//*[@class='search-no-results--header']"));
 			String noResults = ele.getText();
-			if (noResults.equals(arg1)) {
+			if (noResults.contains(arg1)) {
 				login.Log4j.info(noResults + "is displayed for invalid Keyword ");
 			} else {
 				AssertJUnit.fail(noResults + "is not displayed for invalid Keyword ");
@@ -803,7 +805,7 @@ public class DatabasesTab {
 		} else if (arg1.equalsIgnoreCase("URL link copied.")) {
 			CommonFunctionality.ValidateGrowlText(arg1);
 
-		} else if (arg1.equalsIgnoreCase("Commentary copied.") || arg1.equalsIgnoreCase("Data pasted from clipboard")
+		} else if (arg1.equalsIgnoreCase("Text copied.") || arg1.equalsIgnoreCase("Data pasted from clipboard")
 				|| arg1.equalsIgnoreCase("Attachments copied.")) {
 			CommonFunctionality.wait(2000);
 			CommonFunctionality.ValidateGrowlText(arg1);
@@ -1994,35 +1996,36 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 	public void icon_should_be_displayed_in_table_level(String arg1) throws Throwable {
 
 		Thread.sleep(2000);
-		List<WebElement> table_list = login.driver.findElements(
-				By.xpath("//div[contains(@class,'open last-open-node')]//following::*[contains(@style,'padding-left')][1]//*[contains(@class,'status-icon')]"));
+		List<WebElement> table_list = login.driver.findElements(By.xpath(
+				"//div[contains(@class,'open last-open-node')]//following::*[contains(@style,'padding-left')][1]//*[contains(@class,'status-icon')]"));
 		login.Log4j.info("List of tables : " + table_list.size());
-	if(table_list.size() > 0) {
-		for (int i = 0; i < table_list.size(); i++) {
-			//int j = i + 1;
-			ele = login.driver.findElement(
-					By.xpath("//div[contains(@class,'open last-open-node')]//following::*[contains(@style,'padding-left')][1]//div[@class='tree-node']"));
-			String newStr = ele.getText();
-			login.Log4j.info(newStr);
-			if (newStr.contains(arg1)) {
-				Thread.sleep(3000);
-				// clicking on series level
-				login.driver.findElement(By.xpath(
-						"//div[contains(@class,'open last-open-node')]//following::*[contains(@style,'padding-left')][1]//div[@class='tree-node']//div[@class='toggle']"))
-						.click();
-				login.Log4j.info(arg1 + " icon is displaying for table level");
-				break;
-			} else {
-				AssertJUnit.fail(arg1 + " icon is not displaying for table level");
+		if (table_list.size() > 0) {
+			for (int i = 0; i < table_list.size(); i++) {
+				// int j = i + 1;
+				ele = login.driver.findElement(By.xpath(
+						"//div[contains(@class,'open last-open-node')]//following::*[contains(@style,'padding-left')][1]//div[@class='tree-node']"));
+				String newStr = ele.getText();
+				login.Log4j.info(newStr);
+				if (newStr.contains(arg1) || newStr.toLowerCase().equalsIgnoreCase(arg1.toLowerCase())) {
+					Thread.sleep(3000);
+					// clicking on series level
+					login.driver.findElement(By.xpath(
+							"//div[contains(@class,'open last-open-node')]//following::*[contains(@style,'padding-left')][1]//div[@class='tree-node']//div[@class='toggle']"))
+							.click();
+					login.Log4j.info(arg1 + " icon is displaying for table level");
+					break;
+				} else {
+					AssertJUnit.fail(arg1 + " icon is not displaying for table level");
+				}
 			}
+		} else {
+			Assert.fail("Table size is zero");
 		}
-	}else {
-		Assert.fail("Table size is zero");
-	}
 		Thread.sleep(2000);
-		//WebElement ul_element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
+		// WebElement ul_element =
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
 		List<WebElement> li_All = login.driver
-				.findElements(By.xpath("//div[@unselectable='on']//span[@class='status-icon--sign']"));
+				.findElements(By.xpath("//div[@unselectable='on']//span[@class='status-icon status-icon__new']"));
 		login.Log4j.info("List size is :" + li_All.size());
 		for (int i = 0; i < li_All.size(); i++) {
 			Thread.sleep(3000);
@@ -2041,7 +2044,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 				// Until the element is not visible keep scrolling
 				// jse.executeScript("arguments[0].scrollIntoView(true);", ele);
 				String New_icon = ele.getText();
-				if (New_icon.equalsIgnoreCase(arg1) == true) {
+				if (New_icon.toUpperCase().equalsIgnoreCase(arg1.toUpperCase()) == true) {
 					login.Log4j.info(arg1 + " icon is shown for series level");
 				} else {
 					AssertJUnit.fail(arg1 + " icon is not shown for series level");
@@ -2083,13 +2086,15 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 	public void click_on_series_name() throws Throwable {
 		Thread.sleep(2000);
 		try {
-			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
+			ele = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='database-representation--tree']//div[@class='series-item--name'])[1]", 6);
+			ele.click();
 
 		} catch (Exception e) {
-			// Clicking on series name in edit series window for histogram & pie visual
+			// Clicking on series name in edit series window for histogram, map & pie visual
 			try {
+				
 				// close rename popup if it is opened
-				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 20).click();
+				//CommonFunctionality.getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 20).click();
 				CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-name--title']", 6).click();
 			} catch (Exception e1) {
 				CommonFunctionality.getElementByProperty(login.driver, "Series_item_name", 6).click();
@@ -3290,7 +3295,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		the_selected_series_should_be_added_to_My_series_visuals();
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	@And("^Right click on any series$")
 	public void right_click_on_any_series() throws Throwable {
 		 select_a_series();
@@ -3675,6 +3680,20 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		select_a_series();
 		login.driver.findElement(By.xpath("//div[@class='series-list-item--checkbox-wrapper']")).click();
 
+	}
+	@And("^Expand BrazilPremium database till series level and select a series$")
+	public void expand_BrazilPremium_database_till_series_level_and_select_a_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))).click();
+		MoreFilterNotApplied_BRAZILPremiumDB();
+		CommonFunctionality.getElementByProperty(login.driver, "ExpandTable_BrazilDB", 6).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByProperty(login.driver, "BrazilDB_SelectSeries", 6).click();
+		CommonFunctionality.wait(1000);
+		ele = CommonFunctionality.getElementByProperty(login.driver,"BrazilDB_mouseHoverOnSeries",6);
+		CommonFunctionality.sname = ele.getText();
+		login.Log4j.info(CommonFunctionality.sname);
+		
 	}
 
 	@And("^Close search selection window$")

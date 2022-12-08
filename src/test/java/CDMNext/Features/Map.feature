@@ -743,7 +743,7 @@ Feature: Verifying map visual functionality
     And Create a map visual with series id's "226311002;405159937"
     And Click on Edit series option
     And Click on Aggregate and choose any option
-    Then Selected function should be applied to all series
+    Then Selected function should be applied to all the series
 
   @Map
   Scenario: TC_Map_80:Edit series - Verify 'Accumulate' function apply
@@ -963,15 +963,15 @@ Feature: Verifying map visual functionality
     And Search with function "YTD"
     Then Searched functions should be displayed
 
-  @Map
-  Scenario: TC_Map_107:Edit series - Verify removing applied functions
-    And Create a map visual with series id's "369703417"
-    And Click on Edit series option
-    And Click on "Type a function" field in series level
-    And Select "ACCUMULATE" function
-    And Click on "Apply function"
-    And Click on x icon to remove the function
-    Then The function should be removed from the series
+  #@Map......x icon removed
+  #Scenario: TC_Map_107:Edit series - Verify removing applied functions
+    #And Create a map visual with series id's "369703417"
+    #And Click on Edit series option
+    #And Click on "Type a function" field in series level
+    #And Select "ACCUMULATE" function
+    #And Click on "Apply function"
+    #And Click on x icon to remove the function
+    #Then The function should be removed from the series
 
   @Map
   Scenario: TC_Map_108:Edit series - Verify applied funtion in function toolbar
@@ -2685,17 +2685,17 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Click on type a function field in series level
     And Select a function
-    And Click on "Apply function"
+    #And Click on "Apply function"
     Then The selected function should be applied to the series
 
-  @Map
-  Scenario: TC_Map_307:Edit map - Edit series - Verify cancel icon for selected function
-    And Create a map visual with series id's "16240301;447233267"
-    And Click on "Edit Map"
-    And Click on type a function field in series level
-    And Select a function
-    And Click on cancel function icon
-    Then The selected function should be cancelled
+  #@Map...removed cancel icon
+  #Scenario: TC_Map_307:Edit map - Edit series - Verify cancel icon for selected function
+    #And Create a map visual with series id's "16240301;447233267"
+    #And Click on "Edit Map"
+    #And Click on type a function field in series level
+    #And Select a function
+    #And Click on cancel function icon
+    #Then The selected function should be cancelled
 
   @Map
   Scenario: TC_Map_308:Edit map - Edit series - Verify multiple functions apply
@@ -2703,7 +2703,7 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Click on type a function field in series level
     And Select multiple functions
-    And Click on Apply function
+    #And Click on Apply function
     Then The selected functions should be applied to the series
 
   @Map
@@ -2714,15 +2714,15 @@ Feature: Verifying map visual functionality
     And Search with function "YTD"
     Then Searched functions should be displayed
 
-  @Map
-  Scenario: TC_Map_310:Edit map - Edit  series - Verify removing applied functions
-    And Create a map visual with series id's "272965603;273074003"
-    And Click on "Edit Map"
-    And Click on type a function field in series level
-    And Select a function
-    And Click on "Apply function"
-    And Click on cancel function icon
-    Then The function should be removed from the series
+  #@Map....removed ok/cancel icons
+  #Scenario: TC_Map_310:Edit map - Edit  series - Verify removing applied functions
+    #And Create a map visual with series id's "272965603;273074003"
+    #And Click on "Edit Map"
+    #And Click on type a function field in series level
+    #And Select a function
+    #And Click on "Apply function"
+    #And Click on cancel function icon
+    #Then The function should be removed from the series
 
   @Map
   Scenario: TC_Map_311:Edit Map - Edit series - Verify applying invalid function for series
@@ -2730,7 +2730,7 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on Apply function
+    #And Click on Apply function
     Then "The function cannot be applied to selected series" popup should be displayed
 
   @Map
@@ -2739,7 +2739,7 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on Apply function
+    #And Click on Apply function
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 
@@ -2801,7 +2801,7 @@ Feature: Verifying map visual functionality
     And Click on "Edit Map"
     And Change title in edit visual window
     And Click on "Save" button
-    Then The changes should be reflected to histogram visual and Edit visual popup should be closed
+    Then The changes should be reflected to "map" visual and Edit visual popup should be closed
 
   @Map
   Scenario: TC_Map_321:Edit Map - Verify Solid Color button - Color Steps Dropdown

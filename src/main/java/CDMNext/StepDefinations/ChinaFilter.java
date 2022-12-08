@@ -113,9 +113,14 @@ public class ChinaFilter {
 
 	@And("^Click on \"([^\"]*)\" dropdown$")
 	public void click_on_dropdown(String arg1) throws Throwable {
-		CommonFunctionality.ResetMethod();
-		login.Log4j.info("Clicking on All Regions filter");
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
+		if(arg1.equalsIgnoreCase("Alternative Data")) {
+			login.Log4j.info("Clicking on Alternative Data dropdown");
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
+		} else {
+			CommonFunctionality.ResetMethod();
+			login.Log4j.info("Clicking on All Regions filter");
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
+		}
 
 	}
 

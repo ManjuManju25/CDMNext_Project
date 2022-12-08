@@ -19,7 +19,8 @@ import CDMNext.util.Hooks;
 		strict = true,
 		features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@Histogram1"},			
+		tags = {"@Watch1"},	
+		
 		monochrome = true,
 		//dryRun = true,
 		plugin = {"html:target/cucumber-reports/cucumber-pretty",
@@ -30,7 +31,8 @@ import CDMNext.util.Hooks;
 	
 
 public class TestRunner {
-
+	
+	
 	private TestNGCucumberRunner testNGCucumberRunner;
 		
 	public static CucumberFeatureWrapper cucumberFeature;

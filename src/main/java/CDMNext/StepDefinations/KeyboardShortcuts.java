@@ -165,9 +165,10 @@ public class KeyboardShortcuts {
 		hs.create_a_Histogram_visual_without_selecting_series();
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(10000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
 		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
+		CommonFunctionality.wait(4000);
 	}
 
 	@Then("^The selected series should be cut$")

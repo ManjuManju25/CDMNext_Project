@@ -867,7 +867,7 @@ public class SeriesTab {
 			WebElement ele1 = CommonFunctionality.getElementByXpath(login.driver,
 					"//div[@class='check-all-series']//span[@class='input-control--indicator']", 4);
 			action.moveToElement(ele1).pause(1000).click().build().perform();
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 20).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View our suggestions for related series and replacements']", 20).click();
 			break;
 		case "Hide the function bar":
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 20).click();
@@ -1854,18 +1854,18 @@ public class SeriesTab {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
 	
 		try {
-			List<WebElement> li_All =  login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
+			List<WebElement> li_All =  login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--country country-information']"));
 			login.Log4j.info("List size is :" + li_All.size());
 			if (li_All.size() > 0) {
 				for (int i = 0; i < li_All.size(); i++) {
 					login.Log4j.info(i);
 					login.Log4j.info(li_All.size());
 					int j = i + 1;
-					CommonFunctionality.wait(1000);
+					CommonFunctionality.wait(2000);
 					//ele = login.driver.findElement(By.xpath("//*[@class='search-series-list']/*[" + j + "]//div[@class='series-item--name']"));
 					action.moveToElement(li_All.get(i)).build().perform();
-					wait.until(ExpectedConditions
-							.visibilityOfElementLocated(By.xpath("(//*[@class='series-representation--list']/*//*[contains(@class,'series-search-list-item')])[" + j + "]//*[@title='Open footnote']")))
+					CommonFunctionality.wait(200);
+					CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='series-representation--list']/*//*[contains(@class,'series-search-list-item')])[" + j + "]//*[@title='Open footnote']",10)
 							.click();
 					CommonFunctionality.wait(1200);
 					element = login.driver.findElement(
@@ -1969,7 +1969,7 @@ public class SeriesTab {
 	public void select_series() throws Throwable {
 		CommonFunctionality.wait(1500);
 		login.Log4j.info("Clicking on  Series tab ");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
 		CommonFunctionality.wait(5000);
 		List<WebElement> li_All = login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_All.size());

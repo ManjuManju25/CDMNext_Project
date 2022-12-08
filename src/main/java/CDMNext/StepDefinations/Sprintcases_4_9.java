@@ -921,6 +921,8 @@ public void try_to_access_the_ssp_and_footnotes_for_the_unsubscribed_series() th
 @And("^In database tree expand global db Afghanistan Afghanistan National Accounts$")
 public void in_database_tree_expand_globa_db_Afghanistan_Afghanistan_National_Accounts()
 {
+	CommonFunctionality.wait(1000);
+	CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 4).click();
 	login.driver.findElement(By.xpath("(//div[@data-node-model-id='GLOBAL']/div[@class='toggle'])[1]")).click();
 	login.driver.findElement(By.xpath("(//div[@data-node-model-id='GLOBAL&&ALL']/div[@class='toggle'])[1]")).click();
 	login.driver.findElement(By.xpath("(//div[@data-node-model-id='TP2560837']/div[@class='toggle'])[1]")).click();

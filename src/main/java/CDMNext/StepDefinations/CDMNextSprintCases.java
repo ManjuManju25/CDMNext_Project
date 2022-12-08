@@ -2812,14 +2812,14 @@ public class CDMNextSprintCases {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg2 + "')]//preceding::div[@class='toggle'][1]", 4).click();
 		CommonFunctionality.wait(1000);
-		if (arg3.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+		if (arg3.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted")) {
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg3 + "')]//following::div[@class='toggle'][1]", 4).click();
+					"//*[contains(@data-node-model-id,'"+ arg3 +"')]/*[1]", 4).click();
 		} else {
 			CommonFunctionality.wait(1000);
 			WebElement table = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(text(),'" + arg3 + "')]/preceding::div[@class='toggle'][1]", 4);
+					"//*[contains(@data-node-model-id,'"+ arg3 +"')]/*[1]", 4);
 			js.executeScript("arguments[0].scrollIntoView(true);", table);
 			js.executeScript("arguments[0].click();", table);
 		}

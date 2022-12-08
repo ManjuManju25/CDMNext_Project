@@ -965,7 +965,7 @@ Feature: FilterSearch
   @FilterSearch
   Scenario: TC_Filters_Search_111
     Given User enters "capital"
-    And User selects "Frequency" as "Semiannually
+    And User selects "Frequency" as "Semiannually"
     And User has clicked on "Apply filter"
     Then User verify the search results
 

@@ -1543,9 +1543,10 @@ login.driver.findElement(By.xpath("(//*[@class='preview-series-data']//*[@class=
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Close']", 10).click();
 		} else if(arg1.equalsIgnoreCase("Save")) {
 			try {
-			 CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 10).click();
+			 CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-configuration-controls--right']//button[contains(text(),'Save')]", 10).click();
 			}catch(Exception e) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 10).click();
+				CommonFunctionality.wait(2000);
 				 CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 10).click();
 			}
 		} else if(arg1.equalsIgnoreCase("Next") || arg1.equalsIgnoreCase("Previous")) {
