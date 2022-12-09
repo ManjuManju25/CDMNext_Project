@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -17,6 +18,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 
@@ -33,8 +35,14 @@ public class Sprint6_0 extends CommonFunctionality {
 	
 	@Given("^User selects More dropdown$")
 	public void user_selects_More_dropdown() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//span[@title='More']", 4).click();
-		
+		/*Thread.sleep(5000);
+		CommonFunctionality.getElementByXpath(login.driver, "//span[normalize-space(text())='More']", 4).click();
+		Thread.sleep(5000);
+		*/
+		Thread.sleep(5000);
+		login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'More')]")));
+			login.driver.findElement(By.xpath("//span[contains(text(),'More')]")).click();
 		
 	    
 	    
@@ -43,7 +51,14 @@ public class Sprint6_0 extends CommonFunctionality {
 	@And("^clicks on continuos series icon\\.$")
 	public void clicks_on_continuos_series_icon() throws Throwable {
 		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuous"))).isDisplayed()) {
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuous"))).click();
+			try {
+		WebElement continuos=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuous")));
+		continuos.click();
+			}
+			catch(Exception e) {
+				System.out.println("=continuos button not clicked==");
+				
+			}
 		login.Log4j.info("Successfully Continuous  button Clicked ");
 		}
 		else {
@@ -54,7 +69,21 @@ public class Sprint6_0 extends CommonFunctionality {
 
 	@And("^clicks on Apply filter button\\.$")
 	public void clicks_on_Apply_filter_button() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='button__primary button button__primary']", 4).click();   
+		
+		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='button__primary button button__primary']", 4).click(); 
+		//Thread.sleep(5000);
+		//login.driver.findElement(By.xpath("//div[normalize-space(text())='Apply filter'])).click();
+		//login.driver.findElement(By.xpath("//div[normalize-space(text())='Apply filter']")).click();
+		/*WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//div[normalize-space(text())='Apply filter")))).click();	*/
+		/*Thread.sleep(5000);
+		WebElement chkbox = login.driver.findElement(By.xpath("(//span[@class='status-icon'])[4]"));
+		js.executeScript("arguments[0].scrollIntoView(true)", chkbox);
+		Thread.sleep(5000);
+		chkbox.click();*/
+		login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
+		
+		
 	}
 
 	@Then("^Series with tag C  should be displayed infront of series\\.$")
@@ -78,17 +107,23 @@ public class Sprint6_0 extends CommonFunctionality {
 	
 	@And("^clicks on any continuos series\\.$")
 	public void clicks_on_any_continuos_series() throws Throwable {
-		List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='series-list-item--information']/*"));
+		CommonFunctionality.wait(2000);	
+		
+		/*List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='series-list-item--information']/*"));
 		System.out.println("=========="+list.size());
 		for (int i = 1 ; i <= list.size(); i++) {
-			WebElement series = login.driver
-					.findElement(By.xpath("(//div[@class='series-item--name'])["+i+"]"));
+			WebElement series = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])["+i+"]"));
 			
 			new Actions(login.driver).moveToElement(series).pause(1000).click().build().perform();
-			
+		*/
+		
+		login.driver.findElement(By.xpath("//div[@class='series-item--name']")).click();
+		//WebElement ss =login.driver.findElement(By.xpath("//div[@class='series-list-item--information']/*"));
+		//new Actions(login.driver).moveToElement(ss).pause(1000).click().build().perform();
+		
 		}
 		
-	}
+	
 	@Then("^hover mouse on question mark of show continuos series\\.$")
 	public void hover_mouse_on_question_mark_of_show_continuos_series() throws Throwable {
 		WebElement QuestionMark=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("QuestionMark_hovered")));
@@ -128,14 +163,17 @@ public class Sprint6_0 extends CommonFunctionality {
 	@And("^select continuos checkbox\\.$")
 	public void select_continuos_checkbox() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//*[@class='series-list-item--checkbox svg-checkbox']")).click();
+		login.driver.findElement(By.xpath("(//*[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
 	   
 	}
 
 	@And("^Open Add in SSP->click on Add as continuos series\\.$")
 	public void open_Add_in_SSP_click_on_Add_as_continuos_series() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_SSP"))).click();
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Add_SSP")))).click();
+		
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_continuosseries"))).click();
 		login.Log4j.info("clicked on Add as continuos series dropdown.");
 		 
@@ -149,14 +187,17 @@ public class Sprint6_0 extends CommonFunctionality {
 	@And("^add as continuos series\\.$")
 	public void add_as_continuos_series() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
+		WebElement ele=login.driver.findElement(By.xpath("//span[@value='LIST']"));
+		js.executeScript("arguments[0].click();", ele);
 		
-		WebElement Series_list = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_hovered")));
-		CommonFunctionality.action.moveToElement(Series_list).pause(2).build().perform();
-		
+		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[5]")).click();
+		CommonFunctionality.wait(2000);
+		/*WebElement Series_list = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_hovered")));
+		CommonFunctionality.action.moveToElement(Series_list).pause(2000).build().perform();
+		*/
 		CommonFunctionality.wait(2000);
 		WebElement Series_dp1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_listdp1")));
-		CommonFunctionality.action.moveToElement(Series_dp1).pause(500).click().build().perform();
+		CommonFunctionality.action.moveToElement(Series_dp1).pause(3000).click().build().perform();
 		
 		CommonFunctionality.wait(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_ascontinuos"))).click();
@@ -170,6 +211,7 @@ public class Sprint6_0 extends CommonFunctionality {
 	public void continuous_series_must_be_shown_with_continuous_tag() throws Throwable {
 		String Continuos_label = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuos_tag"))).getText();
 		System.out.println("============"+Continuos_label);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Continuos_tag"))));
 		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuos_tag"))).isDisplayed()) {
 		Assert.assertEquals(Continuos_label, "Continuous");
 		login.Log4j.info("Continuos tag is displayed infront of series");
@@ -206,7 +248,7 @@ public class Sprint6_0 extends CommonFunctionality {
 	@Given("^apply other function\\.$")
 	public void apply_other_function() throws Throwable {
 		login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[1]")).click();
-		
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Open_function"))).click();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close_icon"))).click();
 		int x =login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Function_bartab"))).size();
@@ -214,8 +256,11 @@ public class Sprint6_0 extends CommonFunctionality {
 		if(y==1 && x==1) {
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Function_wizard"))).click();
 			login.driver.findElement(By.xpath("//li[@title='Round the values']")).click();
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Function_bartab"))).click();
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_function"))).click();
+				//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Function_bartab"))).click();
+			    CommonFunctionality.wait(2000);
+				WebElement Add=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_function")));
+				Add.click();
+				CommonFunctionality.wait(2000);
 				login.driver.findElement(By.xpath("//button[normalize-space()='Insert function']")).click();
 				
 				login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
@@ -238,7 +283,9 @@ public class Sprint6_0 extends CommonFunctionality {
 	@And("^clicks on add icon\\.$")
 	public void clicks_on_add_icon() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--title'])[1]")).click();
+		
+		
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
 		
 		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//div[@class='add-to-data-selection--title'])[1]"))).click();
 		
@@ -250,7 +297,8 @@ public class Sprint6_0 extends CommonFunctionality {
 	public void select_series_click_related_series() throws Throwable {
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[contains(text(),'Related series')]")).click();
 		
 		
 		
@@ -363,7 +411,8 @@ public class Sprint6_0 extends CommonFunctionality {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Remove_Prefunction"))).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Remove_Prefunction1"))).click();
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace_series"))).click();
+		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace_series"))).click();
+		login.driver.findElement(By.xpath("//*[normalize-space(text())='Replace selected series']")).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
 		
@@ -386,6 +435,7 @@ public class Sprint6_0 extends CommonFunctionality {
 	public void select_some_series_into_series_tab() throws Throwable {
 		Thread.sleep(5000);
 		List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
 		CommonFunctionality.wait(2000);
 		
 		
@@ -406,7 +456,7 @@ public class Sprint6_0 extends CommonFunctionality {
 	@And("^click on related tab\\.$")
 	public void click_on_related_tab() throws Throwable {
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
+		login.driver.findElement(By.xpath("//div[contains(text(),'Related series')]")).click();
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuos_Tab"))).click();
 		login.Log4j.info("Continuos tab is displayed");
 		
@@ -598,8 +648,12 @@ public class Sprint6_0 extends CommonFunctionality {
 	@Then("^validate the \"([^\"]*)\" Sheet and read the '(\\d+)' '(\\d+)' row and column and verify the Preapplied-function$")
 	public void validate_the_Sheet_and_read_the_row_and_column_and_verify_the_Preapplied_function(String arg1, int arg2, int arg3) throws Throwable {
 		Thread.sleep(2000);
-		String ss ="UPDATE(series ID:7935201, CN: (DC)Fixed Asset Inv: ytd: Real Estate, Public &amp; Consultancy Servi [UPDATE(series ID:7874301, CN: FAI: ytd: Tertiary Industry: Real Estate; No; Yes; none)]; No; Yes; none)";
+		String ss="SPLICE(series ID:18987001, Industrial Production Index: 1980-81=100 [SPLICE(series ID:18989701, Industrial Production Index: 1993-94=100; No; Average ratio; Range; 1994-04-01; 1994-04-01) > SPLICE(series ID:314398401, Industrial Production Index: 2004-05=100; No; Average ratio; Range; 2005-04-01; 2005-04-01) > SPLICE(series ID:386587797, Industrial Production Index (IPI); No; Average ratio; Range; 2012-04-01; 2012-04-01)]; No; Average ratio; Range; 2012-04-01; 2012-04-01)";
 		login.Log4j.info("Pre-Applied functions are applied and validated");
+		System.out.println("---------------"+arg1);
+		System.out.println("---------------"+arg2);
+		System.out.println("---------------"+arg3);
+		System.out.println("---------------"+ss);
 		
 		CommonFunctionality.Download_to_Excel(arg1, arg2, arg3, ss);
 	}
@@ -614,6 +668,52 @@ public class Sprint6_0 extends CommonFunctionality {
 		
 	    
 	}
+	
+	
+	@Given("^select favorite function on continuos series$")
+	public void select_favorite_function_on_continuos_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[1]")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//input[@placeholder='Type a function']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//li[@title='Round the values']")).click();
+		CommonFunctionality.wait(2000);
+		WebElement ele=login.driver.findElement(By.xpath("//div[@class='toggle-favorite-control--icon']"));
+		js.executeScript("arguments[0].click();", ele);
+		CommonFunctionality.wait(2000);
+		
+		
+		
+	    
+	}
+
+	@Then("^favourite function should be applied with pre-applied function$")
+	public void favourite_function_should_be_applied_with_pre_applied_function() throws Throwable {
+		
+		CommonFunctionality.wait(2000);
+	
+		WebElement Series_hovered = login.driver.findElement(By.xpath("//span[normalize-space(text())='Consumer Price Index (CPI)']"));
+		CommonFunctionality.action.moveToElement(Series_hovered ).pause(2).build().perform();
+		
+		
+	
+		String data=login.driver.findElement(By.xpath("//div[contains(text(),'UPDATE(series ID:369704527, CN: GDP: 2010p: Primar')]")).getText();
+		System.out.println("======="+data);
+		
+		if(data.contains("UPDATE") && data.contains("ROUND()")) {
+			login.Log4j.info("Favourite function is applied with preapplied function ");	
+		}
+		else {
+			login.Log4j.info("Favourite function is not applied with preapplied function ");
+			
+		}
+		
+		
+			
+		
+	    	}
+
 
 	 
 	}
