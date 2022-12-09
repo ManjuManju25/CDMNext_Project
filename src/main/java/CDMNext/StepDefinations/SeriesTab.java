@@ -1459,10 +1459,11 @@ public class SeriesTab {
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
 		CommonFunctionality.wait(5000);
-
+		int j = 0;
 		List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper']"));
 		if (list.size() > 0) {
 			for (int i = 0; i < list.size(); i++) {
+				j = i;
 				CommonFunctionality.wait(500);
 				list.get(i).click();
 				
@@ -1470,8 +1471,8 @@ public class SeriesTab {
 		}else {
 			Assert.fail("No series were found");
 		}
-
-		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-representation--list']//*[@class='series-item--name'])[1]"));
+		CommonFunctionality.wait(500);
+		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-representation--list']//*[@class='series-item--name'])[" + j + "]"));
 		new Actions(login.driver).contextClick(ele).perform();
 		WebElement Addchart = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dropdown_AddChart")));
 		action.moveToElement(Addchart).click().build().perform();

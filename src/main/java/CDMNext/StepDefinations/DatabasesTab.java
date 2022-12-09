@@ -538,7 +538,10 @@ public class DatabasesTab {
 							"//div[@class='items-wrapper']//span[@title='" + arg1 + "']", 4))
 					.pause(2000).click().build().perform();
 
-		} else {
+		} else if(arg1.equalsIgnoreCase("Change")){
+			
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Open advanced settings popup']", 5).click();
+		}else {
 			login.driver.switchTo().defaultContent();
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + arg1 + "']", 6).click();
 		}
@@ -1825,6 +1828,10 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		}
 		if (arg1.equalsIgnoreCase("State Administrative")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title=' " + arg1 + "']", 6).click();
+		}
+		if(arg1.equalsIgnoreCase("Series sources")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 6).click();
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 6).click();
 		}
 
 	}
