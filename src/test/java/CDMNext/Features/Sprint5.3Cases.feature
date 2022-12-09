@@ -68,7 +68,9 @@ Feature: Verifying Sprint cases Functionality.
     And should generate HeatMap with Thirty series.
 
   @Sprint5_3
-  Scenario Outline: TC_14654_03 : Verify set values & labels for color stops for Map 
+  Scenario Outline: TC_14654_03 : Verify set values & labels for color stops for Map
+    et values & labels for color stops for Map
+
     Given user selects some series.
     And Mouse hover on series selects View as Map option.
     And Double click on the legend bar below visual
@@ -99,28 +101,12 @@ Feature: Verifying Sprint cases Functionality.
     And click on to Move to axis Option.
 
   @Sprint5_3
-  Scenario: TC_19271_06 :Add tooltips to dots used in search ( internal series, see in tree, the node contains matches)
-    Given user clicks on releases Tab
-    And hovers on green dot
-    And click on series tab
-    And hover on any series=>See in database to find purple dot.
-    And user enters Series Id as : "352861347" to view orange dot.
-
-  @Sprint5_3
   Scenario: TC_20571_01: Verify UK not shown in EU(Europe Union) Map
     Given user clicks on all regions at left corner.
     And selects some Europe countries.
     And selects some series.
     And click View as Map=>and click on EU
     Then verify UK should not show in EU Map.
-
-  @Sprint5_3
-  Scenario: TC_20589_01 : Verify the Economic classifications display in series tooltip.
-    Given user clicks on indicator dropdown.
-    And click on All indicator tab
-    And click on apply filter
-    And hover the mouse on series
-    Then click on More should expand with All chains of classifications.
 
   @Sprint5_3
   Scenario: TC_11579_01 : Verify if the Chart is dispalying upto 4 axes in Edit chart
@@ -166,3 +152,20 @@ Feature: Verifying Sprint cases Functionality.
     And Select some series  View as HeatMap option.
     And click on download Option.
     And should not show blank observations for Heat Map.
+
+  @Sprint5_3
+  Scenario: TC_19271_06 :Add tooltips to dots used in search ( internal series, see in tree, the node contains matches)
+    And Login back to internal user with user "vvagicharla" and password "ZAQ!2wsx@7989"
+    Given user clicks on releases Tab
+    And hovers on green dot
+    And click on series tab
+    And hover on any series=>See in database to find purple dot.
+    And user enters Series Id as : "352861347" to view orange dot.
+
+  @Sprint5_3
+  Scenario: TC_20589_01 : Verify the Economic classifications display in series tooltip.
+    Given user clicks on indicator dropdown.
+    And click on All indicator tab
+    And click on apply filter
+    And hover the mouse on series
+    Then click on More should expand with All chains of classifications.
