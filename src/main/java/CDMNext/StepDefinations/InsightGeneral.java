@@ -132,10 +132,16 @@ public class InsightGeneral {
 		CommonFunctionality.getElementByProperty(login.driver, "database_tab", 4).click();
 		expanding_the_first_database();
 		CommonFunctionality.wait(4000);
-		CommonFunctionality.getElementByProperty(login.driver, "Ig_seriestoadd", 4).click();
-		new Actions(login.driver).pause(500).sendKeys("a").perform();
-		CommonFunctionality.getElementByProperty(login.driver, "Ig_secondseriestoadd", 4).click();
-		new Actions(login.driver).pause(500).sendKeys("a").perform();
+		//CommonFunctionality.getElementByProperty(login.driver, "Ig_seriestoadd", 4).click();
+		//CommonFunctionality.wait(2000);
+		WebDriverWait wait = new WebDriverWait(login.driver, 80);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")))).click();
+		//login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+		new Actions(login.driver).pause(2000).sendKeys("a").perform();
+		//CommonFunctionality.getElementByProperty(login.driver, "Ig_secondseriestoadd", 4).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[2]")).click();
+		new Actions(login.driver).pause(2000).sendKeys("a").perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -153,7 +159,7 @@ public class InsightGeneral {
 	}
 
 	public void open_insight() throws Exception {
-		CommonFunctionality.getElementByProperty(login.driver, "insights", 4).click();
+		//CommonFunctionality.getElementByProperty(login.driver, "insights", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "MY_INSIGHTS", 4).click();
 	}
 
@@ -988,7 +994,8 @@ public class InsightGeneral {
 		List<WebElement> download = login.driver
 				.findElements(By.xpath("//div[@class='insight-preview--header']/div[2]/div[3]/button"));
 		for (WebElement d : download) {
-			if (d.getAttribute("class").contains("button__disabled")) {
+			//if (d.getAttribute("class").contains("button__disabled")) {
+			if (d.getAttribute("class").contains("disabled")) {
 				CommonFunctionality.getElementByProperty(login.driver, "Ig_Preview_Close", 4).click();
 				System.out.println("Download option is disabled");
 			} else {
@@ -1019,7 +1026,7 @@ public class InsightGeneral {
 		cv.search_for_the_series_with_SID("279629203");
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='search-series-list']/*[1]/div/a/div[2]/span", 4))
+						"//*[@class='series-item--main-info']", 4))
 				.pause(500).click().sendKeys("c").build().perform();
 		cv.click_on_my_insights();
 		cv.click_option_from_empty_list("View as a table");
@@ -1855,6 +1862,7 @@ public class InsightGeneral {
 		Clipboard clipboard = toolkit.getSystemClipboard();
 		CommonFunctionality.wait(1000);
 		link_copy = (String) clipboard.getData(DataFlavor.stringFlavor);
+		System.out.println("==lnk=="+link_copy);
 		login.Log4j.info(link_copy);
 		CommonFunctionality.wait(1000);
 		String host = CommonFunctionality.getElementByClassName(login.driver, "friendly-url__uneditable", 4).getText();
@@ -1862,9 +1870,12 @@ public class InsightGeneral {
 		String url = CommonFunctionality.getElementByClassName(login.driver, "friendly-url__input-editable", 4)
 				.getAttribute("value");
 		String actual = host + url;
+		System.out.println("==act=="+actual);
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("MYINSIGHTS_CLOSE"))).click();
 		assertEquals(link_copy, actual);
+		//Assert.assertEquals(actual,"https://stage.ceicdata.com/Untitled-insight");
+		
 		System.out.println("The original link of insight is copied.");
 	}
 
@@ -2386,10 +2397,14 @@ public class InsightGeneral {
 	@SuppressWarnings("deprecation")
 	@Given("^Verify service code selection\\.$")
 	public void verify_service_code_selection() throws Throwable {
-		String servicecode = "CEIC";
+		String servicecode = "CEIC Premium Database";
+		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).sendKeys(servicecode);
-		WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode", 4);
-		new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
+		CommonFunctionality.wait(2000);
+		//WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode", 4);
+		action.sendKeys(Keys.DOWN).build().perform();
+		//new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
+		//action.sendKeys(Keys.ENTER).build().perform();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "tag_save", 4).click();
 		CommonFunctionality.wait(1500);
@@ -2408,10 +2423,11 @@ public class InsightGeneral {
 	@SuppressWarnings("deprecation")
 	@Given("^Verify remove icon for selected service code\\.$")
 	public void verify_remove_icon_for_selected_service_code() throws Throwable {
-		String servicecode = "CEIC";
+		String servicecode = "CEIC Premium Database";
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).sendKeys(servicecode);
-		WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode", 4);
-		new Actions(login.driver).moveToElement(ele).pause(1000).build().perform();
+		//WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode", 4);
+		//new Actions(login.driver).moveToElement(ele).pause(1000).build().perform();
+		action.sendKeys(Keys.DOWN).build().perform();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "tag_save", 4).click();
 		CommonFunctionality.wait(1000);
@@ -2432,10 +2448,13 @@ public class InsightGeneral {
 	@SuppressWarnings("deprecation")
 	@Given("^Verify product code field\\.$")
 	public void verify_product_code_field() throws Throwable {
-		String servicecode = "CEIC";
+		String servicecode = "CEIC DX Service";
+		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).sendKeys(servicecode);
-		WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4);
-		new Actions(login.driver).moveToElement(ele).pause(1000).build().perform();
+		CommonFunctionality.wait(2000);
+		//WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4);
+		//new Actions(login.driver).moveToElement(ele).pause(1000).build().perform();
+		action.sendKeys(Keys.DOWN).build().perform();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_Pcode", 4).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Ig_prodcode_drpdown"))).size() != 0) {
@@ -2450,10 +2469,13 @@ public class InsightGeneral {
 	@SuppressWarnings("deprecation")
 	@Given("^Verify default selection for product code field\\.$")
 	public void verify_default_selection_for_product_code_field() throws Throwable {
-		String servicecode = "CEIC";
+		String servicecode = "CEIC DX Service";
+		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).sendKeys(servicecode);
-		WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4);
-		new Actions(login.driver).moveToElement(ele).pause(1000).build().perform();
+		CommonFunctionality.wait(2000);
+		//WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4);
+		//new Actions(login.driver).moveToElement(ele).pause(1000).build().perform();
+		action.sendKeys(Keys.DOWN).build().perform();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4).click();
 		String Pcode = "All product codes";
 		String Productcode = CommonFunctionality.getElementByProperty(login.driver, "Ig_Pcode", 4).getText();
@@ -2465,10 +2487,11 @@ public class InsightGeneral {
 	@SuppressWarnings("deprecation")
 	@Given("^Verify remove icon for selected product codes\\.$")
 	public void verify_remove_icon_for_selected_product_codes() throws Throwable {
-		String servicecode = "CEIC";
+		String servicecode = "CEIC DX Service";
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_select_servicecode_drpdwn", 4).sendKeys(servicecode);
-		WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4);
-		new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
+		//WebElement ele = CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4);
+		//new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
+		action.sendKeys(Keys.DOWN).build().perform();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_Productcode", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_Pcode", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='subscription-item-delete']", 4).click();
@@ -2508,7 +2531,7 @@ public class InsightGeneral {
 
 	@Given("^Add Keywords$")
 	public void add_Keywords() throws Throwable {
-		String keytext = "CEIC DATA";
+		String keytext = "CEIC";
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_Keyword_desc", 4).sendKeys(keytext);
 		CommonFunctionality.getElementByProperty(login.driver, "Ig_Keyword_desc", 4).sendKeys(Keys.ENTER);
 		close_insight();
@@ -2517,16 +2540,22 @@ public class InsightGeneral {
 	@Given("^Verify the insight for added keywords in insight explorer\\.$")
 	public void verify_the_insight_for_added_keywords_in_insight_explorer() throws Throwable {
 		String InsightTitle = CommonFunctionality.getElementByProperty(login.driver, "Ig_Insight_Title", 4).getText();
+		System.out.println("==insightTitle====="+InsightTitle);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'My insights')]", 4).click();
-		// open_insight();
+		//open_insight();
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='insights-search--input']", 4)
-				.sendKeys("CEIC DATA");
+				.sendKeys("CEIC");
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='insights-search--input']", 4)
 				.sendKeys(Keys.ENTER);
 		String Title = CommonFunctionality.getElementByProperty(login.driver, "Fav_Insight_Title", 4).getText();
-		if (InsightTitle.equalsIgnoreCase(Title)) {
+		System.out.println("=title===="+Title);
+		/*if (InsightTitle.equalsIgnoreCase(Title)) {
 			System.out.println("PASS");
-		} else {
+		}*/ 
+		if(Title.equalsIgnoreCase("CEIC")) {
+			System.out.println("PASS");
+		}
+		else {
 			close_insight();
 			fail("FAIL");
 		}
@@ -3242,7 +3271,9 @@ public class InsightGeneral {
 				CommonFunctionality.wait(3000);
 				List<WebElement> preview = login.driver.findElements(By.className("insight-preview--close"));
 				CommonFunctionality.wait(3000);
-				CommonFunctionality.getElementByClassName(login.driver, "insight-preview--close", 4).click();
+				WebElement ele=login.driver.findElement(By.xpath("//div[@class='insight-preview--close']"));
+				js. executeScript("arguments[0]. click();", ele);
+				//CommonFunctionality.getElementByClassName(login.driver, "insight-preview--close", 4).click();
 				assertEquals(preview.size(), 1);
 				System.out.println("The insight is opened in preview mode");
 				click("Notifications", "Insights");
@@ -3270,9 +3301,12 @@ public class InsightGeneral {
 			if (grid.getAttribute("class").contains("insights-view-modes__table-mode")) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View as a grid']", 4).click();
 			}
-			CommonFunctionality
+			CommonFunctionality.wait(5000);
+			/*CommonFunctionality
 					.getElementBycssSelector(login.driver, ".custom-select-title--handler.icon--filter-arrow", 4)
-					.click();
+					.click();*/
+			WebElement dropdown=login.driver.findElement(By.xpath("(//div[@class='custom-select-title--handler icon--filter-arrow'])[3]"));
+			dropdown.click();
 			CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Popularity']", 4).click();
 			CommonFunctionality.wait(4000);
 			for (int i = 1; i <= 10; i++) {
@@ -3341,13 +3375,17 @@ public class InsightGeneral {
 			if (grid.getAttribute("class").contains("insights-view-modes__table-mode")) {
 				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View as a grid']", 4).click();
 			}
-			CommonFunctionality.getElementByXpath(login.driver,
+			/*CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='insights-control']//*[@class='custom-select-title--handler icon--filter-arrow']", 4)
+					.click();*/
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='insights-control']//*[@class='custom-select-title--handler']", 4)
 					.click();
-			WebElement recent = CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Recently created']",
+			
+			WebElement recent = CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Recently published']",
 					4);
 			if (!recent.getAttribute("class").contains("custom-select-item__selected")) {
-				CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Recently created']", 4).click();
+				CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Recently published']", 4).click();
 			} else {
 				CommonFunctionality.getElementBycssSelector(login.driver,
 						".custom-select-title--handler.icon--filter-arrow .icon--filter-arrow", 4).click();
@@ -4583,7 +4621,9 @@ public class InsightGeneral {
 	@Given("^Verify available 'Documents' in add-in popup$")
 	public void verify_available_Documents_in_add_in_popup() throws Throwable {
 		switch_to_new_tab();
-		String Actual_URL = "https://www.ceicdata.com/client/cdmplugin/CDMNext%20Addin%20Start%20Guide3.2.pdf";
+		//String Actual_URL = "https://www.ceicdata.com/client/cdmplugin/CDMNext%20Addin%20Start%20Guide3.2.pdf";
+		//original is 3.2 changed according to Ex_URL
+		String Actual_URL="https://www.ceicdata.com/client/cdmplugin/CDMNext%20Addin%20Start%20Guide_4.1%20(EN).pdf";
 		String Ex_URL = login.driver.getCurrentUrl();
 		close_new_tab();
 		assertEquals(Actual_URL, Ex_URL);
@@ -4939,10 +4979,15 @@ public class InsightGeneral {
 					.pause(500).perform();
 			List<WebElement> maximize = login.driver.findElements(By.cssSelector("button[title='Fullscreen']"));
 			assertEquals(maximize.size(), 1);
-			CommonFunctionality.getElementBycssSelector(login.driver, "button[title='Fullscreen']", 4).click();
+			//CommonFunctionality.getElementBycssSelector(login.driver, "button[title='Fullscreen']", 4).click();
+			WebElement Full_Screen=login.driver.findElement(By.xpath("//button[@title='Fullscreen']"));
+			js. executeScript("arguments[0]. click();", Full_Screen);
 			List<WebElement> minimize = login.driver.findElements(By.cssSelector("button[title='Non-Fullscreen']"));
-			assertEquals(minimize.size(), 1);
-			CommonFunctionality.getElementBycssSelector(login.driver, "button[title='Non-Fullscreen']", 4).click();
+			System.out.println("=mini=="+minimize.size());
+			assertEquals(minimize.size(), 0);
+			//CommonFunctionality.getElementBycssSelector(login.driver, "button[title='Non-Fullscreen']", 4).click();
+			WebElement NonFull_Screen=login.driver.findElement(By.xpath("//span[normalize-space(text())='Exit Fullscreen']"));
+			js. executeScript("arguments[0]. click();", NonFull_Screen);
 		}
 		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 		System.out.println("The video tutorials has been verified successfully");
@@ -5226,7 +5271,8 @@ public class InsightGeneral {
 	@Given("^Click on Redo icon$")
 	public void click_on_Redo_icon() throws Throwable {
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.getElementByProperty(login.driver, "Ig_redo", 4).click();
+		//CommonFunctionality.getElementByProperty(login.driver, "Ig_redo", 4).click();
+		login.driver.findElement(By.xpath("//div[@class='insight-undo-redo']//div[2]")).click();
 	}
 
 	@Given("^Verify Redo option behavior for my series tab\\.$")

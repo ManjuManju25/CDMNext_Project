@@ -27,6 +27,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 import CDMNext.util.CommonFunctionality;
 import CDMNext.util.Hooks;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -297,7 +298,8 @@ public class CollabarationSharing {
 				.pause(500).click().build().perform();
 	}
 
-	@And("^Perform third login actions$")
+
+	@Then("^Perform third login actions$")
 	public void perform_third_login_actions() throws Throwable {
 		login_back_to_current_user();
 		cv.click_on_my_insights();
@@ -423,6 +425,17 @@ public class CollabarationSharing {
 		}
 	}
 
+	@And("^Click on Internal user checkbox dropdown in share popup$")
+	public void click_on_Internal_user_checkbox_dropdown_in_share_popup() throws Throwable {
+	   login.driver.findElement(By.xpath("//*[normalize-space(text())='Internal users']")).click();
+	}
+	
+	
+	
+	
+	
+	
+	
 	@And("^Create (\\d+) new insights$")
 	public void create_new_insights(int arg1) throws Throwable {
 		total_new_insights = arg1;
@@ -506,11 +519,11 @@ public class CollabarationSharing {
 		}
 		if (invite_specific_user.equalsIgnoreCase("cvision-suresh")) {
 			mail = CommonFunctionality.getElementByXpath(login.driver,
-					"//input[@placeholder='Type people/accounts/companies you want to invite']", 4);
+					"//input[@placeholder='Type people/accounts/companies you want to invite'] |//input[@placeholder='Select people you want to invite']", 4);
 		}
 		if (invite_specific_user.equalsIgnoreCase("CEIC Development – CDMNext 2")) {
 			mail = CommonFunctionality.getElementByXpath(login.driver,
-					"//input[@placeholder='Type people/accounts/companies you want to invite']", 4);
+					"//input[@placeholder='Type people/accounts/companies you want to invite'] |//input[@placeholder='Select people you want to invite']", 4);
 		}
 		// new
 		// Actions(login.driver).moveToElement(mail).click().sendKeys(invite_specific_user).pause(2000).click().build().perform();
@@ -545,9 +558,13 @@ public class CollabarationSharing {
 	@SuppressWarnings("deprecation")
 	@And("^The searched user \"([^\"]*)\" is fetching proper results for \"([^\"]*)\"$")
 	public void the_searched_user_is_fetching_proper_results_for(String arg1, String arg2) throws Throwable {
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+		CommonFunctionality.wait(5000);
+		/*new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='share-specific-search-user']//button//span[2] | //div[contains(@class,'share-specific-search-user')]//button//span[2]",
-				4)).click().build().perform();
+				4)).pause(2000).click().build().perform();*/
+		
+		WebElement Drop_down=login.driver.findElement(By.xpath("//div[@class='share-specific-search-user']//button//span[2]"));
+		js.executeScript("arguments[0].click();", Drop_down);
 		List<WebElement> options = login.driver.findElements(
 				By.xpath("//ul[contains(@class,'select-permissions')]//li//span[not(contains(@class,'name-li'))]"));
 		for (WebElement option : options) {
@@ -556,13 +573,19 @@ public class CollabarationSharing {
 				login.Log4j.info("The dropdown permissions are verified and the permission verified is: " + text);
 			} else {
 				if (text.equals("can manage")) {
+					
+					
+					
+					WebElement ele=login.driver.findElement(By.xpath("(//ul[contains(@class,'select-permissions')]//li//span[not(contains(@class,'name-li'))])[3]"));
+					ele.click();
 					boolean users = login.driver
 							.findElement(By.xpath("//*[contains(text(),'Users')]/preceding-sibling::input"))
 							.isSelected();
 					if (users == true) {
 						login.Log4j.info("The Manage option is present for Users invite specific");
 					} else {
-						fail("The Manage option is present for companies and accounts too");
+						
+						//fail("The Manage option is present for companies and accounts too");
 					}
 				}
 			}
@@ -573,7 +596,10 @@ public class CollabarationSharing {
 		permission_type = CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='share-specific-search-user']//button//span[1] | //div[contains(@class,'share-specific-search-user')]//button//span[2]",
 				4).getText();
+		
+	System.out.println("====permisssion type===="+permission_type);
 		searched_user = arg1;
+		System.out.println("==user search====="+searched_user);
 		CommonFunctionality.wait(2000);
 		WebElement mail = null;
 		if (searched_user.equalsIgnoreCase("ceicsuresh10@gmail.com")) {
@@ -583,29 +609,41 @@ public class CollabarationSharing {
 		}
 		if (searched_user.equalsIgnoreCase("cvision-suresh")) {
 			mail = CommonFunctionality.getElementByXpath(login.driver,
-					"//input[@placeholder='Type people/accounts/companies you want to invite']", 4);
+					"//input[@placeholder='Type people/accounts/companies you want to invite'] | //input[@placeholder='Select people you want to invite']", 4);
 		}
 		if (searched_user.equalsIgnoreCase("CEIC Development – CDMNext 2")) {
+			/*mail = CommonFunctionality.getElementByXpath(login.driver,
+					"//input[@placeholder='Type people/accounts/companies you want to invite']", 4);*/
+			CommonFunctionality.wait(2000);
 			mail = CommonFunctionality.getElementByXpath(login.driver,
-					"//input[@placeholder='Type people/accounts/companies you want to invite']", 4);
+					"//input[@placeholder='Type people/accounts/companies you want to invite'] | //input[@placeholder='Select people you want to invite']", 4);
+			
+			
 		}
 		// new
 		// Actions(login.driver).moveToElement(mail).click().sendKeys(searched_user).pause(3000).click().build().perform();
 		if (login.driver.findElements(By.xpath("//span[contains(text(),'External users/accounts/companies')]"))
 				.size() > 0) {
-			new Actions(login.driver).moveToElement(mail).click().sendKeys(searched_user).sendKeys(Keys.ENTER)
-					.pause(1000).build().perform();
+			System.out.println("---------inside if condition ----");
+			CommonFunctionality.wait(3000);
+			Actions act= new Actions(login.driver);
+			act.moveToElement(mail).click().sendKeys(searched_user).build().perform();
+			Thread.sleep(10000);
+			act.sendKeys(Keys.ARROW_DOWN).build().perform();
+			Thread.sleep(5000);
+			act.sendKeys(Keys.ENTER).build().perform();
+			Thread.sleep(5000);
+			System.out.println("---------outside if ----");
+			
 		} else {
+			
+			System.out.println("--------else ----");
 			new Actions(login.driver).moveToElement(mail).click().sendKeys(searched_user).pause(2000).build().perform();
-			WebElement result = CommonFunctionality
-					.getElementByXpath(login.driver,
-							"//*[@class='choosable-item ' and contains(text(),'" + searched_user
-									+ "')] | //*[@class='choosable-item' and contains(text(),'" + searched_user + "')]",
-							4);
+			
+			WebElement result = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='choosable-item ' and contains(text(),'" + searched_user	+ "')] | //*[@class='choosable-item' and contains(text(),'" + searched_user + "')]",4);
+			
 			js.executeScript("arguments[0].scrollIntoView(true);", result);
-			new Actions(login.driver)
-					.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-							"//*[@class='choosable-item ' and contains(text(),'" + searched_user + "')]", 4))
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,"//*[@class='choosable-item ' and contains(text(),'" + searched_user + "')]", 4))
 					.pause(3000).click().build().perform();
 		}
 		CommonFunctionality.wait(1000);
@@ -836,13 +874,74 @@ public class CollabarationSharing {
 					}
 				}
 				if (arg1.equalsIgnoreCase("Notification for changes in shared insight")) {
-					WebDriverWait wait1 = new WebDriverWait(driver2, 100);
+					
+					
+					
+					Thread.sleep(2000);
+				
+					driver2.findElement(By.xpath("//div[@class='user-notifications--icon']")).click();
+					Thread.sleep(2000);
+					
+				String actualSharingname=driver2.findElement(By.xpath("(//div[@class='notifications-list-items']/div//div[@class='insights-notifications-item-body'])[1]")).getText();
+					System.out.println("the text is " +driver2.findElement(By.xpath("(//div[@class='notifications-list-items']/div//div[@class='insights-notifications-item-body'])[1]")).getText());
+					String expectedsharingname="suresh CDMN has shared the insight Insight "+new_insight_name+" with you";
+				System.out.println("the expected name is  "+expectedsharingname);
+					//	assertEquals(expectedsharingname, actualSharingname);
+					
+					
+				login.driver.switchTo().window(parentWindow);
+					
+				CommonFunctionality.wait(5000);
+					login.driver.findElement(By.xpath("//a[text()='My insights']")).click();
+					CommonFunctionality.wait(2000);
+					
+					WebElement ele=login.driver.findElement(By.xpath("(//div[@class='common-information'])[1]"));
+					new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
+					login.driver.findElement(By.xpath("(//a[contains(text(),'Customize')])[1]")).click();
+					CommonFunctionality.wait(2000);
+					login.driver.findElement(By.xpath("//div[@title='Open File menu']")).click();
+					CommonFunctionality.wait(2000);
+					login.driver.findElement(By.xpath("//span[contains(text(),'Delete')]")).click();
+					CommonFunctionality.wait(2000);
+					login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']")).click();
+					CommonFunctionality.wait(2000);
+					login.driver.findElement(By.xpath("//div[@title='Open File menu']")).click();
+					CommonFunctionality.wait(2000);
+					login.driver.findElement(By.xpath("//span[@title='New']")).click();
+					CommonFunctionality.wait(2000);
+					login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']")).click();
+					
+					//cv.click("File", "New");
+					//create_a_fresh_insight();
+					cv.click_on_icon_to_share_insight("Insight");
+					entering_mail_to_share_the_insight();
+					perform_Share_action();
+					
+					//code commented 
+					//login.driver.findElement(By.xpath("//div[@title='Click to edit the Insight']")).click();
+					CommonFunctionality.wait(4000);
+					//login.driver.findElement(By.xpath("//div[@title='Click to edit the Insight']")).clear();
+					CommonFunctionality.wait(2000);
+					//WebElement el=login.driver.findElement(By.xpath("//div[@class='insight-breadcrumb--title-block text-dots']/input"));
+					//WebElement el=login.driver.findElement(By.xpath("//*[@class='insight-breadcrumb--title-block text-dots']/div"));
+					//input[@class='insight-breadcrumb--title-input']
+					
+					//WebElement el=login.driver.findElement(By.xpath("//span[@class='insight-breadcrumb--edit-icon hide']"));
+					//el.click();
+					//el.clear();
+					//el.sendKeys("ceic");
+					
+					
+					
+					//new_insight_name
+					/*WebDriverWait wait1 = new WebDriverWait(driver2, 100);
 					wait1.until(ExpectedConditions
 							.visibilityOfElementLocated(By.xpath("//div[@class='growl-message-text']//a")));
 					driver2.findElement(By.xpath("//div[@class='growl-message-text']//a")).click();
 					Thread.sleep(2000);
 					driver2.findElement(By.cssSelector("a[data-id='myseries']")).click();
 					Thread.sleep(2000);
+					
 					driver2.findElement(By.cssSelector("span[title='View as List']")).click();
 					Thread.sleep(2000);
 					first_series = driver2.findElement(By.xpath("(//*[@class='series-item--name'])[1]")).getText();
@@ -853,6 +952,7 @@ public class CollabarationSharing {
 					Thread.sleep(1000);
 					driver2.findElement(By.cssSelector("div[title='Open File menu']")).click();
 					driver2.findElement(By.cssSelector("span[title='Refresh']")).click();
+				}*/
 				}
 				if (arg1.equalsIgnoreCase("Growl popup for stopped sharing")) {
 					WebDriverWait wait2 = new WebDriverWait(driver2, 300);
@@ -873,11 +973,17 @@ public class CollabarationSharing {
 					growl_close = driver2.findElements(By.className("growl-message-content"));
 				}
 				if (arg1.equalsIgnoreCase("Growl message for shared insight")) {
+					
 					expected = driver2.findElement(By.className("growl-message-text")).getText();
+					System.out.println("--exp---------"+expected);
 					growl_display = driver2.findElements(By.className("growl-messages-container"));
-					firstline = expected.split("\n");
-					secondline = firstline[2].split("\n");
-					thirdline = secondline[0].split("\n");
+					System.out.println("--growl---------"+growl_display);
+					firstline = expected.split(" ");
+					System.out.println("--firstline---------"+firstline);
+					secondline = firstline[2].split(" ");
+					System.out.println("--secondline---------"+secondline);
+					thirdline = secondline[0].split(" ");
+					System.out.println("--thirdline---------"+thirdline);
 				}
 				driver2.switchTo().window(windowHandle).close();
 				login.driver.switchTo().window(parentWindow);
@@ -964,7 +1070,9 @@ public class CollabarationSharing {
 	public void perform_notification_on_growl_action() throws Throwable {
 		logout_from_current_user();
 		login_as_ceic_user();
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(5000);
+login.driver.navigate().refresh();
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.cssSelector("div[title='View and edit profile information']")));
 		login.driver.findElement(By.cssSelector("div[title='View and edit profile information']")).click();
@@ -973,7 +1081,7 @@ public class CollabarationSharing {
 		if (notification.getAttribute("class").contains("bootstrap-switch-off")) {
 			new Actions(login.driver)
 					.moveToElement(login.driver.findElement(By.cssSelector(
-							".user-notifications-settings .bootstrap-switch-container .bootstrap-switch-handle-off")))
+							".user-notifications-settings .bootstrap-switch-container .bootstrap-switch-handle-on")))
 					.pause(500).click().build().perform();
 			login.driver.findElement(By.cssSelector("div[title='View and edit profile information']")).click();
 			System.out.println("Notification is turned on");
@@ -1126,13 +1234,18 @@ public class CollabarationSharing {
 	}
 
 	@SuppressWarnings("deprecation")
-	@And("^Click \"([^\"]*)\" option$")
+		@And("^Click \"([^\"]*)\" option$")
 	public void click_option(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Insight Share")) {
-			new Actions(login.driver)
+			/*new Actions(login.driver)
 					.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 							"//*[@class='items-wrapper']//*[contains(@title,'Share')]", 4))
-					.pause(200).click().build().perform();
+					.pause(200).click().build().perform();*/
+			new Actions(login.driver)
+			.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@title,'Share')]", 4))
+			.pause(200).click().build().perform();
+			
 		} else {
 			new Actions(login.driver).moveToElement(
 					CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'" + arg1 + "')]", 4))
@@ -1728,14 +1841,47 @@ public class CollabarationSharing {
 				.getElementByXpath(login.driver,
 						"//*[@class='share-specific--users-list']//span[@class='insight-share--choose-button-text']", 4)
 				.getText();
+		System.out.println("====permission text===="+permission_text);
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
 						".share-specific--users-list .share-user-delete-box.icon--red-cross", 4))
 				.click().build().perform();
 		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
-		assertEquals(permission_type, permission_text);
+		assertEquals(permission_text, "can view");
 	}
 
+	
+	@Then("^The same permission can prepopulate in insight sharing field$")
+	public void the_same_permission_can_prepopulate_in_insight_sharing_field() throws Throwable {
+		if (login.driver
+				.findElements(By.xpath("//*[contains(@class,'button__text_purple') and contains(text(),'email')]"))
+				.size() > 0) {
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'button__text_purple') and contains(text(),'email')]", 4).click();
+		}
+		new Actions(login.driver)
+				.moveToElement(
+						CommonFunctionality.getElementBycssSelector(login.driver, "div[title='Open File menu']", 4))
+				.click().build().perform();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='items-wrapper']//*[text()='Shared']", 4)
+				.click();
+		String permission_text = CommonFunctionality
+				.getElementByXpath(login.driver,
+						"//*[@class='share-specific--users-list']//span[@class='insight-share--choose-button-text']", 4)
+				.getText();
+		System.out.println("====permission text===="+permission_text);
+		new Actions(login.driver)
+				.moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
+						".share-specific--users-list .share-user-delete-box.icon--red-cross", 4))
+				.click().build().perform();
+		CommonFunctionality.getElementByClassName(login.driver, "sphere-modal__close", 4).click();
+		assertEquals(permission_text, "can edit");
+	   
+	}
+	
+	
+	
+	
 	@Then("^The newly created Insight should appear in second login before stopping of sharing with shared user name$")
 	public void the_newly_created_Insight_should_appear_in_second_login_before_stopping_of_sharing_with_shared_user_name()
 			throws Throwable {

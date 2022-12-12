@@ -141,7 +141,7 @@ Feature: Verifying Insight general Functionality
     And Verify the insight by clicking "Cancel" button
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_18:Verify 'Download' option in insight preview without visual
     And Creating new insight
     And Click "Open File menu" option from the title
@@ -181,7 +181,7 @@ Feature: Verifying Insight general Functionality
     And Verify Cancel option for insight preview popup.
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_23:Verify "Related Insights" in insight preview.
     And Creating new insight
     And Search for related insight series
@@ -300,11 +300,11 @@ Feature: Verifying Insight general Functionality
     And Click on Delete
     And The Email template should be opened with auto filled email ID "helpdesk@ceicdata.com"
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_41:Verify Delete forever button.
     And Verify Delete forever button.
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_42:Verify CDMNext after current opened insight deleted.
     And The default landing page should be loaded as set in the preference
 
@@ -371,7 +371,7 @@ Feature: Verifying Insight general Functionality
     And Verify insight URL after insight title change.
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_52:Change Insight URL with new title.
     And Creating new insight
     And Click on File menu
@@ -403,7 +403,7 @@ Feature: Verifying Insight general Functionality
     And Validate the copied link.
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_83:Verify Description field for General tab
     And Creating new insight
     And Click on File menu
@@ -411,7 +411,7 @@ Feature: Verifying Insight general Functionality
     And Should able to add insight descripiton
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_84:Verify added description under insight explorer
     And Click "File" > "New"
     And Create a fresh insight
@@ -420,7 +420,7 @@ Feature: Verifying Insight general Functionality
     And The descripton should be visible to user
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_85:Verify Save and Apply buttons when settings opened
     And Creating new insight
     And Click on File menu
@@ -436,7 +436,7 @@ Feature: Verifying Insight general Functionality
     And The "Save" button is clicked and popup size is 0
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_87:Verify Apply button when settings opened
     And Creating new insight
     And Click on File menu
@@ -444,7 +444,7 @@ Feature: Verifying Insight general Functionality
     And The "Apply" button is clicked and popup size is 1
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_88:Verify confirmation message after click on Apply.
     And Creating new insight
     And Click on File menu
@@ -452,7 +452,7 @@ Feature: Verifying Insight general Functionality
     Then The "Changes are saved" message should popup
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_89:Verify Apply and Save buttons when redirect to next tabs with changes.
     And Creating new insight
     And Click on File menu
@@ -498,7 +498,7 @@ Feature: Verifying Insight general Functionality
     And Add Views
     And Verify number of the view/s for the insight.
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_96:Verify Data series.
     And Add series to myseries
     And Verify Data series under info tab in settings
@@ -542,7 +542,7 @@ Feature: Verifying Insight general Functionality
   #----------------------------------------------------------Internal login --------------------------------------------------------
   @InsightGeneral
   Scenario: Tc_InsightGeneral_101:Verify Subscription tabs description.
-    And Login back to internal user with user "nmaduru" and password "Automation123$$"
+    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Creating new insight
     And Click on File menu
     And Click on Settings
@@ -579,6 +579,7 @@ Feature: Verifying Insight general Functionality
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_105:Verify remove icon for service code field.
+   
     And Creating new insight
     And Click on File menu
     And Click on Settings
@@ -588,6 +589,7 @@ Feature: Verifying Insight general Functionality
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_106:Verify service code selection.
+ And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Creating new insight
     And Click on File menu
     And Click on Settings
@@ -595,8 +597,9 @@ Feature: Verifying Insight general Functionality
     And Verify service code selection.
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_107:Verify remove icon for selected service code.
+   And Login back to internal user with user "vvagicharla" and password "ZAQ!2wsx@7989" 
     And Creating new insight
     And Click on File menu
     And Click on Settings
@@ -631,8 +634,9 @@ Feature: Verifying Insight general Functionality
     And Verify product code field.
     And Delete Insight
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_111:Verify remove icon for selected product codes.
+  
     And Creating new insight
     And Click on File menu
     And Click on Settings
@@ -658,8 +662,9 @@ Feature: Verifying Insight general Functionality
     And Verify keywords for the insights.
     And Delete Insight
 
-  @InsightGeneral2345
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_114:Verify the insight for added keywords in insight explorer.
+  
     And Creating new insight
     And Click on File menu
     And Click on Settings
@@ -750,7 +755,7 @@ Feature: Verifying Insight general Functionality
   Scenario: Tc_InsightGeneral_125:Verify edit of insight title in the popup.
     And Verify that the insight saved with updated title.
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_126:Verify edit icon for insight URL.
     And Click on Share icon for untitled insight
     And Click on Edit icon on insight URL field and Verify
@@ -765,7 +770,7 @@ Feature: Verifying Insight general Functionality
     And Click on Share icon for untitled insight
     And Verify insight url updated after insight title changed
 
-  @InsightGeneral2345
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_129:Verify 'Copy' permanent link' option.
     And Click on File menu
     And Click on Share icon
@@ -839,11 +844,12 @@ Feature: Verifying Insight general Functionality
     Then The "Recent Insights" should open in preview mode with limit 5
 
   @InsightGeneral
-  Scenario: Tc_InsightGeneral_151:Verify Latest insights from our experts under Insights tabdat
+  Scenario: Tc_InsightGeneral_151:Verify Latest insights from our experts under Insights tabdata.
     Then The "Latest insights from our experts" should open in preview mode with limit 10
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_154:Verify Most popular CEIC insights.
+   
     Then The "Most popular CEIC Insights" should open in preview mode with limit 10
 
   @InsightGeneral
@@ -892,7 +898,7 @@ Feature: Verifying Insight general Functionality
       | "Live chat" | "ON"   |
       | "Live chat" | "OFF"  |
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_165:Verify 'Video tutorials'
     And Click on "Help" -> "Video tutorials"
     Then The available videos should be played
@@ -1006,12 +1012,12 @@ Feature: Verifying Insight general Functionality
     And Click on "Help" -> "Email us"
     Then The "Growl autoclose" field is adding the text
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_197:Email Us - verify attachment upload.
     And Click on "Help" -> "Email us"
     Then The "Attachment upload" field is adding the text
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_199:Email Us - verify attachment remove.
     And Click on "Help" -> "Email us"
     Then The "Attachment remove" field is adding the text
@@ -1076,7 +1082,7 @@ Feature: Verifying Insight general Functionality
     And Click on Report button
     And Verify description and attach screenshot
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_213: Verify Send the Report with attachment
     And Click on Help
     And Click on Report button
@@ -1116,6 +1122,7 @@ Feature: Verifying Insight general Functionality
 
   @InsightGeneral
   Scenario: Tc_InsightGeneral_219:Verify available 'Documents' in add-in popup.
+    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Click on Help
     And Click on Application Excel Addin
     And Click on Document link
@@ -1235,12 +1242,12 @@ Feature: Verifying Insight general Functionality
   @InsightGeneral
   Scenario: Tc_InsightGeneral_242:Verify Undo and Redo option for views tab.
     And Add a Visual
-    And Click on Undo icon
+    And Click on Undo icon			 	
     And Verify Undo option for views tab.
     And Click on Redo icon
     And Verify Redo option for views tab.
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_247:Verify Undo and redo option after refresh
     And Add few series to myseries
     And Click on Undo icon

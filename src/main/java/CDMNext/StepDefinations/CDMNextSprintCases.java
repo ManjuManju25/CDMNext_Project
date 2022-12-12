@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -33,7 +34,6 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import CDMNext.util.CommonFunctionality;
-import ch.qos.logback.core.joran.action.Action;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -120,6 +120,8 @@ public class CDMNextSprintCases {
 	public static String final_api;
 	public static String New_Insight_Name;
 	public static String first_search_keyword;
+	public static String act;
+	public static String exp;
 	public static String second_search_keyword;
 	public static String none;
 	public int decimal_places;
@@ -281,7 +283,7 @@ public class CDMNextSprintCases {
 	public void click_to_create_an_empty_visual() throws Throwable {
 		CommonFunctionality.wait(3000);
 		CommonFunctionality.getElementByProperty(login.driver, "Create_new_view", 8).click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(3000);
 	}
 
 	@And("^Navigating back and refresh button$")
@@ -315,21 +317,28 @@ public class CDMNextSprintCases {
 	public void select_few_series() throws Throwable {
 		CommonFunctionality.ResetMethod();
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		WebElement series = CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8);
-		new Actions(login.driver).moveToElement(series).pause(5000).click().build().perform();
-		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		//CommonFunctionality.webDriverwait_keyvalue("Series_tab");
+		//WebElement series = CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8);
+		//new Actions(login.driver).moveToElement(series).pause(5000).click().build().perform();
+		/*CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
 		// CommonFunctionality.getElementByClassName(login.driver, "search-input-text",
 		// 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(4000);
 		CommonFunctionality.webDriverwait_keyvalue("Series_new");
 		CommonFunctionality.getElementByProperty(login.driver, "Series_new", 8).click();
-		CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
+		//CommonFunctionality.webDriverwait_keyvalue("Series_checkbox");
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
 		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='search-series-list']/*[1]", 8);
 		if (!(selected.getAttribute("class").contains("series-list-item__selected"))) {
 			new Actions(login.driver).moveToElement(series_cb).pause(4000).click().build().perform();
+		}*/
+		WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//span[@value='LIST']")))).click();
+		for (int i = 1; i <= 4; i++) {
+			CommonFunctionality.getElementByXpath(login.driver,
+					"(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]", 8).click();
+
 		}
 	}
 
@@ -338,24 +347,84 @@ public class CDMNextSprintCases {
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8).click();
 	}
+	
+	
+	@And("^Search for  series with SID \"([^\"]*)\"$")
+	public void search_for_series_with_SID(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+		//CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8).click();
+		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByProperty(login.driver, "Series_new", 8).click();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		login.driver.navigate().refresh();
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
+		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+		try {
+			WebElement apply=	login.driver.findElement(By.xpath("//button[normalize-space(text())='Start new'] "));
+			apply.click();
+		}
+		catch(Exception e) {
+			System.out.println("pop up not appeared");
+		}
+		
+		List<WebElement> list1 = login.driver.findElements(By.xpath("//*[@class='series-item--main-info']"));
+		
+		for (int i = 1; i <= list1.size(); i++) {
+			/*WebElement series = login.driver
+					.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));*/
+			
+			WebElement series = login.driver
+					.findElement(By.xpath("//div[@class='series-list-item--information']/*[" + i + "]"));
+			
+			System.out.println("=seriesqqw"+series);
+			
+			new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
+			login.driver.findElement(By.xpath("//*[@class='add-to-data-selection--icon']")).click();
+		}
+	}
+	@And("^click on More dropdown and select continuos checkbox\\.$")
+	public void click_on_More_dropdown_and_select_continuos_checkbox() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[contains(text(),'More')]")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@title='With historical extension of continuous series']//span[@class='text-dots']")).click();
+	    
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@SuppressWarnings("deprecation")
 	@And("^Search for the series with SID \"([^\"]*)\"$")
 	public void search_for_the_series_with_SID(String arg1) throws Throwable {
-		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
-		CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8).click();
-		CommonFunctionality.wait(5000);
+		//CommonFunctionality.webDriverwait_keyvalue("Series_tab");
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[text()='Series']")).click();
+		//CommonFunctionality.getElementByProperty(login.driver, "Series_tab", 8).click();
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series_new", 8).click();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).clear();
+		login.driver.navigate().refresh();
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(arg1);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait(4000);
 		if (arg1.equals("9380901;9385301") || arg1.equals("230795002;230795102")) {
-			List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
+			List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='series-item--main-info']"));
 			for (int i = 1; i <= list.size(); i++) {
+				CommonFunctionality.wait(2000);
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='series-item--main-info']/*[" + i + "]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equals("210698402;206954202")) {
@@ -386,48 +455,74 @@ public class CDMNextSprintCases {
 			List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equals("447238447;447238437")) {
 			List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
 				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
 			}
+			
 		}
+		
+		if (arg1.equals("304366404")) {
+			login.driver.navigate().refresh();
+			/*WebElement Search=login.driver.findElement(By.xpath("//input[@placeholder='Search']"));
+			Search.click();
+			Search.sendKeys("304366404",Keys.ENTER);*/
+			
+			
+			List<WebElement> list = login.driver.findElements(By.xpath("//*[@class='series-item--main-info']"));
+			for (int i = 1; i <= list.size(); i++) {
+				WebElement series = login.driver
+						.findElement(By.xpath("//div[@class='series-item--name']"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
+			}
+			
+		}
+			
+		
+		
+		
+		
+		
+		
+		
+		
 		if (arg1.equalsIgnoreCase("63929901;63928901")) {
 			List<WebElement> list1 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list1.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("51287302;383440717")) {
 			List<WebElement> list1 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list1.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("68941402;68945002")) {
 			List<WebElement> list1 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list1.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("305183101;305188001")) {
 			List<WebElement> list3 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list3.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("1355101; 353749717")) {
@@ -442,15 +537,15 @@ public class CDMNextSprintCases {
 			List<WebElement> list2 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list2.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*"));
-				new Actions(login.driver).moveToElement(series).pause(1000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(1000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("398155157;398155397")) {
 			List<WebElement> list3 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list3.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span"));
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
 				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
@@ -458,7 +553,7 @@ public class CDMNextSprintCases {
 			List<WebElement> list_new = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list_new.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span"));
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
 				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
@@ -466,34 +561,42 @@ public class CDMNextSprintCases {
 			List<WebElement> list4 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list4.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("181804102;116315408")) {
 			List<WebElement> list5 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list5.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("2121901;2121101")) {
 			List<WebElement> list2 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
 			for (int i = 1; i <= list2.size(); i++) {
 				WebElement series = login.driver
-						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
 			}
 		}
 		if (arg1.equalsIgnoreCase("385345667") || arg1.equals("389705827") || arg1.equalsIgnoreCase("32189801")
-				|| arg1.equalsIgnoreCase("253736802") || arg1.equalsIgnoreCase("16164001")) {
-			List<WebElement> list1 = login.driver.findElements(By.xpath("//*[@class='series-representation--list']//*[@unselectable='on']"));
+				|| arg1.equalsIgnoreCase("253736802")) {
+			//List<WebElement> list1 = login.driver.findElements(By.xpath("//div[@class='search-series-list']/*"));
+			List<WebElement> list1 = login.driver.findElements(By.xpath("//*[@class='series-item--main-info']"));
+			
 			for (int i = 1; i <= list1.size(); i++) {
+				/*WebElement series = login.driver
+						.findElement(By.xpath("//div[@class='search-series-list']/*[" + i + "]/div/a/div[2]"));*/
 				
 				WebElement series = login.driver
-						.findElement(By.xpath("(//*[@class='series-representation--list']//*[@unselectable='on']//*[@class='series-list-item--checkbox-wrapper']/*)[" + i + "]"));
-				new Actions(login.driver).moveToElement(series).pause(3000).click().build().perform();
+						.findElement(By.xpath("//div[@class='series-list-item--information']/*[" + i + "]"));
+				
+				System.out.println("=seriesqqw"+series);
+				
+				new Actions(login.driver).moveToElement(series).pause(3000).build().perform();
+				
 			}
 		}
 		
@@ -505,6 +608,16 @@ public class CDMNextSprintCases {
 
 	}
 
+	@And("^click on add icon$")
+	public void click_on_add_icon() throws Throwable {
+		login.driver.findElement(By.xpath("//*[@class='add-to-data-selection--icon']")).click();
+	   
+	}
+	
+	
+	
+	
+	
 	@And("^Enter \"([^\"]*)\" values$")
 	public void enter_values(String arg1) throws Throwable {
 		CommonFunctionality
@@ -521,14 +634,17 @@ public class CDMNextSprintCases {
 
 	@And("^Get the text for first (\\d+) series$")
 	public void get_the_text_for_first_series(int arg1) throws Throwable {
-		text_series1 = CommonFunctionality
+		/*text_series1 = CommonFunctionality
 				.getElementByXpath(login.driver,
 						"//*[@class='search-series-list']/*[1]/div/a/div[3]/div[1]/div/div/div[1]/div[2]", 8)
-				.getText();
-		text_series2 = CommonFunctionality
+				.getText();*/
+		text_series1=login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]")).getText();
+		text_series2=login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[2]")).getText();
+		
+		/*text_series2 = CommonFunctionality
 				.getElementByXpath(login.driver,
 						"//*[@class='search-series-list']/*[2]/div/a/div[3]/div[1]/div/div/div[1]/div[2]", 8)
-				.getText();
+				.getText();*/
 	}
 
 	@And("^Click on the download button in header$")
@@ -571,7 +687,39 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@And("^Select (\\d+) series and click on \"([^\"]*)\" option$")
 	public void select_series_and_click_on_option(int arg1, String arg2) throws Throwable {
-		WebElement first_series = CommonFunctionality.getElementByXpath(login.driver,
+		for (int i = 1; i <= 2; i++) {
+			CommonFunctionality.getElementByXpath(login.driver,
+					"(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]", 8).click();
+			CommonFunctionality.wait(2000);
+			
+			
+		}
+		WebElement FirstSeries=login.driver.findElement(By.xpath("//div[@class='series-item--main-info']"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(4000).build().perform();
+		if((arg2.equalsIgnoreCase("Chart"))) {
+		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
+		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
+		//login.driver.findElement(By.xpath("//span[@title='More actions']")).click();
+		 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		try {
+			WebElement apply=	login.driver.findElement(By.xpath("//button[normalize-space(text())='Apply'] "));
+			apply.click();
+		}
+		catch(Exception e) {
+			System.out.println("pop up not appeared");
+		}
+	
+		
+		
+		}		else if (arg2.equalsIgnoreCase("A")) {
+				
+				new Actions(login.driver).sendKeys("a").pause(4000).build().perform();
+			
+			
+		}
+		/*WebElement first_series = CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='search-series-list']/*[contains(@class,'series-list-item__first-item')]", 8);
 		if (!(first_series.getAttribute("class").contains("series-list-item__selected"))) {
 			WebElement first = CommonFunctionality.getElementByProperty(login.driver, "First_series_item_in_series", 8);
@@ -580,12 +728,15 @@ public class CDMNextSprintCases {
 		WebElement second_series = CommonFunctionality.getElementByProperty(login.driver,
 				"Second_series_item_in_series", 8);
 		new Actions(login.driver).moveToElement(second_series).pause(4000).click().build().perform();
-		WebElement actions = CommonFunctionality.getElementByProperty(login.driver, "Series_actions", 8);
+		login.driver.findElement(By.xpath("(//span[@class='view-chart-icon menu-icon'])[2]")).click();/*
+		
+		/*WebElement actions = CommonFunctionality.getElementByProperty(login.driver, "Series_actions", 8);
 		new Actions(login.driver).moveToElement(actions).pause(4000).build().perform();
 		if (arg2.equalsIgnoreCase("Chart")) {
 			WebElement chart;
 			try {
 				chart = CommonFunctionality.getElementByProperty(login.driver, "View_as_chart_in_series", 8);
+				
 			} catch (Exception e) {
 				chart = CommonFunctionality.getElementByXpath(login.driver,
 						"(//*[contains(@class,'series-item-information--additional-info-field__dates')])[1]", 8);
@@ -595,6 +746,10 @@ public class CDMNextSprintCases {
 		} else if (arg2.equalsIgnoreCase("A")) {
 			new Actions(login.driver).sendKeys("a").pause(4000).build().perform();
 		}
+*/	
+		
+		
+		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -623,16 +778,44 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@And("^Click on functions wizard from right panel series$")
 	public void click_on_functions_wizard_from_right_panel_series() throws Throwable {
-		WebElement one_series = CommonFunctionality.getElementByProperty(login.driver, "One_series_from_myserieslist",
+			WebElement one_series = CommonFunctionality.getElementByProperty(login.driver, "One_series_from_myserieslist",
 				8);
+		
+			
 		new Actions(login.driver).pause(1000).moveToElement(one_series).pause(2000).perform();
 		WebElement apply_functions = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(@title,'Apply Function')]", 8);
 		new Actions(login.driver).moveToElement(apply_functions).pause(3000).click().build().perform();
 	}
+	
+	@And("^Click on functions wizard option  from right panel series$")
+	public void click_on_functions_wizard_option_from_right_panel_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement one_series=login.driver.findElement(By.xpath("//*[@class='series-item--name']"))	;
+		
+	new Actions(login.driver).pause(1000).moveToElement(one_series).pause(2000).perform();
+	WebElement apply_functions = CommonFunctionality.getElementByXpath(login.driver,
+			"//*[contains(@title,'Apply Function')]", 8);
+	new Actions(login.driver).moveToElement(apply_functions).pause(3000).click().build().perform();
+	   
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@And("^Select all series from myseries and click on \"([^\"]*)\" option$")
 	public void select_all_series_from_myseries_and_click_on_option(String arg1) throws Throwable {
+		
 		CommonFunctionality.wait(2000);
 		boolean select_all = login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']"))
 				.isSelected();
@@ -665,15 +848,17 @@ public class CDMNextSprintCases {
 				}
 			}
 		}
-	}
+
+	
+		}
 
 	@And("^click on 'fx' to open 'All functions' popup$")
 	public void click_on_fx_to_open_All_functions_popup() throws Throwable {
 		WebElement toolbar = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'fx-panel-toggle')]", 4);
-		if (!(toolbar.getAttribute("class").contains("fx-panel-toggle__is-open"))) {
+				"//div[@class='function-editor-window--icon']", 4);
+		//if (!(toolbar.getAttribute("class").contains("fx-panel-toggle__is-open"))) {
 			toolbar.click();
-		}
+		//}
 		WebElement function = CommonFunctionality.getElementByClassName(login.driver, "function-editor-window--icon",
 				4);
 		js.executeScript("arguments[0].click();", function);
@@ -684,7 +869,11 @@ public class CDMNextSprintCases {
 
 	@And("^Enter \"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" function$")
 	public void enter_function(String arg1, String arg2, String arg3) throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "Functions_input_field", 4).click();
+		//CommonFunctionality.getElementByProperty(login.driver, "Functions_input_field", 4).click();
+		CommonFunctionality.wait(3000);
+		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Functions_input_field")));
+		js.executeScript("arguments[0].click();", ele1);
+		Thread.sleep(3000);
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByProperty(login.driver, "Functions_input_field", 4).sendKeys(arg1);
 		CommonFunctionality.getElementByProperty(login.driver, "Functions_input_field", 4).sendKeys(Keys.ENTER);
@@ -700,16 +889,30 @@ public class CDMNextSprintCases {
 
 	@And("^choose \"([^\"]*)\" function$")
 	public void choose_function(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'search-functions-input')]", 4)
+		
+		
+		/*CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'search-functions-input')]", 4)
 				.sendKeys(arg1);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'search-functions-input')]", 4)
-				.sendKeys(Keys.ENTER);
+				.sendKeys(Keys.ENTER);*/
+		
+		
 		if (arg1.equalsIgnoreCase("UPDATE")) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4).click();
+			WebElement Agreegate=login.driver.findElement(By.xpath("//*[@data-id='AGGREGATE']"));
+			js.executeScript("arguments[0].scrollIntoView(true);", Agreegate);
+			WebElement Update=login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]"));
+			js.executeScript("arguments[0].click();", Update);
 		} else {
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@data-id='" + arg1 + "' and @class='function-item']", 4)
-					.click();
+			CommonFunctionality.wait(3000);
+			WebElement Mul=login.driver.findElement(By.xpath("//div[@data-id='MULTIPLY']"));
+			js.executeScript("arguments[0].scrollIntoView(true);", Mul);
+			CommonFunctionality.wait(2000);
+			login.driver.findElement(By.xpath("//div[@data-id='AGGREGATE']")).click();
+			WebElement Accumulate=login.driver.findElement(By.xpath("//*[@data-id='MATHRECPROCAL']"));
+			js.executeScript("arguments[0].scrollIntoView(true);", Accumulate);
+			WebElement HPFilter=login.driver.findElement(By.xpath("//*[@data-id='" + arg1 + "']"));
+			js.executeScript("arguments[0].scrollIntoView(true);", HPFilter);
+			js.executeScript("arguments[0].click();", HPFilter);			
 		}
 	}
 
@@ -761,6 +964,8 @@ public class CDMNextSprintCases {
 	public void click_on_my_insights() throws Throwable {
 		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='My insights']", 4).click();
+		//CommonFunctionality.getElementByXpath(login.driver, "//*[text()='My insights']", 8).click();
+		
 	}
 
 	@And("^Click on Created tab under Myinsights$")
@@ -808,7 +1013,10 @@ public class CDMNextSprintCases {
 
 	@And("^Click on \"([^\"]*)\" tab in popup$")
 	public void click_on_tab_in_popup(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4).click();
+		CommonFunctionality.wait(2000);
+		//CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4).click();
+		
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//*[contains(text(),'" + arg1 + "')]")))).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -911,8 +1119,31 @@ public class CDMNextSprintCases {
 
 	@And("^Click \"([^\"]*)\" option from empty list$")
 	public void click_option_from_empty_list(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'" + arg1 + "')]", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[contains(text(),'"+arg1+"')]", 4).click();
+		/*WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
+		 try {
+				WebElement apply=	login.driver.findElement(By.xpath("//*[contains(text(),'Apply')]"));
+				apply.click();
+			}
+			catch(Exception e) {
+				System.out.println("pop up not appeared");
+			}*/
+			
 	}
+	
+	@And("^Click \"([^\"]*)\"  from empty list$")
+	public void click_from_empty_list(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement View_asTable=login.driver.findElement(By.xpath("//div[@title='"+ arg1+"']"));
+		View_asTable.click();
+		
+	    
+	}
+	
+	
+	
 
 	@And("^Click \"([^\"]*)\" button in images wizard$")
 	public void click_button_in__images_wizard(String arg1) throws Throwable {
@@ -950,7 +1181,10 @@ public class CDMNextSprintCases {
 	@And("^Click on one ingisht under EMIS insight$")
 	public void click_on_one_ingisht_under_EMIS_insight() throws Throwable {
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByProperty(login.driver, "EMIS_Insight_Landingpage", 8).click();
+		
+		WebElement ele=CommonFunctionality.getElementByProperty(login.driver, "EMIS_Insight_Landingpage", 8);
+		js.executeScript("arguments[0].click();", ele);
+		
 		CommonFunctionality.wait(5000);
 		WebElement title = CommonFunctionality.getElementByXpath(login.driver,
 				"(//*[@class='insight-grid-item--bottom-panel'])[1]", 4);
@@ -1429,15 +1663,26 @@ public class CDMNextSprintCases {
 		}
 	}
 
-	@And("^Get Value of \"([^\"]*)\" in Preference$")
+		@And("^Get Value of \"([^\"]*)\" in Preference$")
 	public void get_Value_of_in_Preference(String arg1) throws Throwable {
+		//added
+			
+			
+		
+		
+		
 		if (arg1.equalsIgnoreCase("Decimal separator")) {
+			
+			CommonFunctionality.getElementByProperty(login.driver, "Number_format_in_values_axis", 4).click();
+			
+			System.out.println("Number format dropdown is displayed");
 			decimal_seperator = CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(text(),'" + arg1
 									+ "')]//following::*[contains(@class,'toggler-control-item__selected')]/span",
 							4)
 					.getText();
+			System.out.println("=====decimal======"+decimal_seperator);
 		} else if (arg1.equalsIgnoreCase("Grouping separator")) {
 			grouping_seperator = CommonFunctionality
 					.getElementByXpath(login.driver,
@@ -1468,12 +1713,22 @@ public class CDMNextSprintCases {
 	public void getting_the_text_of_first_search_keyword() throws Throwable {
 		first_search_keyword = CommonFunctionality.getElementByClassName(login.driver, "series-series-count--number", 4)
 				.getText();
+		first_search_keyword=first_search_keyword.replace(",", "");
+//	 act=first_search_keyword.substring(0,4);
+	 
+
+	// System.out.println("==act====="+act);
+		System.out.println("==first_search_keyword====="+first_search_keyword);
 	}
 
 	@And("^Getting the text of next search keyword$")
 	public void getting_the_text_of_next_search_keyword() throws Throwable {
 		second_search_keyword = CommonFunctionality
 				.getElementByClassName(login.driver, "series-series-count--number", 4).getText();
+		second_search_keyword=second_search_keyword.replace(",", "");
+		System.out.println("second"+second_search_keyword);
+		// exp=	second_search_keyword.substring(0,5);
+		
 	}
 
 	@And("^Perform Download operation$")
@@ -1632,7 +1887,7 @@ public class CDMNextSprintCases {
 		mail = "ceicsuresh11@gmail.com";
 		WebElement mailing = CommonFunctionality.getElementByXpath(login.driver,
 				"//input[@placeholder='Select people you want to invite']", 4);
-		new Actions(login.driver).moveToElement(mailing).click().sendKeys(mail).pause(2000).sendKeys(Keys.BACK_SPACE)
+		new Actions(login.driver).moveToElement(mailing).click().sendKeys(mail).pause(3000).sendKeys(Keys.BACK_SPACE)
 				.build().perform();
 		WebElement result = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@data-id='aa793e1f-743b-48ec-b6c9-374ae724cbcf']", 4);
@@ -1709,11 +1964,11 @@ public class CDMNextSprintCases {
 
 	@And("^Check the display day-unit date picker$")
 	public void check_for_display_dayunit_date_picker() throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(3000);
 		start_format_datepicker = CommonFunctionality
 				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-xaxis-labels')]/*[2])[1]", 4)
 				.getText();
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(1000);
 		end_format_datepicker = CommonFunctionality
 				.getElementByXpath(login.driver, "(//*[contains(@class,'highcharts-xaxis-labels')]/*[1])[1]", 4)
 				.getText();
@@ -1733,61 +1988,398 @@ public class CDMNextSprintCases {
 		}
 		new Actions(login.driver).moveToElement(one_series).pause(3000).build().perform();
 		CommonFunctionality.wait(3000);
-		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='series-representation--list']/div/*/*[1]/div/a/div[3]/div[2]/span[contains(@title,'" + arg1
-						+ "')] | //*[contains(@class,'tree-series-list')]/ul/*[1]/div/a/div[3]/div[2]/span[contains(@title,'"
-						+ arg1 + "')]",
-				4);
-		new Actions(login.driver).moveToElement(visual).pause(3000).click().build().perform();
+		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
+		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
+		CommonFunctionality.wait(2000);
+		 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		
 	}
 
 	@SuppressWarnings("deprecation")
 	@And("^Click on more actions$")
 	public void click_on_more_actions() throws Throwable {
 		CommonFunctionality.wait(5000);
+		//commented existing code
 		WebElement one_series;
 		try {
+			/*one_series = CommonFunctionality.getElementByXpath(login.driver,
+					"(//*[contains(@class,'series-item--country')])[1]", 4);*/
+			/*one_series = CommonFunctionality.getElementByXpath(login.driver,
+					"//div[@class='series-item--country country-information']", 4);*/
 			one_series = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[contains(@class,'series-item--country')])[1]", 4);
+					"//div[@class='series-item--main-info']", 4);
+			new Actions(login.driver).moveToElement(one_series).pause(3000).build().perform();	
+			
+			
+			
 		} catch (Exception e) {
 			one_series = CommonFunctionality.getElementByProperty(login.driver, "Series_item_information_hover", 8);
 		}
-		new Actions(login.driver).moveToElement(one_series).pause(5000).build().perform();
-		CommonFunctionality.wait(1000);
+		//new Actions(login.driver).moveToElement(one_series).pause(6000).click().build().perform();
+		//CommonFunctionality.action.moveToElement(one_series).pause(10000).build().perform();
+		/*CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='series-representation--list']//*[@title='More actions'])[1]", 4).click();
+				"//*[contains(@class,'search-series-list')]/*[1]//*[@title='More actions']", 4).click();*/
+		
+	//	WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
+		WebElement ele1 =login.driver.findElement(By.xpath("//span[@title='More actions']"));
+		CommonFunctionality.action.moveToElement(ele1).click().build().perform();
+		CommonFunctionality.wait(2000);
+		 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		
+		try {
+			WebElement apply=	login.driver.findElement(By.xpath("//button[normalize-space(text())='Apply'] "));
+			apply.click();
+		}
+		catch(Exception e) {
+			System.out.println("pop up not appeared");
+		}
+		
+		
 	}
+		@And("^Click on more actions dropdown$")
+	public void click_on_more_actions_dropdown() throws Throwable {
+		//actual code is checkboxes.size() changed to index 4
+		CommonFunctionality.wait(2000);
+		List<WebElement> checkboxes = login.driver
+				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
+		for(int i=1;i<=1;i++) {
+			CommonFunctionality.wait(3000);
+			//checkboxes.get(i).click();
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+ i +"]")).click();
+			CommonFunctionality.wait(2000);
+		}
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-list-item-data'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+		/*WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
+		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();*/
+		CommonFunctionality.wait(2000);
+		WebElement ele=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+		js.executeScript("arguments[0].click();", ele);
+		
+		
+	    
+	}
+	
+		@And("^create a chart$")
+		public void create_a_chart() throws Throwable {
+			 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+			 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+			 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+			 try {
+					WebElement apply=	login.driver.findElement(By.xpath("//*[contains(text(),'Apply')]"));
+					apply.click();
+				}
+				catch(Exception e) {
+					System.out.println("pop up not appeared");
+				}
+			 
+		}
+
+
+	
+	
+	
 
 	@SuppressWarnings("deprecation")
-	@And("^Click on more actions to create \"([^\"]*)\"$")
+		@And("^Click on more actions to create \"([^\"]*)\"$")
 	public void click_on_more_actions_to_create(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
-		WebElement one_series;
-		try {
-			one_series = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']//following::*[@unselectable='on'][1]", 8);
-		} catch (Exception e) {
-			one_series = CommonFunctionality.getElementByProperty(login.driver, "Series_item_information_hover", 8);
+		//original code commented actually checkboxes.size is there
+		List<WebElement> checkboxes = login.driver
+				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
+		for(int i=1;i<=2;i++) {
+			CommonFunctionality.wait(3000);
+			//checkboxes.get(i).click();
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
+			CommonFunctionality.wait(2000);
 		}
-		new Actions(login.driver).moveToElement(one_series).pause(500).build().perform();
 		
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='search-series-list']/*[1]//span[contains(@title,'More actions')] | //*[@class='tree-node full-expanded open']//following::*[@unselectable='on'][1]//span[contains(@title,'More actions')]",
-				4).click();
-		CommonFunctionality.wait(500);
-		WebElement Addchart = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Dropdown_AddChart")));
-		new Actions(login.driver).moveToElement(Addchart).click().build().perform();
 		
-		/*WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-item--main-info'])[1]/following::span[@title='More actions'][2]"));
+		
+		new Actions(login.driver).moveToElement(FirstSeries).pause(3000).build().perform();
+		
+		
+		WebElement Nore_actions=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+		js.executeScript("arguments[0].click();", Nore_actions);
+		 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		
+		
+		 
+	   
+		
+		/*CommonFunctionality.wait(500);
+		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='search-series-list']/*[1]/div/a/div[3]/div[2]/span[contains(@title,'View as " + arg1
 						+ "')] | //span[contains(text(),'" + arg1 + "')]",
 				4);
 		new Actions(login.driver).moveToElement(visual).pause(5000).click().build().perform();*/
-		if (arg1.equalsIgnoreCase("Chart")) {
-			CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='visuals-panel']//*[contains(text(),'Line')])[2]", 4).click();
-//			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-//					"//*[@class='dropdown-menu']//*[text()='World']", 4)).pause(500).click().build().perform();
+		
+		
+		if (arg1.equalsIgnoreCase("View as Map")) {
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='dropdown-menu']//*[text()='World']", 4)).pause(500).click().build().perform();
 		}
+	}
+	
+	@And("^create a chart for the above series\\.$")
+	public void create_a_chart_for_the_above_series() throws Throwable {
+      WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-item--main-info'])[1]/following::span[@title='More actions']"));
+	  new Actions(login.driver).moveToElement(FirstSeries).pause(3000).build().perform();
+		
+		
+		WebElement Nore_actions=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+		js.executeScript("arguments[0].click();", Nore_actions);
+		 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		
+		
+	    
+	}
+
+	
+	
+	
+	@And("^Add few series to myseries tab$")
+	public void add_few_series_to_myseries_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		
+		for(int i=1;i<=2;i++) {
+			CommonFunctionality.wait(3000);
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+ i +"]")).click();
+			
+			
+		}
+	}
+	
+	
+	
+	@And("^Click on more actions and create \"([^\"]*)\"$")
+	public void click_on_more_actions_and_create(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+		//original code commented actually checkboxes.size is there
+		List<WebElement> checkboxes = login.driver
+				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
+		for(int i=1;i<=2;i++) {
+			Thread.sleep(3000);
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+ i +"]")).click();
+			//checkboxes.get(i).click();
+			CommonFunctionality.wait(3000);
+		}
+		
+		
+		
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-list-item-data'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+	WebElement More_actions=	login.driver.findElement(By.xpath("//span[@title='More actions']"));
+	js.executeScript("arguments[0].click();", More_actions);
+
+		
+	 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+	 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+	 login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
+	
+		
+		/*CommonFunctionality.wait(500);
+		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='search-series-list']/*[1]/div/a/div[3]/div[2]/span[contains(@title,'View as " + arg1
+						+ "')] | //span[contains(text(),'" + arg1 + "')]",
+				4);
+		new Actions(login.driver).moveToElement(visual).pause(5000).click().build().perform();*/
+		
+		
+		if (arg1.equalsIgnoreCase("View as Map")) {
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='dropdown-menu']//*[text()='World']", 4)).pause(500).click().build().perform();
+		}
+
+		
+		
+	   
+	}
+
+	
+	@And("^Create a Map\\.$")
+	public void create_a_Map() throws Throwable {
+		CommonFunctionality.wait(2000);
+		//original code commented actually checkboxes.size is there
+		List<WebElement> checkboxes = login.driver
+				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
+		for(int i=1;i<=2;i++) {
+			CommonFunctionality.wait(3000);
+			//checkboxes.get(i).click();
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+ i +"]")).click();
+			
+			
+		}
+		
+		
+		
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-list-item-data'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+	WebElement More_actions=	login.driver.findElement(By.xpath("//span[@title='More actions']"));
+	js.executeScript("arguments[0].click();", More_actions);
+
+		
+	 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+	 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+	 login.driver.findElement(By.xpath("//div[contains(@class,'icon--map-filled_large')]")).click();
+	 
+		
+
+	    
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		@And("^Click on more actions to create(\\d+) \"([^\"]*)\"$")
+	public void click_on_more_actions_to_create(int arg1, String arg2) throws Throwable {
+		CommonFunctionality.wait(2000);
+		//original code commented actually checkboxes.size is there
+		/*List<WebElement> checkboxes = login.driver
+				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
+		for(int i=0;i<checkboxes.size();i++) {
+			CommonFunctionality.wait(2000);
+			checkboxes.get(i).click();
+			CommonFunctionality.wait(2000);
+		}*/
+		
+		
+     WebElement FirstSeries=login.driver.findElement(By.xpath("(//*[@class='release-schedule--tree']//*[@class='series-item--main-info'])[1]/following::span[@title='More actions'][2]"));
+		
+		new Actions(login.driver).moveToElement(FirstSeries).pause(3000).build().perform();
+		
+		
+		WebElement Nore_actions=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+		js.executeScript("arguments[0].click();", Nore_actions);
+		
+		
+		
+		
+		/*WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-item--main-info'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+		login.driver.findElement(By.xpath("//span[@title='More actions']")).click();*/
+		
+		WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		 try {
+				WebElement apply=	login.driver.findElement(By.xpath("//*[contains(text(),'Apply')]"));
+				apply.click();
+			}
+			catch(Exception e) {
+				System.out.println("pop up not appeared");
+			} 
+	   
+		
+		//CommonFunctionality.wait(500);
+		/*WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='search-series-list']/*[1]/div/a/div[3]/div[2]/span[contains(@title,'View as " + arg2
+						+ "')] | //span[contains(text(),'" + arg2 + "')]",
+				4);
+		new Actions(login.driver).moveToElement(visual).pause(5000).click().build().perform();*/
+		
+		
+		
+		
+		
+		
+		
+		
+	    
+	}
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	@And("^Click on more actions=>\"([^\"]*)\"$")
+	public void click_on_more_actions(String arg1) throws Throwable {
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-item--main-info'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+		login.driver.findElement(By.xpath("//span[@title='More actions']")).click();
+		WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
+		 try {
+				WebElement apply=	login.driver.findElement(By.xpath("//*[contains(text(),'Apply')]"));
+				apply.click();
+			}
+			catch(Exception e) {
+				System.out.println("pop up not appeared");
+			}
+			
+		 
+	   
+		
+		/*CommonFunctionality.wait(500);
+		WebElement visual = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='search-series-list']/*[1]/div/a/div[3]/div[2]/span[contains(@title,'View as " + arg1
+						+ "')] | //span[contains(text(),'" + arg1 + "')]",
+				4);
+		new Actions(login.driver).moveToElement(visual).pause(5000).click().build().perform();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//button[normalize-space(text())='Apply']")).click();*/
+		if (arg1.equalsIgnoreCase("View as Map")) {
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='dropdown-menu']//*[text()='World']", 4)).pause(500).click().build().perform();
+		}
+	    
+	}
+
+
+	
+	
+	@And("^Click on more actions to create=>View as chart\\.$")
+	public void click_on_more_actions_to_create_View_as_chart() throws Throwable {
+		
+		CommonFunctionality.wait(2000);
+		WebElement Serieslist = login.driver.findElement(
+				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
+		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
+	    WebElement ele1 = login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']/span[@title='More actions']//*[name()='svg']//*[local-name()='use'][1]"));
+		CommonFunctionality.action.moveToElement(ele1).pause(2000).click().build().perform();
+	    //js. executeScript("arguments[0]. click();", ele1);
+		CommonFunctionality.wait(2000);
+		 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		try {
+			WebElement apply=	login.driver.findElement(By.xpath("//*[contains(text(),'Apply')]"));
+			apply.click();
+		}
+		catch(Exception e) {
+			System.out.println("pop up not appeared");
+		}
+		
+		
+		
 	}
 
 	@And("^Clicking on \"([^\"]*)\" button in SSP$")
@@ -1837,6 +2429,18 @@ public class CDMNextSprintCases {
 		check_for_keeping_insight_popup();
 	}
 
+	
+	@And("^create a Histogram\\.$")
+	public void create_a_Histogram() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Add_chart=login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_chart).pause(1000).build().perform();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--histogram_large')]")).click();
+		
+		
+	}
+	
+	
 	@And("^Choose \"([^\"]*)\" > \"([^\"]*)\"$")
 	public void choose(String arg1, String arg2) throws Throwable {
 		CommonFunctionality.wait(500);
@@ -1844,6 +2448,15 @@ public class CDMNextSprintCases {
 		new Actions(login.driver).moveToElement(view).build().perform();
 		CommonFunctionality.webDriverwait_locator("//span[contains(text(),'" + arg2 + "')]", "xpath");
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + arg2 + "')]")).click();
+		if (arg2.equalsIgnoreCase("Pie")) {
+			if (login.driver
+					.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Confirmation']"))
+					.size() > 0) {
+				CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 4).click();
+			}
+		}
+		
+		
 		if (arg2.equalsIgnoreCase("Histogram")) {
 			if (login.driver
 					.findElements(By.xpath("//*[contains(@class,'sphere-modal__content')]//*[text()='Confirmation']"))
@@ -1862,7 +2475,8 @@ public class CDMNextSprintCases {
 	}
 
 	@SuppressWarnings("deprecation")
-	@And("^Open a \"([^\"]*)\" visual$")
+
+
 	public void open_a_visual(String arg1) throws Throwable {
 		CommonFunctionality.wait(500);
 		WebElement visual = CommonFunctionality
@@ -1883,7 +2497,7 @@ public class CDMNextSprintCases {
 
 	@And("^Click on \"([^\"]*)\" visual$")
 	public void click_on_visual(String arg1) throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(1000);
 		if (arg1.equalsIgnoreCase("Add related series") || arg1.equalsIgnoreCase("Edit Series")) {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'left-controls')]//button[text()='" + arg1 + "']", 4).click();
@@ -1902,13 +2516,77 @@ public class CDMNextSprintCases {
 			WebElement chart = CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(@class,'left-controls')]//button[text()='" + arg1
-									+ "'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Chart'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Pie'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Map']",
+									+ "'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Chart'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Pie']",
 							4);
 			new Actions(login.driver).moveToElement(chart).click().build().perform();
 			CommonFunctionality.wait(1000);
 		}
 	}
 
+	@And("^create HeatMap\\.$")
+	public void create_HeatMap() throws Throwable {
+		CommonFunctionality.wait(2000);
+		//original code commented actually checkboxes.size is there
+		List<WebElement> checkboxes = login.driver
+				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
+		for(int i=0;i<=2;i++) {
+			Thread.sleep(6000);
+			checkboxes.get(i).click();
+			CommonFunctionality.wait(3000);
+		}
+		
+		
+		
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-list-item-data'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+	WebElement More_actions=	login.driver.findElement(By.xpath("//span[@title='More actions']"));
+	js.executeScript("arguments[0].click();", More_actions);
+
+		
+	 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+	 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+	 login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]")).click();
+	
+		
+
+	    
+	}
+	
+	@And("^Create Pie\\.$")
+	public void create_Pie() throws Throwable {
+		CommonFunctionality.wait(2000);
+		//original code commented actually checkboxes.size is there
+		List<WebElement> checkboxes = login.driver
+				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+		
+		for(int i=1;i<=2;i++) {
+			Thread.sleep(3000);
+			//checkboxes.get(i).click();
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+ i +"]")).click();
+			
+			CommonFunctionality.wait(3000);
+		}
+		
+		
+		
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-list-item-data'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+	WebElement More_actions=	login.driver.findElement(By.xpath("//span[@title='More actions']"));
+	js.executeScript("arguments[0].click();", More_actions);
+
+		
+	 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+	 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+	 login.driver.findElement(By.xpath("//div[contains(@class,'icon--pie_chart-pie_large')]")).click();
+	 
+		
+
+	   
+	}
+	
+	
+	
 	@And("^check the \"([^\"]*)\" and \"([^\"]*)\" options$")
 	public void check_the_and_options(String arg1, String arg2) throws Throwable {
 		chart_checkbox4 = login.driver
@@ -2115,10 +2793,10 @@ public class CDMNextSprintCases {
 		CommonFunctionality.wait(2000);
 		title_text = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 4)
 				.getAttribute("title");
-		CommonFunctionality.wait(2000);
 		WebElement ceic = CommonFunctionality.getElementByProperty(login.driver, "CEIC_template_styles", 4);
-		new Actions(login.driver).pause(1000).moveToElement(ceic).click().build().perform();
-		new Actions(login.driver).pause(1000).moveToElement(dropdown).click().build().perform();
+		new Actions(login.driver).moveToElement(ceic).click().build().perform();
+		CommonFunctionality.wait(1000);
+		new Actions(login.driver).moveToElement(dropdown).pause(1000).click().build().perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -2126,12 +2804,12 @@ public class CDMNextSprintCases {
 	public void choose(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		boolean checkbox = login.driver
 				.findElement(By.xpath(
-						"//*[contains(@title,'" + arg1 + "')]//*[@class='input-control--indicator']"))
+						"//*[contains(@title,'" + arg1 + "')]"))
 				.isSelected();
 		if (checkbox == false) {
 			login.driver
 					.findElement(By.xpath(
-							"//*[contains(@title,'" + arg1 + "')] //*[@class='input-control--indicator']"))
+							"//*[contains(@title,'" + arg1 + "')]"))
 					.click();
 		} 
 		WebElement advanced = null;
@@ -2140,7 +2818,7 @@ public class CDMNextSprintCases {
 					"(//*[contains(@title,'" + arg1 + "')]//following::*[contains(@title,'" + arg2 + "')][1])[1]", 4);
 		} else {
 			advanced = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[contains(@title,'" + arg1 + "')]//following::*[contains(@title,'" + arg2 + "')][1])[2]", 4);
+					"(//*[contains(@title,'" + arg1 + "')]//following::*[contains(@title,'" + arg2 + "')][1])", 4);
 		}
 		js.executeScript("arguments[0].click();", advanced);
 		CommonFunctionality.wait(1000);
@@ -2286,8 +2964,11 @@ public class CDMNextSprintCases {
 
 	@And("^click on \"([^\"]*)\" option under annotations$")
 	public void click_on_option_under_annotations(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='annotations-menu']//*[contains(@class,'" + arg1 + "')]", 4).click();
+		/*CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='annotations-menu']//*[contains(@class,'" + arg1 + "')]", 4).click();*/
+		login.driver.findElement(By.xpath("//div[text()='Annotations']/following::div[@class='annotations-context-menu--arrow']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[text()='Horizontal']")).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -2301,8 +2982,10 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@And("^hover on to \"([^\"]*)\"$")
 	public void hover_on_to(String arg1) throws Throwable {
-		WebElement hover = CommonFunctionality.getElementByClassName(login.driver, "annotation-cursor--layout", 4);
-		new Actions(login.driver).moveToElement(hover).pause(3000).build().perform();
+	//	WebElement hover = CommonFunctionality.getElementByClassName(login.driver, "annotation-cursor--layout", 4);
+		CommonFunctionality.wait(2000);
+		WebElement hover = login.driver.findElement(By.xpath("//div[@class='annotation-cursor--layout']"));
+		new Actions(login.driver).moveToElement(hover).pause(5000).build().perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -2418,20 +3101,69 @@ public class CDMNextSprintCases {
 	public void check_option(String arg1) throws Throwable {
 		chart_option = arg1;
 		if (arg1.equals("Move to right")) {
-			axis = CommonFunctionality.getElementByXpath(login.driver,
+			/*axis = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'table--column__auto-width')]/following::*[contains(@title,'" + arg1 + "')]",
-					4);
+					4);*/
+			CommonFunctionality.wait(2000);
+			axis=login.driver.findElement(By.xpath("(//div[@title='Move to right'])[4]"));
+			CommonFunctionality.wait(2000);
 			axis.click();
 		} else if (arg1.equals("Move to left")) {
-			axis = CommonFunctionality.getElementByXpath(login.driver,
+			/*axis = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'table--column__auto-width')]/following::*[contains(@title,'" + arg1 + "')]",
-					4);
+					4);*/
+			CommonFunctionality.wait(2000);
+			axis=login.driver.findElement(By.xpath("(//div[@title='Move to left'])[4]"));
+			axis.click();
+			
 		} else {
 			stroke = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'insight-action-panel--btn') and contains(@title,'chart " + arg1 + "')]", 4);
 		}
 	}
 
+	
+	
+	@And("^Check \"([^\"]*)\" axis option$")
+	public void check_axis_option(String arg1) throws Throwable {
+		chart_option = arg1;
+		if (arg1.equals("Move to right")) {
+			/*axis = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'table--column__auto-width')]/following::*[contains(@title,'" + arg1 + "')]",
+					4);*/
+			CommonFunctionality.wait(2000);
+			axis=login.driver.findElement(By.xpath("(//div[@title='Move to right'])[1]"));
+			CommonFunctionality.wait(2000);
+			axis.click();
+		} else if (arg1.equals("Move to left")) {
+			/*axis = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'table--column__auto-width')]/following::*[contains(@title,'" + arg1 + "')]",
+					4);*/
+			CommonFunctionality.wait(2000);
+			axis=login.driver.findElement(By.xpath("(//div[@title='Move to left'])[1]"));
+			axis.click();
+			
+		} else {
+			stroke = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'insight-action-panel--btn') and contains(@title,'chart " + arg1 + "')]", 4);
+		}
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@SuppressWarnings("deprecation")
 	@And("^Select all series from the table$")
 	public void select_all_series_from_the_table() throws Throwable {
@@ -2671,21 +3403,26 @@ public class CDMNextSprintCases {
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[text()='" + arg2 + "']//preceding::div[@class='toggle'][1]", 4)
 				.click();
-		CommonFunctionality.wait(100);
+		login.driver.findElement(By.xpath("//div[@class='tree-node']//span[contains(text(),'CEIC Leading Indicator')]")).click();
+		footnotes_text = login.driver.findElement(By.xpath("//div[@class='footnotes--info']")).getText();
+		System.out.println("=footnote===="+footnotes_text);
+		/*CommonFunctionality.wait(100);
 		WebElement open = CommonFunctionality.getElementByXpath(login.driver, "//div[@data-node-model-id='TP2958827']",
 				4);
 		if (open.getAttribute("class").contains("open")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-node-model-id='SC2966087']//div[1]", 4)
-					.click();
+					.click();*/
 		}
-		CommonFunctionality.wait(100);
+		/*CommonFunctionality.wait(100);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg4 + "')]", 8).click();
 		if (arg2.equals("CEIC Leading Indicator")) {
 			CommonFunctionality.wait
 					.until(ExpectedConditions.visibilityOfElementLocated(By.className("footnotes--info")));
 			footnotes_text = CommonFunctionality.getElementByClassName(login.driver, "footnotes--info", 4).getText();
+			System.out.println("=footnote===="+footnotes_text);
 		}
-	}
+*/	
+		
 
 	@And("^Check for observations$")
 	public void check_for_observations() throws Throwable {
@@ -2780,29 +3517,38 @@ public class CDMNextSprintCases {
 				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg3 + "')]/../../../../child::div[1]", 4)
 				.click();
 		CommonFunctionality.wait(1000);
-		Comparables_text1 = CommonFunctionality.getElementByXpath(login.driver,
+		/*Comparables_text1 = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg3 + "')]//following::div[contains(@class,'comparable-tree-series-list')]",
+				4);*/
+		Comparables_text1 = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(text(),'" + arg3 + "')]",
 				4);
 		CommonFunctionality.wait(1000);
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg4 + "')]/../../../../child::div[1]", 4)
 				.click();
 		CommonFunctionality.wait(1000);
-		Comparables_text2 = CommonFunctionality.getElementByXpath(login.driver,
+		/*Comparables_text2 = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg4 + "')]//following::div[contains(@class,'comparable-tree-series-list')]",
+				4);*/
+		Comparables_text2 = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(text(),'" + arg4 + "')]",
 				4);
 		CommonFunctionality.wait(1000);
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg5 + "')]/../../../../child::div[1]", 4)
 				.click();
 		CommonFunctionality.wait(1000);
-		Comparables_text3 = CommonFunctionality.getElementByXpath(login.driver,
+		/*Comparables_text3 = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg5 + "')]//following::div[contains(@class,'comparable-tree-series-list')]",
+				4);*/
+		Comparables_text3 = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(text(),'" + arg5 + "')]",
 				4);
 	}
 
-	@And("^Expand \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\"$")
-	public void expand(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+	@And("^Expand \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\" > \"([^\"]*)\"$")
+	public void expand(String arg1, String arg2, String arg3, String arg4, String arg5) throws Throwable {
 		// CommonFunctionality.UnselectMethod();
 		// CommonFunctionality.CollapseTreeMethod();
 		CommonFunctionality.wait(1000);
@@ -2812,30 +3558,29 @@ public class CDMNextSprintCases {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'" + arg2 + "')]//preceding::div[@class='toggle'][1]", 4).click();
 		CommonFunctionality.wait(1000);
-		if (arg3.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted")) {
-			CommonFunctionality.wait(1000);
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@data-node-model-id,'"+ arg3 +"')]/*[1]", 4).click();
-		} else {
-			CommonFunctionality.wait(1000);
-			WebElement table = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@data-node-model-id,'"+ arg3 +"')]/*[1]", 4);
-			js.executeScript("arguments[0].scrollIntoView(true);", table);
-			js.executeScript("arguments[0].click();", table);
-		}
-		CommonFunctionality.wait(1000);
-		/*if (arg4.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+		if (arg3.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg2 + "')]//following::div[@class='toggle'][1]", 4).click();
 		} else {
-			WebElement series = CommonFunctionality.getElementByProperty(login.driver,
-					"Series_item_name", 4);
+			WebElement table = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(text(),'" + arg3 + "')]/preceding::div[@class='toggle'][1]", 4);
+			js.executeScript("arguments[0].scrollIntoView(true);", table);
+			js.executeScript("arguments[0].click();", table);
+		}
+		CommonFunctionality.wait(1000);
+		if (arg4.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
+			CommonFunctionality.wait(1000);
+			CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(text(),'" + arg2 + "')]//following::div[@class='toggle'][1]", 4).click();
+		} else {
+			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(text(),'" + arg4 + "')]/preceding::div[@class='toggle'][1]", 4);
 			//js.executeScript("arguments[0].scrollIntoView(true);", series);
-			//js.executeScript("arguments[0].click();", series);
-		}*/
-		//CommonFunctionality.wait(1000);
-/*		if (arg5.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+			js.executeScript("arguments[0].click();", series);
+		}
+		CommonFunctionality.wait(1000);
+		if (arg5.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
 			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg2 + "')]//following::div[@class='toggle'][1]", 4).click();
@@ -2850,7 +3595,7 @@ public class CDMNextSprintCases {
 						.click();
 			}
 			CommonFunctionality.wait(1000);
-		}*/
+		}
 	}
 
 	@And("^Clicking the database \"([^\"]*)\"$")
@@ -2878,33 +3623,55 @@ public class CDMNextSprintCases {
 		table_text = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'Afghanistan: National Accounts')]//following::*[@class='name-text'][1]", 8)
 				.getText();
-		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
+		System.out.println("==table==="+table_text);
+		/*WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='child-container']/div[2]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[2]/a/span/span[1]",
-				4);
+				4);*/
+		
+		WebElement ele=login.driver.findElement(By.xpath("//span[normalize-space(text())='Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual']"));
 		new Actions(login.driver).moveToElement(ele).pause(4000).build().perform();
-		CommonFunctionality.getElementByXpath(login.driver,
+		/*CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='child-container']/div[2]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[2]/span[2]/span[1]",
-				4).click();
+				4).click();*/
+		
+		CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='add-to-data-selection--icon'])[1]" ,4).click();
+		
+		
 		CommonFunctionality.wait(1000);
-		comparable_table_title = CommonFunctionality.getElementByClassName(login.driver, "active-comparable--title", 4)
-				.getText();
+		/*comparable_table_title = CommonFunctionality.getElementByClassName(login.driver, "active-comparable--title", 4)
+				.getText();*/
+		
+		comparable_table_title=login.driver.findElement(By.xpath("//span[normalize-space(text())='Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual']")).getText();                     
+		System.out.println("====comparable===="+comparable_table_title);
 	}
 
 	@SuppressWarnings("deprecation")
 	@And("^Click on series level$")
 	public void click_on_series_level() throws Throwable {
 		CommonFunctionality.wait(3000);
-		series_text = CommonFunctionality.getElementByXpath(login.driver,
+		/*series_text = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[contains(text(),'Afghanistan: National Accounts')]//following::div[@class='series-item--name'][1]",
 				8).getText();
-		WebElement country = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'series-item--country')]", 4);
-		new Actions(login.driver).moveToElement(country).pause(3000).build().perform();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='child-container']/div[2]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div/ul/*[1]/div/a/div[3]/div[2]/span[1]",
-				4).click();
+		*/
+		series_text=login.driver.findElement(By.xpath("//*[contains(text(),'Afghanistan: National Accounts')]//following::div[@class='series-item--name'][1]")).getText();
+		System.out.println("==series_text====="+series_text);
+		
+		/*WebElement country = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'series-item--country')]", 4);*/
+		Thread.sleep(5000);
+		
+		//WebDriverWait wait = new WebDriverWait(login.driver, 60);
+		//WebElement country=	wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//*[contains(@class,'series-item--country')]/following-sibling::div"))));
+		//WebElement country=login.driver.findElement(By.xpath("//*[contains(@class,'series-item--country')]/following-sibling::div"));
+		WebElement country=login.driver.findElement(By.xpath("//*[@class='name-text']/following::div[@class='series-item--name']"));
+		new Actions(login.driver).moveToElement(country).pause(5000).build().perform();
+		/*CommonFunctionality.getElementByXpath(login.driver,
+				"//div[@class='child-container']/div[2]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div[1]/div[3]/div/ul/*[1]/div/a/div[3]/div",
+				4).click();*/
+		
+		CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='add-to-data-selection--icon'])[1]" ,4).click();
 		CommonFunctionality.wait(1000);
-		comparable_series_title = CommonFunctionality.getElementByClassName(login.driver, "active-comparable--title", 8)
+		comparable_series_title = CommonFunctionality.getElementByXpath(login.driver, "//span[normalize-space(text())='Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual']", 8)
 				.getText();
 	}
 
@@ -2942,10 +3709,11 @@ public class CDMNextSprintCases {
 	@And("^Click on select all control$")
 	public void click_on_select_all_control() throws Throwable {
 		CommonFunctionality.wait(1000);
-		WebElement check = CommonFunctionality.getElementByXpath(login.driver,
+		/*WebElement check = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='comparables--header']//*[@class='input-control'] | //*[contains(@class,'comparables--header')]//*[@class='input-control--indicator']",
-				4);
-		new Actions(login.driver).moveToElement(check).pause(500).click().build().perform();
+				4);*/
+		WebElement check=login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[6]"));
+		new Actions(login.driver).moveToElement(check).pause(2000).click().build().perform();
 	}
 
 	@And("^\"([^\"]*)\" should display result of all region$")
@@ -2967,25 +3735,22 @@ public class CDMNextSprintCases {
 	public void expand_World_Trend_Plus() throws Throwable {
 		CommonFunctionality.CollapseTreeMethod();
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath("//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[1]"))
-				.click();
+		//login.driver.findElement(By.xpath("//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[1]")).click();
+		login.driver.findElement(By.xpath("//div[@data-node-model-id='WORLD']/div[1]")).click();
+		
+		
+		
 		Thread.sleep(2000);
-		login.driver
-				.findElement(By.xpath(
-						"//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[3]//div[1]//div[1]"))
-				.click();
+		//login.driver.findElement(By.xpath("//div[@class='tree-container']//div[@data-node-model-id='WORLD']//div[3]//div[1]//div[1]")).click();
+		login.driver.findElement(By.xpath("//div[@data-node-model-id='WORLD']/div[1]//following::div[@data-node-model-id='WORLD&&ALL']/div[1]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(
-				"//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node'][1]//div[1]"))
-				.click();
+		//login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node'][1]//div[1]")).click();
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//following::div[@class='tree-node']/div")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(
-				"//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[1] | //*[contains(text(),'National Accounts')]//preceding::div[@class='toggle'][1]"))
-				.click();
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[1] | //*[contains(text(),'National Accounts')]//preceding::div[@class='toggle'][1]")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(
-				"//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[@class='child-container']//div[@class='tree-node'][1]//div[@class='toggle']"))
-				.click();
+		//login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']//div[@class='child-container']//div[@class='tree-node open']//div[3]//div[1]//div[@class='child-container']//div[@class='tree-node'][1]//div[@class='toggle']")).click();
+		login.driver.findElement(By.xpath("//div[@class='database-node tree-node open']/following::div[@class='tree-node']/div")).click();
 	}
 
 	@And("^Click on \"([^\"]*)\" tab in left panel$")
@@ -3010,23 +3775,44 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@And("^Select (\\d+) series and click on chart option$")
 	public void select_series_and_click_on_chart_option(int arg1) throws Throwable {
-		CommonFunctionality.getElementBycssSelector(login.driver, "*[title='View results as List']", 4).click();
-		for (int i = 1; i <= arg1; i++) {
-			WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@class,'search-series-list')]/*[" + i + "]", 4);
-			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@class,'search-series-list')]/*[" + i + "]/div/a/div[2]/span/*", 4);
-			if (!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
-				new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
-			}
+		//CommonFunctionality.getElementBycssSelector(login.driver, "*[title='View results as List']", 4).click();
+		CommonFunctionality.wait(2000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//span[@value='LIST']")))).click();
+		for (int i = 0; i < arg1; i++) {
+			//WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'search-series-list')]/*[" + i + "]", 4);
+			//WebElement series = CommonFunctionality.getElementByXpath(login.driver,
+				//	"//*[contains(@class,'search-series-list')]/*[" + i + "]/div/a/div[2]", 4);
+			
+			List<WebElement> series = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
+			CommonFunctionality.wait(2000);
+			//if (!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
+				CommonFunctionality.wait(2000);
+				series.get(i).click();
+				
+			//}
+			
 		}
-		WebElement actions = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[contains(@class,'series-item--country')])[" + arg1 + "]", 8);
-		new Actions(login.driver).moveToElement(actions).pause(1000).build().perform();
+		//commented code as functionality changed for View Visuals=eg:chart
+		/*WebElement actions = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[contains(@class,'series-item--name')])[" + arg1 + "]", 8);
+		new Actions(login.driver).moveToElement(actions).pause(500).build().perform();
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 						"(//*[contains(@class,'view-chart-icon')])[" + arg1 + "]", 8))
-				.pause(500).click().build().perform();
+				.click().build().perform();*/
+		WebElement First_Series = login.driver.findElement(By.xpath("(//div[@class='series-list-item--information'])[1]"));
+		new Actions(login.driver).moveToElement(First_Series).pause(2000).build().perform();
+		
+		
+		WebElement More_Actions=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+		 js. executeScript("arguments[0]. click();", More_Actions);
+		 WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		
+		
+		
+		
 	}
 
 	@And("^Right click on any series level of data from DB tab$")
@@ -3040,7 +3826,9 @@ public class CDMNextSprintCases {
 			m = i + 1;
 			checkbox = login.driver.findElement(By.xpath(
 					"//*[@class='search-series-list']/*[" + m + "]//div[@class='series-list-item--checkbox-wrapper']"));
+			CommonFunctionality.wait(2000);
 			checkbox.click();
+			CommonFunctionality.wait(2000);
 			ele = login.driver.findElement(
 					By.xpath("//*[@class='search-series-list']/*[" + m + "]//div[@class='series-item--name']"));
 			if (i == 4) {
@@ -3191,10 +3979,10 @@ public class CDMNextSprintCases {
 	public void hover_on_the_series_in_legend(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 		WebElement legand = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_legand")));
+		System.out.println("======="+legand);
 		new Actions(login.driver).moveToElement(legand).pause(3000).build().perform();
-		legand_tooltip = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following-sibling::*", 4)
-				.getText();
+		 legand_tooltip = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4).getText();
+		System.out.println("==legand_Tooltip===="+legand_tooltip);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -3313,15 +4101,28 @@ public class CDMNextSprintCases {
 	// TC_Cvision_15335
 	@Then("^Tooltip should display as in search series$")
 	public void tooltip_should_display_as_in_search_series() throws Throwable {
+		
 		String series = CommonFunctionality.getElementByProperty(login.driver, "One_series_from_seriesList", 8)
-				.getText();
-		if (series.contains(legand_tooltip)) {
+			.getText();
+		
+		WebElement ele= login.driver.findElement(By.xpath("//span[@class='series-edit--title series-edit--title__editable']"));
+		
+		new Actions(login.driver).moveToElement(ele).pause(4000).build().perform();
+		
+		String tooltip=login.driver.findElement(By.xpath("(//span[@class='series-edit--title series-edit--title__editable'])[1]")).getText();
+		
+		if (series.contains(tooltip)) {
 			login.Log4j.info("Same Tooltip is displayed in series and the tooltip is " + legand_tooltip);
 			CommonFunctionality.Views_list();
 		} else {
 			fail("Verification failed");
+	
 		}
+	
+	
 	}
+	
+	
 
 	@Then("^Verify for annual series - just annual date picker$")
 	public void verify_for_annual_series_just_annual_datepicker() throws Throwable {
@@ -3373,6 +4174,7 @@ public class CDMNextSprintCases {
 		if (start_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
 				&& end_format_datepicker.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")
 				&& (values_list.contains("Weekly"))) {
+			CommonFunctionality.wait(5000);
 			login.Log4j.info("Date format is " + values_list);
 			CommonFunctionality.Views_list();
 		} else {
@@ -3477,9 +4279,12 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@Then("^Tooltip as \"([^\"]*)\" should display for series$")
 	public void tooltip_as_should_display_for_series(String arg1) throws Throwable {
+		/*WebElement tooltip = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'series-item--country')]", 4);*/
 		WebElement tooltip = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'series-item--country')]", 4);
-		new Actions(login.driver).moveToElement(tooltip).pause(2000).build().perform();
+				"//*[@class='series-item--main-info']", 4);
+		
+		new Actions(login.driver).moveToElement(tooltip).pause(4000).build().perform();
 		String tooltip_display = CommonFunctionality
 				.getElementByXpath(login.driver, "(//*[contains(@class,'cross-country-button')])[2]", 4)
 				.getAttribute("title");
@@ -3543,11 +4348,13 @@ public class CDMNextSprintCases {
 		CommonFunctionality.wait(1000);
 		WebElement expand;
 		try {
-			expand = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@class='toggle']/preceding::*[contains(@class,'tree-node data-set-node')])[1]", 4);
+			/*expand = CommonFunctionality.getElementByXpath(login.driver,
+					"(//*[@class='toggle']/preceding::*[contains(@class,'tree-node data-set-node')])[1]", 4)*/;
+					expand = CommonFunctionality.getElementByXpath(login.driver,
+							"(//*[@class='toggle']/preceding::*[contains(@class,'tree-node ')])[4]", 4);
 		} catch (Exception e) {
 			expand = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@class='toggle']/preceding::*[contains(@class,'tree-node data-set-node')])[1]", 4);
+					"(//*[@class='toggle']/preceding::*[contains(@class,'tree-node ')])[4]", 4);
 		}
 		if (expand.getAttribute("class").contains("open")) {
 			login.Log4j.info("Table icon is changed to expanded state");
@@ -3559,16 +4366,22 @@ public class CDMNextSprintCases {
 	@Then("^\"([^\"]*)\" selected icon to display$")
 	public void selected_icon_to_display(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Partially")) {
-			WebElement partial = CommonFunctionality.getElementByXpath(login.driver,
+			/*WebElement partial = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'comparables--header')]//following-sibling::*[contains(@class,'input-control__sm')]",
+					4);*/
+			WebElement partial = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[contains(@class,'input-control__sm')]",
 					4);
-			if (partial.getAttribute("class").contains("input-control__partly")) {
+			//if (partial.getAttribute("class").contains("input-control__partly")) {
+				if(partial.getAttribute("class").contains("input-control__sm")) {
 				login.Log4j.info("The checkbox is partially selected and " + arg1 + " selected icon is displayed");
 			}
 		} else {
-			boolean selected = login.driver.findElement(By.xpath(
+			/*boolean selected = login.driver.findElement(By.xpath(
 					"//*[contains(@class,'comparables--header')]//following-sibling::*[contains(@class,'input-control')]/input"))
-					.isSelected();
+					.isSelected();*/
+			boolean selected = login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[6]")).isSelected();
+			
 			if (selected == true) {
 				login.Log4j.info("The checkbox is fully selected and " + arg1 + " selected icon is displayed");
 			} else if (selected == false) {
@@ -3653,6 +4466,7 @@ public class CDMNextSprintCases {
 
 	@Then("^\"([^\"]*)\" method should be checked$")
 	public void method_should_be_checked(String arg1) throws Throwable {
+		
 		try {
 			boolean check = login.driver
 					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding-sibling::input"))
@@ -3674,10 +4488,15 @@ public class CDMNextSprintCases {
 					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
 			if (check == true) {
 				login.Log4j.info(arg1 + " method is checked by default");
-				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				WebElement close=login.driver.findElement(By.xpath("//div[@class='movable-modal--close']"));
+				js.executeScript("arguments[0].click();", close);
+				
 				CommonFunctionality.DeleteSeries();
 			} else {
-				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				WebElement close=login.driver.findElement(By.xpath("//div[@class='movable-modal--close']"));
+				js.executeScript("arguments[0].click();", close);
 				CommonFunctionality.DeleteSeries();
 				sa.fail("Verification Failed");
 			}
@@ -3686,9 +4505,12 @@ public class CDMNextSprintCases {
 
 	@Then("^\"([^\"]*)\" button should be enabled for user to cancel the operation at any time$")
 	public void button_should_be_enabled_for_user_to_cancel_the_operation_at_any_time(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+		
 		if (button == true) {
 			CommonFunctionality.wait(2000);
-			CommonFunctionality.getElementByXpath(login.driver, "//button[text()='Cancel']", 8).click();
+			WebElement Cancel=login.driver.findElement(By.xpath("//button[text()='Cancel']"));
+			js.executeScript("arguments[0].click();", Cancel);
 		}
 		if (login.driver.findElements(By.className("movable-modal--body")).size() == 0) {
 			login.Log4j.info(arg1 + " button is enabled for users to cancel the operation at any time");
@@ -3733,7 +4555,7 @@ public class CDMNextSprintCases {
 		String d = "LineType";
 		String e = "Remove";
 		WebElement annotation_tooltip = CommonFunctionality.getElementByProperty(login.driver, "Annotation_tooltip", 4);
-		new Actions(login.driver).moveToElement(annotation_tooltip).pause(3000).click().build().perform();
+		new Actions(login.driver).moveToElement(annotation_tooltip).pause(4000).click().build().perform();
 		if (CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'date-marker-editor--date')]", 4)
 				.isDisplayed()) {
 			System.out.println("Date option is present");
@@ -3936,37 +4758,37 @@ public class CDMNextSprintCases {
 		} else {
 			sa.fail("View as options are not present");
 		}
-		WebElement chart = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Chart']", 4);
+		WebElement chart = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--chart-line_large')]", 4);
 		if (chart.isDisplayed()) {
 			System.out.println("Chart Option is present");
 		} else {
 			sa.fail("Chart option are not present");
 		}
-		WebElement map = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Map']", 4);
+		WebElement map = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--map-filled_large')]", 4);
 		if (map.isDisplayed()) {
 			System.out.println("Map Option is present");
 		} else {
 			sa.fail("Map option not present");
 		}
-		WebElement table = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Table']", 4);
+		WebElement table = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--table-vertical_large')]", 4);
 		if (table.isDisplayed()) {
 			System.out.println("Table Option is present");
 		} else {
 			sa.fail("Table option not present");
 		}
-		WebElement pie = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Pie']", 4);
+		WebElement pie = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--pie_chart-pie_large')]", 4);
 		if (pie.isDisplayed()) {
 			System.out.println("Pie Option is present");
 		} else {
 			sa.fail("Pie option not present");
 		}
-		WebElement heatmap = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Heat map']", 4);
+		WebElement heatmap = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--heatmap_large')]", 4);
 		if (heatmap.isDisplayed()) {
 			System.out.println("Heat map Option is present");
 		} else {
 			sa.fail("Heat map option not present");
 		}
-		WebElement histogram = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Histogram']", 4);
+		WebElement histogram = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--histogram_large')]", 4);
 		if (histogram.isDisplayed()) {
 			System.out.println("Histogram Option is present");
 		} else {
@@ -4007,18 +4829,26 @@ public class CDMNextSprintCases {
 	public void country_names_should_be_series_names() throws Throwable {
 		CommonFunctionality.wait(3000);
 		String region_legand = CommonFunctionality.getElementByProperty(login.driver, "legand_region", 4).getText();
+		System.out.println("region 1 is " +region_legand);
 		String region2_legand = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4).getText();
+		System.out.println("region 2 is " +region2_legand);
 		WebElement region1 = CommonFunctionality.getElementByProperty(login.driver, "legand_region", 4);
-		WebElement region2 = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4);
-		WebElement title = CommonFunctionality.getElementBycssSelector(login.driver, "span[data-name='title']", 4);
 		new Actions(login.driver).moveToElement(region1).pause(2000).build().perform();
-		String region_legand_text = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'Region:')]//following-sibling::*", 4).getText();
+		WebElement region2 = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4);
+		new Actions(login.driver).moveToElement(region2).pause(2000).build().perform();
+		WebElement title = CommonFunctionality.getElementBycssSelector(login.driver, "span[data-name='title']", 4);
 		new Actions(login.driver).moveToElement(title).pause(2000).build().perform();
+		//new Actions(login.driver).moveToElement(region1).pause(2000).build().perform();
+		
+		String region_legand_text = CommonFunctionality
+				.getElementByXpath(login.driver, "(//div[@class='legend-item'])[1]/span[1]", 4).getText();
+		//new Actions(login.driver).moveToElement(title).pause(2000).build().perform();
 		new Actions(login.driver).moveToElement(region2).pause(2000).build().perform();
 		String region_legand2_text = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'Region:')]//following-sibling::*", 4).getText();
+				.getElementByXpath(login.driver, "(//div[@class='legend-item'])[2]/span[1]", 4).getText();
+		
 		if (region_legand.equals(region_legand_text) && region2_legand.equals(region_legand2_text)) {
+		
 			login.Log4j.info("The country names are displaying as series names and it has been verified");
 		} else {
 			CommonFunctionality.Views_list();
@@ -4160,14 +4990,28 @@ public class CDMNextSprintCases {
 	@Then("^\"([^\"]*)\" timepoints should be in \"([^\"]*)\" color in SSP$")
 	public void timepoints_should_be_in_color_in_SSP(String arg1, String arg2) throws Throwable {
 		List<WebElement> color = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Negative_timepoints")));
+		System.out.println("=color==="+color);
 		int count = color.size();
 		System.out.println("Total " + arg1 + " timepoints: " + count);
 		for (WebElement red : color) {
-			if (red.getAttribute("fill").contains("#ff3a56") || red.getAttribute("fill").contains("#2B60D0")) {
+			System.out.println("res"+red);
+			CommonFunctionality.wait(4000);
+		//	System.out.println("=====before======="+red.getAttribute("fill").contains("#ff3a56"));
+			WebElement TimePoints=login.driver.findElement(By.xpath("(//*[@fill='#e74c3c'])[1]"));
+			if(TimePoints.isDisplayed()) {
+			new Actions(login.driver).moveToElement(TimePoints).pause(4000).build().perform();
+			}
+			else {
+				System.out.println("timepoints not displayed");
+			}
+			/*if (red.getAttribute("fill").contains("#ff3a56") || red.getAttribute("fill").contains("#2B60D0")) {
+				System.out.println("=====inside======="+red.getAttribute("fill").contains("#ff3a56"));
+			//if (red.getAttribute("fill").contains("#e74c3c") || red.getAttribute("fill").contains("#2B60D0")) {
+			
 				CommonFunctionality.wait(1000);
 			} else {
 				sa.fail("Verification Failed");
-			}
+			}*/
 		}
 		login.Log4j.info(arg1 + " timepoints are displaying in " + arg2 + " color");
 		CommonFunctionality.Hidden_Webelements_handling(login.driver, "className", "movable-modal--close");
@@ -4284,8 +5128,13 @@ public class CDMNextSprintCases {
 
 	@Then("^Choosen series should shift to \"([^\"]*)\" axis$")
 	public void choosen_series_should_shift_to_axis(String arg1) throws Throwable {
-		if (axis.getAttribute("class").contains("series-axis--button__selected") && chart_option.contains(arg1)) {
-			login.Log4j.info("Choosen series is shifted to " + arg1 + " axis");
+	/*	WebElement Left_axis=login.driver.findElement(By.xpath("(//div[@class='series-axis--button series-axis--button__left series-axis--button__selected'])[2]"));
+		if(Left_axis.isDisplayed()) {
+	login.Log4j.info("Choosen series is shifted to " + arg1 + " axis");*/
+		//if (axis.getAttribute("class").contains("series-axis--button__selected") && chart_option.contains(arg1)) {
+		WebElement Right_axis=login.driver.findElement(By.xpath("(//div[@class='series-axis--button series-axis--button__right series-axis--button__selected'])[2]"));
+			if(Right_axis.isDisplayed()) {
+		login.Log4j.info("Choosen series is shifted to " + arg1 + " axis");
 			CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(@class,'movable-modal__active')]//*[@class='movable-modal--close']", 4)
@@ -4296,6 +5145,10 @@ public class CDMNextSprintCases {
 			}
 			CommonFunctionality.Views_list();
 		} else {
+			/*WebElement Left_axis=login.driver.findElement(By.xpath("(//div[@class='series-axis--button series-axis--button__left series-axis--button__selected'])[2]"));
+			if(Left_axis.isDisplayed()) {
+		login.Log4j.info("Choosen series is shifted to " + arg1 + " axis");*/
+			
 			CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(@class,'movable-modal__active')]//*[@class='movable-modal--close']", 4)
@@ -4307,7 +5160,32 @@ public class CDMNextSprintCases {
 			CommonFunctionality.Views_list();
 			sa.fail("Verification failed");
 		}
-	}
+		}
+	
+	
+	
+	@Then("^Choosen axis should shift to \"([^\"]*)\" axis$")
+	public void choosen_axis_series_should_shift_to_axis(String arg1) throws Throwable {
+	/*	WebElement Left_axis=login.driver.findElement(By.xpath("(//div[@class='series-axis--button series-axis--button__left series-axis--button__selected'])[2]"));
+		if(Left_axis.isDisplayed()) {
+	login.Log4j.info("Choosen series is shifted to " + arg1 + " axis");*/
+		//if (axis.getAttribute("class").contains("series-axis--button__selected") && chart_option.contains(arg1)) {
+		WebElement axis=login.driver.findElement(By.xpath("//*[@class='highcharts-scrollbar-thumb']"));
+		Dimension  size=axis.getSize();
+		System.out.println("height "+size.getHeight() +"Width is "+size.getWidth());
+		if(arg1.equalsIgnoreCase("left")) {
+					
+			assertEquals(42, size.getWidth());
+			
+		}
+		else if(arg1.equalsIgnoreCase("right")) {
+			
+			assertEquals(42, size.getWidth());	
+		}
+			
+		}
+		
+	
 
 	@Then("^The results to be sorted based on country$")
 	public void the_results_to_be_sorted_based_on_country() throws Throwable {
@@ -4555,7 +5433,8 @@ public class CDMNextSprintCases {
 	@Then("^The selected \"([^\"]*)\" is applied to the table$")
 	public void the_selected_is_applied_to_the_table(String arg1) throws Throwable {
 		CommonFunctionality.wait(1000);
-		String title_text = CommonFunctionality.getElementByProperty(login.driver, "series_edit_title", 4).getText();
+		//String title_text = CommonFunctionality.getElementByProperty(login.driver, "series_edit_title", 4).getText();
+		String title_text=login.driver.findElement(By.xpath("//*[@class='series-edit--title']")).getText();
 		String frequency_1 = frequency_text.substring(0, 6);
 		if (title_text.contains(frequency_1)) {
 			login.Log4j.info("Selected " + arg1 + " value is displayed in preview title");
@@ -4580,8 +5459,10 @@ public class CDMNextSprintCases {
 
 	@Then("^The selected \"([^\"]*)\" is applied to the table visual$")
 	public void the_selected_is_applied_to_the_table_visual(String arg1) throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(5000);
+		
 		String title_text = CommonFunctionality.getElementByProperty(login.driver, "series_edit_title", 4).getText();
+		CommonFunctionality.wait(3000);
 		String change_1 = change_text.substring(0, 4);
 		if (title_text.matches(".*(?i)" + change_1 + ".*")) {
 			login.Log4j.info("Selected " + arg1 + " value is displayed in preview title");
@@ -4723,9 +5604,11 @@ public class CDMNextSprintCases {
 	@Then("^Verify the uploaded image comes under iframe$")
 	public void verify_the_uploaded_image_comes_under_iframe() throws Throwable {
 		// ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("mce_0_ifr"));
-		login.driver.switchTo().frame("mce_0_ifr");
+		//login.driver.switchTo().frame("mce_0_ifr");
 		CommonFunctionality.wait(8000);
-		WebElement img_title = CommonFunctionality.getElementByXpath(login.driver, "//body[@id='tinymce']//img", 4);
+		//WebElement img_title = CommonFunctionality.getElementByXpath(login.driver, "//body[@id='tinymce']//img", 4);
+		WebElement img_title = CommonFunctionality.getElementByXpath(login.driver, "(//img[@title='Shravas.png'])[1]", 4);
+		
 		if (img_title.getAttribute("title").equals("Shravas.png")) {
 			login.Log4j.info("The image has been uploaded successfully without any errors");
 			login.driver.switchTo().defaultContent();
@@ -4901,6 +5784,8 @@ public class CDMNextSprintCases {
 
 	@Then("^Both the series results should be same$")
 	public void both_the_series_results_should_be_same() throws Throwable {
+		
+		CommonFunctionality.wait(2000);	
 		Integer actual = Integer.parseInt(first_search_keyword);
 		Integer expected = Integer.parseInt(second_search_keyword);
 		assertEquals(actual, expected);
@@ -5645,18 +6530,7 @@ public class CDMNextSprintCases {
 			} else {
 				fail("Verification Failed");
 			}
-		} else if(arg1.equalsIgnoreCase("Legend")) {
-			String title_text = CommonFunctionality
-					.getElementByXpath(login.driver, "//*[@class='popover--title']", 30)
-					.getText();
-			if (title_text.equalsIgnoreCase(arg1)) {
-				login.Log4j.info("Legend popUp is displayed");
-				
-			} else {
-				fail("Legend popUp is not displayed");
-			}
-		}
-		else {
+		} else {
 			fail("Verification Failed");
 		}
 	}

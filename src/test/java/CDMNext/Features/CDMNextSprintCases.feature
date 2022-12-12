@@ -4,7 +4,7 @@ Feature: Verifying Sprintcases
   Scenario: TC_Cvision_15211_01: Verify the quick functions in All functions popup
     And Add to myseries
     And Select a series on right
-    And Click on functions wizard from right panel series
+    And Click on functions wizard option  from right panel series
     And Check for the function buttons
     Then Accumulate-QTD, YTD;Calculate change- YOY,%YOY,POP,%POP;Currency - USD, RMB, GBP, JPY, RUB, MYR, EUR;Aggregate - Sum, Avg & frequency dropdown
 
@@ -12,11 +12,11 @@ Feature: Verifying Sprintcases
   Scenario: TC_Cvision_15211_02: Check for the tooltips of quick functions in 'All functions' popup
     And Add few series to myseries
     And Select a series on right
-    And Click on functions wizard from right panel series
+    And Click on functions wizard option  from right panel series
     And Highlight the functions and check for the tooltips
     Then Tooltips should display for each functions methods
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16283_01: Verify if series selection is removed after chart visual creation using hover options
     And Reset the values in "Databases" tab
     And Select 5 series and click on chart option
@@ -29,97 +29,94 @@ Feature: Verifying Sprintcases
     And Click on more actions to create "View as Chart"
     Then Series selected should be removed
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16283_03: Verify if series selection is removed after table visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
-    And Click on more actions to create "View as Table"
+    And Click on more actions and create "View as Table" 
     Then Series selected should be removed
 
   @SprintCases
   Scenario: TC_Cvision_16283_04: Verify if series selection is removed after table visual creation using more actions
     And Reset the values in "Series" tab
     And Right click on any series level of data from series
-    And Click on more actions to create "View as Table"
+    And Click on more actions and create "View as Table" 
     Then Series selected should be removed
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16283_05: Verify if series selection is removed after map visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
-    And Click on more actions to create "View as Map"
+    And Create a Map.
     Then Series selected should be removed
 
   @SprintCases
   Scenario: TC_Cvision_16283_06: Verify if series selection is removed after map visual creation using more actions
     And Reset the values in "Series" tab
     And Right click on any series level of data from series
-    And Click on more actions to create "View as Map"
+    And Create a Map.
     Then Series selected should be removed
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16283_07: Verify if series selection is removed after pie visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
-    And Click on more actions
-    And Choose "View as ..." > "Pie"
+    And Create Pie.
     Then Series selected should be removed
 
   @SprintCases
   Scenario: TC_Cvision_16283_08: Verify if series selection is removed after pie visual creation using more actions
     And Reset the values in "Series" tab
     And Right click on any series level of data from series
-    And Click on more actions
-    And Choose "View as ..." > "Pie"
+    And Click on more actions dropdown	
+    And Create Pie. 
     Then Series selected should be removed
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16283_09: Verify if series selection is removed after heatmap visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
-    And Click on more actions
-    And Choose "View as ..." > "Heat map"
+    And Click on more actions dropdown
+    And create HeatMap. 
     Then Series selected should be removed
 
   @SprintCases
   Scenario: TC_Cvision_16283_10: Verify if series selection is removed after heatmap visual creation using more actions
     And Reset the values in "Series" tab
     And Right click on any series level of data from series
-    And Click on more actions
-    And Choose "View as ..." > "Heat map"
+    And Click on more actions dropdown
+    And create HeatMap. 
     Then Series selected should be removed
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16283_11: Verify if series selection is removed after histogram visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
-    And Click on more actions
-    And Choose "View as ..." > "Histogram"
+    And Click on more actions dropdown
+    And create a Histogram.
     Then Series selected should be removed
 
   @SprintCases
   Scenario: TC_Cvision_16283_12: Verify if series selection is removed after histogram visual creation using more actions
     And Reset the values in "Series" tab
     And Right click on any series level of data from series
-    And Click on more actions
-    And Choose "View as ..." > "Histogram"
+    And Click on more actions dropdown
+    And create a Histogram.
     Then Series selected should be removed
 
   @SprintCases
    Scenario: TC_Cvision_15402_01: Check if the axis date format - Automatic is applied
     And Search for the series with SID "385345667"
     And Click on more actions
-    And Open a "Chart" visual
     And Click on "Edit" visual
     And Choose "Time axis" > "advanced settings" > "Date format" > "Auto" >
     And Clicking "Save" option
     Then "Auto" date format has to reflect on the "Chart" visual
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15402_02: Check if the axis date format - Custom is applied
     And Search for the series with SID "385345667"
     And Click on more actions
-    And Open a "Chart" visual
     And Click on "Edit" visual
     And Choose "Time axis" > "advanced settings" > "Date format" > "Custom" >
     And Select date format as "YYYY/MM/DD"
@@ -129,9 +126,8 @@ Feature: Verifying Sprintcases
   @SprintCases
   Scenario: TC_Cvision_15335: Check for possibility to hover over smart series tooltip
     And Select few series
-    And Click on more actions
-    And Open a "Chart" visual
-    And Hover on the series "Name:" in legend
+    And Click on more actions to create=>View as chart.
+    And Hover on the series "Name" in legend
     Then Tooltip should display as in search series
 
   @SprintCases
@@ -142,7 +138,6 @@ Feature: Verifying Sprintcases
     And User has clicked on "Apply filter"
     And Search for the series with SID "304366404"
     And Click on more actions
-    And Open a "Chart" visual
     And Check the display day-unit date picker
     Then Verify for annual series - just annual date picker
 
@@ -153,7 +148,6 @@ Feature: Verifying Sprintcases
     And User has clicked on "Apply filter"
     And Search for the series with SID "359237987"
     And Click on more actions
-    And Open a "Chart" visual
     And Check the display day-unit date picker
     Then Verify for semi annual series - month and yr date picker
 
@@ -164,7 +158,6 @@ Feature: Verifying Sprintcases
     And User has clicked on "Apply filter"
     And Search for the series with SID "360461777"
     And Click on more actions
-    And Open a "Chart" visual
     And Check the display day-unit date picker
     Then Verify for quarterly series - month and yr date picker
 
@@ -174,8 +167,7 @@ Feature: Verifying Sprintcases
     And User has selected "Monthly" frequency unit
     And User has clicked on "Apply filter"
     And Search for the series with SID "107958108"
-    And Click on more actions
-    And Open a "Chart" visual
+    And Click on more actions to create=>View as chart.
     And Check the display day-unit date picker
     Then Verify for monthly series - month and yr date picker
 
@@ -186,7 +178,6 @@ Feature: Verifying Sprintcases
     And User has clicked on "Apply filter"
     And Search for the series with SID "389772587"
     And Click on more actions
-    And Open a "Chart" visual
     And Check the display day-unit date picker
     Then Verify for weekly series - day, month and yr date picker
 
@@ -197,7 +188,6 @@ Feature: Verifying Sprintcases
     And User has clicked on "Apply filter"
     And Search for the series with SID "114157808"
     And Click on more actions
-    And Open a "Chart" visual
     And Check the display day-unit date picker
     Then Verify for daily series - day, month and yr date picker
 
@@ -208,7 +198,6 @@ Feature: Verifying Sprintcases
     And User has clicked on "Apply filter"
     And Search for the series with SID "114157808"
     And Click on more actions
-    And Open a "Chart" visual
     And Check the display day-unit date picker
     Then Verify that the date picker should display day,month and yr
 
@@ -219,57 +208,53 @@ Feature: Verifying Sprintcases
     And User has clicked on "Apply filter"
     And Search for the series with SID "205441502"
     And Click on more actions
-    And Open a "Chart" visual
     And Check the display day-unit date picker
     Then Verify that the date picker should display month and yr
 
   @SprintCases
   Scenario: TC_Cvision_15242_02: Verify stroke option for non-line charts
     And Search for the series "360937287"
-    And Click on more actions to create "View as Chart"
+   And Click on more actions to create=>View as chart.
     And Click on "Edit" visual
     And Select type as Column chart
     And Check "stroke" option
     Then Stroke options to be in disabled state
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15242_03: Verify move to right for per-series
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
-    And Click on "Edit" visual
-    And Check "Move to right" option
-    Then Choosen series should shift to "right" axis
+    And Check "Move to right" axis option
+    Then Choosen axis should shift to "right" axis
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15242_04: Verify move to left for per-series
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
-    And Click on "Edit" visual
-    And Check "Move to left" option
-    Then Choosen series should shift to "left" axis
+    And Check "Move to left" axis option
+    Then Choosen axis should shift to "left" axis
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15262_01: Check if the Chart Time within option is synced with timeframe period
     And Search for the series "1053401"
-    And Click on more actions to create "View as Chart"
+   And Click on more actions to create=>View as chart.
     And In Chart tab click on timeframe date field and change date
     And Click "Save period" button
     And Click on "Edit" visual
     And Check Time axis> Time within period
     Then The time within period should sync with chart "timeframe" period.
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15262_02: Check if the Chart within option is synced with zoom period
     And Search for the series "360937287"
-    And Click on more actions to create "View as Chart"
+    And create a chart for the above series.
     And Select "1Y" tab
     And Click "Save period" button	
     And Get date from chart
     And Click on "Edit" visual
-    #And Check Time axis> Time within period
     Then Time within period should sync with chart "zoom" period
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16457: Validate the message for comaprables when no indicators available for specific countries
     And Goto comparables search tab
     And Click on "All Regions" dropdown
@@ -287,7 +272,6 @@ Feature: Verifying Sprintcases
   Scenario: TC_Cvision_16312_02: Check the tooltip for table-level comparables hover
     And Click on closing active comparatable icon and "Databases" tab
     And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual"
-    And Hover on icon
     Then Tooltip as "View table cross country" should display for table
 
   @SprintCases
@@ -315,10 +299,10 @@ Feature: Verifying Sprintcases
     And Click on closing active comparatable icon and "Databases" tab
     And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual"
     And Click on series level
-    And Click on cross icon indicator in comparable tab
+    Then Tooltip as "View series cross country" should display for series
     Then Default tree should be shown
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16312_07: Verify region filter selection
     And Click on closing active comparatable icon and "Databases" tab
     And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual"
@@ -330,7 +314,7 @@ Feature: Verifying Sprintcases
     And Check if the result displays only for the selected regions
     Then "See all countries" should display for region selection
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_16312_08: Verify 'All countries' display in comparables tab
     And Click on closing active comparatable icon and "Databases" tab
     And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "IMF.IFS: Gross Domestic Product: by Expenditure"
@@ -405,7 +389,8 @@ Feature: Verifying Sprintcases
   @SprintCases
   Scenario: TC_Cvision_13924_2: Verify cross icon for series
     And Click on closing active comparatable icon and "Series" tab
-    And Hover to click on create "Chart"
+    #And Click on more actions
+   And Hover to click on create "Chart"
     And Click on "Edit" visual
     And Check the legend icon at visual and edit visual for series
     Then "Cross icon" to be present and its "Remove series"
@@ -414,20 +399,20 @@ Feature: Verifying Sprintcases
   Scenario: TC_Cvision_14824: Verify label default in edit visual
     And Select few series
     And Click on more actions
-    And Open a "Chart" visual
+   # And Open a "Chart" visual
     And Click on "Edit" visual
     And Choose "Labels" > "advanced settings" > "Labels" > "Specific" >
     Then "Last observations" be selected by default
 
-  @SprintCases
-  Scenario: TC_Cvision_15126: Verify validation if no observations are found within requested range in Date
-    And Search for the series "408925837"
-    And Select a series on right
-    And Perform "Download" operation
-    And Perform download with timeframe "Range": "2000-12-31" to "2001-12-31"
-    Then The Message "No observations are found within requested range" should be displayed
+  #@SprintCases
+  #Scenario: TC_Cvision_15126: Verify validation if no observations are found within requested range in Date
+    #And Search for the series "408925837"
+    #And Select a series on right
+    #And Perform "Download" operation
+    #And Perform download with timeframe "Range": "2000-12-31" to "2001-12-31"
+    #Then The Message "No observations are found within requested range" should be displayed
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_14392_01: Verify if series positions changes for 'Bring to front' selection
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
@@ -439,7 +424,7 @@ Feature: Verifying Sprintcases
     And Click "World Trend Plus" > "CEIC Leading Indicator" > "CEIC Leading Indicator" > "CEIC Leading Indicator:"
     Then The Message "Footnote is limited for your selection, you can view related footnote below." be displayed
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_14635: Trend method should be default selection in Function Toolbar
     And Add few series to myseries
     And Select a series on right
@@ -447,7 +432,7 @@ Feature: Verifying Sprintcases
     And choose "HPFILTER" function
     Then "Trend" method should be checked
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15209: Verify UI changes for Update function
     And Add few series to myseries
     And Select a series on right
@@ -455,7 +440,7 @@ Feature: Verifying Sprintcases
     And choose "UPDATE" function
     Then "Fill gaps and future time points" method should be checked
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_6192_1: Verify if selection of function should enable Cancel button in Smart toolbar
     And Add few series to myseries
     And Select a series on right
@@ -464,7 +449,7 @@ Feature: Verifying Sprintcases
     And choose "HPFILTER" function
     Then "Cancel" button should be enabled for user to cancel the operation at any time
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_6192_2: Verify if Escape function can cancel the operation of Selection of function in Smart toolbar
     And Add few series to myseries
     And Select a series on right
@@ -473,22 +458,24 @@ Feature: Verifying Sprintcases
     And Press "Escape" button in keyboard
     Then "Escape" button should be enabled for user to cancel the operation at any time
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_13416_1: Verify the tooltip of date marker
     And Select few series
-    And Click on more actions
-    And Open a "Chart" visual
+    And Click on more actions dropdown
+    And create a chart
+    #And Click on more actions
+    #And Open a "Chart" visual
     And Click on "Edit" visual
     And click on "-annotations__horizontal" option under annotations
     And Click on "Single date" option from annotation selection
     And hover on to "Annotations"
     Then "Click to add date marker" tooltip should present
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_13416_2: Verify the options of date marker
     And Select few series
     And Click on more actions
-    And Open a "Chart" visual
+   # And Open a "Chart" visual
     And Click on "Edit" visual
     And click on "-annotations__horizontal" option under annotations
     And Click on "Single date" option from annotation selection
@@ -499,14 +486,11 @@ Feature: Verifying Sprintcases
   Scenario: TC_Cvision_12162: Verify if custom format is retained for new visual
     And Select few series
     And Click on more actions
-    And Open a "Chart" visual
+   # And Open a "Chart" visual
     And Click on "Edit" visual
     And Uncheck the "Zoom" and "Slider" options
     And Create a new template and "Set as default for future Chart visual"
     And Clicking "Save" option
-    And Select few series
-    And Click on more actions
-    And Open a "Chart" visual
     And Click on "Edit" visual
     And "Delete template" the newly created template
     Then The new visual should save the changes
@@ -515,73 +499,81 @@ Feature: Verifying Sprintcases
   Scenario: TC_Cvision_15495: Check the name for add related series popup
     And Select few series
     And Click on more actions
-    And Open a "Chart" visual
+   # And Open a "Chart" visual
     And Click on "Add related series" visual
     Then The popup name has to be "Add related series"
 
   @SprintCases
   Scenario: TC_Cvision_15497_01: Verify if manage all option is hidden if there is only 1 series for replacement
     And Add few series to myseries
-    And Search for the series with SID "253736802"
-    And Add few series to myseries
-    And Select all series from myseries and click on "Related Series" option
+     Given User selects Add continous series
+    And User has clicked on "Apply filter"
+    And Search for the series with SID "253736802" 
+    And click on add icon
+    #And Add few series to myseries
+    And Select all series from myseries and click on "Related series" option
     And Click on "Continuous" tab in popup
     Then "Manage all" and "Select all" options should "not" display
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15497_03: Verify if manage all option is hidden if there is only 1 series for forecast
-    And Add few series to myseries
-    And Search for the series with SID "32189801"
-    And Add few series to myseries
-    And Select all series from myseries and click on "Related Series" option
+  And Login back to internal user with user "vvagicharla" and password "ZAQ!2wsx@7989"
+   # And Add few series to myseries
+    And Search for  series with SID "32189801"
+   # And Add few series to myseries
+    And Select all series from myseries and click on "Related series" option
     And Click on "Forecast" tab in popup
     Then "Manage all" and "Select all" options should "not" display
 
   @SprintCases
   Scenario: TC_Cvision_15497_04: Verify if manage all option is hidden if there is only 1 dependency series
     And Add few series to myseries
-    And Search for the series with SID "389705827"
-    And Add few series to myseries
-    And Select all series from myseries and click on "Related Series" option
+    And Search for  series with SID "389705827"
+    #And Add few series to myseries
+    And Select all series from myseries and click on "Related series" option
     And Click on "Dependencies" tab in popup
     Then "Manage all" and "Select all" options should "not" display
 
   @SprintCases
   Scenario: TC_Cvision_15909_01: Verify if preserve formula is hidden for series not applied with function
-    And Add few series to myseries
-    And Search for the series with SID "253736802"
-    And Add few series to myseries
-    And Select all series from myseries and click on "Related Series" option
+    And click on More dropdown and select continuos checkbox.
+    And User has clicked on "Apply filter"
+    And Add few series to myseries tab
+  #  And Search for the series with SID "253736802"
+     And click on add icon
+   #And Add few series to myseries
+    And Select all series from myseries and click on "Related series" option
     And Click on "Continuous" tab in popup
     Then Preserve "formula" option should "not" display
 
   @SprintCases
   Scenario: TC_Cvision_15909_02: Verify if preserve formula is hidden for series not applied with function
-    And Add few series to myseries
-    And Search for the series with SID "32189801"
-    And Add few series to myseries
-    And Select all series from myseries and click on "Related Series" option
+    #And Add few series to myseries
+    And Search for  series with SID "32189801"
+    #And Add few series to myseries
+    And Select all series from myseries and click on "Related series" option
     And Click on "Forecast" tab in popup
     Then Preserve "formula" option should "not" display
 
   @SprintCases
   Scenario: TC_Cvision_15909_03: Verify if preserve names is hidden for series not available with differently named dependency series
-    And Add few series to myseries
-    And Search for the series with SID "389705827"
-    And Add few series to myseries
-    And Select all series from myseries and click on "Related Series" option
+    And Login back to internal user with user "vvagicharla" and password "ZAQ!2wsx@7989"
+   # And Add few series to myseries
+    And Search for  series with SID "389705827"
+   # And Add few series to myseries
+    And Select all series from myseries and click on "Related series" option
     And Click on "Dependencies" tab in popup
     Then Preserve "names" option should "not" display
 
-  @SprintCases
-  Scenario: TC_Cvision_15338_01: Verify the smart tooltips of attributes from seris tab
-    And Click on any series from series tab
-    Then Verify for "Observations" and "Classification"
-
-  @SprintCases
-  Scenario: TC_Cvision_15338_02: Verify the smart tooltips of attributes from db tab
-    And Hovor first series from db list
-    Then Verify for "Observations" and "Classification"
+	 # @SprintCases
+	  #Scenario: TC_Cvision_15338_01: Verify the smart tooltips of attributes from seris tab
+	   # And Click on any series from series tab
+	    #Then Verify for "Observations" and "Classification"
+	
+	  #@SprintCases
+	  #Scenario: TC_Cvision_15338_02: Verify the smart tooltips of attributes from db tab
+	   # And Hovor first series from db list
+	    #Then Verify for "Observations" and "Classification"
 
   @Cvision
   Scenario: TC_Cvision_15346: Check if few icons are hidden in collapsed state of SSP
@@ -599,13 +591,13 @@ Feature: Verifying Sprintcases
     And Hover the "series-preview-modal-header--link"
     Then Smart tooltip should popup
 
-  @SprintCases
-  Scenario: TC_Cvision_16243: Verify for minimize and full screen controls on the video tutorials window
-    And Click "Help" > "Video tutorials"
-    And Check for "Fullscreen" and "Exit Fullscreen" controls
-    Then Both should be available
+  #@SprintCases...need to check
+  #Scenario: TC_Cvision_16243: Verify for minimize and full screen controls on the video tutorials window
+    #And Click "Help" > "Video tutorials"
+    #And Check for "Fullscreen" and "Exit Fullscreen" controls
+    #Then Both should be available
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_15749: Verify title bar actions for breakdown series
     And Open SSP for the series "383937057"
     And Click on "Drilldown" icon from SSP window
@@ -613,7 +605,7 @@ Feature: Verifying Sprintcases
     And Open SSP window
     Then "Add series" , "View as" , "Watch" , "Download" actions should be possible
 
-  @SprintCases
+  @SprintCases1
   Scenario: TC_Cvision_7067_01: Verify if series name are same, then country name is displayed as series name in chart
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
@@ -671,8 +663,9 @@ Feature: Verifying Sprintcases
 
   @SprintCases
   Scenario: TC_Cvision_16499_03: Verify if tables have negative timepoint indicated in red color
-    And Search for the series "322664401"
-    And Click on more actions to create "View as Table"
+   # And Search for the series "322664401"
+    And Click on more actions and create "View as Table" 
+   #And Click on more actions to create "View as Table"
     And Check for the font color of negative timepoints in table
     Then Negative timepoints should be in red color
 
@@ -680,7 +673,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_15341_01: Verify selecting attributes under attributes popup
     And Select few series
-    And Click on more actions to create "View as Table"
+   #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Check the count of attributes in table
     And Click on Attributes from the table list
     And Select few attributes "Subnational"
@@ -689,7 +683,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_15341_02: Verify 'select all' check box when all the attributes selected
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+     And Click on more actions=>"View as Table"
     And Click on Attributes from the table list
     And Select attributes checkbox
     And Click title attribute checkbox
@@ -698,7 +693,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_15341_03: Verify unselect all attributes with unchecking main checkbox
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+     And Click on more actions=>"View as Table"
     And Click on Attributes from the table list
     And Select attributes checkbox
     And Double click title attribute checkbox
@@ -707,7 +703,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_15341_04: Verify partly check attributes
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+     And Click on more actions=>"View as Table"
     And Click on Attributes from the table list
     And Select attributes checkbox
     Then "Partial" attributes should be selected
@@ -717,29 +714,31 @@ Feature: Verifying Sprintcases
     And Go to search
     And hightlight any one series from search list and click on  "i" icon .
     And Open SSP window
-    And Verify the title in SSP Window
+    And Verify the title in SSP Window	
+    
     And Click on Ask Question link in SSP window
     Then The title should be "Ask a question about"
 
-  @CDMNextsprintcases3.1
-  Scenario: TC_15269_01: Verify ascending and descending icon for 'Recently update' sort by
-    And Search for the series with SID "205424302;205441502;205428302"
-    And Select 2 series and click on "A" option
-    And Select all series from myseries and click on "Customize your selection" option
-    And Customize popup is opened and Click on "Sort series by" option
-    And Click "Recently Updated" option from dropdown
-    And Clicking "Save" option
-    Then Ascending and descending icon should not displayed for "Recently Updated"
+ # @CDMNextsprintcases3.1
+  #Scenario: TC_15269_01: Verify ascending and descending icon for 'Recently update' sort by
+   # And Search for the series with SID "205424302;205441502;205428302"
+    #And Select 2 series and click on "A" option
+    #And Select all series from myseries and click on "Customize your selection" option
+    #And Customize popup is opened and Click on "Sort series by" option
+    #And Click "Recently Updated" option from dropdown
+    #And Clicking "Save" option
+    #Then Ascending and descending icon should not displayed for "Recently Updated"
 
-  @CDMNextsprintcases3.1
-  Scenario: TC_14142_01: Verify downloading CNA packages
-    And Click "Help" > "Excel Addin"
-    Then User should download the builds
+  #@CDMNextsprintcases3.1
+  #Scenario: TC_14142_01: Verify downloading CNA packages
+    #And Click "Help" > "Excel Addin"
+    #Then User should download the builds
 
   @CDMNextsprintcases3.1
   Scenario: TC_14668_01: Verify zebra selection under Edit table
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Choose options "Zebra" > "Rows"
     Then Should enable only "Rows" coloring when selected zebra checkbox
@@ -748,35 +747,40 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_14172_01: Verify click on '+' icon and save option to save a custome style
     And Select few series
-    And Click on more actions to create "View as Table"
+   # And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Uncheck the "Attributes" and "Wrap text" options
     And Create a new template
     Then The new template should be created in the beginning of the list
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And "Delete template" the newly created customized template
 
   @CDMNextsprintcases3.1
   Scenario: TC_14172_04: Verify cancel icon
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Uncheck the "Attributes" and "Wrap text" options
     And Create a new template and "Template popup" and click "Cancel" icon
     Then The popup should be closed
 
-  @CDMNextsprintcases3.1
+  @CDMNextsprintcases3.11
   Scenario: TC_Cvision_12162: Verify default style template for future visual creation
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Uncheck the "Attributes" and "Wrap text" options
     And Create a new template and "Set as default for future Table visual"
     And Clicking "Save" option
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And "Delete template" the newly created template
     Then The new visual should be created with selected template style
@@ -784,7 +788,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_Cvision_13924_1: Verify cogwheel icon for visual
     And Select few series
-    And Click on more actions to create "View as Table"
+   # And Click on more actions to create "View as Table"
+   And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Check the legend icon at visual and edit visual
     Then "Rename" , "Frequency" , "Currency" and "Change" should be displayed
@@ -792,7 +797,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_13924_02: Cogwheel - Verify Rename
     And Select few series
-    And Click on more actions to create "View as Table"
+   # And Click on more actions to create "View as Table"
+   And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Check the legend icon at visual and edit visual
     And Click "Rename" text from cogwheel
@@ -801,7 +807,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_13924_03: Cogwheel - Verify Frequency
     And Select few series
-    And Click on more actions to create "View as Table"
+   # And Click on more actions to create "View as Table"
+   And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Check the legend icon at visual and edit visual
     And Click "Frequency" text from cogwheel
@@ -809,9 +816,11 @@ Feature: Verifying Sprintcases
     Then The selected "Frequency" is applied to the table
 
   @CDMNextsprintcases3.1
+  
   Scenario: TC_13924_05: Cogwheel - Verify Change
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Check the legend icon at visual and edit visual
     And Click "Change" text from cogwheel
@@ -829,7 +838,8 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_15651_01: Verify Selected style visiblity in the template list
     And Select few series
-    And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
+   # And Click on more actions to create "View as Table"
     And Click on "Edit Table" visual
     And Uncheck the "Attributes" and "Wrap text" options
     And Create a new template and "Template popup"
@@ -843,27 +853,30 @@ Feature: Verifying Sprintcases
     And Observe the "Add related series" button
     Then "Add related series" should not be available for empty visual
 
-  @Cvision
-  Scenario: TC_14173_01: Verify Unit in histogram tooltip
-  And Right click on any series level of data from series
-  And Click on more actions
-  And Choose "View as ..." > "Histogram"
-  And Capture the "Unit:" tooltip indicator value
-  Then  "Unit" should be shown on tooltip
-  
+  #n1
+  #Scenario: TC_14173_01: Verify Unit in histogram tooltip
+  #And Right click on any series level of data from series
+  #And Click on more actions
+  #And Choose "View as ..." > "Histogram"
+  #And Capture the "Unit:" tooltip indicator value
+  #Then  "Unit" should be shown on tooltip
   @CDMNextsprintcases3.1
   Scenario: TC_15656_01: Verify Histogram methodology
     And Right click on any series level of data from series
-    And Click on more actions
-    And Choose "View as ..." > "Histogram"
+    #And Click on more actions
+    And Click on more actions dropdown
+    And create a Histogram.
+   # And Choose "View as ..." > "Histogram"
     And Mouse over to "help-button"
     Then Histogram methodology info should be displayed in tooltip
 
   @CDMNextsprintcases3.1
   Scenario: TC_15656_02: Verify Histogram methodology in Insight view mode
     And Right click on any series level of data from series
-    And Click on more actions
-    And Choose "View as ..." > "Histogram"
+    #And Click on more actions
+    And Click on more actions dropdown
+    And create a Histogram.
+   # And Choose "View as ..." > "Histogram"
     And Click "File" > "View"
     And Click the new insight option
     And Mouse over to "help-button" from insights
@@ -876,22 +889,21 @@ Feature: Verifying Sprintcases
     And Hover on to the "Open Contents"
     Then "Open Contents" tooltip should be displayed
 
-  @CDMNextsprintcases3.1
+  @CDMNextsprintcases3.11
   Scenario: TC_13651_01: Verify upload popup behaviour when the upload is completed
     And Click to create an empty visual
-    And Click "insert Image" option from empty list
+    And Click "Image" option from empty list
     And Click "Upload image" button to upload images
     Then Verify the uploaded image comes under iframe
 
-  @Cvision
-  Scenario: TC_16290_01: Verify shadow for notification panel
-  And Open notification panel
-  Then Shadow should be applied to notification panel
-  
-  @CDMNextsprintcases3.1
+  #@Cvision1... not executing
+  #Scenario: TC_16290_01: Verify shadow for notification panel
+  #And Open notification panel
+  #Then Shadow should be applied to notification panel
+  @CDMNextsprintcases3.11
   Scenario: TC_14907_01: Verify message for non data visual copy
     And Click to create an empty visual
-    And Click "insert Image" option from empty list
+    And Click "Image" option from empty list
     And Click "Upload image" button to upload images
     And Click "Copy" button in images wizard
     Then "Image copied" message for non data visual should be displayed
@@ -899,7 +911,7 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_14601_01: Verify confirmation message for copy link
     And Click on my insights
-    And Click "View as a table" option from empty list
+    And Click "View as a table"  from empty list
     And Right click on Insight name and click on "Copy link"
     Then The message should be "Link is copied"
     And Navigating to back
@@ -907,7 +919,7 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_14601_02: Verify confirmation message for copy Insight
     And Click on my insights
-    And Click "View as a table" option from empty list
+    And Click "View as a table"  from empty list
     And Right click on Insight name and click on "Copy"
     And Click on the insight button "Copy Insight"
     Then The message should be "Selected insight(s) copied"
@@ -925,17 +937,17 @@ Feature: Verifying Sprintcases
     And Select "Series" tab in header
     Then Tooltip only displayed when hover the mouse on series name
 
-  @CDMNextsprintcases3.1
+  @CDMNextsprintcases3.11
   Scenario: TC_14781_01: Verify creating non data visuals with series
     And Select few series
     And Click to create an empty visual
-    And Click "insert Image" option from empty list
+    And Click "Image" option from empty list
     And Click "Upload image" button to upload images
     And Select my series tab
     Then The non data visuals should not create with series
 
   @CDMNextsprintcases3.1
-  Scenario: TC-15107_01: Verify search with old city name and updated city name.
+  Scenario: TC_15107_01: Verify search with old city name and updated city name.
     And Search for the series with SID "Bengaluru"
     And Getting the text of first search keyword
     And Search for the series with SID "Bangalore"
@@ -945,14 +957,16 @@ Feature: Verifying Sprintcases
   @CDMNextsprintcases3.1
   Scenario: TC_15910_01: Verify new title for "Series data conversion" popup
     And Search for the series with SID "384681617;385320997"
-    And Click on more actions to create "View as Table"
+    And Click on more actions and create "View as Table"
+   # And Click on more actions to create "View as Table"
     And Observe the "movable-modal--title-message" for popup
     Then The title of the pop up should be "Series Harmonization"
 
   @CDMNextsprintcases3.1
   Scenario: TC_15910_02: Verify description for "Series Harmonization" popup
     And Search for the series with SID "384681617;385320997"
-    And Click on more actions to create "View as Table"
+    And Click on more actions and create "View as Table"
+    #And Click on more actions to create "View as Table"
     And Observe the "series-data-conversion--info" for popup
     Then The message in the pop up should be "Your selection includes series of different frequency and calendar. Please perform these conversions for better analysis and visualization."
 
@@ -960,13 +974,15 @@ Feature: Verifying Sprintcases
   Scenario: TC_15649_01: Verify 'Enter' for save style template
     And Reset the values in "Series" tab
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+    And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And Uncheck the "Attributes" and "Wrap text" options
     And Create a new template
     Then The style template should be saved
     And Select few series
-    And Click on more actions to create "View as Table"
+    #And Click on more actions to create "View as Table"
+     And Click on more actions=>"View as Table"
     And Click on "Edit Table" visual
     And "Delete template" the newly created template
     And Close the model box
@@ -1351,7 +1367,7 @@ Feature: Verifying Sprintcases
     And Clicking on "Ask me to confirm visual deletion" option under user preference to be "Uncheck"
     And Search for the series with SID "385345667"
     And Click on more actions
-    And Open a "Chart" visual
+    #And Open a "Chart" visual
     And Try to delete the visual
     Then Delete visual confirmation message should not be displayed to users while deleting visual
 
@@ -1423,15 +1439,15 @@ Feature: Verifying Sprintcases
     And Select few series
     And Perform Download operation
     Then The Series "has" removed in search panel after done actions
-
-  @Cvision
-  Scenario: TC_16310_45: Preference - Verify 'Always preserve the order of selection when adding/downloading series= Checked'
-    And Open preference dropdown
-    And Clicking on "Preserve the order of selection when adding/downloading series" option under user preference to be "Check"
-    And Reset the values in "Series" tab
-    And Select few series
-    And Perform Download operation
-    Then The Series "has" removed in search panel after done actions
+#
+  #@Cvision123
+  #Scenario: TC_16310_45: Preference - Verify 'Always preserve the order of selection when adding/downloading series= Checked'
+    #And Open preference dropdown
+    #And Clicking on "Preserve the order of selection when adding/downloading series" option under user preference to be "Check"
+    #And Reset the values in "Series" tab
+    #And Select few series
+    #And Perform Download operation
+    #Then The Series "has" removed in search panel after done actions
 
   @Preferences
   Scenario: TC_16310_47: Preference - 'Show search result without pagination= Uncheck'

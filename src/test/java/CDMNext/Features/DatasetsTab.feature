@@ -1,5 +1,5 @@
 Feature: Verifying Datasets functionality
-
+  	
   @DatasetsTab
   Scenario Outline: TC_Data_set_05: Verify Sort by option for dataset tab
     And Clicking "Datasets" tab from menu
@@ -9,9 +9,10 @@ Feature: Verifying Datasets functionality
       | actual             | index |
       | "Popularity"       |     1 |
       | "Recently Updated" |     2 |
-      | "New Series"       |     3 |
-      | "Region"           |     4 |
-
+      | "New Series"       |     3 |	   
+   #   | "Region"           |     4 |
+	
+	
   @DatasetsTab
   Scenario: TC_Data_set_06: Verify closing Sort by option for dataset tab
     And Open preference dropdown
@@ -32,7 +33,7 @@ Feature: Verifying Datasets functionality
       | "Popularity"       |     1 |
       | "Recently Updated" |     2 |
       | "New Series"       |     3 |
-      | "Region"           |     4 |
+     # | "Region"           |     4 |
 
   @DatasetsTab
   Scenario: TC_Data_set_08: Verify the expand option in dataset tab
@@ -79,7 +80,7 @@ Feature: Verifying Datasets functionality
     And Click on "Drag and Drop a Dataset" option shortcut
     Then Verify that the dataset is added in right pane
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: TC_Data_set_16: Verify adding any series into my series tab
     And Clicking "Datasets" tab from menu
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -87,7 +88,7 @@ Feature: Verifying Datasets functionality
     And Click on "A" option shortcut
     Then Verify that the series is added in right pane
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: TC_Data_set_17: Verify adding any series into my series tab by drag and drop
     And Clicking "Datasets" tab from menu
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -144,11 +145,11 @@ Feature: Verifying Datasets functionality
       | "Table" | "Edit Table" | "Table" |
       | "Map"   | "Edit Map"   | "Map"   |
 
-  @DatasetsTab
-  Scenario: TC_Data_set_26: Verify load more option for dataset's tab
-    And Clicking "Datasets" tab from menu
-    And Clicking Load more option
-    Then Verify the Load more button
+  #@DatasetsTab
+  #Scenario: TC_Data_set_26: Verify load more option for dataset's tab
+   # And Clicking "Datasets" tab from menu
+    #And Clicking Load more option
+    #Then Verify the Load more button
 
   @DatasetsTab
   Scenario Outline: TC_Data_set_27: Verify Sort by option for dataset tab
@@ -160,7 +161,7 @@ Feature: Verifying Datasets functionality
       | "Popularity"       |     1 |
       | "Recently Updated" |     2 |
       | "New Series"       |     3 |
-      | "Region"           |     4 |
+    #  | "Region"           |     4 |
 
   @DatasetsTab
   Scenario: TC_Data_set_31: Verify opening footnotes for dataset tab
@@ -172,7 +173,7 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_32: Verify adding any dataset into my series tab with + icon
     And Clicking "Datasets" tab from menu
     And Select any checkbox for dataset
-    And Clicking "add-to-data-selection--title" option from Table
+    And Clicking "add-to-data-selection--icon" option from Table
     Then Verify that the dataset is added in right pane
 
   @DatasetsTab
@@ -216,23 +217,26 @@ Feature: Verifying Datasets functionality
     And Clicking "Add to recent insight" from dropdown list
     Then Any insight could be selected for the table to add
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: TC_Data_set_40: Verify add and Group insight into visual pane
     And Clicking "Datasets" tab from menu
-    And Select any checkbox for dataset
-    And Clicking "add-to-data-selection--toggle" option from Table
-    And Clicking "Add and group series" from dropdown list
+   # And Select any checkbox for dataset
+    And Verify "Expand" the datasets "Without" keyboard shortcuts
+    And Select any series checkbox for dataset
+    #And Clicking "add-to-data-selection--toggle" option from Table
+    And Clicking "add-to-data-selection--toggle" option from series in dataset
+    And Clicking "Add and group" from dropdown list 
     Then Verify that the dataset is added in right pane
 
-  @DatasetsTab
-  Scenario: TC_Data_set_43: Verify unselect all for right click on dataset
-    And Right Click "Dataset" section from Comparables tab
-    And Select any checkbox for dataset
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Collapse the dataset and perform right click operation
-    And Click on "Unselect all" button in Comparables
-    Then The "Table - Unselect all" option is shown
-    Then Check the download button and search box
+ # @DatasetsTab
+  #Scenario: TC_Data_set_43: Verify unselect all for right click on dataset
+   # And Right Click "Dataset" section from Comparables tab
+    #And Select any checkbox for dataset
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Collapse the dataset and perform right click operation
+    #And Click on "Unselect all" button in Comparables
+    #Then The "Table - Unselect all" option is shown
+    #Then Check the download button and search box
 
   @DatasetsTab
   Scenario: TC_Data_set_44: Verify view as chart for right click on dataset
@@ -240,16 +244,19 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Count the series inside "Selected Dataset"
     And Collapse the dataset and perform right click operation
-    And Click on "View as Chart" button in Comparables
+    And click on Add chart=>create chart.
+    #And Click on "View as Chart" button in Comparables
+    
     Then The "Table - Edit Chart" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: TC_Data_set_45: Verify view as map for right click on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Count the series inside "Selected Dataset"
     And Collapse the dataset and perform right click operation
-    And Click on "View as Map" button in Comparables
+    And click on Add chart=>create Map.
+   # And Click on "View as Map" button in Comparables
     Then The "Table - Edit Map" option is shown
 
   @DatasetsTab
@@ -258,15 +265,18 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Count the series inside "Selected Dataset"
     And Collapse the dataset and perform right click operation
-    And Click on "View as Table" button in Comparables
+     And click on Add chart=>create Table.
+    #And Click on "View as Table" button in Comparables
     Then The "Table - Edit Table" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: TC_Data_set_47: Verify view as... for right click on dataset
     And Right Click "Dataset" section from Comparables tab
     And Collapse the dataset and perform right click operation
-    And Click on "View as ..." button in Comparables
-    Then The "Pie" , "Heat map" , "Histogram" options are present
+    And click on Add chart.
+    Then Pie , Heat map , Histogram options are present
+   # And Click on "View as ..." button in Comparables
+    #Then The "Pie" , "Heat map" , "Histogram" options are present
 
   @DatasetsTab
   Scenario: TC_Data_set_48: Verify view as pie for right click on dataset
@@ -274,7 +284,8 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Count the series inside "Selected Dataset"
     And Collapse the dataset and perform right click operation
-    And Choose "View as ..." > "Pie"
+    And click on Add chart=>create Pie.
+   # And Choose "View as ..." > "Pie"
     Then The "Table - Edit Pie" option is shown
 
   @DatasetsTab
@@ -283,7 +294,8 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Count the series inside "Selected Dataset"
     And Collapse the dataset and perform right click operation
-    And Choose "View as ..." > "Heat map"
+    And click on Add chart=>create Heat map.
+   # And Choose "View as ..." > "Heat map"
     Then The "Table - Edit Heat map" option is shown
 
   @DatasetsTab
@@ -292,7 +304,8 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Count the series inside "Selected Dataset"
     And Collapse the dataset and perform right click operation
-    And Choose "View as ..." > "Histogram"
+    And click on Add chart=>create Histogram.
+   # And Choose "View as ..." > "Histogram"
     Then The "Table - Edit Histogram" option is shown
 
   @DatasetsTab
@@ -303,9 +316,9 @@ Feature: Verifying Datasets functionality
     And Get the name of series inside table
     And Collapse the dataset and perform right click operation
     And Click on "Download" button in Comparables
-    Then The "Table - Download" option is shown
+    #Then The "Table - Download" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: TC_Data_set_54: Verify Copy selected links for right click on dataset
     And Right Click "Dataset" section from Comparables tab
     And Select any checkbox for dataset
@@ -316,8 +329,8 @@ Feature: Verifying Datasets functionality
     And Collapse the dataset and perform right click operation
     And Select the "Copy selected links" option
     And URL should be generated for selected series
-    And Copy the data after clicking Copy button
-    Then Verify selected links are copied
+    #And Copy the data after clicking Copy button
+    #Then Verify selected links are copied
 
   @DatasetsTab
   Scenario: TC_Data_set_55: Verify footnotes for right click on dataset
@@ -347,9 +360,11 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_58: Verify creating chart for selected series on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 1 series inside table
-    And Get the name of series
-    And Click on more actions to create "View as Chart"
+     And Select one series inside table
+#    And Select 1 series inside table
+   And Get the name of series
+    #And Click on more actions to create "View as Chart"
+     And create a chart visual
     And Copy the insight title
     Then The "Selected Series Chart" should create for the series
 
@@ -357,7 +372,7 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_59: Verify creating chart for unselected series on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+  #  And Hovor on to i icon without click
     And Click on more actions to create "View as Chart"
     And Copy the insight title
     Then The "Unselected Series Chart" should create for the series
@@ -366,16 +381,18 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_60: Verify creating chart for multiple series on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 2 series inside table
-    And Click on more actions to create "View as Chart"
+   # And Select one series inside table
+    And Select 2 series inside table1
+    And Click on more actions to create1 "View as Chart"
+  # And Click on more actions to create "View as Chart"
     Then The "Multiple Series Chart" should create for the series
 
   @DatasetsTab
   Scenario: TC_Data_set_61: Verify opening footnotes for series on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Click on "Open footnote" option in series level of Dataset
-    Then The Footnotes window tab should be opened
+    And Click on "Footnotes" option in series level of Dataset
+    Then The "Footnotes" window tab should be opened
 
   @DatasetsTab
   Scenario: TC_Data_set_62: Verify more options for series on dataset
@@ -388,7 +405,7 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_63: Verify series selection when click on more options
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+  #  And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
     And The series should get selected by default
     Then The "Unselect all" , "Add", "Add to new insight", "Add to recent insight", "View as Chart" , "View as Map" , "View as Table" , "View as ..." , "Download" , "Copy" , "Copy data" , "Copy selected links" , "Add to Watchlist" , "Series Info" , "Footnotes" , "Show Dataset" options should available
@@ -397,10 +414,11 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_64: Verify adding series for series level on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 1 series inside table
-    And Hovor on to the series name
+    And Select one series inside table
+   # And Select 1 series inside table
+   # And Hovor on to the series name
     And Clicking "add-to-data-selection--toggle" option from Series list
-    And Clicking "Add series" from dropdown list
+    And Clicking "Add" from dropdown list
     Then Verify that the series is added successfully in right pane
 
   @DatasetsTab
@@ -413,7 +431,8 @@ Feature: Verifying Datasets functionality
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Hovor on icon
-    And Clicking "add-to-data-selection--toggle" option from Series list
+    And Clicking "add-to-data-selection--toggle" option from Series
+  #  And Clicking "add-to-data-selection--toggle" option from Series list
     And Clicking "Add and replace series" from dropdown list
     Then Verify that the series is replaced successfully in right pane
 
@@ -421,18 +440,19 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_66: Verify adding and grouping series for series level on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 1 series inside table
+    And Select one series inside table
     And Hovor on to the series name
     And Clicking "add-to-data-selection--toggle" option from Series list
-    And Clicking "Add and group series" from dropdown list
+    And Clicking "Add and group" from dropdown list
     Then Verify that the series is added successfully in right pane with Group
 
   @DatasetsTab
   Scenario: TC_Data_set_67: Verify add into new insight for series level on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 3 series inside table
+    And Select 1 series inside table
     And Hovor on to the series name
+   #And Select one series inside table
     And Clicking "add-to-data-selection--toggle" option from Series list
     And Clicking "Add to new insight" from dropdown list
     And Series has been added to new insight message should display
@@ -442,20 +462,21 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_68: Verify add into recent insight for series level on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 3 series inside table
+    And Select 1 series inside table
     And Hovor on to the series name
     And Clicking "add-to-data-selection--toggle" option from Series list
     And Clicking "Add to recent insight" from dropdown list
     Then Should be able to navigate to the existing insight
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_69: Verify unselect all in more option
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 2 series inside table
-    And Click on "More actions" option in series level of Dataset
-    And Click on "Unselect all" button in Comparables
-    Then Selected series should get deselected
+ # @DatasetsTab
+  #Scenario: Tc_Data_set_69: Verify unselect all in more option
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+   # And Select 2 series inside table
+    #And Select one series inside table
+    #And Click on "More actions" option in series level of Dataset
+    #And Click on "Unselect all" button in Comparables
+    #Then Selected series should get deselected
 
   @DatasetsTab
   Scenario: Tc_Data_set_70: Verify view as chart in more options
@@ -463,16 +484,18 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Click on "View as Chart" button in Comparables
+    And click on Add chart=>create chart.
+    #And Click on "View as Chart" button in Comparables
     Then The "Edit Chart" option is displayed
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_71: Verify view as Map in more options
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Click on "View as Map" button in Comparables
+     And click on Add chart=>create Map.
+    #And Click on "View as Map" button in Comparables
     Then The "Edit Map" option is displayed
 
   @DatasetsTab
@@ -481,17 +504,20 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Click on "View as Table" button in Comparables
+    And click on Add chart=>create Table.
+   # And Click on "View as Table" button in Comparables
     Then The "Edit Table" option is displayed
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_73: Verify view as... in more options
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Click on "View as ..." button in Comparables
-    Then The "Pie" , "Heat map" , "Histogram" options are present
+    And click on Add chart.
+    Then Pie , Heat map , Histogram options are present
+    #And Click on "View as ..." button in Comparables
+    #Then The "Pie" , "Heat map" , "Histogram" options are present
 
   @DatasetsTab
   Scenario: Tc_Data_set_74: Verify view as Pie in more options
@@ -499,7 +525,8 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Choose "View as ..." > "Pie"
+    And click on Add chart=>create Pie.
+    #And Choose "View as ..." > "Pie"
     Then The "Edit Pie" option is displayed
 
   @DatasetsTab
@@ -508,7 +535,8 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Choose "View as ..." > "Heat map"
+    #And Choose "View as ..." > "Heat map"
+    And click on Add chart=>create Heat map.
     Then The "Edit Heat map" option is displayed
 
   @DatasetsTab
@@ -517,7 +545,8 @@ Feature: Verifying Datasets functionality
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Choose "View as ..." > "Histogram"
+    #And Choose "View as ..." > "Histogram"
+    And click on Add chart=>create Histogram.
     Then The "Edit Histogram" option is displayed
 
   @DatasetsTab
@@ -529,44 +558,47 @@ Feature: Verifying Datasets functionality
     And Click on "Download" button in Comparables
     Then The "Download" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_78: Verify copy data in more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Click on "Copy data" button in Comparables
+    And click on copy data button
+    #And Click on "Copy data" button in Comparables
     Then The "Copy data" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_79: Verify copy in more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
-    And Click on "Copy" button in Comparables
+    And click on copy button
+    #And Click on "Copy" button in Comparables
     And URL should be generated for selected series
     And Copy the data after clicking Copy button
     Then The "Copy" option is shown
 
   @DatasetsTab
-  Scenario: Tc_Data_set_80: Verify copy links in more option
+    Scenario: Tc_Data_set_80: Verify copy links in more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to series name without click
+ #  And Hovor on to series name without click
     And Click on "More actions" option in series level of Dataset
     And Select the "Copy selected links" option
     And URL should be generated for selected series
     And Copy the data after clicking Copy button
     Then The "Copy selected links" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_81: Verify series info for more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to series name without click
+   # And Hovor on to series name without click
     And Click on "More actions" option in series level of Dataset
-    And Select the "Series Info" option
+    And select series info option
+    #And Select the "Series Info" option
     Then The "Series Info" option is shown
 
   @DatasetsTab
@@ -591,7 +623,7 @@ Feature: Verifying Datasets functionality
   Scenario: Tc_Data_set_84: Verify back button in dataset of more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+    #And Hovor on to i icon without click
     And Click on "More actions" option in series level of Dataset
     And Select the "Show Dataset" option
     Then The "Back Button in Dataset" option is shown
@@ -600,41 +632,45 @@ Feature: Verifying Datasets functionality
   Scenario: TC_Data_set_86: Verify dropdown for mouse hover options in series level
     And Clicking "Datasets" tab from menu
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Select 1 series inside table
-    And Hovor on to the series name
-    And Clicking "add-to-data-selection--toggle" option in Dataset
+    And Select one series inside table
+   # And Select 1 series inside table
+   # And Hovor on to the series name
+    And Clicking "add-to-data-selection--toggle" option from Series list
+   # And Clicking "add-to-data-selection--toggle" option in Dataset
     Then "Add" , "Add and replace" , "Add and group" , "Add to new insight" , "Add to recent insight" Options should present
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_96: Verify unselect all for series level right click
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Right Click 1 series
-    And Click on "Unselect all" button in Comparables
-    Then Selected series should get deselected
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_96: Verify unselect all for series level right click
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Right Click 1 series
+    #And Click on "Unselect all" button in Comparables
+    #Then Selected series should get deselected
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_97: Verify unselect all for multiple series level right click
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Right Click 3 series
-    And Click on "Unselect all" button in Comparables
-    Then Selected series should get deselected
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_97: Verify unselect all for multiple series level right click
+    #And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Right Click 3 series
+    #And Click on "Unselect all" button in Comparables
+    #Then Selected series should get deselected
 
   @DatasetsTab
   Scenario: Tc_Data_set_98: Verify view as chart for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Click on "View as Chart" button in Comparables
+    #And Click on "View as Chart" button in Comparables
+    And click on Add chart=>create chart.
     Then The "Edit Chart" option is displayed
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_99: Verify view as Map for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Click on "View as Map" button in Comparables
+   # And Click on "View as Map" button in Comparables
+    And click on Add chart=>create Map.
     Then The "Edit Map" option is displayed
 
   @DatasetsTab
@@ -642,23 +678,27 @@ Feature: Verifying Datasets functionality
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Click on "View as Table" button in Comparables
+    #And Click on "View as Table" button in Comparables
+    And click on Add chart=>create Table.
     Then The "Edit Table" option is displayed
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_101: Verify view as... for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Click on "View as ..." button in Comparables
-    Then The "Pie" , "Heat map" , "Histogram" options are present
+    And click on Add chart.
+    Then Pie , Heat map , Histogram options are present
+    #And Click on "View as ..." button in Comparables
+    #Then The "Pie" , "Heat map" , "Histogram" options are present
 
   @DatasetsTab
   Scenario: Tc_Data_set_102: Verify view as Pie for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Choose "View as ..." > "Pie"
+    #And Choose "View as ..." > "Pie"
+    And click on Add chart=>create Pie.
     Then The "Edit Pie" option is displayed
 
   @DatasetsTab
@@ -666,7 +706,8 @@ Feature: Verifying Datasets functionality
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Choose "View as ..." > "Heat map"
+    #And Choose "View as ..." > "Heat map"
+    And click on Add chart=>create Heat map.
     Then The "Edit Heat map" option is displayed
 
   @DatasetsTab
@@ -674,7 +715,8 @@ Feature: Verifying Datasets functionality
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Choose "View as ..." > "Histogram"
+    #And Choose "View as ..." > "Histogram"
+    And click on Add chart=>create Histogram.
     Then The "Edit Histogram" option is displayed
 
   @DatasetsTab
@@ -685,21 +727,23 @@ Feature: Verifying Datasets functionality
     And Click on "Download" button in Comparables
     Then The "Download" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_106: Verify copy data for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Click on "Copy data" button in Comparables
+    And click on copy data button
+   # And Click on "Copy data" button in Comparables
     Then The "Copy data" option is shown
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_107: Verify copy for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+   # And Hovor on to i icon without click
     And Right Click 1 series
-    And Click on "Copy" button in Comparables
+    And click on copy button
+   # And Click on "Copy" button in Comparables
     And URL should be generated for selected series
     And Copy the data after clicking Copy button
     Then The "Copy" option is shown
@@ -708,8 +752,8 @@ Feature: Verifying Datasets functionality
   Scenario: Tc_Data_set_108: Verify copy links for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to series name without click
     And Right Click 1 series
+   # And Hovor on to series name without click
     And Select the "Copy selected links" option
     And URL should be generated for selected series
     And Copy the data after clicking Copy button
@@ -724,20 +768,21 @@ Feature: Verifying Datasets functionality
     And URL should be generated for selected series
     Then Paste in the clipboard and take url one by one
 
-  @DatasetsTab
+  @DatasetsTab1
   Scenario: Tc_Data_set_110: Verify series info for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+   # And Hovor on to i icon without click
     And Right Click 1 series
-    And Select the "Series Info" option
+    And select series info option
+    #And Select the "Series Info" option
     Then The "Series Info" option is shown
 
   @DatasetsTab
   Scenario: Tc_Data_set_111: Verify footnotes for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+    #And Hovor on to i icon without click
     And Right Click 1 series
     And Select the "Footnotes" option
     Then The "Footnotes" option is shown
@@ -746,7 +791,7 @@ Feature: Verifying Datasets functionality
   Scenario: Tc_Data_set_112: Verify show dataset for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+    #And Hovor on to i icon without click
     And Right Click 1 series
     And Select the "Show Dataset" option
     Then The "Show Dataset" option is shown
@@ -755,18 +800,18 @@ Feature: Verifying Datasets functionality
   Scenario: Tc_Data_set_113: Verify back button for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on to i icon without click
+   # And Hovor on to i icon without click
     And Right Click 1 series
     And Select the "Show Dataset" option
     Then The "Back Button in Dataset" option is shown
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_114: Verify unselect for series in dataset
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Right Click 4 series
-    And Select the "Show Dataset" option
-    Then The series in dataset getting unselected
+  #@DatasetsTab1
+  #Scenario: Tc_Data_set_114: Verify unselect for series in dataset
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Right Click 4 series
+    #And Select the "Show Dataset" option
+    #Then The series in dataset getting unselected
 
   @DatasetsTab
   Scenario: Tc_Data_set_115: Verify top button when Datasets tab is scrolled down
@@ -775,131 +820,131 @@ Feature: Verifying Datasets functionality
     And Search for the series to scroll down
     Then The "Top button" option is shown
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_116: Verify dropdown open for series dataset tab
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    Then The "Updated on" option in series should present
-    Then The "Read More" option in series should present
-    Then The "Datasets" option in series should present
-    Then The "Insights" option in dataset should present
-    Then The "related-series-data--status" option in series should be present
-    Then The "related-series-data--remarks" option in series should be present
-    And Click "Hide related data" option in series
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_116: Verify dropdown open for series dataset tab
+    #And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #Then The "Updated on" option in series should present
+    #Then The "Read More" option in series should present
+    #Then The "Datasets" option in series should present
+    #Then The "Insights" option in dataset should present
+    #Then The "related-series-data--status" option in series should be present
+    #Then The "related-series-data--remarks" option in series should be present
+    #And Click "Hide related data" option in series
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_117: Verify Read more for series in datasets
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Read More" option for series should present
-    Then The Footnotes window for Dataset should be open
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_117: Verify Read more for series in datasets
+    #And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Read More" option for series should present
+    #Then The Footnotes window for Dataset should be open
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_118: Verify related dataset for series opened in dropdown click
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    Then The related dataset option should present
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_118: Verify related dataset for series opened in dropdown click
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #Then The related dataset option should present
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_120: Verify dataset for series opened in dropdown click
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And Click on "database" for related series
-    Then The related "Database" for the series should shown
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_120: Verify dataset for series opened in dropdown click
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And Click on "database" for related series
+    #Then The related "Database" for the series should shown
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_121: Verify navigating to topic for related series in series level
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And Click on "topic" for related series
-    Then The related "Topic" for the series should shown
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_121: Verify navigating to topic for related series in series level
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And Click on "topic" for related series
+    #Then The related "Topic" for the series should shown
 
-  @DatasetsTab
-  Scenario: Tc_Data_Set_122: Verify navigating to section for related series in series level
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And Click on "section" for related series
-    Then The related "Section" for the series should shown
+  #@DatasetsTab
+  #Scenario: Tc_Data_Set_122: Verify navigating to section for related series in series level
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And Click on "section" for related series
+    #Then The related "Section" for the series should shown
 
-  @DatasetsTab
-  Scenario: Tc_Data_Set_123: Verify presence of related insights in series level
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Insights" option in dataset should present
-    Then The tooltip as "Name" and "Number of series" should present
+  #@DatasetsTab
+  #Scenario: Tc_Data_Set_123: Verify presence of related insights in series level
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Insights" option in dataset should present
+    #Then The tooltip as "Name" and "Number of series" should present
 
-  @DatasetsTab
-  Scenario: Tc_Data_Set_124: Verify click on related insight name for series dataset tab
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Insights" option in dataset should present
-    And Check the data of first insight
+  #@DatasetsTab
+  #Scenario: Tc_Data_Set_124: Verify click on related insight name for series dataset tab
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Insights" option in dataset should present
+    #And Check the data of first insight
 
-  @DatasetsTab
-  Scenario: Tc_Data_Set_125: Verify creator of related insight present in series level
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Insights" option in dataset should present
-    Then The creator tooltip should present
+  #@DatasetsTab
+  #Scenario: Tc_Data_Set_125: Verify creator of related insight present in series level
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Insights" option in dataset should present
+    #Then The creator tooltip should present
 
-  @DatasetsTab
-  Scenario: Tc_Data_Set_126: Verify time period of related insight present in series level
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Insights" option in dataset should present
-    Then The Modified time tooltip should present
+  #@DatasetsTab
+  #Scenario: Tc_Data_Set_126: Verify time period of related insight present in series level
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Insights" option in dataset should present
+    #Then The Modified time tooltip should present
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_127: Verify favoriting related insight
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Insights" option in dataset should present
-    And The "First" Insight should present
-    And Clicking favorite icon of related insight
-    And Click on "My insights" option in insights page
-    Then The Related insights should be added to favourite list in insight explorer window of favorite tab
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_127: Verify favoriting related insight
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Insights" option in dataset should present
+    #And The "First" Insight should present
+    #And Clicking favorite icon of related insight
+    #And Click on "My insights" option in insights page
+    #Then The Related insights should be added to favourite list in insight explorer window of favorite tab
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_128: Verify sharing of related insight
-    And Right Click "Dataset" section from Comparables tab
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Insights" option in dataset should present
-    Then The Sharing insight window should be opened
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_128: Verify sharing of related insight
+   # And Right Click "Dataset" section from Comparables tab
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Insights" option in dataset should present
+    #Then The Sharing insight window should be opened
 
-  @DatasetsTab
-  Scenario: Tc_Data_set_129: Verify sharing of non sharing related insight
-    And Clicking "Datasets" tab from menu
-    And Search for "249416501"
-    And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor on icon
-    And Click "Show related data" option in series
-    And The "Insights" option in dataset should present
-    And The "Non shareable Insight" Insight should present
-    Then The Share icon should not present for non sharing related insight
+  #@DatasetsTab
+  #Scenario: Tc_Data_set_129: Verify sharing of non sharing related insight
+   # And Clicking "Datasets" tab from menu
+    #And Search for "249416501"
+    #And Verify "Expand" the datasets "Without" keyboard shortcuts
+    #And Hovor on icon
+    #And Click "Show related data" option in series
+    #And The "Insights" option in dataset should present
+    #And The "Non shareable Insight" Insight should present
+    #Then The Share icon should not present for non sharing related insight
 
   #130 and 131
   @DatasetsTab
@@ -915,7 +960,7 @@ Feature: Verifying Datasets functionality
     And Clicking "Datasets" tab from menu
     And Search for "177610602"
     And Verify "Expand" the datasets "Without" keyboard shortcuts
-    And Hovor only series name
+   And Hovor only series name
     Then The <index> should present on tooltip <name>
 
     Examples: 
@@ -981,49 +1026,54 @@ Feature: Verifying Datasets functionality
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Click on "More actions" option in series level of Dataset
-    And Click on "Add to Watchlist" option in series level
+    And Click on "Add to Watchlist" option in series
+   # And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
     And Select "Daily" option from watchlist
     And User has clicked on "Apply"
     And Growl message as "Watchlist changes applied" should display
-    Then The selected actions should reflect inside watchlist tab
+    #Then The selected actions should reflect inside watchlist tab
 
   @DatasetsTab
   Scenario: Tc_Data_set_142: Verify Add to Watchlist option in series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Right Click 1 series
-    And Click on "Add to Watchlist" option in series level
+     And Click on "More actions" option in series level of Dataset
+    And Click on "Add to Watchlist" option in series
+   # And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
     And Select "Weekly" option from watchlist
     And User has clicked on "Apply"
     And Growl message as "Watchlist changes applied" should display
-    Then The selected actions should reflect inside watchlist tab
+    #Then The selected actions should reflect inside watchlist tab
 
   @DatasetsTab
   Scenario: Tc_Data_set_143: Verify Add to Watchlist option in series level more actions
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Click on "More actions" option in series level of Dataset
-    And Click on "Add to Watchlist" option in series level
+    And Click on "Add to Watchlist" option in series
+   # And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
     And Select "Monthly" option from watchlist
     And User has clicked on "Apply"
     And Growl message as "Watchlist changes applied" should display
-    Then The selected actions should reflect inside watchlist tab
+ #   Then The selected actions should reflect inside watchlist tab
 
   @DatasetsTab
   Scenario: TC_Data_set_144: Verify Add to Watchlist option in series level more actions
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
     And Click on "More actions" option in series level of Dataset
-    And Click on "Add to Watchlist" option in series level
+    And Click on "Add to Watchlist" option in series
+    #And Click on "Add to Watchlist" option in series level
     And Select "popup_notifications" option from watchlist
     And Select "email_notifications" option from watchlist
     And Select "Hourly" option from watchlist
     And User has clicked on "Apply"
     And Growl message as "Watchlist changes applied" should display
-    Then The selected actions should reflect inside watchlist tab
+#    Then The selected actions should reflect inside watchlist tab

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,6 +17,8 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
+
+import com.gargoylesoftware.htmlunit.javascript.host.Set;
 
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
@@ -60,6 +63,7 @@ public class ReleasesTab {
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		CommonFunctionality.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker-loader")));
 		if (arg1.equalsIgnoreCase("5724301")) {
+		
 			select_timeframe_button("-1Y");
 		}
 	}
@@ -93,13 +97,116 @@ public class ReleasesTab {
 			sa.fail(arg1 + " Status is not present");
 		}
 	}
+	@And("^Click on Add chart=>create a Map$")
+	public void click_on_Add_chart_create_a_Map() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--map-filled_large')]")).click();	    
+	}
+	
+	
+	@And("^Click on Add chart=>create a table\\.$")
+	public void click_on_Add_chart_create_a_table() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();	
+	   
+	}
+	@And("^Click on Add chart=>create a Pie\\.$")
+	public void click_on_Add_chart_create_a_Pie() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--pie_chart-pie_large')]")).click();	
+	   
+	}
+	@And("^click Add chart=>HeatMap$")
+	public void click_Add_chart_HeatMap() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]")).click();
+	}
+	@And("^click Add chart=>Histogram\\.$")
+	public void click_Add_chart_Histogram() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--histogram_large')]")).click();
+	    
+	}
+	
+	@And("^Hovering on Add and group option from dropdown list\\.$")
+	public void hovering_on_Add_and_group_option_from_dropdown_list() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[normalize-space()='Add and group']")).click();
+	   
+	}
+	
+	
+	@And("^Hovoring Add to recent insight option from dropdown list$")
+	public void hovoring_Add_to_recent_insight_option_from_dropdown_list() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Add_insight=login.driver.findElement(By.xpath("//span[contains(text(),'Add to recent insight')]"));
+		new Actions(login.driver).moveToElement(Add_insight).pause(2000).build().perform();
+	}
+	
+	@And("^Hovering on Add and replace option from dropdown list$")
+	public void hovering_on_Add_and_replace_option_from_dropdown_list() throws Throwable {
+		dropdown_title = CommonFunctionality
+				.getElementByXpath(login.driver,
+						"//*[contains(@class,'dropdown-menu')]//*[text()='Add']", 4)
+				.getAttribute("title");
+	}
+
+	@And("^Hovoring Add and group option from dropdown list$")
+	public void hovoring_Add_and_group_option_from_dropdown_list() throws Throwable {
+	   
+	}
+	
 
 	@And("^Hovoring \"([^\"]*)\" option from dropdown list$")
 	public void hovoring_option_from_dropdown_list(String arg1) throws Throwable {
-		dropdown_title = CommonFunctionality
+		/*dropdown_title = CommonFunctionality
 				.getElementByXpath(login.driver,
 						"//*[contains(@class,'dropdown-menu')]//*[text()='" + arg1 + "']/parent::*", 4)
+				.getAttribute("title");*/
+		dropdown_title = CommonFunctionality
+				.getElementByXpath(login.driver,
+						"//*[contains(@class,'dropdown-menu')]//*[text()='Add chart']/parent::*", 4)
 				.getAttribute("title");
+		
+		
+		//*[contains(@class,'dropdown-menu')]//*[@class='context-menu-item link disabled']
+		
+		
+		
+	}
+	
+	
+	
+	@And("^Hovoring Add to new insight option from dropdown list$")
+	public void hovoring_Add_to_new_insight_option_from_dropdown_list() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Add_insight=login.driver.findElement(By.xpath("//span[contains(text(),'Add to new insight')]"));
+		new Actions(login.driver).moveToElement(Add_insight).pause(2000).build().perform();
+	   
+	}
+	
+	
+	
+	@And("^Hover on Add and replaceoption from dropdown list$")
+	public void hover_on_Add_and_replaceoption_from_dropdown_list() throws Throwable {
+		dropdown_title = CommonFunctionality
+				.getElementByXpath(login.driver,
+						"//*[contains(@class,'dropdown-menu')]//*[@class='context-menu-item link disabled']", 4)
+				.getAttribute("title");
+	   
+	}
+	@And("^Hovering on Add option from dropdown list$")
+	public void hovering_on_Add_option_from_dropdown_list() throws Throwable {
+		dropdown_title = CommonFunctionality
+				.getElementByXpath(login.driver,
+						"//*[contains(@class,'dropdown-menu')]//*[text()='Add']", 4)
+				.getAttribute("title");
+	  
 	}
 
 	@And("^Growl message as \"([^\"]*)\" should display$")
@@ -161,6 +268,54 @@ public class ReleasesTab {
 						"(//*[@class='release-scheduler-tree-node--title'])[1]", 4))
 				.pause(500).contextClick().build().perform();
 	}
+	
+	
+	@Then("^Chart , Map , Table and download options should be clicked\\.$")
+	public void chart_Map_Table_and_download_options_should_be_clicked() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
+		WebElement chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]"));
+		new Actions(login.driver).moveToElement(chart).pause(2000).build().perform();
+		WebElement Table=login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]"));
+		new Actions(login.driver).moveToElement(Table).pause(2000).build().perform();
+		WebElement Map=login.driver.findElement(By.xpath("//div[contains(@class,'icon--map-filled_large')]"));
+		new Actions(login.driver).moveToElement(Map).pause(2000).build().perform();
+		
+		WebElement Download=login.driver.findElement(By.xpath("//span[@class='name-li'][normalize-space()='Download']"));
+		new Actions(login.driver).moveToElement(Download).pause(2000).build().perform();
+		if(chart.isDisplayed() && Table.isDisplayed() && Map.isDisplayed() ) {
+			System.out.println("Chart Table and Map are displayed");
+		}
+		else {
+			System.out.println("Chart Table and Map are not displayed");
+		}
+
+	}
+	
+	
+	
+	@Then("^Chart , Map , Table and download options are shown\\.$")
+	public void chart_Map_Table_and_download_options_are_shown() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
+		WebElement chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]"));
+		new Actions(login.driver).moveToElement(chart).pause(2000).build().perform();
+		WebElement Table=login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]"));
+		new Actions(login.driver).moveToElement(Table).pause(2000).build().perform();
+		WebElement Map=login.driver.findElement(By.xpath("//div[contains(@class,'icon--map-filled_large')]"));
+		new Actions(login.driver).moveToElement(Map).pause(2000).build().perform();
+		
+		WebElement Download=login.driver.findElement(By.xpath("//span[@class='name-li'][normalize-space()='Download']"));
+		new Actions(login.driver).moveToElement(Download).pause(2000).build().perform();
+		if(chart.isDisplayed() && Table.isDisplayed() && Map.isDisplayed() ) {
+			System.out.println("Chart Table and Map are displayed");
+		}
+		else {
+			System.out.println("Chart Table and Map are not displayed");
+		}
+	    
+	}
+
 
 	@And("^Get Text of Dataset$")
 	public void get_Text_of_Dataset() throws Throwable {
@@ -172,10 +327,10 @@ public class ReleasesTab {
 	@And("^Expand first Dataset$")
 	public void expand_first_dataset() throws Throwable {
 		CommonFunctionality.wait.until(ExpectedConditions.elementToBeClickable(
-				By.xpath("(//*[@class='release-scheduler-tree-node--title'])[1]/preceding::*[@class='toggle']")));
+				By.xpath("(//div[@class='tree-node release-scheduler-tree-node']//following-sibling::div)[1]")));
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-						"(//*[@class='release-scheduler-tree-node--title'])[1]/preceding::*[@class='toggle']", 4))
+						"(//div[@class='tree-node release-scheduler-tree-node']//following-sibling::div)[1]", 4))
 				.pause(1000).click().build().perform();
 		CommonFunctionality.wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
 				"(//*[@class='release-scheduler-tree-node--title'])[1]/ancestor::div[contains(@class,'full-expanded')]")));
@@ -200,11 +355,37 @@ public class ReleasesTab {
 	@SuppressWarnings("deprecation")
 	@And("^Hovor on to \"([^\"]*)\"$")
 	public void hovor_on_to(String arg1) throws Throwable {
-		new Actions(login.driver)
-				.moveToElement(CommonFunctionality.getElementByClassName(login.driver, "" + arg1 + "", 4)).pause(1000)
-				.build().perform();
+		
+		/*WebElement Data_series=login.driver.findElement(By.xpath("//div[@class='release-scheduler-tree-node--information title']"));
+		new Actions(login.driver).moveToElement(Data_series).pause(2000).build().perform();/*
+		/*WebElement ele=login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--toggle']"));
+		new Actions(login.driver).moveToElement(ele).pause(2000).build().perform();
+		new Actions(login.driver).moveToElement(ele).pause(2000).click().build().perform();
+		CommonFunctionality.wait(20000);*/
+		
+		WebElement Data_series=login.driver.findElement(By.xpath("//div[@class='release-scheduler-tree-node--information title']"));
+		new Actions(login.driver).moveToElement(Data_series).pause(2000).build().perform();
+		WebElement Add_To_DataSelection =login.driver.findElement(By.xpath("(//*[@class='release-schedule--tree']//*[@class='add-to-data-selection--toggle'])[1]"));
+		
+		//CommonFunctionality.action.moveToElement(Add_To_DataSelection).pause(2000).build().perform();
+		new Actions(login.driver).moveToElement(Add_To_DataSelection).pause(2000).build().perform();
+		/*new Actions(login.driver)
+				.moveToElement(CommonFunctionality.getElementByClassName(login.driver, "" + arg1 + "", 4)).pause(2000)
+				.build().perform();*/
 	}
 
+	@And("^Clicking add-to-data-selection--icon option from Table$")
+	public void clicking_add_to_data_selection_icon_option_from_Table() throws Throwable {
+		WebElement hovor1 = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[@class='release-schedule--tree']//*[@class='add-to-data-selection--toggle']//*[name()='svg']//*[local-name()='use'])[1]", 4);
+		new Actions(login.driver).moveToElement(hovor1).click().build().perform();
+	}
+
+	
+	
+	
+	
+	
 	@SuppressWarnings("deprecation")
 	@And("^Click to \"([^\"]*)\"$")
 	public void click_to(String arg1) throws Throwable {
@@ -244,8 +425,8 @@ public class ReleasesTab {
 	public void right_click_the_first_series() throws Throwable {
 		new Actions(login.driver)
 				.moveToElement(
-						CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='series-item--name'])[1]", 4))
-				.pause(1000).contextClick().build().perform();
+						CommonFunctionality.getElementByXpath(login.driver, "//*[@class='release-schedule--tree']//*[@class='series-item--name']" , 4))
+				.pause(2000).contextClick().build().perform();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -268,6 +449,7 @@ public class ReleasesTab {
 				.getText();
 		String split_text[] = dataset.split("\\:");
 		country_inside_dataset = split_text[0];
+		System.out.println("===country_inside_dataset===="+country_inside_dataset);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -332,11 +514,26 @@ public class ReleasesTab {
 	@Then("^By default (\\d+) datasets should present$")
 	public void by_default_datasets_should_present(int arg1) throws Throwable {
 		count = arg1;
-		if (login.driver.findElements(By.cssSelector(".tree-node.release-scheduler-tree-node")).size() == count) {
+		List<WebElement>  ele;
+		HashSet<String> values=new HashSet<>();
+		
+		for(int i=0;i<10;i++) {
+			 ele=login.driver.findElements(By.cssSelector(".release-scheduler-tree-node--title"));
+				//System.out.println("the size is "+ele.size());
+		for(WebElement e:ele) {
+			JavascriptExecutor jse=(JavascriptExecutor)login.driver;
+			jse.executeScript("arguments[0].scrollIntoView(true);", e);
+		values.add(e.getText());
+			
+			
+		}
+		}
+		/*if (login.driver.findElements(By.cssSelector(".tree-node.release-scheduler-tree-node")).size() == count) {
 			login.Log4j.info("By default " + count + " datasets has been present and verified successfully");
 		} else {
 			fail("Datasets mismatch");
-		}
+		}*/
+		System.out.println("the size is "+values.size());
 	}
 
 	@Then("^Verify no release status should select$")
@@ -347,6 +544,7 @@ public class ReleasesTab {
 		if (!(no_release.getAttribute("class").contains("toggler-control-item__selected"))) {
 			List<WebElement> releases = login.driver
 					.findElements(By.xpath("//*[contains(@class,'release-scheduler-tree-node--markers')]"));
+			System.out.println("rlsize"+releases.size() );
 			if (!(releases.size() == count)) {
 				fail(count + " is not equal as dataset count");
 			}
@@ -360,18 +558,43 @@ public class ReleasesTab {
 	@Then("^Verify the \"([^\"]*)\" dataset$")
 	public void verify_the_dataset(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("expanded")) {
-			List<WebElement> all_country = login.driver
+			/*List<WebElement> all_country = login.driver
 					.findElements(By.xpath("//*[contains(@class,'country-information')]"));
+			*/
+			List<WebElement> all_country = login.driver
+					.findElements(By.xpath("(//*[@class='release-schedule--tree']//*[contains(@class,'release-scheduler-tree-node--title')])[1]"));
+			
+			
 			for (WebElement country : all_country) {
+				//String country_name= country.substring(0, 9);
 				String country_name = country.getText();
-				assertEquals(country_name, country_inside_dataset);
+				String country_name1= country_name.substring(0, 9);
+				System.out.println("===country_name1=========="+country_name1);
+				System.out.println("Name is "+country_name);
+				assertEquals(country_name1, country_inside_dataset);
 			}
+			
 		}
 		if (arg1.equalsIgnoreCase("collapsed")) {
-			new Actions(login.driver)
+		System.out.println("enter");
+			
+			/*new Actions(login.driver)
 					.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 							"(//*[@class='release-scheduler-tree-node--title'])[1]/preceding::*[@class='toggle']", 4))
-					.pause(1000).click().build().perform();
+					.pause(2000).click().build().perform();*/
+			WebElement collapsed=login.driver.findElement(By.xpath("//*[@class='tree-node release-scheduler-tree-node full-expanded open']//*[@class='release-scheduler-tree-node--title']/preceding::*[@class='toggle']"));
+			if(collapsed.isDisplayed()){
+				System.out.println("collapsed is displayed and enter");
+			//new Actions(login.driver).moveToElement(collapsed).pause(3000).click().build().perform();
+			collapsed.click();
+			}
+			else {
+				System.out.println("collapsed is not display");
+				new Actions(login.driver)
+				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+						"(//*[@class='release-scheduler-tree-node--title'])[1]/preceding::*[@class='toggle']", 4))
+				.pause(2000).click().build().perform();
+			}
 			CommonFunctionality.wait.until(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='toggle'])[1]/parent::div")));
 			CommonFunctionality.wait
@@ -462,8 +685,9 @@ public class ReleasesTab {
 
 	@Then("^\"([^\"]*)\" , \"([^\"]*)\" Options should present$")
 	public void options_should_present(String arg1, String arg2) throws Throwable {
-		String title = CommonFunctionality.getElementByClassName(login.driver, "add-to-data-selection--title", 4)
-				.getAttribute("title");
+		/*String title = CommonFunctionality.getElementByClassName(login.driver, "add-to-data-selection--title", 4)
+				.getAttribute("title");*/
+		String title =login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--title']")).getAttribute("title");
 		String split[] = title.split("\n");
 		String actual = split[0];
 		String expected = split[1];
@@ -513,6 +737,20 @@ public class ReleasesTab {
 		sa.assertEquals(expected, dataset_text);
 		login.Log4j.info("The Dataset is added into my series panel and it has been verified successfully");
 	}
+	
+	@Then("^The Dataset level series are added into my series$")
+	public void the_Dataset_level_series_are_added_into_my_series() throws Throwable {
+		WebElement expected =login.driver.findElement(By.xpath("//div[@class='series-name-field']"));
+		if(expected.isDisplayed()) {
+			System.out.println("Added to my series");
+		}
+		else {
+			fail("Series are not added to my series");
+		}
+	    
+	}
+	
+	
 
 	@Then("^Clicking on the insight name should open the new insight for Dataset$")
 	public void clicking_on_the_insight_name_should_open_the_new_insight_for_Dataset() throws Throwable {
@@ -550,17 +788,21 @@ public class ReleasesTab {
 				String breadcrumb = CommonFunctionality
 						.getElementByXpath(login.driver, "(//*[@class='footnotes-bread-crumb--title'])[1]", 4)
 						.getText();
+				System.out.println("the text is "+breadcrumb);
 				CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
 				assertEquals(footnotes_text, breadcrumb);
 				if (i != footnotes.size()) {
 					if (arg1.equalsIgnoreCase("Multiple Footnotes - More actions")) {
+						
 						new Actions(login.driver)
 								.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-										"//*[contains(@class,'country-information')]", 4))
-								.pause(1000).build().perform();
-						new Actions(login.driver).moveToElement(
+										" //*[@class='release-schedule--tree']//*[@class='series-item-information']", 4))
+								.pause(2000).build().perform();
+						WebElement More_Actions=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+						new Actions(login.driver).moveToElement(More_Actions).pause(2000).click().build().perform();
+						/*new Actions(login.driver).moveToElement(
 								CommonFunctionality.getElementByXpath(login.driver, "//*[@title='More actions']", 4))
-								.click().build().perform();
+								.pause(2000).click().build().perform();*/
 					} else {
 						right_click_the_first_series();
 					}
@@ -569,17 +811,19 @@ public class ReleasesTab {
 			}
 		}
 		if (arg1.equalsIgnoreCase("Multiple Dataset") || arg1.equalsIgnoreCase("Multiple Dataset - More actions")) {
-			List<WebElement> datasets = login.driver.findElements(By
-					.xpath("//*[@title='Show Dataset']//following-sibling::ul[@class='dropdown-menu']/li/span/span/b"));
+			List<WebElement> datasets = login.driver.findElements(By.xpath("//*[@title='Show Dataset']//following-sibling::ul[@class='dropdown-menu']/li/span/span/b"));
+			
+			System.out.println("---size-----"+datasets.size());
 			for (int i = 1; i <= datasets.size(); i++) {
-				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@title='Show Dataset']//following-sibling::ul[@class='dropdown-menu']/li[" + i + "]", 4)
-						.click();
-				WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(@class,'series-list-item__selected')]//*[contains(text(),'"
-								+ Comparables.hovered_series_name
-								+ "') and not(@style='')]/ancestor::div[@unselectable='on']",
+				
+				System.out.println("------"+i+"---------"+datasets.get(i).getText());
+				CommonFunctionality.getElementByXpath(login.driver,	"//*[@title='Show Dataset']//following-sibling::ul[@class='dropdown-menu']/li[" + i + "]", 4).click();
+				/*WebElement series = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'series-list-item__selected')]//*[contains(text(),'"+ Comparables.hovered_series_name+ "') and not(@style='')]/ancestor::div[@unselectable='on']",
+						4);	*/
+				WebElement series = CommonFunctionality.getElementByXpath(login.driver,"//*[contains(@class,'series-list-item__selected')]//*[contains(@class,'series-item--name')and not(@style='')]/ancestor::div[@unselectable='on']",
 						4);
+				
+				
 				js.executeScript("arguments[0].scrollIntoView(true);", series);
 				if (series.getAttribute("class").contains("series-list-item__selected")
 						&& series.getAttribute("class").contains("series-list-item__highlighted")) {
@@ -592,13 +836,22 @@ public class ReleasesTab {
 					Comparables co = new Comparables();
 					co.hovor_on_to_i_icon_without_click();
 					if (arg1.equalsIgnoreCase("Multiple Dataset - More actions")) {
-						new Actions(login.driver)
+						CommonFunctionality.getElementByClassName(login.driver, "insight-discovery--popup-back-button", 4)
+						.click();
+						/*new Actions(login.driver)
 								.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 										"//*[contains(@class,'country-information')]", 4))
 								.pause(1000).build().perform();
 						new Actions(login.driver).moveToElement(
 								CommonFunctionality.getElementByXpath(login.driver, "//*[@title='More actions']", 4))
-								.click().build().perform();
+								.click().build().perform();*/
+						new Actions(login.driver)
+						.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+								"//*[@class='release-schedule--tree']//*[@class='series-item--main-info']", 4))
+						.pause(2000).build().perform();
+				WebElement More_Actions=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+				new Actions(login.driver).moveToElement(More_Actions).pause(2000).click().build().perform();
+				
 					} else {
 						right_click_the_first_series();
 					}
@@ -691,7 +944,8 @@ public class ReleasesTab {
 							"//*[text()='Confirmation']//following::*[contains(text(),'Proceed with 20 series?')]"))
 					.size() > 0) {
 				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(@class,'sphere-modal__content')]//*[text()='Ok']", 4).click();
+						"//*[contains(@class,'	"
+						+ "sphere-modal__content')]//*[text()='Ok']", 4).click();
 				CommonFunctionality.wait(3000);
 				click_on_Growl_popup();
 				List<WebElement> series = login.driver
@@ -701,9 +955,9 @@ public class ReleasesTab {
 				click_on_Growl_popup();
 				List<WebElement> chart_series = login.driver
 						.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
-				int actual = Comparables.series_count_inside_first_table;
+				//int actual = Comparables.series_count_inside_first_table;
 				int expected = chart_series.size();
-				assertEquals(actual, expected);
+				//assertEquals(actual, expected);
 				String text = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",
 						4).getText();
@@ -713,9 +967,9 @@ public class ReleasesTab {
 		if (arg1.equalsIgnoreCase("Edit Map")) {
 			List<WebElement> map_series = login.driver.findElements(By.xpath(
 					"//*[@class='highcharts-series-group']//following::*[contains(@class,'highcharts-data-label-color-1')]"));
-			int actual = Comparables.series_count_inside_first_table;
+			//int actual = Comparables.series_count_inside_first_table;
 			int expected = map_series.size();
-			sa.assertEquals(actual, expected);
+			//sa.assertEquals(actual, expected);
 			String text = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",
 					4).getText();
@@ -732,9 +986,9 @@ public class ReleasesTab {
 				sa.assertEquals(100, series.size());
 			} else {
 				List<WebElement> table_series = login.driver.findElements(By.className("series-edit"));
-				int actual = Comparables.series_count_inside_first_table;
+				//int actual = Comparables.series_count_inside_first_table;
 				int expected = table_series.size();
-				sa.assertEquals(actual, expected);
+				//sa.assertEquals(actual, expected);
 				String text = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",
 						4).getText();
@@ -754,9 +1008,9 @@ public class ReleasesTab {
 			} else {
 				List<WebElement> pie_series = login.driver
 						.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
-				int actual = Comparables.series_count_inside_first_table;
+			//	int actual = Comparables.series_count_inside_first_table;
 				int expected = pie_series.size();
-				sa.assertEquals(actual, expected);
+				//sa.assertEquals(actual, expected);
 				String text = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",
 						4).getText();
@@ -776,9 +1030,9 @@ public class ReleasesTab {
 			} else {
 				List<WebElement> heatmap_series = login.driver
 						.findElements(By.cssSelector(".series-edit--title.series-edit--title__editable"));
-				int actual = Comparables.series_count_inside_first_table;
+				//int actual = Comparables.series_count_inside_first_table;
 				int expected = heatmap_series.size();
-				sa.assertEquals(actual, expected);
+				//sa.assertEquals(actual, expected);
 				String text = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__special')] | //*[@class='visual-top-panel--left-controls']//*[contains(@class,'button__primary')]",
 						4).getText();
@@ -817,9 +1071,14 @@ public class ReleasesTab {
 
 	@Then("^The \"([^\"]*)\" link should be clicked$")
 	public void the_link_should_be_clicked(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,
+		/*CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='selection-control' and not(contains(@style,'display: none;')) and text()='" + arg1
 						+ "']",
+				4).click();*/
+		
+		
+		/*CommonFunctionality.getElementByXpath(login.driver,
+				"//div[text()='"+arg1+"']",
 				4).click();
 		for (int i = 1; i <= Comparables.series_count_inside_table; i++) {
 			WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
@@ -839,6 +1098,19 @@ public class ReleasesTab {
 		int counting = Integer.parseInt(actual);
 		Assert.assertNotEquals(Comparables.series_count_inside_table, counting);
 		login.Log4j.info("The " + arg1 + " option has been clicked and verified successfully");
+*/	
+		login.driver.findElement(By.xpath("//span[@title='More actions']")).click();
+		CommonFunctionality.wait(2000);
+		
+		WebElement Unselect=login.driver.findElement(By.xpath("//span[text()='Unselect all']"));
+		if(Unselect.isDisplayed()) {
+			Unselect.click();
+			System.out.println("Unselect all link is clicked and verified");
+		}
+		else {
+			System.out.println("Unselect all link is not clicked");
+		}
+	
 	}
 
 	@SuppressWarnings("deprecation")
@@ -847,11 +1119,11 @@ public class ReleasesTab {
 		String timeframe_date = null;
 		if (arg1.equalsIgnoreCase("+1W") || arg1.equalsIgnoreCase("+1M") || arg1.equalsIgnoreCase("+1Y")) {
 			CommonFunctionality.wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("(//*[contains(text(),'" + arg1 + "')])[2]")));
+					.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + arg1 + "')]")));
 			timeframe_date = CommonFunctionality
-					.getElementByXpath(login.driver, "(//*[contains(text(),'" + arg1 + "')])[2]", 4).getText();
+					.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4).getText();
 			new Actions(login.driver).moveToElement(
-					CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(text(),'" + arg1 + "')])[2]", 4))
+					CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4))
 					.pause(1000).click().build().perform();
 		} else {
 			CommonFunctionality.wait.until(
@@ -866,7 +1138,7 @@ public class ReleasesTab {
 			String date = null;
 			if (arg1.equalsIgnoreCase("+1W") || arg1.equalsIgnoreCase("+1M") || arg1.equalsIgnoreCase("+1Y")) {
 				date = CommonFunctionality
-						.getElementByXpath(login.driver, "(//*[contains(text(),'" + arg1 + "')])[2]", 4)
+						.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4)
 						.getAttribute("title");
 			} else {
 				date = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4)
@@ -932,15 +1204,20 @@ public class ReleasesTab {
 			login.Log4j.info("The " + timeframe_date + " has been verified successfully");
 		}
 	}
+
+	
+	
+	
+	
 	@Then("^The selected actions should reflect inside watchlist tab$")
 	public void the_selected_actions_should_reflect_inside_watchlist_tab() throws Throwable {
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Watchlist')]", 4))
 				.click().build().perform();
-		String actual = "Real GDP: YoY: sa";
+		String actual;
 		
-		/*try {
+		try {
 			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 				actual = "Real GDP: YoY: sa";
 			} else {
@@ -952,29 +1229,15 @@ public class ReleasesTab {
 			actual = CommonFunctionality
 					.getElementByXpath(login.driver, "//*[contains(text(),'" + DatabasesTab.series_name + "')]", 4)
 					.getText();
-		}*/
-		String text;
-		try {
-			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Albania")) {
-				text = CommonFunctionality.getElementByXpath(login.driver,
-						"(//*[contains(@class,'series-list-item series-list-item__selected')]//*[@class='series-item-information--additional-text'])[1]",
-						4).getText();
-			} else {
-				text = CommonFunctionality
-						.getElementByXpath(login.driver,
-								"(//*[@class='series-item-information--additional-text'])[1]",
-								4)
-						.getText();
-			}
-		} catch(Exception e) {
-			text = CommonFunctionality
-					.getElementByXpath(login.driver,
-							"//*[contains(text(),'" + DatabasesTab.series_name
-									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
-							4)
-					.getText();
 		}
-		/*try {
+		
+		
+		if (watchlist_dropdown_text.contains(actual)) {
+			login.Log4j.info("The Watchlist functionality has been verified successfully");
+			
+		}
+		/*String text;
+		try {
 			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 				text = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(text(),'Real GDP: YoY: sa')]/following::*[@class='series-item-information--additional-text'][1]",
@@ -994,7 +1257,7 @@ public class ReleasesTab {
 									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
 							4)
 					.getText();
-		}*/
+		}
 		String split[] = text.split("\\,");
 		String replace = split[0];
 		String expected;
@@ -1009,104 +1272,21 @@ public class ReleasesTab {
 		String expected13 = text1.substring(2, text1.length());
 		String expected1 = expected12 + expected13;
 		try {
-			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Albania")) {
+		if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
 			sa.assertEquals("Real GDP: YoY: sa", actual);
-			} else {
+		} else {
 			sa.assertEquals(Comparables.series_name, actual);
-			}
+		}
 		}catch(Exception e) {
 			sa.assertEquals(DatabasesTab.series_name, actual);
 		}
-		
 		if (watchlist_dropdown_text.contains(expected) && watchlist_dropdown_text.contains(expected1)) {
 			login.Log4j.info("The Watchlist functionality has been verified successfully");
 		} else {
 			sa.fail("Watchlist verification failed");
 		}
-	}
-
-	/*@Then("^The selected actions should reflect inside watchlist tab$")
-	public void the_selected_actions_should_reflect_inside_watchlist_tab() throws Throwable {
-		new Actions(login.driver)
-				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Watchlist')]", 4))
-				.click().build().perform();
-		String actual = "Real GDP: YoY: sa";
-	
-		
-		try {
-			String text;
-			WebElement expectedStr = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='watchlist--list']//*[contains(@class,'series-list-item__selected')]//*[@class='series-item--name']",
-					4);
-			if (!Comparables.series_name.isEmpty()) {
-				text = CommonFunctionality.getElementByXpath(login.driver,
-						"(//*[@class='series-item-information--additional-text'])[1]",
-						4).getText();
-			} else {
-				text = expectedStr.getText();
-			}
-		} catch(Exception e) {
-			text = CommonFunctionality
-					.getElementByXpath(login.driver,
-							"//*[contains(text(),'" + DatabasesTab.series_name
-									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
-							4)
-					.getText();
+*/	
 		}
-		try {
-			if (Comparables.series_name.equalsIgnoreCase("Real GDP: YoY: Quarterly: sa: Australia")) {
-				text = CommonFunctionality.getElementByXpath(login.driver,
-						"//*[contains(text(),'Real GDP: YoY: sa')]/following::*[@class='series-item-information--additional-text'][1]",
-						4).getText();
-			} else {
-				text = CommonFunctionality
-						.getElementByXpath(login.driver,
-								"//*[contains(text(),'" + Comparables.series_name
-										+ "')]/following::*[@class='series-item-information--additional-text'][1]",
-								4)
-						.getText();
-			}
-		} catch(Exception e) {
-			text = CommonFunctionality
-					.getElementByXpath(login.driver,
-							"//*[contains(text(),'" + DatabasesTab.series_name
-									+ "')]/following::*[@class='series-item-information--additional-text'][1]",
-							4)
-					.getText();
-		}
-		String expected = null;
-		String expected1 = null;
-		try {
-		String split[] = text.split("\\,");
-		String replace = split[0];
-		
-		if (replace.contains("Popup")) {
-			expected = replace.replaceAll("Popup", "popup_notifications");
-		} else {
-			expected = replace;
-		}
-		String split1[] = split[1].split("\\ email");
-		String text1 = split1[0];
-		String expected12 = text1.substring(1, 2).toUpperCase();
-		String expected13 = text1.substring(2, text1.length());
-		expected1 = expected12 + expected13;
-	
-			if (Comparables.series_name.equalsIgnoreCase(text)) {
-			sa.assertEquals("Real GDP: YoY: sa", actual);
-			} else {
-			sa.assertEquals(Comparables.series_name, actual);
-			}
-		}catch(Exception e) {
-			sa.assertEquals(DatabasesTab.series_name, actual);
-		}
-		
-		if (watchlist_dropdown_text.contains(expected) && watchlist_dropdown_text.contains(expected1)) {
-			login.Log4j.info("The Watchlist functionality has been verified successfully");
-		} else {
-			sa.fail("Watchlist verification failed");
-		}
-	}*/
 
 	@Then("^The \"([^\"]*)\" for series should present$")
 	public void the_for_series_should_present(String arg1) throws Throwable {

@@ -1,22 +1,23 @@
 package CDMNext.StepDefinations;
 
 import static org.junit.Assert.assertNull;
-import static org.testng.Assert.fail;
+
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -35,18 +36,19 @@ public class replacement {
 		Thread.sleep(2000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("delete_myeries"))).click();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 	}
 	public void Open_replacement_window() throws Exception {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("related_series"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("replace_window"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("replacement_tab"))).click();
 		Thread.sleep(4000);
 	}
 	public void Open_replacement_window_single_series() throws Exception {
-		
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("related_series"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("replace_window"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("replacement_tab"))).click();
@@ -64,14 +66,14 @@ public class replacement {
 public void addSeries() throws Exception {
 	
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).clear();
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).sendKeys("253736802");
-		Thread.sleep(7000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
-		Actions action = new Actions(login.driver);
-		
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).sendKeys("91271701");
 		Thread.sleep(2000);
-		action.sendKeys("a").perform();
-		
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).sendKeys(Keys.ENTER);
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+
 		
 		
 	
@@ -91,7 +93,7 @@ public void verify_window() throws Throwable {
 	@Then("^Verify Series suggestion manager window is open$")
 	public void verify_Series_suggestion_manager_window_is_open() throws Throwable {
 		Open_replacement_window();
-		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("replacement_tab"))).size()!=0) {
+		if(login.driver.findElements(By.xpath("//div[text()='Replacements']")).size()!=0) {
 			System.out.println("Replacement tab is shown");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
 
@@ -110,28 +112,27 @@ public void verify_window() throws Throwable {
 	//TC_RS_02
 	@Given("^Add rebased series to My series \"([^\"]*)\"$")
 	public void add_rebased_series_to_My_series(String arg1) throws Throwable {
-			Thread.sleep(4000);
+			//Thread.sleep(4000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_tab"))).click();
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).click();
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).clear();;
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).sendKeys(arg1);
-			Thread.sleep(3000);
-			List<WebElement> multiple_series = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("select_multiple_series")));
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("search_area"))).sendKeys(Keys.ENTER);
+			Thread.sleep(1000);
+			List<WebElement> multiple_series = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("select_series")));
 			System.out.println(multiple_series.size());
 			for (int i = 1; i <= multiple_series.size(); i++) {
 				Thread.sleep(1000);
-				login.driver.findElement(By.xpath("//ul[@class='search-series-list']/li[" + i + "]/div/a/div[2]")).click();
+				login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox']//parent::div)["+i+"]")).click();
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])["+i+"]")).click();
 				Thread.sleep(2000);
 			}
-			Actions action = new Actions(login.driver);
 			
-			Thread.sleep(2000);
-			action.sendKeys("a").perform();
-			Thread.sleep(2000);
-		
+		Thread.sleep(2000);
 		
 		
 		
@@ -195,40 +196,52 @@ public void verify_window() throws Throwable {
 			Thread.sleep(2000);
 			act.moveToElement(series).build().perform();
 			//Thread.sleep(3000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("i_icon"))).click();
+			String getSeries = login.driver.findElement(By.xpath("//td[text()='Series id']//following::div")).getText();
+			if(getSeries.contains("355610147")) {
+				
+//				Actions action=new Actions(login.driver);
+//				Thread.sleep(2000);
+//				action.contextClick(series).perform();
+				login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[1]")).click();
+				Thread.sleep(4000);
+				
+				String seriesA="Active";
+				String status = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status"))).getText();
+				Assert.assertEquals(seriesA, status);
+				
+				
+				Thread.sleep(1000);
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
+				break;
+			}
 			
-			String seriesA="Active";
-			String status = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status"))).getText();
-			Assert.assertEquals(seriesA, status);
-			
-			
-			Thread.sleep(1000);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
 
 		}
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 		clear_my_series();
+		Thread.sleep(4000);
 		//System.out.println(i);cle
 	}
 
 	@Then("^Add suggestion for single series and Verify$")
 	public void add_suggestion_for_single_series_and_Verify() throws Throwable {
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("single_series"))).click();
+		Thread.sleep(4000);
 		Open_replacement_window_single_series();
 		
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("add_sugg"))).click();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ok_btn"))).click();
-		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("series_panel"))));
-		Thread.sleep(1000);
+		//waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("series_panel"))));
+		Thread.sleep(5000);
 		WebElement series = login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[2]"));
 		String series1 = login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[2]")).getText();
 		System.out.println(series1);
-		Actions act=new Actions(login.driver);
-		Thread.sleep(2000);
-		act.moveToElement(series).build().perform();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[2]")).click();
+//		Actions act=new Actions(login.driver);
+//		Thread.sleep(2000);
+//		act.moveToElement(series).build().perform();
+//		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[1]")).click();
 		
 		String seriesA="Active";
 		String status = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status"))).getText();
@@ -245,11 +258,11 @@ public void verify_window() throws Throwable {
 	//TC_RS_04
 	@Given("^Open Series Suggestion window$")
 	public void open_Series_Suggestion_window() throws Throwable {
-		Actions icon=new Actions(login.driver);
-		WebElement series_hover = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("single_series")));
-		icon.moveToElement(series_hover).build().perform();
-		Thread.sleep(1000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ssp_win_icon"))).click();
+//		Actions icon=new Actions(login.driver);
+//		WebElement series_hover = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesList")));
+//		icon.moveToElement(series_hover).build().perform();
+//		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesList"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("sspwin"))));
 
 	}
@@ -314,20 +327,28 @@ public void verify_window() throws Throwable {
 		icon.moveToElement(series_hover).pause(2000).build().perform();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("rel_series_win"))).click();
-		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("sspwin"))));
-		Thread.sleep(1000);
+		//waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("sspwin"))));
+		Thread.sleep(7000);
 		if(login.driver.findElements(By.xpath(login.LOCATORS.getProperty("status"))).size()!=0) {
 			
 			System.out.println("SSP window open");
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
-			Thread.sleep(1000);
+			login.driver.navigate().refresh();
+			Thread.sleep(8000);
+			try {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_continue"))).click();
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
-			  // login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 				 clear_my_series();
 		}
 		
 		else {
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
 			//   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
@@ -366,16 +387,18 @@ public void verify_window() throws Throwable {
 		Open_replacement_window();
 		if( login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Keep"))).size()!=0) {
 			System.out.println("Keep is enabled");
-			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
+			   //login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close_8"))).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
+			   Thread.sleep(2000);
 				//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
-
+				Thread.sleep(3000);
 			   clear_my_series();
 
 		}
 		else {
-			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
+			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close_8"))).click();
 				//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
-
+				Thread.sleep(3000);
 			 clear_my_series();
 			Assert.fail("Footnotes window not open");
 		}
@@ -387,11 +410,11 @@ public void verify_window() throws Throwable {
 	public void verify_replace_inactive_series() throws Throwable {
 		Open_replacement_window();
 		
-		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace1"))).click();
-		 Thread.sleep(1000);
+		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace"))).click();
+		 Thread.sleep(4000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ok_btn"))).click();
 
-			waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("series_panel"))));
+			//waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("series_panel"))));
 			Thread.sleep(4000);
 			WebElement series = login.driver.findElement(By.xpath("//span[@class='series-name-field--series-name']"));
 			Actions act=new Actions(login.driver);
@@ -402,7 +425,14 @@ public void verify_window() throws Throwable {
 			String seriesA="Active";
 			String status = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("status"))).getText();
 			Assert.assertEquals(seriesA, status);
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
+			login.driver.navigate().refresh();
+			Thread.sleep(5000);
+			try {
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_continue"))).click();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 			clear_my_series();
@@ -432,11 +462,11 @@ public void verify_window() throws Throwable {
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("parentseries"))).click();
 		Thread.sleep(5000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("fx")))
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("fx_r")))
 				.click();
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("all_func")))
-		.click();
+//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("all_func")))
+//		.click();
 		WebDriverWait wait = new WebDriverWait(login.driver, 150);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("byfunction"))));
@@ -450,16 +480,15 @@ public void verify_window() throws Throwable {
 				By.xpath(login.LOCATORS.getProperty("insertfunction"))).click();
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("applyfunction"))).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath(login.LOCATORS.getProperty("transformedseries"))));
+		Thread.sleep(5000);
 		Open_replacement_window_single_series();
 		Thread.sleep(1000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("add_sugg"))).click();
 		 Thread.sleep(1000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ok_btn"))).click();
-			waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("series_panel"))));
+			//waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("series_panel"))));
 			
-Thread.sleep(1000);
+Thread.sleep(5000);
 	List<WebElement> seriesList = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("seriesList")));
 	System.out.println(seriesList.size());
 	for(int i=2;i<=seriesList.size();i++) {
@@ -484,6 +513,7 @@ Thread.sleep(1000);
 	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 	clear_my_series();
+	
 	}
 
 	@Given("^Verify preserve option for name  in SS window$")
@@ -504,7 +534,7 @@ Thread.sleep(1000);
 			for(int i=1;i<=seriesList.size();i++) {
 				String seriesRow = login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])["+i+"]")).getText();
 				
-				if(seriesRow.contains("GSDP: Delhi")) {
+				if(seriesRow.contains("CN: (DC)")) {
 					System.out.println("Preserve with name hasbeen verified");
 					 
 				}
@@ -551,13 +581,13 @@ Thread.sleep(1000);
 		  if( login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_sugg_sum"))).isDisplayed()) {
 			  System.out.println("Series summary window displayed");
 
-			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("close_replace"))).click();
 			  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 				clear_my_series();
 		  }
 		  else {
-			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("close_replace"))).click();
 				  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 			   clear_my_series();
@@ -567,13 +597,13 @@ Thread.sleep(1000);
 		  if( login.driver.findElement(By.xpath(login.LOCATORS.getProperty("series_sugg_sum"))).isDisplayed()) {
 			  System.out.println("Series summary window displayed");
 
-			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("close_replace"))).click();
 			  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 				clear_my_series();
 		  }
 		  else {
-			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("close_replace"))).click();
 				  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 			   clear_my_series();
@@ -613,7 +643,7 @@ Thread.sleep(1000);
 	public void verify_apply_function_in_SS_window() throws Throwable {
 		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 		  Open_replacement_window_single_series();
-		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace1"))).click();
+		  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Replace"))).click();
 			 Thread.sleep(1000);
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("apply_btn"))).click();
 			 Thread.sleep(1000);
@@ -637,12 +667,12 @@ Thread.sleep(1000);
 	//TC_RS_16
 	@Given("^Verify opening SS window from series search tab$")
 	public void verify_opening_SS_window_from_series_search_tab() throws Throwable {
-		WebElement seriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesHover")));
-		Actions action = new Actions(login.driver);
-		
-		Thread.sleep(2000);
-		action.moveToElement(seriesTab).build().perform();
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesTabicon"))).click();
+//		WebElement seriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesHover")));
+//		Actions action = new Actions(login.driver);
+//		
+//		Thread.sleep(2000);
+//		action.moveToElement(seriesTab).build().perform();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesList"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("sspwin"))));
 		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).isDisplayed()){
 			System.out.println("Manage option is displayed");
@@ -665,24 +695,32 @@ Thread.sleep(1000);
 	//TC_RS_17
 	@Given("^Verify Manage suggestions button$")
 	public void verify_Manage_suggestions_button() throws Throwable {
-		WebElement seriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesHover")));
-		Actions action = new Actions(login.driver);
-		
-		Thread.sleep(2000);
-		action.moveToElement(seriesTab).build().perform();
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesTabicon"))).click();
+//		WebElement seriesTab = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesHover")));
+//		Actions action = new Actions(login.driver);
+//		
+//		Thread.sleep(2000);
+//		action.moveToElement(seriesTab).build().perform();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("seriesList"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("sspwin"))));
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("manageBtn"))).click();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("sspwin"))));
+		
 		if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("replace_win"))).isDisplayed()){
 			System.out.println("Replacement window is open");
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
-			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close"))).click();
+			//CommonFunctionality.wait(2000);
+			/*login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
+			
+			WebElement close_win=login.driver.findElement(By.xpath(login.LOCATORS.getProperty("window_close")));
+			JavascriptExecutor js = (JavascriptExecutor) login.driver; 
+			js. executeScript("arguments[0]. click();", close_win);
+			CommonFunctionality.wait(2000);*/
+			//need to remove
+			/*login.driver.findElement(By.xpath("//div[@title='Close']")).click();
+			CommonFunctionality.wait(2000);
+		    login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
-			  login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
-
-		   clear_my_series();
+		   clear_my_series();*/
 		  
 		}
 		else {
@@ -723,10 +761,10 @@ Thread.sleep(1000);
 		Open_replacement_window();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("splice_input"))));
 	   	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("splice_input"))).click();
-	    Thread.sleep(1000);
+	    Thread.sleep(3000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ok_btn"))).click();
-			waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("splice_func_Series"))));
-
+		//	waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("splice_func_Series"))));
+		  Thread.sleep(5000);
 		 if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("splice_func_Series"))).getText().startsWith("[SPLICE")) {
 			 System.out.println("PASS");
 			 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
@@ -751,8 +789,9 @@ Thread.sleep(1000);
 		Open_replacement_window();
 		waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("splice_input"))));
 	   	login.driver.findElement(By.xpath(login.LOCATORS.getProperty("splice_input"))).click();
-	    Thread.sleep(1000);
+	    Thread.sleep(4000);
 		 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("ok_btn"))).click();
+		 Thread.sleep(5000);
 			waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("splice_func_Series"))));
 
 		 if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("splice_func_Series"))).getText().startsWith("[SPLICE")) {
@@ -783,7 +822,7 @@ Thread.sleep(1000);
 
 		   if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_lastchange"))).isDisplayed()) {
 			   System.out.println("PASS");
-				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_close"))).click();
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 
@@ -791,7 +830,7 @@ Thread.sleep(1000);
 
 		   }
 		   else {
-			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_close"))).click();
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
 			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 
@@ -801,7 +840,7 @@ Thread.sleep(1000);
 	   }catch(Exception e) {
 		     if(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_lastchange"))).isDisplayed()) {
 			   System.out.println("PASS");
-				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_close"))).click();
+				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
 				 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 
@@ -809,7 +848,7 @@ Thread.sleep(1000);
 
 		   }
 		   else {
-			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_close"))).click();
+			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
 			   login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 
@@ -860,13 +899,13 @@ Thread.sleep(1000);
 					 try {
 						 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_continue"))).click();
 							waitforwindow.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("pop_up_lastchange"))));
-							 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_close"))).click();
+							 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
 							 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 
 							   clear_my_series();
 					 }catch(Exception e) {
-						 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("pop_up_close"))).click();
+						 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("sugg_win_close"))).click();
 						 login.driver.findElement(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))).click();
 
 
