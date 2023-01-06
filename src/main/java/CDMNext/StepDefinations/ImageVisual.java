@@ -196,7 +196,10 @@ public class ImageVisual {
 	@And("^Click on title dropdown$")
 	public void click_on_title_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.getElementByXpath(login.driver, " //*[@data-popup='title']/*[2]", 30).click();
+//		CommonFunctionality.getElementByXpath(login.driver, " //*[@data-popup='title']/*[2]", 30).click();
+
+		CommonFunctionality.getElementByXpath(login.driver, "((//div[text()='Title:']//following::div[@class='context-menu-control--icon']))[1]", 30).click();
+
 	}
 
 	@Then("^The Image visual should update the \"([^\"]*)\" text color as blue$")

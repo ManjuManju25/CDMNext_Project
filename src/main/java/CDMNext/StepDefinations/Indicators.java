@@ -41,9 +41,10 @@ public class Indicators {
 	public void click_on_related_series_tab() throws Throwable {
 		Thread.sleep(2000);
 
-		if (login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).isEnabled()) {
+		if (login.driver.findElement(By.xpath("//*[contains(text(),'Related series')]")).isEnabled()) {
 
-			login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
+			login.driver.findElement(By.xpath("//*[contains(text(),'Related series')]")).click();
+
 		} else {
 			fail("Test case failed");
 		}
@@ -73,7 +74,7 @@ public class Indicators {
 	public void try_selecting_related_series_in_my_series() throws Throwable {
 		Thread.sleep(2000);
 
-		if (login.driver.findElements(By.xpath("//*[contains(text(),'Related Series')]")).size() == 2)
+		if (login.driver.findElements(By.xpath("//*[contains(text(),'Related series')]")).size() == 2)
 
 		{
 			Assert.fail("Test case failed");
@@ -102,10 +103,9 @@ public class Indicators {
 	@And("^try click on selecting related series in my series$")
 	public void try_click_on_selecting_related_series_in_my_series() throws Throwable {
 		Thread.sleep(2000);
+		if (login.driver.findElement(By.xpath("//*[contains(text(),'Related series')]")).isEnabled()) {
 
-		if (login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).isEnabled()) {
-
-			login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
+			login.driver.findElement(By.xpath("//*[contains(text(),'Related series')]")).click();
 
 		} else {
 			fail("click on selecting related series in my series");
@@ -324,7 +324,9 @@ public class Indicators {
 		WebElement rightclick = login.driver
 				.findElement(By.xpath("//span[@class='table-container--checkbox svg-checkbox input-control__grey']"));
 		action.contextClick(rightclick).build().perform();
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+		login.driver.findElement(By.xpath("//div[text()='Vertical']")).click();
+		
 
 		Thread.sleep(3000);
 	}
@@ -334,7 +336,7 @@ public class Indicators {
 	public void click_on_Add_related_series() throws Throwable {
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("//button[contains(text(),'Add related series')]")).click();
+		login.driver.findElement(By.xpath("//div[contains(text(),'Related series')]")).click();
 
 	}
 

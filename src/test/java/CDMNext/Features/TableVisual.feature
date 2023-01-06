@@ -108,7 +108,7 @@ Feature: Table Visual Functionality
     And Select the Frequency option in tabel visual
     And verify Frequency option from cogwheel icon
 
-  @TableVisual
+  @TableVisual851
   Scenario: TC_TV_20: Verify Currency option from cogwheel icon
     And User Select Series ID  as "4331701"
     And Select the Currency option in tabel visual
@@ -687,16 +687,16 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Series Verify Verify +Add from my series option
 
-  @TableVisual
+  @TableVisual1
   Scenario: TC_TV_134:Edit series -Verify adding series from my series
     And Create a table visual
     And verify Edit Series Verify adding series from my series
 
-  @TableVisual
+  @TableVisual85
   Scenario: TC_TV_135:Edit series -Verify max series for Table visual
     And verify Edit Series Verify max series for Table visual
 
-  @TableVisual
+  @TableVisual10
   Scenario: TC_TV_136:Edit series -Verify message for selecting more than 100 series
     And verify Edit Series Verify message for selecting more than 100 series
 
@@ -1225,7 +1225,7 @@ Feature: Table Visual Functionality
     And Create a table visual
    And verify Edit Table Copyright popup link horizontal alignment (left, right, center)
 
-  @TableVisual
+  @TableVisual2020
   Scenario: TC_TV_241:Edit Table-Verify Copyright-popup-vertical alignment (Top and bottom)
     And Create a table visual
     And verify Edit Table Copyright popup link vertical alignment (Top and bottom)
@@ -1705,7 +1705,7 @@ Feature: Table Visual Functionality
     And select the table visual
     And verify Add related option when the visual is empty
 
-  @TableVisual
+  @TableVisual852
   Scenario: TC_TV_333:Verify adding series from Series suggestion manager popup
     And User Select Series ID  as "394611277"
     #And Select series to my series tab

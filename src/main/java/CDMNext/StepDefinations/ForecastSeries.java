@@ -118,9 +118,10 @@ public class ForecastSeries {
 
 	@And("^Click on suggested series of forecast$")
 	public void click_on_suggested_series_of_forecast() throws Throwable {
-		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='legend-item'])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
+		Thread.sleep(7000);
+		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//span[@class='series-edit--title series-edit--title__editable'])[1]", 15);
 		Exp_seriesName = legend_item.getText();
+		System.out.println("Exp_seriesName:"+Exp_seriesName);
 		new Actions(login.driver).pause(200).moveToElement(legend_item).click().build().perform();
 	}
 

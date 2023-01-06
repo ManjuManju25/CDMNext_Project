@@ -281,7 +281,7 @@ Feature: Dependency module
     Then Series present in a chart should be disabled
 
   @Dependency
-  Scenario: TC_27: Verify 'enabling series present in a chart of dependencies series'
+  Scenario: TC_28: Verify 'enabling series present in a chart of dependencies series'
     And User Select Series ID as "384240277;454809317"
     And click on datasets
     And add some of series into my series tab

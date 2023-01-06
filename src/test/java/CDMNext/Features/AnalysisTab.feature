@@ -4,6 +4,7 @@ Feature: Verifying Analysis tab functionality
   Scenario: TC_Analysis_01: Verify Sub tabs under Analytics
     And Verify Sub tabs under Analytics
 
+#@doubt
   @Analysis
   Scenario: TC_Analysis_02: Verify search for analysis insights
     And Verify search for analysis insights
@@ -136,83 +137,84 @@ Feature: Verifying Analysis tab functionality
   Scenario: TC_Analysis_34: Verify CEIC insight Edit access
     And Verify CEIC insight Edit access
 
-  @Analysis
+#@functionality remove
+  #@Analysis
   Scenario: TC_Analysis_35:Verify Focus Economics tab under Analysis
     And Verify Focus Economics tab under Analysis
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_36:Verify Focus Economics Insight
     And Verify Focus Economics Insight
-
-  @Analysis
+#functionality remove
+ # @Analysis
   Scenario: TC_Analysis_37:Verify number of insights for Focus Economics Insight
     And Verify number of insights for Focus Economics Insight
-
-  @Analysis
+#functionality remove
+ # @Analysis
   Scenario: TC_Analysis_38:Verify Right click options-Focus Economics Insight
     And Verify Right click options-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+ # @Analysis
   Scenario: TC_Analysis_39:Verify Right click options view -Focus Economics Insight
     And Verify Right click options view -Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_40:Verify Right click options Customize -Focus Economics Insight
     And Verify Right click options Customize -Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_41:Verify growl message for Right click options Customize -Focus Economics Insight
     And Verify growl message for Right click options Customize -Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_42:Verify Right click options Copy link-Focus Economics Insight
     And Verify Right click options Copy link-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_43:Verify Right click options copied URL-Focus Economics Insight
     And Verify Right click options copied URL-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_44:Verify Right click options insights in view mode-Focus Economics Insight
     And Verify Right click options insights in view mode-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_45:Verify Right click options Related Insights in view mode-Focus Economics Insight
     And Verify Right click options Related Insights in view mode-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_46:Verify Customize option in view mode-Focus Economics Insight
     And Verify Customize option in view mode in view mode-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_47:Verify Copy Link option in view mode-Focus Economics Insight
     And Verify Copy Link option in view mode in view mode-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_48:Verify Download option in view mode-Focus Economics Insight
     And Verify Download option in view mode in view mode-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_49:Verify Expand popup option in view mode-Focus Economics Insight
     And Verify Expand popup option in view mode in view mode-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_50:Verify close option in view mode-Focus Economics Insight
     And Verify close option in view mode in view mode-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_51:Verify search, my series and view panels-Focus Economics Insight
     And Verify search my series and view panels-Focus Economics Insight
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_52:Verify Download scenario for Focus Economics insights
     And Verify Download scenario for Focus Economics insights
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_53:Verify scrolling down for last insights Focus Economics insights
     And Verify scrolling down for last insights Focus Economics insights
-
-  @Analysis
+#functionality remove
+  #@Analysis
   Scenario: TC_Analysis_54:Verify Focus Economics insight Edit access
     And Verify Focus Economics insight Edit access
 
@@ -231,7 +233,7 @@ Feature: Verifying Analysis tab functionality
   @Analysis
   Scenario: TC_Analysis_58:Verify Customize insight Right click options for WPIC tab
     And Verify Customize insight Right click options for WPIC tab
-
+#@doubt
   @Analysis
   Scenario: TC_Analysis_59:Verify growl message for Customize on insight right click for WPIC tab
     And Verify growl message for Customize on insight right click for WPIC tab

@@ -33,7 +33,7 @@ Feature: SprintCases_4.10 feature
     Then any category is selected on the left side, the header with associated indicators should be presented on the right side with the "Select All" control
 
   @sprint_4.10
-  Scenario: TC_19383_01: Verify 'The order of tabs and Uploads tab default one
+  Scenario: TC_19383_01: Verify 'The order of tabs and Uploads tab default one'
     And Create table visual
     And click on insert Attachment
     Then order is 'Uploads and links' and default tab is Uploads

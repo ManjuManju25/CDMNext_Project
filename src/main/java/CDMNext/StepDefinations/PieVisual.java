@@ -862,7 +862,7 @@ public class PieVisual {
 	@And("^Double click on timepoints$")
 	public void double_click_on_timepoints() throws Throwable {
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='highcharts-label-box highcharts-data-label-box'])[1]", 4);
+				"(//div[@class='preview-container']//div[@class='visual-item-container']//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[5]//*", 4);
 		new Actions(login.driver).pause(300).doubleClick(ele).build().perform();
 	}
 

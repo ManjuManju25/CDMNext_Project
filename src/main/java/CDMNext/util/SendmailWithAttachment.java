@@ -1,7 +1,6 @@
-package CDMNext.util;
+/*package CDMNext.util;
 
 import javax.activation.DataHandler;
-
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;
@@ -108,4 +107,4 @@ public class SendmailWithAttachment {
 	public static void main(String[] args) {
 		SendmailWithAttachment.report();
 	}
-}
+}*/

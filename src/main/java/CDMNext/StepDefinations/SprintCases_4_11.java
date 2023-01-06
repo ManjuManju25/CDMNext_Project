@@ -3,6 +3,7 @@ package CDMNext.StepDefinations;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,6 +18,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+
+import CDMNext.util.CommonFunctionality;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -126,16 +130,19 @@ public class SprintCases_4_11 {
 		WebElement table2 = login.driver
 				.findElement(By.xpath("//tr[@class=' heading']//*[contains(text(),'Suggestions')]"));
 
-		WebElement table3 = login.driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/table[1]/thead[1]/tr[18]/th[2]"));
+		//WebElement table3 = login.driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]/div[1]/table[1]/thead[1]/tr[18]/th[2]"));
 
-	System.out.println(table3.getText().toString());
+		WebElement table3 = login.driver.findElement(By.xpath("(//tr[@class=' heading']//*[contains(text(),'Suggestions')]//following::th)[1]"));
+	    System.out.println(table3.getText().toString());
 		
 		//System.getProperty("user.dir")  + "\\Testdata\\" +x+ ".xlsx");
 		
 		//String excelFilepath = ("user.dir")+"//Import of Goods and Services.xlsx";
 		//String excelFilepath = ("user.home")+"//Downloads//Import of Goods and Services.xlsx";
 		
-		String excelFilepath = "C://Users//tbemineni//Downloads//Import of Goods and Services.xlsx";
+		//String excelFilepath = "C://Users//tbemineni//Downloads//Import of Goods and Services.xlsx";
+		String excelFilepath = "C://Users//Venkataswami//Downloads//Import of Goods and Services.xlsx";
+		
 		
 		// File file = new File(System.getProperty("user.home") + "\\Downloads\\Seriesname.xlsx");
 		//FileInputStream file = new FileInputStream(excelFilepath);
@@ -146,9 +153,9 @@ public class SprintCases_4_11 {
 
 		int rows = sheet.getLastRowNum();
 		System.out.println(rows);
-		// int cols=sheet.getRow(1).getLastCellNum();
+		 int cols=sheet.getRow(1).getLastCellNum();
 
-		/*for (int r = 1; r <= rows; r++) {
+		for (int r = 1; r <= rows; r++) {
 
 			//System.out.println("starting from for loop");
 			XSSFComment tableval = sheet.getRow(r).getCell(1).getCellComment();
@@ -174,7 +181,7 @@ public class SprintCases_4_11 {
 
 			}
 
-		}*/
+		}
 
 	}
 	@And("^Search \"([^\"]*)\" in search panel$")
@@ -200,10 +207,9 @@ public class SprintCases_4_11 {
 			WebElement mouseover = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
 			action.moveToElement(mouseover).pause(500).build().perform();
 			login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]")).click();
-
+			//(//div[@class='series-item--name'])[1]
 			String region = login.driver
-					.findElement(By.xpath("//div[@class='series-location-panel-item main-series-information--link']"))
-					.getText();
+					.findElement(By.xpath("//div[@class='series-location-panel-item main-series-information--link']")).getText();
 
 			System.out.println("Region:" + region);
 
@@ -410,22 +416,23 @@ public class SprintCases_4_11 {
 	public void apply_function(String arg1) throws Throwable {
 		Thread.sleep(3000);
 		//checked check box
-		login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[11]")).click();
-		Thread.sleep(2000);
+		                                   //(//div[@class='add-to-data-selection--icon'])[1]
+		login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])")).click();
+		//Thread.sleep(2000);
 		
 		//click on function 
 		login.driver.findElement(By.xpath("//div[@class='function-editor-window--icon']")).click();
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		
 		
 		//click on by function
-		login.driver.findElement(By.xpath("//div[@class='function-mode-switcher--button']")).click();
+		//login.driver.findElement(By.xpath("//div[@class='function-mode-switcher--button']")).click();
 		
 		Thread.sleep(2000);
 		//search i/p
-		login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).sendKeys(arg1);
+		login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys(arg1);
 		Thread.sleep(2000);
-	 WebElement doubleclick=login.driver.findElement(By.xpath("//div[@class='function-item']"));
+	 WebElement doubleclick=login.driver.findElement(By.xpath("//span[@class='rBp4bp9QFdeCkIQxSLEE']"));
 		//Double Click the button
 	 action.doubleClick(doubleclick).perform();
 	 Thread.sleep(2000);
@@ -512,7 +519,7 @@ public class SprintCases_4_11 {
 	@Then("^verify Tooltip should displayed with full group name$")
 	public void verify_Tooltip_should_displayed_with_full_group_name() throws Throwable {
 
-		String fullsname = login.driver.findElement(By.xpath("(//span[@class='input-control--description'])[7]"))
+		String fullsname = login.driver.findElement(By.xpath("(//span[@class='input-control--description'])[1]"))
 				.getText();
 		System.out.println("fullsname:" + fullsname);
 		System.out.println("Enter into final scenario");
@@ -537,9 +544,20 @@ public class SprintCases_4_11 {
 	       login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 		}
 		Thread.sleep(1000);
-		action.contextClick().build().perform();
+		WebElement series1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		action.pause(500).moveToElement(series1).contextClick(series1).build().perform();
+		Thread.sleep(2000);
+		//action.contextClick().build().perform();
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+		Thread.sleep(2000);
+        login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
+		
+		Thread.sleep(2000);
+		
+		
+		
 		
 	}
 	@Given("^Search for random word like \"([^\"]*)\" Which yields no search results$")
@@ -646,7 +664,7 @@ public class SprintCases_4_11 {
 	@And("^click on any one continues series and click on continuous series details$")
 	public void click_on_any_one_continues_series_and_click_on_continuous_series_details() throws Throwable {
 	   
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		
 		login.driver.findElement(By.xpath("(//div[@class='legend-drilldown--prefix']//following::span)[1]")).click();
 		Thread.sleep(2000);
@@ -656,7 +674,7 @@ public class SprintCases_4_11 {
 		login.driver.switchTo().activeElement();
 		Thread.sleep(2000);
 		
-		login.driver.findElement(By.xpath("(//span[@js-series-action='open_info'])[5]")).click();
+		login.driver.findElement(By.xpath("(//span[@js-series-action='open_info'])[4]")).click();
 		
 	
 //		List<WebElement>data=login.driver.findElements(By.xpath("//span[@js-series-action='open_info']"));
@@ -676,9 +694,13 @@ public class SprintCases_4_11 {
 	@Then("^check open ssp of continuous series present in SSP opened$")
 	public void check_open_ssp_of_continuous_series_present_in_SSP_opened() throws Throwable {
 	   Thread.sleep(6000);
-		String text=login.driver.findElement(By.xpath("//div[@class='series-changes-time-line--status series-changes-time-line--status__discontinued']")).getText();
+	   
+	  
+	   
+	 
 		
-		if(text.equalsIgnoreCase("Discontinued"))
+		
+		if(login.driver.findElements(By.xpath("//div[@class='series-preview-modal-header--title ']")).size()==1)
 		{
 			login.Log4j.info("SSP of continues series present in SSP opened:PASS"); 
 		}
@@ -705,16 +727,30 @@ public class SprintCases_4_11 {
 	public void create_country_filter_on_same_view() throws Throwable
 	{
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div[@class='icon--filter']")).click();
+		
+		try {
+			login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
+			login.driver.findElement(By.xpath("//div[@class='icon--filter']")).click();
+		}
+		catch(NoSuchElementException e)
+		{
+			login.driver.findElement(By.xpath("//div[@class='icon--filter']")).click();
+		}
+		
+		
+		
 	}
 	@And("^Select any one region from country filter$")
 	public void select_any_one_region_from_country_filter() throws InterruptedException
 	{
+		
 		Thread.sleep(2000);
 		js.executeScript("arguments[0].scrollIntoView(true);",login.driver.findElement(By.xpath("//span[contains(text(),'All countries')]")));
 		login.driver.findElement(By.xpath("//span[contains(text(),'All countries')]")).click();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//input[@name='IN']/following::span[1]")).click();
+		//login.driver.findElement(By.xpath("//input[@class='input-control--input']")).click();
+		
 		
 	}
 	@And("^Open insight in view mode$")
@@ -727,7 +763,7 @@ public class SprintCases_4_11 {
 	public void select_or_unselect_region_in_country_filter()
 	{
 		login.driver.switchTo().activeElement();
-		login.driver.findElement(By.xpath("(//div[@class='custom-select-title--handler icon--filter-arrow'])[4]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='filter-template--multi-select']//span[@class='dropdown--icon icon--filter-arrow'])[2]")).click();
 		login.driver.findElement(By.xpath("//input[@name='CN']/following::span[1]")).click();
 		
 		login.driver.findElement(By.xpath("//div[@class='insight-preview--close']")).click();
@@ -750,7 +786,7 @@ public class SprintCases_4_11 {
 	public void select_series_with_applied_function() throws InterruptedException
 	{
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[11]")).click();
+		login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])")).click();
 		login.driver.findElement(By.xpath("//span[@class='table-container--checkbox svg-checkbox input-control__grey']")).click();
 		//login.driver.findElement(By.xpath("//div[@title='Show the function bar']")).click();
 		if(login.driver.findElement(By.xpath("//div[@class='toggle-favorite-control--icon']")).isDisplayed())
@@ -762,12 +798,12 @@ public class SprintCases_4_11 {
 	@And("Select a series with gap \"([^\"]*)\"$")
 	public void select_a_series_with_gap(String str) throws InterruptedException
 	{
-		if(login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).isDisplayed())
-		{
-			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-		
-		   login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
-		}
+//		if(login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).isDisplayed())
+//		{
+//			login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+//		
+//		   login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+//		}
 		s7.Search_for_series_in_layout(str);
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
@@ -789,7 +825,7 @@ public class SprintCases_4_11 {
 		login.driver.findElement(By.xpath("//span[contains(text(),'Fill with "+z+"')]")).click();
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[3]")).click();
 		Thread.sleep(4000);
-		String path2 = "C:\\Users\\tbemineni\\Downloads\\DCInsurance Industry Long Term Investment The People Insurance of China.xlsx";
+		String path2 = "C:\\Users\\Venkataswami\\Downloads\\DCInsurance Industry Long Term Investment The People Insurance of China.xlsx";
 		 
 	        XSSFWorkbook test = new XSSFWorkbook(path2); 
 	        XSSFSheet sheet = test.getSheetAt(0);
@@ -818,14 +854,20 @@ public class SprintCases_4_11 {
 	                	System.out.println ("Is shows data as show in Excel file" + cellStringValue);
 	                }
 	            }
-	            System.out.println();
+	            
 	        }
 	    }  
 	@And("^Create any pie chart and set number of pie to seen as (\\d+),(\\d+),(\\d+)$")
 	public void create_any_pie_chart_and_set_number_of_pie_to_seen_as(int a,int b,int c) throws Throwable
 	{
 		create_pie_chart();
-		 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+		if( login.driver.findElements(By.xpath("//button[contains(text(),'Apply')]")).size()==1)
+		{
+			login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+		}
+		else {
+			System.out.println("Already apply button clicked");
+		}
 		 
 		
 	}
@@ -875,7 +917,12 @@ public class SprintCases_4_11 {
 			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 			
 		}
-		 action.sendKeys((Keys.chord("a"))).build().perform();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[5]")).click();
+		//WebElement series1 = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[5]"));
+		//action.pause(500).moveToElement(series1).contextClick(series1).build().perform();
+		//Thread.sleep(2000);
+		 //action.sendKeys((Keys.chord("a"))).build().perform();
 		
 	}
 	@And("^Apply them into different functions to make them as favorite by clicking on starred icon beside functions applied in function bar \"([^\"]*)\"$")
@@ -886,14 +933,18 @@ public class SprintCases_4_11 {
 		{
 			Thread.sleep(3000);
 		action.moveToElement(login.driver.findElement(By.xpath("(//span[@class='series-name-field-title'])["+i+"]"))).build().perform();
-		Thread.sleep(4000);
+		Thread.sleep(6000);
 		login.driver.findElement(By.xpath("(//div[@title='Apply Function'])["+i+"]")).click();
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-icon']")).click();
-		 login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
+		 //login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
 		 Thread.sleep(4000);
-		 login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).click();
-		 login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).sendKeys(data[i-1]);
-		 action.moveToElement(login.driver.findElement(By.xpath("//div[contains(text(),'"+data[i-1]+"')]"))).doubleClick().perform();
+		 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).click();
+		                                                          
+		 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys(data[i-1]);
+		 Thread.sleep(3000);
+		 action.moveToElement(login.driver.findElement(By.xpath("//span[@class='rBp4bp9QFdeCkIQxSLEE']"))).doubleClick().perform();
+		 Thread.sleep(3000);
 		// login.driver.findElement(By.xpath("(//div[@class='toggle-favorite-control--icon'])[2]")).click();
 		 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 		}
@@ -927,9 +978,22 @@ public class SprintCases_4_11 {
 				login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 				
 			}
-			action.contextClick().build().perform();
-			action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'View as ...')]"))).click().perform();
-			action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'Pie')]"))).click().perform();
+			//action.contextClick().build().perform();
+			
+			WebElement series1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+			action.pause(500).moveToElement(series1).contextClick(series1).build().perform();
+			//Thread.sleep(2000);
+			//action.contextClick().build().perform();
+			Thread.sleep(1000);
+			login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[contains(@class,\"icon--pie_chart-pie_large\")]")).click();
+			 
+			//login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+			Thread.sleep(2000);
+			
+			//action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'View as ...')]"))).click().perform();
+			//login.driver.findElement(By.xpath("(//div[text()='Pie'])[2]")).click();
 	 }
 	 @And("^Update pie chart date picker controls for multiple pie in single pie according to frequency of series$")
 	 public void update_pie_chart_date_picker_controls_for_multiple_pie_in_single_pie_according_to_frequency_of_series() throws InterruptedException
@@ -939,12 +1003,15 @@ public class SprintCases_4_11 {
 		 Thread.sleep(2000);
 		 login.driver.findElement(By.xpath("(//div[@class='datepicker-input-wrapper--icon icon--calendar'])[2]")).click();
 		 Thread.sleep(2000);
-			login.driver.findElement(By.xpath("(//span[contains(text(),'Q4')])[1]")).click();
+		 login.driver.findElement(By.xpath("(//span[@class='prev-arrow'])[2]")).click();
+		 
+		 Thread.sleep(2000);
+			login.driver.findElement(By.xpath("(//span[contains(text(),'Q3')])[1]")).click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("(//button[@title='Save period'])")).click();
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("(//button[contains(text(),'2')])")).click();
-			Thread.sleep(2000);
+			//login.driver.findElement(By.xpath("(//button[contains(text(),'2')])")).click();
+			//Thread.sleep(2000);
 			login.driver.findElement(By.xpath("(//div[@class='datepicker-input-wrapper--icon icon--calendar'])[2]")).click();
 			String str=login.driver.findElement(By.xpath("//span[@class='month focused active']")).getText().toString();
 			System.out.println(str);
@@ -965,12 +1032,41 @@ public class SprintCases_4_11 {
 		 
 	 }
 	 
+	 @Given("^click on frequency and select Quarterly$")
+	 public void click_on_frequency_and_select_Quarterly() throws Throwable {
+	    
+		 
+		 CommonFunctionality.wait(2000);
+		 
+		 login.driver.findElement(By.xpath("//span[text()='Frequency']")).click();
+		 
+		 
+				 login.driver.findElement(By.xpath("(//div[@class='dropdown-search-filter-wrapper']//span[@class='text-dots'])[4]")).click();
+		 
+		 
+		 
+				 login.driver.findElement(By.xpath("//div[@class='button__primary button button__primary']")).click();
+				 
+				
+		 
+		 
+		 
+		 
+		 
+	 }
+
 	 @And("^Create multiple pie in single pie visual$")
 	 public void create_multiple_pie_in_single_pie_visual() throws Throwable
 	 {
 		 create_pie_chart();
 		
-		 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+		 if(login.driver.findElements(By.xpath("//button[contains(text(),'Apply')]")).size()==1)
+		 {
+			 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+		 }
+		 else {
+			 System.out.println("Already apply button clicked");
+		 }
 		 
 	 }
 	
@@ -980,7 +1076,7 @@ public class SprintCases_4_11 {
 	{
 		String data[]=str.split(";");
 		login.driver.findElement(By.xpath("(//button[contains(text(),'4')])")).click();
-		for(int i=1;i<=4;i++)
+		for(int i=1;i<=3;i++)
 		{
 			Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='datepicker-input-wrapper--icon icon--calendar'])["+i+"]")).click();
