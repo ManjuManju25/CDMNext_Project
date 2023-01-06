@@ -90,9 +90,9 @@ public class ForecastSeries {
 
 	@And("^click on cross icon for any legends name$")
 	public void click_on_cross_icon_for_any_legends_name() throws Throwable {
-		WebElement first_legend_series =  CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
+		WebElement first_legend_series =  CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item '])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
 		new Actions(login.driver).pause(200).moveToElement(first_legend_series).build().perform();	
-		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]/*[1]", 15);
+		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item '])[1]/*[1]", 15);
 		//new Actions(login.driver).pause(200).moveToElement(first_legend_item).click().build().perform();
 		jse.executeScript("arguments[0].click();", first_legend_item);
 
@@ -110,16 +110,16 @@ public class ForecastSeries {
 				.findElement(By.xpath("//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker']"))
 				.getAttribute("visibility").contains("hidden");
 		if (is_disabled == true) {
-			login.Log4j.info("Cross clicked legend of the chart in suggestion chart is disabled");
+			login.Log4j.info("Hide series icon clicked legend of the chart in suggestion chart is disabled");
 		} else {
-			Assert.fail("Cross clicked legend of the chart in suggestion chart is not disabled");
+			Assert.fail("Hide series icon clicked legend of the chart in suggestion chart is not disabled");
 		}
 	}
 
 	@And("^Click on suggested series of forecast$")
 	public void click_on_suggested_series_of_forecast() throws Throwable {
-		Thread.sleep(7000);
-		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//span[@class='series-edit--title series-edit--title__editable'])[1]", 15);
+		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[@class='legend-item '])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
 		Exp_seriesName = legend_item.getText();
 		System.out.println("Exp_seriesName:"+Exp_seriesName);
 		new Actions(login.driver).pause(200).moveToElement(legend_item).click().build().perform();

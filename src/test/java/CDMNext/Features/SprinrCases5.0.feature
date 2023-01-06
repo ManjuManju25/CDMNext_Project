@@ -273,7 +273,7 @@ Feature: Verifying sprintcases 5.0
     And Come back to the previous tab and check for the timeframe selection
     Then The selected timeframe should be saved if user switched to some other tabs
 
-  @Sprintcases5.01
+  @Sprintcases5.0
   Scenario: TC_52911_7806_01: Verify the visibility of FX icon as number of functions applied on a series  increased
     And Search for the series "454608037"
     And Select a series and apply multiple functions

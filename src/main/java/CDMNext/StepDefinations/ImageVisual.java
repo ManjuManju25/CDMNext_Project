@@ -164,6 +164,7 @@ public class ImageVisual {
 	@Then("^Edit the title name as \"([^\"]*)\"$")
 	public void edit_the_title_name_as(String arg1) throws Throwable {
 		Edit_title = arg1;
+		CommonFunctionality.wait(1200);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='accordion-config ']//*[@name='title']", 20)
 				.clear();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='accordion-config ']//*[@name='title']", 20)

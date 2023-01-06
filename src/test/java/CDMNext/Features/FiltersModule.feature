@@ -610,77 +610,77 @@ Feature: FilterSearch
     And User has clicked on "Apply filter"
     Then User verify the search results
 
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_71
-    #Given User enters "261968101"
-    #And Click on "More" filter
-    #And User selected "Database" as "World Trend Plus"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Aggregate: World"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_72
-    #Given User enters "228912101"
-    #And Click on "More" filter
-    #And User selected "Database" as "Global Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Albania"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_73
-    #Given User enters "227807102"
-    #And Click on "More" filter
-    #And User selected "Database" as "High Frequency Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Lending Rates"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_74
-    #Given User enters "1380601"
-    #And Click on "More" filter
-    #And User selected "Database" as "Brazil Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Foreign Trade"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_75
-    #Given User enters "181692002"
-    #And Click on "More" filter
-    #And User selected "Database" as "Russia Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Energy Sector"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_76
-    #Given User enters "21355201"
-    #And Click on "More" filter
-    #And User selected "Database" as "India Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Investment"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_77
-    #Given User enters "245732302"
-    #And Click on "More" filter
-    #And User selected "Database" as "Indonesia Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Business and Economic Survey"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_78
-    #Given User enters "3782201"
-    #And Click on "More" filter
-    #And User selected "Database" as "China Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Financial Market"
-    #Then User verify the results
+  @FilterSearch
+  Scenario: TC_Filters_Search_71
+    Given User enters "261968101"
+    And Click on "More" filter
+    And User selected "Database" as "World Trend Plus"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Aggregate: World"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_72
+    Given User enters "228912101"
+    And Click on "More" filter
+    And User selected "Database" as "Global Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Albania"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_73
+    Given User enters "227807102"
+    And Click on "More" filter
+    And User selected "Database" as "High Frequency Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Lending Rates"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_74
+    Given User enters "1380601"
+    And Click on "More" filter
+    And User selected "Database" as "Brazil Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Foreign Trade"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_75
+    Given User enters "181692002"
+    And Click on "More" filter
+    And User selected "Database" as "Russia Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Energy Sector"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_76
+    Given User enters "21355201"
+    And Click on "More" filter
+    And User selected "Database" as "India Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Investment"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_77
+    Given User enters "245732302"
+    And Click on "More" filter
+    And User selected "Database" as "Indonesia Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Business and Economic Survey"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_78
+    Given User enters "3782201"
+    And Click on "More" filter
+    And User selected "Database" as "China Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Financial Market"
+    Then User verify the results
 
   #@FilterSearch
   #Scenario: TC_Filters_Search_79
@@ -718,50 +718,50 @@ Feature: FilterSearch
     #When User get the topics as "OECD Members: Austria"
     #Then User verify the results
 
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_83
-    #Given User enters "brdlac"
-    #And Click on "More" filter
-    #And User selected "Database" as "Daily Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Lending Rates"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_84
-    #Given User enters "brjac"
-    #And Click on "More" filter
-    #And User selected "Database" as "Brazil Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Foreign Trade"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_85
-    #Given User enters "idiab"
-    #And Click on "More" filter
-    #And User selected "Database" as "India Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Financial Market"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_86
-    #Given User enters "DKCBGA"
-    #And Click on "More" filter
-    #And User selected "Database" as "Indonesia Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Monetary"
-    #Then User verify the results
-#
-  #@FilterSearch
-  #Scenario: TC_Filters_Search_87
-    #Given User enters "CZACKC"
-    #And Click on "More" filter
-    #And User selected "Database" as "China Premium Database"
-    #And User has clicked on "Apply filter"
-    #When User get the topics as "Insurance Sector"
-    #Then User verify the results
+  @FilterSearch
+  Scenario: TC_Filters_Search_83
+    Given User enters "brdlac"
+    And Click on "More" filter
+    And User selected "Database" as "High Frequency Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Lending Rates"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_84
+    Given User enters "brjac"
+    And Click on "More" filter
+    And User selected "Database" as "Brazil Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Foreign Trade"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_85
+    Given User enters "idiab"
+    And Click on "More" filter
+    And User selected "Database" as "India Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Financial Market"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_86
+    Given User enters "DKCBGA"
+    And Click on "More" filter
+    And User selected "Database" as "Indonesia Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Monetary"
+    Then User verify the results
+
+  @FilterSearch
+  Scenario: TC_Filters_Search_87
+    Given User enters "CZACKC"
+    And Click on "More" filter
+    And User selected "Database" as "China Premium Database"
+    And User has clicked on "Apply filter"
+    When User get the topics as "Insurance Sector"
+    Then User verify the results
 
   @FilterSearch
   Scenario: TC_Filters_Search_88

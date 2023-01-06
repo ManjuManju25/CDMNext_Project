@@ -4066,7 +4066,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 	}
 
 	static void AfterMethod() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		WebElement SeriesCount = login.driver.findElement(By.cssSelector(".series-series-count--number"));
 		String after_apply_filter = SeriesCount.getText();
 		login.Log4j.info(after_apply_filter);
@@ -4076,7 +4076,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 	}
 
 	static void BeforeMethod() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 		WebElement SeriesCount = login.driver.findElement(By.cssSelector(".series-series-count--number"));
 		String before_apply_filter = SeriesCount.getText();
 		login.Log4j.info(before_apply_filter);

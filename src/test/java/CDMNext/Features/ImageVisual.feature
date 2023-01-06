@@ -6,7 +6,7 @@ Feature: Verifying Image visual functionality
     And Click on insert Image visual icon
     Then "Image" visual should be created
 
-  @ImageVisual1
+  @ImageVisual
   Scenario: Tc_ImageVisual_2 : Verify copy-paste of image visual
     And Go to View tab
     And Click on insert Image visual icon

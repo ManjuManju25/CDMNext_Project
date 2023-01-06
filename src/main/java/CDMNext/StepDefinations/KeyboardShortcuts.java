@@ -126,8 +126,8 @@ public class KeyboardShortcuts {
 			break;
 		case "L":
 			// before perform keyboard action
-			activeElement = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'index-module_active')]", 15)
-					.getText();
+			activeElement = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_group_button__active')]/*", 15)
+					.getAttribute("title");
 			CommonFunctionality.wait(500);
 			rb = new Robot();
 			rb.keyPress(KeyEvent.VK_L);
@@ -391,7 +391,7 @@ public class KeyboardShortcuts {
 
 	@And("^Press \"([^\"]*)\" for select all series$")
 	public void press_for_select_all_series(String arg1) throws Throwable {
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(1500);
 		actions.keyDown(Keys.CONTROL);
 		actions.sendKeys("a");
 		actions.keyUp(Keys.CONTROL);
@@ -403,10 +403,8 @@ public class KeyboardShortcuts {
 		CommonFunctionality.wait(2000);
 //		Boolean series_panel_selected = login.driver.findElement(By.xpath("//*[@class='series-panel--selected']"))
 //				.isDisplayed();
-		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",
-				4);
-		if (selected.getAttribute("class").contains("all-selected")) {
+		Boolean input_control_checkbox_selected = login.driver.findElement(By.xpath("//*[@class='input-control ']//input[@type='checkbox']")).isSelected();
+		if (input_control_checkbox_selected == true) {
 			login.Log4j.info("All the series in My series tab is selected");
 		} else {
 			Assert.fail("All the series in My series tab is not selected");
@@ -484,8 +482,9 @@ public class KeyboardShortcuts {
 
 	@Then("^The Data tab should be Swich to list/table mode$")
 	public void the_Data_tab_should_be_Swich_to_list_table_mode() throws Throwable {
+		login.Log4j.info(activeElement);
 		String currentActiveElement = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'index-module_active')]", 15).getText();
+				.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_group_button__active')]/*", 15).getAttribute("title");
 		if (!activeElement.equalsIgnoreCase(currentActiveElement)) {
 			login.Log4j.info("The data tab switched to list/table mode ");
 		} else {

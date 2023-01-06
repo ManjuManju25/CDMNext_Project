@@ -96,10 +96,10 @@ Feature: WatchList feature
     Then select "Email frequency" option1
     Then Change the orientation order
 
-  @Watch2
+  @Watch
   Scenario: TC_CVISION_WL_021:Validating the maximum number of series in watchlist
     And Add 2001 series into watchlist having series "popup_notifications"
 
-  @Watch2
+  @Watch
   Scenario: TC_CVISION_WL_022:Verify if 1999 items can be added to watchlist
     And Add 1999 into watchlist having series "popup_notifications"

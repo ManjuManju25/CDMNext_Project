@@ -31,7 +31,7 @@ Feature: Verifying the Forecast series functionality
     And click on cross icon for any legends name
     Then Cross clicked legend of the chart in suggestion chart should be disabled
 
-  @ForecastSeries01
+  @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _05:Verify opening ssp for more than suggestion of forecast in its chart suggestion dropdown
     Given User enters "32190101"
     And Add series to the right pane
