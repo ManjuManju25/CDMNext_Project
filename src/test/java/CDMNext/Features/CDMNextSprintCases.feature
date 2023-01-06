@@ -16,7 +16,7 @@ Feature: Verifying Sprintcases
     And Highlight the functions and check for the tooltips
     Then Tooltips should display for each functions methods
 
-  @SprintCases1
+  @SprintCases
   Scenario: TC_Cvision_16283_01: Verify if series selection is removed after chart visual creation using hover options
     And Reset the values in "Databases" tab
     And Select 5 series and click on chart option
@@ -29,7 +29,7 @@ Feature: Verifying Sprintcases
     And Click on more actions to create "View as Chart"
     Then Series selected should be removed
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_16283_03: Verify if series selection is removed after table visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
@@ -43,7 +43,7 @@ Feature: Verifying Sprintcases
     And Click on more actions and create "View as Table" 
     Then Series selected should be removed
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_16283_05: Verify if series selection is removed after map visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
@@ -57,7 +57,7 @@ Feature: Verifying Sprintcases
     And Create a Map.
     Then Series selected should be removed
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_16283_07: Verify if series selection is removed after pie visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
@@ -72,7 +72,7 @@ Feature: Verifying Sprintcases
     And Create Pie. 
     Then Series selected should be removed
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_16283_09: Verify if series selection is removed after heatmap visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
@@ -88,7 +88,7 @@ Feature: Verifying Sprintcases
     And create HeatMap. 
     Then Series selected should be removed
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_16283_11: Verify if series selection is removed after histogram visual creation using hover options
     And Reset the values in "Databases" tab
     And Right click on any series level of data from DB tab
@@ -113,7 +113,7 @@ Feature: Verifying Sprintcases
     And Clicking "Save" option
     Then "Auto" date format has to reflect on the "Chart" visual
 
-  @SprintCases1
+  @SprintCases
   Scenario: TC_Cvision_15402_02: Check if the axis date format - Custom is applied
     And Search for the series with SID "385345667"
     And Click on more actions
@@ -220,21 +220,21 @@ Feature: Verifying Sprintcases
     And Check "stroke" option
     Then Stroke options to be in disabled state
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_15242_03: Verify move to right for per-series
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
     And Check "Move to right" axis option
     Then Choosen axis should shift to "right" axis
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_15242_04: Verify move to left for per-series
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
     And Check "Move to left" axis option
     Then Choosen axis should shift to "left" axis
 
-  @SprintCases1
+  @SprintCases
   Scenario: TC_Cvision_15262_01: Check if the Chart Time within option is synced with timeframe period
     And Search for the series "1053401"
    And Click on more actions to create=>View as chart.
@@ -244,7 +244,7 @@ Feature: Verifying Sprintcases
     And Check Time axis> Time within period
     Then The time within period should sync with chart "timeframe" period.
 
-  @SprintCases1
+  @SprintCases
   Scenario: TC_Cvision_15262_02: Check if the Chart within option is synced with zoom period
     And Search for the series "360937287"
     And create a chart for the above series.
@@ -254,7 +254,7 @@ Feature: Verifying Sprintcases
     And Click on "Edit" visual
     Then Time within period should sync with chart "zoom" period
 
-  @SprintCases1
+  @SprintCases
   Scenario: TC_Cvision_16457: Validate the message for comaprables when no indicators available for specific countries
     And Goto comparables search tab
     And Click on "All Regions" dropdown
@@ -302,7 +302,7 @@ Feature: Verifying Sprintcases
     Then Tooltip as "View series cross country" should display for series
     Then Default tree should be shown
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_16312_07: Verify region filter selection
     And Click on closing active comparatable icon and "Databases" tab
     And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "Table AF.IMF.IFS: Gross Domestic Product: by Expenditure: Annual"
@@ -314,7 +314,7 @@ Feature: Verifying Sprintcases
     And Check if the result displays only for the selected regions
     Then "See all countries" should display for region selection
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_16312_08: Verify 'All countries' display in comparables tab
     And Click on closing active comparatable icon and "Databases" tab
     And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "IMF.IFS: Gross Domestic Product: by Expenditure"
@@ -340,7 +340,7 @@ Feature: Verifying Sprintcases
     And Click on expand control
     Then Icon to change to expanded state
 
-  @SprintCases
+ @SprintCases
   Scenario: TC_Cvision_16312_11: Verify fully selected state of series
     And Click on closing active comparatable icon and "Databases" tab
     And Expand "Global Database" > "All Regions" > "Afghanistan" > "Afghanistan: National Accounts" > "IMF.IFS: Gross Domestic Product: by Expenditure"
@@ -412,7 +412,7 @@ Feature: Verifying Sprintcases
     #And Perform download with timeframe "Range": "2000-12-31" to "2001-12-31"
     #Then The Message "No observations are found within requested range" should be displayed
 
-  @SprintCases1
+  @SprintCases
   Scenario: TC_Cvision_14392_01: Verify if series positions changes for 'Bring to front' selection
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
@@ -424,7 +424,7 @@ Feature: Verifying Sprintcases
     And Click "World Trend Plus" > "CEIC Leading Indicator" > "CEIC Leading Indicator" > "CEIC Leading Indicator:"
     Then The Message "Footnote is limited for your selection, you can view related footnote below." be displayed
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_14635: Trend method should be default selection in Function Toolbar
     And Add few series to myseries
     And Select a series on right
@@ -432,7 +432,7 @@ Feature: Verifying Sprintcases
     And choose "HPFILTER" function
     Then "Trend" method should be checked
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_15209: Verify UI changes for Update function
     And Add few series to myseries
     And Select a series on right
@@ -440,7 +440,7 @@ Feature: Verifying Sprintcases
     And choose "UPDATE" function
     Then "Fill gaps and future time points" method should be checked
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_6192_1: Verify if selection of function should enable Cancel button in Smart toolbar
     And Add few series to myseries
     And Select a series on right
@@ -449,7 +449,7 @@ Feature: Verifying Sprintcases
     And choose "HPFILTER" function
     Then "Cancel" button should be enabled for user to cancel the operation at any time
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_6192_2: Verify if Escape function can cancel the operation of Selection of function in Smart toolbar
     And Add few series to myseries
     And Select a series on right
@@ -458,7 +458,7 @@ Feature: Verifying Sprintcases
     And Press "Escape" button in keyboard
     Then "Escape" button should be enabled for user to cancel the operation at any time
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_13416_1: Verify the tooltip of date marker
     And Select few series
     And Click on more actions dropdown
@@ -471,7 +471,7 @@ Feature: Verifying Sprintcases
     And hover on to "Annotations"
     Then "Click to add date marker" tooltip should present
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_13416_2: Verify the options of date marker
     And Select few series
     And Click on more actions
@@ -515,9 +515,9 @@ Feature: Verifying Sprintcases
     And Click on "Continuous" tab in popup
     Then "Manage all" and "Select all" options should "not" display
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_15497_03: Verify if manage all option is hidden if there is only 1 series for forecast
-  And Login back to internal user with user "vvagicharla" and password "ZAQ!2wsx@7989"
+  And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
    # And Add few series to myseries
     And Search for  series with SID "32189801"
    # And Add few series to myseries
@@ -557,7 +557,7 @@ Feature: Verifying Sprintcases
 
   @SprintCases
   Scenario: TC_Cvision_15909_03: Verify if preserve names is hidden for series not available with differently named dependency series
-    And Login back to internal user with user "vvagicharla" and password "ZAQ!2wsx@7989"
+    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
    # And Add few series to myseries
     And Search for  series with SID "389705827"
    # And Add few series to myseries
@@ -591,13 +591,13 @@ Feature: Verifying Sprintcases
     And Hover the "series-preview-modal-header--link"
     Then Smart tooltip should popup
 
-  #@SprintCases...need to check
+  #@SprintCases
   #Scenario: TC_Cvision_16243: Verify for minimize and full screen controls on the video tutorials window
     #And Click "Help" > "Video tutorials"
     #And Check for "Fullscreen" and "Exit Fullscreen" controls
     #Then Both should be available
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_15749: Verify title bar actions for breakdown series
     And Open SSP for the series "383937057"
     And Click on "Drilldown" icon from SSP window
@@ -605,7 +605,7 @@ Feature: Verifying Sprintcases
     And Open SSP window
     Then "Add series" , "View as" , "Watch" , "Download" actions should be possible
 
-  @SprintCases1
+ @SprintCases
   Scenario: TC_Cvision_7067_01: Verify if series name are same, then country name is displayed as series name in chart
     And Search for the series with SID "Registered unemployment Rate"
     And Select 2 series and click on "Chart" option
@@ -769,7 +769,7 @@ Feature: Verifying Sprintcases
     And Create a new template and "Template popup" and click "Cancel" icon
     Then The popup should be closed
 
-  @CDMNextsprintcases3.11
+  @CDMNextsprintcases3.1
   Scenario: TC_Cvision_12162: Verify default style template for future visual creation
     And Select few series
     #And Click on more actions to create "View as Table"
@@ -889,7 +889,7 @@ Feature: Verifying Sprintcases
     And Hover on to the "Open Contents"
     Then "Open Contents" tooltip should be displayed
 
-  @CDMNextsprintcases3.11
+  @CDMNextsprintcases3.1
   Scenario: TC_13651_01: Verify upload popup behaviour when the upload is completed
     And Click to create an empty visual
     And Click "Image" option from empty list
@@ -900,7 +900,7 @@ Feature: Verifying Sprintcases
   #Scenario: TC_16290_01: Verify shadow for notification panel
   #And Open notification panel
   #Then Shadow should be applied to notification panel
-  @CDMNextsprintcases3.11
+  @CDMNextsprintcases3.1
   Scenario: TC_14907_01: Verify message for non data visual copy
     And Click to create an empty visual
     And Click "Image" option from empty list
@@ -937,7 +937,7 @@ Feature: Verifying Sprintcases
     And Select "Series" tab in header
     Then Tooltip only displayed when hover the mouse on series name
 
-  @CDMNextsprintcases3.11
+  @CDMNextsprintcases3.1
   Scenario: TC_14781_01: Verify creating non data visuals with series
     And Select few series
     And Click to create an empty visual

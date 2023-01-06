@@ -354,7 +354,7 @@ Feature: Verify shared saved search from search panel.
   @Sprint5_2_2
   Scenario: TC_20076_01 : Verify "CEIC Insights" under notification if shared insight from internal user.
     Given user Logout from current user
-    And Logins with internal account with username : "vvagicharla" and Password : "ZAQ!2wsx@7989"
+    And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkjln"
     And Share insight "Company" from internal to external account.
     And Login to shared user account.
     And Login to the shared user account.
@@ -363,14 +363,14 @@ Feature: Verify shared saved search from search panel.
  # @Sprint5_2_2
   #Scenario: TC_20060_01 : Verify 'FocusEconomics' under Analysis tab.
     #Given user Logout from current user
-   # And Logins with internal account with username : "vvagicharla" and Password : "ZAQ!2wsx@7989"
+   # And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkjln"
     #And Navigate to Analysis > FocusEconomics
     #Then The folder name should be 'FocusEconomics'(oneword).
 
   @Sprint5_2_2
   Scenario: TC_19984_01 : Verify indication for internal series when the 'Show all' filter is applied.
     Given user Logout from current user
-    And Logins with internal account with username : "vvagicharla" and Password : "ZAQ!2wsx@7989"
+    And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkjln"
     And Search "Table CN.GE" in the search field.
     And select ShowAll filter.
     And Open DB > Topic >Section>Table.

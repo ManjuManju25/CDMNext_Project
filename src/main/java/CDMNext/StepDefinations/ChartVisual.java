@@ -1132,7 +1132,8 @@ public class ChartVisual {
 
 	@And("^Create a chart\\.$")
 	public void create_a_chart() throws Throwable {
-		WebElement ele1 = login.driver.findElement(By.xpath("//span[@title='More actions']//*[name()='svg']//*[local-name()='use'][1]"));
+		WebElement ele1 = login.driver.findElement(By.xpath("(//span[@title='More actions'])[2]"));
+		
 		//CommonFunctionality.action.moveToElement(ele1).pause(2000).click().build().perform();
 		//WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
 		CommonFunctionality.action.moveToElement(ele1).pause(2000).click().build().perform();
@@ -1180,9 +1181,28 @@ public class ChartVisual {
 		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
 		Enter_text.click();
 		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(2000).doubleClick().sendKeys("2b60d0").build().perform();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
+		for(int i=1; i<30;i++) {
+		Enter_text.sendKeys(Keys.BACK_SPACE);
+		}
+		//CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(2000);
+		for(int i=1; i<30;i++) {
+		Enter_text.sendKeys(Keys.DELETE);
+		}
+		Enter_text.sendKeys("#2b60d0");
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
+		
+		
+		
+		
+		
+		
+		
+		//new Actions(login.driver).moveToElement(Enter_text).pause(2000).doubleClick().sendKeys("2b60d0").build().perform();
+		//CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
 		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
 			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
 		}
@@ -1465,12 +1485,22 @@ public class ChartVisual {
 		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
 		Enter_text.click();
 		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
+		CommonFunctionality.wait(2000);
+		for(int i=1; i<30;i++) {
+		Enter_text.sendKeys(Keys.BACK_SPACE);
+		}
+		//CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(2000);
+		for(int i=1; i<30;i++) {
+		Enter_text.sendKeys(Keys.DELETE);
+		}
+		Enter_text.sendKeys("#2b60d0");
+		CommonFunctionality.wait(2000);
+		
+		//new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		/*if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}*/
+		
 
 	}
 
@@ -1596,30 +1626,6 @@ public class ChartVisual {
 
 		
 	}
-	
-	@And("^select \"([^\"]*)\" Axis Title Right color from list$")
-	public void select_Axis_Title_Right_color_from_list(String arg1) throws Throwable {
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.BACK_SPACE);
-		}
-		//CommonFunctionality.wait(2000);
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.DELETE);
-		}
-		Enter_text.sendKeys("#2b60d0");
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
-
-	}
-
 
 	@And("^Select the \"([^\"]*)\" y axis right bgcolor from list$")
 	public void select_the_y_axis_right_bgcolor_from_list(String arg1) throws Throwable {
@@ -2941,9 +2947,6 @@ public class ChartVisual {
 	@And("^Check the timeframe checkbox for \"([^\"]*)\" section$")
 	public void check_the_timeframe_checkbox_for_section(String arg1) throws Throwable {
 		timeframe_label_text = arg1;
-		/*new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='preview-container']//*[contains(@class,'header-picker_header-module__calendar_icon')]", 4))
-				.pause(500).click().build().perform();*/
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 				"(//div[@class='P5wrmP1RS8FT67EvVXnH'])[2]", 4))
 				.pause(500).click().build().perform();
@@ -2971,8 +2974,8 @@ public class ChartVisual {
 		timepoints_last_date = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + ":')]//following-sibling::*", 4)
 				.getText();*/
-		timepoints_first_date=login.driver.findElement(By.xpath("(//*[@class='highcharts-axis-labels highcharts-xaxis-labels']//*[normalize-space(text())='11/11/2022'])[1]")).getText();
-		timepoints_last_date =login.driver.findElement(By.xpath("(//*[@class='highcharts-axis-labels highcharts-xaxis-labels']//*[normalize-space(text())='12/04/2022'])[1]")).getText();
+		timepoints_first_date=login.driver.findElement(By.xpath("(//*[contains(@class,'highcharts-axis-labels')] /following::*[text()='12/12/2022'])[2]")).getText();
+		timepoints_last_date =login.driver.findElement(By.xpath("(//*[contains(@class,'highcharts-axis-labels')] /following::*[text()='01/04/2023'])[1]")).getText();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -3537,7 +3540,7 @@ public class ChartVisual {
 					"//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]//*[not(@y='-9999')]"));
 			logarithmic_after = elements.size();
 			System.out.println("=====logafter======"+logarithmic_after);
-			if (logarithmic_after==logarithmic_before) {
+			if (logarithmic_after!=logarithmic_before) {
 				login.Log4j.info("The " + arg2 + " of " + arg3 + " has been verified successfully");
 			} else {
 				fail("Verification Failed");
@@ -4526,6 +4529,35 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			rightclick_element.add(rightclick_text);
 		}
 	}
+	
+	@Then("^text and sub text options should be present\\.$")
+	public void text_and_sub_text_options_should_be_present() throws Throwable {
+		List<WebElement> elements = login.driver.findElements(
+				By.xpath("//*[@class='items-wrapper']/li/span[not(contains(@class,'dropdown-submenu-icon'))]"));
+		for (WebElement element : elements) {
+			String rightclick_text = element.getAttribute("title");
+			System.out.println("=====rightclick_text========="+rightclick_text);
+			CommonFunctionality.wait(500);
+			rightclick_element.add(rightclick_text);
+		}
+		if (rightclick_element.contains("Download")) {
+			List<WebElement> sub = login.driver.findElements(
+					By.xpath("//*[@title='Download']//following-sibling::ul[@class='dropdown-menu']/li/span"));
+			for (int k = 1; k <= sub.size(); k++) {
+				WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Download']", 4);
+				new Actions(login.driver).moveToElement(hover).pause(500).build().perform();
+				String subdropdown_text = CommonFunctionality
+						.getElementByXpath(login.driver, "//*[@title='Download']//following-sibling::ul[@class='dropdown-menu']/li[" + k + "]/span", 4)
+						.getAttribute("title");
+				download.add(subdropdown_text);
+			}
+		} else {
+			fail("Subdropdown items are not present");
+		}
+		
+	}
+	
+	
 
 	@SuppressWarnings("deprecation")
 	@And("^Get the text of sub dropdowns available$")
@@ -6821,14 +6853,57 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		login.Log4j.info("The Right click options in the chart visual has been verified successfully");
 		CommonFunctionality.Views_list();
 	}
+	
+	@Then("^The \"([^\"]*)\" options should be present$")
+	public void the_options_should_be_present(String arg1) throws Throwable {
+		WebElement Change_chartType=login.driver.findElement(By.xpath("//span[contains(text(),'"+ arg1 +"')]"));
+		new Actions(login.driver).moveToElement(Change_chartType).pause(500).click().build().perform();
+	    WebElement Table=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--table-vertical_large')])[2]"));
+	    WebElement Chart=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--chart-line_large')])[2]"));
+	    WebElement Histogram=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--histogram_large')])[2]"));
+	    WebElement HeatMap=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--heatmap_large')])[2]"));
+	    WebElement Pie=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--pie_chart-pie_large')])[2]"));
+	    if(Table.isDisplayed() && Chart.isDisplayed() && Histogram.isDisplayed() && HeatMap.isDisplayed() && Pie.isDisplayed()) {
+	    	System.out.println("All options are present under '"+ arg1+"'");
+	    }
+	    else {
+	    	System.out.println("All options are not present under '"+ arg1+"'");
+	    }
+	
+	
+	}
+	
+	@Then("^The \"([^\"]*)\" options should be available$")
+	public void the_options_should_be_available(String arg1) throws Throwable {
+		WebElement Add_chart=login.driver.findElement(By.xpath("//span[contains(text(),'"+ arg1 +"')]"));
+		new Actions(login.driver).moveToElement(Add_chart).pause(500).click().build().perform();
+	    WebElement Table=login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]"));
+	    WebElement Chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]"));
+	    WebElement Histogram=login.driver.findElement(By.xpath("//div[contains(@class,'icon--histogram_large')]"));
+	    WebElement HeatMap=login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]"));
+	    WebElement Pie=login.driver.findElement(By.xpath("//div[contains(@class,'icon--pie_chart-pie_large')]"));
+	    if(Table.isDisplayed() && Chart.isDisplayed() && Histogram.isDisplayed() && HeatMap.isDisplayed() && Pie.isDisplayed()) {
+	    	System.out.println("All options are present under '"+ arg1+"'");
+	    }
+	    else {
+	    	System.out.println("All options are not present under '"+ arg1+"'");
+	    }
+	   
+	}	
+	
+	
+	
+	
+	
+	
 
 	@SuppressWarnings("deprecation")
 	@Then("^The \"([^\"]*)\" options have been verified$")
 	public void the_options_have_been_verified(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Insert visual")) {
-			String l = "Chart";
+		if (arg1.equalsIgnoreCase("Change chart type")) {
+			String l = "Line";
 			String m = "Pie";
-			String n = "Table";
+			String n = "Vertical";
 			String o = "Map";
 			String p = "Heat map";
 			String q = "Histogram";
@@ -7046,7 +7121,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sheet1 = wb.getSheetAt(0);
 		System.out.println("enter");
-		String data = sheet1.getRow(27).getCell(1).getStringCellValue();
+		String data = sheet1.getRow(28).getCell(1).getStringCellValue();
 		System.out.println("data is "+data);
 		
 		System.out.print("=applied_function=="+applied_function);

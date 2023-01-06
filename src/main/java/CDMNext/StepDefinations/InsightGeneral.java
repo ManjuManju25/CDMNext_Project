@@ -1029,7 +1029,7 @@ public class InsightGeneral {
 						"//*[@class='series-item--main-info']", 4))
 				.pause(500).click().sendKeys("c").build().perform();
 		cv.click_on_my_insights();
-		cv.click_option_from_empty_list("View as a table");
+		cv.click_option_from_empty_list1("View as a table");
 		new Actions(login.driver).keyDown(Keys.CONTROL)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 						"(//*[not(contains(@data-id,'Untitled-insight'))]/following::*[text()='"

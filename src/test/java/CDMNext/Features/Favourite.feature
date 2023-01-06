@@ -5,7 +5,7 @@ Feature: Verify favorite function popup
     Given user add some series into my series.
     And clicks on fx icon.
 
-  @Favourite2
+  @Favourite
   Scenario: Tc_Favfunc_02 : Verify starred icon for functioned series
     Given user add some series into my series.
     And Apply function on a series from function bar

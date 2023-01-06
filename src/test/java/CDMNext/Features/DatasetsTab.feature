@@ -80,7 +80,7 @@ Feature: Verifying Datasets functionality
     And Click on "Drag and Drop a Dataset" option shortcut
     Then Verify that the dataset is added in right pane
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: TC_Data_set_16: Verify adding any series into my series tab
     And Clicking "Datasets" tab from menu
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -88,7 +88,7 @@ Feature: Verifying Datasets functionality
     And Click on "A" option shortcut
     Then Verify that the series is added in right pane
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: TC_Data_set_17: Verify adding any series into my series tab by drag and drop
     And Clicking "Datasets" tab from menu
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -217,7 +217,7 @@ Feature: Verifying Datasets functionality
     And Clicking "Add to recent insight" from dropdown list
     Then Any insight could be selected for the table to add
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: TC_Data_set_40: Verify add and Group insight into visual pane
     And Clicking "Datasets" tab from menu
    # And Select any checkbox for dataset
@@ -249,7 +249,7 @@ Feature: Verifying Datasets functionality
     
     Then The "Table - Edit Chart" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: TC_Data_set_45: Verify view as map for right click on dataset
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -269,7 +269,7 @@ Feature: Verifying Datasets functionality
     #And Click on "View as Table" button in Comparables
     Then The "Table - Edit Table" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: TC_Data_set_47: Verify view as... for right click on dataset
     And Right Click "Dataset" section from Comparables tab
     And Collapse the dataset and perform right click operation
@@ -318,7 +318,7 @@ Feature: Verifying Datasets functionality
     And Click on "Download" button in Comparables
     #Then The "Table - Download" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: TC_Data_set_54: Verify Copy selected links for right click on dataset
     And Right Click "Dataset" section from Comparables tab
     And Select any checkbox for dataset
@@ -488,7 +488,7 @@ Feature: Verifying Datasets functionality
     #And Click on "View as Chart" button in Comparables
     Then The "Edit Chart" option is displayed
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_71: Verify view as Map in more options
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -508,7 +508,7 @@ Feature: Verifying Datasets functionality
    # And Click on "View as Table" button in Comparables
     Then The "Edit Table" option is displayed
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_73: Verify view as... in more options
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -558,7 +558,7 @@ Feature: Verifying Datasets functionality
     And Click on "Download" button in Comparables
     Then The "Download" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_78: Verify copy data in more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -568,7 +568,7 @@ Feature: Verifying Datasets functionality
     #And Click on "Copy data" button in Comparables
     Then The "Copy data" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_79: Verify copy in more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -591,7 +591,7 @@ Feature: Verifying Datasets functionality
     And Copy the data after clicking Copy button
     Then The "Copy selected links" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_81: Verify series info for more option
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -664,7 +664,7 @@ Feature: Verifying Datasets functionality
     And click on Add chart=>create chart.
     Then The "Edit Chart" option is displayed
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_99: Verify view as Map for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -682,7 +682,7 @@ Feature: Verifying Datasets functionality
     And click on Add chart=>create Table.
     Then The "Edit Table" option is displayed
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_101: Verify view as... for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -727,7 +727,7 @@ Feature: Verifying Datasets functionality
     And Click on "Download" button in Comparables
     Then The "Download" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_106: Verify copy data for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -736,7 +736,7 @@ Feature: Verifying Datasets functionality
    # And Click on "Copy data" button in Comparables
     Then The "Copy data" option is shown
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_107: Verify copy for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -768,7 +768,7 @@ Feature: Verifying Datasets functionality
     And URL should be generated for selected series
     Then Paste in the clipboard and take url one by one
 
-  @DatasetsTab1
+  @DatasetsTab
   Scenario: Tc_Data_set_110: Verify series info for series level right click
     And Right Click "Dataset" section from Comparables tab
     And Verify "Expand" the datasets "Without" keyboard shortcuts
@@ -805,7 +805,7 @@ Feature: Verifying Datasets functionality
     And Select the "Show Dataset" option
     Then The "Back Button in Dataset" option is shown
 
-  #@DatasetsTab1
+  #@DatasetsTab
   #Scenario: Tc_Data_set_114: Verify unselect for series in dataset
    # And Right Click "Dataset" section from Comparables tab
     #And Verify "Expand" the datasets "Without" keyboard shortcuts

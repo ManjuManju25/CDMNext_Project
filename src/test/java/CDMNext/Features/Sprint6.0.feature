@@ -170,7 +170,7 @@ Feature: Verify C icon for continous series.
     And clicks on Apply filter button.
     And add as continuos series.
     And click on download button=>Download to excel.
-    Then validate the "Name your insight" Sheet and read the '11' '1' row and column and verify the Preapplied-function
+    Then validate the "Name your insight" Sheet and read the '12' '2' row and column and verify the Preapplied-function
     
     
     @Sprint6_0

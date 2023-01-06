@@ -87,6 +87,24 @@ public class Favourite extends CommonFunctionality {
 
 	@Given("^Apply function on a series from function wizard\\.$")
 	public void apply_function_on_a_series_from_function_wizard() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='function-editor-window--icon']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@data-id='ACCSER']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//button[normalize-space()='Insert function']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
+		CommonFunctionality.wait(1000);
+		WebElement Starred_icon=login.driver.findElement(By.xpath("//div[@class='toggle-favorite-control--icon']"));
+		if(Starred_icon.isDisplayed()) {
+			System.out.println("Starred icon is displayed");
+		}
+		else {
+			fail("Starred icon is not displayed");
+		}
 	    
 	}
 
@@ -523,6 +541,7 @@ public class Favourite extends CommonFunctionality {
 
 	@Then("^select second series and apply same function as round\\.$")
 	public void select_second_series_and_apply_same_function_as_round() throws Throwable {
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("(//div[@title='Apply Function'])[3]")).click();
 		
 		WebElement Favorite=login.driver.findElement(By.xpath("//div[normalize-space(text())='Favorite']/following::div[@class='toggle-favorite-control toggle-favorite-control__favorite']"));
@@ -651,6 +670,8 @@ public class Favourite extends CommonFunctionality {
 		robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
 		
 		WebElement Third_Series=login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[5]"));
+		//jse.executeScript("arguments[0].scrollIntoView(true);", Third_Series);
+		//jse.executeScript("window.scrollBy(0,2500)");
 		Third_Series.click();
 		CommonFunctionality.wait(2000);
 		WebElement Fx2=login.driver.findElement(By.xpath("//div[@class='function-editor-window--icon']"));
@@ -677,6 +698,8 @@ public class Favourite extends CommonFunctionality {
 		
 		
 		WebElement Fourth_Series=login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[7]"));
+		//jse.executeScript("arguments[0].scrollIntoView(true);", Fourth_Series);
+	//	jse.executeScript("window.scrollBy(0,2500)");
 		Fourth_Series.click();
 		CommonFunctionality.wait(2000);
 		WebElement Fx3=login.driver.findElement(By.xpath("//div[@class='function-editor-window--icon']"));
@@ -704,6 +727,8 @@ public class Favourite extends CommonFunctionality {
 		
 		
 		WebElement Fifth_Series=login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[9]"));
+		//jse.executeScript("arguments[0].scrollIntoView(true);", Fifth_Series);
+	//	jse.executeScript("window.scrollBy(0,2500)");
 		Fifth_Series.click();
 		CommonFunctionality.wait(2000);
 		WebElement Fx4=login.driver.findElement(By.xpath("//div[@class='function-editor-window--icon']"));

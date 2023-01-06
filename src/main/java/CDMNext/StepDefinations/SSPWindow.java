@@ -124,7 +124,7 @@ public class SSPWindow {
 	@And("^Search for the series \"([^\"]*)\"$")
 	public void search_for_the_series(String arg1) throws Throwable {
 		Thread.sleep(4000);
-		Myseries.delete_series();
+		//Myseries.delete_series();
 		try {
 			
 		

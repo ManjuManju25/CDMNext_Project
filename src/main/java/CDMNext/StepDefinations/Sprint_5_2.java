@@ -1216,7 +1216,6 @@ catch(Exception e) {
     	CommonFunctionality.wait(2000);
 		
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//span[@title='China Premium Database: Table CN.OC: Fixed Asset Investment: Industry']")))).click();
-		//login.driver.findElement(By.xpath("//span[@title='China Premium Database: Table CN.OC: Fixed Asset Investment: Industry']")).click();
 		WebElement Purple_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Purple_mouseover")));
 		new Actions(login.driver).pause(500).moveToElement(Purple_series).build().perform();
 		if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Purple_dot"))).isDisplayed()) {

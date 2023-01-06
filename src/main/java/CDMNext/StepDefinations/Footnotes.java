@@ -4653,36 +4653,38 @@ login.driver.findElement(
 	public void Click_on_the_down_arrow_present() throws Throwable {
 		WebElement series_row = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_row_1")));
-		WebDriverWait wait = new WebDriverWait(login.driver, 70);
-		action.moveToElement(series_row).perform();
+		//WebDriverWait wait = new WebDriverWait(login.driver, 70);
+		action.moveToElement(series_row).pause(2000).build().perform();
 		Thread.sleep(10000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("seriesDropdown1"))));
 		login.driver.findElement(
-				By.xpath(login.LOCATORS.getProperty("seriesDropdown1"))).click();
+				By.xpath(login.LOCATORS.getProperty("seriesDropdown1"))).click();*/
+		login.driver.findElement(By.xpath("//span[@title='More actions']")).click();
 		Thread.sleep(5000);
 	}
 
 	@Given("^Click on the  'readmore' option, verify Footnotes$")
 	public void Click_on_the_readmore_option_verify_Footnotes()
 			throws Throwable {
-		login.driver.findElement(
-				By.xpath(login.LOCATORS.getProperty("readMore"))).click();
+		/*login.driver.findElement(
+				By.xpath(login.LOCATORS.getProperty("readMore"))).click();*/
+		login.driver.findElement(By.xpath("//span[@title='More actions']")).click();
 		Thread.sleep(6000);
 		if (login.driver.findElements(
 				By.xpath(login.LOCATORS.getProperty("footnote_window"))).size() != 0) {
 			System.out.println("Footnotes is open");
 			footnotes_close();
 			Thread.sleep(2000);
-			login.driver.findElement(
+			/*login.driver.findElement(
 					By.xpath(login.LOCATORS.getProperty("seriesDropdown")))
-					.click();
+					.click();*/
 		} else {
 			footnotes_close();
 			Thread.sleep(2000);
-			login.driver.findElement(
+			/*login.driver.findElement(
 					By.xpath(login.LOCATORS.getProperty("seriesDropdown")))
-					.click();
+					.click();*/
 			Assert.fail("Footnotes is not open");
 		}
 
@@ -4782,22 +4784,22 @@ login.driver.findElement(
 		WebDriverWait wait = new WebDriverWait(login.driver, 500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("global_db"))));
-		Thread.sleep(9000);
+		
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("global_db"))).click();
 		Thread.sleep(5000);
 		login.driver.findElement(
 				By.xpath("(//div[@data-node-model-id='GLOBAL&&ALL']/div)[1]")).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		login.driver.findElement(
 				By.xpath("(//div[contains(@class,'tree-node open last-open-node')]/following::*[@class='tree-node'])[2]")).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("section_table"))).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("global_table"))).click();
-		Thread.sleep(6000);
+		Thread.sleep(2000);
 	}
 
 	@Given("^Open footnotes for table level$")
@@ -4808,7 +4810,6 @@ login.driver.findElement(
 		action.moveToElement(table_row).perform();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("footnote_global_table_icon"))));
-		Thread.sleep(8000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS
 						.getProperty("footnote_global_table_icon"))).click();
@@ -5116,7 +5117,7 @@ login.driver.navigate().refresh();
 	@Given("^Verify 'Ask question' is available for translated footnotes$")
 	public void verify_Ask_question_is_available_for_translated_footnotes()
 			throws Throwable {
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("footnote_container")))
 				.click();

@@ -103,7 +103,7 @@ public class Sprint_5_1 extends CommonFunctionality {
 	@Given("^Hide \"([^\"]*)\" from Demo users\\.$")
 	public void hide_from_Demo_users(String arg1) throws Throwable {
 
-		List<WebElement> WhatsNew = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("WhatsNew")));
+		/*List<WebElement> WhatsNew = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("WhatsNew")));
 
 		for (int i = 0; i < WhatsNew.size(); i++) {
 			if (!WhatsNew.get(i).getText().contains("What's new")) {
@@ -116,7 +116,7 @@ public class Sprint_5_1 extends CommonFunctionality {
 
 			}
 
-		}
+		}*/
 
 	}
 

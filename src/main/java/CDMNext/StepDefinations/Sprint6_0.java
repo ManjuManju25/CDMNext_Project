@@ -69,6 +69,18 @@ public class Sprint6_0 extends CommonFunctionality {
 
 	@And("^clicks on Apply filter button\\.$")
 	public void clicks_on_Apply_filter_button() throws Throwable {
+		
+		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='button__primary button button__primary']", 4).click(); 
+		//Thread.sleep(5000);
+		//login.driver.findElement(By.xpath("//div[normalize-space(text())='Apply filter'])).click();
+		//login.driver.findElement(By.xpath("//div[normalize-space(text())='Apply filter']")).click();
+		/*WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//div[normalize-space(text())='Apply filter")))).click();	*/
+		/*Thread.sleep(5000);
+		WebElement chkbox = login.driver.findElement(By.xpath("(//span[@class='status-icon'])[4]"));
+		js.executeScript("arguments[0].scrollIntoView(true)", chkbox);
+		Thread.sleep(5000);
+		chkbox.click();*/
 		login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
 		
 		
@@ -95,8 +107,19 @@ public class Sprint6_0 extends CommonFunctionality {
 	
 	@And("^clicks on any continuos series\\.$")
 	public void clicks_on_any_continuos_series() throws Throwable {
-		CommonFunctionality.wait(2000);			
+		CommonFunctionality.wait(2000);	
+		
+		/*List<WebElement> list = login.driver.findElements(By.xpath("//div[@class='series-list-item--information']/*"));
+		System.out.println("=========="+list.size());
+		for (int i = 1 ; i <= list.size(); i++) {
+			WebElement series = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])["+i+"]"));
+			
+			new Actions(login.driver).moveToElement(series).pause(1000).click().build().perform();
+		*/
+		
 		login.driver.findElement(By.xpath("//div[@class='series-item--name']")).click();
+		//WebElement ss =login.driver.findElement(By.xpath("//div[@class='series-list-item--information']/*"));
+		//new Actions(login.driver).moveToElement(ss).pause(1000).click().build().perform();
 		
 		}
 		
@@ -275,7 +298,7 @@ public class Sprint6_0 extends CommonFunctionality {
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[contains(text(),'Related series')]")).click();
+		login.driver.findElement(By.xpath("//div[@title='View our suggestions for related series and replacements']//div[@class='insight-action-panel--btn-icon']")).click();
 		
 		
 		
@@ -625,7 +648,8 @@ public class Sprint6_0 extends CommonFunctionality {
 	@Then("^validate the \"([^\"]*)\" Sheet and read the '(\\d+)' '(\\d+)' row and column and verify the Preapplied-function$")
 	public void validate_the_Sheet_and_read_the_row_and_column_and_verify_the_Preapplied_function(String arg1, int arg2, int arg3) throws Throwable {
 		Thread.sleep(2000);
-		String ss="SPLICE(series ID:18987001, Industrial Production Index: 1980-81=100 [SPLICE(series ID:18989701, Industrial Production Index: 1993-94=100; No; Average ratio; Range; 1994-04-01; 1994-04-01) > SPLICE(series ID:314398401, Industrial Production Index: 2004-05=100; No; Average ratio; Range; 2005-04-01; 2005-04-01) > SPLICE(series ID:386587797, Industrial Production Index (IPI); No; Average ratio; Range; 2012-04-01; 2012-04-01)]; No; Average ratio; Range; 2012-04-01; 2012-04-01)";
+		//String ss="SPLICE(series ID:18987001, Industrial Production Index: 1980-81=100 [SPLICE(series ID:18989701, Industrial Production Index: 1993-94=100; No; Average ratio; Range; 1994-04-01; 1994-04-01) > SPLICE(series ID:314398401, Industrial Production Index: 2004-05=100; No; Average ratio; Range; 2005-04-01; 2005-04-01) > SPLICE(series ID:386587797, Industrial Production Index (IPI); No; Average ratio; Range; 2012-04-01; 2012-04-01)]; No; Average ratio; Range; 2012-04-01; 2012-04-01)";
+		String ss="UPDATE(series ID:8475101, CN: (DC)Automobile: Sales: Passenger Cars [UPDATE(series ID:56397101, Automobile: Sales: Passenger Car (PC); No; Yes; none)]; No; Yes; none)";
 		login.Log4j.info("Pre-Applied functions are applied and validated");
 		System.out.println("---------------"+arg1);
 		System.out.println("---------------"+arg2);

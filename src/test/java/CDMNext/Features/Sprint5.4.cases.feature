@@ -212,14 +212,7 @@ Feature: Verify title for commentary visual by default.
     Given user import a UDD series.
     And Import from CDM Next and Import File again.
 
-  @Sprint5_4
-  Scenario: TC_20884_03: Verify remove series icon for other than creator.
-    Given user import a UDD series.
-	
-	    And The series should be imported successfully and should available under Imported tab.
-    And to other account  with user "shankar@gmail.com" and password "Ceic@123"
-    And hover the mouse on imported series from user1
-
+  
   @Sprint5_4
   Scenario: TC_20856_01: Verify confirmation growl when user data file is imported
     Given user import a UDD series.
@@ -259,8 +252,7 @@ Feature: Verify title for commentary visual by default.
     Then verify the content.
 
   @Sprint5_4
-  Scenario: TC_20839_03: Verify On Demand statu	
-  s when download series.
+  Scenario: TC_20839_03: Verify On Demand status when download series.
     And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Search for on demand series '377135117'
     And Download series to excel
@@ -546,5 +538,13 @@ Feature: Verify title for commentary visual by default.
     Given Verify the footnotes of series "3675901"
     Then Check for the characters language
 	
+		@Sprint5_4
+  Scenario: TC_20884_03: Verify remove series icon for other than creator.
+    Given user import a UDD series.
+	
+	    And The series should be imported successfully and should available under Imported tab.
+    And to other account  with user "shankar@gmail.com" and password "Ceic@123"
+    And hover the mouse on imported series from user1
 		
-		
+			
+			

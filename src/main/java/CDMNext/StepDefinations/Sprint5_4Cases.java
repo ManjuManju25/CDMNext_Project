@@ -282,6 +282,7 @@ public static 	String parent_window;
 	@Given("^download series base and transformed to excel$")
 	public void download_series_base_and_transformed_to_excel() throws Throwable {
 		CommonFunctionality.wait(2000);
+		
 		String  DOWNLOAD_DEFAULT_LOCAL_DIRECTORY =  "C:\\Users\\ShankarVenkatRaju\\Downloads";
 		 String  DOWNLOAD_DEFAULT_Remote_DIRECTORY ="D:\\Raju\\CDMNextAutomation\\Cucumber_project\\Testdata";
 		 String name = getTitleOfInsight();
@@ -1489,10 +1490,12 @@ public void search_UDD_Series_with_attributes_like_UserId_and_Category() throws 
 	@Given("^user Navigates to Analysis Tab\\.$")
 	public void user_Navigates_to_Analysis_Tab() throws Throwable {
 		WebElement Analysis=login.driver.findElement(By.xpath("//span[normalize-space(text())='Analysis']"));
-		Analysis.click();
-		
-	    
+		Analysis.click();    
 	}
+	
+
+	
+	
 
 	@Given("^Open any Insight having series$")
 	public void open_any_Insight_having_series() throws Throwable {
@@ -2062,6 +2065,8 @@ public static Workbook readExcel(String fileName,String path) {
 	@Given("^Navigate to Aggregate function$")
 	public void navigate_to_Aggregate_function() throws Throwable {
 		Thread.sleep(3000);
+		Thread.sleep(4000);
+		
 		login.driver.findElement(By.xpath("//div[@data-id='AGGREGATE']")).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//button[normalize-space()='Insert function']")).click();
@@ -2511,9 +2516,7 @@ public void check_if_the_icons_C_and_S_are_displayed_infront_of_the_series() thr
     		System.out.println("C icons are not  present");
     	}
     	
-    	//Assert.assertEquals(login.driver.findElement(By.xpath("(//span[@class='status-icon status-icon__key'])["+i+"]")).isDisplayed(),true);
-    	//Assert.assertEquals(login.driver.findElement(By.xpath("(//span[@class='status-icon status-icon__has-replacements'])["+i+"]")).isDisplayed(),true);
-    	   
+    	
     }
 }
 @And("^Refresh the page$")
@@ -2947,14 +2950,11 @@ public void select_the_options(String str) throws Throwable {
   	   login.driver.switchTo().activeElement();
   	   String str=login.driver.findElement(By.xpath("//div[@class='modal-body sphere-modal__body']")).getText();
   	   System.out.println("Str22"+str);
-  	  /* Assert.assertEquals(str,"The function cannot be applied to \"Policy Rate: Month End: Main Refinancing Operations\" series.\r\n" + 
-  	   		"Continue operation with other function(s)?\r\n" + 
-  	   		"CancelOk]");*/
   	 Assert.assertEquals(str,"The function cannot be applied to \"Policy Rate: Month End: Main Refinancing Operations\" series.\r\n" + 
   	 		"Continue operation with other function(s)?\r\n" + 
   	 		"CancelOk");
 	 }
-	 @And("^Apply Aggregate Sum,yearly,december$")
+		 @And("^Apply Aggregate Sum,yearly,december$")
 	 public void apply_Aggregate_Sum_yearly_december() throws Throwable {
 		 check_the_series_id_checkbox_and_click_on_the_fx_icon_in_toolbar();
 		 login.driver.findElement(By.xpath("//div[@data-id='SUM']")).click();
@@ -2967,8 +2967,7 @@ public void select_the_options(String str) throws Throwable {
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[3]")).click();
 		Thread.sleep(2000);
 		String path2 = "C:\\Users\\tbemineni\\Downloads\\Industrial Production Civil Steel Ships.xlsx";
-		 //String path2 =  "C:\\Users\\ShankarVenkatRaju\\Downloads";
-	     	
+		 
          FileInputStream s1=new FileInputStream(path2);
          XSSFWorkbook test = new XSSFWorkbook(s1); 
          XSSFSheet sheet = test.getSheetAt(0);

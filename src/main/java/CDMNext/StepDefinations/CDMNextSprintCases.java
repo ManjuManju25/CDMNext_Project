@@ -856,9 +856,9 @@ public class CDMNextSprintCases {
 	public void click_on_fx_to_open_All_functions_popup() throws Throwable {
 		WebElement toolbar = CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='function-editor-window--icon']", 4);
-		//if (!(toolbar.getAttribute("class").contains("fx-panel-toggle__is-open"))) {
+		
 			toolbar.click();
-		//}
+	
 		WebElement function = CommonFunctionality.getElementByClassName(login.driver, "function-editor-window--icon",
 				4);
 		js.executeScript("arguments[0].click();", function);
@@ -895,6 +895,7 @@ public class CDMNextSprintCases {
 				.sendKeys(arg1);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'search-functions-input')]", 4)
 				.sendKeys(Keys.ENTER);*/
+		
 		
 		
 		if (arg1.equalsIgnoreCase("UPDATE")) {
@@ -1129,7 +1130,24 @@ public class CDMNextSprintCases {
 			}
 			catch(Exception e) {
 				System.out.println("pop up not appeared");
-			}*/
+			}
+			*/
+	}
+	
+	
+	@And("^Click \"([^\"]*)\" option from empty list1$")
+	public void click_option_from_empty_list1(String arg1) throws Throwable {
+		//CommonFunctionality.getElementByXpath(login.driver, "//div[contains(text(),'"+arg1+"')]", 4).click();
+		WebElement View_Chart=login.driver.findElement(By.xpath("//span[normalize-space()='Add chart']"));
+		 new Actions(login.driver).moveToElement(View_Chart).pause(2000).build().perform();
+		 login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
+		 try {
+				WebElement apply=	login.driver.findElement(By.xpath("//*[contains(text(),'Apply')]"));
+				apply.click();
+			}
+			catch(Exception e) {
+				System.out.println("pop up not appeared");
+			}
 			
 	}
 	
@@ -3021,8 +3039,9 @@ public class CDMNextSprintCases {
 	@SuppressWarnings("deprecation")
 	@And("^Press \"([^\"]*)\" button in keyboard$")
 	public void press_button_in_keyboard(String arg1) throws Throwable {
-		new Actions(login.driver).pause(2000).sendKeys(Keys.ESCAPE).perform();
-		login.Log4j.info(arg1 + " operation is performed");
+		Thread.sleep(5000);
+		/*new Actions(login.driver).pause(2000).sendKeys(Keys.ESCAPE).perform();
+		login.Log4j.info(arg1 + " operation is performed");*/
 	}
 
 	@SuppressWarnings("deprecation")
@@ -3709,9 +3728,6 @@ public class CDMNextSprintCases {
 	@And("^Click on select all control$")
 	public void click_on_select_all_control() throws Throwable {
 		CommonFunctionality.wait(1000);
-		/*WebElement check = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='comparables--header']//*[@class='input-control'] | //*[contains(@class,'comparables--header')]//*[@class='input-control--indicator']",
-				4);*/
 		WebElement check=login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[6]"));
 		new Actions(login.driver).moveToElement(check).pause(2000).click().build().perform();
 	}
@@ -4366,9 +4382,6 @@ public class CDMNextSprintCases {
 	@Then("^\"([^\"]*)\" selected icon to display$")
 	public void selected_icon_to_display(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Partially")) {
-			/*WebElement partial = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@class,'comparables--header')]//following-sibling::*[contains(@class,'input-control__sm')]",
-					4);*/
 			WebElement partial = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'input-control__sm')]",
 					4);
@@ -4488,13 +4501,13 @@ public class CDMNextSprintCases {
 					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
 			if (check == true) {
 				login.Log4j.info(arg1 + " method is checked by default");
-				//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				
 				WebElement close=login.driver.findElement(By.xpath("//div[@class='movable-modal--close']"));
 				js.executeScript("arguments[0].click();", close);
 				
 				CommonFunctionality.DeleteSeries();
 			} else {
-				//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+				
 				WebElement close=login.driver.findElement(By.xpath("//div[@class='movable-modal--close']"));
 				js.executeScript("arguments[0].click();", close);
 				CommonFunctionality.DeleteSeries();
@@ -4506,6 +4519,8 @@ public class CDMNextSprintCases {
 	@Then("^\"([^\"]*)\" button should be enabled for user to cancel the operation at any time$")
 	public void button_should_be_enabled_for_user_to_cancel_the_operation_at_any_time(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
+		Thread.sleep(5000);
+		
 		
 		if (button == true) {
 			CommonFunctionality.wait(2000);

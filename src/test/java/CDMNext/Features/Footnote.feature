@@ -52,13 +52,13 @@ Scenario: Tc_Footnotes_14: Verify opening of footnotes in new tab from maximized
          And Click on Footnotes tab
          And Click on Open in new tab icon to verify footnotes open in new tab
 
-@Footnote1
+@Footnote
 Scenario: Tc_Footnotes_18: Verify footnotes open from database search tab
 		 And Create an insight
 		 And Goto Database Search tab 
          And Expand the database 
         And Verify the footnotes at each level from database search
-@Footnote1
+@Footnote
 Scenario: Tc_Footnotes_19: Verify footnotes open from comparables search tab
 		 And Create an insight
 		 And Goto comparables search tab
@@ -83,16 +83,16 @@ Scenario: Tc_Footnotes_22:Verify Country > geo_province > geo_city > geo_county 
 		  And Expand the database
 		  And Open Footnotes to verify provinces
 		 
-@Footnote1
+@Footnote
 Scenario: Tc_Footnotes_24:Verify view comments, view notifications, view and edit profile 
 		  And click on Open in new tab 
 		  And Verify view comments, view notifications, view and edit profile dropdowns are shown
-@Footnote1
+@Footnote3
 Scenario: Tc_Footnotes_25:Verify redirection to Country specific information in world trend db
 		  And Goto Database Search tab
 		  And Expand the Section
 		  And Verify redirection to Country specific information 
-@Footnote1
+@Footnote3
 Scenario: Tc_Footnotes_26:Verify open footnotes from SSP window
 		  And Goto Series Search tab
 		  And Add series to My series 
@@ -185,7 +185,7 @@ Scenario: Tc_Footnotes_55:Verify footnotes open in suggested indicators
 	          And Select series then click on Related series
 		      And Click on i icon to verify footnotes
 
-@Footnote2
+@Footnote
 Scenario: Tc_Footnotes_62:Footnotes: 'Ask question' should include the selected table name
 			 And Goto Database Search tab
 			 And Expand the global database
@@ -227,7 +227,7 @@ Scenario: Tc_Footnotes_56:Verify chinese translated footnotes for any of the glo
 			 And Expand the global database
              And Open footnotes for table level
              And Download chinese language footnote file
-@Footnote123
+@Footnote323
 Scenario: Tc_Footnotes_57:Verify Korean translated footnotes for any of the global series
 			And Goto Database Search tab 
             And Expand the global database
@@ -287,7 +287,7 @@ Scenario: Tc_Footnotes_64:Footnotes: Verify Footnotes download message
 
 
 #.............................Features which have been removed..................
- @Footnote1
+ @Footnote3
 Scenario: Tc_Footnotes_43:Verify Back button  in new window of translated footnotes opened
 		  And Goto Database Search tab
 		  And Expand the Section
@@ -303,7 +303,7 @@ Scenario: Tc_Footnotes_31:Verify translation for footnotes opened in window
           And verify language translation Section_level
           And verify language translation Table_level
           And verify language translation Series_level
-			 			@Footnote1
+			 			@Footnote3
 Scenario: Tc_Footnotes_32:Verify translation for footnotes opened in new tab
 		   And Goto Database Search tab 
 		   And Expand the database
@@ -315,113 +315,113 @@ Scenario: Tc_Footnotes_32:Verify translation for footnotes opened in new tab
        And verify language translation Series_level in new tab
        
        
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_66: Verify if Hyperlinks from market purchasing managers' index are redirectable
 #			  And Goto Database Search tab
 #              And Expand the Markit database
 #              And Open footnotes for section level
 #              And Access links verify hyperlinks are redirectable
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_70:	Verify the action of  'Back' button
 #			 And Goto Footnotes menu bar , click Open new tab
 #			 And Set the Preference to insight
 #			 And Close the new tab
 #			 And Goto Footnotes menu bar , click Open new tab
 #			 And Expand the database then translate to japanese and verify Back button
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_68: Verify display of 'Please see Table of Contents to select a Footnote ' message 
 #			And Goto Database Search tab
 #			And Expand Daily Database
 #			And Open footnote for table
 #			And Verify the message 'Please see Table of Contents to select a Footnote '
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_29:Verify refreshing footnotes in new tab with f5 when opened through menu bar of an insight
 #		  And Goto Footnotes menu bar , click Open new tab
 #		  And expand the tree , refresh the page
 #		  And Verify the tree is collapsed
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_27:Verify refreshing footnotes window tab with refresh option
 #		  And Click on Footnotes menu bar , click Open
 #		  And Click on File , select Refresh
 #		  And Verify the footnotes window is retained
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_28:Verify refreshing footnotes window tab with f5 key on keyboard
 #		  And Click on Footnotes menu bar , click Open
 #		  And Refresh the page,Verify the footnotes window disappear
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_16: Verify footnotes open from series search tab
 #		 And Create an insight
 #		 And Goto Series Search tab
 #        And Click on hat option to Verify footnotes open from series search tab
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_17: Verify footnotes open from dataset search tab
 #		 And Create an insight
 #		 And Goto Dataset Search tab
 #         And Select record click on hat option to verify footnotes 
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_61:Check the translation of Glossary link page of Footnotes
 #			 And Goto Database Search tab
 #            And Expand the Markit database
 #            And Open footnotes for section level, change to Japanese
 #            And Click on PMI glossary link,Verify the glossary     
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_01: Verify opening of footnotes from insight explorer window 
 #    And Set the Preference to insight explorer 
 #    And Find the Footnote option in menu bar 
 #    And Click Open to verify the footnotes
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_02: Verify opening of footnotes from new insight
 #     And Set the Preference to new insight
 #     And Find the Footnote option in menu bar  
 #     And Click Open to verify the footnotes   
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_23:Verify menu bar options 
 #		  And Create an insight
 #            And Hover on menu bar options and verify                                       
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_15: Verify opening of footnotes in new tab from minimized form
 #         And Click on Footnotes tab
 #         And Click on minimize icon
 #         And Click on Open in new tab icon to verify footnotes open in new tab  
 #
 
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_36:Verify back button in footnotes
 #			And Create an insight
 #		    And Goto Footnotes menu bar , click Open new tab
 #            And click on CEIC logo,verify Back button   
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_53:Verify our support team link  from footnotes
 #			And Goto Db Search tab 
 #		    And Expand the database
 #		    And Click on link - our support team,verify
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_10: Verify download option in footnotes when Db's are not selected
           #And Find the Footnote option in menu bar 
           #And Verify the download option is disabled    
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_11: Verify download option in footnotes enabled when Db's are  selected
 #			 And Find the Footnote option in menu bar 
             #And Verify the download option in footnotes is enabled 
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_37:Verify back button in footnotes in new tab
 #		   And Set the Preference to insight explorer
 #		   And Click on CEIC logo
 #		   And Goto Footnotes menu bar , click Open new tab
           #And verify Back button
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_38:Verify back button in footnotes in new tab
 #		     And Click on Footnotes tab Open new tab
             #And Expand the tree change the language ,verify the Back button
             #And Set the Preference to new insight 
 #				
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_39:Verify click on back in the table opened footnote
 #		   And Set the Preference to new insight 
 #		   And Goto Database Search tab
 #		   And Expand the Section
           #And Check the navigation onclick Back button
-#@Footnote1
+#@Footnote3
 #Scenario: Tc_Footnotes_65:Footnotes:Verify if Footnotes in minimized state displays tooltip while downloading
 #			And Goto Db Search tab 
 #			And Expand the global database

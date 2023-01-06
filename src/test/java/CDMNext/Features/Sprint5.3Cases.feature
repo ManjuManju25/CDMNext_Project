@@ -155,7 +155,7 @@ Feature: Verifying Sprint cases Functionality.
 
   @Sprint5_3
   Scenario: TC_19271_06 :Add tooltips to dots used in search ( internal series, see in tree, the node contains matches)
-    And Login back to internal user with user "vvagicharla" and password "ZAQ!2wsx@7989"
+    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     Given user clicks on releases Tab
     And hovers on green dot
     And click on series tab

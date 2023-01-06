@@ -21,7 +21,7 @@ Feature: Verifying Insight general Functionality
   Scenario: Tc_InsightGeneral_04:Verify Clicking on my insights
     And My Insights should be loaded
 
-  @InsightGeneral
+  @InsightGeneral1
   Scenario: Tc_InsightGeneral_05:Verify insight URL after changed insight title
     And Creating new insight
     And Change insight title and verify insight URL after changed insight title
@@ -141,7 +141,7 @@ Feature: Verifying Insight general Functionality
     And Verify the insight by clicking "Cancel" button
     And Delete Insight
 
-  @InsightGeneral1
+  @InsightGeneral
   Scenario: Tc_InsightGeneral_18:Verify 'Download' option in insight preview without visual
     And Creating new insight
     And Click "Open File menu" option from the title
@@ -755,7 +755,7 @@ Feature: Verifying Insight general Functionality
   Scenario: Tc_InsightGeneral_125:Verify edit of insight title in the popup.
     And Verify that the insight saved with updated title.
 
-  @InsightGeneral1
+  @InsightGeneral
   Scenario: Tc_InsightGeneral_126:Verify edit icon for insight URL.
     And Click on Share icon for untitled insight
     And Click on Edit icon on insight URL field and Verify
@@ -898,7 +898,7 @@ Feature: Verifying Insight general Functionality
       | "Live chat" | "ON"   |
       | "Live chat" | "OFF"  |
 
-  @InsightGeneral1
+  @InsightGeneral
   Scenario: Tc_InsightGeneral_165:Verify 'Video tutorials'
     And Click on "Help" -> "Video tutorials"
     Then The available videos should be played
