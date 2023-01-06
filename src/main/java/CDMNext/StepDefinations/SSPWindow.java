@@ -1554,6 +1554,8 @@ login.driver.findElement(By.xpath("(//*[@class='preview-series-data']//*[@class=
 		} else if(arg1.equalsIgnoreCase("Apply")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 10).click();
 			
+		} else if(arg1.equalsIgnoreCase("Download")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//button//*[contains(text(),'" + arg1 + "')]", 10).click();
 		}
 	}
 

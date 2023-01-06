@@ -19,7 +19,7 @@ import CDMNext.util.Hooks;
 		strict = true,
 		features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-		tags = {"@sprint5.51"},	
+		tags = {"@Histogram1"},	
 		
 		monochrome = true,
 		//dryRun = true,

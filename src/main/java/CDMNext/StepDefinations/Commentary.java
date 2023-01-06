@@ -194,11 +194,7 @@ public class Commentary {
 			WebElement checkbox1 = CommonFunctionality.getElementByProperty(login.driver, "unchecked", 4);
 			new Actions(login.driver).pause(300).moveToElement(checkbox1).click().build().perform();
 		}
-		try {
-			CommonFunctionality.getElementByProperty(login.driver, "POP_title_close", 20).click();
-		} catch(Exception e) {
-			
-		}
+		
 	}
 
 	@Then("^The title name should reflect on the Commentary$")
@@ -228,6 +224,7 @@ public class Commentary {
 
 	@And("^Check the box and enter the title name as \"([^\"]*)\"$")
 	public void check_the_box_and_enter_the_title_name_as(String arg1) throws Throwable {
+		
 		CommonFunctionality.getElementByProperty(login.driver, "Title_input", 8).clear();
 		CommonFunctionality.getElementByProperty(login.driver, "Title_input", 8).sendKeys(arg1);
 	}
@@ -985,6 +982,7 @@ public class Commentary {
 
 	@And("^Click on Download icon$")
 	public void click_on_Download_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
 		login.driver.switchTo().defaultContent();
 		CommonFunctionality.getElementByProperty(login.driver, "DownloadIcon_var", 20).click();
 	}

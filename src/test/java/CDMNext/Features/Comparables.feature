@@ -356,7 +356,7 @@ Feature: Verify Comparables feature
     And Clicking "Download" button from Header portion
     Then The Series selected should gets downloaded to excel
 
-  @Comparables1
+  @Comparables
   Scenario: Tc_Comparables_52: Verify CTC of series in comparables
     And Clicking "Comparables" icon
     And Search for "249416501"

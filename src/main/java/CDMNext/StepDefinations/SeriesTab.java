@@ -897,7 +897,9 @@ public class SeriesTab {
 			jse.executeScript("arguments[0].scrollIntoView(true);",advance_search);
 			CommonFunctionality.wait(200);
 			advance_search.click();
-	
+		case "Edit Heat map":
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 8).click();
+			break;
 		default:
 			CommonFunctionality.wait(500);
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 4).click();

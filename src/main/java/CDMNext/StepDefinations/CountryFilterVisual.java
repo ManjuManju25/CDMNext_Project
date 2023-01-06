@@ -256,6 +256,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Click inside filter visual$")
 	public void click_inside_filter_visual() throws Throwable {
+		wait(2000);
 		getElementByProperty(login.driver, "AllCountries", 20).click();
 	}
 
