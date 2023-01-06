@@ -17,12 +17,7 @@ import CDMNext.util.Hooks;
 		strict = true,
 		features = "src/test/java/CDMNext/Features/",
 		glue = { "CDMNext.StepDefinations" }, 
-<<<<<<< HEAD
-		tags = {"@Sprint5_4"},	
-		
-=======
 		tags = {"@sprint5.51"},	
->>>>>>> 2bb777c4abe008908b04c1b8941d7bf5efa2788b
 		monochrome = true,
 		// dryRun = true,
 		plugin = { "html:target/cucumber-reports/cucumber-pretty",
