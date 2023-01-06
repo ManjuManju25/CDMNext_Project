@@ -4,6 +4,7 @@ Feature: Verify Cross section functionality
   #Given User has successful logged in
   @CrossSection
   Scenario: Tc_Cross Section_01: Verify cross section functionality for series
+   # And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Open preference dropdown
     # And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check"
     And Clicking on "Keyboard shortcuts" option under user preference be "ON"

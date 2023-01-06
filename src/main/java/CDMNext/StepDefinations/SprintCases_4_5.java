@@ -1,4 +1,4 @@
-package CDMNext.StepDefinations;
+/*package CDMNext.StepDefinations;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.fail;
@@ -38,7 +38,7 @@ import cucumber.api.java.en.*;
 import test.ant.AntSystemPropertySet;
 
 public class SprintCases_4_5 {
-	/*public String NotificationText;
+	public String NotificationText;
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
 	Actions action = new Actions(login.driver);
 	WebDriverWait wait = new WebDriverWait(login.driver, 30);
@@ -1474,7 +1474,7 @@ public class SprintCases_4_5 {
 	
 
 	// TC_18480_01
-	/*@Then("^\"([^\"]*)\" should be loaded in new browser tab$")
+	@Then("^\"([^\"]*)\" should be loaded in new browser tab$")
 	public void should_be_loaded_in_new_browser_tab(String arg1) throws Throwable {
 
 		// It will return the parent window name as a String
@@ -1662,6 +1662,6 @@ public class SprintCases_4_5 {
 		Assert.assertEquals(excepted, actual);
 		login.driver.findElement(By.xpath("//*[@class='movable-modal--close']")).click();
 
-	}*/
+	}
 
-}
+}*/

@@ -48,11 +48,9 @@ public class Analysistab {
 	public void verify_search_for_analysis_insights() throws Throwable {
 		Thread.sleep(18000);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//div[@class='search-presentation-tabs--visible']/span[2]/span", 20)
-				.click();
+				.getElementByXpath(login.driver, "//div[@class='search-presentation-tabs--visible']/span[2]/span", 20).click();
 		Thread.sleep(2000);
-		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='search-input-text']", 20)
-				.sendKeys("Philippines Economy in a Snapshot - Q3 2019");
+		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='search-input-text']", 20).sendKeys("Philippines Economy in a Snapshot - Q3 2019");
 		Thread.sleep(5000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 20).click();
 		Thread.sleep(2000);
@@ -79,10 +77,10 @@ public class Analysistab {
 				.getElementByXpath(login.driver, "//div[@class='search-presentation-tabs--visible']/span[2]/span", 20)
 				.click();
 		Thread.sleep(2000);
-		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--open-icon'])[2]", 20)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 20)
 				.click();
 		Thread.sleep(500);
-		if (login.driver.findElements(By.xpath("(//div[@class='navigation-sidebar--header'])[2]")).size() != 0) {
+		if (login.driver.findElements(By.xpath("(//div[@class='navigation-sidebar--close-icon'])[2]")).size() != 0) {
 			System.out.println("Verified");
 		} else {
 			Assert.fail();
@@ -101,13 +99,11 @@ public class Analysistab {
 				.click();
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 20).click();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//span[@class='text-dots' and contains(text(),'Recently created')]", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//span[@class='text-dots' and contains(text(),'Recently published')]", 20).click();
 		Thread.sleep(2000);
 		Assert.assertTrue(CommonFunctionality
 				.getElementByXpath(login.driver,
-						"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']", 20)
-				.isDisplayed());
+						"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']", 20).isDisplayed());
 		System.out.println("verified");
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//div[@class='search-presentation-tabs--visible']/span[1]/span", 20)
@@ -123,17 +119,11 @@ public class Analysistab {
 				.click();
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 20).click();
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//span[@class='name' and contains(text(),' EMIS Insights')]", 20)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='name' and contains(text(),' EMIS Insights')]", 20).click();
 		Thread.sleep(2000);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='custom-select-title--handler icon--filter-arrow'])[3]/span[2]", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver,"(//span[text()='Recently published']//following::span[@class='dropdown--icon icon--filter-arrow'])[1]", 20).click();
 		Thread.sleep(2000);
-		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']/div[1]", 20)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']/div[1]", 20).click();
 		// CommonFunctionality.getElementByXpath(login.driver,
 		// "(//span[@class='icon--arrow-sort-asc
 		// sort-select-title--directions-box-icon'])[1]", 20).click();
@@ -173,13 +163,9 @@ public class Analysistab {
 				.getElementByXpath(login.driver, "//span[@class='name' and contains(text(),' EMIS Insights')]", 20)
 				.click();
 		Thread.sleep(2000);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='custom-select-title--handler icon--filter-arrow'])[3]/span[2]", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver,"(//span[text()='Recently published']//following::span[@class='dropdown--icon icon--filter-arrow'])[1]", 20).click();
 		Thread.sleep(2000);
-		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']/div[2]", 20)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']/div[2]", 20).click();
 		// CommonFunctionality.getElementByXpath(login.driver,
 		// "(//span[@class='icon--arrow-sort-asc
 		// sort-select-title--directions-box-icon'])[1]", 20).click();
@@ -219,13 +205,9 @@ public class Analysistab {
 				.getElementByXpath(login.driver, "//span[@class='name' and contains(text(),' EMIS Insights')]", 20)
 				.click();
 		Thread.sleep(2000);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='custom-select-title--handler icon--filter-arrow'])[3]/span[2]", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver,"(//span[text()='Recently published']//following::span[@class='dropdown--icon icon--filter-arrow'])[1]", 20).click();
 		Thread.sleep(2000);
-		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']/div[3]", 20)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']/div[3]", 20).click();
 		// CommonFunctionality.getElementByXpath(login.driver,
 		// "(//span[@class='icon--arrow-sort-asc
 		// sort-select-title--directions-box-icon'])[1]", 20).click();
@@ -266,7 +248,7 @@ public class Analysistab {
 				.click();
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='custom-select-title--handler icon--filter-arrow'])[3]/span[2]", 20).click();
+				"//div[@class='custom-select--body custom-select--sorting-filter-dropdown']/div[3]", 20).click();
 		Thread.sleep(2000);
 		CommonFunctionality
 				.getElementByXpath(login.driver,
@@ -311,8 +293,7 @@ public class Analysistab {
 				.getElementByXpath(login.driver, "//span[@class='name' and contains(text(),' EMIS Insights')]", 20)
 				.click();
 
-		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='link link__medium insight-grid-item--bottom-panel-title'])[1]", 20);
+		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,"/(//div[@class='link link__medium insight-grid-item--bottom-panel-title'])[1]", 20);
 		Actions action = new Actions(login.driver);
 		action.moveToElement(gridmode).build().perform();
 
@@ -2070,11 +2051,10 @@ public class Analysistab {
 
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[2]", 20).click();
-
+CommonFunctionality.wait(3000);
 		String customizenamemyseries = CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@class='insight-breadcrumb--title text-dots insight-breadcrumb--title__editable']", 20)
-				.getText();
+				.getElementByXpath(login.driver,"//div[@class='insight-breadcrumb--title text-dots insight-breadcrumb--title__editable insight-breadcrumb__is-explore']", 20).getText();
+		                                         
 		Thread.sleep(2000);
 		System.out.println(customizenamemyseries + customizename);
 
@@ -2201,7 +2181,7 @@ public class Analysistab {
 		r.keyRelease(KeyEvent.VK_V);
 		r.keyPress(KeyEvent.VK_ENTER);
 		r.keyRelease(KeyEvent.VK_ENTER);
-
+Thread.sleep(2000);
 		ArrayList<String> tabs2 = new ArrayList<String>(login.driver.getWindowHandles());
 		login.driver.switchTo().window(tabs2.get(1));
 
@@ -2311,20 +2291,18 @@ public class Analysistab {
 
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[1]", 20).click();
 
-		Thread.sleep(2000);
-		String customizenameinviewpopup = CommonFunctionality
-				.getElementByXpath(login.driver, "//span[@class='insight-preview--title text-dots']", 20).getText();
+		Thread.sleep(3000);
+		String customizenameinviewpopup = CommonFunctionality.getElementByXpath(login.driver, "//span[@class='insight-preview--title text-dots']", 20).getText();
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-preview--actions']/div[1]", 20)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-preview--close']", 20).click();
 
 		Thread.sleep(3000);
-		String customizenamemyseries = CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@class='insight-breadcrumb--title text-dots insight-breadcrumb--title__editable']", 20)
-				.getText();
+		String customizenamemyseries = CommonFunctionality.getElementByXpath(login.driver,"//div[@class='insight-breadcrumb--title text-dots insight-breadcrumb--title__editable insight-breadcrumb__is-explore']", 20).getText();
 		Thread.sleep(2000);
+		System.out.println("================="+customizenamemyseries);
+		System.out.println("customizenameinviewpopup================="+customizenameinviewpopup);
 
 		if (!customizenamemyseries.contains(customizenameinviewpopup)) {
 			System.out.println("Verified");
@@ -2353,13 +2331,11 @@ public class Analysistab {
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'WPIC Platinum Quarterly')]", 20)
 				.click();
 		Thread.sleep(5000);
-		String customizename = CommonFunctionality
-				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 20)
-				.getText();
-		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,
-				"(//a[@class='link insight-table-item--title-link text-dots'])[1]", 20);
+		String customizename = CommonFunctionality.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 20).getText();
+		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,"(//a[@class='link insight-table-item--title-link text-dots'])[1]", 20);
 		Actions action = new Actions(login.driver);
 		action.contextClick(gridmode).build().perform();
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[1]", 20).click();
 
 		Thread.sleep(2000);
@@ -3079,15 +3055,14 @@ public class Analysistab {
 		String customizenameinviewpopup = CommonFunctionality
 				.getElementByXpath(login.driver, "//span[@class='insight-preview--title text-dots']", 20).getText();
 		Thread.sleep(2000);
+		
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-preview--actions']/div[1]", 20)
 				.click();
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-preview--close']", 20).click();
 		Thread.sleep(5000);
 		String customizenamemyseries = CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@class='insight-breadcrumb--title text-dots insight-breadcrumb--title__editable']", 20)
-				.getText();
+				.getElementByXpath(login.driver,"//div[@class='insight-breadcrumb--title text-dots insight-breadcrumb--title__editable insight-breadcrumb__is-explore']", 20).getText();
 		Thread.sleep(2000);
 		if (!customizenamemyseries.contains(customizenameinviewpopup)) {
 			System.out.println("Verified");

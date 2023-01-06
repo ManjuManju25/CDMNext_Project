@@ -394,7 +394,8 @@ public class CrossSection {
 			 * 
 			 * CommonFunctionality.wait(10000); }
 			 */
-			chart.uncheck_the_checkbox_for_sections("Data Refresh");
+			
+			//chart.uncheck_the_checkbox_for_sections("Data Refresh");
 
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='sphere-modal-controls']//*[contains(text(),'Download')]", 15).click();
@@ -1066,7 +1067,9 @@ public class CrossSection {
 			String function = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'ui-resizable ui-draggable')]//*[@class='series-function-item--body']", 15)
 					.getText();
+			System.out.println("====Cross==="+function);
 			applied_function_in_fx = function.replaceAll("\n", "");
+			System.out.println("====Applied func==="+applied_function_in_fx);
 			cv.click_button("Apply");
 			hovor_on_to_first_myseries_name();
 
@@ -1088,7 +1091,14 @@ public class CrossSection {
 			// "//span[@title='Customize your selection']", 15)).perform();
 			String expected = CommonFunctionality
 					.getElementByXpath(login.driver, "//*[@class='series-functions-title']", 15).getText();
-			if (expected.contains(applied_function_in_fx)) {
+			System.out.println("===expecteddd=="+expected);
+			
+			String substring = expected.substring(1,expected.length()-1);
+			System.out.println("=====Substring val======="+substring);
+		//	if (expected.contains(applied_function_in_fx)) {
+			System.out.println("===expected1==="+substring.contains(applied_function_in_fx));
+			
+			if (substring.contains(applied_function_in_fx)) {
 				login.Log4j.info("The applied function is present and has been verified successfully");
 			} else {
 				fail("Verification Failed");

@@ -46,6 +46,7 @@ Feature: SprintCases_4.7 feature
     And make changes to copyright parameters
     Then Save template icon should be enabled
 
+#@doubt
   @sprint_4.7
   Scenario: TC_18875_01: Verify Move icon for visuals
     And Create two visuals in single view1

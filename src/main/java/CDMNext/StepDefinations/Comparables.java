@@ -913,6 +913,15 @@ public class Comparables {
 			Clipboard clipboard = toolkit.getSystemClipboard();
 			copied_link = (String) clipboard.getData(DataFlavor.stringFlavor);
 		}
+		
+		//venkat added els condition
+//		else {
+//			
+//			login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+//			CommonFunctionality.wait(2000);
+//		}
+		
+		
 	}
 
 	@And("^Message should display$")

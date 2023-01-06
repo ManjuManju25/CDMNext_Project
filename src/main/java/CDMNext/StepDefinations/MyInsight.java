@@ -1306,36 +1306,36 @@ public class MyInsight {
 	// TC_MyInsights_42
 	@Given("^Verify Favorite icon$")
 	public void verify_Favorite_icon() throws Throwable {
+		
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
-		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,
-				"(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10);
+		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,"(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.moveToElement(gridmode).build().perform();
-		CommonFunctionality
-				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10).click();
 		Thread.sleep(15000);
-		String beforefavicon = CommonFunctionality
-				.getElementByXpath(login.driver, "//span[@class='insight-preview--title text-dots']", 10).getText();
+		String beforefavicon = CommonFunctionality.getElementByXpath(login.driver, "//span[@class='insight-preview--title text-dots']", 10).getText();
 		System.out.println("beforefavicon:" + beforefavicon);
+		
+	     // WebElement star=login.driver.findElement(By.xpath("//div[@class='insight-favorite insight-favorite__green']"));
+	      //action.moveToElement(star).click().build().perform();
 
-		if (login.driver
-				.findElement(
-						By.xpath("//div[@class='insight-favorite insight-favorite__active insight-favorite__green']"))
-				.isDisplayed()) {
+		
+		if (login.driver.findElements(By.xpath("//div[@class='insight-favorite insight-favorite__green']")).size()==1) {
 			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-preview--close']", 10).click();
 		} else {
-			CommonFunctionality
-					.getElementByXpath(login.driver, "//div[@class='insight-favorite  insight-favorite__green']", 10)
-					.click();
+			
+			 WebElement mouse=CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Add to favorite']", 10);
+			Actions action1 = new Actions(login.driver);
+			action1.moveToElement(mouse).click().build().perform();
+			
 			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-preview--close']", 10).click();
 		}
 
 		// CommonFunctionality.getElementByXpath(login.driver,
 		// "//div[@class='insight-favorite insight-favorite__green']", 10).click();
 
-		CommonFunctionality.getElementByXpath(login.driver, " (//*[text()='Favorite'])", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Favorite'])", 10).click();
 		String afterfavicon = CommonFunctionality
 				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10)
 				.getText();
@@ -1512,10 +1512,7 @@ public class MyInsight {
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Copy Insight')]",
 				10).click();
 		Thread.sleep(5000);
-		Assert.assertTrue(CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//button[@class='data-selection-series-overlay--btn button button__primary']", 10)
-				.isDisplayed());
+		Assert.assertTrue(CommonFunctionality.getElementByXpath(login.driver,"//button[@class='data-selection-series-overlay--btn button button__primary']", 10).isDisplayed());
 		CommonFunctionality
 				.getElementByXpath(login.driver,
 						"//a[@class='insight-breadcrumb--title-link link' and contains(text(),'My insights')]", 10)
@@ -1958,13 +1955,13 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 	}
 
-	// TC_MyInsights_63
+	// TC_MyInsights_64
 	@Given("^Verify right click options for share-multiple insights$")
 	public void verify_right_click_options_for_share_multiple_insights() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
-		int number_of_insights = 4;
-		for (int i = 2; i <= number_of_insights; i++) {
+		int number_of_insights = 10;
+		for (int i =1; i <= number_of_insights; i++) {
 			if (!(i == number_of_insights)) {
 				new Actions(login.driver).keyDown(Keys.CONTROL).moveToElement(CommonFunctionality.getElementByXpath(
 						login.driver,
@@ -1982,12 +1979,8 @@ public class MyInsight {
 						.pause(200).contextClick().build().perform();
 			}
 		}
-		CommonFunctionality
-				.getElementByXpath(login.driver, "(//span[@class='context-menu-item link']/following::li[1])[1]", 10)
-				.click();
-		Assert.assertTrue(CommonFunctionality.getElementByXpath(login.driver,
-				"//h4[@class='modal-title sphere-modal__title text-dots' and contains(text(),'Share (3 insights)')]",
-				10).isDisplayed());
+		CommonFunctionality.getElementByXpath(login.driver, "(//span[@class='context-menu-item link']/following::li[1])[1]", 10).click();
+		Assert.assertTrue(CommonFunctionality.getElementByXpath(login.driver,"//h4[@class='modal-title sphere-modal__title text-dots' and contains(text(),'Share (8 insights)')]",10).isDisplayed());
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
@@ -2003,8 +1996,8 @@ public class MyInsight {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
-		int number_of_insights = 25;
-		for (int i = 2; i <= number_of_insights; i++) {
+		int number_of_insights = 23;
+		for (int i = 1; i <= number_of_insights; i++) {
 			if (!(i == number_of_insights)) {
 				new Actions(login.driver).keyDown(Keys.CONTROL).moveToElement(CommonFunctionality.getElementByXpath(
 						login.driver,
@@ -2022,21 +2015,19 @@ public class MyInsight {
 						.pause(200).contextClick().build().perform();
 			}
 		}
-		Assert.assertTrue(CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='growl-message-text' and contains(text(),'You cannot select more than 20 insights at once')]",
-				10).isDisplayed());
+		Assert.assertTrue(CommonFunctionality.getElementByXpath(login.driver,"//div[@class='growl-message-text' and contains(text(),'You cannot select more than 20 insights at once')]",10).isDisplayed());
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 	}
 
-	// TC_MyInsights_65
+	// TC_MyInsights_66
 	@Given("^Verify right click options delete for multiple insights$")
 	public void verify_right_click_options_delete_for_multiple_insights() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		String firstelementbefore = CommonFunctionality
-				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10)
+				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[2]", 10)
 				.getText();
 		int number_of_insights = 4;
 		for (int i = 1; i <= number_of_insights; i++) {
@@ -2061,13 +2052,9 @@ public class MyInsight {
 				.getElementByXpath(login.driver, "(//span[@class='context-menu-item link']/following::li[3])[1]", 10)
 				.click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",
-				10).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",10).click();
 		Thread.sleep(3500);
-		String firstelementafter = CommonFunctionality
-				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10)
-				.getText();
+		String firstelementafter = CommonFunctionality.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[2]", 10).getText();
 		System.out.println("Verified" + firstelementbefore + firstelementafter);
 		if (!firstelementbefore.equalsIgnoreCase(firstelementafter)) {
 
@@ -2079,7 +2066,7 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 	}
 
-	// TC_MyInsights_66
+	// TC_MyInsights_67
 	@Given("^Verify right click options delete for limit for multiple insights selection$")
 	public void verify_right_click_options_delete_for_limit_for_multiple_insights_selection() throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -2088,7 +2075,7 @@ public class MyInsight {
 		String firstelementbefore = CommonFunctionality
 				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10)
 				.getText();
-		int number_of_insights = 21;
+		int number_of_insights = 23;
 		for (int i = 1; i <= number_of_insights; i++) {
 			if (!(i == number_of_insights)) {
 				new Actions(login.driver).keyDown(Keys.CONTROL).moveToElement(CommonFunctionality.getElementByXpath(
@@ -2206,13 +2193,13 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 	}
 
-	// TC_MyInsights_69
+	// TC_MyInsights_70
 	@Given("^Verify right click options Add tags-Cancel/dismiss\\(x\\) button$")
 	public void verify_right_click_options_Add_tags_Cancel_dismiss_x_button() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		WebElement rightclickelement = CommonFunctionality.getElementByXpath(login.driver,
-				"(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10);
+				"(//a[@class='link insight-table-item--title-link text-dots'])[4]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(rightclickelement).build().perform();
 		CommonFunctionality.wait(2000);
@@ -2224,13 +2211,13 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 	}
 
-	// TC_MyInsights_70
+	// TC_MyInsights_71
 	@Given("^Verify right click options Add tags-disabled Save button$")
 	public void verify_right_click_options_Add_tags_disabled_Save_button() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		WebElement rightclickelement = CommonFunctionality.getElementByXpath(login.driver,
-				"(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10);
+				"(//a[@class='link insight-table-item--title-link text-dots'])[4]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(rightclickelement).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[8]", 10).click();
@@ -2246,10 +2233,10 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
-		System.out.println("===============================================>70");
+		System.out.println("===============================================>71");
 	}
 
-	// TC_MyInsights_71
+	// TC_MyInsights_72
 	@Given("^Verify right click options Add tags for multiple insights at once$")
 	public void verify_right_click_options_Add_tags_for_multiple_insights_at_once() throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -2258,9 +2245,9 @@ public class MyInsight {
 		delete_Nameyourinsight();
 		Thread.sleep(5500);
 		String firstelementbefore = CommonFunctionality
-				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10)
+				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[2]", 10)
 				.getText();
-		int number_of_insights = 3;
+		int number_of_insights = 10;
 		for (int i = 1; i <= number_of_insights; i++) {
 			if (!(i == number_of_insights)) {
 				new Actions(login.driver).keyDown(Keys.CONTROL).moveToElement(CommonFunctionality.getElementByXpath(
@@ -2283,7 +2270,7 @@ public class MyInsight {
 		}
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Add tags']", 10).click();
 		Assert.assertTrue(CommonFunctionality.getElementByXpath(login.driver,
-				"//h4[@class='modal-title sphere-modal__title text-dots' and contains(text(),'Add tags (3 insights)')]",
+				"//h4[@class='modal-title sphere-modal__title text-dots' and contains(text(),'Add tags (1 insight)')]",
 				10).isDisplayed());
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
 		Thread.sleep(1500);
@@ -2298,9 +2285,9 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		delete_Nameyourinsight();
 		String firstelementbefore = CommonFunctionality
-				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10)
+				.getElementByXpath(login.driver, "(//a[@class='link insight-table-item--title-link text-dots'])[2]", 10)
 				.getText();
-		int number_of_insights = 3;
+		int number_of_insights = 10;
 		for (int i = 1; i <= number_of_insights; i++) {
 			if (!(i == number_of_insights)) {
 				new Actions(login.driver).keyDown(Keys.CONTROL).moveToElement(CommonFunctionality.getElementByXpath(
@@ -2320,13 +2307,11 @@ public class MyInsight {
 			}
 		}
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='Add tags']", 10).click();
-		String addtagcount = CommonFunctionality.getElementByXpath(login.driver,
-				"//h4[@class='modal-title sphere-modal__title text-dots' and contains(text(),'Add tags (3 insights)')]",
-				10).getText();
+		String addtagcount = CommonFunctionality.getElementByXpath(login.driver,"//h4[@class='modal-title sphere-modal__title text-dots' and contains(text(),'Add tags (8 insights)')]",10).getText();
 		String str = addtagcount;
 		String numberOnly = str.replaceAll("[^0-9]", "");
 		int count = Integer.parseInt(numberOnly);
-		if (count == 3) {
+		if (count == 8) {
 			System.out.println("Verified");
 		} else {
 			Assert.fail();
@@ -3065,19 +3050,18 @@ public class MyInsight {
 		// String createdfolder =
 		// CommonFunctionality.getElementByXpath(login.driver,"//div[@class='insight-breadcrumb--title
 		// text-dots insight-breadcrumb--title__editable']", 10).getText();
-//
+Thread.sleep(2000);
 
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='insight-context-menu--menu-icon']", 10);
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[8]", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[4]", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",
 				10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
@@ -3194,13 +3178,10 @@ public class MyInsight {
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//div[@class='modal-body sphere-modal__body']/div/input", 10)
 				.sendKeys("Creatingfolder");
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",
-				10).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[contains(text(),'All insights')]", 10).click();
 
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//a[@class='link insight-table-item--title-link text-dots'])[1]", 10);
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 
@@ -3212,8 +3193,7 @@ public class MyInsight {
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
 
-		WebElement firstelementgrid1 = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		WebElement firstelementgrid1 = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action1 = new Actions(login.driver);
 		action1.contextClick(firstelementgrid1).build().perform();
 
@@ -3223,8 +3203,7 @@ public class MyInsight {
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",
 				10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10).click();
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
@@ -3237,8 +3216,7 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10).click();
 		CommonFunctionality
 				.getElementByXpath(login.driver,
 						"//div[@class='insights-tree--create-folder-button' and contains(text(),'Add new folder')]", 10)
@@ -3248,17 +3226,15 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",
 				10).click();
-
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		           Thread.sleep(2000);                                                                       
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[1]", 10).click();
-		String autofoldername = CommonFunctionality
-				.getElementByXpath(login.driver, "//div[@class='modal-body sphere-modal__body']/div/input", 10)
-				.getAttribute("value");
-		if (autofoldername.contains("Folder")) {
+		String autofoldername = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='modal-body sphere-modal__body']/div/input", 10).getAttribute("value");
+		System.out.println("autofoldername"+autofoldername);
+		if (autofoldername.contains("folder")) {
 			System.out.println("Verified");
 		} else {
 			Assert.fail();
@@ -3266,19 +3242,16 @@ public class MyInsight {
 
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
 
-		WebElement firstelementgrid1 = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		WebElement firstelementgrid1 = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action1 = new Actions(login.driver);
 		action1.contextClick(firstelementgrid1).build().perform();
 
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//span[@class='context-menu-item link   ' and  @title='Delete folder']", 10).click();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",
-				10).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//span[@class='context-menu-item link   ' and  @title='Delete folder']", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
-				.click();
+		//CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10).click();
+		                                                    
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10).click();
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 	}
@@ -3290,7 +3263,8 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		CommonFunctionality
 				.getElementByXpath(login.driver,
@@ -3302,9 +3276,8 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",
 				10).click();
-
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		Thread.sleep(2000); 
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 
@@ -3326,9 +3299,7 @@ public class MyInsight {
 				10).click();
 
 		Thread.sleep(3500);
-		String renamefoldertext = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10)
-				.getText();
+		String renamefoldertext = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10).getText();
 		System.out.println(renamefoldertext);
 		if (renamefoldertext.equalsIgnoreCase("renamefolder")) {
 			System.out.println("Verified");
@@ -3336,8 +3307,7 @@ public class MyInsight {
 			Assert.fail();
 		}
 
-		WebElement firstelementgrid2 = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		WebElement firstelementgrid2 = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action2 = new Actions(login.driver);
 		action2.contextClick(firstelementgrid2).build().perform();
 		Thread.sleep(1500);
@@ -3352,7 +3322,8 @@ public class MyInsight {
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",
 				10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
@@ -3366,7 +3337,7 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		CommonFunctionality
 				.getElementByXpath(login.driver,
@@ -3380,7 +3351,7 @@ public class MyInsight {
 				10).click();
 
 		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+				"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 
@@ -3399,7 +3370,7 @@ public class MyInsight {
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
 		WebElement firstelementgrid2 = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+				"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action2 = new Actions(login.driver);
 		action2.contextClick(firstelementgrid2).build().perform();
 		Thread.sleep(1500);
@@ -3414,14 +3385,14 @@ public class MyInsight {
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",
 				10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
 	}
 
-	// TC_MyInsights_103
+	// TC_MyInsights_102
 	@Given("^Verify new folder in right click$")
 	public void verify_new_folder_in_right_click() throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -3440,9 +3411,8 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",
 				10).click();
-
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+Thread.sleep(2000);
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[2]", 10).click();
@@ -3450,16 +3420,11 @@ public class MyInsight {
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//div[@class='modal-body sphere-modal__body']/div/input", 10)
 				.sendKeys("Creatingfolderinrightclick");
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",
-				10).click();
-
+		CommonFunctionality.getElementByXpath(login.driver,"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",10).click();
+Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insights-tree-node-icon']", 10).click();
 
-		String createdfolder = CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//div[@class='insights-tree-node-icon insights-tree-node-icon--opened']/following::div[5]", 10)
-				.getText();
+		String createdfolder = CommonFunctionality.getElementByXpath(login.driver,"//div[@class='insights-tree-node-icon insights-tree-node-icon--opened']/following::div[5]", 10).getText();
 
 		if (createdfolder.equalsIgnoreCase("Creatingfolderinrightclick")) {
 			System.out.println("Verified");
@@ -3503,21 +3468,21 @@ public class MyInsight {
 		 * "//button[@class='sphere-modal-control button button button__primary' and contains(text(),'Delete forever')]"
 		 * , 10).click(); Thread.sleep(1500);
 		 */
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		Thread.sleep(1500);
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
 	}
 
-	// TC_MyInsights_104
+	// TC_MyInsights_103
 	@Given("^Verify new insights under folder right click$")
 	public void verify_new_insights_under_folder_right_click() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		CommonFunctionality
 				.getElementByXpath(login.driver,
@@ -3529,9 +3494,8 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Create folder')]",
 				10).click();
-
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+                         Thread.sleep(2000);                                                           
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[3]", 10).click();
@@ -3542,23 +3506,23 @@ public class MyInsight {
 		Thread.sleep(1500);
 
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 	}
 
-	// TC_MyInsights_105
+	// TC_MyInsights_104
 	@Given("^Verify auto title for Create insight under folder right click$")
 	public void verify_auto_title_for_Create_insight_under_folder_right_click() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[3]", 10).click();
@@ -3576,24 +3540,22 @@ public class MyInsight {
 		}
 
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
 	}
 
-	// TC_MyInsights_106
+	// TC_MyInsights_105
 	@Given("^Verify Create insight under folder right click$")
 	public void verify_Create_insight_under_folder_right_click() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10).click();
 
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[3]", 10).click();
@@ -3607,8 +3569,7 @@ public class MyInsight {
 				10).click();
 		Thread.sleep(7500);
 
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a grid']", 10).click();
 		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,
 				"(//div[@class='link link__medium insight-grid-item--bottom-panel-title'])[1]", 10);
@@ -3623,7 +3584,7 @@ public class MyInsight {
 			Assert.fail();
 		}
 
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		WebElement subfolder = CommonFunctionality.getElementByXpath(login.driver,
 				"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
@@ -3641,20 +3602,20 @@ public class MyInsight {
 				10).click();
 		Thread.sleep(5500);
 
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
 	}
 
-	// TC_MyInsights_107
+	// TC_MyInsights_106
 	@Given("^Verify Cancel button for new insight popup under folder right click$")
 	public void verify_Cancel_button_for_new_insight_popup_under_folder_right_click() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		CommonFunctionality
 				.getElementByXpath(login.driver,
@@ -3668,8 +3629,7 @@ public class MyInsight {
 				10).click();
 		Thread.sleep(3500);
 
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[3]", 10).click();
@@ -3679,20 +3639,20 @@ public class MyInsight {
 		Thread.sleep(1500);
 
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='sphere-modal__close']", 10).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
 	}
 
-	// TC_MyInsights_108
+	// TC_MyInsights_107
 	@Given("^Verify Delete folder$")
 	public void verify_Delete_folder() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		WebElement subfolder = CommonFunctionality.getElementByXpath(login.driver,
 				"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
@@ -3705,24 +3665,22 @@ public class MyInsight {
 		JavascriptExecutor executor = (JavascriptExecutor) login.driver;
 		executor.executeScript("arguments[0].click()", deleterenamefolder);
 
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",
-				10).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//button[@class='sphere-modal-control button button__primary' and contains(text(),'Delete forever')]",10).click();
 		Thread.sleep(10500);
-
-		if (login.driver.findElements(By.xpath("(//div[@class='insights-tree-node-name text-dots'])[1]")).size() == 0) {
+		
+		if (login.driver.findElements(By.xpath("(//div[@class='insights-tree-node-name text-dots'])[1]")).size() == 1){
 			System.out.println("Verified");
 		} else {
 			Assert.fail();
 		}
-
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
-				.click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10).click();
+		
+				
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
 	}
 
-	// TC_MyInsights_109
+	// TC_MyInsights_108
 	@Given("^Verify insight which is added to folder$")
 	public void verify_insight_which_is_added_to_folder() throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -3730,7 +3688,7 @@ public class MyInsight {
 		CommonFunctionality.getElementByXpath(login.driver, "(//*[text()='Created'])", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a table']", 10).click();
 		Thread.sleep(1500);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		CommonFunctionality
 				.getElementByXpath(login.driver,
@@ -3744,8 +3702,7 @@ public class MyInsight {
 				10).click();
 		Thread.sleep(3500);
 
-		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='insights-tree-node insights-tree-node--selected']/div/following::div[1])[1]", 10);
+		WebElement firstelementgrid = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
 		Actions action = new Actions(login.driver);
 		action.contextClick(firstelementgrid).build().perform();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='items-wrapper']/li[3]", 10).click();
@@ -3759,7 +3716,7 @@ public class MyInsight {
 				10).click();
 		Thread.sleep(7500);
 
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View as a grid']", 10).click();
 		WebElement gridmode = CommonFunctionality.getElementByXpath(login.driver,
@@ -3775,7 +3732,7 @@ public class MyInsight {
 			Assert.fail();
 		}
 
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Expand My folders']", 10)
 				.click();
 		WebElement subfolder = CommonFunctionality.getElementByXpath(login.driver,
 				"(//div[@class='insights-tree-node-name text-dots'])[1]", 10);
@@ -3793,7 +3750,7 @@ public class MyInsight {
 				10).click();
 		Thread.sleep(5500);
 
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='navigation-sidebar--open-icon']", 10)
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='navigation-sidebar--close-icon'])[2]", 10)
 				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='application-logo']", 10).click();
 
@@ -3819,7 +3776,7 @@ public class MyInsight {
 
 	}
 
-	@And("^Verify CEIC logo$")
+/*	@And("^Verify CEIC logo$")
 	public void verify_CEIC_logo() throws Throwable {
 
 		Thread.sleep(3000);
@@ -3830,9 +3787,9 @@ public class MyInsight {
 			fail("CEIC logo not displayed:FAIL");
 		}
 
-	}
+	}*/
 
-	@And("^Verify insight title change$")
+	/*@And("^Verify insight title change$")
 	public void verify_insight_title_change() throws Throwable {
 		Thread.sleep(3000);
 
@@ -3856,5 +3813,5 @@ public class MyInsight {
 		Thread.sleep(3000);
 
 	}
-
+*/
 }

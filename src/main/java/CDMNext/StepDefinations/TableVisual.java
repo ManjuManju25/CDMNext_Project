@@ -440,16 +440,23 @@ public class TableVisual {
 		action.moveToElement(Sereiesnameintable).build().perform();
 		CommonFunctionality.getElementByProperty(login.driver, "EditseriesTable", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Currency_Series_TV", 8).click();
-		WebElement rub = null;
+		//WebElement rub;
+		String rub;
 		try {
 
-			rub = CommonFunctionality.getElementByProperty(login.driver, "Currency_RUB", 8);
-			((JavascriptExecutor) login.driver).executeScript("arguments[0].click();", rub);
+			 rub=login.driver.findElement(By.xpath("/html/body/ul/div[3]/li[4]/ul/li[8]/span/span")).getText();
+			login.driver.findElement(By.xpath("/html/body/ul/div[3]/li[4]/ul/li[8]/span/span")).click();
+			//WebElement	rub = CommonFunctionality.getElementByProperty(login.driver, "Currency_RUB", 8);
+			
+			//((JavascriptExecutor) login.driver).executeScript("arguments[0].click();", rub);
 		} catch (org.openqa.selenium.StaleElementReferenceException ex) {
-			rub = CommonFunctionality.getElementByProperty(login.driver, "Currency_RUB", 8);
-			((JavascriptExecutor) login.driver).executeScript("arguments[0].click();", rub);
+//			WebElement rub = CommonFunctionality.getElementByProperty(login.driver, "Currency_RUB", 8);
+//			((JavascriptExecutor) login.driver).executeScript("arguments[0].click();", rub);
+			 rub=login.driver.findElement(By.xpath("/html/body/ul/div[3]/li[4]/ul/li[8]/span/span")).getText();
+			login.driver.findElement(By.xpath("/html/body/ul/div[3]/li[4]/ul/li[8]/span/span")).click();
 		}
-		Applied_currency = rub.getText();
+		//String rub;
+		Applied_currency = rub;
 	}
 
 	// TC_TV_20
@@ -2636,7 +2643,11 @@ public class TableVisual {
 				"(//*[@class='series-name-field--series-name'])[1]", 9);
 		// mouseover.
 		action.moveToElement(mouseover).pause(500).contextClick().build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 8).click();
+		
+		login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
+		//CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 8).click();
 		Thread.sleep(500);
 		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Applay_Button"))).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close_window"))).size() > 0) {
@@ -3114,9 +3125,13 @@ public class TableVisual {
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByProperty(login.driver, "EditSeries", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "AddfromMySeries", 10).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Editseries_tablemode", 10).click();
+		
+	WebElement table=	login.driver.findElement(By.xpath("//div[@title='Table mode']"));
+		action.moveToElement(table).pause(2000).click().perform();
+		
+		//CommonFunctionality.getElementByProperty(login.driver, "Editseries_tablemode", 10).click();
 		Thread.sleep(3000);
-		boolean Table_mode_view = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Table_mode_view")))
+		boolean Table_mode_view = login.driver.findElement(By.xpath("//td[@column='1']/div[@class='webix_hcell']"))
 				.isDisplayed();
 		if (Table_mode_view == true) {
 			System.out.println("Verified");
@@ -3126,7 +3141,7 @@ public class TableVisual {
 
 		}
 		Thread.sleep(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'View as List')]", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='List mode']", 10).click();
 	}
 
 	// TC_TV_135
@@ -3135,8 +3150,7 @@ public class TableVisual {
 		Thread.sleep(5000);
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Series')]", 8).click();
 		JavascriptExecutor js = (JavascriptExecutor) login.driver;
-		WebElement search_paginationELE = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='search-series-pagination-count']", 10);
+		WebElement search_paginationELE = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='search-series-pagination-count']", 10);
 		js.executeScript("arguments[0].scrollIntoView(true);", search_paginationELE);
 		// select 100 series
 		CommonFunctionality.getElementByXpath(login.driver, "//select//*[@value='100']", 8).click();
@@ -3146,16 +3160,17 @@ public class TableVisual {
 
 		for (int i = 1; i <= Totallist.size(); i++) {
 			Thread.sleep(300);
-			login.driver.findElement(By.xpath("(//*[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]"))
-					.click();
+			login.driver.findElement(By.xpath("(//*[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]")).click();
 		}
-
 		Thread.sleep(700);
-		WebElement mouseover = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='series-item--name'])[100]", 8);
+		WebElement mouseover = CommonFunctionality.getElementByXpath(login.driver,"(//div[@class='series-item--name'])[15]", 8);
 		// mouseover.
 		action.moveToElement(mouseover).pause(500).contextClick().build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 10).click();
+		
+		login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
+		//CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 10).click();
 		Thread.sleep(500);
 		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Applay_Button"))).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close_window"))).size() > 0) {
@@ -3207,7 +3222,10 @@ public class TableVisual {
 			}
 		}
 
-		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 10).click();
+		login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
+		//CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 10).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//button[contains(text(),'Ok')]", 10).click();
 		Thread.sleep(500);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close_window"))).size() > 0) {
@@ -8259,10 +8277,15 @@ public class TableVisual {
 	@And("^Verify adding series from Series suggestion manager popup$")
 	public void verify_adding_series_from_Series_suggestion_manager_popup() throws Throwable {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series"))).click();
+		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series"))).click();
+		login.driver.findElement(By.xpath("//a[@data-id='myseries']")).click();
+		
 		Thread.sleep(2000);
-		String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series_firsttitle")))
-				.getText();
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[normalize-space(text())='Related series']")).click();
+		
+		String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series_firsttitle"))).getText();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series_regiondropdown"))).click();
 		Thread.sleep(2000);
@@ -9318,7 +9341,11 @@ public class TableVisual {
 		WebElement mouseover = login.driver.findElement(By.xpath("(//*[@class='series-item--name'])[1]"));
 		// mouseover.
 		action.moveToElement(mouseover).pause(1000).contextClick().build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Add chart')]", 8).click();
+		Thread.sleep(500);
+		CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--table-vertical_large')]", 8).click();
+		
+		
 
 	}
 
