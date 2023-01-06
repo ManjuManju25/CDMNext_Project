@@ -98,13 +98,13 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Rename" option
     Then The "Rename" popup should be displayed
 	
-#	 @Histogram
-  #Scenario: TC_Histogram_16:Rename - verify number of selected series
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Rename" option
-    #Then Number of selected series count should be shown on the rename popup header
-#
+	 @Histogram
+  Scenario: TC_Histogram_16:Rename - verify number of selected series
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Rename" option
+    Then Number of selected series count should be shown on the rename popup header
+
   #@Histogram
   #Scenario: TC_Histogram_17:Rename - verify find field
     #And Create histogram visual with series
@@ -472,7 +472,7 @@ Feature: Verifying Histogram Visual functionality
     And Create a histogram visual with series
     And Click on Edit series option
     And Click on Aggregate and choose any option
-    Then Selected function should be applied to all series
+    Then Selected function should be applied to all the series
 
   @Histogram
   Scenario: TC_Histogram_54:Edit series - Verify 'Accumulate' function apply
@@ -614,7 +614,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on Edit series option
     And Click on frequency dropdown in series level
-    And Select "Monthly (Distribute)" from frequency dropdown
+    And Select "Weekly (Distribute)" from frequency dropdown
     Then Selected frequency should be applied to ONLY selected series
 
   @Histogram
@@ -631,7 +631,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select "ACCUMULATE" function
-    And Click on "Apply function"
+    #And Click on "Apply function"
     Then Selected function should applied to the series
 
   @Histogram
@@ -640,18 +640,18 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select multiple functions "ACCUMULATE"  and "LOG"
-    And Click on "Apply function"
+    #And Click on "Apply function"
     Then The Selected functions should applied to the series
 
-  @Histogram
-  Scenario: TC_Histogram_75:Edit series - Verify removing applied functions
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Type a function" field in series level
-    And Select "ACCUMULATE" function
-    And Click on "Apply function"
-    And Click on x icon to remove the function
-    Then The function should be removed from the series
+  #@Histogram...removed cancel(x) icon 0n stage 5.6.0-rc.4
+  #Scenario: TC_Histogram_75:Edit series - Verify removing applied functions
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on "Type a function" field in series level
+    #And Select "ACCUMULATE" function
+    #And Click on "Apply function"
+    #And Click on x icon to remove the function
+    #Then The function should be removed from the series
 
   @Histogram
   Scenario: TC_Histogram_76:Edit series - Verify applied funtion in function toolbar
@@ -659,7 +659,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select "ACCUMULATE" function
-    And Click on "Apply function"
+    #And Click on "Apply function"
     Then The applied function should be displayed on the toolbar
 
   @Histogram
@@ -1810,17 +1810,17 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select a function
-    And Click on "Apply function"
+    #And Click on "Apply function"
     Then The selected function should be applied to the series
 
-  @Histogram
-  Scenario: TC_Histogram_203:Edit Histogram - Edit series -  Verify cancel icon for selected function
-    And Create histogram visual with series
-    And Click on "Edit Histogram"	
-    And Click on type a function field in series level
-    And Select a function
-    And Click on cancel function icon
-    Then The selected function should be cancelled
+  #@Histogram..removed cancel icon
+  #Scenario: TC_Histogram_203:Edit Histogram - Edit series -  Verify cancel icon for selected function
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"	
+    #And Click on type a function field in series level
+    #And Select a function
+    #And Click on cancel function icon
+    #Then The selected function should be cancelled
 
   @Histogram
   Scenario: TC_Histogram_204:Edit Histogram - Edit series - Verify multiple functions apply
@@ -1828,26 +1828,26 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select multiple functions
-    And Click on "Apply function"
+    #And Click on "Apply function"
     Then The selected functions should be applied to the series
 
-  @Histogram
-  Scenario: TC_Histogram_205:Edit Histogram - Edit  series - Verify removing applied functions
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on type a function field in series level
-    And Select a function
-    And Click on "Apply function"
-    And Click on cancel function icon
-    Then The function should be removed from the series
+  #@Histogram...removed cancel and apply icons
+  #Scenario: TC_Histogram_205:Edit Histogram - Edit  series - Verify removing applied functions
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on type a function field in series level
+    #And Select a function
+    #And Click on "Apply function"
+    #And Click on cancel function icon
+    #Then The function should be removed from the series
 
   @Histogram
-  Scenario: TC_Histogram_206:Edit Histogram - Edit series - Verify appling invalid function for series
+    Scenario: TC_Histogram_206:Edit Histogram - Edit series - Verify appling invalid function for series
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on "Apply function"
+    #And Click on "Apply function"
     Then "The function cannot be applied to selected series" popup should be displayed
 
   @Histogram
@@ -1856,7 +1856,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on "Apply function"
+    #And Click on "Apply function"
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 
@@ -1905,7 +1905,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Change title in edit visual window
     And Click on "Save" button
-    Then The changes should be reflected to histogram visual and Edit visual popup should be closed
+    Then The changes should be reflected to "histogram" visual and Edit visual popup should be closed
 
   @Histogram
   Scenario: TC_Histogram_214:Verify add to insight option
@@ -2362,14 +2362,14 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Frequency"
     Then "Series Harmonization" popup should be opened
 
-  @Histogram
-  Scenario: TC_Histogram_273:Edit series -  Verify cancel icon for selected function
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on type a function field in series level
-    And Select a function
-    And Click on cancel function icon
-    Then The selected function should be cancelled
+  #@Histogram
+  #Scenario: TC_Histogram_273:Edit series -  Verify cancel icon for selected function
+    #And Create histogram visual with series
+    #And Click on Edit series option
+    #And Click on type a function field in series level
+    #And Select a function
+    #And Click on cancel function icon
+    #Then The selected function should be cancelled
 
   @Histogram
   Scenario: TC_Histogram_274:Edit seires - Verify OK button on "The function cannot be applied to selected series" popup
@@ -2377,7 +2377,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on type a function field in series level
     And Select an invalid function
-    And Click on Apply function
+    #And Click on Apply function
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 
@@ -2475,7 +2475,7 @@ Feature: Verifying Histogram Visual functionality
       | Tooltip_expand | Tooltip_collapse |
       | "Common"       | "Common"         |
       | "Items"        | "Items"          |
-      #| "Border"       | "Border"         |
+      #| "Border"       | "Border"         |....removed
 
   @Histogram
   Scenario: TC_Histogram_284:Edit Histogram - Edit series - Verify edit series icon
@@ -2548,5 +2548,5 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on type a function field
     And Select any function
-    And Click on "Apply"
+    #And Click on "Apply"
     Then The selected function should be displayed

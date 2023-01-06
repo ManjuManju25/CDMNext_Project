@@ -746,7 +746,7 @@ public class EmptyView {
 			
 		}
 		CommonFunctionality.wait(2000);
-		no_of_visuals = login.driver.findElements(By .xpath("//*[@class='view-components']/*[@class='insight-visuals-row text-content'] | //*[@class='view-components']/*[@class='insight-visuals-row--list'] | //*[@class='view-components']/*[@class='insight-visuals-row']"));
+		no_of_visuals = login.driver.findElements(By .xpath("//*[@class='view-components']/*[@class='insight-visuals-row text-content'] | //*[@class='view-components']/*[@class='insight-visuals-row--list'] | //*[@class='view-components']/*[contains(@class,'insight-visuals-row')]"));
 		/*
 		 * if (arg1.equalsIgnoreCase("Commentary") || arg1.equalsIgnoreCase("Filter") ||
 		 * arg1.equalsIgnoreCase("Image")) { no_of_visuals =

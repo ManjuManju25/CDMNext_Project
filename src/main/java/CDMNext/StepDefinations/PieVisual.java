@@ -573,19 +573,19 @@ public class PieVisual {
 
 		ArrayList<String> list = new ArrayList<>();
 		List<WebElement> Function_Arguments = login.driver
-				.findElements(By.xpath("//*[@class='function-data--description function-data--parameters']/*"));
+				.findElements(By.xpath("//*[@class='function-data--description function-data--parameters']//*[@class='function-parameter--title']"));
 		for (int i = 0; i < Function_Arguments.size(); i++) {
-			list.add(Function_Arguments.get(i).getAttribute("argument"));
+			list.add(Function_Arguments.get(i).getText());
 		}
-		for (String expeted : Arguments) {
-			if (list.contains(expeted.toLowerCase())) {
-				login.Log4j.info(expeted + " is presented");
+		for (String expected : Arguments) {
+			if (list.contains(expected)) {
+				login.Log4j.info(expected + " is presented");
 			} else {
-				fail(expeted + " is not presented");
+				fail(expected + " is not presented");
 			}
 		}
-		CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
-		CommonFunctionality.Views_list();
+		//CommonFunctionality.getElementByClassName(login.driver, "movable-modal--close", 4).click();
+		//CommonFunctionality.Views_list();
 	}
 
 	@And("^Click on Functions dropdown$")
@@ -612,7 +612,7 @@ public class PieVisual {
 	@Then("^The below \"([^\"]*)\" dropdown options should be available$")
 	public void the_below_dropdown_options_should_be_available(String arg1, List<String> DropdownList)
 			throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='function-data--info']//*[@argument='" + arg1
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'function-data--info')]//*[@argument='" + arg1
 				+ "']//*[@class='select2-container function-parameter--select']", 4).click();
 		List<WebElement> li_all = login.driver.findElements(By.xpath("//ul[@class='select2-results']/li"));
 		SeriesDataConversionFunctionsList(DropdownList, li_all);
@@ -862,7 +862,7 @@ public class PieVisual {
 	@And("^Double click on timepoints$")
 	public void double_click_on_timepoints() throws Throwable {
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='highcharts-label-box highcharts-data-label-box'])[1]", 4);
+				"(//div[@class='preview-container']//div[@class='visual-item-container']//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[5]//*", 4);
 		new Actions(login.driver).pause(300).doubleClick(ele).build().perform();
 	}
 
@@ -1253,10 +1253,10 @@ public class PieVisual {
 		// Click on edit series
 		hs.click_on_Edit_series_option();
 		// select Table tab in edit series panel
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='data-selection-panel']//*[text()='Table']", 6)
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='data-selection-panel']//*[@class='toggler-control-wrapper']/*/*[2]", 6)
 				.click();
 		String ActualSName = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='table-series--name ']/*[2]", 6).getText();
+				.getElementByXpath(login.driver, "//*[@class='table-series--name  ']/*[2]", 6).getText();
 		if (ActualSName.equalsIgnoreCase(ExpectedSname)) {
 			login.Log4j.info("The selected series displayed in Table tab");
 		} else {
@@ -2180,7 +2180,7 @@ public class PieVisual {
 
 	@Then("^Selected attributes should be displayed along with percentage attribute for visual$")
 	public void selected_attributes_should_be_displayed_along_with_percentage_attribute_for_visual() throws Throwable {
-		String name = " Net Lending toIndividuals: sa";
+		String name = " Net Lending to Individuals: sa";
 		String percentage = "100.00 %";
 		String AtualResult = CommonFunctionality
 				.getElementByXpath(login.driver,
@@ -2490,6 +2490,7 @@ public class PieVisual {
 			fail("Applied functions has not been shown in the header of download window");
 		}
 	}
+	
 
 	void SeriesDataConversionFunctionsList(List<String> ExpectedfunctionsList, List<WebElement> ActualfunctionsList)
 			throws Exception {

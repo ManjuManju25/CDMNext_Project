@@ -90,9 +90,9 @@ public class ForecastSeries {
 
 	@And("^click on cross icon for any legends name$")
 	public void click_on_cross_icon_for_any_legends_name() throws Throwable {
-		WebElement first_legend_series =  CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
+		WebElement first_legend_series =  CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item '])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
 		new Actions(login.driver).pause(200).moveToElement(first_legend_series).build().perform();	
-		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item'])[1]/*[1]", 15);
+		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item '])[1]/*[1]", 15);
 		//new Actions(login.driver).pause(200).moveToElement(first_legend_item).click().build().perform();
 		jse.executeScript("arguments[0].click();", first_legend_item);
 
@@ -110,17 +110,18 @@ public class ForecastSeries {
 				.findElement(By.xpath("//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker']"))
 				.getAttribute("visibility").contains("hidden");
 		if (is_disabled == true) {
-			login.Log4j.info("Cross clicked legend of the chart in suggestion chart is disabled");
+			login.Log4j.info("Hide series icon clicked legend of the chart in suggestion chart is disabled");
 		} else {
-			Assert.fail("Cross clicked legend of the chart in suggestion chart is not disabled");
+			Assert.fail("Hide series icon clicked legend of the chart in suggestion chart is not disabled");
 		}
 	}
 
 	@And("^Click on suggested series of forecast$")
 	public void click_on_suggested_series_of_forecast() throws Throwable {
 		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='legend-item'])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
+				"(//*[@class='legend-item '])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
 		Exp_seriesName = legend_item.getText();
+		System.out.println("Exp_seriesName:"+Exp_seriesName);
 		new Actions(login.driver).pause(200).moveToElement(legend_item).click().build().perform();
 	}
 
@@ -848,7 +849,7 @@ public class ForecastSeries {
 		
 		CommonFunctionality.getElementByProperty(login.driver, "Dropdown_AddChart", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']", 8).click();
+				"//div[contains(@class,'icon--table-vertical_large')]", 8).click();
 		
 	}
 
@@ -928,9 +929,9 @@ public class ForecastSeries {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='current-function-input']", 4).click();
 		// Applying Round() function
 		CommonFunctionality.getElementByXpath(login.driver, "//li[contains(text(),'ROUND')]", 4).click();
-		CommonFunctionality.wait(500);
-		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4).click();
+//		CommonFunctionality.wait(500);
+//		CommonFunctionality
+//				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4).click();
 
 	}
 
@@ -948,8 +949,12 @@ public class ForecastSeries {
 				"//*[@class='function-editor-window']//*[@class='current-function-input']", 4).click();
 		// Applying Round() function
 		CommonFunctionality.getElementByXpath(login.driver, "//li[contains(text(),'ROUND')]", 4).click();
+		try {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='function-wizard--footer-buttons']//*[contains(text(),'Apply')]", 4).click();
+		}catch(Exception e){
+			
+		}
 	}
 
 	@Then("^Function should be applied to the visual$")

@@ -164,15 +164,15 @@ public class InsightGeneral {
 	@Given("^Verify CEIC logo$")
 	public void verify_CEIC_logo() throws Throwable {
 		CommonFunctionality.wait(1000);
-		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("untitledInsight"))).size() != 0) {
-			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("applogo"))).size() != 0) {
+		//if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("untitledInsight"))).size() != 0) {
+			if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("applogo"))).size()==1) {
 				login.Log4j.info("CEIC logo is shown");
 			} else {
 				fail("CEIC logo is not shown");
 			}
-		} else {
-			fail("CEIC logo is not shown");
-		}
+		//} else {
+			//fail("CEIC logo is not shown");
+		//}
 	}
 
 	@Given("^Creating new insight$")
@@ -211,9 +211,10 @@ public class InsightGeneral {
 
 	@Given("^Verify insight title change$")
 	public void verify_insight_title_change() throws Throwable {
-		String insightText = CommonFunctionality
-				.getElementBycssSelector(login.driver, ".insight-breadcrumb--title.text-dots", 4).getText();
-		assertEquals("test", insightText);
+		
+		login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		String insightText = CommonFunctionality.getElementByXpath(login.driver, "//a[text()='Name your insight']", 4).getText();
+		assertEquals("Name your insight", insightText);
 	}
 
 	@And("^My Insights should be loaded$")

@@ -477,16 +477,25 @@ public class SearchTest extends CommonFunctionality{
 	@And("^User selects economic zone \"([^\"]*)\"$")
 	public void user_selects_economic_zone(String arg1) throws Throwable {
 		economic_zone = arg1;
+		try {
 		getElementByXpath(login.driver,
 				"//*[@class='navigation-sidebar navigation-sidebar__expanded']//*[contains(text(),'" + arg1 + "')]", 15)
 				.click();
+		}catch(NoSuchElementException e) {
+			getElementByXpath(login.driver,
+					"//*[@title='Economic Zone']/ancestor::*[@class='tree-filter-item--title']/*[1]", 15)
+					.click();
+			getElementByXpath(login.driver,
+					"//*[@class='navigation-sidebar navigation-sidebar__expanded']//*[contains(text(),'" + arg1 + "')]", 15)
+					.click();
+		}
 	}
 
 	@SuppressWarnings("deprecation")
 	@Then("^Search for corresponding regions$")
 	public void search_for_corresponding_regions() throws Throwable {
 		String Content = "";
-	wait(2000);
+		wait(2000);
 		SeriesTab = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
@@ -530,7 +539,7 @@ public class SearchTest extends CommonFunctionality{
 				login.Log4j.info("Title information is \n" + TooltipInfo);
 				// Until the element is not visible keep scrolling
 				jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
-				String Region_text = null;
+				/*String Region_text = null;
 				String[] lines = TooltipInfo.split("\n");
 
 				for (String Tooltip : lines) {
@@ -540,21 +549,24 @@ public class SearchTest extends CommonFunctionality{
 					}
 				}
 				Boolean Result = false;
-				String[] subnational = Region_text.split(":");
+				String[] subnational = Region_text.split(":");*/
+				Boolean Result = false;
+				String expectedStr = "";
 				for (String ExpectedRegion : listwords) {
-					if (subnational[1].trim().contains(ExpectedRegion)) {
-						login.Log4j.info(subnational[1] + " series are shown ");
+					expectedStr = ExpectedRegion;
+					if (TooltipInfo.contains(ExpectedRegion)) {
+						login.Log4j.info(ExpectedRegion + " series are shown ");
 						Result = true;
 						break;
 					}
 				}
 				if (Result == false) {
-					Assert.fail(subnational[1] + " series are not shown");
+					Assert.fail(expectedStr + " series are not shown");
 				}
 
 			}
 		} catch (Exception e) {
-			Assert.fail("No results were found");
+			Assert.fail("Verification failed");
 		}
 
 	}

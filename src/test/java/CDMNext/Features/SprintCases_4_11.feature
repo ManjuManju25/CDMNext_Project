@@ -8,15 +8,16 @@ Feature: SprintCases_4.11 feature
     And click on save button
     And Open preference dropdown1
     Then Should be able to save first name and last name with single quote
-
+#@Excel related cases
   @sprint_4.11
   Scenario: TC_18707_01: Verify 'Series Remarks and Suggestions' attribute on table and downloaded file
     And User Select Series ID as "365383927"
     And Create table visual
     And double click on any one attribute on table
-    And 'Series Remarks and Suggestions' check box checked
+    And 'Series Remarks and Suggestions' check box checked	
     And click on Download button in right side header
     Then 'Series Remarks and Suggestions' attributes should displayed to table visual and should displayed in download table
+
 
   @sprint_4.11
   Scenario: TC_14772_01: Verify search for EU
@@ -63,6 +64,7 @@ Feature: SprintCases_4.11 feature
     And Verify text for c series
     Then It should be "With historical extension of continuous series"
 
+
   @sprint_4.11
   Scenario: TC_12978_01:Verify country filter on view mode(insight view or shared in view mode).
     And Select some series from different region "1692001;447233417;378276697;386588657"
@@ -102,7 +104,8 @@ Feature: SprintCases_4.11 feature
   @sprint_4.11
   Scenario: TC_10175: FEEDBACK: functions - make Most frequently used application (maths functions) to be shown easily or bookmarked
     And Create new insight1
-    And Add a series "1692001" into right-pane
+    And add series into right pane
+   # And Add a series "1692001" into right-pane
     And Click on function toolbar apply round function "ROUND"
     And select series with applied function
 
@@ -122,6 +125,7 @@ Feature: SprintCases_4.11 feature
 
   @sprint_4.11
   Scenario: TC_13790: Pie: implement the Compare option
+  And click on frequency and select Quarterly
     And Create any pie chart and set number of pie to seen as 1,2,4
     And Switch from smaller to bigger number of pie will inherit time period as default pie
     And switch from bigger to smaller number of pie will keep the left top corner of pie as default "#FFD620" "#54B582"
@@ -134,10 +138,12 @@ Feature: SprintCases_4.11 feature
 
   @sprint_4.11
   Scenario: TC_19533 :Pie chart controls update
+  And click on frequency and select Quarterly
     And Create pie chart
     And Update pie chart date picker controls for multiple pie in single pie according to frequency of series
 
   @sprint_4.11
   Scenario: TC_19264:Download: implement support for downloading multiple pie charts in one visual
+   And click on frequency and select Quarterly
     And Create multiple pie in single pie visual
     And set different date pickers for each and download to excel "Q1;Q2;Q3;Q4"

@@ -43,20 +43,22 @@ public class SprintCases_4_8 {
 	WebDriverWait wait = new WebDriverWait(login.driver, 30);
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
 	public String windowsversion;
+	
 	@And("^Add table and text$")
 	public void add_table_and_text() throws Throwable {
 		Thread.sleep(2000);
 
 		// click on table dropdown
-		login.driver.findElement(By.xpath("(//*[@class='tox-tbtn__select-chevron'])[1]")).click();
+		login.driver.findElement(By.xpath("//button[@title='More...']//*[@class='tox-icon tox-tbtn__icon-wrap']")).click();
 Thread.sleep(2000);
+login.driver.findElement(By.xpath("//div[@class='tox-toolbar__overflow']//button[@class='tox-tbtn tox-tbtn--select']//div[@class='tox-tbtn__select-chevron']")).click();
+
 		// mouse over the table
-		WebElement table = login.driver.findElement(By.xpath(
-				"(//*[@class='tox-collection__item-label'])[1]"));
-		//(//*[@class='tox-collection__item-label'])[1]
+		WebElement table = login.driver.findElement(By.xpath("(//*[@class='tox-collection__item-label'])[1]"));
+	
 		action.moveToElement(table).click().perform();
 
-		//login.driver.findElement(By.xpath("(//div[@role='button'])[3]")).click();
+		login.driver.findElement(By.xpath("//div[@class='tox-insert-table-picker__selected']")).click();
 
 	//	login.driver.findElement(By.xpath("(//tbody/tr[1]/td[1])[2]")).sendKeys("Hello");
 
@@ -76,10 +78,10 @@ Thread.sleep(2000);
 	@And("^click on GDP nowcast insight$")
 	public void click_on_GDP_nowcast_insight() throws Throwable {
 		Thread.sleep(1000);
-		//login.driver.findElement(By.xpath("//div[@title='View as a table']")).click();
+		login.driver.findElement(By.xpath("//span[normalize-space(text())='GDP Nowcast']")).click();
 		Thread.sleep(2000);
         // js.executeScript("arguments[0].ScrollIntoview().click();",login.driver.findElement(By.xpath("(//*[contains(text(),'State Elections in India: Punjab')])[1]")));
-         login.driver.findElement(By.xpath("(//*[contains(text(),'Indonesia Payment and Settlement System')])[1]")).click();
+        // login.driver.findElement(By.xpath("(//*[contains(text(),'Indonesia Payment and Settlement System')])[1]")).click();
 
 	}
 	// TC_18934_01
@@ -89,7 +91,7 @@ Thread.sleep(2000);
 		Thread.sleep(2000);
 
 		// click on table dropdown
-		login.driver.findElement(By.xpath("(//*[@class='tox-tbtn__select-chevron'])[1]")).click();
+		login.driver.findElement(By.xpath("//div[@class='tox-toolbar__overflow']//button[@class='tox-tbtn tox-tbtn--select']//div[@class='tox-tbtn__select-chevron']")).click();
 
 		login.driver.findElement(By.xpath("(//*[contains(text(),'Table properties')])")).click();
 
@@ -198,9 +200,9 @@ Thread.sleep(2000);
 
 		login.driver.findElement(By.xpath("//div[@class='insights-view-modes--item insights-view-modes--item__table']"))
 				.click();
-		Thread.sleep(500);
+		Thread.sleep(3000);
 		// click on GDP nowcast insight
-		login.driver.findElement(By.xpath("(//*[contains(text(),'Indonesia Payment and Settlement System')])[1]")).click();
+		login.driver.findElement(By.xpath("(//a[@class='link insight-table-item--title-link text-dots'])[1]")).click();
 
 		if (login.driver.findElements(By.xpath("//*[@class='insight-preview--actions']")).size() == 1) {
 			System.out.println("GDP Nowcast should open insight in preview mode.View as table mode");
@@ -268,9 +270,10 @@ Thread.sleep(2000);
 		Thread.sleep(5000);
 		 Robot robot = new Robot();
 		 robot.setAutoDelay(2000);
-		   
-	       StringSelection selection = new StringSelection("C:\\Users\\tbemineni\\Downloads\\tree.jfif");
-	       Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null);
+		// CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+			
+	       StringSelection selection = new StringSelection("E:\\CDMNextProject\\CDMNext\\cucumber\\AutoIT\\Shravas.png");
+	      Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null);
 
 	       robot.setAutoDelay(1000);
 
@@ -307,7 +310,7 @@ Thread.sleep(2000);
 
 		
 		login.driver.switchTo().frame(0);
-		if(login.driver.findElements(By.xpath("//p//img[@width='100%']")).size()==1)
+		if(login.driver.findElements(By.xpath("//p//img[@width='200']")).size()==1)
 		{
 			System.out.println("select Fit to width");
 		}
@@ -329,20 +332,17 @@ Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//*[@class='icon--image']")).click();
 		login.driver.findElement(By.xpath(
 				"//button[@title='Upload image']/span[@class='tox-icon tox-tbtn__icon-wrap']")).click();
-		
-
 	}
 	@And("^Choose a series in  Database tree$")
 	public void Choose_a_series_in_Database_tree()
 	{
 		login.driver.findElement(By.xpath("//span[contains(text(),'Databases')]")).click();
-		login.driver.findElement(By.xpath("(//div[@data-node-model-id='WORLD']/div[@class='toggle'])[1]")).click();
-		login.driver.findElement(By.xpath("(//div[@data-node-model-id='WORLD&&ALL']/div[@class='toggle'])[1]")).click();
-		login.driver.findElement(By.xpath("(//div[@data-node-model-id='TP74383']/div[@class='toggle'])[1]")).click();
-		login.driver.findElement(By.xpath("(//div[@data-node-model-id='SC74575']/div[@class='toggle'])[1]")).click();
-
-		login.driver.findElement(By.xpath("(//div[@data-node-model-id='TB3168187']/div[@class='toggle'])[1]")).click();
-		
+		login.driver.findElement(By.xpath("(//div[@data-node-model-id='GLOBAL']/div[@class='toggle'])[1]")).click();
+		//login.driver.findElement(By.xpath("(//span[normalize-space(text())='Global Database']//ancestor::div/parent::div[@data-node-model-id='GLOBAL']//div)[1]")).click();
+		login.driver.findElement(By.xpath("(//div[@data-node-model-id='GLOBAL&&ALL']/div[@class='toggle'])[1]")).click();
+		login.driver.findElement(By.xpath("(//div[@data-node-model-id='TP2560837']/div[@class='toggle'])[1]")).click();
+		login.driver.findElement(By.xpath("(//div[@data-node-model-id='SC2576097']/div[@class='toggle'])[1]")).click();
+		login.driver.findElement(By.xpath("(//div[@data-node-model-id='TB2643987']/div[@class='toggle'])[1]")).click();
 		action.moveToElement(login.driver.findElement(By.xpath("(//div[@class='series-list-item-data'])[1]"))).build().perform();
 	}
 	@And("^Create footnote for the series$")

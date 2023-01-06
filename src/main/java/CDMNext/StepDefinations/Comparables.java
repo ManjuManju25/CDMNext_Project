@@ -132,7 +132,7 @@ public class Comparables {
 	@SuppressWarnings("deprecation")
 	@And("^Clicking \"([^\"]*)\" section from Comparables tab$")
 	public void clicking_section_from_Comparables_tab(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+		if (arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted")) {
 			CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(text(),'Global Economic Monitor')]/following::div[@class='toggle'][1]", 4)
@@ -483,7 +483,7 @@ public class Comparables {
 
 	@And("^Check the checkbox \"([^\"]*)\"$")
 	public void check_the_checkbox(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+		if (arg1.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted")) {
 			new Actions(login.driver).moveToElement(login.driver.findElement(By.xpath(
 					"//*[@class='tree-node full-expanded open']/*[2]/*[1]//*[@class='checkbox-control']")))
 					.click().build().perform();
@@ -614,6 +614,7 @@ public class Comparables {
 
 	@And("^Count the series in selected Filter$")
 	public void count_the_series_in_selected_Filter() throws Throwable {
+		CommonFunctionality.wait(500);
 		String filter_count = CommonFunctionality.getElementByXpath(login.driver,
 				"(//div[@class='search-filter-container']//*[contains(text(),'" + Filters.var
 						+ "')]//following::div[2])[2] | //div[@class='search-filter-container']//*[contains(text(),'"
@@ -629,6 +630,7 @@ public class Comparables {
 		String filters[] = Filters.var.split(";");
 		int var_count = filters.length;
 		for (int i = 0; i <= var_count - 1; i++) {
+			CommonFunctionality.wait(500);
 			String filter_count = CommonFunctionality.getElementByXpath(login.driver,
 					"//div[@class='search-filter-container']//*[contains(text(),'" + filters[i]
 							+ "')]//following::div[2] | (//div[@class='search-filter-container']//*[contains(text(),'"
@@ -666,10 +668,10 @@ public class Comparables {
 
 	@And("^Click \"([^\"]*)\" to collapse$")
 	public void click_to_collapse(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+		if (arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted")) {
 			CommonFunctionality
 					.getElementByXpath(login.driver,
-							"//*[contains(text(),'Global Economic Monitor')]/following::div[@class='toggle'][1]", 4)
+							"//*[contains(text(),'Global Economic Monitor')]/*[1]", 4)
 					.click();
 		} else {
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -688,7 +690,7 @@ public class Comparables {
 			series_inside_table = login.driver.findElements(
 					By.xpath("(//*[contains(@class,'tree-series-list list-view-component')])[1]//ul[1]/*"));
 		} else {
-			if (arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+			if (arg1.equalsIgnoreCase("Table: Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted")) {
 				String series_count = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(text(),'Global Economic Monitor')]/following::span[@class='name-text'][1]", 4)
 						.getText();
@@ -706,7 +708,7 @@ public class Comparables {
 	@And("^Right Click \"([^\"]*)\" section from Comparables tab$")
 	public void right_click_section_from_Comparables_tab(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
-		if (arg1.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted: Asia")) {
+		if (arg1.equalsIgnoreCase("Real GDP: Y-o-Y Growth: Quarterly: Seasonally Adjusted")) {
 			section_name = CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(text(),'Global Economic Monitor')]/following::span[@class='name-text'][1]", 4)
@@ -914,6 +916,15 @@ public class Comparables {
 			Clipboard clipboard = toolkit.getSystemClipboard();
 			copied_link = (String) clipboard.getData(DataFlavor.stringFlavor);
 		}
+		
+		//venkat added els condition
+//		else {
+//			
+//			login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+//			CommonFunctionality.wait(2000);
+//		}
+		
+		
 	}
 
 	@And("^Message should display$")
@@ -1151,9 +1162,10 @@ public class Comparables {
 	@Then("^Should be able to move down the section levels results$")
 	public void should_be_able_to_move_down_the_section_levels_results_upto_table_level() throws Throwable {
 		WebElement section = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(text(),'Government and Public Finance')]/ancestor::div[2]", 4);
+				"//*[contains(text(),'Demographic and Labour Market')]/ancestor::div[2]", 4);
 		// WebElement section = CommonFunctionality.getElementByXpath(login.driver,
 		// "//*[contains(text(),'Demographic and Labour Market')]/ancestor::div[2]", 4);
+		CommonFunctionality.wait(500);
 		if (section.getAttribute("class").contains("active")) {
 			login.Log4j.info(
 					"It is possible to Move down the section level results with keyboard actions and it has been Verified Successfully");
@@ -1303,6 +1315,7 @@ public class Comparables {
 
 	@Then("^The comparables count should match to applied filter count$")
 	public void the_comparables_count_should_match_to_applied_filter_count() throws Throwable {
+		CommonFunctionality.wait(1000);
 		String compare_count = CommonFunctionality.getElementByClassName(login.driver, "series-series-count--number", 4)
 				.getText();
 		String count = compare_count.replaceAll(",", "");
@@ -1326,7 +1339,7 @@ public class Comparables {
 		int actual = Integer.parseInt(selected_series_id);
 		assertEquals(actual, series_id);
 		login.Log4j.info("The related results are shown in comparables tab and it has been verified successfully");*/
-		CommonFunctionality.wait(500);
+		CommonFunctionality.wait(2000);
 		WebElement series = CommonFunctionality.getElementByProperty(login.driver, "Series_item_name", 4);
 		series.click();
 		String id = CommonFunctionality
@@ -1342,6 +1355,7 @@ public class Comparables {
 
 	@Then("^The comparables count after reset should match to applied filter count$")
 	public void the_comparables_count_after_reset_should_match_to_applied_filter_count() throws Throwable {
+		CommonFunctionality.wait(500);
 		String compare_count = CommonFunctionality.getElementByClassName(login.driver, "series-series-count--number", 4)
 				.getText();
 		String count = compare_count.replaceAll(",", "");
@@ -1354,6 +1368,7 @@ public class Comparables {
 
 	@Then("^The comparables count should match to applied filters count$")
 	public void the_comparables_count_should_match_to_applied_filters_count() throws Throwable {
+		CommonFunctionality.wait(3000);
 		String compare_count = CommonFunctionality.getElementByClassName(login.driver, "series-series-count--number", 4)
 				.getText();
 		String count = compare_count.replaceAll(",", "");
@@ -1369,6 +1384,7 @@ public class Comparables {
 
 	@Then("^The comparables count should match to actual count$")
 	public void the_comparables_count_should_match_to_actual_count() throws Throwable {
+		CommonFunctionality.wait(3000);
 		String compare_count = CommonFunctionality.getElementByClassName(login.driver, "series-series-count--number", 4)
 				.getText();
 		String count = compare_count.replaceAll(",", "");
@@ -1589,6 +1605,7 @@ public class Comparables {
 		FileInputStream fis = new FileInputStream(src);
 		Workbook wb = new XSSFWorkbook(fis);
 		Sheet sheet1 = wb.createSheet();
+		sheet1 = wb.getSheetAt(0);
 		Row row = sheet1.createRow(0);
 		Cell cell = null;
 		for (int i = 0; i <= series_count_inside_table; i++) {
@@ -1602,7 +1619,8 @@ public class Comparables {
 		String data1 = null;
 		for (int i = 1; i <= series_count_inside_table; i++) {
 
-			String data = sheet1.getRow(1).getCell(0).getStringCellValue();
+			String data = sheet1.getRow(0).getCell(i).getStringCellValue();
+			login.Log4j.info(data);
 			if (data.contains("\n")) {
 				String text[] = data.split("\n");
 				data1 = text[0];
@@ -1611,9 +1629,12 @@ public class Comparables {
 				data1 = data1.replaceAll("\t", "");
 			}
 			excel_values.add(data1);
+			login.Log4j.info(excel_values);
+			login.Log4j.info(series_values);
 		}
 		fos.close();
 		fis.close();
+		
 		boolean result = Arrays.equals(series_values.toArray(), excel_values.toArray());
 		login.Log4j.info("Comparision is: \n" + result);
 		assertEquals(series_values.toArray(), excel_values.toArray());

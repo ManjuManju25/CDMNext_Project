@@ -51,6 +51,7 @@ public class Profile {
 	public static String firstname;
 	public static String lastname;
 	public static String arg1;
+	public static String scount1;
 	public String name;
 	public String insight;
 
@@ -59,32 +60,40 @@ public class Profile {
 
 	public static ArrayList<String> insightseries;
 	public static ArrayList<String> seriesname;
+	
+	public static String firstName ="test";
+	public static String Lastname="Selenium";
 
 	// TC_02
 	@And("^Verifyed first name and last name$")
 	public void verifyed_first_name_and_last_name() throws Throwable {
 
 		// first and last name
-		String FandLname = login.driver.findElement(By.xpath("//div[@class='profile-menu--name text-dots']")).getText();
+		if(login.driver.findElements(By.xpath("//div[@class='profile-menu--name text-dots']")).size()==1)
+		{
+			System.out.println("User's first name and last name should be displayed");
+			System.out.println("=============TC_02====================");
+		}
+		else {
+			
+			fail("User's first name and last name should be displayed");
+		}
+		
 
-		System.out.println("Firstname and Last name should be display============>" + FandLname);
-
-		System.out.println("==============================================TC_02=====================================");
+		
 	}
 
-	// TC_03
+	// TC_03 & 04
 	@And("^click on pencile button$")
 	public void click_on_pencile_button() throws Throwable {
-		// Actions action = new Actions(login.driver);
+		
 		Thread.sleep(2000);
-
-		// Thread.sleep(2000);
 		// click on pencil
 		login.driver.findElement(By.xpath("//div[@class='profile-menu--edit-icon']")).click();
 
 	}
 
-	// TC_03
+	// TC_03 & 04
 	@And("^select the prefix$")
 	public void select_the_prefix() throws Throwable {
 		// click on prefix
@@ -101,7 +110,7 @@ public class Profile {
 		Thread.sleep(1000);
 	}
 
-	// TC_03
+	// TC_03 & 04
 	@And("^click on save button$")
 	public void click_on_save_button() throws Throwable {
 		Thread.sleep(1000);
@@ -111,7 +120,7 @@ public class Profile {
 
 	}
 
-	// TC_04
+	// TC_05
 	@And("^update first name$")
 	public void update_first_name() throws Throwable {
 
@@ -124,14 +133,29 @@ public class Profile {
 		login.driver.findElement(By.name("first_name")).clear();
 		Thread.sleep(1000);
 		//// enter first name
-		login.driver.findElement(By.name("first_name")).sendKeys("Test");
+		login.driver.findElement(By.name("first_name")).sendKeys(firstName);
 		Thread.sleep(1000);
-
-		System.out.println("============================================TC_04================");
+		
 
 	}
-
 	// TC_05
+	@Then("^Verify the first name should be updated$")
+	public void verify_the_first_name_should_be_updated() throws Throwable {
+		Thread.sleep(1000);
+		
+		String fname=login.driver.findElement(By.xpath("//div[@class='profile-menu--name text-dots']")).getText();
+		if(fname.contains(firstName))
+		{
+			System.out.println("first name should be updated");
+		}
+		else {
+			fail("first name should be updated");
+		}
+		
+		System.out.println("============================================TC_05================");	
+	}
+
+	// TC_06
 	@And("^update Last name$")
 	public void update_Last_name() throws Throwable {
 
@@ -142,12 +166,28 @@ public class Profile {
 		// clear the last name field
 		login.driver.findElement(By.name("last_name")).clear();
 		// enter last name
-		login.driver.findElement(By.name("last_name")).sendKeys("Selenium");
+		login.driver.findElement(By.name("last_name")).sendKeys(Lastname);
 
-		System.out.println("============================================TC_05================");
+		
+	}
+	// TC_06
+	@Then("^Verify the 'Last name' should be updated$")
+	public void verify_the_Last_name_should_be_updated() throws Throwable {
+		Thread.sleep(1000);
+		String Lname=login.driver.findElement(By.xpath("//div[@class='profile-menu--name text-dots']")).getText();
+		if(Lname.contains(Lastname))
+		{
+			System.out.println("Last name should be updated");
+		}
+		else {
+			fail("Last name should be updated");
+		}
+		
+		System.out.println("=============================TC_06================");	
+		
 	}
 
-	// TC_06
+	// TC_07
 	@And("^blank the first name filed$")
 	public void blank_the_first_name_filed() throws Throwable {
 
@@ -163,7 +203,7 @@ public class Profile {
 
 	}
 
-	// TC_06
+	// TC_07
 	@And("^blank the last name field$")
 	public void blank_the_last_name_field() throws Throwable {
 
@@ -180,36 +220,33 @@ public class Profile {
 
 	}
 
-	// TC_06
+	// TC_08
 	@And("^validations should be display$")
 	public void validations_should_be_display() throws Throwable {
 
 		// First name validation display
-		boolean Fname = login.driver.findElement(By.xpath("//div[contains(text(),'First name is required')]"))
-				.isDisplayed();
+		boolean Fname = login.driver.findElement(By.xpath("//div[contains(text(),'First name is required')]")).isDisplayed();
 
-		if (Fname = true) {
+		if (Fname == true) {
 			System.out.println("Validation popup should be display");
 		} else {
-			System.out.println("Validation popup should not be display");
+			fail("Validation popup should not be display");
 		}
 
-		// System.out.println("First name is required");
-
 		// Last name validation display
-		boolean Lname = login.driver.findElement(By.xpath("//div[contains(text(),'Last name is required')]"))
-				.isDisplayed();
+		boolean Lname = login.driver.findElement(By.xpath("//div[contains(text(),'Last name is required')]")).isDisplayed();
 
 		if (Lname == true) {
 			System.out.println("Validation popup should be display");
 		} else {
-			System.out.println("Validation popup should not display");
+			fail("Validation popup should not display");
 		}
 
-		System.out.println("==================================TC_06===========================");
+		System.out.println("==================================TC_07 & TC_08===========================");
+		
 	}
 
-	// TC_07
+	// TC_09
 	@And("^User enter First as \"([^\"]*)\" and Last name as \"([^\"]*)\"$")
 	public void user_enter_First_as_and_Last_name_as(String Fname, String Lname) throws Throwable {
 
@@ -235,16 +272,26 @@ public class Profile {
 		login.driver.findElement(By.name("last_name")).sendKeys(Lname);
 
 	}
-
-	// TC_07
-	@And("^Should allow non english keywords and changes should be saved\\.$")
-	public void should_allow_non_english_keywords_and_changes_should_be_saved() throws Throwable {
+	// TC_09
+	@And("^Verify the allow non english keywords and changes should be saved$")
+	public void verify_the_allow_non_english_keywords_and_changes_should_be_saved() throws Throwable {
+		
 		Thread.sleep(1000);
-
-		System.out.println("Should allow non english keywords and changes should be saved.");
-		System.out.println("==================================TC_07===========================");
-
+		String FandLastName=login.driver.findElement(By.xpath("//div[@class='profile-menu--name text-dots']")).getText();
+		if(FandLastName.contains("sdjhfjksdhfjk"))
+		{
+			System.out.println("non english keywords and changes should be saved");
+			System.out.println("==================================TC_09===========================");
+		}
+		else {
+			fail("non english keywords and changes should be saved");
+		}
+		
+		
+		
+		
 	}
+	
 
 	@And("^user enter first name as \"([^\"]*)\"$")
 	public void user_enter_first_name_as(String arg) throws Throwable {
@@ -265,7 +312,7 @@ public class Profile {
 
 	}
 
-	// TC_08
+	// TC_10
 	@Then("^User changes should be reflected under profile picture after saved$")
 	public void user_changes_should_be_reflected_under_profile_picture_after_saved() throws Throwable {
 
@@ -286,31 +333,32 @@ public class Profile {
 					"//*[@class='account-avatar--container'] | //*[@class='account-avatar--image']", 8);
 		}
 		new Actions(login.driver).moveToElement(preferences).pause(3000).click().build().perform();
-		System.out.println("==============>First line Execution================>");
+		
 
 		String usernamechange = login.driver.findElement(By.xpath("//div[@class='profile-menu--name text-dots']"))
 				.getText();
 		System.out.println("usernamechange:" + usernamechange);
 		System.out.println("firs_tname:" + firs_tname);
 
-		System.out.println("==================================TC_08===========================");
-		// }
+		System.out.println("==================================TC_10===========================");
+		
 	}
 
-	// TC_09
+	// TC_11
 	@And("^click on Email filed$")
 	public void click_on_Email_filed() throws Throwable {
 
 		boolean email = login.driver.findElement(By.name("user_id")).isEnabled();
 		if (true != email) {
 			System.out.println("Email field not editable");
+			System.out.println("==================================TC_11===========================");
 		}
 
 		else {
-			System.out.println("Verification failed");
+			fail("Verification failed");
 		}
 
-		System.out.println("==================================TC_09===========================");
+		
 	}
 
 //TC_10
@@ -336,13 +384,21 @@ public class Profile {
 		login.driver.findElement(By.name("first_name")).sendKeys(" CDMNext");
 	}
 
-	// TC_10
+	// TC_12
 	@And("^The changes in the profile section should be saved\\.$")
 	public void the_changes_in_the_profile_section_should_be_saved() throws Throwable {
 		Thread.sleep(1000);
 
+	String name=login.driver.findElement(By.name("first_name")).getText();
+	if(name.contains("Te"))
+	{
 		System.out.println("First name updated ");
-		System.out.println("==================================TC_10===========================");
+		System.out.println("==================================TC_12===========================");
+	}else {
+		fail("First name updated");
+	}
+		
+		
 	}
 
 	// TC_11
@@ -385,7 +441,7 @@ public class Profile {
 
 	}
 
-	// TC_11
+	// TC_13
 	@And("^click on Cancel button$")
 	public void click_on_Cancle_button() throws Throwable {
 
@@ -395,12 +451,22 @@ public class Profile {
 
 	}
 
-	// TC_11
+	// TC_13
 	@And("^The changes should be canceled$")
 	public void the_changes_should_be_canceled() throws Throwable {
+		
+		Thread.sleep(1000);
 
-		System.out.println("changes_should_be canceled");
-		System.out.println("==================================TC_11===========================");
+		String name=login.driver.findElement(By.name("last_name")).getText();
+		if(name.equalsIgnoreCase("Automation"))
+		{
+			fail("changes should be canceled");
+			
+		}else {
+			System.out.println("changes should be canceled");
+			System.out.println("==================================TC_13===========================");
+		}
+		
 
 	}
 
@@ -802,7 +868,7 @@ public class Profile {
 
 	}
 
-	// TC_26
+	// TC_28
 	@And("^Date format \"([^\"]*)\" and \"([^\"]*)\" formate default display$")
 	public void date_format_and_formate_default_display(String arg1, String arg2) throws Throwable {
 
@@ -812,10 +878,16 @@ public class Profile {
 
 		Thread.sleep(1000);
 
-		String dateformat = login.driver.findElement(By.xpath("//div[contains(text(),'DD/MM/YYYY')]")).getText();
+		String dateformat = login.driver.findElement(By.xpath("//div[contains(text(),'MM/DD/YYYY')]")).getText();
 		System.out.println(dateformat);
-
-		System.out.println("Date formate Auto default display");
+if(dateformat.equalsIgnoreCase("MM/DD/YYYY"))
+{
+	System.out.println("Date formate Auto default display");
+}
+else {
+	fail("Date formate Auto default display");
+}
+		
 
 	}
 
@@ -828,17 +900,17 @@ public class Profile {
 
 	}
 
-	// TC_27
+	// TC_28
 	@And("^select date format in Auto dropdown$")
 	public void select_date_format_in_Auto_dropdown() throws Throwable {
 		Thread.sleep(1000);
 		// click on date format
 
-		WebElement movtoname = login.driver.findElement(By.xpath("//div[contains(text(),'DD/MM/YYYY')]"));
+		WebElement movtoname = login.driver.findElement(By.xpath("//span[@id='select2-chosen-2']"));
 		action.pause(500).moveToElement(movtoname).click().build().perform();
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("//div[contains(text(),'MM/DD/YYYY')]")).click();
+		login.driver.findElement(By.xpath("//div[contains(text(),'DD/MM/YYYY')]")).click();
 		Thread.sleep(2000);
 
 	}
@@ -861,20 +933,13 @@ public class Profile {
 
 		login.driver.findElement(By.xpath("(//div[@class='tabs__tab-item'])[1]")).click();
 
-		String updatedateinSSP = login.driver
-				.findElement(By.xpath("(//*[@class='preview-series-time-points--point-date'])[6]")).getText();
+		String updatedateinSSP = login.driver.findElement(By.xpath("(//*[@class='preview-series-time-points--point-date'])[6]")).getText();
 
 		System.out.println(updatedateinSSP);
 
 	}
 
-	// TC_27
-	@Then("^Only selected Date format should be displayed in entire CDMNext$")
-	public void only_selected_Date_format_should_be_displayed_in_entire_CDMNext() throws Throwable {
-
-		System.out.println("selected Date format should be displayed in entire CDMNext");
-
-	}
+	
 
 	// TC_28
 	@And("^checked custom radio button$")
@@ -914,25 +979,23 @@ public class Profile {
 
 		Thread.sleep(1000);
 		// validation should be display
-		String customvalidation = login.driver
-				.findElement(By.xpath("//div[contains(text(),'Invalid date format. Please enter a valid format')]"))
-				.getText();
+		 customvalidation = login.driver.findElement(By.xpath("//div[contains(text(),'Invalid date format. Please enter a valid format')]")).getText();
 		System.out.println(customvalidation);
-		System.out.println(validation);
+		
 
 	}
 
-	// TC_29
+	// TC_31
 	@And("^verified \"([^\"]*)\" message should be displayed in red color$")
 	public void verified_message_should_be_displayed_in_red_color(String arg1) throws Throwable {
 
 		Thread.sleep(2000);
-		if (customvalidation == validation) {
+		if (customvalidation.equalsIgnoreCase(arg1)) {
 
 			System.out.println(
 					"Invalid date format. Please enter a valid format message should be displayed in red color.");
 		} else {
-			System.out.println("validation should not be display");
+			fail("validation should not be display");
 		}
 	}
 
@@ -953,26 +1016,26 @@ public class Profile {
 
 		Thread.sleep(1000);
 		// validation display
-		String customempty = login.driver
+		 customempty = login.driver
 				.findElement(By.xpath("//div[contains(text(),'Custom date pattern cannot be empty')]")).getText();
 		System.out.println(customempty);
 
 	}
-
-	// TC_30
-	@Then("^'Custom date pattern cannot be empty' message displayed in red color\\.$")
-	public void custom_date_pattern_cannot_be_empty_message_displayed_in_red_color() throws Throwable {
-
-		String customtextboxempty = "Custom date pattern cannot be empty";
-
-		if (customtextboxempty == customempty) {
-			System.out.println("Custom date pattern cannot be empty' message displayed in red color");
-
-		} else {
-			System.out.println("Test case Failed");
-
-		}
+	//TC_32
+	@Then("^\"([^\"]*)\" message displayed in red color$")
+	public void message_displayed_in_red_color(String arg1) throws Throwable {
+	   if(customempty.equalsIgnoreCase(arg1))
+	   {
+		   System.out.println("Custom date pattern cannot be empty' message displayed in red color");
+		   
+	   }
+	   else {
+		   fail("Custom date pattern cannot be empty' message displayed in red color");
+	   }
 	}
+
+
+	
 
 	// TC_31
 	@And("^get the value of Timeframe$")
@@ -999,15 +1062,12 @@ public class Profile {
 		// SSP pop up display and click on view as
 		login.driver.findElement(By.xpath("//span[contains(text(),'View as')]")).click();
 		// click on Table
-		login.driver.findElement(By.xpath("//div[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
-
+		login.driver.findElement(By.xpath("//div[@class='icon--table-vertical_large v6Emt8Bm0sLK7mrRgQtN']")).click();
 		Thread.sleep(1000);
 		// click on cancel button
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 		
 		Thread.sleep(2000);
-
-		Thread.sleep(1000);
 
 	}
 
@@ -1054,25 +1114,38 @@ public class Profile {
 
 	@And("^Download popup display$")
 	public void download_popup_display() throws Throwable {
+		
+		if(login.driver.findElements(By.xpath("//div[@class='modal-body sphere-modal__body']")).size()==1)
+		{
+			System.out.println("Download popup displayed");
+		}
+		else {
+			fail("download popup not showing");
+		}
+		
+		
 
-		String downloadpopup = login.driver.findElement(By.xpath("//span[contains(text(),'(5 series)')]")).getText();
-		System.out.println("Download pop series count:" + downloadpopup);
-
-		String series = downloadpopup;
-		String scount = series.replaceAll("[^0-9]", "");
-		System.out.println("Series count = " + scount);
+		
 
 	}
 
-	// TC_32
+	// TC_34
 	@Then("^\"([^\"]*)\" window should be \"([^\"]*)\" and selected series count display$")
 	public void window_should_be_and_selected_series_count_display(String arg1, String arg2) throws Throwable {
 
-		if (checkedseries == scount) {
-			System.out.println("Selected series and download popup display series are equal");
-		} else {
-			System.out.println("test case faild ");
-		}
+		
+		String downloadpopup = login.driver.findElement(By.xpath("//span[contains(text(),'(5 series)')]")).getText();
+		System.out.println("Download pop series count:" + downloadpopup);
+      if(downloadpopup.contains("5"))
+      {
+    	  System.out.println("selected series count display");
+      }
+      else {
+    	  fail("selected series count display");
+      }
+		
+		
+		
 
 	}
 
@@ -1088,12 +1161,20 @@ public class Profile {
 
 	}
 
-	// TC_33
+	// TC_35
 	@And("^Download settings window should not be displayed and directly download with saved settings\\.$")
 	public void download_settings_window_should_not_be_displayed_and_directly_download_with_saved_settings()
 			throws Throwable {
-		System.out
-				.println("Download settings window should not be displayed and directly download with saved settings.");
+		
+		if(login.driver.findElements(By.xpath("//div[@class='modal-body sphere-modal__body']")).size()==0)
+		{
+			System.out
+			.println("Download settings window should not be displayed and directly download with saved setting");
+		}
+		else {
+			fail("Download settings window should not be displayed and directly download with saved setting");
+		}
+		
 
 	}
 
@@ -1141,19 +1222,23 @@ public class Profile {
 		System.out.println("The Always ask me to conform the download settingsoption should be unchecked.");
 	}
 
-	// TC_36
-	@And("^Right click on and click on 'view as chart'$")
-	public void right_click_on_and_click_on_view_as_chart() throws Throwable {
-
+	
+//TC_36
+	@And("^Right click on and click on \"([^\"]*)\"$")
+	public void right_click_on_and_click_on(String arg1) throws Throwable {
+	  
 		Thread.sleep(1000);
 
 		WebElement elementLocator = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
 
 		action.contextClick(elementLocator).perform();
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'"+arg1+"')]")).click();
 		Thread.sleep(2000);
-
+      login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		
+		
+		
 	}
 
 	// TC_36
@@ -1187,12 +1272,20 @@ public class Profile {
 		Thread.sleep(500);
 	}
 
-	// TC_37
+	// TC_39
 	@Then("^Deletion confirmation message should not be displayed to users while deleting visuals\\.$")
 	public void deletion_confirmation_message_should_not_be_displayed_to_users_while_deleting_visuals()
 			throws Throwable {
 
-		System.out.println("Deletion confirmation message should not be displayed to users while deleting visuals");
+		if(login.driver.findElements(By.xpath("//div[@class='modal-body sphere-modal__body']")).size()==0)
+		{
+			System.out.println("Deletion confirmation message should not be displayed to users while deleting visuals");
+		}
+		else {
+			fail("Deletion confirmation message should not be displayed to users while deleting visuals");
+		}
+		
+		
 
 	}
 
@@ -1236,7 +1329,8 @@ public class Profile {
 	public void click_on_customize() throws Throwable {
 
 		Thread.sleep(2000);
-
+		login.driver.findElement(By.xpath("//div[@title='View as a grid']")).click();
+		
 		WebElement movtoname = login.driver
 				.findElement(By.xpath("(//*[@class='insight-grid-item--buttons-item button'])[4]"));
 		action.pause(500).moveToElement(movtoname).build().perform();
@@ -1286,7 +1380,15 @@ public class Profile {
 	@Then("^The Replacement popup should not be displayed to user$")
 	public void the_Replacement_popup_should_not_be_displayed_to_user() throws Throwable {
 
-		System.out.println("The Replacement popup should not be displayed to user");
+		if(login.driver.findElements(By.xpath("//div[@class='series-changes-summary']")).size()==0)
+		{
+			System.out.println("The Replacement popup should not be displayed to user");
+		}
+		else {
+			fail("The Replacement popup should not be displayed to user");
+		}
+		
+		
 
 	}
 
@@ -1295,8 +1397,7 @@ public class Profile {
 	public void checked_the_Show_latest_changes_in_my_insights_upon_opening() throws Throwable {
 
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]"))
-				.click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
 
 	}
 
@@ -1306,12 +1407,9 @@ public class Profile {
 
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("//span[contains(text(),'Do not show again')]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='series-changes-summary-controls']//span[contains(text(),'Do not show again')])[2]")).click();
 
-		login.driver
-				.findElement(By
-						.xpath("//*[@class='series-changes-summary-controls--buttons']//*[contains(text(),'Cancel')]"))
-				.click();
+		login.driver.findElement(By.xpath("(//*[text()='Cancel'])[2]")).click();
 
 	}
 
@@ -1319,8 +1417,14 @@ public class Profile {
 	@Then("^The Replacement popup should not be displayed to user and should be unchecked under preference as well$")
 	public void the_Replacement_popup_should_not_be_displayed_to_user_and_should_be_unchecked_under_preference_as_well()
 			throws Throwable {
-
-		System.out.println(" Show latest changes in my insights upon opening unchecked");
+		if(login.driver.findElements(By.xpath("//div[@class='series-changes-summary']")).size()==0)
+		{
+			System.out.println("The Replacement popup should not be displayed to user");
+		}
+		else {
+			fail("The Replacement popup should not be displayed to user");
+		}
+		
 	}
 
 	// TC_41
@@ -1540,8 +1644,9 @@ public class Profile {
 			action.pause(500).moveToElement(series1).contextClick(series1).build().perform();
 			Thread.sleep(2000);
 
-			login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
-
+			login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+			Thread.sleep(2000);
+            login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
 		}
 
 		catch (org.openqa.selenium.StaleElementReferenceException ex) {
@@ -1565,8 +1670,10 @@ public class Profile {
 			WebElement series1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
 			action.pause(500).moveToElement(series1).contextClick(series1).build().perform();
 			Thread.sleep(2000);
-
-			login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
+			login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+			Thread.sleep(2000);
+login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		//	login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
 
 		}
 	}
@@ -1585,8 +1692,10 @@ public class Profile {
 		action.pause(500).moveToElement(movtoname).build().perform();
 		Thread.sleep(2000);
 		action.contextClick(movtoname).perform();
-
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+		Thread.sleep(2000);
+login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
 
 	}
 
@@ -1696,7 +1805,10 @@ public class Profile {
 		// SSP pop display
 		login.driver.findElement(By.xpath("//span[contains(text(),'View as')]")).click();
 		// click on chat
-		login.driver.findElement(By.xpath("//span[contains(text(),'Chart')]")).click();
+				login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+		
+		// click on chat
+		//login.driver.findElement(By.xpath("//span[contains(text(),'Chart')]")).click();
 
 		// SSP pop up close
 		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
@@ -1785,9 +1897,7 @@ public class Profile {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//label[contains(text(),'Upload image')]")).click();
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 		CommonFunctionality.wait(2000);
 	}
 
@@ -1830,8 +1940,7 @@ public class Profile {
 		Thread.sleep(1000);
 
 		// click on alignment
-		WebElement movtoname = login.driver
-				.findElement(By.cssSelector(".col:nth-child(1) .config-btn:nth-child(1) > .config-btn--icon"));
+		WebElement movtoname = login.driver.findElement(By.cssSelector(".col:nth-child(1) .config-btn:nth-child(1) > .config-btn--icon"));
 		action.moveToElement(movtoname).click().build().perform();
 
 	}
@@ -1854,7 +1963,7 @@ public class Profile {
 		// click on Text button
 		WebElement movtoname = login.driver.findElement(By.xpath("//span[contains(text(),'Text')]"));
 		action.pause(500).moveToElement(movtoname).click().build().perform();
-
+		login.driver.findElement(By.name("credits_text")).clear();
 		login.driver.findElement(By.name("credits_text")).sendKeys("CEIC Data");
 
 	}
@@ -1895,11 +2004,11 @@ public class Profile {
 	@And("^change text size$")
 	public void change_text_size() throws Throwable {
 
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 
 		login.driver.findElement(By.xpath("//input[@name='credits_font_size']")).clear();
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//input[@name='credits_font_size']")).sendKeys("30");
+		login.driver.findElement(By.xpath("//input[@name='credits_font_size']")).sendKeys("29");
 		// input[@name='credits_font_size']
 
 	}
@@ -1936,18 +2045,25 @@ public class Profile {
 	@And("^click on color button and select color$")
 	public void click_on_color_button_and_select_color() throws Throwable {
 		Thread.sleep(1000);
-		WebElement movtoname = login.driver.findElement(By.cssSelector(".sp-preview-inner"));
-		action.pause(500).moveToElement(movtoname).build().perform();
-		Thread.sleep(2000);
-		login.driver.findElement(By.cssSelector(".sp-preview-inner")).click();
-		Thread.sleep(1000);
-
-		// select color pop up
-		WebElement movtoname1 = login.driver.findElement(By.cssSelector(".sp-thumb-el:nth-child(7) > .sp-thumb-inner"));
-		action.pause(500).moveToElement(movtoname1).build().perform();
-		Thread.sleep(2000);
-
-		login.driver.findElement(By.cssSelector(".sp-thumb-el:nth-child(7) > .sp-thumb-inner")).click();
+		
+		login.driver.findElement(By.xpath("//div[@class='index-module_swatch_button_item_color__gAHg1']")).click();
+		
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[1]")).click();
+		
+		
+		
+//		WebElement movtoname = login.driver.findElement(By.xpath("//div[@class='index-module_swatch_button_item_color__gAHg1']"));
+//		action.pause(500).moveToElement(movtoname).build().perform();
+//		Thread.sleep(2000);
+//		login.driver.findElement(By.cssSelector(".sp-preview-inner")).click();
+//		Thread.sleep(1000);
+//
+//		// select color pop up
+//		WebElement movtoname1 = login.driver.findElement(By.cssSelector(".sp-thumb-el:nth-child(7) > .sp-thumb-inner"));
+//		action.pause(500).moveToElement(movtoname1).build().perform();
+//		Thread.sleep(2000);
+//
+//		login.driver.findElement(By.cssSelector(".sp-thumb-el:nth-child(7) > .sp-thumb-inner")).click();
 
 	}
 
@@ -1955,8 +2071,20 @@ public class Profile {
 	@Then("^The selected color should be applied to text copyright in visual$")
 	public void the_selected_color_should_be_applied_to_text_copyright_in_visual() throws Throwable {
 		Thread.sleep(2000);
-
-		System.out.println("The selected color should be applied to text copyright in visual");
+		String color=login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper--credits-text text-dots']//a")).getAttribute("style");
+		
+		System.out.println(color);
+		System.out.println("#05999a");
+		if(color.contains("rgb(5, 153, 154)"))
+		{
+			System.out.println("The selected color should be applied to text copyright in visual");
+			
+		}else {
+			fail("The selected color should be applied to text copyright in visual");
+			
+		}
+		
+		
 
 	}
 
@@ -1964,16 +2092,31 @@ public class Profile {
 	@Then("^The text copyright should display in selected position$")
 	public void the_text_copyright_should_display_in_selected_position() throws Throwable {
 
-		WebElement Textcopyrightimage = login.driver
-				.findElement(By.xpath("//div[@class='visual-item-wrapper--text ']"));
+		WebElement Textcopyrightimage = login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper--text  text-dots']"));
 
 		if (Textcopyrightimage.isDisplayed()) {
 			System.out.println("The image copyright should be display");
 		} else {
-			System.out.println("Test case failed");
+			fail("Test case failed");
 		}
 	}
+//64
+	@Then("^should be open copyright window$")
+	public void should_be_open_copyright_window() throws Throwable {
+	    CommonFunctionality.wait(2000);
+	    
+	    WebElement copytext = login.driver.findElement(By.xpath("//*[@class='visual-item-wrapper--logo']"));
+		action.moveToElement(copytext).click().build().perform();
+		Thread.sleep(1000);
+		
+if (login.driver.findElements(By.xpath("//button[contains(text(),'Delete and sign out')]")).size() == 1) {
 
+	System.out.println("copyright window displayed");
+} else {
+	fail("copyright window not displayed");
+}		
+		
+	}
 	// TC_62
 	@Then("^Should redirected to \"([^\"]*)\" in new tab$")
 	public void should_redirected_to_in_new_tab(String arg1) throws Throwable {
@@ -1992,12 +2135,16 @@ public class Profile {
 		Iterator<String> I1 = s.iterator();
 		while (I1.hasNext()) {
 			String child_window = I1.next();
+			System.out.println(parent);
+			System.out.println(child_window);
 			if (!parent.equals(child_window)) {
 				login.driver.switchTo().window(child_window);
 				System.out.println(login.driver.switchTo().window(child_window).getTitle());
 				System.out.println(login.driver.getCurrentUrl());
 			}
 		}
+		System.out.println("=========================>"+arg1);
+		System.out.println("=========================>"+login.driver.getCurrentUrl());
 		assertEquals(arg1, login.driver.getCurrentUrl());
 		System.out.println("Should redirected to https://www.ceicdata.com/en");
 

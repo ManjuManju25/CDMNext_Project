@@ -2,7 +2,7 @@ Feature: Verify Unit Manipulation functionality
 
   #Background:
   #Given User has successful logged in
-  @UnitManipulation1
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_01: Verify applying unit manipulation for series
     And Open preference dropdown
     #And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check"
@@ -18,7 +18,7 @@ Feature: Verify Unit Manipulation functionality
     #Then Rename the insight to "01" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with default Output Multiplier" and "default Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_01"
     Then Rename the insight to "01" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "default Output Multiplier" and "default Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_01"
 
-  @UnitManipulation2
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_02: Verify applying unit manipulation for series from function toolbar
     # And Search for the series with SID "SR866744" and click on "A" option
     And Search for the series with ID "SR866744" and click on "A" option
@@ -28,7 +28,7 @@ Feature: Verify Unit Manipulation functionality
     #And Check the checkbox for Unit manipulation as "Convert all multipliers"
     Then Rename the insight to "02" and able to apply unit manipualtion function with base series and transformed series present in "Function toolbar" with "default Output Multiplier" and "default Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_02"
 
-  @UnitManipulation3
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_03: Verify unit manipulation for series with func wizard without selecting any sub-methods
     #And Search for the series with SID "SR4878432" and click on "A" option
     And Search for the series with ID "SR866744" and click on "A" option
@@ -39,7 +39,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert all multipliers"
     Then Rename the insight to "03" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_03"
 
-  @UnitManipulation4
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_04: Verify func for thousand output multiplier with convert all multipliers method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -49,7 +49,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert all multipliers"
     Then Rename the insight to "04" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_04"
 
-  @UnitManipulation5
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_05: Verify func for million output multiplier with convert all multipliers method
     And Search for the series with ID "SR866744" and click on "A" option
     And Count the series in myseries
@@ -61,7 +61,7 @@ Feature: Verify Unit Manipulation functionality
     Then Rename the insight to "05" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_05"
     Then Apply "Million" on transformed series with renaming to "05" able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_05"
 
-  @UnitManipulation6
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_06: Verify func for Billion output multiplier with convert all multipliers method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -71,7 +71,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert all multipliers"
     Then Rename the insight to "06" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_06"
 
-  @UnitManipulation7
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_07: Verify func for Trillion output multiplier with convert all multipliers method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -81,7 +81,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert all multipliers"
     Then Rename the insight to "07" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_07"
 
-  @UnitManipulation8
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_08: Verify func for hundred output multiplier with convert only multipliers not in the unit name method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -91,7 +91,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert only multipliers not in the unit name"
     Then Rename the insight to "08" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert only multipliers not in the unit name" and then verify "TC_Unit Manipulation_08"
 
-  @UnitManipulation9
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_09: Verify func for Thousand output multiplier with Convert only multipliers not in the unit name method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -101,7 +101,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert only multipliers not in the unit name"
     Then Rename the insight to "09" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert only multipliers not in the unit name" and then verify "TC_Unit Manipulation_09"
 
-  @UnitManipulation10
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_10: Verify func for Million output multiplier with Convert only multipliers not in the unit name method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -111,7 +111,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert only multipliers not in the unit name"
     Then Rename the insight to "10" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert only multipliers not in the unit name" and then verify "TC_Unit Manipulation_10"
 
-  @UnitManipulation11
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_11: Verify func for Billion output multiplier with Convert only multipliers not in the unit name method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -121,7 +121,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert only multipliers not in the unit name"
     Then Rename the insight to "11" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert only multipliers not in the unit name" and then verify "TC_Unit Manipulation_11"
 
-  @UnitManipulation12
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_12: Verify func for Trillion output multiplier with Convert only multipliers not in the unit name method
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -131,7 +131,7 @@ Feature: Verify Unit Manipulation functionality
     And Check the checkbox for Unit manipulation as "Convert only multipliers not in the unit name"
     Then Rename the insight to "12" and able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "Output Multiplier" and "Method" and the checkbox "Convert only multipliers not in the unit name" and then verify "TC_Unit Manipulation_12"
 
-  @UnitManipulation13
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_13: Verify applying multiple functions on unit manipulation func
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -139,7 +139,7 @@ Feature: Verify Unit Manipulation functionality
     And Click "By function" tab and enter "UNIT" in search field
     Then Apply "ACCUMULATE" on transformed series with renaming to "13" able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "default Output Multiplier" and "default Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_13"
 
-  @UnitManipulation14
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_14: Verify applying multiple functions on unit manipulation func with func toolbar
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -147,7 +147,7 @@ Feature: Verify Unit Manipulation functionality
     And Click "By function" tab and enter "UNIT" in search field
     Then Apply "MULTIPLY" on transformed series with renaming to "14" able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "default Output Multiplier" and "default Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_14"
 
-  @UnitManipulation15
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_15: Verify applying unit manipulation function over other transformed functions
     And Search for the series with ID "254123002" and click on "A" option
     And Count the series in myseries
@@ -155,7 +155,7 @@ Feature: Verify Unit Manipulation functionality
     And Click "By function" tab and enter "LAG" in search field
     Then Apply "UNIT_MULTIPLIER" on transformed series with renaming to "15" able to apply unit manipualtion function with base series and transformed series present in "Function wizard" with "default Output Multiplier" and "default Method" and the checkbox "Convert all multipliers" and then verify "TC_Unit Manipulation_15"
 
-  @UnitManipulation16
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_16: Verify applying unit manipulation function over other transformed functions with replace selected series
     And Search for the series with ID "254123002" and click on "A" option
     And Select all series from myseries and click on "Copy the series" option
@@ -163,21 +163,21 @@ Feature: Verify Unit Manipulation functionality
     And Type "UNIT" in functions input box
     Then The transformed series is replaced and applied functions are present in new series
 
-  @UnitManipulation17
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_17: Verify help on this function for unit multiplier function in func wizard
     And Search for the series with ID "254123002" and click on "A" option
     And Select all series from myseries and click on "Open function editor" option
     And Click "By function" tab and enter "UNIT" in search field
     Then The help field is present for "UNIT_MANIPULATION"
 
-  @UnitManipulation18
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_18: Verify cancel applying function for unit multiplier from func wizard window
     And Search for the series with ID "254123002" and click on "A" option
     And Select all series from myseries and click on "Open function editor" option
     And Click "By function" tab and enter "UNIT" in search field
     Then The "Cancel" button is clicked and the functions wizard is closed
 
-  @UnitManipulation19
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_19: Verify applying function for visuals like chart/pie/map/table
     And Search for the series with ID "254123002" and click on "C" option
     And Right Click the "Chart" visual
@@ -186,7 +186,7 @@ Feature: Verify Unit Manipulation functionality
     And Click "By function" tab and enter "UNIT" in search field
     Then The function should apply successfully in "Chart"
 
-  @UnitManipulation20
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_20: Verify applying crosssec func from edit visual window for visuals
     And Search for the series with ID "254123002" and click on "Pie" option
     And Click "More functions" option from insight action panel
@@ -194,7 +194,7 @@ Feature: Verify Unit Manipulation functionality
     And Click "By function" tab and enter "UNIT" in search field
     Then The function should apply successfully in "Pie"
 
-  @UnitManipulation21
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_21: Verify unit multiplier function from edit series popup
     And Search for the series with ID "254123002" and click on "Heat map" option
     And Click on Edit series visual
@@ -202,7 +202,7 @@ Feature: Verify Unit Manipulation functionality
     And Click on "Apply function" in functions box
     Then The function should apply successfully in "Heat map"
 
-  @UnitManipulation22
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_22: Verify tooltip for unit multipler applied function on visuals
     And Search for the series with ID "254123002" and click on "Heat map" option
     And Click on Edit series visual
@@ -210,7 +210,7 @@ Feature: Verify Unit Manipulation functionality
     And Click on "Apply function" in functions box
     Then The function should apply successfully in "Heat map"
 
-  @UnitManipulation23
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_23: Verify applying unit multiplier for series in download window from search pane
     And Search for the series with ID "SR4878432" and click on "C" option
     And Copy the visual title
@@ -218,14 +218,14 @@ Feature: Verify Unit Manipulation functionality
     And Select "series" tab in download popup and click on "fx" option and pass as "UNIT"
     Then The "Download button" in Download window is to be present
 
-  @UnitManipulation24
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_24: Verify applying unit multiplier func on other functions in download window
     And Search for the series with ID "SR4878432" and click on "A" option
     And Select all series from myseries and click on "Open function editor" option
     And Click "By function" tab and enter "AGGREGATE" in search field
     Then Apply both function and rename series as "24" then validate the Testdata as "TC_Unit_Manipulation_24"
 
-  @UnitManipulation25
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_25: Verify applying unit multiplier for visuals in view mode
     And Search for the series with ID "202916302" and click on "C" option
     And click on download button on chat visual
@@ -233,14 +233,14 @@ Feature: Verify Unit Manipulation functionality
     And Select "series" tab in download popup and click on "fx" option and pass as "UNIT"
     Then The "Views button" in Download window is to be present
 
-  @UnitManipulation26
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_26: Verify applying unit multiplier with kg,ton,euro,usd etc
     And Search for the series with ID "204883202;202916302;292524004;77161701" and click on "A" option
     And Select all series from myseries and click on "Open function editor" option
     And Click "By function" tab and enter "UNIT" in search field
     Then Apply function and rename series as "26" then validate the Testdata as "TC_Unit_Manipulation_26"
 
-  @UnitManipulation27
+  @UnitManipulation
   Scenario: Tc_Unit Manipulation_27: Verify applying unit multiplier with %,2000=100 etc
     And Search for the series with ID "203982302;198573502" and click on "A" option
     And Select all series from myseries and click on "Open function editor" option

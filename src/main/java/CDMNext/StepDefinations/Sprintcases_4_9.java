@@ -61,7 +61,8 @@ public class Sprintcases_4_9 {
 
 		Thread.sleep(5000);
 
-		login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]")).click();
+		WebElement mouse=login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		action.moveToElement(mouse).click().build().perform();
 
 	}
 
@@ -126,7 +127,7 @@ public class Sprintcases_4_9 {
 
 		// click + icon on monthly product updates
 
-		login.driver.findElement(By.xpath("(//div[@class='toggle'])[20]")).click();
+		login.driver.findElement(By.xpath("(//span[contains(text(),'Monthly Product Updates')]//parent::div//parent::div[@class='tree-node full-expanded']//div)[1]")).click();
 		Thread.sleep(1000);
 
 	}
@@ -135,17 +136,16 @@ public class Sprintcases_4_9 {
 	@And("^click '\\+' icon on what's new$")
 	public void click_icon_on_what_s_new() throws Throwable {
 		Thread.sleep(2000);
-
-		login.driver.findElement(By.xpath("(//div[@class='toggle'])[11]")).click();
-
+		login.driver.findElement(By.xpath("//span[contains(text(),'What')]//parent::div//parent::div[@class='tree-node full-expanded']/div[1]")).click();
 	}
 
 	// TC_18729_01
 	@Then("^Check 'CEIC monthly newsletter'under analysis$")
 	public void check_CEIC_monthly_newsletter_under_analysis() throws Throwable {
 		Thread.sleep(2000);
-
-		String subdata = login.driver.findElement(By.xpath("(//div[@class='child-container'])[4]")).getText();
+		
+		String subdata = login.driver.findElement(By.xpath("//div[@class='analytics-insights-tree']")).getText();
+		//String subdata = login.driver.findElement(By.xpath("(//div[@class='child-container'])[4]")).getText();
 		subdata = subdata.replaceAll("[0-9]", "");
 		subdata = subdata.trim();
 		System.out.println(subdata);
@@ -272,7 +272,7 @@ login.driver.findElement(By.xpath("//div[@class='background-control--options']//
 
 
 // select color
-login.driver.findElement(By.xpath("//div[@class='index-module_wrapper__j2U4-']/div[@style='background-color: rgb(5, 153, 154);']")).click();
+login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[1]")).click();
                                    //(//*[@class='sp-thumb-inner'])[13]
 
 // click on cross mark
@@ -289,9 +289,7 @@ Thread.sleep(2000);
 login.driver.findElement(By.xpath("//*[@class='visual-top-panel--content']")).click();
 
 // whole visual area
-String color = login.driver
-		.findElement(By.xpath("//*[@class='visual-item-template visual-select-area text-template']"))
-		.getCssValue("background-color");
+String color = login.driver.findElement(By.xpath("//*[@class='visual-item-template visual-select-area text-template']")).getCssValue("background-color");
 
 System.out.println("Background color:" + color);
 
@@ -462,9 +460,10 @@ public void Select_source(String str) throws InterruptedException
 	login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
 }
 @And("^Navigate to World Trend >Forecast >Regional Forecast$")
-public void Navigate_to_worldTrend_forecast_RegionalForecast()
+public void Navigate_to_worldTrend_forecast_RegionalForecast() throws InterruptedException
 {
-
+	login.driver.findElement(By.xpath("//span[text()='Databases']")).click();
+	Thread.sleep(1000);
 	login.driver.findElement(By.xpath("//div[@data-node-model-id='WORLD']/div[@class='toggle']")).click();
 	
 	login.driver.findElement(By.xpath("//div[@data-node-model-id='WORLD&&WFOR']/div[@class='toggle']")).click();
@@ -490,6 +489,9 @@ public void verify_the_comparable_tab(String str)
 public void Click_show_related_data() throws InterruptedException
 {
 	Thread.sleep(5000);
+	login.driver.findElement(By.xpath("//span[text()='Databases']")).click();
+	Thread.sleep(1000);
+	
 	if(login.driver.findElement(By.xpath("//span[@value='MISMATCHES_ONLY']")).isSelected())
 	{
 		System.out.println("selected");
@@ -532,18 +534,26 @@ public void Popular_group_has_to_be_selected_by_default() throws InterruptedExce
 public void Click_on_function_toolbar() throws InterruptedException
 {
 	Thread.sleep(3000);
-	action.sendKeys((Keys.chord("a"))).build().perform();
-	action.moveToElement(login.driver.findElement(By.xpath("(//span[@class='series-name-field-title'])[1]"))).build().perform();
+	//action.sendKeys((Keys.chord("a"))).build().perform();
+	login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
+	//WebElement plusicon=login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
+	//action.moveToElement(plusicon).click().build().perform();
+	
+	login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+	//(//div[@class='add-to-data-selection--icon'])[1]
+	action.moveToElement(login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"))).build().perform();
 	login.driver.findElement(By.xpath("//div[@title='Apply Function']")).click();
 }
 @Then("^Select BVA function and go to the help section$")
-public void Select_BVA_function_and_go_to_the_help_section()
+public void Select_BVA_function_and_go_to_the_help_section() throws InterruptedException
 {
 	
 login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-icon']")).click();
- login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
- login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys("BASEVALADJ");
- login.driver.findElement(By.xpath("//div[contains(text(),' BASEVALADJ ')]")).click();
+ //login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
+ login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys("BASEVALADJ");
+ Thread.sleep(2000);
+ login.driver.findElement(By.xpath("//span[text()='BASEVALADJ']")).click();
+ Thread.sleep(1000);
  login.driver.findElement(By.xpath("//div[contains(text(),'Help on this function')]")).click();
  List<WebElement>l=login.driver.findElements(By.xpath("//div[@class='function-data--description']"));
  for(WebElement l1:l)
@@ -567,7 +577,6 @@ public void Rightclick_any_of_the_sections_copy_link_should_be_available(String 
 	for(WebElement l1:l)
 	{
 		action.moveToElement(l1).contextClick().build().perform();
-
 		WebElement copy=login.driver.findElement(By.xpath("//span[contains(text(),'Copy link')]"));
 		//action.moveToElement(copy).build().perform();
 		copy.click();
@@ -579,14 +588,25 @@ public void Rightclick_any_of_the_sections_copy_link_should_be_available(String 
 }
 }
 @And ("^Select chart to right click and apply round function$")
-public void select_chart_to_right_click_and_apply_round_function()
+public void select_chart_to_right_click_and_apply_round_function() throws InterruptedException
 {
+	action.moveToElement(login.driver.findElement(By.xpath("//span[@class='series-name-field--text']"))).contextClick().build().perform();
+	
+	Thread.sleep(1000);
+	login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+	Thread.sleep(2000);
+	login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+	Thread.sleep(3000);
 	action.moveToElement(login.driver.findElement(By.xpath("//div[@class='visual-top-panel']"))).contextClick().build().perform();
 	action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'Calculate series')]"))).click().perform();
-	login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-icon']")).click();
-	 login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
-	 login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys("Round");
-	 action.moveToElement(login.driver.findElement(By.xpath("//div[contains(text(),'ROUND')]"))).doubleClick().perform();
+	                     login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-icon']")).click();
+	// login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
+	                     login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).click();
+	 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys("Round");
+	 Thread.sleep(2000);
+	 action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'Mathematics')]"))).doubleClick().perform();
+	 Thread.sleep(2000);
+	 
 	 //login.driver.findElement(By.xpath("//span[contains(text(),'Replace selected series')]//parent::label/span[@class='input-control--indicator']")).click(); 
 	 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 
@@ -650,6 +670,14 @@ System.out.println(s+s1);
 public void open_a_chart_visual(String str) throws InterruptedException
 {
 	create_chart_visual_for_the_series(str);
+	
+	 WebElement visual= login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+	 action.moveToElement(visual).contextClick().build().perform();
+	 login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[contains(@class,\"icon--chart-line_large\")]")).click();
+		Thread.sleep(2000);
+	
 	login.driver.findElement(By.xpath("//button[contains(text(),'Edit Chart')]")).click();
 	
 }
@@ -706,14 +734,28 @@ public void Add_any_series_and_create_a_line_chart_with_it() throws InterruptedE
      login.driver.findElement(By.xpath("//div[contains(text(),'Line')]")).click();
      login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
     s7.Select_any_series1();
-    action.sendKeys((Keys.chord("a"))).build().perform();
+    Thread.sleep(2000);
+    
+   WebElement seriesname= login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+   
+    action.moveToElement(seriesname).contextClick().build().perform();
+    CommonFunctionality.wait(1000);
+    login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+    CommonFunctionality.wait(1000);
+    login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+  
+  
+   // action.sendKeys((Keys.chord("a"))).build().perform();
 	
 }
 @And("^Open \"([^\"]*)\" popup$")
 public void Open_popup(String str) throws InterruptedException
 {
 	Thread.sleep(3000);
+	if(login.driver.findElements(By.xpath("//button[contains(text(),'Apply')]")).size()==1)
+	{
 	login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+	}
 	login.driver.findElement(By.xpath("//button[contains(text(),'"+str+"')]")).click();
 }
 
@@ -742,9 +784,15 @@ public void set_Db_language_for_WTP_as_chinese() throws Throwable
 	
 	//action.moveToElement(login.driver.findElement(By.xpath("(//span[@title-en='Translate'])[1]"))).click().perform();
 	//action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'English')]"))).click().perform();
-	action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'World Trend Plus')]"))).build().perform();
+	
+	login.driver.findElement(By.xpath("//span[text()='Databases']")).click();
+	WebElement db=login.driver.findElement(By.xpath("(//div[@data-node-model-id='WORLD'])"));
+	action.moveToElement(db).build().perform();
+	Thread.sleep(2000);
 	action.moveToElement(login.driver.findElement(By.xpath("(//span[@title-en='Translate'])[1]"))).click().perform();
-	action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'??')]"))).click().perform();
+	Thread.sleep(2000);
+	action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'中文')]"))).click().perform();
+
 }
 @And("^Search for series \"([^\"]*)\" and create SSP$")
 public void Search_for_series_and_create_SSP(int i)
@@ -757,8 +805,8 @@ public void Search_for_series_and_create_SSP(int i)
 public void create_heatmap_or_table_in_an_insight() throws InterruptedException
 {Thread.sleep(2000);
 login.driver.findElement(By.xpath("//div[@title='Create new View tab']")).click();
-	login.driver.findElement(By.xpath("//span[contains(text(),'View 1')]")).click();
-    login.driver.findElement(By.xpath("(//div[contains(text(),'Heat map')])[2]")).click();
+	//login.driver.findElement(By.xpath("//span[contains(text(),'View 1')]")).click();
+    login.driver.findElement(By.xpath("(//div[contains(text(),'Heat map')])[1]")).click();
     login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
     
     s7.Select_any_series1();
@@ -766,10 +814,43 @@ login.driver.findElement(By.xpath("//div[@title='Create new View tab']")).click(
     
 	
 }
+
+@Given("^create heatmap visual$")
+public void create_heatmap_visual() throws Throwable {
+   
+	CommonFunctionality.wait(2000);
+	login.driver.findElement(By.xpath("//span[@class='dropdown-search-filter-title--text' and text()='Frequency']")).click();
+	CommonFunctionality.wait(3000);
+	login.driver.findElement(By.xpath("(//div[@class='dropdown-search-filter-wrapper--body']//span[@class='text-dots'])[6]")).click();
+	
+	login.driver.findElement(By.xpath("//div[@class='button__primary button button__primary']")).click();
+	CommonFunctionality.wait(3000);
+	WebElement seriesName=login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+    action.moveToElement(seriesName).contextClick().build().perform();
+    
+    login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+    
+    login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]")).click();
+  
+  Thread.sleep(2000);
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
 @And("^Change date for sorting heatmap or table \"([^\"]*)\" \"([^\"]*)\"$")
 public void change_date_for_sorting_heatmap_or_table(String str1,String str2) throws InterruptedException
 {
-	login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+	//login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 	Thread.sleep(2000);
 	s7.click_on_the_timeframe_to_choose_custom_dates_from(str1,str2);
 }
@@ -778,32 +859,59 @@ public void click_on_copy_icon() throws InterruptedException
 {
 	Thread.sleep(2000);
 	action.contextClick().build().perform();
-	login.driver.findElement(By.xpath("//span[contains(text(),'Copy heat map')]")).click();
+	login.driver.findElement(By.xpath("//div[@title='Copy']")).click();
 	login.driver.findElement(By.xpath("//button[contains(text(),'More options')]")).click();
 }
 @Then("^Paste it onto excel$")
 public void paste_it_onto_excel()
 {
-	login.driver.findElement(By.xpath("//span[contains(text(),'Download')]")).click();
+	login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button insight-download__modal-button button button__download-btn']")).click();
+}
+
+
+@Given("^add series into right pane$")
+public void add_series_into_right_pane() throws Throwable {
+	CommonFunctionality.wait(2000);
+	
+	
+	Thread.sleep(4000);
+	login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
+	
+	Thread.sleep(2000);
+	login.driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys("1692001");
+	
+	login.driver.findElement(By.xpath("//input[@placeholder='Search']")).click();
+	
+	
+ //login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
+//	a.moveToElement(series).contextClick().build().perform();
+//	Thread.sleep(2000);
+//	login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+//	Thread.sleep(2000);
+//	login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+//	                                                 
+	
+   
 }
 @And("^Click on function toolbar apply round function \"([^\"]*)\"$")
 public void click_on_function_toolbar_apply_round_function(String str) throws InterruptedException
 {
-	action.sendKeys((Keys.chord("a"))).build().perform();
+	//action.sendKeys((Keys.chord("a"))).build().perform();
 	Click_on_function_toolbar();
 	login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-icon']")).click();
-	 login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
+	// login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
 	 Thread.sleep(2000);
-	 login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).click();
-	 login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).sendKeys("Round");
-	 action.moveToElement(login.driver.findElement(By.xpath("//div[contains(text(),'"+str+"')]"))).doubleClick().perform();
+	 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).click();
+	 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys("Round");
 	 Thread.sleep(2000);
-	 login.driver.findElement(By.xpath("//span[contains(text(),'Replace selected series')]//parent::label/span[@class='input-control--indicator']")).click(); 
+	 action.moveToElement(login.driver.findElement(By.xpath("//span[@class='rBp4bp9QFdeCkIQxSLEE']"))).doubleClick().perform();
+	 Thread.sleep(2000);
+	 //login.driver.findElement(By.xpath("//span[contains(text(),'Replace selected series')]//parent::label/label[@class='index-module_checkboxCheck__7QgRr']")).click(); 
 	 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 	 Thread.sleep(2000);
-	 login.driver.findElement(By.xpath("//span[contains(text(),'Download')]")).click();
+	 login.driver.findElement(By.xpath("(//span[normalize-space(text())='Download'])[1]")).click();
 	 login.driver.switchTo().activeElement();
-	 login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[3]")).click();
+	 login.driver.findElement(By.xpath("(//span[normalize-space(text())='Download'])[2]")).click();
 	
 }
 @Then("^Download to excel and verify the results \"([^\"]*)\"$")
@@ -811,7 +919,9 @@ public void download_to_excel_and_verify_the_result(String insightname) throws I
 {
 	Thread.sleep(7000);
 	
-	String path2 = "C:\\Users\\tbemineni\\Downloads\\"+insightname+".xlsx";
+	//String path2 = "C:\\Users\\tbemineni\\Downloads\\"+insightname+".xlsx";
+	String path2 = "C:\\Users\\Venkataswami\\Downloads\\"+insightname+".xlsx";
+	
 	
  FileInputStream s1=new FileInputStream(path2);
     XSSFWorkbook test = new XSSFWorkbook(s1); 
@@ -847,41 +957,55 @@ public void download_to_excel_and_verify_the_result(String insightname) throws I
 @And("^Click on function toolbar apply round function and choose replace original series$")
 public void click_on_function_toolbar_apply_round_function_and_choose_replace_original_series() throws InterruptedException
 {
-	action.sendKeys((Keys.chord("a"))).build().perform();
+	//action.sendKeys((Keys.chord("a"))).build().perform();
 	Click_on_function_toolbar();
 	login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-icon']")).click();
-	 login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
-	 login.driver.findElement(By.xpath("//input[@placeholder='Search...']")).sendKeys("Round");
-	 action.moveToElement(login.driver.findElement(By.xpath("//div[contains(text(),'ROUND')]"))).doubleClick().perform();
+	 //login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
+	login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).click();
+	 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys("Round");
+	 Thread.sleep(3000);
+	 action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'Mathematics')]"))).doubleClick().perform();
 	 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
-	 login.driver.findElement(By.xpath("//span[contains(text(),'Download')]")).click();
-	 login.driver.switchTo().activeElement();
-	 login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[3]")).click();
+	 Thread.sleep(1000);
+	 
+			 login.driver.findElement(By.xpath("(//span[normalize-space(text())='Download'])[1]")).click();
+			 Thread.sleep(1000);
+	 login.driver.findElement(By.xpath("(//span[normalize-space(text())='Download'])[2]")).click();
+	// login.driver.switchTo().activeElement();
+	// login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[3]")).click();
 }
 @And("^Select download button, select function window from data transformation section and  apply round function$")
 public void select_download_button_select_function_window_from_data_transformation_section_and_apply_round_function() throws InterruptedException
 {
-	
-	action.sendKeys((Keys.chord("a"))).build().perform();
-   
+	Thread.sleep(2000);
+               //	action.sendKeys((Keys.chord("a"))).build().perform();
+	login.driver.findElement(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']")).click();
+	Thread.sleep(2000);
+	       WebElement plusioc=  login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']"));
+	       action.moveToElement(plusioc).click().build().perform();
+			//login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
 	Thread.sleep(2000);
 	login.driver.findElement(By.xpath("//span[contains(text(),'Download')]")).click();
 	login.driver.switchTo().activeElement();
-	login.driver.findElement(By.xpath("//div[@class='hot-functions-button hot-functions-button-download']")).click();
+	login.driver.findElement(By.xpath("(//span[normalize-space(text())='Download'])[2]")).click();
 	login.driver.switchTo().activeElement();
-	login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-icon']")).click();
-	 login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
+	login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+	// login.driver.findElement(By.xpath("//div[contains(text(),'By function')]")).click();
 	 Thread.sleep(2000);
-	 login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).click();
-	 login.driver.findElement(By.xpath("//input[@class='form--control search-functions-input']")).sendKeys("Round");
-	 action.moveToElement(login.driver.findElement(By.xpath("//div[contains(text(),'ROUND')]"))).doubleClick().perform();
+	 login.driver.findElement(By.xpath("//div[@class='function-editor-window--icon']")).click();
+	 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).click();
 	 Thread.sleep(2000);
-	 login.driver.findElement(By.xpath("//span[contains(text(),'Replace selected series')]//parent::label/span[@class='input-control--indicator']")).click(); 
+	 
+	 login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys("Round");
+	 Thread.sleep(3000);
+	 action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'Mathematics')]"))).doubleClick().perform();
+	 Thread.sleep(2000);
+	// login.driver.findElement(By.xpath("//span[contains(text(),'Replace selected series')]//parent::label/span[@class='input-control--indicator']")).click(); 
 	 login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 	 Thread.sleep(2000);
 	 //login.driver.findElement(By.xpath("//span[contains(text(),'Download')]")).click();
 	 login.driver.switchTo().activeElement();
-	 login.driver.findElement(By.xpath("(//span[contains(text(),'Download')])[3]")).click();
+	 login.driver.findElement(By.xpath("//span[text()='Download']")).click();
 }
 @Given("^login with that username$")
 public void login_with_that_username() throws Throwable
@@ -896,7 +1020,9 @@ public void login_with_that_username() throws Throwable
 	
 	login.driver.navigate().to("https://stage.ceicdata.com/node/WORLD__WORLD&&ALL__TP3200827");
 	Thread.sleep(10000);
-	login.driver.findElement(By.xpath("//input[@name='user_id']")).sendKeys("theju@gmail.com");
+	//login.driver.findElement(By.xpath("//input[@name='user_id']")).sendKeys("theju@gmail.com");
+	//login.driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Ceic@123");
+	login.driver.findElement(By.xpath("//input[@name='user_id']")).sendKeys("venkat.test@gmail.com");
 	login.driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Ceic@123");
 	login.driver.findElement(By.xpath("//button[@class='btn']")).click();
 	
@@ -906,21 +1032,24 @@ public void login_with_that_username() throws Throwable
 public void try_to_access_the_ssp_and_footnotes_for_the_unsubscribed_series() throws InterruptedException
 {
 	Thread.sleep(5000);
-	action.moveToElement(login.driver.findElement(By.xpath("(//span[contains(text(),'Geopolitical Risk Index')])[2]"))).build().perform();
+	action.moveToElement(login.driver.findElement(By.xpath("(//span[contains(text(),'Geopolitical Risk Index')])"))).build().perform();
 	if(login.driver.findElements(By.xpath("(//div[@class='series-list-item-data'])[1]//span[@title='Open footnote']")).size()==0)
 	{
 		System.out.println("SubScribed series");
 	}
 	
-	login.driver.findElement(By.xpath("(//span[contains(text(),'Geopolitical Risk Index')])[2]")).click();
+	login.driver.findElement(By.xpath("(//span[contains(text(),'Geopolitical Risk Index')])")).click();
 	login.driver.switchTo().activeElement();
-	String str=login.driver.findElement(By.xpath("//h4[@ui='$title']")).getText().toString();
-	System.out.println(str);
+	//String str=login.driver.findElement(By.xpath("//h4[@ui='$title']")).getText().toString();
+	//System.out.println(str);
 	
 }
 @And("^In database tree expand global db Afghanistan Afghanistan National Accounts$")
-public void in_database_tree_expand_globa_db_Afghanistan_Afghanistan_National_Accounts()
+public void in_database_tree_expand_globa_db_Afghanistan_Afghanistan_National_Accounts() throws InterruptedException
 {
+	Thread.sleep(2000);
+	login.driver.findElement(By.xpath("//span[text()='Databases']")).click();
+	Thread.sleep(1000);
 	login.driver.findElement(By.xpath("(//div[@data-node-model-id='GLOBAL']/div[@class='toggle'])[1]")).click();
 	login.driver.findElement(By.xpath("(//div[@data-node-model-id='GLOBAL&&ALL']/div[@class='toggle'])[1]")).click();
 	login.driver.findElement(By.xpath("(//div[@data-node-model-id='TP2560837']/div[@class='toggle'])[1]")).click();

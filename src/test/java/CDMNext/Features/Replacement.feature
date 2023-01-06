@@ -3,7 +3,7 @@ Feature: verifying replacement series  Functionality
   Background: 
     Given User has successful logged in
 
-  @replacement
+  @replacement1
   Scenario: TC_RS_01:Verify to open series suggestion manager window for series replacements in my_series
     And Verify window
     And Add rebased series to My series

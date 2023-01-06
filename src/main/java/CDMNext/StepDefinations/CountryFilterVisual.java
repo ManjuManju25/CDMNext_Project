@@ -22,6 +22,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	String Visual2_filter_title_text;
 	String Visual1_hs_title_text;
+	
 
 	@And("^Click on insert Filter visual icon$")
 	public void click_on_insert_Filter_visual_icon() throws Throwable {
@@ -244,6 +245,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Create any other visuals in a view$")
 	public void create_any_other_visuals_in_a_view() throws Throwable {
+	
 		emptyView.create_Histogram_and_Map_visuals();
 	}
 
@@ -254,6 +256,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Click inside filter visual$")
 	public void click_inside_filter_visual() throws Throwable {
+		wait(2000);
 		getElementByProperty(login.driver, "AllCountries", 20).click();
 	}
 
@@ -368,7 +371,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 		Visual2_filter_title_text = sourecEle.getText();
 		wait(2000);
 		WebElement targetEle = login.driver.findElement(
-				By.xpath("(//*[contains(@class,'histogram-visual')]//*[@class='visual-title--text text-dots'])[1]"));
+				By.xpath("//*[@class='view-components']/*[2]//*[@class='visual-title--text text-dots']"));
 		wait(500);
 		Visual1_hs_title_text = targetEle.getText();
 		wait(1000);
@@ -381,9 +384,9 @@ public class CountryFilterVisual extends CommonFunctionality {
 	public void country_filter_visual_should_move() throws Throwable {
 		// Visuals after drag and drop
 		wait(1000);
-		String visual1_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[1]")).getText();
-		String visual2_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[2]")).getText();
-		if (!visual1_text.equals(Visual1_hs_title_text) && !visual2_text.equals(Visual2_filter_title_text)) {
+		String visual2_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[1]")).getText();
+		String visual1_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[2]")).getText();
+		if (!visual2_text.equals(Visual1_hs_title_text) && !visual1_text.equals(Visual2_filter_title_text)) {
 			login.Log4j.info("Visuals interchanged by drag and drop");
 		} else {
 			Assert.fail("Verification failed");

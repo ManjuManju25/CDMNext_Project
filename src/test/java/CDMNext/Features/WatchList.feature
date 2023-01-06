@@ -51,7 +51,7 @@ Feature: WatchList feature
   @Watch
   Scenario: TC_CVISION_WL_010: Verify edit alert - Change to weekly
     And Add a series to watchlist
-    And Go to watchlist and select the series and click edit alert drop-down "popup_notifications" "Weekly"
+    And Go to watchlist and select the series and click edit alert drop-down "email_notifications" "Weekly"
     Then Highlight the series in watchlist and click bell-icon "email_notifications"
 
   @Watch
@@ -96,10 +96,10 @@ Feature: WatchList feature
     Then select "Email frequency" option1
     Then Change the orientation order
 
-  @Watch1
+  @Watch
   Scenario: TC_CVISION_WL_021:Validating the maximum number of series in watchlist
     And Add 2001 series into watchlist having series "popup_notifications"
 
-  @Watch1
+  @Watch
   Scenario: TC_CVISION_WL_022:Verify if 1999 items can be added to watchlist
     And Add 1999 into watchlist having series "popup_notifications"

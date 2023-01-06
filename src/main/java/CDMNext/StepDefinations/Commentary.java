@@ -194,11 +194,7 @@ public class Commentary {
 			WebElement checkbox1 = CommonFunctionality.getElementByProperty(login.driver, "unchecked", 4);
 			new Actions(login.driver).pause(300).moveToElement(checkbox1).click().build().perform();
 		}
-		/*try {
-			CommonFunctionality.getElementByProperty(login.driver, "POP_title_close", 20).click();
-		} catch(Exception e) {
-			
-		}*/
+		
 	}
 
 	@Then("^The title name should reflect on the Commentary$")
@@ -228,6 +224,7 @@ public class Commentary {
 
 	@And("^Check the box and enter the title name as \"([^\"]*)\"$")
 	public void check_the_box_and_enter_the_title_name_as(String arg1) throws Throwable {
+		
 		CommonFunctionality.getElementByProperty(login.driver, "Title_input", 8).clear();
 		CommonFunctionality.getElementByProperty(login.driver, "Title_input", 8).sendKeys(arg1);
 	}
@@ -985,6 +982,7 @@ public class Commentary {
 
 	@And("^Click on Download icon$")
 	public void click_on_Download_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
 		login.driver.switchTo().defaultContent();
 		CommonFunctionality.getElementByProperty(login.driver, "DownloadIcon_var", 20).click();
 	}
@@ -1704,6 +1702,9 @@ public class Commentary {
 	@And("^Choose alignment as \"([^\"]*)\"$")
 	public void choose_alignment_as(String arg1) throws Throwable {
 		login.driver.switchTo().defaultContent();
+		if(arg1.equalsIgnoreCase("Align left")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@title='More...']", 15).click();
+		}
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 15);
 		//action.doubleClick(ele).build().perform();
 		ele.click();
@@ -1792,6 +1793,7 @@ public class Commentary {
 		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
 				System.getProperty("user.dir") + "\\AutoIT\\UploadFile.exe",
 				System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+		
 		CommonFunctionality.wait(5000);
 	}
 
@@ -1926,7 +1928,7 @@ public class Commentary {
 		
 		case "Map":
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//div[contains(@class,'icon--table-vertical_large')]", 8).click();
+					"//div[contains(@class,'icon--map-filled_large')]", 8).click();
 			break;
 		case "Table":
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -2015,9 +2017,9 @@ public class Commentary {
 		if (CreatedCommentaryVisuals.size() > 0) {
 			for (int i = 0; i < CreatedCommentaryVisuals.size(); i++) {
 				if (CreatedCommentaryVisuals.get(i).isDisplayed()) {
-					login.Log4j.info("Commentary visual is created");
+					login.Log4j.info("Commentary visual is created/pasted");
 				} else {
-					Assert.fail("Commentary visual is not created");
+					Assert.fail("Commentary visual is not created/pasted");
 				}
 			}
 		} else {
@@ -2037,6 +2039,7 @@ public class Commentary {
 
 	@And("^Again Right click on visual header$")
 	public void again_Right_click_on_visual_header() throws Throwable {
+		CommonFunctionality.wait(5000);
 		right_click_on_visual_header();
 		// WebElement title = CommonFunctionality.getElementByXpath(login.driver,
 		// "//*[@data-name='title']", 4);
@@ -2046,6 +2049,15 @@ public class Commentary {
 	@Then("^Copied visual should be pasted$")
 	public void copied_visual_should_be_pasted() throws Throwable {
 		the_commentary_visual_should_be_created_in_the_same_view_tab();
+		/*CommonFunctionality.wait(2000);
+		List<WebElement> No_OfVisuals = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("visuals")));
+		if(No_OfVisuals.size() == 2)	{
+			login.Log4j.info("Commentary visual is pasted");
+				
+				
+		}else {
+			Assert.fail("Commentary visual is not pasted");
+		}*/
 	}
 
 	@Then("^All the contents should be removed from the visual$")

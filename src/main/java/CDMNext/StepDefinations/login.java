@@ -100,7 +100,8 @@ public class login {
 	//TestRunner testRunner = new TestRunner();
 	
 	
-	@Before("~@Search,~@FilterSearch")
+	//@Before("~@Search,~@FilterSearch")
+	@Before
 	public void setUp(Scenario scenario) throws Throwable {
 		//driver.manage().deleteAllCookies();
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
@@ -109,26 +110,27 @@ public class login {
 	    root.setLevel(ch.qos.logback.classic.Level.INFO);
 		Invoke_browser();	
 		SearchTest.user_has_successful_logged_in();	
-		Hooks.before_run();
-		/*String feature_file = Hooks.getFeatureFileNameFromScenarioId(scenario);
+		//Hooks.before_run();
+		String feature_file = Hooks.getFeatureFileNameFromScenarioId(scenario);
 		if (feature_file.toLowerCase().contains("filtersearch") || feature_file.toLowerCase().contains("synonym search")) {
-			Hooks.CloseAnnouncementPopUp();
-			Hooks.Handle_BrowserNotification_popup();
+			//Hooks.CloseAnnouncementPopUp();
+			//Hooks.Handle_BrowserNotification_popup();
 			login.driver.navigate().refresh();
 			CommonFunctionality.ResetMethod();
 		} else {
 			Hooks.before_run();
 		}
-		*/
+		
 	}
 
-	@Before("@Search,@FilterSearch")
+/*	@Before("@Search,@FilterSearch")
 	public void setUp1() throws Throwable {
-		SearchTest.user_has_successful_logged_in();	
+		Invoke_browser();
+		SearchTest.user_has_successful_logged_in();
 		login.driver.navigate().refresh();
 		CommonFunctionality.ResetMethod();
 
-	}
+	}*/
 	@After
 	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);

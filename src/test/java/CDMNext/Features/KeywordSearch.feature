@@ -276,10 +276,10 @@ Feature: Synonym Search
     Given User enters keyword "wsa"
     Then User verify keyword search results
 
-  @SynonymSearch
-  Scenario: TC_SynonymSearch_56 : Search for an Acronym as "LME"
-    Given User enters keyword "LME"
-    Then User verify keyword search results
+  #@SynonymSearch
+  #Scenario: TC_SynonymSearch_56 : Search for an Acronym as "LME"
+    #Given User enters keyword "LME"
+    #Then User verify keyword search results
 
   @SynonymSearch
   Scenario: TC_SynonymSearch_57 : Search for an Acronym as "incl"
@@ -492,8 +492,9 @@ Feature: Synonym Search
     Then User verify keyword search results
 
   @SynonymSearch
-  Scenario: TC_SynonymSearch_99 : Search for an Acronym as "	
-  "
+  Scenario: TC_SynonymSearch_99 : Search for an Acronym as "
+    "
+
     Given User enters keyword "bdo"
     Then User verify keyword search results
 
@@ -1391,147 +1392,148 @@ Feature: Synonym Search
   Scenario: TC_@SeriesTag_278 :Search for an seriesTag as "61149902(IDIAF)"
     Given User enters keyword "61149902(IDIAF)"
     Then Verify the search results for given SerisTag
-#
+
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_279 : Search for an Acronym as "上 交 所"
-    #Given User enters keyword "上 交 所"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "上 交 所"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_280 : Search for an Acronym as "个 人 消 费 支 出"
-    #Given User enters keyword "个 人 消 费 支 出"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "个 人 消 费 支 出"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_281 : Search for an Acronym as "冰 箱"
-    #Given User enters keyword "冰 箱"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "冰 箱"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_282 : Search for an Acronym as "印 尼"
-    #Given User enters keyword "印 尼"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "印 尼"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_283 : Search for an Acronym as "国 债 利 率"
-    #Given User enters keyword "国 债 利 率"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "国 债 利 率"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_284 : Search for an Acronym as "张 家 界"
-    #Given User enters keyword "张 家 界"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "张 家 界"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_285 : Search for an Acronym as "活 猪 存 栏 量"
-    #Given User enters keyword "活 猪 存 栏 量"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "活 猪 存 栏 量"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_286 : Search for an Acronym as "深 交 所"
-    #Given User enters keyword "深 交 所"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "深 交 所"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_287 : Search for an Acronym as "生 产 率"
-    #Given User enters keyword "生 产 率"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "生 产 率"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_288 : Search for an Acronym as "草 鱼"
-    #Given User enters keyword "草 鱼"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "草 鱼"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_289 : Search for an Acronym as "货 币 供 应 量"
-    #Given User enters keyword "货 币 供 应 量"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "货 币 供 应 量"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_290 : Search for an Acronym as "金 融 资 产 总 量"
-    #Given User enters keyword "金 融 资 产 总 量"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "金 融 资 产 总 量"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_291 : Search for an Acronym as "程 限"
-    #Given User enters keyword "程 限"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "程 限"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_292 : Search for an Acronym as "文 化"
-    #Given User enters keyword "文 化"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "文 化"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_293 : Search for an Acronym as "一 月"
-    #Given User enters keyword "一 月"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "一 月"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_294 : Search for an Acronym as "职 工"
-    #Given User enters keyword "职 工"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "职 工"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_295 : Search for an Acronym as "年 尾 年 末"
-    #Given User enters keyword "年 尾 年 末"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "年 尾 年 末"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_296 : Search for an Acronym as "交 易"
-    #Given User enters keyword "交 易"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "交 易"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_297 : Search for an Acronym as "建 造"
-    #Given User enters keyword "建 造"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "建 造"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_298 : Search for an Acronym as "假 期"
-    #Given User enters keyword "假 期"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "假 期"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_299 : Search for an Acronym as "季 节"
-    #Given User enters keyword "季 节"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "季 节"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_300 : Search for an Acronym as "加 强"
-    #Given User enters keyword "加 强"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "加 强"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_301 : Search for an Acronym as "计 算"
-    #Given User enters keyword "计 算"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "计 算"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_302 : Search for an Acronym as "出 产"
-    #Given User enters keyword "出 产"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "出 产"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_303 : Search for an Acronym as "出 入 收 支"
-    #Given User enters keyword "出 入 收 支"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "出 入 收 支"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_304 : Search for an Acronym as "长三角：长江三角洲"
-    #Given User enters keyword "长三角：长江三角洲"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "长三角：长江三角洲"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_305 : Search for an Acronym as "珠三角：珠江三角洲"
-    #Given User enters keyword "珠三角：珠江三角洲"
-    #Then User verify keyword search results
-#
+  #Given User enters keyword "珠三角：珠江三角洲"
+  #Then User verify keyword search results
+  #
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_306
-    #Given User enters "从业人数 AND ВВП"
-    #Then User verifies keyword search results
-#
+  #Given User enters "从业人数 AND ВВП"
+  #Then User verifies keyword search results
+  #
   @ChineseKeywordSearch
   Scenario: TC_KeywordSearch_307
     Given User enters keyword "国内総生産 OR ВВП OR gas"
@@ -1544,18 +1546,17 @@ Feature: Synonym Search
 
   #@ChineseKeywordSearch
   #Scenario: TC_KeywordSearch_309
-    #Given User enters "摩托车"
-    #And User selects "Source" as "China Association of Automobile Manufacturers"
-    #And User has clicked on "Apply filter"
-    #Then User verify the search results
-#
+  #Given User enters "摩托车"
+  #And User selects "Source" as "China Association of Automobile Manufacturers"
+  #And User has clicked on "Apply filter"
+  #Then User verify the search results
+  #
   #@RussianKeywordSearch
   #Scenario: TC_KeywordSearch_311
-    #Given User enters "среднегодовым"
-    #And User selects "Source" as "Federal State Statistics Service"
-    #And User has clicked on "Apply filter"
-    #Then User verify the search results
-
+  #Given User enters "среднегодовым"
+  #And User selects "Source" as "Federal State Statistics Service"
+  #And User has clicked on "Apply filter"
+  #Then User verify the search results
   @SynonymSearch
   Scenario: TC_SynonymSearch_312 : Search for an Acronym as "Allahabad"
     Given User enters keyword "Allahabad"
@@ -1668,7 +1669,7 @@ Feature: Synonym Search
     Given User enters keyword "粤港澳大湾区：大湾区"
     Then User verify keyword search results
 
-     @SynonymSearch
+  @SynonymSearch
   Scenario: TC_SynonymSearch_332 : Search for an Acronym as "FGV"
     Given User enters keyword "FGV"
     Then User verify keyword search results

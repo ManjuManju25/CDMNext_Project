@@ -71,6 +71,7 @@ public class Breakdown extends CommonFunctionality {
 
 	@And("^Expand \"([^\"]*)\" till first table level$")
 	public void expand_till_first_table_level(String arg1) throws Throwable {
+		wait(1000);
 		getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/preceding::*[@class='toggle'][1]", 20)
 				.click();
 		getElementByProperty(login.driver, "NationalAccounts_table_level", 20).click();
@@ -310,6 +311,7 @@ public class Breakdown extends CommonFunctionality {
 
 	@And("^Expand \"([^\"]*)\" till second table level$")
 	public void expand_till_second_table_level(String arg1) throws Throwable {
+		wait(500);
 		getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]/preceding::*[@class='toggle'][1]", 20)
 				.click();
 		wait(500);

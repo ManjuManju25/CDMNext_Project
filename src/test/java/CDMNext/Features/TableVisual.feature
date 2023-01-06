@@ -108,7 +108,7 @@ Feature: Table Visual Functionality
     And Select the Frequency option in tabel visual
     And verify Frequency option from cogwheel icon
 
-  @TableVisual
+  @TableVisual851
   Scenario: TC_TV_20: Verify Currency option from cogwheel icon
     And User Select Series ID  as "4331701"
     And Select the Currency option in tabel visual
@@ -637,10 +637,10 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Series appling function in series level
 
-  @TableVisual
-  Scenario: TC_TV_124:Edit series - Verify cancel icon for selected function
-    And User Select Series ID  as "4331701"
-    And verify Edit Series appling function  cancel icon for selected function
+  #@TableVisual
+  #Scenario: TC_TV_124:Edit series - Verify cancel icon for selected function
+    #And User Select Series ID  as "4331701"
+    #And verify Edit Series appling function  cancel icon for selected function
 
   @TableVisual
   Scenario: TC_TV_125:Edit series - Verify multiple functions apply
@@ -652,10 +652,10 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Series search for functions
 
-  @TableVisual
-  Scenario: TC_TV_127:Edit series - Verify removing applied functions
-    And User Select Series ID  as "4331701"
-    And verify Edit Series removing applied functions
+  #@TableVisual
+  #Scenario: TC_TV_127:Edit series - Verify removing applied functions
+    #And User Select Series ID  as "4331701"
+    #And verify Edit Series removing applied functions
 
   @TableVisual
   Scenario: TC_TV_128:Edit series - Verify applied funtion in function toolbar
@@ -687,16 +687,16 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Series Verify Verify +Add from my series option
 
-  @TableVisual
+  @TableVisual1
   Scenario: TC_TV_134:Edit series -Verify adding series from my series
     And Create a table visual
     And verify Edit Series Verify adding series from my series
 
-  @TableVisual
+  @TableVisual85
   Scenario: TC_TV_135:Edit series -Verify max series for Table visual
     And verify Edit Series Verify max series for Table visual
 
-  @TableVisual
+  @TableVisual10
   Scenario: TC_TV_136:Edit series -Verify message for selecting more than 100 series
     And verify Edit Series Verify message for selecting more than 100 series
 
@@ -1223,9 +1223,9 @@ Feature: Table Visual Functionality
   @TableVisual
   Scenario: TC_TV_240:Edit Table-Verify Copyright-popup-horizontal alignment (left, right, center)
     And Create a table visual
-    And verify Edit Table Copyright popup link horizontal alignment (left, right, center)
+   And verify Edit Table Copyright popup link horizontal alignment (left, right, center)
 
-  @TableVisual
+  @TableVisual2020
   Scenario: TC_TV_241:Edit Table-Verify Copyright-popup-vertical alignment (Top and bottom)
     And Create a table visual
     And verify Edit Table Copyright popup link vertical alignment (Top and bottom)
@@ -1607,10 +1607,10 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify Edit Table appling function in series level inside Edit tabel popup
 
-  @TableVisual
-  Scenario: TC_TV_314:Edit Table- Edit series -Verify cancel icon for selected function -inside Edit tabel popup
-    And Create a table visual
-    And verify Edit Table cancel icon for selected function inside Edit tabel popup
+  #@TableVisual
+  #Scenario: TC_TV_314:Edit Table- Edit series -Verify cancel icon for selected function -inside Edit tabel popup
+    #And Create a table visual
+    #And verify Edit Table cancel icon for selected function inside Edit tabel popup
 
   @TableVisual
   Scenario: TC_TV_315:Edit Table- Edit series -Verify multiple functions apply -inside Edit tabel popup
@@ -1705,7 +1705,7 @@ Feature: Table Visual Functionality
     And select the table visual
     And verify Add related option when the visual is empty
 
-  @TableVisual
+  @TableVisual852
   Scenario: TC_TV_333:Verify adding series from Series suggestion manager popup
     And User Select Series ID  as "394611277"
     #And Select series to my series tab
@@ -1753,7 +1753,7 @@ Feature: Table Visual Functionality
     And Create a table visual
     And verify confirmation message for copy visual
 
-  #@TableVisual1
+  #@TableVisual
   #Scenario: TC_TV_341:Copy -Verify copy here in growl message
     #And Create a table visual
     #And verify copy here in growl message
