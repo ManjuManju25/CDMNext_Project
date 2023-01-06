@@ -4,7 +4,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: RSP_01: Verify RSP for 'series'
     And add some series into my series with more dropdown rebased filter
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -13,8 +13,9 @@ Feature: Refresh Summary PopUp feature
   @RSP
   Scenario: TC_02:Verify RSP for 'visuals'
     And create some visuals with more dropdown rebased filter
-    Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+  	
+  	  Then logout by saving insight
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -27,7 +28,7 @@ Feature: Refresh Summary PopUp feature
     And click on related series tab
     #And some tabs display in RSP
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -40,7 +41,7 @@ Feature: Refresh Summary PopUp feature
     And click on add related series
     #And some tabs display in RSP
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -60,7 +61,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_06: Verify Replacement for series under RSP
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -74,7 +75,7 @@ Feature: Refresh Summary PopUp feature
     And new insight search series ids as "19525401;91271701"
     And add series into visuals
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -87,14 +88,14 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_08:Verify RSP when don’t show again is checked
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
     And Check don’t show again checkbox
     And click on close window
     Then click on signout
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -104,14 +105,14 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_09: Verify RSP to enable RSP when don’t show again is checked
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
     And Check don’t show again checkbox
     And click on close window
     Then click on signout
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -126,7 +127,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_10: Verify minimising RSP
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -137,7 +138,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_11: Verify maxmizing RSP
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -149,7 +150,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_12: Verify enlarging RSP
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -160,7 +161,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_13: Verify cross mark in RSP
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -171,7 +172,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_14:Verify cancel button in RSP
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -188,7 +189,7 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_16: Verify RSP when site is refreshed
     And New insight search with given data as "19525401;91271701"
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -222,13 +223,13 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_20: Verify dismiss button in RSP
     And add some series into my series with more dropdown rebased filter
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
     And click on dismiss button in RSP window
     Then click on signout
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -238,19 +239,19 @@ Feature: Refresh Summary PopUp feature
   Scenario: TC_21: Verify dismiss button in RSP for refresh action
     And add some series into my series with more dropdown rebased filter
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
     And click on dismiss button in RSP window
     And refresh the page
-    Then RSP window should not be opened
+    Then RSP window should not be openeds
 
   @RSP
   Scenario: TC_22:Verify dismiss button in new insight for same filter as previous insight
     And add some series into my series with more dropdown rebased filter
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open
@@ -260,7 +261,7 @@ Feature: Refresh Summary PopUp feature
     And click on CDMNext, CEIC’s Data Manager
     And add some series into my series with more dropdown rebased filter
     Then logout by saving insight
-    And login again with username"tbemineni" and passowrd as "abc1@WSX!ABC"
+    And login again with username "vvagicharla@isimarkets.com" and passowrd as "ZAQ!2wsx@7989"
     And click on Myinsights
     And click on recent saved insights
     And click on open

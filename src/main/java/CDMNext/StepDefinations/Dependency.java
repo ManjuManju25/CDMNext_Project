@@ -3,10 +3,14 @@ package CDMNext.StepDefinations;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -52,9 +56,8 @@ public class Dependency {
 	public void add_some_of_series_into_my_series_tab() throws Throwable {
 		Thread.sleep(3000);
 		for (int i = 1; i <= 2; i++) {
-
-			login.driver.findElement(By.xpath("(//div[@class='title']/span[@class='svg-checkbox'])[" + i + "]"))
-					.click();
+			                                  // (//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]
+			login.driver.findElement(By.xpath("(//div[@class='title']/span[@class='svg-checkbox'])["+i+"]")).click();
 
 		}
 
@@ -75,7 +78,7 @@ public class Dependency {
 	public void click_on_related_series() throws Throwable {
 
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
+		login.driver.findElement(By.xpath("//*[contains(text(),'Related series')]")).click();
 	}
 
 	// TC_01
@@ -289,15 +292,18 @@ public class Dependency {
 	@Then("^'Chart opened' should be closed$")
 	public void chart_opened_should_be_closed() throws Throwable {
 		Thread.sleep(3000);
-		if (login.driver.findElement(By.xpath("//div[@class='legend-item--marker legend-item--hide-series']"))
-				.isDisplayed()) {
-
-			Assert.fail("Test case failed");
-		} else {
-
+		
+		
+		if(login.driver.findElements(By.xpath("//div[@class='legend-item--marker legend-item--hide-series']")).size()==0) {
 			System.out.println("Chart opened' should be closed");
+			System.out.println("------------------------------------>9");
+			}
+		else {
+			Assert.fail("Test case failed");
 		}
-		System.out.println("------------------------------------>9");
+		
+		
+		
 	}
 
 //TC_10
@@ -640,7 +646,11 @@ public class Dependency {
 		WebElement rightbutton = login.driver.findElement(By.xpath("(//span[@class='group-name'])[1]"));
 		action.contextClick(rightbutton).perform();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
+		
+		
+		login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+		login.driver.findElement(By.xpath("//div[text()='Vertical']")).click();
+		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
 		Thread.sleep(2000);
 
 		// series harmonization
@@ -727,7 +737,11 @@ public class Dependency {
 		js.executeScript("arguments[0].scrollIntoView();", scrolldown);
 		Thread.sleep(3000);
 
-		login.driver.findElement(By.xpath("(//div[@class='legend-item--marker legend-item--hide-series'])[1]")).click();
+		WebElement chartlegend = login.driver.findElement(By.xpath("(//div[@class='legend-item--marker'])[1]"));
+		action.moveToElement(chartlegend).build().perform();
+		
+		
+		login.driver.findElement(By.xpath("(//div[@class='legend-item--hiding-series'])[1]")).click();
 
 		Thread.sleep(2000);
 	}

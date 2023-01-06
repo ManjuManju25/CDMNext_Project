@@ -232,7 +232,7 @@ Feature: Comparing Data in Two Exel sheet
     And Select Leave as Blank
     And Compare "TC_38" exel sheet with Actual data
 
-  @ExelDatacomparision
+  @ExelDatacomparision4
   Scenario: TC_39:Verifying Download with Automatic date format + Series in Columns + Descending + No Attributes + Filter Blanks with no observation
     And User Select Series ID  as "310902302"
     And Select Download button
@@ -387,7 +387,7 @@ Feature: Comparing Data in Two Exel sheet
   Scenario: TC_54:Verifying the function CurrencyConversion using an unsupported currency.
     And User Select Series ID  as "310902302"
     And Select Download button
-    And Select the Function as "Convertcur"
+    And Select the Function as "CONVERTCUR"
     And Select the Applay button
     And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes
@@ -397,7 +397,7 @@ Feature: Comparing Data in Two Exel sheet
   Scenario: TC_55:Verifying the function Disaggregate.
     And User Select Series ID  as "2121401"
     And Select Download button
-    And Select the Function as "Disaggregate"
+    And Select the Function as "DISAGGREGATE"
     And Select the Parameters
     And Select the Applay button
     And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
@@ -419,7 +419,7 @@ Feature: Comparing Data in Two Exel sheet
     # And User Select Series ID "5739901"
     And User Select Series ID  as "5739901"
     And Select Download button
-    And Select the Function as YTD
+    And Select the Function as "YTD"
     And Select the Applay button
     And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And Select the Selected Attributes
@@ -495,7 +495,7 @@ Feature: Comparing Data in Two Exel sheet
     And User Select Series ID  as "5190101"
     And Select Download button
     And Select Orientation as  Rows
-    And Select the Function as "Accumulate"
+    And Select the Function as "ACCUMULATE"
     And Select the Applay button
     And Select the Start Date as "1997-01-01" and End Date "2006-12-31"
     And uncheck the Date column

@@ -40,22 +40,16 @@ Map c=new Map();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[text()='Series']")).click();
 		
-		
-		
 		Thread.sleep(3000);
 
-		WebElement rightclick = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		WebElement rightclick = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[5]"));
+		                                                                           
 		a.contextClick(rightclick).build().perform();
-		login.driver.findElement(By.xpath("//span[text()='View as Chart']")).click();
+		login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
 
 		Thread.sleep(3000); 	 	
-		login.driver.findElement(By.xpath("(//div[@class='icon--map-world'])[1]")).click();
+		login.driver.findElement(By.xpath("(//div[text()='Map'])[3]")).click();
 		Thread.sleep(3000);
-		
-		
-		
-		
-		
 		
 	}
 
@@ -209,10 +203,9 @@ Map c=new Map();
 
 			List<String> sname = new ArrayList<>();
 
-			for (int i = 2; i <= 9; i++) {
+			for (int i = 1; i <= 8; i++) {
 
-				String frequencyOrder = login.driver.findElement(By.xpath("(//span[@class='text-dots'])[" + i + "]"))
-						.getText();
+				String frequencyOrder = login.driver.findElement(By.xpath("(//div[@class='dropdown-search-filter-wrapper']//span[@class='text-dots'])["+i+"]")).getText();
 				System.out.println("frequencyOrder:" + frequencyOrder);
 				sname.add(frequencyOrder);
 				System.out.println("static values:" + arg1);
@@ -243,7 +236,7 @@ Map c=new Map();
 		
 				// checked 1st series
 				Thread.sleep(4000);
-				login.driver.findElement(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']")).click();
+				login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[5]")).click();
 
 				// click on + icon Right side panel
 
@@ -368,6 +361,8 @@ Map c=new Map();
 				login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 			}
 			
+			
+			
 		}
 		@And("^Add a series \"([^\"]*)\" into right-pane$")
 		public void add_a_series_into_right_pane(String str) throws InterruptedException
@@ -375,22 +370,33 @@ Map c=new Map();
 			Thread.sleep(4000);
 			login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
 			
-			if(login.driver.findElements(By.xpath("//span[@class='input-control--indicator']")).size()>=1)
-			{
-				login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[11]")).click();
-				
-			      login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
-			}
+//			if(login.driver.findElements(By.xpath("//span[@class='input-control--indicator']")).size()>=1)
+//			{
+//				login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[11]")).click();
+//				
+//			      login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
+//			}
 			Search_for_series_in_layout(str);
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+			WebElement series=login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+			a.moveToElement(series).contextClick().build().perform();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
+			                                                 
+			
+			
+			
+			//login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+			
 			//action.sendKeys((Keys.chord("a"))).build().perform();
 		}
 		@And("^Create a chart for series \"([^\"]*)\"$")
 		public void create_chart_for_series(String str) throws InterruptedException
 		{
 			add_a_series_into_right_pane(str);
-			a.sendKeys((Keys.chord("c"))).build().perform();
+			//a.sendKeys((Keys.chord("c"))).build().perform();
 		}
 		@And("^Click on the timeframe to choose custom dates from \"([^\"]*)\" to \"([^\"]*)\"$")
 		public void click_on_the_timeframe_to_choose_custom_dates_from(String str1,String str2) throws InterruptedException
@@ -425,8 +431,17 @@ Map c=new Map();
 			login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
 			Thread.sleep(2000);
 			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
-			a.contextClick().build().perform();
-			a.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]"))).click().perform();
+			//
+		WebElement series=	login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+	a.moveToElement(series).build().perform();
+	a.contextClick().build().perform();
+			Thread.sleep(2000);
+			a.moveToElement(login.driver.findElement(By.xpath("//span[text()='Add chart']"))).click().perform();
+			// login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
+				Thread.sleep(2000);
+				login.driver.findElement(By.xpath("//div[contains(@class,\"icon--chart-line_large\")]")).click();
+				Thread.sleep(2000);
+			
 		}
 		@And("^Open edit visual$")
 		public void open_edit_visual() throws InterruptedException

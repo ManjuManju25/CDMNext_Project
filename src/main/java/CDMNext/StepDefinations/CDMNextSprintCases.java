@@ -933,9 +933,10 @@ public class CDMNextSprintCases {
 		}
 	}
 
+	//venkat updated xpath 21-22-2022
 	@And("^Click on Download button in header$")
 	public void click_on_Download_button_in_header() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'button__download-btn')]", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='download-button--text drop-down-button--label']", 4).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -1229,7 +1230,7 @@ public class CDMNextSprintCases {
 		new Actions(login.driver).moveToElement(notification).pause(1000).click().build().perform();
 	}
 
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	@And("^Open preference dropdown$")
 	public void open_preference_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -1267,30 +1268,22 @@ public class CDMNextSprintCases {
 	}
 
 	@And("^Click on the Upload button to upload \"([^\"]*)\"$")
-	public void click_Upload_button_to_upload(String arg1) throws Throwable {
+	public void click_Upload_button_to_upload(String arg1) throws Throwable{
 		if (arg1.equalsIgnoreCase("Image")) {
 			CommonFunctionality.wait(2000);
-			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-					System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
-					System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 			CommonFunctionality.wait(2000);
-		} else if (arg1.equalsIgnoreCase("Large Image")) {
+		} else if (arg1.equalsIgnoreCase("Large Image")){
 			CommonFunctionality.wait(2000);
-			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-					System.getProperty("user.dir") + "\\AutoIT\\Technology.exe",
-					System.getProperty("user.dir") + "\\AutoIT\\Technology.jpg");
+			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Technology.exe",System.getProperty("user.dir") + "\\AutoIT\\Technology.jpg");
 			CommonFunctionality.wait(2000);
 		} else if (arg1.equalsIgnoreCase("Videos")) {
 			CommonFunctionality.wait(2000);
-			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-					System.getProperty("user.dir") + "\\AutoIT\\Typing.exe",
-					System.getProperty("user.dir") + "\\AutoIT\\Typing.mp4");
+			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Typing.exe",System.getProperty("user.dir") + "\\AutoIT\\Typing.mp4");
 			CommonFunctionality.wait(2000);
 		} else if (arg1.equalsIgnoreCase("File")) {
 			CommonFunctionality.wait(2000);
-			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-					System.getProperty("user.dir") + "\\AutoIT\\Empty_File.exe",
-					System.getProperty("user.dir") + "\\AutoIT\\Empty_File.txt");
+			CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Empty_File.exe",System.getProperty("user.dir") + "\\AutoIT\\Empty_File.txt");
 			CommonFunctionality.wait(2000);
 		}
 	}
@@ -1346,8 +1339,7 @@ public class CDMNextSprintCases {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::span[1]", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"(//ul[@class='select2-results']//*[@class='select2-result-label'])[4]", 4).click();
-		prefix_edit = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::span[1]", 4).getText();
+		prefix_edit = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg1 + "']/following::span[1]", 4).getText();
 	}
 
 	@And("^Click on edit in \"([^\"]*)\" from preferences option$")

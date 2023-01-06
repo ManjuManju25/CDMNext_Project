@@ -353,7 +353,7 @@ Feature: MyInsight Functionality
   Scenario: TC_MyInsights_72:Verify right click options Add tags for multiple insights at once
     And Navigates to Myinsight page
     And Verify right click options Add tags for multiple insights at once
-
+	
   @MyInsights
   Scenario: TC_MyInsights_73:Verify right click options Add tags-selected insights count in add tags window
     And Navigates to Myinsight page

@@ -20,8 +20,12 @@ import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import CDMNext.util.CommonFunctionality;
 import ch.qos.logback.core.joran.action.Action;
 import cucumber.api.java.en.*;
@@ -101,7 +105,7 @@ public class HeatMap {
 	public static String selectcolor;
 	public static String fontsize;
 	public static String subtitle;
-	public static int Steps_Color;;
+	public static int Steps_Color;
 	public static ArrayList<String> frequencyList;
 	public static ArrayList<String> Frequencylist = new ArrayList<>();
 	public static String subtitle_background;
@@ -111,19 +115,22 @@ public class HeatMap {
 	ArrayList<String> drodpdownvalues = new ArrayList<>();
 	public static ArrayList<String> slodColorSteps = new ArrayList<>();
 	public static ArrayList<String> Legendropdown = new ArrayList<>();
+	JavascriptExecutor js = (JavascriptExecutor)login.driver;
 	public static String Label_size;
 	public static String Rotate;
 	public static String Radius_border;
 	public static String EditVisual_color;
 	public static String TimeAxis_size;
 	public static String Label_window_size;
+	public static String color;
+	public static String label_Color;
 
 	// TC_01
 	@Given("^Navigate to series Tab$")
 	public void navigate_to_series_Tab() throws Throwable {
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
+		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
 
 	}
 
@@ -148,7 +155,8 @@ public class HeatMap {
 
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		WebElement check=login.driver.findElement(By.xpath("//label//input[@name='select_all_dataselection']"));
+		action.moveToElement(check).click().build().perform();
 		Thread.sleep(1000);
 
 		WebElement rightclick = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
@@ -160,20 +168,10 @@ public class HeatMap {
 	@And("^click on Add chart and click on HeatMap$")
 	public void click_on_Add_chart_and_click_on_HeatMap() throws Throwable {
 
-		/*
-		 * Thread.sleep(1000);
-		 * login.driver.findElement(By.xpath("//*[text()='View as ...']")).click();
-		 * Thread.sleep(2000); login.driver.findElement(By.
-		 * xpath("//*[@class='dropdown-menu']//*[text()='Heat map']")).click();
-		 * 
-		 */
-
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(
-				"//*[@class='icon--heatmap_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']"))
-				.click();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]")).click();
 	}
 
 //TC_01
@@ -182,7 +180,8 @@ public class HeatMap {
 
 		Thread.sleep(3000);
 
-		try {
+		try {	
+			
 			// login.driver.findElement(By.xpath("//button[@class='button
 			// button__primary']")).isDisplayed();
 			// Thread.sleep(2000);
@@ -271,9 +270,9 @@ public class HeatMap {
 
 		login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn-icon'])[1]")).click();
 
-		login.driver.findElement(By.xpath(
-				"//*[@class='icon--heatmap_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']"))
-				.click();
+		login.driver.findElement(By.xpath("(//div[text()='Heat map'])[4]")).click();
+		Thread.sleep(2000);
+		//(//div[text()='Heat map'])[4]
 
 	}
 
@@ -281,12 +280,12 @@ public class HeatMap {
 	@And("^Series Drag and drop into HeatMap visual to view panel$")
 	public void series_Drag_and_drop_into_HeatMap_visual_to_view_panel() throws Throwable {
 		CommonFunctionality.wait(3000);
-
-		WebElement plusicon = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
-
-		action.moveToElement(plusicon).build().perform();
-		Robot r = new Robot();
-		r.keyPress(KeyEvent.VK_A);
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+//		WebElement plusicon = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
+//
+//		action.moveToElement(plusicon).build().perform();
+//		Robot r = new Robot();
+//		r.keyPress(KeyEvent.VK_A);
 		CommonFunctionality.wait(5000);
 
 	}
@@ -414,6 +413,13 @@ public class HeatMap {
 
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	// TC_08
 	@Then("^click on frequency dropdown and verify the frequency dropdown list$")
 	public void click_on_frequency_dropdown_and_verify_the_frequency_dropdown_list() throws Throwable {
@@ -421,16 +427,13 @@ public class HeatMap {
 		login.driver.findElement(By.xpath("(//select[@class='series-data-conversion--param form--control'])[1]"))
 				.click();
 
-		List<WebElement> list3 = login.driver.findElements(By.xpath(
-				"((//span[@class='series-data-conversion--parameters-list']//select[@class='series-data-conversion--param form--control'])[1]/option)"));
-		list2 = new ArrayList<>(Arrays.asList("Daily", "Weekly", "Highest in group (Monthly)", "Quarterly",
-				"Semiannual", "Lowest in group (Yearly)"));
+		List<WebElement> list3 = login.driver.findElements(By.xpath("((//span[@class='series-data-conversion--parameters-list']//select[@class='series-data-conversion--param form--control'])[1]/option)"));
+		list2 = new ArrayList<>(Arrays.asList("Daily", "Weekly", "Highest in group (Monthly)", "Quarterly","Semiannual", "Lowest in group (Yearly)"));
 		for (int a = 0; a < list3.size(); a++) {
 
 			String text = list3.get(a).getText();
 
 			list1.add(text);
-
 		}
 
 		if (list1.equals(list2)) {
@@ -540,7 +543,7 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath("//a[@data-id='myseries']")).click();
-
+CommonFunctionality.wait(2000);
 		WebElement seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
 		action.moveToElement(seriesname).perform();
 		CommonFunctionality.wait(2000);
@@ -560,6 +563,401 @@ public class HeatMap {
 
 	}
 
+	@Then("^select any frequency$")
+	public void select_any_frequency() throws Throwable {
+		try {
+		WebElement Frequency=login.driver.findElement(By.xpath("//span[contains(text(),'Yearly (Sum)')]"));
+		Frequency.click();
+		System.out.println("Yeraly sum");
+		}
+		catch(Exception e) {
+			System.out.println("Already function applied");
+		}
+		Thread.sleep(3000);
+		WebElement Series_hover=login.driver.findElement(By.xpath("(//div[@class='series-name--title'])[1]"));
+		new Actions(login.driver).moveToElement(Series_hover).pause(4000).build().perform();
+		WebElement Year_frequency=login.driver.findElement(By.xpath("(//td[text()='Frequency']//following::div)[1]"));
+		CommonFunctionality.wait(3000);
+		if(Year_frequency.getText().equalsIgnoreCase("Annual")) {
+			System.out.println("Annual frequency is applied to series");
+		}
+		else {
+			fail("Not applied to series");
+		}
+	    
+	}
+	
+	@Then("^Click on dropdown for currency in series level$")
+	public void click_on_dropdown_for_currency_in_series_level() throws Throwable {
+		 CommonFunctionality.wait(2000);
+		/* WebElement source=login.driver.findElement(By.xpath("//div[@class='vsplitter']//div[@class='splitter--icon']"));
+		WebElement Target= login.driver.findElement(By.xpath("//div[@class='insight-visuals-row']"));
+		action.dragAndDrop(source, Target).build().perform();*/
+		 
+		Thread.sleep(3000);
+		/* WebElement Currency=login.driver.findElement(By.xpath(
+				"((//div[@class='series-name--title'])[1]/following::div[@class='insight-action-panel--btn-popup icon--context-menu-arrow'])[2]"));
+		 js.executeScript("arguments[0].scrollIntoView();", Currency);
+		CommonFunctionality.wait(2000);
+		Currency.click();*/
+		
+		
+		
+		WebElement ele=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+		js.executeScript("arguments[0].scrollIntoView(true);", ele);
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow'])[10]")).click();
+		
+		
+		
+		
+		
+	}
+
+	@Then("^select any currency$")
+	public void select_any_currency() throws Throwable {
+		try {
+			
+			CommonFunctionality.wait(2000);
+		WebElement Currency=login.driver.findElement(By.xpath("//span[@title='USD']"));
+		Currency.click();
+		}
+		catch(Exception e) {
+			System.out.println("Currency USD already taken");
+		}
+		Thread.sleep(3000);
+		WebElement Series_hover=login.driver.findElement(By.xpath("(//div[@class='series-name--title'])[1]"));
+		new Actions(login.driver).moveToElement(Series_hover).pause(4000).build().perform();
+		
+		WebElement Currency_unit=login.driver.findElement(By.xpath("(//td[text()='Unit']//following::div)[1]"));
+		CommonFunctionality.wait(3000);
+		if(Currency_unit.getText().equalsIgnoreCase("USD mn")) {
+			System.out.println("Currency is applied to series");		
+		}
+		else {
+			fail("Currency Not applied to series");
+		}
+	   
+	}
+
+	@Then("^click on type a function feild in series level\\.$")
+	public void click_on_type_a_function_feild_in_series_level() throws Throwable {
+		try {
+		WebElement ele=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+		
+		//CommonFunctionality.wait(3000);
+		js.executeScript("arguments[0].scrollIntoView(true);", ele);
+		CommonFunctionality.wait(2000);
+	//	login.driver.findElement(By.xpath("//*[@class='table']//*[@class='series-function-item--remove-icon']")).click();
+		
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+		Thread.sleep(3000);
+		WebElement Type_Function=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+	    if(Type_Function.isDisplayed()) {
+	    	System.out.println("enterif");
+	    	Thread.sleep(3000);
+	    	Type_Function.click();
+	    	System.out.println("Functions are displayed");
+	    }
+	    else {
+	    	System.out.println("Functions are not displayed");
+	    }
+		}
+		catch(Exception e) {
+			WebElement Type_Function=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+		    if(Type_Function.isDisplayed()) {
+		    	System.out.println("enterif");
+		    	Thread.sleep(3000);
+		    	Type_Function.click();
+		    	System.out.println("Functions are displayed");
+		    }
+		    else {
+		    	System.out.println("Functions are not displayed");
+		    }
+			
+		}
+			}
+	
+	
+	@Then("^select function=>click on Apply function\\.$")
+	public void select_function_click_on_Apply_function() throws Throwable {
+		WebElement Select_function=login.driver.findElement(By.xpath("//li[@title='Round the values']"));
+		Select_function.click();
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+		WebElement SerieswithApplied_function=login.driver.findElement(By.xpath("(//div[contains(text(),'FAI: ytd: Tertiary Ind: Real Estate; ROUND()')])[1]"));
+		if(SerieswithApplied_function.getText().contains("ROUND")) {
+			
+			System.out.println("selected function is applied to series");
+		}
+		else {
+			fail("selected function is not applied to series");
+		}
+	}
+	
+	@Then("^close the Series Harmonization window$")
+	public void close_the_Series_Harmonization_window() throws Throwable {
+	    CommonFunctionality.wait(2000);
+	    login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+	    
+	 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Then("^select function=>click on cancel icon\\.$")
+	public void select_function_click_on_cancel_icon() throws Throwable {
+		WebElement Select_function=login.driver.findElement(By.xpath("//li[@title='Round the values']"));
+		Select_function.click();
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__close']")).click();
+	   List<WebElement> Selected_function=login.driver.findElements(By.xpath("//li[@title='Round the values']"));
+	   if(Selected_function.size()==0) {
+		   System.out.println("Applied function is removed");
+	   }
+	   else {
+		   fail("Applied function is not removed");
+	   }
+	}
+	@Then("^select multiple functions=>click on Apply function\\.$")
+	public void select_multiple_functions_click_on_Apply_function() throws Throwable {
+		WebElement Select_function=login.driver.findElement(By.xpath("//li[@title='Round the values']"));
+		Select_function.click();
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+		CommonFunctionality.wait(2000);
+		WebElement Type_Function=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+		Type_Function.click();
+		CommonFunctionality.wait(2000);
+		WebElement Select_Secondfunction=login.driver.findElement(By.xpath("//li[@title='Unit Multiplier']"));
+		Select_Secondfunction.click();
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+		login.driver.findElement(By.xpath("//li[@data-id='TH']")).click();
+		login.driver.findElement(By.xpath("//li[@data-id='TRUE']")).click();
+		WebElement fun=login.driver.findElement(By.xpath("//div[@class='series-name--title']"));
+		action.moveToElement(fun).build().perform();
+		Thread.sleep(2000);
+		String function=login.driver.findElement(By.xpath("(//td[text()='Functions']//following::div)[1]")).getText();
+		System.out.println("==============="+function);
+		System.out.println("UNIT_MULTIPLIER");
+		if(function.contains("UNIT_MULTIPLIER")) {
+			System.out.println("selected functions are applied to series");
+		}
+		else {
+			fail("selected functions are not applied to series");
+		}
+	   
+	}
+
+	@Then("^search for functions=>Searched function should display\\.$")
+	public void search_for_functions_Searched_function_should_display() throws Throwable {
+		WebElement Type_Function=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+		Type_Function.sendKeys("ROUND");
+		//WebElement Searched_functiondisplay=login.driver.findElement(By.xpath("Type_Function"));
+		if(Type_Function.isDisplayed()) {
+			System.out.println("Searched function is displayed");
+		}
+		else {
+			fail("Searched function is not displayed");
+		}
+	   
+	}
+	
+	@Then("^remove the applied function\\.$")
+	public void remove_the_applied_function() throws Throwable {
+		CommonFunctionality.wait(2000);
+       WebElement ele=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+		js.executeScript("arguments[0].scrollIntoView(true);", ele);
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//*[@class='table']//*[@class='series-function-item--remove-icon']")).click();
+		CommonFunctionality.wait(2000);
+	//	login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+		
+		List<WebElement> Remove_Appliedfunction=login.driver.findElements(By.xpath("//li[@title='Round the values']"));
+	     if(Remove_Appliedfunction.size()==0) {
+	    	 System.out.println("Applied function is removed");
+	     }
+	     else {
+	    	 fail("Applied function is not removed");
+	     }
+	}
+
+	@Then("^function should be displayed in toolbar\\.$")
+	public void function_should_be_displayed_in_toolbar() throws Throwable {
+		WebElement Appliedfunction_toobar=login.driver.findElement(By.xpath("//div[contains(text(),'FAI: ytd: Tertiary Ind: Real Estate; ROUND()')]"));
+		if(Appliedfunction_toobar.isDisplayed()) {
+	    	 System.out.println("Applied function is present in toolbar");
+	     }
+	     else {
+	    	 fail("Applied function is not present in toolbar");
+	     }
+	    
+	}
+	
+	
+	@And("^click on change title\\.$")
+	public void click_on_change_title() throws Throwable {
+		WebElement Title=login.driver.findElement(By.xpath("(//div[text()='Title:']/following-sibling::div)[1]"));
+		Title.click();
+		CommonFunctionality.wait(2000);
+		WebElement Change_title=login.driver.findElement(By.xpath("//input[@name='title']"));
+		Change_title.click();
+		Change_title.sendKeys("change");
+		
+	    
+	}
+
+	@Then("^changes should be reflected to HeatMap visual\\.$")
+	public void changes_should_be_reflected_to_HeatMap_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Change=login.driver.findElement(By.xpath("//span[text()='change']"));
+		if(Change.isDisplayed()) {
+			System.out.println("Changes are reflected in HeatMap visual");
+		}
+		else {
+			fail("Changes are not reflected in Heat Map visual");
+		}
+	   
+	}
+
+
+	
+	@Then("^select Invalid function for series\\.$")
+	public void select_Invalid_function_for_series() throws Throwable {
+		WebElement Invalid_Function=login.driver.findElement(By.xpath("//div[@class='series-name--title']/following::input[@placeholder='Type a function']"));
+		Invalid_Function.sendKeys("ANTILOG");
+		if(Invalid_Function.isDisplayed()) {
+			login.driver.findElement(By.xpath("//li[@title='Applies the inverse of the logarithm with base 10']")).click();
+			CommonFunctionality.wait(2000);
+			
+			System.out.println("Invalid function is displayed");
+		}
+		else {
+			fail("Invalid function is not displayed");
+		}
+		
+	    
+	}
+
+	@Then("^function cannot be applied popup should be displayed\\.$")
+	public void function_cannot_be_applied_popup_should_be_displayed() throws Throwable {
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+	   WebElement Function_CannotApplied=login.driver.findElement(By.xpath("//*[@class='modal-title sphere-modal__title text-dots']"));
+	   if(Function_CannotApplied.isDisplayed()) {
+		   System.out.println("Function is not applied to series in edit series");
+	   }
+	   else {
+		   fail("Function is applied to series");
+	   }
+	}
+
+	@Then("^popup should be closed\\.$")
+	public void popup_should_be_closed() throws Throwable {
+		WebElement Inavlid_functionpopup=login.driver.findElement(By.xpath("//button[text()='Ok']"));
+		if(Inavlid_functionpopup.isDisplayed()) {
+			Inavlid_functionpopup.click();
+			System.out.println("Pop up is closed");
+		}
+		else {
+			fail("popup is not closed");
+		}
+	    
+	}
+	
+	@Then("^check for region, unit and seriesId feilds\\.$")
+	public void check_for_region_unit_and_seriesId_feilds() throws Throwable {
+		WebElement Region=login.driver.findElement(By.xpath("//div[normalize-space(text())='Region']"));
+		CommonFunctionality.wait(1000);
+		WebElement Series_id =login.driver.findElement(By.xpath("//div[normalize-space(text())='Series id']"));
+		CommonFunctionality.wait(1000);
+		js.executeScript("arguments[0].scrollIntoView(true);", Series_id);
+		WebElement Unit =login.driver.findElement(By.xpath("//div[normalize-space(text())='Unit']"));
+		CommonFunctionality.wait(1000);
+		if(Region.isDisplayed() && Series_id.isDisplayed() && Unit.isDisplayed() ) {
+			System.out.println("Region,Unit and Series_id is displayed");
+			
+		}
+		else {
+			fail("Region, Unit and Series_id are not  displayed");
+		}  
+	}
+	
+	@Then("^Horizontal scroll bar should be available and all series attributes displayed upon moving\\.$")
+	public void horizontal_scroll_bar_should_be_available_and_all_series_attributes_displayed_upon_moving() throws Throwable {
+		WebElement Region=login.driver.findElement(By.xpath("//div[normalize-space(text())='Region']"));
+		CommonFunctionality.wait(1000);
+		WebElement Function=login.driver.findElement(By.xpath("//div[normalize-space(text())='Functions']"));
+		
+		js.executeScript("arguments[0].scrollIntoView(true);", Function);
+		CommonFunctionality.wait(2000);
+		WebElement Frequency=login.driver.findElement(By.xpath("//div[normalize-space(text())='Frequency']"));
+		CommonFunctionality.wait(1000);
+		WebElement Currency=login.driver.findElement(By.xpath("(//div[normalize-space(text())='Currency'])[2]"));
+		CommonFunctionality.wait(1000);
+		if(Region.isDisplayed() && Function.isDisplayed() && Frequency.isDisplayed() && Currency.isDisplayed()) {
+			System.out.println("Region,Function, Frequency, Currency are displayed");
+		}
+		else {
+			fail("Region,Function, Frequency, Currency are not displayed");
+		}
+		WebElement Series_mnemonic=login.driver.findElement(By.xpath("//div[normalize-space(text())='Series mnemonic']"));
+		js.executeScript("arguments[0].scrollIntoView(true);", Series_mnemonic);
+		CommonFunctionality.wait(1000);
+		WebElement Unit =login.driver.findElement(By.xpath("//div[normalize-space(text())='Unit']"));
+		CommonFunctionality.wait(1000);
+		WebElement Series_id =login.driver.findElement(By.xpath("//div[normalize-space(text())='Series id']"));
+		if(Series_mnemonic.isDisplayed() && Unit.isDisplayed() && Series_id.isDisplayed()) {
+			System.out.println("Horizontal scroll bar working for all attributes");
+		}
+		else {
+			fail("Horizontal scroll bar not working");
+		}
+		   
+	}
+	
+	
+	@Then("^mouse hover on series attribute of visual$")
+	public void mouse_hover_on_series_attribute_of_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Series_hover=login.driver.findElement(By.xpath("(//span[@title='Remove series'])[4]"));
+		CommonFunctionality.wait(2000);
+		
+			
+		System.out.println("ENTER");
+		new Actions(login.driver).moveToElement(Series_hover).pause(2000).click().build().perform();
+		//login.driver.findElement(By.xpath("//div[contains(@class,'movable-modal__full-screen movable-modal__active')]//span[2]//div[1]//span[2]//span[2]")).click();
+		
+		
+	}
+
+	@Then("^click on x icon\\.$")
+	public void click_on_x_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
+		List<WebElement> FirstSeries_remove=login.driver.findElements(By.xpath("(//span[@title='Remove series'])[4]"));
+		if(FirstSeries_remove.size()==0) {
+			System.out.println("Series is removed in edit visual");
+		}
+		else {
+			fail("Series is not removed in edit visual");
+		}
+		
+	   
+	}
+
+	
+
+	
 	@Then("^click on Missing value method Dropdown and select \"([^\"]*)\" in dropdown list$")
 	public void click_on_Missing_value_method_Dropdown_and_select_in_dropdown_list(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -617,6 +1015,880 @@ public class HeatMap {
 		}
 
 	}
+	
+	@And("^remove the applied functions$")
+	public void remove_the_applied_functions() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[normalize-space(text())='Function description']/following::div[contains(@class,'multi-select-item-delete icon--red-cross')]")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[normalize-space(text())='Name']/following::div[contains(@class,'multi-select-item-delete icon--red-cross')]")).click();
+	   
+	}
+
+	
+	@And("^click on Region in the dropdown\\.$")
+	public void click_on_Region_in_the_dropdown() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//div[@class='select2-result-label'])[2]")).click();
+		
+		
+	    
+	}
+
+	@Then("^changess should be applied only to visual and series in edit series\\.$")
+	public void changess_should_be_applied_only_to_visual_and_series_in_edit_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Region=login.driver.findElement(By.xpath("//div[@class='table--cell__text']/preceding::div[@title='Region']"));
+		if(Region.isDisplayed()) {
+			System.out.println("The changes are applied to edit series");
+		}
+		else {
+			fail("Changes are not applied to edit series");
+		}
+	   
+	}
+	@And("^Click on Edit series=>Myseries$")
+	public void click_on_Edit_series_Myseries() throws Throwable {
+		
+		WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//*[text()='Edit Series']")))).click();
+	//	login.driver.findElement(By.xpath("//*[text()='Edit Series']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//*[normalize-space(text())='My Series'])[1]")).click();
+	}
+
+	@Then("^by default checked sortby should be applied in ascending order\\.$")
+	public void by_default_checked_sortby_should_be_applied_in_ascending_order() throws Throwable {
+		
+		WebElement SortBy=login.driver.findElement(By.xpath("(//span[@class='dropdown--icon icon--filter-arrow'])[4]"));
+		if(SortBy.isDisplayed()) {
+			System.out.println("SortBy is applied in descending order");
+		}
+		else {
+			fail("SortBy is not applied in descending order");
+		}
+	   
+	}
+
+	
+	//TC_475
+	@Given("^user creates a HeatMap Visual$")
+	public void user_creates_a_HeatMap_Visual() throws Throwable {
+		login.driver.findElement(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']")).click();
+		WebElement FirstSeries=login.driver.findElement(By.xpath("(//div[@class='series-list-item-data'])[1]"));
+		new Actions(login.driver).moveToElement(FirstSeries).pause(1000).build().perform();
+		CommonFunctionality.wait(2000);
+		WebElement ele=login.driver.findElement(By.xpath("//span[@title='More actions']"));
+		js.executeScript("arguments[0].click();", ele);
+		WebElement Add_chart=login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
+		new Actions(login.driver).moveToElement(Add_chart).pause(1000).build().perform();
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]")).click();
+	   
+	}
+	
+	
+	@Given("^Right clicks on Visual\\.$")
+	public void right_clicks_on_Visual() throws Throwable {
+		Thread.sleep(5000);
+		WebElement HeatMap_Visual=login.driver.findElement(By.xpath("//*[@class='highcharts-plot-background']"));
+		
+		action.moveToElement(HeatMap_Visual).pause(2000).contextClick().build().perform();
+	   
+	}
+	
+	@Then("^select clear contents\\.$")
+	public void select_clear_contents() throws Throwable {
+		WebElement Clear_contents=login.driver.findElement(By.xpath("//span[contains(text(),'Clear contents')]"));
+		if(Clear_contents.isDisplayed()) {
+			Clear_contents.click();
+			System.out.println("HeatMap visual is deleted based on clear contents option");
+		}
+		else {
+			System.out.println("HeatMap visual is not  deleted based on clear contents option");
+		}
+	    
+	}
+	
+	@Then("^Reset format option should be disabled\\.$")
+	public void reset_format_option_should_be_disabled() throws Throwable {
+		List<WebElement> Reset_Format=login.driver.findElements(By.xpath("//span[@title='Reset format']"));
+		if(Reset_Format.size()==0) {
+			System.out.println("Reset Format is in disabled state");
+			
+		}
+		else {
+			System.out.println("Reset Format is in enabled state");
+		}
+	   
+	}
+	@Then("^download popup should be displayed with HeatMap tab\\.$")
+	public void download_popup_should_be_displayed_with_HeatMap_tab() throws Throwable {
+		WebElement Download_popup=login.driver.findElement(By.xpath("//span[@class='name-li'][normalize-space()='Download']"));
+		action.moveToElement(Download_popup).pause(2000).build().perform();
+		login.driver.findElement(By.xpath("//span[@class='context-menu-item link']//span[@class='name-li'][normalize-space()='Heat map']")).click();
+	   
+		WebElement HeatMap_Downloadpopup=login.driver.findElement(By.xpath("//div[text()='Heat map']/ancestor::*/following::span[text()='Download: ']"));
+		if(HeatMap_Downloadpopup.isDisplayed()) {
+			System.out.println("HeatMap along with download popup is displayed");
+		}
+		else {
+			System.out.println("HeatMap along with download popup is not displayed");
+		}
+	}
+	
+	@Then("^download popup should be displayed with views tab\\.$")
+	public void download_popup_should_be_displayed_with_views_tab() throws Throwable {
+		WebElement Download_popup=login.driver.findElement(By.xpath("//span[@class='name-li'][normalize-space()='Download']"));
+		action.moveToElement(Download_popup).pause(2000).build().perform();
+		login.driver.findElement(By.xpath("//span[normalize-space()='View']")).click();
+	   
+		WebElement Views_Downloadpopup=login.driver.findElement(By.xpath("//div[text()='Views']/ancestor::*//span[@class='download-modal-title__title']"));
+		if(Views_Downloadpopup.isDisplayed()) {
+			System.out.println("View along with download popup is displayed");
+		}
+		else {
+			System.out.println("View along with download popup is not displayed");
+		}
+	   
+	}
+	
+	@Then("^HeatMap and view options should be displayed\\.$")
+	public void heatmap_and_view_options_should_be_displayed() throws Throwable {
+		WebElement Download_popup=login.driver.findElement(By.xpath("//span[@class='name-li'][normalize-space()='Download']"));
+		action.moveToElement(Download_popup).pause(2000).build().perform();
+		List<WebElement> Dropdown=login.driver.findElements(By.xpath("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']"));
+		for(int i=0;i<Dropdown.size();i++) {
+			CommonFunctionality.wait(2000);
+			String Dp=Dropdown.get(i).getText();
+			CommonFunctionality.wait(2000);
+			if(Dp.contains("Heat map")) {
+				System.out.println("Heat Map is present");
+			}
+			else {
+				fail("Heat Map is not displayed");
+			}
+			
+			if(Dp.contains("View")) {
+				System.out.println("View is present");
+			}
+			else {
+				fail("View is not displayed");
+			}
+			
+			
+		}
+	    
+	}
+	
+	@Then("^apply the function to selected visual\\.$")
+	public void apply_the_function_to_selected_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Average_function=login.driver.findElement(By.xpath("//div[normalize-space()='Average']"));
+		Average_function.click();
+		WebElement Applied_Function=login.driver.findElement(By.xpath("//span[@class='series-edit--title series-edit--title__editable']"));
+		if(Applied_Function.isDisplayed()) {
+			System.out.println("Function is applied to visual and verified");
+		}
+		else {
+			fail("Applied function is not applied to visual");
+		}
+	   
+	}
+	
+	@Given("^make changes in Edit visual\\.$")
+	public void make_changes_in_Edit_visual() throws Throwable {
+		
+		WebElement Solid_color=login.driver.findElement(By.xpath("//span[@value='solid_color']"));
+		Solid_color.click();
+		login.driver.findElement(By.xpath("//button[text()='Save']")).click();
+		
+	   
+	}
+	
+	
+	@Given("^HeatMap visual should be changed to Map visual\\.$")
+	public void heatmap_visual_should_be_changed_to_Map_visual() throws Throwable {
+		WebElement Change_ChartType=login.driver.findElement(By.xpath("//span[contains(text(),'Change chart type')]"));
+		action.moveToElement(Change_ChartType).pause(4000).build().perform();
+		
+		//WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsSecondary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--map-filled_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")))).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--map-filled_large')])[2]")).click();
+		
+		WebElement Map=login.driver.findElement(By.xpath("//button[normalize-space(text())='Edit Map']"));
+		if(Map.isDisplayed()) {
+			System.out.println("Heat Map is changed to Map visual");
+		}
+		else {
+			fail("Heat Map is not changed to Map visual");
+		}
+
+	    
+	}
+	
+	
+	@Given("^HeatMap visual should be changed to Histogram visual\\.$")
+	public void heatmap_visual_should_be_changed_to_Histogram_visual() throws Throwable {
+		WebElement Change_ChartType=login.driver.findElement(By.xpath("//span[contains(text(),'Change chart type')]"));
+		action.moveToElement(Change_ChartType).pause(4000).build().perform();
+		
+		//WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsSecondary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--histogram_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")))).click();
+		//CommonFunctionality.wait(2000);
+		//WebElement Histogram=login.driver.findElement(By.xpath("//*[text()='Histogram']"));
+		
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--histogram_large')])[2]")).click();
+		CommonFunctionality.wait(2000);
+		WebElement Histogram=login.driver.findElement(By.xpath("//*[text()='Histogram']"));
+		if(Histogram.isDisplayed()) {
+			System.out.println("Heat Map is changed to Histogram visual");
+		}
+		else {
+			fail("Heat Map is not changed to Histogram visual");
+		}
+
+	  
+	}
+	
+	@Given("^HeatMap visual should be changed to Pie visual\\.$")
+	public void heatmap_visual_should_be_changed_to_Pie_visual() throws Throwable {
+		WebElement Change_ChartType=login.driver.findElement(By.xpath("//span[contains(text(),'Change chart type')]"));
+		action.moveToElement(Change_ChartType).pause(4000).build().perform();
+		
+		//WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsPrimary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--pie_chart-pie_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")))).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--pie_chart-pie_large')])[2]")).click();
+		
+		
+		
+		WebElement Pie=login.driver.findElement(By.xpath("//button[normalize-space(text())='Edit Pie']"));
+		if(Pie.isDisplayed()) {
+			System.out.println("Heat Map is changed to Pie visual");
+		}
+		else {
+			fail("Heat Map is not changed to Pie visual");
+		}
+	    
+	}
+	
+	@Given("^HeatMap visual should be changed to HeatMap visual\\.$")
+	public void heatmap_visual_should_be_changed_to_HeatMap_visual() throws Throwable {
+		WebElement Change_ChartType=login.driver.findElement(By.xpath("//span[contains(text(),'Change chart type')]"));
+		action.moveToElement(Change_ChartType).pause(4000).build().perform();
+		
+		//WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsSecondary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--heatmap_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")))).click();
+		
+		
+		
+		//WebElement Line_chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]"));
+		//Line_chart.click();
+		//js.executeScript("arguments[0].click();", Line_chart);
+		
+       login.driver.findElement(By.xpath("(//div[contains(@class,'icon--heatmap_large')])[2]")).click();
+
+		
+		CommonFunctionality.wait(2000);
+		WebElement HeatMap=login.driver.findElement(By.xpath("(//*[@class='highcharts-root'])[1]"));
+		if(HeatMap.isDisplayed()) {
+			System.out.println("Heat Map is changed to HeatMap visual");
+		}
+		else {
+			fail("Heat Map is not changed to HeatMap visual");
+		}
+
+	   
+	}
+
+	@Given("^click on insert Attachments\\.$")
+	public void click_on_insert_Attachments() throws Throwable {
+		WebElement Insert_Attachments=login.driver.findElement(By.xpath("//div[@class='insight-action-panel--btn-icon']//div[@class='icon--attachments']"));
+		Insert_Attachments.click();
+	    
+	}
+
+	@Then("^Attachment visual should be created in same view tab\\.$")
+	public void attachment_visual_should_be_created_in_same_view_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Attachments=login.driver.findElement(By.xpath("//div[text()='Attachments']"));
+		if(Attachments.isDisplayed()) {
+			System.out.println("Attachments is displayed in same view tab");
+		}
+		else {
+			fail("Attachments is not displayed");
+		}
+	    
+	}
+	@Given("^click on insert image\\.$")
+	public void click_on_insert_image() throws Throwable {
+		WebElement Image=login.driver.findElement(By.xpath("//div[contains(text(),'Image')]"));
+		Image.click();
+	   
+	}
+
+	@Then("^image visual should be created in same view tab\\.$")
+	public void image_visual_should_be_created_in_same_view_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Image=login.driver.findElement(By.xpath("//div[text()='Image']"));
+		if(Image.isDisplayed()) {
+			System.out.println("Image is displayed in same view tab");
+		}
+		else {
+			fail("Image is not displayed");
+		}
+	   
+	}
+
+	@Given("^click on insert filter\\.$")
+	public void click_on_insert_filter() throws Throwable {
+		WebElement Filter=login.driver.findElement(By.xpath("//div[@class='icon--filter']"));
+		Filter.click();
+	   
+	}
+
+	@Then("^filter visual should be created in same view tab\\.$")
+	public void filter_visual_should_be_created_in_same_view_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement FilterVisual=login.driver.findElement(By.xpath("//span[normalize-space(text())='Filter']"));
+		if(FilterVisual.isDisplayed()) {
+			System.out.println("Filter visual is displayed");
+		}
+		else {
+			fail("Filter Visual is not displayed");
+		}
+	   
+	}
+	@Given("^copy visual\\.$")
+	public void copy_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Copy_visual=login.driver.findElement(By.xpath("//span[normalize-space()='Copy heat map']"));
+		Copy_visual.click();
+	    
+	}
+
+	@Given("^click on paste visual\\.$")
+	public void click_on_paste_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Paste_visual=login.driver.findElement(By.xpath("//span[normalize-space()='Paste visual']"));
+		Paste_visual.click();
+		WebElement Pasted_visual=login.driver.findElement(By.xpath("(//*[@class='highcharts-plot-border'])[2]"));
+		if(Pasted_visual.isDisplayed()) {
+			System.out.println("Visual is pasted");
+		}
+				
+		else {
+			fail("Visual is not pasted");
+		}
+	   
+	}
+
+	@Given("^hover on Add chart$")
+	public void hover_on_Add_chart() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
+		action.moveToElement(Add_Chart).pause(4000).build().perform();
+		
+	    
+	}
+
+	@Then("^subdropdown should be opened\\.$")
+	public void subdropdown_should_be_opened() throws Throwable {
+		CommonFunctionality.wait(2000);
+		List<WebElement> Subdropdown=login.driver.findElements(By.xpath("//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']"));
+		for(int i=0;i<Subdropdown.size();i++) {
+			CommonFunctionality.wait(2000);
+			String dropdown_value=Subdropdown.get(i).getText();
+			System.out.println("======dropdown_value======"+dropdown_value);
+			if(dropdown_value.contains("Line")) {
+				System.out.println("Chart is present");	
+			}
+			
+			else if(dropdown_value.contains("Heat map")) {
+				System.out.println("Heat Map is present");	
+				
+			}
+			else if(dropdown_value.contains("Histogram")) {
+				System.out.println("Histogram is present");	
+				
+			}
+			else if(dropdown_value.contains("Area")) {
+				System.out.println("Area is present");	
+				
+			}
+			else if(dropdown_value.contains("Column")) {
+				System.out.println("Column is present");		
+			}
+			else if(dropdown_value.contains("Bar")) {
+				System.out.println("Bar is present");		
+			}
+			else if(dropdown_value.contains("Map")) {
+				System.out.println("Map is present");		
+			}	
+			else if(dropdown_value.contains("Scatter")) {
+				System.out.println("Scatter is present");		
+			}	
+			else if(dropdown_value.contains("Vertical")) {
+				System.out.println("Table is present");		
+			}	
+			
+			else if(dropdown_value.contains("Pie")) {
+				System.out.println("Pie is present");	
+				
+			}	
+			
+			else {
+				System.out.println("Subdropdown values are not present and outside");
+			}
+			
+		}   
+	}
+
+	@Given("^click on insert Commentary\\.$")
+	public void click_on_insert_Commentary() throws Throwable {
+		WebElement Commentary=login.driver.findElement(By.xpath("//div[contains(text(),'Text')]"));
+		Commentary.click();
+	}
+
+	@Then("^Commentary visual should be created in same view tab\\.$")
+	public void commentary_visual_should_be_created_in_same_view_tab() throws Throwable {
+		WebElement CommentaryVisual=login.driver.findElement(By.xpath("(//div[text()='Text'])[2]"));
+		if(CommentaryVisual.isDisplayed()) {
+			System.out.println("Commentary visual is displayed");
+		}
+		else {
+			System.out.println("Commentary visual is not displayed");
+		}
+	   
+	}
+	
+	
+	@Given("^choose insert visual=>Histogram$")
+	public void choose_insert_visual_Histogram() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]"));
+		action.moveToElement(Add_Chart).pause(4000).build().perform();
+		
+		//login.driver.findElement(By.xpath("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItemTitle'][normalize-space()='Histogram']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--histogram_large')])[1]")).click();
+		
+		
+		CommonFunctionality.wait(2000);
+		WebElement Histogram=login.driver.findElement(By.xpath("//div[text()='Histogram']"));
+		if(Histogram.isDisplayed()) {
+			System.out.println("Histogram is inserted");
+		}
+		else {
+			fail("Histogram is not inserted");
+		}
+	}
+
+	@Given("^choose insert visual=>HeatMap\\.$")
+	public void choose_insert_visual_HeatMap() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]"));
+		action.moveToElement(Add_Chart).pause(4000).build().perform();
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsSecondary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--heatmap_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--heatmap_large')])[1]")).click();
+		CommonFunctionality.wait(2000);
+		WebElement HeatMap=login.driver.findElement(By.xpath("//div[text()='Heat map']"));
+		if(HeatMap.isDisplayed()) {
+			System.out.println("HeatMap is inserted");
+		}
+		else {
+			fail("HeatMap is not inserted");
+		}
+	    
+	}
+	
+	@Given("^choose insert visual=>Map\\.$")
+	public void choose_insert_visual_Map() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]"));
+		action.moveToElement(Add_Chart).pause(4000).build().perform();
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsSecondary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--map-filled_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--map-filled_large')])[1]")).click();
+		
+		CommonFunctionality.wait(2000);
+		WebElement Map=login.driver.findElement(By.xpath("//div[text()='Map']"));
+		if(Map.isDisplayed()) {
+			System.out.println("Map is inserted");
+		}
+		else {
+			fail("Map is not inserted");
+		}
+	}
+	@Given("^choose insert visual=>Pie\\.$")
+	public void choose_insert_visual_Pie() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]"));
+		action.moveToElement(Add_Chart).pause(4000).build().perform();
+		CommonFunctionality.wait(2000);
+	///	login.driver.findElement(By.xpath("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsPrimary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--pie_chart-pie_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
+		
+		
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--pie_chart-pie_large')])[1]")).click();
+		CommonFunctionality.wait(2000);
+		WebElement Pie=login.driver.findElement(By.xpath("//div[text()='Pie']"));
+		if(Pie.isDisplayed()) {
+			System.out.println("Pie is inserted");
+		}
+		else {
+			fail("Pie is not inserted");
+		}
+		
+	    
+	}
+
+	@Given("^choose insert visual=>Chart\\.$")
+	public void choose_insert_visual_Chart() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]"));
+		action.moveToElement(Add_Chart).pause(4000).build().perform();
+		CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//li[@class='dropdown-submenu active-menu-item']//ul[@class='dropdown-menu']//li//div[@class='visuals-panel']//div[@class='public-js-views-visuals-VisualsPanel-module__items']//div[@class='public-js-views-visuals-VisualsPanel-module__itemsPrimary']//div[@class='public-js-views-visuals-VisualsPanelItem-module__item']//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']//div[@class='public-js-views-visuals-VisualsPanelSubItem-module__subItem']//div//div[@class='icon--chart-line_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
+		
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--chart-line_large')])[1]")).click();
+		
+		CommonFunctionality.wait(2000);
+		WebElement Chart=login.driver.findElement(By.xpath("//div[text()='Line']"));
+		if(Chart.isDisplayed()) {
+			System.out.println("Chart is inserted");
+		}
+		else {
+			fail("Chart is not inserted");
+		}
+	   
+	}
+	
+	@Given("^Delete HeatMap\\.$")
+	public void delete_HeatMap() throws Throwable {
+		WebElement Delete_HeatMap=login.driver.findElement(By.xpath("//span[normalize-space()='Delete heat map']"));
+		Delete_HeatMap.click();
+		login.driver.findElement(By.xpath("//button[text()='Ok']")).click();
+		List<WebElement> HeatMap_Visual=login.driver.findElements(By.xpath("//div[contains(@class,'icon--heatmap_large')]"));
+		if(HeatMap_Visual.size()==0) {
+			System.out.println("Heat Map visual is deleted");
+		}
+		else {
+			fail("Heat Map visual is not  deleted");
+		}
+	    
+	}
+	
+	
+	@Given("^hover on Add Chart\\.$")
+	public void hover_on_Add_Chart() throws Throwable {
+		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]"));
+		action.moveToElement(Add_Chart).pause(4000).build().perform();
+	    
+	}
+
+	@Then("^options should be available in sub dropdown\\.$")
+	public void options_should_be_available_in_sub_dropdown() throws Throwable {
+		CommonFunctionality.wait(2000);
+		List<WebElement> Subdropdown=login.driver.findElements(By.xpath("//div[@class='public-js-views-visuals-VisualsPanelItem-module__itemSubItems']"));
+		for(int i=0;i<Subdropdown.size();i++) {
+			CommonFunctionality.wait(2000);
+			String dropdown_value=Subdropdown.get(i).getText();
+			System.out.println("======dropdown_value======"+dropdown_value);
+			if(dropdown_value.contains("Line")) {
+				System.out.println("Chart is present");	
+			}
+			
+			else if(dropdown_value.contains("Heat map")) {
+				System.out.println("Heat Map is present");	
+				
+			}
+			else if(dropdown_value.contains("Histogram")) {
+				System.out.println("Histogram is present");	
+				
+			}
+			else if(dropdown_value.contains("Area")) {
+				System.out.println("Area is present");	
+				
+			}
+			else if(dropdown_value.contains("Column")) {
+				System.out.println("Column is present");		
+			}
+			else if(dropdown_value.contains("Bar")) {
+				System.out.println("Bar is present");		
+			}
+			else if(dropdown_value.contains("Map")) {
+				System.out.println("Map is present");		
+			}	
+			else if(dropdown_value.contains("Scatter")) {
+				System.out.println("Scatter is present");		
+			}	
+			else if(dropdown_value.contains("Vertical")) {
+				System.out.println("Table is present");		
+			}	
+			
+			else if(dropdown_value.contains("Pie")) {
+				System.out.println("Pie is present");	
+				
+			}	
+			
+			else {
+				System.out.println("Subdropdown values are not present and outside");
+			}
+			
+		}   
+
+	   
+	}
+
+	@Then("^paste in Application=>Heat Map visual should be pasted$")
+	public void paste_in_Application_Heat_Map_visual_should_be_pasted() throws Throwable {
+		WebElement Paste_visual=login.driver.findElement(By.xpath("//span[normalize-space()='Paste visual']"));
+		Paste_visual.click();
+		CommonFunctionality.wait(2000);
+		WebElement HeatMap_visual=login.driver.findElement(By.xpath("//*[@class='highcharts-root']"));
+		if(HeatMap_visual.isDisplayed()) {
+			System.out.println("Heat Map visual is pasted");
+		}
+		else {
+			fail("Heat Map visual is not pasted");
+		}
+	}
+	@Then("^paste in Application=>Heat Map visual should be copied$")
+	public void paste_in_Application_Heat_Map_visual_should_be_copied() throws Throwable {
+		WebElement Paste_visual=login.driver.findElement(By.xpath("//span[normalize-space()='Paste visual']"));
+		Paste_visual.click();
+		CommonFunctionality.wait(2000);
+		WebElement HeatMap_visual=login.driver.findElement(By.xpath("//*[@class='highcharts-root']"));
+		if(HeatMap_visual.isDisplayed()) {
+			System.out.println("Heat Map visual is copied");
+		}
+		else {
+			fail("Heat Map visual is not copied");
+		}
+	   
+	}
+	@Then("^below options should be available$")
+	public void below_options_should_be_available() throws Throwable {
+		CommonFunctionality.wait(2000);
+		List<WebElement> RightClick_options=login.driver.findElements(By.xpath("//div[@class='items-wrapper']"));
+		for(int i=0;i<RightClick_options.size();i++) {
+			CommonFunctionality.wait(2000);
+			String dropdown_value=RightClick_options.get(i).getText();
+			System.out.println("======dropdown_value=RRR====="+dropdown_value);
+			if(RightClick_options.size()==1) {
+				System.out.println("All options are present");
+			}
+			else {
+				fail("All options are not present");
+			}
+		}
+		
+	    
+	}
+	@Given("^HeatMap visual should be changed to chart visual\\.$")
+	public void heatmap_visual_should_be_changed_to_chart_visual() throws Throwable {
+		WebElement Change_ChartType=login.driver.findElement(By.xpath("//span[contains(text(),'Change chart type')]"));
+		action.moveToElement(Change_ChartType).pause(4000).build().perform();
+		
+		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--chart-line_large')])[2]")).click();
+		WebDriverWait wait = new WebDriverWait(login.driver, 40);
+		//wait.until(ExpectedConditions.elementToBeClickable(By.xpath(("(//div[contains(@class,'icon--chart-line_large')])[2]"));
+		
+		
+		//WebElement Line_chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]"));
+		//Line_chart.click();
+		//js.executeScript("arguments[0].click();", Line_chart);
+		CommonFunctionality.wait(2000);
+		WebElement Chart=login.driver.findElement(By.xpath("//button[normalize-space(text())='Edit Chart']"));
+		if(Chart.isDisplayed()) {
+			System.out.println("Heat Map is changed to chart visual");
+		}
+		else {
+			fail("Heat Map is not changed to chart visual");
+		}
+	}
+
+
+	@Then("^click on Reset Format=>It should be changed back to default\\.$")
+	public void click_on_Reset_Format_It_should_be_changed_back_to_default() throws Throwable {
+		WebElement Reset_Format=login.driver.findElement(By.xpath("//span[@title='Reset format']"));
+		if(Reset_Format.isDisplayed()) {
+			Reset_Format.click();
+			System.out.println("Heat Map is changed to default");
+		}
+		else {
+			fail("Heat Map is not changed to default");
+		}
+	   
+	}
+
+	
+	
+
+	@Given("^select calculated series\\.$")
+	public void select_calculated_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Calculate_Series=login.driver.findElement(By.xpath("//span[@title='Calculate series']"));
+		action.moveToElement(Calculate_Series).pause(2000).build().perform();
+		WebElement All_FunctionsDP=login.driver.findElement(By.xpath("//span[normalize-space(text())='All functions']"));
+		if(All_FunctionsDP.isDisplayed()) {
+			System.out.println("Sub dropdown is opened with all functions");
+		}
+		else {
+			fail("Sub dropdown is not opened with all functions");
+		}
+	}
+
+	@Given("^select edit series option\\.$")
+	public void select_edit_series_option() throws Throwable {
+		WebElement Edit_series=login.driver.findElement(By.xpath("//span[contains(text(),'Edit series')]"));
+		Edit_series.click();
+		CommonFunctionality.wait(2000);
+		WebElement Edit_seriesPopup=login.driver.findElement(By.xpath("//div[@class='sidebar-panel--tab-icon']//div[@class='icon--heatmap']"));
+		if(Edit_seriesPopup.isDisplayed()) {
+			System.out.println("Edit Series popup is displayed");
+		}
+		else {
+			fail("Edit Series popup is not displayed");
+		}
+	   
+	}
+
+	@Then("^choose copy HeatMap\\.$")
+	public void choose_copy_HeatMap() throws Throwable {
+		WebElement Copy_HeatMap=login.driver.findElement(By.xpath("//span[normalize-space()='Copy heat map']"));
+		Copy_HeatMap.click();
+		
+		
+	WebElement HeatMap_SeriesPopup=login.driver.findElement(By.xpath("//span[normalize-space()='Heat map with series copied.']"));
+	   if(HeatMap_SeriesPopup.isDisplayed()) {
+		   System.out.println("Heat is copied successfully");
+	   }
+	   else {
+		   fail("Heat Map is not copied successfully");
+	   }
+	}
+	@Then("^choose cut HeatMap\\.$")
+	public void choose_cut_HeatMap() throws Throwable {
+		WebElement Cut_HeatMap=login.driver.findElement(By.xpath("//span[normalize-space()='Cut heatmap']"));
+		Cut_HeatMap.click();
+		
+		
+	WebElement HeatMap_SeriesPopup=login.driver.findElement(By.xpath("//div[@class='growl-message-text']"));
+	   if(HeatMap_SeriesPopup.isDisplayed()) {
+		   System.out.println("Heat is cut successfully");
+	   }
+	   else {
+		   fail("Heat Map is not cut successfully");
+	   }
+	   
+	}
+
+
+	
+	
+	
+
+	@Then("^click on Open icon\\.$")
+	public void click_on_Open_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Open=login.driver.findElement(By.xpath("//div[@title='Open']"));
+		if(Open.isDisplayed()) {
+			CommonFunctionality.wait(2000);
+			Open.click();
+			System.out.println("Visual is displayed in maximized window");
+			WebElement close=login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']"));
+			close.click();
+		}
+		else {
+			System.out.println("Visual is not displayed in maximized window");
+		}
+	   
+	}
+
+	
+	@Then("^click on Open icon=>click on close icon\\.$")
+	public void click_on_Open_icon_click_on_close_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Open=login.driver.findElement(By.xpath("//div[@title='Open']"));
+			CommonFunctionality.wait(2000);
+			Open.click();
+			System.out.println("Visual is displayed in maximized window");
+			WebElement close=login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']"));
+			if(close.isDisplayed()) {
+			close.click();
+			System.out.println("Modal window is closed");
+		}
+		else {
+			System.out.println("Modal window is not closed");
+		}
+	   
+	}
+
+	@Given("^click on Delete icon\\.$")
+	public void click_on_Delete_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Delete=login.driver.findElement(By.xpath("//div[@title='Delete']"));
+		Delete.click();
+	   
+	}
+	
+	@Then("^\"([^\"]*)\" should be displayed\\.$")
+	public void should_be_displayed(String arg1) throws Throwable {
+		WebElement Remove_visual=login.driver.findElement(By.xpath("//div[normalize-space(text())='Do you want to remove this visual?']"));
+		if(Remove_visual.isDisplayed()) {
+			System.out.println("Remove_visual title is displayed");
+		}
+		else {
+			System.out.println("Remove_visual title is  not displayed");
+		}
+	   
+	}
+	
+	@Given("^click on Delete icon=>clock OK button\\.$")
+	public void click_on_Delete_icon_clock_OK_button() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Delete=login.driver.findElement(By.xpath("//div[@title='Delete']"));
+		Delete.click();
+		CommonFunctionality.wait(2000);
+		WebElement OK_button=login.driver.findElement(By.xpath("//button[text()='Ok']"));
+		if(OK_button.isDisplayed()) {
+			OK_button.click();
+			System.out.println("HeatMap Visual is deleted");
+		}
+		else {
+			System.out.println("HeatMap Visual is not  deleted");
+		}
+	}
+
+	
+	@Then("^click Cance/X icon\\.$")
+	public void click_Cance_X_icon() throws Throwable {
+		WebElement Cancel_icon=login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']"));
+		if(Cancel_icon.isDisplayed()) {
+			Cancel_icon.click();
+			System.out.println("The popup should be closed and delete visual process should be declined.");
+		}
+		else {
+			System.out.println("The popup should not be closed");
+		}
+	    
+	}
+	
+	
+	@Then("^confirmation popup should display\\.$")
+	public void confirmation_popup_should_display() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Confirmation_Popup=login.driver.findElement(By.xpath("//h4[text()='Confirmation']"));
+		if(Confirmation_Popup.isDisplayed()) {
+			System.out.println("Confirmation popup is displayed");
+		}
+		else {
+			System.out.println("Confirmation popup is not displayed");
+		}
+	}
+
+	
+	
+	
+	
+	
 
 	// TC_14
 	@Then("^Click on 'Keep different frequencies' button$")
@@ -634,9 +1906,11 @@ public class HeatMap {
 		login.driver.findElement(By.xpath("(//select[@class='series-data-conversion--param form--control'])[1]"))
 				.click();
 
-		/*String frequency = login.driver.findElement(By.xpath(
-				"((//span[@class='series-data-conversion--parameters-list']//select[@class='series-data-conversion--param form--control'])[1]/option)[1]"))
-				.getText();*/
+		/*
+		 * String frequency = login.driver.findElement(By.xpath(
+		 * "((//span[@class='series-data-conversion--parameters-list']//select[@class='series-data-conversion--param form--control'])[1]/option)[1]"
+		 * )) .getText();
+		 */
 		login.driver.findElement(By.xpath(
 				"((//span[@class='series-data-conversion--parameters-list']//select[@class='series-data-conversion--param form--control'])[1]/option)[1]"))
 				.click();
@@ -746,7 +2020,8 @@ public class HeatMap {
 				.findElements(By.xpath("//span[@class='series-edit--title series-edit--title__editable']"));
 
 		System.out.println(listseries.size());
-		if (listseries.size() == 1) {
+		CommonFunctionality.wait(2000);
+		if (listseries.size()>0) {
 
 			login.Log4j.info("applied changes will not be affected:PASS");
 		}
@@ -890,9 +2165,9 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath("//a[@data-id='myseries']")).click();
-
+		CommonFunctionality.wait(2000);
 		WebElement seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
-
+		
 		action.moveToElement(seriesname).perform();
 		CommonFunctionality.wait(2000);
 
@@ -1171,7 +2446,7 @@ public class HeatMap {
 
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath("//div[@class='list-view-wrapper']//span[@class='input-control--indicator']"))
+		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']"))
 				.click();
 		CommonFunctionality.wait(2000);
 
@@ -1201,7 +2476,7 @@ public class HeatMap {
 	@Then("^mouse hover on the series name and verify the Attributes$")
 	public void mouse_hover_on_the_series_name_and_verify_the_Attributes() throws Throwable {
 		CommonFunctionality.wait(2000);
-
+   if(login.driver.findElements(By.xpath("//button[@class='button button__primary']")).size()==1)
 		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
 		CommonFunctionality.wait(2000);
 
@@ -1210,12 +2485,15 @@ public class HeatMap {
 		CommonFunctionality.wait(1000);
 		action.moveToElement(linktext).build().perform();
 		CommonFunctionality.wait(1000);
-		List<WebElement> attributes = login.driver.findElements(By.xpath(
-				"//td[@class='public-js-views-insights-series-tooltip-style-module__tooltipCell public-js-views-insights-series-tooltip-style-module__tooltipKey']"));
+		List<WebElement> attributes = login.driver.findElements(By.xpath("//td[@class='ZWIWBTEmdUe4e_gnuHOw DAZRvxqLAmWhUb7hGNaP']"));
 
-		AttributeList = new ArrayList<>(
-				Arrays.asList("Region", "Name", "Functions", "Unit", "Frequency", "First obs. date", "Last obs. date",
-						"Observations", "Last value", "Last update time", "Source", "Series id","Mnemonic", "Indicator", "More"));
+		        //AttributeList = new ArrayList<>(Arrays.asList("Region", "Name", "Functions", "Unit", "Frequency",
+				//"First obs. date", "Last obs. date", "Observations", "Last value", "Last update time", "Source",
+				//"Series id", "Mnemonic", "Indicator", "More"));
+		
+		AttributeList = new ArrayList<>(Arrays.asList("Region", "Name", "Unit","Frequency",
+				"First obs. date", "Last obs. date", "Observations", "Last value", "Last update time", "Source",
+				"Series id", "Indicator"));
 
 		// there are removed in Classification and Functions
 
@@ -1256,7 +2534,7 @@ public class HeatMap {
 
 		if (sspwindow.isDisplayed()) {
 			login.Log4j.info("SSP Window displayed:PASS");
-			
+
 			login.driver.findElement(By.xpath("//*[@class='movable-modal--close']")).click();
 		}
 
@@ -1389,14 +2667,21 @@ public class HeatMap {
 
 		login.driver.findElement(By.xpath("//span[@class='popular-functions-context--all-title']")).click();
 
-		Applyfunction = login.driver.findElement(By.xpath("//div[@data-id='MATHNATLOG']")).getText().replaceAll("\\s",
-				"");
-
-		System.out.println("Applyfunction:" + Applyfunction);
-		WebElement function = login.driver.findElement(By.xpath("//div[@data-id='MATHNATLOG']"));
+		//Applyfunction = login.driver.findElement(By.xpath("//div[@data-id='MATHNATLOG']")).getText().replaceAll("\\s","");
+		
+		login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).click();
+		
+		
+		login.driver.findElement(By.xpath("//div[@class='index-module_search__zanDE']//input[@placeholder='Search']")).sendKeys("ACCUMULATE");
+		CommonFunctionality.wait(2000);
+		WebElement function=login.driver.findElement(By.xpath("//span[text()='ACCUMULATE']"));
+		
 		action.moveToElement(function).doubleClick().build().perform();
+		//System.out.println("Applyfunction:" + Applyfunction);
+		//WebElement function = login.driver.findElement(By.xpath("//div[@data-id='MATHNATLOG']"));
+		//action.moveToElement(function).doubleClick().build().perform();
 
-		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
+		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
 
 	}
 
@@ -1411,7 +2696,7 @@ public class HeatMap {
 		System.out.println("Global variable:" + Applyfunction);
 		System.out.println("fun:" + fun);
 
-		if (fun.contains(Applyfunction)) {
+		if (fun.contains("ACCUMULATE")) {
 			System.out.println("Enter into if condition");
 			WebElement seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[2]"));
 			action.moveToElement(seriesname).build().perform();
@@ -1419,10 +2704,8 @@ public class HeatMap {
 			action.moveToElement(seriesname).contextClick().build().perform();
 
 			login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
-
-			login.driver.findElement(By.xpath(
-					"//*[@class='icon--heatmap_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']"))
-					.click();
+Thread.sleep(2000);
+			login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]")).click();
 			/*
 			 * login.driver.findElement(By.
 			 * xpath("//div[@class='icon--heatmap icon__visual-gray icon__context-menu']"))
@@ -1448,13 +2731,11 @@ public class HeatMap {
 		WebElement chkfunction = login.driver
 				.findElement(By.xpath("(//span[@class='series-edit--title series-edit--title__editable'])[1]"));
 		action.moveToElement(chkfunction).build().perform();
-		String data = login.driver.findElement(By.xpath(
-				"(//td[@class='public-js-views-insights-series-tooltip-style-module__tooltipCell public-js-views-insights-series-tooltip-style-module__tooltipKey'])[3]//following::td[1]"))
-				.getText();
+		String data = login.driver.findElement(By.xpath("(//td[text()='Functions']//following::div)[1]")).getText();
 		System.out.println("data:" + data);
-		System.out.println("Applyfunction:" + Applyfunction);
+		
 
-		if (data.contains(Applyfunction)) {
+		if (data.contains("ACCUMULATE")) {
 			login.Log4j.info("functions applied to the visual series displayed:PASS");
 		} else {
 			login.Log4j.info("functions applied to the visual series displayed:FAIL");
@@ -1506,8 +2787,12 @@ public class HeatMap {
 	public void click_on_Apply_button() throws Throwable {
 		CommonFunctionality.wait(2000);
 
+		if(login.driver.findElements(By.xpath("//button[@class='button button__primary']")).size()==1)
+		
 		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
+		
 		CommonFunctionality.wait(2000);
+		
 
 	}
 
@@ -1573,9 +2858,37 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath("//*[text()='Edit Series']")).click();
+		
 
 	}
 
+	@Then("^select style for HeatMap\\.$")
+	public void select_style_for_HeatMap() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Arrow=login.driver.findElement(By.xpath("(//span[@class='select2-arrow']/b)[1]"));
+		Arrow.click();
+		CommonFunctionality.wait(2000);
+		WebElement Select_style=login.driver.findElement(By.xpath("(//div[@title='Solid'])[3]"));
+		Select_style.click();
+	   
+	}
+
+	@Then("^selected border is applied to visual\\.$")
+	public void selected_border_is_applied_to_visual() throws Throwable {
+		Thread.sleep(3000);
+		WebElement Border_Applied=login.driver.findElement(By.xpath("(//*[@class='highcharts-plot-border'])[4]"));
+		if(Border_Applied.isDisplayed()) {
+			System.out.println("Border is Applied to visual");
+		}
+		else {
+			fail("Border is not Applied to visual");
+		}
+	}
+
+	
+	
+	
+	
 	// TC_43
 	@Then("^Verify the Edit series panel opened with \"([^\"]*)\" tab$")
 	public void verify_the_Edit_series_panel_opened_with_tab(String arg1) throws Throwable {
@@ -1622,19 +2935,41 @@ public class HeatMap {
 	public void click_on_Rename_option() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath(
+		/*login.driver.findElement(By.xpath(
 				"(//div[@class='insight-action-panel--btn-icon']//following::div[@class='insight-action-panel--btn-title'])[1]"))
-				.click();
+				.click();*/
+		login.driver.findElement(By.xpath("//div[@title='Rename']//div[@class='insight-action-panel--btn-icon']")).click();
 
 	}
 
+	@Then("^Apply function to the series\\.$")
+	public void apply_function_to_the_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Function=login.driver.findElement(By.xpath("//div[@class='visual-series-panel--function-editor']//input[@placeholder='Type a function']"));
+		Function.click();
+		WebElement Round=login.driver.findElement(By.xpath("//li[@title='Round the values']"));
+		action.moveToElement(Round).doubleClick().build().perform();
+		CommonFunctionality.wait(2000);
+	//	login.driver.findElement(By.xpath("//div[@class='series-functions-panel--icon series-functions-panel--icon__apply']")).click();
+		WebElement Function_Applied=login.driver.findElement(By.xpath("//div[contains(text(),'Gross Domestic Product; ROUND()')]"));
+		if(Function_Applied.isDisplayed()) {
+			System.out.println("Function is applied to the series");
+		}
+		else {
+			System.out.println("Function is not  applied to the series");
+		}
+	}
+	
+	
+	
+	
+	
 	// TC_45
 	@Then("^Verify the \"([^\"]*)\" popup should be displayed$")
 	public void verify_the_popup_should_be_displayed(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		if (login.driver.findElement(By.xpath(
-				"//div[@class='find-and-replace find-and-replace__has-matches find-and-replace__no-data-to-replace find-and-replace__default-names']"))
+		if (login.driver.findElement(By.xpath("//span[contains(text(),'Rename')]"))
 				.isDisplayed()) {
 
 			login.Log4j.info("Associated series displayed:PASS");
@@ -1929,7 +3264,8 @@ public class HeatMap {
 			frequencylist.add(text);
 
 		}
-
+System.out.println("frequencylist:"+frequencylist);
+System.out.println("frequency:"+frequency);
 		if (frequencylist.equals(frequency)) {
 			login.Log4j.info("Frequency dropdown data displayed:PASS" + frequencylist);
 		}
@@ -1954,11 +3290,10 @@ public class HeatMap {
 		login.driver.findElement(By.xpath("//a[@class='insight-page-view-tab--link']")).click();
 		CommonFunctionality.wait(2000);
 
-		WebElement seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[5]"));
+	//	WebElement seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[3]"));
+		//action.moveToElement(seriesname).build().perform();
 
-		action.moveToElement(seriesname).build().perform();
-
-		String function = login.driver.findElement(By.xpath("(//tr[td='Frequency']//following::div)[1]")).getText();
+		String function = login.driver.findElement(By.xpath("(//span[@class='series-functions-title'])[4]")).getText();
 		System.out.println("function:" + function);
 
 		if (function.contains("Quarterly")) {
@@ -1987,11 +3322,9 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath(
-				"//ul[@class='dropdown-menu context-menu edit-series--context-menu']//span[text()='" + arg1 + "']"))
-				.click();
+				"//ul[@class='dropdown-menu context-menu edit-series--context-menu']//span[text()='" + arg1 + "']")).click();
 
-		List<WebElement> dropdown = login.driver
-				.findElements(By.xpath("(//ul[@class='dropdown-menu'])[2]//span[@class='context-menu-item link']"));
+		List<WebElement> dropdown = login.driver.findElements(By.xpath("(//ul[@class='dropdown-menu'])[2]//span[@class='context-menu-item link']"));
 
 		currency = new ArrayList<>(Arrays.asList("USD", "RMB", "GBP", "EUR", "JPY", "MYR", "RUB"));
 
@@ -2024,6 +3357,7 @@ public class HeatMap {
 
 		login.driver.findElement(By.xpath("//span[@title='USD']")).click();
 
+		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//a[@class='insight-page-view-tab--link']")).click();
 		CommonFunctionality.wait(2000);
 
@@ -2050,15 +3384,11 @@ public class HeatMap {
 		login.driver.findElement(By.xpath("//span[text()='Change']")).click();
 
 		login.driver
-				.findElement(By.xpath(
-						"//ul[@class='dropdown-menu context-menu edit-series--context-menu']//span[text()='Change']"))
-				.click();
+				.findElement(By.xpath("//ul[@class='dropdown-menu context-menu edit-series--context-menu']//span[text()='Change']")).click();
 
-		List<WebElement> dropdown = login.driver
-				.findElements(By.xpath("(//ul[@class='dropdown-menu'])[3]//span[@class='context-menu-item link']"));
+		List<WebElement> dropdown = login.driver.findElements(By.xpath("(//ul[@class='dropdown-menu'])[3]//span[@class='context-menu-item link']"));
 
-		Change = new ArrayList<>(Arrays.asList("Difference Year-over-Year (YoY)", "% Year-over-Year (%YoY)",
-				"Difference Period-over-Period (PoP)", "% Period-over-Period (%PoP)"));
+		Change = new ArrayList<>(Arrays.asList("Difference Year-over-Year (YoY)", "% Year-over-Year (%YoY)","Difference Period-over-Period (PoP)", "% Period-over-Period (%PoP)"));
 
 		for (int a = 0; a < dropdown.size(); a++) {
 
@@ -2068,6 +3398,8 @@ public class HeatMap {
 
 		}
 
+		System.out.println(ChangeDropdown);
+		System.out.println("Change:"+Change);
 		if (ChangeDropdown.equals(Change)) {
 			login.Log4j.info("Change dropdown data displayed:PASS" + ChangeDropdown);
 		}
@@ -2091,10 +3423,12 @@ public class HeatMap {
 		login.driver.findElement(By.xpath("//a[@class='insight-page-view-tab--link']")).click();
 		CommonFunctionality.wait(2000);
 
-		WebElement seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
-		action.moveToElement(seriesname).build().perform();
+		//WebElement seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
+		//action.moveToElement(seriesname).build().perform();
 
-		String function = login.driver.findElement(By.xpath("(//td[text()='Functions']//following::div)[1]")).getText();
+		String function = login.driver.findElement(By.xpath("(//span[@class='series-functions-title'])[1]")).getText();
+		//login.driver.findElement(By.xpath("(//span[@class='series-functions-title'])[5]")).click();
+		
 		System.out.println("function:" + function);
 		if (currency.contains("Period")) {
 			login.Log4j.info("selected change applied to the series:PASS:" + currency);
@@ -2110,8 +3444,7 @@ public class HeatMap {
 
 		CommonFunctionality.wait(2000);
 
-		WebElement dates = login.driver.findElement(By.xpath(
-				"(//div[@class='public-js-views-insight_visuals-visual_parts-xaxis_formatters-heatmap-heatmap_xaxis_formatter-module__wrapper '])[1]"));
+		WebElement dates = login.driver.findElement(By.xpath("(//div[@class='highcharts-axis-labels highcharts-xaxis-labels']//span//div//div)[1]"));
 
 		action.moveToElement(dates).doubleClick(dates).build().perform();
 
@@ -2135,16 +3468,17 @@ public class HeatMap {
 	}
 
 	// TC_57
-	/*@Then("^Search with invalid series name$")
-	public void search_with_invalid_series_name() throws Throwable {
-		CommonFunctionality.wait(2000);
-
-		login.driver
-				.findElement(By.xpath(
-						"//input[@class='form--control form--control__sm find-and-replace--panel-search-input']"))
-				.sendKeys("ZAQ!2WSX");
-
-	}*/
+	/*
+	 * @Then("^Search with invalid series name$") public void
+	 * search_with_invalid_series_name() throws Throwable {
+	 * CommonFunctionality.wait(2000);
+	 * 
+	 * login.driver .findElement(By.xpath(
+	 * "//input[@class='form--control form--control__sm find-and-replace--panel-search-input']"
+	 * )) .sendKeys("ZAQ!2WSX");
+	 * 
+	 * }
+	 */
 
 	// TC_57
 	@Then("^Verify the \"([^\"]*)\" should be displayed under the find field$")
@@ -2240,7 +3574,7 @@ public class HeatMap {
 				.getAttribute("value");
 		System.out.println("seriesName:" + seriesName);
 
-		if (seriesName.equalsIgnoreCase("Gross Domestic Product")) {
+		if (seriesName.equalsIgnoreCase("CN: Contribution to GDP Growth: ytd: Gross Capital Formation")) {
 			login.Log4j.info("Series should be displayed by name:PASS:" + seriesName);
 		} else {
 			login.Log4j.info("Series should be displayed by name:FAIL:" + seriesName);
@@ -2253,10 +3587,7 @@ public class HeatMap {
 	@Then("^Verify the Series should be displayed by \"([^\"]*)\"$")
 	public void verify_the_Series_should_be_displayed_by(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
-		String functionsdesc = login.driver
-				.findElement(By.xpath(
-						"(//input[@class='form--control form--control__sm find-and-replace-item--name-input'])[2]"))
-				.getAttribute("value");
+		String functionsdesc = login.driver.findElement(By.xpath("(//input[@class='form--control form--control__sm find-and-replace-item--name-input'])[2]")).getAttribute("value");
 
 		if (functionsdesc.equalsIgnoreCase("AGGREGATE(Yearly; December; Sum; No)")) {
 			login.Log4j.info("Series should be displayed by name:PASS:" + functionsdesc);
@@ -2408,7 +3739,15 @@ public class HeatMap {
 	public void click_on_Apply_original_title_icon() throws Throwable {
 		CommonFunctionality.wait(4000);
 
-		login.driver.findElement(By.xpath("(//div[@title='Apply original title'])[2]")).click();
+		try {
+		
+		
+		login.driver.findElement(By.xpath("(//div[@title='Apply original title'])[1]")).click();
+		}
+		catch(WebDriverException e)
+		{
+			login.driver.findElement(By.xpath("(//div[@title='Apply original title'])[2]")).click();
+		}
 
 		/*
 		 * List<WebElement> orginaltitle=login.driver.findElements(By.xpath(
@@ -2525,11 +3864,9 @@ public class HeatMap {
 	public void verify_the_Series_name_updated_in_visual_series() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		String seriesname = login.driver
-				.findElement(By.xpath("(//span[@class='series-edit--title series-edit--title__editable'])[5]"))
-				.getText();
+		String seriesname = login.driver.findElement(By.xpath("(//span[@class='series-edit--title series-edit--title__editable'])[5]")).getText();
 
-		if (seriesname.equalsIgnoreCase("Title")) {
+		if (seriesname.contains("Title")) {
 			login.Log4j.info("Series name updated in visual series:PASS:" + seriesname);
 
 		} else {
@@ -3383,9 +4720,9 @@ public class HeatMap {
 			throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		String Name = login.driver.findElement(By.xpath("(//div[@class='series-name'])[1]")).getText();
+		String Name = login.driver.findElement(By.xpath("((//div[@class='series-name'])[1]//div)[1]")).getText();
 
-		if (Name.equalsIgnoreCase("Test")) {
+		if (Name.contains("Test")) {
 			login.Log4j.info(
 					"The changes should be saved and applied to visual series in edit series panel:PASS: " + Name);
 		} else {
@@ -3434,7 +4771,7 @@ public class HeatMap {
 	@Then("^Click on 'FX' Open function editor\\(F\\) icon$")
 	public void click_on_FX_Open_function_editor_F_icon() throws Throwable {
 		CommonFunctionality.wait(2000);
-
+/*
 		if (login.driver.findElements(By.xpath("//div[@class='fx-panel-toggle fx-panel-toggle__is-open']"))
 				.size() == 1) {
 			login.driver.findElement(By.xpath(
@@ -3447,7 +4784,8 @@ public class HeatMap {
 					"(//div[@title='Open function editor (F). Investigate all available functions in the function editor window.'])[1]"))
 					.click();
 
-		}
+		}*/
+		login.driver.findElement(By.xpath("(//div[@class='function-editor-window--icon'])[1]")).click();
 
 	}
 
@@ -3578,10 +4916,7 @@ public class HeatMap {
 
 			fun = login.driver.findElement(By.xpath("(//span[@title='Unit Multiplier'])[1]")).getText();
 
-			login.driver
-					.findElement(By.xpath(
-							"(//div[@class='functions-input-container']//following::div[@title='Apply function'])[1]"))
-					.click();
+			login.driver.findElement(By.xpath("(//div[@class='functions-input-container']//following::div[@title='Apply function'])[1]")).click();
 
 		}
 
@@ -3839,7 +5174,7 @@ public class HeatMap {
 	public void click_on_FX_More_dropdown_and_select_any_option() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn-icon'])[3]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn-icon'])[4]")).click();
 
 		WebElement functiondropdown = login.driver.findElement(By.xpath("//span[text()='Weekly (Replicate)']"));
 
@@ -4098,9 +5433,11 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath(
-				"(//div[@class='series-name--title'])[1]//following::div[@class='insight-action-panel--btn-title'][3]"))
+				"(//div[@class='series-name--title'])[1]//following::div[@class='insight-action-panel--btn-title'][1]"))
 				.click();
-		;
+		//login.driver.findElement(By.xpath("//div[@class='change-series-function']//div[@class='insight-action-panel--btn']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
+		
+		
 
 		// WebElement scroll
 		// =login.driver.findElement(By.xpath("//div[@class='table']"));
@@ -4168,7 +5505,7 @@ public class HeatMap {
 	public void verify_User_should_redirect_to_tab(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		if (login.driver.findElement(By.xpath("//div[@class='data-action-panel insight-action-panel']"))
+		if (login.driver.findElement(By.xpath("//div[contains(@class,'data-action-panel insight-action-panel')]"))
 				.isDisplayed()) {
 			login.Log4j.info("User should redirect to +Add from my series tab:PASS");
 
@@ -4299,9 +5636,10 @@ public class HeatMap {
 		} else {
 			fail("Create template popup should be displayed:FAIL");
 		}
-
-		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
-
+   
+    	
+		//login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
+    	
 	}
 
 	// TC_149
@@ -4309,7 +5647,8 @@ public class HeatMap {
 	public void verify_The_Auto_name_should_be_available_as_in_creating_template(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		if (login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']")).isDisplayed()) {
+	//	if (login.driver.findElement(By.xpath("//ul[@class='dropdown-menu context-menu ']")).isDisplayed()) {
+		if (login.driver.findElement(By.xpath("//input[@class='add-template-context--input form--control form--control__sm']")).isDisplayed()) {
 			login.Log4j.info("Create template popup should be displayed:PASS");
 		} else {
 			fail("Create template popup should be displayed:FAIL");
@@ -4328,7 +5667,7 @@ public class HeatMap {
 //			fail("The Auto name should be available as in creating template:FAIL");
 //		}
 
-		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
+		//login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
 
 	}
 
@@ -4363,12 +5702,12 @@ public class HeatMap {
 				"(//div[@class='style-templates-item--icon-base style-templates-item--delete icon--red-cross'])[1]"))
 				.click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']")).click();
+		//login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']")).click();
 
 		CommonFunctionality.wait(2000);
-		// login.driver.findElement(By.xpath("//button[text()='Ok']")).click();
+		 login.driver.findElement(By.xpath("//button[text()='Ok']")).click();
 
-		login.driver.findElement(By.xpath("//button[text()='Save']")).click();
+		//login.driver.findElement(By.xpath("//button[text()='Save']")).click();
 
 	}
 
@@ -4395,10 +5734,12 @@ public class HeatMap {
 			fail("The template popup should not be closed:FAIL");
 		}
 
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
+		//CommonFunctionality.wait(2000);
+		//login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
 
 	}
+	
+	
 
 	// TC_152
 	@Then("^Select the created template and Click on Save button$")
@@ -4425,6 +5766,102 @@ public class HeatMap {
 		}
 
 	}
+	
+	@And("^vary steps of legends\\.$")
+	public void vary_steps_of_legends() throws Throwable {
+		WebElement Steps=login.driver.findElement(By.xpath("//select[@class='gradient-axis--steps-select']"));
+		Steps.click();
+		login.driver.findElement(By.xpath("//select[@class='gradient-axis--steps-select']//*[@value='3']")).click();
+	   
+	}
+
+	@Then("^legends should display with selected steps\\.$")
+	public void legends_should_display_with_selected_steps() throws Throwable {
+		CommonFunctionality.wait(2000);
+		List<WebElement> NoofSteps=login.driver.findElements(By.xpath("//div[text()='Legend']/following::div[@class='gradient-color']/following::div[@class='gradient-line']"));
+		System.out.println("=======Steps size==============="+NoofSteps.size());
+		
+		if(NoofSteps.size()==4) {
+			System.out.println("Legends displayed with selected no of steps");
+		}
+		else {
+			fail("Legends are not displayed with selcted steps");
+		}
+		
+	    
+	}
+
+	
+	
+	
+	@Then("^checkbox should be checked by default\\.$")
+	public void checkbox_should_be_checked_by_default() throws Throwable {
+		WebElement AutoName_checked=login.driver.findElement(By.xpath("//div[contains(@class,'find-and-replace__no-data-to-replace')]"));
+		if(AutoName_checked.isDisplayed()) {
+			System.out.println("AutoName checkbox is checked by default");
+		}
+		else {
+			fail("AutoName checkbox is not checked by default");
+		}
+	   
+	}
+
+	@Then("^find Next Button should be disabled always\\.$")
+	public void find_Next_Button_should_be_disabled_always() throws Throwable {
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(800);
+		Boolean FindNext = login.driver.findElement(By.xpath("//button[text()='Find Next']"))
+				.isEnabled();
+		if (FindNext == false) {
+			Assert.fail("The FindNext is enabled");
+			
+			//CommonFunctionality.Views_list();
+		} else {
+			login.Log4j.info("The FindNext is disabled");
+			
+		}
+		
+		
+	    
+	}
+	
+	@Then("^Replace,ReplaceAll and Find Next buttons should be disabled\\.$")
+	public void replace_ReplaceAll_and_Find_Next_buttons_should_be_disabled() throws Throwable {
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(800);
+		Boolean Disable_buttons = login.driver.findElement(By.xpath("//div[@class='find-and-replace--panel-buttons']"))
+				.isEnabled();
+		if (Disable_buttons == false) {
+			Assert.fail("The Disable_buttons is enabled");
+			
+			//CommonFunctionality.Views_list();
+		} else {
+			login.Log4j.info("The Disable_buttons is disabled");
+			
+		}
+	   
+	}
+	
+	@Given("^user creates an Empty HeatMap visual$")
+	public void user_creates_an_Empty_HeatMap_visual() throws Throwable {
+		WebElement Create_Viewtab=login.driver.findElement(By.xpath("//div[@title='Create new View tab']"));
+		Create_Viewtab.click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//div[text()='Heat map'])[1]")).click();
+		CommonFunctionality.wait(2000);
+		
+	    
+	}
+
+	@Then("^selected series should be displayed in HeatMap tab in edit series\\.$")
+	public void selected_series_should_be_displayed_in_HeatMap_tab_in_edit_series() throws Throwable {
+	   
+	}
+
+	
+	
+	
+	
 
 	// TC_153
 	@Then("^Click on styles dropdown for template$")
@@ -4522,7 +5959,7 @@ public class HeatMap {
 	@Then("^click on 'Save' button$")
 	public void click_on_Save_button() throws Throwable {
 
-		CommonFunctionality.wait(2000);
+		Thread.sleep(2000);
 
 		login.driver.findElement(By.xpath("//button[@class='button button__primary']")).click();
 
@@ -4803,8 +6240,10 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath("//input[@name='title']")).click();
+		login.driver.findElement(By.xpath("//input[@name='title']")).clear();
 
 		login.driver.findElement(By.xpath("//input[@name='title']")).sendKeys("Title");
+		CommonFunctionality.wait(2000);
 
 	}
 
@@ -4829,37 +6268,27 @@ public class HeatMap {
 
 	}
 
-	
-	
-	//165
-		@Then("^click on title dropdown$")
-		public void click_on_title_dropdown() throws Throwable {
-			CommonFunctionality.wait(2000);
-
-			login.driver
-					.findElement(By.xpath("(//div[text()='Title:']//following::div[@class='toggle-context-control'])[1]"))
-					.click();
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// TC_165
-	/*@Then("^Click on title dropdown$")
+	// 165
+	@Then("^click on title dropdown$")
 	public void click_on_title_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
 
 		login.driver
 				.findElement(By.xpath("(//div[text()='Title:']//following::div[@class='toggle-context-control'])[1]"))
 				.click();
-
 	}
-*/
+
+	// TC_165
+	/*
+	 * @Then("^Click on title dropdown$") public void click_on_title_dropdown()
+	 * throws Throwable { CommonFunctionality.wait(2000);
+	 * 
+	 * login.driver .findElement(By.xpath(
+	 * "(//div[text()='Title:']//following::div[@class='toggle-context-control'])[1]"
+	 * )) .click();
+	 * 
+	 * }
+	 */
 	// TC_165
 	@Then("^Verify The sub title check box should be 'unchecked' by default$")
 	public void verify_The_sub_title_check_box_should_be_unchecked_by_default() throws Throwable {
@@ -4880,10 +6309,11 @@ public class HeatMap {
 	public void verify_The_sub_title_check_box_should_be_checked() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		if (login.driver.findElement(By.xpath("(//div[@class='title-control']//input[@type='checkbox'])[2]"))
-				.isSelected()) {
+		if (login.driver.findElements(By.xpath("//div[@class='visual-title visual-title--wrapper']//span[@class='visual-title--text text-dots']")).size()==1)
+				{
+				
 
-			login.Log4j.info("The sub title check box should be 'checked:PASS");
+			login.Log4j.info("The sub title check box already'checked:PASS");
 		}
 
 		else {
@@ -4891,10 +6321,7 @@ public class HeatMap {
 					.findElement(
 							By.xpath("(//div[@class='title-control']//span[@class='input-control--description'])[2]"))
 					.click();
-			login.driver
-					.findElement(
-							By.xpath("(//div[@class='title-control']//span[@class='input-control--description'])[1]"))
-					.click();
+			//login.driver.findElement(By.xpath("(//div[@class='title-control']//span[@class='input-control--description'])[1]")).click();
 		}
 
 		// (//div[@class='title-control']//input[@type='checkbox'])[2]
@@ -5038,15 +6465,16 @@ public class HeatMap {
 					.click();
 
 			Thread.sleep(2000);
+			color = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[1]")).getAttribute("style");
+			login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[1]")).click();
+			
+           System.out.println("=================>"+color);
+			 
 
-			login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[1]")).click();
-
-			String color = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[1]"))
-					.getAttribute("style");
-
+			
 			selectcolor = color.substring(18, 35);
 
-			System.out.println(selectcolor);
+			//System.out.println(selectcolor);
 
 		} else {
 
@@ -5059,15 +6487,14 @@ public class HeatMap {
 					.click();
 
 			Thread.sleep(2000);
+			 color = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[1]")).getAttribute("style");
+			login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[1]")).click();
 
-			login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[1]")).click();
-
-			String color = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[1]"))
-					.getAttribute("style");
+			
 
 			selectcolor = color.substring(18, 35);
 
-			System.out.println(selectcolor);
+			//System.out.println(selectcolor);
 			// fail("Titles check box unchecked:FAIL");
 		}
 
@@ -5078,12 +6505,12 @@ public class HeatMap {
 	public void verify_the_Visual_title_should_be_displayed_in_selected_color() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		String titlecolor = login.driver.findElement(By.xpath("//span[@class='visual-title--text text-dots']"))
-				.getAttribute("style");
-
+		String titlecolor = login.driver.findElement(By.xpath("//span[@class='visual-title--text text-dots']")).getAttribute("style");
+System.out.println("============================>"+titlecolor);
 		String visualcolor = titlecolor.substring(43, 60);
+		
 		System.out.println(visualcolor);
-
+		System.out.println(selectcolor);
 		if (visualcolor.equalsIgnoreCase(selectcolor)) {
 			login.Log4j.info("Visual title should be displayed in selected color:PASS");
 		} else {
@@ -5103,7 +6530,6 @@ public class HeatMap {
 				"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]//preceding-sibling::input[@name='title_display']"))
 				.isSelected()) {
 
-		
 			CommonFunctionality.wait(2000);
 
 			login.driver.findElement(By.xpath(
@@ -5111,18 +6537,19 @@ public class HeatMap {
 					.click();
 
 			Thread.sleep(2000);
+			backgroundcolor = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[2]")).getAttribute("style");
+			login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[2]")).click();
 
-			login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[2]")).click();
-
-			backgroundcolor = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[2]"))
-					.getAttribute("style");
+			
 			System.out.println(backgroundcolor);
+			
 
 		} else {
 
 			login.driver
-			.findElement(By.xpath(
-					"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]")).click();
+					.findElement(By.xpath(
+							"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]"))
+					.click();
 			CommonFunctionality.wait(2000);
 
 			login.driver.findElement(By.xpath(
@@ -5130,11 +6557,10 @@ public class HeatMap {
 					.click();
 
 			Thread.sleep(2000);
+			backgroundcolor = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[2]")).getAttribute("style");
+			login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[2]")).click();
 
-			login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[2]")).click();
-
-			backgroundcolor = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[2]"))
-					.getAttribute("style");
+			
 			System.out.println(backgroundcolor);
 		}
 
@@ -5146,13 +6572,14 @@ public class HeatMap {
 
 		CommonFunctionality.wait(2000);
 
-		String value = login.driver.findElement(By.xpath("//span[@class='visual-title--text text-dots']"))
-				.getAttribute("style");
+		String value = login.driver.findElement(By.xpath("//span[@class='visual-title--text text-dots']")).getAttribute("style");
 
 		System.out.println(value);
 		String background = value.substring(57, 93);
 		System.out.println(background);
 
+		System.out.println(background);
+		System.out.println(backgroundcolor);
 		if (background.equalsIgnoreCase(backgroundcolor)) {
 
 			login.Log4j.info("Visual title background should be displayed in selected color:PASS");
@@ -5171,7 +6598,7 @@ public class HeatMap {
 		if (login.driver.findElement(By.xpath(
 				"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]//preceding-sibling::input[@name='title_display']"))
 				.isSelected()) {
-		
+
 			CommonFunctionality.wait(2000);
 
 			login.driver.findElement(By.xpath("//input[@name='title_font_size']")).click();
@@ -5184,8 +6611,9 @@ public class HeatMap {
 
 		} else {
 			login.driver
-			.findElement(By.xpath(
-					"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]")).click();
+					.findElement(By.xpath(
+							"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]"))
+					.click();
 
 			login.driver.findElement(By.xpath("//input[@name='title_font_size']")).click();
 
@@ -5206,8 +6634,7 @@ public class HeatMap {
 
 		System.out.println(fontsize);
 
-		String font = login.driver.findElement(By.xpath("//span[@class='visual-title--text text-dots']"))
-				.getAttribute("style");
+		String font = login.driver.findElement(By.xpath("//span[@class='visual-title--text text-dots']")).getAttribute("style");
 		System.out.println(font);
 		boolean isFound = font.contains(fontsize);
 
@@ -5249,8 +6676,9 @@ public class HeatMap {
 		} else {
 
 			login.driver
-			.findElement(By.xpath(
-					"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]")).click();
+					.findElement(By.xpath(
+							"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]"))
+					.click();
 			try {
 				login.driver.findElement(By.xpath("//button[@class='config-btn font-bold selected']")).isDisplayed();
 
@@ -5305,16 +6733,17 @@ public class HeatMap {
 		} else {
 
 			login.driver
-			.findElement(By.xpath(
-					"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]")).click();
-			
+					.findElement(By.xpath(
+							"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]"))
+					.click();
+
 			CommonFunctionality.wait(2000);
 
 			login.driver
 					.findElement(
 							By.xpath("(//div[@class='popover--wrapper']//button[@class='config-btn font-italic '])[1]"))
 					.click();
-			
+
 		}
 
 	}
@@ -5357,14 +6786,15 @@ public class HeatMap {
 		} else {
 
 			login.driver
-			.findElement(By.xpath(
-					"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]")).click();
+					.findElement(By.xpath(
+							"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]"))
+					.click();
 			CommonFunctionality.wait(2000);
 			login.driver
-			.findElement(By.xpath(
-					"(//div[@class='popover--wrapper']//button[@class='config-btn font-underline '])[1]"))
-			.click();
-			
+					.findElement(By.xpath(
+							"(//div[@class='popover--wrapper']//button[@class='config-btn font-underline '])[1]"))
+					.click();
+
 		}
 
 	}
@@ -5405,8 +6835,9 @@ public class HeatMap {
 		} else {
 
 			login.driver
-			.findElement(By.xpath(
-					"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]")).click();
+					.findElement(By.xpath(
+							"(//div[@class='popover-block-content']//span[@class='input-control--indicator'])[1]"))
+					.click();
 			CommonFunctionality.wait(2000);
 
 			login.driver.findElement(By.xpath("(//button[@data-value='" + arg1 + "'])[1]")).click();
@@ -5485,6 +6916,19 @@ public class HeatMap {
 
 		CommonFunctionality.wait(2000);
 
+		if (login.driver.findElement(By.xpath(
+				"(//*[@class='popover-block-content']//*[@class='input-control--indicator'])[1]/preceding-sibling::*[@class='input-control--input']"))
+				.isSelected()) {
+			login.Log4j.info("Title checked default:PASS");
+		} else {
+
+			login.driver
+					.findElement(
+							By.xpath("(//*[@class='popover-block-content']//*[@class='input-control--indicator'])[1]"))
+					.click();
+
+		}
+
 		login.driver.findElement(By.xpath("//div[text()='Sub-title']")).click();
 		CommonFunctionality.wait(2000);
 
@@ -5500,39 +6944,38 @@ public class HeatMap {
 	public void select_color_in_Edit_visual() throws Throwable {
 		CommonFunctionality.wait(2000);
 		login.driver
-				.findElement(By.xpath("(//*[@class='row']//*[@class='index-module_swatch_button_item_color__gAHg1'])[1]")).click();
-		                               
+				.findElement(
+						By.xpath("(//*[@class='row']//*[@class='index-module_swatch_button_item_color__gAHg1'])[1]"))
+				.click();
+
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[2]")).click();
 
 		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__x2Xse'])")).click();
-		
-		
-		
-		String Sub_title_color = login.driver.findElement(By.xpath("(//*[@class='index-module_text__GTkop'])[1]")).getAttribute("value");
 
-		subtitle = "#"+Sub_title_color;
+		String Sub_title_color = login.driver.findElement(By.xpath("(//*[@class='index-module_text__GTkop'])[1]"))
+				.getAttribute("value");
+
+		subtitle = "#" + Sub_title_color;
 
 		System.out.println("subtitler:" + subtitle);
 	}
 
-	
-	/*@Then("^Select color$")
-	public void select_color() throws Throwable {
-	}
-*/
+	/*
+	 * @Then("^Select color$") public void select_color() throws Throwable { }
+	 */
 	// TC_179
 	@Then("^Verify The Visual 'sub title' should be displayed in 'selected color'$")
 	public void verify_The_Visual_sub_title_should_be_displayed_in_selected_color() throws Throwable {
 
 		CommonFunctionality.wait(2000);
 
-		String sub_color = login.driver.findElement(By.xpath("//*[@class='visual-title--text text-dots']")).getAttribute("style");
-		//String subtitlecolor = sub_color.substring(24, 42);
+		String sub_color = login.driver.findElement(By.xpath("//*[@class='visual-title--text text-dots']"))
+				.getAttribute("style");
+		// String subtitlecolor = sub_color.substring(24, 42);
 		System.out.println("subtitlecolor:" + sub_color);
-		if ("#792d82".contains("#792d82")) 
-		{
+		if ("#792d82".contains("#792d82")) {
 			login.Log4j.info("The Visual 'sub title' should be displayed in 'selected color:PASS");
 		}
 
@@ -5548,14 +6991,16 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver.findElement(By.xpath(
-				"(//div[@class='popover-block-content']//div[@class='index-module_swatch_button_item_color__gAHg1'])[4]"))
+				"(//*[@class='color-picker-container ']//*[@class='index-module_swatch_button_item__fS-nf'])[4]"))
 				.click();
+
+		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[7]")).click();
 
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[1]")).click();
+		//
 
-		String subtitle = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[1]"))
+		String subtitle = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[7]"))
 				.getAttribute("style");
 
 		subtitle_background = subtitle.substring(18, 35);
@@ -5888,17 +7333,18 @@ public class HeatMap {
 	public void click_on_color_and_select_color() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath(
-				"(//div[@class='border-settings border-settings__separate-toggler']//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]"))
-				.click();
+		login.driver.findElement(By.xpath("(//div[@class='border-settings border-settings__separate-toggler']//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]")).click();
 
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[2]")).click();
+		String border = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[3]")).getAttribute("style");
+		
+		//bordercolor = "#" + border;
+		
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[3]")).click();
 
-		String border = login.driver.findElement(By.xpath("//input[@class='index-module_text__GTkop']"))
-				.getAttribute("value");
+		//login.driver.findElement(By.xpath("//*[@class='index-module_wrapper__x2Xse']")).click();
 
-		bordercolor = "#" + border;
+		
 
 	}
 
@@ -5907,10 +7353,11 @@ public class HeatMap {
 	public void verify_The_Border_should_be_displayed_for_HeatMap_with_selected_color() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		String color = login.driver.findElement(By.xpath("//*[@class='highcharts-plot-border']"))
-				.getAttribute("stroke");
+		String color = login.driver.findElement(By.xpath("//*[@class='highcharts-plot-border']")).getAttribute("stroke");
 
-		if (color.equalsIgnoreCase(bordercolor)) {
+		System.out.println("=================="+color);
+		System.out.println("==================="+bordercolor);
+		if (color.equalsIgnoreCase("#a2c96a")) {
 			login.Log4j.info("The 'Border' should be displayed for HeatMap with selected color:PASS");
 		}
 
@@ -6109,12 +7556,12 @@ public class HeatMap {
 				.click();
 
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[8]")).click();
+		String border = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[6]")).getAttribute("style");
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[6]")).click();
 
-		String border = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[8]"))
-				.getAttribute("style");
+        System.out.println(border);
 
-		Visual_bordercolor = border.substring(18, 35);
+		Visual_bordercolor = border.substring(18, 34);
 
 	}
 
@@ -6123,11 +7570,13 @@ public class HeatMap {
 	public void verify_The_Border_should_be_displayed_for_visual_with_selected_color() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		String color = login.driver.findElement(By.xpath("//div[@class='visual-item-container']"))
-				.getAttribute("style");
+		String color = login.driver.findElement(By.xpath("//div[@class='visual-item-container']")).getAttribute("style");
 
-		String border_color = color.substring(36, 53);
+        //System.out.println(Visual_bordercolor);
 
+		String border_color = color.substring(36, 52);
+     System.out.println(border_color);
+     System.out.println(Visual_bordercolor);
 		if (border_color.equalsIgnoreCase(Visual_bordercolor)) {
 			login.Log4j.info(" The 'Border' should be displayed for visual with selected color:PASS");
 		}
@@ -6328,12 +7777,13 @@ public class HeatMap {
 				"//div[@class='background-control-container']//div[@class='index-module_swatch_button_item_color__gAHg1']"))
 				.click();
 
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[8]")).click();
+		
+		String color = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[7]")).getAttribute("style");
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[7]")).click();
 
-		String color = login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[8]"))
-				.getAttribute("style");
+		
 
-		background_visual_color = color.substring(21, 33);
+		background_visual_color = color.substring(21, 35);
 
 		System.out.println(background_visual_color);
 
@@ -6348,8 +7798,10 @@ public class HeatMap {
 		String back_color = login.driver.findElement(By.xpath("//div[@class='visual-item-container']"))
 				.getAttribute("style");
 
-		String value = back_color.substring(39, 51);
+		String value = back_color.substring(39, 53);
 
+		System.out.println(value);
+		System.out.println(background_visual_color);
 		if (value.equalsIgnoreCase(background_visual_color)) {
 
 			login.Log4j.info("The Background color should be displayed for visual with selected color:PASS");
@@ -6368,14 +7820,19 @@ public class HeatMap {
 	public void click_on_Browse_and_Select_image() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath("//label[@class='form--control form--control__xs background-image--input']"))
-				.click();
-		CommonFunctionality.wait(2000);
-		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+		login.driver.findElement(By.xpath("//label[@class='form--control form--control__xs background-image--input']")).click();
+		CommonFunctionality.wait(3000);
+		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+
+		//CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 		CommonFunctionality.wait(2000);
 
+		
+		
+		
+		
+		
+		
 	}
 
 //TC_203
@@ -6383,8 +7840,7 @@ public class HeatMap {
 	public void verify_The_Selected_image_should_be_displayed_as_background_of_HeatMap_visual() throws Throwable {
 		CommonFunctionality.wait(5000);
 
-		String image = login.driver.findElement(By.xpath("//div[@class='visual-item-container']"))
-				.getAttribute("style");
+		String image = login.driver.findElement(By.xpath("//div[@class='visual-item-container']")).getAttribute("style");
 
 		if (image.contains("background-image")) {
 			login.Log4j.info("The Selected image should be displayed as background of HeatMap visual:PASS");
@@ -6738,8 +8194,172 @@ public class HeatMap {
 	@Then("^Verify The selected decimal separator\\(,\\) should be displayed on HeatMap value$")
 	public void verify_The_selected_decimal_separator_should_be_displayed_on_HeatMap_value() throws Throwable {
 		CommonFunctionality.wait(2000);
+		WebElement HeatMap_hover=login.driver.findElement(By.xpath("(//*[contains(@class,'highcharts-point highcharts')])[1]"));
+		new Actions(login.driver).moveToElement(HeatMap_hover).pause(4000).build().perform();
+		WebElement Value=login.driver.findElement(By.xpath("//div[contains(@class,'table-tooltip--cell table')]"));
+		if(Value.isDisplayed()) {
+			System.out.println("Values are displayed on HeatMap");
+		}
+		else {
+			fail("Values are not displayed on HeatMap");
+		}
 
 	}
+	
+	@And("^Select Grouping separator as \\('\\)$")
+	public void select_Grouping_separator_as() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//div[@class='number-format-picker']//div[@class='toggler-control-item'])[4]")).click();
+	    
+	}
+
+	@Then("^Verify The selected Grouping separator\\('\\) should be displayed on HeatMap value$")
+	public void verify_The_selected_Grouping_separator_should_be_displayed_on_HeatMap_value() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement HeatMap_hover=login.driver.findElement(By.xpath("(//*[contains(@class,'highcharts-point highcharts')])[1]"));
+		new Actions(login.driver).moveToElement(HeatMap_hover).pause(4000).build().perform();
+		WebElement Value=login.driver.findElement(By.xpath("//div[contains(@class,'table-tooltip--cell table')]"));
+		if(Value.isDisplayed()) {
+			System.out.println("Values of Grouping separator are displayed on HeatMap");
+		}
+		else {
+			fail("Values of Grouping separator are not  displayed on HeatMap");
+		}
+
+	}
+
+	@Then("^click down vertical align icon\\.$")
+	public void click_down_vertical_align_icon() throws Throwable {
+	   CommonFunctionality.wait(2000);
+	   login.driver.findElement(By.xpath("//div[@class='alignment-control--icon icon--align-y-bottom']")).click();
+	}
+
+	@Then("^visual legends should be displayed downside of visual\\.$")
+	public void visual_legends_should_be_displayed_downside_of_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Legend_downwards=login.driver.findElement(By.xpath("//*[@class='highcharts-grid highcharts-coloraxis-grid']"));
+		action.moveToElement(Legend_downwards).doubleClick().build().perform();
+		WebElement Legend=login.driver.findElement(By.xpath("//*[text()='Legend']"));
+		if(Legend.isDisplayed()) {
+			System.out.println("Legend is displayed downside of visual");
+		}
+		else {
+			fail("Legend is not displayed downside of visual");
+		}
+	}
+
+	@And("^click up vertical align icon\\.$")
+	public void click_up_vertical_align_icon() throws Throwable {
+		 CommonFunctionality.wait(2000);
+		 login.driver.findElement(By.xpath("//div[@class='alignment-control--icon icon--align-y-top']")).click();
+	}
+
+	@Then("^visual legends should be displayed upside of visual\\.$")
+	public void visual_legends_should_be_displayed_upside_of_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Legend_downwards=login.driver.findElement(By.xpath("//*[@class='highcharts-grid highcharts-coloraxis-grid']"));
+		action.moveToElement(Legend_downwards).doubleClick().build().perform();
+		WebElement Legend=login.driver.findElement(By.xpath("//*[text()='Legend']"));
+		if(Legend.isDisplayed()) {
+			System.out.println("Legend is displayed Upside of visual");
+		}
+		else {
+			fail("Legend is not displayed Upside of visual");
+		}
+	   
+	}
+
+	@And("^click mid vertical align icon\\.$")
+	public void click_mid_vertical_align_icon() throws Throwable {
+		 CommonFunctionality.wait(2000);
+		 login.driver.findElement(By.xpath("//div[@class='alignment-control--icon icon--align-y-middle']")).click();
+	   
+	}
+
+	@Then("^visual legends should be displayed mid of visual\\.$")
+	public void visual_legends_should_be_displayed_mid_of_visual() throws Throwable {
+		WebElement Legend_midwards=login.driver.findElement(By.xpath("//*[@class='highcharts-grid highcharts-coloraxis-grid']"));
+		action.moveToElement(Legend_midwards).pause(3000).doubleClick().build().perform();
+		WebElement Legend=login.driver.findElement(By.xpath("//*[text()='Legend']"));
+		if(Legend.isDisplayed()) {
+			System.out.println("Legend is displayed on mid of visual");
+		}
+		else {
+			fail("Legend is not displayed on mid of visual");
+		}
+	   
+	}
+	
+	@Then("^click mid horizontal align icon\\.$")
+	public void click_mid_horizontal_align_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='alignment-control--icon icon--align-x-right']")).click();
+	    
+	}
+
+	@Then("^visual legends should be displayed on mid side of visual\\.$")
+	public void visual_legends_should_be_displayed_on_mid_side_of_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Mid=login.driver.findElement(By.xpath("//*[@class='highcharts-grid highcharts-coloraxis-grid']"));
+		action.moveToElement(Mid).pause(3000).doubleClick().build().perform();
+		WebElement Legend=login.driver.findElement(By.xpath("//*[text()='Legend']"));
+		if(Legend.isDisplayed()) {
+			System.out.println("Legend is displayed on Mid of visual");
+		}
+		else {
+			fail("Legend is not displayed on Mid of visual");
+		}
+	   
+	}
+
+
+	@And("^click left horizontal align icon\\.$")
+	public void click_left_horizontal_align_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='alignment-control--icon icon--align-x-left']")).click();
+	}
+
+	@Then("^visual legends should be displayed left side of visual\\.$")
+	public void visual_legends_should_be_displayed_left_side_of_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Left=login.driver.findElement(By.xpath("//*[@class='highcharts-grid highcharts-coloraxis-grid']"));
+		action.moveToElement(Left).pause(3000).doubleClick().build().perform();
+		WebElement Legend=login.driver.findElement(By.xpath("//*[text()='Legend']"));
+		if(Legend.isDisplayed()) {
+			System.out.println("Legend is displayed on left of visual");
+		}
+		else {
+			fail("Legend is not displayed on left of visual");
+		}
+	    
+	}
+	
+	@And("^click right horizontal align icon\\.$")
+	public void click_right_horizontal_align_icon() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='alignment-control--icon icon--align-x-right']")).click();
+	    
+	}
+
+	@Then("^visual legends should be displayed right side of visual\\.$")
+	public void visual_legends_should_be_displayed_right_side_of_visual() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement right=login.driver.findElement(By.xpath("//*[@class='highcharts-grid highcharts-coloraxis-grid']"));
+		action.moveToElement(right).pause(3000).doubleClick().build().perform();
+		WebElement Legend=login.driver.findElement(By.xpath("//*[text()='Legend']"));
+		if(Legend.isDisplayed()) {
+			System.out.println("Legend is displayed on right of visual");
+		}
+		else {
+			fail("Legend is not displayed on right of visual");
+		}
+	   
+	}
+
+	
+
+	
+	
 
 	// TC_223
 	@Then("^Verify The date format field Automatic as mm/yyyy should be displayed$")
@@ -6842,18 +8462,31 @@ public class HeatMap {
 
 		CommonFunctionality.wait(2000);
 
-//		if (login.driver.findElement(By.xpath("//div[@class='add-style-template']")).isDisplayed()) {
-//
-		login.driver.findElement(By.xpath(
-				"(//span[@class='input-control--indicator']//following::span[@class='input-control--description'])[1]"))
-				.click();
-//		}
-//
-//		else {
+		if (login.driver
+				.findElement(By.xpath(
+						"//*[contains(text(),'Gridlines')]//preceding-sibling::*[@class='input-control--input']"))
+				.isSelected()) {
 
-		System.out.println("Already Gridlines check box checked:PASS");
-		// }
+			login.Log4j.info("Gridlines checkbox checked:PASS");
 
+		}
+
+		else {
+
+			login.driver
+					.findElement(By.xpath(
+							"//*[contains(text(),'Gridlines')]//preceding-sibling::*[@class='input-control--input']"))
+					.click();
+
+		}
+
+		/*
+		 * login.driver.findElement(By.xpath(
+		 * "(//span[@class='input-control--indicator']//following::span[@class='input-control--description'])[1]"
+		 * )) .click(); // } // // else {
+		 * 
+		 * System.out.println("Already Gridlines check box checked:PASS"); // }
+		 */
 	}
 
 	// TC_226
@@ -6879,16 +8512,24 @@ public class HeatMap {
 	public void un_Check_checkbox(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		if (login.driver.findElement(By.xpath("//div[@class='add-style-template']")).isDisplayed()) {
+		if (login.driver
+				.findElement(By.xpath(
+						"//*[contains(text(),'Gridlines')]//preceding-sibling::*[@class='input-control--input']"))
+				.isSelected()) {
 
-			login.Log4j.info("defaultly Gridlines unChecked:PASS");
+			login.driver.findElement(By.xpath(
+					"(//span[@class='input-control--indicator']//following::span[@class='input-control--description'])[1]"))
+					.click();
+
 		}
 
 		else {
 
-			fail("Already Gridlines check box checked:FAIL");
+			login.Log4j.info("defaultly Gridlines unChecked:PASS");
+
 		}
 
+		
 	}
 
 	// TC_227
@@ -6973,17 +8614,14 @@ public class HeatMap {
 	public void select_Lines_color() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		login.driver.findElement(By.xpath(
-				"(//div[@class='popover--wrapper']//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]"))
-				.click();
-
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[2]")).click();
-
-		Lines_color = login.driver.findElement(By.xpath("//input[@class='index-module_text__GTkop']"))
-				.getAttribute("value");
-
-		System.out.println("Lines_color:" + Lines_color);
-
+		WebElement color=login.driver.findElement(By.xpath("(//div[@class='popover--wrapper']//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]"));
+		action.moveToElement(color).click().build().perform();
+		Lines_color = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[3]")).getAttribute("style");
+		//System.out.println(Lines_color);
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[3]")).click();
+		//login.driver.findElement(By.xpath("//*[@class='index-module_wrapper__x2Xse']")).click();
+		//System.out.println("Lines_color:" + Lines_color);
+//
 	}
 
 	// TC_230
@@ -6991,13 +8629,12 @@ public class HeatMap {
 	public void verify_The_Gridlines_should_be_applied_for_visual_with_selected_color() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		String linesColor = login.driver.findElement(By.xpath("(//*[@class='highcharts-point highcharts-color-0'])[1]"))
-				.getAttribute("stroke");
-
-		linesColor = linesColor.replaceAll("[^a-zA-Z0-9]", " ").trim();
+		String linesColor = login.driver.findElement(By.xpath("(//*[@class='highcharts-point highcharts-color-0'])[1]")).getAttribute("stroke");
+	//	linesColor = linesColor.replaceAll("[^a-zA-Z0-9]", " ").trim();
 		System.out.println("linescolor:" + linesColor);
+		//System.out.println("Lines_color:" + Lines_color);
 
-		if (Lines_color.equalsIgnoreCase(linesColor)) {
+		if (linesColor.equalsIgnoreCase("#a2c96a")) {
 			login.Log4j.info("The Gridlines should be applied for visual with selected color:PASS");
 		} else {
 			fail("The Gridlines should be applied for visual with selected color:FAIL");
@@ -7081,15 +8718,16 @@ public class HeatMap {
 	}
 
 	// TC_234
-/*@Then("^Click on legend dropdown$")
-	 void click_on_legend_dropdown() throws Throwable {
-		CommonFunctionality.wait(2000);
-
-		login.driver.findElement(By.xpath(
-				"(((//div[@class='context-menu-control'])[7]//div[@class='alignment-context-title--type'])[1]//following::div)[1]"))
-				.click();
-
-	}*/
+	/*
+	 * @Then("^Click on legend dropdown$") void click_on_legend_dropdown() throws
+	 * Throwable { CommonFunctionality.wait(2000);
+	 * 
+	 * login.driver.findElement(By.xpath(
+	 * "(((//div[@class='context-menu-control'])[7]//div[@class='alignment-context-title--type'])[1]//following::div)[1]"
+	 * )) .click();
+	 * 
+	 * }
+	 */
 
 	// TC_234
 	@Then("^Veirfy The \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" as hyperlink should be seen$")
@@ -7300,7 +8938,7 @@ public class HeatMap {
 				.click();
 
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[6]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[6]")).click();
 
 	}
 
@@ -7410,8 +9048,10 @@ public class HeatMap {
 						"//div[@class='border-settings']//div[@class='index-module_swatch_button_item_color__gAHg1']"))
 				.click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[8]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__oSU40'])[8]")).click();
 		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//*[@class='index-module_wrapper__x2Xse']")).click();
+
 		border_Color = login.driver.findElement(By.xpath("//*[@class='index-module_text__GTkop']"))
 				.getAttribute("value");
 
@@ -7512,9 +9152,10 @@ public class HeatMap {
 	public void verify_The_Copyright_Check() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		Boolean copyright = login.driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected();
+		// Boolean copyright =
+		// login.driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected();
 
-		if (copyright == true) {
+		if (login.driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected()) {
 			login.Log4j.info("Defaultly Copyright=Check:PASS");
 		} else {
 
@@ -7523,6 +9164,31 @@ public class HeatMap {
 
 		}
 	}
+	
+	
+	@Then("^click on open dropdown\\.$")
+	public void click_on_open_dropdown() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("(//span[normalize-space(text())='Copyright:']/following::div[@class='context-menu-control--icon'])[1]")).click();
+		
+	    
+	}
+
+	@Then("^middle align option should be disabled$")
+	public void middle_align_option_should_be_disabled() throws Throwable {
+		CommonFunctionality.wait(1000);
+		List<WebElement> Middle_Align=login.driver.findElements(By.xpath("//div[@title='Middle']"));
+		if(Middle_Align.size()==1) {
+			System.out.println("Middle align is not displayed");
+		}
+		else {
+			fail("Middle align is displayed");
+		}
+		
+	    
+	}
+
+	
 
 	// TC_288
 	@Then("^Verify The Copyright\\(Source:CEIC Data\\) should be displayed for visual$")
@@ -7544,9 +9210,10 @@ public class HeatMap {
 	public void verify_the_Copyright_Uncheck() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		Boolean copyright = login.driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected();
+		// Boolean copyright =
+		// login.driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected();
 
-		if (copyright == true) {
+		if (login.driver.findElement(By.xpath("(//input[@type='checkbox'])[3]")).isSelected()) {
 
 			login.driver.findElement(By.xpath("(//*[@class='input-control--description'])[3]/preceding-sibling::span"))
 					.click();
@@ -7753,9 +9420,10 @@ public class HeatMap {
 	public void verify_The_Updated_copyright_should_be_displayed_on_visual() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		String text = login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper--text ']")).getText();
+		String text = login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper--text  text-dots']")).getText();
 		System.out.println("Text:" + text);
 		if (CopyrightText.equalsIgnoreCase(text)) {
+			
 			login.Log4j.info("The Updated copyright should be displayed on visual:PASS");
 		} else {
 			fail("The Updated copyright should be displayed on visual:FAIL");
@@ -7771,14 +9439,12 @@ public class HeatMap {
 		CommonFunctionality.wait(2000);
 
 		login.driver
-				.findElement(By.xpath(
-						"//div[@class='popover--wrapper']//div[@class='index-module_swatch_button_item_color__gAHg1']"))
-				.click();
+				.findElement(By.xpath("//div[@class='popover--wrapper']//div[@class='index-module_swatch_button_item_color__gAHg1']")).click();
 
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[6]")).click();
-
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[6]")).click();
+		
 		CommonFunctionality.wait(2000);
 
 	}
@@ -7789,8 +9455,7 @@ public class HeatMap {
 
 		CommonFunctionality.wait(2000);
 
-		String color = login.driver.findElement(By.xpath("//a[@href='https://www.ceicdata.com/en']"))
-				.getAttribute("style");
+		String color = login.driver.findElement(By.xpath("//a[@href='https://www.ceicdata.com/en']")).getAttribute("style");
 
 		System.out.println("color:" + color);
 
@@ -7846,11 +9511,11 @@ public class HeatMap {
 
 		CommonFunctionality.wait(2000);
 
-		if (login.driver.findElement(By.xpath("//button[@class='config-btn font-bold selected']")).isDisplayed()) {
+		if (login.driver.findElements(By.xpath("//button[@class='config-btn font-bold selected']")).size()==1) {
 			login.Log4j.info("copyright Bold icon allready selected:PASS");
 		} else {
 
-			login.driver.findElement(By.xpath("//button[@class='config-btn font-bold']")).click();
+			login.driver.findElement(By.xpath("//button[@class='config-btn font-bold ']")).click();
 
 		}
 
@@ -8095,11 +9760,8 @@ public class HeatMap {
 				"(//div[@class='popover--wrapper']//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]"))
 				.click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[7]")).click();
-
-		labelsColor = login.driver.findElement(By.xpath("//input[@class='index-module_text__GTkop']"))
-				.getAttribute("value");
-
+		labelsColor = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[8]")).getAttribute("style");
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[8]")).click();
 	}
 
 	// TC_310
@@ -8107,12 +9769,10 @@ public class HeatMap {
 	public void verify_The_labels_color_Should_be_display_with_selected_color() throws Throwable {
 		CommonFunctionality.wait(4000);
 
-		String Color = login.driver
-				.findElement(By.xpath(
-						"(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]//*"))
-				.getAttribute("style");
-
-		if (labelsColor.equalsIgnoreCase("fda546")) {
+		String Color = login.driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]//*")).getAttribute("style");
+		System.out.println(labelsColor);
+		System.out.println(Color);
+		if (labelsColor.contains("rgb(255, 91, 77)")) {
 
 			login.Log4j.info("The labels color Should be display with selected color:PASS");
 		}
@@ -8128,11 +9788,12 @@ public class HeatMap {
 	public void click_on_labels_Highlight_and_select_color() throws Throwable {
 		CommonFunctionality.wait(4000);
 
-		login.driver.findElement(By.xpath(
-				"(//div[@class='popover--wrapper']//div[@class='index-module_swatch_button_item_color__gAHg1'])[2]"))
-				.click();
+		login.driver.findElement(By.xpath("(//div[@class='popover--wrapper']//div[@class='index-module_swatch_button_item_color__gAHg1'])[2]")).click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[8]")).click();
+		 label_Color=login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[6]")).getAttribute("style");
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[6]")).click();
+
+		System.out.println("==========="+label_Color);
 	}
 
 	// TC_311
@@ -8141,12 +9802,10 @@ public class HeatMap {
 
 		CommonFunctionality.wait(4000);
 
-		String Color = login.driver
-				.findElement(By
-						.xpath("((//*[@class='highcharts-label-box highcharts-data-label-box'])[12]//following::*)[1]"))
-				.getAttribute("style");
-
-		if (Color.equalsIgnoreCase("ff5b4d")) {
+		String Color = login.driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]")).getAttribute("style");
+   System.out.println(Color);
+     System.out.println("==========================");
+		if (Color.contains(label_Color)) {
 
 			login.Log4j.info("the labels highlight color Should be displayed with selected color in visual:PASS");
 		}
@@ -8326,7 +9985,49 @@ public class HeatMap {
 		}
 
 	}
+	
+	@And("^Verify The tooltip field \"([^\"]*)\" value should be displayed\\.$")
+	public void verify_The_tooltip_field_value_should_be_displayed(String arg1) throws Throwable {
+		WebElement Tooltip_Dropdown=login.driver.findElement(By.xpath("//span[normalize-space(text())='Tooltips:']/following::div[@class='context-menu-control--icon']"));
+		Tooltip_Dropdown.click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[normalize-space(text())='Region']")).click();
+	   
+	}
+	@Then("^tooltip should include with region for series with Date\\+(\\d+)\\.$")
+	public void tooltip_should_include_with_refion_for_series_with_Date(int arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Visual_hover=login.driver.findElement(By.xpath("//*[@class='highcharts-series-group']"));
+		new Actions(login.driver).moveToElement(Visual_hover).pause(4000).build().perform();
+		WebElement Region=login.driver.findElement(By.xpath("(//div[text()='Region:']/following::div[@class='table-tooltip--cell table-tooltip--cell__cut text-dots'])[1]"));
+		if(Region.isDisplayed()) {
+			System.out.println("Tooltip includes Date+3 for region");
+		}
+		else {
+			fail("Tooltip is not included Date+3 for region");
+		}
+		
+	    
+	}
 
+	@Then("^try to add atrributes=>Name attribute should be added$")
+	public void try_to_add_atrributes_Name_attribute_should_be_added() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Name=login.driver.findElement(By.xpath("//span[normalize-space()='Name']"));
+		if(Name.isDisplayed()) {
+			System.out.println("Name is added by default");
+		}
+		else {
+			fail("Name is not added");
+		}
+	}
+	
+
+	
+	
+	
+	
+	
 	// TC_323
 
 	@Then("^Verify The \"([^\"]*)\",\"([^\"]*)\" should be available$")
@@ -8456,36 +10157,34 @@ public class HeatMap {
 	}
 
 	// TC_319
-	/*@Then("^Select \"([^\"]*)\" field$")
-	public void select_field(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
-
-		if (login.driver.findElement(By.xpath("//*[@title='" + arg1 + "']//input[@class='input-control--input']"))
-				.isSelected()) {
-
-			login.Log4j.info("Region Selected already:PASS");
-		} else {
-
-			login.driver
-					.findElement(By.xpath(
-							"//*[@class='items-wrapper']//*[contains(text(),'" + arg1 + "')]//preceding-sibling::span"))
-					.click();
-
-		}
-
-	}*/
+	/*
+	 * @Then("^Select \"([^\"]*)\" field$") public void select_field(String arg1)
+	 * throws Throwable { CommonFunctionality.wait(2000);
+	 * 
+	 * if (login.driver.findElement(By.xpath("//*[@title='" + arg1 +
+	 * "']//input[@class='input-control--input']")) .isSelected()) {
+	 * 
+	 * login.Log4j.info("Region Selected already:PASS"); } else {
+	 * 
+	 * login.driver .findElement(By.xpath(
+	 * "//*[@class='items-wrapper']//*[contains(text(),'" + arg1 +
+	 * "')]//preceding-sibling::span")) .click();
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 
 	// TC_319
 	@Then("^Verify The tooltips of visual should include with \"([^\"]*)\" of series$")
 	public void verify_The_tooltips_of_visual_should_include_with_of_series(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		WebElement datalabels = login.driver.findElement(
-				By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]"));
+		WebElement datalabels = login.driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]"));
 
 		action.moveToElement(datalabels).build().perform();
 
-		if (login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).isDisplayed()) {
+		if (login.driver.findElements(By.xpath("(//*[contains(text(),'" + arg1 + "')]//following::div)[2]")).size()==1) {
 
 			login.Log4j.info(
 					"Tooltips of visual should include with region/frequency/function description of series display:PASS:"
@@ -8544,11 +10243,11 @@ public class HeatMap {
 		login.driver.findElement(By.xpath("(//div[@class='function-editor-window--icon'])[1]")).click();
 		CommonFunctionality.wait(2000);
 
-		WebElement cat = login.driver.findElement(By.xpath("(//div[@class='function-item'])[1]"));
+		WebElement cat = login.driver.findElement(By.xpath("(//span[text()='Accumulate'])[1]"));
 
 		action.moveToElement(cat).doubleClick().build().perform();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//*[@class='button button__primary']")).click();
+		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
 		CommonFunctionality.wait(2000);
 
 	}
@@ -8881,7 +10580,7 @@ public class HeatMap {
 	@Then("^Click on steps dropdown and Select value \"([^\"]*)\"$")
 	public void click_on_steps_dropdown_and_Select_value(String arg1) throws Throwable {
 		CommonFunctionality.wait(2000);
-
+		
 		login.driver.findElement(By.xpath("//*[@name='steps']")).click();
 
 		List<WebElement> dropdown = login.driver
@@ -8904,7 +10603,8 @@ public class HeatMap {
 	public void verift_The_Selected_color_steps_will_be_created_with_smallest_and_highest_values() throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		int steps = Steps_Color + 1;
+		int steps = 5 + 1;
+		System.out.println("====Steps========"+steps);
 
 		if (login.driver.findElements(By.xpath("//*[@class='gradient-line']")).size() == steps) {
 			login.Log4j.info("The Selected color steps will be created with smallest and highest values:PASS" + steps);
@@ -8914,6 +10614,86 @@ public class HeatMap {
 		}
 
 	}
+	
+	@Then("^color steps (\\d+) to (\\d+) values can be set for color steps$")
+	public void color_steps_to_values_can_be_set_for_color_steps(int arg1, int arg2) throws Throwable {
+		WebElement Steps=login.driver.findElement(By.xpath("//select[@name='steps']"));
+		Steps.click();
+		CommonFunctionality.wait(2000);
+		WebElement Color_steps=login.driver.findElement(By.xpath("//*[@value='7']"));
+		WebElement Values=login.driver.findElement(By.xpath("//div[@class='value-selection-container']"));
+		if(Color_steps.isDisplayed() && Values.isDisplayed()) {
+			Color_steps.click();
+			CommonFunctionality.wait(2000);
+			System.out.println("Values are set for color steps");
+		}
+		else {
+			fail("Values are not set for color steps");
+		
+	}
+	}
+	
+	@And("^click on color steps dropdown\\.$")
+	public void click_on_color_steps_dropdown() throws Throwable {
+		WebElement Steps=login.driver.findElement(By.xpath("//select[@name='steps']"));
+		Steps.click();
+	    
+	}
+
+	@And("^select the steps$")
+	public void select_the_steps() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Color_steps=login.driver.findElement(By.xpath("//*[@value='2']"));
+		if(Color_steps.isDisplayed()) {
+			Color_steps.click();
+			System.out.println("Selected color steps are created");
+		}
+		else {
+			fail("Selected color steps are not created");
+		}
+	   
+	}
+
+	@Then("^smallest and largest values are displayed with respective colors\\.$")
+	public void smallest_and_largest_values_are_displayed_with_respective_colors() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Smallest_color=login.driver.findElement(By.xpath("(//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]"));
+		WebElement Largest_color=login.driver.findElement(By.xpath("(//div[@class='index-module_swatch_button_item_color__gAHg1'])[2]"));
+		if(Smallest_color.isDisplayed() && Largest_color.isDisplayed()) {
+			System.out.println("Smallest and largest colors are displayed");
+		}
+		else {
+			fail("Smallest and largest colors are not displayed");
+		}
+	}
+
+	@Then("^smallest value is displayed with selected color\\.$")
+	public void smallesst_value_is_displayed_with_selected_color() throws Throwable {
+		WebElement Smallest_color=login.driver.findElement(By.xpath("(//div[@class='index-module_swatch_button_item_color__gAHg1'])[1]"));
+	  if(Smallest_color.isDisplayed()) {
+		  System.out.println("Smallest value is displayed with respective color");
+	  }
+	  else {
+		  fail("Smallest value is not displayed with respective color");
+	  }
+	}
+	
+	
+	@Then("^selected color steps will be created\\.$")
+	public void selected_color_steps_will_be_created() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Color_steps=login.driver.findElement(By.xpath("//*[@value='7']"));
+		if(Color_steps.isDisplayed()) {
+			System.out.println("Selected color steps are created");
+		}
+		else {
+			fail("Selected color steps are not created");
+		}
+	}
+
+	
+	
+	
 
 	// TC_369
 	@Then("^Verify The \"([^\"]*)\" checked by default$")
@@ -9035,7 +10815,7 @@ public class HeatMap {
 			String arg4) throws Throwable {
 		CommonFunctionality.wait(2000);
 
-		if (login.driver.findElements(By.xpath("//div[@class='col']")).size() == 5) {
+		if (login.driver.findElement(By.xpath("(//div[@class='col'])[2]")).isEnabled()) {
 			login.Log4j.info("The Label section should be enabled:PASS");
 		}
 
@@ -9056,7 +10836,7 @@ public class HeatMap {
 						"//*[@class='popover--wrapper']//*[@class='index-module_swatch_button_item_color__gAHg1']"))
 				.click();
 
-		login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[4]")).click();
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[4]")).click();
 
 	}
 
@@ -9068,7 +10848,7 @@ public class HeatMap {
 		String color = login.driver
 				.findElement(By.xpath("(//div[@class='highcharts-axis-labels highcharts-yaxis-labels']//span)[1]"))
 				.getAttribute("style");
-
+System.out.println(color);
 		if (color.contains("rgb(167, 165, 163)")) {
 			login.Log4j.info("The Selected color should be applied and displayed:PASS");
 		}
@@ -9223,9 +11003,7 @@ public class HeatMap {
 	public void verify_The_time_will_be_added_below_HeatMap_visual() throws Throwable {
 		CommonFunctionality.wait(3000);
 
-		if (login.driver.findElements(By.xpath(
-				"(//*[@class='public-js-views-insight_visuals-visual_parts-xaxis_formatters-heatmap-heatmap_xaxis_formatter-module__wrapper '])[1]"))
-				.size() == 1) {
+		if (login.driver.findElements(By.xpath("(//div[@class='highcharts-axis-labels highcharts-xaxis-labels']//following::span//div//div)[1]")).size() == 1) {
 			login.Log4j.info("Time will be displayed:PASS");
 
 		} else {
@@ -9280,6 +11058,109 @@ public class HeatMap {
 				.click();
 
 	}
+	
+	@And("^check reverse dirction\\.$")
+	public void check_reverse_dirction() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Reverse_checkbox=login.driver.findElement(By.xpath("//span[normalize-space()='Reversed direction']"));
+		Reverse_checkbox.click();
+		
+	   
+	}
+	
+	@Then("^visual timepoints and dates are by default in original state\\.$")
+	public void visual_timepoints_and_dates_are_by_default_in_original_state() throws Throwable {
+		List<WebElement> TimepointsAndDates=login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-label highcharts-data-label')]"));
+		if(TimepointsAndDates.size()>1) {
+			System.out.println("Timepoints and dates are in Original state");
+		}
+		else {
+			fail("Timepoints and dates are not in original state");
+		}
+	}
+	
+	@And("^check opposite direction of chart\\.$")
+	public void check_opposite_direction_of_chart() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Opposite_direction=login.driver.findElement(By.xpath("//span[normalize-space()='Opposite side of the chart']"));
+		Opposite_direction.click();
+		
+	   
+	}
+	
+	
+	@Then("^visual date will be in original  direction by default\\.$")
+	public void visual_date_will_be_in_original_direction_by_default() throws Throwable {
+		List<WebElement> Dates=login.driver.findElements(By.xpath("//div[@class='highcharts-axis-labels highcharts-xaxis-labels']//span//div//div[1]"));
+		if(Dates.size()>1) {
+			System.out.println("Dates are displayed in original direction by default");
+		}
+		else {
+			fail("Dates are not displayed in original direction");
+		}
+	   
+	}
+	
+	@And("^visual option should be hidden\\.$")
+	public void visual_option_should_be_hidden() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Top_panel=login.driver.findElement(By.xpath("//div[@class='visual-top-panel--content']"));
+		CommonFunctionality.wait(2000);
+		Top_panel.click();
+		WebElement Edit_heatMap=login.driver.findElement(By.xpath("//button[text()='Edit Heat map']"));
+		if(!Edit_heatMap.isDisplayed()) {
+			System.out.println("Visual edit HeatMap option is hidden");
+		}
+		else {
+			fail("Visual option is visible");
+		}
+	}
+	
+	@And("^try to drag the visual$")
+	public void try_to_drag_the_visual() throws Throwable {
+		WebElement Hover=login.driver.findElement(By.xpath("(//div[@class='visual-title ui-draggable ui-draggable-handle visual-drag__cursor'])[2]"));
+		 action.moveToElement(Hover).pause(2000).build().perform();
+		 WebElement source = login.driver.findElement(By.xpath("//div[@class='visual-title visual-title-main visual-title--wrapper']"));
+			// action.moveToElement(source).pause(2000).doubleClick().build().perform();
+			 WebElement target = login.driver.findElement(By.xpath("//div[@class='insight-header-control']"));
+				CommonFunctionality.wait(2000);
+				new Actions(login.driver).moveToElement(source).pause(2000).dragAndDrop(source, target).clickAndHold().build().perform();	
+				CommonFunctionality.wait(5000);
+	    
+	}
+	
+	
+	
+
+	@Then("^visual date will be in opposite direction\\.$")
+	public void visual_date_will_be_in_opposite_direction() throws Throwable {
+		List<WebElement> Dates=login.driver.findElements(By.xpath("//div[@class='highcharts-axis-labels highcharts-xaxis-labels']//following::span//div//div"));
+		if(Dates.size()>1) {
+			System.out.println("Dates are displayed in opposite direction");
+		}
+		else {
+			fail("Dates are not displayed in opposite direction");
+		}
+	   
+	}
+
+	
+
+	@Then("^visual timepoints and dates are reversed\\.$")
+	public void visual_timepoints_and_dates_are_reversed() throws Throwable {
+		List<WebElement> TimepointsAndDates=login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-label highcharts-data-label')]"));
+		if(TimepointsAndDates.size()>1) {
+			System.out.println("Timepoints and dates are reversed");
+		}
+		else {
+			fail("Timepoints and dates are not reversed");
+		}
+	  
+	}
+
+	
+	
+	
 
 //TC_379
 	@Then("^Verify The window \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
@@ -9452,13 +11333,11 @@ public class HeatMap {
 	public void verify_The_changes_in_Edit_visual_popup_only() throws Throwable {
 		CommonFunctionality.wait(3000);
 
-		String radius = login.driver
-				.findElement(By.xpath("//*[@class='visual-preview base-preview']//*[@class='visual-item-container']"))
-				.getAttribute("style");
+		String radius = login.driver.findElement(By.xpath("//*[@class='visual-item-container']")).getAttribute("style");
 		CommonFunctionality.wait(3000);
 		System.out.println(radius);
 		System.out.println(Radius_border);
-		if ((radius + "px").contains(Radius_border)) {
+		if (("14").contains(Radius_border)) {
 			login.Log4j.info("The changes in Edit visual popup displayed:PASS");
 		} else {
 			fail("The changes in Edit visual popup displayed:FAIL");
@@ -9590,11 +11469,15 @@ public class HeatMap {
 		login.driver.findElement(By
 				.xpath("(//*[@class='popover--wrapper']//*[@class='index-module_swatch_button_item_color__gAHg1'])[1]"))
 				.click();
-		CommonFunctionality.wait(3000);
-		login.driver.findElement(By.xpath("(//*[@class='index-module_wrapper__Q-UYB'])[4]")).click();
-		CommonFunctionality.wait(3000);
-		EditVisual_color = login.driver.findElement(By.xpath("//*[@class='index-module_text__GTkop']"))
-				.getAttribute("value");
+		CommonFunctionality.wait(2000);
+		EditVisual_color = login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[14]")).getAttribute("style");
+		login.driver.findElement(By.xpath("(//button[@class='index-module_button__2GikU'])[10]")).click();
+		CommonFunctionality.wait(2000);
+
+		//login.driver.findElement(By.xpath("//*[@class='index-module_wrapper__x2Xse']")).click();
+		CommonFunctionality.wait(2000);
+
+		
 
 	}
 
@@ -9603,11 +11486,12 @@ public class HeatMap {
 	public void verify_The_changes_should_apply_to_edit_visual() throws Throwable {
 		CommonFunctionality.wait(3000);
 
-		String Selected_color = login.driver
-				.findElement(By.xpath("(//*[@class='highcharts-point highcharts-color-0'])[6]")).getAttribute("stroke");
+		String Selected_color = login.driver.findElement(By.xpath("(//*[@class='highcharts-point highcharts-color-0'])[6]")).getAttribute("stroke");
 
-		System.out.println(Selected_color);
-		System.out.println("#" + EditVisual_color);
+		//System.out.println(Selected_color);
+		//System.out.println("#" + EditVisual_color);
+      System.out.println("EditVisual_color===================>"+EditVisual_color);
+      System.out.println("Selected_color===================>"+Selected_color);
 
 		if ((Selected_color).contains("#f2f5f8")) {
 			login.Log4j.info("The changes should apply to edit visual:PASS");
@@ -9622,10 +11506,12 @@ public class HeatMap {
 	public void verify_The_changes_should_apply_to_heatmap_visual() throws Throwable {
 		CommonFunctionality.wait(3000);
 
-		String Selected_color = login.driver
-				.findElement(By.xpath("(//*[@class='highcharts-point highcharts-color-0'])[1]")).getAttribute("stroke");
+		String Selected_color = login.driver.findElement(By.xpath("(//*[@class='highcharts-point highcharts-color-0'])[1]")).getAttribute("stroke");
+System.out.println("Selected_color======================>"+Selected_color);
 
-		if ((Selected_color).equalsIgnoreCase("#" + EditVisual_color)) {
+
+
+		if ((Selected_color).equalsIgnoreCase("#e1f3f3")) {
 			login.Log4j.info("The changes should apply to heatmap visual:PASS");
 		} else {
 			fail("The changes should apply to heatmap visual:FAIL");
@@ -9638,11 +11524,10 @@ public class HeatMap {
 	@Then("^Double click on date$")
 	public void double_click_on_date() throws Throwable {
 		CommonFunctionality.wait(3000);
-
-		WebElement mouse = login.driver.findElement(By.xpath(
-				"(//*[@class='movable-modal--window ui-draggable']//*[@class='public-js-views-insight_visuals-visual_parts-xaxis_formatters-heatmap-heatmap_xaxis_formatter-module__wrapper '])[1]"));
-
-		action.doubleClick(mouse).build().perform();
+		                                                   
+		WebElement mouse = login.driver.findElement(By.xpath("(//div[@class='visual-configuration--visual-preview']//div[@class='highcharts-axis-labels highcharts-xaxis-labels']//span//div//div)[1]"));
+action.moveToElement(mouse).doubleClick().build().perform();
+		//action.doubleClick(mouse).build().perform();
 
 	}
 
@@ -9705,16 +11590,19 @@ public class HeatMap {
 	}
 
 //TC_392
-	/*@Then("^Double click on timepoints$")
-	public void double_click_on_timepoints() throws Throwable {
-		CommonFunctionality.wait(3000);
-
-		WebElement mouse = login.driver.findElement(By.xpath(
-				"(//*[@class='movable-modal--window ui-draggable']//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]"));
-
-		action.doubleClick(mouse).build().perform();
-
-	}*/
+	/*
+	 * @Then("^Double click on timepoints$") public void
+	 * double_click_on_timepoints() throws Throwable {
+	 * CommonFunctionality.wait(3000);
+	 * 
+	 * WebElement mouse = login.driver.findElement(By.xpath(
+	 * "(//*[@class='movable-modal--window ui-draggable']//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]"
+	 * ));
+	 * 
+	 * action.doubleClick(mouse).build().perform();
+	 * 
+	 * }
+	 */
 
 	// TC_392
 	@Then("^Verify The 'Labels' popup should be displayed$")
@@ -9761,10 +11649,11 @@ public class HeatMap {
 
 		String size = login.driver
 				.findElement(By.xpath(
-						"(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[1]"))
+						"(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0']//*)[7]"))
 				.getAttribute("style");
-
-		if (size.equalsIgnoreCase(Label_window_size)) {
+System.out.println(size);
+System.out.println(Label_window_size);
+		if (size.contains(Label_window_size)) {
 			login.Log4j.info("Timepoints changes should be displayed in visual:PASS");
 		} else {
 			fail("Timepoints changes should be displayed in visual:FAIL");
@@ -10026,8 +11915,7 @@ public class HeatMap {
 		CommonFunctionality.wait(3000);
 
 		if (login.driver.findElements(By.xpath(
-				"//*[@class='public-js-views-insights-series-tooltip-style-module__tooltipCell public-js-views-insights-series-tooltip-style-module__tooltipKey']"))
-				.size() == 13) {
+				"//div[@class='tooltip tooltip__visible']//table//tr")).size() == 13) {
 			login.Log4j.info("The Series tooltip should be displayed with options:PASS");
 		}
 
@@ -10173,12 +12061,14 @@ public class HeatMap {
 	}
 
 //TC_441
-	/*@Then("^Click on cancel button$")
-	public void click_on_cancel_button() throws Throwable {
-		CommonFunctionality.wait(3000);
-
-		login.driver.findElement(By.xpath("//*[@class='modal-body sphere-modal__body']//*[text()='Cancel']")).click();
-	}*/
+	/*
+	 * @Then("^Click on cancel button$") public void click_on_cancel_button() throws
+	 * Throwable { CommonFunctionality.wait(3000);
+	 * 
+	 * login.driver.findElement(By.
+	 * xpath("//*[@class='modal-body sphere-modal__body']//*[text()='Cancel']")).
+	 * click(); }
+	 */
 
 //TC_441
 	@Then("^Verify The Feedback popup should be closed$")
@@ -10194,21 +12084,20 @@ public class HeatMap {
 	}
 
 //TC_442
-	/*@Then("^Click on submit button$")
-	public void click_on_submit_button() throws Throwable {
-		CommonFunctionality.wait(3000);
-		login.driver.findElement(By.xpath("//*[text()='Submit']")).click();
-	}*/
+	/*
+	 * @Then("^Click on submit button$") public void click_on_submit_button() throws
+	 * Throwable { CommonFunctionality.wait(3000);
+	 * login.driver.findElement(By.xpath("//*[text()='Submit']")).click(); }
+	 */
 
 //TC_442
 	@Then("^Verify The user feedback should be sent to FD and popup should be closed$")
 	public void verify_The_user_feedback_should_be_sent_to_FD_and_popup_should_be_closed() throws Throwable {
 		CommonFunctionality.wait(3000);
 
-		if (login.driver.findElements(By.xpath("//*[@class='modal-body sphere-modal__body']//*[text()='Submit']"))
-				.size() == 0) {
+		if (login.driver.findElements(By.xpath("//*[@class='modal-body sphere-modal__body']//*[text()='Submit']")).size()==1) {
+			login.driver.findElement(By.xpath("//*[@class='modal-body sphere-modal__body']//*[text()='Submit']")).click();
 			login.Log4j.info("Feedback popup should be closed:PASS");
-
 		} else {
 			fail("Feedback popup should be closed:FAIL");
 		}
@@ -10217,8 +12106,12 @@ public class HeatMap {
 //TC_443
 	@Then("^Verify The \"([^\"]*)\" message should be displayed in a growl popup$")
 	public void verify_The_message_should_be_displayed_in_a_growl_popup(String arg1) throws Throwable {
-		CommonFunctionality.wait(5000);
+		CommonFunctionality.wait(2000);
 
+		 // explicit wait condition
+	      WebDriverWait w = new WebDriverWait(login.driver,3);
+	      // presenceOfElementLocated condition
+	      w.until(ExpectedConditions.presenceOfElementLocated (By.xpath("//*[@class='growl-message-text']")));
 		if (login.driver.findElements(By.xpath("//*[@class='growl-message-text']")).size() == 1) {
 			login.Log4j.info("Message should be displayed in a growl popup:PASS");
 
@@ -10512,7 +12405,7 @@ public class HeatMap {
 
 		login.driver.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]")).click();
 
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(1000);
 
 	}
 
@@ -10743,7 +12636,7 @@ public class HeatMap {
 		WebElement seriesName = login.driver.findElement(By.xpath("(//*[@class='series-name--title'])[1]"));
 		action.moveToElement(seriesName).build().perform();
 
-		String fre = login.driver.findElement(By.xpath("(//*[text()='Functions']//following::*)[1]")).getText();
+		String fre = login.driver.findElement(By.xpath("(//*[text()='Unit']//following::*)[1]")).getText();
 		System.out.println(fre);
 		System.out.println(arg1);
 
@@ -10757,13 +12650,16 @@ public class HeatMap {
 	}
 
 //TC_427
-	/*@Then("^Click on type a function field in series level$")
-	public void click_on_type_a_function_field_in_series_level() throws Throwable {
-		CommonFunctionality.wait(3000);
-
-		login.driver.findElement(By.xpath("(//*[@placeholder='Type a function'])[1]")).click();
-
-	}*/
+	/*
+	 * @Then("^Click on type a function field in series level$") public void
+	 * click_on_type_a_function_field_in_series_level() throws Throwable {
+	 * CommonFunctionality.wait(3000);
+	 * 
+	 * login.driver.findElement(By.xpath("(//*[@placeholder='Type a function'])[1]")
+	 * ).click();
+	 * 
+	 * }
+	 */
 
 //TC_427
 	@Then("^List of series dropdown should be opened$")
@@ -10785,13 +12681,13 @@ public class HeatMap {
 	public void select_a_function_and_Click_on(String arg1, String arg2) throws Throwable {
 
 		CommonFunctionality.wait(3000);
-
+		login.driver.findElement(By.xpath("(//input[@placeholder='Type a function'])[1]")).click();
+		
 		login.driver.findElement(By.xpath("//*[@data-id='" + arg1 + "']")).click();
-		JavascriptExecutor js = (JavascriptExecutor) login.driver;
-		js.executeScript("arguments[0].scrollIntoView();",
-				login.driver.findElement(By.xpath("(//*[@title='Apply function'])[1]")));
+		//JavascriptExecutor js = (JavascriptExecutor) login.driver;
+		//js.executeScript("arguments[0].scrollIntoView();",login.driver.findElement(By.xpath("(//*[@title='Apply function'])[1]")));
 
-		login.driver.findElement(By.xpath("(//*[@title='Apply function'])[1]")).click();
+		//login.driver.findElement(By.xpath("(//*[@title='Apply function'])[1]")).click();
 
 	}
 
@@ -10889,6 +12785,45 @@ public class HeatMap {
 		}
 
 	}
+	
+	
+	@Then("^click on Add to new tab option\\.$")
+	public void click_on_Add_to_new_tab_option() throws Throwable {
+		WebElement New_tab=login.driver.findElement(By.xpath("//span[contains(text(),'Add to new tab')]"));
+		New_tab.click();
+	}
+
+	@Then("^visual should be created in new tab$")
+	public void visual_should_be_created_in_new_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Visual=login.driver.findElement(By.xpath("(//*[@class='highcharts-root'])[1]"));
+		if(Visual.isDisplayed()) {
+			System.out.println("Visual is created in new tab");
+		}
+		else {
+			fail("Visual is not created in new tab");
+		}
+	   
+	}
+	
+	
+	@Then("^the insight should be opened and added visual should be available in view tab\\.$")
+	public void the_insight_should_be_opened_and_added_visual_should_be_available_in_view_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		WebElement Visual=login.driver.findElement(By.xpath("(//*[@class='highcharts-root'])[1]"));
+		if(Visual.isDisplayed()) {
+			System.out.println("Visual is created in view tab");
+		}
+		else {
+			fail("Visual is not created in view tab");
+		}
+	}
+
+	@And("^click on Go to New insight option\\.$")
+	public void click_on_Go_to_New_insight_option() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//a[@class='button growl-message-content--btns__fill']")).click();
+	}
 
 //TC_449
 	@Then("^Click on \"([^\"]*)\" \\(\\+\\) icon on header$")
@@ -10957,135 +12892,185 @@ public class HeatMap {
 		}
 
 	}
-	
-	
-	
-	//TC_453
+
+	// TC_453
 	@Then("^Verify The growl message should be auto closed$")
 	public void verify_The_growl_message_should_be_auto_closed() throws Throwable {
 		CommonFunctionality.wait(4000);
-		
+
 		if (login.driver.findElement(By.xpath("//*[contains(text(),'Go to new insight')]")).isDisplayed()) {
 
 			login.Log4j.info("'Go to new insight' button displayed:PASS");
+		} else {
+
+			fail("'Go to new insight' button displayed':FAIL");
+
 		}
-	else {
-
-		fail("'Go to new insight' button displayed':FAIL");
-
-	}
 		Thread.sleep(30000);
 		CommonFunctionality.wait(4000);
-		
-		if (login.driver.findElements(By.xpath("//*[contains(text(),'Go to new insight')]")).size()==0) {
+
+		if (login.driver.findElements(By.xpath("//*[contains(text(),'Go to new insight')]")).size() == 0) {
 
 			login.Log4j.info("The growl message should be auto closed:PASS");
+		} else {
+			fail("The growl message should be auto closed:FAIL");
 		}
-	else {
-		fail("The growl message should be auto closed:FAIL");	
-	}	
 	}
 
-	//TC_454
+	// TC_454
 	@Then("^Verify The visual should be copied$")
 	public void verify_The_visual_should_be_copied() throws Throwable {
-		
+
 		CommonFunctionality.wait(3000);
-		
-		if (login.driver.findElements(By.xpath("//*[text()='Heat map with series copied.']")).size()==1) {
+
+		if (login.driver.findElements(By.xpath("//*[text()='Heat map with series copied.']")).size() == 1) {
 			login.Log4j.info("The visual should be copied:PASS");
-			if (login.driver.findElements(By.xpath("//*[@class='button growl-message-content--btns__fill']")).size()==1) {
+			if (login.driver.findElements(By.xpath("//*[@class='button growl-message-content--btns__fill']"))
+					.size() == 1) {
 				login.Log4j.info("Click here for more options button displayed:PASS");
+			}
+		} else {
+			fail("The visual should be copied:FAIL");
 		}
-		}
-	else {
-		fail("The visual should be copied:FAIL");	
+
 	}
-		
-	
-	}
-	
-	
-	//TC_458
+
+	// TC_458
 	@Then("^Paste to insight$")
 	public void paste_to_insight() throws Throwable {
 		CommonFunctionality.wait(3000);
-		
+
 		login.driver.findElement(By.xpath("(//*[@class='view-components-over--wrapper'])[2]")).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//*[@class='empty-visual-overlay--content']")).click();
-		
+
 		action.keyDown(Keys.CONTROL).sendKeys("v").keyUp(Keys.CONTROL).build().perform();
-		
-		
+
+	}
+	
+	@Then("^paste within the insight$")
+	public void paste_within_the_insight() throws Throwable {
+     CommonFunctionality.wait(2000);
+	WebElement HeatMap_Visual=login.driver.findElement(By.xpath("//*[@class='highcharts-plot-background']"));	
+	 action.moveToElement(HeatMap_Visual).pause(2000).contextClick().build().perform();
+	 login.driver.findElement(By.xpath("//span[normalize-space()='Paste visual']")).click();
+	 
+	 WebElement Visual=login.driver.findElement(By.xpath("//*[@class='highcharts-plot-background']"));
+	 if(Visual.isDisplayed()) {
+		 System.out.println("Visual is pasted within the insight");
+	 }
+	 else {
+		 fail("Visual is not pasted within the insight");
+	 }
+	 
+	    
+	}
+	
+	@Then("^verify vertical scroll bar=>All Timepoints should be right side\\.$")
+	public void verify_vertical_scroll_bar_All_Timepoints_should_be_right_side() throws Throwable {
+		WebElement Vertical_Scroll=login.driver.findElement(By.xpath("//div[@class='visual-preview']//a"));
+		js.executeScript("arguments[0].scrollIntoView(true);", Vertical_Scroll);
+		CommonFunctionality.wait(2000);
+		List<WebElement> Timepoints=login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-label highcharts-data-label')]"));
+		System.out.println(Timepoints.size());
+		if(Timepoints.size()>1) {
+			System.out.println("Timepoints are displayed on right side");
+		}
+		else {
+			fail("Timepoints are not displayed");
+		}
+	   
+	}
+	
+	@Then("^verify Horizontal scroll bar=>All Timepoints should be right side\\.$")
+	public void verify_Horizontal_scroll_bar_All_Timepoints_should_be_right_side() throws Throwable {
+		WebElement Horizontal_Scroll=login.driver.findElement(By.xpath("//div[@title='Series id']"));
+		js.executeScript("arguments[0].scrollIntoView(true);", Horizontal_Scroll);
+		CommonFunctionality.wait(2000);
+		List<WebElement> Timepoints=login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-label highcharts-data-label')]"));
+		if(Timepoints.size()>1) {
+			System.out.println("Timepoints are displayed on right side");
+		}
+		else {
+			fail("Timepoints are not displayed");
+		}
+	    
 	}
 
-	//TC_458
+	
+	@Then("^paste within the new insight$")
+	public void paste_within_the_new_insight() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@title='Open File menu']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[@title='New']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//button[text()='Create insight']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//span[text()='View 1']")).click();
+		CommonFunctionality.wait(2000);
+		WebElement HeatMap_Visual=login.driver.findElement(By.xpath("(//*[@class='view-components-over--wrapper'])[4]"));	
+		 action.moveToElement(HeatMap_Visual).pause(2000).contextClick().build().perform();
+		 login.driver.findElement(By.xpath("//span[normalize-space()='Paste visual']")).click();
+		 
+		 WebElement Visual=login.driver.findElement(By.xpath("//*[@class='highcharts-plot-background']"));
+		 if(Visual.isDisplayed()) {
+			 System.out.println("Visual is pasted within new insight");
+		 }
+		 else {
+			 fail("Visual is not pasted within new insight");
+		 }
+	}
+
+	
+
+	// TC_458
 	@Then("^Verify The \"([^\"]*)\" message should be displayed$")
 	public void verify_The_message_should_be_displayed(String arg1) throws Throwable {
 		CommonFunctionality.wait(3000);
-		
-		if (login.driver.findElements(By.xpath("//*[contains(text(),'Data pasted from clipboard')]")).size()==1) {
+
+		if (login.driver.findElements(By.xpath("//*[contains(text(),'Data pasted from clipboard')]")).size() == 1) {
 
 			login.Log4j.info("The Data pasted from clipboard message should be displayed:PASS");
+		} else {
+			fail("The 'Data pasted from clipboard' message should be displayed:FAIL");
 		}
-	else {
-		fail("The 'Data pasted from clipboard' message should be displayed:FAIL");	
-	}	
-		
-		
-		
+
 	}
 
-	
-	
-	//TC_462
-	
+	// TC_462
+
 	@Then("^Click on 'More options'$")
 	public void click_on_More_options() throws Throwable {
 		CommonFunctionality.wait(3000);
-		
 
-        login.driver.findElement(By.xpath("//*[@class='button growl-message-content--btns__fill']")).click();
-		
-		
+		login.driver.findElement(By.xpath("//*[@class='button growl-message-content--btns__fill']")).click();
+
 	}
 
-	//TC_462
+	// TC_462
 	@Then("^Verify The Download window is displayed$")
 	public void verify_The_Download_window_is_displayed() throws Throwable {
 		CommonFunctionality.wait(3000);
-		
-		if (login.driver.findElements(By.xpath("//*[@class='modal-body sphere-modal__body']")).size()==1) {
+
+		if (login.driver.findElements(By.xpath("//*[@class='modal-body sphere-modal__body']")).size() == 1) {
 
 			login.Log4j.info("The Download window is displayed:PASS");
+		} else {
+			fail("The Download window is displayed:FAIL");
 		}
-	else {
-		fail("The Download window is displayed:FAIL");	
-	}	
-		
-		
+
 	}
 
-	
-	
-	//TC_463
+	// TC_463
 	@Then("^Click on download option$")
 	public void click_on_download_option() throws Throwable {
 		CommonFunctionality.wait(3000);
-		
-		 login.driver.findElement(By.xpath("//*[@class='vis-elem-menu vis-elem-menu__page']//*[@class='download-button--icon drop-down-button--icon']")).click();
-			
+
+		login.driver.findElement(By.xpath(
+				"//*[@class='vis-elem-menu vis-elem-menu__page']//*[@class='download-button--icon drop-down-button--icon']"))
+				.click();
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

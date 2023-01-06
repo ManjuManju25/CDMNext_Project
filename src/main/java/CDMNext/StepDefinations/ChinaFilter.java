@@ -127,7 +127,7 @@ public class ChinaFilter {
 	@And("^Select subnational as \"([^\"]*)\"$")
 	public void select_subnational_as(String arg1) throws Throwable {
 		login.Log4j.info("Selecting subnational " + arg1);
-		CommonFunctionality.wait(3000);
+		CommonFunctionality.wait(5000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg1 + "')]"))).click();
 	}

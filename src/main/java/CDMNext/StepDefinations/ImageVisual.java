@@ -164,6 +164,7 @@ public class ImageVisual {
 	@Then("^Edit the title name as \"([^\"]*)\"$")
 	public void edit_the_title_name_as(String arg1) throws Throwable {
 		Edit_title = arg1;
+		CommonFunctionality.wait(1200);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='accordion-config ']//*[@name='title']", 20)
 				.clear();
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='accordion-config ']//*[@name='title']", 20)
@@ -196,7 +197,10 @@ public class ImageVisual {
 	@And("^Click on title dropdown$")
 	public void click_on_title_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.getElementByXpath(login.driver, " //*[@data-popup='title']/*[2]", 30).click();
+//		CommonFunctionality.getElementByXpath(login.driver, " //*[@data-popup='title']/*[2]", 30).click();
+
+		CommonFunctionality.getElementByXpath(login.driver, "((//div[text()='Title:']//following::div[@class='context-menu-control--icon']))[1]", 30).click();
+
 	}
 
 	@Then("^The Image visual should update the \"([^\"]*)\" text color as blue$")

@@ -68,16 +68,27 @@ public class RefreshSummaryPopUp {
 		
 	}
 
+	
+	
 	// TC_01
-	@Then("^login again with username\"([^\"]*)\" and passowrd as \"([^\"]*)\"$")
+	@Then("^login again with username \"([^\"]*)\" and passowrd as \"([^\"]*)\"$")
 	public void login_again_with_username_and_passowrd_as(String arg1, String arg2) throws Throwable {
-
+	   
 		Thread.sleep(2000);
 		login.driver.findElement(By.name("user_id")).sendKeys(arg1);
 		login.driver.findElement(By.name("password")).sendKeys(arg2);
 		login.driver.findElement(By.xpath("//button[@class='btn']")).click();
-
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// TC_01
 	@Then("^click on Myinsights$")
 	public void click_on_Myinsights() throws Throwable {
@@ -149,10 +160,8 @@ public class RefreshSummaryPopUp {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(
-				"//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']"))
-				.click();
-		
+		//login.driver.findElement(By.xpath("//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
+		login.driver.findElement(By.xpath("//div[text()='Vertical']")).click();
 		
 		
 		
@@ -222,11 +231,6 @@ public class RefreshSummaryPopUp {
 		Thread.sleep(2000);
 		
 		
-		
-		
-		
-		
-		
 //		login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']/following::span[@class='input-control--indicator']")).click();
 //		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
 //		login.driver.switchTo().activeElement();
@@ -263,7 +267,7 @@ public class RefreshSummaryPopUp {
   Thread.sleep(1000);
 	login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
   Thread.sleep(1000);
-  for(int i=1;i<=4;i++)
+  for(int i=1;i<=2;i++)
   {
   Thread.sleep(3000);
   	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
@@ -277,11 +281,17 @@ public class RefreshSummaryPopUp {
 	//TC_04
 	@Given("^add series into visuals$")
 	public void add_series_into_visuals() throws Throwable {
-	    Thread.sleep(2000);
-	   // login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
 		Thread.sleep(2000);
-		//WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
-		//actions.contextClick().build().perform();
+		WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
+		actions.contextClick(elementLocator).perform();
+		
+		
+	    Thread.sleep(2000);
+//	   // login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
+//		Thread.sleep(2000);
+//		WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
+//		actions.contextClick().build().perform();
 		
 		
 		
@@ -293,9 +303,8 @@ public class RefreshSummaryPopUp {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath(
-				"//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']"))
-				.click();
+		//login.driver.findElement(By.xpath("//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
+		login.driver.findElement(By.xpath("//div[text()='Vertical']")).click();
 		
 		
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
@@ -346,7 +355,8 @@ public class RefreshSummaryPopUp {
 	@Then("^click on Apply$")
 	public void click_on_Apply() throws Throwable {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//div[@class='suggestions-apply-button'])[2]")).click();
+		login.driver.findElement(By.xpath("(//button[@class='button button__primary suggestions-wizard--button suggestions-wizard--button__apply'])[2]")).click();
+		
 		Thread.sleep(500);
 		//login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();	
 		
@@ -381,7 +391,8 @@ public class RefreshSummaryPopUp {
 	public void click_on_Apply_and_ok() throws Throwable {
 	   Thread.sleep(2000);
 	  // click on apply button
-	   login.driver.findElement(By.xpath("(//div[@class='suggestions-apply-button'])[2]")).click();
+	  
+	   login.driver.findElement(By.xpath("(//button[@class='button button__primary suggestions-wizard--button suggestions-wizard--button__apply'])[2]")).click();
 		Thread.sleep(500);	
 		//click on delete series popup
 		login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']")).click();
@@ -418,7 +429,7 @@ public class RefreshSummaryPopUp {
 	    
 		Thread.sleep(2000);
 		
-		login.driver.findElement(By.xpath("//span[contains(text(),'Do not show again')]")).click();
+		login.driver.findElement(By.xpath("(//span[contains(text(),'Do not show again')])[2]")).click();
 		
 		
 		System.out.println("Checked");
@@ -639,7 +650,7 @@ public class RefreshSummaryPopUp {
 	public void rsp_should_get_closed() throws Throwable {
 	   Thread.sleep(2000);
 		
-	   if(login.driver.findElement(By.xpath("//span[contains(text(),'List')]")).isDisplayed())
+	   if(login.driver.findElement(By.xpath("//a[contains(text(),'My Series')]")).isDisplayed())
 		{
 		   System.out.println("RSP should get closed");
 		   
@@ -661,7 +672,7 @@ public class RefreshSummaryPopUp {
 	@Then("^click on cancel button in RSP$")
 	public void click_on_cancel_button_in_RSP() throws Throwable {
 	    Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div[contains(text(),'Cancel')]")).click();
+		login.driver.findElement(By.xpath("(//div[contains(text(),'Cancel')])[2]")).click();
 		
 		
 		
@@ -694,7 +705,7 @@ public class RefreshSummaryPopUp {
 	public void refresh_the_page() throws Throwable {
 	   Thread.sleep(2000);
 	   
-	   if(login.driver.findElement(By.xpath("//span[contains(text(),'List')]")).isDisplayed())
+	   if(login.driver.findElement(By.xpath("(//div[normalize-space()='Related series'])[2]")).isDisplayed())
 		{
 		   System.out.println("RSP should get closed");	
 		}
@@ -711,20 +722,17 @@ public class RefreshSummaryPopUp {
 	public void rsp_should_be_opened() throws Throwable {
 		
 		Thread.sleep(3000);
-		   if(login.driver.findElement(By.xpath("//div[contains(text(),'Cancel')]")).isDisplayed())
+		   if(login.driver.findElement(By.xpath("(//div[contains(text(),'Cancel')])[2]")).isDisplayed())
 			{
 			   System.out.println("RSP should be opened");
 			}
-			
 			else {
 				Assert.fail("Test case failed");
 			}
-		   login.driver.findElement(By.xpath("//div[contains(text(),'Cancel')]")).click();
+		   login.driver.findElement(By.xpath("(//div[contains(text(),'Cancel')])[2]")).click();
 		   CommonFunctionality.DeleteSeries();
 			System.out.println("=============>TC_16==============>");
-	   
 	}	
-	
 	
 	//TC_17
 	@And("^click on open file menu\\(settings icon\\)$")
@@ -852,7 +860,7 @@ public class RefreshSummaryPopUp {
 	   Thread.sleep(3000);
 		
 		
-	   login.driver.findElement(By.xpath("//div[contains(text(),'Dismiss')]")).click();
+	   login.driver.findElement(By.xpath("(//div[@class='series-changes-summary']//div[contains(text(),'Dismiss')])[2]")).click();
 		
 	 
 		
@@ -863,7 +871,7 @@ public class RefreshSummaryPopUp {
 	public void rsp_window_should_not_be_opened() throws Throwable {
 		 Thread.sleep(2000);
 		
-		  if(login.driver.findElement(By.xpath("//span[contains(text(),'List')]")).isDisplayed())
+		  if(login.driver.findElement(By.xpath("//span[@class='searches-manager--reset-button button button__sm button__warning']")).isDisplayed())
 			{
 			   System.out.println("RSP window should not be opened");
 			}

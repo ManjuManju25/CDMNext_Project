@@ -33,7 +33,8 @@ Feature: SprintCases_4.8 feature
     And Check 'Select Microsoft Windows Version'
     Then Windows 10 (64 Bit) should select by default
 
-  @sprint_4.8
+  	
+  	 @sprint_4.8
   Scenario: TC_18757_01: Verify fit to width option for image visual
     And create image visual
     And upload image visual
@@ -44,3 +45,4 @@ Feature: SprintCases_4.8 feature
     And Choose a series in  Database tree
     And Create footnote for the series
     Then Check the tabs in footnotes
+

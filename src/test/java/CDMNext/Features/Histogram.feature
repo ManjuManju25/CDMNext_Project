@@ -98,13 +98,13 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Rename" option
     Then The "Rename" popup should be displayed
 	
-#	 @Histogram
-  #Scenario: TC_Histogram_16:Rename - verify number of selected series
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Rename" option
-    #Then Number of selected series count should be shown on the rename popup header
-#
+	 @Histogram
+  Scenario: TC_Histogram_16:Rename - verify number of selected series
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Rename" option
+    Then Number of selected series count should be shown on the rename popup header
+
   #@Histogram
   #Scenario: TC_Histogram_17:Rename - verify find field
     #And Create histogram visual with series
