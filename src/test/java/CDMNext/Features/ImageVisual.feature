@@ -23,7 +23,6 @@ Feature: Verifying Image visual functionality
     And Select "Upload image" icon
     And Upload any image
     Then Below optins should be displayed
-      | Title              |
       | Add to insight     |
       | Copy               |
       | Download. Type `d` |
@@ -124,19 +123,21 @@ Feature: Verifying Image visual functionality
     Then The subtitle should update as "New subtitle"
 
   @ImageVisual
-  Scenario: Tc_ImageVisual_13 : Verify changing title of the image in the title dropdown
+  Scenario: Tc_ImageVisual_13 : Verify changing title of the image in the Edit Visual Title popup
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+    And Mouse hover on Edit Visual title and click on it
     And Check the box for the title name
     And Edit the title name as "ImageVisual"
     Then The title name should reflect on the Image
 
   @ImageVisual
-  Scenario: Tc_ImageVisual_14 : Verify changing subtitle of the image in the title dropdown
+  Scenario: Tc_ImageVisual_14 : Verify changing subtitle of the image in the Edit Visual Title popup
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Check the box and enter the sub-title name as "New subtitle"
     Then The subtitle should update as "New subtitle"
 
@@ -144,7 +145,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_15 : Verify title text color
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Check the box for the title name
     And Choose text color is blue
     Then The Image visual should update the "title" text color as blue
@@ -153,7 +155,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_16 : Verify highlight color
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Check the box for the title name
     And Choose highlight color is Orange
     Then The Image visual should update the "title" highlight color as Orange
@@ -162,7 +165,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_17 : Verify 'font size'
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Check the box for the title name
     And Choose "20" from the drop-down for the font size
     Then The Image visual should update the "title" font as "20"
@@ -171,7 +175,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_18 : Verify title in bold style
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Click on Bold icon for "title"
     Then The visual "title" should be in bold style
 
@@ -179,7 +184,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_19 : Verify title in Italic style
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Check the box for the title name
     And Click on Italic under style
     Then The visual "title" should be "italic"
@@ -188,7 +194,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_20 : Verify title as underlined
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Check the box for the title name
     And Click on Underline icon for "title"
     Then The visual "title" should be "underline"
@@ -197,7 +204,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_21 : Verify horizontal alignment (left, right, center)
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Check the box for the title name
     And Click on left,center and right alignment for title
     Then The title should align to "left" , "center" and "right" as user set
@@ -206,7 +214,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_22 : Verify Sub-title text color
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Choose text color is blue for subtitle
     Then The Image visual should update the "sub_title" text color as blue
 
@@ -214,7 +223,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_23 : Subtitle > Verify highlight color
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Choose highlight color is Orange for subtitle
     Then The Image visual should update the "sub_title" highlight color as Orange
 
@@ -222,7 +232,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_24 : Subtitle > Verify 'font size'
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Choose "10" from the drop-down for the font size of subtitle
     Then The Image visual should update the "sub_title" font as "10"
 
@@ -230,7 +241,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_25 : Verify Subtitle in bold style
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Click on B under style for sub-title
     Then The visual "sub_title" should be in bold style
 
@@ -238,7 +250,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_26 : Verify Subtitle in Italic style
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Click on Italic under style for sub-title
     Then The visual "sub_title" should be "italic"
 
@@ -246,7 +259,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_27 : Verify Subtitle as underlined
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Click on Underline icon for sub-title
     Then The visual "sub_title" should be "underline"
 
@@ -254,7 +268,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_28 : Verify horizontal alignment (left, right, center) of sub_title
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Click on left,center and right alignment for sub_title
     Then The sub_title should align to "left" , "center" and "right" as user set
 
@@ -262,7 +277,8 @@ Feature: Verifying Image visual functionality
   Scenario: Tc_ImageVisual_29 : Verify closing of titles popup
     And Go to View tab
     And Click on insert Image visual icon
-    And Click on title dropdown
+    #And Click on title dropdown
+     And Mouse hover on Edit Visual title and click on it
     And Click on X icon to close the popup
     Then The "Title" popup should be closed
 
@@ -412,15 +428,16 @@ Feature: Verifying Image visual functionality
     And Click on "Download"
     Then Image with visuals should be downloaded with selected timeframe and data placement
 
-  @ImageVisual
-  Scenario: Tc_ImageVisual_44 : Verify moving image visula inside the view tab
-    And Go to View tab
-    And Create a Chart visual
-    And Add a series to the chart visual
-    And Click on insert Image visual icon
-    And Click on title dropdown
-    And Check the box for the title name
-    Then Visuals should be interchanged by drag and drop
+  #@ImageVisual1... can't drag and drop in automation
+  #Scenario: Tc_ImageVisual_44 : Verify moving image visula inside the view tab
+    #And Go to View tab
+    #And Create a Chart visual
+    #And Add a series to the chart visual
+    #And Click on insert Image visual icon
+    #And Click on title dropdown
+     #And Mouse hover on Edit Visual title and click on it
+    #And Check the box for the title name
+    #Then Visuals should be interchanged by drag and drop
 
   @ImageVisual
   Scenario: Tc_ImageVisual_45 : Verify image download as views (insight) pdf

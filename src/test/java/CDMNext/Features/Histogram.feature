@@ -978,240 +978,240 @@ Feature: Verifying Histogram Visual functionality
     And UnCheck Show Series and Save
     Then Data of series should be removed from the visual
 
-  @Histogram
-  Scenario: TC_Histogram_115:Edit Histogram - Verify Title=Yes
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And Check Title and Save
-    Then The title of the visual should be displayed
-
-  @Histogram
-  Scenario: TC_Histogram_116:Edit Histogram - Verify Title=No
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And UnCheck Title and Save
-    Then The title of the visual should be removed from the visual
-
-  @Histogram
-  Scenario: TC_Histogram_117:Edit Histogram - Verify default selection for title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    Then The title should be selected by default
-
-  @Histogram
-  Scenario: TC_Histogram_118:Edit Histogram - Verify Auto title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And Check title with empty title field and Save
-    Then Auto title should be displayed as series name
-
-  @Histogram
-  Scenario: TC_Histogram_119:Edit Histogram - Verify renaming title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And Enter visual name and Save
-    Then The visual name should be changed
-
-  @Histogram
-  Scenario: TC_Histogram_120:Edit Histogram - Verify sub title by default
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    Then The sub title check box should be unchecked by default
-
-  @Histogram
-  Scenario: TC_Histogram_121:Edit Histogram - Verify sub title=Check
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And Check Subtitle and Save
-    Then Sub title should be displayed for the visual
-
-  @Histogram
-  Scenario: TC_Histogram_122:Edit Histogram - Verify sub title=UnCheck
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And UnCheck Subtitle and Save
-    Then Sub title should not be displayed for the visual
-
-  @Histogram
-  Scenario: TC_Histogram_123:Edit Histogram - Verify default title for sub title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And Check Subtitle and Save
-    Then Default sub title should be "Sub title"
-
-  @Histogram
-  Scenario: TC_Histogram_124:Edit Histogram - Verify advance settings
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on Title drop down
-    And Click on "Advanced settings"
-    Then Titles popup should be displayed
-
-  @Histogram
-  Scenario: TC_Histogram_125:Edit Histogram - Verify advance settings cogwheel icon
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    Then Titles popup should be displayed
-
-  @Histogram
-  Scenario: TC_Histogram_126:Edit Histogram - Verify color for visual title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select color for "Title"
-    When Click on "Save"
-    Then Visual "title" should be displayed in selected color
-
-  @Histogram
-  Scenario: TC_Histogram_127:Edit Histogram - Verify color for visual title background
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select color for "title" background highlight
-    When Click on "Save"
-    Then Visual "title" background should be displayed in selected color
-
-  @Histogram
-  Scenario: TC_Histogram_128:Edit Histogram - Verify font size for visual title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select size for visual "title" as "20"
-    When Click on "Save"
-    Then The "title" font size should be changed as "20"
-
-  @Histogram
-  Scenario: TC_Histogram_129:Edit Histogram - Verify bold style for visual title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Bold icon for "title"
-    When Click on "Save"
-    Then The "title" should be displayed in Bold format
-
-  @Histogram
-  Scenario: TC_Histogram_130:Edit Histogram - Verify Italic style for visual title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Italic under style
-    When Click on "Save"
-    Then The "title" should be "italic"
-
-  @Histogram
-  Scenario: TC_Histogram_131:Edit Histogram - Verify Underline style for visual title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Underline icon for "title"
-    When Click on "Save"
-    Then The "title" should be "underline"
-
-  @Histogram
-  Scenario: TC_Histogram_132:Edit Histogram - Verify horizontal alignment (left, right, center)
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select alignment of title to "left"
-    Then The title should align to "left"
-    And Select alignment of title to "center"
-    Then The title should align to "center"
-    And Select alignment of title to "right"
-    Then The title should align to "right"
-
-    @Histogram
-  Scenario: TC_Histogram_133:Edit Histogram - Verify color for visual sub title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select color for "Sub title"
-    When Click on "Save"
-    Then Visual "sub_title" should be displayed in selected color
-
-  @Histogram
-  Scenario: TC_Histogram_134:Edit Histogram - Verify color for visual sub title background
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select color for "Sub title" background highlight
-    When Click on "Save"
-    Then Visual "sub_title" background should be displayed in selected color
-
-  @Histogram
-  Scenario: TC_Histogram_135:Edit Histogram - Verify font size for visual sub title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Select size for visual "Sub title" as "20"
-    When Click on "Save"
-    Then The "sub_title" font size should be changed as "20"
-
-  @Histogram
-  Scenario: TC_Histogram_136:Edit Histogram - Verify bold style for visual sub title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Click on B under style for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be displayed in Bold format
-
-  @Histogram
-  Scenario: TC_Histogram_137:Edit Histogram - Verify Italic style for visual sub title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Click on Italic under style for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be "italic"
-
-  @Histogram
-  Scenario: TC_Histogram_138:Edit Histogram - Verify Unnderline style for visual sub title
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Click on Underline icon for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be "underline"
-
-  @Histogram
-  Scenario: TC_Histogram_139:Edit Histogram - Verify horizontal alignment (left, right, center)
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select alignment of sub title to "left"
-    Then The subtitle should align to "left"
-    And Select alignment of sub title to "center"
-    Then The subtitle should align to "center"
-    And Select alignment of sub title to "right"
-    Then The subtitle should align to "right"
-
-  @Histogram
-  Scenario: TC_Histogram_140:Edit Histogram - Verify closing of Titles popup
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Click on X icon to close the popup
-    Then The Title popup should be closed
+  #@Histogram.....CVISION-21993(title drop down is removed in Edit visual)
+  #Scenario: TC_Histogram_115:Edit Histogram - Verify Title=Yes
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And Check Title and Save
+    #Then The title of the visual should be displayed
+#
+  #@Histogram
+  #Scenario: TC_Histogram_116:Edit Histogram - Verify Title=No
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And UnCheck Title and Save
+    #Then The title of the visual should be removed from the visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_117:Edit Histogram - Verify default selection for title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #Then The title should be selected by default
+#
+  #@Histogram
+  #Scenario: TC_Histogram_118:Edit Histogram - Verify Auto title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And Check title with empty title field and Save
+    #Then Auto title should be displayed as series name
+#
+  #@Histogram
+  #Scenario: TC_Histogram_119:Edit Histogram - Verify renaming title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And Enter visual name and Save
+    #Then The visual name should be changed
+#
+  #@Histogram
+  #Scenario: TC_Histogram_120:Edit Histogram - Verify sub title by default
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #Then The sub title check box should be unchecked by default
+#
+  #@Histogram
+  #Scenario: TC_Histogram_121:Edit Histogram - Verify sub title=Check
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And Check Subtitle and Save
+    #Then Sub title should be displayed for the visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_122:Edit Histogram - Verify sub title=UnCheck
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And UnCheck Subtitle and Save
+    #Then Sub title should not be displayed for the visual
+#
+  #@Histogram
+  #Scenario: TC_Histogram_123:Edit Histogram - Verify default title for sub title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And Check Subtitle and Save
+    #Then Default sub title should be "Sub title"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_124:Edit Histogram - Verify advance settings
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on Title drop down
+    #And Click on "Advanced settings"
+    #Then Titles popup should be displayed
+#
+  #@Histogram
+  #Scenario: TC_Histogram_125:Edit Histogram - Verify advance settings cogwheel icon
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #Then Titles popup should be displayed
+#
+  #@Histogram
+  #Scenario: TC_Histogram_126:Edit Histogram - Verify color for visual title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select color for "Title"
+    #When Click on "Save"
+    #Then Visual "title" should be displayed in selected color
+#
+  #@Histogram
+  #Scenario: TC_Histogram_127:Edit Histogram - Verify color for visual title background
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select color for "title" background highlight
+    #When Click on "Save"
+    #Then Visual "title" background should be displayed in selected color
+#
+  #@Histogram
+  #Scenario: TC_Histogram_128:Edit Histogram - Verify font size for visual title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select size for visual "title" as "20"
+    #When Click on "Save"
+    #Then The "title" font size should be changed as "20"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_129:Edit Histogram - Verify bold style for visual title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Bold icon for "title"
+    #When Click on "Save"
+    #Then The "title" should be displayed in Bold format
+#
+  #@Histogram
+  #Scenario: TC_Histogram_130:Edit Histogram - Verify Italic style for visual title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Italic under style
+    #When Click on "Save"
+    #Then The "title" should be "italic"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_131:Edit Histogram - Verify Underline style for visual title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Underline icon for "title"
+    #When Click on "Save"
+    #Then The "title" should be "underline"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_132:Edit Histogram - Verify horizontal alignment (left, right, center)
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select alignment of title to "left"
+    #Then The title should align to "left"
+    #And Select alignment of title to "center"
+    #Then The title should align to "center"
+    #And Select alignment of title to "right"
+    #Then The title should align to "right"
+#
+    #@Histogram
+  #Scenario: TC_Histogram_133:Edit Histogram - Verify color for visual sub title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select color for "Sub title"
+    #When Click on "Save"
+    #Then Visual "sub_title" should be displayed in selected color
+#
+  #@Histogram
+  #Scenario: TC_Histogram_134:Edit Histogram - Verify color for visual sub title background
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select color for "Sub title" background highlight
+    #When Click on "Save"
+    #Then Visual "sub_title" background should be displayed in selected color
+#
+  #@Histogram
+  #Scenario: TC_Histogram_135:Edit Histogram - Verify font size for visual sub title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Select size for visual "Sub title" as "20"
+    #When Click on "Save"
+    #Then The "sub_title" font size should be changed as "20"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_136:Edit Histogram - Verify bold style for visual sub title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Click on B under style for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be displayed in Bold format
+#
+  #@Histogram
+  #Scenario: TC_Histogram_137:Edit Histogram - Verify Italic style for visual sub title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Click on Italic under style for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be "italic"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_138:Edit Histogram - Verify Unnderline style for visual sub title
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Click on Underline icon for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be "underline"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_139:Edit Histogram - Verify horizontal alignment (left, right, center)
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select alignment of sub title to "left"
+    #Then The subtitle should align to "left"
+    #And Select alignment of sub title to "center"
+    #Then The subtitle should align to "center"
+    #And Select alignment of sub title to "right"
+    #Then The subtitle should align to "right"
+#
+  #@Histogram
+  #Scenario: TC_Histogram_140:Edit Histogram - Verify closing of Titles popup
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Click on X icon to close the popup
+    #Then The Title popup should be closed
 
   @Histogram
   Scenario: TC_Histogram_141:Edit Histogram - Verify size of the visual
@@ -1904,7 +1904,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Change title in edit visual window
-    And Click on "Save" button
+    When Click on "Save"
     Then The changes should be reflected to "histogram" visual and Edit visual popup should be closed
 
   @Histogram
@@ -2157,7 +2157,7 @@ Feature: Verifying Histogram Visual functionality
     And Choose "Copy histogram"
     And Again Right click on visual header
     And Choose "Paste visual"
-    Then Copied visual should be pasted
+    Then Copied visual should be pasted in same view tab
 
   #@Histogram
   #Scenario: TC_Histogram_249:Right click - View as - Verify Chart
@@ -2412,13 +2412,13 @@ Feature: Verifying Histogram Visual functionality
     And Create a new histogram visual
     Then The Histogram should be created with default format template
 
-  @Histogram
-  Scenario: TC_Histogram_278:Edit Histogram - Verify bold style default selection.
-    And Create histogram visual with series
-    And Click on "Edit Histogram"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    Then The bold icon should be selected by default
+  #@Histogram...title drop down is removed
+  #Scenario: TC_Histogram_278:Edit Histogram - Verify bold style default selection.
+    #And Create histogram visual with series
+    #And Click on "Edit Histogram"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #Then The bold icon should be selected by default
 
   @Histogram
   Scenario: TC_Histogram_279:Edit Histogram - Size - Verify Proportion for the visual

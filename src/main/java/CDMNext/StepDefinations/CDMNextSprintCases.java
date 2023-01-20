@@ -2526,7 +2526,7 @@ public class CDMNextSprintCases {
 			WebElement chart = CommonFunctionality
 					.getElementByXpath(login.driver,
 							"//*[contains(@class,'left-controls')]//button[text()='" + arg1
-									+ "'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Chart'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Pie']",
+									+ "'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Chart'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Pie'] | //*[contains(@class,'left-controls')]//button[text()='" + arg1 + " Map']",
 							4);
 			new Actions(login.driver).moveToElement(chart).click().build().perform();
 			CommonFunctionality.wait(1000);
@@ -2930,7 +2930,7 @@ public class CDMNextSprintCases {
 		} else {
 			WebElement enable = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'sphere-modal__body')]//*[contains(text(),'" + arg1
-							+ "')] | //*[contains(@class,'movable-modal--body')]//*[contains(text(),'" + arg1 + "')]",
+							+ "')] | //*[@class='visual-configuration--controls']//*[contains(text(),'" + arg1 + "')]",
 					4);
 			js.executeScript("arguments[0].click();", enable);
 			CommonFunctionality.wait(6000);
@@ -6536,6 +6536,16 @@ public class CDMNextSprintCases {
 						"//*[@class='popover--wrapper']//*[@class='popover--close']", 20).click();
 			} else {
 				fail("Verification Failed");
+			}
+		} else if(arg1.equalsIgnoreCase("Legend")) {
+			String title_text = CommonFunctionality
+					.getElementByXpath(login.driver, "//*[@class='popover--title']", 30)
+					.getText();
+			if (title_text.equalsIgnoreCase(arg1)) {
+				login.Log4j.info("Legend popUp is displayed");
+				
+			} else {
+				fail("Legend popUp is not displayed");
 			}
 		} else {
 			fail("Verification Failed");

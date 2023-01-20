@@ -6,6 +6,7 @@ import org.testng.AssertJUnit;
 
 import CDMNext.util.CommonFunctionality;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -172,6 +173,7 @@ public class Filters extends CommonFunctionality{
 				login.driver.findElement(By.xpath("//*[contains(text(),'" + list + "')]")).click();
 				
 			}
+			
 			break;
 		case "Status":
 			CommonFunctionality.wait(2000);
@@ -629,7 +631,7 @@ public class Filters extends CommonFunctionality{
 								for (int m = 0; m < Datearr.length; m++) {
 									SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 									Date date = new Date();
-
+									
 									if (Datearr[m].equalsIgnoreCase("First observation before")) {
 										Datearr[m] = "First obs. date";
 									}
@@ -641,7 +643,8 @@ public class Filters extends CommonFunctionality{
 												//login.Log4j.info(Tooltip);
 												//String[] frstDate = Tooltip.split(": ");
 												String first_obs_before = sdf.format(date);
-												if(searchData.equalsIgnoreCase("Agar")){
+												try {
+												  if(searchData.equalsIgnoreCase("Agar")){
 													if (sdf.parse(lines[11])
 															.before(sdf.parse(first_obs_before)) == true) {
 														login.Log4j.info(lines[11] + " is less than " + first_obs_before
@@ -650,14 +653,27 @@ public class Filters extends CommonFunctionality{
 													} else {
 														Assert.fail(lines[11] + " is not less than " + first_obs_before);
 													}
-												} else {
-													if (sdf.parse(lines[9])
-															.before(sdf.parse(first_obs_before)) == true) {
-														login.Log4j.info(lines[9] + " is less than " + first_obs_before
-																+ "? " + sdf.parse(lines[9])
-																		.before(sdf.parse(first_obs_before)));
-													} else {
-														Assert.fail(lines[9] + " is not less than " + first_obs_before);
+												  }
+												} catch(Exception e) {
+													try {
+												
+														if (sdf.parse(lines[9])
+																.before(sdf.parse(first_obs_before)) == true) {
+															login.Log4j.info(lines[9] + " is less than " + first_obs_before
+																	+ "? " + sdf.parse(lines[9])
+																			.before(sdf.parse(first_obs_before)));
+														} else {
+															Assert.fail(lines[9] + " is not less than " + first_obs_before);
+														}
+													}catch(ParseException e1)	{
+														if (sdf.parse(lines[11])
+																.before(sdf.parse(first_obs_before)) == true) {
+															login.Log4j.info(lines[11] + " is less than " + first_obs_before
+																	+ "? " + sdf.parse(lines[1])
+																			.before(sdf.parse(first_obs_before)));
+														} else {
+															Assert.fail(lines[11] + " is not less than " + first_obs_before);
+														}
 													}
 												}
 											//}
@@ -672,13 +688,24 @@ public class Filters extends CommonFunctionality{
 											//if (Tooltip.contains("Last obs. date")) {
 												//login.Log4j.info(Tooltip);
 												//String[] lastDate = Tooltip.split(": ");
+												
 												String last_obs_after = sdf.format(date);
-												if (sdf.parse(lines[11]).after(sdf.parse(last_obs_after)) == true) {
-													login.Log4j.info(lines[11] + " is greater than " + last_obs_after
-															+ "? "
-															+ sdf.parse(lines[11]).after(sdf.parse(last_obs_after)));
-												} else {
-													Assert.fail(lines[11] + " is not greater than " + last_obs_after);
+												try {
+													if (sdf.parse(lines[11]).after(sdf.parse(last_obs_after)) == true ||  sdf.parse(lines[11]).compareTo(sdf.parse(last_obs_after)) == 0 ) {
+														login.Log4j.info(lines[11] + " is greater than " + last_obs_after
+																+ "? "
+																+ sdf.parse(lines[11]).after(sdf.parse(last_obs_after)));
+													} else {
+														Assert.fail(lines[11] + " is not greater than " + last_obs_after);
+													}
+												}catch(ParseException e) {// when subnational is fetched in tooltip
+													if (sdf.parse(lines[13]).after(sdf.parse(last_obs_after)) == true ||  sdf.parse(lines[13]).compareTo(sdf.parse(last_obs_after)) == 0 ) {
+														login.Log4j.info(lines[13] + " is greater than " + last_obs_after
+																+ "? "
+																+ sdf.parse(lines[13]).after(sdf.parse(last_obs_after)));
+													} else {
+														Assert.fail(lines[13] + " is not greater than " + last_obs_after);
+													}
 												}
 											//}
 										//}

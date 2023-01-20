@@ -126,7 +126,7 @@ public class KeyboardShortcuts {
 			break;
 		case "L":
 			// before perform keyboard action
-			activeElement = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_group_button__active')]/*", 15)
+			activeElement = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_button__selected')]/*", 15)
 					.getAttribute("title");
 			CommonFunctionality.wait(500);
 			rb = new Robot();
@@ -484,7 +484,7 @@ public class KeyboardShortcuts {
 	public void the_Data_tab_should_be_Swich_to_list_table_mode() throws Throwable {
 		login.Log4j.info(activeElement);
 		String currentActiveElement = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_group_button__active')]/*", 15).getAttribute("title");
+				.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_button__selected')]", 15).getAttribute("title");
 		if (!activeElement.equalsIgnoreCase(currentActiveElement)) {
 			login.Log4j.info("The data tab switched to list/table mode ");
 		} else {

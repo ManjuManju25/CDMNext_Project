@@ -952,7 +952,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Cancel"
     Then The popup should be closed and delete visual process should be declined
 
-  @Commentary
+  @Commentary1
   Scenario: TC_Commentary_115:Verify 'Save as' OR Copy for an insight having all type of visuals
     And Create all visuals in an insight
     And Perform "Save as"
@@ -970,7 +970,7 @@ Feature: Verifying Commentary Visual functionality
     And Perform download to excel with all views
     Then All visuals should be downloaded successfully
 
-  @Commentary
+  @Commentary1
   Scenario: TC_Commentary_118:Verify 'Delete' insight having all type of visuals
     And Delete the created insight with all visuals
     Then The insight should be deleted successfully

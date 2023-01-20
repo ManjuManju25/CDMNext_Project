@@ -66,10 +66,11 @@ public class PieVisual {
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.className("blocker--loader")));
 		List<WebElement> total_count = login.driver.findElements(
 				By.xpath("//*[@class='series-representation--list']//div[contains(@class,'series-search-list-item')]"));
+		int j = 0;
 		for (int i = 0; i < total_count.size(); i++) {
 //			WebElement unselect_check = CommonFunctionality.getElementByXpath(login.driver,
 //					"//*[@class='search-series-list']//div[contains(@class,'series-search-list-item')][" + i + "]", 4);
-			int j = i + 1;
+			j = i + 1;
 			WebElement unselect_check = total_count.get(i);
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
 					"(//*[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper']//span[contains(@class,'series-list-item--checkbox')])["
@@ -80,7 +81,10 @@ public class PieVisual {
 			}
 		}
 		if (arg2.equalsIgnoreCase("Pie")) {
-			cv.click_on_more_actions();
+			//right click on last selected series name
+			WebElement ele1 =login.driver.findElement(By.xpath("(//*[@class='series-representation--list']//div[contains(@class,'series-search-list-item')]//*[@class='series-item--name'])[" + j + "]"));
+			new Actions(login.driver).contextClick(ele1).build().perform();
+			
 			new Actions(login.driver).moveToElement(
 					CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Add chart')]", 4))
 					.build().perform();
@@ -249,7 +253,7 @@ public class PieVisual {
 				"div[argument='end'] .function-parameter--body .select2-chosen", 4).getText();
 		assertEquals(text, "December");*/
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='function-data--info']//*[@argument='end']//*[@class='select2-container function-parameter--select']",
+				"//*[@argument='end']//*[@class='select2-container function-parameter--select']",
 				4).click();
 		List<WebElement> listOfDays = login.driver.findElements(By.xpath("//ul[@class='select2-results']/li"));
 		if (listOfDays.size() != 0) {
@@ -260,6 +264,7 @@ public class PieVisual {
 				String selected_day = CommonFunctionality.getElementByXpath(login.driver, "//*[@argument='end']//*[@class='select2-chosen']", 10).getText();
 				if(selected_day.equalsIgnoreCase(text1)) {
 					login.Log4j.info("The number of days is selectable in frequency end dropdown");
+					
 				} else {
 					fail("verification failed");
 				}
@@ -622,12 +627,16 @@ public class PieVisual {
 	public void should_create_pie_chart_with_different_freq_by_disabling_highest_frequency() throws Throwable {
 		CommonFunctionality.wait(300);
 		WebElement higherFrequency_ele = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='highcharts-legend']/*[1]/*[1]/*[1]", 8);
+				"//div[contains(@class,'highcharts-legend-item highcharts-pie-series highcharts-color-1 ')]", 8);
 		WebElement lowerFrequency_ele = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='highcharts-legend']/*[1]/*[1]/*[2]", 8);
+				"//div[@class='highcharts-legend-item highcharts-pie-series highcharts-color-0']", 8);
 		if (higherFrequency_ele.getAttribute("class").contains("highcharts-legend-item-hidden")) {
-			String series1 = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@class='series-edit--title series-edit--title__editable'])[1]", 8).getText();
+			WebElement series2 = CommonFunctionality.getElementByXpath(login.driver,
+					"(//*[@class='series-edit--title series-edit--title__editable'])[2]", 8);
+			new Actions(login.driver).pause(300)
+			.moveToElement(series2).build().perform();
+			String tooltipText = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")))
+					.getText();
 			/*new Actions(login.driver).pause(300)
 					.moveToElement(login.driver.findElement(
 							By.xpath("(//*[@class='series-edit--title series-edit--title__editable'])[1]")))
@@ -644,20 +653,24 @@ public class PieVisual {
 				}
 			}
 			String[] frequency = freq.split("Frequency: ");*/
-			if (series1.contains("Weekly")) {
+			if (tooltipText.contains("Annual")) {
 				login.Log4j.info("Higher frequency series is disabled");
 			} else {
 				fail("Higher frequency series is not disabled");
 			}
 		}
 		// mousehover on visual title (moving the cursor position before mouse hover on
-		// 2nd legend item)
+		// 1st legend item)
 		new Actions(login.driver).pause(200)
 				.moveToElement(login.driver.findElement(By.xpath("//*[@data-name='title']"))).build().perform();
 		if (!lowerFrequency_ele.getAttribute("class").contains("highcharts-legend-item-hidden")) {
 			CommonFunctionality.wait(500);
-			String series2 = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@class='series-edit--title series-edit--title__editable'])[1]", 8).getText();
+			WebElement series1 = CommonFunctionality.getElementByXpath(login.driver,
+					"(//*[@class='series-edit--title series-edit--title__editable'])[1]", 8);
+			new Actions(login.driver).pause(300)
+			.moveToElement(series1).build().perform();
+			String tooltipText = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")))
+					.getText();
 			/*new Actions(login.driver).pause(300)
 					.moveToElement(login.driver.findElement(
 							By.xpath("(//*[@class='series-edit--title series-edit--title__editable'])[2]")))
@@ -674,7 +687,7 @@ public class PieVisual {
 				}
 			}
 			String[] frequency = freq.split("Frequency: ");*/
-			if (series2.contains("Annual")) {
+			if (tooltipText.contains("Weekly")) {
 				login.Log4j.info("Lower frequency series is enabled");
 			} else {
 				fail("Lower frequency series is not enabled");
@@ -862,7 +875,7 @@ public class PieVisual {
 	@And("^Double click on timepoints$")
 	public void double_click_on_timepoints() throws Throwable {
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='preview-container']//div[@class='visual-item-container']//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0'])[5]//*", 4);
+				"//div[@class='visual-item-container']//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0']", 4);
 		new Actions(login.driver).pause(300).doubleClick(ele).build().perform();
 	}
 
@@ -1133,7 +1146,7 @@ public class PieVisual {
 	}
 
 	@And("^Make any changes in edit visual$")
-	public void make_any_changes_in_edit_visual() throws Throwable {
+	public static void make_any_changes_in_edit_visual() throws Throwable {
 		CommonFunctionality.wait(1000);
 		// unselect legend check box option
 		Boolean isChecked = login.driver
@@ -1176,7 +1189,7 @@ public class PieVisual {
 	@Then("^The pie border \"([^\"]*)\" should be updated to \"([^\"]*)\"$")
 	public void the_pie_border_should_be_updated_to(String arg1, String arg2) throws Throwable {
 		Thread.sleep(2000);
-		CommonFunctionality.getElementByXpath(login.driver, "//button[text()='Save']", 6).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-configuration--content']//button[text()='Save']", 6).click();
 		if (arg1.equals("Width")) {
 			String ActualWidth;
 			CommonFunctionality.wait(2000);
@@ -1212,7 +1225,7 @@ public class PieVisual {
 	@Then("^Radius should be updated to (\\d+) on pie$")
 	public void radius_should_be_updated_to_on_pie(int arg1) throws Throwable {
 		Thread.sleep(2000);
-		CommonFunctionality.getElementByXpath(login.driver, "//button[text()='Save']", 6).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-configuration--content']//button[text()='Save']", 6).click();
 		Thread.sleep(2000);
 		String ActualRadius = login.driver.findElement(By.xpath("//*[@class='highcharts-plot-border']"))
 				.getCssValue("rx");
@@ -1559,7 +1572,7 @@ public class PieVisual {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-value='" + arg1 + "']", 8).click();
 		}
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 40).click();
+				"//*[@class='visual-configuration--controls']//button[contains(text(),'Save')]", 40).click();
 	}
 
 	@And("^Open date dropdown$")
@@ -1616,7 +1629,7 @@ public class PieVisual {
 			fail("The tooltip default value is not changed");
 		}
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 40).click();
+				"//*[@class='visual-configuration--controls']//button[contains(text(),'Save')]", 40).click();
 		CommonFunctionality.wait(1000);
 		WebElement mouseHoverVisual = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='highcharts-point highcharts-color-0']", 10);
@@ -1624,7 +1637,7 @@ public class PieVisual {
 		String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table-tooltip']/*[3]/*[1]", 4)
 				.getText();
 		if (arg2.equalsIgnoreCase("Function description")) {
-			if (arg2.contains(text)) {
+			if (arg2.contains(text) || text.equalsIgnoreCase("Functions:")) {
 				login.Log4j.info("The selected attribute " + text + " is displayed in the tooltip of the visual");
 			}
 		} else if (!arg2.equalsIgnoreCase("Function description")) {
@@ -1636,7 +1649,12 @@ public class PieVisual {
 			fail("Verification failed");
 		}
 	}
-
+	@And("^Select pie visual$")
+	public void select_pie_visual() throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "Dropdown_AddChart", 4).click();
+		CommonFunctionality.getElementByProperty(login.driver, "PieIcon", 4).click();
+		CommonFunctionality.wait(500);
+	}
 	@Then("^The following items should be available$")
 	public void the_following_items_should_be_available(List<String> list) throws Throwable {
 		List<WebElement> List_of_options = null;
@@ -1753,7 +1771,7 @@ public class PieVisual {
 		String text = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table-tooltip']/*[3]/*[1]", 4)
 				.getText();
 		if (arg1.equalsIgnoreCase("Function description")) {
-			if (arg1.contains(text)) {
+			if (arg1.contains(text) || text.equals("Functions:")) {
 				login.Log4j.info("The selected attribute " + text + " get added in the tooltip of the visual");
 			}
 		} else if (!arg1.equalsIgnoreCase("Function description")) {

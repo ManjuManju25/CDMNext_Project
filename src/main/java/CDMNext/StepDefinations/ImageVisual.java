@@ -198,11 +198,16 @@ public class ImageVisual {
 	public void click_on_title_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
 //		CommonFunctionality.getElementByXpath(login.driver, " //*[@data-popup='title']/*[2]", 30).click();
-
 		CommonFunctionality.getElementByXpath(login.driver, "((//div[text()='Title:']//following::div[@class='context-menu-control--icon']))[1]", 30).click();
 
 	}
-
+	@And("^Mouse hover on Edit Visual title and click on it$")
+	public void mouse_hover_on_Edit_Visual_title_and_click_on_it() throws Throwable {
+	    WebElement editvisualtitle = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-edit-name='title']", 30);
+	    new Actions(login.driver).moveToElement(editvisualtitle).build().perform();
+	    CommonFunctionality.wait(200);
+	    editvisualtitle.click();
+	}
 	@Then("^The Image visual should update the \"([^\"]*)\" text color as blue$")
 	public void the_Image_visual_should_update_the_text_color_as_blue(String arg1) throws Throwable {
 		attachment.the_Attachments_should_update_the_text_color_as_blue(arg1);

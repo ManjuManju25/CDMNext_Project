@@ -26,6 +26,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Click on insert Filter visual icon$")
 	public void click_on_insert_Filter_visual_icon() throws Throwable {
+		CommonFunctionality.wait(1000);
 		getElementByXpath(login.driver, "//*[@data-instance='filter']", 20).click();
 		try {
 			Boolean Filtervisual = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
@@ -60,8 +61,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 	@Then("^Below optins should be displayed$")
 	public void below_optins_should_be_displayed(List<String> list) throws Throwable {
 		String arg2, arg6 = null;
-		String arg1 = getElementByXpath(login.driver, "//*[@data-popup='title']/span", 20)
-				.getText();
+		
 		try {
 			// filter visual
 			arg2 = getElementByXpath(login.driver, "//*[@data-popup='visual']/span", 20).getText();
@@ -78,22 +78,24 @@ public class CountryFilterVisual extends CommonFunctionality {
 				.getAttribute("title");
 		String arg5 = getElementByXpath(login.driver, "//*[@data-action='delete']", 20)
 				.getAttribute("title");
-		if (list.size() == 5) {
-			if (list.contains(arg1) && list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
+		if (list.size() == 4) {
+			if (list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
 					&& list.contains(arg5)) {
-				login.Log4j.info(arg1 + " AND " + arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
+				login.Log4j.info(arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
 						+ " options are displayed");
 			} else {
 				Assert.fail("Verification failed");
 			}
-		} else if (list.size() == 6) {
-			if (list.contains(arg1) && list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
+		} else if (list.size() == 5) {
+			if (list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
 					&& list.contains(arg5) || list.contains(arg6)) {
-				login.Log4j.info(arg1 + " AND " + arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
+				login.Log4j.info(arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
 						+ " AND "+ arg6 + " options are displayed");
 			} else {
 				Assert.fail("Verification failed");
 			}
+		} else {
+			Assert.fail("Verification failed");
 		}
 
 	}

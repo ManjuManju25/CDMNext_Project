@@ -1,6 +1,6 @@
 Feature: Verifying SeriesTab functionality
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_01:Verify indicator filter  for series tab
     And Select indicator "Production" as "Steel Production"
     And Select indicator "Tourism Sector" as "Tourism Revenue"
@@ -116,16 +116,16 @@ Feature: Verifying SeriesTab functionality
     When Click on "Apply filter"
     Then "Key series" should be displayed
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_19:Verifying "with release schedule" filter for series tab
-    Given User enters "FDI"
+    Given User enters "GDP"
     And User has selects "More" as "With release schedule"
     When Click on "Apply filter"
     Then User verify corresponding results for selected filter
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_20:Verifying "with suggestions for rebased/discontinued series " filter for series tab
-    Given User enters "PSI"
+    Given User enters "GDP"
     And User has selects "More" as "With suggestions for rebased/discontinued series"
     When Click on "Apply filter"
     Then User verify corresponding results for selected filter
@@ -230,7 +230,7 @@ Feature: Verifying SeriesTab functionality
     When User Mouse hover on "View as Chart. Type `c`" icon
     Then User can see the Chart Visual in the right pannel
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_36:Verify 'Add and replace' from dropdown
     And Create any visual
     Given User enters seriesID "5724301;5958801"
@@ -319,14 +319,14 @@ Feature: Verifying SeriesTab functionality
     When Click on "Apply filter"
     Then "s" symbol to be displayed for "replacement suggestions series"
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_49:Verifying "New only" filter for series tab
     And Open "Series" tab
     And User has selects "More" as "New only"
     When Click on "Apply filter"
     Then "new series" should be displayed
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_50:Verify results by World trend plus database
     And User enters "GDP"
     And Click on "More" filter
@@ -369,7 +369,7 @@ Feature: Verifying SeriesTab functionality
     #When User right click on any series
     #Then User can able to see "View as Histogram" option from dropdown menu
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_54:Verifying "Download" option for selected series
     Given User enters seriesID "7872901;7874601"
     And Select series
@@ -468,7 +468,7 @@ Feature: Verifying SeriesTab functionality
     And Select "See in Database"
     Then Navigate to the series from db tab
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_68:Verify 'Copy' option from More actions
     Given User enters seriesID "261975301;237211603"
     And Select series and Click on More actions
@@ -476,7 +476,7 @@ Feature: Verifying SeriesTab functionality
     Then The message should be in growl popup as "Selected series copied."
     Then Series should be pasted in excel as refreshable links
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_69:Verify showing results per page
     And Scroll down and set showing results as "50" per page
     Then "50" results should display in a page
@@ -537,7 +537,7 @@ Feature: Verifying SeriesTab functionality
     When Click on "Apply filter"
     Then User verify the search results
 
-  @SeriesTab
+  @SeriesTab1
   Scenario: TC_SeriesTab_78:Verify selected First obs before and Last ob after results
     And Click on "More" filter
     And User selects "Date" as "First observation before;Last observation after"

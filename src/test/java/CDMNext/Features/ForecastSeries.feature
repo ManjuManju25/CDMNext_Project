@@ -94,7 +94,7 @@ Feature: Verifying the Forecast series functionality
     And Click on Manage All dropdown
     Then Below options should be shown
       | Add Forecasts              |
-      | Add as new series          |
+      #| Add as new series          | ...option is removed
       | Replace the current series |
 
   @ForecastSeries
@@ -273,7 +273,7 @@ Feature: Verifying the Forecast series functionality
     And Click on "Apply"
     And Click on "Ok"
     And Select forecast suggestion series
-    And Create table visual
+    And Create TableVisual
     Then Visual should be created with "Edit Table"
 
   @ForecastSeries

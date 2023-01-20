@@ -6,6 +6,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -389,6 +390,24 @@ public void the_series_should_be_added_to_with_its_data(String arg1) throws Thro
 		Visual_Title_txt = login.driver.findElement(By.xpath("//*[@data-name='title']")).getText();
 
 	}
+
+@Then("^Copied visual should be pasted in same view tab$")
+public void copied_visual_should_be_pasted_in_same_view_tab() throws Throwable {
+	List<WebElement> EditVisual = login.driver.findElements(By.xpath("//*[@class='insight-views-container']//*[@class='insight-visuals-row']//*[@class='insight-visual--top-panel']//button[contains(@class,'button__primary')]"));
+	boolean result = false;
+	for (int i = 0; i < EditVisual.size(); i++) {
+		if (EditVisual.get(i).getText().contains("Histogram")) {
+			result = true;
+		
+		}
+	}
+	if(result == true) {
+		login.Log4j.info("Histogram visual is pasted");
+	} else {
+			Assert.fail("Histogram visual is not pasted");
+		
+	}
+}
 
 @And("^Create a new histogram visual$")
 public void create_a_new_histogram_visual() throws Throwable {
@@ -1237,7 +1256,7 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 		} else if(table_columns.size() == 8) {
 			currency =CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*[4]/*[2]/*[1]", 30);
 		}else if(table_columns.size() == 10) {
-			currency = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*/*[2]/*[6]/*", 30);
+			currency = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*/*[2]/*[5]/*", 30);
 		} else if(table_columns.size() == 11) {
 			currency = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*/*[2]/*[7]/*", 30);
 		}
@@ -1503,9 +1522,9 @@ public void verify_View_as_sub_dropdown_options_for_histogram_visual() throws Th
 	@Then("^Visual legend \"([^\"]*)\" and \"([^\"]*)\" should be displayed$")
 	public void visual_legend_and_should_be_displayed(String arg1, String arg2) throws Throwable {
 		String series = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='highcharts-legend highcharts-no-tooltip']/*[2]/*[1]/*[1]/*[3]", 6).getText();
+				.getElementByXpath(login.driver, "(//*[@class='visual-item']//*[@class='legend-item '])[1]//*[@class='series-edit--title']", 6).getText();
 		String histogram = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='highcharts-legend highcharts-no-tooltip']/*/*[1]/*[2]/*[1]", 6).getText();
+				.getElementByXpath(login.driver, "(//*[@class='visual-item']//*[@class='legend-item '])[2]//*[@class='series-edit--title']", 6).getText();
 		if (arg1.equalsIgnoreCase(series) && arg2.equalsIgnoreCase(histogram)) {
 			login.Log4j.info("Visual legend " + arg1 + " AND " + arg2 + " is displayed");
 		//	CommonFunctionality.Views_list();
@@ -1516,7 +1535,7 @@ public void verify_View_as_sub_dropdown_options_for_histogram_visual() throws Th
 
 	@And("^Click on series legend$")
 	public void click_on_series_legend() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-legend highcharts-no-tooltip']/*[2]/*[1]/*[1]/*[3]", 6).click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='visual-item']//*[@class='legend-item '])[1]//*[@class='series-edit--title']", 6).click();
 	}
 
 	@Then("^Series data should be hidden from the visual$")
@@ -1533,7 +1552,7 @@ public void verify_View_as_sub_dropdown_options_for_histogram_visual() throws Th
 
 	@And("^Click on Histogram legend$")
 	public void click_on_Histogram_legend() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-legend highcharts-no-tooltip']/*/*[1]/*[2]/*[1]", 6)
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='visual-item']//*[@class='legend-item '])[2]//*[@class='series-edit--title']", 6)
 				.click();
 	}
 
@@ -1551,14 +1570,14 @@ public void verify_View_as_sub_dropdown_options_for_histogram_visual() throws Th
 
 	@And("^Again click on the same$")
 	public void again_click_on_the_same() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-legend highcharts-no-tooltip']/*[2]/*[1]/*[1]/*[3]", 6)
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='visual-item']//*[@class='legend-item '])[1]//*[@class='series-edit--title']", 6)
 				.click();
 	}
 
 	@Then("^The legend should be enabled$")
 	public void the_legend_should_be_enabled() throws Throwable {
 		CommonFunctionality.wait(800);
-		Boolean legend = login.driver.findElement(By.xpath("//*[@class='highcharts-legend highcharts-no-tooltip']/*[2]/*[1]/*[1]/*[3]"))
+		Boolean legend = login.driver.findElement(By.xpath("(//*[@class='visual-item']//*[@class='legend-item '])[1]//*[@class='series-edit--title']"))
 				.isEnabled();
 		if (legend == true) {
 			login.Log4j.info("The legend is enabled");
@@ -1570,8 +1589,8 @@ public void verify_View_as_sub_dropdown_options_for_histogram_visual() throws Th
 
 @Then("^Should disable only \"([^\"]*)\" legend$")
 public void should_disable_only_legend(String arg1) throws Throwable {
-	WebElement legend_series = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-legend highcharts-no-tooltip']/*[2]/*[1]/*[1]", 20);
-	WebElement legend_histogram = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-legend highcharts-no-tooltip']/*/*[1]/*[2]", 20);
+	WebElement legend_series = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='highcharts-legend highcharts-no-tooltip'])[1]/*[2]/*[1]/*[1]", 20);
+	WebElement legend_histogram = CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='highcharts-legend highcharts-no-tooltip'])[1]/*/*[1]/*[2]", 20);
     if(arg1.equalsIgnoreCase("Series")) {
     	CommonFunctionality.wait(800);
     	if(legend_series.getAttribute("class").contains("highcharts-legend-item-hidden") && !legend_histogram.getAttribute("class").contains("highcharts-legend-item-hidden")) {
@@ -1737,7 +1756,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 		NewTemplate = arg1;
 		CommonFunctionality
 				.getElementByXpath(login.driver,
-						"//input[@class='add-template-context--input form--control form--control__sm']", 10)
+						"//input[@class='add-template-context--input']", 10)
 				.sendKeys(NewTemplate);
 
 	}
@@ -1828,7 +1847,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 	@And("^Click on dropdown for template$")
 	public void click_on_dropdown_for_template() throws Throwable {
 		WebElement dropDown = CommonFunctionality.getElementByXpath(login.driver,
-				"//div[contains(@class,'context-menu-control__clean context-menu-control__icon')]//div[@class='context-menu-control--icon']",
+				"//div[@class='style-container--templates']//div[@class='context-menu-control--icon']",
 				10);
 		new Actions(login.driver).moveToElement(dropDown).click().perform();
 	}
@@ -1840,7 +1859,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 		for (String styles : list) {
 			if (styles.equals("CEIC Styles")) {
 				if (login.driver.findElement(By.xpath(
-						"//div[@class='style-templates-context--section-items style-templates-context--section-items__row']//img[@class='style-templates-item--icon']"))
+						"//*[contains(text(),'CEIC Styles')]/parent::*"))
 						.isDisplayed()) {
 					login.Log4j.info("CEIC style template is available");
 				} else {
@@ -1855,10 +1874,21 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 					login.Log4j.info("My style template is available");
 				} 
 				}catch(Exception e) {
-					uncheck_Show_Series();
-					click_on_create_template_icon();
+					try {
+					 uncheck_Show_Series();
+					}catch(Exception e1) {
+						PieVisual.make_any_changes_in_edit_visual();
+					}
+					CommonFunctionality.getElementByXpath(login.driver,
+							"//*[@class='style-container--templates']//*[contains(text(),'Save')]",
+							10).click();
+					
+					//click_on_create_template_icon();
 					enter_new_template_name_as("Shravas");
-					click_on_green_tick_mark();
+					//click_on_green_tick_mark();
+					CommonFunctionality.getElementByXpath(login.driver,
+							"//*[contains(text(),'Save new style')]",
+							10).click();
 					click_on_dropdown_for_template();
 					if (login.driver.findElement(By.xpath(
 							"//*[@class='style-templates-context']/*[2]//*[@class='style-templates-context--section-heading']"))
@@ -1930,8 +1960,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 
 	@And("^Click on Border drop down$")
 	public void click_on_Border_drop_down() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='style-container--controls']//div[2]//div[2]//div[1]//div[2]", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[contains(text(),'Border:')]/parent::*//*[@class='context-menu-control--icon']", 8).click();
 	}
 
 	@And("^Check Histogram$")
@@ -2217,7 +2246,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 	@And("^Click on Background drop down$")
 	public void click_on_Background_drop_down() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='base-config--column base-config--column__style']//div[3]//div[2]//div[1]//div[2]", 8)
+				"//div[contains(@title,'Configure the backgrounds in the visual')]/*/*[2]", 8)
 				.click();
 	}
 
@@ -2323,9 +2352,28 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 				"//div[@class='background-image']//*[contains(@class,'form--control__xs background-image--input')]",
 				6).click();
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\UploadFile.exe",
-				System.getProperty("user.dir") + "\\AutoIT\\Job_Vacancies_Total.pdf");
+		//To run on local machine
+		 // creating object of Robot class
+	    Robot rb = new Robot();
+	 
+	    // copying File path to Clipboard
+	    StringSelection str = new StringSelection("C:\\Users\\NadiyaMaduru\\OneDrive - SHRAVAS TECHNOLOGIES INDIA PRIVATE LIMITED\\Documents\\CDMNextAutomation\\Cucumber_project\\AutoIT\\Job_Vacancies_Total.pdf");
+	    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(str, null);
+	 
+	     // press Contol+V for pasting
+	     rb.keyPress(KeyEvent.VK_CONTROL);
+	     rb.keyPress(KeyEvent.VK_V);
+	 
+	    // release Contol+V for pasting
+	    rb.keyRelease(KeyEvent.VK_CONTROL);
+	    rb.keyRelease(KeyEvent.VK_V);
+	 
+	    // for pressing and releasing Enter
+	    rb.keyPress(KeyEvent.VK_ENTER);
+	    rb.keyRelease(KeyEvent.VK_ENTER);
+//		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
+//				System.getProperty("user.dir") + "\\AutoIT\\UploadFile.exe",
+//				System.getProperty("user.dir") + "\\AutoIT\\Job_Vacancies_Total.pdf");
 		CommonFunctionality.wait(5000);
 	}
 
@@ -2373,7 +2421,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 	public void uncheck_Show_Series_and_Save() throws Throwable {
 		make_any_changes();
 		// save the changes
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//*[@class='visual-configuration--controls']//button[contains(text(),'Save')]", 8).click();
 
 	}
 
@@ -2386,7 +2434,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 		
 		
 		if (login.driver
-				.findElements(By.xpath("//*[@class='highcharts-legend-item highcharts-scatter-series highcharts-color-undefined highcharts-series-0']")).size() == 0                          ) {
+				.findElements(By.xpath("//*[@class='legend-item ']//*[contains(text(),'Series')]")).size() == 0) {
 			login.Log4j.info("Data of series is removed from the visual");
 		} else {
 			Assert.fail("Data of series is not removed from the visual");
@@ -2396,8 +2444,7 @@ public void the_Histogram_should_be_created_with_default_format_template() throw
 
 	@And("^Click on Title drop down$")
 	public void click_on_Title_drop_down() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='style-container--style-controls']//div[1]//div[2]//div[1]//div[2]", 10).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='style-container--style-controls']//div[1]//div[2]//div[1]//div[2]", 10).click();
 	}
 
 	@And("^Check Title and Save$")
@@ -3232,7 +3279,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 		CommonFunctionality.wait(1500);
 		String alignment = login.driver
 				.findElement(
-						By.xpath("//*[@class='movable-modal--body']//*[@class='visual-item-wrapper--credits-container']"))
+						By.xpath("//*[@class='movable-modal--body']//*[@class='visual-item-wrapper--credits-container'] | //*[@class='visual-item-wrapper--credits-container']"))
 				.getAttribute("style");
 		if (arg1.equalsIgnoreCase("Left")) {
 
@@ -4141,7 +4188,7 @@ public void selected_frequency_should_be_displayed_in_the_series() throws Throwa
 	public void click_on_currency_dropdown() throws Throwable {
 		try {
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='table']/*/*[2]/*[5]//*[contains(@class,'icon--context-menu-arrow')]", 30)
+					"//*[@class='table']/*/*[2]/*[6]//*[contains(@class,'icon--context-menu-arrow')]", 30)
 					.click();
 		} catch (NoSuchElementException e) {
 			CommonFunctionality.getElementByXpath(login.driver,
@@ -4753,9 +4800,9 @@ public void the_content_should_be_removed() throws Throwable {
 
 @Then("^All the changes should be revert back to default$")
 public void all_the_changes_should_be_revert_back_to_default() throws Throwable {
-	CommonFunctionality.wait(1000);
+	CommonFunctionality.wait(2000);
 	Boolean Series = login.driver
-			.findElement(By.xpath("//*[@class='highcharts-legend-item highcharts-scatter-series highcharts-color-undefined highcharts-series-0']"))
+			.findElement(By.xpath("//*[@class='legend-item ']//*[contains(text(),'Series')]"))
 			.isDisplayed();
 	
 	if (Series == true) {
@@ -4933,24 +4980,31 @@ void VisualSelection(String Selected_visual) throws Exception {
 		//CommonFunctionality.Views_list();
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	void CheckHistogram(String arg) throws Exception {
-		WebElement ele = null;
+	
 		CommonFunctionality.wait(1500);
 		if (arg.equalsIgnoreCase("Border")) {
-			ele = login.driver
-					.findElement(By.xpath("//div[@class='border-control']/*/*[1]//label//input[@type='checkbox']"));
+			WebElement ele = login.driver.findElement(
+					By.xpath("//div[@class='border-control']/*/*[1]//span[@class='input-control--indicator']"));
 
+			Boolean check_border = ele.isSelected();		
+			if (check_border == false) {
+				login.driver
+				.findElement(By.xpath("//div[@class='border-control']/*/*[1]//label//span[@class='input-control--indicator']")).click();
+			}
 		} else if (arg.equalsIgnoreCase("Background")) {
-			ele = login.driver.findElement(
-					By.xpath("//*[@class='background-control-container']/*[1]//label//input[@type='checkbox']"));
+			boolean ele = login.driver.findElement(
+					By.xpath("//*[@class='background-control-container']/*[1]//input[@type='checkbox']")).isSelected();
+			
+			
+			if (ele == false) {
+				login.driver
+				.findElement(By.xpath("//*[@class='background-control-container']/*[1]//label//span[@class='input-control--indicator']")).click();
+			}
 		}
-		new Actions(login.driver).pause(500).moveToElement(ele).click().perform();
-		Boolean check_histogram = ele.isSelected();
-		if (check_histogram == false) {
-			// check histogram
-			ele.click();
-		}
+		//new Actions(login.driver).pause(500).moveToElement(ele).click().perform();
+		
 	}
 	
 	void CheckVisual() {

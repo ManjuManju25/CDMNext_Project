@@ -747,7 +747,8 @@ public class ChartVisual {
 				"//*[text()='Decimal separator']//following::*[contains(text(),\"" + data_format_separator + "\")][1]",
 				4).click();
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.getElementByProperty(login.driver, "data_label_format", 4).click();
+		Histogram.click_on_Number_format_dropdown();
+		//CommonFunctionality.getElementByProperty(login.driver, "data_label_format", 4).click();
 		CommonFunctionality.wait(2000);
 		CommonFunctionality
 				.getElementByXpath(login.driver, "//*[text()='Grouping separator']//following::*[contains(text(),\""
@@ -1792,8 +1793,9 @@ public class ChartVisual {
 
 	@And("^Click on the \"([^\"]*)\" Container$")
 	public void click_on_the_Container(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Tooltips:") || arg1.equalsIgnoreCase("Data labels:")
+		if (arg1.equalsIgnoreCase("Tooltips:") || arg1.equalsIgnoreCase("Data labels")
 				|| arg1.equalsIgnoreCase("Legend:") || arg1.equalsIgnoreCase("Copyright:")) {
+			CommonFunctionality.wait(300);
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg1 + "')]//following::*[@class='base-config--row-settings'][1]", 4)
 					.click();
@@ -2404,10 +2406,10 @@ public class ChartVisual {
 			copyright_checkbox = login.driver
 					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]")).isSelected();
 		} else if (arg1.equalsIgnoreCase("Show tooltips") || arg1.equalsIgnoreCase("Display for all series at once")
-				|| arg1.equalsIgnoreCase("Data labels:") || arg1.equalsIgnoreCase("Legend:")
+				|| arg1.equalsIgnoreCase("Data labels") || arg1.equalsIgnoreCase("Legend:")
 				|| arg1.equalsIgnoreCase("Copyright:") || arg1.equalsIgnoreCase("Slider")) {
 			boolean checkbox = login.driver
-					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]")).isSelected();
+					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/parent::*//input[@type='checkbox']")).isSelected();
 			if (checkbox == false) {
 				CommonFunctionality
 						.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//preceding::span[1]", 4)
@@ -2451,12 +2453,12 @@ public class ChartVisual {
 		} else {
 			if (arg2.equalsIgnoreCase("Check")) {
 				boolean checkbox = login.driver
-						.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
+						.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/parent::*//input[@type='checkbox']"))
 						.isSelected();
 				if (checkbox == false) {
 					new Actions(login.driver)
 							.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-									"//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4))
+									"//*[contains(text(),'" + arg1 + "')]//preceding::span[1]", 4))
 							.click().build().perform();
 				}
 			} else if (arg2.equalsIgnoreCase("UnCheck")) {
@@ -5201,10 +5203,11 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@Then("^The Visual area should align to \"([^\"]*)\"$")
 	public void the_Visual_area_should_align_to(String arg1) throws Throwable {
+		CommonFunctionality.wait(2000);
 		if (arg1.equalsIgnoreCase("Left")) {
 			String left = login.driver
 					.findElement(
-							By.xpath("//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='preview-container--visual top_panel']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[0];
 			if (left.equals("width:80%") || left.equals("width: 80%")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -5215,7 +5218,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		if (arg1.equalsIgnoreCase("Center")) {
 			String center = login.driver
 					.findElement(
-							By.xpath("//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='preview-container--visual top_panel']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[1];
 			if (center.equals(" margin: 0px auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -5226,7 +5229,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		if (arg1.equalsIgnoreCase("Right")) {
 			String right = login.driver
 					.findElement(
-							By.xpath("//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='preview-container--visual top_panel']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[1];
 			if (right.equals(" margin-left: auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -6401,7 +6404,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		if (arg1.equalsIgnoreCase("Font style") && values_axis_checkboxes == true) {
 			cv.clicking_option("Save");
 			WebElement title = CommonFunctionality.getElementBycssSelector(login.driver,
-					"div.highcharts-legend-title > span", 4);
+					"g.highcharts-legend-title > text", 4);
 			String font_bold = title.getCssValue("font-weight");
 			String font_italic = title.getCssValue("font-style");
 			String font_underline = title.getCssValue("text-decoration");

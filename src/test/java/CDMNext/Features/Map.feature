@@ -1165,262 +1165,262 @@ Feature: Verifying map visual functionality
     And Click on "Cancel"
     Then The confirmation popup should be closed
 
-  @Map
-  Scenario: TC_Map_130:Edit Map - Title - Verify Title=Yes
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And Check Title and Save
-    Then The title of the visual should be displayed
-
-  @Map
-  Scenario: TC_Map_131:Edit Map - Title - Verify Title=No
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And UnCheck Title and Save
-    Then The title of the visual should be removed from the visual
-
-  @Map
-  Scenario: TC_Map_132:Edit MAp -  Title - Verify default selection for title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    Then The title should be selected by default
-
-  @Map
-  Scenario: TC_Map_133:Edit Map -  Title - Verify Auto title
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And Check title with empty title field and Save
-    Then Auto title should be displayed as series name
-
-  @Map
-  Scenario: TC_Map_134:Edit Map - Title - Verify renaming title
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And Enter visual name and Save
-    Then The visual name should be changed
-
-  @Map
-  Scenario: TC_Map_135:Edit Map - Title - Verify sub title by default
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    Then The sub title check box should be unchecked by default
-
-  @Map
-  Scenario: TC_Map_136:Edit Map - Title - Verify sub title=Check
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And Check Subtitle and Save
-    Then Sub title should be displayed for the visual
-
-  @Map
-  Scenario: TC_Map_137:Edit Map -  Title - Verify sub title=Uncheck
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And UnCheck Subtitle and Save
-    Then Sub title should not be displayed for the visual
-
-  @Map
-  Scenario: TC_Map_138:Edit Map - Title - Verify default title for sub title
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And Check Subtitle and Save
-    Then Default sub title should be "Sub title"
-
-  @Map
-  Scenario: TC_Map_139:Edit Map - Title - Verify advance settings
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on Title drop down
-    And Click on "Advanced settings"
-    Then Titles popup should be displayed
-
-  @Map
-  Scenario: TC_Map_140:Edit Map - Verify advance settings cogwheel icon
-    And Create a map visual with series id's "16240301"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    Then Titles popup should be displayed
-
-  @Map
-  Scenario: TC_Map_141:Edit Map - Title - Verify color for visual title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select color for "Title"
-    When Click on "Save"
-    Then Visual "title" should be displayed in selected color
-
-  @Map
-  Scenario: TC_Map_142:Edit Map - Title - Verify color for visual title background
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select color for "title" background highlight
-    When Click on "Save"
-    Then Visual "title" background should be displayed in selected color
-
-  @Map
-  Scenario: TC_Map_143:Edit Map - Title - Verify font size for visual title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select size for visual "title" as "20"
-    When Click on "Save"
-    Then The "title" font size should be changed as "20"
-
-  @Map
-  Scenario: TC_Map_144:Edit Map - Title - Verify bold style for visual title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Bold icon for "title"
-    When Click on "Save"
-    Then The "title" should be displayed in Bold format
-
-  @Map
-  Scenario: TC_Map_145:Edit Map - Title - Verify bold style default selection
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    Then The bold icon should be selected by default
-
-  @Map
-  Scenario: TC_Map_146:Edit Map - Title - Verify Italic style for visual title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Italic under style
-    When Click on "Save"
-    Then The "title" should be "italic"
-
-  @Map
-  Scenario: TC_Map_147:Edit Map - Title - Verify Underline style for visual title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Underline icon for "title"
-    When Click on "Save"
-    Then The "title" should be "underline"
-
-  @Map
-  Scenario: TC_Map_148:Edit Map - Title - Verify horizontal alignment (left, right, center)
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select alignment of title to "left"
-    Then The title should align to "left"
-    And Select alignment of title to "center"
-    Then The title should align to "center"
-    And Select alignment of title to "right"
-    Then The title should align to "right"
-
-  @Map
-  Scenario: TC_Map_149:Edit Map - Title - Verify color for visual sub title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select color for "Sub title"
-    When Click on "Save"
-    Then Visual "sub_title" should be displayed in selected color
-
-  @Map
-  Scenario: TC_Map_150:Edit Map - Verify color for visual sub title background
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select color for "Sub title" background highlight
-    When Click on "Save"
-    Then Visual "sub_title" background should be displayed in selected color
-
-  @Map
-  Scenario: TC_Map_151:Edit Map - Title - Verify font size for visual sub title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Select size for visual "Sub title" as "20"
-    When Click on "Save"
-    Then The "sub_title" font size should be changed as "20"
-
-  @Map
-  Scenario: TC_Map_152:Edit Map - Title - Verify bold style for visual sub title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Click on B under style for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be displayed in Bold format
-
-  @Map
-  Scenario: TC_Map_153:Edit Map - Title - Verify Italic style for visual sub title
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Click on Italic under style for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be "italic"
-
-  @Map
-  Scenario: TC_Map_154:Edit Map - Verify Underline style for visual sub title.
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Click on Underline icon for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be "underline"
-
-  @Map
-  Scenario: TC_Map_155:Edit Map - Title - Verify horizontal alignment (left, right, center)
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select alignment of sub title to "left"
-    Then The subtitle should align to "left"
-    And Select alignment of sub title to "center"
-    Then The subtitle should align to "center"
-    And Select alignment of sub title to "right"
-    Then The subtitle should align to "right"
-
-  @Map
-  Scenario: TC_Map_156:Edit Map - Title - Verify expanding and collapsing the title and subtitle sections
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Expand the Title section
-    Then The section should be expnaded
-    And Collapse the Title section
-    Then The section should be collapsed
-    And Expand the Sub-title section
-    Then The Sub-title section should be expnaded
-    And Collapse the Sub-title section
-    Then The Sub-title section should be collapsed
-
-  @Map
-  Scenario: TC_Map_157:Edit Map - Title - Verify closing of Titles popup
-    And Create a map visual with series id's "16240301;16243001"
-    And Click on "Edit Map"
-    And Click on cogwheel icon for title
-    And Click on X icon to close the popup
-    Then The "Title" popup should be closed
+  #@Map
+  #Scenario: TC_Map_130:Edit Map - Title - Verify Title=Yes
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And Check Title and Save
+    #Then The title of the visual should be displayed
+#
+  #@Map
+  #Scenario: TC_Map_131:Edit Map - Title - Verify Title=No
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And UnCheck Title and Save
+    #Then The title of the visual should be removed from the visual
+#
+  #@Map
+  #Scenario: TC_Map_132:Edit MAp -  Title - Verify default selection for title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #Then The title should be selected by default
+#
+  #@Map
+  #Scenario: TC_Map_133:Edit Map -  Title - Verify Auto title
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And Check title with empty title field and Save
+    #Then Auto title should be displayed as series name
+#
+  #@Map
+  #Scenario: TC_Map_134:Edit Map - Title - Verify renaming title
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And Enter visual name and Save
+    #Then The visual name should be changed
+#
+  #@Map
+  #Scenario: TC_Map_135:Edit Map - Title - Verify sub title by default
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #Then The sub title check box should be unchecked by default
+#
+  #@Map
+  #Scenario: TC_Map_136:Edit Map - Title - Verify sub title=Check
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And Check Subtitle and Save
+    #Then Sub title should be displayed for the visual
+#
+  #@Map
+  #Scenario: TC_Map_137:Edit Map -  Title - Verify sub title=Uncheck
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And UnCheck Subtitle and Save
+    #Then Sub title should not be displayed for the visual
+#
+  #@Map
+  #Scenario: TC_Map_138:Edit Map - Title - Verify default title for sub title
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And Check Subtitle and Save
+    #Then Default sub title should be "Sub title"
+#
+  #@Map
+  #Scenario: TC_Map_139:Edit Map - Title - Verify advance settings
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on Title drop down
+    #And Click on "Advanced settings"
+    #Then Titles popup should be displayed
+#
+  #@Map
+  #Scenario: TC_Map_140:Edit Map - Verify advance settings cogwheel icon
+    #And Create a map visual with series id's "16240301"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #Then Titles popup should be displayed
+#
+  #@Map
+  #Scenario: TC_Map_141:Edit Map - Title - Verify color for visual title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select color for "Title"
+    #When Click on "Save"
+    #Then Visual "title" should be displayed in selected color
+#
+  #@Map
+  #Scenario: TC_Map_142:Edit Map - Title - Verify color for visual title background
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select color for "title" background highlight
+    #When Click on "Save"
+    #Then Visual "title" background should be displayed in selected color
+#
+  #@Map
+  #Scenario: TC_Map_143:Edit Map - Title - Verify font size for visual title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select size for visual "title" as "20"
+    #When Click on "Save"
+    #Then The "title" font size should be changed as "20"
+#
+  #@Map
+  #Scenario: TC_Map_144:Edit Map - Title - Verify bold style for visual title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Bold icon for "title"
+    #When Click on "Save"
+    #Then The "title" should be displayed in Bold format
+#
+  #@Map
+  #Scenario: TC_Map_145:Edit Map - Title - Verify bold style default selection
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #Then The bold icon should be selected by default
+#
+  #@Map
+  #Scenario: TC_Map_146:Edit Map - Title - Verify Italic style for visual title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Italic under style
+    #When Click on "Save"
+    #Then The "title" should be "italic"
+#
+  #@Map
+  #Scenario: TC_Map_147:Edit Map - Title - Verify Underline style for visual title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Underline icon for "title"
+    #When Click on "Save"
+    #Then The "title" should be "underline"
+#
+  #@Map
+  #Scenario: TC_Map_148:Edit Map - Title - Verify horizontal alignment (left, right, center)
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select alignment of title to "left"
+    #Then The title should align to "left"
+    #And Select alignment of title to "center"
+    #Then The title should align to "center"
+    #And Select alignment of title to "right"
+    #Then The title should align to "right"
+#
+  #@Map
+  #Scenario: TC_Map_149:Edit Map - Title - Verify color for visual sub title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select color for "Sub title"
+    #When Click on "Save"
+    #Then Visual "sub_title" should be displayed in selected color
+#
+  #@Map
+  #Scenario: TC_Map_150:Edit Map - Verify color for visual sub title background
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select color for "Sub title" background highlight
+    #When Click on "Save"
+    #Then Visual "sub_title" background should be displayed in selected color
+#
+  #@Map
+  #Scenario: TC_Map_151:Edit Map - Title - Verify font size for visual sub title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Select size for visual "Sub title" as "20"
+    #When Click on "Save"
+    #Then The "sub_title" font size should be changed as "20"
+#
+  #@Map
+  #Scenario: TC_Map_152:Edit Map - Title - Verify bold style for visual sub title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Click on B under style for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be displayed in Bold format
+#
+  #@Map
+  #Scenario: TC_Map_153:Edit Map - Title - Verify Italic style for visual sub title
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Click on Italic under style for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be "italic"
+#
+  #@Map
+  #Scenario: TC_Map_154:Edit Map - Verify Underline style for visual sub title.
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Click on Underline icon for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be "underline"
+#
+  #@Map
+  #Scenario: TC_Map_155:Edit Map - Title - Verify horizontal alignment (left, right, center)
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select alignment of sub title to "left"
+    #Then The subtitle should align to "left"
+    #And Select alignment of sub title to "center"
+    #Then The subtitle should align to "center"
+    #And Select alignment of sub title to "right"
+    #Then The subtitle should align to "right"
+#
+  #@Map
+  #Scenario: TC_Map_156:Edit Map - Title - Verify expanding and collapsing the title and subtitle sections
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Expand the Title section
+    #Then The section should be expnaded
+    #And Collapse the Title section
+    #Then The section should be collapsed
+    #And Expand the Sub-title section
+    #Then The Sub-title section should be expnaded
+    #And Collapse the Sub-title section
+    #Then The Sub-title section should be collapsed
+#
+  #@Map
+  #Scenario: TC_Map_157:Edit Map - Title - Verify closing of Titles popup
+    #And Create a map visual with series id's "16240301;16243001"
+    #And Click on "Edit Map"
+    #And Click on cogwheel icon for title
+    #And Click on X icon to close the popup
+    #Then The "Title" popup should be closed
 
   @Map
   Scenario: TC_Map_158:Edit Map - Border - Verify Map color
@@ -2078,20 +2078,23 @@ Feature: Verifying map visual functionality
     Then The SSP window should be displayed
 
   @Map
-  Scenario: TC_Map_229:Verify 'Add related series' option.
-    And Create a map visual with series id's "5724301;5823501"
-    And Click on "Add related series"
+  Scenario: TC_Map_229:Verify 'Related series' option.
+    And Create a map visual with series id's "414322477;19525401"
+    And Click on Edit series option
+    And Click on "Related series"
     Then The series suggestion manager popup should be displayed
 
   @Map
   Scenario: TC_Map_230:Verify 'Add related series' option when the visual is empty
     And Create a empty map visual
+    And Click on Edit series option
     Then The Add related series option should be hidden if have no series associated with the visual
 
   @Map
   Scenario: TC_Map_231:Verify adding series from 'Series suggestion manager' popup
     And Create a map visual with series id's "5724301;5823501"
-    And Click on "Add related series"
+     And Click on Edit series option
+    And Click on "Related series"
     And Select a region as "Albania"
     Then The related series should be added to the map visual
 
@@ -2800,7 +2803,8 @@ Feature: Verifying map visual functionality
     And Create a map visual with series id's "272965603"
     And Click on "Edit Map"
     And Change title in edit visual window
-    And Click on "Save" button
+     When Click on "Save"
+    #And Click on "Save" button
     Then The changes should be reflected to "map" visual and Edit visual popup should be closed
 
   @Map

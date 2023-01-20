@@ -373,7 +373,7 @@ public class ForecastSeries {
 	@And("^Chart should be displayed for suggestion series by default$")
 	public void chart_should_be_displayed_for_suggestion_series_by_default() throws Throwable {
 		boolean chart = login.driver.findElement(By.xpath(
-				"//*[@class='compare-suggestions-visual compare-suggestions-visual__open-compare-visual']"))
+				"//*[contains(@class,'compare-suggestions-visual__open-compare-visual')]"))
 				.isDisplayed();
 		if (chart == true) {
 			login.Log4j.info("Chart is displayed");
@@ -392,8 +392,8 @@ public class ForecastSeries {
 	@Then("^Chart displayed should be hidden$")
 	public void chart_displayed_should_be_hidden() throws Throwable {
 		if (login.driver
-				.findElements(By.xpath("//*[@class='compare-suggestions-visual']"))
-				.size() == 1) {
+				.findElements(By.xpath("//*[contains(@class,'compare-suggestions-visual__open-compare-visual')]"))
+				.size() == 0) {
 			login.Log4j.info("Chart doesn't displayed by selecting chart icon");
 		} else {
 			Assert.fail("FAIL");
@@ -976,10 +976,10 @@ public class ForecastSeries {
 		CommonFunctionality.wait(1000);
 		// mouse hover on legend marker
 		WebElement legend_item1 = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='legend-item']/*[1])[1]", 4);
+				"(//*[@class='legend-item--marker'])[1]", 4);
 		new Actions(login.driver).pause(200).moveToElement(legend_item1).build().perform();
 		if (login.driver.findElements(By.xpath(
-				"//*[@class='highcharts-series highcharts-series-1 highcharts-line-series highcharts-series-inactive']"))
+				"//*[@class='highcharts-markers highcharts-series-1 highcharts-line-series highcharts-tracker highcharts-series-inactive']"))
 				.size() == 1) {
 			
 				login.Log4j.info("Corresponding series is enabled and other series is disabled on the chart");
@@ -987,8 +987,10 @@ public class ForecastSeries {
 		} else {
 			fail("Verification failed");
 		}
-		// clicking on cross icon of legend marker
-		legend_item1.click();
+		// clicking on eye icon of legend marker
+		new Actions(login.driver).pause(200).moveToElement(legend_item1).build().perform();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[@class='legend-item--hiding-series__show'])[1]", 4).click();
 //		WebElement Visual_info = CommonFunctionality.getElementByXpath(login.driver,
 //				"//*[@class='compare-suggestions-visual--info']", 5);
 //		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();

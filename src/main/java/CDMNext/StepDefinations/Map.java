@@ -1042,13 +1042,14 @@ public void create_a_empty_map_visual() throws Throwable {
 
 @Then("^The Add related series option should be hidden if have no series associated with the visual$")
 public void the_Add_related_series_option_should_be_hidden_if_have_no_series_associated_with_the_visual() throws Throwable {
-	CommonFunctionality.wait(500);
-	WebElement add_related_series_button = login.driver.findElement(By.xpath("//*[@class='visual-top-panel--left-controls']/*[3]"));
-	   if(!add_related_series_button.isEnabled()) {
+	CommonFunctionality.wait(1000);
+	WebElement add_related_series_button = login.driver.findElement(By.xpath("//*[@data-action='suggestions']/ancestor::*//*[contains(@class,'insight-data insight-data')]/*[1]"));
+//	   if(!add_related_series_button.isEnabled()) {
+	if(add_related_series_button.getAttribute("class").contains("disabled")) {
 		   login.Log4j.info("PASS");
-	   } else {
+	 } else {
 		   Assert.fail("Verification failed");
-	   }
+	 }
 }
 @Then("^The related series should be added to the map visual$")
 public void the_related_series_should_be_added_to_the_map_visual() throws Throwable {
@@ -1254,21 +1255,40 @@ public void selected_color_steps_will_be_created_as_per_the_selection() throws T
 }
 @Then("^Selected steps will be created as per the selection$")
 public void selected_steps_will_be_created_as_per_the_selection() throws Throwable {
-	 Select select = new Select(Dropdown_ele);
+	/* Select select = new Select(Dropdown_ele);
 	 List<WebElement> dropdown_list = select.getOptions();
 	
 	 for(WebElement ele: dropdown_list) {
 		 ele.click();
-		 login.Log4j.info("options: " + ele.getText());
+		 CommonFunctionality.wait(500);
+		 WebElement selectedValue = login.driver.findElement(By.xpath("//*[@class='gradient-axis--steps-select']"));
+		 login.Log4j.info("options: " + selectedValue.getText());
 		 CommonFunctionality.wait(500);
 		 List<WebElement> steps = login.driver.findElements(By.xpath("//*[@class='gradient-line']"));
-		 if(Integer.parseInt(ele.getText()) < steps.size()) {
+		 if(Integer.parseInt(selectedValue.getText()) < steps.size()) {
 			 login.Log4j.info("Selected steps: "+ Integer.parseInt(ele.getText()) + " is displayed");
 		 } else {
 			 Assert.fail("Selected steps not displayed");
 		 }
 		
+	 }*/
+	 
+	 List<WebElement> list_of_steps = login.driver.findElements(By.xpath("//*[@class='gradient-axis--steps-select']//*"));
+	 for(int i = 0; i <= list_of_steps.size(); i++) {
+		 list_of_steps.get(i).click();
+		 CommonFunctionality.wait(500);
+		 String selectedValue = list_of_steps.get(i).getAttribute("value");
+		 login.Log4j.info(selectedValue);
+		 CommonFunctionality.wait(500);
+		 List<WebElement> steps = login.driver.findElements(By.xpath("//*[@class='gradient-line']"));
+		 if(Integer.parseInt(selectedValue) < steps.size()) {
+			 login.Log4j.info("Selected steps: "+ Integer.parseInt(selectedValue) + " is displayed");
+		 } else {
+			 Assert.fail("Selected steps not displayed");
+		 }
+		 
 	 }
+	 
 }
 	@Then("^Smallest value for Map will be displayed in decimal points with respective color$")
 	public void smallest_value_for_Map_will_be_displayed_in_decimal_points_with_respective_color() throws Throwable {

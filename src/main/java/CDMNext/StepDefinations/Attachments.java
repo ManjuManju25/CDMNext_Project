@@ -59,6 +59,7 @@ public class Attachments {
 
 	@And("^Create a Attachments visual$")
 	public void create_a_Attachments_visual() throws Throwable {
+		CommonFunctionality.wait(1500);
 		commentary.CreateViewTab();
 		click_on_Insert_Attachments();
 	}

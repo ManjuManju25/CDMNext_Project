@@ -234,7 +234,15 @@ public void enter_Any_of_these_series_IDs_as(String arg1) throws Throwable {
 	}
 
 	void method_commonSteps() throws InterruptedException {
-			
+		//verify show results without pagination check box
+		wait(2000);
+		getElementByXpath(login.driver, "//*[@title='View and edit profile information']", 10).click();
+		boolean search_results_checkbox = login.driver.findElement(By.xpath("//*[contains(text(),'Show search results without pagination')]/parent::*//input[@type = 'checkbox']")).isSelected();
+		 //if check box is selected then unselect
+		if(search_results_checkbox == true) {
+			login.driver.findElement(By.xpath("//*[contains(text(),'Show search results without pagination')]")).click();
+		}
+		
 		login.Log4j.info("Clicking on Series tab ");
 		wait(5000);
 		WebElement seriesTab = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));

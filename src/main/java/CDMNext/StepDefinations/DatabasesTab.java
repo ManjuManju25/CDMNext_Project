@@ -599,6 +599,7 @@ public class DatabasesTab {
 		CommonFunctionality
 				.getElementByProperty(login.driver, "Expand_JapanNationalAccounts", 10)
 				.click();
+		CommonFunctionality.wait(200);
 		CommonFunctionality.getElementByProperty(login.driver,
 				"Expand_firstTable", 10).click();
 		CommonFunctionality.wait(1500);
@@ -3346,6 +3347,7 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver,
 				"Expand_AllRegion", 4)
 				.click();
+		CommonFunctionality.wait(200);
 		CommonFunctionality.getElementByProperty(login.driver,
 				"ExpandAfganistan_GlobalDB",
 				4).click();

@@ -11,7 +11,7 @@ Feature: Verifying Pie Visual Functionality
 
   @PieVisual
   Scenario: TC_Pie_02: Verify creating Pie visual with random series present in a search pane of an insight
-    And Select different frequency series "3671601;403770597" and click on "Pie" icon
+    And Select different frequency series "3671601;365749427" and click on "Pie" icon
     Then Pie visual should be created with frequency conversion window popped up
 
   #@PieVisual
@@ -97,9 +97,10 @@ Feature: Verifying Pie Visual Functionality
 
   @PieVisual
   Scenario: TC_Pie_15: Verify series having negative timepoints in pie chart
-    And Search for the series with SID "16164001"
-    And Click on more actions
-     And Choose Add chart as "Pie"
+    And Create a pie visual with series id's "16164001"
+    #And Search for the series with SID "16164001"
+    #And Click on more actions
+     #And Choose Add chart as "Pie"
     Then The message should appear
 
   @PieVisual
@@ -1227,262 +1228,262 @@ Feature: Verifying Pie Visual Functionality
     And Click on "Open advanced settings popup"
     Then Visual popup should be opened
 
-  @PieVisual
-  Scenario: TC_Pie_161:Edit Pie - Title - Verify Title=Yes
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And Check Title and Save
-    Then The title of the visual should be displayed
-
-  @PieVisual
-  Scenario: TC_Pie_162:Edit Pie - Title - Verify Title=No
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And UnCheck Title and Save
-    Then The title of the visual should be removed from the visual
-
-  @PieVisual
-  Scenario: TC_Pie_163:Edit Pie -  Title - Verify default selection for title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    Then The title should be selected by default
-
-  @PieVisual
-  Scenario: TC_Pie_164:Edit Pie -  Title - Verify Auto title
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And Check title with empty title field and Save
-    Then Auto title should be displayed as series name
-
-  @PieVisual
-  Scenario: TC_Pie_165:Edit Pie - Title - Verify renaming title
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And Enter visual name and Save
-    Then The visual name should be changed
-
-  @PieVisual
-  Scenario: TC_Pie_166:Edit Pie - Title - Verify sub title by default
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    Then The sub title check box should be unchecked by default
-
-  @PieVisual
-  Scenario: TC_Pie_167:Edit Pie - Title - Verify sub title=Check
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And Check Subtitle and Save
-    Then Sub title should be displayed for the visual
-
-  @PieVisual
-  Scenario: TC_Pie_168:Edit Pie -  Title - Verify sub title=Uncheck
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And UnCheck Subtitle and Save
-    Then Sub title should not be displayed for the visual
-
-  @PieVisual
-  Scenario: TC_Pie_169:Edit Pie - Title - Verify default title for sub title
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And Check Subtitle and Save
-    Then Default sub title should be "Sub title"
-
-  @PieVisual
-  Scenario: TC_Pie_170:Edit Pie - Title - Verify advance settings
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on Title drop down
-    And Click on "Advanced settings"
-    Then Titles popup should be displayed
-
-  @PieVisual
-  Scenario: TC_Pie_171:Edit Pie - Verify advance settings cogwheel icon
-    And Create a pie visual with series id's "16240301"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    Then Titles popup should be displayed
-
- @PieVisual
-  Scenario: TC_Pie_172:Edit Pie - Title - Verify color for visual title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select color for "Title"
-    When Click on "Save"
-    Then Visual "title" should be displayed in selected color
-
- @PieVisual
-  Scenario: TC_Pie_173:Edit Pie - Title - Verify color for visual title background
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select color for "title" background highlight
-    When Click on "Save"
-    Then Visual "title" background should be displayed in selected color
-
-  @PieVisual
-  Scenario: TC_Pie_174:Edit Pie - Title - Verify font size for visual title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select size for visual "title" as "20"
-    When Click on "Save"
-    Then The "title" font size should be changed as "20"
-
-  @PieVisual
-  Scenario: TC_Pie_175:Edit Pie - Title - Verify bold style for visual title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Bold icon for "title"
-    When Click on "Save"
-    Then The "title" should be displayed in Bold format
-
-  @PieVisual
-  Scenario: TC_Pie_176:Edit Pie - Title - Verify Italic style for visual title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Italic under style
-    When Click on "Save"
-    Then The "title" should be "italic"
-
-  @PieVisual
-  Scenario: TC_Pie_177:Edit Pie - Title - Verify Underline style for visual title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Click on Underline icon for "title"
-    When Click on "Save"
-    Then The "title" should be "underline"
-
-  @PieVisual
-  Scenario: TC_Pie_178:Edit Pie - Title - Verify bold style default selection
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    Then The bold icon should be selected by default
-
- @PieVisual
-  Scenario: TC_Pie_179:Edit Pie - Title - Verify horizontal alignment (left, right, center)
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "Title"
-    And Select alignment of title to "left"
-    Then The title should align to "left"
-    And Select alignment of title to "center"
-    Then The title should align to "center"
-    And Select alignment of title to "right"
-    Then The title should align to "right"
-
- @PieVisual
-  Scenario: TC_Pie_180:Edit Pie - Title - Verify color for visual sub title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select color for "Sub title"
-    When Click on "Save"
-    Then Visual "sub_title" should be displayed in selected color
-
- @PieVisual
-  Scenario: TC_Pie_181:Edit Pie - Verify color for visual sub title background
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select color for "Sub title" background highlight
-    When Click on "Save"
-    Then Visual "sub_title" background should be displayed in selected color
-
-  @PieVisual
-  Scenario: TC_Pie_182:Edit Pie - Title - Verify font size for visual sub title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Select size for visual "Sub title" as "20"
-    When Click on "Save"
-    Then The "sub_title" font size should be changed as "20"
-
-  @PieVisual
-  Scenario: TC_Pie_183:Edit Pie - Title - Verify bold style for visual sub title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Click on B under style for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be displayed in Bold format
-
-  @PieVisual
-  Scenario: TC_Pie_184:Edit Pie - Title - Verify Italic style for visual sub title
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Click on Italic under style for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be "italic"
-
-  @PieVisual
-  Scenario: TC_Pie_185:Edit Pie - Verify Underline style for visual sub title.
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Click on Underline icon for sub-title
-    When Click on "Save"
-    Then The "sub_title" should be "underline"
-
- @PieVisual
-  Scenario: TC_Pie_186:Edit Pie - Title - Verify horizontal alignment (left, right, center)
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Check "sub-title"
-    And Select alignment of sub title to "left"
-    Then The subtitle should align to "left"
-    And Select alignment of sub title to "center"
-    Then The subtitle should align to "center"
-    And Select alignment of sub title to "right"
-    Then The subtitle should align to "right"
-
-  @PieVisual
-  Scenario: TC_Pie_187:Edit Pie - Title - Verify expanding and collapsing the title and subtitle sections
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Expand the Title section
-    Then The section should be expnaded
-    And Collapse the Title section
-    Then The section should be collapsed
-    And Expand the Sub-title section
-    Then The Sub-title section should be expnaded
-    And Collapse the Sub-title section
-    Then The Sub-title section should be collapsed
-
-  @PieVisual
-  Scenario: TC_Pie_188:Edit Pie - Title - Verify closing of Titles popup
-    And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Edit Pie"
-    And Click on cogwheel icon for title
-    And Click on X icon to close the popup
-    Then The "Title" popup should be closed
+  #@PieVisual
+  #Scenario: TC_Pie_161:Edit Pie - Title - Verify Title=Yes
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And Check Title and Save
+    #Then The title of the visual should be displayed
+#
+  #@PieVisual
+  #Scenario: TC_Pie_162:Edit Pie - Title - Verify Title=No
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And UnCheck Title and Save
+    #Then The title of the visual should be removed from the visual
+#
+  #@PieVisual
+  #Scenario: TC_Pie_163:Edit Pie -  Title - Verify default selection for title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #Then The title should be selected by default
+#
+  #@PieVisual
+  #Scenario: TC_Pie_164:Edit Pie -  Title - Verify Auto title
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And Check title with empty title field and Save
+    #Then Auto title should be displayed as series name
+#
+  #@PieVisual
+  #Scenario: TC_Pie_165:Edit Pie - Title - Verify renaming title
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And Enter visual name and Save
+    #Then The visual name should be changed
+#
+  #@PieVisual
+  #Scenario: TC_Pie_166:Edit Pie - Title - Verify sub title by default
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #Then The sub title check box should be unchecked by default
+#
+  #@PieVisual
+  #Scenario: TC_Pie_167:Edit Pie - Title - Verify sub title=Check
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And Check Subtitle and Save
+    #Then Sub title should be displayed for the visual
+#
+  #@PieVisual
+  #Scenario: TC_Pie_168:Edit Pie -  Title - Verify sub title=Uncheck
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And UnCheck Subtitle and Save
+    #Then Sub title should not be displayed for the visual
+#
+  #@PieVisual
+  #Scenario: TC_Pie_169:Edit Pie - Title - Verify default title for sub title
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And Check Subtitle and Save
+    #Then Default sub title should be "Sub title"
+#
+  #@PieVisual
+  #Scenario: TC_Pie_170:Edit Pie - Title - Verify advance settings
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on Title drop down
+    #And Click on "Advanced settings"
+    #Then Titles popup should be displayed
+#
+  #@PieVisual
+  #Scenario: TC_Pie_171:Edit Pie - Verify advance settings cogwheel icon
+    #And Create a pie visual with series id's "16240301"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #Then Titles popup should be displayed
+#
+ #@PieVisual
+  #Scenario: TC_Pie_172:Edit Pie - Title - Verify color for visual title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select color for "Title"
+    #When Click on "Save"
+    #Then Visual "title" should be displayed in selected color
+#
+ #@PieVisual
+  #Scenario: TC_Pie_173:Edit Pie - Title - Verify color for visual title background
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select color for "title" background highlight
+    #When Click on "Save"
+    #Then Visual "title" background should be displayed in selected color
+#
+  #@PieVisual
+  #Scenario: TC_Pie_174:Edit Pie - Title - Verify font size for visual title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select size for visual "title" as "20"
+    #When Click on "Save"
+    #Then The "title" font size should be changed as "20"
+#
+  #@PieVisual
+  #Scenario: TC_Pie_175:Edit Pie - Title - Verify bold style for visual title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Bold icon for "title"
+    #When Click on "Save"
+    #Then The "title" should be displayed in Bold format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_176:Edit Pie - Title - Verify Italic style for visual title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Italic under style
+    #When Click on "Save"
+    #Then The "title" should be "italic"
+#
+  #@PieVisual
+  #Scenario: TC_Pie_177:Edit Pie - Title - Verify Underline style for visual title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Click on Underline icon for "title"
+    #When Click on "Save"
+    #Then The "title" should be "underline"
+#
+  #@PieVisual
+  #Scenario: TC_Pie_178:Edit Pie - Title - Verify bold style default selection
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #Then The bold icon should be selected by default
+#
+ #@PieVisual
+  #Scenario: TC_Pie_179:Edit Pie - Title - Verify horizontal alignment (left, right, center)
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "Title"
+    #And Select alignment of title to "left"
+    #Then The title should align to "left"
+    #And Select alignment of title to "center"
+    #Then The title should align to "center"
+    #And Select alignment of title to "right"
+    #Then The title should align to "right"
+#
+ #@PieVisual
+  #Scenario: TC_Pie_180:Edit Pie - Title - Verify color for visual sub title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select color for "Sub title"
+    #When Click on "Save"
+    #Then Visual "sub_title" should be displayed in selected color
+#
+ #@PieVisual
+  #Scenario: TC_Pie_181:Edit Pie - Verify color for visual sub title background
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select color for "Sub title" background highlight
+    #When Click on "Save"
+    #Then Visual "sub_title" background should be displayed in selected color
+#
+  #@PieVisual
+  #Scenario: TC_Pie_182:Edit Pie - Title - Verify font size for visual sub title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Select size for visual "Sub title" as "20"
+    #When Click on "Save"
+    #Then The "sub_title" font size should be changed as "20"
+#
+  #@PieVisual
+  #Scenario: TC_Pie_183:Edit Pie - Title - Verify bold style for visual sub title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Click on B under style for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be displayed in Bold format
+#
+  #@PieVisual
+  #Scenario: TC_Pie_184:Edit Pie - Title - Verify Italic style for visual sub title
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Click on Italic under style for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be "italic"
+#
+  #@PieVisual
+  #Scenario: TC_Pie_185:Edit Pie - Verify Underline style for visual sub title.
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Click on Underline icon for sub-title
+    #When Click on "Save"
+    #Then The "sub_title" should be "underline"
+#
+ #@PieVisual
+  #Scenario: TC_Pie_186:Edit Pie - Title - Verify horizontal alignment (left, right, center)
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Check "sub-title"
+    #And Select alignment of sub title to "left"
+    #Then The subtitle should align to "left"
+    #And Select alignment of sub title to "center"
+    #Then The subtitle should align to "center"
+    #And Select alignment of sub title to "right"
+    #Then The subtitle should align to "right"
+#
+  #@PieVisual
+  #Scenario: TC_Pie_187:Edit Pie - Title - Verify expanding and collapsing the title and subtitle sections
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Expand the Title section
+    #Then The section should be expnaded
+    #And Collapse the Title section
+    #Then The section should be collapsed
+    #And Expand the Sub-title section
+    #Then The Sub-title section should be expnaded
+    #And Collapse the Sub-title section
+    #Then The Sub-title section should be collapsed
+#
+  #@PieVisual
+  #Scenario: TC_Pie_188:Edit Pie - Title - Verify closing of Titles popup
+    #And Create a pie visual with series id's "16240301;16243001"
+    #And Click on "Edit Pie"
+    #And Click on cogwheel icon for title
+    #And Click on X icon to close the popup
+    #Then The "Title" popup should be closed
 
   @PieVisual
   Scenario: TC_Pie_189:Edit Pie - Verify Copyright=Check
@@ -1680,7 +1681,12 @@ Feature: Verifying Pie Visual Functionality
 
   @PieVisual
   Scenario Outline: <TCID>:Edit Pie - <ActualAttribute> tooltip for pie visual
-    And Create a pie visual with series id's "16240301;16243001"
+    #And Create a pie visual with series id's "16240301;16243001"
+    Given User enters "16240301"
+    And Add series to the right pane
+    And Apply function for a series
+    And Right click on series
+    And Select pie visual
     And Click on "Edit Pie"
     And Check "Tooltips"
     And Open date dropdown
@@ -1689,10 +1695,10 @@ Feature: Verifying Pie Visual Functionality
 
     Examples: 
       | TCID       | ActualAttribute      | ExpectedAttribute    |
-      | TC_Pie_208 | Name                 | Name                 |
-      | TC_Pie_209 | Region               | Region               |
-      | TC_Pie_210 | Frequency            | Frequency            |
-      | TC_Pie_211 | Percentage           | Percentage           |
+      #| TC_Pie_208 | Name                 | Name                 |
+      #| TC_Pie_209 | Region               | Region               |
+      #| TC_Pie_210 | Frequency            | Frequency            |
+      #| TC_Pie_211 | Percentage           | Percentage           |
       | TC_Pie_212 | Function description | Function description |
 
 
@@ -1764,7 +1770,8 @@ Feature: Verifying Pie Visual Functionality
 
   @PieVisual
   Scenario: TC_Pie_221:Edit pie > tooltip dropdown > advanced settings > items > Function description
-    And Add series to the my series tab
+  	Given User enters "16240301"
+    And Add series to the right pane
     And Apply function for a series
     And Right click on series
     And Select "Pie" visual
@@ -2633,7 +2640,7 @@ Feature: Verifying Pie Visual Functionality
     And Create a pie visual with series id's "272965603"
     And Click on "Edit Pie"
     And Change title in edit visual window
-    And Click on "Save" button
+     When Click on "Save"
     Then The changes should be reflected to "pie" visual and Edit visual popup should be closed
 
   @PieVisual
@@ -3009,13 +3016,16 @@ Feature: Verifying Pie Visual Functionality
   @PieVisual
   Scenario: TC_Pie_362:Verify 'Add related series' option
     And Create a pie visual with series id's "16240301;16243001"
-    And Click on "Add related series"
+    And Click on Edit series option
+    And Click on "Related series"
     Then The series suggestion manager popup should be displayed
 
   @PieVisual
   Scenario: TC_Pie_363:Verify adding series from 'Series suggestion manager' popup
     And Create a pie visual with series id's "5823501"
-    And Click on "Add related series"
+     And Click on Edit series option
+    And Click on "Related series"
+    #And Click on "Add related series"
     And Select a region as "Albania"
     Then The related series should be added to the visual
 

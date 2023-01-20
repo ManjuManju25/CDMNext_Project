@@ -583,8 +583,8 @@ public class EmptyView {
 
 	@And("^Create below visuals using keyboard shortcuts$")
 	public void create_below_visuals_using_keyboard_shortcuts(List<String> list) throws Throwable {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_tab"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
 		CommonFunctionality.wait(2000);
 		WebElement checkBox = login.driver
 				.findElement(By.xpath("//div[@class='series-representation--list']//div[@class='series-list-item--checkbox-wrapper']/*"));

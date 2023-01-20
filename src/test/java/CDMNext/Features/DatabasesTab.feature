@@ -985,11 +985,11 @@ Feature: Verifying Databases tab functionality
     And Click on Back button
     Then Should redirect to database tab
 
-  @DB
-  Scenario: TC_DB_135:Verify adding separators with series
-    And Select series with separators
-    And Add to my series
-    Then Selected series and separators should be added to my series
+  #@DB1.....checkbox is removed for sepator CVISION-16811
+  #Scenario: TC_DB_135:Verify adding separators with series
+    #And Select series with separators
+    #And Add to my series
+    #Then Selected series and separators should be added to my series
 
   @DB
   Scenario: TC_DB_136:Verify series order when table data added

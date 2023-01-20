@@ -1006,7 +1006,7 @@ public class SSPWindow {
 		}
 		CommonFunctionality.wait(3000);*/
 		//code removed
-		login.driver.findElement(By.xpath("//span[text()='"+ arg1 +"']")).click();
+		login.driver.findElement(By.xpath("//*[text()='"+ arg1 +"'] | //*[@data-tab='" + arg1 + "']")).click();
 		
 		
 	}

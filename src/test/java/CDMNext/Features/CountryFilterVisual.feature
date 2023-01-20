@@ -12,7 +12,6 @@ Feature: Verifying Country Filter functionality
   @FilterVisual
   Scenario: Tc_FilterVisual_2:Verify content present in the filter visual
     Then Below optins should be displayed
-      | Title              |
       | Visual             |
       | Download. Type `d` |
       | Open               |
@@ -44,106 +43,138 @@ Feature: Verifying Country Filter functionality
     And Check "sub-title"
     Then Sub title should be displayed for the visual
 
-  @FilterVisual
-  Scenario: Tc_FilterVisual_7:Verify click on title dropdown and able to edit the title
-    And Click on title dropdown of the filter visual
-    Then The title popup should be appeared
-    And Edit the name of the title
-    And The changes should be reflected to filter visual
+  #@FilterVisual1...title dropdown is removed
+  #Scenario: Tc_FilterVisual_7:Verify click on title dropdown and able to edit the title
+    #And Click on title dropdown of the filter visual
+    #Then The title popup should be appeared
+    #And Edit the name of the title
+    #And The changes should be reflected to filter visual
 
   @FilterVisual
-  Scenario: Tc_FilterVisual_8:Verify click on title dropdown and able to edit the subtitle
-    And Click on title dropdown of the filter visual
+  Scenario: Tc_FilterVisual_8:Verify changing subtitle of the filter
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Check the box and enter the sub-title name as "New subtitle"
     Then The filter visual should update the "sub_title" name to "New subtitle"
 
   @FilterVisual
   Scenario: Tc_FilterVisual_9:Verify title text color
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Choose text color is blue
     Then The filter visual should update the "title" text color as blue
 
   @FilterVisual
   Scenario: Tc_FilterVisual_10:Verify highlight color
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Choose highlight color is Orange
     Then The filter visual should update the "title" highlight color as Orange
 
   @FilterVisual
   Scenario: Tc_FilterVisual_11:Verify 'font size'
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Choose "20" from the drop-down for the font size
     Then The filter visual should update the "title" font as "20"
 
   @FilterVisual
   Scenario: Tc_FilterVisual_12:Verify title in bold style
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on Bold icon for "title"
     Then The visual "title" should be in bold style
 
   @FilterVisual
   Scenario: Tc_FilterVisual_13:Verify title in Italic style
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on Italic under style
     Then The visual "title" should be "italic"
 
   @FilterVisual
   Scenario: Tc_FilterVisual_14:Verify title as underlined
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on Underline icon for "title"
     Then The visual "title" should be "underline"
 
   @FilterVisual
   Scenario: Tc_FilterVisual_15:Verify horizontal alignment (left, right, center)
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on left,center and right alignment for title
     Then The title should align to "left" , "center" and "right" as user set
 
   @FilterVisual
   Scenario: Tc_FilterVisual_16:Verify Sub-title text color
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Choose text color is blue for subtitle
     Then The filter visual should update the "sub_title" text color as blue
 
   @FilterVisual
   Scenario: Tc_FilterVisual_17:Subtitle > Verify highlight color
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Choose highlight color is Orange for subtitle
     Then The filter visual should update the "sub_title" highlight color as Orange
 
   @FilterVisual
   Scenario: Tc_FilterVisual_18:Subtitle > Verify 'font size'
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Choose "10" from the drop-down for the font size of subtitle
     Then The filter visual should update the "sub_title" font as "10"
 
   @FilterVisual
   Scenario: Tc_FilterVisual_19:Verify Subtitle in bold style
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on B under style for sub-title
     Then The visual "sub_title" should be in bold style
 
   @FilterVisual
   Scenario: Tc_FilterVisual_20:Verify Subtitle in Italic style
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on Italic under style for sub-title
     Then The visual "sub_title" should be "italic"
 
   @FilterVisual
   Scenario: Tc_FilterVisual_21:Verify Subtitle as underlined
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on Underline icon for sub-title
     Then The visual "sub_title" should be "underline"
 
   @FilterVisual
   Scenario: Tc_FilterVisual_22:Verify horizontal alignment (left, right, center) of sub_title
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on left,center and right alignment for sub_title
     Then The sub_title should align to "left" , "center" and "right" as user set
 
   @FilterVisual
   Scenario: Tc_FilterVisual_23:Verify crossmark when title window opened
-    And Click on title dropdown of the filter visual
+    #And Click on title dropdown of the filter visual
+    And Mouse hover on visual title
+    And Click on edit icon
     And Click on X icon to close the popup
     Then The "Title" popup should be closed
 
@@ -204,7 +235,7 @@ Feature: Verifying Country Filter functionality
     And Choose "Delete filter"
     Then Filter visual should be deleted
 
-  #@FilterVisual
+  #@FilterVisual..... insert visual is removed
   #Scenario: Tc_FilterVisual_32:Verify insert visual for filter visual
     #And Right click on visual header
     #And Choose "Insert visual"
