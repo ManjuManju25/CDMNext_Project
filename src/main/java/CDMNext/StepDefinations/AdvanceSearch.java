@@ -35,7 +35,8 @@ public class AdvanceSearch extends CommonFunctionality{
 		method_commonSteps();
 		String[] keywords = AllWords.split(";");
 		wait(5000);
-		List<WebElement> country_list = login.driver
+		
+	/*	List<WebElement> country_list = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("ListOfCounties")));
 		for (int i = 0; i < country_list.size(); i++) {
 			if (country_list.get(i).getText().contains(keywords[0])
@@ -46,7 +47,51 @@ public class AdvanceSearch extends CommonFunctionality{
 			} else {
 				fail(country_list.get(i).getText() + " keyword not displayed");
 			}
+		}*/
+		List<WebElement> sName = login.driver
+				.findElements(By.xpath(login.LOCATORS.getProperty("Series_item_name")));
+		for (int i = 0; i < sName.size(); i++) {
+			login.Log4j.info(i);
+			login.Log4j.info(sName.size());
+			wait(600);
+			action.moveToElement(sName.get(i)).build().perform();
+			wait(800);
+			WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
+			String TooltipInfo = tooltip.getText();
+
+			boolean KeywordMatch = false;
+			if (TooltipInfo.contains(keywords[0]) || TooltipInfo.contains(keywords[1]) || TooltipInfo.contains(keywords[2]) || TooltipInfo.contains(keywords[3])) {
+				login.Log4j.info(keywords[0] + " OR " + keywords[1] + " OR " + keywords[2] + " OR " + keywords[3] + " is exists in the" + "\n" + TooltipInfo);
+				KeywordMatch = true;
+
+			} else if (KeywordMatch == false) {
+				sName.get(i).click();
+				if (login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).isDisplayed()) {
+					wait(1000);
+					login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Related_Data"))).click();
+					List<WebElement> datasets = login.driver
+							.findElements(By.xpath(login.LOCATORS.getProperty("ssp_info")));
+					for (WebElement list : datasets) {
+						Filters.showdata = list.getText();
+					}
+				}
+
+				if (Filters.showdata.contains(keywords[0]) || Filters.showdata.contains(keywords[1]) || Filters.showdata.contains(keywords[2]) || Filters.showdata.contains(keywords[3])) {
+					login.Log4j
+							.info(keywords[0] + " OR " + keywords[1] + " OR "+ keywords[2]+ " OR " + keywords[3]+ " is exists in the" + "\n" + Filters.showdata);
+					getElementByProperty(login.driver, "closeAction", 10).click();
+					KeywordMatch = true;
+
+				} else {
+					getElementByProperty(login.driver, "closeAction", 10).click();
+					AssertJUnit.fail(keywords[0] + " OR " + keywords[1] + " OR "+ keywords[2]+ " OR " + keywords[3] + " keywords doesn't exists in the "
+							+ TooltipInfo + "\n\n" + Filters.showdata + "\n\n");
+				}
+			}
+
+			jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 		}
+
 
 	}
 

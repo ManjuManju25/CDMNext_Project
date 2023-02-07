@@ -72,6 +72,7 @@ public class Commentary {
 	List<WebElement> BeforeInsert_ListOfColumns;
 	String ActualInsight_Name;
 	List<String> Visuals_list = new ArrayList<>();
+	
 	//public static String SelectedColor;
 	
 	
@@ -186,7 +187,7 @@ public class Commentary {
 
 	@And("^Click on visual title$")
 	public void click_on_visual_title() throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "Title_popup", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "VisualTitle", 20).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -540,7 +541,7 @@ public class Commentary {
 	@SuppressWarnings("deprecation")
 	@And("^Double click on the visual title/subtitle$")
 	public void double_click_on_the_visual_title_subtitle() throws Throwable {
-		click_on_visual_title();
+		click_on_edit_commentary_icon();
 		check_the_box_for_the_title_name();
 		CommonFunctionality.wait(3000);
 		WebElement title = CommonFunctionality.getElementByProperty(login.driver, "VisualTitle", 4);
@@ -560,9 +561,9 @@ public class Commentary {
 	@SuppressWarnings("deprecation")
 	@And("^Click on edit commentary icon$")
 	public void click_on_edit_commentary_icon() throws Throwable {
-		click_on_visual_title();
-		check_the_box_for_the_title_name();
-		WebElement title = CommonFunctionality.getElementByProperty(login.driver, "VisualTitle", 4);
+		//click_on_visual_title();
+		//check_the_box_for_the_title_name();
+		WebElement title = CommonFunctionality.getElementByProperty(login.driver, "EditCommentaryIcon", 4);
 		new Actions(login.driver).pause(500).moveToElement(title).build().perform();
 		CommonFunctionality.getElementByProperty(login.driver, "EditCommentaryIcon", 4).click();
 

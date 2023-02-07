@@ -1256,7 +1256,7 @@ public void should_be_displayed_under_the_find_field(String arg1) throws Throwab
 		} else if(table_columns.size() == 8) {
 			currency =CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*[4]/*[2]/*[1]", 30);
 		}else if(table_columns.size() == 10) {
-			currency = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*/*[2]/*[5]/*", 30);
+			currency = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*/*[2]/*[6]/*", 30);
 		} else if(table_columns.size() == 11) {
 			currency = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='table']/*/*[2]/*[7]/*", 30);
 		}
@@ -3208,7 +3208,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	@And("^Check Copyright and Save$")
 	public void check_Copyright_and_Save() throws Throwable {
 		check("Copyright");
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 40).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'visual-configuration--controls')]//button[contains(text(),'Save')]", 40).click();
 	}
 	/*
 	 * @And("^Check Copyright$") public void check_Copyright() throws Throwable {
@@ -3222,7 +3222,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 
 	@Then("^The Copyright logo should be displayed for visual$")
 	public void the_Copyright_logo_should_be_displayed_for_visual() throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(2000);
 		Boolean Ceic_Logo = login.driver.findElement(By.xpath("//*[@class='visual-item-wrapper--credits-image']//img"))
 				.isDisplayed();
 		if (Ceic_Logo == true) {
@@ -3237,7 +3237,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 	public void uncheck_Copyright() throws Throwable {
 		Uncheck_Copyright();
 		// CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 40).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'visual-configuration--controls')]//button[contains(text(),'Save')]", 40).click();
 	}
 
 	@Then("^The Copyright logo should be removed for visual$")
@@ -3279,7 +3279,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 		CommonFunctionality.wait(1500);
 		String alignment = login.driver
 				.findElement(
-						By.xpath("//*[@class='movable-modal--body']//*[@class='visual-item-wrapper--credits-container'] | //*[@class='visual-item-wrapper--credits-container']"))
+						By.xpath("//*[@class='movable-modal--body']//*[@class='visual-item-wrapper--credits-container']"))
 				.getAttribute("style");
 		if (arg1.equalsIgnoreCase("Left")) {
 
@@ -3319,7 +3319,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 				"//*[@class='copyright-config']/*[5]/*[1]/*[2]/*[1]/*[2]//*[@class='input-control--indicator']", 40)
 				.click();
 		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-configuration']//button[contains(text(),'Save')]", 40).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'visual-configuration--controls')]//button[contains(text(),'Save')]", 40).click();
 	}
 
 	@Then("^Copyright text \"([^\"]*)\" should be displayed on visual$")
@@ -3440,7 +3440,7 @@ public void the_subtitle_should_align_to(String arg1) throws Throwable {
 		TextField.clear();
 		new Actions(login.driver).pause(500).sendKeys(TextField, Edit_text).perform();
 		CommonFunctionality.wait(1000);
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='visual-configuration']//button[contains(text(),'Save')]", 20).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'visual-configuration--controls')]//button[contains(text(),'Save')]", 20).click();
 		// CommonFunctionality.getElementByXpath(login.driver,
 		// "//button[contains(text(),'Ok')]", 10).click();
 	}
@@ -4192,7 +4192,7 @@ public void selected_frequency_should_be_displayed_in_the_series() throws Throwa
 					.click();
 		} catch (NoSuchElementException e) {
 			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='visual-series-list']/*/*/*[1]/*[7]//*[contains(@class,'icon--context-menu-arrow')]", 30)
+					"//*[@class='visual-series-list']/*/*/*[1]/*[5]//*[contains(@class,'icon--context-menu-arrow')]", 30)
 					.click();
 		}
 
@@ -4485,9 +4485,9 @@ public void the_changes_should_be_reflected_to_visual_and_Edit_visual_popup_shou
 
 @Then("^Below options should be displayed$")
 public void below_options_should_be_displayed(List<String> list ) throws Throwable {
-		CommonFunctionality.wait(1200);
+		
 		List<WebElement> List_of_options = null;
-
+		CommonFunctionality.wait(1500);
 		List_of_options = login.driver.findElements(By.xpath("//*[@class='dropdown-menu context-menu ']/*[3]//li"));
 
 		if (List_of_options.size() > 0) {

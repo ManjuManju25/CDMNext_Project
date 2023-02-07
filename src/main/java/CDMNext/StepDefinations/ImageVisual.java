@@ -1,6 +1,8 @@
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,21 +36,20 @@ public class ImageVisual {
 	String Edit_title, sourceUrl, title;
 	String dimension1, dimension2;
 	List<String> ListOfalignmentValue = new ArrayList<>();
-	String observation_count ;
+	String observation_count;
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 
 	@And("^Click on insert Image visual icon$")
 	public void click_on_insert_Image_visual_icon() throws Throwable {
 		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='image']", 20).click();
-		/*try {
-			Boolean ImageTitle = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
-			if (ImageTitle == true) {
-				login.Log4j.info("Image visual is created");
-			}
-		} catch (Exception e) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@data-instance='image']", 20).click();
-		}*/
+		/*
+		 * try { Boolean ImageTitle =
+		 * login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
+		 * if (ImageTitle == true) { login.Log4j.info("Image visual is created"); } }
+		 * catch (Exception e) { CommonFunctionality.getElementByXpath(login.driver,
+		 * "//*[@data-instance='image']", 20).click(); }
+		 */
 	}
 
 	@And("^Select \"([^\"]*)\" icon$")
@@ -56,20 +57,45 @@ public class ImageVisual {
 		CommonFunctionality.wait(2000);
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + arg1 + "']", 20);
 		CommonFunctionality.wait(500);
-		//ele.click();
+		// ele.click();
 		new Actions(login.driver).doubleClick(ele).build().perform();
 	}
 
 	@And("^Upload any image$")
 	public void upload_any_image() throws Throwable {
+		/*
+		 * CommonFunctionality.wait(2000);
+		 * CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
+		 * System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
+		 * System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
+		 * CommonFunctionality.wait(2000);
+		 * Runtime.getRuntime().exec(System.getProperty("user.dir") +
+		 * "\\AutoIT\\CloseButton.exe");
+		 */
+
+		// To run on local machine
+		// creating object of Robot class
 		CommonFunctionality.wait(2000);
-		CommonFunctionality.uploadTheFileusingAutoIT(login.driver,
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",
-				System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
-		CommonFunctionality.wait(2000);
-		Runtime.getRuntime().exec(System.getProperty("user.dir") + "\\AutoIT\\CloseButton.exe");
-		
+		Robot rb = new Robot();
+
+		// copying File path to Clipboard
+		StringSelection str = new StringSelection(
+				"C:\\Users\\NadiyaMaduru\\OneDrive - SHRAVAS TECHNOLOGIES INDIA PRIVATE LIMITED\\Documents\\CDMNextAutomation\\Cucumber_project\\AutoIT\\Shravas.png");
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(str, null);
+
+		// press Contol+V for pasting
+		rb.keyPress(KeyEvent.VK_CONTROL);
+		rb.keyPress(KeyEvent.VK_V);
+
+		// release Contol+V for pasting
+		rb.keyRelease(KeyEvent.VK_CONTROL);
+		rb.keyRelease(KeyEvent.VK_V);
+
+		// for pressing and releasing Enter
+		rb.keyPress(KeyEvent.VK_ENTER);
+		rb.keyRelease(KeyEvent.VK_ENTER);
 	
+
 	}
 
 	@Then("^The image visual should be pasted to new insight$")
@@ -92,11 +118,13 @@ public class ImageVisual {
 		String arg2 = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[1]/*[2]", 20)
 				.getAttribute("aria-label");
-		String arg3 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[2]/*[1]", 20).getText();
+		String arg3 = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[2]/*[1]", 20).getText();
 		String arg4 = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[3]/*[1]", 20)
 				.getAttribute("aria-label");
-		String arg5 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[3]/*[2]", 20)
+		String arg5 = CommonFunctionality
+				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[3]/*[2]", 20)
 				.getAttribute("aria-label");
 		String arg6 = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='tox-toolbar__primary']/*[3]/*[3]", 20)
@@ -197,17 +225,24 @@ public class ImageVisual {
 	@And("^Click on title dropdown$")
 	public void click_on_title_dropdown() throws Throwable {
 		CommonFunctionality.wait(2000);
-//		CommonFunctionality.getElementByXpath(login.driver, " //*[@data-popup='title']/*[2]", 30).click();
-		CommonFunctionality.getElementByXpath(login.driver, "((//div[text()='Title:']//following::div[@class='context-menu-control--icon']))[1]", 30).click();
+		// CommonFunctionality.getElementByXpath(login.driver, "
+		// //*[@data-popup='title']/*[2]", 30).click();
+		CommonFunctionality
+				.getElementByXpath(login.driver,
+						"((//div[text()='Title:']//following::div[@class='context-menu-control--icon']))[1]", 30)
+				.click();
 
 	}
+
 	@And("^Mouse hover on Edit Visual title and click on it$")
 	public void mouse_hover_on_Edit_Visual_title_and_click_on_it() throws Throwable {
-	    WebElement editvisualtitle = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-edit-name='title']", 30);
-	    new Actions(login.driver).moveToElement(editvisualtitle).build().perform();
-	    CommonFunctionality.wait(200);
-	    editvisualtitle.click();
+		WebElement editvisualtitle = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-edit-name='title']",
+				30);
+		new Actions(login.driver).moveToElement(editvisualtitle).build().perform();
+		CommonFunctionality.wait(200);
+		editvisualtitle.click();
 	}
+
 	@Then("^The Image visual should update the \"([^\"]*)\" text color as blue$")
 	public void the_Image_visual_should_update_the_text_color_as_blue(String arg1) throws Throwable {
 		attachment.the_Attachments_should_update_the_text_color_as_blue(arg1);
@@ -261,15 +296,14 @@ public class ImageVisual {
 	@Then("^Below options should be available in General tab$")
 	public void below_options_should_be_available_in_General_tab(List<String> list) throws Throwable {
 		CommonFunctionality.wait(500);
-		List<WebElement> generalTab_options = login.driver.findElements(By.xpath(
-				"//label[@class='tox-label']"));
+		List<WebElement> generalTab_options = login.driver.findElements(By.xpath("//label[@class='tox-label']"));
 		int j = 0;
 
 		for (String arg : list) {
-			//login.Log4j.info(arg.trim());
+			// login.Log4j.info(arg.trim());
 			for (int i = j; i <= generalTab_options.size();) {
-				//CommonFunctionality.wait(500);
-				//login.Log4j.info(generalTab_options.get(j).getText().trim());
+				// CommonFunctionality.wait(500);
+				// login.Log4j.info(generalTab_options.get(j).getText().trim());
 				if (generalTab_options.get(j).getText().trim().equalsIgnoreCase(arg.trim())) {
 					login.Log4j.info(arg + " is displayed");
 					j = j + 1;
@@ -290,11 +324,9 @@ public class ImageVisual {
 
 	@Then("^Below options should be available in Upload tab$")
 	public void below_options_should_be_available_in_Upload_tab(List<String> list) throws Throwable {
-		String arg1 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='tox-dropzone']/*[1]", 20)
+		String arg1 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-dropzone']/*[1]", 20)
 				.getText();
-		String arg2 = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='tox-dropzone']/*[2]", 20)
+		String arg2 = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-dropzone']/*[2]", 20)
 				.getText();
 		for (String str : list) {
 			if (str.equalsIgnoreCase(arg1)) {
@@ -341,35 +373,28 @@ public class ImageVisual {
 	@And("^Enter Source as \"([^\"]*)\"$")
 	public void enter_Source_as(String arg1) throws Throwable {
 		sourceUrl = arg1;
-		CommonFunctionality
-				.getElementByXpath(login.driver,
-						"//*[@class='tox-control-wrap']//input", 30)
-				.sendKeys(arg1);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-control-wrap']//input", 30).sendKeys(arg1);
 	}
 
 	@And("^Enter Image Title as \"([^\"]*)\"$")
 	public void enter_Image_Title_as(String arg1) throws Throwable {
 		title = arg1;
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='tox-form']/*[2]//input", 30).sendKeys(arg1);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-form']/*[2]//input", 30).sendKeys(arg1);
 	}
 
 	@And("^Enter Dimensions as (\\d+) and (\\d+)$")
 	public void enter_Dimensions_as_and(int arg1, int arg2) throws Throwable {
 		dimension1 = Integer.toString(arg1);
 		dimension2 = Integer.toString(arg2);
-		WebElement ele1 = CommonFunctionality
-		.getElementByXpath(login.driver,
+		WebElement ele1 = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='tox-form']/*[3]/*[1]/*[1]/*[2]", 30);
 		ele1.clear();
 		ele1.sendKeys(dimension1);
-		WebElement ele2 = CommonFunctionality
-		.getElementByXpath(login.driver,
+		WebElement ele2 = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='tox-form']/*[3]/*[1]/*[2]/*[2]", 30);
 		ele2.clear();
 		ele2.sendKeys(dimension2);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[@class='tox-dialog__footer-end']/*[2]", 30).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tox-dialog__footer-end']/*[2]", 30).click();
 	}
 
 	@Then("^Image should be uploaded in view tab with given details$")
@@ -430,8 +455,10 @@ public class ImageVisual {
 	@And("^Create a Chart visual$")
 	public void create_a_Chart_visual() throws Throwable {
 		CommonFunctionality.wait(500);
-		//CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='line']", 4).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='view-components-over--visuals']//*[@class='icon--chart-line']", 4).click();
+		// CommonFunctionality.getElementByXpath(login.driver,
+		// "//*[@data-action='line']", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='view-components-over--visuals']//*[@class='icon--chart-line']", 4).click();
 	}
 
 	@And("^Add a series to the chart visual$")
@@ -447,11 +474,13 @@ public class ImageVisual {
 		}
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
+
 	@And("^Select timeframe as \"([^\"]*)\"$")
 	public void select_timeframe_as(String arg1) throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 30).click();
-		//observation_count = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='input-observation']/*[1]", 30).getText();
-		
+		// observation_count = CommonFunctionality.getElementByXpath(login.driver,
+		// "//*[@class='input-observation']/*[1]", 30).getText();
+
 	}
 
 	@And("^Select Data placement as \"([^\"]*)\"$")
@@ -473,7 +502,7 @@ public class ImageVisual {
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sheet = null;
 		XSSFRow row = null;
-		//XSSFCell cell = null;
+		// XSSFCell cell = null;
 		List<String> list = new ArrayList<>();
 		if (file.exists()) {
 			// login.Log4j.info(wb.getNumberOfSheets());
@@ -507,18 +536,26 @@ public class ImageVisual {
 
 					int colCount = row.getLastCellNum();
 					System.out.println("Column Count :- " + colCount);
-					for (int j = 26; j < colCount; j++) {
-						int cell_obj = (int) sheet.getRow(1).getCell(j).getNumericCellValue();
-						System.out.println(cell_obj);
-						list.add(Integer.toString(cell_obj));
-//						login.Log4j.info("Observation count is " + observation_count);
+					for (int j = 0; j < colCount; j++) {
+						String cell_text = sheet.getRow(0).getCell(j).getStringCellValue();
+						if (cell_text.equalsIgnoreCase("No. of Obs")) {
 
+							for (int k = j + 1; k < colCount; k++) {
+								int cell_obj = (int) sheet.getRow(1).getCell(k).getNumericCellValue();
+								System.out.println(cell_obj);
+								list.add(Integer.toString(cell_obj));
+								// login.Log4j.info("Observation count is " + observation_count);
+
+							}
+							if (list.size() == 10) {
+								System.out.println("Observation count is matched ");
+							} else {
+								Assert.fail("Observation count is not matched");
+							}
+							break;
+						}
 					}
-					if (list.size() == 10) {
-						System.out.println("Observation count is matched ");
-					} else {
-						Assert.fail("Observation count is not matched");
-					}
+
 				} else {
 					Assert.fail(wb.getSheetName(i) + " IS NOT downloaded");
 				}
@@ -532,6 +569,7 @@ public class ImageVisual {
 
 		File_delete.delete();
 	}
+
 	@Then("^Visuals should be interchanged by drag and drop$")
 	public void visuals_should_be_interchanged_by_drag_and_drop() throws Throwable {
 		CommonFunctionality.wait(2000);
@@ -558,6 +596,7 @@ public class ImageVisual {
 		}
 
 	}
+
 	void Alignvisual(String align) throws InterruptedException {
 		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@aria-label='" + align + "']", 20);
 		new Actions(login.driver).moveToElement(ele).click().build().perform();

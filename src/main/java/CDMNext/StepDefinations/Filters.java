@@ -401,6 +401,7 @@ public class Filters extends CommonFunctionality{
 							login.Log4j.info("Title information is \n" + str);
 						}
 					}*/
+					CommonFunctionality.wait(300);
 					tooltip = getElementByProperty(login.driver, "tooltip_text",8);
 					text = tooltip.getText();
 					 login.Log4j.info("Title information is \n" + text);
@@ -715,20 +716,32 @@ public class Filters extends CommonFunctionality{
 							if (filters.get(k).equalsIgnoreCase("Frequency")) {
 								login.Log4j.info("filter  is : " + filters.get(k));
 								login.Log4j.info(frequencyarr.length);
-								login.Log4j.info(frequency);
+								//login.Log4j.info(frequency);
 								String str = "Half-yearly";
 								String str1 = "Annual";
 								if ((frequencyarr.length == 1)) {
 									if (frequencyarr[0].equalsIgnoreCase("Semiannually")) {
-										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
-												|| text.toUpperCase().contains(str.toUpperCase()) == true) {
-											login.Log4j.info(frequencyarr[0] + " OR " + str + " is exists in the" + "\n"
+										if (text.toUpperCase().contains(str.toUpperCase()) == true) {
+											login.Log4j.info(str + " is exists in the" + "\n"
+													+ text);
+										} else {
+											AssertJUnit.fail(str +" is not exists in the" + "\n"
+													+ text);
+										}
+									} else if(frequencyarr[0].equalsIgnoreCase("Yearly")) {
+										if (text.toUpperCase().contains(str1.toUpperCase()) == true) {
+											login.Log4j.info(str1 + " is exists in the" + "\n"
+													+ text);
+										} else {
+											AssertJUnit.fail(str1 +" is not exists in the" + "\n"
 													+ text);
 										}
 									} else {
-										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
-												|| text.toUpperCase().contains(str1.toUpperCase()) == true) {
-											login.Log4j.info(frequencyarr[0] + " OR " + str1 + " is exists in the" + "\n"
+										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true) {
+											login.Log4j.info(frequencyarr[0] +" is exists in the" + "\n"
+													+ text);
+										} else {
+											AssertJUnit.fail(frequencyarr[0] +" is not exists in the" + "\n"
 													+ text);
 										}
 									}
@@ -856,8 +869,10 @@ public class Filters extends CommonFunctionality{
 						}
 					}
 					// Until the element is not visible keep scrolling
+					CommonFunctionality.wait(100);
 					WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
 					action.pause(50).moveToElement(comparables).build().perform();
+					CommonFunctionality.wait(200);
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 				}
 				
@@ -889,13 +904,13 @@ public class Filters extends CommonFunctionality{
 		CommonFunctionality.wait(4000);
 		WebElement ele;
 		try {
-			if (topic.equals("Foreign Trade") || topic.equals("Monetary") || topic.equalsIgnoreCase("Albania") || topic.equalsIgnoreCase("Aggregate: World")) {
+			if (topic.equalsIgnoreCase("Albania") || topic.equalsIgnoreCase("Aggregate: World") || topic.equals("Lending Rates")) {
 				ele = login.driver.findElement(By.xpath(
-						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[1]/*[2]/*[2]/*[1]/*[2]"));
+						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[2]/*[2]/*[2]/*[1]/*[2]"));
 			} 
 			else {
 				ele = login.driver.findElement(By.xpath(
-						"//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node open full-expanded'))]/*[2]/*[2]//*[@class='name-text']"));
+						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[1]/*[2]/*[2]/*[1]/*[2]"));
 			}
 		} catch (NoSuchElementException e) {
 			ele = login.driver.findElement(

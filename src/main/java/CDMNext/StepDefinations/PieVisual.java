@@ -1072,12 +1072,12 @@ public class PieVisual {
 
 	@Then("^Selected color should be applied to the series$")
 	public void selected_color_should_be_applied_to_the_series() throws Throwable {
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(2000);
 		String background_color = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[@class='visual-series-color']/*[1]/*[1]/*", 6)
 				.getCssValue("background-color");
 		try {
-		Commentary.ColorValidation(background_color,Histogram.TitleColor);
+			Commentary.ColorValidation(background_color,Histogram.TitleColor);
 		}catch(NullPointerException e) {
 			Commentary.ColorValidation(background_color,DatabasesTab.ActualColor);
 		}
@@ -1510,7 +1510,7 @@ public class PieVisual {
 
 		}
 		CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'movable-modal__active')]//button[contains(text(),'Save')]", 40).click();
+				"//*[contains(@class,'visual-configuration--controls')]//button[contains(text(),'Save')]", 40).click();
 
 	}
 

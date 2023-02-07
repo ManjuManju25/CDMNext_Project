@@ -99,8 +99,8 @@ Feature: FilterSearch
 
   @FilterSearch
   Scenario: TC_Filters_Search_11
-    Given User enters "322968702"
-    And User selects "Source" as "AIA Group Limited"
+    Given User enters "448530337"
+    And User selects "Source" as "Eurostat"
     And User has clicked on "Apply filter"
     And Click on "More" filter
     And User selected "Database" as "World Trend Plus"
@@ -639,11 +639,11 @@ Feature: FilterSearch
 
   @FilterSearch
   Scenario: TC_Filters_Search_74
-    Given User enters "1380601"
+    Given User enters "273491503"
     And Click on "More" filter
     And User selected "Database" as "Brazil Premium Database"
     And User has clicked on "Apply filter"
-    When User get the topics as "Foreign Trade"
+    When User get the topics as "Inflation"
     Then User verify the results
 
   @FilterSearch
@@ -957,7 +957,7 @@ Feature: FilterSearch
 
   @FilterSearch
   Scenario: TC_Filters_Search_110
-    Given User enters "Selenium"
+    Given User enters "capital"
     And User selects "Frequency" as "Quarterly"
     And User has clicked on "Apply filter"
     Then User verify the search results
@@ -971,7 +971,7 @@ Feature: FilterSearch
 
   @FilterSearch
   Scenario: TC_Filters_Search_112
-    Given User enters "Selenium"
+    Given User enters "capital"
     And User selects "Frequency" as "Yearly"
     And User has clicked on "Apply filter"
     Then User verify the search results
@@ -1130,7 +1130,7 @@ Feature: FilterSearch
   Scenario: TC_Filters_Search_124
     Given User enters "Seleni*"
     And Click on "More" filter
-    And User selected "Database" as "India Premium Database"
+    And User selected "Database" as "Indonesia Premium Database"
     And User has clicked on "Apply filter"
     Then User verifies Filter search results
 

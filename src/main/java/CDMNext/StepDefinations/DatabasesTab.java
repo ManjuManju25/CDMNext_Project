@@ -328,9 +328,8 @@ public class DatabasesTab {
 		CommonFunctionality.footnoteDb = login.driver.findElement(By.className("footnotes-modal--name"));
 		str = CommonFunctionality.footnoteDb.getText();
 		login.Log4j.info(str);
-		Validationstr = ele.getText();
-		login.Log4j.info(Validationstr);
-		if (str.contains(Validationstr) == true) {
+	
+		if (str.contains(CommonFunctionality.sname) == true) {
 			login.Log4j.info("Footnotes is displayed on " + arg1 + " level");
 			CommonFunctionality.wait(1500);
 			login.driver.findElement(By.className("movable-modal--close")).click();
@@ -799,7 +798,7 @@ public class DatabasesTab {
 			login.Log4j.info("Clicking on  Series tab ");
 			CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 10).click();
 			CommonFunctionality.wait(5000);
-			ele = login.driver.findElement(By.xpath("//*[@class='series-representation']//*[@class='search-no-results--header']"));
+			ele = login.driver.findElement(By.xpath("//*[@class='search-no-results--header']"));
 			String noResults = ele.getText();
 			if (noResults.contains(arg1)) {
 				login.Log4j.info(noResults + "is displayed for invalid Keyword ");
@@ -1103,6 +1102,7 @@ public class DatabasesTab {
 	@And("^Mouse hover on any Section level of data$")
 	public void mouse_hover_on_any_Section_level_of_data() throws Throwable {
 		// CommonFunctionality.CollapseTreeMethod();
+		CommonFunctionality.getElementByProperty(login.driver, "Databases_Tab", 8).click();
 		// mouse hover on Markit Purchasing Managers' Index for section level
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Expand_GlobalPurchasingManagersIndexDB"))))
@@ -1830,9 +1830,9 @@ public void select_option_at_series_level(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("State Administrative")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title=' " + arg1 + "']", 6).click();
 		}
-		if(arg1.equalsIgnoreCase("Series sources")) {
-			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 6).click();
-			CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 6).click();
+		if(arg1.equalsIgnoreCase("Source")) {
+			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'movable-modal__active')]//*[text()='" + arg1 + "']", 6).click();
+			//CommonFunctionality.getElementByXpath(login.driver, "//*[@class='popover--close']", 6).click();
 		}
 
 	}

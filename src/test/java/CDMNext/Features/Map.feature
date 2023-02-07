@@ -1500,7 +1500,7 @@ Feature: Verifying map visual functionality
   Scenario: TC_Map_166:Edit Map - Border - Verify advance settings cogwheel
     And Create a map visual with series id's "16240301;16243001"
     And Click on "Edit Map"
-    And Click on Border drop down
+    #And Click on Border drop down
     And Click on "Open advanced settings popup"
     Then Visual popup should be opened
 
@@ -2012,7 +2012,7 @@ Feature: Verifying map visual functionality
     Then The Selected font size should update with selected input
 
   @Map
-  Scenario: TC_Map_221:Edit Map - Data labels - advanced settings cogwheel - labels - Size
+  Scenario: TC_Map_221:Edit Map - Data labels - advanced settings cogwheel - labels - styles
     And Create a map visual with series id's "5724301;5823501"
     And Click on "Edit Map"
     And Click on the "Data labels" checkbox to "Check"

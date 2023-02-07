@@ -79,7 +79,8 @@ Feature: Verifying Pie Visual Functionality
     And Create a pie visual with series id's "16240301;16243001"
     And Click on "Edit Pie"
     And Click on Border drop down
-    And Click on "Open advanced settings popup"
+    #And Click on "Open advanced settings popup"
+    And Click on "Advanced settings"
     And Click on X icon
     Then The visual popup should be closed
 
@@ -1224,7 +1225,7 @@ Feature: Verifying Pie Visual Functionality
   Scenario: TC_Pie_160:Edit Pie - Border - Verify advance settings cogwheel
     And Create a pie visual with series id's "16240301;16243001"
     And Click on "Edit Pie"
-    And Click on Border drop down
+    #And Click on Border drop down
     And Click on "Open advanced settings popup"
     Then Visual popup should be opened
 
@@ -1695,10 +1696,10 @@ Feature: Verifying Pie Visual Functionality
 
     Examples: 
       | TCID       | ActualAttribute      | ExpectedAttribute    |
-      #| TC_Pie_208 | Name                 | Name                 |
-      #| TC_Pie_209 | Region               | Region               |
-      #| TC_Pie_210 | Frequency            | Frequency            |
-      #| TC_Pie_211 | Percentage           | Percentage           |
+      | TC_Pie_208 | Name                 | Name                 |
+      | TC_Pie_209 | Region               | Region               |
+      | TC_Pie_210 | Frequency            | Frequency            |
+      | TC_Pie_211 | Percentage           | Percentage           |
       | TC_Pie_212 | Function description | Function description |
 
 

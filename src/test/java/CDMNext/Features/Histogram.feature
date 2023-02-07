@@ -866,14 +866,14 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on Border drop down
-    And Click on "Open advanced settings popup"
+    And Click on "Advanced settings"
     Then Visual popup should be opened
 
   @Histogram
   Scenario: TC_Histogram_102:Edit Histogram - Border - Verify closing of visual popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
-    And Click on Border drop down
+    #And Click on Border drop down
     And Click on "Open advanced settings popup"
     And Click on X icon
     Then The visual popup should be closed

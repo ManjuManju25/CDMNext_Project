@@ -1016,7 +1016,7 @@ public class SprintCases5_0 {
 	@Then("^FX icon will not be disappear$")
 	public void fx_icon_will_not_be_disappear() throws Throwable {
 		CommonFunctionality.wait(1000);
-		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("FX_icon"))).size() == 1) {
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("myseries_function_icon"))).size() == 1) {
 			login.Log4j.info("FX icon is appeared ");
 		} else {
 			fail("FX icon is not appeared");
@@ -1052,8 +1052,9 @@ public class SprintCases5_0 {
 		} else {
 			fail(arg1 + " is not displayed");
 		}
-		CommonFunctionality.getElementByProperty(login.driver, "watchlist_tab", 20).click();
 		CommonFunctionality.wait(4000);
+		CommonFunctionality.getElementByProperty(login.driver, "watchlist_tab", 20).click();
+		CommonFunctionality.wait(1000);
 		String Actual_sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='watchlist--select']//*[@class='dropdown--title']", 10)
 				.getText();
 		if (expected_sname.equals(Actual_sname)) {
@@ -1155,7 +1156,7 @@ public class SprintCases5_0 {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))))
 				.click();
 		CommonFunctionality.wait(500);
-		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-item--name']", 10);
+		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='database-representation']//div[@class='series-item--name']", 10);
 		new Actions(login.driver).pause(400).moveToElement(ele).perform();
 		CommonFunctionality.wait(800);
 		WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
@@ -1341,7 +1342,7 @@ public class SprintCases5_0 {
 	public void click_on_database(String arg1) throws Throwable {
 		//select 1st tab
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']/*[1]", 10).click();
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//table//*[contains(text(),'" + arg1 + "')]", 10).click();
 	}
 

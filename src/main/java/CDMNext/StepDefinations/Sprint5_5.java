@@ -74,9 +74,9 @@ public class Sprint5_5 extends CommonFunctionality {
 		wait(3000);
 
 		List<WebElement> li_All = login.driver
-				.findElements(By.xpath("//*[@class='series-representation']/*//*[@class='series-item--name']"));
+				.findElements(By.xpath("//*[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		login.Log4j.info("List size is :" + li_All.size());
-		String strLabel = null;
+		//String strLabel = null;
 		if (li_All.size() > 0) {
 			for (int i = 0; i < li_All.size(); i++) {
 				int j = i + 1;
@@ -93,7 +93,7 @@ public class Sprint5_5 extends CommonFunctionality {
 
 				// Until the element is not visible keep scrolling
 				jse.executeScript("arguments[0].scrollIntoView(true);", element);
-				login.Log4j.info(strLabel);
+				login.Log4j.info(element.getText());
 				if (element.getText().equalsIgnoreCase(arg1)) {
 					login.Log4j.info(arg1 + " is displayed for " + arg1);
 				} else {
@@ -105,9 +105,9 @@ public class Sprint5_5 extends CommonFunctionality {
 		}
 	}
 
-	@And("^Switch on \"([^\"]*)\" mode$")
-	public void switch_on_mode(String arg1) throws Throwable {
-		getElementByXpath(login.driver, "//*[@class='toggler-control-wrapper']/*/*[2]", 6).click();
+	@And("^Switch on \"([^\"]*)\"$")
+	public void switch_on(String arg1) throws Throwable {
+		getElementByXpath(login.driver, "//*[@class='toggler-control-wrapper']//*[@title='"+ arg1 + "']", 6).click();
 	}
 
 	@And("^Mouse hover on series$")
@@ -124,7 +124,9 @@ public class Sprint5_5 extends CommonFunctionality {
 		login.Log4j.info(actual);
 		if (actual.contains(arg1)) {
 			login.Log4j.info("The series is displayed in " + arg1 + " format");
+			switch_on("List mode");
 		} else {
+			switch_on("List mode");
 			Assert.fail("The series is not displayed in " + arg1 + " format");
 		}
 
@@ -228,7 +230,7 @@ public class Sprint5_5 extends CommonFunctionality {
 		ArrayList<String> sourcesList = new ArrayList<>();
 		for (int i = 0; i < list_of_items.size(); i++) {
 			list_of_items.get(i).click();
-			wait(300);
+			wait(1000);
 			WebElement ele = getElementByXpath(login.driver,
 					"//*[contains(text(),'Source:')]/ancestor::td/following-sibling::*//td//*[contains(@class,'main-series-information--field-value')]",
 					10);
@@ -268,7 +270,7 @@ public class Sprint5_5 extends CommonFunctionality {
 
 	@Then("^The \"([^\"]*)\" label should be translated$")
 	public void the_label_should_be_translated(String arg1) throws Throwable {
-		wait(2000);
+		wait(5000);
 		// reading sources from created visual after changing UI languge as Bahasa
 		WebElement ele = getElementByXpath(login.driver, "//*[@class='visual-item-wrapper--text text-dots link']", 10);
 		String actualSeriesSourceEle = ele.getText();
@@ -279,13 +281,21 @@ public class Sprint5_5 extends CommonFunctionality {
 
 			// change default lanugage as english
 			wait(2000);
-			getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 10).click();
+			try {
+				getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 10).click();
+			}catch(NoSuchElementException e) {
+				
+			}
 			getElementByXpath(login.driver, "//*[@class='account-avatar--container']", 10).click();
 			getElementByXpath(login.driver, "//*[@data-language='en']", 10).click();
 		} else {
 			// change default lanugage as english
 			wait(2000);
-			getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 10).click();
+			try {
+				getElementByXpath(login.driver, "//*[@class='movable-modal--close']", 10).click();
+			}catch(NoSuchElementException e) {
+				
+			}
 			getElementByXpath(login.driver, "//*[@class='account-avatar--container']", 10).click();
 			getElementByXpath(login.driver, "//*[@data-language='en']", 10).click();
 			Assert.fail();
@@ -532,8 +542,11 @@ public class Sprint5_5 extends CommonFunctionality {
 
 	@And("^Select the image$")
 	public void select_the_image() throws Throwable {
+		WebElement element = login.driver.findElement(By.className("tox-edit-area__iframe"));
+		login.driver.switchTo().frame(element);
 		wait(2000);
 		getElementByXpath(login.driver, "//body[@id='tinymce']//img", 8).click();
+		login.driver.switchTo().defaultContent();
 	}
 
 	@Then("^The \"([^\"]*)\" option should be selected/enabled$")

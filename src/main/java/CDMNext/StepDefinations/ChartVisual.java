@@ -6403,8 +6403,8 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		}
 		if (arg1.equalsIgnoreCase("Font style") && values_axis_checkboxes == true) {
 			cv.clicking_option("Save");
-			WebElement title = CommonFunctionality.getElementBycssSelector(login.driver,
-					"g.highcharts-legend-title > text", 4);
+			WebElement title = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='highcharts-label highcharts-legend-title']//span", 4);
 			String font_bold = title.getCssValue("font-weight");
 			String font_italic = title.getCssValue("font-style");
 			String font_underline = title.getCssValue("text-decoration");

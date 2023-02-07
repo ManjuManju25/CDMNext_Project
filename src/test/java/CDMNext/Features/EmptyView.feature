@@ -256,7 +256,7 @@
     And Click inside of the visual box created
     Then Menu bar should be displayed with respective visual edit options
 
-  @EmptyView1
+  @EmptyView
   Scenario: Tc_EmptyView_39 : Verify paste visual from right click on view tab
     And Create any of the visual
     And Copy the visual

@@ -895,6 +895,7 @@ public class SeriesTab {
 			ele2.click();
 			break;
 		case "Add to watchlist":
+			CommonFunctionality.wait(1000);
 			CommonFunctionality.getElementByXpath(login.driver, "//*[@title= '" + arg1 + "']", 10).click();
 			break;
 		case "Advanced search":
@@ -2137,7 +2138,7 @@ public class SeriesTab {
 		login.Log4j.info("List size is :" + li_All.size());
 
 		if (li_All.size() == SeriesCount) {
-			ogin.Log4j.info(arg1 + " series are displayed as per the selection");
+			login.Log4j.info(arg1 + " series are displayed as per the selection");
 			CommonFunctionality.wait(2000);
 			element = login.driver.findElement(By.className("search-series-pagination-count"));
 			element.click();

@@ -322,7 +322,7 @@ Feature: Verifying the Forecast series functionality
     And Apply with any function
     Then Function should be applied to the visual
 
-  @ForecastSeries
+  @ForecastSeries1
   Scenario: Tc_Forecast Series Sugg _33:Verify preserve frequency with replace the current series
     Given Enter series id's"103003407;103003507;103003607"
     And Add some series to my series

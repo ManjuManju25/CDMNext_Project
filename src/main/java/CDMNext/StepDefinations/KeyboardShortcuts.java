@@ -457,6 +457,7 @@ public class KeyboardShortcuts {
 
 	@Then("^The visual should be replaced the series with selected series$")
 	public void the_visual_should_be_replaced_the_series_with_selected_series() throws Throwable {
+		CommonFunctionality.wait(1000);
 		String After_replacement = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 8)
 				.getText();
 		if (!before_replace_titleText.equals(After_replacement)) {
