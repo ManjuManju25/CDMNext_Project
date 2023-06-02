@@ -5,32 +5,27 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import java.awt.Image;
-
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.comparator.LastModifiedFileComparator;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -54,9 +49,6 @@ import org.testng.AssertJUnit;
 import org.testng.Reporter;
 
 import CDMNext.StepDefinations.login;
-
-import java.awt.image.BufferedImage;
-import java.awt.image.PixelGrabber;
 
 public class CommonFunctionality {
 	public static String db_name;
@@ -189,13 +181,18 @@ public class CommonFunctionality {
 			}
 		} catch (Exception e) {
 			try {
-				WebElement Table_mode_selected_ = getElementByXpath(login.driver,
-						"//table//*[@class='table-container--checkbox svg-checkbox input-control__grey']/*[@class='icon']",
-						4);
-				action.moveToElement(Table_mode_selected_).pause(500).click().build().perform();
-				getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
-			} catch (Exception e1) {
+				wait(1000);
+				boolean select_all_series_checkbox = login.driver
+						.findElement(By.xpath("//*[@class='check-all-series']//*//*[@type='checkbox']")).isSelected();
+				if (select_all_series_checkbox == false) {
+					WebElement check_box_ele = getElementByXpath(login.driver,
+							"//*[@class='check-all-series']//*//*[@class='input-control--indicator']", 4);
+					action.moveToElement(check_box_ele).pause(500).click().build().perform();
+					getElementByXpath(login.driver, "//div[@data-action='delete']", 4).click();
+				}
 
+			} catch (Exception e1) {
+				Assert.fail(e1.getMessage());
 			}
 		}
 
@@ -755,7 +752,7 @@ public class CommonFunctionality {
 	}
 
 	public static void ValidateGrowlText(String ExpectedTxt) throws Exception {
-		CommonFunctionality.wait(300);
+		CommonFunctionality.wait(100);
 		WebElement ele = login.driver.findElement(By.xpath("//div[@class='growl-message-text']"));
 		String ActualTxt = ele.getText();
 		login.Log4j.info(ActualTxt);

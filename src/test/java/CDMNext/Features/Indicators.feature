@@ -33,7 +33,6 @@ Feature: Indicators feature
     And Select some series to my series tab
     And select all series check box checked
     And click on related series tab
-    # And click on select a region text box dropdown
     And Add indicators to my series by click on plus icon beside indicators of country selected
     Then Maximum of 5 country/region tabs can be created
 
@@ -62,14 +61,12 @@ Feature: Indicators feature
     Then should get reflected in my series tab as related series
 
   @Indicators
-  Scenario: TC_09: Verify adding indicator series into visual selection pane
+  Scenario: TC_09: Verify adding indicator series into visual selection panel
     And Select some series to my series tab
-    And select all series check box checked
     And Create the visual like table
     And click on Add related series
-    # And click on plus icon in indicators tab
     And select any of the indicators for series being in visual selection pane
-    Then indicators tab should get reflected in visual selection pane as related series
+    Then indicators tab should get reflected in visual selection panel as related series
 
   @Indicators
   Scenario: TC_10:Verify frequency conversion popup window for indicator tab

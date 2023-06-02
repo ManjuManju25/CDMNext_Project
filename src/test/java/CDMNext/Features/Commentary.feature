@@ -1,3 +1,4 @@
+
 Feature: Verifying Commentary Visual functionality
 
   @Commentary
@@ -15,8 +16,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_03:Verify Title for Commentary
     And Create Commentary visual
-    And Click on edit commentary icon
-    #And Click on "Title" option on visual header
+    And Click on "Title" option on visual header
     Then The "Title" popup should be displayed
 
   @Commentary
@@ -27,24 +27,21 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_05:Verify 'Title' display ON
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     Then The title name should reflect on the Commentary
 
   @Commentary
   Scenario: TC_Commentary_06:Verify 'Title' display OFF
     And Create Commentary visual
-    #And Click on visual title
-   And Click on edit commentary icon
+    And Click on visual title
     And Uncheck the box for the title name
     Then No title name should display for the Commentary
 
   @Commentary
   Scenario: TC_Commentary_07:Verify visual title field
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Check the box and enter the title name as "New commentary"
     Then The commentary should update the "title" name to "New commentary"
@@ -52,8 +49,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_08:Verify text color
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Choose text color is blue
     Then The commentary should update the "title" text color as blue
@@ -61,8 +57,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_09:Verify highlight color
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Choose highlight color is Orange
     Then The commentary should update the "title" highlight color as Orange
@@ -70,8 +65,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_10:Verify 'font size'
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Choose "20" from the drop-down for the font size
     Then The commentary should update the "title" font as "20"
@@ -79,8 +73,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_11:Verify title in bold style
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Click on Bold icon for "title"
     Then The visual "title" should be in bold style
@@ -88,8 +81,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_12:Verify title in Italic style
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Click on Italic under style
     Then The visual "title" should be "italic"
@@ -97,8 +89,7 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_13:Verify title as underlined
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Click on Underline icon for "title"
     Then The visual "title" should be "underline"
@@ -106,104 +97,91 @@ Feature: Verifying Commentary Visual functionality
   @Commentary
   Scenario: TC_Commentary_14:Verify horizontal alignment (left, right, center)
     And Create Commentary visual
-    #And Click on visual title
-   And Click on edit commentary icon
+    And Click on visual title
     And Click on left,center and right alignment for title
     Then The title should align to "left" , "center" and "right" as user set
 
   @Commentary
   Scenario: TC_Commentary_15:Subtitle - Verify subtitle by default
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Expand subtitle
     Then The Subtitle should be disabled by default
 
   @Commentary
   Scenario: TC_Commentary_16:Commentary subtitle display=YES
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for sub-title
     Then The "Sub title" should reflect on the Commentary
 
   @Commentary
   Scenario: TC_Commentary_17:Commentary subtitle display=NO
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Uncheck the box for sub-title
     Then No sub-title name should be displayed
 
   @Commentary
   Scenario: TC_Commentary_18:Sub-title field
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box and enter the sub-title name as "New subtitle"
     Then The commentary should update the "sub_title" name to "New subtitle"
 
   @Commentary
   Scenario: TC_Commentary_19:Verify Sub-title text color
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Choose text color is blue for subtitle
     Then The commentary should update the "sub_title" text color as blue
 
   @Commentary
   Scenario: TC_Commentary_20:Subtitle > Verify highlight color
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Choose highlight color is Orange for subtitle
     Then The commentary should update the "sub_title" highlight color as Orange
 
   @Commentary
   Scenario: TC_Commentary_21:Subtitle > Verify 'font size'
     And Create Commentary visual
-    #And Click on visual title
-   And Click on edit commentary icon
+    And Click on visual title
     And Choose "10" from the drop-down for the font size of subtitle
     Then The commentary should update the "sub_title" font as "10"
 
   @Commentary
   Scenario: TC_Commentary_22:Verify Subtitle in bold style
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Click on B under style for sub-title
     Then The visual "sub_title" should be in bold style
 
   @Commentary
   Scenario: TC_Commentary_23:Verify Subtitle in Italic style
     And Create Commentary visual
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Click on Italic under style for sub-title
     Then The visual "sub_title" should be "italic"
 
   @Commentary
   Scenario: TC_Commentary_24:Verify Subtitle as underlined
     And Create Commentary visual
-    #And Click on visual title
-   And Click on edit commentary icon
+    And Click on visual title
     And Click on Underline icon for sub-title
     Then The visual "sub_title" should be "underline"
 
   @Commentary
   Scenario: TC_Commentary_25:Verify horizontal alignment (left, right, center) of sub_title
     And Create Commentary visual
-    #And Click on visual title
-   And Click on edit commentary icon
+    And Click on visual title
     And Click on left,center and right alignment for sub_title
     Then The sub_title should align to "left" , "center" and "right" as user set
 
   @Commentary
   Scenario: TC_Commentary_26:Verify closing of titles popup
     And Create Commentary visual
-    #And Click on visual title
-   And Click on edit commentary icon
+    And Click on visual title
     And Click on X icon to close the popup
     Then The "Title" popup should be closed
 
@@ -370,7 +348,7 @@ Feature: Verifying Commentary Visual functionality
     And Click on "Download"
     Then The tab name should be "Text"
 
-  @Commentary1
+  @Commentary
   Scenario: TC_Commentary_50:Download - Verify visual download to PNG format
     And Add some text in the description field
     And Click on Download icon
@@ -761,8 +739,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_93:Right click - Verify Copy commentary
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Copy commentary"
@@ -772,8 +749,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_94:Right click - Validate copied commentary
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Copy commentary"
@@ -784,8 +760,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_95:Right click - Verify Cut commentary
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Cut commentary"
@@ -795,8 +770,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_96:Right click - Validate Cut commentary
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Cut commentary"
@@ -807,8 +781,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_97:Right click - Verify Delete commentary
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Delete commentary"
@@ -818,8 +791,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_98:Right click - Verify chart under insert visual
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Add chart as "Chart"
@@ -829,8 +801,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_99:Right click - Verify map under insert visual
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Add chart as "Map"
@@ -840,8 +811,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_100:Right click - Verify table under insert visual
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Add chart as "Table"
@@ -851,8 +821,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_101:Right click - Verify pie under insert visual
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Add chart as "Pie"
@@ -862,8 +831,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_102:Right click - Verify Heat map under insert visual
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Add chart as "Heat map"
@@ -873,8 +841,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_103:Right click - Verify Histogram under insert visual
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Add chart as "Histogram"
@@ -924,8 +891,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_108:Right click - Verify Paste visual
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Copy commentary"
@@ -937,8 +903,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_109:Right click - Verify 'Clear contents'
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Clear contents"
@@ -948,8 +913,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_110:Right click - Verify Download subdropdown
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose "Download"
@@ -959,8 +923,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_111:Right click - Download - Verify commentary
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Download as "Text"
@@ -970,8 +933,7 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_112:Right click - Download - Verify View
     And Add some text in the description field
     And Get the text from the description field
-    #And Click on visual title
-    And Click on edit commentary icon
+    And Click on visual title
     And Check the box for the title name
     And Right click on visual header
     And Choose Download as "View"
@@ -1013,3 +975,4 @@ Feature: Verifying Commentary Visual functionality
   Scenario: TC_Commentary_118:Verify 'Delete' insight having all type of visuals
     And Delete the created insight with all visuals
     Then The insight should be deleted successfully
+

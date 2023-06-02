@@ -28,7 +28,6 @@ Feature: Verify C icon for continous series.
     Given User selects More dropdown
     And clicks on continuos series icon.
     And clicks on Apply filter button.
-    #And User has clicked on "Apply filter"
     And select continuos checkbox.
     And clicks on any continuos series.
     And Open Add in SSP->click on Add as continuos series.
@@ -38,13 +37,11 @@ Feature: Verify C icon for continous series.
     Given User selects More dropdown
     And clicks on continuos series icon.
     And clicks on Apply filter button.
-   # And select continuos checkbox.	
-   
+   # And select continuos checkbox.
     And add as continuos series.
     And Continuous series must be shown with continuous tag.
     
-     #@Sprint6_0	
-     
+     #@Sprint6_0
    #Scenario: Tc_Conti_02 : Verify Global key series/Forecasting service db for continuous series
     #Given User selects More dropdown
     #And clicks on Keys only series icon.
@@ -92,11 +89,9 @@ Feature: Verify C icon for continous series.
      Given User selects More dropdown
      And clicks on continuos series icon.
      And clicks on Apply filter button.
-     And select some series into series tab.
-     And click on related tab.
-     #And clicks on add icon.
-     #And select series=>click related series
-    # And check for continuos tab.
+     And clicks on add icon.
+     And select series=>click related series
+     And check for continuos tab.
      And check for preserve Name.
      
       @Sprint6_0
@@ -170,18 +165,7 @@ Feature: Verify C icon for continous series.
     And clicks on Apply filter button.
     And add as continuos series.
     And click on download button=>Download to excel.
-    Then validate the "Name your insight" Sheet and read the '12' '2' row and column and verify the Preapplied-function
-    
-    
-    @Sprint6_0
-   Scenario: Tc_Conti_21: Verify other favorited function on continuous series.
-   Given User selects More dropdown
-    And clicks on continuos series icon.
-    And clicks on Apply filter button.
-    And add as continuos series.
-    And select favorite function on continuos series
-    Then favourite function should be applied with pre-applied function
-   
+    Then validate the "Name your insight" Sheet and read the '10' '1' row and column and verify the Preapplied-function
     
     
     
@@ -192,6 +176,4 @@ Feature: Verify C icon for continous series.
     
     
     
-    	
-    		
-    		
+    

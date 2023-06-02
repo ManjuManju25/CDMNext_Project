@@ -1,5 +1,4 @@
-	
-	Feature: Login to the application under test
+Feature: Login to the application under test
 
   @Login
   Scenario Outline: Login functionality for Success and Failure TC'S

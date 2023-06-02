@@ -4,14 +4,12 @@ Feature: Verify Cross section functionality
   #Given User has successful logged in
   @CrossSection
   Scenario: Tc_Cross Section_01: Verify cross section functionality for series
-   # And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Open preference dropdown
-    # And Clicking on "Ask me to confirm the download settings" option under user preference to be "Check"
     And Clicking on "Keyboard shortcuts" option under user preference be "ON"
     And Open preference dropdown
-    #And Sort the series in left pane
     And Search for the series with SID "310901701;310901801" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The "Sum" method is default and series should be applied with crosssec func with first series name as output
 
@@ -19,14 +17,16 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_02: Verify cross section function for single series
     And Sort the series in left pane
     And Search for the series with SID "310901701" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+   And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The "This function can only be applied over a selection of multiple series" message should display
 
-  @CrossSection
+  @CrossSection2
   Scenario: Tc_Cross Section_03: Verify crosssec output series in excel
     And Search for the series with SID "310901701;310901801" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Rename the Insight to "03" and click Download option from "Download Window"
     And The output series has to be present inbetween the base series
@@ -36,14 +36,15 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_04: Verify crosssec func with list mode in myseries
     And Search for the series with SID "310901701;310901801" and click on "A" option
     And Clicking "List" option from myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The output series has to be present inbetween the base series and the "List" method is selected
 
   @CrossSection
   Scenario: Tc_Cross Section_05: Verify crosssec func with table mode in myseries
     And Search for the series with SID "310901701;310901801" and click on "A" option
-    And Clicking "Table" option from myseries
+    And Clicking the "Table" option from myseries
     And Select all series from table in myseries and click on "Open function editor" option
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The output series has to be present inbetween the base series and the "Table" method is selected
@@ -52,14 +53,16 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_06: Verify replace base series with its base series
     And List option should select
     And Search for the series with SID "310901701;310901801" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The output series has to be present inbetween the base series and should be able to move up or down
 
   @CrossSection
   Scenario: Tc_Cross Section_07: Verify sorting output series with sort by options dropdown
     And Search for the series with SID "310901701;310901801" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+     And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then Clicking on sort by options
 
@@ -119,7 +122,8 @@ Feature: Verify Cross section functionality
   @CrossSection
   Scenario: Tc_Cross Section_15: Verify methods dropdown for crosssec function
     And Search for the series with SID "310902301;310902401" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The "Sum" , "Median" , "Avg" , "Product" methods should present
 
@@ -127,7 +131,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_16: Verify apply crosssec for series with replace selected series
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Sum" method from dropdown
     And Click "Replace selected series" text and "Checked" the checkbox
@@ -137,7 +142,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_17: Verify crosssec function with sum method in functions wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Sum" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -149,18 +155,20 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_19: Verify crosssec func with sum method in functions wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+   And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Click "Extend to longest" text and "Uncheck" the checkbox
-
-  # And Click "Ignore missed" text and "Check" the checkbox
-  #  And Click "Replace selected series" text and "Checked" the checkbox
-  #  Then The Output series must get replaced with first "Uncheck Longest" base series
+   And Click "Ignore missed" text and "Check" the checkbox
+   And Click "Replace selected series" text and "Checked" the checkbox
+   Then The Output series must get replaced with first "Uncheck Longest" base series
+   
   @CrossSection
   Scenario: Tc_Cross Section_20: Verify crosssec func with sum method in functions wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+  	And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Sum" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -172,7 +180,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_21: Verify crosssec func with sum method in functions wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+   And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Sum" method from dropdown
     And Click "Extend to longest" text and "Uncheck" the checkbox
@@ -184,7 +193,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_22: Verify crosssec func with Median method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+   And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Median" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -196,7 +206,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_24: Verify crosssec func with Median method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Median" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -208,7 +219,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_25: Verify crosssec func with Median method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Median" method from dropdown
     And Click "Extend to longest" text and "Uncheck" the checkbox
@@ -220,7 +232,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_26: Verify crosssec func with Median method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Median" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -232,7 +245,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_27: Verify crosssec func with Median method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Median" method from dropdown
     And Click "Extend to longest" text and "Uncheck" the checkbox
@@ -244,7 +258,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_28: Verify crosssec func with Avg method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Avg" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -256,7 +271,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_30: Verify crosssec func with Avg method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+   And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Avg" method from dropdown
     And Click "Extend to longest" text and "Uncheck" the checkbox
@@ -268,7 +284,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_31: Verify crosssec func with Avg method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+   And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Avg" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -280,7 +297,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_32: Verify crosssec func with Avg method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Avg" method from dropdown
     And Click "Extend to longest" text and "Uncheck" the checkbox
@@ -292,7 +310,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_33: Verify crosssec func with Product method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Product" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -304,7 +323,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_35: Verify crosssec func with Product method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+   And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Product" method from dropdown
     And Click "Extend to longest" text and "Uncheck" the checkbox
@@ -316,7 +336,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_36: Verify crosssec func with Product method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+ 	  And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Product" method from dropdown
     And Click "Extend to longest" text and "Check" the checkbox
@@ -328,7 +349,8 @@ Feature: Verify Cross section functionality
   Scenario: Tc_Cross Section_37: Verify crosssec func with Product method in func wizard
     And Search for the series with SID "310902301;310902401" and click on "A" option
     And Count the series in myseries
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     And Select "Product" method from dropdown
     And Click "Extend to longest" text and "Uncheck" the checkbox
@@ -467,21 +489,24 @@ Feature: Verify Cross section functionality
   @CrossSection
   Scenario: Tc_Cross Section_54: Verify applying crosssec to series having different frequency
     And Search for the series with SID "210698402;206954202" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The Series should be of same "frequency" Validation message should appear
 
   @CrossSection
   Scenario: Tc_Cross Section_55: Verify applying crosssec to series having different unit
     And Search for the series with SID "210698402;35709701" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+    And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The Series should be of same "unit" Validation message should appear
 
   @CrossSection
   Scenario: Tc_Cross Section_56: Verify applying crosssec to series having different unit & frequency
     And Search for the series with SID "210698402;387139827" and click on "A" option
-    And Select all series from myseries and click on "Open function editor" option
+     And Select all series from myseries  
+   	And Click on "fx" icon as function editor window
     And Click "By function" tab and enter "CROSSSEC" in search field
     Then The Series should be of same "frequency" Validation message should appear
 
@@ -520,7 +545,7 @@ Feature: Verify Cross section functionality
   @CrossSection
   Scenario: Tc_Cross Section_60: Verify applying crosssec for visuals with its frequency conversion popup by converting currency too for pie/chart/map
     And Search for the series with SID "313735501;339329501" and click on "C" option
-    And Select "currency" as "EUR" in frequency popup
+    And Select "currency" as "Euros" in frequency popup
     And Click on "Apply" in frequency conversion popup
     And Right Click the "Chart" visual
     And Click on "Calculate series" to check the type of visual
@@ -532,7 +557,7 @@ Feature: Verify Cross section functionality
   @CrossSection
   Scenario: Tc_Cross Section_61: Verify applying crosssec for visuals with its frequency conversion popup by converting currency too for pie/chart/map
     And Search for the series with SID "313735501;339329501" and click on "Heat map" option
-    And Select "currency" as "EUR" in frequency popup
+    And Select "currency" as "Euros" in frequency popup
     And Click on "Apply" in frequency conversion popup
     And Right Click the "Heat map" visual
     And Click on "Calculate series" to check the type of visual
@@ -555,10 +580,11 @@ Feature: Verify Cross section functionality
     And Search for the series with SID "310901701;310901801" and click on "Download" option
     And Select "series" tab in download popup and click on "fx" option and pass as "CROSSSEC"
     Then The "Download button" in Download window has to be present
-
+			
+		
   @CrossSection
   Scenario: Tc_Cross Section_66: Verify cancel applied function over search pane series throught download window
     And Search for the series with SID "310901701;310901801" and click on "Download" option
     And Select "series" tab in download popup and click on "fx" option and pass as "CROSSSEC"
     Then The "Cancel button" in Download window has to be present
-    And Sort the default series in left pane
+   #And Sort the default series in left pane

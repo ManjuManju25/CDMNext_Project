@@ -33,7 +33,6 @@ public class RefreshSummaryPopUp {
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'More')]")));
 			login.driver.findElement(By.xpath("//span[contains(text(),'More')]")).click();
 		
-		//login.driver.findElement(By.xpath("//span[contains(text(),'More')]")).click();
 		Thread.sleep(5000);
 		WebElement chkbox = login.driver.findElement(By.xpath("(//span[@class='status-icon'])[4]"));
 		js.executeScript("arguments[0].scrollIntoView(true)", chkbox);
@@ -46,6 +45,9 @@ public class RefreshSummaryPopUp {
 		//click on series
 		login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
 		Thread.sleep(5000);
+		
+		WebElement series1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		new Actions(login.driver).moveToElement(series1).build().perform();
 		//click on +icon
 		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
 		
@@ -58,7 +60,7 @@ public class RefreshSummaryPopUp {
 		Thread.sleep(2000);
 		login.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		login.driver.findElement(By.xpath("//div[@class='account-avatar account-avatar__small']")).click();
-        Thread.sleep(1000);
+		Thread.sleep(1000);
 		WebElement SighOut = login.driver.findElement(By.xpath("//span[contains(text(),'Sign out')]"));
 		js.executeScript("arguments[0].scrollIntoView(true)", SighOut);
 		SighOut.click();
@@ -80,15 +82,6 @@ public class RefreshSummaryPopUp {
 		login.driver.findElement(By.xpath("//button[@class='btn']")).click();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// TC_01
 	@Then("^click on Myinsights$")
 	public void click_on_Myinsights() throws Throwable {
@@ -102,10 +95,12 @@ public class RefreshSummaryPopUp {
 	@Then("^click on recent saved insights$")
 	public void click_on_recent_saved_insights() throws Throwable {
 		Thread.sleep(4000);
+		login.driver.findElement(By.xpath("//div[@title='View as a grid']")).click();
+		Thread.sleep(2000);
 		login.driver
-				.findElement(By.xpath("(//div[@class='link link__medium insight-grid-item--bottom-panel-title'])[2]"))
+				.findElement(By.xpath("(//div[@class='insight-grid-item--bottom-panel']/div)[2]"))
 				.click();
-
+	
 	}
 
 	// TC_01
@@ -154,32 +149,45 @@ public class RefreshSummaryPopUp {
 		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
 		Thread.sleep(2000);
 		WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
-		actions.contextClick(elementLocator).perform();
-		
-		
+		actions.contextClick(elementLocator).build().perform();
+				
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
 		Thread.sleep(2000);
-		//login.driver.findElement(By.xpath("//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
 		login.driver.findElement(By.xpath("//div[text()='Vertical']")).click();
-		
-		
-		
-		
-		
-		
-		
-		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
 		Thread.sleep(3000);
-		
-
-		
+			
 	}
 
-	
 	//TC_03
 	@Given("^New insight search with given data as \"([^\"]*)\"$")
 	public void new_insight_search_with_given_data_as(String arg1) throws Throwable {
+	    Thread.sleep(2000);
+	   
+	    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
+	    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(Keys.ENTER);
+	    Thread.sleep(1000);
+	    
+	    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='toggler-control-item--label'])[2]")));
+	    Thread.sleep(1000);
+		login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
+	    Thread.sleep(1000);
+	    for(int i=1;i<=10;i++)
+	    {
+	    Thread.sleep(1000);
+	    	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]")).click();
+	    //	System.out.println("Enter into if condition: "+i);
+	    }
+	    Thread.sleep(1000);
+	    WebElement series = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+	    new Actions(login.driver).moveToElement(series).build().perform();
+	    Thread.sleep(1000);
+	    login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+	    	 
+	 	 }
+	
+	@Given("^New insight search with given data as \"([^\"]*)\" with two series$")
+	public void new_insight_search_with_given_data_as_with_two_series(String arg1) throws Throwable {
 	    Thread.sleep(2000);
 	   
 	    login.driver.findElement(By.xpath("//input[@class='search-input-text']")).sendKeys(arg1);
@@ -197,45 +205,34 @@ public class RefreshSummaryPopUp {
 	    	System.out.println("Enter into if condition: "+i);
 	    }
 	    Thread.sleep(1000);
+	    WebElement seriess = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+	    new Actions(login.driver).moveToElement(seriess).build().perform();
+	    
 	    login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
 	    	 
-	    	  
-	    	 
-
-	    		  }
-
-
-	    
-	
-	//TC_03
+	 	 }
+   	//TC_03
 	@And("^some tabs display in RSP$")
 	public void some_tabs_display_in_RSP() throws Throwable {
 	   Thread.sleep(2000);
 	   
+	   login.driver.findElement(By.xpath("//div[contains(text(),'Indicators')]")).isDisplayed();
 	   login.driver.findElement(By.xpath("//div[contains(text(),'Forecast')]")).isDisplayed();
+	   login.driver.findElement(By.xpath("//div[contains(text(),'Replacements')]")).isDisplayed();
 	   login.driver.findElement(By.xpath("//div[contains(text(),'Continuous')]")).isDisplayed();
 	   login.driver.findElement(By.xpath("//div[contains(text(),'Breakdowns')]")).isDisplayed();
 	   login.driver.findElement(By.xpath("//div[contains(text(),'Dependencies')]")).isDisplayed();
 	   
 	   
 	   login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
-	 
-	   
-
-	   
-	   
+	     	   
 	}
 	//TC_03
 	@Then("^Only replacement tab should be shown in RSP$")
 	public void only_replacement_tab_should_be_shown_in_RSP() throws Throwable {
 		Thread.sleep(2000);
 		
-		
-//		login.driver.findElement(By.xpath("//input[@name='select_all_dataselection']/following::span[@class='input-control--indicator']")).click();
-//		login.driver.findElement(By.xpath("//div[contains(text(),'Related Series')]")).click();
-//		login.driver.switchTo().activeElement();
-		
-		 if(login.driver.findElement(By.xpath("//div[contains(text(),'Replacements (2)')]")).isDisplayed())
+		 if(login.driver.findElement(By.xpath("//div[@class='tabs__tab-item']")).isDisplayed())
 		 {
 			 login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
 			 CommonFunctionality.DeleteSeries();
@@ -267,74 +264,59 @@ public class RefreshSummaryPopUp {
   Thread.sleep(1000);
 	login.driver.findElement(By.xpath("(//span[@class='toggler-control-item--label'])[2]")).click();
   Thread.sleep(1000);
-  for(int i=1;i<=2;i++)
+  for(int i=1;i<=10;i++)
   {
   Thread.sleep(3000);
   	login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
   	System.out.println("Enter into if condition: "+i);
   }
   Thread.sleep(1000);
- // login.driver.findElement(By.xpath("(/9/div[@class='add-to-data-selection--icon'])[1]")).click();
-  	 
-
-	}
+  
+}
 	//TC_04
 	@Given("^add series into visuals$")
 	public void add_series_into_visuals() throws Throwable {
-		login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
-		Thread.sleep(2000);
+		
 		WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
-		actions.contextClick(elementLocator).perform();
-		
-		
+		actions.contextClick(elementLocator).build().perform();
 	    Thread.sleep(2000);
-//	   // login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]")).click();
-//		Thread.sleep(2000);
-//		WebElement elementLocator = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
-//		actions.contextClick().build().perform();
-		
-		
-		
-		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
-		//Thread.sleep(3000);
-		
-		
-		
-		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
+	    login.driver.findElement(By.xpath("//*[text()='Add chart']")).click();
 		Thread.sleep(2000);
 		//login.driver.findElement(By.xpath("//*[@class='icon--table-vertical_large public-js-views-visuals-VisualsPanelSubItem-module__subItemIcon']")).click();
 		login.driver.findElement(By.xpath("//div[text()='Vertical']")).click();
-		
-		
+		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 		
 	}
 	//TC_04
+	
+	@And("^Click on my series and selct all checkbox$")
+	public void click_on_my_series_and_select_all_checkbox() throws Throwable {
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//a[@data-id='myseries']")).click();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath("//div[@class='check-all-series']//span[@class='input-control--indicator']")).click();
+
+		
+		}
 	@Given("^click on add related series$")
 	public void click_on_add_related_series() throws Throwable {
 	   
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//*[contains(text(),'Related Series')]")).click();
+		login.driver.findElement(By.xpath("//button[contains(text(),'Add related series')]")).click();
 	
 	}
-
+//TC_05
+	
+	
 	
 	//TC_06
 	@Then("^Manage All checkbox checked$")
 	public void manage_All_checkbox_checked() throws Throwable {
 	   Thread.sleep(3000);
 	   
+	   login.driver.findElement(By.xpath("//div[@class='tabs__tab-item']")).click();
+	   Thread.sleep(2000);
 	   login.driver.findElement(By.xpath("//div[@class='suggestions-panel--checker-all']")).click();
 	   
 
@@ -346,7 +328,7 @@ public class RefreshSummaryPopUp {
 		Thread.sleep(2000);
 		 login.driver.findElement(By.xpath("//div[@class='suggestions-panel--arrow icon--filter-arrow']")).click();
 		 Thread.sleep(500);
-		 login.driver.findElement(By.xpath("//span[contains(text(),'Replace')]")).click();
+		 login.driver.findElement(By.xpath("//span[@title='Replace Inactive Series']")).click();
 		Thread.sleep(2000);
 		
 	   
@@ -358,7 +340,7 @@ public class RefreshSummaryPopUp {
 		login.driver.findElement(By.xpath("(//button[@class='button button__primary suggestions-wizard--button suggestions-wizard--button__apply'])[2]")).click();
 		
 		Thread.sleep(500);
-		//login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();	
+		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();	
 		
 	 
 	}
@@ -498,12 +480,7 @@ public class RefreshSummaryPopUp {
 	   Thread.sleep(2000);
 	   
 	   login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
-		
-		
-	   
-	   
-	   
-		
+		 		
 	}
 	//TC_09
 	@Then("^check for show latest changes for insights upon opening$")
@@ -722,7 +699,7 @@ public class RefreshSummaryPopUp {
 	public void rsp_should_be_opened() throws Throwable {
 		
 		Thread.sleep(3000);
-		   if(login.driver.findElement(By.xpath("(//div[contains(text(),'Cancel')])[2]")).isDisplayed())
+		   if(login.driver.findElement(By.xpath("//div[@class='movable-modal--title ui-draggable-handle']")).isDisplayed())
 			{
 			   System.out.println("RSP should be opened");
 			}
@@ -785,8 +762,7 @@ public class RefreshSummaryPopUp {
 		   
 	  Thread.sleep(2000);
 	  
-	 
-	}
+	 	}
 	//TC_18
 	@Then("^RSP not display$")
 	public void rsp_not_display() throws Throwable {
@@ -858,13 +834,10 @@ public class RefreshSummaryPopUp {
 	@Then("^click on dismiss button in RSP window$")
 	public void click_on_dismiss_button_in_RSP_window() throws Throwable {
 	   Thread.sleep(3000);
-		
-		
-	   login.driver.findElement(By.xpath("(//div[@class='series-changes-summary']//div[contains(text(),'Dismiss')])[2]")).click();
-		
-	 
-		
-		
+		WebElement dismiss = login.driver.findElement(By.xpath("(//div[@class='button button__secondary_purple'])[2]"));
+		dismiss.click();
+	//   login.driver.findElement(By.xpath("(//div[@class='button button__secondary_purple'])[2]")).click();
+			 			
 	}
 	//TC_20
 	@Then("^RSP window should not be opened$")
@@ -900,11 +873,20 @@ public class RefreshSummaryPopUp {
 	
 	
 	//TC_23
+	
 	@Then("^show latest changes in my insight upon opening option should be checked only$")
 	public void show_latest_changes_in_my_insight_upon_opening_option_should_be_checked_only() throws Throwable {
 	    Thread.sleep(2000);
-	   login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
-	   //CommonFunctionality.DeleteSeries();
+	//   login.driver.findElement(By.xpath("//*[@title='View and edit profile information']")).click();
+	//   Thread.sleep(1000);
+	   
+	  if(login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]/preceding-sibling::input[@name='changes_summary']")).isSelected())
+	  {
+		  System.out.println("Show latest changes in my insight upon opening option should be checked only");
+	  }else {
+		  Assert.fail("Test case failed");
+	  }
+	   CommonFunctionality.DeleteSeries();
 		System.out.println("=============>TC_23==============>");
 	}
 	

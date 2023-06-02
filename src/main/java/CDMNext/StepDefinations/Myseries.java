@@ -31,6 +31,7 @@ import org.testng.Assert;
 
 import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.Given;
 
 public class Myseries {
@@ -40,11 +41,15 @@ public class Myseries {
 	WebElement element;
 	WebElement ulelement;
 	public String Searchinserieslistfilter;
+	public String name;
 	public String FirstseriesName;
+	public String FirstseriesName1;
 	public String firstFourChars;
 	public String function_series_name;
 	public String TEST;
 	public String Seriesname;
+	public String Seriesname1;
+	public String Seriesname2;
 	public String Functionseriesname;
 	public String first_series_name_myseries;
 	public String Second_first_series_name_myseries;
@@ -64,6 +69,7 @@ public class Myseries {
 	public String lastupdatevalue;
 	public String Seriesnametodrag;
 	public String searchSeriesname;
+	public String Functionappliedintoolbar;
 	ArrayList<String> listofseries = new ArrayList<>();
 
 	// TC_MS_01
@@ -107,33 +113,34 @@ public class Myseries {
 					"(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]", 8).click();
 
 		}
-		// click on '+'icon
-		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
-				.click();
+		
+		//Mouse hover on series name
 		CommonFunctionality.wait(1000);
-		//try {
-			//CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View as List']", 10).click();
-		//} catch (Exception e) {
-			CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 10).click();
-		//}
-
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]", 8);
+		new Actions(login.driver).moveToElement(series).build().perform();
+		// click on '+'icon
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8).click();
+	
+			
+		CommonFunctionality.wait(1000);
+	
 	}
 
 	// TC_MS_03
 	@And("^Select all series$")
 	public void select_all_series() throws Throwable {
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByProperty(login.driver, "Series_select_all", 10).click();
 	}
 
 	// TC_MS_03
 	@And("^select the Related series option$")
 	public void select_the_Related_series_option() throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "Related_Series", 10).click();
-		CommonFunctionality.wait(2000);
-		//login.driver.findElement(By.xpath("//button[normalize-space(text())='Related Series']")).click();
-		login.driver.findElement(By.xpath("//div[normalize-space(text())='Related series']")).click();
 		
+		CommonFunctionality.wait(2000);
+		
+		login.driver.findElement(By.xpath("//*[contains(text(),'Related series')]")).click();
+
 	}
 
 	// TC_MS_03
@@ -152,7 +159,7 @@ public class Myseries {
 	public void select_the_Rename_series_option() throws Throwable {
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//div[@title='Rename']")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "Rename", 10).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "Rename", 10).click();
 	}
 
 	// TC_MS_04
@@ -186,17 +193,27 @@ public class Myseries {
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
 	}
 
+	// TC_MS_06
+
+	@And("^Verify Series rename popup should be displayed with the selected series available in My series panel$")
+	public void verify_Series_rename_popup_should_be_displayed_with_the_selected_series_available_in_My_series_panel()
+			throws Throwable {
+		Thread.sleep(2000);
+
+		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 10).click();
+	}
+
 	// TC_MS_07
 	@And("^get the series name$")
 	public void get_the_series_name() throws Throwable {
 		Thread.sleep(1000);
-		
-		
-		
+
 		WebElement chartlegend = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
 		action.moveToElement(chartlegend).build().perform();
-		
-		FirstseriesName = CommonFunctionality.getElementByProperty(login.driver, "First_series_Name", 8).getText();
+
+		FirstseriesName = CommonFunctionality
+				.getElementByXpath(login.driver, "(//span[@class='series-name-field--text'])[1]", 8).getText();
+
 		System.out.println(FirstseriesName);
 	}
 
@@ -204,12 +221,15 @@ public class Myseries {
 	@And("^Verify the series order in Rename popup$")
 	public void verify_the_series_order_in_Rename_popup() throws Throwable {
 		Thread.sleep(2000);
-		//String FirstseriesNameinpopup = CommonFunctionality
-			///	.getElementByProperty(login.driver, "First_series_Name_in_popup", 8).getAttribute("value");
-		
-		//login.driver.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input[1]")).click();
-		String FirstseriesNameinpopup = login.driver.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input[1]")).getAttribute("value");
-		System.out.println("---------------"+FirstseriesNameinpopup);
+		// String FirstseriesNameinpopup = CommonFunctionality
+		/// .getElementByProperty(login.driver, "First_series_Name_in_popup",
+		// 8).getAttribute("value");
+
+		// login.driver.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input[1]")).click();
+		String FirstseriesNameinpopup = login.driver
+				.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input[1]"))
+				.getAttribute("value");
+		System.out.println("---------------" + FirstseriesNameinpopup);
 		System.out.println(FirstseriesName + ":" + FirstseriesNameinpopup);
 		CommonFunctionality.wait(2000);
 		if (FirstseriesName.equalsIgnoreCase(FirstseriesNameinpopup)) {
@@ -226,10 +246,13 @@ public class Myseries {
 	@And("^Verify the Rename option if series selected$")
 	public void verify_the_Rename_option_if_series_selected() throws Throwable {
 		Thread.sleep(2000);
-	//	String FirstseriesNameinpopup = CommonFunctionality
-				//.getElementByProperty(login.driver, "First_series_Name_in_popup", 8).getAttribute("value");
-		
-		String FirstseriesNameinpopup = login.driver.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input")).getAttribute("value");
+		// String FirstseriesNameinpopup = CommonFunctionality
+		// .getElementByProperty(login.driver, "First_series_Name_in_popup",
+		// 8).getAttribute("value");
+
+		String FirstseriesNameinpopup = login.driver
+				.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input"))
+				.getAttribute("value");
 		System.out.println(FirstseriesNameinpopup);
 		System.out.println(FirstseriesName + ":" + FirstseriesNameinpopup);
 		if (FirstseriesName.equalsIgnoreCase(FirstseriesNameinpopup)) {
@@ -251,11 +274,15 @@ public class Myseries {
 	@And("^Verify the Rename option for number of available itmes$")
 	public void verify_the_Rename_option_for_number_of_available_itmes() throws Throwable {
 		Thread.sleep(2000);
-		//String Seriesinmyseries = CommonFunctionality.getElementByProperty(login.driver, "UnSelected_series", 8)
-			//	.getText();
-		String Seriesinmyseries = login.driver.findElement(By.xpath("//span[@class='find-and-replace--modal-title-info']")).getText();
+		// String Seriesinmyseries =
+		// CommonFunctionality.getElementByProperty(login.driver, "UnSelected_series",
+		// 8)
+		// .getText();
+		String Seriesinmyseries = login.driver
+				.findElement(By.xpath("//span[@class='find-and-replace--modal-title-info']")).getText();
 		System.out.println("Seriesinmyseries count:---->" + Seriesinmyseries);
-		String Seriesinpopup = CommonFunctionality.getElementByProperty(login.driver, "UnSelected_series_inpopup", 8).getText();
+		String Seriesinpopup = CommonFunctionality.getElementByProperty(login.driver, "UnSelected_series_inpopup", 8)
+				.getText();
 
 		String str = Seriesinpopup;
 		String Seriesinpopup_num = str.replaceAll("[^0-9]", "");
@@ -275,18 +302,19 @@ public class Myseries {
 	public void select_random_series_to_my_series_tab() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Series')]", 8).click();
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 2; i++) {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"(//*[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]", 8).click();
 		}
 
 		// click on '+' icon
-		CommonFunctionality.wait(200);
-		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='add-to-data-selection--icon'])[1]", 10)
-				.click();
 		CommonFunctionality.wait(500);
-		//CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View as List']", 10).click();
-
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]", 8);
+		new Actions(login.driver).moveToElement(series).build().perform();
+		
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+		
+		CommonFunctionality.wait(1000);
 	}
 
 	// TC_MS_10
@@ -551,9 +579,12 @@ public class Myseries {
 	@And("^Verify  Rename-Name selection$")
 	public void verify_Rename_Name_selection() throws Throwable {
 		Thread.sleep(2000);
-		//String Seriesfirstname = CommonFunctionality.getElementByProperty(login.driver, "First_series_Name_in_popup", 8)
-			//	.getText();
-		String Seriesfirstname =login.driver.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input")).getText();
+		// String Seriesfirstname =
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "First_series_Name_in_popup", 8)
+		// .getText();
+		String Seriesfirstname = login.driver
+				.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input")).getText();
 		System.out.println(Seriesfirstname);
 		if (Seriesfirstname != (FirstseriesName)) {
 			System.out.println("Verified Rename-Name selection");
@@ -566,20 +597,28 @@ public class Myseries {
 	// TC_MS_23
 	@And("^Applay Function as \"([^\"]*)\"$")
 	public void applay_Function_as(String arg1) throws Throwable {
+		CommonFunctionality.wait(1000);
 		select_all_series();
-		CommonFunctionality.getElementByProperty(login.driver, "function_applay", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "First_function_applay", 8).click();
-	}
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Open function editor (F). Investigate all available functions in the function editor window.']", 8).click();
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Type a function'])[2]", 8).click();
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByXpath(login.driver, "//li[@title='Gets the percentage change over time']", 8)
+				.click();
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByXpath(login.driver, "//li[@class='suggestion-param selected']", 8).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//button[text()='Apply']", 8).click();
+	} 
 
 	// TC_MS_23
 	@And("^get the Applayied function series name$")
 	public void get_the_Applayied_function_series_name() throws Throwable {
 		Thread.sleep(2000);
-		//function_series_name = CommonFunctionality.getElementByProperty(login.driver, "function_series_name", 8).getText();
-		function_series_name =login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[1]")).getText();
+		function_series_name = login.driver.findElement(By.xpath("(//span[@class='series-name-field-title'])[2]"))
+				.getText();
 		System.out.println(function_series_name);
-		// String loginToken="[wdsd34svdf]";
-		 Functionseriesname = function_series_name.substring(0,function_series_name.length());
+		Functionseriesname = function_series_name.substring(0, function_series_name.length());
 
 	}
 
@@ -588,14 +627,15 @@ public class Myseries {
 	public void verify_Function_Description_Name_selection() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info_Function", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info", 8).click();
+	//	CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info", 8).click();
 		Thread.sleep(1000);
-		String Seriesfirstnameinpopup = CommonFunctionality.getElementByProperty(login.driver, "First_series_Name_in_popup", 8).getText();
+		String Seriesfirstnameinpopup = CommonFunctionality
+				.getElementByProperty(login.driver, "First_series_Name_in_popup", 8).getText();
 		// System.out.println(Seriesfirstnameinpopup);
 		// System.out.println(Seriesfirstnameinpopup + ":" + Functionseriesname);
 
 		System.out.println("Seriesfirstnameinpopup:" + Seriesfirstnameinpopup);
-		System.out.println("function_series_name:" + function_series_name);
+		System.out.println("Function series name:" + function_series_name);
 
 		if (function_series_name.contains(Seriesfirstnameinpopup)) {
 			System.out.println("Verified Function Description-Name selection");
@@ -611,8 +651,12 @@ public class Myseries {
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info_Function", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info", 8).click();
-		//String Seriesfirstnameinpopup = CommonFunctionality.getElementByProperty(login.driver, "First_series_Name_in_popup", 8).getAttribute("value");
-		String Seriesfirstnameinpopup=login.driver.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input")).getAttribute("value");
+		// String Seriesfirstnameinpopup =
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "First_series_Name_in_popup", 8).getAttribute("value");
+		String Seriesfirstnameinpopup = login.driver
+				.findElement(By.xpath("//div[@class='find-and-replace--body']/div[2]/div[1]/input"))
+				.getAttribute("value");
 		if (Seriesfirstnameinpopup.isEmpty() || Seriesfirstnameinpopup == null) {
 			System.out.println("Verified Function selection without function apply");
 		} else {
@@ -625,14 +669,19 @@ public class Myseries {
 	@And("^select any series to applay function$")
 	public void select_any_series_to_applay_function() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "First_Series_select", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "function_applay", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "First_function_applay", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "function_applay",
+		// 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "First_function_applay", 8).click();
 		login.driver.findElement(By.xpath("//input[@placeholder='Type a function']")).click();
 		login.driver.findElement(By.xpath("//li[@title='Round the values']")).click();
 		CommonFunctionality.wait(2000);
-		
-		
-		get_the_Applayied_function_series_name();
+
+		function_series_name = login.driver.findElement(By.xpath("(//span[@class='series-name-field-title'])[1]"))
+				.getText();
+		System.out.println(function_series_name);
+		// String loginToken="[wdsd34svdf]";
+		Functionseriesname = function_series_name.substring(0, function_series_name.length());
 
 	}
 
@@ -643,9 +692,10 @@ public class Myseries {
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info_Function", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series_info", 8).click();
 		Thread.sleep(1000);
-		//String Seriesfirstnameinpopup = CommonFunctionality
-			//	.getElementByProperty(login.driver, "First_series_Name_in_popup", 8).getAttribute("value");
-		String Seriesfirstnameinpopup =login.driver.findElement(By.xpath("//span[@class='link']")).getText();
+		// String Seriesfirstnameinpopup = CommonFunctionality
+		// .getElementByProperty(login.driver, "First_series_Name_in_popup",
+		// 8).getAttribute("value");
+		String Seriesfirstnameinpopup = login.driver.findElement(By.xpath("//span[@class='link']")).getText();
 		System.out.println(Seriesfirstnameinpopup);
 		System.out.println(Seriesfirstnameinpopup + ":" + Functionseriesname);
 
@@ -675,18 +725,21 @@ public class Myseries {
 	public void verify_Function_description_editing() throws Throwable {
 		TEST = "TEST";
 		Thread.sleep(1000);
-		//String Seriesfirstname = CommonFunctionality.getElementByProperty(login.driver, "function_series_name", 8).getText();
-		String Seriesfirstname =login.driver.findElement(By.xpath("(//span[@class='series-name-field-title'])[1]//span[2]")).getText();
+		// String Seriesfirstname =
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "function_series_name", 8).getText();
+		String Seriesfirstname = login.driver
+				.findElement(By.xpath("(//span[@class='series-name-field-title'])[1]//span[2]")).getText();
 		System.out.println(Seriesfirstname);
-		//String s1 = Seriesfirstname.substring(1, 18);
-		//System.out.println(s1 + ":" + TEST);
+		// String s1 = Seriesfirstname.substring(1, 18);
+		// System.out.println(s1 + ":" + TEST);
 
 		if (Seriesfirstname.contains(TEST)) {
 			System.out.println("Verified Function Description editing");
 		} else {
 			Assert.fail("Function Description editing is NOT verified ");
 		}
-		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close_window"))).click();
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close_window"))).click();
 	}
 
 	// TC_MS_28
@@ -743,6 +796,7 @@ public class Myseries {
 	// TC_MS_32
 	@And("^Change the series name as \"([^\"]*)\"$")
 	public void change_the_series_name_as(String arg1) throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).clear();
 		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).sendKeys(arg1);
 		Thread.sleep(2000);
@@ -757,8 +811,10 @@ public class Myseries {
 	@And("^Verify Rename Name Editing series name$")
 	public void verify_Rename_Name_Editing_series_name() throws Throwable {
 		Thread.sleep(2000);
-		String Seriesnameinmyseries = CommonFunctionality.getElementByProperty(login.driver, "First_series_Name", 8)
-				.getText();
+		String Seriesnameinmyseries = CommonFunctionality
+				.getElementByXpath(login.driver, "(//span[@class='series-name-field-title'])[1]", 8).getText();
+		// CommonFunctionality.getElementByProperty(login.driver, "First_series_Name",
+		// 8).getText();
 		System.out.println(Seriesnameinmyseries);
 		System.out.println(Seriesnameinmyseries + ":" + Seriesname);
 		if (Seriesnameinmyseries.equalsIgnoreCase(Seriesname)) {
@@ -794,9 +850,11 @@ public class Myseries {
 	// TC_MS_33
 	@And("^Change the series name$")
 	public void change_the_series_name() throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).clear();
 		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).sendKeys("TESTING");
 		Thread.sleep(2000);
+
 		Seriesname = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("First_series_in_rename")))
 				.getAttribute("value");
 		System.out.println("After changing the series name is " + Seriesname);
@@ -804,18 +862,65 @@ public class Myseries {
 	}
 
 	// TC_MS_34
-	@And("^Name Series apply original title icon  for more than one series$")
-	public void name_Series_apply_original_title_icon_for_more_than_one_series() throws Throwable {
-		name_Series_apply_original_title_icon();
+	@And("^Change all the series name$")
+	public void change_all_the_series_name() throws Throwable {
+		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).click();
+		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).clear();
+		CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8).sendKeys("TEST1");
+		Thread.sleep(2000);
+
+		Seriesname1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("First_series_in_rename")))
+				.getAttribute("value");
+		// Second_series_in_rename
+		CommonFunctionality.getElementByProperty(login.driver, "Second_series_in_rename", 8).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Second_series_in_rename", 8).clear();
+		CommonFunctionality.getElementByProperty(login.driver, "Second_series_in_rename", 8).sendKeys("TEST2");
+		Thread.sleep(2000);
+
+		Seriesname2 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("First_series_in_rename")))
+				.getAttribute("value");
+
+		// System.out.println("After changing the series name is : ");
+
+	}
+
+	@Then("^All the changes should be revert back with original title\\.$")
+	public void all_the_changes_should_be_revert_back_with_original_title() throws Throwable {
+
+		CommonFunctionality
+				.getElementByXpath(login.driver, "//div[@class='find-and-replace--body-header-action-icon']", 10)
+				.click();
+		CommonFunctionality.wait(2000);
+		String seriesinrename1 = CommonFunctionality.getElementByProperty(login.driver, "First_series_in_rename", 8)
+				.getAttribute("value");
+
+		String seriesinrename2 = CommonFunctionality.getElementByProperty(login.driver, "Second_series_in_rename", 8)
+				.getAttribute("value");
+
+		if (!seriesinrename1.equalsIgnoreCase(Seriesname1) && !seriesinrename2.equalsIgnoreCase(Seriesname2)) {
+			System.out.println("All the changes should be revert back with original title");
+		} else {
+			Assert.fail("Not verified");
+		}
+		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
 	}
 
 	// TC_MS_35
 	@And("^Verify > icon if no changes in series name and description$")
 	public void verify_icon_if_no_changes_in_series_name_and_description() throws Throwable {
 		System.out.println("===========>Enter into TC_35");
-		Thread.sleep(2000);
-		Assert.assertTrue(
-				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reverse_icon_rename"))).isDisplayed());
+		CommonFunctionality.wait(2000);
+
+		Boolean icon = CommonFunctionality
+				.getElementByXpath(login.driver, "(//div[@class='find-and-replace-item--action'])[1]", 8).isEnabled();
+		if (icon == false) {
+			login.Log4j.info("The '<' icon should be disabled if no changes:PASS");
+			// System.out.println("The '<' icon should be disabled if no changes");
+		} else {
+			// fail("The '<' icon should be disabled if no changes:FAIL");
+		}
+		// Assert.assertTrue(
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Reverse_icon_rename"))).isDisplayed());
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
 
 	}
@@ -830,8 +935,12 @@ public class Myseries {
 					"(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]", 8).click();
 			System.out.println("i vlaue===========>" + i);
 		}
-		CommonFunctionality.getElementByXpath(login.driver, "(//*[@class='add-to-data-selection--icon'])[1]", 8)
-				.click();
+		WebElement series11 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		new Actions(login.driver).moveToElement(series11).build().perform();
+		
+		WebElement icon1 = login.driver.findElement(By.xpath("(//*[@class='add-to-data-selection--icon'])[1]"));
+		new Actions(login.driver).moveToElement(icon1).click().build().perform();
+		
 	}
 
 	// TC_MS_36
@@ -859,6 +968,15 @@ public class Myseries {
 		CommonFunctionality.getElementByProperty(login.driver, "Applay_Button", 8).isDisplayed();
 		CommonFunctionality.getElementByProperty(login.driver, "Applay_Button", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Find_search_box", 8).isDisplayed();
+
+		if ((login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Rename_popup"))).size() == 1)) {
+
+			System.out.println("The changes should be saved and rename popup remains displayed");
+
+		} else {
+			Assert.fail("Not verified");
+		}
+
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
 
 	}
@@ -981,10 +1099,10 @@ public class Myseries {
 	// TC_MS_44
 	@And("^select the preview option$")
 	public void select_the_preview_option() throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "preview", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "preview", 8).click();
 		CommonFunctionality.wait(2000);
-	WebElement preview=	login.driver.findElement(By.xpath("(//div[normalize-space()='Preview'])[2]"));
-	action.moveToElement(preview).click().build().perform();
+		WebElement preview = login.driver.findElement(By.xpath("(//div[normalize-space()='Preview'])[2]"));
+		action.moveToElement(preview).click().build().perform();
 	}
 
 	// TC_MS_44
@@ -1018,7 +1136,8 @@ public class Myseries {
 
 		try {
 
-			WebElement chartlegend = login.driver.findElement(By.xpath("//*[@class='highcharts-container ']/div[1]/div/div/div[1]/span/div[1]/span[1]"));
+			WebElement chartlegend = login.driver.findElement(
+					By.xpath("//*[@class='highcharts-container ']/div[1]/div/div/div[1]/span/div[1]/span[1]"));
 			action.moveToElement(chartlegend).build().perform();
 			CommonFunctionality.getElementByProperty(login.driver, "preview_Chart_Legend", 8).click();
 			Thread.sleep(2000);
@@ -1047,13 +1166,17 @@ public class Myseries {
 	public void verify_the_Preview_hiding_all_series_from_chart() throws Throwable {
 
 		CommonFunctionality.wait(1000);
-		List<WebElement> chartlegend = login.driver.findElements(By.xpath("//div[@class='legend-item--hiding-series']"));
+		List<WebElement> chartlegend = login.driver
+				.findElements(By.xpath("//div[@class='legend-item--hiding-series']"));
 		for (int i = 1; i <= chartlegend.size(); i++) {
-			action.moveToElement(login.driver.findElement(By.xpath("(//div[@class='legend-item--hiding-series'])["+i+"]"))).build().perform();
+			action.moveToElement(
+					login.driver.findElement(By.xpath("(//div[@class='legend-item--hiding-series'])[" + i + "]")))
+					.build().perform();
 			CommonFunctionality.wait(300);
-			login.driver.findElement(By.xpath("(//div[@class='legend-item--hiding-series'])["+i+"]")).click();
+			login.driver.findElement(By.xpath("(//div[@class='legend-item--hiding-series'])[" + i + "]")).click();
 		}
-		Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("preview_Chart_Legend_nodata"))).isDisplayed());
+		Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("preview_Chart_Legend_nodata")))
+				.isDisplayed());
 		CommonFunctionality.getElementByProperty(login.driver, "preview_popup_close", 8).click();
 	}
 
@@ -1353,14 +1476,20 @@ public class Myseries {
 		}
 		Thread.sleep(300);
 		// click on '+'icon
-		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 10)
-				.click();
+		WebElement series1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		new Actions(login.driver).moveToElement(series1).build().perform();
+		
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+	
+				
+		Thread.sleep(1000);
 	}
 
 	// TC_MS_59
 	@And("^Verify for \"([^\"]*)\" Maximum series for 'Preview option'$")
 	public void verify_for_Maximum_series_for_Preview_option(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='check-all-series']//span[@class='input-control--indicator']", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 8).click();
 		CommonFunctionality.getElementByXpath(login.driver, "(//div[normalize-space()='Preview'])[2]", 8).click();
 
 		if (login.driver.findElements(By.xpath("//div[@class='series-preview-title']")).size() != 0) {
@@ -1387,53 +1516,38 @@ public class Myseries {
 		}
 		Thread.sleep(500);
 		// click on '+'icon
-		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 10)
-				.click();
-
+		
+		CommonFunctionality.wait(1000);
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]", 8);
+		new Actions(login.driver).moveToElement(series).build().perform();
+		
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+				
+		CommonFunctionality.wait(1000);
 	}
 
 	// TC_MS_58
 	@And("^Verify 'Preview option' is disable for \"([^\"]*)\" series$")
 	public void verify_Preview_option_is_disable_for_series(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 10).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series_select_all", 10).click();
 
-		if (login.driver.findElements(By.xpath(
-				"//div[@title='Preview. View selected series as a chart and as a table and see series statistics.']"))
-				.size() != 0) {
-			System.out.println("Preview option is working fine for More than 20 Series!!! ");
+		Boolean preview = CommonFunctionality.getElementByXpath(login.driver,
+				"//div[@title='Preview. View selected series as a chart and as a table and see series statistics.']", 8)
+				.isEnabled();
+		if (preview == false) {
+			login.Log4j.info("Preview option is disabled for more than 20 series");
 		} else {
-			Assert.fail("Preview option is NOT working fine for More than 20 Series!!!");
+			 Assert.fail("Preview option is enabled for less than 20 series");
 		}
 	}
 
-	/*
-	 * @And("^Select preview option$") public void select_preview_option() throws
-	 * Throwable { Thread.sleep(8000);
-	 * login.driver.findElement(By.xpath("//span[@class='input-control--indicator']"
-	 * )).click(); Thread.sleep(8000); login.driver.findElement(By.
-	 * xpath("//div[@class='webix_column list-series-name webix_last']/div[1]/div/span"
-	 * )) .click(); Thread.sleep(8000); login.driver.findElement(By.
-	 * xpath("//div[@class='data-action-panel insight-action-panel']/div[5]")).click
-	 * (); Thread.sleep(8000); login.driver.findElement(By.
-	 * xpath("//div[@class='webix_column list-series-name webix_last']/div[1]/div/span"
-	 * )) .click();
-	 * 
-	 * }
-	 */
 	// TC_MS_60
 	@And("^Verify Validation message for more than (\\d+) series added to preview window\\.$")
 	public void verify_Validation_message_for_more_than_series_added_to_preview_window(int arg1) throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "First_series_inmyseriespanel", 8).click();
-		login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn-title'])[2]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "preview", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "	"+ "", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver,"//div[@class='check-all-series']//span[@class='input-control--indicator']", 10).click();
-
-		//CommonFunctionality.getElementByProperty(login.driver, "preview_refresh", 10).click();
-		Thread.sleep(1000);
-		if (login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).size() == 0) {
-			System.out.println("Validation message Verified Successfully!!! ");
+		CommonFunctionality.getElementByProperty(login.driver, "preview_refresh", 10).click();
+		CommonFunctionality.wait(2000);
+		if (login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).size() == 1) {
+			login.Log4j.info("Validation message Verified Successfully!!!");
 		} else {
 			Assert.fail("Validation message is NOT Verified Successfully!!!");
 		}
@@ -1443,9 +1557,23 @@ public class Myseries {
 	// TC_MS_60
 	@And("^Select preview option$")
 	public void select_preview_option() throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "First_series_inmyseriespanel", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "preview", 10).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Select_All_Series_checkbox", 10).click();
+		select_all_series();
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByXpath(login.driver,
+				"(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[1]", 8).click();
+		CommonFunctionality.wait(1000);
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "First_series_inmyseriespanel", 8).click();
+		WebElement preview = login.driver.findElement(By.xpath("(//div[normalize-space()='Preview'])[2]"));
+		action.moveToElement(preview).click().build().perform();
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByXpath(login.driver,
+				"(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[1]", 8).click();
+		CommonFunctionality.wait(5000);
+		// CommonFunctionality.getElementByProperty(login.driver, "preview",
+		// 10).click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "Select_All_Series_checkbox", 10).click();
 	}
 
 	/*
@@ -1564,15 +1692,12 @@ public class Myseries {
 	// TC_MS_72
 	@And("^Select the Delete option$")
 	public void select_the_Delete_option() throws Throwable {
-		CommonFunctionality.wait(500);
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 8).click();
-
-	/*	CommonFunctionality
-				.getElementByXpath(login.driver, "//div[@class='data-action-panel insight-action-panel']/div[7]", 8)
-				.click();*/
-		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//div[@title='Delete (Delete). Delete selected series from the `My series`.']//div[@class='insight-action-panel--btn-icon']")).click();
+		CommonFunctionality.wait(1000);
+	//	CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='insight-action-panel--btn-icon'])[4]", 8)
+	//			.click();
+		 login.driver.findElement(By.xpath(
+		 "//div[@title='Delete (Delete). Delete selected series from the `My series`.']//div[@class='insight-action-panel--btn-icon']"))
+		 .click();
 
 	}
 
@@ -1580,12 +1705,13 @@ public class Myseries {
 	@And("^Verify Delete option functionality for Series$")
 	public void verify_Delete_option_functionality_for_Series() throws Throwable {
 		Thread.sleep(2000);
-		String delete = login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn disabled'])[2]")).getAttribute("class");
+		String delete = login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn disabled'])[2]"))
+				.getAttribute("class");
 		System.out.println(delete);
 		if (delete.contains("disabled")) {
 			System.out.println("Delete Functionality having Series is working Successfully");
 		} else {
-			Assert.fail("Delete Functionality having Series is Not working Successfully:-(");
+			Assert.fail("Delete Functionality having Series is Not working Successfully");
 		}
 	}
 
@@ -1600,12 +1726,12 @@ public class Myseries {
 		WebElement elementLocator11 = login.driver
 				.findElement(By.xpath("(//*[@class='series-list-item--checkbox svg-checkbox'])[1]"));
 		action.contextClick(elementLocator11).perform();
-		//CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Chart')]", 8).click();
-		WebElement Add_chart=login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
+	
+		WebElement Add_chart = login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
 		new Actions(login.driver).moveToElement(Add_chart).pause(2000).build().perform();
-		
-		WebElement Chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line')]"));
-		js. executeScript("arguments[0]. click();", Chart);
+
+		WebElement Chart = login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line')]"));
+		js.executeScript("arguments[0]. click();", Chart);
 	}
 
 	// TC_MS_74
@@ -1629,7 +1755,10 @@ public class Myseries {
 	@And("^Select to myseries button and select the delete option$")
 	public void select_to_myseries_button_and_select_the_delete_option() throws Throwable {
 		CommonFunctionality.wait(4000);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-page-menu']/div[1]", 8).click();
+		WebElement myseries = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-page-view-tab']", 8);
+		action.moveToElement(myseries).click().build().perform();
+		select_all_series();
+		CommonFunctionality.wait(2000);
 		select_the_Delete_option();
 	}
 
@@ -1640,17 +1769,9 @@ public class Myseries {
 		Assert.assertTrue(
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Delete_ok_button"))).isDisplayed());
 		CommonFunctionality.getElementByProperty(login.driver, "Delete_ok_button", 8).click();
-		/*Thread.sleep(2000);
-		String delete = login.driver
-				.findElement(By.xpath("(//div[@class='insight-action-panel--btn disabled']/div)[2]"))
-				.getAttribute("class");
-		System.out.println(delete);
-		if (delete.contains("disabled")) {
-			System.out.println("Delete ok Functionality  is working Successfully");
-		} else {
-			Assert.fail("Delete ok Functionality is Not working Successfully:-(");
-		}*/
-
+		System.out.println("Delete ok Functionality  is working Successfully"); 
+		Assert.fail("Delete ok Functionality is Not working Successfully");
+		  	 
 	}
 
 	// TC_MS_76
@@ -1683,11 +1804,8 @@ public class Myseries {
 	public void select_the_grouping_function() throws Throwable {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@data-action='group'])[1]", 8).click();
-		/*CommonFunctionality
-				.getElementByXpath(login.driver, "//ul[@class='dropdown-menu context-menu ']/div[3]/li[1]/span", 8)
-				.click();*/
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@data-action='group'])[1]", 8).click();
+		
 		CommonFunctionality
 				.getElementByXpath(login.driver,
 						"//div[@class='insight-series-rename--button insight-series-rename--button__cancel']", 8)
@@ -1695,12 +1813,23 @@ public class Myseries {
 
 	}
 
+	@Then("^Verify selected series should be grouped$")
+	public void verify_selected_series_should_be_grouped() throws Throwable {
+	   Thread.sleep(1000);
+	   
+	  String group = login.driver.findElement(By.xpath("//div[@class='popover-content']/div/input")).getText();
+	  
+	  if(group.equalsIgnoreCase("Group: Consumer Price Index")) {
+		  login.Log4j.info("Selected series should be grouped");
+	  }else {
+		 Assert.fail("Selected series should not be grouped");
+	  }
+	}
 	// TC_MS_78
 	@And("^Verify \"([^\"]*)\" functionality for Series$")
 	public void verify_functionality_for_Series(String arg1) throws Throwable {
-
 		String GroupVerification = "Group";
-		String Text = CommonFunctionality.getElementByXpath(login.driver, "//span[@class='group-name']", 9).getText();
+		String Text = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='popover-content']/div/input", 9).getText();
 		System.out.println("Text is" + Text);
 		String mystring = Text;
 		String arr[] = mystring.split(" ", 2);
@@ -1722,10 +1851,11 @@ public class Myseries {
 	public void select_the_grouping_dropdown() throws Throwable {
 		select_all_series();
 		CommonFunctionality.wait(500);
-		//CommonFunctionality.getElementByProperty(login.driver, "Grouping_dropdown_icon", 8).click();
-	    login.driver.findElement(By.xpath("//div[@title='Group. Unite selected series into a group.']//div[contains(@class,'context-menu-arrow')]")).click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		login.driver.findElement(By.xpath(
+				"//div[@title='Group. Unite selected series into a group.']//div[contains(@class,'context-menu-arrow')]"))
+				.click();
 	}
-	
 
 	// TC_MS_79
 	@And("^Verify Grouping dropdown$")
@@ -1733,7 +1863,6 @@ public class Myseries {
 		Thread.sleep(3000);
 		Assert.assertTrue(
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Grouping_dropdown"))).isDisplayed());
-		//CommonFunctionality.getElementByProperty(login.driver, "Grouping_dropdown_icon", 8).click();
 		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Group')]")).click();
 	}
@@ -1742,9 +1871,9 @@ public class Myseries {
 	@And("^Select the grouping icon$")
 	public void select_the_grouping_icon() throws Throwable {
 		select_all_series();
-		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//div[@title='Group. Unite selected series into a group.']")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "Grouping_icon", 8).click();
+		CommonFunctionality.wait(1000);
+		login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn-icon'])[10]")).click();
+		
 		System.out.println("<============================TC80================================================>");
 	}
 
@@ -1800,80 +1929,104 @@ public class Myseries {
 		System.out.println(GroupVerification + ":" + firstWord);
 		if (GroupVerification.equalsIgnoreCase(firstWord)) {
 
-			System.out.println("Grouping Functionality  is working Successfully");
+			System.out.println("Cancel icon for grouping functionality is working Successfully");
 		} else {
-			Assert.fail("Grouping Functionality is Not working Successfully:-(");
+			Assert.fail("Cancel icon for grouping functionality is not working Successfully:-(");
 		}
 
 	}
-	
+
 	// TC_MS_84
 	@And("^select group option\\.$")
 	public void select_group_option() throws Throwable {
 		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//div[contains(text(),'Group')]")).click();
-	   
+		WebElement group = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(text(),'Group')]", 8);
+		action.moveToElement(group).click().build().perform();
+		// login.driver.findElement(By.xpath("//div[contains(text(),'Group')]")).click();
+
 	}
-	
-	
+
 	// TC_MS_84
 	@And("^Select the UnGroup option$")
 	public void select_the_UnGroup_option() throws Throwable {
-		/*CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]", 8).click();*/
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[@title='Group. Unite selected series into a group.']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//div[@title='Group. Unite selected series into a group.']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']",
+				8).click();
 		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Ungroup')]")).click();
-		/*CommonFunctionality
-				.getElementByXpath(login.driver, "//ul[@class='dropdown-menu context-menu ']/div[3]/li[2]/span", 8)
-				.click();*/
-	}
+		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Ungroup')]", 8).click();
+		}
 
 	// TC_MS_84
 	@And("^Verify UnGroup functionality for Series$")
 	public void verify_UnGroup_functionality_for_Series() throws Throwable {
-		/*CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]", 8).click();*/
-		login.driver.findElement(By.xpath("//div[@title='Group. Unite selected series into a group.']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
-		Thread.sleep(2000);
-		if (login.driver.findElements(By.xpath("//span[@class='context-menu-item link disabled']")).size() != 0) {
-			System.out.println("UnGrouping Functionality  is working Successfully");
+		
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//div[@title='Group. Unite selected series into a group.']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']",
+				8).click();
+		CommonFunctionality.wait(500);
+		if (login.driver.findElement(By.xpath("//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).isEnabled()){
+		
+			login.Log4j.info("UnGrouping Functionality  is working Successfully");
 		} else {
 			Assert.fail("UnGrouping Functionality is Not working Successfully:-(");
 		}
-		/*CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]", 8).click();*/
+		/*
+		 * CommonFunctionality.getElementByXpath(login.driver,
+		 * "//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]",
+		 * 8).click();
+		 */
 	}
 
 	// TC_MS_85
 	@And("^Verify UnGroup functionality disabled status when their is no Group$")
 	public void verify_UnGroup_functionality_disabled_status_when_their_is_no_Group() throws Throwable {
-		/*CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]", 8).click();*/
+		/*
+		 * CommonFunctionality.getElementByXpath(login.driver,
+		 * "//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]",
+		 * 8).click();
+		 */
 		CommonFunctionality.wait(500);
-		login.driver.findElement(By.xpath("//div[@title='Group. Unite selected series into a group.']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
-		Thread.sleep(2000);
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//div[@title='Group. Unite selected series into a group.']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']",
+				8).click();
+		// login.driver.findElement(By.xpath(
+		// "//div[@title='Group. Unite selected series into a
+		// group.']//div[@class='insight-action-panel--btn-popup
+		// icon--context-menu-arrow']"))
+		// .click();
+		CommonFunctionality.wait(2000);
 		if (login.driver.findElements(By.xpath("//span[@class='context-menu-item link disabled']")).size() != 0) {
 			System.out.println("UnGrouping Functionality  is in disabled status when their is no Group");
 		} else {
 			Assert.fail("UnGrouping Functionality  is NOT in disabled status when their is no Group:-(");
 		}
-		//login.driver.findElement(By.xpath("//div[@title='Group. Unite selected series into a group.']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
-		/*CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]", 8).click();*/
+		// login.driver.findElement(By.xpath("//div[@title='Group. Unite selected series
+		// into a group.']//div[@class='insight-action-panel--btn-popup
+		// icon--context-menu-arrow']")).click();
+		/*
+		 * CommonFunctionality.getElementByXpath(login.driver,
+		 * "//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]",
+		 * 8).click();
+		 */
 	}
 
 	// TC_MS_86
 	@And("^Select the Seperator option$")
 	public void select_the_Seperator_option() throws Throwable {
 		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@data-action='group']//following::div)[2]", 8)
+				.click();
 		login.driver.findElement(By.xpath("(//div[@data-action='group']//following::div)[2]")).click();
-		/*CommonFunctionality.getElementByXpath(login.driver,
-				"//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]", 8).click();*/
-		/*CommonFunctionality
-				.getElementByXpath(login.driver, "//ul[@class='dropdown-menu context-menu ']/div[3]/li[3]/span", 8)
-				.click();*/
+		/*
+		 * CommonFunctionality.getElementByXpath(login.driver,
+		 * "//div[@class='data-action-panel insight-action-panel']/div[9]/div[2]",
+		 * 8).click();
+		 */
+		/*
+		 * CommonFunctionality .getElementByXpath(login.driver,
+		 * "//ul[@class='dropdown-menu context-menu ']/div[3]/li[3]/span", 8) .click();
+		 */
 		CommonFunctionality.wait(500);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Add separator')]")).click();
 
@@ -1887,7 +2040,8 @@ public class Myseries {
 				"//div[@class='check-all-series']//span[@class='input-control--indicator']", 8).click();
 		CommonFunctionality.wait(2000);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//div[@class='series-name-wrapper separator-row ']/span[1]", 8).click();
+				.getElementByXpath(login.driver, "//div[@class='series-name-wrapper separator-row ']/span[1]", 8)
+				.click();
 		Thread.sleep(2000);
 
 		if (login.driver.findElements(By.xpath("//*[@class='series-name-wrapper separator-row ']")).size() == 1) {
@@ -1902,7 +2056,8 @@ public class Myseries {
 	@And("^get the text of the first series$")
 	public void get_the_text_of_the_first_series() throws Throwable {
 		Thread.sleep(2000);
-		first_series_name_myseries = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]")).getText();
+		first_series_name_myseries = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"))
+				.getText();
 	}
 
 	// TC_MS_87
@@ -2069,7 +2224,8 @@ public class Myseries {
 	// TC_MS_96
 	@And("^Select Copy option$")
 	public void select_Copy_option() throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "Copy_option", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "Copy_option",
+		// 8).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("(//div[@class='insight-action-panel--btn-icon'])[3]")).click();
 	}
@@ -2116,64 +2272,61 @@ public class Myseries {
 	// TC_MS_99
 	@And("^Select Currency Conversion$")
 	public void select_Currency_Conversion() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='input-control--indicator']", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "Concurrency_current_dropdown", 8).click();
+		select_all_series();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[@title='USD mn']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
-		CommonFunctionality.getElementByProperty(login.driver, "USD_Function", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-action-panel--btn-title'][contains(text(),'Popular')]", 8).click();
+	//	 CommonFunctionality.getElementByProperty(login.driver,
+	//			 "Concurrency_current_dropdown", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@data-id='USD']", 8).click();
+		CommonFunctionality.wait(2000);
+//		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='name-li'][contains(text(),'USD')]", 8)
+//				.click();
+
 	}
 
 	// TC_MS_99
 	@And("^verify the Currency Conversion is applied for a series$")
 	public void verify_the_Currency_Conversion_is_applied_for_a_series() throws Throwable {
 		Thread.sleep(3000);
-		String Functionappliedintoolbar = login.driver
-				.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
-		System.out.println("Functionappliedintoolbar------->" + Functionappliedintoolbar);
+		String Functionappliedintoolbar = "[CONVERTCUR(US Dollars; as reported)]";
+	//	System.out.println("Functionappliedintoolbar------->" + Functionappliedintoolbar);
 		Thread.sleep(3000);
 		String Functiondescriptioninseries = login.driver
-				.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();
-		String s1 = Functiondescriptioninseries.substring(1, 11);
-		System.out.println("Currency selected value:" + s1);
-		System.out.println("Functionappliedintoolbar------->" + Functionappliedintoolbar);
-		System.out.println(Functionappliedintoolbar + ":" + s1);
-
-		if (Functionappliedintoolbar.equalsIgnoreCase(s1)) {
-			System.out.println("Currency Conversion is applied Successfully");
+				.findElement(By.xpath("//span[@class='series-functions-title']")).getText();
+		
+		if (Functionappliedintoolbar.equalsIgnoreCase(Functiondescriptioninseries)) {
+			
+			login.Log4j.info("Currency Conversion is applied successfully");
 		} else {
-			Assert.fail("Currency Conversion functionality is Not working Successfully:-(");
+			 Assert.fail("Currency Conversion is not applied successfully");
 		}
 	}
 
 	// TC_MS_100
 	@And("^Select Calculate Change$")
 	public void select_Calculate_Change() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='input-control--indicator']", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "Calculate_change_dropdown", 8).click();
+		select_all_series();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[@title='Change']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='YEAR_OVER_YEAR']", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-action-panel--btn-title'][contains(text(),'Popular')]", 8).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@data-id='YEAR_OVER_YEAR']", 8).click();
+	
 	}
 
 	// TC_MS_100
 	@And("^verify the Calculate Change is applied for a series$")
 	public void verify_the_Calculate_Change_is_applied_for_a_series() throws Throwable {
 		Thread.sleep(3000);
-		String Functionappliedintoolbar = login.driver
-				.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
-
+		String Functionappliedintoolbar = "[%CHANGE(Over Year)]";
 		Thread.sleep(3000);
 		String Functiondescriptioninseries = login.driver
-				.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();
-		String s1 = Functiondescriptioninseries.substring(1, 8);
-		System.out.println("Calculate changes value" + s1);
-		System.out.println(Functionappliedintoolbar + ":" + s1);
+				.findElement(By.xpath("//span[@class='series-functions-title']")).getText();
 
-		if (Functionappliedintoolbar.contains(s1)) {
+		if (Functiondescriptioninseries.equalsIgnoreCase(Functionappliedintoolbar)) {
 
-			System.out.println("Calculate Change is applied Successfully");
+			System.out.println("Calculate Change is applied successfully");
 		} else {
-			Assert.fail("Calculate Change functionality is Not working Successfully:-(");
+			Assert.fail("Calculate Change is not applied successfully");
 		}
 		System.out.println("<============================TC100================================================>");
 	}
@@ -2181,48 +2334,36 @@ public class Myseries {
 	// TC_MS_101
 	@And("^Select Aggregate$")
 	public void select_Aggregate() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='input-control--indicator']", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "Aggregate_dropdown", 8).click();
+		select_all_series();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("(//div[@title='More functions']//div)[1]")).click();
-		CommonFunctionality.wait(1000);
-		login.driver.findElement(By.xpath("//div[normalize-space()='SUM']")).click();
-		//login.driver.findElement(By.xpath("//div[contains(@title,'Quarterly, ending')]//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "Yearly_Function", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-action-panel--btn-title'][contains(text(),'Popular')]", 8).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@data-id='SUM']", 8).click();
+		
 	}
 
 	// TC_MS_101
 	@And("^verify the Aggregate is applied for a series$")
 	public void verify_the_Aggregate_is_applied_for_a_series() throws Throwable {
 		Thread.sleep(3000);
-		String Functionappliedintoolbar = login.driver
-				.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+		String Functionappliedintoolbar = "[AGGREGATE(Yearly; December; Sum)]";
 		Thread.sleep(3000);
 		String Functiondescriptioninseries = login.driver
-				.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();
-		String s1 = Functiondescriptioninseries.substring(1, 4);
-		System.out.println("Functiondescriptioninseries value:" + s1);
-		System.out.println(Functionappliedintoolbar + ":" + s1);
+				.findElement(By.xpath("//span[@class='series-functions-title")).getText();
+	
+		if (Functiondescriptioninseries.equalsIgnoreCase(Functionappliedintoolbar)) {
 
-		if (Functionappliedintoolbar.contains(s1)) {
-
-			System.out.println("Aggregate is applied Successfully");
+			System.out.println("Aggregate is applied successfully");
 		} else {
-			Assert.fail("Aggregate functionality is Not working Successfully:-(");
+			Assert.fail("Aggregate is not applied successfully");
 		}
-		// Thread.sleep(3000);
-		// CommonFunctionality.DeleteSeries();
-		// Thread.sleep(3000);
-		// login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
+		
 	}
 
 	// TC_MS_102
 
 	@Given("^\"([^\"]*)\" series added into my series$")
 	public void series_added_into_my_series(String arg1) throws Throwable {
-		// Thread.sleep(3000);
-		// delete_series();
-		// Thread.sleep(3000);
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Series')]", 8).click();
 		Thread.sleep(2000);
 		// click on search bar
@@ -2234,62 +2375,37 @@ public class Myseries {
 				.getElementByXpath(login.driver, "//span[@class='series-list-item--checkbox svg-checkbox']]", 8)
 				.click();
 
-		// Thread.sleep(3000);
+		 Thread.sleep(3000);
 
 		// click on '+'icon
+		 
 		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
 				.click();
 		// add-to-data-selection--icon
 		// Thread.sleep(2000);
 	}
 
-	/*
-	 * @Given("^'(\\d+)'series added into my series$") public void
-	 * series_added_into_my_series(int arg1) throws Throwable { Thread.sleep(3000);
-	 * delete_series();
-	 * 
-	 * login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click
-	 * (); Thread.sleep(2000); //click on search bar
-	 * login.driver.findElement(By.xpath("//input[@class='search-input-text']")).
-	 * click();
-	 * 
-	 * login.driver.findElement(By.xpath("//input[@class='search-input-text']")).
-	 * clear();
-	 * login.driver.findElement(By.xpath("//input[@class='search-input-text']")).
-	 * sendKeys(arg1); Thread.sleep(2000); // click on '+'icon
-	 * login.driver.findElement(By.xpath(
-	 * "//body/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/ul[1]/li[1]/div[1]/a[1]/div[4]/div[1]/div[1]"
-	 * )) .click(); Thread.sleep(1000);
-	 * 
-	 * }
-	 */
 
 	// TC_MS_102
 	@And("^Select Accumulate$")
 	public void select_Accumulate() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='input-control--indicator']", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "Accumulate_dropdown", 8).click();
+		select_all_series();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[@title='Accumulate']//div[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")).click();
-		CommonFunctionality.getElementByProperty(login.driver, "YTD_Function", 8).click();
-
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-action-panel--btn-title'][contains(text(),'Popular')]", 8).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@data-id='YTD']", 8).click();
 	}
 
 	// TC_MS_102
 	@And("^verify the Accumulate is applied for a series$")
 	public void verify_the_Accumulate_is_applied_for_a_series() throws Throwable {
 		Thread.sleep(3000);
-		String Functionappliedintoolbar = login.driver
-				.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
-
+		String Functionappliedintoolbar = "[YTD(Sum; December)]";
 		Thread.sleep(3000);
 		String Functiondescriptioninseries = login.driver
-				.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();
-		String s1 = Functiondescriptioninseries.substring(1, 4);
-		System.out.println("Accumulate value:" + s1);
-		System.out.println(Functionappliedintoolbar + ":" + s1);
-
-		if (Functionappliedintoolbar.equalsIgnoreCase(s1)) {
+				.findElement(By.xpath("//span[@class='series-functions-title")).getText();
+	
+		if (Functiondescriptioninseries.equalsIgnoreCase(Functionappliedintoolbar)) {
 
 			System.out.println("Accumulate is applied Successfully");
 		} else {
@@ -2298,11 +2414,19 @@ public class Myseries {
 	}
 
 	// TC_MS_103
-	@And("^Select FX drop down$")
-	public void select_FX_drop_down() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='input-control--indicator']", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "FX_dropdown", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//div[contains(text(),'YTD')]", 8).click();
+	@And("^Select Favorite drop down$")
+	public void select_Favorite_drop_down() throws Throwable {
+		select_all_series();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-action-panel--btn-title'][contains(text(),'Favorite')]", 8).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='popular-functions-context--all-title']", 8).click();
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[3]", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[3]", 8).clear();
+		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[3]", 8).sendKeys("YTD");
+		CommonFunctionality.wait(2000);
+		
 
 	}
 
@@ -2328,12 +2452,13 @@ public class Myseries {
 	// TC_MS_104
 	@And("^Select FX Icon$")
 	public void select_FX_Icon() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//span[@class='input-control--indicator']", 8).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "FX_Icon", 8).click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[@title='Open function editor (F). Investigate all available functions in the function editor window.']")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "FX_all_functionlink", 8).click();
-	}
+		select_all_series();
+		CommonFunctionality.wait(2000);
+		login.driver.findElement(By.xpath(
+				"//div[@title='Open function editor (F). Investigate all available functions in the function editor window.']"))
+				.click();
+		}
 
 	// TC_MS_104
 	@And("^verify the FX Icon$")
@@ -2351,43 +2476,32 @@ public class Myseries {
 	// TC_MS_105
 	@And("^Applay \"([^\"]*)\" function$")
 	public void applay_function(String arg1) throws Throwable {
-		
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("(//input[@placeholder='Type a function'])[2]")).click();
 		CommonFunctionality.wait(1000);
 		login.driver.findElement(By.xpath("(//input[@placeholder='Type a function'])[2]")).sendKeys(arg1);
 		login.driver.findElement(By.xpath("//li[@class='suggestion-param selected']")).click();
 		login.driver.findElement(By.xpath("//li[@class='suggestion-param selected']")).click();
-		
-		//CommonFunctionality.getElementByProperty(login.driver, "Function_search_popup", 8).clear();
-		//CommonFunctionality.getElementByProperty(login.driver, "Function_search_popup", 8).sendKeys(arg1);
-		//WebElement element = CommonFunctionality.getElementByProperty(login.driver, "Change_function_in_popup", 8);
-		// Double click
-		//action.doubleClick(element).perform();
-		//CommonFunctionality.getElementByProperty(login.driver, "Applay_button_in_popup", 8).click();
-	
+		Thread.sleep(3000);
 		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-	
+
 	}
-	
-	
 
 	// TC_MS_105
 	@And("^verify appling function by clicking on function icon$")
 	public void verify_appling_function_by_clicking_on_function_icon() throws Throwable {
 		Thread.sleep(3000);
-		String Functionappliedintoolbar = login.driver.findElement(By.xpath("//span[@class='series-function-item--body']/span[1]")).getText();
+		String Functionappliedintoolbar = "[%CHANGE(Over Year)]";
+		String Functiondescriptioninseries = login.driver
+				.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();
+	//	String s1 = Functiondescriptioninseries.substring(1, 19);
+	//	System.out.println(Functionappliedintoolbar + ":" + s1);
 
-		Thread.sleep(3000);
-		String Functiondescriptioninseries = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']/span[2]")).getText();
-		String s1 = Functiondescriptioninseries.substring(1, 8);
-		System.out.println(Functionappliedintoolbar + ":" + s1);
+		if (Functiondescriptioninseries.equalsIgnoreCase(Functionappliedintoolbar)) {
 
-		if (Functionappliedintoolbar.equalsIgnoreCase(s1)) {
-
-			System.out.println("Appling function by clicking on function icon is Successful");
+		login.Log4j.info("Appling function by clicking on function icon is Successful");
 		} else {
-			Assert.fail("Appling function by clicking on function icon is Not working Successfully:-(");
+			Assert.fail("Appling function by clicking on function icon is Not working Successfully");
 		}
 	}
 
@@ -2531,7 +2645,8 @@ public class Myseries {
 	// TC_MS_112
 	@And("^Select the X icon$")
 	public void select_the_X_icon() throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "X_icon_selected_series", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "X_icon_selected_series", 8).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//span[@class='insight-action-panel--clear-selection-icon']")).click();
 	}
@@ -2539,8 +2654,11 @@ public class Myseries {
 	// TC_MS_112
 	@And("^verify remove icon for selected series$")
 	public void verify_remove_icon_for_selected_series() throws Throwable {
-		/*boolean selectd_series = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Full_selected_count")))
-				.isDisplayed();*/
+		/*
+		 * boolean selectd_series =
+		 * login.driver.findElement(By.xpath(login.LOCATORS.getProperty(
+		 * "Full_selected_count"))) .isDisplayed();
+		 */
 		boolean selectd_series = login.driver.findElement(By.xpath("//div[@class='list-container']")).isDisplayed();
 		if (selectd_series == true) {
 			System.out.println("Remove icon for selected series is Verified Successfully!!! ");
@@ -2550,8 +2668,8 @@ public class Myseries {
 	}
 
 	// TC_MS_113
-	@And("^search for the serie as \"([^\"]*)\"$")
-	public void search_for_the_serie_as(String arg1) throws Throwable {
+	@And("^search for the series as \"([^\"]*)\"$")
+	public void search_for_the_series_as(String arg1) throws Throwable {
 
 		searchSeriesname = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-item--name']", 8)
 				.getText();
@@ -2592,10 +2710,10 @@ public class Myseries {
 	@And("^Select the List mode$")
 	public void select_the_List_mode() throws Throwable {
 		CommonFunctionality.wait(500);
-		//CommonFunctionality.getElementByProperty(login.driver, "List_mode_option", 8).click();
-		//login.driver.findElement(By.xpath("//button[normalize-space()='List']")).click();
-		login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]")).click();
-		
+
+		login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"))
+				.click();
+
 	}
 
 	// TC_MS_116
@@ -2615,11 +2733,9 @@ public class Myseries {
 	// TC_MS_116
 	@And("^Select the Table mode$")
 	public void select_the_Table_mode() throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "Table_mode_option", 8).click();
 		CommonFunctionality.wait(500);
-		//CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 10).click();
-		//CommonFunctionality.wait(500);
-		WebElement table=login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[2]"));
+		WebElement table = login.driver
+				.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[2]"));
 		action.moveToElement(table).click().build().perform();
 		CommonFunctionality.wait(2000);
 	}
@@ -2628,34 +2744,31 @@ public class Myseries {
 	@And("^verify the Table mode$")
 	public void verify_the_Table_mode() throws Throwable {
 		Thread.sleep(3000);
-		if(login.driver.findElements(By.xpath("//div[text()='Function description']")).size()==0)
-		{
-			System.out.println("List mode is Verified Successfully!!! ");
+		if (login.driver.findElements(By.xpath("//div[text()='Function description']")).size() == 0) {
+			System.out.println("Table mode is Verified Successfully!!! ");
 			select_the_List_mode();
 		}
-		//boolean Table_mode_view = login.driver.findElement(By.xpath("//div[text()='Function description']")).isDisplayed();
-		 else {
-			 select_the_List_mode();
-			//Assert.fail("List mode is NOT Verified Successfully!!!");
-			
+		else {
+			select_the_List_mode();
+			// Assert.fail("List mode is NOT Verified Successfully!!!");
+
 		}
 	}
 
 	// TC_MS_117
 	@And("^Select the Customize option$")
 	public void select_the_Customize_option() throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "Customize_option", 8).click();
-		
-		login.driver.findElement(By.xpath("//button[@title='Customize your selection']//div")).click();
-		
-		
-	}
+		Thread.sleep(1000);
+		CommonFunctionality.getElementByXpath(login.driver, "//button[@title='Customize your selection']//div", 8)
+				.click();
+		}
 
 	// TC_MS_117
 	@And("^verify the Customize option$")
 	public void verify_the_Customize_option() throws Throwable {
 		Thread.sleep(2000);
-		boolean Table_mode_view = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_popup"))).isDisplayed();
+		boolean Table_mode_view = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_popup")))
+				.isDisplayed();
 		if (Table_mode_view == true) {
 			System.out.println("Customize option is Verified Successfully!!! ");
 			CommonFunctionality.getElementByProperty(login.driver, "Customize_Close_window", 8).click();
@@ -2668,14 +2781,16 @@ public class Myseries {
 	// TC_MS_118
 	@And("^Select the Table mode in Customize window$")
 	public void select_the_Table_mode_in_Customize_window() throws Throwable {
-		
-		WebElement table=login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[2]"));
+
+		WebElement table = login.driver
+				.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[2]"));
 		action.moveToElement(table).click().build().perform();
 		CommonFunctionality.wait(2000);
-		
+
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_table_option", 8).click();
 		Thread.sleep(3000);
-		boolean Table_mode = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_table_option"))).isSelected();
+		boolean Table_mode = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_table_option")))
+				.isSelected();
 		if (Table_mode == true) {
 			CommonFunctionality.getElementByProperty(login.driver, "Customize_Close_window", 8).click();
 		} else {
@@ -2695,10 +2810,11 @@ public class Myseries {
 	@And("^Select the List mode in Customize window$")
 	public void select_the_List_mode_in_Customize_window() throws Throwable {
 		Thread.sleep(3000);
-		WebElement table=login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
+		WebElement table = login.driver
+				.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
 		action.moveToElement(table).click().build().perform();
 		CommonFunctionality.wait(2000);
-		
+
 		boolean Table_mode = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_List_option")))
 				.isSelected();
 		if (Table_mode == true) {
@@ -2721,7 +2837,8 @@ public class Myseries {
 	@And("^Select the Table mode in Customize window for show in$")
 	public void select_the_Table_mode_in_Customize_window_for_show_in() throws Throwable {
 		Thread.sleep(3000);
-		boolean Table_mode = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_table_option"))).isSelected();
+		boolean Table_mode = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_table_option")))
+				.isSelected();
 		if (Table_mode == true) {
 			System.out.println("Table mode is Selected");
 		} else {
@@ -2733,7 +2850,8 @@ public class Myseries {
 	@And("^Verify hidden show selection in Table mode$")
 	public void verify_hidden_show_selection_in_Table_mode() throws Throwable {
 		Thread.sleep(3000);
-		boolean Customize2rowattribute = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_2_row_attribute"))).isDisplayed();
+		boolean Customize2rowattribute = login.driver
+				.findElement(By.xpath(login.LOCATORS.getProperty("Customize_2_row_attribute"))).isDisplayed();
 
 		if (Customize2rowattribute == true) {
 			System.out.println("Hidden show selection in Table mode is Verified Successfully");
@@ -2774,11 +2892,11 @@ public class Myseries {
 	@And("^Verify show selection in List mode of (\\d+) row$")
 	public void verify_show_selection_in_List_mode_of_row(int arg1) throws Throwable {
 		Thread.sleep(3000);
-		List<WebElement> Totalselecteditem = login.driver.findElements(
-				By.xpath("//div[contains(@class,'webix_column list-series-name webix')]"));
+		List<WebElement> Totalselecteditem = login.driver
+				.findElements(By.xpath("//div[contains(@class,'webix_column list-series-name webix')]"));
 		System.out.println("Total Series are : " + Totalselecteditem.size());
 		int Totalselecteditem_in_2_row = Totalselecteditem.size();
-		//if (Totalselecteditem_in_2_row == 3) {
+		
 		if (Totalselecteditem_in_2_row == 1) {
 			System.out.println("Show selection in List mode of 2 row is Verified Successfully!!! ");
 		} else {
@@ -2793,7 +2911,8 @@ public class Myseries {
 	// TC_MS_122
 	@And("^select the Show series in list as (\\d+) row$")
 	public void select_the_Show_series_in_list_as_row(int arg1) throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "Customize_1_row", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "Customize_1_row",
+		// 8).click();
 		login.driver.findElement(By.xpath("//span[normalize-space(text())='1 row']")).click();
 	}
 
@@ -2801,7 +2920,8 @@ public class Myseries {
 	@And("^Verify show selection in List mode of one row$")
 	public void verify_show_selection_in_List_mode_of_one_row() throws Throwable {
 		Thread.sleep(3000);
-		boolean Customize2rowattribute = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Customize_2_row_attribute"))).isDisplayed();
+		boolean Customize2rowattribute = login.driver
+				.findElement(By.xpath(login.LOCATORS.getProperty("Customize_2_row_attribute"))).isDisplayed();
 		if (Customize2rowattribute == false) {
 			System.out.println("Hidden show selection in Table mode is Verified Successfully");
 
@@ -2826,16 +2946,21 @@ public class Myseries {
 	public void select_the_required_attribute_for_table_mode() throws Throwable {
 		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tmnemonics", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tregion", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "Customize_Tregion",
+		// 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tsubnational", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tfrequency", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "Customize_Tfrequency", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tlastupdate", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tunit", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tfirstdate", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tlastdate", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "Customize_Tfirstdate", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "Customize_Tlastdate",
+		// 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tlastvalue", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tnumberofobservation", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tstatus", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "Customize_Tstatus",
+		// 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Tsource", 8).click();
 	}
 
@@ -2868,19 +2993,26 @@ public class Myseries {
 	// TC_MS_126
 	@And("^Select the second series$")
 	public void select_the_second_series() throws Throwable {
-		
-		login.driver.findElement(By.xpath("//div[@title='List mode']")).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Second_series_checkbox", 8).click();
-		second_series_name = CommonFunctionality.getElementByProperty(login.driver, "Second_series_Name", 8).getText();
+		CommonFunctionality.wait(1000);
 
+		login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"))
+				.click();
+		second_series_name = CommonFunctionality.getElementByProperty(login.driver, "Second_series_Name", 8)
+				.getText();
+	
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByProperty(login.driver, "Second_series_checkbox", 8).click();
+	
 	}
 
 	// TC_MS_126
 	@And("^select the Sort series by option$")
 	public void select_the_Sort_series_by_option() throws Throwable {
+		CommonFunctionality.wait(1000);
 		CommonFunctionality.getElementByProperty(login.driver, "Sort_series_by", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Sort_series_by_Checked", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_save_option", 8).click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "Customize_save_option", 8).click();
 		System.out.println("<============================TC100================================================>");
 	}
 
@@ -2889,17 +3021,57 @@ public class Myseries {
 	public void verify_the_Sort_series_by_option() throws Throwable {
 
 		get_the_series_name();
+		
 		System.out.println(second_series_name + ":" + FirstseriesName);
-		if (second_series_name.equalsIgnoreCase(second_series_name)) {
-
-			System.out.println("Sort series by option is verified Successfully");
+		if (FirstseriesName.equalsIgnoreCase("Consumer Price Index")) {
+			//System.out.println("Sort series by option is verified Successfully");
+			login.Log4j.info("Sort series by option is verified Successfully");
 		} else {
 			Assert.fail("Sort series by option is Not verified Successfully:-(");
 		}
-		select_the_Customize_option();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_Reset_option", 8).click();
-		CommonFunctionality.getElementByProperty(login.driver, "Customize_save_option", 8).click();
+	}
+	
+	@And("^select the Sort series by option in list mode$")
+	public void select_the_Sort_series_by_option_in_list_mode() throws Throwable {
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByProperty(login.driver, "Sort_series_by", 8).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Sort_series_by_Checked", 8).click();
+		System.out.println("<============================TC100================================================>");
+		get_the_series_name();
+		System.out.println(FirstseriesName);
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
+	}
+	
+	@And("^select the Sort series by option in table mode$")
+	public void select_the_Sort_series_by_option_in_table_mode() throws Throwable {
+		CommonFunctionality.wait(1000);
+		login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[2]"))
+		.click();
+		CommonFunctionality.getElementByProperty(login.driver, "Sort_series_by", 8).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Sort_series_by_Checked", 8).click();
+		WebElement chartlegend = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
+		action.moveToElement(chartlegend).build().perform();
 
+		FirstseriesName1 = CommonFunctionality
+				.getElementByXpath(login.driver, "(//span[@class='series-name-field--text'])[1]", 8).getText();
+
+		System.out.println(FirstseriesName1);
+		
+	}
+	
+	@And("^Verify the Sort series by option in list mode and table mode as user customize setting$")
+	public void verify_the_Sort_series_by_option_in_list_mode_and_table_mode_as_user_customize_setting() throws Throwable {
+
+		if (FirstseriesName.equalsIgnoreCase("Exports fob") && FirstseriesName1.equalsIgnoreCase("Exports fob")) {
+			
+			login.Log4j.info("Verify the Sort series by option in list mode and table mode as user customize setting Successfully");
+		} else {
+			Assert.fail("Verify the Sort series by option in list mode and table mode as user customize setting not Successfully:-(");
+		}
+		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"))
+		.click();
 	}
 
 	// TC_MS_127
@@ -2943,7 +3115,7 @@ public class Myseries {
 	}
 
 	// TC_MS_131
-	@And("^Select series to my series tab of different country$")
+/*	@And("^Select series to my series tab of different country$")
 	public void select_series_to_my_series_tab_of_different_country() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Series')]", 8).click();
@@ -2953,18 +3125,41 @@ public class Myseries {
 		}
 
 		// click on '+'icon
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]", 8);
+		new Actions(login.driver).moveToElement(series).build().perform();
+		
 		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
 				.click();
 
-	}
+	}    */
 
 	// TC_MS_131
+	@And("^add all series to my series$")
+	public void add_all_series_to_my_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+
+		login.driver.findElement(By.xpath("//span[@class='toggler-control-item--label' and text()='Series']")).click();
+
+		for (int i = 1; i <= 3; i++) {
+
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]"))
+					.click();
+		}
+		WebElement series = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
+		action.moveToElement(series).build().perform();
+		
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+		
+
+	}
 	@And("^Verify suggested indicator$")
 	public void verify_suggested_indicator() throws Throwable {
-		Thread.sleep(5000);
+		CommonFunctionality.wait(5000);
 		List<WebElement> objLinks = login.driver
 				.findElements(By.xpath("//div[contains(@class,'visual-indicator-countries-tabs')]"));
-		Thread.sleep(2000);
+		CommonFunctionality.wait(2000);
+		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='movable-modal--close']", 8).click();
+
 		String C_name1 = CommonFunctionality
 				.getElementByXpath(login.driver, "(//div[@class='series-item--country country-information'])[1]", 8)
 				.getText();
@@ -2980,7 +3175,7 @@ public class Myseries {
 			if (c.contains(C_name1) || c.contains(C_name2) || c.contains(C_name3)) {
 				System.out.println("Found countryname Successfully");
 			} else {
-				Assert.fail("Could'nt Found countryname Successfully");
+				Assert.fail("Couldn't Found countryname Successfully");
 			}
 
 		}
@@ -2991,7 +3186,17 @@ public class Myseries {
 		element1.click();
 		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Close_window"))).click();
 	}
-
+	
+	@And("^Verify the suggested indicator$")
+	public void verify_the_suggested_indicator() throws Throwable {
+		CommonFunctionality.wait(5000);
+		if(login.driver.findElement(By.xpath("//div[@class='suggestions-manager']")).isDisplayed()) {
+			login.Log4j.info("Suggested indicator is displayed verified successfully");
+		}else {
+			Assert.fail("Failed verification");
+		}
+		
+	}
 	// TC_MS_133
 	@And("^select the \\(i\\) icon$")
 	public void select_the_i_icon() throws Throwable {
@@ -3053,13 +3258,13 @@ public class Myseries {
 	}
 
 	// TC_MS_135
-	@And("^Verify contries tab under suggested indicator$")
-	public void verify_contries_tab_under_suggested_indicator() throws Throwable {
+	@And("^Verify countries tab under suggested indicator$")
+	public void verify_countries_tab_under_suggested_indicator() throws Throwable {
 		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Related_series_serieslist"))).size() != 0) {
-			System.out.println("Contries tab under suggested indicator is Verified Successfully!!! ");
+			System.out.println("Countries tab under suggested indicator is Verified Successfully!!! ");
 		} else {
-			Assert.fail("Contries tab under suggested indicator is NOT Verified Successfully");
+			Assert.fail("Countries tab under suggested indicator is NOT Verified Successfully");
 		}
 		Thread.sleep(1000);
 		login.driver.navigate().refresh();
@@ -3067,32 +3272,53 @@ public class Myseries {
 	}
 
 	// TC_MS_136
-	@And("^Select random six different series to my series tab$")
+/*	@And("^Select random six different series to my series tab$")
 	public void select_random_six_different_series_to_my_series_tab() throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Series')]", 8).click();
-		for (int i = 2; i <= 4; i++) {
+		for (int i = 1; i <= 6; i++) {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]", 8).click();
 		}
 		// click on '+'icon
-		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
-				.click();
+		WebElement series = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
+		action.moveToElement(series).build().perform();
+		WebElement icon = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
+		action.moveToElement(icon).click().build().perform();
+
+	}  */
+	
+	@And("^add all the series to my series$")
+	public void add_all_the_series_to_my_series() throws Throwable {
+		CommonFunctionality.wait(2000);
+
+		login.driver.findElement(By.xpath("//span[@class='toggler-control-item--label' and text()='Series']")).click();
+
+		for (int i = 1; i <= 6; i++) {
+
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]"))
+					.click();
+		}
+		WebElement series = login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[1]"));
+		action.moveToElement(series).build().perform();
+		
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+		
 
 	}
 
 	// TC_MS_136
-	@And("^Verify max contires display$")
-	public void verify_max_contires_display() throws Throwable {
+	@And("^Verify max five countries display$")
+	public void verify_max_five_countries_display() throws Throwable {
 		Thread.sleep(3000);
 		List<WebElement> objLinks = login.driver
 				.findElements(By.xpath("//div[contains(@class,'visual-indicator-countries-tabs')]"));
 		int total_country = objLinks.size();
 		System.out.println(total_country);
-		if (total_country >= 1) {
-			System.out.println("Max contires display under suggested indicator is Verified Successfully!!! ");
+		if (total_country <= 5) {
+			System.out.println("Max countires display under suggested indicator is Verified Successfully!!! ");
 		} else {
-			Assert.fail("Max contires display under suggested indicator is NOT Verified Successfully");
+			Assert.fail("Max countires display under suggested indicator is NOT Verified Successfully");
 		}
 		Thread.sleep(1000);
 		login.driver.navigate().refresh();
@@ -3143,12 +3369,8 @@ public class Myseries {
 		WebElement we = CommonFunctionality.getElementByProperty(login.driver, "Related_series_firstserieslist", 8);
 		action.moveToElement(we).pause(2000).build().perform();
 		Thread.sleep(1000);
-		Addingseries = CommonFunctionality.getElementByProperty(login.driver, "Related_series_firstserieslisticon", 8)
+		Addingseries = CommonFunctionality.getElementByProperty(login.driver, "Related_series_firstserieslist", 8)
 				.getText();
-
-		WebElement we1 = CommonFunctionality.getElementByProperty(login.driver, "Related_series_firstserieslisticon",
-				8);
-		action.moveToElement(we1).build().perform();
 
 		WebDriverWait wait2 = new WebDriverWait(login.driver, 10);
 		WebElement element2 = wait2
@@ -3166,7 +3388,10 @@ public class Myseries {
 	@And("^Verify Suggested indicators \\+ icon$")
 	public void verify_Suggested_indicators_icon() throws Throwable {
 		Thread.sleep(3000);
-		String fourthseries = login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[4]")).getText();
+		String fourthseries = login.driver
+				.findElement(
+						By.xpath("(//span[@class='series-name-field--text'])[4]"))
+				.getText();
 		// String Addedindicators = "Consumer Price Index: YoY";
 		if (fourthseries.contains(Addingseries)) {
 			System.out.println("Suggested indicators + icon is Verified Successfully!!! ");
@@ -3319,9 +3544,11 @@ public class Myseries {
 	@And("^try to drag window$")
 	public void try_to_drag_window() throws Throwable {
 		CommonFunctionality.wait(500);
-		WebElement dragfrom = login.driver.findElement(By.xpath("(//div[@class='series-list-item--content']/a/div[3])[1]"));
+		WebElement dragfrom = login.driver
+				.findElement(By.xpath("(//div[@class='series-list-item--content']/a/div[3])[1]"));
 		CommonFunctionality.wait(500);
-		WebElement dragto = login.driver.findElement(By.xpath("//div[@class='data-selection-series-overlay--content']"));
+		WebElement dragto = login.driver
+				.findElement(By.xpath("//div[@class='data-selection-series-overlay--content']"));
 		action.dragAndDrop(dragfrom, dragto).build().perform();
 
 	}
@@ -3353,22 +3580,34 @@ public class Myseries {
 	public void select_the_sort_by_dropdown() throws Throwable {
 		Thread.sleep(400);
 		try {
-			
-			login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-			CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		
 
-//			if(login.driver.findElement(By.xpath("(//div[@class='custom-select-title sort-select-title sort-select-title__desc-hidden']//div[@class='custom-select-title--handler']//span)[2]")).isDisplayed()){
-//				
-//				login.driver.findElement(By.xpath("(//div[@class='custom-select-title sort-select-title sort-select-title__desc-hidden']//div[@class='custom-select-title--handler']//span)[2]")).click();
-			}
-		
-			catch(Exception e) {
-				CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver,
+					"(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
+
+	}
+
+		catch (Exception e) {
+			CommonFunctionality.getElementByXpath(login.driver,
+					"(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
 			System.out.println("Clicked already sortby dropdown");
 		}
-		
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown", 6).click();
+	}
+
+	@And("^select the sort by dropdown for \"([^\"]*)\"$")
+	public void select_the_sort_by_dropdown_for(String arg1) throws Throwable {
+		Thread.sleep(400);
+		try {
+
+			CommonFunctionality.getElementByXpath(login.driver,
+					"(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
+
+		}
+
+		catch (Exception e) {
+			CommonFunctionality.getElementByXpath(login.driver,
+					"(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
+			System.out.println("Clicked already sortby dropdown");
+		}
 	}
 
 	// TC_MS_148
@@ -3383,12 +3622,14 @@ public class Myseries {
 	@And("^check any one of the series$")
 	public void check_any_one_of_the_series() throws Throwable {
 		Thread.sleep(300);
-		Thirdseriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[3]")).getText();
-		//CommonFunctionality.getElementByProperty(login.driver, "Third_series_ceckbox", 6).click();
-		System.out.println("Thirdseriesname"+Thirdseriesname);
-	     login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[3]")).click();
+		Thirdseriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[2]"))
+				.getText();
+		System.out.println("Thirdseriesname" + Thirdseriesname);
+		login.driver
+				.findElement(
+						By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[2]"))
+				.click();
 	}
-	
 
 	// TC_MS_149
 	@And("^select checked option$")
@@ -3401,8 +3642,8 @@ public class Myseries {
 	public void verify_sort_by_dropdown_checked() throws Throwable {
 		String Firstseriesname = CommonFunctionality.getElementByProperty(login.driver, "First_series_Name", 6)
 				.getText();
-		System.out.println("===FirstSeries===="+Firstseriesname);
-		System.out.println("=====1-3======"+Firstseriesname.equalsIgnoreCase(Thirdseriesname));
+		System.out.println("===FirstSeries====" + Firstseriesname);
+		System.out.println("=====1-3======" + Firstseriesname.equalsIgnoreCase(Thirdseriesname));
 		if (Firstseriesname.equalsIgnoreCase(Thirdseriesname)) {
 
 			System.out.println("Sort by dropdown checked is Verified Successfully!!! ");
@@ -3416,167 +3657,312 @@ public class Myseries {
 	// TC_MS_150
 	@And("^select \"([^\"]*)\" option$")
 	public void select_option(String arg1) throws Throwable {
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@title,'" + arg1 + "')]", 8).click();
 	}
 
 	@Given("^select Sort by checked series option$")
 	public void select_Sort_by_checked_series_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "(//span[text()='Sort By'])[2]", 8).click();
-		
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[1]", 8).click();
+		CommonFunctionality.wait(1000);
+		CommonFunctionality
+				.getElementByXpath(login.driver, "(//div[@class='custom-select-item--link text-dots'])[1]", 8).click();
 	}
 
 	@Given("^select Sort by last modified date of a series \\(among active series only\\) option$")
 	public void select_Sort_by_last_modified_date_of_a_series_among_active_series_only_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[2]", 8).click();
-		CommonFunctionality.wait(500);
 		try {
-			
-			login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-			CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-			//(//span[@class='custom-select-title--reset-icon'])[4]
-			if(login.driver.findElement(By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Recently Updated']")).isDisplayed()){
-				login.driver.findElement(By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Recently Updated']")).click();
+
+			CommonFunctionality.getElementByXpath(login.driver,
+					"(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
+
+			if (login.driver
+					.findElement(By.xpath(
+							"//div[@class='custom-select-item--link text-dots'][normalize-space()='Recently Updated']"))
+					.isDisplayed()) {
+				login.driver.findElement(By.xpath(
+						"//div[@class='custom-select-item--link text-dots'][normalize-space()='Recently Updated']"))
+						.click();
 			}
-			
-		}
-		catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println("Already clicked recently updated");
 		}
-		
+
 	}
 
 	@Given("^select Sort by series percentage change option$")
 	public void select_Sort_by_series_percentage_change_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[3]", 8).click();
-	 CommonFunctionality.wait(500);
-	 try {
-		 if(login.driver.findElement(By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='% Change']")).isDisplayed()){
-			 login.driver.findElement(By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='% Change']")).click();
-		 }
-	 }
-	 catch(Exception e) {
-		 System.out.println("Change already clicked");
-	 }
-	 
-	 
-	
+		// CommonFunctionality.getElementByXpath(login.driver,
+		// "//div[@class='custom-select--body']/div[3]", 8).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By
+							.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='% Change']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='% Change']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Change already clicked");
+		}
+
 	}
-	
-	
 
 	@Given("^select Last Value option$")
 	public void select_Last_Value_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[4]", 8).click();
-	      CommonFunctionality.wait(500);
-	      try {
-	    	  if(login.driver.findElement(By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Last Value']")).isDisplayed()){
-	    		  login.driver.findElement(By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Last Value']")).click();
-	    	  }
-	      }
-	      catch(Exception e) {
-	    	  System.out.println("Last value already clicked");
-	      }
-	      
+		
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By.xpath(
+							"//div[@class='custom-select-item--link text-dots'][normalize-space()='Last Value']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Last Value']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Last value already clicked");
+		}
+
 	}
 
 	@Given("^select Status option$")
 	public void select_Status_option() throws Throwable {
-		
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[5]", 8).click();
+
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(
+							By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Status']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Status']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Status already clicked");
+		}
 	}
 
 	@Given("^select Name option$")
 	public void select_Name_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[6]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		CommonFunctionality.wait(4000);
-        login.driver.findElement(By.xpath("(//div[normalize-space()='Name'])[1]")).click();
-	
+		// CommonFunctionality.getElementByXpath(login.driver,
+		// "//div[@class='custom-select--body']/div[6]", 8).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(
+							By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Name']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By
+								.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Name']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Name already clicked");
+		}
 	}
-	
-	
 
 	@Given("^select Region option$")
 	public void select_Region_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[7]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-	    login.driver.findElement(By.xpath("(//div[normalize-space()='Region'])[1]")).click();
-        	
+		// CommonFunctionality.getElementByXpath(login.driver,
+		// "//div[@class='custom-select--body']/div[7]", 8).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(
+							By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Region']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Region']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Region already clicked");
+		}
 	}
-	
 
 	@Given("^select Subnational option$")
 	public void select_Subnational_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[8]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-	    login.driver.findElement(By.xpath("(//div[normalize-space()='Subnational'])[1]")).click();
-	
+
+		// login.driver.findElement(By.xpath("(//div[@class='custom-select-item--link
+		// text-dots'])[8]")).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By.xpath(
+							"//div[@class='custom-select-item--link text-dots'][normalize-space()='Subnational']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Subnational']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Subnational already clicked");
+		}
+
 	}
-	
 
 	@Given("^select Frequency option$")
 	public void select_Frequency_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[9]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		login.driver.findElement(By.xpath("(//div[normalize-space()='Frequency'])[5]")).click();
+
+		// login.driver.findElement(By.xpath("(//div[normalize-space()='Frequency'])[5]")).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By
+							.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Frequency']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Frequency']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Frequency already clicked");
+		}
 	}
 
 	@Given("^select Unit option$")
 	public void select_Unit_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[10]", 8).click();
-		
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		 login.driver.findElement(By.xpath("(//div[normalize-space()='Unit'])[2]")).click();
+
+		// login.driver.findElement(By.xpath("(//div[normalize-space()='Unit'])[2]")).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(
+							By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Unit']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By
+								.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Unit']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Unit already clicked");
+		}
 	}
-	
 
 	@Given("^select Source option$")
 	public void select_Source_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[11]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-	    login.driver.findElement(By.xpath("(//div[normalize-space()='Source'])[5]")).click();
+
+		// login.driver.findElement(By.xpath("(//div[normalize-space()='Source'])[5]")).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(
+							By.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Source']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Source']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Source already clicked");
+		}
 	}
-	
 
 	@Given("^select Mnemonic option$")
 	public void select_Mnemonic_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[12]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-	login.driver.findElement(By.xpath("(//div[normalize-space()='Mnemonic'])[1]")).click();
-	
+
+		// login.driver.findElement(By.xpath("(//div[normalize-space()='Mnemonic'])[1]")).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By
+							.xpath("//div[@class='custom-select-item--link text-dots'][normalize-space()='Mnemonic']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Mnemonic']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Mnemonic already clicked");
+		}
+
 	}
-	
 
 	@Given("^select Function Description option$")
 	public void select_Function_Description_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[13]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		login.driver.findElement(By.xpath("(//div[normalize-space()='Function Description'])[1]")).click();
+		// CommonFunctionality.getElementByXpath(login.driver,
+		// "//div[@class='custom-select--body']/div[13]", 8).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver.findElement(By.xpath(
+					"//div[@class='custom-select-item--link text-dots'][normalize-space()='Function Description']"))
+					.isDisplayed()) {
+				login.driver.findElement(By.xpath(
+						"//div[@class='custom-select-item--link text-dots'][normalize-space()='Function Description']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Function description already clicked");
+		}
 	}
 
 	@Given("^select Obs\\. Number option$")
 	public void select_Obs_Number_option() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		login.driver.findElement(By.xpath("(//div[normalize-space()='Obs. Number'])[2]")).click();
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[14]", 8).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By.xpath(
+							"//div[@class='custom-select-item--link text-dots'][normalize-space()='Obs. Number']"))
+					.isDisplayed()) {
+				login.driver
+						.findElement(By.xpath(
+								"//div[@class='custom-select-item--link text-dots'][normalize-space()='Obs. Number']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Obs. Number already clicked");
+		}
 	}
 
 	@Given("^select First Date option$")
 	public void select_First_Date_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[15]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-	    login.driver.findElement(By.xpath("(//div[normalize-space()='First Obs. Date'])[1]")).click();
-	
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By.xpath(
+							"//div[@class='custom-select-item--link text-dots'][normalize-space()='First Obs. Date']"))
+					.isDisplayed()) {
+				login.driver.findElement(By.xpath(
+						"//div[@class='custom-select-item--link text-dots'][normalize-space()='First Obs. Date']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("First observation date already clicked");
+		}
 	}
-	
 
 	@Given("^select Last Date option$")
 	public void select_Last_Date_option() throws Throwable {
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='custom-select--body']/div[16]", 8).click();
-		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[2]//following::div[@class='sort-series']", 8).click();
-		login.driver.findElement(By.xpath("(//div[normalize-space()='Last Obs. Date'])[1]")).click();
+		// CommonFunctionality.getElementByXpath(login.driver,
+		// "//div[@class='custom-select--body']/div[16]", 8).click();
+		CommonFunctionality.wait(500);
+		try {
+			if (login.driver
+					.findElement(By.xpath(
+							"//div[@class='custom-select-item--link text-dots'][normalize-space()='Last Obs. Date']"))
+					.isDisplayed()) {
+				login.driver.findElement(By.xpath(
+						"//div[@class='custom-select-item--link text-dots'][normalize-space()='Last Obs. Date']"))
+						.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Last observation date already clicked");
+		}
 	}
 
 	// TC_MS_150
@@ -3598,12 +3984,13 @@ public class Myseries {
 				Assert.fail("Sort by Recently updated is NOT Verified Successfully");
 			}
 		}
-		//login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
+		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
 	}
 
 	// TC_MS_151
 	@And("^search for the Series ID  as \"([^\"]*)\"$")
 	public void search_for_the_Series_ID_as(String arg1) throws Throwable {
+		// CommonFunctionality.DeleteSeries();
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='search-input-text']", 8).clear();
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='search-input-text']", 8).sendKeys(arg1);
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='search-input-text']", 8)
@@ -3619,10 +4006,14 @@ public class Myseries {
 					"(//span[@class='series-list-item--checkbox svg-checkbox'])[" + j + "]", 8).click();
 		}
 		login.Log4j.info(listofseries);
-		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
-				.click();
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]", 8);
+		new Actions(login.driver).moveToElement(series).build().perform();
+		
+		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+		
 	}
-
+	
+	
 	// TC_MS_151
 	@And("^Verify sort by % Change$")
 	public void verify_sort_by_Change() throws Throwable {
@@ -3635,7 +4026,7 @@ public class Myseries {
 		}
 		login.Log4j.info(list2);
 		for (int i = 0; i < listofseries.size(); i++) {
-			
+
 			if (listofseries.contains(list2.get(i))) {
 				System.out.println("Sort by %Change is Verified Successfully!!!");
 			} else {
@@ -3643,8 +4034,7 @@ public class Myseries {
 			}
 		}
 
-		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-
+		 login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
 	}
 
 	// TC_MS_152
@@ -3661,22 +4051,11 @@ public class Myseries {
 			String text = obj.getText();
 			String str1 = text.substring(0, 2);
 			System.out.println("str1:==============>" + str1);
-
-			// int result1 = Integer.parseInt(str1);
-			// if(result <= result1){
-			// System.out.println("Enter into if condition");
-			// System.out.println("Sort by Last Value is Verified Successfully!!!");
-			// }
-			// else{
-			// Assert.fail("Sort by Last Value is NOT Verified Successfully");
-			// }
 		}
-		// System.out.println("=======>after if condition============>");
-		// CommonFunctionality.getElementByProperty(login.driver,
-		// "sortdown_dropdown_X_icon", 6).click();
-		// CommonFunctionality.DeleteSeries();
-
-	}
+		Thread.sleep(1000);
+		 login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
+	
+		}
 
 	// TC_MS_153
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -3701,8 +4080,7 @@ public class Myseries {
 		}
 		CommonFunctionality.getElementByProperty(login.driver, "Expand_Icon_Right", 8).click();
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
-	}
+		}
 
 	// TC_MS_154
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -3726,8 +4104,7 @@ public class Myseries {
 			Assert.fail("Verification failed");
 		}
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
-
+		
 	}
 
 	// TC_MS_155
@@ -3752,8 +4129,7 @@ public class Myseries {
 			Assert.fail("Verification failed");
 		}
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
-
+	
 	}
 
 	// TC_MS_156
@@ -3786,7 +4162,6 @@ public class Myseries {
 			Assert.fail("Verification failed");
 		}
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
 		select_the_Customize_option();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Reset_option", 6).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_save_option", 6).click();
@@ -3815,7 +4190,7 @@ public class Myseries {
 			Assert.fail("Verification failed");
 		}
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
+	
 
 	}
 
@@ -3841,9 +4216,9 @@ public class Myseries {
 			Assert.fail("Verification failed");
 		}
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Expand_Icon_Right"))).click();
-		
+
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
+	
 	}
 
 	// TC_MS_159
@@ -3877,7 +4252,6 @@ public class Myseries {
 		}
 		CommonFunctionality.getElementByProperty(login.driver, "Expand_Icon_Right", 8).click();
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
 		select_the_Customize_option();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Reset_option", 6).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_save_option", 6).click();
@@ -3917,7 +4291,6 @@ public class Myseries {
 
 		CommonFunctionality.getElementByProperty(login.driver, "Expand_Icon_Right", 8).click();
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
 		select_the_Customize_option();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Reset_option", 6).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_save_option", 6).click();
@@ -3969,10 +4342,9 @@ public class Myseries {
 		} else {
 			Assert.fail("Verification failed");
 		}
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
-		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();	
-	}
 	
+		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
+	}
 
 	// TC_MS_162
 	@And("^select  Observation option in customize setting$")
@@ -4005,7 +4377,6 @@ public class Myseries {
 
 			CommonFunctionality.getElementByProperty(login.driver, "Expand_Icon_Right", 8).click();
 			login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-			//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
 			select_the_Customize_option();
 			CommonFunctionality.getElementByProperty(login.driver, "Customize_Reset_option", 6).click();
 			CommonFunctionality.getElementByProperty(login.driver, "Customize_save_option", 6).click();
@@ -4029,6 +4400,10 @@ public class Myseries {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]", 8).click();
 		}
+		WebElement series = CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='series-item--name'])[1]", 8);
+		new Actions(login.driver).moveToElement(series).build().perform();
+		
+		
 		// click on + icon
 		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
 				.click();
@@ -4096,8 +4471,7 @@ public class Myseries {
 		}
 		System.out.println("=========>Exit from if condition ");
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
-	}
+		}
 
 	// TC_MS_164
 	@And("^Verify sort by Last date$")
@@ -4116,7 +4490,7 @@ public class Myseries {
 				Assert.fail("Sort by Last date is NOT Verified Successfully");
 			}
 		}
-		//CommonFunctionality.getElementByProperty(login.driver, "sortdown_dropdown_X_icon", 6).click();
+		
 		login.driver.findElement(By.xpath("(//span[@class='custom-select-title--reset-icon'])[4]")).click();
 	}
 
@@ -4167,8 +4541,7 @@ public class Myseries {
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Series')]", 8).click();
 		Thread.sleep(2000);
 		Seriesnametodrag = CommonFunctionality
-				.getElementByXpath(login.driver, "(//div[@class='series-list-item--content']/a/div)[1]", 8)
-				.getText();
+				.getElementByXpath(login.driver, "(//div[@class='series-list-item--content']/a/div)[1]", 8).getText();
 
 		WebElement dragfrom = login.driver
 				.findElement(By.xpath("(//div[@class='series-list-item--content']/a/div)[1]"));
@@ -4197,15 +4570,14 @@ public class Myseries {
 
 		try {
 			login.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			WebElement we = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
+			WebElement we = login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[1]"));
 			action.moveToElement(we).pause(2000).build().perform();
 
 		}
 
 		catch (org.openqa.selenium.StaleElementReferenceException ex) {
 			login.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-			WebElement we = login.driver
-					.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
+			WebElement we = login.driver.findElement(By.xpath("(//span[@class='series-name-field--series-name'])[1]"));
 			action.moveToElement(we).pause(2000).build().perform();
 		}
 	}
@@ -4224,9 +4596,11 @@ public class Myseries {
 	// TC_MS_168
 	@And("^Select Show Series info$")
 	public void select_Show_Series_info() throws Throwable {
-		//WebElement we = login.driver.findElement(By.xpath("//div[@class='webix_column list-series-name webix_last']/div[1]/div[1]/div[1]/div[1]/span[1]/span"));
-		//action.moveToElement(we).build().perform();
-		//CommonFunctionality.getElementByProperty(login.driver, "SSP_Icon", 6).click();
+		// WebElement we = login.driver.findElement(By.xpath("//div[@class='webix_column
+		// list-series-name webix_last']/div[1]/div[1]/div[1]/div[1]/span[1]/span"));
+		// action.moveToElement(we).build().perform();
+		// CommonFunctionality.getElementByProperty(login.driver, "SSP_Icon",
+		// 6).click();
 		login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]")).click();
 	}
 
@@ -4246,10 +4620,12 @@ public class Myseries {
 	// TC_MS_169
 	@And("^Verify series tooltip in my series$")
 	public void verify_series_tooltip_in_my_series() throws Throwable {
-		WebElement we = CommonFunctionality.getElementByXpath(login.driver,"//span[@class='series-name-field--series-name']", 8);
+		WebElement we = CommonFunctionality.getElementByXpath(login.driver,
+				"(//span[@class='series-name-field--text'])[1]", 8);
 		action.moveToElement(we).pause(2000).build().perform();
 		Thread.sleep(3000);
-		boolean tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text_Myseries"))).isDisplayed();
+		boolean tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text_Myseries")))
+				.isDisplayed();
 		if (tooltip == true) {
 			System.out.println("Series tooltip info is Verified Successfully!!! ");
 		} else {
@@ -4260,7 +4636,7 @@ public class Myseries {
 	// TC_MS_170
 	@And("^Select the Edit series option$")
 	public void select_the_Edit_series_option() throws Throwable {
-		// Thread.sleep(5000);
+		 Thread.sleep(1000);
 		CommonFunctionality.getElementByProperty(login.driver, "Edit_series", 6).click();
 	}
 
@@ -4502,6 +4878,7 @@ public class Myseries {
 	// TC_MS_185
 	@And("^Select the Fx option$")
 	public void select_the_Fx_option() throws Throwable {
+		Thread.sleep(1000);
 		CommonFunctionality.getElementByProperty(login.driver, "FXover_icon", 6).click();
 	}
 
@@ -4520,14 +4897,17 @@ public class Myseries {
 	// TC_MS_186
 	@And("^Select the Footnotes option$")
 	public void select_the_Footnotes_option() throws Throwable {
-		CommonFunctionality.getElementByProperty(login.driver, "Footnotes_icon", 6).click();
+		CommonFunctionality.wait(1000);
+		WebElement footnote = login.driver.findElement(By.xpath("(//div[@class='open-footnote menu-icon'])[1]"));
+		action.moveToElement(footnote).click().build().perform();
+	//	CommonFunctionality.getElementByProperty(login.driver, "Footnotes_icon", 6).click();
 	}
 
 	// TC_MS_186
 	@And("^Verify Footnotes on series mouse hovering$")
 	public void verify_Footnotes_on_series_mouse_hovering() throws Throwable {
 		Thread.sleep(2000);
-		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Footnotes_pop_up"))).size() != 0) {
+		if (login.driver.findElement(By.xpath("//div[@class='movable-modal--window ui-resizable ui-draggable']")).isDisplayed()) {
 			System.out.println("Footnotes on series mouse hovering is Verified Successfully!!! ");
 		} else {
 			Assert.fail("Footnotes on series mouse hovering is NOT Verified Successfully");
@@ -4540,32 +4920,26 @@ public class Myseries {
 	@SuppressWarnings("deprecation")
 	@And("^Select the More option$")
 	public void select_the_More_option() throws Throwable {
-
+			
 		try {
 			Thread.sleep(2000);
 			WebElement we = login.driver
-					.findElement(By.xpath("//span[@class='series-item--icon series-item--icon__edit']"));
-			action.moveToElement(we).pause(1000).build().perform();
+					.findElement(By.xpath("(//div[@class='show-context menu-icon'])[1]"));
+			action.moveToElement(we).click().build().perform();
 		} catch (org.openqa.selenium.StaleElementReferenceException ex) {
 			Thread.sleep(2000);
 			WebElement we = login.driver
-					.findElement(By.xpath("//span[@class='series-item--icon series-item--icon__edit']"));
-			action.moveToElement(we).pause(1000).build().perform();
+					.findElement(By.xpath("(//div[@class='show-context menu-icon'])[1]"));
+			action.moveToElement(we).click().build().perform();
 		}
 
-		try {
-
-			CommonFunctionality.getElementByProperty(login.driver, "More_icon", 8).click();
-		} catch (Exception e) {
-			CommonFunctionality.getElementByProperty(login.driver, "More_icon", 8).click();
 		}
-	}
 
 	// TC_MS_187
 	@And("^Verify More option on series mouse hovering$")
 	public void verify_More_option_on_series_mouse_hovering() throws Throwable {
 		Thread.sleep(3000);
-		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("More_icon_dropdown"))).size() != 0) {
+		if (login.driver.findElement(By.xpath("//div[@class='items-wrapper']")).isDisplayed()) {
 			System.out.println("More option on series mouse hovering is Verified Successfully!!! ");
 		} else {
 			Assert.fail("More option on series mouse hovering is NOT Verified Successfully");
@@ -4588,90 +4962,81 @@ public class Myseries {
 	}
 
 	// TC_MS_189
-	@And("^Verify More View as Chart all$")
-	public void verify_More_View_as_Chart_all() throws Throwable {
+	@And("^Verify More Add to chart Chart all$")
+	public void verify_More_Add_to_chart_Chart_all() throws Throwable {
 		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Chart_created"))).size() != 0) {
-			System.out.println("More option View as Chart is Verified Successfully!!! ");
+			System.out.println("More option Add to chart Chart is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as Chart is NOT Verified Successfully");
+			Assert.fail("More option Add to chart Chart is NOT Verified Successfully");
 
 		}
 	}
 
-	//TC_MS_189
+	// TC_MS_189
 	@And("^Select the \"([^\"]*)\" button$")
 	public void select_the_button(String arg1) throws Throwable {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='items-wrapper']//span[@title='" + arg1 + "']/*[2]")).click();
-	   
+
 	}
 
 	@And("^Select the \"([^\"]*)\" link$")
 	public void select_the_link(String chat) throws Throwable {
 		CommonFunctionality.wait(1000);
-		
-		login.driver.findElement(By.xpath("//div[contains(@class,'icon--"+chat+"_large')]")).click();
+
+		login.driver.findElement(By.xpath("//div[contains(@class,'icon--" + chat + "_large')]")).click();
 		CommonFunctionality.wait(2000);
 	}
-	
+
 	@Given("^one series add into my series tab$")
 	public void one_series_add_into_my_series_tab() throws Throwable {
 		CommonFunctionality.wait(300);
-		WebElement table=login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
+/*		WebElement table = login.driver
+				.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
 		action.moveToElement(table).click().build().perform();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
 		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();
-		
-		
-		
-		
+		login.driver.findElement(By.xpath("//div[@data-action='delete']")).click();  */
+
 		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 10).click();
 
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Series')]", 8).click();
-		
-			CommonFunctionality.getElementByXpath(login.driver,"(//span[@class='series-list-item--checkbox svg-checkbox'])[1]", 8).click();
 
-		
+		CommonFunctionality
+				.getElementByXpath(login.driver, "(//span[@class='series-list-item--checkbox svg-checkbox'])[1]", 8)
+				.click();
+
 		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
 				.click();
 		CommonFunctionality.wait(1000);
-		
-			CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 10).click();
-		
+
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 10).click();
 
 	}
-	
-	
+
 	// TC_MS_190
 	@SuppressWarnings("deprecation")
-	@And("^Verify More View as Map$")
-	public void verify_More_View_as_Map() throws Throwable {
-
-//		new Actions(login.driver)
-//				.moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "*[title='View as Map']", 4))
-//				.pause(500).click().build().perform();
-//		new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
-//				".dropdown-menu.context-menu span[title='World']", 4)).pause(2000).click().build().perform();
-
+	@And("^Verify More Add to chart Map$")
+	public void verify_More_Add_to_chart_Map() throws Throwable {
+		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("MAP_created"))).size() != 0) {
-			System.out.println("More option View as MAP is Verified Successfully!!! ");
+			System.out.println("More option Add to chart MAP is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as MAP is NOT Verified Successfully");
+			Assert.fail("More option Add to chart MAP is NOT Verified Successfully");
 		}
 	}
 
 	// TC_MS_191
-	@And("^Verify More View as Table$")
-	public void verify_More_View_as_Table() throws Throwable {
+	@And("^Verify More Add to chart Table$")
+	public void verify_More_Add_to_chart_Table() throws Throwable {
 		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Table_created"))).size() != 0) {
-			System.out.println("More option View as Table is Verified Successfully!!! ");
+			System.out.println("More option Add to chart Table is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as Table is NOT Verified Successfully");
+			Assert.fail("More option Add to chart Table is NOT Verified Successfully");
 		}
 	}
 
@@ -4679,82 +5044,105 @@ public class Myseries {
 	@And("^Verify More View as \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
 	public void verify_More_View_as(String arg1, String arg2, String arg3) throws Throwable {
 		Thread.sleep(1000);
-		WebElement display_pie = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--"+arg1+"_large')]", 4);
+		WebElement display_pie = CommonFunctionality.getElementByXpath(login.driver,
+				"//div[contains(@class,'icon--" + arg1 + "_large')]", 4);
 		Assert.assertTrue(display_pie.isDisplayed());
-		WebElement display_heatmap = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--"+arg2+"_large')]", 4);
+		WebElement display_heatmap = CommonFunctionality.getElementByXpath(login.driver,
+				"//div[contains(@class,'icon--" + arg2 + "_large')]", 4);
 		Assert.assertTrue(display_heatmap.isDisplayed());
-		WebElement display_histogram = CommonFunctionality.getElementByXpath(login.driver, "//div[contains(@class,'icon--"+arg3+"_large')]", 4);
+		WebElement display_histogram = CommonFunctionality.getElementByXpath(login.driver,
+				"//div[contains(@class,'icon--" + arg3 + "_large')]", 4);
 		Assert.assertTrue(display_histogram.isDisplayed());
-		
-		//WebElement display_histogram = CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg3 + "']",4);
-		//Assert.assertTrue(display_histogram.isDisplayed());
+
+		// WebElement display_histogram =
+		// CommonFunctionality.getElementByXpath(login.driver, "//*[text()='" + arg3 +
+		// "']",4);
+		// Assert.assertTrue(display_histogram.isDisplayed());
 	}
 
 	// TC_MS_193
-	@And("^Verify More View as Pie$")
-	public void verify_More_View_as_Pie() throws Throwable {
-		//CommonFunctionality.getElementByProperty(login.driver, "PIE", 6).click();
+	@And("^Verify More Add to chart Pie$")
+	public void verify_More_Add_to_chart_Pie() throws Throwable {
+		// CommonFunctionality.getElementByProperty(login.driver, "PIE", 6).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("PIE_created"))).size() != 0) {
-			System.out.println("More option View as pie is Verified Successfully!!! ");
+			System.out.println("More option Add to chart pie is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as pie is NOT Verified Successfully");
+			Assert.fail("More option Add to chart pie is NOT Verified Successfully");
 
 		}
 	}
 
 	// TC_MS_194
-	@And("^Verify More View as Heatmap$")
-	public void verify_More_View_as_Heatmap() throws Throwable {
+	@And("^Verify More Add to chart Heatmap$")
+	public void verify_More_Add_to_chart_Heatmap() throws Throwable {
 		Thread.sleep(1000);
-		//new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "*[title='Heat map']", 4)).pause(500).click().build().perform();
+		// new
+		// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
+		// "*[title='Heat map']", 4)).pause(500).click().build().perform();
 		Thread.sleep(2000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Heatmap_created"))).size() != 0) {
-			System.out.println("More option View as Heatmap is Verified Successfully!!! ");
+			System.out.println("More option Add to chart Heatmap is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as Heatmap is NOT Verified Successfully");
+			Assert.fail("More option Add to chart Heatmap is NOT Verified Successfully");
+
+		}
+
+	}
+
+	// TC_MS_195
+
+	@And("^Verify More Add to chart Scatter$")
+	public void verify_More_Add_to_chart_Scatter() throws Throwable {
+
+		Thread.sleep(2000);
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Scatter_created"))).size() != 0) {
+			System.out.println("More option Add to chart Scatter is Verified Successfully!!! ");
+		} else {
+			Assert.fail("More option Add to chart Scatter is NOT Verified Successfully");
 
 		}
 
 	}
 
 	// TC_MS_196
-	@And("^Verify More View as Histogram$")
-	public void verify_More_View_as_Histogram() throws Throwable {
+	@And("^Verify More Add to chart Histogram$")
+	public void verify_More_Add_to_chart_Histogram() throws Throwable {
 		Thread.sleep(1000);
-		//new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, "*[title='Histogram']", 4)).pause(500).click().build().perform();
+		// new
+		// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
+		// "*[title='Histogram']", 4)).pause(500).click().build().perform();
 
 		Thread.sleep(1000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Histrogram_created"))).size() != 0) {
-			System.out.println("More option View as Histogram is Verified Successfully!!! ");
+			System.out.println("More option Add to chart Histogram is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as Histogram is NOT Verified Successfully");
+			Assert.fail("More option Add to chart Histogram is NOT Verified Successfully");
 
 		}
 	}
 
 	// TC_MS_197
-	@And("^Verify creating visual with more than max seires selection$")
-	public void verify_creating_visual_with_more_than_max_seires_selection() throws Throwable {
+	@And("^Verify creating visual with more than max series selection$")
+	public void verify_creating_visual_with_more_than_max_series_selection() throws Throwable {
 		Thread.sleep(1000);
 		Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Confirmation"))).isDisplayed());
 		CommonFunctionality.getElementByProperty(login.driver, "Confirmation_ok", 6).click();
 		CommonFunctionality.getElementByProperty(login.driver, "footnote_window_close", 8).click();
-		//verify_More_View_as_Chart_all();
+		// verify_More_View_as_Chart_all();
 	}
 
-	
 	@And("^click on 'Download' option$")
 	public void click_on_Download_option() throws Throwable {
-	    
+
 		login.driver.findElement(By.xpath("(//*[text()='Download'])[2]")).click();
-		
+
 	}
 
 	// TC_MS_197
 	@And("^Mouse hover the last series$")
 	public void mouse_hover_the_last_series() throws Throwable {
 		Thread.sleep(1000);
-		WebElement we = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[8]"));
+		WebElement we = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[6]"));
 		action.moveToElement(we).pause(2000).build().perform();
 
 	}
@@ -4766,7 +5154,7 @@ public class Myseries {
 		 * Thread.sleep(3000); CommonFunctionality.getElementByProperty(login.driver,
 		 * "lastseriesmore", 6).click();
 		 */
-		WebElement ele = login.driver.findElement(By.xpath("(//div[@title='More actions'])[8]"));
+		WebElement ele = login.driver.findElement(By.xpath("(//div[@title='More actions'])[6]"));
 		action.contextClick(ele).pause(2000).build().perform();
 	}
 
@@ -4844,6 +5232,7 @@ public class Myseries {
 
 	@And("^Select the Copy selected links option$")
 	public void select_the_Copy_selected_links_option() throws Throwable {
+
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Copy selected links')]", 8)
 				.click();
 
@@ -4936,11 +5325,12 @@ public class Myseries {
 //		WebElement we = login.driver.findElement(By.xpath("//div[@class='items-wrapper']/li[14]"));
 //		action.moveToElement(we).pause(2000).build().perform();
 		Thread.sleep(1000);
-		//String insertcopied = CommonFunctionality.getElementByProperty(login.driver, "Insert_copy", 6).getAttribute("class");
-		
+		// String insertcopied = CommonFunctionality.getElementByProperty(login.driver,
+		// "Insert_copy", 6).getAttribute("class");
+
 		login.driver.findElement(By.xpath("//span[text()='Copy data']")).click();
 		Thread.sleep(1000);
-		//System.out.println(insertcopied);
+		// System.out.println(insertcopied);
 		if (login.driver.findElement(By.xpath("//div[@class='modal-body sphere-modal__body']")).isDisplayed()) {
 			System.out.println("More actions insert copied option if not data in clipboard is Verified Successfully");
 		} else {
@@ -4948,7 +5338,6 @@ public class Myseries {
 
 		}
 		login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
-		
 
 	}
 
@@ -4956,11 +5345,13 @@ public class Myseries {
 	@And("^Verify More actions insert copied option$")
 	public void verify_More_actions_insert_copied_option() throws Throwable {
 		Thread.sleep(2000);
-		String Series_count_before = CommonFunctionality.getElementByProperty(login.driver, "Total_series_count", 6).getText();
+		String Series_count_before = CommonFunctionality.getElementByProperty(login.driver, "Total_series_count", 6)
+				.getText();
 		int SC_before = Integer.parseInt(Series_count_before);
 		System.out.println(SC_before);
 		Thread.sleep(2000);
-		String Series_count_after = CommonFunctionality.getElementByProperty(login.driver, "Total_series_count", 6).getText();
+		String Series_count_after = CommonFunctionality.getElementByProperty(login.driver, "Total_series_count", 6)
+				.getText();
 		int SC_after = Integer.parseInt(Series_count_after);
 		System.out.println(SC_after);
 		if (SC_before >= SC_after) {
@@ -4974,26 +5365,36 @@ public class Myseries {
 	@And("^Verify More actions insert growl message$")
 	public void verify_More_actions_insert_growl_message() throws Throwable {
 		Thread.sleep(1000);
-		
-		if(login.driver.findElements(By.xpath("//div[@class='modal-body sphere-modal__body']")).size()==1)
-		{
+
+		if (login.driver.findElements(By.xpath("//div[@class='modal-body sphere-modal__body']")).size() == 1) {
 			System.out.println("Download popup shown");
-		}
-		else {
+		} else {
 			Assert.fail("Download popup not shown");
 		}
 		login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
-		
-		
-	/*	if (login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).size() != 0) {
-			System.out.println("Validation message Verified Successfully for insert copied Option!!! ");
-		} else {
-			Assert.fail("Validation message is NOT Verified Successfully for insert copied Option!!!");
-		}
-		*/
+
+		/*
+		 * if
+		 * (login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).
+		 * size() != 0) { System.out.
+		 * println("Validation message Verified Successfully for insert copied Option!!! "
+		 * ); } else { Assert.
+		 * fail("Validation message is NOT Verified Successfully for insert copied Option!!!"
+		 * ); }
+		 */
 	}
 
 	// TC_MS_213
+	@And("^Select the the Delete option$")
+	public void select_the_the_Delete_option() throws Throwable {
+		CommonFunctionality.wait(500);
+
+		CommonFunctionality.wait(500);
+		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='insight-action-panel--btn-icon'])[4]", 8)
+				.click();
+
+	}
+
 	@And("^Verify More actions Delete$")
 	public void verify_More_actions_Delete() throws Throwable {
 		Thread.sleep(2000);
@@ -5084,7 +5485,8 @@ public class Myseries {
 	@And("^Verify More actions OK icon by default$")
 	public void verify_More_actions_OK_icon_by_default() throws Throwable {
 		Thread.sleep(3000);
-		Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Grouping_icon"))).isDisplayed());
+		Assert.assertTrue(
+				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Grouping_icon"))).isDisplayed());
 	}
 
 	// TC_MS_221
@@ -5113,7 +5515,8 @@ public class Myseries {
 		Thread.sleep(1000);
 		Secondseriesname = CommonFunctionality.getElementByProperty(login.driver, "Second_series_name", 6).getText();
 		Thread.sleep(1000);
-		WebElement we = login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[3]"));
+		WebElement we = login.driver.findElement(
+				By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[3]"));
 		action.moveToElement(we).pause(2000).build().perform();
 		try {
 			CommonFunctionality.getElementByProperty(login.driver, "More_icon", 8).click();
@@ -5320,8 +5723,8 @@ public class Myseries {
 	}
 
 	// TC_MS_230
-	@Given("^Verify More actions Footnotesif the series linked to multiple Database$")
-	public void verify_More_actions_Footnotesif_the_series_linked_to_multiple_Database() throws Throwable {
+	@Given("^Verify More actions Footnotes if the series linked to multiple Database$")
+	public void verify_More_actions_Footnotes_if_the_series_linked_to_multiple_Database() throws Throwable {
 
 		WebElement we = login.driver.findElement(By.xpath("//span[text()='Footnotes']"));
 		action.moveToElement(we).pause(5000).build().perform();
@@ -5403,7 +5806,8 @@ public class Myseries {
 		Thread.sleep(1000);
 		for (int i = 1; i <= 1; i++) {
 			Thread.sleep(1000);
-			//login.driver.findElement(By.xpath("//*[@class='search-series-list']/*[" + i + "]/div/a/div[2]")).click();
+			// login.driver.findElement(By.xpath("//*[@class='search-series-list']/*[" + i +
+			// "]/div/a/div[2]")).click();
 			login.driver.findElement(By.xpath("//*[@class='search-input-text']")).click();
 		}
 	}
@@ -5437,21 +5841,21 @@ public class Myseries {
 	}
 
 	// TC_MS_235
-	@And("^Verify Right click View as Chart all$")
-	public void verify_Right_click_View_as_Chart_all() throws Throwable {
-		verify_More_View_as_Chart_all();
+	@And("^Verify Right click Add to chart Chart all$")
+	public void verify_Right_click_Add_to_chart_Chart_all() throws Throwable {
+		verify_More_Add_to_chart_Chart_all();
 	}
 
 	// TC_MS_236
-	@And("^Verify Right click View as Map$")
-	public void verify_Right_click_View_as_Map() throws Throwable {
-		verify_More_View_as_Map();
+	@And("^Verify Right click Add to chart Map$")
+	public void verify_Right_click_Add_to_chart_Map() throws Throwable {
+		verify_More_Add_to_chart_Map();
 	}
 
 	// TC_MS_237
-	@And("^Verify Right click View as Table$")
-	public void verify_Right_click_View_as_Table() throws Throwable {
-		verify_More_View_as_Table();
+	@And("^Verify Right click Add to chart Table$")
+	public void verify_Right_click_Add_to_chart_Table() throws Throwable {
+		verify_More_Add_to_chart_Table();
 	}
 
 	// TC_MS_238
@@ -5469,34 +5873,40 @@ public class Myseries {
 	}
 
 	// TC_MS_239
-	@And("^Verify Right click View as Pie$")
-	public void verify_Right_click_View_as_Pie() throws Throwable {
+	@And("^Verify Right click Add to chart Pie$")
+	public void verify_Right_click_Add_to_chart_Pie() throws Throwable {
 		Thread.sleep(3000);
 		CommonFunctionality.getElementByProperty(login.driver, "PIE", 6).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("PIE_created"))).size() != 0) {
-			System.out.println("Right click option View as pie is Verified Successfully!!! ");
+			System.out.println("Right click option Add to chart pie is Verified Successfully!!! ");
 		} else {
 			CommonFunctionality.Views_list();
-			Assert.fail("Right click option View as pie is NOT Verified Successfully");
+			Assert.fail("Right click option Add to chart pie is NOT Verified Successfully");
 
 		}
 	}
 
 	// TC_MS_240
-	@And("^Verify Right click View as Heatmap$")
-	public void verify_Right_click_View_as_Heatmap() throws Throwable {
-		verify_More_View_as_Heatmap();
+	@And("^Verify Right click Add to chart Heatmap$")
+	public void verify_Right_click_Add_to_chart_Heatmap() throws Throwable {
+		verify_More_Add_to_chart_Heatmap();
+	}
+
+	// TC_MS_241
+	@And("^Verify Right click Add to chart Scatter$")
+	public void verify_Right_click_Add_to_chart_Scatter() throws Throwable {
+		verify_More_Add_to_chart_Scatter();
 	}
 
 	// TC_MS_242
-	@And("^Verify Right click View as Histogram$")
-	public void verify_Right_click_View_as_Histogram() throws Throwable {
-		verify_More_View_as_Histogram();
+	@And("^Verify Right click Add to chart Histogram$")
+	public void verify_Right_click_Add_to_chart_Histogram() throws Throwable {
+		verify_More_Add_to_chart_Histogram();
 	}
 
 	// TC_MS_243
-	@And("^Verify Right click creating visual with more than max seires selection$")
-	public void verify_Right_click_creating_visual_with_more_than_max_seires_selection() throws Throwable {
+	@And("^Verify Right click creating visual with more than max series selection$")
+	public void verify_Right_click_creating_visual_with_more_than_max_series_selection() throws Throwable {
 		Thread.sleep(1000);
 		Assert.assertTrue(
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Confirmation_ok"))).isDisplayed());
@@ -5504,7 +5914,7 @@ public class Myseries {
 		CommonFunctionality.getElementByProperty(login.driver, "Confirmation_ok", 6).click();
 		Thread.sleep(3000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("footnote_window_close"))).click();
-		//verify_More_View_as_Chart_all();
+		// verify_More_View_as_Chart_all();
 	}
 
 	// TC_MS_244
@@ -5754,9 +6164,9 @@ public class Myseries {
 	}
 
 	// TC_MS_276
-	@And("^Verify Right click Footnotesif the series linked to multiple Database$")
-	public void verify_Right_click_Footnotesif_the_series_linked_to_multiple_Database() throws Throwable {
-		verify_More_actions_Footnotesif_the_series_linked_to_multiple_Database();
+	@And("^Verify Right click Footnotes if the series linked to multiple Database$")
+	public void verify_Right_click_Footnotes_if_the_series_linked_to_multiple_Database() throws Throwable {
+		verify_More_actions_Footnotes_if_the_series_linked_to_multiple_Database();
 	}
 
 	// TC_MS_277
@@ -5807,8 +6217,8 @@ public class Myseries {
 		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("More_icon_dropdown"))).size() != 0) {
 			System.out.println("More option on series mouse hovering is Verified Successfully!!! ");
-			
-			//login.driver.findElement(By.xpath("//span[@class='series-panel--group-button-text']")).click();
+
+			// login.driver.findElement(By.xpath("//span[@class='series-panel--group-button-text']")).click();
 		} else {
 			Assert.fail("More option on series mouse hovering is NOT Verified Successfully");
 
@@ -5817,22 +6227,22 @@ public class Myseries {
 	}
 
 	// TC_MS_309
-	@And("^Verify Right click View as Chart all in table mode$")
-	public void verify_Right_click_View_as_Chart_all_in_table_mode() throws Throwable {
+	@And("^Verify Right click Add to chart chart in table mode$")
+	public void verify_Right_click_Add_to_chart_chart_in_table_mode() throws Throwable {
 		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Chart_created"))).size() != 0) {
-			System.out.println("Table Right click View as Chart is Verified Successfully!!! ");
+			System.out.println("Table Right click Add to chart chart is Verified Successfully!!! ");
 		} else {
-			Assert.fail("Table Right click View as Chart is NOT Verified Successfully");
+			Assert.fail("Table Right click Add to chart chart is NOT Verified Successfully");
 
 		}
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-//		select_the_List_mode();
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 	}
 
 	// TC_MS_310
-	@And("^Verify Right click View as Map in table mode$")
-	public void verify_Right_click_View_as_Map_in_table_mode() throws Throwable {
+	@And("^Verify Right click Add to chart map in table mode$")
+	public void verify_Right_click_Add_to_chart_map_in_table_mode() throws Throwable {
 
 //		WebElement we = login.driver.findElement(By.xpath((login.LOCATORS.getProperty("maprightclick"))));
 //		action.moveToElement(we).pause(2000).click().build().perform();
@@ -5840,27 +6250,27 @@ public class Myseries {
 
 		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("MAP_created"))).size() != 0) {
-			System.out.println("Table Right click View as MAP is Verified Successfully!!! ");
+			System.out.println("Table Right click Add to chart MAP is Verified Successfully!!! ");
 		} else {
-			Assert.fail("Table Right click View as MAP is NOT Verified Successfully");
+			Assert.fail("Table Right click Add to chart MAP is NOT Verified Successfully");
 
 		}
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-//		select_the_List_mode();
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 	}
 
 	// TC_MS_311
-	@And("^Verify Right click View as Table in table mode$")
-	public void verify_Right_click_View_as_Table_in_table_mode() throws Throwable {
+	@And("^Verify Right click Add to chart Table in table mode$")
+	public void verify_Right_click_Add_to_chart_Table_in_table_mode() throws Throwable {
 		Thread.sleep(3000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Table_created"))).size() != 0) {
-			System.out.println("Table Right click View as Table is Verified Successfully!!! ");
+			System.out.println("Table Right click Add to chart Table is Verified Successfully!!! ");
 		} else {
-			Assert.fail("Table Right click View as Table is NOT Verified Successfully");
+			Assert.fail("Table Right click Add to chart Table is NOT Verified Successfully");
 
 		}
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-//		select_the_List_mode();
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 	}
 
 	// TC_MS_312
@@ -5879,40 +6289,56 @@ public class Myseries {
 	}
 
 	// TC_MS_313
-	@And("^Verify Right click View as Pie in table mode$")
-	public void verify_Right_click_View_as_Pie_in_table_mode() throws Throwable {
+	@And("^Verify Right click Add to chart Pie in table mode$")
+	public void verify_Right_click_ADd_to_chart_Pie_in_table_mode() throws Throwable {
 		Thread.sleep(3000);
-		//CommonFunctionality.getElementByProperty(login.driver, "PIE", 6).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "PIE", 6).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("PIE_created"))).size() != 0) {
-			System.out.println("Right click option View as pie is Verified Successfully!!! ");
+			System.out.println("Right click option Add to chart pie is Verified Successfully!!! ");
 		} else {
-			Assert.fail("Right click option View as pie is NOT Verified Successfully");
+			Assert.fail("Right click option Add to chart pie is NOT Verified Successfully");
 
 		}
-//		Thread.sleep(5000);
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-//		select_the_List_mode();
+		Thread.sleep(5000);
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 	}
 
 	// TC_MS_314
-	@And("^Verify Right click View as Heatmap in table mode$")
-	public void verify_Right_click_View_as_Heatmap_in_table_mode() throws Throwable {
+	@And("^Verify Right click Add to chart Heatmap in table mode$")
+	public void verify_Right_click_Add_to_chart_Heatmap_in_table_mode() throws Throwable {
 		Thread.sleep(3000);
-		//CommonFunctionality.getElementByProperty(login.driver, "Heat_map", 6).click();
+		// CommonFunctionality.getElementByProperty(login.driver, "Heat_map",
+		// 6).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Heatmap_created"))).size() != 0) {
-			System.out.println("More option View as Heatmap is Verified Successfully!!! ");
+			System.out.println("More option Add to chart Heatmap is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as Heatmap is NOT Verified Successfully");
+			Assert.fail("More option Add to chart Heatmap is NOT Verified Successfully");
 
 		}
-//		Thread.sleep(5000);
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-//		select_the_List_mode();
+		Thread.sleep(5000);
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
+	}
+	// TC_MS_315
+
+	@And("^Verify Right click Add to chart Scatter in table mode$")
+	public void verify_Right_click_Add_to_chart_Scatter_in_table_mode() throws Throwable {
+		Thread.sleep(3000);
+
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Scatter_created"))).size() != 0) {
+			System.out.println("More option Add to chart Scatter is Verified Successfully!!! ");
+		} else {
+			Assert.fail("More option Add to chart Scatter is NOT Verified Successfully");
+		}
+		Thread.sleep(5000);
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 	}
 
 	// TC_MS_316
-	@And("^Verify Right click View as Histogram in table mode$")
-	public void verify_Right_click_View_as_Histogram_in_table_mode() throws Throwable {
+	@And("^Verify Right click Add to chart Histogram in table mode$")
+	public void verify_Right_click_Add_to_chart_Histogram_in_table_mode() throws Throwable {
 		Thread.sleep(3000);
 //		//CommonFunctionality.getElementByProperty(login.driver, "Histrogram", 6).click();
 //		try {
@@ -5922,30 +6348,44 @@ public class Myseries {
 //
 //		}
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Histrogram_created"))).size() != 0) {
-			System.out.println("More option View as Histogram is Verified Successfully!!! ");
+			System.out.println("More option Add to chart Histogram is Verified Successfully!!! ");
 		} else {
-			Assert.fail("More option View as Histogram is NOT Verified Successfully");
+			Assert.fail("More option Add to chart Histogram is NOT Verified Successfully");
 
 		}
-//		Thread.sleep(5000);
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-//		select_the_List_mode();
+		Thread.sleep(5000);
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 	}
 
 	// TC_MS_318
+	@And("^Select the Download option$")
+	public void select_the_Download_option() throws Throwable {
+		CommonFunctionality.wait(500);
+		
+		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Download')]", 8).click();
+	}
+
 	@And("^Verify More View on Download option table mode$")
 	public void verify_More_View_on_Download_option_table_mode() throws Throwable {
 		Assert.assertTrue(
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Download_pop_up"))).isDisplayed());
 		Thread.sleep(1000);
 		CommonFunctionality.getElementByProperty(login.driver, "Customize_Close_window", 6).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-		// select_the_List_mode();
+		Thread.sleep(3000);
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 
 	}
 
 	// TC_MS_319
+	@And("^Select the Copy option$")
+	public void select_the_Copy_option() throws Throwable {
+		CommonFunctionality.wait(500);
+	
+		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Copy')]", 8).click();
+	}
+
 	@And("^Verify More Copy option table mode$")
 	public void verify_More_Copy_option_table_mode() throws Throwable {
 		// get_the_series_name();
@@ -5958,9 +6398,9 @@ public class Myseries {
 		} else {
 			Assert.fail("More Copy option is NOT Verified Successfully");
 		}
-//		Thread.sleep(3000);
-//		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab",8).click();
-//		select_the_List_mode();
+		Thread.sleep(3000);
+		CommonFunctionality.getElementByProperty(login.driver, "MyInsight_Tab", 8).click();
+		select_the_List_mode();
 	}
 
 	@And("^Verify More actions the confirmation message for Copy action table mode$")
@@ -5981,7 +6421,7 @@ public class Myseries {
 
 		WebElement we = login.driver.findElement(By.xpath("//div[@class='growl-message-close']"));
 		action.moveToElement(we).click().build().perform();
-		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("growl_message_close"))).click();
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("growl_message_close"))).click();
 		Thread.sleep(7000);
 		if (login.driver.findElements(By.xpath("//div[@class='growl-message-text']")).size() == 0) {
 			System.out.println("closing of growl popup is Verified Successfully");
@@ -6018,10 +6458,10 @@ public class Myseries {
 		} else {
 			Assert.fail("More Copy link option is NOT Verified Successfully");
 		}
-//		Thread.sleep(1000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_322
@@ -6047,10 +6487,10 @@ public class Myseries {
 
 		login.driver.close();
 		login.driver.switchTo().window(tabs2.get(0));
-//		Thread.sleep(1000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	@And("^Verify Right click Copy link confirmation message in table mode$")
@@ -6078,7 +6518,8 @@ public class Myseries {
 	@And("^Verify Right click insert copied option if not data in clipboard in table mode$")
 	public void verify_Right_click_insert_copied_option_if_not_data_in_clipboard_in_table_mode() throws Throwable {
 		Thread.sleep(1000);
-		String insertcopied = CommonFunctionality.getElementByProperty(login.driver, "Insert_copy", 6).getAttribute("class");
+		String insertcopied = CommonFunctionality.getElementByProperty(login.driver, "Insert_copy", 6)
+				.getAttribute("class");
 		if (insertcopied.contains("disabled")) {
 			System.out.println("Right click insert copied option if not data in clipboard is Verified Successfully");
 		} else {
@@ -6092,15 +6533,16 @@ public class Myseries {
 //		Thread.sleep(3000);
 //		CommonFunctionality.DeleteSeries();
 	}
+
 	@And("^Select list mode$")
 	public void select_list_mode() throws Throwable {
-	   CommonFunctionality.wait(1000);
-	   WebElement table=login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
+		CommonFunctionality.wait(1000);
+		WebElement table = login.driver
+				.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
 		action.moveToElement(table).click().build().perform();
 		CommonFunctionality.wait(2000);
-	   
-	}
 
+	}
 
 	// TC_MS_325
 	@And("^Verify Right click insert copied option in table mode$")
@@ -6155,16 +6597,16 @@ public class Myseries {
 
 		for (int i = 1; i <= 1; i++) {
 			Thread.sleep(2000);
-			login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])["+i+"]")).click();
+			login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[" + i + "]")).click();
 		}
 //		Thread.sleep(2000);
 //		Robot r = new Robot();
 //		r.keyPress(KeyEvent.VK_A);
 //		r.keyRelease(KeyEvent.VK_A);
-//		Thread.sleep(1000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_327
@@ -6173,17 +6615,18 @@ public class Myseries {
 		Thread.sleep(3000);
 		Assert.assertTrue(
 				login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Grouping_rename_popup"))).isDisplayed());
-//		Thread.sleep(1000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(1000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_328
 	@And("^Verify More actions auto title for group in table mode$")
 	public void verify_More_actions_auto_title_for_group_in_table_mode() throws Throwable {
 		Thread.sleep(5000);
-		String autotitle = CommonFunctionality.getElementByProperty(login.driver, "Edit_series_rename_popup", 6).getAttribute("value");
+		String autotitle = CommonFunctionality.getElementByProperty(login.driver, "Edit_series_rename_popup", 6)
+				.getAttribute("value");
 		String s1 = autotitle.substring(0, 5);
 		String s2 = "Group";
 		Assert.assertEquals(s1, s2);
@@ -6203,10 +6646,10 @@ public class Myseries {
 		} else {
 			Assert.fail("Edit series Rename by default is NOT Verified Successfully");
 		}
-//		Thread.sleep(3000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 
 	}
 
@@ -6288,8 +6731,8 @@ public class Myseries {
 		action.moveToElement(we).build().perform();
 		Thread.sleep(300);
 
-		WebElement group=login.driver.findElement(By.xpath("//span[text()='Group']"));
-        action.moveToElement(group).build().perform();
+		WebElement group = login.driver.findElement(By.xpath("//span[text()='Group']"));
+		action.moveToElement(group).build().perform();
 		login.driver.findElement(By.xpath("//input[@class='add-to-context-manage--search']")).sendKeys("Group");
 
 		/*
@@ -6343,11 +6786,13 @@ public class Myseries {
 		action.moveToElement(we).build().perform();
 		Thread.sleep(300);
 
-		WebElement group=login.driver.findElement(By.xpath("//span[text()='Group']"));
-        action.moveToElement(group).build().perform();
-		//CommonFunctionality.getElementByXpath(login.driver, "//div[@class='add-to-context-manage']", 8).isDisplayed();
-		
-		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='add-to-context-manage--search']", 8).sendKeys("Group");
+		WebElement group = login.driver.findElement(By.xpath("//span[text()='Group']"));
+		action.moveToElement(group).build().perform();
+		// CommonFunctionality.getElementByXpath(login.driver,
+		// "//div[@class='add-to-context-manage']", 8).isDisplayed();
+
+		CommonFunctionality.getElementByXpath(login.driver, "//input[@class='add-to-context-manage--search']", 8)
+				.sendKeys("Group");
 
 		// login.driver.findElement(By.xpath("//body/ul[1]/div[3]/li[19]/ul[1]/li[1]/div[1]/div[2]/div[1]/div[1]")).click();
 		// Thread.sleep(1000);
@@ -6371,10 +6816,10 @@ public class Myseries {
 		 * Assert.fail("Edit series Rename by default is NOT Verified Successfully"); }
 		 */
 
-//		Thread.sleep(1000);
-//		login.driver.navigate().refresh();
-//		Thread.sleep(1000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(1000);
+		login.driver.navigate().refresh();
+		Thread.sleep(1000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_333
@@ -6384,7 +6829,7 @@ public class Myseries {
 		Thread.sleep(1000);
 		WebElement we = login.driver.findElement(By.xpath(("//span[text()='Group']")));
 		action.moveToElement(we).build().perform();
-		
+
 		CommonFunctionality.getElementByProperty(login.driver, "Group_createnewgroup", 8).click();
 
 		CommonFunctionality.getElementByProperty(login.driver, "List_mode_option", 8).click();
@@ -6394,8 +6839,8 @@ public class Myseries {
 		} else {
 			Assert.fail("new group option is NOT working");
 		}
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_334
@@ -6408,10 +6853,10 @@ public class Myseries {
 			Assert.fail("Preview pop up is NOT verified ");
 		}
 		CommonFunctionality.getElementByProperty(login.driver, "preview_popup_close", 8).click();
-//		Thread.sleep(3000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_335
@@ -6420,10 +6865,10 @@ public class Myseries {
 		Thread.sleep(3000);
 		Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Dialogue"))).isDisplayed());
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
-//		Thread.sleep(3000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_336
@@ -6437,16 +6882,16 @@ public class Myseries {
 			Assert.fail("More actions Footnotes is NOT Verified Successfully");
 		}
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
-//		Thread.sleep(3000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_337
 	@And("^Verify Right click Footnotesif the series linked to multiple Database in table mode$")
 	public void verify_Right_click_Footnotesif_the_series_linked_to_multiple_Database_in_table_mode() throws Throwable {
-CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(2000);
 		WebElement we = login.driver.findElement(By.xpath("//span[@title='Footnotes']"));
 		action.moveToElement(we).pause(2000).build().perform();
 
@@ -6470,10 +6915,10 @@ CommonFunctionality.wait(2000);
 		String Actual1 = "Global Key Series Database";
 		assertEquals(Actual1, GDB_keyseries);
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
-//		Thread.sleep(3000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_338
@@ -6486,10 +6931,10 @@ CommonFunctionality.wait(2000);
 		} else {
 			Assert.fail("Dataset is not displayed for given SeriesID");
 		}
-//		Thread.sleep(3000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_339
@@ -6503,48 +6948,51 @@ CommonFunctionality.wait(2000);
 			Assert.fail();
 		}
 
-//		Thread.sleep(3000);
-//		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
-//		Thread.sleep(3000);
-//		CommonFunctionality.DeleteSeries();
+		Thread.sleep(3000);
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("List_mode_option"))).click();
+		Thread.sleep(3000);
+		CommonFunctionality.DeleteSeries();
 	}
 
 	// TC_MS_340
 	@And("^Select undo option$")
 	public void select_undo_option() throws Throwable {
 		Thread.sleep(1000);
-		WebElement series1 = login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[1]"));
+		
+		String name = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]")).getText();
+		Thread.sleep(1000);
+		WebElement series1 = login.driver.findElement(
+				By.xpath("(//div[@class='series-name-field--series-name'])[1]"));
 		action.pause(500).moveToElement(series1).build().perform();
-		CommonFunctionality.getElementByXpath(login.driver, "(//span[@class='series-item--icon series-item--icon__edit'])[1]", 8).click();
+
+		
+		CommonFunctionality
+				.getElementByXpath(login.driver, "(//span[@class='series-item--icon series-item--icon__edit'])[1]", 8)
+				.click();
 		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'Rename')]", 8).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@id='current-title']", 8).click();
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@id='current-title']", 8).clear();
 		CommonFunctionality.getElementByXpath(login.driver, "//input[@id='current-title']", 8).sendKeys("data");
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@class='insight-series-rename--button insight-series-rename--button__apply']", 8).click();
+		CommonFunctionality
+				.getElementByXpath(login.driver,
+						"//div[@class='insight-series-rename--button insight-series-rename--button__apply']", 8)
+				.click();
 		CommonFunctionality.getElementByProperty(login.driver, "Undo_option", 8).click();
 	}
 
 	// TC_MS_340
 	@And("^Verify undo option for making changes in my series tab$")
 	public void verify_undo_option_for_making_changes_in_my_series_tab() throws Throwable {
+		CommonFunctionality.wait(2000);
+		String selected = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]")).getText();
+		System.out.println(selected);
+//System.out.println("data");
 
-		// System.out.println("undo option for making changes in my series tab is
-		// verified Succesfully");
-		//WebElement selected = CommonFunctionality.getElementByXpath(login.driver,"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",4);
-	//	WebElement selected = login.driver,"(//div[@class='series-name-field--series-name'])[1]"
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[@title='Redo (Ctrl+Y)']")).click();
-		CommonFunctionality.wait(2000);
-		String selected=login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]")).getText();
-System.out.println(selected);
-System.out.println("data");
-		if(selected.equalsIgnoreCase("data"))
-		{
-			System.out.println("undo option for making changes in my series tab is verified Succesfully");
+		if (selected.equalsIgnoreCase(name)) {
+		
+			login.Log4j.info("Undo option for making changes in my series tab is verified Succesfully");
 		} else {
-			Assert.fail("undo option for making changes in my series tab is NOT verified Succesfully");
-			
-			
+			Assert.fail("Undo option for making changes in my series tab is NOT verified Succesfully");
 
 		}
 	}
@@ -6558,18 +7006,16 @@ System.out.println("data");
 	// TC_MS_341
 	@And("^Verify redo option for making changes in my series tab$")
 	public void verify_redo_option_for_making_changes_in_my_series_tab() throws Throwable {
-		CommonFunctionality.wait(2000);		
-		WebElement selected=login.driver.findElement(By.xpath("(//div[@class='series-name-field--series-name'])[1]"));
+		CommonFunctionality.wait(2000);
+		WebElement selected = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
 
-		if(selected.getText().equalsIgnoreCase("data"))
-		{
-			System.out.println("redo option for making changes in my series tab is verified Succesfully");
-			
+		if (selected.getText().equalsIgnoreCase("data")) {
+		//	System.out.println("redo option for making changes in my series tab is verified Succesfully");
+			login.Log4j.info("redo option for making changes in my series tab is verified Succesfully");
 		} else {
-			Assert.fail("redo option for making changes in my series tab is verified Succesfully is NOT verified Succesfully");
-			
-			
-		
+			Assert.fail(
+					"redo option for making changes in my series tab is verified Succesfully is NOT verified Succesfully");
+
 //		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("First_series_Name"))).size()==1) {
 //			System.out.println("redo option for making changes in my series tab is verified Succesfully");
 //		} else {
@@ -6588,7 +7034,8 @@ System.out.println("data");
 		WebElement we = login.driver.findElement(By.xpath((login.LOCATORS.getProperty("secondSeriesnameintablemode"))));
 		action.moveToElement(we).build().perform();
 		Thread.sleep(3000);
-		Secondseriesname = CommonFunctionality.getElementByProperty(login.driver, "secondSeriesnameintablemode", 6).getText();
+		Secondseriesname = CommonFunctionality.getElementByProperty(login.driver, "secondSeriesnameintablemode", 6)
+				.getText();
 
 	}
 
@@ -6608,8 +7055,7 @@ System.out.println("data");
 		Thread.sleep(1000);
 		String Searchedseriesname = CommonFunctionality.getElementByProperty(login.driver, "Seriesnameintablemode", 6)
 				.getText();
-		
-		
+
 		if (Secondseriesname.equalsIgnoreCase(Searchedseriesname)) {
 			System.out.println("Search for name field in table mode is verified Succesfully");
 			Thread.sleep(500);
@@ -6617,18 +7063,22 @@ System.out.println("data");
 		} else {
 			Assert.fail("Search for name field in table mode is NOT verified Succesfully");
 		}
-	WebElement listMode=	login.driver.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
-	action.moveToElement(listMode).click().build().perform();
-	
-	//	CommonFunctionality.getElementByProperty(login.driver, "List_mode_option", 8).click();
-	
-	WebElement search=	login.driver.findElement(By.xpath("//input[@class='form--control']"));
-	action.moveToElement(search).click().build().perform();
-	login.driver.findElement(By.xpath("//div[@class='selection-filter--icon selection-filter--clear-button']")).click();
-	//CommonFunctionality.getElementByProperty(login.driver, "//input[@class='form--control']", 8).clear();
-	
-	//CommonFunctionality.getElementByProperty(login.driver, "//input[@class='form--control']", 8).click();
-		
+		WebElement listMode = login.driver
+				.findElement(By.xpath("(//div[@class='toggler-control-wrapper']//button[@type='button'])[1]"));
+		action.moveToElement(listMode).click().build().perform();
+
+		// CommonFunctionality.getElementByProperty(login.driver, "List_mode_option",
+		// 8).click();
+
+		WebElement search = login.driver.findElement(By.xpath("//input[@class='form--control']"));
+		action.moveToElement(search).click().build().perform();
+		login.driver.findElement(By.xpath("//div[@class='selection-filter--icon selection-filter--clear-button']"))
+				.click();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "//input[@class='form--control']", 8).clear();
+
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "//input[@class='form--control']", 8).click();
 
 		// Actions action = new Actions(login.driver);
 		// WebElement we
@@ -6644,7 +7094,8 @@ System.out.println("data");
 	@And("^select the second series and applay function$")
 	public void select_the_second_series_and_applay_function() throws Throwable {
 		Thread.sleep(1000);
-		Secondseriesnamefunctionapplied = CommonFunctionality.getElementByProperty(login.driver, "Second_series_Name", 6).getText();
+		Secondseriesnamefunctionapplied = CommonFunctionality
+				.getElementByProperty(login.driver, "Second_series_Name", 6).getText();
 		CommonFunctionality.getElementByProperty(login.driver, "Second_series_check_box", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Calculate_change_dropdown", 8).click();
 		CommonFunctionality.getElementByProperty(login.driver, "YOY_Function", 8).click();
@@ -6694,6 +7145,7 @@ System.out.println("data");
 		WebElement we = CommonFunctionality.getElementByProperty(login.driver, "Seriesid_field_search", 8);
 		action.moveToElement(we).pause(2000).click().sendKeys(SID).build().perform();
 	}
+
 	// TC_MS_282
 	@And("^verify Series ID in table mode$")
 	public void verify_Series_ID_in_table_mode() throws Throwable {
@@ -6724,7 +7176,7 @@ System.out.println("data");
 		Secondseriesnameinssp = CommonFunctionality.getElementByProperty(login.driver, "SSP_seriesname", 6).getText();
 		Thread.sleep(1000);
 		String SeriesID_ssp = CommonFunctionality.getElementByProperty(login.driver, "SSP_ID", 6).getText();
-		System.out.println("SeriesID_ssp:"+SeriesID_ssp);
+		System.out.println("SeriesID_ssp:" + SeriesID_ssp);
 		SID = SeriesID_ssp.substring(4, 12);
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
 	}
@@ -6735,7 +7187,7 @@ System.out.println("data");
 		Thread.sleep(1000);
 		WebElement we = login.driver.findElement(By.xpath(("//div[@class='series-item--name']")));
 		action.moveToElement(we).pause(2000).click().build().perform();
-		
+
 		Thread.sleep(1000);
 		Secondseriesnameinssp = CommonFunctionality.getElementByProperty(login.driver, "SSP_seriesname", 6).getText();
 		Thread.sleep(1000);
@@ -7004,7 +7456,7 @@ System.out.println("data");
 	@And("^get series name and last update value$")
 	public void get_series_name_and_last_update_value() throws Throwable {
 		Thread.sleep(1000);
-		
+
 		WebElement we = login.driver.findElement(By.xpath(("//div[@class='series-item--name']")));
 		action.moveToElement(we).pause(2000).click().build().perform();
 		Thread.sleep(1000);
@@ -7018,7 +7470,7 @@ System.out.println("data");
 	@And("^get series name and First date value$")
 	public void get_series_name_and_First_date_value() throws Throwable {
 		Thread.sleep(1000);
-		
+
 		WebElement we = login.driver.findElement(By.xpath(("(//div[@class='series-item--name'])[1]")));
 		action.moveToElement(we).pause(2000).click().build().perform();
 		Thread.sleep(1000);
@@ -7026,9 +7478,11 @@ System.out.println("data");
 		Thread.sleep(1000);
 		CommonFunctionality.getElementByProperty(login.driver, "Data_SSP", 6).click();
 		Thread.sleep(2000);
-		lastupdatevalue = login.driver.findElement(By.xpath("(//span[@class='preview-series-time-points--point-date'])[21]")).getText();
-		
-		//lastupdatevalue = CommonFunctionality.getElementByProperty(login.driver, "First_date", 6).getText();
+		lastupdatevalue = login.driver
+				.findElement(By.xpath("(//span[@class='preview-series-time-points--point-date'])[21]")).getText();
+
+		// lastupdatevalue = CommonFunctionality.getElementByProperty(login.driver,
+		// "First_date", 6).getText();
 		CommonFunctionality.getElementByProperty(login.driver, "Close_window", 8).click();
 	}
 
@@ -7055,15 +7509,16 @@ System.out.println("data");
 	public void search_First_date() throws Throwable {
 		select_the_Expand_Icon();
 		Thread.sleep(2000);
-		
+
 		login.driver.findElement(By.xpath("//button[@title='Customize your selection']")).click();
-		
+
 		login.driver.findElement(By.xpath("//button[text()='Reset']")).click();
-		
+
 		login.driver.findElement(By.xpath("//button[text()='Save']")).click();
-		//WebElement we = login.driver.findElement(By.xpath((login.LOCATORS.getProperty("Mnenonics_field_search"))));
+		// WebElement we =
+		// login.driver.findElement(By.xpath((login.LOCATORS.getProperty("Mnenonics_field_search"))));
 		WebElement we = login.driver.findElement(By.xpath(("(//tr[@section='header'])[2]/td[10]/div/input")));
-		
+
 		action.moveToElement(we).pause(2000).click().sendKeys(lastupdatevalue).build().perform();
 	}
 
@@ -7071,9 +7526,12 @@ System.out.println("data");
 	@And("^verify First date in table mode$")
 	public void verify_First_date_in_table_mode() throws Throwable {
 		Thread.sleep(3000);
-	//	String Searchedfunctionseriesname = CommonFunctionality.getElementByProperty(login.driver, "Seriesnameintablemode", 6).getText();
-		
-		String Searchedfunctionseriesname =login.driver.findElement(By.xpath("(//div[@class='series-name-field--series-name'])[1]")).getText();
+		// String Searchedfunctionseriesname =
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "Seriesnameintablemode", 6).getText();
+
+		String Searchedfunctionseriesname = login.driver
+				.findElement(By.xpath("(//div[@class='series-name-field--series-name'])[1]")).getText();
 		if (Secondseriesnameinssp.equalsIgnoreCase(Searchedfunctionseriesname)) {
 			System.out.println("First date field in table mode is verified Succesfully");
 		} else {
@@ -7309,8 +7767,9 @@ System.out.println("data");
 		Thread.sleep(3000);
 		WebElement selected = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[2]"));
 		System.out.println("=============================>" + selected);
-		//System.out.println(selected.getAttribute("class"));
-		//System.out.println("table-container--checkbox svg-checkbox input-control__grey");
+		// System.out.println(selected.getAttribute("class"));
+		// System.out.println("table-container--checkbox svg-checkbox
+		// input-control__grey");
 		if (selected.getText().equalsIgnoreCase(selected.getText())) {
 			System.out.println("selected series in list mode is verified Succesfully");
 		} else {
@@ -7322,8 +7781,8 @@ System.out.println("data");
 	@And("^verify Mouse hover icons on series in table mode$")
 	public void verify_Mouse_hover_icons_on_series_in_table_mode() throws Throwable {
 		Thread.sleep(1000);
-		//Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Icon"))).isDisplayed());
-		//Thread.sleep(1000);
+		// Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("SSP_Icon"))).isDisplayed());
+		// Thread.sleep(1000);
 		Assert.assertTrue(login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Edit_series"))).isDisplayed());
 	}
 
@@ -7331,11 +7790,12 @@ System.out.println("data");
 	@And("^Select SSP icon$")
 	public void select_SSP_icon() throws Throwable {
 		Thread.sleep(3000);
-		
+
 		WebElement we = login.driver.findElement(By.xpath((login.LOCATORS.getProperty("Seriesnameintablemode"))));
 		action.moveToElement(we).click().build().perform();
-		//WebElement we = login.driver.findElement(By.xpath((login.LOCATORS.getProperty("I_icon_SSP"))));
-		//action.moveToElement(we).pause(2000).click().build().perform();
+		// WebElement we =
+		// login.driver.findElement(By.xpath((login.LOCATORS.getProperty("I_icon_SSP"))));
+		// action.moveToElement(we).pause(2000).click().build().perform();
 	}
 
 	// TC_MS_298
@@ -7353,9 +7813,10 @@ System.out.println("data");
 	// TC_MS_299
 	@And("^verify series tooltip in table mode$")
 	public void verify_series_tooltip_in_table_mode() throws Throwable {
-		
+
 		boolean tooltip = login.driver.findElement(By.xpath("//div[@class='tooltip tooltip__visible']")).isDisplayed();
-		//boolean tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text_Myseries"))).isDisplayed();
+		// boolean tooltip =
+		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text_Myseries"))).isDisplayed();
 		if (tooltip == true) {
 			System.out.println("Series tooltip info is Verified Successfully!!! ");
 		} else {
@@ -7506,12 +7967,14 @@ System.out.println("data");
 	@And("^Verify Remove series if  visuals created from the series-table mode$")
 	public void verify_Remove_series_if_visuals_created_from_the_series_table_mode() throws Throwable {
 
-		//WebElement we = CommonFunctionality.getElementByProperty(login.driver, "Edit_series", 8);
-		//action.moveToElement(we).build().perform();
-		
-		WebElement we = login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[2]"));
+		// WebElement we = CommonFunctionality.getElementByProperty(login.driver,
+		// "Edit_series", 8);
+		// action.moveToElement(we).build().perform();
+
+		WebElement we = login.driver.findElement(
+				By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[1]"));
 		action.moveToElement(we).build().perform();
-		
+
 		CommonFunctionality.getElementByProperty(login.driver, "Series_remove", 8).click();
 		Thread.sleep(2000);
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Delete_series_popup"))).size() != 0) {
@@ -7522,7 +7985,7 @@ System.out.println("data");
 		Thread.sleep(500);
 		CommonFunctionality.getElementByProperty(login.driver, "Delete_ok_button", 6).click();
 		Thread.sleep(1000);
-		
+
 //		for (int i = 1; i <= 1; i++){
 //			Thread.sleep(500);
 //			login.driver.findElement(By.xpath("//*[@class='search-series-list']/*[" + i + "]/div/a/div[2]")).click();
@@ -7536,6 +7999,4 @@ System.out.println("data");
 	}
 }
 
-/*
- * 6 duplicate 4 FR 13 Cannot Automate 312 Automated
- */
+

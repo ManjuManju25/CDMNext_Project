@@ -1,4 +1,4 @@
-Feature:  verifying replacement series  Functionality
+Feature: verifying replacement series  Functionality
 
   Background: 
     Given User has successful logged in
@@ -125,4 +125,3 @@ Feature:  verifying replacement series  Functionality
     And Add rebased series to My series "1053401"
     Then Click on the series name in the chart.
     Then Verify for ssp window for series in replacement window
-

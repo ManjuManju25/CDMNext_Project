@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.io.File;
@@ -113,21 +114,16 @@ public class ChinaFilter {
 
 	@And("^Click on \"([^\"]*)\" dropdown$")
 	public void click_on_dropdown(String arg1) throws Throwable {
-		if(arg1.equalsIgnoreCase("Alternative Data")) {
-			login.Log4j.info("Clicking on Alternative Data dropdown");
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
-		} else {
-			CommonFunctionality.ResetMethod();
-			login.Log4j.info("Clicking on All Regions filter");
-			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
-		}
+		CommonFunctionality.ResetMethod();
+		login.Log4j.info("Clicking on All Regions filter");
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(),'" + arg1 + "')]"))).click();
 
 	}
 
 	@And("^Select subnational as \"([^\"]*)\"$")
 	public void select_subnational_as(String arg1) throws Throwable {
 		login.Log4j.info("Selecting subnational " + arg1);
-		CommonFunctionality.wait(5000);
+		CommonFunctionality.wait(3000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(
 				By.xpath("//*[@class='tabs__tabs-box']//*[contains(text(),'" + arg1 + "')]"))).click();
 	}
@@ -402,3 +398,4 @@ public class ChinaFilter {
 	}
 
 }
+

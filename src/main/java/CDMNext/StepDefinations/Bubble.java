@@ -23,8 +23,8 @@ public class Bubble extends CommonFunctionality {
 	ArrayList<String> same_country_list = new ArrayList<>();
 	ArrayList<String> unit_list = new ArrayList<>();
 	Filters filters = new Filters();
-	String Applied_color, Expected_color,data_labels_font_size;
-	WebElement data_labels_bold,data_labels_italic,data_labels_underline;
+	String Applied_color, Expected_color, data_labels_font_size;
+	WebElement data_labels_bold, data_labels_italic, data_labels_underline;
 
 	@And("^Create a bubble visual$")
 	public void create_a_bubble_visual() throws Throwable {
@@ -669,9 +669,9 @@ public class Bubble extends CommonFunctionality {
 	public void choose_for_labels(String arg1) throws Throwable {
 		wait(1000);
 		if (arg1.equalsIgnoreCase("Style")) {
-			data_labels_bold = getElementByXpath(login.driver,"//*[@name='data_labels_font_weight']", 4);
-			data_labels_italic = getElementByXpath(login.driver,"//*[@name='data_labels_font_style']", 4);
-			data_labels_underline = getElementByXpath(login.driver,"//*[@name='data_labels_font_underline']", 4);
+			data_labels_bold = getElementByXpath(login.driver, "//*[@name='data_labels_font_weight']", 4);
+			data_labels_italic = getElementByXpath(login.driver, "//*[@name='data_labels_font_style']", 4);
+			data_labels_underline = getElementByXpath(login.driver, "//*[@name='data_labels_font_underline']", 4);
 			if (!(data_labels_bold.getAttribute("class").contains("selected"))) {
 				data_labels_bold.click();
 			}
@@ -680,7 +680,7 @@ public class Bubble extends CommonFunctionality {
 			}
 			if (!(data_labels_underline.getAttribute("class").contains("selected"))) {
 				data_labels_underline.click();
-			}	
+			}
 		} else {
 			WebElement color = getElementByXpath(login.driver, "//*[@class='data-labels-config']//*[text()='" + arg1
 					+ "']/parent::*//*[@class='color-picker--ui']/*", 4);
@@ -764,18 +764,18 @@ public class Bubble extends CommonFunctionality {
 			AssertJUnit.fail("List size is zero");
 		}
 	}
+
 	@And("^Choose \"([^\"]*)\" for labels to (\\d+)$")
 	public void choose_for_labels_to(String arg1, int arg2) throws Throwable {
 		data_labels_font_size = Integer.toString(arg2);
-		WebElement size = CommonFunctionality.getElementByXpath(login.driver,
+		WebElement size = getElementByXpath(login.driver,
 				"//*[@class='popover--wrapper']//*[@name='data_labels_font_size']", 4);
 		size.sendKeys(Keys.chord(Keys.CONTROL, "a"), data_labels_font_size);
 	}
 
-	
 	@Then("^Selected style should be applied on labels of visual$")
 	public void selected_style_should_be_applied_on_labels_of_visual() throws Throwable {
-		CommonFunctionality.wait(1000);
+		wait(1000);
 		List<WebElement> font_style = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("data_labels_list")));
 		if (font_style.size() > 0) {
@@ -787,8 +787,7 @@ public class Bubble extends CommonFunctionality {
 				assertTrue(font_bold.equals("bold") || font_bold.equals("700"));
 				assertTrue(font_italic.equals("italic"));
 				assertTrue(font_underline.contains("underline"));
-				login.Log4j
-						.info("The Selected styles has been applied on labels of visual");
+				login.Log4j.info("The Selected styles has been applied on labels of visual");
 
 			}
 		} else {
@@ -796,4 +795,65 @@ public class Bubble extends CommonFunctionality {
 
 		}
 	}
+
+	@And("^Hover mouse over on legend$")
+	public void hover_mouse_over_on_legend() throws Throwable {
+		wait(2000);
+		WebElement legend = getElementByProperty(login.driver, "country_name_for_selected_same_country_series", 6);
+		action.moveToElement(legend).build().perform();
+	}
+
+	@Then("^The tooltip should display$")
+	public void the_tooltip_should_display() throws Throwable {
+		wait(300);
+		WebElement tooltip_text = getElementByProperty(login.driver, "legend_tooltip", 6);
+		login.Log4j.info(tooltip_text.getText());
+		wait(300);
+		List<WebElement> tooltip_info = login.driver
+				.findElements(By.xpath(login.LOCATORS.getProperty("legend_tooltip_data")));
+		int j = 0;
+
+		for (String sname : selected_series_list) {
+
+			for (int i = j; i < tooltip_info.size();) {
+				login.Log4j.info(tooltip_info.get(i).getText());
+				if (sname.equals(tooltip_info.get(i).getText())) {
+					login.Log4j.info("PASS");
+					j = j + 1;
+					break;
+				} else {
+					Assert.fail("Verification failed");
+				}
+
+			}
+		}
+		// verify legend tooltip text contains X axis , Y axis and Size
+		if (tooltip_text.getText().contains("X axis") && tooltip_text.getText().contains("Y axis")
+				&& tooltip_text.getText().contains("Size")) {
+			login.Log4j.info("PASS");
+		} else {
+			Assert.fail("FAIL");
+		}
+
+	}
+
+	@And("^Click on \"([^\"]*)\" option on download window of bubble tab$")
+	public void click_on_option_on_download_window_of_bubble_tab(String arg1) throws Throwable {
+		wait(500);
+		getElementByXpath(login.driver, "//*[text()='" + arg1 + "']", 6).click();
+	}
+
+	@Then("^Advanced setting should be hide$")
+	public void advanced_setting_should_be_hide() throws Throwable {
+		wait(500);
+		String advanced_setting_hide = getElementByXpath(login.driver,
+				"//*[@class='insight-download-advanced-settings']", 6).getAttribute("style");
+		if (advanced_setting_hide.contains("display: none")) {
+			login.Log4j.info("Advanced settings option is hide");
+		} else {
+			Assert.fail("Advanced settings option is not hide");
+		}
+
+	}
+
 }

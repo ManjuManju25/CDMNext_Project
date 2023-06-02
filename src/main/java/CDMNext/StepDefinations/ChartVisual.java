@@ -57,6 +57,7 @@ public class ChartVisual {
 	WebDriverWait wait = new WebDriverWait(login.driver, 100);
 	SoftAssert sa = new SoftAssert();
 	JavascriptExecutor js = (JavascriptExecutor) login.driver;
+	
 	public int m;
 	public static String first_series_title;
 	public static String chart_visual_title;
@@ -322,11 +323,6 @@ public class ChartVisual {
 		login.Log4j.info(date_excel);
 		login.Log4j.info(timepoints_excel);
 	}
-	
-	
-	
-	
-	
 
 	@And("^Observe the entire list of \"([^\"]*)\"$")
 	public void observe_the_entire_list_of(String arg1) throws Throwable {
@@ -360,23 +356,13 @@ public class ChartVisual {
 	@And("^Creating an Insight by selecting few series$")
 	public void creating_an_Insight_by_selecting_few_series() throws Throwable {
 		CommonFunctionality.wait(2000);
-		/*CommonFunctionality.getElementByProperty(login.driver, "Series", 4).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 4).click();
 		WebElement first_series = CommonFunctionality.getElementByProperty(login.driver, "First_series_item_in_series",
 				8);
 		new Actions(login.driver).moveToElement(first_series).pause(4000).click().build().perform();
 		WebElement second_series = CommonFunctionality.getElementByProperty(login.driver,
 				"Second_series_item_in_series", 8);
-		new Actions(login.driver).moveToElement(second_series).pause(4000).click().build().perform();*/
-		login.driver.findElement(By.xpath("//span[normalize-space(text())='Series']")).click();
-		List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
-		CommonFunctionality.wait(2000);
-		
-		
-		for (int i=0; i<=4; i++) {
-			CommonFunctionality.wait(2000);
-			list.get(i).click();
-			CommonFunctionality.wait(2000);	
-		}
+		new Actions(login.driver).moveToElement(second_series).pause(4000).click().build().perform();
 		WebElement actions = CommonFunctionality.getElementByProperty(login.driver, "add_to_myseries_icon", 8);
 		new Actions(login.driver).moveToElement(actions).pause(4000).click().build().perform();
 	}
@@ -473,18 +459,7 @@ public class ChartVisual {
 	@SuppressWarnings("deprecation")
 	@And("^Perform DragDrop operation in \"([^\"]*)\" Chart$")
 	public void perform_DragDrop_operation_in_Chart(String arg1) throws Throwable {
-		/*List<WebElement> list = login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
-		CommonFunctionality.wait(2000);
-		
-		
-		for (int i=1; i<list.size(); i++) {
-			CommonFunctionality.wait(2000);
-			list.get(i).click();
-			CommonFunctionality.wait(2000);	
-		}*/
-		//WebElement source = CommonFunctionality.getElementByClassName(login.driver, "series-item--main-info", 4);
-		CommonFunctionality.wait(2000);
-		WebElement source =login.driver.findElement(By.xpath("//div[@class='series-list-item-data']"));
+		WebElement source = CommonFunctionality.getElementByClassName(login.driver, "search-series-list", 4);
 		WebElement target = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='view-components-over--visual']//*[text()='" + arg1 + "']", 4);
 		new Actions(login.driver).moveToElement(source).pause(2000).dragAndDrop(source, target).build().perform();
@@ -501,11 +476,8 @@ public class ChartVisual {
 
 	@And("^Copy the insight title$")
 	public void copy_the_insight_title() throws Throwable {
-		
-		
 		visual_title = CommonFunctionality.getElementBycssSelector(login.driver, ".visual-title--text.text-dots", 4)
 				.getText();
-		System.out.println("====visual_title==============="+visual_title);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -515,54 +487,18 @@ public class ChartVisual {
 		// results as List']", 4).click();
 		CommonFunctionality.webDriverwait_keyvalue("Series_tab");
 		WebElement SeriesTab = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_tab_bar"))));
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
-		CommonFunctionality.wait(2000);
-		List<WebElement> ele=new ArrayList<>();
-		Thread.sleep(5000);
-		for(int i=0;i<arg1;i++) {
-			 ele=login.driver.findElements(By.xpath("//*[@class='series-list-item--checkbox svg-checkbox']"));
-				System.out.println("the size is "+ele.size());
-				ele.get(i).click();
-		/*for(WebElement e:ele) {
-			JavascriptExecutor jse=(JavascriptExecutor)login.driver;
-			jse.executeScript("arguments[0].scrollIntoView(true);", e);*/
-		
-				//ele.click();
-			
-			
-			
-	//	}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	//	List<WebElement> Checkboxes=login.driver.findElements(By.xpath("//*[@class='series-list-item--checkbox svg-checkbox']"));
-		//for (int i = 0; i <= arg1; i++) {
-			//CommonFunctionality.wait(200);
-			//Checkboxes.get(i).click();
-			//CommonFunctionality.wait(200);
-			
-			
-			
-			/*WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='series-list-item--checkbox svg-checkbox']/*[" + i + "]", 4);
-			
+		for (int i = 1; i <= arg1; i++) {
+			CommonFunctionality.wait(200);
+			WebElement series_unselected = CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@class='search-series-list']/*[" + i + "]", 4);
 			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='series-list-item--checkbox svg-checkbox']/*[" + i + "]", 4);
+					"//*[@class='search-series-list']/*[" + i + "]/div/a/div[2]/span/*", 4);
 			if (!series_unselected.getAttribute("class").contains("series-list-item__selected")) {
-				new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();*/
-			/*}*/
-		//}
+				new Actions(login.driver).moveToElement(series).pause(500).click().build().perform();
+			}
+		}
 		new Actions(login.driver).sendKeys("c").pause(500).perform();
 	}
 
@@ -580,9 +516,7 @@ public class ChartVisual {
 		CommonFunctionality.wait(1000);
 		WebElement series = CommonFunctionality.getElementBycssSelector(login.driver, ".series-edit--title__editable",
 				4);
-		
-			
-		new Actions(login.driver).moveToElement(series).pause(2000).build().perform();
+		new Actions(login.driver).moveToElement(series).pause(1000).build().perform();
 	}
 
 	@And("^Count the list of views \"([^\"]*)\" clicking the New option$")
@@ -624,7 +558,7 @@ public class ChartVisual {
 		WebElement rotation = null;
 		if (arg1.equalsIgnoreCase("Value_label_rotation")) {
 			rotation = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='popover--wrapper']//*[@name='label_rotation']", 4);
+					"//*[@class='popover--wrapper']//*[@name='y_axis_label_rotation']", 4);
 		} else if (arg1.equalsIgnoreCase("Time_Axis_label_rotation")) {
 			rotation = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='popover--wrapper']//*[@name='x_axis_label_rotation']", 4);
@@ -699,24 +633,8 @@ public class ChartVisual {
 //				"//*[text()='Grouping separator']/following::span[text()=\"" + grouping + "\"]", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='number-format-picker']/*[2]/*[2]//*[@value=\"" + decimal + "\"]", 4).click();
-		
-		
-		
-		click_on_dropdown_under_popup("Number format","Values Axis");
-		if(!grouping.equalsIgnoreCase("Space")) {
-			
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='number-format-picker']/*[3]/*[2]//*[@value=\"" + grouping + "\"]", 4).click();
-			
-		}
-		else {
-			CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='number-format-picker']/*[3]/*[2]//*[text()=\"" + grouping + "\"]", 4).click();
-			
-		}
-		
-		
-		
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='number-format-picker']/*[3]/*[2]//*[@value=\"" + grouping + "\"]", 4).click();
 		
 	}
 
@@ -746,13 +664,9 @@ public class ChartVisual {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[text()='Decimal separator']//following::*[contains(text(),\"" + data_format_separator + "\")][1]",
 				4).click();
-		CommonFunctionality.wait(2000);
 		Histogram.click_on_Number_format_dropdown();
-		//CommonFunctionality.getElementByProperty(login.driver, "data_label_format", 4).click();
-		CommonFunctionality.wait(2000);
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[text()='Grouping separator']//following::*[contains(text(),\""
-						+ data_format_grouping_separator + "\")][1]", 4)
+				.getElementByXpath(login.driver, "//*[text()='Grouping separator']//following::*[contains(text(),\"" + data_format_grouping_separator + "\")][1]", 4)
 				.click();
 	}
 
@@ -819,8 +733,7 @@ public class ChartVisual {
 
 	@And("^Hovor on Insert Chart$")
 	public void hovor_on_Insert_Chart() throws Throwable {
-		//insert_chart = CommonFunctionality.getElementByXpath(login.driver, "//div[@data-type='line']", 4);
-		insert_chart =login.driver.findElement(By.xpath("//div[@data-type='line']"));
+		insert_chart = CommonFunctionality.getElementByXpath(login.driver, "//div[@data-type='line']", 4);
 		dest = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='view-components-over--visual-title' and text()='Line']", 4);
 	}
@@ -849,9 +762,8 @@ public class ChartVisual {
 	@And("^Highlight any one series$")
 	public void highlight_any_one_series() throws Throwable {
 		CommonFunctionality.wait(8000);
-		/*WebElement one_series = login.driver
-				.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));*/
-		WebElement one_series =	login.driver.findElement(By.xpath("//*[@class='series-item--name']"));
+		WebElement one_series = login.driver
+				.findElement(By.xpath(login.LOCATORS.getProperty("One_series_from_myserieslist")));
 		new Actions(login.driver).moveToElement(one_series).pause(4000).build().perform();
 	}
 
@@ -939,36 +851,6 @@ public class ChartVisual {
 		CommonFunctionality.wait(1000);
 		WebElement title = CommonFunctionality.getElementBycssSelector(login.driver, "span[data-name='" + arg1 + "']",
 				4);
-		//WebElement title=login.driver.findElement(By.xpath("(//*[normalize-space(text())='Chart'])[2]"));
-		new Actions(login.driver).moveToElement(title).pause(1000).doubleClick().build().perform();
-	}
-	
-	@SuppressWarnings("deprecation")
-	@And("^Double click on highchartstitle \"([^\"]*)\"$")
-	public void double_click_on_highchartstitle(String arg1) throws Throwable {
-		CommonFunctionality.wait(3000);
-		
-		try {
-		WebElement title = login.driver.findElement(By.xpath("(//span[@data-name='" + arg1 + "'])[2]"));
-		//WebElement title=login.driver.findElement(By.xpath("(//*[normalize-space(text())='Chart'])[2]"));
-		new Actions(login.driver).moveToElement(title).pause(1000).doubleClick().build().perform();
-	}
-	catch (Exception e) {
-		WebElement title = login.driver.findElement(By.xpath("(//span[@data-name='" + arg1 + "'])[1]"));
-		//WebElement title=login.driver.findElement(By.xpath("(//*[normalize-space(text())='Chart'])[2]"));
-		new Actions(login.driver).moveToElement(title).pause(1000).doubleClick().build().perform();
-	}
-	}
-	
-	
-	@SuppressWarnings("deprecation")
-	@And("^I click on Advanced settings popup \"([^\"]*)\"$")
-	public void click_on_advancesettingspopup(String arg1) throws Throwable {
-		CommonFunctionality.wait(3000);
-		
-		
-		WebElement title = login.driver.findElement(By.xpath("//div[text()='"+arg1+":']/..//div[@title='Open advanced settings popup']"));
-		//WebElement title=login.driver.findElement(By.xpath("(//*[normalize-space(text())='Chart'])[2]"));
 		new Actions(login.driver).moveToElement(title).pause(1000).doubleClick().build().perform();
 	}
 
@@ -1032,44 +914,17 @@ public class ChartVisual {
 				"//*[@class='popover--wrapper']//*[contains(text(),'" + arg1 + "')]/ancestor::div[2]", 4);
 		if (section.getAttribute("class").contains("collapsed")) {
 			section.click();
+			login.Log4j.info(arg1 + " section  is expanded");
 		} else {
 			System.out.println("Already expanded");
 		}
 	}
 
-	/*@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@And("^Click on chart option from hover$")
 	public void click_on_chart_option_from_hover() throws Throwable {
-		CommonFunctionality.wait(500);
-		/*List<WebElement> total_count = login.driver
-				.findElements(By.xpath("//*[contains(@class,'search-series-list')]/*"));
-		for (int i = 1; i <= total_count.size(); i++) {
-			WebElement unselect_check = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[contains(@class,'search-series-list')]/*[" + i + "]", 4);
-			WebElement series = CommonFunctionality.getElementByXpath(login.driver,
-					"(//div[@class='series-list-item--checkbox-wrapper']//*[contains(@class,'series-list-item--checkbox')])["
-							+ i + "]",
-					4);
-			if (!(unselect_check.getAttribute("class").contains("series-list-item__selected"))) {
-				new Actions(login.driver).moveToElement(series).pause(100).click().build().perform();
-			}
-		} ->comment here 
-		WebElement actions = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[contains(@class,'series-item--country')])[1]", 8);
-		new Actions(login.driver).moveToElement(actions).pause(500).build().perform();
-		new Actions(login.driver).moveToElement(
-				CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'view-chart-icon')])[1]", 8))
-				.pause(500).click().build().perform();
-	}
-*/
-		
-		
-		
-	
-	@SuppressWarnings("deprecation")
-		@And("^Click on chart option from hover$")
-	public void click_on_chart_option_from_hover() throws Throwable {
-		//CommonFunctionality.wait(5000);
+		//CommonFunctionality.ExpandLeft();
+		CommonFunctionality.wait(2000);
 		/*List<WebElement> total_count = login.driver
 				.findElements(By.xpath("//*[contains(@class,'search-series-list')]/*"));
 		for (int i = 1; i <= total_count.size(); i++) {
@@ -1083,70 +938,14 @@ public class ChartVisual {
 				new Actions(login.driver).moveToElement(series).pause(100).click().build().perform();
 			}
 		}*/
-		
-		System.out.println("-------------------Element  Dispalyed");
-		//1WebElement actions =login.driver.findElement(By.xpath("//div[@class='series-item--main-info']"));
-		//WebElement actions = CommonFunctionality.getElementByXpath(login.driver,"(//*[contains(@class,'series-item--country')])[1]", 8);
-		//1new Actions(login.driver).moveToElement(actions).pause(2000).build().perform();
-		//1CommonFunctionality.wait(2000);
-		//1WebElement actions1 =login.driver.findElement(By.xpath("(//span[@class='view-chart-icon menu-icon'])[1]"));
-		//1new Actions(login.driver).moveToElement(actions1).pause(2000).click().build().perform();
-		/*new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//span[@class='view-chart-icon menu-icon'])[1]", 8))
-				.pause(2000).click().build().perform();*/
-		CommonFunctionality.wait(2000);
-		//original code commented actually checkboxes.size is there
-		List<WebElement> checkboxes = login.driver
-				.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
-		
-		for(int i=0;i<checkboxes.size();i++) {
-			CommonFunctionality.wait(2000);
-			checkboxes.get(i).click();
-			CommonFunctionality.wait(2000);
-		}
-		WebElement Serieslist = login.driver.findElement(
-				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
-		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
-		
-        CommonFunctionality.wait(3000);
-        WebElement ele1 = login.driver.findElement(By.xpath("(//span[@class='view-chart-icon menu-icon'])[1]"));
-		//CommonFunctionality.action.moveToElement(ele1).pause(5).build().perform();
-		js. executeScript("arguments[0]. click();", ele1);
-	
+		WebElement actions = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[contains(@class,'series-item--name')])[1]", 8);
+		new Actions(login.driver).moveToElement(actions).pause(500).build().perform();
+		new Actions(login.driver).moveToElement(
+				CommonFunctionality.getElementByXpath(login.driver, "(//*[contains(@class,'view-chart-icon')])[1]", 8))
+				.pause(500).click().build().perform();
 	}
-	
-	@And("^Search for the series with SID \"([^\"]*)\" in search bar$")
-	public void search_for_the_series_with_SID_in_search_bar(String arg1) throws Throwable {
-		WebElement Placeholder=login.driver.findElement(By.xpath("//input[@placeholder='Search']"));
-		Placeholder.click();
-		Placeholder.sendKeys(arg1,Keys.ENTER);
-		List<WebElement> Checkboxes=login.driver.findElements(By.xpath("//span[@class='series-list-item--checkbox svg-checkbox']"));
-		for(int i=0;i<Checkboxes.size();i++) {
-			CommonFunctionality.wait(2000);
-			Checkboxes.get(i).click();
-			CommonFunctionality.wait(2000);
-		}
-		
-	    
-	}
-	
-	
 
-	@And("^Create a chart\\.$")
-	public void create_a_chart() throws Throwable {
-		WebElement ele1 = login.driver.findElement(By.xpath("(//span[@title='More actions'])[2]"));
-		
-		//CommonFunctionality.action.moveToElement(ele1).pause(2000).click().build().perform();
-		//WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More_actions")));
-		CommonFunctionality.action.moveToElement(ele1).pause(2000).click().build().perform();
-	    //js. executeScript("arguments[0]. click();", ele1);
-		CommonFunctionality.wait(2000);
-		WebElement Add_chart=login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
-		new Actions(login.driver).moveToElement(Add_chart).pause(1000).build().perform();
-		WebElement Chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line')]"));
-		js. executeScript("arguments[0]. click();", Chart);
-	}
-	
-	
 	@SuppressWarnings("deprecation")
 	@And("^Click on Edit Chart$")
 	public void click_on_Edit_Chart() throws Throwable {
@@ -1171,66 +970,12 @@ public class ChartVisual {
 		new Actions(login.driver).moveToElement(color).pause(500).click().build().perform();
 		
 	}
-	
-	@And("^select \"([^\"]*)\" from more colors option$")
-	public void select_from_more_colors_option(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
-		color=arg1;
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.BACK_SPACE);
-		}
-		//CommonFunctionality.wait(2000);
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.DELETE);
-		}
-		Enter_text.sendKeys("#2b60d0");
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
-		
-		
-		
-		
-		
-		
-		
-		//new Actions(login.driver).moveToElement(Enter_text).pause(2000).doubleClick().sendKeys("2b60d0").build().perform();
-		//CommonFunctionality.wait(2000);
-		//login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-	}
-	
-	
+
 	@And("^Select \"([^\"]*)\" color from list$")
 	public void select_color_from_list(String arg1) throws Throwable {
 		color = arg1;
-		List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}
-		/*WebElement ele=login.driver.findElement(By.xpath("(//div[@class='index-module_wrapper__Q-UYB'])[6]"));
-		String color=ele.getCssValue("background-color");
-		String color2=Color.fromString(color).asHex();
-		System.out.println("the bg color us "+color2);
-	ele.click();*/
-		
-		/*CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + color + "']");
-		CommonFunctionality.wait(500);*/
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + color + "']");
+		CommonFunctionality.wait(500);
 		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
 			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
 		}
@@ -1239,183 +984,33 @@ public class ChartVisual {
 	@And("^Select \"([^\"]*)\" series chart color from list$")
 	public void select_series_chart_color_from_list(String arg1) throws Throwable {
 		series_chart_color = arg1;
-		/*CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
-				"//*[@title='" + series_chart_color + "']");*/
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-
-
-		
-		
-		
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+				"//*[@title='" + series_chart_color + "']");
 	}
 
 	@And("^Select \"([^\"]*)\" legend color from list$")
 	public void select_legend_color_from_list(String arg1) throws Throwable {
 		legend_color = arg1;
-		//CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + legend_color + "']");
-		
-		
-		
-		//time_axis_color = arg1;
-		//CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + time_axis_color + "']");
-		// CommonFunctionality.getElementByProperty(login.driver,
-		// "time_axis_title_color_field", 4).click();
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-
-		
-		
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + legend_color + "']");
 	}
 
 	@And("^Select \"([^\"]*)\" copyright color from list$")
 	public void select_copyright_color_from_list(String arg1) throws Throwable {
 		copyright_color = arg1;
-		//CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + copyright_color + "']");
-		
-		
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-
-		
-		
-		
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + copyright_color + "']");
 	}
 
 	@And("^Select \"([^\"]*)\" legend bgcolor from list$")
 	public void select_legend_bgcolor_from_list(String arg1) throws Throwable {
 		legend_bgcolor = arg1;
-		//CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + legend_bgcolor + "']");
-		
-		
-		
-		
-		//CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + time_axis_color + "']");
-		// CommonFunctionality.getElementByProperty(login.driver,
-		// "time_axis_title_color_field", 4).click();
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + legend_bgcolor + "']");
 	}
 
 	@And("^Select \"([^\"]*)\" legend border color from list$")
 	public void select_legend_border_color_from_list(String arg1) throws Throwable {
 		legend_border_color = arg1;
-		/*CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
-				"//*[@title='" + legend_border_color + "']");*/
-		
-		
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}
-
-*/
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-
-		
-		
-		
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+				"//*[@title='" + legend_border_color + "']");
 	}
 
 	@And("^Select the \"([^\"]*)\" color from list$")
@@ -1469,85 +1064,24 @@ public class ChartVisual {
 	@And("^Select the \"([^\"]*)\" title axis color from list$")
 	public void select_the_title_axis_color_from_list(String arg1) throws Throwable {
 		time_axis_color = arg1;
-		
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.BACK_SPACE);
-		}
-		//CommonFunctionality.wait(2000);
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.DELETE);
-		}
-		Enter_text.sendKeys("#2b60d0");
-		CommonFunctionality.wait(2000);
-		
-		//new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + time_axis_color + "']");
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "time_axis_title_color_field", 4).click();
+		try {
+			// select title bar
+			CommonFunctionality.getElementByXpath(login.driver, "//*[@name='x_axis_font_underline']", 4).click();
+		} catch (Exception e) {
 
+		}
 	}
 
 	@And("^Select the \"([^\"]*)\" y axis color from list$")
 	public void select_the_y_axis_color_from_list(String arg1) throws Throwable {
 		y_axis_color = arg1;
-		
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.BACK_SPACE);
-		}
-		//CommonFunctionality.wait(2000);
-		CommonFunctionality.wait(2000);
-		for(int i=1; i<30;i++) {
-		Enter_text.sendKeys(Keys.DELETE);
-		}
-		Enter_text.sendKeys("#2b60d0");
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[normalize-space()='Apply']")).click();
-		
-		//new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("#2b60d0").build().perform();
-		//new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().build().perform();
-		//new Actions(login.driver).moveToElement(Enter_text).pause(500).sendKeys("#2b60d0").build().perform();
-		
-		//CommonFunctionality.wait(2000);
-		
-		
-	
-		
+		// CommonFunctionality.getElementByProperty(login.driver, "axis_color_field",
+		// 4).click();
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+				"//*[contains(@class,'sp-container sp-light sp-buttons-disabled')]//*[@title='" + y_axis_color + "']");
 
 	}
 
@@ -1572,89 +1106,31 @@ public class ChartVisual {
 	@And("^Select the \"([^\"]*)\" title axis bgcolor from list$")
 	public void select_the_title_axis_bgcolor_from_list(String arg1) throws Throwable {
 		time_axis_bgcolor = arg1;
-		
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("fda546").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		/*if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}*/
-		}
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+				"//*[@title='" + time_axis_bgcolor + "']");
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='preview-container']//*[text()='5Y']", 4)
+				.click();
+	}
 
 	@And("^Select the \"([^\"]*)\" y axis bgcolor from list$")
 	public void select_the_y_axis_bgcolor_from_list(String arg1) throws Throwable {
 		y_axis_bgcolor = arg1;
-
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("#fda546").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-
-		
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+				"(//*[contains(@class,'sp-container sp-light sp-buttons-disabled')])[2]//*[@title='" + y_axis_bgcolor
+						+ "']");
+		new Actions(login.driver)
+				.moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//div[text()='Labels']", 4)).click()
+				.build().perform();
+		// CommonFunctionality.getElementByProperty(login.driver,
+		// "axis_highlight_color_field", 4).click();
 	}
 
 	@And("^Select the \"([^\"]*)\" y axis right bgcolor from list$")
 	public void select_the_y_axis_right_bgcolor_from_list(String arg1) throws Throwable {
 		y_axis_right_bgcolor = arg1;
-		
-		/*List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("#fda546").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		/*if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}*/
-
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+				"//*[@title='" + y_axis_right_bgcolor + "']");
+		CommonFunctionality.getElementByProperty(login.driver, "axis_highlight_color_right", 4).click();
 	}
 
 	@And("^Select the \"([^\"]*)\" title label line color from list$")
@@ -1668,35 +1144,8 @@ public class ChartVisual {
 
 	@And("^Select the \"([^\"]*)\" label line color from list$")
 	public void select_the_label_line_color_from_list(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
 		time_color = arg1;
-		/*//CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + time_color + "']");
-		List<WebElement> list=login.driver.findElements(By.xpath("//div[@class='index-module_wrapper__Q-UYB']"));
-		for(WebElement ele2 :list) {
-			String color=ele2.getCssValue("background-color");
-			String color2=Color.fromString(color).asHex();
-			if(color2.equalsIgnoreCase(arg1)) {
-				ele2.click();
-				break;
-			}
-			
-		}*/
-		
-		
-		WebElement More_colors=login.driver.findElement(By.xpath("//span[text()='More colors']"));
-		More_colors.click();
-		CommonFunctionality.wait(2000);
-		WebElement Enter_text=login.driver.findElement(By.xpath("(//input[@class='index-module_text__GTkop'])[1]"));
-		Enter_text.click();
-		CommonFunctionality.wait(2000);
-		new Actions(login.driver).moveToElement(Enter_text).pause(500).doubleClick().sendKeys("2b60d0").build().perform();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//button[text()='Apply']")).click();
-		if (login.driver.findElements(By.className("popover--close")).size() > 0) {
-			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}
-
-		
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='" + time_color + "']");
 	}
 
 	@And("^Select \"([^\"]*)\" highlight color from list$")
@@ -1723,7 +1172,8 @@ public class ChartVisual {
 	@And("^Right Click the \"([^\"]*)\" visual$")
 	public void right_Click_the_visual(String arg1) throws Throwable {
 		CommonFunctionality.wait(7000);
-		WebElement visual = CommonFunctionality.getElementBycssSelector(login.driver, "span[data-name='title']", 4);
+		
+		WebElement visual = CommonFunctionality.getElementByXpath(login.driver, "//span[@data-name='title']", 4);
 		new Actions(login.driver).moveToElement(visual).pause(500).contextClick().build().perform();
 	}
 
@@ -1735,21 +1185,10 @@ public class ChartVisual {
 
 	@And("^Click on \"([^\"]*)\" visual from the list$")
 	public void click_on_visual_from_the_list(String arg1) throws Throwable {
-		//WebElement visual = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='" + arg1 + "']", 4);
-		//ul[@class='dropdown-menu']//li//div[@class='n_jqU83kRCakZwGCXpGS'][normalize-space()='Map']
-		//WebElement visual = CommonFunctionality.getElementByXpath(login.driver, "(//div[contains(@class,'public-js-views-visuals-Visuals')]/following::div[text()='"+ arg1 +"'])[4]", 4);
-		WebElement visual = CommonFunctionality.getElementByXpath(login.driver, "(//ul[@class='dropdown-menu']//li//div[@class='n_jqU83kRCakZwGCXpGS'][normalize-space()='"+ arg1+"'])[2]", 4);
-		
+		WebElement visual = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-action='" + arg1 + "']", 4);
 		new Actions(login.driver).moveToElement(visual).click().build().perform();
 	}
 
-	@And("^Click on \"([^\"]*)\" visual from the hover$")
-	public void click_on_visual_from_the_hover(String arg1) throws Throwable {
-		WebElement Table_visual = CommonFunctionality.getElementByXpath(login.driver, "(//div[contains(@class,'icon--table-vertical_large')])[2]", 4);
-		new Actions(login.driver).moveToElement(Table_visual).click().build().perform();
-	   
-	}
-	
 	@And("^Get the series title$")
 	public void get_the_series_title() throws Throwable {
 		series_title = CommonFunctionality.getElementBycssSelector(login.driver, ".series-edit--title__editable", 4)
@@ -1795,7 +1234,6 @@ public class ChartVisual {
 	public void click_on_the_Container(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Tooltips:") || arg1.equalsIgnoreCase("Data labels")
 				|| arg1.equalsIgnoreCase("Legend:") || arg1.equalsIgnoreCase("Copyright:")) {
-			CommonFunctionality.wait(300);
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg1 + "')]//following::*[@class='base-config--row-settings'][1]", 4)
 					.click();
@@ -1804,10 +1242,6 @@ public class ChartVisual {
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1
 					+ "')]//following-sibling::*[@class='style-container--control-row-control'] | //*[contains(text(),'"
 					+ arg1 + "')]//following::*[@class='context-menu-control']", 8).click();
-			
-			
-			//CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+ arg1 +"')]//following::div[@title='Open advanced settings popup']", 8).click();
-			
 			CommonFunctionality.wait(1000);
 		}
 	}
@@ -1864,14 +1298,10 @@ public class ChartVisual {
 				.getElementByXpath(login.driver,
 						"//*[contains(text(),'Grouping separator')]//following::*[contains(text(),\",\")][1]", 4)
 				.click();
-		cv.open_preference_dropdown();
-		cv.clicking_on_option_in_preference("Number format");
 		CommonFunctionality
 				.getElementByXpath(login.driver,
 						"//*[contains(text(),'Decimal separator')]//following::*[contains(text(),\".\")][1]", 4)
 				.click();
-		cv.open_preference_dropdown();
-		cv.clicking_on_option_in_preference("Number format");
 		cv.click_on_in_format_and_enter_value_as("Decimal places", 2);
 		cv.open_preference_dropdown();
 	}
@@ -1880,23 +1310,14 @@ public class ChartVisual {
 	public void setting_the_values_in_preference() throws Throwable {
 		cv.open_preference_dropdown();
 		cv.clicking_on_option_in_preference("Number format");
-		
-		
-		CommonFunctionality
-		.getElementByXpath(login.driver,
-				"//*[contains(text(),'Decimal separator')]/..//div[2]//span[contains(text(),',')]", 4)
-		.click();
-		
-		CommonFunctionality.wait(3000);
-		cv.open_preference_dropdown();
-		cv.clicking_on_option_in_preference("Number format");
 		CommonFunctionality
 				.getElementByXpath(login.driver,
-						"//*[contains(text(),'Grouping separator')]/..//div[2]//span[contains(text(),',')]", 4)
+						"//*[contains(text(),'Grouping separator')]//following::*[contains(text(),\",\")][1]", 4)
 				.click();
-		cv.open_preference_dropdown();
-		cv.clicking_on_option_in_preference("Number format");
-		CommonFunctionality.wait(3000);
+		CommonFunctionality
+				.getElementByXpath(login.driver,
+						"//*[contains(text(),'Decimal separator')]//following::*[contains(text(),\".\")][1]", 4)
+				.click();
 		cv.click_on_in_format_and_enter_value_as("Decimal places", 2);
 		cv.open_preference_dropdown();
 	}
@@ -1944,15 +1365,6 @@ public class ChartVisual {
 
 	@And("^Fetch the color of axis line right \"([^\"]*)\" Invert$")
 	public void fetch_the_color_of_axis_line_right_Invert(String arg1) throws Throwable {
-		/*WebElement sorce1=login.driver.findElement(By.xpath("//div[@class='hsplitter']//div[contains(text(),'...')]"));
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		WebElement source=login.driver.findElement(By.xpath("//*[@class='preview-container']"));
-		//new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).dragAndDrop(sorce1, source).build().perform();*/
-		
-
 		if (arg1.equalsIgnoreCase("Before")) {
 			CommonFunctionality.wait(2000);
 			String text = CommonFunctionality.getElementByProperty(login.driver, "chart_before_invert", 4)
@@ -2039,7 +1451,7 @@ public class ChartVisual {
 			CommonFunctionality.getElementByProperty(login.driver, "Value_axes_label_line_color", 4).click();
 		} else if (arg1.equalsIgnoreCase("Value_label_size")) {
 			WebElement size = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='popover--wrapper']//*[@name='label_font_size']", 4);
+					"//*[@class='popover--wrapper']//*[@name='y_axis_label_font_size']", 4);
 			size.sendKeys(Keys.chord(Keys.CONTROL, "a"), font_size_y_axis);
 		} else if (arg1.equalsIgnoreCase("Point marker radius")) {
 			WebElement size = CommonFunctionality.getElementByXpath(login.driver,
@@ -2047,7 +1459,7 @@ public class ChartVisual {
 			size.sendKeys(Keys.chord(Keys.CONTROL, "a"), point_marker_radius);
 		} else if (arg1.equalsIgnoreCase("Value_label_rotation")) {
 			WebElement rotation = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='popover--wrapper']//*[@name='label_rotation']", 4);
+					"//*[@class='popover--wrapper']//*[@name='y_axis_label_rotation']", 4);
 			rotation.sendKeys(Keys.chord(Keys.CONTROL, "a"), font_rotation_y_axis);
 			rotation.sendKeys(Keys.TAB);
 		} else if (arg1.equalsIgnoreCase("Time_Axis_label_rotation")) {
@@ -2071,12 +1483,12 @@ public class ChartVisual {
 			rotation.sendKeys(Keys.chord(Keys.CONTROL, "a"), time_axis_label_date_format1);
 			rotation.sendKeys(Keys.TAB);
 		} else if (arg1.equalsIgnoreCase("Value_label_style")) {
-			y_axis_bold = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='label_font_weight']",
+			y_axis_bold = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='y_axis_label_font_weight']",
 					4);
-			y_axis_italic = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='label_font_style']",
+			y_axis_italic = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='y_axis_label_font_style']",
 					4);
 			y_axis_underline = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@name='label_font_underline']", 4);
+					"//*[@name='y_axis_label_font_underline']", 4);
 			if (!(y_axis_bold.getAttribute("class").contains("selected"))) {
 				y_axis_bold.click();
 			}
@@ -2101,8 +1513,7 @@ public class ChartVisual {
 			}
 			if (!(data_labels_underline.getAttribute("class").contains("selected"))) {
 				data_labels_underline.click();
-			}	
-			
+			}
 		} else if (arg1.equalsIgnoreCase("Legends Style")) {
 			legends_bold = CommonFunctionality.getElementBycssSelector(login.driver,
 					"button[name='legend_title_font_weight']", 4);
@@ -2164,10 +1575,7 @@ public class ChartVisual {
 		} else if (arg1.equalsIgnoreCase("Time Axis Title Label Color")) {
 			CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_label_color_field", 4).click();
 		} else if (arg1.equalsIgnoreCase("Time Axis Title Background Color")) {
-			CommonFunctionality.wait(3000);
-			
-		//	CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_highlight_color_field", 4).click();
-			js.executeScript("arguments[0].click();", CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_highlight_color_field", 4));
+			CommonFunctionality.getElementByProperty(login.driver, "time_axis_title_highlight_color_field", 4).click();
 		} else if (arg1.equalsIgnoreCase("Axis Title Background Color")) {
 			//clicking left axis label due to highlight attribute is hidden 
 			CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Left Axis')]", 10).click();
@@ -2183,8 +1591,7 @@ public class ChartVisual {
 		} else if (arg1.equalsIgnoreCase("legend_background_color")) {
 			CommonFunctionality.getElementBycssSelector(login.driver, "*[name='" + arg1 + "'] + div", 4).click();
 		} else if (arg1.equalsIgnoreCase("legend_border_color")) {
-			//CommonFunctionality.getElementBycssSelector(login.driver, "*[name='" + arg1 + "'] + div", 4).click();
-			login.driver.findElement(By.xpath("(//*[@class='index-module_swatch_button_item_color__gAHg1'])[5]")).click();
+			CommonFunctionality.getElementBycssSelector(login.driver, "*[name='" + arg1 + "'] + div", 4).click();
 		} else if (arg1.equalsIgnoreCase("copyright_color")) {
 			CommonFunctionality.getElementBycssSelector(login.driver, "input[name='credits_color'] + div", 4).click();
 		} else if (arg1.equalsIgnoreCase("Data Labels Format")) {
@@ -2204,12 +1611,12 @@ public class ChartVisual {
 				time_axis_underline.click();
 			}
 		} else if (arg1.equalsIgnoreCase("Y Axis Style")) {
-			y_axis_left_bold = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='font_weight']",
+			y_axis_left_bold = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='y_axis_font_weight']",
 					4);
-			y_axis_left_italic = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='font_style']",
+			y_axis_left_italic = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='y_axis_font_style']",
 					4);
 			y_axis_left_underline = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@name='font_underline']", 4);
+					"//*[@name='y_axis_font_underline']", 4);
 			if (!(y_axis_left_bold.getAttribute("class").contains("selected"))) {
 				y_axis_left_bold.click();
 			}
@@ -2221,11 +1628,11 @@ public class ChartVisual {
 			}
 		} else if (arg1.equalsIgnoreCase("Y Axis Style Right")) {
 			y_axis_right_bold = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@name='font_weight'])[2]", 4);
+					"//*[@name='opposite_y_axis_font_weight']", 4);
 			y_axis_right_italic = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@name='font_style'])[2]", 4);
+					"//*[@name='opposite_y_axis_font_style']", 4);
 			y_axis_right_underline = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@name='font_underline'])[2]", 4);
+					"//*[@name='opposite_y_axis_font_underline']", 4);
 			if (!(y_axis_right_bold.getAttribute("class").contains("selected"))) {
 				y_axis_right_bold.click();
 			}
@@ -2252,11 +1659,8 @@ public class ChartVisual {
 				timeaxis_label_underline.click();
 			}
 		} else {
-			//original code commented and changed xpath
-			/*CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='color-picker-control']//*[contains(@class,'sp-replacer')]", 4).click();*/
 			CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@class='color-picker-control']//div)[2]", 4).click();
+					"//*[@class='color-picker-control']//*[contains(@class,'sp-replacer')]", 4).click();
 		}
 	}
 
@@ -2285,20 +1689,15 @@ public class ChartVisual {
 	public void select_for_chart_visual_to(String arg1, int arg2) throws Throwable {
 		if (arg1.equalsIgnoreCase("Values Axis Lines width")) {
 			width_y_axis = Integer.toString(arg2);
-		/*	WebElement size = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='popover--wrapper']//*[@name='y_grid_line_width']", 4);*/
 			WebElement size = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='popover--wrapper']//*[@name='line_width']", 4);
-			
+					"//*[@class='popover--wrapper']//*[@name='y_grid_line_width']", 4);
 			size.sendKeys(Keys.chord(Keys.CONTROL, "a"), width_y_axis);
 			CommonFunctionality.wait(1000);
 		}
 		if (arg1.equalsIgnoreCase("Time Axis Lines width")) {
 			width_x_axis = Integer.toString(arg2);
-			CommonFunctionality.wait(1000);
 			WebElement size = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='popover--wrapper']//*[@name='x_grid_line_width']", 4);
-			size.click();
 			size.sendKeys(Keys.chord(Keys.CONTROL, "a"), width_x_axis);
 			CommonFunctionality.wait(1000);
 		}
@@ -2311,14 +1710,13 @@ public class ChartVisual {
 		if (arg1.equalsIgnoreCase("Y axis font size")) {
 			y_axis_font_size = Integer.toString(arg2);
 			WebElement size = CommonFunctionality.getElementByXpath(login.driver,
-					"//div[text()='Size']/..//input[contains(@name,'font_size')]", 4);
-			size.click();
+					"//*[@class='popover--wrapper']//*[@name='y_axis_font_size']", 4);
 			size.sendKeys(Keys.chord(Keys.CONTROL, "a"), y_axis_font_size);
 		}
 		if (arg1.equalsIgnoreCase("Y axis Right font size")) {
 			y_axis_right_font_size = Integer.toString(arg2);
 			WebElement size = CommonFunctionality.getElementByXpath(login.driver,
-					"(//input[@name='font_size'])[2]", 4);
+					"//*[@class='popover--wrapper']//*[@name='opposite_y_axis_font_size']", 4);
 			size.sendKeys(Keys.chord(Keys.CONTROL, "a"), y_axis_right_font_size);
 		}
 		if (arg1.equalsIgnoreCase("Data Labels font size")) {
@@ -2409,7 +1807,7 @@ public class ChartVisual {
 				|| arg1.equalsIgnoreCase("Data labels") || arg1.equalsIgnoreCase("Legend:")
 				|| arg1.equalsIgnoreCase("Copyright:") || arg1.equalsIgnoreCase("Slider")) {
 			boolean checkbox = login.driver
-					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/parent::*//input[@type='checkbox']")).isSelected();
+					.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//preceding::input[1]")).isSelected();
 			if (checkbox == false) {
 				CommonFunctionality
 						.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//preceding::span[1]", 4)
@@ -2453,12 +1851,12 @@ public class ChartVisual {
 		} else {
 			if (arg2.equalsIgnoreCase("Check")) {
 				boolean checkbox = login.driver
-						.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]/parent::*//input[@type='checkbox']"))
+						.findElement(By.xpath("//*[contains(text(),'" + arg1 + "')]//following::input[1]"))
 						.isSelected();
 				if (checkbox == false) {
 					new Actions(login.driver)
 							.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-									"//*[contains(text(),'" + arg1 + "')]//preceding::span[1]", 4))
+									"//*[contains(text(),'" + arg1 + "')]//following::span[1]", 4))
 							.click().build().perform();
 				}
 			} else if (arg2.equalsIgnoreCase("UnCheck")) {
@@ -2785,10 +2183,11 @@ public class ChartVisual {
 					"//*[@class='multi-select-config']//*[contains(@class,'add-item-attribute')]", 4).click();
 			CommonFunctionality.wait(200);
 			List<WebElement> dropdown = login.driver.findElements(By.xpath(
-					"//*[@class='select2-drop-mask']//following::*[contains(@class,'select2-drop-active')]//li[not(contains(@class,'select2-selected'))]"));
+					"//*[@class='select2-drop-mask']//following::*[contains(@class,'select2-drop-active')]//li"));
 			for (int i = 1; i <= dropdown.size(); i++) {
 				CommonFunctionality.getElementByXpath(login.driver,
-						"//*[@class='select2-drop-mask']//following::*[contains(@class,'select2-drop-active')]//li[not(contains(@class,'select2-selected'))][1]",
+						"//*[@class='select2-drop-mask']//following::*[contains(@class,'select2-drop-active')]//li[" + i
+								+ "]",
 						4).click();
 				CommonFunctionality
 						.getElementByXpath(login.driver,
@@ -2796,7 +2195,6 @@ public class ChartVisual {
 						.click();
 				CommonFunctionality.wait(200);
 			}
-			
 			WebElement item = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Items')]", 4);
 			new Actions(login.driver).moveToElement(item).pause(500).doubleClick().build().perform();
 		} else if (arg1.equalsIgnoreCase("Remove")) {
@@ -2812,9 +2210,7 @@ public class ChartVisual {
 	@And("^Enter the text \"([^\"]*)\" for axis title$")
 	public void enter_the_text_for_axis_title(String arg1) throws Throwable {
 		y_axis_title = arg1;
-		WebElement title = login.driver.findElement(By.xpath("//*[@name='title']"));
-		title.click();
-		//WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='y_axis_title']", 4);
+		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='y_axis_title']", 4);
 		title.sendKeys(Keys.chord(Keys.CONTROL, "a"), y_axis_title);
 	}
 
@@ -2849,7 +2245,7 @@ public class ChartVisual {
 	@And("^Enter the text \"([^\"]*)\" for right axis title$")
 	public void enter_the_text_for_right_axis_title(String arg1) throws Throwable {
 		y_axis_opposite_title = arg1;
-		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "(//*[@name='title'])[2]", 4);
+		WebElement title = CommonFunctionality.getElementByXpath(login.driver, "//*[@name='opposite_y_axis_title']", 4);
 		title.sendKeys(Keys.chord(Keys.CONTROL, "a"), y_axis_opposite_title);
 	}
 
@@ -2950,10 +2346,8 @@ public class ChartVisual {
 	public void check_the_timeframe_checkbox_for_section(String arg1) throws Throwable {
 		timeframe_label_text = arg1;
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-				"(//div[@class='P5wrmP1RS8FT67EvVXnH'])[2]", 4))
+				"//*[@class='preview-container']//*[contains(@class,'header-picker_header-module__calendar_icon')]", 4))
 				.pause(500).click().build().perform();
-		
-		
 		boolean checkbox = login.driver.findElement(By.xpath("//*[text()='" + arg1 + "']//preceding-sibling::input"))
 				.isSelected();
 		if (checkbox == false) {
@@ -2970,14 +2364,12 @@ public class ChartVisual {
 	public void get_the_series_and(String arg1, String arg2) throws Throwable {
 		WebElement series_hovor = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4);
 		new Actions(login.driver).moveToElement(series_hovor).pause(1000).build().perform();
-		/*timepoints_first_date = CommonFunctionality
+		timepoints_first_date = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + ":')]//following-sibling::*", 4)
 				.getText();
 		timepoints_last_date = CommonFunctionality
 				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg2 + ":')]//following-sibling::*", 4)
-				.getText();*/
-		timepoints_first_date=login.driver.findElement(By.xpath("(//*[contains(@class,'highcharts-axis-labels')] /following::*[text()='12/12/2022'])[2]")).getText();
-		timepoints_last_date =login.driver.findElement(By.xpath("(//*[contains(@class,'highcharts-axis-labels')] /following::*[text()='01/04/2023'])[1]")).getText();
+				.getText();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -2986,7 +2378,7 @@ public class ChartVisual {
 		WebElement series_hovor = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4);
 		new Actions(login.driver).moveToElement(series_hovor).pause(1000).build().perform();
 		name_ssp = CommonFunctionality
-				.getElementByXpath(login.driver, "//div[@class='series-item--name']", 4)
+				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + ":')]//following-sibling::*", 4)
 				.getText();
 	}
 
@@ -3004,7 +2396,7 @@ public class ChartVisual {
 		WebElement series_hovor = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4);
 		new Actions(login.driver).moveToElement(series_hovor).pause(1000).build().perform();
 		region_ssp = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following-sibling::*", 4)
+				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + ":')]//following-sibling::*", 4)
 				.getText();
 	}
 
@@ -3014,7 +2406,7 @@ public class ChartVisual {
 		WebElement series_hovor = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4);
 		new Actions(login.driver).moveToElement(series_hovor).pause(1000).build().perform();
 		frequency_ssp = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'"+ arg1+"')]//following-sibling::*", 4)
+				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + ":')]//following-sibling::*", 4)
 				.getText();
 	}
 
@@ -3024,7 +2416,7 @@ public class ChartVisual {
 		WebElement series_hovor = CommonFunctionality.getElementByProperty(login.driver, "legand_region2", 4);
 		new Actions(login.driver).moveToElement(series_hovor).pause(1000).build().perform();
 		unit_ssp = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]//following-sibling::*", 4)
+				.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + ":')]//following-sibling::*", 4)
 				.getText();
 	}
 
@@ -3255,18 +2647,9 @@ public class ChartVisual {
 			}
 		}
 		if (arg1.equalsIgnoreCase("Legend Border Width")) {
-			/*WebElement width = CommonFunctionality.getElementByXpath(login.driver,
-					"(//*[@class='border-settings--container']//div[2])[3]", 4);*/
-			
-			WebElement width=login.driver.findElement(By.xpath("//*[@class='series-edit--title series-edit--title__editable']"));
-			if(width.isDisplayed()) {
-				cv.clicking_option("Save");
-				login.Log4j.info("The Border width feild is disabled successfully");
-			}
-			else {
-				login.Log4j.info("The Border width feild is not disabled successfully");
-			}
-			/*if (width.getAttribute("class").contains("disabled") && values_axis_checkboxes_uncheck == false) {
+			WebElement width = CommonFunctionality.getElementByXpath(login.driver,
+					"(//*[@class='border-settings--container']//div[2])[3]", 4);
+			if (width.getAttribute("class").contains("disabled") && values_axis_checkboxes_uncheck == false) {
 				cv.clicking_option("Save");
 				if (!(CommonFunctionality.getElementBycssSelector(login.driver, "rect.highcharts-legend-box", 4)
 						.getAttribute("stroke-width") == null)) {
@@ -3274,7 +2657,7 @@ public class ChartVisual {
 				}
 			} else {
 				fail("Verification Failed");
-			}*/
+			}
 		}
 		if (arg1.equalsIgnoreCase("Legend Border Radius")) {
 			WebElement width = CommonFunctionality.getElementByXpath(login.driver,
@@ -3414,10 +2797,17 @@ public class ChartVisual {
 	@And("^Select data label \"([^\"]*)\" from the list$")
 	public void select_data_label_from_the_list(String arg1) throws Throwable {
 		CommonFunctionality.wait(1000);
+		if(arg1.equals("Outline")) {
+			new Actions(login.driver)
+			.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//*[@name='data_regions_outline']//following::div[1]/*", 4))
+			.pause(500).click().build().perform();
+		} else {
 		new Actions(login.driver)
 				.moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 						"//*[@name='data_labels_" + arg1 + "']//following::div[1]", 4))
 				.pause(500).click().build().perform();
+		}
 	}
 
 	@And("^Observe the value order \"([^\"]*)\" selecting \"([^\"]*)\" for \"([^\"]*)\"$")
@@ -3469,21 +2859,18 @@ public class ChartVisual {
 				list1.add(integer3);
 			}
 			boolean sorted = Ordering.natural().isOrdered(list1);
-			if (sorted == false) {
+			if (sorted == true) {
 				login.Log4j.info("The text are displaying in Ascending order");
 			} else {
 				fail("Verification Failed");
 			}
-		}
-		//code commented for descending order functionality
-		/*else if (arg1.equals("after") && arg2.equalsIgnoreCase("Reversed direction")
+		} else if (arg1.equals("after") && arg2.equalsIgnoreCase("Reversed direction")
 				&& arg3.equalsIgnoreCase("Left Axis") && time_axis_checkboxes == true) {
 			List<WebElement> elements = login.driver.findElements(By
 					.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[3][not(@x='0')]"));
 			for (WebElement element : elements) {
 				String text = element.getText();
-				System.out.println("text is "+text);
-				String text1[] = text.split("\\,");
+				String text1[] = text.split("\\.");
 				BigInteger integer1 = null;
 				if (text1[0].contains(",")) {
 					String text2 = text1[0].replaceAll(",", "");
@@ -3497,7 +2884,7 @@ public class ChartVisual {
 					.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[2][not(@x='0')]"));
 			for (WebElement element : elements1) {
 				String text1 = element.getText();
-				String text2[] = text1.split("\\,");
+				String text2[] = text1.split("\\.");
 				BigInteger integer2 = null;
 				if (text2[0].contains(",")) {
 					String text3 = text2[0].replaceAll(",", "");
@@ -3511,7 +2898,7 @@ public class ChartVisual {
 					.xpath("//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]/*[1][not(@x='0')]"));
 			for (WebElement element : elements3) {
 				String text2 = element.getText();
-				String text3[] = text2.split("\\,");
+				String text3[] = text2.split("\\.");
 				BigInteger integer3 = null;
 				if (text3[0].contains(",")) {
 					String text4 = text3[0].replaceAll(",", "");
@@ -3528,21 +2915,19 @@ public class ChartVisual {
 				fail("Verification Failed");
 			}
 			CommonFunctionality.Views_list();
-		}*/
+		}
 		if (arg1.equals("before") && arg2.equalsIgnoreCase("Logarithmic") && arg3.equalsIgnoreCase("Left Axis")
 				&& axis_setup_checkboxes_uncheck == false) {
 			List<WebElement> elements = login.driver.findElements(By.xpath(
 					"//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]//*[not(@y='-9999')]"));
 			logarithmic_before = elements.size();
-			System.out.println("=====logbefore======"+logarithmic_before);
 		}
 		if (arg1.equals("after") && arg2.equalsIgnoreCase("Logarithmic") && arg3.equalsIgnoreCase("Left Axis")
 				&& time_axis_checkboxes == true) {
 			List<WebElement> elements = login.driver.findElements(By.xpath(
 					"//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-left')]//*[not(@y='-9999')]"));
 			logarithmic_after = elements.size();
-			System.out.println("=====logafter======"+logarithmic_after);
-			if (logarithmic_after!=logarithmic_before) {
+			if (logarithmic_after > logarithmic_before) {
 				login.Log4j.info("The " + arg2 + " of " + arg3 + " has been verified successfully");
 			} else {
 				fail("Verification Failed");
@@ -3588,34 +2973,26 @@ public class ChartVisual {
 				fail("Verification Failed");
 			}
 		}
-		
-		//commented as not required based on functionality
-		/*if (arg1.equals("after") && arg2.equalsIgnoreCase("Reversed direction") && arg3.equalsIgnoreCase("Right Axis")
+		if (arg1.equals("after") && arg2.equalsIgnoreCase("Reversed direction") && arg3.equalsIgnoreCase("Right Axis")
 				&& axis_checkboxes_right == true) {
 			String first = CommonFunctionality.getElementByXpath(login.driver,
 					"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[3]",
 					4).getText();
-			System.out.println("first text is "+first);
 			String second = CommonFunctionality.getElementByXpath(login.driver,
 					"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[2]",
 					4).getText();
-			
-			System.out.println("Second text is "+second);
 			String third = CommonFunctionality.getElementByXpath(login.driver,
 					"(//*[contains(@class,'highcharts-yaxis-labels highcharts-yaxis-right')]//*[not(@y='-9999')])[1]",
 					4).getText();
-			System.out.println("thord is " +third);
 			String first_element[] = null;
 			if (first.contains("1,000.00")) {
 				String text_replace = first.replaceAll("1,000.00", "1000.00");
-				System.out.println("replaced is "+text_replace);
-				first_element = text_replace.split("\\,");
-				System.out.println("first elements is "+first_element[0]);
+				first_element = text_replace.split("\\.");
 			} else {
-				first_element = first.split("\\,");
+				first_element = first.split("\\.");
 			}
-			String second_element[] = second.split("\\,");
-			String third_element[] = third.split("\\,");
+			String second_element[] = second.split("\\.");
+			String third_element[] = third.split("\\.");
 			Integer first_element_int = Integer.parseInt(first_element[0]);
 			list4.add(first_element_int);
 			Integer second_element_int = Integer.parseInt(second_element[0]);
@@ -3662,8 +3039,7 @@ public class ChartVisual {
 			}
 			CommonFunctionality.Views_list();
 		}
-*/	
-		}
+	}
 
 	@And("^Click on Labels checkbox$")
 	public void click_on_Labels_checkbox() throws Throwable {
@@ -3693,14 +3069,12 @@ public class ChartVisual {
 
 	@And("^Click on \"([^\"]*)\" alignment$")
 	public void click_on_alignment(String arg1) throws Throwable {
-			left = CommonFunctionality.getElementByXpath(login.driver,
+		left = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@name='title_align' and @data-value='" + arg1 + "']", 4);
 		right = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@name='title_align' and @data-value='" + arg1 + "']", 4);
 		center = CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@name='title_align' and @data-value='" + arg1 + "']", 4);
-		
-		
 		if (arg1.equalsIgnoreCase("left") && !left.getAttribute("class").contains("selected")) {
 			left.click();
 		}
@@ -3710,8 +3084,6 @@ public class ChartVisual {
 		if (arg1.equalsIgnoreCase("center") && !center.getAttribute("class").contains("selected")) {
 			center.click();
 		}
-		cv.click_button("Save");
-		CommonFunctionality.wait(3000);
 	}
 
 	@And("^Click on Sign out option$")
@@ -3743,10 +3115,8 @@ public class ChartVisual {
 	@And("^Click on the \"([^\"]*)\" chart type$")
 	public void click_on_the_chart_type(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Line")) {
-			Thread.sleep(5000);
-			/*CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
-					"//*[@title='Change the chart type']");*/
-			login.driver.findElement(By.xpath("//div[@class='type-select--icon']")).click();
+			CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath",
+					"//*[@title='Change the chart type']");
 		}
 	}
 
@@ -3767,18 +3137,9 @@ public class ChartVisual {
 		} else if (arg1.equalsIgnoreCase("Back")) {
 			CommonFunctionality.getElementByXpath(login.driver, "//div[@class='breakdown-preview--back']", 8).click();
 		} else {
-		//new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
-			//		"//*[@class='preview-container']//*[@class=' highcharts-button-box'] | //*[@class='visual-series-list']",
-				//	4)).perform();
-			WebElement sorce1=login.driver.findElement(By.xpath("//div[@class='hsplitter']"));
-			
-			new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-			WebElement source=login.driver.findElement(By.xpath("//*[@class='preview-container']"));
-			//new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-			
-			new Actions(login.driver).moveToElement(sorce1).pause(20000).dragAndDrop(sorce1, source).build().perform();
-			
-			
+//			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+//					"//*[@class='preview-container']//*[@class=' highcharts-button-box'] | //*[@class='visual-series-list']",
+//					4)).perform();
 			CommonFunctionality.getElementByXpath(login.driver,
 					"(//*[@class='visual-series-list']//*[@title='" + arg1 + "'])[1]", 4).click();
 
@@ -3787,9 +3148,7 @@ public class ChartVisual {
 
 	@And("^Click on the \"([^\"]*)\" option for delete$")
 	public void click_on_the_option_for_delete(String arg1) throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "(//*[@title='"+ arg1+"'])[1]", 4).click();
-		login.driver.findElement(By.xpath("//button[@class='sphere-modal-control button button__primary']")).click();
-		
+		CommonFunctionality.getElementByXpath(login.driver, "(//*[@title='" + arg1 + "'])[2]", 4).click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -3806,83 +3165,32 @@ public class ChartVisual {
 	@And("^Click credits image$")
 	public void click_credits_image() throws Throwable {
 		CommonFunctionality.wait(2000);
-		/*new Actions(login.driver).moveToElement(
-				CommonFunctionality.getElementByClassName(login.driver, "visual-item-wrapper--credits-image", 4))
-				.pause(500).click().build().perform();*/
 		new Actions(login.driver).moveToElement(
-				CommonFunctionality.getElementByClassName(login.driver, "visual-item-wrapper", 4))
+				CommonFunctionality.getElementByClassName(login.driver, "visual-item-wrapper--credits-image", 4))
 				.pause(500).click().build().perform();
 	}
-	
-	@And("^Click the Functions input box in edit series$")
-	public void click_the_Functions_input_box_in_edit_series() throws Throwable {
-      /*WebElement sorce1=login.driver.findElement(By.xpath("//div[@class='hsplitter']//div[contains(text(),'...')]"));
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		WebElement source=login.driver.findElement(By.xpath("//*[@class='preview-container']"));
-		//new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).dragAndDrop(sorce1, source).build().perform();*/
-		CommonFunctionality.wait(3000);
-		
-		WebElement element = login.driver.findElement(By.cssSelector("input[class='current-function-input--field']"));
-		//JavascriptExecutor executor = (JavascriptExecutor)login.driver;
-		js.executeScript("arguments[0].scrollIntoView(true);", element);
-		element.click();
-		CommonFunctionality.wait(3000);
-	   
-	}	
-	
 
 	@And("^Click the Functions input box$")
 	public void click_the_Functions_input_box() throws Throwable {
-		WebElement sorce1=login.driver.findElement(By.xpath("//div[@class='hsplitter']//div[contains(text(),'...')]"));
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		WebElement source=login.driver.findElement(By.xpath("//*[@class='preview-container']"));
-		//new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).dragAndDrop(sorce1, source).build().perform();
-		CommonFunctionality.wait(3000);
-		
-		WebElement element = login.driver.findElement(By.cssSelector("input[class='current-function-input--field']"));
-		JavascriptExecutor executor = (JavascriptExecutor)login.driver;
-		executor.executeScript("arguments[0].click();", element);
-		CommonFunctionality.wait(3000);
-		/*CommonFunctionality.getElementBycssSelector(login.driver, "input[class='current-function-input--field']", 4)
-				.click();*/
+		CommonFunctionality.getElementBycssSelector(login.driver, "input[class='current-function-input--field']", 4)
+				.click();
 	}
 
 	@And("^Click on the Currency button$")
 	public void click_on_the_Currency_button() throws Throwable {
-		WebElement sorce1=login.driver.findElement(By.xpath("//div[@class='hsplitter']//div[contains(text(),'...')]"));
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		WebElement source=login.driver.findElement(By.xpath("//*[@class='preview-container']"));
-		//new Actions(login.driver).moveToElement(sorce1).pause(20000).build().perform();
-		
-		new Actions(login.driver).moveToElement(sorce1).pause(20000).dragAndDrop(sorce1, source).build().perform();
-		
-	/*	CommonFunctionality.getElementBycssSelector(login.driver,
+		CommonFunctionality.getElementBycssSelector(login.driver,
 				"div.preview-container--series.bottom_panel > div > div > div > div:nth-child(9) > div.table--cell.table--body-cell.visual-series-list--series-row > div > div > div.insight-action-panel--btn-title",
-				4).click();*/
-		
-		
-		login.driver.findElement(By.xpath("//div[contains(text(),'Currency')]")).click();
+				4).click();
 	}
 
 	@And("^Enter the function$")
 	public void enter_the_function() throws Throwable {
 		WebElement element = CommonFunctionality.getElementBycssSelector(login.driver,
 				"input[class='current-function-input--field']", 4);
-
-		CommonFunctionality.wait(5000);
-	//	element.click();
 		element.sendKeys("%");
-		element.click();
-	//	CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(20000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
 	}
 
@@ -3890,7 +3198,6 @@ public class ChartVisual {
 	public void enter_the_function_in_function_field() throws Throwable {
 		WebElement element = CommonFunctionality.getElementBycssSelector(login.driver,
 				"input[class='current-function-input--field']", 4);
-		element.click();
 		element.sendKeys("AGG");
 		CommonFunctionality.wait(2000);
 		element.sendKeys(Keys.ENTER);
@@ -3916,17 +3223,16 @@ public class ChartVisual {
 	public void enter_the_function_in_function_fields() throws Throwable {
 		WebElement element = CommonFunctionality.getElementBycssSelector(login.driver,
 				"input[class='current-function-input--field']", 4);
-		element.click();
 		element.sendKeys("DIS");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys("Daily");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys("Distribute");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
 	}
 
@@ -3934,13 +3240,12 @@ public class ChartVisual {
 	public void enter_function_in_function_fields_of_Chart() throws Throwable {
 		WebElement element = CommonFunctionality.getElementBycssSelector(login.driver,
 				"input[class='current-function-input--field']", 4);
-		element.click();
 		element.sendKeys("FILL");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys("Pre");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
 	}
 
@@ -3948,15 +3253,14 @@ public class ChartVisual {
 	public void enter_the_function_in_function_fields_of_Chart() throws Throwable {
 		WebElement element = CommonFunctionality.getElementBycssSelector(login.driver,
 				"input[class='current-function-input--field']", 4);
-		element.click();
 		element.sendKeys("SMOO");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys("Sin");
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(200);
 		element.sendKeys(Keys.ENTER);
 	}
 
@@ -3971,47 +3275,34 @@ public class ChartVisual {
 		String function = CommonFunctionality.getElementByClassName(login.driver, "series-function-item--body", 4)
 				.getText();
 		applied_function = function.replaceAll("\n", "");
-		System.out.println("---applied function----"+applied_function);
 	}
 
 	@And("^Click on \"([^\"]*)\" in functions box$")
 	public void click_on_in_functions_box(String arg1) throws Throwable {
-		
-		/*WebElement apply = CommonFunctionality.getElementByXpath(login.driver, "//div[@title='" + arg1 + "']", 4);
-		
+		CommonFunctionality.wait(3000);
+		WebElement apply = CommonFunctionality.getElementByXpath(login.driver, "(//button[@type='button'])[9]", 4);
 		js.executeScript("arguments[0].scrollIntoView(true);", apply);
-		if (login.driver.findElements(By.xpath("//div[@title='" + arg1 + "']")).size() > 0) {
+		if (login.driver.findElements(By.xpath("(//button[@type='button'])[9]")).size() > 0) {
 			js.executeScript("arguments[0].click();", apply);
-			CommonFunctionality.wait(10000);
 		}
-		CommonFunctionality.wait(1000);*/
+		CommonFunctionality.wait(1000);
 		if (arg1.equalsIgnoreCase("Apply function")) {
 			CommonFunctionality.wait(2000);
 			String function = CommonFunctionality.getElementByClassName(login.driver, "series-function-item--body", 4)
 					.getText();
-			
-			
-			System.out.print("=function=="+function);
 			applied_function = function.replaceAll("\n", "");
-			System.out.print("=applied_function=="+applied_function);
-			
 		}
 	}
 
 	@And("^Clicking Download button from \"([^\"]*)\"$")
 	public void clicking_Download_button(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("Context Menu")) {
-			//CommonFunctionality.wait(2000);
-			//login.driver.findElement(By.xpath("//div[normalize-space()='Data refresh']")).click();
-			
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'sphere-modal__content')]//*[contains(@class,'button__download-btn')]", 4)
 					.click();
 			CommonFunctionality.wait(3000);
 		}
 		if (arg1.equalsIgnoreCase("Page Header of Views Tab")) {
-			
-			
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='page-main-header--buttons']//following::*[contains(@class,'button__download-btn')]", 4)
 					.click();
@@ -4037,22 +3328,6 @@ public class ChartVisual {
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[@class='page-main-header--buttons']//following::*[contains(@class,'button__download-btn')]", 4)
 					.click();
-			CommonFunctionality.wait(2000);
-			try {
-				WebElement DataRefresh_Checked=login.driver.findElement(By.xpath("//*[contains(@class,'index-module_checked__mJsi-')]"));
-				if(DataRefresh_Checked.isDisplayed()) {
-					
-					System.out.println("Already checked");
-					login.driver.findElement(By.xpath("//div[normalize-space()='Data refresh']")).click();
-					System.out.println("unchecked");
-				}
-			}
-			catch(Exception e) {
-				System.out.println("good");
-				
-				}
-		
-			
 			// CommonFunctionality.getElementByXpath(login.driver,
 			// "//div[@data-tab='series']", 4).click();
 			if (login.driver
@@ -4081,12 +3356,10 @@ public class ChartVisual {
 
 	@And("^Get the updated Chart visual value$")
 	public void get_the_updated_Chart_visual_value() throws Throwable {
-		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='3Y']/parent::button", 4).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//*[text()='3Y']", 4).click();
 		CommonFunctionality.wait(1000);
-		
-		chart_axis_multipler_value_numberformat=CommonFunctionality.getElementByXpath(login.driver, "//*[@text-anchor='end' and @opacity]", 4).getText();
-	/*	chart_axis_multipler_value_numberformat = CommonFunctionality
-				.getElementByProperty(login.driver, "chart_axis_multipler_value_number_format", 4).getText();*/
+		chart_axis_multipler_value_numberformat = CommonFunctionality
+				.getElementByProperty(login.driver, "chart_axis_multipler_value_number_format", 4).getText();
 	}
 
 	@And("^Click on \"([^\"]*)\" align in Title section$")
@@ -4107,16 +3380,6 @@ public class ChartVisual {
 			high.click();
 		}
 	}
-	
-	
-	@And("^Click on \"([^\"]*)\" option and create chart$")
-	public void click_on_option_and_create_chart(String arg1) throws Throwable {
-		WebElement Add_chart=login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
-		new Actions(login.driver).moveToElement(Add_chart).pause(1000).build().perform();
-		login.driver.findElement(By.xpath("(//div[contains(@class,'icon--chart-line')])[2]")).click();
-	    
-	}
-	
 
 	@And("^Click on \"([^\"]*)\" button in myseries$")
 	public void click_on_button_in_myseries(String arg1) throws Throwable {
@@ -4135,7 +3398,6 @@ public class ChartVisual {
 					.moveToElement(
 							CommonFunctionality.getElementBycssSelector(login.driver, "*[title='" + arg1 + "']", 4))
 					.click().build().perform();
-			
 		}
 	}
 
@@ -4198,19 +3460,10 @@ public class ChartVisual {
 
 	@And("^Click on \"([^\"]*)\" button from myseries$")
 	public void click_on_button_from_myseries(String frequency) throws Throwable {
-		
-		try {
 		new Actions(login.driver)
 				.moveToElement(
 						CommonFunctionality.getElementBycssSelector(login.driver, "*[title='" + frequency + "']", 4))
 				.click().build().perform();
-		}
-		catch (Exception e) {
-			new Actions(login.driver)
-			.moveToElement(
-					CommonFunctionality.getElementBycssSelector(login.driver, "*[title='" + frequency + "']", 4))
-			.click().build().perform();
-		}
 	}
 
 	@And("^Click on \"([^\"]*)\" button in myseries list$")
@@ -4229,51 +3482,9 @@ public class ChartVisual {
 				.moveToElement(
 						CommonFunctionality.getElementBycssSelector(login.driver, "*[title='" + change + "']", 4))
 				.click().build().perform();
-		
-		//WebElement Change=login.driver.findElement(By.xpath("//span[contains(text(),'% Period-over-Period (%PoP)')]"));
-		//new Actions(login.driver).moveToElement(Change).click().build().perform();
 		change_in_series = text.replaceAll("-", " ");
 	}
 
-	@And("^Click on more actions with SID \"([^\"]*)\" and create a chart$")
-	public void click_on_more_actions_with_SID_and_create_a_chart(String arg1) throws Throwable {
-if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || arg1.equals("310901701") || arg1.equals("205424302")) {
-		
-	CommonFunctionality.wait(2000);
-	WebElement Serieslist = login.driver.findElement(
-			By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
-	new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
-    WebElement ele1 = login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']/span[@title='More actions']//*[name()='svg']//*[local-name()='use'][1]"));
-	CommonFunctionality.action.moveToElement(ele1).pause(2000).click().build().perform();
-    //js. executeScript("arguments[0]. click();", ele1);
-	CommonFunctionality.wait(2000);
-	WebElement Add_chart=login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
-	new Actions(login.driver).moveToElement(Add_chart).pause(2000).build().perform();
-	
-	WebElement Chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line')]"));
-	js. executeScript("arguments[0]. click();", Chart);
-	CommonFunctionality.wait(3000);
-	try {
-		WebElement apply=	login.driver.findElement(By.xpath("//*[contains(text(),'Apply')]"));
-		apply.click();
-	}
-	catch(Exception e) {
-		System.out.println("pop up not appeared");
-	}
-	
-
-	
-	
-	
-			
-					}
-	}
-
-	
-	
-	
-	
-	
 	@And("^Enter the Series name as \"([^\"]*)\"$")
 	public void enter_the_Series_name_as(String arg1) throws Throwable {
 		rename_series = arg1;
@@ -4303,20 +3514,13 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@And("^Select \"([^\"]*)\" option from line chart$")
 	public void select_option_from_line_chart(String arg1) throws Throwable {
-		/*WebElement line = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4);*/
-		List<WebElement>ele= login.driver.findElements(By.xpath("//*[@class='name-li']"));
-		
-			System.out.println("======entere=======" );
-			if(ele.size()!=0) {
-		WebElement line =login.driver.findElement(By.xpath("//*[@class='items-wrapper']//*[normalize-space(text())='"+ arg1 +"']"));	
-		//new Actions(login.driver).moveToElement(line).click().build().perform();
-		line.click();
-			}
+		WebElement line = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(text(),'" + arg1 + "')]/preceding-sibling::span", 4);
+		new Actions(login.driver).moveToElement(line).click().build().perform();
 		CommonFunctionality.wait(2000);
-		//CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='Change the chart type']");
+		CommonFunctionality.Hidden_Webelements_handling(login.driver, "xpath", "//*[@title='Change the chart type']");
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@And("^Click on \"([^\"]*)\" option from layout$")
 	public void click_on_option_from_layout(String arg1) throws Throwable {
@@ -4350,7 +3554,6 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 					"//*[contains(text(),'" + arg1 + "')]/following::input[@name='title']", 8).clear();
 			CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(text(),'" + arg1 + "')]/following::input[@name='title']", 8).sendKeys(arg2);
-			CommonFunctionality.wait(2000);
 		} else if (arg1.equalsIgnoreCase("Sub title")) {
 			chart_subtitle_text = arg2;
 			WebElement subtitle = CommonFunctionality.getElementByXpath(login.driver,
@@ -4531,56 +3734,25 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			rightclick_element.add(rightclick_text);
 		}
 	}
-	
-	@Then("^text and sub text options should be present\\.$")
-	public void text_and_sub_text_options_should_be_present() throws Throwable {
-		List<WebElement> elements = login.driver.findElements(
-				By.xpath("//*[@class='items-wrapper']/li/span[not(contains(@class,'dropdown-submenu-icon'))]"));
-		for (WebElement element : elements) {
-			String rightclick_text = element.getAttribute("title");
-			System.out.println("=====rightclick_text========="+rightclick_text);
-			CommonFunctionality.wait(500);
-			rightclick_element.add(rightclick_text);
-		}
-		if (rightclick_element.contains("Download")) {
-			List<WebElement> sub = login.driver.findElements(
-					By.xpath("//*[@title='Download']//following-sibling::ul[@class='dropdown-menu']/li/span"));
-			for (int k = 1; k <= sub.size(); k++) {
-				WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Download']", 4);
-				new Actions(login.driver).moveToElement(hover).pause(500).build().perform();
-				String subdropdown_text = CommonFunctionality
-						.getElementByXpath(login.driver, "//*[@title='Download']//following-sibling::ul[@class='dropdown-menu']/li[" + k + "]/span", 4)
-						.getAttribute("title");
-				download.add(subdropdown_text);
-			}
-		} else {
-			fail("Subdropdown items are not present");
-		}
-		
-	}
-	
-	
 
 	@SuppressWarnings("deprecation")
 	@And("^Get the text of sub dropdowns available$")
 	public void get_the_text_of_sub_dropdowns_available() throws Throwable {
-		//String a = "Insert visual";
-		String a = "Change chart type";
-		//String b = "View as";
-		String b = "Add chart";
+		String a = "Insert visual";
+		String b = "View as";
 		String c = "Download"; /*
 								 * String d="Calculate series"; String e="Paste visual"; String
 								 * f="Reset format";
 								 */
 		if (rightclick_element.contains(a)) {
 			List<WebElement> sub = login.driver.findElements(
-					By.xpath("//*[@title='" + a + "']//following-sibling::*[@class='dropdown-menu']/li/span"));
+					By.xpath("//*[@title='" + a + "']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 			for (int i = 1; i <= sub.size(); i++) {
 				WebElement hover = CommonFunctionality.getElementByXpath(login.driver, "//*[@title='" + a + "']", 4);
 				new Actions(login.driver).moveToElement(hover).pause(500).build().perform();
 				String subdropdown_text = CommonFunctionality
 						.getElementByXpath(login.driver, "//*[@title='" + a
-								+ "']//following-sibling::span[@class='dropdown-menu']/li[" + i + "]/span", 4)
+								+ "']//following-sibling::ul[@class='dropdown-menu']/li[" + i + "]/span", 4)
 						.getAttribute("title");
 				insert_visual_list.add(subdropdown_text);
 			}
@@ -4799,19 +3971,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@Then("^Validation message should appear and chart is created only with (\\d+) series$")
 	public void validation_message_should_appear_and_chart_is_created_only_with_series(int arg1) throws Throwable {
-		
-		
-		if(login.driver
-				.findElements(By
-						.xpath("//span[@class='series-edit--title series-edit--title__editable']"))
-				.size()==arg1) {
-			
-				login.Log4j.info("Validation message appears to create chart with only " + arg1 + " series");
-		}
-		else {
-			Assert.fail();
-		}
-		/*if (login.driver
+		if (login.driver
 				.findElements(By
 						.xpath("//*[text()='Confirmation']//following::*[contains(text(),'Proceed with 20 series?')]"))
 				.size() > 0) {
@@ -4845,11 +4005,6 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		CommonFunctionality.wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.className("insight-page-view-tab--title")));
 		CommonFunctionality.Views_list();
-*/	
-		
-	
-	
-	
 	}
 
 	@Then("^Chart visual should add to view area by \"([^\"]*)\"$")
@@ -4892,8 +4047,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		CommonFunctionality.wait(4000);
 		String chart_title = CommonFunctionality.getElementBycssSelector(login.driver, "span[data-name='title']", 4)
 				.getText();
-		System.out.println("=====chart-title=========="+chart_title);
-		assertEquals("Chart", chart_title);
+		assertEquals(arg1, chart_title);
 		login.Log4j.info("The Default title for Chart visual is " + arg1);
 		CommonFunctionality.Views_list();
 	}
@@ -4918,23 +4072,19 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 	@Then("^Entered title appears in Views panel for title display \"([^\"]*)\"$")
 	public void entered_title_appears_in_Views_panel_for_title_display(String arg1) throws Throwable {
 		if (arg1.equalsIgnoreCase("ON")) {
-			/*String chart_title = CommonFunctionality
+			String chart_title = CommonFunctionality
 					.getElementByXpath(login.driver, "//span[@data-name='title']/parent::div", 4).getAttribute("style");
-			System.out.println("=====chart_title display"+chart_title);*/
-			String chart_title=login.driver.findElement(By.xpath("//span[@data-name='title']/parent::div/parent::div")).getAttribute("style");
-			System.out.println("=====chart_title display"+chart_title);
 			String split[] = chart_title.split("\\;");
 			String chart_text = CommonFunctionality.getElementByXpath(login.driver, "//span[@data-name='title']", 4)
 					.getText();
-			System.out.println("====chart_text========"+chart_text);
 			assertEquals(chart_text, chart_title_text);
-			assertEquals(split[0], "justify-content: center");
+			assertEquals(split[0], "display: flex");
 			login.Log4j.info("The entered title appears in Views panel");
 			CommonFunctionality.Views_list();
 		}
 		if (arg1.equalsIgnoreCase("OFF")) {
 			List<WebElement> element = login.driver.findElements(By.xpath("//span[@data-name='title']"));
-			assertEquals(element.size(), 1);
+			assertEquals(element.size(), 0);
 			login.Log4j.info("The entered title not appears in Views panel");
 			CommonFunctionality.Views_list();
 		}
@@ -5049,7 +4199,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			String text_color = CommonFunctionality
 					.getElementBycssSelector(login.driver, "span[data-name='" + arg3 + "']", 4).getCssValue("color");
 			String actual = Color.fromString(text_color).asHex();
-			//assertEquals(actual, color);
+			assertEquals(actual, color);
 		}
 		if (arg2.equalsIgnoreCase("Highlight color")) {
 			CommonFunctionality.wait(2000);
@@ -5057,7 +4207,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 					.getElementBycssSelector(login.driver, "span[data-name='" + arg3 + "']", 4)
 					.getCssValue("background-color");
 			String actual = Color.fromString(text_bgcolor).asHex();
-			//assertEquals(actual, highlight_color);
+			assertEquals(actual, highlight_color);
 		}
 		login.Log4j.info("The Chart is updated with " + arg1 + " and " + arg2 + " and has been verified successfully");
 		CommonFunctionality.Views_list();
@@ -5105,10 +4255,10 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@Then("^The chart should update the \"([^\"]*)\" alignment$")
 	public void the_chart_should_update_the_alignment(String arg1) throws Throwable {
-		/*if (login.driver.findElements(By.className("popover--wrapper")).size() > 0) {
+		if (login.driver.findElements(By.className("popover--wrapper")).size() > 0) {
 			CommonFunctionality.getElementByClassName(login.driver, "popover--close", 4).click();
-		}*/
-		/*if (right.getAttribute("class").contains("selected") && arg1.equalsIgnoreCase("right")) {
+		}
+		if (right.getAttribute("class").contains("selected") && arg1.equalsIgnoreCase("right")) {
 			CommonFunctionality.CompareImage(login.driver,
 					System.getProperty("user.dir") + "\\Pictures\\Title_" + arg1 + ".png", destFile);
 			login.Log4j.info("The chart title is in " + arg1);
@@ -5122,43 +4272,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			login.Log4j.info("The chart title is in " + arg1);
 		} else {
 			fail("Verification Failed");
-		}*/
-		/*CommonFunctionality.wait(2000);
-		WebElement center=login.driver.findElement(By.xpath("//button[@class='config-btn align-text' and @data-value='center']"));
-		center.click();
-		WebElement Center_alignment= login.driver.findElement(By.xpath("//button[@class='config-btn align-text selected' and @data-value='center']"));   
-		if(Center_alignment.isDisplayed()) {
-			
-			//WebElement center=login.driver.findElement(By.xpath("//button[@class='config-btn align-text selected' and @data-value='center']"));
-			login.Log4j.info("The chart title is in center");
-			
 		}
-		else {
-			login.Log4j.info("The chart title is not moved to center");
-		}*/
-		String value="";
-		if(arg1.equalsIgnoreCase("left")) {
-			value="flex-start";
-		}
-		else if(arg1.equalsIgnoreCase("right")) {
-			value="flex-end";
-		}
-		else{
-			value=arg1;
-		}
-		WebElement alignment=login.driver.findElement(By.xpath("(//div[@class='visual-title visual-title--wrapper'])[1]"));
-		String alignment_value=alignment.getAttribute("style");
-		if(alignment_value.contains(value)) {
-			login.Log4j.info("The chart title is in  "+arg1+" aligments");
-			
-		}
-		else {
-			login.Log4j.info("The chart title is not moved to "+arg1+"");
-		}
-		
-		
-		
-		
 	}
 
 	@Then("^The subtitle name \"([^\"]*)\" reflect on the chart$")
@@ -5203,11 +4317,10 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@Then("^The Visual area should align to \"([^\"]*)\"$")
 	public void the_Visual_area_should_align_to(String arg1) throws Throwable {
-		CommonFunctionality.wait(2000);
 		if (arg1.equalsIgnoreCase("Left")) {
 			String left = login.driver
 					.findElement(
-							By.xpath("//*[@class='preview-container--visual top_panel']//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='visual-preview base-preview']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[0];
 			if (left.equals("width:80%") || left.equals("width: 80%")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -5218,7 +4331,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		if (arg1.equalsIgnoreCase("Center")) {
 			String center = login.driver
 					.findElement(
-							By.xpath("//*[@class='preview-container--visual top_panel']//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='visual-preview base-preview']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[1];
 			if (center.equals(" margin: 0px auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -5229,7 +4342,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		if (arg1.equalsIgnoreCase("Right")) {
 			String right = login.driver
 					.findElement(
-							By.xpath("//*[@class='preview-container--visual top_panel']//*[@class='visual-item-container']"))
+							By.xpath("//*[@class='visual-preview base-preview']//*[@class='visual-item-container']"))
 					.getAttribute("style").split(";")[1];
 			if (right.equals(" margin-left: auto")) {
 				login.Log4j.info("The Visual area is aligned to " + arg1);
@@ -5277,7 +4390,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		String stroke = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='highcharts-plot-border']", 4)
 				.getAttribute("stroke");
 		String actual = Color.fromString(stroke).asHex();
-		//assertEquals(actual, color);
+		assertEquals(actual, color);
 		login.Log4j.info("The border color has been updated and verified successfully");
 		closing_the_chart_visual();
 	}
@@ -5321,12 +4434,12 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			String coloring = CommonFunctionality
 					.getElementByProperty(login.driver, "chart_axes_multipler_value_dash", 4).getCssValue("color");
 			String actual = Color.fromString(coloring).asHex();
-			//assertEquals(actual, color);
+			assertEquals(actual, color);
 		}
 		if (arg2.equalsIgnoreCase("Axis color")) {
 			String axis_color_new = CommonFunctionality
 					.getElementByProperty(login.driver, "value_axes_left_inside_chart", 4).getAttribute("stroke");
-			//assertEquals(axis_color_new, axis_color);
+			assertEquals(axis_color_new, axis_color);
 		}
 		login.Log4j.info("The " + arg1 + " and " + arg2 + " has been updated and verified successfully");
 		closing_the_chart_visual();
@@ -5370,9 +4483,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			CommonFunctionality.wait(2000);
 			String format = login.driver
 					.findElement(By.xpath("//*[contains(@class,'highcharts-xaxis-labels')][1]/*[1]")).getText();
-			System.out.println("Format11"+format);
-			//if (format.matches("([0-9]{4})/([0-9]{4})")) {
-			if (format.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+			if (format.matches("([0-9]{4})/([0-9]{2})")) {
 				login.Log4j.info("The " + arg1 + " changes are reflecting on the Chart Visual");
 			} else {
 				fail("Verification Failed");
@@ -5381,8 +4492,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			CommonFunctionality.wait(2000);
 			String format = login.driver
 					.findElement(By.xpath("//*[contains(@class,'highcharts-xaxis-labels')][1]/*[1]")).getText();
-			//if (format.matches("([0-9]{4})/([0-9]{2})/([0-9]{2})")) {
-			if (format.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+			if (format.matches("([0-9]{4})/([0-9]{2})/([0-9]{2})")) {
 				login.Log4j.info("The " + arg1 + " changes are reflecting on the Chart Visual");
 				CommonFunctionality.Views_list();
 			} else {
@@ -5427,13 +4537,9 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 	@Then("^\"([^\"]*)\" , \"([^\"]*)\" , \"([^\"]*)\" values has been updated$")
 	public void values_has_been_updated(String arg1, String arg2, String arg3) throws Throwable {
 		int integer = chart_axis_multipler_value_numberformat.indexOf(CDMNextSprintCases.decimal_seperator);
-		System.out.println("int value "+integer);
 		decimalValues = chart_axis_multipler_value_numberformat.length() - integer - 1;
-		System.out.println("decimalValues"+decimalValues);
-		int value = Integer.parseInt(CDMNextSprintCases.separator_value);
-		System.out.println("value"+value);
 		if (arg1.equalsIgnoreCase("Decimal places")) {
-			//int value = Integer.parseInt(CDMNextSprintCases.separator_value);
+			int value = Integer.parseInt(CDMNextSprintCases.separator_value);
 			if (value == decimalValues) {
 				login.Log4j.info("Decimal places are appearing as per the selection in " + arg1);
 			} else {
@@ -5448,8 +4554,6 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			}
 		}
 		if (arg3.equalsIgnoreCase("Grouping Separator")) {
-			System.out.println("group separator "+CDMNextSprintCases.grouping_seperator);
-			System.out.println("kbkdbf "+chart_axis_multipler_value_numberformat+"vbjkb");
 			if (CDMNextSprintCases.grouping_seperator.contains("Space")) {
 				CDMNextSprintCases.grouping_seperator = " ";
 			}
@@ -5474,7 +4578,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			String axis_color_new = CommonFunctionality.getElementByProperty(login.driver, "value_lines", 8)
 					.getAttribute("stroke");
 			String actual = Color.fromString(axis_color_new).asHex();
-			//assertEquals(actual, value_line_color);
+			assertEquals(actual, value_line_color);
 			login.Log4j.info("The " + arg1 + " has been updated and verified successfully");
 		}
 		if (arg1.equalsIgnoreCase("Time Axis color")) {
@@ -5483,7 +4587,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 					.findElement(By.xpath("//*[@class='highcharts-grid highcharts-xaxis-grid']/*[2]"))
 					.getAttribute("stroke");
 			String actual = Color.fromString(axis_color_new).asHex();
-			//assertEquals(actual, time_line_color);
+			assertEquals(actual, time_line_color);
 			login.Log4j.info("The " + arg1 + " has been updated and verified successfully");
 		}
 		if (arg1.equalsIgnoreCase("Values Axis Lines width")) {
@@ -5528,8 +4632,8 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 				String time_label_axis_color = CommonFunctionality
 						.getElementByProperty(login.driver, "time_axis_label_axis_colr_text", 4).getAttribute("stroke");
 				String actual = Color.fromString(time_label_color).asHex();
-				//assertEquals(actual, time_axis_label_color);
-				//assertEquals(time_label_axis_color, time_axis_label_line_color);
+				assertEquals(actual, time_axis_label_color);
+				assertEquals(time_label_axis_color, time_axis_label_line_color);
 				login.Log4j.info("The " + arg1 + " has been updated and verified successfully");
 				closing_the_chart_visual();
 			} else {
@@ -5595,16 +4699,15 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@Then("^The URL should navigate to \"([^\"]*)\"$")
 	public void the_URL_should_navigate_to(String arg1) throws Throwable {
-		//ArrayList<String> tabs = new ArrayList<String>(login.driver.getWindowHandles());
+		ArrayList<String> tabs = new ArrayList<String>(login.driver.getWindowHandles());
 		CommonFunctionality.wait(2000);
-		//login.driver.switchTo().window(tabs.get(1));
+		login.driver.switchTo().window(tabs.get(1));
 		String new_URL = login.driver.getCurrentUrl();
-		String new_URL1 = new_URL.substring(0, 26);
-		//login.driver.switchTo().window(tabs.get(1)).close();
-		//login.driver.switchTo().window(tabs.get(0));
-		//login.Log4j.info("The new URL has been Verified successfully");
+		login.driver.switchTo().window(tabs.get(1)).close();
+		login.driver.switchTo().window(tabs.get(0));
+		login.Log4j.info("The new URL has been Verified successfully");
 		CommonFunctionality.Views_list();
-		assertEquals(arg1, new_URL1);
+		assertEquals(arg1, new_URL);
 	}
 
 	@Then("^Entered timeframe date should update in chart$")
@@ -5790,7 +4893,6 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 	@SuppressWarnings("deprecation")
 	@Then("^Selected \"([^\"]*)\" should display$")
 	public void selected_should_display(String arg1) throws Throwable {
-		
 		CommonFunctionality.wait(1000);
 		if (arg1.equalsIgnoreCase("Item")) {
 			List<WebElement> timepoints = login.driver.findElements(By.xpath(
@@ -5801,27 +4903,15 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 								+ i + "]",
 						4);
 				new Actions(login.driver).moveToElement(timepoint).pause(50).build().perform();
-				/*String text = CommonFunctionality
+				String text = CommonFunctionality
 						.getElementByXpath(login.driver,
 								"//*[contains(@class,'highcharts-tooltip highcharts-color-undefined')]/span", 4)
-						.getText();*/
-				List<WebElement> ele=login.driver.findElements(By.xpath("//*[contains(@class,'highcharts-tooltip highcharts-color-undefined')]/span/div//div[@class='table-tooltip--cell']"));
-				for(WebElement ele1:ele) {
-					String text;
-					text=ele1.getText()	;
-					System.out.println("text is "+text);
-					split_text = text.split(":");
-					if ((split_text[0].contains(unit_ssp) || split_text[0].contains(name_ssp)
-							|| split_text[0].contains(region_ssp) || split_text[0].contains(frequency_ssp))) {
-						
-						login.Log4j.info(split_text[0]+"Item is displayed correctly");
-					}
-					else {
-						sa.fail("Timepoints are not displaying properly");
-					}
+						.getText();
+				split_text = text.split(";");
+				if (!(split_text[0].contains(unit_ssp) && split_text[1].contains(name_ssp)
+						&& split_text[2].contains(region_ssp) && split_text[3].contains(frequency_ssp))) {
+					sa.fail("Timepoints are not displaying properly");
 				}
-				
-				
 				WebElement title = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(@class,'visual-title--text') and @data-name='title']", 4);
 				new Actions(login.driver).moveToElement(title).pause(10).build().perform();
@@ -5843,7 +4933,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 								"//*[contains(@class,'highcharts-tooltip highcharts-color-undefined')]/span", 4)
 						.getCssValue("color");
 				String Timepoints_color = Color.fromString(text).asHex();
-				//assertEquals(Timepoints_color, tooltip_color);
+				assertEquals(Timepoints_color, tooltip_color);
 				WebElement title = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(@class,'visual-title--text') and @data-name='title']", 4);
 				new Actions(login.driver).moveToElement(title).pause(10).build().perform();
@@ -5912,17 +5002,12 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			new Actions(login.driver).moveToElement(timepoint).pause(50).build().perform();
 			String text = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'highcharts-tooltip highcharts-color-undefined')]/span", 4).getText();
-			System.out.println("text is " +text);
-			String date_only = text.substring(6,16);
-			System.out.println("date only "+date_only);
+			String date_only = text.substring(0, 10);
 			Date date = new SimpleDateFormat("MM/dd/yyyy").parse(date_only);
 			String lines[] = text.split("\\r?\\n");
-			System.out.println("lines "+lines[1]+"====="+lines[2]);
 			String next_lines[] = lines[1].split("\\s+");
-			System.out.println("next lines "+next_lines[1]+"====="+next_lines[2]);
-	//System.out.println("next lines "+next_lines[1]);
 			// To replace decimal places without space
-			String replaceLine = next_lines[2].replaceAll(",", "");
+			String replaceLine = next_lines[1].replaceAll(",", "");
 			double decimal = Double.parseDouble(replaceLine);
 			NumberFormat df = new DecimalFormat("########0.00");
 			String new_format = df.format(decimal);
@@ -5936,24 +5021,10 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		login.Log4j.info("<=============================== Application values ==================================>");
 		login.Log4j.info(date_app);
 		login.Log4j.info(timepoints_app);
-		System.out.println("Data excel size is "+date_excel.size());
-		System.out.println("Data app size is "+date_app.size());
-		
-		for(Date d :date_excel) {
-			
-			
-			System.out.println("date excel is "+d);
-			
-		}
 		boolean result = Arrays.equals(date_excel.toArray(), date_app.toArray());
-	
 		login.Log4j.info("Date Comparision is: \n" + result);
-		System.out.println("===excel1====="+date_excel.toArray());
-		System.out.println("====date1===="+date_app.toArray());
 		assertEquals(date_excel.toArray(), date_app.toArray());
-		
 		boolean result1 = Arrays.equals(timepoints_excel.toArray(), timepoints_app.toArray());
-		
 		login.Log4j.info("Timepoints comparision is: \n" + result1);
 		assertEquals(timepoints_excel.toArray(), timepoints_app.toArray());
 		login.Log4j.info(
@@ -5974,20 +5045,8 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			new Actions(login.driver).moveToElement(timepoint).pause(50).build().perform();
 			String text = CommonFunctionality.getElementByXpath(login.driver,
 					"//*[contains(@class,'highcharts-tooltip highcharts-color-undefined')]/span", 4).getText();
-			System.out.println("=text is ===="+text);
-			//String date_only = text.substring(5, 1);
-			String date_only = text.substring(5);
-			System.out.println("==date_only="+date_only);
-			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.ENGLISH);
-			 Date currentdate;
-			 currentdate=sdf.parse(date_only);
-			 System.out.println("======CDate===="+currentdate);
-			
-			
-			//Date date = new SimpleDateFormat("MM/dd/yyyy").parse(text);
-			
-			
-			
+			String date_only = text.substring(0, 10);
+			Date date = new SimpleDateFormat("MM/dd/yyyy").parse(date_only);
 			String lines[] = text.split("\\r?\\n");
 			String next_lines[] = lines[1].split("\\s+");
 			// To replace decimal places without space
@@ -6056,13 +5115,12 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 						.getText();
 				String lines[] = text.split("\\r?\\n");
 				String next_lines[] = lines[1].split("\\s+");
-				System.out.println("next lines "+next_lines[1]+"============="+next_lines[2]);
 				if (number_separator.equals("Space")) {
 					if (!(lines[1].matches(".*\\s.*"))) {
 						fail("Verification Failed");
 					}
 				} else {
-					if (!(next_lines[2].contains(number_separator)) && !next_lines[2].contains(decimal_separator)) {
+					if (!(next_lines[1].contains(number_separator)) && !next_lines[1].contains(decimal_separator)) {
 						fail(arg1 + " Verification failed");
 					}
 				}
@@ -6092,21 +5150,14 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 						.getElementByXpath(login.driver,
 								"//*[contains(@class,'highcharts-tooltip highcharts-color-undefined')]/span", 4)
 						.getText();
-				System.out.println("===text11====="+text);
 				String lines[] = text.split("\\r?\\n");
-				System.out.println("====lines======"+lines[1]);
 				String next_lines[] = lines[1].split("\\s+");
 				String decimal_places[] = next_lines[1].split("\\.");
-				System.out.println("==decimal places==="+decimal_places[0]);
-				int length_of_digits = decimal_places[0].length();
-				System.out.println("====digits ======="+length_of_digits);
-				
-				//assertEquals(length_of_digits, chart_decimal_places);
-				assertEquals(4, chart_decimal_places);
+				int length_of_digits = decimal_places[1].length();
+				assertEquals(length_of_digits, chart_decimal_places);
 				WebElement title = CommonFunctionality.getElementByXpath(login.driver,
 						"//*[contains(@class,'visual-title--text') and @data-name='title']", 4);
 				new Actions(login.driver).moveToElement(title).pause(2).build().perform();
-				
 			}
 			login.Log4j.info("The Selected " + arg1
 					+ " has been updated in chart visual timepoints and it's verified successfully");
@@ -6166,7 +5217,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 						.getCssValue("fill");
 				CommonFunctionality.wait(2000);
 				String actual = Color.fromString(color_text).asHex();
-				//assertEquals(actual, data_label_color);
+				assertEquals(actual, data_label_color);
 			}
 			for (int i = 1; i <= highlight_color.size(); i++) {
 				String highlight_color1 = CommonFunctionality
@@ -6175,7 +5226,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 						.getAttribute("fill");
 				CommonFunctionality.wait(2000);
 				String highlight_color_text = Color.fromString(highlight_color1).asHex();
-				//assertEquals(highlight_color_text, data_label_highlight_color);
+				assertEquals(highlight_color_text, data_label_highlight_color);
 			}
 			login.Log4j.info("The Selected " + arg1
 					+ " has been updated in chart visual timepoints and it's verified successfully");
@@ -6184,6 +5235,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		if (arg1.equalsIgnoreCase("Font size")) {
 			List<WebElement> font_size = login.driver.findElements(
 					By.cssSelector(".highcharts-data-labels.highcharts-series-0.highcharts-line-series > g > text"));
+			
 			for (int i = 1; i <= font_size.size(); i++) {
 				String fontsize = login.driver
 						.findElement(By.cssSelector(
@@ -6193,9 +5245,10 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 				Integer expected = Integer.valueOf(font_size_text[0]);
 				Integer actual = Integer.valueOf(data_labels_font_size);
 				assertEquals(actual, expected);
+				login.Log4j.info("The Selected " + arg1
+						+ " has been updated in chart visual timepoints and it's verified successfully");
 			}
-			login.Log4j.info("The Selected " + arg1
-					+ " has been updated in chart visual timepoints and it's verified successfully");
+			
 		}
 		if (arg1.equalsIgnoreCase("Font Style")) {
 			List<WebElement> font_style = login.driver.findElements(
@@ -6246,7 +5299,6 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 							"//*[contains(@class,'highcharts-yaxis-left')]//*[@class='highcharts-axis-title']", 4)
 					.getCssValue("color");
 			String color_hex = Color.fromString(color).asHex();
-			
 			assertEquals(color_hex, y_axis_color);
 			login.Log4j.info("The y axis color has been verified for left axis");
 			String bgcolor = CommonFunctionality
@@ -6273,14 +5325,12 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 					.getText();
 			assertEquals(y_axis_opposite_title, text);
 			login.Log4j.info("The y axis title name has been verified for right axis");
-			String color1 = CommonFunctionality
+			String color = CommonFunctionality
 					.getElementByXpath(login.driver,
-							"(//*[contains(@class,'highcharts-yaxis-right')]//*[@class='highcharts-axis-title'])[1]", 4)
+							"//*[contains(@class,'highcharts-yaxis-right')]//*[@class='highcharts-axis-title']", 4)
 					.getCssValue("color");
-		
-			String color_hex = Color.fromString(color1).asHex();
-			System.out.println("===color_hex========"+color_hex +"   "+color +"   "+color);
-			assertEquals(color_hex, color);
+			String color_hex = Color.fromString(color).asHex();
+			assertEquals(color_hex, y_axis_right_color);
 			login.Log4j.info("The y axis color has been verified for right axis");
 			String bgcolor = CommonFunctionality
 					.getElementByXpath(login.driver,
@@ -6347,7 +5397,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@Then("^\"([^\"]*)\" is displayed at bottom of the chart$")
 	public void is_displayed_at_bottom_of_the_chart(String arg1) throws Throwable {
-		if (login.driver.findElements(By.xpath("//div[@class='legend-item ']")).size() > 0
+		if (login.driver.findElements(By.cssSelector("div[class='legend-item']")).size() > 0
 				&& legend_checkbox == true) {
 			login.Log4j.info("The legend item is displayed and it has been verified successfully");
 		} else {
@@ -6380,7 +5430,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		}
 		if (arg1.equalsIgnoreCase("Title") && values_axis_checkboxes == true) {
 			String title = CommonFunctionality
-					.getElementBycssSelector(login.driver, "div.highcharts-legend-title > span", 4).getText();
+					.getElementByXpath(login.driver, "//*[@class='highcharts-label highcharts-legend-title']/*", 4).getText();
 			assertEquals(title, legend_title);
 			login.Log4j.info("The selected " + arg1 + " is reflecting in chart visual");
 			CommonFunctionality.Views_list();
@@ -6404,7 +5454,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		if (arg1.equalsIgnoreCase("Font style") && values_axis_checkboxes == true) {
 			cv.clicking_option("Save");
 			WebElement title = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='highcharts-label highcharts-legend-title']//span", 4);
+					"//*[@class='highcharts-label highcharts-legend-title']/*", 4);
 			String font_bold = title.getCssValue("font-weight");
 			String font_italic = title.getCssValue("font-style");
 			String font_underline = title.getCssValue("text-decoration");
@@ -6503,41 +5553,13 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		}
 		if (arg1.equalsIgnoreCase("Copyright link") && tooltips_checkbox == true) {
 			cv.clicking_option("Save");
-			CommonFunctionality.wait(2000);
-		
 			CommonFunctionality.getElementBycssSelector(login.driver, ".visual-item-wrapper--text", 4).click();
-			
-			/*CommonFunctionality.wait(5000);
-			
-			js.executeScript("arguments[0].scrollIntoView();", login.driver.findElement(By.xpath("//span[@class='series-edit--title series-edit--title__editable']")));
-			login.driver.findElement(By.xpath("//*[@class='view-scroll-bottom']")).click();
-			for(int i=0;i<5;i++) {
-				js.executeScript("window.scrollBy(0,500)");
-				CommonFunctionality.wait(3000);
-				try {
-					js.executeScript("arguments[0].scrollIntoView();", login.driver.findElement(By.xpath("//*[@class='visual-item-wrapper--text ']")));
-
-				WebElement ele =login.driver.findElement(By.xpath("//*[@class='visual-item-wrapper--text ']"));
-				ele.click();
-				
-					
-				}
-				catch (Exception e) {
-					System.out.println("ele not found");
-				}
-			
-			
-			}
-*/			
-			
-			
-			/*ArrayList<String> browserTabs = new ArrayList<String>(login.driver.getWindowHandles());
-			login.driver.switchTo().window(browserTabs.get(0));
+			ArrayList<String> browserTabs = new ArrayList<String>(login.driver.getWindowHandles());
+			login.driver.switchTo().window(browserTabs.get(1));
 			String URL = login.driver.getCurrentUrl();
 			login.Log4j.info("The selected " + arg1 + " is reflecting in chart visual");
 			login.driver.close();
-			login.driver.switchTo().window(browserTabs.get(0));*/
-			String URL = login.driver.getCurrentUrl();
+			login.driver.switchTo().window(browserTabs.get(0));
 			sa.assertEquals(URL, copyright_title_link);
 			cv.click_on_visual("Edit");
 			click_on_the_checkbox_to("Copyright:", "Check");
@@ -6549,13 +5571,12 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 			cv.clicking_option("Save");
 			CommonFunctionality.getElementBycssSelector(login.driver, "img[class='visual-item-wrapper--logo']", 4)
 					.click();
-			/*ArrayList<String> browserTabs = new ArrayList<String>(login.driver.getWindowHandles());
+			ArrayList<String> browserTabs = new ArrayList<String>(login.driver.getWindowHandles());
 			login.driver.switchTo().window(browserTabs.get(1));
 			String URL = login.driver.getCurrentUrl();
 			login.Log4j.info("The selected " + arg1 + " is reflecting in chart visual");
 			login.driver.close();
-			login.driver.switchTo().window(browserTabs.get(0));*/
-			String URL = login.driver.getCurrentUrl();
+			login.driver.switchTo().window(browserTabs.get(0));
 			sa.assertEquals(URL, copyright_title_link);
 			cv.click_on_visual("Edit");
 			click_on_the_checkbox_to("Copyright:", "Check");
@@ -6578,18 +5599,14 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		}
 		if (arg1.equalsIgnoreCase("Copyright font style") && tooltips_checkbox == true) {
 			cv.clicking_option("Save");
-			/*WebElement title = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='visual-item-wrapper--text ']/parent::a", 4);*/
 			WebElement title = CommonFunctionality.getElementByXpath(login.driver,
-					"//*[@class='visual-item-wrapper--text  text-dots']", 4);
-			
+					"//*[@class='visual-item-wrapper--text ']/parent::a", 4);
 			String font_bold = title.getCssValue("font-weight");
 			String font_italic = title.getCssValue("font-style");
-			//String font_underline = title.getCssValue("font_underline");
-			//String font_underline = title.getCssValue("text-decoration");
+			String font_underline = title.getCssValue("text-decoration");
 			assertTrue(font_bold.equals("bold") || font_bold.equals("700"));
 			assertTrue(font_italic.equals("italic"));
-			//assertTrue(font_underline.equals("underline"));
+			assertTrue(font_underline.contains("underline"));
 			login.Log4j.info("The selected " + arg1 + " is reflecting in chart visual");
 			cv.click_on_visual("Edit");
 			click_on_the_checkbox_to("Copyright:", "Check");
@@ -6649,7 +5666,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 	@Then("^(\\d+) type of visuals should present$")
 	public void type_of_visuals_should_present(int arg1) throws Throwable {
 		List<WebElement> visuals_list = login.driver
-				.findElements(By.xpath("//span[contains(text(),'Add chart')]//following-sibling::ul[@class='dropdown-menu']/li/span"));
+				.findElements(By.xpath("//*[@title='View as']//following-sibling::ul[@class='dropdown-menu']/li/span"));
 		for (WebElement visual : visuals_list) {
 			String visual_text = visual.getAttribute("title");
 			System.out.println("The visual type is: " + visual_text);
@@ -6809,9 +5826,9 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		String a = "Copy Chart";
 		String b = "Cut chart";
 		String c = "Delete chart";
-		String d = "Add chart";
+		String d = "Insert visual";
 		String e = "Paste visual";
-		String f = "Change chart type";
+		String f = "View as";
 		String g = "Calculate series";
 		String h = "Edit series";
 		String i = "Clear contents";
@@ -6856,57 +5873,14 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 		login.Log4j.info("The Right click options in the chart visual has been verified successfully");
 		CommonFunctionality.Views_list();
 	}
-	
-	@Then("^The \"([^\"]*)\" options should be present$")
-	public void the_options_should_be_present(String arg1) throws Throwable {
-		WebElement Change_chartType=login.driver.findElement(By.xpath("//span[contains(text(),'"+ arg1 +"')]"));
-		new Actions(login.driver).moveToElement(Change_chartType).pause(500).click().build().perform();
-	    WebElement Table=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--table-vertical_large')])[2]"));
-	    WebElement Chart=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--chart-line_large')])[2]"));
-	    WebElement Histogram=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--histogram_large')])[2]"));
-	    WebElement HeatMap=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--heatmap_large')])[2]"));
-	    WebElement Pie=login.driver.findElement(By.xpath("(//div[contains(@class,'icon--pie_chart-pie_large')])[2]"));
-	    if(Table.isDisplayed() && Chart.isDisplayed() && Histogram.isDisplayed() && HeatMap.isDisplayed() && Pie.isDisplayed()) {
-	    	System.out.println("All options are present under '"+ arg1+"'");
-	    }
-	    else {
-	    	System.out.println("All options are not present under '"+ arg1+"'");
-	    }
-	
-	
-	}
-	
-	@Then("^The \"([^\"]*)\" options should be available$")
-	public void the_options_should_be_available(String arg1) throws Throwable {
-		WebElement Add_chart=login.driver.findElement(By.xpath("//span[contains(text(),'"+ arg1 +"')]"));
-		new Actions(login.driver).moveToElement(Add_chart).pause(500).click().build().perform();
-	    WebElement Table=login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]"));
-	    WebElement Chart=login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]"));
-	    WebElement Histogram=login.driver.findElement(By.xpath("//div[contains(@class,'icon--histogram_large')]"));
-	    WebElement HeatMap=login.driver.findElement(By.xpath("//div[contains(@class,'icon--heatmap_large')]"));
-	    WebElement Pie=login.driver.findElement(By.xpath("//div[contains(@class,'icon--pie_chart-pie_large')]"));
-	    if(Table.isDisplayed() && Chart.isDisplayed() && Histogram.isDisplayed() && HeatMap.isDisplayed() && Pie.isDisplayed()) {
-	    	System.out.println("All options are present under '"+ arg1+"'");
-	    }
-	    else {
-	    	System.out.println("All options are not present under '"+ arg1+"'");
-	    }
-	   
-	}	
-	
-	
-	
-	
-	
-	
 
 	@SuppressWarnings("deprecation")
 	@Then("^The \"([^\"]*)\" options have been verified$")
 	public void the_options_have_been_verified(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Change chart type")) {
-			String l = "Line";
+		if (arg1.equalsIgnoreCase("Insert visual")) {
+			String l = "Chart";
 			String m = "Pie";
-			String n = "Vertical";
+			String n = "Table";
 			String o = "Map";
 			String p = "Heat map";
 			String q = "Histogram";
@@ -7074,7 +6048,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 					"//*[@class='highcharts-series highcharts-series-0 highcharts-line-series']/*[@class='highcharts-graph']",
 					4).getAttribute("stroke");
 			String actual = Color.fromString(color_text).asHex();
-			//assertEquals(actual, color);
+			assertEquals(actual, color);
 		}
 		if (arg1.equalsIgnoreCase("Stroke Width")) {
 			String stroke = CommonFunctionality.getElementByXpath(login.driver,
@@ -7117,26 +6091,12 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 	public void verify_the_functions_appeared_in_excel() throws Throwable {
 		CommonFunctionality.wait(1000);
 		String path = System.getProperty("user.home") + "\\Downloads\\" + visual_title + ".xlsx";
-		System.out.println("Path is"+path);
 		File src = new File(path);
-		System.out.println("src is"+src);
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sheet1 = wb.getSheetAt(0);
-		System.out.println("enter");
-		String data = sheet1.getRow(28).getCell(1).getStringCellValue();
-		System.out.println("data is "+data);
-		
-		System.out.print("=applied_function=="+applied_function);
-	//	String []ar=data.split(";");
-	//	String data2=ar[1].replace(" ", "");
-	//	System.out.println("===data====="+data2);
-		System.out.println(applied_function.contains(data));
-		
-		//applied_function=applied_function.replace(" ", "");
-		//System.out.println("====applied_function1==============="+applied_function);
-		if (applied_function.contains(data)) {
-			System.out.println("====enter=djoiado==============");
+		String data = sheet1.getRow(21).getCell(1).getStringCellValue();
+		if (data.contains(applied_function)) {
 			Files.deleteIfExists(Paths.get(path));
 			login.Log4j.info(
 					"The applied function has been displayed in chart and it has been verified successfully and the applied function is "
@@ -7152,7 +6112,7 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 
 	@Then("^Verify that the Functions applied is reflecting in excel data$")
 	public void verify_that_the_Functions_applied_is_reflecting_in_excel_data() throws Throwable {
-		CommonFunctionality.Download_to_Excel(myseriestitle, 11, 1, function_myseries);
+		CommonFunctionality.Download_to_Excel(myseriestitle, 10, 1, function_myseries);
 		login.Log4j.info("The entered function applied is reflecting in Chart visual and it has been verified");
 		CommonFunctionality.DeleteSeries();
 	}
@@ -7287,56 +6247,44 @@ if (arg1.equals("310902301;310902401") || arg1.equals("210698402;206954202") || 
 				assertEquals(series_chart_color, color);
 			}
 			String legend_color = CommonFunctionality
-					.getElementBycssSelector(login.driver, ".legend-item--marker", 4)
+					.getElementBycssSelector(login.driver, ".legend-item--marker.legend-item--hide-series", 4)
 					.getCssValue("background-color");
 			String legand = Color.fromString(legend_color).asHex();
 			assertEquals(series_chart_color, legand);
 		}
 		if (arg1.equalsIgnoreCase("Frequency")) {
 			String a = "Yearly";
-			/*String actual = CommonFunctionality
+			String actual = CommonFunctionality
 					.getElementByXpath(login.driver, "//*[contains(text(),'Functions:')]/following-sibling::*", 4)
-					.getText();*/
-			String actual =	login.driver.findElement(By.xpath("//td[normalize-space()='Functions']/following::*[normalize-space()='Frequency']")).getText();
-			if ((actual.contains(a))) {
+					.getText();
+			if (!(actual.contains(a))) {
 				fail("Verification Failed");
 			}
 		}
 		if (arg1.equalsIgnoreCase("Frequency for Weekly and Monthly")) {
-			
-			String a = "Monthly";
-			String b = "Weekly";
-			/*String actual = CommonFunctionality
+			String a = "Weekly";
+			String b = "Monthly";
+			String actual = CommonFunctionality
 					.getElementByXpath(login.driver, "//*[contains(text(),'Functions:')]/following-sibling::*", 4)
-					.getText();*/
-			//String actual =	login.driver.findElement(By.xpath("//td[normalize-space()='Functions']/following::*[normalize-space()='Frequency']")).getText();
-			String actual =	login.driver.findElement(By.xpath("//td[normalize-space()='Functions']/following::*[normalize-space()='Frequency']/following::div[contains(text(),'Monthly')]")).getText();
-			System.out.println("====actualee======"+actual);
-			if ((actual.contains(a) || actual.contains(b))) {
+					.getText();
+			if (actual.contains(a) || actual.contains(b)) {
 			} else {
 				fail("Verification Failed");
 			}
 		}
 		if (arg1.equalsIgnoreCase("Change")) {
-			/*String actual = CommonFunctionality
-					.getElementByXpath(login.driver, "//div[@class='legend-item']//span", 4)
-					.getText();*/
-			String actual=login.driver.findElement(By.xpath("(//div[@class='legend-item ']/span)[1]")).getText();
-			System.out.println("Actual is "+actual);
+			String actual = CommonFunctionality
+					.getElementByXpath(login.driver, "//*[contains(text(),'Functions:')]/following-sibling::*", 4)
+					.getText();
 			String split[] = actual.split("\\(");
-			System.out.println("split is "+split);
-			String next_split = split[2];
+			String next_split = split[1];
 			String final_split;
 			if (next_split.contains(";")) {
 				final_split = next_split.substring(0, 11);
-				System.out.println("Final Split is "+final_split);
 			} else {
 				final_split = next_split.substring(0, 9);
-				System.out.println("Final Split in else s "+final_split);
 			}
-			System.out.println("chane is seris "+change_in_series);
 			if (change_in_series.toLowerCase().contains(final_split.toLowerCase())) {
-				
 			} else {
 				fail("Verification Failed");
 			}

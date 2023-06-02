@@ -66,10 +66,6 @@ public class UnitManipulation {
 	
 	
 	
-	
-	
-	
-	
 	public void myseries_series_list_without_functions(String arg1) throws Throwable {
 	   List<WebElement> series_functions_list = login.driver.findElements(By.className("series-functions-title"));
 	   for(int i=1; i<=series_functions_list.size(); i++) {
@@ -156,11 +152,7 @@ public class UnitManipulation {
    public void search_for_the_series_with_ID_and_click_on_option(String arg1, String arg2) throws Throwable {
        
 	   Thread.sleep(2000);
-	   
-	   
-	   
-	   
-	   
+	     	   
 	   CommonFunctionality.DeleteSeries();
 	  Thread.sleep(2000);
 	   CommonFunctionality.getElementByXpath(login.driver, "//div[@title='View results as List']", 4).click();
@@ -217,26 +209,20 @@ public class UnitManipulation {
    
    }
    
-   
-   
-   
-   
-   
-   
+     
    
    
    @And("^Check the checkbox for Unit manipulation as \"([^\"]*)\"$")
    public void check_the_checkbox_for_Unit_manipulation_as(String arg1) throws Throwable {
 	   unit_manipulation_checkbox_text = arg1;
-	   boolean checkbox=login.driver.findElement(By.xpath("//*[contains(text(),'"+arg1+"')]/parent::label//span[@class='input-control--indicator']")).isSelected();
+	   boolean checkbox=login.driver.findElement(By.xpath("(//span[@class='input-control--description'])[1]//parent ::label")).isSelected();
 	   if(checkbox!=true)
 	   {
-		   new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'"+arg1+"')]/parent::label//span[@class='input-control--indicator']", 4)).click().build().perform();
+		   new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "(//span[@class='input-control--description'])[1]//parent ::label", 4)).click().build().perform();
 		   
        }
 	   
-	  
-	   
+	     
 	   }
    
    
@@ -246,12 +232,24 @@ public class UnitManipulation {
     		String functions_text = functions.getText().toString();
     		System.out.println(functions_text);
     		String split[] = functions_text.split("\\; ");
-    		String split1[] = split[1].split("\\)");
+    		String split1[] = split[1].split("\\(");
     		AssertJUnit.assertEquals(split1[0],unit_manipulation_checkbox_text);
     		AssertJUnit.assertEquals(split1[0], unit_manipulation_checkbox);	
     	}
     }
           
+    @And("^Click \"([^\"]*)\" tab and enter \"([^\"]*)\" in search field in function window$")
+	public void click_tab_and_enter_in_search_field_in_function_window(String arg1, String arg2) throws Throwable {
+		CommonFunctionality.wait(5000);
+	//	CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Cross Section']", 20).click();
+
+		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[3]", 15)
+				.sendKeys(arg2);
+		CommonFunctionality
+				.getElementByXpath(login.driver,
+						"(//span[@class='rBp4bp9QFdeCkIQxSLEE'])[1]", 15)
+				.click();
+	}
     @And("^Copy the visual title$")
     public void copy_the_visual_title() throws Throwable {
     	
@@ -265,13 +263,8 @@ public class UnitManipulation {
 		action.moveToElement(mouseover).pause(3000).contextClick().build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'View as Chart')]")).click();
-    	
-    	
-    	
-    	
-    	
-    	
-    	
+    	   	
+    	 	    	
     	
     	if(title.contains("(") && title.contains(")")) {
     		String visualtitle = title.replace("(", "");
@@ -304,7 +297,7 @@ public class UnitManipulation {
  	public void rename_the_insight_to_and_able_to_apply_unit_manipualtion_function_with_base_series_and_transformed_series_present_in_with_and_and_the_checkbox_and_then_verify(String arg1, String arg2, String arg3, String arg4, String arg5, String arg6) throws Throwable {
 		unit_manipulation_checkbox = arg5;
 		if(arg1.equals("02")) {
-		new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".series-functions-panel--icon__apply", 4)).keyUp(Keys.CONTROL).pause(200).click().keyDown(Keys.CONTROL).build().perform();
+		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//button[@type='button'][contains(text(),'Apply')]", 4)).keyUp(Keys.CONTROL).pause(200).click().keyDown(Keys.CONTROL).build().perform();
 		CommonFunctionality.wait(4000);
 		unit_manipulation_method_checkbox();
 		} else {
@@ -368,7 +361,7 @@ public class UnitManipulation {
         series.sendKeys(Keys.ENTER);
         CommonFunctionality.wait(1000);
     	}
-    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver, ".series-functions-panel--icon__apply", 4)).keyUp(Keys.CONTROL).pause(200).click().keyDown(Keys.CONTROL).build().perform();
+    	new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver, "//button[@type='button'][contains(text(),'Apply')]", 4)).keyUp(Keys.CONTROL).pause(200).click().keyDown(Keys.CONTROL).build().perform();
     	CommonFunctionality.wait(1000);
     	}
     	myseries_new_series_list_with_functions();

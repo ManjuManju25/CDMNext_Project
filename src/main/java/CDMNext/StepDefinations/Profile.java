@@ -61,12 +61,24 @@ public class Profile {
 	public static ArrayList<String> insightseries;
 	public static ArrayList<String> seriesname;
 	
-	public static String firstName ="test";
+	public static String firstName ="Test";
 	public static String Lastname="Selenium";
+	
+	
+	//TC_01
+	@Then("^Verify profile popup should be open$")
+	public void verify_profile_popup_should_be_open() throws Throwable {
+	 Boolean profile = login.driver.findElement(By.xpath("//div[@class='account-popup']")).isDisplayed();
+	 if(profile == true) {
+		 login.Log4j.info("Profile popup should be open");
+	 }else {
+		 fail("failed");
+	 }
+	}
 
-	// TC_02
-	@And("^Verifyed first name and last name$")
-	public void verifyed_first_name_and_last_name() throws Throwable {
+		// TC_02
+	@And("^User first name and last name should be displayed$")
+	public void user_first_name_and_last_name_should_be_displayed() throws Throwable {
 
 		// first and last name
 		if(login.driver.findElements(By.xpath("//div[@class='profile-menu--name text-dots']")).size()==1)
@@ -88,6 +100,8 @@ public class Profile {
 	public void click_on_pencile_button() throws Throwable {
 		
 		Thread.sleep(2000);
+		WebElement profile = login.driver.findElement(By.xpath("//div[@class='profile-menu']"));
+		new Actions(login.driver).moveToElement(profile).build().perform();
 		// click on pencil
 		login.driver.findElement(By.xpath("//div[@class='profile-menu--edit-icon']")).click();
 
@@ -127,15 +141,12 @@ public class Profile {
 		Thread.sleep(1000);
 
 		// click on first name
-		login.driver.findElement(By.name("first_name")).click();
-		Thread.sleep(1000);
+		login.driver.findElement(By.xpath("//input[@id='first_name']")).click();
 		// first name clear
-		login.driver.findElement(By.name("first_name")).clear();
-		Thread.sleep(1000);
-		//// enter first name
-		login.driver.findElement(By.name("first_name")).sendKeys(firstName);
-		Thread.sleep(1000);
-		
+		login.driver.findElement(By.xpath("//input[@id='first_name']")).clear();
+		// enter first name
+		login.driver.findElement(By.xpath("//input[@id='first_name']")).sendKeys(firstName);
+				
 
 	}
 	// TC_05
@@ -162,11 +173,11 @@ public class Profile {
 		Thread.sleep(1000);
 
 		// click on last name
-		login.driver.findElement(By.name("last_name")).click();
+		login.driver.findElement(By.xpath("//input[@id='last_name']")).click();
 		// clear the last name field
-		login.driver.findElement(By.name("last_name")).clear();
+		login.driver.findElement(By.xpath("//input[@id='last_name']")).clear();
 		// enter last name
-		login.driver.findElement(By.name("last_name")).sendKeys(Lastname);
+		login.driver.findElement(By.xpath("//input[@id='last_name']")).sendKeys(Lastname);
 
 		
 	}
@@ -188,17 +199,17 @@ public class Profile {
 	}
 
 	// TC_07
-	@And("^blank the first name filed$")
-	public void blank_the_first_name_filed() throws Throwable {
+	@And("^blank the first name field$")
+	public void blank_the_first_name_field() throws Throwable {
 
 		// click on first name
-		login.driver.findElement(By.name("first_name")).click();
+		login.driver.findElement(By.xpath("//input[@id='first_name']")).click();
 		Thread.sleep(1000);
-		WebElement textbox = login.driver.findElement(By.name("first_name"));
+		WebElement textbox = login.driver.findElement(By.xpath("//input[@id='first_name']"));
 		textbox.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(1000);
 		// first name clear
-		login.driver.findElement(By.name("first_name")).clear();
+		login.driver.findElement(By.xpath("//input[@id='first_name']")).clear();
 		Thread.sleep(1000);
 
 	}
@@ -208,14 +219,14 @@ public class Profile {
 	public void blank_the_last_name_field() throws Throwable {
 
 		// click on last name
-		login.driver.findElement(By.name("last_name")).click();
+		login.driver.findElement(By.xpath("//input[@id='last_name']")).click();
 		Thread.sleep(1000);
 		// clear the 1 letter
-		WebElement textbox = login.driver.findElement(By.name("last_name"));
+		WebElement textbox = login.driver.findElement(By.xpath("//input[@id='last_name']"));
 		textbox.sendKeys(Keys.BACK_SPACE);
 		Thread.sleep(1000);
 		// clear the last name field
-		login.driver.findElement(By.name("last_name")).clear();
+		login.driver.findElement(By.xpath("//input[@id='last_name']")).clear();
 		Thread.sleep(2000);
 
 	}
@@ -345,11 +356,13 @@ public class Profile {
 	}
 
 	// TC_11
-	@And("^click on Email filed$")
-	public void click_on_Email_filed() throws Throwable {
+	@And("^click on Email field$")
+	public void click_on_Email_field() throws Throwable {
 
 		boolean email = login.driver.findElement(By.name("user_id")).isEnabled();
-		if (true != email) {
+		
+		if (! email == true) {
+			
 			System.out.println("Email field not editable");
 			System.out.println("==================================TC_11===========================");
 		}
@@ -373,7 +386,6 @@ public class Profile {
 		login.driver.findElement(By.name("first_name")).sendKeys(Keys.BACK_SPACE);
 		// clear first name data
 		login.driver.findElement(By.name("first_name")).clear();
-
 		// enter first name data
 		login.driver.findElement(By.name("first_name")).sendKeys(firstname);
 		Thread.sleep(1000);
@@ -415,8 +427,8 @@ public class Profile {
 		// clear the last name field
 		login.driver.findElement(By.name("last_name")).sendKeys(lastname);
 		Thread.sleep(1000);
-		login.driver.findElement(By.name("last_name")).sendKeys(Keys.BACK_SPACE);
-		Thread.sleep(1000);
+	//	login.driver.findElement(By.name("last_name")).sendKeys(Keys.BACK_SPACE);
+	//	Thread.sleep(1000);
 
 		LastName = lastname;
 
@@ -452,18 +464,18 @@ public class Profile {
 	}
 
 	// TC_13
-	@And("^The changes should be canceled$")
-	public void the_changes_should_be_canceled() throws Throwable {
+	@And("^The changes should be cancelled$")
+	public void the_changes_should_be_cancelled() throws Throwable {
 		
 		Thread.sleep(1000);
 
 		String name=login.driver.findElement(By.name("last_name")).getText();
 		if(name.equalsIgnoreCase("Automation"))
 		{
-			fail("changes should be canceled");
+			fail("changes should be cancelled");
 			
 		}else {
-			System.out.println("changes should be canceled");
+			System.out.println("changes should be cancelled");
 			System.out.println("==================================TC_13===========================");
 		}
 		
@@ -597,9 +609,17 @@ public class Profile {
 	}
 
 	// TC_21
-	@Then("^UI interface shoud be loaded for selected language$")
-	public void ui_interface_shoud_be_loaded_for_selected_language() throws Throwable {
-		System.out.println("UI interface shoud be loaded for selected language");
+	@Then("^UI interface should be loaded for selected language$")
+	public void ui_interface_should_be_loaded_for_selected_language() throws Throwable {
+		
+		String data = login.driver.findElement(By.xpath("//div[@class='page-main-header--title']")).getText();
+		
+		if(data.contains("您的CEIC数据管理平台")) {
+			login.Log4j.info("UI interface should be loaded for selected language:PASS");
+		//	System.out.println("UI interface shoud be loaded for selected language");
+		}else {
+			Assert.fail("UI interface should not be loaded for selected language:FAIL");
+		}
 
 	}
 
@@ -636,13 +656,20 @@ public class Profile {
 
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("//div[@class='number-format-context-title']")).click();
+		login.driver.findElement(By.xpath("//div[@class='number-format-control']")).click();
 		// print number format data
-		String numberformatedropdown = login.driver.findElement(By.xpath("//body/ul[1]/div[3]/li[1]/div[1]")).getText();
-		login.Log4j.info("Number formate dropdown data:" + numberformatedropdown);
+		String decplace = login.driver.findElement(By.xpath("//div[@class='number-format-picker--places']")).getText();
+		String seperator = login.driver.findElement(By.xpath("//div[@class='number-format-picker--separator']")).getText();
+		String grpseperator = login.driver.findElement(By.xpath("//div[@class='number-format-picker--separator']")).getText();
+		if(decplace.equalsIgnoreCase("Decimal places") || seperator.equalsIgnoreCase("Decimal separator") || grpseperator.equalsIgnoreCase("Grouping separator")) {
+			login.Log4j.info("Number formate dropdown data:PASS");
+		}else {
+			Assert.fail();
+		}
+		
 		// get data from decimal place
-		String decimaldata = login.driver.findElement(By.name("decimal_places")).getText();
-		System.out.println(decimaldata);
+	//	String decimaldata = login.driver.findElement(By.name("decimal_places")).getText();
+	//	System.out.println(decimaldata);
 
 	}
 
@@ -737,7 +764,7 @@ public class Profile {
 	// TC_23
 	@Then("^Decimal place and timepoint value should be same$")
 	public void decimal_place_and_timepoint_value_should_be_same() throws Throwable {
-
+		
 		System.out.println("decimal place and timepoints should be same");
 
 	}
@@ -878,15 +905,15 @@ public class Profile {
 
 		Thread.sleep(1000);
 
-		String dateformat = login.driver.findElement(By.xpath("//div[contains(text(),'MM/DD/YYYY')]")).getText();
+		String dateformat = login.driver.findElement(By.xpath("//div[contains(text(),'DD/MM/YYYY')]")).getText();
 		System.out.println(dateformat);
-if(dateformat.equalsIgnoreCase("MM/DD/YYYY"))
-{
-	System.out.println("Date formate Auto default display");
-}
-else {
-	fail("Date formate Auto default display");
-}
+		if(dateformat.equalsIgnoreCase("DD/MM/YYYY"))
+		{
+			System.out.println("Date formate Auto default display");
+		}
+		else {
+			fail("Date formate Auto default shoul not display");
+		}
 		
 
 	}
@@ -906,11 +933,11 @@ else {
 		Thread.sleep(1000);
 		// click on date format
 
-		WebElement movtoname = login.driver.findElement(By.xpath("//span[@id='select2-chosen-2']"));
+		WebElement movtoname = login.driver.findElement(By.xpath("//span[@class='select2-chosen']"));
 		action.pause(500).moveToElement(movtoname).click().build().perform();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
-		login.driver.findElement(By.xpath("//div[contains(text(),'DD/MM/YYYY')]")).click();
+		login.driver.findElement(By.xpath("//div[contains(text(),'MM/DD/YYYY')]")).click();
 		Thread.sleep(2000);
 
 	}
@@ -931,11 +958,20 @@ else {
 
 		Thread.sleep(1000);
 
-		login.driver.findElement(By.xpath("(//div[@class='tabs__tab-item'])[1]")).click();
+	//	login.driver.findElement(By.xpath("(//div[@class='tabs__tab-item'])[1]")).click();
 
-		String updatedateinSSP = login.driver.findElement(By.xpath("(//*[@class='preview-series-time-points--point-date'])[6]")).getText();
+		String updatedateinSSP = login.driver.findElement(By.xpath("//span[@class='series-changes-time-line--last-update-date']")).getText();
 
 		System.out.println(updatedateinSSP);
+		
+		if(updatedateinSSP.contains("05/11/2023")) {
+			login.Log4j.info("Only selected Date format should be displayed in entire CDMNext:PASS");
+		}else {
+				Assert.fail();
+		}
+		
+		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+		Thread.sleep(1000);
 
 	}
 
@@ -984,6 +1020,29 @@ else {
 		
 
 	}
+	//Tc_30
+	@And("^Updated date in custom format display in SSP$")
+	public void updated_date_in_custom_format_display_in_SSP() throws Throwable {
+
+		Thread.sleep(1000);
+
+	//	login.driver.findElement(By.xpath("(//div[@class='tabs__tab-item'])[1]")).click();
+
+		String updatedateinSSP = login.driver.findElement(By.xpath("//span[@class='series-changes-time-line--last-update-date']")).getText();
+
+		System.out.println(updatedateinSSP);
+		
+		if(updatedateinSSP.contains("2023")) {
+			login.Log4j.info("Only selected Date format should be displayed in entire CDMNext:PASS");
+		}else {
+				Assert.fail();
+		}
+		
+		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+		Thread.sleep(1000);
+
+	}
+	
 
 	// TC_31
 	@And("^verified \"([^\"]*)\" message should be displayed in red color$")
@@ -1060,13 +1119,14 @@ else {
 		login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]")).click();
 
 		// SSP pop up display and click on view as
-		login.driver.findElement(By.xpath("//span[contains(text(),'View as')]")).click();
+		login.driver.findElement(By.xpath("//div[@title='View as']")).click();
 		// click on Table
-		login.driver.findElement(By.xpath("//div[@class='icon--table-vertical_large v6Emt8Bm0sLK7mrRgQtN']")).click();
+		login.driver.findElement(By.xpath("//div[@class='n_jqU83kRCakZwGCXpGS']")).click();
+
 		Thread.sleep(1000);
 		// click on cancel button
-		login.driver.findElement(By.xpath("//div[contains(text(),'×')]")).click();
-		
+		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+		// click on download button
 		Thread.sleep(2000);
 
 	}
@@ -1082,7 +1142,6 @@ else {
 		for (int i = 1; i <= Timeframe; i++) {
 			System.out.println("No of timeframes count");
 			login.driver.findElement(By.xpath("(//td[@class='vertical-header'])[" + i + "]"));
-
 		}
 		System.out.println(
 				"Only selected observations should be displayed for visuals in all insights and also in download popup");
@@ -1114,19 +1173,16 @@ else {
 
 	@And("^Download popup display$")
 	public void download_popup_display() throws Throwable {
+		Boolean download = login.driver.findElement(By.xpath("//div[@class='modal-body sphere-modal__body']")).isDisplayed();
 		
-		if(login.driver.findElements(By.xpath("//div[@class='modal-body sphere-modal__body']")).size()==1)
+		if(download==true)
 		{
 			System.out.println("Download popup displayed");
 		}
 		else {
-			fail("download popup not showing");
+			fail("Download popup should not displayed");
 		}
-		
-		
-
-		
-
+					
 	}
 
 	// TC_34
@@ -1144,10 +1200,10 @@ else {
     	  fail("selected series count display");
       }
 		
+      Thread.sleep(1000);
+      login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
 		
-		
-
-	}
+		}
 
 	// TC_33
 	@And("^unchecked on Ask me to confirm the download settings$")
@@ -1185,7 +1241,7 @@ else {
 		WebElement elementLocator = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
 		action.contextClick(elementLocator).perform();
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Copy data')]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'Download')]")).click();
 
 	}
 
@@ -1218,10 +1274,14 @@ else {
 	@Then("^The 'ask me to confirm the download settings' option should be unchecked$")
 	public void the_ask_me_to_confirm_the_download_settings_option_should_be_unchecked() throws Throwable {
 		Thread.sleep(1000);
-
-		System.out.println("The Always ask me to conform the download settingsoption should be unchecked.");
+		Boolean uncheck = login.driver.findElement(By.xpath("//span[contains(text(),'Ask me to confirm the download settings')]")).isSelected();
+		if(uncheck==false) {
+	//	System.out.println("The Always ask me to conform the download settings option should be unchecked.");
+		login.Log4j.info("The Always ask me to conform the download settings option should be unchecked");
+	}else {
+		fail("The Always ask me to conform the download settings option should not be unchecked");
 	}
-
+	}
 	
 //TC_36
 	@And("^Right click on and click on \"([^\"]*)\"$")
@@ -1230,16 +1290,13 @@ else {
 		Thread.sleep(1000);
 
 		WebElement elementLocator = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
-
 		action.contextClick(elementLocator).perform();
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'"+arg1+"')]")).click();
 		Thread.sleep(2000);
       login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large')]")).click();
-		
-		
-		
-	}
+				
+		}
 
 	// TC_36
 	@And("^click on delete button in visual insight$")
@@ -1252,13 +1309,32 @@ else {
 	}
 
 	// TC_36
+	@And("^check the 'Ask me to confirm visual deletion' in preference dropdown$")
+	public void check_the_Ask_me_to_confirm_visual_deletion_in_preference_dropdown() throws Throwable {
+
+		Thread.sleep(1000);
+		if(login.driver.findElement(By.xpath("//span[contains(text),'Ask me to confirm visual deletion']")).isSelected()) {
+			login.Log4j.info("Checkbox is checked by default:Pass");
+		}else {
+			fail("Checkbox is unchecked:FAIL");
+		}
+		
+		Thread.sleep(500);
+	}
 	@Then("^Deletion confirmation message should be dispalyed for visual delete$")
 	public void deletion_confirmation_message_should_be_dispalyed_for_visual_delete() throws Throwable {
 		Thread.sleep(1000);
-
+		Boolean confirm = login.driver.findElement(By.xpath("//*[@class='modal-title sphere-modal__title text-dots']")).isDisplayed();
+				
+		Boolean message = login.driver.findElement(By.xpath("//input[@type='checkbox']")).isSelected();
+		
+		if(confirm == true && message == true ) {
+			login.Log4j.info("Deletion confirmation message should be dispalyed for visual delete");
+		}else {
+		fail("Deletion confirmation message should not be dispalyed for visual delete");
+		}
 		login.driver.findElement(By.xpath("//button[contains(text(),'Ok')]")).click();
 
-		System.out.println("Deletion confirmation message should be dispalyed for visual delete");
 
 	}
 
@@ -1311,8 +1387,11 @@ else {
 		Thread.sleep(1000);
 
 		// click on '+'icon
-
-		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
+		WebElement series = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		new Actions(login.driver).moveToElement(series).build().perform();
+		
+		WebElement icon = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
+		new Actions(login.driver).moveToElement(icon).click().build().perform();
 
 	}
 
@@ -1325,6 +1404,21 @@ else {
 	}
 
 //TC_38
+	@And("^click on 'customize' in grid mode$")
+	public void click_on_customize_in_grid_mode() throws Throwable {
+
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//div[@title='View as a grid']")).click();
+		
+		WebElement movtoname = login.driver
+				.findElement(By.xpath("(//*[@class='insight-grid-item--buttons-item button'])[2]"));
+		action.pause(500).moveToElement(movtoname).build().perform();
+		Thread.sleep(2000);
+		// movtoname.click();
+		login.driver.findElement(By.xpath("(//*[@class='insight-grid-item--buttons-item button'])[2]")).click();
+
+	}
+
 	@And("^click on 'customize'$")
 	public void click_on_customize() throws Throwable {
 
@@ -1337,8 +1431,11 @@ else {
 		Thread.sleep(2000);
 		// movtoname.click();
 		login.driver.findElement(By.xpath("(//*[@class='insight-grid-item--buttons-item button'])[4]")).click();
-
+		String nameinsight = login.driver.findElement(By.xpath("//div[@class='insight-breadcrumb--title text-dots insight-breadcrumb--title__editable']")).getText();
+		
 	}
+	
+	
 
 //TC_38
 	@Then("^Replacement popup should be displayed$")
@@ -1397,8 +1494,13 @@ else {
 	public void checked_the_Show_latest_changes_in_my_insights_upon_opening() throws Throwable {
 
 		Thread.sleep(1000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).click();
-
+		if(login.driver.findElement(By.xpath("//span[contains(text(),'Show latest changes in my insights upon opening')]")).isSelected()) {
+			login.Log4j.info("Checkbox is checked by default:Pass");
+		}else {
+			fail("Checkbox is unchecked:FAIL");
+		}
+		
+		Thread.sleep(500);
 	}
 
 //TC_40
@@ -1432,7 +1534,7 @@ else {
 	public void click_on_download_button() throws Throwable {
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath(
-				"//*[@class='download-button--icon drop-down-button--icon']//following::*[contains(text(),'Download')]"))
+				"//button[@class='sphere-modal-control button insight-download__modal-button button button__download-btn']"))
 				.click();
 		Thread.sleep(5000);
 	}
@@ -1486,6 +1588,18 @@ else {
 	}
 
 	// TC_43
+	@And("^checked the 'Preserve search selection after Download/CTC actions'$")
+	public void checked_the_Preserve_search_selection_after_Download_CTC_actions() throws Throwable {
+
+		Thread.sleep(1000);
+		if(login.driver.findElement(By.xpath("//span[contains(text(),'Preserve the order of selection when adding/downloading series')]")).isSelected()) {
+			login.Log4j.info("Checkbox is checked by default:Pass");
+		}else {
+			fail("Checkbox is unchecked:FAIL");
+		}
+		
+		Thread.sleep(500);
+	}
 	@And("^Select series in your order$")
 	public void select_series_in_your_order() throws Throwable {
 
@@ -1741,6 +1855,18 @@ login.driver.findElement(By.xpath("//div[contains(@class,'icon--chart-line_large
 	// TC_49
 	@And("^checked the 'Show system suggestion when working with visuals'$")
 	public void checked_the_Show_system_suggestion_when_working_with_visuals() throws Throwable {
+
+		Thread.sleep(1000);
+		if(login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[5]")).isSelected()) {
+			login.Log4j.info("Checkbox is checked by default:Pass");
+		}else {
+			fail("Checkbox is unchecked:FAIL");
+		}
+		
+		Thread.sleep(500);
+	}
+	@And("^check the 'Show system suggestion when working with visuals'$")
+	public void check_the_Show_system_suggestion_when_working_with_visuals() throws Throwable {
 
 		Thread.sleep(1000);
 
@@ -2177,7 +2303,7 @@ if (login.driver.findElements(By.xpath("//button[contains(text(),'Delete and sig
 		Robot r = new Robot();
 		Thread.sleep(1000);
 
-		WebElement movtoname = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
+		WebElement movtoname = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[5]"));
 		action.pause(500).moveToElement(movtoname).build().perform();
 		Thread.sleep(2000);
 
@@ -2215,7 +2341,7 @@ if (login.driver.findElements(By.xpath("//button[contains(text(),'Delete and sig
 		Robot r = new Robot();
 		Thread.sleep(1000);
 
-		WebElement movtoname = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
+		WebElement movtoname = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[5]"));
 		action.pause(500).moveToElement(movtoname).build().perform();
 		Thread.sleep(2000);
 		r.keyPress(KeyEvent.VK_A);
@@ -2296,13 +2422,20 @@ if (login.driver.findElements(By.xpath("//button[contains(text(),'Delete and sig
 		Thread.sleep(1000);
 
 	}
+	
+	@And("^Select Notification=OFF$")
+	public void select_Notification_ON() throws Throwable {
+	WebElement ON = login.driver.findElement(By.xpath("(//span[@class='bootstrap-switch-handle-off bootstrap-switch-default'][contains(text(),'OFF')])[2]"));
+	new Actions(login.driver).moveToElement(ON).click().build().perform();
+	  
+		}
 
 	@And("^click on file menu$")
 	public void click_on_file_menu() throws Throwable {
 		Thread.sleep(1000);
 
 		login.driver.findElement(By.xpath("//div[@class='insight-context-menu--menu-icon']")).click();
-
+		
 	}
 
 	@And("^click on share$")
@@ -2331,6 +2464,7 @@ if (login.driver.findElements(By.xpath("//button[contains(text(),'Delete and sig
 	public void click_on_save() throws Throwable {
 
 		Thread.sleep(2000);
+		
 		login.driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
 
 		// confirmation
@@ -2382,16 +2516,17 @@ if (login.driver.findElements(By.xpath("//button[contains(text(),'Delete and sig
 		login.driver.findElement(By.className("btn")).click();
 
 	}
-
-	@Then("^The Change password section should not be displayed for internal users$")
-	public void the_Change_password_section_should_not_be_displayed_for_internal_users() throws Throwable {
-
-		System.out.println("The Change password section should not be displayed for internal users");
-
+	@Then("^Verify change password section should not be displayed for internal users$")
+	public void verify_change_password_section_should_not_be_displayed_for_internal_users() throws Throwable {
+		Thread.sleep(2000);
+	    String email = login.driver.findElement(By.xpath("//div[@class='profile-menu--email-wrapper']")).getText();
+	//	Boolean pass = login.driver.findElement(By.xpath("//*[@class='profile-menu--password']")).isDisplayed();
+	if(!email.contains("change password")) {
+		login.Log4j.info("change password section should not be displayed for internal users");
+	}else {
+		fail("verified");
 	}
-
-	// Author=venkata swami
-	// username=ceicsuresh12@gmail.com
-	// password=Ceic@123
+		
+	}
 
 }

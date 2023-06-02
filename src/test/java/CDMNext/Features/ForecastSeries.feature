@@ -31,7 +31,7 @@ Feature: Verifying the Forecast series functionality
     And click on cross icon for any legends name
     Then Cross clicked legend of the chart in suggestion chart should be disabled
 
-  @ForecastSeries
+  @ForecastSeries01
   Scenario: Tc_Forecast Series Sugg _05:Verify opening ssp for more than suggestion of forecast in its chart suggestion dropdown
     Given User enters "32190101"
     And Add series to the right pane
@@ -94,7 +94,7 @@ Feature: Verifying the Forecast series functionality
     And Click on Manage All dropdown
     Then Below options should be shown
       | Add Forecasts              |
-      #| Add as new series          | ...option is removed
+      | Add as new series          |
       | Replace the current series |
 
   @ForecastSeries
@@ -273,7 +273,7 @@ Feature: Verifying the Forecast series functionality
     And Click on "Apply"
     And Click on "Ok"
     And Select forecast suggestion series
-    And Create TableVisual
+    And Create table visual
     Then Visual should be created with "Edit Table"
 
   @ForecastSeries
@@ -322,7 +322,7 @@ Feature: Verifying the Forecast series functionality
     And Apply with any function
     Then Function should be applied to the visual
 
-  @ForecastSeries1
+  @ForecastSeries
   Scenario: Tc_Forecast Series Sugg _33:Verify preserve frequency with replace the current series
     Given Enter series id's"103003407;103003507;103003607"
     And Add some series to my series

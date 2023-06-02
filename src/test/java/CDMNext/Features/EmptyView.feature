@@ -111,10 +111,10 @@
     And Click on View tab
     Then Hovering mouse on each option should show tooltip for each present in the menu bar
 
-  #@EmptyView
-  #Scenario: Tc_EmptyView_19 : Verify interplacing of visuals created in a view
-    #And Create Histogram and Map visuals
-    #Then Visuals should be interplaced by drag and drop
+  @EmptyView
+  Scenario: Tc_EmptyView_19 : Verify interplacing of visuals created in a view
+    And Create Histogram and Map visuals
+    Then Visuals should be interplaced by drag and drop
 
   @EmptyView
   Scenario: Tc_EmptyView_20 : Verify copy pasting of visuals should not empty the copied view tab visuals

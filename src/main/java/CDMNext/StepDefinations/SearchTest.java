@@ -79,7 +79,7 @@ public class SearchTest extends CommonFunctionality{
 		Boolean SynomymSearch = false;
 		login.Log4j.info("Clicking on  Series tab ");
 		
-		SeriesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
+		SeriesTab = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
 		// text file location where it contains synonyms
 		FileReader file = new FileReader(
@@ -144,8 +144,6 @@ public class SearchTest extends CommonFunctionality{
 							KeywordMatch = true;
 							break;
 						} else if (KeywordMatch == false) {
-							WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
-							action.pause(50).moveToElement(comparables).build().perform();
 							sspValidation(j);
 
 							if (search_validation(Filters.showdata, keyword) == true) {
@@ -173,6 +171,7 @@ public class SearchTest extends CommonFunctionality{
 								+ Filters.showdata + "\n\n" + SeriesInfo);
 					}
 
+					
 					WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
 					action.pause(50).moveToElement(comparables).build().perform();
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
@@ -199,7 +198,7 @@ public class SearchTest extends CommonFunctionality{
 		login.Log4j.info("Clicking on  Series tab ");
 		// Thread.sleep(2000);
 		SeriesTab = wait
-				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
 
 		ul_element = null;
@@ -477,25 +476,16 @@ public class SearchTest extends CommonFunctionality{
 	@And("^User selects economic zone \"([^\"]*)\"$")
 	public void user_selects_economic_zone(String arg1) throws Throwable {
 		economic_zone = arg1;
-		try {
 		getElementByXpath(login.driver,
 				"//*[@class='navigation-sidebar navigation-sidebar__expanded']//*[contains(text(),'" + arg1 + "')]", 15)
 				.click();
-		}catch(NoSuchElementException e) {
-			getElementByXpath(login.driver,
-					"//*[@title='Economic Zone']/ancestor::*[@class='tree-filter-item--title']/*[1]", 15)
-					.click();
-			getElementByXpath(login.driver,
-					"//*[@class='navigation-sidebar navigation-sidebar__expanded']//*[contains(text(),'" + arg1 + "')]", 15)
-					.click();
-		}
 	}
 
 	@SuppressWarnings("deprecation")
 	@Then("^Search for corresponding regions$")
 	public void search_for_corresponding_regions() throws Throwable {
 		String Content = "";
-		wait(2000);
+	wait(2000);
 		SeriesTab = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
@@ -539,7 +529,7 @@ public class SearchTest extends CommonFunctionality{
 				login.Log4j.info("Title information is \n" + TooltipInfo);
 				// Until the element is not visible keep scrolling
 				jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
-				/*String Region_text = null;
+				String Region_text = null;
 				String[] lines = TooltipInfo.split("\n");
 
 				for (String Tooltip : lines) {
@@ -549,24 +539,21 @@ public class SearchTest extends CommonFunctionality{
 					}
 				}
 				Boolean Result = false;
-				String[] subnational = Region_text.split(":");*/
-				Boolean Result = false;
-				String expectedStr = "";
+				String[] subnational = Region_text.split(":");
 				for (String ExpectedRegion : listwords) {
-					expectedStr = ExpectedRegion;
-					if (TooltipInfo.contains(ExpectedRegion)) {
-						login.Log4j.info(ExpectedRegion + " series are shown ");
+					if (subnational[1].trim().contains(ExpectedRegion)) {
+						login.Log4j.info(subnational[1] + " series are shown ");
 						Result = true;
 						break;
 					}
 				}
 				if (Result == false) {
-					Assert.fail(expectedStr + " series are not shown");
+					Assert.fail(subnational[1] + " series are not shown");
 				}
 
 			}
 		} catch (Exception e) {
-			Assert.fail("Verification failed");
+			Assert.fail("No results were found");
 		}
 
 	}
@@ -721,3 +708,4 @@ public class SearchTest extends CommonFunctionality{
 	}
 
 }
+

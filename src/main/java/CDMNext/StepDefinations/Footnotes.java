@@ -29,7 +29,6 @@ import org.openqa.selenium.interactions.SendKeysAction;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -353,9 +352,9 @@ public class Footnotes {
 
 	@Given("^select '-' icon to maximize$")
 	public void select_icon_to_maximize() throws Throwable {
-		//WebDriverWait wait = new WebDriverWait(login.driver, 70);
-		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath(login.LOCATORS.getProperty("footnote_window_maximize"))));*/
+		WebDriverWait wait = new WebDriverWait(login.driver, 70);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath(login.LOCATORS.getProperty("footnote_window_maximize"))));
 		login.driver
 				.findElement(
 						By.xpath(login.LOCATORS
@@ -478,13 +477,12 @@ public class Footnotes {
 		WebElement elementText = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("footnote_full_screen")));
 		String toolTipElement = elementText.getAttribute("title");
-		System.out.println("=====tooltip====="+toolTipElement);
 		System.out.println(toolTipElement);
 		String expected = "Full-screen";
 		if (login.driver.findElements(
 				By.xpath(login.LOCATORS
 						.getProperty("footnote_exit_full_screen"))).size() != 0) {
-			Assert.assertEquals(toolTipElement, "Exit full-screen");
+			Assert.assertEquals(toolTipElement, "Full-screen");
 			System.out.println("Footnote window is not  in full-screen");
 			WebDriverWait wait = new WebDriverWait(login.driver, 30);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By
@@ -770,7 +768,7 @@ login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("new_insight"))).click();
 		Thread.sleep(2000);
 		login.driver.findElement(
-				By.xpath(login.LOCATORS.getProperty("Create_insight"))).click();
+				By.xpath(login.LOCATORS.getProperty("create_insight"))).click();
 		login.driver.manage().timeouts().implicitlyWait(1200, TimeUnit.SECONDS);
 			}
 
@@ -1324,24 +1322,16 @@ login.driver.findElement(
 	// Tc_Footnotes_21
 	@Given("^right click , select Footnotes$")
 	public void right_click_select_Footnotes() throws Throwable {
-		//WebDriverWait wait = new WebDriverWait(login.driver, 700);
-		WebElement Series=login.driver.findElement(By.xpath("//*[@title='View results as Tree']/following::*[@class='series-item--main-info']"));
-		new Actions(login.driver).moveToElement(Series).pause(3000).build().perform();
-	    WebElement ele1 = login.driver.findElement(By.xpath("//div[@class='series-list-item--action-icons']/span[@title='More actions']//*[name()='svg']//*[local-name()='use'][1]"));
-		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
-		
-		//action.contextClick(Series).build().perform();
-		
+		WebDriverWait wait = new WebDriverWait(login.driver, 700);
 		WebElement element = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("series_footnote")));
-		element.click();
-		//action.contextClick(element).build().perform();
-		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By
+		action.contextClick(element).build().perform();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("select_footnotes"))));
 		WebElement footnote_element = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("select_footnotes")));
 		footnote_element.click();
-		Thread.sleep(5000);*/
+		Thread.sleep(5000);
 
 	}
 
@@ -1694,26 +1684,21 @@ login.driver.findElement(
 		login.driver.navigate().refresh();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("expand_database"))));
-		
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("expand_database")))
 				.click();
-		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("expand_all"))));
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("expand_all"))).click();
-		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("expand_topic"))));
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("expand_topic"))).click();
-		Thread.sleep(1000);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("expand_section"))));
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("expand_section"))).click();
-		Thread.sleep(1000);
 	}
 
 	// Tc_Footnotes_25
@@ -2190,14 +2175,14 @@ login.driver.findElement(
 		WebElement database = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("language")));
 		Thread.sleep(4000);
-		String db_text = "World Trend Plus 数据库";
+		String db_text = "世界趋势增强数据库";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("language"))));
 
 		String db = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("language"))).getText();
 		System.out.println(db);
-		if (db.contains("World Trend Plus")) {
+		if (db.matches(db_text)) {
 			System.out.println("Translated to chinese ");
 		} else {
 			Assert.fail("Failed to convert to chinese ");
@@ -2211,14 +2196,14 @@ login.driver.findElement(
 		WebElement db_jpn = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("language")));
 		Thread.sleep(4000);
-		String db_text_jpn = " World TrendPlusデータベース";
+		String db_text_jpn = "ワールドトレンドプラスデータベース";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("language"))));
 
 		String db_jpn_txt = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("language"))).getText();
 		System.out.println(db_jpn_txt);
-		if (db_jpn_txt.contains("World Trend")) {
+		if (db_jpn_txt.matches(db_text_jpn)) {
 			System.out.println("Translated to japanese ");
 		} else {
 			Assert.fail("Failed to convert to japanese ");
@@ -2230,14 +2215,14 @@ login.driver.findElement(
 		WebElement db_korn = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("language")));
 		Thread.sleep(4000);
-		String db_text_krn = "World Trend Plus Database";
+		String db_text_krn = "World Trend Plus 데이터베이스";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("language"))));
 
 		String db_krn_txt = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("language"))).getText();
 		System.out.println(db_krn_txt);
-		if (db_text_krn.contains("World Trend Plus")) {
+		if (db_text_krn.matches(db_krn_txt)) {
 			System.out.println("Translated to korean ");
 		} else {
 			Assert.fail("Failed to convert to korean ");
@@ -2249,14 +2234,14 @@ login.driver.findElement(
 		WebElement db_russ = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("language")));
 		Thread.sleep(4000);
-		String db_text_russ = " База данных World Trend Plus ";
+		String db_text_russ = "База данных World Trend Plus";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("language"))));
 
 		String db_russ_txt = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("language"))).getText();
 		System.out.println(db_russ_txt);
-		if (db_text_russ.contains("World Trend Plus")) {
+		if (db_text_russ.matches(db_russ_txt)) {
 			System.out.println("Translated to russian ");
 		} else {
 			Assert.fail("Failed to convert to russian ");
@@ -2267,14 +2252,14 @@ login.driver.findElement(
 		WebElement db_indo = login.driver.findElement(By.xpath(login.LOCATORS
 				.getProperty("language")));
 		Thread.sleep(4000);
-		String db_text_indo = "Database World Trend Plus";
+		String db_text_indo = "Database Trend Plus Dunia";
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("language"))));
 
 		String db_indo_txt = login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("language"))).getText();
 		System.out.println(db_indo_txt);
-		if (db_text_indo.contains("World Trend Plus")) {
+		if (db_text_indo.matches(db_indo_txt)) {
 			System.out.println("Translated to indonessian ");
 		} else {
 			Assert.fail("Failed to convert to indonessian ");
@@ -4653,38 +4638,36 @@ login.driver.findElement(
 	public void Click_on_the_down_arrow_present() throws Throwable {
 		WebElement series_row = login.driver.findElement(By
 				.xpath(login.LOCATORS.getProperty("series_row_1")));
-		//WebDriverWait wait = new WebDriverWait(login.driver, 70);
-		action.moveToElement(series_row).pause(2000).build().perform();
+		WebDriverWait wait = new WebDriverWait(login.driver, 70);
+		action.moveToElement(series_row).perform();
 		Thread.sleep(10000);
-		/*wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath(login.LOCATORS.getProperty("seriesDropdown1"))));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath(login.LOCATORS.getProperty("seriesDropdown"))));
 		login.driver.findElement(
-				By.xpath(login.LOCATORS.getProperty("seriesDropdown1"))).click();*/
-		login.driver.findElement(By.xpath("//span[@title='More actions']")).click();
+				By.xpath(login.LOCATORS.getProperty("seriesDropdown"))).click();
 		Thread.sleep(5000);
 	}
 
 	@Given("^Click on the  'readmore' option, verify Footnotes$")
 	public void Click_on_the_readmore_option_verify_Footnotes()
 			throws Throwable {
-		/*login.driver.findElement(
-				By.xpath(login.LOCATORS.getProperty("readMore"))).click();*/
-		login.driver.findElement(By.xpath("//span[@title='More actions']")).click();
+		login.driver.findElement(
+				By.xpath(login.LOCATORS.getProperty("readMore"))).click();
 		Thread.sleep(6000);
 		if (login.driver.findElements(
 				By.xpath(login.LOCATORS.getProperty("footnote_window"))).size() != 0) {
 			System.out.println("Footnotes is open");
 			footnotes_close();
 			Thread.sleep(2000);
-			/*login.driver.findElement(
+			login.driver.findElement(
 					By.xpath(login.LOCATORS.getProperty("seriesDropdown")))
-					.click();*/
+					.click();
 		} else {
 			footnotes_close();
 			Thread.sleep(2000);
-			/*login.driver.findElement(
+			login.driver.findElement(
 					By.xpath(login.LOCATORS.getProperty("seriesDropdown")))
-					.click();*/
+					.click();
 			Assert.fail("Footnotes is not open");
 		}
 
@@ -4719,7 +4702,8 @@ login.driver.findElement(
 		action.sendKeys("a").perform();
 		Thread.sleep(3000);
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		login.driver.findElement(
+				By.xpath(login.LOCATORS.getProperty("parentseries"))).click();
 		Thread.sleep(3000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("related_series"))).click();
@@ -4745,24 +4729,9 @@ login.driver.findElement(
 			System.out.println("Footnotes window will open");
 			Thread.sleep(15000);
 			footnotes_close();
-			CommonFunctionality.wait(2000);
-			footnotes_close();
-			
-			
 
 		} else {
 			footnotes_close();
-			login.driver.findElement(
-					By.xpath(login.LOCATORS
-							.getProperty("my_series_filter_checkbox"))).click();
-			Thread.sleep(2000);
-			// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
-
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By
-					.xpath(login.LOCATORS.getProperty("delete_myeries"))));
-			login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("delete_myeries"))).click();
-			Thread.sleep(5000);
 			Assert.fail("Failed to open footnotes window");
 
 		}
@@ -4773,7 +4742,6 @@ login.driver.findElement(
 		// footnotes_close();
 		login.driver.navigate().refresh();
 		Thread.sleep(15000);
-		
 	}
 
 	// TC_Footnotes_56
@@ -4784,22 +4752,22 @@ login.driver.findElement(
 		WebDriverWait wait = new WebDriverWait(login.driver, 500);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("global_db"))));
-		
+		Thread.sleep(9000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("global_db"))).click();
 		Thread.sleep(5000);
 		login.driver.findElement(
-				By.xpath("(//div[@data-node-model-id='GLOBAL&&ALL']/div)[1]")).click();
-		Thread.sleep(2000);
+				By.xpath(login.LOCATORS.getProperty("all_region"))).click();
+		Thread.sleep(5000);
 		login.driver.findElement(
-				By.xpath("(//div[contains(@class,'tree-node open last-open-node')]/following::*[@class='tree-node'])[2]")).click();
-		Thread.sleep(2000);
+				By.xpath(login.LOCATORS.getProperty("albania"))).click();
+		Thread.sleep(5000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("section_table"))).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("global_table"))).click();
-		Thread.sleep(2000);
+		Thread.sleep(6000);
 	}
 
 	@Given("^Open footnotes for table level$")
@@ -4810,6 +4778,7 @@ login.driver.findElement(
 		action.moveToElement(table_row).perform();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath(login.LOCATORS.getProperty("footnote_global_table_icon"))));
+		Thread.sleep(8000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS
 						.getProperty("footnote_global_table_icon"))).click();
@@ -5117,7 +5086,7 @@ login.driver.navigate().refresh();
 	@Given("^Verify 'Ask question' is available for translated footnotes$")
 	public void verify_Ask_question_is_available_for_translated_footnotes()
 			throws Throwable {
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("footnote_container")))
 				.click();
@@ -5226,9 +5195,9 @@ login.driver.navigate().refresh();
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("applyfunction"))).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By
-				.xpath(login.LOCATORS.getProperty("parentseries1"))));
+				.xpath(login.LOCATORS.getProperty("transformedseries"))));
 		WebElement transformedSeries = login.driver.findElement(By
-				.xpath(login.LOCATORS.getProperty("parentseries1")));
+				.xpath(login.LOCATORS.getProperty("transformedseries")));
 		action.moveToElement(transformedSeries).perform();
 		Thread.sleep(3000);
 		login.driver
@@ -5254,25 +5223,9 @@ login.driver.navigate().refresh();
 			footnotes_close();
 			Assert.fail("Footnotes failed to open for transformed series");
 		}
-		Thread.sleep(7000);
-		if(!(login.driver.findElements(By.xpath("//button[@class='button  button__primary']")).size()==0)) {
-			login.driver.findElement(By.xpath("//button[@class='button  button__primary']")).click();
-			login.driver.findElement(
-					By.xpath(login.LOCATORS
-							.getProperty("my_series_filter_checkbox"))).click();
-			Thread.sleep(2000);
-			// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("select_series"))).click();
-
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By
-					.xpath(login.LOCATORS.getProperty("delete_myeries"))));
-			login.driver.findElement(
-					By.xpath(login.LOCATORS.getProperty("delete_myeries"))).click();
-
-		}
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))));
-		else{
-			login.driver.findElement(
-		
+		Thread.sleep(5000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("my_series_filter_checkbox"))));
+		login.driver.findElement(
 				By.xpath(login.LOCATORS
 						.getProperty("my_series_filter_checkbox"))).click();
 		Thread.sleep(2000);
@@ -5282,7 +5235,6 @@ login.driver.navigate().refresh();
 				.xpath(login.LOCATORS.getProperty("delete_myeries"))));
 		login.driver.findElement(
 				By.xpath(login.LOCATORS.getProperty("delete_myeries"))).click();
-		}
 	}
 
 	// TC_Footnotes_70

@@ -22,11 +22,9 @@ public class CountryFilterVisual extends CommonFunctionality {
 	JavascriptExecutor jse = (JavascriptExecutor) login.driver;
 	String Visual2_filter_title_text;
 	String Visual1_hs_title_text;
-	
 
 	@And("^Click on insert Filter visual icon$")
 	public void click_on_insert_Filter_visual_icon() throws Throwable {
-		CommonFunctionality.wait(1000);
 		getElementByXpath(login.driver, "//*[@data-instance='filter']", 20).click();
 		try {
 			Boolean Filtervisual = login.driver.findElement(By.xpath("//*[@data-name='title']")).isDisplayed();
@@ -40,28 +38,20 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@Then("^\"([^\"]*)\" visual should be created$")
 	public void visual_should_be_created(String arg1) throws Throwable {
-		if (arg1.equalsIgnoreCase("Image")) {
-			WebElement ImageVisual = CommonFunctionality.getElementByProperty(login.driver, "Image_Visual", 4);
-			if (ImageVisual.isDisplayed()) {
-				login.Log4j.info(arg1 + " visual is created");
-			} else {
-				Assert.fail(arg1 + " visual is not created");
-			}
-
+		String Visuale_Title = getElementByXpath(login.driver, "//*[@data-name='title']", 20)
+				.getText();
+		if (Visuale_Title.equals(arg1)) {
+			login.Log4j.info(arg1 + " visual is created");
 		} else {
-			String Visuale_Title = getElementByXpath(login.driver, "//*[@data-name='title']", 20).getText();
-			if (Visuale_Title.equals(arg1)) {
-				login.Log4j.info(arg1 + " visual is created");
-			} else {
-				Assert.fail(arg1 + " visual is not created");
-			}
+			Assert.fail(arg1 + " visual is not created");
 		}
 	}
 
 	@Then("^Below optins should be displayed$")
 	public void below_optins_should_be_displayed(List<String> list) throws Throwable {
 		String arg2, arg6 = null;
-		
+		String arg1 = getElementByXpath(login.driver, "//*[@data-popup='title']/span", 20)
+				.getText();
 		try {
 			// filter visual
 			arg2 = getElementByXpath(login.driver, "//*[@data-popup='visual']/span", 20).getText();
@@ -78,24 +68,22 @@ public class CountryFilterVisual extends CommonFunctionality {
 				.getAttribute("title");
 		String arg5 = getElementByXpath(login.driver, "//*[@data-action='delete']", 20)
 				.getAttribute("title");
-		if (list.size() == 4) {
-			if (list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
+		if (list.size() == 5) {
+			if (list.contains(arg1) && list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
 					&& list.contains(arg5)) {
-				login.Log4j.info(arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
+				login.Log4j.info(arg1 + " AND " + arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
 						+ " options are displayed");
 			} else {
 				Assert.fail("Verification failed");
 			}
-		} else if (list.size() == 5) {
-			if (list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
+		} else if (list.size() == 6) {
+			if (list.contains(arg1) && list.contains(arg2) && list.contains(arg3) && list.contains(arg4)
 					&& list.contains(arg5) || list.contains(arg6)) {
-				login.Log4j.info(arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
+				login.Log4j.info(arg1 + " AND " + arg2 + " AND " + arg3 + " AND " + arg4 + " AND " + arg5
 						+ " AND "+ arg6 + " options are displayed");
 			} else {
 				Assert.fail("Verification failed");
 			}
-		} else {
-			Assert.fail("Verification failed");
 		}
 
 	}
@@ -247,7 +235,6 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Create any other visuals in a view$")
 	public void create_any_other_visuals_in_a_view() throws Throwable {
-	
 		emptyView.create_Histogram_and_Map_visuals();
 	}
 
@@ -258,7 +245,6 @@ public class CountryFilterVisual extends CommonFunctionality {
 
 	@And("^Click inside filter visual$")
 	public void click_inside_filter_visual() throws Throwable {
-		wait(2000);
 		getElementByProperty(login.driver, "AllCountries", 20).click();
 	}
 
@@ -283,7 +269,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 		getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
 		getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		commentary.CreateViewTab();
-		getElementByClassName(login.driver, "icon--heatmap", 10).click();
+		getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
 		getElementByProperty(login.driver, "Series", 20).click();
 		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
@@ -322,12 +308,10 @@ public class CountryFilterVisual extends CommonFunctionality {
 	@And("^create another visual in the same view$")
 	public void create_another_visual_in_the_same_view() throws Throwable {
 		// create map visual
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart_map", 6).click();
-//		new Actions(login.driver).pause(2000)
-//				.moveToElement(
-//						login.driver.findElement(By.xpath("//*[@class='view-components-over--visuals']//*[@class='icon--map-world']")))
-//				.click().perform();
+		new Actions(login.driver).pause(2000)
+				.moveToElement(
+						login.driver.findElement(By.xpath("//*[@data-action='world']//*[@class='icon--map-world']")))
+				.click().perform();
 		getElementByXpath(login.driver, "//*[contains(text(),'Add from My Series')]", 20).click();
 		wait(1000);
 		WebElement ele =getElementByXpath(login.driver,
@@ -373,7 +357,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 		Visual2_filter_title_text = sourecEle.getText();
 		wait(2000);
 		WebElement targetEle = login.driver.findElement(
-				By.xpath("//*[@class='view-components']/*[2]//*[@class='visual-title--text text-dots']"));
+				By.xpath("(//*[contains(@class,'histogram-visual')]//*[@class='visual-title--text text-dots'])[1]"));
 		wait(500);
 		Visual1_hs_title_text = targetEle.getText();
 		wait(1000);
@@ -386,9 +370,9 @@ public class CountryFilterVisual extends CommonFunctionality {
 	public void country_filter_visual_should_move() throws Throwable {
 		// Visuals after drag and drop
 		wait(1000);
-		String visual2_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[1]")).getText();
-		String visual1_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[2]")).getText();
-		if (!visual2_text.equals(Visual1_hs_title_text) && !visual1_text.equals(Visual2_filter_title_text)) {
+		String visual1_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[1]")).getText();
+		String visual2_text = login.driver.findElement(By.xpath("(//*[@data-name='title'])[2]")).getText();
+		if (!visual1_text.equals(Visual1_hs_title_text) && !visual2_text.equals(Visual2_filter_title_text)) {
 			login.Log4j.info("Visuals interchanged by drag and drop");
 		} else {
 			Assert.fail("Verification failed");
@@ -399,7 +383,7 @@ public class CountryFilterVisual extends CommonFunctionality {
 	public void click_on_crossmark_when_all_countries_are_selected() throws Throwable {
 		getElementByProperty(login.driver, "Search", 20).sendKeys("292514701;34709201");
 		commentary.CreateViewTab();
-		getElementByXpath(login.driver, "//*[@class='view-components-over--visual']//*[@class='icon--heatmap']", 10).click();
+		getElementByXpath(login.driver, "//*[@data-title='Heat map']", 10).click();
 		getElementByProperty(login.driver, "Series", 20).click();
 		wait(1500);
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));

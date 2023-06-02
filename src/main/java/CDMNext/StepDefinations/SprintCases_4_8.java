@@ -63,7 +63,7 @@ login.driver.findElement(By.xpath("//div[@class='tox-toolbar__overflow']//button
 	//	login.driver.findElement(By.xpath("(//tbody/tr[1]/td[1])[2]")).sendKeys("Hello");
 
 	}
-/*	@And("^click on CEIC insights and click on '\\+ icon on india'$")
+	@And("^click on CEIC insights and click on '\\+ icon on india'$")
 	public void click_on_CEIC_insights_and_click_on_icon_on_india() throws Throwable {
 		Thread.sleep(1000);
 
@@ -74,7 +74,7 @@ login.driver.findElement(By.xpath("//div[@class='tox-toolbar__overflow']//button
 Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//div[@class='toggle'])[15]")).click();
 
-	}*/
+	}
 	@And("^click on GDP nowcast insight$")
 	public void click_on_GDP_nowcast_insight() throws Throwable {
 		Thread.sleep(1000);
@@ -175,7 +175,7 @@ Thread.sleep(2000);
 		Thread.sleep(5000);
 
 	}
-	/*@Then("^GDP Nowcast should open insight in preview mode\\.View as grid mode$")
+	@Then("^GDP Nowcast should open insight in preview mode\\.View as grid mode$")
 	public void gdp_Nowcast_should_open_insight_in_preview_mode_View_as_grid_mode() throws Throwable {
 		Thread.sleep(1000);
 
@@ -189,7 +189,7 @@ Thread.sleep(2000);
 		Thread.sleep(1000);
 		login.driver.findElement(By.xpath("//*[@class='insight-preview--close']")).click();
 
-	}*/
+	}
 	@Then("^GDP Nowcast should open insight in preview mode\\.View as table mode$")
 	public void gdp_Nowcast_should_open_insight_in_preview_mode_View_as_table_mode() throws Throwable {
 		Thread.sleep(1000);
@@ -272,7 +272,7 @@ Thread.sleep(2000);
 		 robot.setAutoDelay(2000);
 		// CommonFunctionality.uploadTheFileusingAutoIT(login.driver,System.getProperty("user.dir") + "\\AutoIT\\Shravas.exe",System.getProperty("user.dir") + "\\AutoIT\\Shravas.png");
 			
-	       StringSelection selection = new StringSelection("E:\\CDMNextProject\\CDMNext\\cucumber\\AutoIT\\Shravas.png");
+	       StringSelection selection = new StringSelection("C:\\Users\\RupaliSanjayMane\\Documents\\CDMNextApp\\Cucumber_project\\Cucumber_project\\AutoIT\\Shravas.png");
 	      Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection,null);
 
 	       robot.setAutoDelay(1000);

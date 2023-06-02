@@ -194,7 +194,7 @@ Feature: Verifying sprintcases 5.0
     And Open "Data" tab
     Then The "Data Briefings" panel should be displayed
     And Open "Releases" tab
-    Then The "Data Briefings" panel should be shown
+    Then The "Data Briefings" panel should be displayed
 
   @Sprintcases5.0
   Scenario: TC_19494_02:Verify search for Data Briefings
@@ -281,7 +281,7 @@ Feature: Verifying sprintcases 5.0
 
   @Sprintcases5.0
   Scenario: TC_52911_17373_01: Verify the growl message when user add a series to a watchlist
-    Given User enters "5823501"
+    Given User enters "454608037"
     And Mouse hover on the series name
     And Click on "Add to watchlist"
     And Select any check box in that popup
@@ -294,7 +294,7 @@ Feature: Verifying sprintcases 5.0
     And Add the series to my series tab
     And Select the series from my series tab
     And Select the currency conversion function
-    #And Apply the function
+    And Apply the function
     Then The function cannot be applied to series should be displayed along with series name and "Continue with other series?" will be  appear
 
   @Sprintcases5.0
@@ -303,7 +303,7 @@ Feature: Verifying sprintcases 5.0
     Then Compare the results in database tab and comparables tab
 
   @Sprintcases5.0
-  Scenario: TC_10425_11 : Modify the alert message 'Visual Copied.' for CTC icon
+  Scenario: TC_10425_11 : Modify the alert message 'Visual with Series Copied.Click here for more actions' for CTC action
     And Create a pie visual with series id's "16240301;16243001"
     And Click on "Copy" icon
     Then "Pie with series copied." and "More options" confirmation message should be displayed
@@ -321,10 +321,10 @@ Feature: Verifying sprintcases 5.0
     And Click on any Data Briefings
     Then "See in Database" word must be there instead see in tree
 
-  #@Sprintcases5.0
-  #Scenario: TC_16922_13 :Keyword search for AMECO do not yield any results
-    #Given User enters keyword "AMECO"
-    #Then Should yield results as "AMECO" on table level under database tab
+  @Sprintcases5.0
+  Scenario: TC_16922_13 :Keyword search for AMECO do not yield any results
+    Given User enters keyword "AMECO"
+    Then Should yield results as "AMECO" on table level under database tab
 
   @Sprintcases5.0
   Scenario: TC_19072_01 :Remove (c) icon for continuous series in Global Key series DB

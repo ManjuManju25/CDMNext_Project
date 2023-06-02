@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.io.File;
@@ -27,6 +28,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 //import junit.framework.Assert;
+
 
 public class AllRegion extends CommonFunctionality{
 	SoftAssert softAssert = new SoftAssert();
@@ -455,7 +457,6 @@ public class AllRegion extends CommonFunctionality{
 				}*/
 
 			}
-
-			}
+}
 
 

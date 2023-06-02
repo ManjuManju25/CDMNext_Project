@@ -61,9 +61,8 @@ public class SprintCases {
 				.click();
 		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 100);
 		new Actions(login.driver).pause(500).contextClick(sname).perform();
-		CommonFunctionality.getElementByProperty(login.driver, "Dropdown_AddChart", 4).click();
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart_map", 6).click();
-			
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'View on India Map')]", 20).click();
+
 	}
 
 	@Then("^Andhra Pradesh subnational city should appear on India map$")
@@ -114,7 +113,7 @@ public class SprintCases {
 	public void open_ssp_window() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(5000);
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(7000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 20).click();
 		Thread.sleep(2000);
@@ -188,8 +187,7 @@ public class SprintCases {
 	@And("^Hover the mouse over series in Search panel or in My series tab$")
 	public void hover_the_mouse_over_series_in_Search_panel_or_in_My_series_tab() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
-		CommonFunctionality.wait(5000);
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		WebElement seriesName = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']",
 				20);
 		CommonFunctionality.action.pause(1000).moveToElement(seriesName).build().perform();
@@ -201,18 +199,18 @@ public class SprintCases {
 			throws Throwable {
 		Thread.sleep(1000);
 		WebElement tooltip = login.driver.findElement(By.xpath("//*[@class='tooltip tooltip__visible']//table"));
-		//String toolTip_txt = tooltip.getText();
+		String toolTip_txt = tooltip.getText();
 		if (tooltip.isDisplayed() == true) {
 			login.Log4j.info("tooltip is displayed for series name");
 		}
-		/*Thread.sleep(2000); commented as show databases icon is removed for series level
+		Thread.sleep(2000);
 		WebElement showDatabase = login.driver.findElement(By.xpath("//*[@class='show-in-tree-icon menu-icon']"));
 		CommonFunctionality.action.pause(1000).moveToElement(showDatabase).build().perform();
 		String showDb = showDatabase.getAttribute("title");
 		login.Log4j.info(showDb);
 		if (!toolTip_txt.equals(showDb)) {
 			login.Log4j.info("tooltip is not displayed for " + showDb);
-		}*/
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -220,16 +218,13 @@ public class SprintCases {
 	public void create_visual() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(5000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab")))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		Thread.sleep(2000);
 		List<WebElement> ListOfSeries = login.driver.findElements(By.xpath("//*[@class='series-representation--list']/*//*[@class='series-item--name']"));
 		for (int i = 0; i < ListOfSeries.size(); i++) {
 			int j = i + 1;
 			Thread.sleep(1000);
 			WebElement seriesName = ListOfSeries.get(i);
-			if(i == 1) {
-				EmptyView.click_on_View_tab();
-			}
 			CommonFunctionality.action.pause(1000).moveToElement(seriesName).build().perform();
 			CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='series-representation--list']//*[@class='view-chart-icon menu-icon'])[" + j + "]",6).click();
 		}
@@ -357,14 +352,12 @@ public class SprintCases {
 	public void create_a_map_visual() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		Thread.sleep(10000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		Thread.sleep(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-list-item--checkbox-wrapper']",4)
 				.click();
-		EmptyView.click_on_View_tab();
-		CommonFunctionality.getElementByProperty(login.driver, "map_icon", 6).click();
-//		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='insight-page-menu-views-container--add']",4).click();
-//		CommonFunctionality.getElementByXpath(login.driver,"//*[@data-action='world']",4).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[@class='insight-page-menu-views-container--add']",4).click();
+		CommonFunctionality.getElementByXpath(login.driver,"//*[@data-action='world']",4).click();
 	}
 
 	@And("^Click on Edit Map$")
@@ -411,7 +404,7 @@ public class SprintCases {
 		SolidColor.click();
 	}
 
-		@Then("^Default value should be \"([^\"]*)\" and the colors range should be from \"([^\"]*)\"$")
+	@Then("^Default value should be \"([^\"]*)\" and the colors range should be from \"([^\"]*)\"$")
 	public void default_value_should_be_and_the_colors_range_should_be_from(String arg1, String arg2) throws Throwable {
 		String SolidColorDefaultValue = null;
 		CommonFunctionality.wait(2000);
@@ -517,17 +510,15 @@ public class SprintCases {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@title='Create new View tab']"))).click();
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(5000);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab")))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//*[@class='series-list-item--checkbox svg-checkbox']")).click();
-		EmptyView.click_on_View_tab();
-		CommonFunctionality.getElementByProperty(login.driver, "map_icon", 6).click();
 		// CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Create new
 		// View tab']", 20).click();
-//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-//				"//*[@data-type='world']//*[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")))
-//				.click();
-//		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-action='china']"))).click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
+				"//*[@data-type='world']//*[@class='insight-action-panel--btn-popup icon--context-menu-arrow']")))
+				.click();
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-action='china']"))).click();
 
 	}
 
@@ -543,14 +534,11 @@ public class SprintCases {
 			/*Taiwan_attribute = login.driver.findElement(By.xpath(
 					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]"))
 					.getAttribute("innerHTML");*/
-			WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='custom-select-title--name text-dots']", 10);
-			String map_type_select = ele.getText();
-			
 			Taiwan_attribute = login.driver.findElement(By.xpath(
 					"(//*[contains(@class,'highcharts-color-0 highcharts-tracker')])[3]/*[1]/*[1]"))
 					.getAttribute("innerHTML");
 			login.Log4j.info(Taiwan_attribute);
-			if (Taiwan_attribute.contains("Taiwan") && map_type_select.equalsIgnoreCase("china")) {
+			if (Taiwan_attribute.contains("Taiwan")) {
 				login.Log4j.info("Taiwan is included in China map");
 				CommonFunctionality.Views_list();
 			}

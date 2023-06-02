@@ -136,7 +136,14 @@ public class CrossSection {
 	@And("^Clicking \"([^\"]*)\" option from myseries$")
 	public void clicking_option_from_myseries(String arg1) throws Throwable {
 		CommonFunctionality
-				.getElementByXpath(login.driver, "//*[@class='series-tab--text' and text()='" + arg1 + "']", 15)
+				.getElementByXpath(login.driver, "//button[@title='List mode']", 15)
+				.click();
+	}
+
+	@And("^Clicking the \"([^\"]*)\" option from myseries$")
+	public void clicking_the_option_from_myseries(String arg1) throws Throwable {
+		CommonFunctionality
+				.getElementByXpath(login.driver, "//button[@title='Table mode']", 15)
 				.click();
 	}
 
@@ -259,7 +266,7 @@ public class CrossSection {
 //				 Thread.sleep(2000);
 //			 }
 
-			login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
+			login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--title']")).click();
 
 			// action.sendKeys((Keys.chord("a"))).build().perform();
 			System.out.println("click on A ");
@@ -302,6 +309,20 @@ public class CrossSection {
 							CommonFunctionality.getElementBycssSelector(login.driver, "span[title='" + arg2 + "']", 15))
 					.pause(1000).click().build().perform();
 		}
+	}
+	
+	@And("^Select all series from myseries$")
+	public void select_all_series_from_myseries() throws Throwable {
+		CommonFunctionality.wait(1000);
+		CommonFunctionality.getElementByProperty(login.driver, "Series_select_all", 10).click();
+	}
+
+	@And("^Click on \"([^\"]*)\" icon as function editor window$")
+	public void click_on_icon_as_function_editor_window(String arg1) throws Throwable {
+		CommonFunctionality.wait(1000);
+		CommonFunctionality
+		.getElementByXpath(login.driver, "//div[@class='function-editor-window--icon']", 15)
+		.click();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -533,8 +554,12 @@ public class CrossSection {
 			CommonFunctionality.wait(500);
 			element.sendKeys(Keys.ENTER);
 			CommonFunctionality.wait(500);
-			new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
-					".series-functions-panel--icon__apply", 15)).pause(200).click().build().perform();
+		//	new Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
+		//			".series-functions-panel--icon__apply", 15)).pause(200).click().build().perform();
+			
+			new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
+					"//button[@type='button'][contains(text(),'Apply')]" , 15)).click().build().perform();
+							
 		}
 	}
 
@@ -724,13 +749,13 @@ public class CrossSection {
 	@And("^Click \"([^\"]*)\" tab and enter \"([^\"]*)\" in search field$")
 	public void click_tab_and_enter_in_search_field(String arg1, String arg2) throws Throwable {
 		CommonFunctionality.wait(5000);
-		CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Cross Section']", 20).click();
+	//	CommonFunctionality.getElementByXpath(login.driver, "//div[@title='Cross Section']", 20).click();
 
-		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'search-functions-input')]", 15)
+		CommonFunctionality.getElementByXpath(login.driver, "(//input[@placeholder='Search'])[3]", 15)
 				.sendKeys(arg2);
 		CommonFunctionality
 				.getElementByXpath(login.driver,
-						"//*[@class='series-functions-list-container']//*[contains(@data-id,'" + arg2 + "')]", 15)
+						"//span[@class='rBp4bp9QFdeCkIQxSLEE'][contains(text(),'" + arg2+ "')]", 15)
 				.click();
 	}
 
@@ -741,7 +766,7 @@ public class CrossSection {
 		if (arg2.equalsIgnoreCase("Uncheck") && arg1.equalsIgnoreCase("Extend to longest")) {
 
 			if (login.driver.findElement(By.xpath(
-					"(//*[contains(text(),'Extend to longest')]//following::input[@class='input-control--input'])[1]"))
+					"//*[@argument = 'extend_to_longest']//input[@type='checkbox']"))
 					.isSelected()) {
 				login.driver.findElement(By.xpath(
 						"(//div[@class='function-data--description function-data--parameters']//*[@class='input-control--indicator'])[1]"))
@@ -758,7 +783,7 @@ public class CrossSection {
 		else if (arg2.equalsIgnoreCase("Uncheck") && arg1.equalsIgnoreCase("Ignore missed")) {
 			CommonFunctionality.wait(5000);
 			if (login.driver.findElement(By.xpath(
-					"(//*[contains(text(),'Ignore missed')]//following::input[@class='input-control--input'])[1]"))
+					"//*[@argument = 'ignore_missed']//input[@type='checkbox']"))
 					.isSelected()) {
 
 				login.driver.findElement(By.xpath(
@@ -776,10 +801,12 @@ public class CrossSection {
 		if (arg2.equalsIgnoreCase("Check") && arg1.equalsIgnoreCase("Extend to longest")) {
 			CommonFunctionality.wait(5000);
 			if (login.driver.findElement(By.xpath(
-					"(//*[contains(text(),'Extend to longest')]//following::input[@class='input-control--input'])[1]"))
+					"//*[@argument = 'extend_to_longest']//input[@type='checkbox']"))
 					.isSelected()) {
 
-			} else {
+			} 
+			
+			else {
 
 				login.driver.findElement(By.xpath(
 						"(//div[@class='function-data--description function-data--parameters']//*[@class='input-control--indicator'])[1]"))
@@ -791,11 +818,18 @@ public class CrossSection {
 
 		else if (arg2.equalsIgnoreCase("Check") && arg1.equalsIgnoreCase("Ignore missed")) {
 			CommonFunctionality.wait(5000);
-			if (login.driver.findElement(By.xpath(
+	/*		if (login.driver.findElement(By.xpath(
 					"(//*[contains(text(),'Ignore missed')]//following::input[@class='input-control--input'])[1]"))
 					.isSelected()) {
 
-			} else {
+			}  */
+			
+			if(login.driver.findElement(By.xpath(
+					"//*[@argument = 'ignore_missed']//input[@type='checkbox']")).isSelected())
+			{
+				
+			}
+			 else {
 
 				login.driver.findElement(By.xpath(
 						"(//div[@class='function-data--description function-data--parameters']//*[@class='input-control--indicator'])[2]"))
@@ -810,14 +844,14 @@ public class CrossSection {
 				CommonFunctionality.wait(5000);
 				if (login.driver
 						.findElement(
-								By.xpath("//*[contains(text(),'Replace selected series')]//preceding-sibling::input"))
+								By.xpath("//*[contains(text(),'Replace selected series')]//preceding-sibling::*"))
 						.isSelected()) {
 
 				} else {
 
 					login.driver
 							.findElement(By.xpath(
-									"//div[@class='function-wizard--replace-ch']//*[@class='input-control--input']"))
+									"//div[@class='function-wizard--footer']//*[contains(text(),'Replace selected series')]"))
 							.click();
 				}
 
@@ -828,11 +862,11 @@ public class CrossSection {
 
 				if (login.driver
 						.findElement(
-								By.xpath("//*[contains(text(),'Replace selected series')]//preceding-sibling::input"))
+								By.xpath("//*[contains(text(),'Replace selected series')]//preceding-sibling::*"))
 						.isSelected()) {
 					login.driver
 							.findElement(By.xpath(
-									"//div[@class='function-wizard--replace-ch']//*[@class='input-control--input']"))
+									"//div[@class='function-wizard--footer']//*[contains(text(),'Replace selected series')]"))
 							.click();
 
 				}
@@ -1074,7 +1108,7 @@ public class CrossSection {
 			hovor_on_to_first_myseries_name();
 
 			Actions actionProvider = new Actions(login.driver);
-			WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+			WebElement icon = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[1]"));
 			// Performs mouse move action onto the element
 			actionProvider.moveToElement(icon).build().perform();
 			Thread.sleep(2000);
@@ -1083,7 +1117,8 @@ public class CrossSection {
 			// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
 			// "//span[@title='Customize your selection']", 15)).perform();
 			hovor_on_to_last_myseries_name();
-
+					
+		//	WebElement icon1 = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[2]"));
 			actionProvider.moveToElement(icon).build().perform();
 			Thread.sleep(2000);
 			// new
@@ -1119,15 +1154,16 @@ public class CrossSection {
 	public void the_output_series_has_to_be_present_inbetween_the_base_series() throws Throwable {
 		hovor_on_to_first_myseries_name();
 
-		WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+		WebElement icon = login.driver.findElement(By.xpath("(//span[@class='table-container--checkbox svg-checkbox input-control__grey'])[2]"));
 		action.moveToElement(icon).build().perform();
 		Thread.sleep(2000);
-
+		
 		// new
 		// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
 		// "div[title='More']", 15)).perform();
 		hovor_on_to_last_myseries_name();
 
+	//	WebElement icon1 = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[2]"));
 		action.moveToElement(icon).build().perform();
 		Thread.sleep(2000);
 
@@ -1139,7 +1175,7 @@ public class CrossSection {
 		new Actions(login.driver).moveToElement(CommonFunctionality.getElementByXpath(login.driver,
 				"(//*[@class='series-name-field--series-name'])[2]", 15)).pause(500).build().perform();
 		String tooltip_functions = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(text(),'Functions')]/following-sibling::*", 15)
+				.getElementByXpath(login.driver, "(//*[@class='ZWIWBTEmdUe4e_gnuHOw nfnBRpaJ0CSBYW8UqGWU'])[3]", 15)
 				.getText();
 		String substring = expected.substring(1, expected.length() - 1);
 		assertEquals(tooltip_functions, substring);
@@ -1173,7 +1209,7 @@ public class CrossSection {
 			if (list.getAttribute("class").contains("active")) {
 
 				hovor_on_to_first_myseries_name();
-				WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+				WebElement icon = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[1]"));
 				action.moveToElement(icon).build().perform();
 				Thread.sleep(2000);
 
@@ -1228,7 +1264,7 @@ public class CrossSection {
 					"//*[@class='series-tab--text' and text()='" + arg1 + "']/parent::span", 15);
 			if (table.getAttribute("class").contains("active")) {
 				hovor_on_to_first_myseries_name();
-				WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+				WebElement icon = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[1]"));
 				// Performs mouse move action onto the element
 				action.moveToElement(icon).build().perform();
 				Thread.sleep(2000);
@@ -1327,13 +1363,14 @@ public class CrossSection {
 
 	@And("^List option should select$")
 	public void list_option_should_select() throws Throwable {
-		boolean list = login.driver.findElement(By.cssSelector("span[title='View as List']")).isEnabled();
+	//	boolean list = login.driver.findElement(By.cssSelector("span[title='View as List']")).isEnabled();
+		
+		boolean list = login.driver.findElement(By.xpath("//button[@title='List mode']")).isEnabled();
 		if (list == true) {
 			new Actions(login.driver)
 					.moveToElement(
-							CommonFunctionality.getElementBycssSelector(login.driver, "span[title='View as List']", 15))
-					.click().build().perform();
-		}
+							CommonFunctionality.getElementByXpath(login.driver, "//button[@title='List mode']", 15)).click().build().perform();
+						}
 	}
 
 	@Then("^Clicking on sort by options$")
@@ -1440,14 +1477,14 @@ public class CrossSection {
 		}
 		hovor_on_to_first_myseries_name();
 
-		WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+		WebElement icon = login.driver.findElement(By.xpath("//span[@class='series-name-field-title']"));
 		action.moveToElement(icon).build().perform();
 		Thread.sleep(2000);
 
 		// new
 		// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
 		// "div[title='More']", 15)).perform();
-		hovor_on_to_last_myseries_name();
+		hovor_on_to_next_myseries_name();
 		action.moveToElement(icon).build().perform();
 		Thread.sleep(2000);
 		// new
@@ -1580,7 +1617,7 @@ public class CrossSection {
 		cv.click_button("Apply");
 		hovor_on_to_first_myseries_name();
 
-		WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+		WebElement icon = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[1]"));
 		action.moveToElement(icon).build().perform();
 		Thread.sleep(2000);
 
@@ -2070,7 +2107,7 @@ public class CrossSection {
 		hovor_on_to_first_myseries_name();
 
 		Actions actionProvider = new Actions(login.driver);
-		WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+		WebElement icon = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[1]"));
 		// Performs mouse move action onto the element
 		actionProvider.moveToElement(icon).build().perform();
 		Thread.sleep(2000);
@@ -2079,6 +2116,9 @@ public class CrossSection {
 		// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
 		// "div[title='More']", 15)).perform();
 		hovor_on_to_last_myseries_name();
+		
+		actionProvider.moveToElement(icon).build().perform();
+		Thread.sleep(2000);
 		// new
 		// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
 		// "div[title='More']", 15)).perform();
@@ -2144,7 +2184,7 @@ public class CrossSection {
 		// new
 		// Actions(login.driver).moveToElement(CommonFunctionality.getElementBycssSelector(login.driver,
 		// "div[title='More']", 15)).perform();
-		WebElement icon = login.driver.findElement(By.xpath("//span[@title='Customize your selection']"));
+		WebElement icon = login.driver.findElement(By.xpath("(//div[@class='series-name-wrapper '])[1]"));
 		// Performs mouse move action onto the element
 		action.moveToElement(icon).build().perform();
 		Thread.sleep(2000);

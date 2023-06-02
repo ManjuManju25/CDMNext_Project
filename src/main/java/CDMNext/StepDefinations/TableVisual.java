@@ -2643,11 +2643,7 @@ public class TableVisual {
 				"(//*[@class='series-name-field--series-name'])[1]", 9);
 		// mouseover.
 		action.moveToElement(mouseover).pause(500).contextClick().build().perform();
-		
-		login.driver.findElement(By.xpath("//span[text()='Add chart']")).click();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
-		//CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 8).click();
+		CommonFunctionality.getElementByXpath(login.driver, "//span[contains(text(),'View as Table')]", 8).click();
 		Thread.sleep(500);
 		// login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Applay_Button"))).click();
 		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("Close_window"))).size() > 0) {
@@ -8277,15 +8273,10 @@ public class TableVisual {
 	@And("^Verify adding series from Series suggestion manager popup$")
 	public void verify_adding_series_from_Series_suggestion_manager_popup() throws Throwable {
 		Thread.sleep(2000);
-		//login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series"))).click();
-		login.driver.findElement(By.xpath("//a[@data-id='myseries']")).click();
-		
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series"))).click();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div[normalize-space(text())='Related series']")).click();
-		
-		String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series_firsttitle"))).getText();
+		String x = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series_firsttitle")))
+				.getText();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add_related_series_regiondropdown"))).click();
 		Thread.sleep(2000);

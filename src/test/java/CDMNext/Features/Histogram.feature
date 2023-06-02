@@ -74,7 +74,7 @@ Feature: Verifying Histogram Visual functionality
   @Histogram
   Scenario: TC_Histogram_12:Empty visual - Verify adding series to empty visual
     And Add series to the my series tab
-    And Create a empty visual 
+    And Create a empty visual
     And Click on Edit series option
     And Choose series from  "+ Add from My Series"
     Then The series should be added to "histogram" with its data
@@ -97,50 +97,49 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Rename" option
     Then The "Rename" popup should be displayed
-	
-	 @Histogram
-  Scenario: TC_Histogram_16:Rename - verify number of selected series
-    And Create histogram visual with series
-    And Click on Edit series option
-    And Click on "Rename" option
-    Then Number of selected series count should be shown on the rename popup header
 
+  #	 @Histogram
+  #Scenario: TC_Histogram_16:Rename - verify number of selected series
+  #And Create histogram visual with series
+  #And Click on Edit series option
+  #And Click on "Rename" option
+  #Then Number of selected series count should be shown on the rename popup header
+  #
   #@Histogram
   #Scenario: TC_Histogram_17:Rename - verify find field
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Rename" option
-    #And Search for the series you want to rename
-    #Then Result should be loaded for searched keyword
-#
+  #And Create histogram visual with series
+  #And Click on Edit series option
+  #And Click on "Rename" option
+  #And Search for the series you want to rename
+  #Then Result should be loaded for searched keyword
+  #
   #@Histogram
   #Scenario: TC_Histogram_18:Rename -  verify number of searched result
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Rename" option
-    #And Search for the series you want to rename
-    #Then The total number of matches result should be displayed in below the find field
-#
+  #And Create histogram visual with series
+  #And Click on Edit series option
+  #And Click on "Rename" option
+  #And Search for the series you want to rename
+  #Then The total number of matches result should be displayed in below the find field
+  #
   #@Histogram
   #Scenario: TC_Histogram_19:Rename - verify 'Replace' button
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Rename" option
-    #And Search for the series you want to rename
-    #And Enter keyword you want to replace with
-    #And Click on Replace
-    #Then The keyword should be replaced for selected series
-#
+  #And Create histogram visual with series
+  #And Click on Edit series option
+  #And Click on "Rename" option
+  #And Search for the series you want to rename
+  #And Enter keyword you want to replace with
+  #And Click on Replace
+  #Then The keyword should be replaced for selected series
+  #
   #@Histogram
   #Scenario: TC_Histogram_20:Rename - verify 'Replace All' button
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Rename" option
-    #And Search for the series you want to rename
-    #And Enter keyword you want to replace with
-    #And Click on "Replace All"
-    #Then All the available series should be replaced with the keyword
-
+  #And Create histogram visual with series
+  #And Click on Edit series option
+  #And Click on "Rename" option
+  #And Search for the series you want to rename
+  #And Enter keyword you want to replace with
+  #And Click on "Replace All"
+  #Then All the available series should be replaced with the keyword
   @Histogram
   Scenario: TC_Histogram_21:Rename - Verify default selection for 'Edit series info' dropdown
     And Create histogram visual with series
@@ -472,7 +471,7 @@ Feature: Verifying Histogram Visual functionality
     And Create a histogram visual with series
     And Click on Edit series option
     And Click on Aggregate and choose any option
-    Then Selected function should be applied to all the series
+    Then Selected function should be applied to all series
 
   @Histogram
   Scenario: TC_Histogram_54:Edit series - Verify 'Accumulate' function apply
@@ -614,7 +613,7 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on Edit series option
     And Click on frequency dropdown in series level
-    And Select "Weekly (Distribute)" from frequency dropdown
+    And Select "Monthly (Distribute)" from frequency dropdown
     Then Selected frequency should be applied to ONLY selected series
 
   @Histogram
@@ -631,7 +630,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select "ACCUMULATE" function
-    #And Click on "Apply function"
+    And Click on "Apply function"
     Then Selected function should applied to the series
 
   @Histogram
@@ -640,18 +639,18 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select multiple functions "ACCUMULATE"  and "LOG"
-    #And Click on "Apply function"
+    And Click on "Apply function"
     Then The Selected functions should applied to the series
 
-  #@Histogram...removed cancel(x) icon 0n stage 5.6.0-rc.4
-  #Scenario: TC_Histogram_75:Edit series - Verify removing applied functions
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Type a function" field in series level
-    #And Select "ACCUMULATE" function
-    #And Click on "Apply function"
-    #And Click on x icon to remove the function
-    #Then The function should be removed from the series
+  @Histogram
+  Scenario: TC_Histogram_75:Edit series - Verify removing applied functions
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on "Type a function" field in series level
+    And Select "ACCUMULATE" function
+    And Click on "Apply function"
+    And Click on x icon to remove the function
+    Then The function should be removed from the series
 
   @Histogram
   Scenario: TC_Histogram_76:Edit series - Verify applied funtion in function toolbar
@@ -659,7 +658,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on "Type a function" field in series level
     And Select "ACCUMULATE" function
-    #And Click on "Apply function"
+    And Click on "Apply function"
     Then The applied function should be displayed on the toolbar
 
   @Histogram
@@ -786,7 +785,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on Border drop down
     And Check Histogram for "Border"
-    And Select color 
+    And Select color
     Then Border should be displayed for "histogram" with selected color
 
   @Histogram
@@ -866,14 +865,14 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on Border drop down
-    And Click on "Advanced settings"
+    And Click on "Open advanced settings popup"
     Then Visual popup should be opened
 
   @Histogram
   Scenario: TC_Histogram_102:Edit Histogram - Border - Verify closing of visual popup
     And Create histogram visual with series
     And Click on "Edit Histogram"
-    #And Click on Border drop down
+    And Click on Border drop down
     And Click on "Open advanced settings popup"
     And Click on X icon
     Then The visual popup should be closed
@@ -978,240 +977,240 @@ Feature: Verifying Histogram Visual functionality
     And UnCheck Show Series and Save
     Then Data of series should be removed from the visual
 
-  #@Histogram.....CVISION-21993(title drop down is removed in Edit visual)
-  #Scenario: TC_Histogram_115:Edit Histogram - Verify Title=Yes
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And Check Title and Save
-    #Then The title of the visual should be displayed
-#
-  #@Histogram
-  #Scenario: TC_Histogram_116:Edit Histogram - Verify Title=No
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And UnCheck Title and Save
-    #Then The title of the visual should be removed from the visual
-#
-  #@Histogram
-  #Scenario: TC_Histogram_117:Edit Histogram - Verify default selection for title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #Then The title should be selected by default
-#
-  #@Histogram
-  #Scenario: TC_Histogram_118:Edit Histogram - Verify Auto title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And Check title with empty title field and Save
-    #Then Auto title should be displayed as series name
-#
-  #@Histogram
-  #Scenario: TC_Histogram_119:Edit Histogram - Verify renaming title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And Enter visual name and Save
-    #Then The visual name should be changed
-#
-  #@Histogram
-  #Scenario: TC_Histogram_120:Edit Histogram - Verify sub title by default
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #Then The sub title check box should be unchecked by default
-#
-  #@Histogram
-  #Scenario: TC_Histogram_121:Edit Histogram - Verify sub title=Check
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And Check Subtitle and Save
-    #Then Sub title should be displayed for the visual
-#
-  #@Histogram
-  #Scenario: TC_Histogram_122:Edit Histogram - Verify sub title=UnCheck
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And UnCheck Subtitle and Save
-    #Then Sub title should not be displayed for the visual
-#
-  #@Histogram
-  #Scenario: TC_Histogram_123:Edit Histogram - Verify default title for sub title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And Check Subtitle and Save
-    #Then Default sub title should be "Sub title"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_124:Edit Histogram - Verify advance settings
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on Title drop down
-    #And Click on "Advanced settings"
-    #Then Titles popup should be displayed
-#
-  #@Histogram
-  #Scenario: TC_Histogram_125:Edit Histogram - Verify advance settings cogwheel icon
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #Then Titles popup should be displayed
-#
-  #@Histogram
-  #Scenario: TC_Histogram_126:Edit Histogram - Verify color for visual title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #And Select color for "Title"
-    #When Click on "Save"
-    #Then Visual "title" should be displayed in selected color
-#
-  #@Histogram
-  #Scenario: TC_Histogram_127:Edit Histogram - Verify color for visual title background
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #And Select color for "title" background highlight
-    #When Click on "Save"
-    #Then Visual "title" background should be displayed in selected color
-#
-  #@Histogram
-  #Scenario: TC_Histogram_128:Edit Histogram - Verify font size for visual title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #And Select size for visual "title" as "20"
-    #When Click on "Save"
-    #Then The "title" font size should be changed as "20"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_129:Edit Histogram - Verify bold style for visual title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #And Click on Bold icon for "title"
-    #When Click on "Save"
-    #Then The "title" should be displayed in Bold format
-#
-  #@Histogram
-  #Scenario: TC_Histogram_130:Edit Histogram - Verify Italic style for visual title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #And Click on Italic under style
-    #When Click on "Save"
-    #Then The "title" should be "italic"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_131:Edit Histogram - Verify Underline style for visual title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #And Click on Underline icon for "title"
-    #When Click on "Save"
-    #Then The "title" should be "underline"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_132:Edit Histogram - Verify horizontal alignment (left, right, center)
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #And Select alignment of title to "left"
-    #Then The title should align to "left"
-    #And Select alignment of title to "center"
-    #Then The title should align to "center"
-    #And Select alignment of title to "right"
-    #Then The title should align to "right"
-#
-    #@Histogram
-  #Scenario: TC_Histogram_133:Edit Histogram - Verify color for visual sub title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "sub-title"
-    #And Select color for "Sub title"
-    #When Click on "Save"
-    #Then Visual "sub_title" should be displayed in selected color
-#
-  #@Histogram
-  #Scenario: TC_Histogram_134:Edit Histogram - Verify color for visual sub title background
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "sub-title"
-    #And Select color for "Sub title" background highlight
-    #When Click on "Save"
-    #Then Visual "sub_title" background should be displayed in selected color
-#
-  #@Histogram
-  #Scenario: TC_Histogram_135:Edit Histogram - Verify font size for visual sub title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Select size for visual "Sub title" as "20"
-    #When Click on "Save"
-    #Then The "sub_title" font size should be changed as "20"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_136:Edit Histogram - Verify bold style for visual sub title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Click on B under style for sub-title
-    #When Click on "Save"
-    #Then The "sub_title" should be displayed in Bold format
-#
-  #@Histogram
-  #Scenario: TC_Histogram_137:Edit Histogram - Verify Italic style for visual sub title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Click on Italic under style for sub-title
-    #When Click on "Save"
-    #Then The "sub_title" should be "italic"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_138:Edit Histogram - Verify Unnderline style for visual sub title
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Click on Underline icon for sub-title
-    #When Click on "Save"
-    #Then The "sub_title" should be "underline"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_139:Edit Histogram - Verify horizontal alignment (left, right, center)
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "sub-title"
-    #And Select alignment of sub title to "left"
-    #Then The subtitle should align to "left"
-    #And Select alignment of sub title to "center"
-    #Then The subtitle should align to "center"
-    #And Select alignment of sub title to "right"
-    #Then The subtitle should align to "right"
-#
-  #@Histogram
-  #Scenario: TC_Histogram_140:Edit Histogram - Verify closing of Titles popup
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Click on X icon to close the popup
-    #Then The Title popup should be closed
+  @Histogram
+  Scenario: TC_Histogram_115:Edit Histogram - Verify Title=Yes
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And Check Title and Save
+    Then The title of the visual should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_116:Edit Histogram - Verify Title=No
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And UnCheck Title and Save
+    Then The title of the visual should be removed from the visual
+
+  @Histogram
+  Scenario: TC_Histogram_117:Edit Histogram - Verify default selection for title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    Then The title should be selected by default
+
+  @Histogram
+  Scenario: TC_Histogram_118:Edit Histogram - Verify Auto title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And Check title with empty title field and Save
+    Then Auto title should be displayed as series name
+
+  @Histogram
+  Scenario: TC_Histogram_119:Edit Histogram - Verify renaming title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And Enter visual name and Save
+    Then The visual name should be changed
+
+  @Histogram
+  Scenario: TC_Histogram_120:Edit Histogram - Verify sub title by default
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    Then The sub title check box should be unchecked by default
+
+  @Histogram
+  Scenario: TC_Histogram_121:Edit Histogram - Verify sub title=Check
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And Check Subtitle and Save
+    Then Sub title should be displayed for the visual
+
+  @Histogram
+  Scenario: TC_Histogram_122:Edit Histogram - Verify sub title=UnCheck
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And UnCheck Subtitle and Save
+    Then Sub title should not be displayed for the visual
+
+  @Histogram
+  Scenario: TC_Histogram_123:Edit Histogram - Verify default title for sub title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And Check Subtitle and Save
+    Then Default sub title should be "Sub title"
+
+  @Histogram
+  Scenario: TC_Histogram_124:Edit Histogram - Verify advance settings
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on Title drop down
+    And Click on "Advanced settings"
+    Then Titles popup should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_125:Edit Histogram - Verify advance settings cogwheel icon
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    Then Titles popup should be displayed
+
+  @Histogram
+  Scenario: TC_Histogram_126:Edit Histogram - Verify color for visual title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select color for "Title"
+    When Click on "Save"
+    Then Visual "title" should be displayed in selected color
+
+  @Histogram
+  Scenario: TC_Histogram_127:Edit Histogram - Verify color for visual title background
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select color for "title" background highlight
+    When Click on "Save"
+    Then Visual "title" background should be displayed in selected color
+
+  @Histogram
+  Scenario: TC_Histogram_128:Edit Histogram - Verify font size for visual title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select size for visual "title" as "20"
+    When Click on "Save"
+    Then The "title" font size should be changed as "20"
+
+  @Histogram
+  Scenario: TC_Histogram_129:Edit Histogram - Verify bold style for visual title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Click on Bold icon for "title"
+    When Click on "Save"
+    Then The "title" should be displayed in Bold format
+
+  @Histogram
+  Scenario: TC_Histogram_130:Edit Histogram - Verify Italic style for visual title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Click on Italic under style
+    When Click on "Save"
+    Then The "title" should be "italic"
+
+  @Histogram
+  Scenario: TC_Histogram_131:Edit Histogram - Verify Underline style for visual title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Click on Underline icon for "title"
+    When Click on "Save"
+    Then The "title" should be "underline"
+
+  @Histogram
+  Scenario: TC_Histogram_132:Edit Histogram - Verify horizontal alignment (left, right, center)
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    And Select alignment of title to "left"
+    Then The title should align to "left"
+    And Select alignment of title to "center"
+    Then The title should align to "center"
+    And Select alignment of title to "right"
+    Then The title should align to "right"
+
+  @Histogram
+  Scenario: TC_Histogram_133:Edit Histogram - Verify color for visual sub title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "sub-title"
+    And Select color for "Sub title"
+    When Click on "Save"
+    Then Visual "sub_title" should be displayed in selected color
+
+  @Histogram
+  Scenario: TC_Histogram_134:Edit Histogram - Verify color for visual sub title background
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "sub-title"
+    And Select color for "Sub title" background highlight
+    When Click on "Save"
+    Then Visual "sub_title" background should be displayed in selected color
+
+  @Histogram
+  Scenario: TC_Histogram_135:Edit Histogram - Verify font size for visual sub title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Select size for visual "Sub title" as "20"
+    When Click on "Save"
+    Then The "sub_title" font size should be changed as "20"
+
+  @Histogram
+  Scenario: TC_Histogram_136:Edit Histogram - Verify bold style for visual sub title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Click on B under style for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be displayed in Bold format
+
+  @Histogram
+  Scenario: TC_Histogram_137:Edit Histogram - Verify Italic style for visual sub title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Click on Italic under style for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be "italic"
+
+  @Histogram
+  Scenario: TC_Histogram_138:Edit Histogram - Verify Unnderline style for visual sub title
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Click on Underline icon for sub-title
+    When Click on "Save"
+    Then The "sub_title" should be "underline"
+
+  @Histogram
+  Scenario: TC_Histogram_139:Edit Histogram - Verify horizontal alignment (left, right, center)
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "sub-title"
+    And Select alignment of sub title to "left"
+    Then The subtitle should align to "left"
+    And Select alignment of sub title to "center"
+    Then The subtitle should align to "center"
+    And Select alignment of sub title to "right"
+    Then The subtitle should align to "right"
+
+  @Histogram
+  Scenario: TC_Histogram_140:Edit Histogram - Verify closing of Titles popup
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Click on X icon to close the popup
+    Then The Title popup should be closed
 
   @Histogram
   Scenario: TC_Histogram_141:Edit Histogram - Verify size of the visual
@@ -1232,7 +1231,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Horizontal align of visual to "Right"
     Then The Visual area should align to "Right"
 
-   @Histogram
+  @Histogram
   Scenario: TC_Histogram_143:Edit Histogram - Size - Verify Horizontal align by defaullt
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1266,7 +1265,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Horizontal align of visual to "Right"
     Then The copyright image should align to "Right"
 
-   @Histogram
+  @Histogram
   Scenario: TC_Histogram_147:Edit Histogram - Copyright - Verify advance settings
     And Create histogram visual with series
     And Click on "Edit Histogram"
@@ -1810,17 +1809,17 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select a function
-    #And Click on "Apply function"
+    And Click on "Apply function"
     Then The selected function should be applied to the series
 
-  #@Histogram..removed cancel icon
-  #Scenario: TC_Histogram_203:Edit Histogram - Edit series -  Verify cancel icon for selected function
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"	
-    #And Click on type a function field in series level
-    #And Select a function
-    #And Click on cancel function icon
-    #Then The selected function should be cancelled
+  @Histogram
+  Scenario: TC_Histogram_203:Edit Histogram - Edit series -  Verify cancel icon for selected function
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on cancel function icon
+    Then The selected function should be cancelled
 
   @Histogram
   Scenario: TC_Histogram_204:Edit Histogram - Edit series - Verify multiple functions apply
@@ -1828,26 +1827,26 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select multiple functions
-    #And Click on "Apply function"
+    And Click on "Apply function"
     Then The selected functions should be applied to the series
 
-  #@Histogram...removed cancel and apply icons
-  #Scenario: TC_Histogram_205:Edit Histogram - Edit  series - Verify removing applied functions
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on type a function field in series level
-    #And Select a function
-    #And Click on "Apply function"
-    #And Click on cancel function icon
-    #Then The function should be removed from the series
+  @Histogram
+  Scenario: TC_Histogram_205:Edit Histogram - Edit  series - Verify removing applied functions
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on type a function field in series level
+    And Select a function
+    And Click on "Apply function"
+    And Click on cancel function icon
+    Then The function should be removed from the series
 
   @Histogram
-    Scenario: TC_Histogram_206:Edit Histogram - Edit series - Verify appling invalid function for series
+  Scenario: TC_Histogram_206:Edit Histogram - Edit series - Verify appling invalid function for series
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select an invalid function
-    #And Click on "Apply function"
+    And Click on "Apply function"
     Then "The function cannot be applied to selected series" popup should be displayed
 
   @Histogram
@@ -1856,7 +1855,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Edit Histogram"
     And Click on type a function field in series level
     And Select an invalid function
-    #And Click on "Apply function"
+    And Click on "Apply function"
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 
@@ -1904,8 +1903,8 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Change title in edit visual window
-    When Click on "Save"
-    Then The changes should be reflected to "histogram" visual and Edit visual popup should be closed
+    And Click on "Save" button
+    Then The changes should be reflected to histogram visual and Edit visual popup should be closed
 
   @Histogram
   Scenario: TC_Histogram_214:Verify add to insight option
@@ -2157,7 +2156,7 @@ Feature: Verifying Histogram Visual functionality
     And Choose "Copy histogram"
     And Again Right click on visual header
     And Choose "Paste visual"
-    Then Copied visual should be pasted in same view tab
+    Then Copied visual should be pasted
 
   #@Histogram
   #Scenario: TC_Histogram_249:Right click - View as - Verify Chart
@@ -2263,12 +2262,11 @@ Feature: Verifying Histogram Visual functionality
 
   #@Histogram
   #Scenario: TC_Histogram_263:Rename - verify for invalid search
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on "Rename" option
-    #And Search with invalid series name
-    #Then "No matches found" should be displayed under the find field
-
+  #And Create histogram visual with series
+  #And Click on Edit series option
+  #And Click on "Rename" option
+  #And Search with invalid series name
+  #Then "No matches found" should be displayed under the find field
   @Histogram
   Scenario: TC_Histogram_264:Edit series - Verify adding series from my series
     And Select a series
@@ -2362,14 +2360,14 @@ Feature: Verifying Histogram Visual functionality
     And Click on "Frequency"
     Then "Series Harmonization" popup should be opened
 
-  #@Histogram
-  #Scenario: TC_Histogram_273:Edit series -  Verify cancel icon for selected function
-    #And Create histogram visual with series
-    #And Click on Edit series option
-    #And Click on type a function field in series level
-    #And Select a function
-    #And Click on cancel function icon
-    #Then The selected function should be cancelled
+  @Histogram
+  Scenario: TC_Histogram_273:Edit series -  Verify cancel icon for selected function
+    And Create histogram visual with series
+    And Click on Edit series option
+    And Click on type a function field in series level
+    And Select a function
+    And Click on cancel function icon
+    Then The selected function should be cancelled
 
   @Histogram
   Scenario: TC_Histogram_274:Edit seires - Verify OK button on "The function cannot be applied to selected series" popup
@@ -2377,7 +2375,7 @@ Feature: Verifying Histogram Visual functionality
     And Click on Edit series option
     And Click on type a function field in series level
     And Select an invalid function
-    #And Click on Apply function
+    And Click on Apply function
     And Click on "Ok"
     Then The function cannot be applied to selected series popup should be closed
 
@@ -2405,20 +2403,20 @@ Feature: Verifying Histogram Visual functionality
     And Create histogram visual with series
     And Click on "Edit Histogram"
     And Check Show Series
-    And  Mouse hover on existing visual templates
+    And Mouse hover on existing visual templates
     And Click on template dropdown
     And Check the box for "Set as default for future Histogram visual" should be unchecked
     And Click on "Save"
     And Create a new histogram visual
     Then The Histogram should be created with default format template
 
-  #@Histogram...title drop down is removed
-  #Scenario: TC_Histogram_278:Edit Histogram - Verify bold style default selection.
-    #And Create histogram visual with series
-    #And Click on "Edit Histogram"
-    #And Click on cogwheel icon for title
-    #And Check "Title"
-    #Then The bold icon should be selected by default
+  @Histogram
+  Scenario: TC_Histogram_278:Edit Histogram - Verify bold style default selection.
+    And Create histogram visual with series
+    And Click on "Edit Histogram"
+    And Click on cogwheel icon for title
+    And Check "Title"
+    Then The bold icon should be selected by default
 
   @Histogram
   Scenario: TC_Histogram_279:Edit Histogram - Size - Verify Proportion for the visual
@@ -2445,7 +2443,7 @@ Feature: Verifying Histogram Visual functionality
   Scenario: TC_Histogram_281: Edit Histogram - Tooltip - Verify date format
     And Create histogram visual with series
     And Open preference dropdown
-     And Clicking on "Date format" option in preference
+    And Clicking on "Date format" option in preference
     And Click "Auto" format date option
     And Click on "Edit Histogram"
     And Check "Tooltips"
@@ -2475,7 +2473,7 @@ Feature: Verifying Histogram Visual functionality
       | Tooltip_expand | Tooltip_collapse |
       | "Common"       | "Common"         |
       | "Items"        | "Items"          |
-      #| "Border"       | "Border"         |....removed
+      #| "Border"       | "Border"         |
 
   @Histogram
   Scenario: TC_Histogram_284:Edit Histogram - Edit series - Verify edit series icon
@@ -2541,12 +2539,12 @@ Feature: Verifying Histogram Visual functionality
     #And Click on "Hide the function bar"
     #And Click on "Show the function bar"
     #Then The function toolbar should be shown
-    
-     @Histogram
+
+   @Histogram
   Scenario: TC_Histogram_293:Edit series - Verify 'Type a function' field
     And Create histogram visual with series
     And Click on Edit series option
     And Click on type a function field
     And Select any function
-    #And Click on "Apply"
+    And Click on "Apply"
     Then The selected function should be displayed

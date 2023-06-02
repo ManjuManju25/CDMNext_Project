@@ -28,7 +28,7 @@ public class ForecastSeries {
 	@And("^Add series to the right pane$")
 	public void add_series_to_the_right_pane() throws Throwable {
 		CommonFunctionality.wait(6000);
-		CommonFunctionality.getElementByProperty(login.driver, "Series_Tab", 20).click();
+		CommonFunctionality.getElementByProperty(login.driver, "Series", 20).click();
 		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
 	}
@@ -90,12 +90,9 @@ public class ForecastSeries {
 
 	@And("^click on cross icon for any legends name$")
 	public void click_on_cross_icon_for_any_legends_name() throws Throwable {
-		WebElement first_legend_series =  CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item '])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
-		new Actions(login.driver).pause(200).moveToElement(first_legend_series).build().perform();	
-		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//*[@class='legend-item '])[1]/*[1]", 15);
-		//new Actions(login.driver).pause(200).moveToElement(first_legend_item).click().build().perform();
-		jse.executeScript("arguments[0].click();", first_legend_item);
-
+		WebElement first_legend_item = CommonFunctionality.getElementByXpath(login.driver,
+				"(//*[@class='legend-item'])[1]/*[1]", 15);
+		new Actions(login.driver).pause(200).moveToElement(first_legend_item).click().build().perform();
 
 	}
 
@@ -110,16 +107,16 @@ public class ForecastSeries {
 				.findElement(By.xpath("//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker']"))
 				.getAttribute("visibility").contains("hidden");
 		if (is_disabled == true) {
-			login.Log4j.info("Hide series icon clicked legend of the chart in suggestion chart is disabled");
+			login.Log4j.info("Cross clicked legend of the chart in suggestion chart is disabled");
 		} else {
-			Assert.fail("Hide series icon clicked legend of the chart in suggestion chart is not disabled");
+			Assert.fail("Cross clicked legend of the chart in suggestion chart is not disabled");
 		}
 	}
 
 	@And("^Click on suggested series of forecast$")
 	public void click_on_suggested_series_of_forecast() throws Throwable {
-		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='legend-item '])[1]//*[@class='series-edit--title series-edit--title__editable']", 15);
+		Thread.sleep(7000);
+		WebElement legend_item = CommonFunctionality.getElementByXpath(login.driver,"(//span[@class='series-edit--title series-edit--title__editable'])[1]", 15);
 		Exp_seriesName = legend_item.getText();
 		System.out.println("Exp_seriesName:"+Exp_seriesName);
 		new Actions(login.driver).pause(200).moveToElement(legend_item).click().build().perform();
@@ -260,7 +257,7 @@ public class ForecastSeries {
 		// Reading frequency for first basic series
 		CommonFunctionality.wait(500);
 		frequencyTxt_forBasicSeries = CommonFunctionality.getElementByXpath(login.driver,
-				"//*[contains(@class,'series-list-item__select')]/*[1]/*[1]//*[@class='series-item-information--additional-info']/*[3]//*[contains(@class,'series-item-information--frequency')]",
+				"//*[contains(@class,'series-list-item__select')]/*[1]/*[1]//*[@class='series-item-information--additional-info']/*[2]//*[contains(@class,'series-item-information--frequency')]",
 				5).getText();
 		CommonFunctionality.wait(500);
 		// Reading frequency for forecast series
@@ -373,7 +370,7 @@ public class ForecastSeries {
 	@And("^Chart should be displayed for suggestion series by default$")
 	public void chart_should_be_displayed_for_suggestion_series_by_default() throws Throwable {
 		boolean chart = login.driver.findElement(By.xpath(
-				"//*[contains(@class,'compare-suggestions-visual__open-compare-visual')]"))
+				"//*[@class='compare-suggestions-visual compare-suggestions-visual__open-compare-visual']"))
 				.isDisplayed();
 		if (chart == true) {
 			login.Log4j.info("Chart is displayed");
@@ -392,8 +389,8 @@ public class ForecastSeries {
 	@Then("^Chart displayed should be hidden$")
 	public void chart_displayed_should_be_hidden() throws Throwable {
 		if (login.driver
-				.findElements(By.xpath("//*[contains(@class,'compare-suggestions-visual__open-compare-visual')]"))
-				.size() == 0) {
+				.findElements(By.xpath("//*[@class='compare-suggestions-visual']"))
+				.size() == 1) {
 			login.Log4j.info("Chart doesn't displayed by selecting chart icon");
 		} else {
 			Assert.fail("FAIL");
@@ -402,7 +399,6 @@ public class ForecastSeries {
 
 	@And("^Check \"([^\"]*)\" function$")
 	public void check_function(String arg1) throws Throwable {
-		CommonFunctionality.wait(50);
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='series-list-with-suggestions--wrapper']/*[1]//*[@class='splice-function-checker']//*[contains(text(),'"
 						+ arg1 + "')]",
@@ -425,14 +421,10 @@ public class ForecastSeries {
 		} else {
 			Assert.fail(arg1 + " is not selected " + arg2 + " by default");
 		}
-		try {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@title='Close']", 4).click();
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='modal-window modal-window__active']//*[contains(text(),'Ok')]", 4).click();
-		}catch(Exception e) {
-			
-		}
 	}
 
 	@And("^Hover on forecast series and click on \"([^\"]*)\" icon$")
@@ -846,11 +838,8 @@ public class ForecastSeries {
 
 	@And("^Create TableVisual$")
 	public void create_TableVisual() throws Throwable {
-		
-		CommonFunctionality.getElementByProperty(login.driver, "Dropdown_AddChart", 4).click();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"//div[contains(@class,'icon--table-vertical_large')]", 8).click();
-		
+
+		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'View as Table')]", 4).click();
 	}
 
 	@And("^Select forecast suggestion series from my series pane$")
@@ -929,10 +918,9 @@ public class ForecastSeries {
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='current-function-input']", 4).click();
 		// Applying Round() function
 		CommonFunctionality.getElementByXpath(login.driver, "//li[contains(text(),'ROUND')]", 4).click();
-//		CommonFunctionality.wait(500);
-//		CommonFunctionality
-//				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4).click();
-
+		CommonFunctionality
+				.getElementByXpath(login.driver, "//*[contains(@class,'series-functions-panel--icon__apply')]", 4)
+				.click();
 	}
 
 	@And("^Right click on visual$")
@@ -949,12 +937,8 @@ public class ForecastSeries {
 				"//*[@class='function-editor-window']//*[@class='current-function-input']", 4).click();
 		// Applying Round() function
 		CommonFunctionality.getElementByXpath(login.driver, "//li[contains(text(),'ROUND')]", 4).click();
-		try {
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//*[@class='function-wizard--footer-buttons']//*[contains(text(),'Apply')]", 4).click();
-		}catch(Exception e){
-			
-		}
 	}
 
 	@Then("^Function should be applied to the visual$")
@@ -976,10 +960,10 @@ public class ForecastSeries {
 		CommonFunctionality.wait(1000);
 		// mouse hover on legend marker
 		WebElement legend_item1 = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='legend-item--marker'])[1]", 4);
+				"(//*[@class='legend-item']/*[1])[1]", 4);
 		new Actions(login.driver).pause(200).moveToElement(legend_item1).build().perform();
 		if (login.driver.findElements(By.xpath(
-				"//*[@class='highcharts-markers highcharts-series-1 highcharts-line-series highcharts-tracker highcharts-series-inactive']"))
+				"//*[@class='highcharts-series highcharts-series-1 highcharts-line-series highcharts-series-inactive']"))
 				.size() == 1) {
 			
 				login.Log4j.info("Corresponding series is enabled and other series is disabled on the chart");
@@ -987,10 +971,8 @@ public class ForecastSeries {
 		} else {
 			fail("Verification failed");
 		}
-		// clicking on eye icon of legend marker
-		new Actions(login.driver).pause(200).moveToElement(legend_item1).build().perform();
-		CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[@class='legend-item--hiding-series__show'])[1]", 4).click();
+		// clicking on cross icon of legend marker
+		legend_item1.click();
 //		WebElement Visual_info = CommonFunctionality.getElementByXpath(login.driver,
 //				"//*[@class='compare-suggestions-visual--info']", 5);
 //		new Actions(login.driver).moveToElement(Visual_info).pause(200).build().perform();

@@ -109,7 +109,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_16: Verifying remove icon for filters.
-    And User selects "Frequency" as "Monthly"
+    And User selects "Frequency" as "MONTHLY"
     And User has clicked on "Apply filter"
     When Click on x icon
     Then The applied filters should be removed
@@ -284,10 +284,11 @@ Feature: Verifying Databases tab functionality
 
   #@DB....removed for table level
   #Scenario: TC_DB_43:Verifying Add and Group for table level
-  #And Mouse hover on any table level
-  #And Click on dropdown icon
-  #And Click on "Add and group"
-  #Then Selected table should be added as group in My series
+    #And Mouse hover on any table level
+    #And Click on dropdown icon
+    #And Click on "Add and group"
+    #Then Selected table should be added as group in My series
+
   @DB
   Scenario: TC_DB_44:Verifying Add to new insight for table level
     And Mouse hover on any table level
@@ -380,11 +381,13 @@ Feature: Verifying Databases tab functionality
   ##	And Click on "×"
   ##	Then The insight explorer popup should be closed
   ##
+ 
   #@DB
   #Scenario: TC_DB_49:Verifying 'Unselect all' for table level
-  #And Right click on any table level
-  #And Select "Unselect all"
-  #Then The selected series should be unselected
+    #And Right click on any table level
+    #And Select "Unselect all"
+    #Then The selected series should be unselected
+
   @DB
   Scenario: TC_DB_50:Verifying Add chart > Chart for table level
     And Right click on any table level
@@ -400,13 +403,13 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_52:Verifying Add chart > Table for table level
     And Right click on any table level
-    And Choose Add chart as "Table"
+  	And Choose Add chart as "Table"
     Then "Table" should be created with series in views panel
 
   @DB
   Scenario: TC_DB_53:Verifying Add chart > Pie for table level
     And Right click on any table level
-    And Choose Add chart as "Pie"
+   And Choose Add chart as "Pie"
     Then "Pie" should be created with series in views panel
 
   @DB
@@ -423,28 +426,29 @@ Feature: Verifying Databases tab functionality
 
   #@DB
   #Scenario: TC_DB_56:Verify creating visual with more than max seires selection
-  #And Right click on any table level and select more than max series
-  #And Select "View as Chart"
-  #Then "Confirmation" window should be displayed
-  #
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #Then "Confirmation" window should be displayed
+#
   #@DB
   #Scenario: TC_DB_57:Verify confirmation window for more than max series selection for visual creation
-  #And Right click on any table level and select more than max series
-  #And Select "View as Chart"
-  #Then Confirmation window should display with "You cannot create a chart with more than 30 series. Proceed with 30 series?"
-  #
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #Then Confirmation window should display with "You cannot create a chart with more than 30 series. Proceed with 30 series?"
+#
   #@DB
   #Scenario: TC_DB_58:Verifying cancel/x button for confrimation popup
-  #And Right click on any table level and select more than max series
-  #And Select "View as Chart"
-  #And Click on "Cancel"
-  #
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #And Click on "Cancel"
+#
   #@DB
   #Scenario: TC_DB_59:Verifying Ok button for confrimation popup
-  #And Right click on any table level and select more than max series
-  #And Select "View as Chart"
-  #And Click on "Ok"
-  #Then "Chart" visual should be created with max series
+    #And Right click on any table level and select more than max series
+    #And Select "View as Chart"
+    #And Click on "Ok"
+    #Then "Chart" visual should be created with max series
+
   @DB
   Scenario: TC_DB_60:Verifying Download option for table level
     And Right click on any table level
@@ -477,7 +481,7 @@ Feature: Verifying Databases tab functionality
     And User has clicked on "Apply filter"
     And Select Global database
     And Expand till table level
-    Then "New" icon should be displayed in table level
+    Then "new" icon should be displayed in table level
 
   @DB
   Scenario: TC_DB_65:Verifying adding table by keyboard shortcut
@@ -493,63 +497,64 @@ Feature: Verifying Databases tab functionality
 
   #@DB....show related data dropdown functionality has been removed for series level
   #Scenario: TC_DB_67:Verifying related data
-  #And Select database as Daily Database
-  #And Expand till series level
-  #And Click on "Show related data" icon
-  #Then Related data should be displayed under the dropdown
-  #
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on "Show related data" icon
+    #Then Related data should be displayed under the dropdown
+#
   #@DB
   #Scenario: TC_DB_68:Verify Related data > Remarks
-  #And Expand World Trend Plus till series level
-  #And Click on Show related data icon
-  #Then "Remarks:" should be displayed if available for the series
-  #
+    #And Expand World Trend Plus till series level
+    #And Click on Show related data icon
+    #Then "Remarks:" should be displayed if available for the series
+#
   #@DB
   #Scenario: TC_DB_69:Verify 'Read more' for Remarks under Related data
-  #And Expand World Trend Plus till series level
-  #And Click on Show related data icon
-  #And Click on "Read More"
-  #Then Should open related footnotes
-  #
+    #And Expand World Trend Plus till series level
+    #And Click on Show related data icon
+    #And Click on "Read More"
+    #Then Should open related footnotes
+#
   #@DB
   #Scenario: TC_DB_70:Verify clicking Datasets
-  #And Select database as Daily Database
-  #And Expand till series level
-  #And Click on Show related data icon
-  #And Click on datalinks under datasets
-  #Then Should redirect to respective datasets
-  #
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on datalinks under datasets
+    #Then Should redirect to respective datasets
+#
   #@DB
   #Scenario: TC_DB_71:Verify related insights
-  #And Select database as Daily Database
-  #And Expand till series level
-  #And Click on Show related data icon
-  #And Click on any insights under insights section
-  #Then Insights should be opened in preview mode
-  #
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on any insights under insights section
+    #Then Insights should be opened in preview mode
+#
   #@DB
   #Scenario: TC_DB_72:Verify share icon for insight
-  #And Select database as Daily Database
-  #And Expand till series level
-  #And Click on Show related data icon
-  #And Click on share under insights section
-  #Then Share popup should be opened if have permission to share
-  #
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on share under insights section
+    #Then Share popup should be opened if have permission to share
+#
   #@DB
   #Scenario: TC_DB_73:Verify add to favorite icon
-  #And Select database as Daily Database
-  #And Expand till series level
-  #And Click on Show related data icon
-  #And Click on add to favourite under insights section
-  #Then The insights should be added to favorite list
-  #
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on Show related data icon
+    #And Click on add to favourite under insights section
+    #Then The insights should be added to favorite list
+#
   #@DB
   #Scenario: TC_DB_74:Verify hide related data
-  #And Select database as Daily Database
-  #And Expand till series level
-  #And Click on "Show related data"
-  #And Click on "Hide related data"
-  #Then The related data dropdown should be collapsed
+    #And Select database as Daily Database
+    #And Expand till series level
+    #And Click on "Show related data"
+    #And Click on "Hide related data"
+    #Then The related data dropdown should be collapsed
+
   @DB
   Scenario: TC_DB_75: Verifying 'View as chart'
     And Mouse hover on any series level
@@ -570,10 +575,11 @@ Feature: Verifying Databases tab functionality
 
   #@DB
   #Scenario: TC_DB_77:More actions - Verify Unselect all
-  #And Mouse hover on any series level of data
-  #And Click on "More actions"
-  #And Click on "Unselect all"
-  #Then The selected series should be unselected
+    #And Mouse hover on any series level of data
+    #And Click on "More actions"
+    #And Click on "Unselect all"
+    #Then The selected series should be unselected
+
   @DB
   Scenario: TC_DB_78:More actions - Verify Add chart > Chart for series level
     And Mouse hover on any series level of data
@@ -585,7 +591,7 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_79:More actions - Verify Add chart > Map for series level
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Choose Add chart as "Map"
+      And Choose Add chart as "Map"
     Then Visual should be created with "Edit Map"
 
   @DB
@@ -606,7 +612,7 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_82:More actions - Verify View as Heat map for series level
     And Mouse hover on any series level of data
     And Click on "More actions"
-    And Choose Add chart as "Heat map"
+     And Choose Add chart as "Heat map"
     Then Visual should be created with "Edit Heat map"
 
   @DB
@@ -625,10 +631,11 @@ Feature: Verifying Databases tab functionality
 
   #@DB
   #Scenario: TC_DB_85:More actions - Verify creating visual with more than max seires selection
-  #And Mouse hover on any series level and select more than max series
-  #And Select "View as Chart"
-  #Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
-  #Then "Chart" visual should be created with max series
+    #And Mouse hover on any series level and select more than max series
+    #And Select "View as Chart"
+    #Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
+    #Then "Chart" visual should be created with max series
+
   @DB
   Scenario: TC_DB_86:More actions - Verify 'Copy' for series level
     And Mouse hover on any series level of data
@@ -749,12 +756,12 @@ Feature: Verifying Databases tab functionality
   Scenario: TC_DB_102:Verify Add and Replace
     And Create a visual and select visual
     And Select a series and Click on dropdown icon
-    And Click on "Add and replace"
+    And Click on "Add and replace" 
     Then The selected series should be replaced with existing series on the visual
 
   @DB
   Scenario: TC_DB_103:Verify Add and Group
-    And Select a series and Click on dropdown icon
+   And Select a series and Click on dropdown icon
     And Click on "Add and group"
     Then Selected series should be added as group in My series
 
@@ -860,9 +867,10 @@ Feature: Verifying Databases tab functionality
 
   #@DB
   #Scenario: TC_DB_115:Right click - Verify Unselect all
-  #And Right click on any series level of data
-  #And Select "Unselect all"
-  #Then The selected series should be unselected
+    #And Right click on any series level of data
+    #And Select "Unselect all"
+    #Then The selected series should be unselected
+
   @DB
   Scenario: TC_DB_116:Right click - Verify Add chart > Chart for series level
     And Right click on any series level of data
@@ -872,13 +880,13 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_117:Right click - Verify Add chart > Map for series level
     And Right click on any series level of data
-    And Choose Add chart as "Map"
+     And Choose Add chart as "Map"
     Then Visual should be created with "Edit Map"
 
   @DB
   Scenario: TC_DB_118:Right click - Verify Add chart > Table for series level
     And Right click on any series level of data
-    And Choose Add chart as "Table"
+     And Choose Add chart as "Table"
     Then Visual should be created with "Edit Table"
 
   @DB
@@ -890,21 +898,22 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_120:Right click - Verify Add chart > Heat map for series level
     And Right click on any series level of data
-    And Choose Add chart as "Heat map"
+     And Choose Add chart as "Heat map"
     Then Visual should be created with "Edit Heat map"
 
   @DB
   Scenario: TC_DB_121:Right click - Verify Add chart > Histogram for series level
     And Right click on any series level of data
-    And Choose Add chart as "Histogram"
+     And Choose Add chart as "Histogram"
     Then Visual should be created with "Edit Histogram"
 
   #@DB
   #Scenario: TC_DB_122:Right click - Verify creating visual with more than max seires selection
-  #And Right click on any series level and select more than max series
-  #And Select "View as Chart"
-  #Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
-  #Then "Chart" visual should be created with max series
+    #And Right click on any series level and select more than max series
+    #And Select "View as Chart"
+    #Then Confirmation window should be displayed and proceed with max series if click on "Ok" button
+    #Then "Chart" visual should be created with max series
+
   @DB
   Scenario: TC_DB_123:Right click - Verify download option for series
     And Right click on any series level of data
@@ -939,7 +948,7 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_128:Right click - Verify Copy links for a series
     #And Right click on any series
-    And Right click on any series level of data
+     And Right click on any series level of data
     And Select "Copy selected links"
     Then URL should be generated for selected series
 
@@ -967,25 +976,25 @@ Feature: Verifying Databases tab functionality
   @DB
   Scenario: TC_DB_132:Right click - Verify 'Series info' option for series
     #And Right click on any series
-    And Right click on any series level of data
+     And Right click on any series level of data
     And Select "Series Info"
     Then The SSP window should be opened
 
   @DB
   Scenario: TC_DB_133:Right click - Verify 'Footnotes' option for series
     And Right click on any series
-    And Select "Footnotes"
+     And Select "Footnotes"
     Then Footnotes should be opened for related "series"
 
   @DB
   Scenario: TC_DB_134:Right click - Verify back button
     #And Right click on any series
-    And Right click on any series level of data
+     And Right click on any series level of data
     And Select "Show Dataset"
     And Click on Back button
     Then Should redirect to database tab
 
-  #@DB1.....checkbox is removed for sepator CVISION-16811
+  #@DB ..... need to check locators and logic
   #Scenario: TC_DB_135:Verify adding separators with series
     #And Select series with separators
     #And Add to my series
@@ -1204,7 +1213,7 @@ Feature: Verifying Databases tab functionality
 
   @DB
   Scenario: TC_DB_162:Series selection - Verify 'Add to recent insight' in dropdown
-    And Expand BrazilPremium database till series level and select a series
+    And Select any series
     And Click on selected series count
     And Click on dropdown icon next to +
     And Click on "Add to recent insight"

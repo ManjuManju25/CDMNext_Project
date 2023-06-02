@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import java.awt.Robot;
@@ -100,8 +101,7 @@ public class login {
 	//TestRunner testRunner = new TestRunner();
 	
 	
-	//@Before("~@Search,~@FilterSearch")
-	@Before
+	@Before("~@Search,~@FilterSearch")
 	public void setUp(Scenario scenario) throws Throwable {
 		//driver.manage().deleteAllCookies();
 		System.out.println("\nInside Cucumber @Before in Login.java.  Launching Browser..");
@@ -110,27 +110,26 @@ public class login {
 	    root.setLevel(ch.qos.logback.classic.Level.INFO);
 		Invoke_browser();	
 		SearchTest.user_has_successful_logged_in();	
-		//Hooks.before_run();
-		String feature_file = Hooks.getFeatureFileNameFromScenarioId(scenario);
+		Hooks.before_run();
+		/*String feature_file = Hooks.getFeatureFileNameFromScenarioId(scenario);
 		if (feature_file.toLowerCase().contains("filtersearch") || feature_file.toLowerCase().contains("synonym search")) {
-			//Hooks.CloseAnnouncementPopUp();
-			//Hooks.Handle_BrowserNotification_popup();
+			Hooks.CloseAnnouncementPopUp();
+			Hooks.Handle_BrowserNotification_popup();
 			login.driver.navigate().refresh();
 			CommonFunctionality.ResetMethod();
 		} else {
 			Hooks.before_run();
 		}
-		
+		*/
 	}
 
-/*	@Before("@Search,@FilterSearch")
+	@Before("@Search,@FilterSearch")
 	public void setUp1() throws Throwable {
-		Invoke_browser();
-		SearchTest.user_has_successful_logged_in();
+		SearchTest.user_has_successful_logged_in();	
 		login.driver.navigate().refresh();
 		CommonFunctionality.ResetMethod();
 
-	}*/
+	}
 	@After
 	public void afterScenario(Scenario scenario) throws Throwable {
 		ErrorScreenshot.takeScreenshotOnFailure(scenario);
@@ -355,7 +354,6 @@ public class login {
 			options.addArguments("--ignore-certificate-errors"); //ignoring certificate issues if there
 			options.setExperimentalOption("useAutomationExtension", false); // disable automation message
 			options.setExperimentalOption("prefs", prefs);
-			
 			DesiredCapabilities capabilities = new DesiredCapabilities();	
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);	 // accept SSL certificates
 			capabilities.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true); // accept insecure certificates if any
@@ -404,3 +402,4 @@ public class login {
 		logged_in = true;
 	}
 }
+

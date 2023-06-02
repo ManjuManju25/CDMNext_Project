@@ -232,7 +232,7 @@ public class SprintCases5_0 {
 		} else {
 			fail("The growl popup not displayed with series copied");
 		}
-		//CommonFunctionality.getElementByProperty(login.driver, "preivew_mode_close", 10).click();
+		CommonFunctionality.getElementByProperty(login.driver, "preivew_mode_close", 10).click();
 	}
 
 	@And("^Login to CDMNext$")
@@ -679,17 +679,6 @@ public class SprintCases5_0 {
 			fail("The " + arg1 + " panel is not displayed");
 		}
 	}
-	@Then("^The \"([^\"]*)\" panel should be shown$")
-	public void the_panel_should_be_shown(String arg1) throws Throwable {
-		CommonFunctionality.wait(5000);
-		String Expected_databriefings_text = CommonFunctionality
-				.getElementByProperty(login.driver, "releasesTab_databriefings_panel_text", 20).getText();
-		if (Expected_databriefings_text.contains(arg1)) {
-			login.Log4j.info("The " + arg1 + " panel is displayed");
-		} else {
-			fail("The " + arg1 + " panel is not displayed");
-		}
-	}
 
 	@And("^Search for a series id$")
 	public void search_for_a_series_id() throws Throwable {
@@ -729,7 +718,7 @@ public class SprintCases5_0 {
 	public void the_Data_briefings_title_should_displayed() throws Throwable {
 		CommonFunctionality.wait(1000);
 		String Expected_databriefingTitle = CommonFunctionality
-				.getElementByProperty(login.driver, "Databriefing_title", 10).getText();
+				.getElementByProperty(login.driver, "First_databriefing_title", 10).getText();
 		if (Expected_databriefingTitle.equals(databriefing_title)) {
 			login.Log4j.info("Verification PASS");
 		} else {
@@ -778,7 +767,7 @@ public class SprintCases5_0 {
 
 	@Then("^The Data Briefings should displayed in the Top releases$")
 	public void the_Data_Briefings_should_displayed_in_the_Top_releases() throws Throwable {
-		CommonFunctionality.wait(2000);
+		CommonFunctionality.wait(1000);
 		List<WebElement> After_applying_SortByTopRelease_databriefings_list = login.driver
 				.findElements(By.xpath(login.LOCATORS.getProperty("databriefings_list")));
 		for (int i = 1; i <= 3; i++) {
@@ -850,7 +839,7 @@ public class SprintCases5_0 {
 	@Then("^The last applied sorting should be saved per user$")
 	public void the_last_applied_sorting_should_be_saved_per_user() throws Throwable {
 		CommonFunctionality.wait(1500);
-		String expected_sortBy_filter = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='briefings-sidebar-title']//*[@class='text-dots']", 10)
+		String expected_sortBy_filter = CommonFunctionality.getElementByProperty(login.driver, "sortby_filterText", 10)
 				.getText();
 		if (expected_sortBy_filter.equalsIgnoreCase(Applied_SortBy_filter)) {
 			login.Log4j.info("The selected sort by filter is saved");
@@ -1016,7 +1005,7 @@ public class SprintCases5_0 {
 	@Then("^FX icon will not be disappear$")
 	public void fx_icon_will_not_be_disappear() throws Throwable {
 		CommonFunctionality.wait(1000);
-		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("myseries_function_icon"))).size() == 1) {
+		if (login.driver.findElements(By.xpath(login.LOCATORS.getProperty("FX_icon"))).size() == 1) {
 			login.Log4j.info("FX icon is appeared ");
 		} else {
 			fail("FX icon is not appeared");
@@ -1026,21 +1015,19 @@ public class SprintCases5_0 {
 	@And("^Mouse hover on the series name$")
 	public void mouse_hover_on_the_series_name() throws Throwable {
 	
-		CommonFunctionality.webDriverwait_keyvalue("Series_Tab");
-	    CommonFunctionality.getElementByProperty(login.driver, "Series_Tab",10).click();
-		Thread.sleep(3000);
+		CommonFunctionality.webDriverwait_keyvalue("Series");
+	 CommonFunctionality.getElementByProperty(login.driver, "Series",10).click();
+		Thread.sleep(500);
 		expected_sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10)
 				.getText();
 		WebElement series_cb = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_checkbox")));
-		Thread.sleep(1000);
 		new Actions(login.driver).moveToElement(series_cb).pause(500).build().perform();
 	}
 
 	@And("^Select any check box in that popup$")
 	public void select_any_check_box_in_that_popup() throws Throwable {
-		CommonFunctionality.wait(4000);
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByProperty(login.driver, "popup_notification_checkBox", 20).click();
-		
 	}
 
 	@Then("^Message \"([^\"]*)\" will be appears and series will be added to the watchlist$")
@@ -1052,10 +1039,9 @@ public class SprintCases5_0 {
 		} else {
 			fail(arg1 + " is not displayed");
 		}
-		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByProperty(login.driver, "watchlist_tab", 20).click();
-		CommonFunctionality.wait(1000);
-		String Actual_sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='watchlist--select']//*[@class='dropdown--title']", 10)
+		CommonFunctionality.wait(4000);
+		String Actual_sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='watchlist-series-item']//*[@class='series-item--name']", 10)
 				.getText();
 		if (expected_sname.equals(Actual_sname)) {
 			login.Log4j.info("The series added to the watchlist");
@@ -1156,7 +1142,7 @@ public class SprintCases5_0 {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))))
 				.click();
 		CommonFunctionality.wait(500);
-		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='database-representation']//div[@class='series-item--name']", 10);
+		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//div[@class='series-item--name']", 10);
 		new Actions(login.driver).pause(400).moveToElement(ele).perform();
 		CommonFunctionality.wait(800);
 		WebElement tooltip = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("tooltip_text")));
@@ -1218,15 +1204,19 @@ public class SprintCases5_0 {
 	@Then("^\"([^\"]*)\" icon for series should not be shows for global key series$")
 	public void icon_for_series_should_not_be_shows_for_global_key_series(String arg1) throws Throwable {
 		CommonFunctionality.wait(500);
-		login.Log4j.info("Clicking on  Databases tab ");
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Databases_Tab"))))
-				.click();
+		WebElement ele = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10);
+		new Actions(login.driver).moveToElement(ele).pause(500).build().perform();
+		login.Log4j.info("Clicking on show database icon");
 		CommonFunctionality.wait(1000);
-		String statusIcon = CommonFunctionality.getElementByXpath(login.driver,
-				"(//*[contains(text(),'Global Key Series Database')]/following::*[@class='series-item--status-icons'])[1]",
+		CommonFunctionality.getElementByXpath(login.driver,
+				"//div[@class='series-list-item--action-icons']//span[@title='See in Database']", 4).click();
+		st.user_can_selects("Global Key Series Database");
+		CommonFunctionality.wait(5000);
+		String highlitedEle = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[contains(@class,'series-list-item__selected series-list-item__highlighted')]//*[@class='series-item--status-icons']",
 				4).getText();
-		login.Log4j.info(statusIcon);
-		if (!arg1.equals(statusIcon)) {
+		login.Log4j.info(highlitedEle);
+		if (!arg1.equals(highlitedEle)) {
 			login.Log4j.info(arg1 + " icon for series not shown for global key series");
 		} else {
 			fail(arg1 + " icon is displayed for global key series");
@@ -1238,7 +1228,7 @@ public class SprintCases5_0 {
 	public void add_some_series_to_my_series_tab() throws Throwable {
 		login.Log4j.info("Clicking on  Series tab ");
 		WebElement SeriesTab = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
 		CommonFunctionality.wait(5000);
 		List<WebElement> checkBox = login.driver
@@ -1342,7 +1332,7 @@ public class SprintCases5_0 {
 	public void click_on_database(String arg1) throws Throwable {
 		//select 1st tab
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='tabs__tabs-box']/*[1]", 10).click();
-		CommonFunctionality.wait(4000);
+		CommonFunctionality.wait(2000);
 		CommonFunctionality.getElementByXpath(login.driver, "//table//*[contains(text(),'" + arg1 + "')]", 10).click();
 	}
 
@@ -1382,10 +1372,10 @@ public class SprintCases5_0 {
 
 	@And("^Select the series and create a pie visual$")
 	public void select_the_series_and_create_a_pie_visual() throws Throwable {
-	//	CommonFunctionality.ExpandRight();
+		CommonFunctionality.ExpandLeft();
 		login.Log4j.info("Clicking on  Series tab ");
 		WebElement SeriesTab = wait
-				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
+				.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series"))));
 		SeriesTab.click();
 		CommonFunctionality.wait(1000);
 		List<WebElement> checkBox = login.driver
@@ -1396,9 +1386,8 @@ public class SprintCases5_0 {
 			if(i == checkBox.size()) {
 				int j = i - 1 ;
 				action.contextClick(sName.get(j)).build().perform();
-				pie.create_a_Pie_visual();
-//				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View as ...']", 10).click();
-//				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Pie']", 10).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='View as ...']", 10).click();
+				CommonFunctionality.getElementByXpath(login.driver, "//*[@title='Pie']", 10).click();
 			} else {
 				action.moveToElement(checkBox.get(i)).click().build().perform();
 			}
@@ -1417,10 +1406,9 @@ public class SprintCases5_0 {
 		//select All functions
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'All functions')]", 10).click();
 		//select X13ARIMA function
-		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='function-wizard-sidebar-body']//input[@placeholder='Search']", 10).sendKeys(arg1);
-		WebElement function = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'" + arg1 + "')]", 10);
+		WebElement function = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-id='" + arg1 + "']", 10);
 		CommonFunctionality.wait(500);
-		//jse.executeScript("arguments[0].scrollIntoView(true);", function);
+		jse.executeScript("arguments[0].scrollIntoView(true);", function);
 		function.click();
 		//Click on Insert function button
 		CommonFunctionality.getElementByXpath(login.driver, "//*[contains(text(),'Insert function')]", 10).click();
@@ -1443,8 +1431,8 @@ public class SprintCases5_0 {
 	public void create_a_chart_visual_with(String arg1) throws Throwable {
 		CommonFunctionality.getElementByProperty(login.driver,"Search",10).sendKeys(arg1);
 		CommonFunctionality.getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		CommonFunctionality.wait(2000);
 		WebElement sname = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-item--name']", 10);
 		action.moveToElement(sname).pause(200).perform();
@@ -1454,9 +1442,8 @@ public class SprintCases5_0 {
 	@And("^Create a pie visual with \"([^\"]*)\"$")
 	public void create_a_pie_visual_with(String arg1) throws Throwable {
 		CommonFunctionality.ResetMethod();
-		PieVisual.SelectSeries(arg1);
-		CommonFunctionality.getElementByProperty(login.driver, "AddChart", 4).click();
-		CommonFunctionality.getElementByProperty(login.driver, "PieIcon", 4).click();
+		pie.SelectSeries(arg1);
+		CommonFunctionality.getElementByXpath(login.driver, "//*[@data-title='Pie']", 4).click();
 		CommonFunctionality.wait(2000);
 		//if series harmonization popup opened
 		try {
@@ -1555,9 +1542,6 @@ public class SprintCases5_0 {
 		CommonFunctionality.getElementByProperty(login.driver, "Newinsight_file", 20).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Create_insight", 20).click();
 		CommonFunctionality.wait(1000);
-		login.Log4j.info("Clicking on  Series tab ");
-		CommonFunctionality.wait(2000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
 		CommonFunctionality.getElementByXpath(login.driver, "(//div[@class='add-to-data-selection--icon'])[1]", 8)
 				.click();
 		CommonFunctionality.wait(500);
@@ -1570,8 +1554,8 @@ public class SprintCases5_0 {
 		try {
 			CommonFunctionality.wait(2000);
 //			ul_element = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("UL")));
-			//List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='data-representation']//div[@unselectable='on']"));
-			//login.Log4j.info("List size is :" + li_All.size());
+			List<WebElement> li_All =  login.driver.findElements(By.xpath("//*[@class='data-representation']//div[@unselectable='on']"));
+			login.Log4j.info("List size is :" + li_All.size());
 			List<WebElement> sName = login.driver
 					.findElements(By.xpath("//*[@unselectable='on']//*[@class='series-item--name']"));
 			WebElement tooltip = null;

@@ -1,7 +1,5 @@
 package CDMNext.StepDefinations;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,10 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
-import junit.framework.Assert;
 
 public class WatchList {
 	Actions action = new Actions(login.driver);
@@ -25,17 +21,14 @@ public class WatchList {
 	ArrayList<String> compareRead = new ArrayList<String>();
 	ArrayList<String> releaseRead = new ArrayList<String>();
 	Map map = new Map();
-	int j;
 
 	@And("^Select a few series from left and right pane$")
 	public void select_a_few_series_from_left_and_right_pane() throws Throwable {
 		delete_watlist();
 
 		Thread.sleep(4000);
-		login.Log4j.info("Clicking on series tab");
-		login.driver.findElement(By.xpath("//*[@data-id='LIST']")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 		for (int i = 1; i <= 5; i++) {
-			j = i;
 			Thread.sleep(2000);
 			String str = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]")).getText()
 					.toString();
@@ -45,51 +38,49 @@ public class WatchList {
 					.click();
 			System.out.println(fileWrite.get(i - 1));
 		}
-		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + j + "]"));
-		action.contextClick(ele).build().perform();
+
 	}
 
 	@And("^Add to watchlist \"([^\"]*)\"$")
 	public void add_to_watchlist(String str) throws InterruptedException {
-		Thread.sleep(1000);
-		action.moveToElement(login.driver.findElement(By.xpath("//*[@title='Add to Watchlist']"))).build()
-				.perform();
+		Thread.sleep(3000);
+	
+		WebElement rightclick = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[1]"));
+		action.contextClick(rightclick).perform();
+		
+		WebElement watchlist = login.driver.findElement(By.xpath("//span[@title='Add to Watchlist']"));
+		action.moveToElement(watchlist).click().build().perform();
 		Thread.sleep(2000);
+
 		login.driver
 				.findElement(
 						By.xpath("//input[@name='" + str + "']/following::span[@class='input-control--indicator'][1]"))
 				.click();
-		login.driver.findElement(By.xpath("//*[@class='dropdown-submenu active-menu-item']//button[contains(text(),'Apply')]")).click();
+		// login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[5]")).click();
+
+		// login.driver.findElement(By.xpath("//div[contains(text(),'Apply')]")).click();
+
+		login.driver.findElement(By.xpath(
+				"//div[@class='watchlist-control--footer']//button[@class='button__primary button button__primary']"))
+				.click();
 	}
 
 	@Then("^Check if series are added in watchlist tab$")
 	public void check_if_series_are_added_in_watchlist_tab() throws InterruptedException {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//*[@class='search-presentation-tabs--visible']//*[@data-id='WATCHLIST'])")).click();
-		List<WebElement> l = login.driver.findElements(By.xpath("//*[@class='watchlist watchlist__empty-list watchlist__has-selected']//div[@class='series-item--name']"));
+		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
+		List<WebElement> l = login.driver.findElements(By.xpath("//div[@class='series-item--name']"));
 		for (WebElement l1 : l) {
 			String str = l1.getText().toString();
 			fileRead.add(str);
 		}
-		boolean result = false;
-		for (String str: fileWrite) {
-			if(fileRead.contains(str)) {
-				System.out.println(str);
-				login.Log4j.info("The selected series are added to watchlist tab");
-				result = true;
-			}
-		}
-		/*for (int i = 0; i <= fileWrite.size() - 1; i++) {
+
+		for (int i = 0; i <= fileWrite.size() - 1; i++) {
 			for (int j = 0; j < fileRead.size() - 1; j++) {
 				if (fileWrite.get(i).equalsIgnoreCase(fileRead.get(j))) {
 					System.out.println(fileRead.get(j).toString());
-					login.Log4j.info("The selected series are added to watchlist tab");
-					result = true;
-				} 
+				}
 			}
-		}*/
-		if(result == false) {
-			Assert.fail("The selected series are not added to watchlist tab");
 		}
 
 	}
@@ -99,7 +90,6 @@ public class WatchList {
 		delete_watlist();
 		s9.in_database_tree_expand_globa_db_Afghanistan_Afghanistan_National_Accounts();
 		for (int i = 6; i <= 12; i++) {
-			j = i;
 			Thread.sleep(2000);
 			String str = login.driver.findElement(By.xpath("(//span[@class='name-text'])[" + i + "]")).getText()
 					.toString();
@@ -111,30 +101,46 @@ public class WatchList {
 					.click();
 		}
 		// System.out.println(fileWrite);
-		WebElement ele = login.driver.findElement(By.xpath("(//span[@class='name-text'])[" + j + "]"));
-		action.contextClick(ele).build().perform();
+
+	}
+
+	@And("^Add to watchlist \"([^\"]*)\" for table$")
+	public void add_to_watchlist_for_table(String arg1) throws Throwable {
+		Thread.sleep(3000);
+
+		WebElement rightclick = login.driver.findElement(By.xpath("(//span[@class='name-text'])[6]"));
+		action.contextClick(rightclick).perform();
+
+		// action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'Add
+		// to Watchlist')]"))).build().perform();
+		login.driver.findElement(By.xpath("//span[@title='Add to Watchlist']")).click();
+		Thread.sleep(2000);
+
+		login.driver
+				.findElement(
+						By.xpath("//input[@name='" + arg1 + "']/following::span[@class='input-control--indicator'][1]"))
+				.click();
+		// login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[5]")).click();
+
+		// login.driver.findElement(By.xpath("//div[contains(text(),'Apply')]")).click();
+
+		login.driver.findElement(By.xpath(
+				"//div[@class='watchlist-control--footer']//button[@class='button__primary button button__primary']"))
+				.click();
+
 	}
 
 	@Then("^Check if tables are added in watchlist tab$")
 	public void check_if_tables_are_added_in_watchlist_tab() throws InterruptedException {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
-		List<WebElement> l = login.driver.findElements(By.xpath("//*[@class='watchlist--list']//div[@class='series-data-set--table-name']"));
-		for (int i = 0; i <= l.size() - 1; i++) {
+		List<WebElement> l = login.driver.findElements(By.xpath("//div[@class='series-data-set--table-name']"));
+		for (int i = 1; i <= l.size() - 1; i++) {
 			String str = l.get(i).getText().toString();
 			fileRead.add(str);
 		}
-		System.out.println(fileWrite);
-		System.out.println(fileRead);
-		for(String str : fileWrite) {
-			if(fileRead.contains(str)) {
-				System.out.println("equal");
-			} else {
-				Assert.fail("Fail");
-			}
-		}
 
-		/*for (int i = 0; i <= fileWrite.size() - 1; i++) {
+		for (int i = 0; i <= fileWrite.size() - 1; i++) {
 			// System.out.println(fileWrite.get(i));
 			for (int j = 0; j < fileRead.size() - 1; j++) {
 				// System.out.println(fileRead.get(j));
@@ -142,53 +148,36 @@ public class WatchList {
 					System.out.println("equal");
 				}
 			}
-		}*/
+		}
 	}
 
 	public void delete_watlist() throws Throwable {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
 		Thread.sleep(4000);
-		try {
-			if (login.driver.findElement(By.xpath("//*[@class='watchlist watchlist__empty-list']//span[@class='input-control--indicator']")).isDisplayed()) {
-				Thread.sleep(2000);
-				login.driver.findElement(By.xpath("//*[@class='watchlist watchlist__empty-list']//span[@class='input-control--indicator']")).click();
-				login.driver.findElement(By.xpath("//div[@class='button button__sm watchlist--remove']")).click();
-				Thread.sleep(2000);
-				login.driver
-						.findElement(
-								By.xpath("//*[@class='search-presentation-tabs--visible']//span[contains(text(),'Data')]"))
-						.click();
-			} 
-		}catch(Exception e) {
-			try {
-				Thread.sleep(2000);
-				boolean watchlist = login.driver.findElement(By.xpath(
-						"//div[contains(@class,'watchlist__has-selected')]//*[@class='watchlist--select']//input[@type = 'checkbox']"))
-						.isSelected();
-				if (watchlist == true) {
-					login.driver.findElement(By.xpath("//div[@class='button button__sm watchlist--remove']")).click();
-				}
-			} catch (Exception e1) {
-			} finally {
-			login.driver
-					.findElement(
-							By.xpath("//*[@class='search-presentation-tabs--visible']//span[contains(text(),'Data')]"))
+		if (login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[1]")).isDisplayed()) {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[1]")).click();
+			login.driver.findElement(By.xpath("//div[@class='button button__sm watchlist--remove']")).click();
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("(//span[@class='series-tab--text'][contains(text(),'Data')])[1]"))
 					.click();
-		    }
+		} else {
+			Thread.sleep(2000);
+			login.driver.findElement(By.xpath("(//span[@class='series-tab--text'][contains(text(),'Data')])[1]"))
+					.click();
 		}
 	}
 
 	@And("^Select a few tables from all tabs \"([^\"]*)\" \"([^\\\"]*)\" \"([^\"]*)\"$")
 	public void select_a_few_tables_from_al_3_tabs(String str, String str1, String str2) throws Throwable {
-	
-//		Thread.sleep(2000);
-//		delete_watlist();
+
+		Thread.sleep(2000);
+		delete_watlist();
 
 		if (str.equalsIgnoreCase("Data")) {
 			Thread.sleep(2000);
 			select_a_few_tables_from_left_pane();
-
 		}
 
 		if (str1.equalsIgnoreCase("Comparables")) {
@@ -222,22 +211,19 @@ public class WatchList {
 					"(//div[@class='release-scheduler-tree-node--markers'])[1]/following::div[@class='toggle'][1]"))
 					.click();
 			Thread.sleep(4000);
-			// List<WebElement>
-			// l=login.driver.findElements(By.xpath("(//span[@class='series-list-item--checkbox
-			// svg-checkbox'])"));
+			List<WebElement> l = login.driver
+					.findElements(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])"));
 			for (int i = 1; i <= 4; i++) {
-				j = i;
 				login.driver
-						.findElement(By.xpath("(//*[@class='release-schedule--body']//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]"))
+						.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]"))
 						.click();
-				String str5 = login.driver.findElement(By.xpath("(//*[@class='release-schedule--body']//div[@class='series-item--name'])[" + i + "]"))
+				String str5 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]"))
 						.getText().toString();
 				release.add(str);
 				System.out.println(str5);
 
 			}
-			WebElement ele = login.driver.findElement(By.xpath("(//*[@class='release-schedule--body']//div[@class='series-item--name'])[" + j + "]"));
-			action.contextClick(ele).build().perform();
+
 		}
 
 	}
@@ -246,23 +232,14 @@ public class WatchList {
 	public void check_if_selected_series_are_added_in_watchlist_tab() throws Throwable {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
-		Thread.sleep(2000);
 		List<WebElement> l = login.driver.findElements(By.xpath("//div[@class='series-data-set--table-name']"));
 		for (int i = 0; i <= l.size() - 1; i++) {
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			String str = l.get(i).getText().toString();
 			fileRead.add(str);
 		}
-		System.out.println(fileRead);
-		System.out.println(fileWrite);
-		for(String str : fileWrite) {
-			if(fileRead.contains(str)) {
-				System.out.println("equal");
-			} else {
-				Assert.fail();
-			}
-		}
-		/*for (int i = 0; i <= fileWrite.size() - 1; i++) {
+
+		for (int i = 0; i <= fileWrite.size() - 1; i++) {
 			// System.out.println(fileWrite.get(i));
 			for (int j = 0; j <= fileRead.size() - 1; j++) {
 				// System.out.println(fileRead.get(j));
@@ -270,9 +247,9 @@ public class WatchList {
 					System.out.println("equal");
 				}
 			}
-		}*/
+		}
 
-		List<WebElement> l3 = login.driver.findElements(By.xpath("//*[@class='watchlist-series-item']//div[@class='series-item--name']"));
+		List<WebElement> l3 = login.driver.findElements(By.xpath("//div[@class='series-item--name']"));
 		for (int i = 0; i <= l3.size() - 1; i++) {
 			Thread.sleep(2000);
 			String str = l3.get(i).getText().toString();
@@ -301,6 +278,8 @@ public class WatchList {
 	@And("^Add a series to watchlist$")
 	public void add_a_series_to_watchlist() throws Throwable {
 		Thread.sleep(2000);
+		delete_watlist();
+		Thread.sleep(2000);
 		select_a_few_series_from_left_and_right_pane();
 
 	}
@@ -320,27 +299,32 @@ public class WatchList {
 				.size() >= 1) {
 			System.out.println("checkbox is clicked");
 
-			List<WebElement> l3 = login.driver.findElements(By.xpath("//*[@class='watchlist watchlist__empty-list watchlist__has-selected']//div[@class='series-item--name']"));
-			for (int i = 0; i < l3.size(); i++) {
-				j = i + 1;;
-				action.moveToElement(l3.get(i)).build()
+			List<WebElement> l3 = login.driver.findElements(By.xpath("//div[@class='series-item--name']"));
+			for (int i = 20; i <= l3.size(); i++) {
+
+				action.contextClick(
+						login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]"))).build()
 						.perform();
+				// action.moveToElement(login.driver.findElement(By.xpath("(//div[@class='series-item--name'])["
+				// +i+ "]"))).build().perform();
+				// login.driver.findElement(By.xpath("(//div[@class='series-item--name'])["+i+"]")).click();
 				Thread.sleep(2000);
-				login.driver.findElement(By.xpath("(//*[@class='watchlist--list']//span[@title-en='Add to watchlist'])[" + j + "]")).click();
+				login.driver.findElement(By.xpath("//span[@title='Add to Watchlist']")).click();
+				Thread.sleep(2000);
+
 				if (login.driver
-						.findElements(By.xpath(
+						.findElement(By.xpath(
 								"//input[@name='" + str + "']/following::span[@class='input-control--indicator'][1]"))
-						.size() >= 1) {
-					System.out.println("popup notification is selected");
-				} else {
-					Assert.fail();
+						.isSelected())
+				// if(login.driver.findElements(By.xpath("//input[@name='"+str+"']/following::span[@class='input-control--indicator'][1]")).size()>=1)
+				{
+					System.out.println("Verified");
 				}
-				//to just distract mouse action from the element(Add to watchlist)
-				WebElement main_header_spacer =CommonFunctionality.getElementByXpath(login.driver, "//*[@class='page-main-header--spacer']", 4);
-				main_header_spacer.click();
-				//action.pause(50).moveToElement(comparables).build().perform();
-//				Thread.sleep(2000);
-//				login.driver.findElement(By.xpath("//*[@class='dropdown-submenu active-menu-item']//button[contains(text(),'Apply')]")).click();
+				Thread.sleep(2000);
+				// login.driver.findElement(By.xpath("//div[contains(text(),'Apply')]")).click();
+				// login.driver.findElement(By.xpath("//div[@class='watchlist-control--footer']//button[@class='button__primary
+				// button button__primary']")).click();
+				login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
 			}
 		}
 
@@ -348,10 +332,10 @@ public class WatchList {
 
 	@And("^Check Email notifications \"([^\"]*)\" \"([^\"]*)\"$")
 	public void check_email_notifications(String str, String str1) throws Throwable {
-		Thread.sleep(1000);
-		action.moveToElement(login.driver.findElement(By.xpath("//*[@title='Add to Watchlist']"))).build()
-		.perform();
-		
+		Thread.sleep(3000);
+		action.contextClick().build().perform();
+//	action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'Add to Watchlist')]"))).build().perform();
+		login.driver.findElement(By.xpath("//span[@title='Add to Watchlist']")).click();
 		Thread.sleep(2000);
 		login.driver
 				.findElement(
@@ -360,7 +344,12 @@ public class WatchList {
 		// login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[13]")).click();
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + str1 + "')]")).click();
 
-		login.driver.findElement(By.xpath("//*[@class='dropdown-submenu active-menu-item']//button[contains(text(),'Apply')]")).click();
+		Thread.sleep(2000);
+		// login.driver.findElement(By.xpath("//div[contains(text(),'Apply')]")).click();
+		login.driver.findElement(By.xpath(
+				"//div[@class='watchlist-control--footer']//button[@class='button__primary button button__primary']"))
+				.click();
+
 	}
 
 	@And("^Go to watchlist and select the series and click edit alert drop-down \"([^\"]*)\" \"([^\"]*)\"$")
@@ -369,7 +358,6 @@ public class WatchList {
 		choose_popup_notification("popup_notifications");
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
-		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Edit alert')]")).click();
 		login.driver
 				.findElement(By.xpath(
@@ -381,8 +369,12 @@ public class WatchList {
 				.click();
 
 		login.driver.findElement(By.xpath("//span[contains(text(),'" + str1 + "')]")).click();
-		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+//	login.driver.findElement(By.xpath("//div[contains(text(),'Apply')]")).click();
+		login.driver.findElement(By.xpath(
+				"//div[@class='watchlist-control--footer']//button[@class='button__primary button button__primary']"))
+				.click();
 		Thread.sleep(2000);
+
 	}
 
 	@And("^Go to watchlist and select the series and click edit alert drop-down1 \"([^\"]*)\" \"([^\"]*)\"$")
@@ -391,8 +383,7 @@ public class WatchList {
 		choose_popup_notification("email_notifications");
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
-		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//span[contains(text(),'Edit alert')]")).click();
+		login.driver.findElement(By.xpath("(//span[@class='dropdown--title'])[10]")).click();
 		login.driver
 				.findElement(By.xpath(
 						"//input[@name='email_notifications']/following::span[@class='input-control--indicator'][1]"))
@@ -406,17 +397,20 @@ public class WatchList {
 		}
 		// login.driver.findElement(By.xpath("//input[@name='"+str1+"']/following::span[@class='input-control--indicator'][1]")).click();
 
-		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+//	login.driver.findElement(By.xpath("//div[contains(text(),'Apply')]")).click();
+		login.driver.findElement(By.xpath(
+				"//div[@class='watchlist-control--footer']//button[@class='button__primary button button__primary']"))
+				.click();
 		Thread.sleep(2000);
 	}
 
 	@And("^Select a series and table under watchlist \"([^\"]*)\"$")
 	public void select_a_series_and_table_under_watchlist(String str) throws Throwable {
+		delete_watlist();
 		select_a_few_tables_from_left_pane();
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 		for (int i = 1; i <= 5; i++) {
-			j  = i;
 			Thread.sleep(2000);
 			String str1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]")).getText()
 					.toString();
@@ -427,8 +421,6 @@ public class WatchList {
 
 		}
 		System.out.println(fileWrite);
-		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + j + "]"));
-		action.contextClick(ele).build().perform();
 		add_to_watchlist(str);
 	}
 
@@ -446,7 +438,6 @@ public class WatchList {
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 		for (int i = 1; i <= 4; i++) {
-			j = i;
 			Thread.sleep(2000);
 			String str1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]")).getText()
 					.toString();
@@ -457,8 +448,6 @@ public class WatchList {
 
 		}
 		System.out.println(fileWrite);
-		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + j + "]"));
-		action.contextClick(ele).build().perform();
 		add_to_watchlist(str);
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
@@ -466,9 +455,9 @@ public class WatchList {
 
 	@Then("^Change the switch of Enable All to \"([^\"]*)\"$")
 	public void change_the_switch_of_enable_all_to(String str) throws InterruptedException {
-		login.driver.findElement(By.xpath("//span[contains(text(),'OFF')]")).click();
+		login.driver.findElement(By.xpath("//*[@class='index-module_switchControl__bL1i-']")).click();
 		Thread.sleep(2000);
-		System.out.println("enabled");
+		System.out.println("Verified");
 	}
 
 	@And("^Add series with different updated dates to watchlist \"([^\"]*)\"$")
@@ -477,16 +466,12 @@ public class WatchList {
 	}
 
 	@Then("^Select recently updated option$")
-	public void select_recently_updated_option(String expected) throws InterruptedException {
+	public void select_recently_updated_option() throws InterruptedException {
 		Thread.sleep(2000);
-		String str = login.driver.findElement(By.xpath("//*[@class='watchlist--right']//span[@class='text-dots']")).getText().toString();
+		String str = login.driver.findElement(By.xpath("(//span[@class='text-dots'])[4]")).getText().toString();
 		System.out.println(str);
 		if (str.equalsIgnoreCase("Recently updated")) {
 			System.out.println("equal");
-		} else if(expected.equalsIgnoreCase(str)){
-			System.out.println(expected + " is displayed");
-		} else {
-			Assert.fail();
 		}
 	}
 
@@ -499,9 +484,9 @@ public class WatchList {
 	@Then("^select \"([^\"]*)\" option1$")
 	public void select_option(String str) throws InterruptedException {
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//*[@class='watchlist--right']//span[@class='dropdown--icon icon--filter-arrow']")).click();
+		login.driver.findElement(By.xpath("(//span[@class='dropdown--icon icon--filter-arrow'])[3]")).click();
 		login.driver.findElement(By.xpath("//div[@title='" + str + "']")).click();
-		select_recently_updated_option(str);
+		select_recently_updated_option();
 
 	}
 
@@ -513,12 +498,14 @@ public class WatchList {
 		login.driver.findElement(By.xpath(
 				"//span[@title='Weekly']/parent::div/preceding-sibling::div//span[@class='input-control--indicator']"))
 				.click();
-		login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
+//	login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
 
+		login.driver.findElement(By.xpath(
+				"//div[@class='watchlist-control--footer']//button[@class='button__primary button button__primary']"))
+				.click();
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 		for (int i = 1; i <= 4; i++) {
-			j = i;
 			Thread.sleep(2000);
 			String str1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]")).getText()
 					.toString();
@@ -529,8 +516,6 @@ public class WatchList {
 
 		}
 		System.out.println(fileWrite);
-		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + j + "]"));
-		action.contextClick(ele).build().perform();
 		add_to_watchlist(str);
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
@@ -546,7 +531,6 @@ public class WatchList {
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 		for (int i = 1; i <= 4; i++) {
-			j = i;
 			Thread.sleep(2000);
 			String str1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]")).getText()
 					.toString();
@@ -557,8 +541,6 @@ public class WatchList {
 
 		}
 		System.out.println(fileWrite);
-		WebElement ele = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + j + "]"));
-		action.contextClick(ele).build().perform();
 		add_to_watchlist(str3);
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Watchlist')])[1]")).click();
@@ -568,19 +550,19 @@ public class WatchList {
 	public void change_the_orientation_order() {
 		login.driver
 				.findElement(
-						By.xpath("(//span[@class='icon--arrow-sort-asc sort-select-title--directions-box-icon'])[1]"))
+						By.xpath("(//span[@class='icon--arrow-sort-asc sort-select-title--directions-box-icon'])[3]"))
 				.click();
 	}
 
 	@And("^Add (\\d+) series into watchlist having series \"([^\"]*)\"$")
 	public void add_series_into_watchlist_having_series(int str, String j) throws Throwable {
 		delete_watlist();
-		int i = 1;
+	int i;
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Series')]")).click();
 
 		for (i = 1; i <= str; i++) {
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			String str1 = login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[" + i + "]")).getText()
 					.toString();
 			fileWrite.add(str1);

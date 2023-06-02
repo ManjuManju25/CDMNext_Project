@@ -1,3 +1,4 @@
+
 Feature: Verifying Insight Share functionality
 
   @CollabarationSharing
@@ -351,8 +352,7 @@ Feature: Verifying Insight Share functionality
     And Click on "File" > "Protect" > "Edit" > "OFF" > "Apply"
     And Perform first login actions
     Then The newly created insight should appear as "view" permission in next user login
-    And Perform third login actions	
-    
+    And Perform third login actions
 
   @CollabarationSharing
   Scenario: TC_Share_66:Permission - Validate "Edit=Off" for shared insight with manage permission.
@@ -378,7 +378,7 @@ Feature: Verifying Insight Share functionality
     Then Perform "Copy" action by using "Save as" option in the context menu
     And Perform third login actions
 
-  @CollabarationSharing
+  @CollabarationSharing1
   Scenario: TC_Share_68:Permission - Verify save as option under file when "Copy=OFF" and Verify 'Copy' option under insight explorer
     And Click "File" > "New"
     And Create a fresh insight
@@ -390,9 +390,9 @@ Feature: Verifying Insight Share functionality
 
   #---------------------------------------------------------- Internal account --------------------------------------------------------------
   #TC 28 - TC 33
-  @CollabarationSharing
+  @CollabarationSharing1
   Scenario: TC_Share_28:Users - Search for user name/email ID you want to invite.
-    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
+    And Login back to internal user with user "nmaduru" and password "Selenium123"
     And Click "File" > "New"
     And Create a fresh insight
     And Click on "Insight" icon to share insight
@@ -403,7 +403,7 @@ Feature: Verifying Insight Share functionality
     And Click on my insights
     And Click "Shared" tab
     Then The newly created insight should appear as "view" permission in next user login
-    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
+    And Login back to internal user with user "nmaduru" and password "Selenium123"
     And Delete Insight
 
   @CollabarationSharing
@@ -418,7 +418,7 @@ Feature: Verifying Insight Share functionality
     And Click on my insights
     And Click "Shared" tab
     Then The newly created insight should appear as "edit" permission in next user login
-    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
+    And Login back to internal user with user "nmaduru" and password "Automation123$$"
     And Delete Insight
 
   #TC_35 to TC_40
@@ -434,7 +434,7 @@ Feature: Verifying Insight Share functionality
     And Click on my insights
     And Click "Shared" tab
     Then The newly created insight should appear as "view" permission in next user login
-    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
+    And Login back to internal user with user "nmaduru" and password "Automation123$$"
     And Delete Insight
 
   @CollabarationSharing
@@ -449,12 +449,11 @@ Feature: Verifying Insight Share functionality
     And Click on my insights
     And Click "Shared" tab
     Then The newly created insight should appear as "edit" permission in next user login
-    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
+    And Login back to internal user with user "nmaduru" and password "Automation123$$"
     And Delete Insight
 
   @CollabarationSharing
-	
-	  Scenario Outline: TC_Share_41:Verify remove(x) icon.
+  Scenario Outline: TC_Share_41:Verify remove(x) icon.
     And Click "File" > "New"
     And Click "Create insight" to create a new insight
     And Click on "Insight" icon to share insight
@@ -471,7 +470,6 @@ Feature: Verifying Insight Share functionality
 
   @CollabarationSharing
   Scenario Outline: TC_Share_42:Verify selecting user/account/company with permission pre-set for view permission
-   And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Click "File" > "New"
     And Click "Create insight" to create a new insight
     And Click on "Insight" icon to share insight
@@ -482,21 +480,19 @@ Feature: Verifying Insight Share functionality
 
     Examples: 
       | Invite                              | user_name                      |
-     | "External users/accounts/companies" | "ceicsuresh10@gmail.com"       |
-     | "External users/accounts/companies" | "cvision-suresh"               |
-     | "External users/accounts/companies" | "CEIC Development – CDMNext 2" |
+      | "External users/accounts/companies" | "ceicsuresh10@gmail.com"       |
+      | "External users/accounts/companies" | "cvision-suresh"               |
+      | "External users/accounts/companies" | "CEIC Development – CDMNext 2" |
 
-  @CollabarationSharing
+  @CollabarationSharing2
   Scenario Outline: TC_Share_43:Verify selecting user/account/company with permission pre-set for edit permission
-  And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Click "File" > "New"
     And Click "Create insight" to create a new insight
     And Click on "Insight" icon to share insight
     And Click on <Invite> dropdown in share popup
     And The searched user <user_name> is fetching proper results for "can edit"
     And Click on "Save" button to share
-   #Then The same permission can prepopulate in insight share field
-    Then The same permission can prepopulate in insight sharing field
+    Then The same permission can prepopulate in insight share field
 
     Examples: 
       | Invite                              | user_name                      |
@@ -506,20 +502,18 @@ Feature: Verifying Insight Share functionality
 
   @CollabarationSharing
   Scenario: TC_Share_43:Verify selecting user with permission pre-set for manage permission
-   And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
     And Click "File" > "New"
     And Click "Create insight" to create a new insight
     And Click on "Insight" icon to share insight
-   And Click on "External users/accounts/companies" dropdown in share popup
-   And Click on Internal user checkbox dropdown in share popup
-   And The searched user "ceicsuresh10@gmail.com" is fetching proper results for "can manage"
+    And Click on "External users/accounts/companies" dropdown in share popup
+    And The searched user "ceicsuresh10@gmail.com" is fetching proper results for "can manage"
     And Click on "Save" button to share
     Then The same permission can prepopulate in insight share field
     And Rename Insight to Download
 
   @CollabarationSharing
   Scenario: TC_Share_07: Verify 'Share' option for Guest users.
-    And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
+    And Login back to internal user with user "nmaduru" and password "Automation123$$"
     And Click Guest access
     And Click "File" > "New"
     And Click "Create insight" to create a new insight
@@ -540,8 +534,7 @@ Feature: Verifying Insight Share functionality
 
   @CollabarationSharing
   Scenario: TC_Share_48: Verify growl message for shared insight.
-  And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln" 
-   And Enter mail for "Growl message for shared insight" with action as "shared" an insight
+    And Enter mail for "Growl message for shared insight" with action as "shared" an insight
 
   @CollabarationSharing
   Scenario: TC_Share_49: Verify clicking on insight title in growl message
@@ -562,7 +555,6 @@ Feature: Verifying Insight Share functionality
   #TC_Share_59 - TC_Share-61
   @CollabarationSharing
   Scenario: TC_Share_59: Verify notification for changes in shared insight
- # And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln" 
     And Enter mail for "Notification for changes in shared insight" with action as "sharing" an insight
 
   @CollabarationSharing
@@ -571,6 +563,6 @@ Feature: Verifying Insight Share functionality
 
   @CollabarationSharing
   Scenario: Tc_Share_73: Verify Notifications when turn ON notification under Profile dropdown
-   #And Login back to internal user with user "svenkatraju" and password "z0lfdt?Dkjln"
-   And Enter mail for "Notification growl" with action as "Turn ON notifications" the insight
-   #And Login back to default execution login
+    And Enter mail for "Notification growl" with action as "Turn ON notifications" the insight
+    And Login back to default execution login
+

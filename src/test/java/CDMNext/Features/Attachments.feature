@@ -6,7 +6,7 @@ Feature: Verifying Attachments Visual functionality
     And Click on Insert Attachments
     Then Attachments should be inserted
 
-  @Attachments
+  @Attachments1
   Scenario: TC_Attachments_02:Verify 'Insert Attachments' creating by drag and drop
     And Go to View tab
     And Drag and drop Attachments visual to the page
@@ -15,183 +15,160 @@ Feature: Verifying Attachments Visual functionality
   @Attachments
   Scenario: TC_Attachments_03:Title - Verify Title for Attachments
     And Create a Attachments visual
-    #And Click on "Title" option on visual header
-    And Mouse hover on Edit Visual title and click on it
+    And Click on "Title" option on visual header
     Then The "Title" popup should be displayed
 
   @Attachments
   Scenario: TC_Attachments_04:Verify 'Title' display ON
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Check the box for the title name
     Then The title name should reflect on the Attachments
 
   @Attachments
   Scenario: TC_Attachments_05:Verify 'Title' display OFF
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Uncheck the box for the title name
     Then No title name should display for the Attachments
 
   @Attachments
   Scenario: TC_Attachments_06:Verify visual title field
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Check the box and enter the title name as "New Attachments"
     Then The Attachments should update the "title" name to "New Attachments"
 
   @Attachments
   Scenario: TC_Attachments_07:Verify text color
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Choose text color is blue
     Then The Attachments should update the "title" text color as blue
 
   @Attachments
   Scenario: TC_Attachments_08:Verify highlight color
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Choose highlight color is Orange
     Then The Attachments should update the "title" highlight color as Orange
 
   @Attachments
   Scenario: TC_Attachments_09:Verify 'font size'
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Choose "20" from the drop-down for the font size
     Then The Attachments should update the "title" font as "20"
 
   @Attachments
   Scenario: TC_Attachments_10:Verify title in bold style
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on Bold icon for "title"
     Then The visual "title" should be in bold style
 
   @Attachments
   Scenario: TC_Attachments_11:Verify title in Italic style
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on Italic under style
     Then The visual "title" should be "italic"
 
   @Attachments
   Scenario: TC_Attachments_12:Verify title as underlined
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on Underline icon for "title"
     Then The visual "title" should be "underline"
 
   @Attachments
   Scenario: TC_Attachments_13:Verify horizontal alignment (left, right, center)
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on left,center and right alignment for title
     Then The title should align to "left" , "center" and "right" as user set
 
   @Attachments
   Scenario: TC_Attachments_14:Subtitle - Verify subtitle by default
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Expand subtitle
     Then The Subtitle should be disabled by default
 
   @Attachments
   Scenario: TC_Attachments_15:Attachments subtitle display=YES
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Check the box for sub-title
     Then The "Sub title" should reflect on the Attachments
 
   @Attachments
   Scenario: TC_Attachments_16:Attachments subtitle display=NO
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Uncheck the box for sub-title
     Then No sub-title name should be displayed
 
   @Attachments
   Scenario: TC_Attachments_17:Sub-title field
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Check the box and enter the sub-title name as "New subtitle"
     Then The Attachments should update the "sub_title" name to "New subtitle"
 
   @Attachments
   Scenario: TC_Attachments_18:Verify Sub-title text color
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Choose text color is blue for subtitle
     Then The Attachments should update the "sub_title" text color as blue
 
   @Attachments
   Scenario: TC_Attachments_19:Subtitle > Verify highlight color
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Choose highlight color is Orange for subtitle
     Then The Attachments should update the "sub_title" highlight color as Orange
 
   @Attachments
   Scenario: TC_Attachments_20:Subtitle > Verify 'font size'
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Choose "10" from the drop-down for the font size of subtitle
     Then The Attachments should update the "sub_title" font as "10"
 
   @Attachments
   Scenario: TC_Attachments_21:Verify Subtitle in bold style
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on B under style for sub-title
     Then The visual "sub_title" should be in bold style
 
   @Attachments
   Scenario: TC_Attachments_22:Verify Subtitle in Italic style
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on Italic under style for sub-title
     Then The visual "sub_title" should be "italic"
 
   @Attachments
   Scenario: TC_Attachments_23:Verify Subtitle as underlined
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on Underline icon for sub-title
     Then The visual "sub_title" should be "underline"
 
   @Attachments
   Scenario: TC_Attachments_24:Verify horizontal alignment (left, right, center) of sub_title
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on left,center and right alignment for sub_title
     Then The sub_title should align to "left" , "center" and "right" as user set
 
   @Attachments
   Scenario: TC_Attachments_25:Verify closing of titles popup
     And Create a Attachments visual
-    #And Click on visual title
-    And Mouse hover on Edit Visual title and click on it
+    And Click on visual title
     And Click on X icon to close the popup
     Then The "Title" popup should be closed
 
@@ -582,35 +559,35 @@ Feature: Verifying Attachments Visual functionality
     Then Attachments should be deleted
 
   @Attachments
-  Scenario: TC_Attachments_74:Right click - Verify chart under Add chart
+  Scenario: TC_Attachments_74:Right click - Verify chart under insert visual
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Chart"
     Then "Chart" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_75:Right click - Verify Map under Add chart
+  Scenario: TC_Attachments_75:Right click - Verify Map under insert visual
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Map"
     Then "Map" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_76:Right click - Verify Table under Add chart
+  Scenario: TC_Attachments_76:Right click - Verify Table under insert visual
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Table"
     Then "Table" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_77:Right click - Verify Heat map under Add chart
+  Scenario: TC_Attachments_77:Right click - Verify Heat map under insert visual
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Heat map"
     Then "Heat map" visual should be created in the same view tab
 
   @Attachments
-  Scenario: TC_Attachments_78:Right click - Verify Histogram under Add chart
+  Scenario: TC_Attachments_78:Right click - Verify Histogram under insert visual
     And Create a Attachments visual
     And Right click on visual header
     And Choose Add chart as "Histogram"

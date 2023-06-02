@@ -1,4 +1,5 @@
-Feature: Verify shared saved search from search panel.
+	
+	Feature: Verify shared saved search from search panel.
 
   @Sprint5_2_2
   Scenario: TC_19719_01 : Verify sharing saved search from search panel.
@@ -8,12 +9,12 @@ Feature: Verify shared saved search from search panel.
     And Enters username username
     And Enters password password
     When User clicks on "login"
-    # And Login to the shared user account.
-    Then check for shared search under "saved search".
-
+    #And Login to the shared user account.
+    Then check for shared search under "saved search".	
+    
   @Sprint5_2_2
   Scenario: TC_19719_02 : Verify running search by selecting saved search.
-    # And waittime
+    And waittime
     Given User enters "India" in the search panel and save the search and click on the share icon
     And select a user and share.
     And Launch the private window
@@ -23,7 +24,7 @@ Feature: Verify shared saved search from search panel.
     #And Login to the shared user account.
     Then select Shared Search.
 
-  @Sprint5_2_2
+   @Sprint5_2_2
   Scenario: TC_19719_03 : Verify share icon for shared search.
     Given User enters "India" in the search panel and save the search and click on the share icon
     And select a user and share.
@@ -31,7 +32,7 @@ Feature: Verify shared saved search from search panel.
     And Enters username username
     And Enters password password
     When User clicks on "login"
-    # And Login to the shared user account.
+    #And Login to the shared user account.
     Then Move the mouse on "shared search" under Share with Me.
 
   @Sprint5_2_2
@@ -55,14 +56,14 @@ Feature: Verify shared saved search from search panel.
     When User clicks on "login"
     #And Login to the shared user account.
     And Click on Copy Icon and open browser.
+    Then Run in the browserand copy the URL in the new Tab
 
-  #Then Run in the browserand copy the URL in the new Tab
-  @Sprint5_2_2
+@Sprint5_2_2
   Scenario: TC_19719_06 : Verify growl message for sharing saved search.
     Given User enters "India" in the search panel and save the search and click on the share icon
     And select a user and share and growl message should be displayed.
 
-  @Sprint5_2_2
+ @Sprint5_2_2
   Scenario: TC_19719_07 : Verify stop sharing saved search..
     Given User enters "India" in the search panel and save the search and click on the share icon
     And select a user and share.
@@ -70,10 +71,11 @@ Feature: Verify shared saved search from search panel.
     And Enters username username
     And Enters password password
     When User clicks on "login"
-    # And Login to the shared user account.
+    #And Login to the shared user account.
     And select Shared Search option.
     And stop sharing saved Search.
-    And Check for Shared Search
+    And Check for Shared Search	
+    
 
   @Sprint5_2_2
   Scenario: Verify copy icon for saved search.
@@ -152,10 +154,10 @@ Feature: Verify shared saved search from search panel.
     And Enters username username
     And Enters password password
     When User clicks on "login"
-    # And Login to the shared user account.
     And check for shared style.
     And stop sharing saved Style.
     Then check for Shared style under shared with me.
+
 
   @Sprint5_2_2
   Scenario: TC_14304_01: Verify check box for Data tab.
@@ -170,8 +172,9 @@ Feature: Verify shared saved search from search panel.
 
   #@Sprint5_2_2
   #Scenario: TC_12173_01: Verify frozen date column in table visual.
-  #Given user creates a table visual with 10 series.
-  #And scroll horizontal and verify the date column.
+    #Given user creates a table visual with 10 series.
+    #And scroll horizontal and verify the date column.
+
   @Sprint5_2_2
   Scenario: TC_14859_01 : Verify tooltip for 'fx' option under download popup.
     Given user clicks on Download window.
@@ -181,7 +184,6 @@ Feature: Verify shared saved search from search panel.
   Scenario: TC_19891_01 : Verify unchecking the show copyright checkbox.
     Given user clicks on view and edit profile information.
     And click on change for copyright.
-    And uncheck the checkbox for copyright.
     Then All options under setup should be greyed out when unchecked.
 
   @Sprint5_2_2
@@ -217,14 +219,16 @@ Feature: Verify shared saved search from search panel.
   @Sprint5_2_2
   Scenario: TC_	20334_01: Verify 0 observation series for external users.
     Given user Clicks on Login to CDMNext with an external account
-    Then Search for 0 observation series : "291668204 286849804".
+    Then Search for 0 observation series : "299244904 299241004".
 
   #@Sprint5_2_2
   #Scenario: TC_14144_01: Verify the title checkbox when removing custom text in the title popup under edit visual.
   # Given user selects View as a Histogram from More actions
-  # And clicks on edit Histogram and enter title as "shankar".
-  #And Title > Add your title for the visual > displayed on visual
-  #Then Removes the title.
+   # And clicks on edit Histogram and enter title as "shankar".
+    #And Title > Add your title for the visual > displayed on visual
+    #Then Removes the title.	
+    
+
   @Sprint5_2_2
   Scenario: TC_20431_02 : Verify comparables based on non applicable source
     Given user Search with sources: "Central bureau of statistics"
@@ -255,14 +259,14 @@ Feature: Verify shared saved search from search panel.
   Scenario: TC_19793_07: Verify  Search:Improve the source display in the search filter "Sources".
     Given user selects Goto sources dropdown in search pane.
     And enter "CEIC Data" in search feild.
-
-  @Sprint5_2_2
+    
+     @Sprint5_2_2
   Scenario: TC_20272_01: Source filter: search by abbreviation.
     Given user clicks on source filter.
     And apply some filters by abbreviation : "MOF" and "ABIPLAST".
     And by default top matches option is displayed.
-
-  @Sprint5_2_2
+    
+     @Sprint5_2_2
   Scenario: TC_20272_02: Source filter: search by abbreviation when "All sources" option is selected
     Given user clicks on source filter.
     And apply some filters by abbreviation : "MOF" and "ABIPLAST".
@@ -271,7 +275,7 @@ Feature: Verify shared saved search from search panel.
   Scenario: TC_20272_03: Source filter: search by abbreviation when "Exclude Value" checkbox is check
     Given user clicks on source filter.
     And apply some filters in search bar like : "MOF" and "ABIPLAST".
-    And by default top matches option is displayed.
+     And by default top matches option is displayed.
 
   @Sprint5_2_2
   Scenario: TC_20272_04: Source filter: search by abbreviation when "Exclude Value" checkbox is uncheck
@@ -317,21 +321,22 @@ Feature: Verify shared saved search from search panel.
     And check for orange series.
     And expand release tab for green series.
     And Open database for purple series.
-
-  @Sprint5_2_2
+    
+     @Sprint5_2_2
   Scenario: TC_20270_03: Verify border and scroll bar for saved search.
     Given user enters five saved searches and scroll bar should be displayed.
     And Delete the saved searches.
-    
-
-  @Sprint5_2_2
+   
+     @Sprint5_2_2
   Scenario: TC_20210_11: Search: Replacement icon is missing for series having both continuous and replacements.
     Given user selects S from More Actions.
-    And User has clicked on "Apply filter"
+     And User has clicked on "Apply filter"
     And Replacement series should be shown.
     And selects C from More Actions.
     And User has clicked on "Apply filter"
     And Continuos series should be shown.
+    
+    
 
   @Sprint5_2_2
   Scenario: TC_19791_04: Implement a tab for continuous series in the Insight summary popup
@@ -339,46 +344,42 @@ Feature: Verify shared saved search from search panel.
     And User has clicked on "Apply filter"
     And user selects some series into my series tab
     And click on refresh Insight.
-
-  @Sprint5_2_2
+    
+    @Sprint5_2_2
   Scenario: TC_20333: Verify accessible to Test topics to external user accounts.
     Given user logins with external account
     And access comparables tab.
+    
 
-  #@Sprint5_2_2
-  #Scenario: TC_20270_03: Verify email field for Non-email users.
-  # Given user Logout from current user
-  #And User logins into CDM Next with Username : "suresh" and Password : "Ceic@123".
-  #Then Check for Email Id field for watchlist across the application.
+  		@Sprint5_2_2
+  Scenario: TC_20270_03: Verify email field for Non-email users.
+    Given user Logout from current user
+    And User logins into CDM Next with Username : "suresh" and Password : "Ceic@123".
+    Then Check for Email Id field for watchlist across the application.
+
   #=========================Internal Account=========================================================================
   @Sprint5_2_2
   Scenario: TC_20076_01 : Verify "CEIC Insights" under notification if shared insight from internal user.
     Given user Logout from current user
-    And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkjln"
+    And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkj"
     And Share insight "Company" from internal to external account.
     And Login to shared user account.
-    And Login to the shared user account.
     Then Notification > check for the shared user name.
-
- # @Sprint5_2_2
-  #Scenario: TC_20060_01 : Verify 'FocusEconomics' under Analysis tab.
-    #Given user Logout from current user
-   # And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkjln"
-    #And Navigate to Analysis > FocusEconomics
-    #Then The folder name should be 'FocusEconomics'(oneword).
-
+	
+	
   @Sprint5_2_2
-  Scenario: TC_19984_01 : Verify indication for internal series when the 'Show all' filter is applied.
+  Scenario: TC_20060_01 : Verify 'FocusEconomics' under Analysis tab.
     Given user Logout from current user
-    And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkjln"
+    And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkj"
+    And Navigate to Analysis > FocusEconomics
+    Then The folder name should be 'FocusEconomics'(oneword).
+
+  @Sprint5_2_2	
+  
+  Scenario: TC_19984_01 : Verify indication for internal series when the 'Show all' filter is applied.
+    Given user Logout from current user	
+    And Logins with internal account with username : "svenkatraju" and Password : "z0lfdt?Dkj"
     And Search "Table CN.GE" in the search field.
     And select ShowAll filter.
     And Open DB > Topic >Section>Table.
     Then Orange and Green dots should display to indicate Orange as internal series and Green as Matched series.
-
-  @Sprint5_2_2
-  Scenario: TC_19598_01: Verify email field for Non-email users.
-    Given user Logout from current user
-    And User logins into CDM Next with Username : "suresh" and Password : "Ceic@123".
-    And Login to the shared user account.
-    Then Check for Email Id field for watchlist across the application.

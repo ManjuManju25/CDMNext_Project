@@ -792,7 +792,6 @@ public void set_Db_language_for_WTP_as_chinese() throws Throwable
 	action.moveToElement(login.driver.findElement(By.xpath("(//span[@title-en='Translate'])[1]"))).click().perform();
 	Thread.sleep(2000);
 	action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'中文')]"))).click().perform();
-
 }
 @And("^Search for series \"([^\"]*)\" and create SSP$")
 public void Search_for_series_and_create_SSP(int i)

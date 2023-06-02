@@ -126,8 +126,8 @@ public class KeyboardShortcuts {
 			break;
 		case "L":
 			// before perform keyboard action
-			activeElement = CommonFunctionality.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_button__selected')]/*", 15)
-					.getAttribute("title");
+			activeElement = CommonFunctionality.getElementByXpath(login.driver, "//*[@class='series-tab active']", 15)
+					.getText();
 			CommonFunctionality.wait(500);
 			rb = new Robot();
 			rb.keyPress(KeyEvent.VK_L);
@@ -165,10 +165,9 @@ public class KeyboardShortcuts {
 		hs.create_a_Histogram_visual_without_selecting_series();
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(10000);
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		CommonFunctionality.wait(4000);
 		CommonFunctionality.getElementByXpath(login.driver, "//*[@class='add-to-data-selection--icon']", 30).click();
-		CommonFunctionality.wait(4000);
 	}
 
 	@Then("^The selected series should be cut$")
@@ -215,7 +214,6 @@ public class KeyboardShortcuts {
 
 	@And("^Delete the selected series$")
 	public void delete_the_selected_series() throws Throwable {
-		CommonFunctionality.wait(1000);
 		DeleteSeries();
 	}
 
@@ -310,10 +308,10 @@ public class KeyboardShortcuts {
 				"//*[text()='Databases']", 4).click();
 		CommonFunctionality.getElementByProperty(login.driver, "Daily_db", 10).click();
 		login.Log4j.info("Clicking on Database level");
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(500);
 		CommonFunctionality.getElementByXpath(login.driver,
 				"//div[@data-node-model-id='DAILY']/following::*[@class='toggle'][1]", 4).click();
-		CommonFunctionality.wait(1000);
+		CommonFunctionality.wait(500);
 		CommonFunctionality
 				.getElementByProperty(login.driver,
 						"Expand3rdLevel", 4)
@@ -327,7 +325,7 @@ public class KeyboardShortcuts {
 	@Then("^Press left arrow key on KB$")
 	public void press_left_arrow_key_on_KB() throws Throwable {
 		WebElement ele = CommonFunctionality.getElementByProperty(login.driver,
-				"Global_db", 10);
+				"Deposit_rates", 10);
 		ele.click();
 		actions.sendKeys(ele, Keys.ARROW_LEFT).build().perform();
 
@@ -367,7 +365,7 @@ public class KeyboardShortcuts {
 	public void add_some_series_to_the_Data_tab() throws Throwable {
 		Thread.sleep(3000);
 		login.Log4j.info("Clicking on  Series tab ");
-		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series_Tab"))).click();
+		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Series"))).click();
 		//WebElement ul_element = login.driver.findElement(By.cssSelector(login.LOCATORS.getProperty("UL")));
 //		List<WebElement> li_All = ul_element.findElements(By.tagName(login.LOCATORS.getProperty("List")));
 		List<WebElement> li_All = login.driver.findElements(By.xpath("//div[@class='series-representation--list']/*//*[@class='series-item--name']"));
@@ -391,7 +389,7 @@ public class KeyboardShortcuts {
 
 	@And("^Press \"([^\"]*)\" for select all series$")
 	public void press_for_select_all_series(String arg1) throws Throwable {
-		CommonFunctionality.wait(1500);
+		CommonFunctionality.wait(500);
 		actions.keyDown(Keys.CONTROL);
 		actions.sendKeys("a");
 		actions.keyUp(Keys.CONTROL);
@@ -401,10 +399,12 @@ public class KeyboardShortcuts {
 	@Then("^All the series in data tab should be selected$")
 	public void all_the_series_in_data_tab_should_be_selected() throws Throwable {
 		CommonFunctionality.wait(2000);
-//		Boolean series_panel_selected = login.driver.findElement(By.xpath("//*[@class='series-panel--selected']"))
-//				.isDisplayed();
-		Boolean input_control_checkbox_selected = login.driver.findElement(By.xpath("//*[@class='input-control ']//input[@type='checkbox']")).isSelected();
-		if (input_control_checkbox_selected == true) {
+		Boolean series_panel_selected = login.driver.findElement(By.xpath("//*[@class='series-panel--selected']"))
+				.isDisplayed();
+		WebElement selected = CommonFunctionality.getElementByXpath(login.driver,
+				"//*[@class='input-control--indicator']//*[@class='icon']//following::*[contains(@class,'list-container')]",
+				4);
+		if (selected.getAttribute("class").contains("all-selected") && series_panel_selected == true) {
 			login.Log4j.info("All the series in My series tab is selected");
 		} else {
 			Assert.fail("All the series in My series tab is not selected");
@@ -457,7 +457,6 @@ public class KeyboardShortcuts {
 
 	@Then("^The visual should be replaced the series with selected series$")
 	public void the_visual_should_be_replaced_the_series_with_selected_series() throws Throwable {
-		CommonFunctionality.wait(1000);
 		String After_replacement = CommonFunctionality.getElementByXpath(login.driver, "//*[@data-name='title']", 8)
 				.getText();
 		if (!before_replace_titleText.equals(After_replacement)) {
@@ -483,9 +482,8 @@ public class KeyboardShortcuts {
 
 	@Then("^The Data tab should be Swich to list/table mode$")
 	public void the_Data_tab_should_be_Swich_to_list_table_mode() throws Throwable {
-		login.Log4j.info(activeElement);
 		String currentActiveElement = CommonFunctionality
-				.getElementByXpath(login.driver, "//*[contains(@class,'index-module_toggle_button__selected')]", 15).getAttribute("title");
+				.getElementByXpath(login.driver, "//*[@class='series-tab active']", 15).getText();
 		if (!activeElement.equalsIgnoreCase(currentActiveElement)) {
 			login.Log4j.info("The data tab switched to list/table mode ");
 		} else {

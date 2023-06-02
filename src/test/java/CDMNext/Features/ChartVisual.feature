@@ -8,24 +8,23 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_02: Verify if chart is created for more than 20 series
-    And Select 5 series for chart and click on chart option
-     And Closing the Series Harmonization popup
-     Then Validation message should appear and chart is created only with 5 series
-    
+    #And Setting values in preference
+    And Select 21 series for chart and click on chart option
+    Then Validation message should appear and chart is created only with 20 series
 
-  #@ChartVisual
-  #Scenario: TC_Chart_03: Verify double click on Chart option
-   # And Click to create an empty visual
-    #And Hovor on Insert Chart
-    #And "DoubleClick" the Insert option
-    #Then Chart visual should add to view area by "DoubleClick"
+  @ChartVisual
+  Scenario: TC_Chart_03: Verify double click on Chart option
+    And Click to create an empty visual
+    And Hovor on Insert Chart
+    And "DoubleClick" the Insert option
+    Then Chart visual should add to view area by "DoubleClick"
 
-  #@ChartVisual
-  #Scenario: TC_Chart_04: Verify Drag and drop of Chart option
-   # And Click to create an empty visual
-    #And Hovor on Insert Chart
-    #And "Drag and Drop" the Insert option
-    #Then Chart visual should add to view area by "DragandDrop"
+  @ChartVisual
+  Scenario: TC_Chart_04: Verify Drag and drop of Chart option
+    And Click to create an empty visual
+    And Hovor on Insert Chart
+    And "Drag and Drop" the Insert option
+    Then Chart visual should add to view area by "DragandDrop"
 
   @ChartVisual
   Scenario: TC_Chart_05: Verify Options for Chart Visual
@@ -43,9 +42,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_07: Verify if 'Default' format is retained for Chart option
     And Select few series
-    #And Click on more actions
-    And Click on more actions to create=>View as chart.
-   # And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Edit" visual
     And Select the style title as "Default"
     And Check the style attribute title
@@ -57,9 +55,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_08: Verify if 'Max-Min Observations' format is retained for Chart option
     And Select few series
-    #And Click on more actions
-    And Click on more actions to create=>View as chart.
-   # And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Edit" visual
     And Select the style title as "Max-Min Observations"
     And Check the style attribute title
@@ -70,9 +67,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_09: Verify if 'Clean' format is retained for Chart option
     And Select few series
-   # And Click on more actions
-   And Click on more actions to create=>View as chart.
-   # And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Edit" visual
     And Select the style title as "Clean"
     And Check the style attribute title
@@ -83,9 +79,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_10: Verify if 'All values' format is retained for Chart option
     And Select few series
-   # And Click on more actions
-    And Click on more actions to create=>View as chart.
-    #And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Edit" visual
     And Select the style title as "All values"
     And Check the style attribute title
@@ -96,9 +91,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_11: Verify if 'Values and legend on top' format is retained for Chart option
     And Select few series
-    #And Click on more actions
-    And Click on more actions to create=>View as chart.
-    #And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Edit" visual
     And Select the style title as "Values and legend on top"
     And Check the style attribute title
@@ -108,8 +102,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_12: Check default style applied for chart data
-    And Search for the series with SID "398155157;398155397" in search bar
-    #And Search for the series with SID "398155157;398155397"
+    And Search for the series with SID "398155157;398155397"
     And Closing the Series Harmonization popup
     And Click to create an empty visual
     And Perform DragDrop operation in "Line" Chart
@@ -161,8 +154,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_16: Verify chart title value
-   # And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -174,8 +166,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_17: Verify color - 'text and highlight'
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Double click on highcharts "title"
@@ -188,8 +179,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_18: Verify chart title font size
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Double click on highcharts "title"
@@ -206,24 +196,20 @@ Feature: Verifying Chart Visual Functionality
     And Select the "Style" for "title"
     Then The chart should update the "Style" selected for "title"
 
-  @ChartVisual
+  @ChartVisual23
   Scenario: TC_Chart_20: Verify style - 'horizontal alignment' (left, right, center)
     And Search for the series with SID "181804102;116315408"
     And Click on more actions to create "View as Chart"
     And Click on "Edit" visual
-     And I click on Advanced settings popup "Title"
+    And Double click on highcharts "title"
     And Click on "left" alignment
-  #  And Capture Screenshot
+    And Capture Screenshot
     Then The chart should update the "left" alignment
-    And Click on "Edit" visual
-     And I click on Advanced settings popup "Title"
     And Click on "center" alignment
-   # And Capture Screenshot
+    And Capture Screenshot
     Then The chart should update the "center" alignment
-    And Click on "Edit" visual
- And I click on Advanced settings popup "Title"
     And Click on "right" alignment
-    #And Capture Screenshot
+    And Capture Screenshot
     Then The chart should update the "right" alignment
     And Resetting back the width to original
 
@@ -251,7 +237,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_23: Verify Sub-title value
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -263,7 +249,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_24: Verify Sub-title Color - 'text and highlight'
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -305,10 +291,9 @@ Feature: Verifying Chart Visual Functionality
     And Select the "Style" for "sub_title"
     Then The chart should update the "Style" selected for "sub_title"
 
-  @ChartVisual
+  @ChartVisual2
   Scenario Outline: TC_Chart_27: Verify visual area 'Horizontal alignment'(left, right, center)
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -323,8 +308,7 @@ Feature: Verifying Chart Visual Functionality
       | align    | verify   |
       | "Left"   | "Left"   |
       | "Center" | "Center" |
-      | "Right"  | "Right"  |	
-      
+      | "Right"  | "Right"  |
 
   @ChartVisual
   Scenario: TC_Chart_30: Check for Image proportion percentage change horizontally
@@ -352,11 +336,10 @@ Feature: Verifying Chart Visual Functionality
     And Click on "Chart background" option in Edit visual
     And Click on the "Chart" checkbox to be "Checked"
     And Select any "color" for chart visual
-    And select "#2b60d0" from more colors option
-   # And Select "#2b60d0" color from list
+    And Select "#2b60d0" color from list
     Then The color of background should be updated
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_33: Verify chart area background image
     And Search for the series with SID "1355101;353749717"
     And Click on chart option from hover
@@ -374,7 +357,7 @@ Feature: Verifying Chart Visual Functionality
     And Clicking "Save" option
     And Closing the chart visual
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_35: Verify chart area border color
     And Search for the series with SID "1355101;353749717"
     And Click on chart option from hover
@@ -383,12 +366,11 @@ Feature: Verifying Chart Visual Functionality
     And Click on the Visual "Border:" Container for "Chart"
     And Click on the "Chart" checkbox to be "Checked"
     And Select any "color" for chart visual
-    And select "#2b60d0" from more colors option
-    #And Select "#2b60d0" color from list
+    And Select "#2b60d0" color from list
     And Clicking "Save" option
     Then The color of border should be updated
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_36: Verify chart area border width
     And Search for the series with SID "1355101;353749717"
     And Click on chart option from hover
@@ -407,8 +389,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_37: Verify chart area border radius
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -435,8 +416,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisualScreenshot
   Scenario: TC_Chart_39: Verify different line charts
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Click on Apply in Series Harmonization popup except for "9380901;9380801"
     And Click on "Edit" visual
@@ -508,14 +488,13 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_43: Check if the default axis is 'left'
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on more actions to create "View as Chart"
     And Click on Apply in Series Harmonization popup except for "9380901;9380801"
     And Click on "Edit" visual
     And Click on the "Values axis" checkbox to "Check"
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_45_01: Verify reverse direction values on left axis
     And Setting the values in preference
     And Search for the series with SID "51287302;383440717"
@@ -553,7 +532,7 @@ Feature: Verifying Chart Visual Functionality
     And Check the checkbox for "Logarithmic" sections
     And Observe the value order "after" selecting "Logarithmic" for "Left Axis"
 
-  @ChartVisual
+  @ChartVisual2
   Scenario: TC_Chart_46_01: Verify reverse direction values on right axis
     And Setting the values in preference
     And Search for the series with SID "51287302;383440717"
@@ -580,7 +559,7 @@ Feature: Verifying Chart Visual Functionality
     And Closing the Series Harmonization popup
     And Click on Edit Chart
     And Click on the "Values axis" checkbox to "Check"
-    And Activate the "Right Axis" header	
+    And Activate the "Right Axis" header
     And Expanding "Axis Setup" section from "Values Axis" popup of "Right Axis"
     And Uncheck the checkbox for "Logarithmic" sections
     And Observe the value order "before" selecting "Logarithmic" for "Right Axis"
@@ -591,7 +570,7 @@ Feature: Verifying Chart Visual Functionality
     And Check the checkbox for "Logarithmic" sections of Right Axis
     And Observe the value order "after" selecting "Logarithmic" for "Right Axis"
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_47: Verify title name, color, hightlight, size in left axis
     And Search for the series with SID "51287302;383440717"
     And Click on chart option from hover
@@ -602,12 +581,11 @@ Feature: Verifying Chart Visual Functionality
     And Expand "Title" section from "Values Axis" popup
     And Check the checkbox for "Title" section
     And Enter the text "Shravas" for axis title
-    And Select "Y axis font size" for chart visual to 18
     And Select any "Axis Title Color" for chart visual
     And Select the "#2b60d0" y axis color from list
     And Select any "Axis Title Background Color" for chart visual
     And Select the "#fda546" y axis bgcolor from list
-    #And Enter font size of 18 in the list for "title"
+    And Select "Y axis font size" for chart visual to 18
     Then Verify the changes are reflecting in Chart visual for "Left Axis"
 
   @ChartVisual
@@ -621,13 +599,11 @@ Feature: Verifying Chart Visual Functionality
     And Expanding "Title" section from "Values Axis" popup of "Right Axis"
     And Check the checkbox for "Title" section for Right axis
     And Enter the text "Shravas" for right axis title
-    And Select "Y axis Right font size" for chart visual to 18
+    And Select any "Axis Title Right Color" for chart visual
+    And Select the "#2b60d0" y axis right color from list
     And Select any "Axis Title Right Background Color" for chart visual
     And Select the "#fda546" y axis right bgcolor from list
-    And Select any "Axis Title Right Color" for chart visual
-    And select "#2b60d0" from more colors option
-    #And Select "#2b60d0" color from list
-    #And Select the "#2b60d0" y axis right color from list
+    And Select "Y axis Right font size" for chart visual to 18
     Then Verify the changes are reflecting in Chart visual for "Right Axis"
 
   @ChartVisual
@@ -680,8 +656,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_52: Verify title axis intervals for 'x' and 'y' axis
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -697,10 +672,9 @@ Feature: Verifying Chart Visual Functionality
     Then Verify that Intervals should update as per inputs
     And Resetting back the width to original
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_53: Values labels color
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -719,8 +693,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_54: Values labels size
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -734,8 +707,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_55: Values labels style
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -748,8 +720,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_56: Values labels rotation
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -766,30 +737,30 @@ Feature: Verifying Chart Visual Functionality
     And Revert the "Value_label_rotation" for chart visual to 0
     And Resetting back the width to original
 
-  #@ChartVisual
-  #Scenario Outline: TC_Chart_57: Values number format
-   # And Search for the series with SID "230795002;230795102"
-    #And Click on chart option from hover
-    #And Closing the Series Harmonization popup
-    #And Click on "Edit" visual
-    #And Click on the "Values axis" checkbox to "Check"
-    #And Expand "Number format" section from "Values Axis" popup
-    #And Click on "Number format" dropdown under "Values Axis" popup
-    #And Click on "Decimal places" in format and enter value as 3
-    #And Enter <decimal> and <grouping> separator for Value axis
-    #And Get Text on "Decimal places" in Chart visual
-    #And Get Value of "Decimal separator" in Preference
-    #And Get Value of "Grouping separator" in Preference
-    #And Clicking "Save" option
-    #And Get the updated Chart visual value
-    #Then "Decimal places" , "Decimal Separator" , "Grouping Separator" values has been updated
+  @ChartVisual2
+  Scenario Outline: TC_Chart_57: Values number format
+    And Search for the series with SID "230795002;230795102"
+    And Click on chart option from hover
+    And Closing the Series Harmonization popup
+    And Click on "Edit" visual
+    And Click on the "Values axis" checkbox to "Check"
+    And Expand "Number format" section from "Values Axis" popup
+    And Click on "Number format" dropdown under "Values Axis" popup
+    And Click on "Decimal places" in format and enter value as 3
+    And Enter <decimal> and <grouping> separator for Value axis
+    And Get Text on "Decimal places" in Chart visual
+    And Get Value of "Decimal separator" in Preference
+    And Get Value of "Grouping separator" in Preference
+    And Clicking "Save" option
+    And Get the updated Chart visual value
+    Then "Decimal places" , "Decimal Separator" , "Grouping Separator" values has been updated
 
-    #Examples: 
-      #| decimal | grouping |
+    Examples: 
+      | decimal | grouping |
       #| ","     | ","      |
       #| "."     | "."      |
-      #| ","     | "."      |
-      #| ","     | "Space"  |
+      | ","     | "."      |
+      | ","     | "Space"  |
 
   #| ","     | "'"      |
   #| ","     | "-"      |
@@ -798,48 +769,49 @@ Feature: Verifying Chart Visual Functionality
   #| "."     | "Space"  |
   #| "."     | "'"      |
   #| "."     | "-"      |
-  #| "."     | "None"   |	
+  #| "."     | "None"   |
   
   #@ChartVisual....locators
   #Scenario: TC_Chart_58: Verify Values line - color
-  #And Search for the series with SID "230795002;230795102"
-  #And Click on chart option from hover
-  #And Closing the Series Harmonization popup
-  #And Click on "Edit" visual
-  #And Click on the "Values axis" checkbox to "Check"
-  #And Expand "Lines" section from "Values Axis" popup
-  #And Check the checkbox for "Lines" section
-  #And Select any "Values Axis Lines color" for chart visual
-  #And Select the "#2b60d0" value line color from list
-  #And Clicking "Save" option
-  #Then "Value Axis color" should reflect on the chart
-  #And Click on "Edit" visual
-  #And Click on the "Values axis" checkbox to "Check"
-  #And Expand "Lines" section from "Values Axis" popup
-  #And Uncheck the checkbox for "Lines" section
-  #And Verify the "color" field is disabled
-  #@ChartVisual3.... need to check locators
+    #And Search for the series with SID "230795002;230795102"
+    #And Click on chart option from hover
+    #And Closing the Series Harmonization popup
+    #And Click on "Edit" visual
+    #And Click on the "Values axis" checkbox to "Check"
+    #And Expand "Lines" section from "Values Axis" popup
+    #And Check the checkbox for "Lines" section
+    #And Select any "Values Axis Lines color" for chart visual
+    #And Select the "#2b60d0" value line color from list
+    #And Clicking "Save" option
+    #Then "Value Axis color" should reflect on the chart
+    #And Click on "Edit" visual
+    #And Click on the "Values axis" checkbox to "Check"
+    #And Expand "Lines" section from "Values Axis" popup
+    #And Uncheck the checkbox for "Lines" section
+    #And Verify the "color" field is disabled
+
+  #@ChartVisual3.... need to check locators 
   #Scenario: TC_Chart_59: Verify Values line - width
-  #And Search for the series with SID "230795002;230795102"
-  #And Click on chart option from hover
-  #And Closing the Series Harmonization popup
-  #And Click on "Edit" visual
-  #And Click on the "Values axis" checkbox to "Check"
-  #And Expand "Lines" section from "Values Axis" popup
-  #And Check the checkbox for "Lines" section
-  #And Select "Values Axis Lines width" for chart visual to 3
-  #And Clicking "Save" option
-  #Then "Values Axis Lines width" should reflect on the chart
-  #And Click on "Edit" visual
-  #And Click on the "Values axis" checkbox to "Check"
-  #And Expand "Lines" section from "Values Axis" popup
-  #And Select "Values Axis Lines width" for chart visual to 1
-  #And Uncheck the checkbox for "Lines" section
-  #And Verify the "width" field is disabled
+    #And Search for the series with SID "230795002;230795102"
+    #And Click on chart option from hover
+    #And Closing the Series Harmonization popup
+    #And Click on "Edit" visual
+    #And Click on the "Values axis" checkbox to "Check"
+    #And Expand "Lines" section from "Values Axis" popup
+    #And Check the checkbox for "Lines" section
+    #And Select "Values Axis Lines width" for chart visual to 3
+    #And Clicking "Save" option
+    #Then "Values Axis Lines width" should reflect on the chart
+    #And Click on "Edit" visual
+    #And Click on the "Values axis" checkbox to "Check"
+    #And Expand "Lines" section from "Values Axis" popup
+    #And Select "Values Axis Lines width" for chart visual to 1
+    #And Uncheck the checkbox for "Lines" section
+    #And Verify the "width" field is disabled
+
   @ChartVisual
   Scenario: TC_Chart_60: Values line - Opacity
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -854,8 +826,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_62: Verify Time - Title color
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -864,8 +835,6 @@ Feature: Verifying Chart Visual Functionality
     And Check the checkbox for "Title" section
     And Select any "Time Axis Title Color" for chart visual
     And Select the "#2b60d0" title axis color from list
-    #And Click on the "Time axis" checkbox to "Check"
-    #And Expand "Title" section from "Time Axis" popup
     And Select any "Time Axis Title Background Color" for chart visual
     And Select the "#fda546" title axis bgcolor from list
     And Clicking "Save" option
@@ -873,8 +842,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_63: Verify Time - Title size
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -887,8 +855,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_64: Verify Time - Title style
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -900,7 +867,7 @@ Feature: Verifying Chart Visual Functionality
     Then "Style" should reflect on the chart visual
 
   #...................Timeframe functionality has been removed
-  #@ChartVisual3
+  #@ChartVisual123
   #Scenario: TC_Chart_66: Verify Time - Timeframe last x observations
   #And Search for the series with SID "360937287"
   #And Click on chart option from hover
@@ -916,7 +883,7 @@ Feature: Verifying Chart Visual Functionality
   #And Clicking "Save" option
   #And "Correct Observations" should displayed
   #
-  #@ChartVisual3
+  #@ChartVisual123
   #Scenario: TC_Chart_67: Verify Time - Timeframe range
   #And Search for the series with SID "360937287"
   #And Click on chart option from hover
@@ -929,7 +896,7 @@ Feature: Verifying Chart Visual Functionality
   #And Clicking "Save" option
   #Then Entered timeframe date should update in chart
   #
-  #@ChartVisual3
+  #@ChartVisual123
   #Scenario: TC_Chart_68: Verify Time - Timeframe All observations
   #And Search for the series with SID "360937287"
   #And Click on chart option from hover
@@ -942,8 +909,7 @@ Feature: Verifying Chart Visual Functionality
   #Then Entered timeframe date should update in chart for "All observations"
   @ChartVisual
   Scenario: TC_Chart_69: Verify Time - Axis setup
-    #And Search for the series with SID "360937287"
-    And Search for the series with SID "360937287" in search bar
+    And Search for the series with SID "360937287"
     And Click on chart option from hover
     And Click on "Edit" visual
     And Get the series "First obs. date" and "Last obs. date"
@@ -1032,21 +998,22 @@ Feature: Verifying Chart Visual Functionality
 
   #@ChartVisual3.... need to check locators issue
   #Scenario: TC_Chart_75: Verify Time lines - color
-  #And Search for the series with SID "360937287"
-  #And Click on chart option from hover
-  #And Click on "Edit" visual
-  #And Click on the "Time axis" checkbox to "Check"
-  #And Expand "Lines" section from "Time Axis" popup
-  #And Check the checkbox for "Lines" section
-  #And Select any "Time Axis Lines color" for chart visual
-  #And Select the "#2b60d0" time line color from list
-  #And Clicking "Save" option
-  #Then "Time Axis color" should reflect on the chart
-  #And Click on "Edit" visual
-  #And Click on the "Time axis" checkbox to "Check"
-  #And Expand "Lines" section from "Time Axis" popup
-  #And Uncheck the checkbox for "Lines" section
-  #And Verify the "color" field is disabled
+    #And Search for the series with SID "360937287"
+    #And Click on chart option from hover
+    #And Click on "Edit" visual
+    #And Click on the "Time axis" checkbox to "Check"
+    #And Expand "Lines" section from "Time Axis" popup
+    #And Check the checkbox for "Lines" section
+    #And Select any "Time Axis Lines color" for chart visual
+    #And Select the "#2b60d0" time line color from list
+    #And Clicking "Save" option
+    #Then "Time Axis color" should reflect on the chart
+    #And Click on "Edit" visual
+    #And Click on the "Time axis" checkbox to "Check"
+    #And Expand "Lines" section from "Time Axis" popup
+    #And Uncheck the checkbox for "Lines" section
+    #And Verify the "color" field is disabled
+
   @ChartVisual
   Scenario: TC_Chart_76: Verify Time lines - Width
     And Search for the series with SID "360937287"
@@ -1065,7 +1032,7 @@ Feature: Verifying Chart Visual Functionality
     And Uncheck the checkbox for "Lines" section
     And Verify the "width" field is disabled
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_79: Verify Inverting of chart
     And Search for the series with SID "360937287"
     And Click on chart option from hover
@@ -1115,7 +1082,7 @@ Feature: Verifying Chart Visual Functionality
     And Clicking "Save" option
     Then Tooltips for multiple series "Should" be visible in dashboard page
     And Click on "Edit" visual
-  #  And Click on the "Tooltips:" checkbox to "Check"
+    And Click on the "Tooltips:" checkbox to "Check"
     And Click on the "Tooltips:" Container
     And Click on the "Display for all series at once" checkbox to "UnChecked Checkbox"
     And Clicking "Save" option
@@ -1174,25 +1141,25 @@ Feature: Verifying Chart Visual Functionality
     And Clicking "Save" option
     And Closing the chart visual
 
-  #@ChartVisual
-  #Scenario: TC_Chart_85: Verify Tooltips - style
-   # And Search for the series with SID "299442804"
-    #And Click on chart option from hover
-    #And Click on "Edit" visual
-    #And Click on the "Tooltips:" checkbox to "Check"
-    #And Click on the "Tooltips:" Container
-    #And Expand "Items" section from "Tooltip" popup
-    #And Select any "Timepoints Style" for chart visual
-    #And Clicking "Save" option
-    #Then Selected "Font Style" should display
-    #And Click on "Edit" visual
-    #And Click on the "Tooltips:" Container
-    #And Expand "Items" section from "Tooltip" popup
-    #And Revert the "Timepoints Style" for chart visual
-    #And Clicking "Save" option
-    #And Closing the chart visual
-
   @ChartVisual
+  Scenario: TC_Chart_85: Verify Tooltips - style
+    And Search for the series with SID "299442804"
+    And Click on chart option from hover
+    And Click on "Edit" visual
+    And Click on the "Tooltips:" checkbox to "Check"
+    And Click on the "Tooltips:" Container
+    And Expand "Items" section from "Tooltip" popup
+    And Select any "Timepoints Style" for chart visual
+    And Clicking "Save" option
+    Then Selected "Font Style" should display
+    And Click on "Edit" visual
+    And Click on the "Tooltips:" Container
+    And Expand "Items" section from "Tooltip" popup
+    And Revert the "Timepoints Style" for chart visual
+    And Clicking "Save" option
+    And Closing the chart visual
+
+  @ChartVisual2
   Scenario: TC_Chart_86: Verify Tooltips - Read tooltips data from Excel (Negative timepoints)
     And Setting values in preference
     And Read the "Timepoints" and "Date" from excel file "TC_Chart_86.xlsx"
@@ -1213,7 +1180,7 @@ Feature: Verifying Chart Visual Functionality
     And Clicking "Save" option
     Then Excel data is compared with application data
 
-  @ChartVisual
+  @ChartVisual2
   Scenario: TC_Chart_88: Verify Tooltips - Get timepoint values from application (negative timepoints)
     And Open SSP for the series "357534787"
     And Click on "Data" tab
@@ -1272,44 +1239,42 @@ Feature: Verifying Chart Visual Functionality
     And Select "4" separator from "Decimal places" dropdown
     And Clicking "Save" option
     Then The Selected "Decimal Places" should update with selected input
-    
-#------92 & 93 functionality removed-----#
-  #@ChartVisual
-  #Scenario: TC_Chart_92: Verify Tooltips - border color
-   # And Search for the series with SID "357534787"
-    #And Click on chart option from hover
-    #And Click on "Edit" visual
-    #And Click on the "Tooltips:" Container
-    #And Expand "Border" section from "Tooltip" popup
-    #And Check the checkbox for "Border" section
-    #And Select any "Tooltip Border Color" for chart visual
-    #And Select the "#fda546" tooltip border color from list
-    #And Clicking "Save" option
-    #Then The Selected "Tooltip Border Color" should update with selected input
-    #And Click on "Edit" visual
-    #And Click on the "Tooltips:" Container
-    #And Expand "Border" section from "Tooltip" popup
-    #And Uncheck the checkbox for "Border" section
-    #And Verify the "Tooltip border color" field is disabled
 
-  #@ChartVisual
-  #Scenario: TC_Chart_93: Verify Tooltips - border width
-   # And Search for the series with SID "357534787"
-    #And Click on chart option from hover
-    #And Click on "Edit" visual
-    #And Click on the "Tooltips:" Container
-    #And Expand "Border" section from "Tooltip" popup
-    #And Check the checkbox for "Border" section
-    #And Select "Tooltip Border Width" for chart visual to 3
-    #And Clicking "Save" option
-    #Then The Selected "Tooltip Border Width" should update with selected input
-    #And Click on "Edit" visual
-    #And Click on the "Tooltips:" Container
-    #And Expand "Border" section from "Tooltip" popup
-    #And Select "Tooltip Border Width" for chart visual to 1
-    #And Uncheck the checkbox for "Border" section
-    #And Verify the "Tooltip border width" field is disabled
-    #------92 & 93 functionality removed-----#
+  @ChartVisual
+  Scenario: TC_Chart_92: Verify Tooltips - border color
+    And Search for the series with SID "357534787"
+    And Click on chart option from hover
+    And Click on "Edit" visual
+    And Click on the "Tooltips:" Container
+    And Expand "Border" section from "Tooltip" popup
+    And Check the checkbox for "Border" section
+    And Select any "Tooltip Border Color" for chart visual
+    And Select the "#fda546" tooltip border color from list
+    And Clicking "Save" option
+    Then The Selected "Tooltip Border Color" should update with selected input
+    And Click on "Edit" visual
+    And Click on the "Tooltips:" Container
+    And Expand "Border" section from "Tooltip" popup
+    And Uncheck the checkbox for "Border" section
+    And Verify the "Tooltip border color" field is disabled
+
+  @ChartVisual
+  Scenario: TC_Chart_93: Verify Tooltips - border width
+    And Search for the series with SID "357534787"
+    And Click on chart option from hover
+    And Click on "Edit" visual
+    And Click on the "Tooltips:" Container
+    And Expand "Border" section from "Tooltip" popup
+    And Check the checkbox for "Border" section
+    And Select "Tooltip Border Width" for chart visual to 3
+    And Clicking "Save" option
+    Then The Selected "Tooltip Border Width" should update with selected input
+    And Click on "Edit" visual
+    And Click on the "Tooltips:" Container
+    And Expand "Border" section from "Tooltip" popup
+    And Select "Tooltip Border Width" for chart visual to 1
+    And Uncheck the checkbox for "Border" section
+    And Verify the "Tooltip border width" field is disabled
 
   @ChartVisual
   Scenario: TC_Chart_96: Verify Labels - color
@@ -1468,8 +1433,7 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_105: Verify Legend - Float on plot area option
     And Search for the series with SID "357534787"
-    And Click on more actions to create=>View as chart.
-   # And Click on more actions to create "View as Chart"
+    And Click on more actions to create "View as Chart"
     And Click on "Edit" visual
     And Click on the "Legend:" checkbox to "Check"
     And Click on the "Legend:" Container
@@ -1521,8 +1485,6 @@ Feature: Verifying Chart Visual Functionality
     Then The Selected "Font size" should reflect in the chart visual legand
     And Uncheck the checkbox for "Title" section
     And Verify the "Legend Title" field is disabled
-    
-    
 
   @ChartVisual
   Scenario: TC_Chart_116: Verify Legend - Font style
@@ -1534,7 +1496,7 @@ Feature: Verifying Chart Visual Functionality
     And "Legend" popup should appeared
     And "Title" section from Legand popup should expand
     And Check the checkbox for "Title" section
-    And Enter the text "Shravas" for legend title	
+    And Enter the text "Shravas" for legend title
     And Select any "Legends Style" for chart visual
     Then The Selected "Font style" should reflect in the chart visual legand
     And Uncheck the checkbox for "Title" section
@@ -1746,7 +1708,7 @@ Feature: Verifying Chart Visual Functionality
     And Enable the Chat bubble
 
   #..................functionality has been removed
-  #@ChartVisual3
+  #@ChartVisual123
   #Scenario: TC_Chart_130: Verify Show controls of Zoom - Check/Uncheck
   #And Search for the series with SID "357534787"
   #And Click on chart option from hover
@@ -1760,18 +1722,16 @@ Feature: Verifying Chart Visual Functionality
     And Search for the series with SID "357534787"
     And Click on chart option from hover
     And Right Click the "Chart" visual
-   # And Click on "View as" to check the type of visual
-    And Click on "Add chart" to check the type of visual
-    Then 6 type of visuals should present
+    And Click on "View as" to check the type of visual
+    Then 5 type of visuals should present
 
   @ChartVisual
   Scenario: TC_Chart_132: Verify Converting to Map option
     And Search for the series with SID "357534787"
     And Click on chart option from hover
     And Right Click the "Chart" visual
-   # And Click on "View as" to check the type of visual
-    And Click on "Change chart type" to check the type of visual
-    And Click on "Map" visual from the list
+    And Click on "View as" to check the type of visual
+    And Click on "map" visual from the list
     Then Verify the top panel should change to "Edit Map"
 
   @ChartVisual
@@ -1779,9 +1739,8 @@ Feature: Verifying Chart Visual Functionality
     And Search for the series with SID "357534787"
     And Click on chart option from hover
     And Right Click the "Chart" visual
-    #And Click on "View as" to check the type of visual
-    And Click on "Change chart type" to check the type of visual
-    And Click on "Vertical" visual from the hover 
+    And Click on "View as" to check the type of visual
+    And Click on "table" visual from the list
     Then Verify the top panel should change to "Edit Table"
 
   @ChartVisual
@@ -1813,7 +1772,7 @@ Feature: Verifying Chart Visual Functionality
     And Count the list of views "Before" clicking the New option
     And Copy the insight title
     And Click on "Add to insight" option from Visual
-    And Click on "Add to new tab" option from Visual
+    And Click on "Add" option from Visual
     And Count the list of views "After" clicking the New option
     Then Verify the Changes on clicking New button
     And Click on "Add to insight" option from Visual
@@ -1823,9 +1782,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_139: Verify Copy icon
     And Select few series
-    #And Click on more actions
-   And Click on more actions to create=>View as chart.
-    #And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Copy" option from Visual
     And Growl popup is displaying
     And Copy the data after clicking Copy button
@@ -1835,9 +1793,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_140: Verify Copy to excel icon
     And Select few series
-   # And Click on more actions
-    And Click on more actions to create=>View as chart.
-    #And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Download. Type `d`" option from Visual
     And Click on "Copy to Clipboard" option inside visual
     And Growl popup is displaying
@@ -1848,9 +1805,8 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_141: Verify Download icon
     And Select few series
-     And Click on more actions to create=>View as chart.
-    #And Click on more actions
-   # And Open a "Chart" visual
+    And Click on more actions
+    And Open a "Chart" visual
     And Click on "Download. Type `d`" option from Visual
     Then Verify the download popup appears and the title should be "Download:"
 
@@ -1876,25 +1832,28 @@ Feature: Verifying Chart Visual Functionality
     And Search for the series with SID "357534787"
     And Click on chart option from hover
     And Right Click the "Chart" visual
-    Then text and sub text options should be present.
-    
+    And Get the text of options available
+    And Get the text of sub dropdowns available
+    Then The text and sub text options are present in context click
 
   @ChartVisual
   Scenario: TC_Chart_147: Verify Insert visual - context menu
     And Search for the series with SID "357534787"
     And Click on chart option from hover
     And Right Click the "Chart" visual
-    And text and sub text options should be present.
-    Then The "Change chart type" options should be present
+    And Get the text of options available
+    And Get the text of sub dropdowns available
+    Then The "Insert visual" options have been verified
 
   @ChartVisual
   Scenario: TC_Chart_148: Verify View as - context menu
     And Search for the series with SID "357534787"
     And Click on chart option from hover
     And Right Click the "Chart" visual
-    And text and sub text options should be present.
-    Then The "Add chart" options should be available
-   
+    And Get the text of options available
+    And Get the text of sub dropdowns available
+    Then The "View as" options have been verified
+
   @ChartVisual
   Scenario: TC_Chart_149: Verify Edit series - context menu
     And Search for the series with SID "357534787"
@@ -1929,8 +1888,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_155: Verify per series chart type - Column
-   # And Search for the series with SID "230795002;230795102"
-   And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -1941,8 +1899,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_156: Verify per series chart type - Area
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -1953,8 +1910,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_157: Verify per series chart type - Bar
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -1965,8 +1921,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_158: Verify per series chart type - Line
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -1977,20 +1932,18 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_159: Verify per series chart type - Default
-   # And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
     And Click on the "Line" chart type
-    #And Select "Default" option from line chart
+    And Select "Default" option from line chart
     And Clicking "Save" option
     Then The chart is changed to "line" type
 
   @ChartVisual
   Scenario: TC_Chart_160: Verify per series chart type - style color
-   # And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -2003,8 +1956,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_161: Verify per series chart type - style size
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
@@ -2017,29 +1969,27 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_162: Verify per series style type
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
-    #And Hovor on to i icon without click
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on "Edit" visual
+    #And Hovor on to i icon without click
     And Click on the "Move to right" option
     And Clicking "Save" option
     Then The Series is changed to the "Move to right" specified
 
   @ChartVisual
   Scenario: TC_Chart_164: Verify delete series option
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Count the number of series before delete
-   # And Click on "Edit" visual
-    And Click on the "Delete" option for delete
-   # And Clicking "Save" option
+    And Click on "Edit" visual
+    And Click on the "Delete series" option for delete
+    And Clicking "Save" option
     Then The Series is changed to the "Deleted" specified
 
-  @ChartVisuals
+  @ChartVisual
   Scenario: TC_Chart_165: Verify percentage change over a year function to single series in chart visual
     And Search for the series with SID "377148287"
     And Click on chart option from hover
@@ -2090,8 +2040,7 @@ Feature: Verifying Chart Visual Functionality
     And Copy the insight title
     And Clicking Download button from "Page Header"
     And Verify the functions appeared in excel
-	
-	
+
   @ChartVisual
   Scenario: TC_Chart_169: Verify Disaggregate(Distribute) function to single series in chart visual
     And Search for the series with SID "389772587"
@@ -2131,18 +2080,16 @@ Feature: Verifying Chart Visual Functionality
     And Clicking Download button from "Page Header"
     And Verify the functions appeared in excel
 
-#---functionality removed---#
- # @ChartVisual
-  #Scenario: TC_Chart_173: Verify unselect all option to clear all series in chart visual.
-   # And Search for the series with SID "230795002;230795102"
-    #And Click on chart option from hover
-    #And Closing the Series Harmonization popup
-    #And Click on Edit series visual
-    #And Click on Add from My Series visual
-    #And Click on More actions button in myseries
-    #And Click on Unselect all button in myseries
-    #Then The "Unselect" action is performed successfully
-    #---functionality removed---#
+  @ChartVisual
+  Scenario: TC_Chart_173: Verify unselect all option to clear all series in chart visual.
+    And Search for the series with SID "230795002;230795102"
+    And Click on chart option from hover
+    And Closing the Series Harmonization popup
+    And Click on Edit series visual
+    And Click on Add from My Series visual
+    And Click on More actions button in myseries
+    And Click on Unselect all button in myseries
+    Then The "Unselect" action is performed successfully
 
   @ChartVisual
   Scenario: TC_Chart_174: Verify copy and insert copy options in chart visual
@@ -2169,8 +2116,7 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_176: Verify for series deletion from chart visual
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on Edit series visual
@@ -2191,12 +2137,11 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_178: Check for preview of multiple series in chart visual
-    #And Search for the series with SID "230795002;230795102"
-    And Search for the series with SID "230795002;230795102" in search bar
+    And Search for the series with SID "230795002;230795102"
     And Click on chart option from hover
     And Closing the Series Harmonization popup
     And Click on Edit series visual
-    And Click the Functions input box in edit series
+    And Click the Functions input box
     And Enter the function in function field
     And Click on "Apply function" in functions box
     And Click on Add from My Series visual
@@ -2209,10 +2154,10 @@ Feature: Verifying Chart Visual Functionality
     And Add few series to myseries
     And Highlight any one series
     And Click on More actions button in myseries
-    And Click on "Add chart" option and create chart
+    And Click on "View as Chart" button in myseries
     Then Verify the top panel should change to "Edit Chart"
 
-  @ChartVisual
+  @ChartVisual1
   Scenario: TC_Chart_180: Verify downloading chart series to excel from selection context menu
     And Add few series to myseries
     And Copy the myseries title
@@ -2334,10 +2279,10 @@ Feature: Verifying Chart Visual Functionality
 
     Examples: 
       | change                                   |
-     | "Difference Year-over-Year (YoY)"        |
-     | "% Year-over-Year (%YoY)"                |
-     | "Difference Period-over-Period (PoP)"    |
-     | "% Period-over-Period (%PoP)" |
+      | "Difference Year-over-Year (YoY)"        |
+      | "% Year-over-Year (%YoY)"                |
+      | "Difference Period-over-Period (PoP)"    |
+      | "% Period-over-Period Annualized (%PoP)" |
 
   @ChartVisual
   Scenario: TC_Chart_192: Verify if changes function is applied for chart visual
@@ -2350,9 +2295,8 @@ Feature: Verifying Chart Visual Functionality
 
   @ChartVisual
   Scenario: TC_Chart_197: Verify download of native charts from views tab
-    
-    And Search for the series with SID "230795002;230795102" in search bar
-    And Create a chart.
+    And Search for the series with SID "447238447;447238437" and click on "C" option
+    And Search for the series with SID "230795002;230795102" and click on "C" option
     And Closing the Series Harmonization popup
     And Search for the series with SID "205424302" and click on "C" option
     And Clicking myseries
@@ -2364,11 +2308,7 @@ Feature: Verifying Chart Visual Functionality
   @ChartVisual
   Scenario: TC_Chart_198: Verify CEIC logo for chart visual
     And Disable the Chat bubble
-   # And Search for the series with SID "205424302" and click on "C" option
-   # And Click on more actions to create=>View as chart.
-    And Click on more actions with SID "205424302" and create a chart
+    And Search for the series with SID "205424302" and click on "C" option
     And Click credits image
-    Then The URL should navigate to "https://stage.ceicdata.com"
+    Then The URL should navigate to "https://www.ceicdata.com/en"
     And Enable the Chat bubble
-	
-	

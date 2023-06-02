@@ -209,6 +209,7 @@ public class MySearch {
 
 		System.out.println("===================TC_5_Executed=============================");
 	}
+
 //TC_06
 	@Given("^select keyword and some filters$")
 	public void select_keyword_and_some_filters() throws Throwable {
@@ -241,22 +242,22 @@ public class MySearch {
 		login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
 
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("(//div[@class='panel-expander--icon panel-expander--icon__right'])[1]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='panel-expander--icon panel-expander--icon__right'])[1]"))
+				.click();
 		Thread.sleep(2000);
 
 		login.driver.findElement(By.xpath("//span[contains(text(),' Save')]")).click();
 
-		
-		
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//input[@class='insight-search-input--search-field']")).sendKeys("china");
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Save new search')]")).click();
-		
+
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//div[@class='growl-message-close']")).click();
 		Thread.sleep(200);
-		login.driver.findElement(By.xpath("(//div[@class='panel-expander--icon panel-expander--icon__left'])[4]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='panel-expander--icon panel-expander--icon__left'])[4]"))
+				.click();
 		Thread.sleep(4000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
 		Thread.sleep(2000);
@@ -266,10 +267,11 @@ public class MySearch {
 
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("//span[contains(text(),'Reset')]")).click();
-		
+
 		System.out.println("===================TC_6_Executed=============================");
 
 	}
+
 //TC_07
 	@Given("^search should be deleted from My searches drop down$")
 	public void search_should_be_deleted_from_My_searches_drop_down() throws Throwable {

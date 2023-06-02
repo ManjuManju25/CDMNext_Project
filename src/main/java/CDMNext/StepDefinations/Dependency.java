@@ -10,7 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,19 +54,27 @@ public class Dependency {
 	@Given("^add some of series into my series tab$")
 	public void add_some_of_series_into_my_series_tab() throws Throwable {
 		Thread.sleep(3000);
+
 		for (int i = 1; i <= 2; i++) {
-			                                  // (//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]
-			login.driver.findElement(By.xpath("(//div[@class='title']/span[@class='svg-checkbox'])["+i+"]")).click();
+
+			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])[" + i + "]"))
+					.click();
 
 		}
 
+		// click on '+' icon
+		Thread.sleep(1000);
+		WebElement series1 = login.driver.findElement(By.xpath("(//div[@class='series-item--main-info'])[1]"));
+		new Actions(login.driver).moveToElement(series1).build().perform();
+		
+		WebElement add = login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
+		new Actions(login.driver).moveToElement(add).click().build().perform();
+	//	login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]"));
 		Thread.sleep(1000);
 
-		// click on '+' icon
-		login.driver.findElement(By.xpath("(//div[@class='add-to-data-selection--icon'])[1]")).click();
-		Thread.sleep(3000);
 		// select all series check box checked
-		login.driver.findElement(By.xpath("//span[@class='input-control--indicator']")).click();
+		login.driver.findElement(By.xpath("//div[@class='check-all-series']//span[@class='input-control--indicator']"))
+				.click();
 
 		Thread.sleep(2000);
 
@@ -233,13 +240,14 @@ public class Dependency {
 	@Then("^Should be able to 'uncheck all the series' in dependencies$")
 	public void should_be_able_to_uncheck_all_the_series_in_dependencies() throws Throwable {
 		Thread.sleep(3000);
+		Boolean series = login.driver.findElement(By.xpath("//div[@class='series-list-item--checkbox-wrapper']"))
+				.isSelected();
 
-		if (login.driver.findElements(By.xpath("//div[@class='series-with-suggestions "
-				+ "series-with-dependencies series-with-suggestions__open-suggestions series-list-item__selected']"))
-				.size() > 0) {
-			Assert.fail("Test case failed");
+		if (series == false) {
+			System.out.println("Should be able to 'uncheck all the series' in dependencies");
+
 		} else {
-			System.out.println("Should be able to 'uncheck all the series' in dependencies:PASS");
+			Assert.fail("Test case failed");
 
 		}
 		System.out.println("------------------------------------>7");
@@ -292,18 +300,15 @@ public class Dependency {
 	@Then("^'Chart opened' should be closed$")
 	public void chart_opened_should_be_closed() throws Throwable {
 		Thread.sleep(3000);
-		
-		
-		if(login.driver.findElements(By.xpath("//div[@class='legend-item--marker legend-item--hide-series']")).size()==0) {
+
+		if (login.driver.findElements(By.xpath("//div[@class='legend-item--marker legend-item--hide-series']"))
+				.size() == 0) {
 			System.out.println("Chart opened' should be closed");
 			System.out.println("------------------------------------>9");
-			}
-		else {
+		} else {
 			Assert.fail("Test case failed");
 		}
-		
-		
-		
+
 	}
 
 //TC_10
@@ -457,9 +462,9 @@ public class Dependency {
 	public void should_be_able_to_add_dependencies_for_selected_series_under_dependencies_tab() throws Throwable {
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("(//div[@class='webix_tree_close'])[1]")).click();
+		// login.driver.findElement(By.xpath("(//div[@class='webix_tree_close'])[1]")).click();
 
-		Thread.sleep(1000);
+		// Thread.sleep(1000);
 		String seriesname = login.driver.findElement(By.xpath("(//span[@class='series-name-field-title'])[2]"))
 				.getText();
 		System.out.println("my series series name:" + seriesname);
@@ -545,6 +550,7 @@ public class Dependency {
 		login.driver.findElement(By.xpath(
 				"//div[@class='movable-modal single-series-preview--modal movable-modal__draggable movable-modal__active']//div[@title='Minimize']"))
 				.click();
+
 		System.out.println("minimizing the SSP window");
 
 		System.out.println("------------------------------------>19");
@@ -555,7 +561,7 @@ public class Dependency {
 	@Then("^click on the maximizing icon in SSP window$")
 	public void click_on_the_maximizing_icon_in_SSP_window() throws Throwable {
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//body/div[1]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1]/div[1]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='movable-modal--action'])[1]")).click();
 		System.out.println("maximizing the SSP window");
 
 		System.out.println("------------------------------------>20");
@@ -643,14 +649,14 @@ public class Dependency {
 
 		// click on Right click
 
-		WebElement rightbutton = login.driver.findElement(By.xpath("(//span[@class='group-name'])[1]"));
+		WebElement rightbutton = login.driver.findElement(By.xpath("(//span[@class='series-name-field--text'])[1]"));
 		action.contextClick(rightbutton).perform();
 		Thread.sleep(2000);
-		
-		
+
 		login.driver.findElement(By.xpath("//span[contains(text(),'Add chart')]")).click();
 		login.driver.findElement(By.xpath("//div[text()='Vertical']")).click();
-		//login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]")).click();
+		// login.driver.findElement(By.xpath("//span[contains(text(),'View as
+		// Table')]")).click();
 		Thread.sleep(2000);
 
 		// series harmonization
@@ -670,7 +676,7 @@ public class Dependency {
 		}
 
 		else {
-			Assert.fail("Tes case failed");
+			Assert.fail("Tets case failed");
 		}
 
 		System.out.println("------------------------------------>24");
@@ -682,7 +688,7 @@ public class Dependency {
 	public void click_on_series_name_in_dependencies_series() throws Throwable {
 		Thread.sleep(2000);
 
-		login.driver.findElement(By.xpath("(//div[@class='suggested-series-item--title'])[1]")).click();
+		login.driver.findElement(By.xpath("(//div[@class='series-item--name'])[5]")).click();
 
 	}
 
@@ -690,12 +696,12 @@ public class Dependency {
 	@Then("^SSP window for dependencies series should be opened$")
 	public void ssp_window_for_dependencies_series_should_be_opened() throws Throwable {
 		Thread.sleep(3000);
-		if (login.driver.findElements(By.xpath("//div[@class='main-series-information--series-id']")).size() == 1) {
+		if (login.driver.findElements(By.xpath("(//div[@class='movable-modal--header'])[2]")).size() == 1) {
 			System.out.println("SSP window should be open");
 		}
 
 		else {
-			Assert.fail("Tes case failed");
+			Assert.fail("Test case failed");
 		}
 
 		System.out.println("------------------------------------>25");
@@ -715,12 +721,12 @@ public class Dependency {
 	@Then("^SSP window for dependencies series should be closed$")
 	public void ssp_window_for_dependencies_series_should_be_closed() throws Throwable {
 
-		if (login.driver.findElements(By.xpath("(//div[@class='insight-action-panel--btn-title'])[1]")).size() == 1) {
+		if (login.driver.findElements(By.xpath("(//div[@class='movable-modal--header'])[2]")).size() == 0) {
 			System.out.println("SSP window should be close");
 		}
 
 		else {
-			Assert.fail("Tes case failed");
+			Assert.fail("Test case failed");
 		}
 		System.out.println("------------------------------------>26");
 	}
@@ -735,12 +741,11 @@ public class Dependency {
 				.findElement(By.xpath("//div[contains(text(),'Gross DomesticProduct (GDP): 2015p: sa')]"));
 		Thread.sleep(1000);
 		js.executeScript("arguments[0].scrollIntoView();", scrolldown);
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 
-		WebElement chartlegend = login.driver.findElement(By.xpath("(//div[@class='legend-item--marker'])[1]"));
+		WebElement chartlegend = login.driver.findElement(By.xpath("(//div[@class='legend-item'])[1]"));
 		action.moveToElement(chartlegend).build().perform();
-		
-		
+
 		login.driver.findElement(By.xpath("(//div[@class='legend-item--hiding-series'])[1]")).click();
 
 		Thread.sleep(2000);
@@ -749,10 +754,17 @@ public class Dependency {
 //TC_27
 	@Then("^Series present in a chart should be disabled$")
 	public void series_present_in_a_chart_should_be_disabled() throws Throwable {
-
-		System.out.println("Series present in a chart should be disabled");
-
-		System.out.println("---------------------->27");
+		Boolean chart = login.driver.findElement(By.xpath(
+				"//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker']"))
+				.isDisplayed();
+		if (chart == false) {
+			System.out.println("Series present in a chart should be disabled");
+		} else {
+			Assert.fail("Series present in a chart should not be disabled");
+			System.out.println("---------------------->27");
+		}
+		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+		Thread.sleep(3000);
 	}
 
 //TC_28
@@ -761,9 +773,17 @@ public class Dependency {
 	public void series_in_a_chart_should_be_enabled() throws Throwable {
 
 		Thread.sleep(3000);
-		System.out.println("Series present in a chart should be Enable");
+		if (login.driver.findElement(By.xpath(
+				"//*[@class='highcharts-markers highcharts-series-0 highcharts-line-series highcharts-tracker']"))
+				.isDisplayed()) {
 
-		System.out.println("---------------------->28");
+			System.out.println("Series present in a chart should be Enable");
+		} else {
+			System.out.println("---------------------->28");
+		}
+
+		login.driver.findElement(By.xpath("//div[@class='movable-modal--close']")).click();
+		Thread.sleep(3000);
 	}
 
 //TC_29

@@ -116,8 +116,8 @@ Kolkata, Calcutta
 lcd,liquid crystal display
 l&d,l d, loans discounts, loans and discounts
 LIBOR,London Interbank Offered Rate
-lme,london metal exchange,Loss Making Enterprises
-#LME,Loss Making Enterprises
+lme,london metal exchange
+LME,Loss Making Enterprises
 LMRA, Labour Market Regulatory Authority
 lng,liquified natural gas
 IP, Industrial Products
@@ -220,15 +220,15 @@ ytd,year to date
 gds,Gross Domestic Saving
 real state,property,housing,apartments,dwellings
 Coronavirus, nCoV, covid-19, covid-2019, covi, coronanav, coronovirus, 2019-nCoV
-Guangdong-Hong Kong-Macao Greater Bay Area, Dongguan, Foshan, Guangzhou, Hong Kong, Huizhou, Jiangmen,  Macau SAR (China) , Shenzhen , Zhaoqing , Zhongshan , Zhuhai
-Pearl River Delta, Dongguan, Foshan, Guangzhou,  Heyuan, Huizhou, Qingyuan, Jiangmen, Shanwe, Shaoguan, Shenzhen, Yangjiang, Yunfu, Zhaoqing, Zhongshan, Zhuhai 
-Yangtze River Delta, Changzhou, Hangzhou, Huaian, Huzhou, Jiaxing, Jinhua,  Lianyungang, Lishui, Nanjing, Nantong, Shanghai, Wuxi, Ningbo, Suzhou, Hefei, Wenzhou, Yangzhou, Xuzhou, Taizhou, Yancheng
-Bohai Economic Rim, Baoding, Beijing, Cangzhou, Dalian, Huludao, Jinan, Qingdao, Qinhuangdao, Shenyang, Shijiazhuang, Tangshan, Tianjin, Yantai 
+#Guangdong-Hong Kong-Macao Greater Bay Area, Dongguan, Foshan, Guangzhou, Hong Kong, Huizhou, Jiangmen,  Macau SAR (China) , Shenzhen , Zhaoqing , Zhongshan , Zhuhai
+#Pearl River Delta, Dongguan, Foshan, Guangzhou,  Heyuan, Huizhou, Qingyuan, Jiangmen, Shanwe, Shaoguan, Shenzhen, Yangjiang, Yunfu, Zhaoqing, Zhongshan, Zhuhai 
+#Yangtze River Delta, Changzhou, Hangzhou, Huaian, Huzhou, Jiaxing, Jinhua,  Lianyungang, Lishui, Nanjing, Nantong, Shanghai, Wuxi, Ningbo, Suzhou, Hefei, Wenzhou, Yangzhou, Xuzhou, Taizhou, Yancheng
+#Bohai Economic Rim, Baoding, Beijing, Cangzhou, Dalian, Huludao, Jinan, Qingdao, Qinhuangdao, Shenyang, Shijiazhuang, Tangshan, Tianjin, Yantai 
 FGV, Getulio
-#Yangtze River Delta: Changjiang/Yangzi/Yangtze (River) Delta, YRD, CRD, Changjiang/Yangzi/Yangtze (River) City Belt, CCB, YCB, Changjiang/Yangzi/Yangtze (River) Megalopolis, Changjiang/Yangzi/Yangtze (River) Delta Metropolitan Region, Changjiang/Yangzi/Yangtze (River) Economic Zone
-#Pearl River Delta: Pearl (River) Delta, PRD, Pearl (River) City Belt, PCB, Pearl (River) Megalopolis, Pearl (River) Delta Metropolitan Region, Pearl (River) Economic Zone
-#Bohai Economic Rim: Bohai (Bay) Economic Rim, BER, Bohai (Bay) City Belt, BCB, Bohai (Bay) Megalopolis, Bohai (Bay) Metropolitan Region, Bohai (Bay) Economic Zone
-#Big Bay Area: Guangdong-Hong Kong-Macao Greater Bay Area, GBA, Bay Area, Big Bay Economic Zone
+Yangtze River Delta: Changjiang/Yangzi/Yangtze (River) Delta, YRD, CRD, Changjiang/Yangzi/Yangtze (River) City Belt, CCB, YCB, Changjiang/Yangzi/Yangtze (River) Megalopolis, Changjiang/Yangzi/Yangtze (River) Delta Metropolitan Region, Changjiang/Yangzi/Yangtze (River) Economic Zone
+Pearl River Delta: Pearl (River) Delta, PRD, Pearl (River) City Belt, PCB, Pearl (River) Megalopolis, Pearl (River) Delta Metropolitan Region, Pearl (River) Economic Zone
+Bohai Economic Rim: Bohai (Bay) Economic Rim, BER, Bohai (Bay) City Belt, BCB, Bohai (Bay) Megalopolis, Bohai (Bay) Metropolitan Region, Bohai (Bay) Economic Zone
+Big Bay Area: Guangdong-Hong Kong-Macao Greater Bay Area, GBA, Bay Area, Big Bay Economic Zone
 # Chinese
 
 上 交 所, 上 海 证 券 交 易 所

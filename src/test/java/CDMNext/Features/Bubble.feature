@@ -122,5 +122,18 @@ Feature: Verify Bubble visual functionality
     And Click on "Edit Bubble"
     And Click on the "Data labels" checkbox to "Check"
     And Click on advanced settings icon
-    And Choose "Style" for labels 
+    And Choose "Style" for labels
     Then Selected style should be applied on labels of visual
+
+  @Bubble
+  Scenario: Tc_bubble_20: Bubble- Verify tooltip legend if legend is country name or indicators
+    And Select any 3 series and Create a bubble visual
+    And Hover mouse over on legend
+    Then The tooltip should display
+
+  @Bubble1
+  Scenario: Tc_bubble_21: Bubble - Download -Verify hide advanced setting option on download window of bubble tab
+    And Select any 3 series and Create a bubble visual
+    And Click on Download icon
+    And Click on "Hide advanced settings" option on download window of bubble tab
+    Then Advanced setting should be hide

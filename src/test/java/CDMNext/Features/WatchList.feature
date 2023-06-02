@@ -1,21 +1,21 @@
 Feature: WatchList feature
 
-  @Watch
+   @Watch	
   Scenario: TC_CVISION_WL_001: Check for adding of series into watchlist from left and right pane
     And Select a few series from left and right pane
     And Add to watchlist "popup_notifications"
     Then Check if series are added in watchlist tab
-
-  @Watch
+	
+	  @Watch
   Scenario: TC_CVISION_WL_002:Check for adding of table into watchlist
     And Select a few tables from left  pane
-    And Add to watchlist "popup_notifications"
+    And Add to watchlist "popup_notifications" for table 
     Then Check if tables are added in watchlist tab
 
   @Watch
   Scenario: TC_CVISION_WL_003 :Verify if series can be added to watchlist from data, comparables and releases tab
     And Select a few tables from all tabs "Data" "Comparables" "Releases"
-    And Add to watchlist "popup_notifications"
+    And Add to watchlist "popup_notifications" for table
     Then Check if selected series are added in watchlist tab
 
   @Watch
@@ -23,7 +23,8 @@ Feature: WatchList feature
     And Add a series to watchlist
     And Choose Popup-notification "popup_notifications"
     Then Highlight the series in watchlist and click bell-icon "popup_notifications"
-
+	
+	
   @Watch
   Scenario: TC_CVISION_WL_006: Verify if Email notifications - Hourly option selection is retained
     And Add a series to watchlist
@@ -64,7 +65,8 @@ Feature: WatchList feature
   Scenario: TC_CVISION_WL_012:Verify Delete option
     And Select a series and table under watchlist "popup_notifications"
     Then Click on delete
-
+	
+	
   @Watch
   Scenario: TC_CVISION_WL_013:Verify turning off 'Enable All' option.
     And Open Watchlist tab "popup_notifications"
@@ -97,7 +99,7 @@ Feature: WatchList feature
     Then Change the orientation order
 
   @Watch
-  Scenario: TC_CVISION_WL_021:Validating the maximum number of series in watchlist
+    Scenario: TC_CVISION_WL_021:Validating the maximum number of series in watchlist
     And Add 2001 series into watchlist having series "popup_notifications"
 
   @Watch

@@ -1,7 +1,7 @@
 	
 	Feature: Display Continuos series Tag
 
-   @Sprint5_1
+   @Sprint5_1	 
   Scenario: TC_19072_01 : Display continous series for transformed series
     Given User selects Add continous series
     And User has clicked on "Apply filter"

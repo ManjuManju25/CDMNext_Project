@@ -1,4 +1,5 @@
 package CDMNext.StepDefinations;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -18,9 +19,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Map;
-
-import CDMNext.util.CommonFunctionality;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
@@ -135,9 +133,7 @@ public class Sprint_5_3 {
 			login.driver.findElement(By.xpath("(//span[@class='series-list-item--checkbox svg-checkbox'])["+i+"]")).click();
 	    }
 	
-		//action.sendKeys((Keys.chord("a"))).build().perform();
-		login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
-		CommonFunctionality.wait(2000);
+		action.sendKeys((Keys.chord("a"))).build().perform();
 		login.driver.findElement(By.xpath("//div[@title='Open File menu']")).click();	
 		login.driver.findElement(By.xpath("//span[contains(text(),'Share')]")).click();
 		login.driver.switchTo().activeElement();
@@ -146,12 +142,10 @@ public class Sprint_5_3 {
 		// Enter Email id
 
 		login.driver.findElement(By.xpath("//*[@class='share-specific-search-user--input form--control']"))
-				.sendKeys("ceicsuresh@gmail.com",Keys.ENTER);
-		CommonFunctionality.wait(3000);
-		action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
+				.sendKeys("venkat.test@gmail.com",Keys.ENTER);
 		Thread.sleep(1000);
-		//login.driver.findElement(By.xpath("(//span[contains(text(),'can view')]/following::span[@class='insight-share--choose-button-arrow'])[1]")).click();
-		//login.driver.findElement(By.xpath("(//span[contains(text(),'can edit')])")).click();
+		login.driver.findElement(By.xpath("(//span[contains(text(),'can view')]/following::span[@class='insight-share--choose-button-arrow'])[1]")).click();
+		login.driver.findElement(By.xpath("(//span[contains(text(),'can edit')])")).click();
 		login.driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
 
 		// confirmation
@@ -160,11 +154,10 @@ public class Sprint_5_3 {
 		 parentwindow=login.driver.getWindowHandle();
 		 System.out.println(parentwindow);
 		}
-	 //@And("^login to User2 and Open the shared insight$")
-	 @And("^Login to User(\\d+) and Open the shared insight$")
+	 @And("^login to User2 and Open the shared insight$")
 	 public void login_to_user2_and_open_the_shared_insight() throws InterruptedException, AWTException
 	 {
-		 /*Robot robot = new Robot();
+		 Robot robot = new Robot();
 		 DesiredCapabilities capa = DesiredCapabilities.firefox();
 			capa.setCapability("marionette", true);
 			//WebDriverManager.firefoxdriver().setup();
@@ -176,7 +169,7 @@ public class Sprint_5_3 {
 			login.driver1.findElement(By.xpath(login.LOCATORS.getProperty("input_username"))).sendKeys("venkat.test@gmail.com");
 			login.driver1.findElement(By.xpath(login.LOCATORS.getProperty("input_password"))).sendKeys("Ceic@123");
 			login.driver1.findElement(By.xpath(login.LOCATORS.getProperty("btnlogin"))).click();
-	        Thread.sleep(30000);*/
+	        Thread.sleep(30000);
 	        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'My insights')]"))).click();
 			login.driver1.findElement(By.xpath("//a[contains(text(),'My insights')]")).click();
 			Thread.sleep(2000);
@@ -227,10 +220,8 @@ public class Sprint_5_3 {
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath("(//span[contains(text(),'Datasets')])")).click();
 		Thread.sleep(3000);
-		login.driver.findElement(By.xpath("//div[@class='tree-node data-set-node']//span[@class='svg-checkbox']")).click();
-		CommonFunctionality.wait(2000);
-		login.driver.findElement(By.xpath("//*[@class='tree-node data-set-node']//*[@class='add-to-data-selection--icon']")).click();
-		//action.sendKeys((Keys.chord("a"))).build().perform();	
+		login.driver.findElement(By.xpath("//div[@data-node-model-id='TB85994']//span[@class='svg-checkbox']")).click();
+		action.sendKeys((Keys.chord("a"))).build().perform();	
    }
 	@And("^Expand the table$")
 	public void expand_the_table() throws InterruptedException
@@ -282,25 +273,16 @@ public class Sprint_5_3 {
 	{
 		login.driver.switchTo().activeElement();
 		Thread.sleep(4000);
-		login.driver.findElement(By.xpath("//span[normalize-space(text())='Real GDP Growth']")).click();
-		login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
+		login.driver.findElement(By.xpath("(//span[@class='input-control--indicator'])[13]")).click();
+		//login.driver.findElement(By.xpath("//div[contains(text(),'Apply filter')]")).click();
 	}
 	@Then("Mouse move on the indicator in the pill box \"([^\"]*)\"$")
 	public void mouse_move_on_the_indicator_in_the_pill_box(String str) throws InterruptedException
 	{
 		Thread.sleep(2000);
-		WebElement Real_GDP=login.driver.findElement(By.xpath("//*[@data-id='indicator']"));
-		new Actions(login.driver).moveToElement(Real_GDP).pause(3000).build().perform();
-		Thread.sleep(2000);
-		//action.moveToElement(login.driver.findElement(By.xpath("(//span[contains(text(),'"+str+"')])[2]"))).build().perform();
-		WebElement Tooltip=login.driver.findElement(By.xpath("//div[@class='tooltip tooltip__visible']"));
-		CommonFunctionality.wait(2000);
-		if(Tooltip.isDisplayed()) {
-			System.out.println("Tooltip is displayed");
-		}
-		else {
-			System.out.println("Tooltip is not displayed");
-		}
+		action.moveToElement(login.driver.findElement(By.xpath("(//span[contains(text(),'"+str+"')])[2]"))).build().perform();
+		System.out.println(login.driver.findElement(By.xpath("//div[@class='tooltip tooltip__visible']")).getText().toString());
+		
 		
 	}
 	@And("^Select any subnational \"([^\"]*)\"$")
@@ -310,26 +292,19 @@ public class Sprint_5_3 {
 		  Subregion.click();
 		  
 	}
-	@And("^Create a visual\\.$")
-	public void create_a_visual() throws Throwable {
-	
-		WebElement Serieslist = login.driver.findElement(
-				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
-		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
-	    WebElement ele1 = login.driver.findElement(By.xpath("//span[@title='More actions']"));
-		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
-		CommonFunctionality.wait(2000);
-		WebElement Add_chart=login.driver.findElement(By.xpath("//span[normalize-space(text())='Add chart']"));
-		new Actions(login.driver).moveToElement(Add_chart).pause(1000).build().perform();
-		login.driver.findElement(By.xpath("//div[contains(@class,'icon--map-filled_large')]")).click();
+	@And("^Create a visual \"([^\"]*)\"$")
+	public void create_a_visual(int str) throws InterruptedException, AWTException
+	{
+		c.selectSeries(str);
+		c.keyBoardmap();
 	
 	}
 	@Then("^Click on CEIC logo1$")
 	public void click_on_ceic_logo1() throws InterruptedException
 	{
-		//c.click_on_EditMap();
+		c.click_on_EditMap();
 		Thread.sleep(2000);
-		login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper--credits-image']")).click();
+		login.driver.findElement(By.xpath("(//img[@ui='$credits'])[2]")).click();
 		login.driver.switchTo().activeElement();
 		str=login.driver.findElement(By.xpath("//div[@class='popover--title']")).getText().toString();
 		if(str.equalsIgnoreCase("Copyright"))
@@ -350,7 +325,7 @@ public class Sprint_5_3 {
 	@Then("^Click on CEIC logo under a visual$")
 	public void click_on_ceic_logo_under_a_visual()
 	{
-		login.driver.findElement(By.xpath("//div[@class='visual-item-wrapper--credits-image']")).click();
+		login.driver.findElement(By.xpath("(//img[@ui='$credits'])[2]")).click();
 		String parentwindow=login.driver.getWindowHandle();
 		Set<String> l=login.driver.getWindowHandles();	
 		Iterator<String> I1= l.iterator();
@@ -432,10 +407,10 @@ public class Sprint_5_3 {
 	public void click_the_cogwheel_icon() throws InterruptedException
 	{
 		login.driver.switchTo().activeElement();
-		//login.driver.findElement(By.xpath("//span[@class='series-panel--settings']")).click();
+		login.driver.findElement(By.xpath("//span[@class='series-panel--settings']")).click();
 		
 			//login.driver.findElement(By.xpath("//button[contains(text(),'Reset')]")).click();
-		if(login.driver.findElements(By.xpath("//div[@title='Table mode']")).size()>1)
+		if(login.driver.findElements(By.xpath("//span[contains(text(),'Table mode')]/preceding::span[@class='input-control--indicator'][1]")).size()>1)
 		{
 			System.out.println("selected");
 			login.driver.findElement(By.xpath("//div[@class='sphere-modal__close']")).click();
@@ -443,91 +418,47 @@ public class Sprint_5_3 {
 			
 		}
 		else {
-			try {
-		login.driver.findElement(By.xpath("//div[@title='Table mode']")).click();
-			}
-			catch(Exception e) {
-				System.out.println("Table mode not clicked");
-			}
-		Thread.sleep(2000);
-		}
+		login.driver.findElement(By.xpath("//span[contains(text(),'Table mode')]/preceding::span[@class='input-control--indicator'][1]")).click();
 		
+		Thread.sleep(2000);
+		login.driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
+		}
+		Thread.sleep(2000);
 	}
-	
-
-	
-	
-	
 	@Then("^Add some series1$")
 	public void add_some_series1() throws InterruptedException
 	{
-	 CommonFunctionality.wait(2000);
-	 login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
-	 CommonFunctionality.wait(2000);
+	 login.driver.findElement(By.xpath("//div[@title='View results as List']")).click();
 	    s7.Select_any_series1();
-	    login.driver.findElement(By.xpath("//div[@class='add-to-data-selection--icon']")).click();
-	    //action.sendKeys((Keys.chord("a"))).build().perform();
-	   /* try {
-	    	if(login.driver.findElement(By.xpath("//div[@title='Table mode']")).isSelected())
-		    {
-		    	System.out.println("tablemode is enabled");
-		    }
+	    action.sendKeys((Keys.chord("a"))).build().perform();
+	    if(login.driver.findElement(By.xpath("//span[contains(text(),'Table')]")).isSelected())
+	    {
+	    	System.out.println("tablemode is enabled");
 	    }
-	    catch(Exception e) {
-	    	login.driver.findElement(By.xpath("//div[@title='Table mode']")).click();
-	    	System.out.println("Table mode is selected ");
-	    }
-	   */
 	}
 	@And("^Search for this series \"([^\"]*)\"$")
 	public void search_for_this_series(String str) throws InterruptedException
 	{
-		login.driver.findElement(By.xpath("//span[@value='LIST']")).click();
 		s7.Search_for_series_in_layout(str);
 		
 	}
 	@And("^Open the Data briefings$")
 	public void open_the_data_briefing()
 	{
-		try {
-			if(login.driver.findElement(By.xpath("//div[@title='Expand Briefings']")).isDisplayed()) {
-				login.driver.findElement(By.xpath("//div[@title='Expand Briefings']")).click();	
-			}
-		}
-			catch(Exception e) {
-				System.out.println("Data Briefings already clicked");
-			}
-		}
-		//login.driver.findElement(By.xpath("//div[@title='Expand Briefings']")).click();
-		//login.driver.findElement(By.xpath("//div[@class='public-js-views-briefings-list-item-module__title']")).click();
-	
+		login.driver.findElement(By.xpath("//div[@title='Expand Briefings']")).click();
+		login.driver.findElement(By.xpath("//div[@class='public-js-views-briefings-list-item-module__title']")).click();
+	}
 	@Then("^Click on See in Database$")
 	public void click_on_see_in_database() throws InterruptedException
 	{
-		
-		CommonFunctionality.wait(2000);
-		WebElement Serieslist = login.driver.findElement(
-				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
-		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
-	    WebElement ele1 = login.driver.findElement(By.xpath("//span[@title='More actions']"));
-		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
-		CommonFunctionality.wait(2000);
-		boolean ss =	login.driver.findElement(By.xpath("//span[@title='See in Database']")).isDisplayed();
-		System.out.println("======"+ss);
-	
-	WebElement Database = login.driver.findElement(By.xpath("//span[@title='See in Database']"));
-	Database.click();
-	
-		
-		
-		/*login.driver.findElement(By.xpath("//span[contains(text(),'See in Database')]")).click();
+		login.driver.findElement(By.xpath("//span[contains(text(),'See in Database')]")).click();
 		List<WebElement> l1=login.driver.findElements(By.xpath("//span[@class='context-menu-item link   ']"));
 		for(int i=0;i<=l1.size();i++)
 		{
 			l1.get(1).click();
 			Thread.sleep(4000);
 			break;
-		}*/
+		}
 		if(login.driver.findElement(By.xpath("//span[contains(text(),'Databases')]")).isSelected())
 		{
 			System.out.println("Redirected to corresponding database");
@@ -544,41 +475,21 @@ public class Sprint_5_3 {
 	@Then("^Mouse move the See in database icon$")
 	public void mouse_move_the_see_in_database_icon() throws InterruptedException
 	{
-		CommonFunctionality.wait(2000);
-		WebElement Serieslist = login.driver.findElement(
-				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
-		new Actions(login.driver).moveToElement(Serieslist).pause(3000).build().perform();
-	    WebElement ele1 = login.driver.findElement(By.xpath("//span[@title='More actions']"));
-		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
-		CommonFunctionality.wait(2000);
-		WebElement See_database=login.driver.findElement(By.xpath("(//span[@title='See in Database'])[1]"));
-		CommonFunctionality.action.moveToElement(See_database).pause(2).build().perform();
-		if(See_database.isDisplayed()) {
-			System.out.println("See in Database tooltip is displayed");
-		}
-		else {
-			System.out.println("See in Database tooltip is not  displayed");
+		login.driver.findElement(By.xpath("(//span[@title='See in Database'])[1]")).click();
+		List<WebElement> l1=login.driver.findElements(By.xpath("//span[@class='context-menu-item link   ']"));
+		for(WebElement l:l1)
+		{
+			System.out.print(l.getAttribute("title"));
+			
 		}
 	}
 	@And("^Create a table visual2$")
 	public void create_a_table_visual() throws Throwable
 	{
-		/*l1.select_a_few_series_from_left_and_right_pane();
+		l1.select_a_few_series_from_left_and_right_pane();
 		action.contextClick().build().perform();;
 		action.moveToElement(login.driver.findElement(By.xpath("//span[contains(text(),'View as Table')]"))).click().perform();
-		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();*/
-		
-		WebElement Series = login.driver.findElement(
-				By.xpath("//div[@class='series-list-item-data']/div[@class='series-list-item--information'][1]"));
-		new Actions(login.driver).moveToElement(Series).pause(3000).build().perform();
-		WebElement ele1 = login.driver.findElement(By.xpath("//span[@title='More actions']"));
-		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
-		CommonFunctionality.wait(2000);
-		WebElement Add_Chart=login.driver.findElement(By.xpath("//span[@title='Add chart']"));
-		new Actions(login.driver).moveToElement(Add_Chart).pause(2000).build().perform();
-		login.driver.findElement(By.xpath("//div[contains(@class,'icon--table-vertical_large')]")).click();
-		
-		
+		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 	}
 	@Then("^Right click on series1$")
 	public void right_click_on_series() throws InterruptedException
@@ -602,7 +513,7 @@ public class Sprint_5_3 {
 	{
           login.driver.findElement(By.xpath("//div[@title='Create new View tab']")).click();
           Thread.sleep(2000);
-          login.driver.findElement(By.xpath("//div[contains(text(),'Text')]")).click();
+          login.driver.findElement(By.xpath("//div[@title='Click or drag-and-drop to insert Commentary']")).click();
           
 	}
 	@Then("^Type this \"([^\"]*)\"$")
@@ -626,7 +537,7 @@ public class Sprint_5_3 {
 	@Then("^select \"([^\"]*)\"$")
 	public void select(String str)
 	{
-		login.driver.findElement(By.xpath("//span[contains(text(),'"+str+"')]")).click();
+		login.driver.findElement(By.xpath("//div[contains(text(),'"+str+"')]")).click();
 		login.driver.findElement(By.xpath("//div[@class='visual-top-panel--content']")).click();
 		String str1=login.driver.findElement(By.xpath("//div[@class='text-block-editor']/p")).getText().toString();
 		if(str1.equalsIgnoreCase(str))
@@ -643,7 +554,6 @@ public class Sprint_5_3 {
 	@Then("^Unselect visual$")
 	public void unselect_visual()
 	{
-		CommonFunctionality.wait(2000);
 		login.driver.findElement(By.xpath("//div[@class='visual-top-panel--content']")).click();
 		String str1=login.driver.findElement(By.xpath("//div[@class='text-block-editor']/p")).getText().toString();
 		System.out.println(str1);
@@ -657,7 +567,7 @@ public class Sprint_5_3 {
 	}
 	@And("^Right click on each series name on the visual \"([^\"]*)\"$")
 	public void right_click_on_each_series_name_on_the_visual(String str) throws Throwable {
-		//login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 		Thread.sleep(2000);
 		String str1[]=str.split(";");
 	List<WebElement> l1=login.driver.findElements(By.xpath("//span[@class='series-edit--title series-edit--title__editable']"));
@@ -689,7 +599,7 @@ public class Sprint_5_3 {
 
 
 
-		//login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
+		login.driver.findElement(By.xpath("//button[contains(text(),'Apply')]")).click();
 		List<WebElement> l1=login.driver.findElements(By.xpath("//span[@class='series-edit--title series-edit--title__editable']"));
 		for(int i=1;i<=l1.size();i++)
 		{

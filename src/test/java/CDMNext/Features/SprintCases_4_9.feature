@@ -161,4 +161,3 @@ Scenario: TC_19317:Verify subscription control for Footnotes and ssp
 	Given login with that username 
 	Then Try to access the ssp and footnotes for the unsubscribed series 
 	
-

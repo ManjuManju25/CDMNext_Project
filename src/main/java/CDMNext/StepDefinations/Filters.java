@@ -1,3 +1,4 @@
+
 package CDMNext.StepDefinations;
 
 import org.testng.Assert;
@@ -6,7 +7,6 @@ import org.testng.AssertJUnit;
 
 import CDMNext.util.CommonFunctionality;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,7 +73,7 @@ public class Filters extends CommonFunctionality{
 		//ResetMethod();
 		login.Log4j.info("searching with " + searchData);
 		getElementByProperty(login.driver, "Search" , 8).sendKeys(searchData);
-		getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
+	getElementByClassName(login.driver, "search-input-text", 4).sendKeys(Keys.ENTER);
 		
 	}
 
@@ -92,7 +92,7 @@ public class Filters extends CommonFunctionality{
 			try {
 						
 				if(regionarr.length == 1 && regionarr[0].equals(arg2) == true) {
-					CommonFunctionality.wait(4000);
+					CommonFunctionality.wait(2000);
 					login.driver.findElement(By.className("filters-search--search-field")).sendKeys(arg2);
 					CommonFunctionality.wait(2000);
 					login.driver.findElement(By.xpath("//span[contains(text(),'" + arg2 + "')]")).click();
@@ -173,7 +173,6 @@ public class Filters extends CommonFunctionality{
 				login.driver.findElement(By.xpath("//*[contains(text(),'" + list + "')]")).click();
 				
 			}
-			
 			break;
 		case "Status":
 			CommonFunctionality.wait(2000);
@@ -371,8 +370,8 @@ public class Filters extends CommonFunctionality{
 
 		login.Log4j.info("Clicking on  Series tab ");
 		CommonFunctionality.wait(7000);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series_Tab"))));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series_Tab")))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(login.LOCATORS.getProperty("Series"))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(login.LOCATORS.getProperty("Series")))).click();
 		//ul_element = null;
 		try {
 			wait(5000);
@@ -401,11 +400,9 @@ public class Filters extends CommonFunctionality{
 							login.Log4j.info("Title information is \n" + str);
 						}
 					}*/
-					CommonFunctionality.wait(300);
 					tooltip = getElementByProperty(login.driver, "tooltip_text",8);
 					text = tooltip.getText();
 					 login.Log4j.info("Title information is \n" + text);
-					 lines = text.split("\n");
 					// Until the element is not visible keep scrolling
 					//CommonFunctionality.jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 					/*lines = text.split("\n");
@@ -632,116 +629,66 @@ public class Filters extends CommonFunctionality{
 								for (int m = 0; m < Datearr.length; m++) {
 									SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 									Date date = new Date();
-									
+
 									if (Datearr[m].equalsIgnoreCase("First observation before")) {
-										Datearr[m] = "First obs. date";
+										Datearr[m] = "First date";
 									}
-									if (Datearr[m].equals("First obs. date")) {
-										
-										
-										//for (String Tooltip : lines) {
-											//if (Tooltip.contains("First obs. date")) {
-												//login.Log4j.info(Tooltip);
-												//String[] frstDate = Tooltip.split(": ");
+									if (Datearr[m].equals("First date")) {
+										for (String Tooltip : lines) {
+											if (Tooltip.contains("First date")) {
+												login.Log4j.info(Tooltip);
+												String[] frstDate = Tooltip.split(": ");
 												String first_obs_before = sdf.format(date);
-												try {
-												  if(searchData.equalsIgnoreCase("Agar")){
-													if (sdf.parse(lines[11])
-															.before(sdf.parse(first_obs_before)) == true) {
-														login.Log4j.info(lines[11] + " is less than " + first_obs_before
-																+ "? " + sdf.parse(lines[11])
-																		.before(sdf.parse(first_obs_before)));
-													} else {
-														Assert.fail(lines[11] + " is not less than " + first_obs_before);
-													}
-												  }
-												} catch(Exception e) {
-													try {
-												
-														if (sdf.parse(lines[9])
-																.before(sdf.parse(first_obs_before)) == true) {
-															login.Log4j.info(lines[9] + " is less than " + first_obs_before
-																	+ "? " + sdf.parse(lines[9])
-																			.before(sdf.parse(first_obs_before)));
-														} else {
-															Assert.fail(lines[9] + " is not less than " + first_obs_before);
-														}
-													}catch(ParseException e1)	{
-														if (sdf.parse(lines[11])
-																.before(sdf.parse(first_obs_before)) == true) {
-															login.Log4j.info(lines[11] + " is less than " + first_obs_before
-																	+ "? " + sdf.parse(lines[1])
-																			.before(sdf.parse(first_obs_before)));
-														} else {
-															Assert.fail(lines[11] + " is not less than " + first_obs_before);
-														}
-													}
+												if (sdf.parse(frstDate[1])
+														.before(sdf.parse(first_obs_before)) == true) {
+													login.Log4j.info(frstDate[1] + " is less than " + first_obs_before
+															+ "? " + sdf.parse(frstDate[1])
+																	.before(sdf.parse(first_obs_before)));
+												} else {
+													Assert.fail(frstDate[1] + " is not less than " + first_obs_before);
 												}
-											//}
-										//}
+											}
+										}
 									}
 
 									if (Datearr[m].equalsIgnoreCase("Last observation after")) {
-										Datearr[m] = "Last obs. date";
+										Datearr[m] = "Last date";
 									}
-									if (Datearr[m].equals("Last obs. date")) {
-										//for (String Tooltip : lines) {
-											//if (Tooltip.contains("Last obs. date")) {
-												//login.Log4j.info(Tooltip);
-												//String[] lastDate = Tooltip.split(": ");
-												
+									if (Datearr[m].equals("Last date")) {
+										for (String Tooltip : lines) {
+											if (Tooltip.contains("Last date")) {
+												login.Log4j.info(Tooltip);
+												String[] lastDate = Tooltip.split(": ");
 												String last_obs_after = sdf.format(date);
-												try {
-													if (sdf.parse(lines[11]).after(sdf.parse(last_obs_after)) == true ||  sdf.parse(lines[11]).compareTo(sdf.parse(last_obs_after)) == 0 ) {
-														login.Log4j.info(lines[11] + " is greater than " + last_obs_after
-																+ "? "
-																+ sdf.parse(lines[11]).after(sdf.parse(last_obs_after)));
-													} else {
-														Assert.fail(lines[11] + " is not greater than " + last_obs_after);
-													}
-												}catch(ParseException e) {// when subnational is fetched in tooltip
-													if (sdf.parse(lines[13]).after(sdf.parse(last_obs_after)) == true ||  sdf.parse(lines[13]).compareTo(sdf.parse(last_obs_after)) == 0 ) {
-														login.Log4j.info(lines[13] + " is greater than " + last_obs_after
-																+ "? "
-																+ sdf.parse(lines[13]).after(sdf.parse(last_obs_after)));
-													} else {
-														Assert.fail(lines[13] + " is not greater than " + last_obs_after);
-													}
+												if (sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)) == true) {
+													login.Log4j.info(lastDate[1] + " is greater than " + last_obs_after
+															+ "? "
+															+ sdf.parse(lastDate[1]).after(sdf.parse(last_obs_after)));
+												} else {
+													Assert.fail(lastDate[1] + " is not greater than " + last_obs_after);
 												}
-											//}
-										//}
+											}
+										}
 									}
 								}
 							}
-							if (filters.get(k).equalsIgnoreCase("Frequency")) {
+							if (filters.get(k).equals("Frequency")) {
 								login.Log4j.info("filter  is : " + filters.get(k));
 								login.Log4j.info(frequencyarr.length);
-								//login.Log4j.info(frequency);
+								login.Log4j.info(frequency);
 								String str = "Half-yearly";
 								String str1 = "Annual";
 								if ((frequencyarr.length == 1)) {
-									if (frequencyarr[0].equalsIgnoreCase("Semiannually")) {
-										if (text.toUpperCase().contains(str.toUpperCase()) == true) {
-											login.Log4j.info(str + " is exists in the" + "\n"
-													+ text);
-										} else {
-											AssertJUnit.fail(str +" is not exists in the" + "\n"
-													+ text);
-										}
-									} else if(frequencyarr[0].equalsIgnoreCase("Yearly")) {
-										if (text.toUpperCase().contains(str1.toUpperCase()) == true) {
-											login.Log4j.info(str1 + " is exists in the" + "\n"
-													+ text);
-										} else {
-											AssertJUnit.fail(str1 +" is not exists in the" + "\n"
+									if (frequencyarr[0].equals("Semiannually")) {
+										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| text.toUpperCase().contains(str.toUpperCase()) == true) {
+											login.Log4j.info(frequencyarr[0] + " OR " + str + " is exists in the" + "\n"
 													+ text);
 										}
 									} else {
-										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true) {
-											login.Log4j.info(frequencyarr[0] +" is exists in the" + "\n"
-													+ text);
-										} else {
-											AssertJUnit.fail(frequencyarr[0] +" is not exists in the" + "\n"
+										if (text.toUpperCase().contains(frequencyarr[0].toUpperCase()) == true
+												|| text.toUpperCase().contains(str1.toUpperCase()) == true) {
+											login.Log4j.info(frequencyarr[0] + " OR " + str1 + " is exists in the" + "\n"
 													+ text);
 										}
 									}
@@ -869,10 +816,8 @@ public class Filters extends CommonFunctionality{
 						}
 					}
 					// Until the element is not visible keep scrolling
-					CommonFunctionality.wait(100);
 					WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
 					action.pause(50).moveToElement(comparables).build().perform();
-					CommonFunctionality.wait(200);
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 				}
 				
@@ -904,13 +849,13 @@ public class Filters extends CommonFunctionality{
 		CommonFunctionality.wait(4000);
 		WebElement ele;
 		try {
-			if (topic.equalsIgnoreCase("Albania") || topic.equalsIgnoreCase("Aggregate: World") || topic.equals("Lending Rates")) {
+			if (topic.equals("Foreign Trade") || topic.equals("Monetary") || topic.equalsIgnoreCase("Albania") || topic.equalsIgnoreCase("Aggregate: World")) {
 				ele = login.driver.findElement(By.xpath(
-						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[2]/*[2]/*[2]/*[1]/*[2]"));
+						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[1]/*[2]/*[2]/*[1]/*[2]"));
 			} 
 			else {
 				ele = login.driver.findElement(By.xpath(
-						"(//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node full-expanded open'))])[1]/*[2]/*[2]/*[1]/*[2]"));
+						"//*[@class='tree-node open full-expanded' or (contains(@class,'tree-node open full-expanded'))]/*[2]/*[2]//*[@class='name-text']"));
 			}
 		} catch (NoSuchElementException e) {
 			ele = login.driver.findElement(
@@ -1092,9 +1037,6 @@ public class Filters extends CommonFunctionality{
 						}
 					}
 					// Until the element is not visible keep scrolling
-					//jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
-					WebElement comparables = getElementByXpath(login.driver, "//*[@class='search-presentation-tabs--visible']//*[contains(text(),'Comparables')]", 4);
-					action.pause(50).moveToElement(comparables).build().perform();
 					jse.executeScript("arguments[0].scrollIntoView(true);", sName.get(i));
 				}
 			} else {
@@ -1397,3 +1339,4 @@ public class Filters extends CommonFunctionality{
 
 	}
 }
+

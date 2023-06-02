@@ -1,3 +1,4 @@
+	
 package CDMNext.StepDefinations;
 
 import static org.testng.Assert.fail;
@@ -26,14 +27,16 @@ public class Sprint_5_1 extends CommonFunctionality {
 	@Given("^User selects Add continous series$")
 	public void user_selects_Add_continous_series() throws Throwable {
 
-		
-			CommonFunctionality.wait(2000);
+		if (CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("More"), 500)
+				.isDisplayed()) {
 
-			login.driver.findElement(By.xpath("//span[normalize-space(text())='More']")).click();
+			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("More"))).click();
 			login.Log4j.info("Successfully More button Clicked ");
 			login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Continuous"))).click();
 			login.Log4j.info("Successfully Continuous  button Clicked ");
-		
+		} else {
+			fail("Failed");
+		}
 
 	}
 
@@ -49,7 +52,7 @@ public class Sprint_5_1 extends CommonFunctionality {
 		CommonFunctionality.action.moveToElement(ele).pause(2).build().perform();
 		WebElement ele1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("dp1")));
 		CommonFunctionality.action.moveToElement(ele1).pause(2).click().build().perform();
-		CommonFunctionality.wait(3000);
+		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add"))).click();
 		String data1 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("function"))).getText();
 		
@@ -78,12 +81,13 @@ public class Sprint_5_1 extends CommonFunctionality {
 		CommonFunctionality.action.moveToElement(dropdown).pause(2).click().build().perform();
 		Thread.sleep(2000);
 		login.driver.findElement(By.xpath(login.LOCATORS.getProperty("Add"))).click();
-		CommonFunctionality.wait(2000);
 		if (CommonFunctionality.getElementByXpath(login.driver, login.LOCATORS.getProperty("function1"), 500)
 				.isDisplayed()) {
 		String data2 = login.driver.findElement(By.xpath(login.LOCATORS.getProperty("function1"))).getText(); 
-		Assert.assertTrue(data2.contains("SPLICE"));
+		Assert.assertTrue(data2.contains("UPDATE"));
 		login.Log4j.info("functions is displayed ");
+		
+		
 		}
 		else {
 			login.Log4j.info("fail ");
@@ -103,7 +107,7 @@ public class Sprint_5_1 extends CommonFunctionality {
 	@Given("^Hide \"([^\"]*)\" from Demo users\\.$")
 	public void hide_from_Demo_users(String arg1) throws Throwable {
 
-		/*List<WebElement> WhatsNew = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("WhatsNew")));
+		List<WebElement> WhatsNew = login.driver.findElements(By.xpath(login.LOCATORS.getProperty("WhatsNew")));
 
 		for (int i = 0; i < WhatsNew.size(); i++) {
 			if (!WhatsNew.get(i).getText().contains("What's new")) {
@@ -116,7 +120,7 @@ public class Sprint_5_1 extends CommonFunctionality {
 
 			}
 
-		}*/
+		}
 
 	}
 

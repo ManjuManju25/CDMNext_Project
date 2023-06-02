@@ -1,3 +1,4 @@
+	
 package CDMNext.util;
 
 import java.awt.Robot;
@@ -81,14 +82,14 @@ public class Hooks {
 				
 			}
 
-		/*	if (login.driver
+			if (login.driver
 					.findElements(
 							By.cssSelector(".button.button__primary"))	
 					
 					.size() > 0) {
 				CommonFunctionality.getElementBycssSelector(login.driver,
 						".button.button__primary", 4).click();
-			}*/
+			}
 		}
 
 		CommonFunctionality.Views_list();

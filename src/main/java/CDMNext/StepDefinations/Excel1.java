@@ -28,8 +28,8 @@ public class Excel1 {
 		}
 		public static void Crosssection_Excelverify(WebDriver driver, String Excel1, String Excel2) throws Throwable {
 			Thread.sleep(20000);
-			String path1 = "C:\\Users\\tbemineni\\Desktop\\New folder\\Cucumber_project\\Testdata\\"+Excel1+".xlsx";
-			String path2 = "C:\\Users\\tbemineni\\Downloads\\"+Excel2+".xlsx";
+			String path1 = "C:\\Users\\RupaliSanjayMane\\Documents\\CDMNextApp\\Cucumber_project\\Cucumber_project\\Testdata\\"+Excel1+".xlsx";
+			String path2 = "C:\\Users\\RupaliSanjayMane\\Downloads\\"+Excel2+".xlsx";
 			
 			FileInputStream excellFile1 = new FileInputStream(path1);
 			FileInputStream excellFile2 = new FileInputStream(path2);
